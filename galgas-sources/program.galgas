@@ -3,7 +3,7 @@
 case . "plms"
 message "a source text file with the .plms extension"
 grammar plms_grammar
-?sourceFilePath:@lstring inSourceFile {
+?sourceFilePath:@lstring unused inSourceFile {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
