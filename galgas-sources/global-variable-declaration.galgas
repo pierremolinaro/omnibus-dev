@@ -1,0 +1,173 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @globalVarDeclaration : @abstractDeclaration {
+  @lstringlist mModeList
+  @generalizedTypeEnumAST mType
+  @lstring mVarName
+  @expressionAST mSourceExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalVarDeclaration location -> @location outLocation {
+  outLocation = mVarName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $var$
+    @lstringlist modeList = {}
+    repeat
+      $modeName$ ?let modeName
+      modeList += !modeName
+    while
+    end
+    <var_declaration> ?let @generalizedTypeEnumAST type ?let @lstring varName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioAST.mDeclarationList += !@globalVarDeclaration.new {
+      !modeList
+      !type
+      !varName
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalVarDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  enterNodeInPrecedenceGraph (!nodeName:mVarName !nodeInfo:self !type:mType !?ioGraph)
+  [mSourceExpression addDependenceEdgeForStaticExpression !mVarName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalVarDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "global variable " + mVarName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalVarDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+{
+#--- Get destination type
+  switch mType
+  case valueType (@lstring typeName) :
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let constantType]
+  #--- Analyze source expression
+    [mSourceExpression analyzeStaticExpression
+      !optionalTargetType:constantType
+      !context:ioContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+      ?expressionType:let inferredType
+      ?generatedCode:let expressionGeneratedCode
+    ]
+  #--- Execution mode set
+    @stringset executionModes = {}
+    for (m) in mModeList do
+      executionModes += !m.string
+    end
+  #--- Enter in context
+    [!?ioContext.mGlobalVariableMap insertKey
+      !mVarName
+      !inferredType
+      !executionModes
+      !expressionGeneratedCode
+    ]
+  case procType (* *) :
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalVarDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Check execution mode names
+  @stringset executionModes = {}
+  for (m) in mModeList do
+    [inContext.mModeMap searchKey !m]
+    executionModes += !m.string
+  end
+#--- Code generation
+  [inContext.mGlobalVariableMap searchKey
+    !mVarName
+    ?let inferredType
+    ?let executionModeSet
+    ?let expressionGeneratedCode
+  ]
+  ioOrderedGenerationList += !@globalVariableGeneration.new {
+    !mVarName.string
+    ![inferredType key]
+    ![executionModeSet count] > 1
+    !expressionGeneratedCode
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @globalVariableGeneration : @abstractGeneration {
+  @string mGlobalVariableName
+  @string mActualTypeName
+  @bool mGenerateVolatile
+  @abstractExpressionGeneration mInitialValueExpressionGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper globalVariableGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template implementation "global-var-declaration.galgasTemplate"
+    ?@string GLOBAL_VAR_NAME
+    ?@string GLOBAL_TYPE_NAME
+    ?@bool GENERATE_VOLATILE
+    ?@string INITIAL_VALUE_STRING
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalVariableGeneration headerCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalVariableGeneration implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper globalVariableGenerationTemplate.implementation
+    !mGlobalVariableName
+    !mActualTypeName
+    !mGenerateVolatile
+    ![mInitialValueExpressionGeneration expressionCode]
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

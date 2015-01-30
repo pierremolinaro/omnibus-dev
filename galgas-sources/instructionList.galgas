@@ -1,0 +1,110 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @instructionAST {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @instructionListAST {
+  @instructionAST mInstruction
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instructionList> !@instructionListAST outInstructionList {
+    outInstructionList = {}
+    repeat
+    while
+      <instruction> !?outInstructionList
+    while
+      $;$
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @instructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @instructionListAST analyzeBranchInstructionList
+  ?endOfInstructionList:@location inEndOfInstructionList
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Begin branch
+  [!?ioVariableMap openBranch]
+  for () in self do
+    [mInstruction analyze 
+      !optionalReceiverType:inReceiverType
+      !context:inContext
+      !mode:inMode
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?generatedCode:ioInstructionGenerationList
+    ]
+  end
+#--- End branch
+  [!?ioVariableMap closeBranch !inEndOfInstructionList]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @instructionListAST analyzeRoutineInstructionList
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+  for () in self do
+    [mInstruction analyze 
+      !optionalReceiverType:inReceiverType
+      !context:inContext
+      !mode:inMode
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?generatedCode:ioInstructionGenerationList
+    ]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @instructionGenerationList instructionListCode -> @string outCode {
+  outCode = ""
+  [!?outCode incIndentation !2]
+  for () in self do
+    outCode += [mInstructionGeneration instructionCode]
+  end
+  [!?outCode decIndentation !2]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

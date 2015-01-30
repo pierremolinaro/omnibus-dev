@@ -1,0 +1,129 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @globalConstantDeclaration : @abstractDeclaration {
+  @lstring mTypeName
+  @lstring mConstantName
+  @expressionAST mSourceExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalConstantDeclaration location -> @location outLocation {
+  outLocation = mConstantName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $let$
+    $Identifier$ ?let typeName
+    $identifier$ ?let constantName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioAST.mDeclarationList += !@globalConstantDeclaration.new {
+      !typeName
+      !constantName
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalConstantDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mConstantName !self]
+  [!?ioGraph addEdge !mConstantName !mTypeName]
+  [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalConstantDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "global constant " + mConstantName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @expressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalConstantDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+{
+#--- Get destination type
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?let constantType]
+#--- Variable map contains already computed global constants
+#  @variableMap variableMap = .emptyMap
+#  for (constantName constantType sourceExpressionCode) in ioContext.mGlobalConstantMap do
+#    [!?variableMap insertUsedLocalConstant
+#      !constantName
+#      !constantType
+#      ![sourceExpressionCode expressionCode]
+#      !true
+#    ]
+#  end
+#--- Analyze source expression
+  [mSourceExpression analyzeStaticExpression
+    !optionalTargetType:constantType
+    !context:ioContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+    ?expressionType:let inferredType
+    ?generatedCode:let expressionGeneratedCode
+  ]
+#--- Enter in context
+  [!?ioContext.mGlobalConstantMap insertKey
+    !mConstantName
+    !inferredType
+    !expressionGeneratedCode
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @expressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @globalConstantDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!generation:@orderedGenerationList unused ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*

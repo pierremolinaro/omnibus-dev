@@ -1,0 +1,11 @@
+gui cocoa {
+  with option plm_options
+
+  with lexique plm_lexique {
+    fileExtension: "plm"
+    fileExtension: "plms"
+    title: "Source"
+    blockComment : "//"
+  }
+
+}

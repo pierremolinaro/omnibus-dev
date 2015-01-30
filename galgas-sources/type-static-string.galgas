@@ -1,0 +1,166 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalStringDeclaration : @abstractDeclaration {
+  @lstring mLiteralStringTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalStringDeclaration location -> @location outLocation {
+  outLocation = mLiteralStringTypeName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mLiteralStringTypeName !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalStringDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "literal string " + mLiteralStringTypeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mLiteralStringTypeName
+    !kind:.literalString
+    !constructorMap:{}
+    !procedureMap:{}
+    !copiable:true
+    !equatable:true
+    !comparable:true
+  ]
+#--- Enter operators
+  enterStaticStringOperators (
+    !integerTypeName:mLiteralStringTypeName
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterStaticStringOperators
+  ?integerTypeName:@lstring inBooleanTypeName
+  ?!context:@semanticContext ioContext
+{
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+  [!?ioContext.mEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"=="}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"!="}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<"}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<="}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!">"}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!">="}
+  ]
+  [!?ioContext.mAndOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"&"}
+  ]
+  [!?ioContext.mAndShortCircuitOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"&&"}
+  ]
+  [!?ioContext.mOrOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"|"}
+  ]
+  [!?ioContext.mOrShortCircuitOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"||"}
+  ]
+  [!?ioContext.mXorOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"^"}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+  ioOrderedGenerationList += !@literalStringGeneration.new {
+    !mLiteralStringTypeName.string
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalStringGeneration : @abstractGeneration {
+  @string mLiteralStringTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper literalStringGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "literal-string-declaration.galgasTemplate"
+    ?@string STATIC_STRING_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalStringGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper literalStringGenerationTemplate.declaration
+    !mLiteralStringTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalStringGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,449 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @infixOperator {
+  case equal
+  case nonEqual
+  case strictInf
+  case strictSup
+  case infEqual
+  case supEqual
+  case andOp
+  case andShortCircuitOp
+  case orOp
+  case orShortCircuitOp
+  case xorOp
+  case addOp
+  case subOp
+  case mulOp
+  case divOp
+  case modOp
+  case leftShiftOp
+  case rightShiftOp
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @infixOperatorExpressionAST : @expressionAST {
+  @expressionAST mLeftExpression
+  @lstring mOperator
+  @infixOperator mOp
+  @expressionAST mRightExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <comparison> !@expressionAST outExpression {
+    <multiplicative_expression> ?outExpression
+    select
+    or
+      $==$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"==" !operatorLocation}
+        !.equal
+        !rightExpression
+      }
+    or
+      $!=$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"!=" !operatorLocation}
+        !.nonEqual
+        !rightExpression
+      }
+    or
+      $<=$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"<=" !operatorLocation}
+        !.infEqual
+        !rightExpression
+      }
+    or
+      $>=$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!">=" !operatorLocation}
+        !.supEqual
+        !rightExpression
+      }
+    or
+      $<$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"<" !operatorLocation}
+        !.strictInf
+        !rightExpression
+      }
+    or
+      $>$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!">" !operatorLocation}
+        !.strictSup
+        !rightExpression
+      }
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <multiplicative_expression> !@expressionAST outExpression {
+    <additive_expression> ?outExpression
+    repeat
+    while
+      $&$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"&" !operatorLocation}
+        !.andOp
+        !rightExpression
+      }
+    while
+      $*$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"*" !operatorLocation}
+        !.mulOp
+        !rightExpression
+      }
+    while
+      $%$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"%" !operatorLocation}
+        !.modOp
+        !rightExpression
+      }
+    while
+      $/$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"*" !operatorLocation}
+        !.divOp
+        !rightExpression
+      }
+    while
+      $&&$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"&&" !operatorLocation}
+        !.andShortCircuitOp
+        !rightExpression
+      }
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <additive_expression> !@expressionAST outExpression {
+    <primary> ?outExpression
+    repeat
+    while
+      $|$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"|" !operatorLocation}
+        !.orOp
+        !rightExpression
+      }
+    while
+      $^$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"^" !operatorLocation}
+        !.xorOp
+        !rightExpression
+      }
+    while
+      $+$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"+" !operatorLocation}
+        !.addOp
+        !rightExpression
+      }
+    while
+      $-$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"-" !operatorLocation}
+        !.subOp
+        !rightExpression
+      }
+    while
+      $||$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"||" !operatorLocation}
+        !.orShortCircuitOp
+        !rightExpression
+      }
+    while
+      $<<$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"<<" !operatorLocation}
+        !.leftShiftOp
+        !rightExpression
+      }
+    while
+      $>>$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!">>" !operatorLocation}
+        !.rightShiftOp
+        !rightExpression
+      }
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @infixOperatorExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze left expression
+  [mLeftExpression analyzeStaticExpression
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+    ?expressionType:let leftExpressionType
+    ?generatedCode:let leftExpressionGeneratedCode
+  ]
+#--- Analyze right expression
+  [mRightExpression analyzeStaticExpression
+    !optionalTargetType:leftExpressionType
+    !context:inContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+    ?expressionType:let rightExpressionType
+    ?generatedCode:let rightExpressionGeneratedCode
+  ]
+#--- Check left type
+  @infixOperatorMap operatorMap
+  switch mOp 
+  case equal : operatorMap = inContext.mEqualOperatorMap
+  case nonEqual : operatorMap = inContext.mNonEqualOperatorMap
+  case strictInf : operatorMap = inContext.mStrictInfOperatorMap
+  case infEqual : operatorMap = inContext.mInfEqualOperatorMap
+  case strictSup : operatorMap = inContext.mStrictSupOperatorMap
+  case supEqual : operatorMap = inContext.mSupEqualOperatorMap
+  case andOp : operatorMap = inContext.mAndOperatorMap
+  case andShortCircuitOp : operatorMap = inContext.mAndShortCircuitOperatorMap
+  case orOp : operatorMap = inContext.mOrOperatorMap
+  case orShortCircuitOp : operatorMap = inContext.mOrShortCircuitOperatorMap
+  case xorOp : operatorMap = inContext.mXorOperatorMap
+  case addOp : operatorMap = inContext.mAddOperatorMap
+  case subOp : operatorMap = inContext.mSubOperatorMap
+  case mulOp : operatorMap = inContext.mMulOperatorMap
+  case divOp : operatorMap = inContext.mDivOperatorMap
+  case modOp : operatorMap = inContext.mModOperatorMap
+  case leftShiftOp  : operatorMap = inContext.mLeftShiftOperatorMap
+  case rightShiftOp : operatorMap = inContext.mRightShiftOperatorMap
+  end
+  [operatorMap checkWith
+    !leftType:leftExpressionType
+    !rightType:rightExpressionType
+    !operator:mOperator
+    ?resultType:outExpressionType
+    ?opString:let @abstractInfixOperatorGeneration resultOperator
+  ]
+#--- Generate code
+  outGeneratedCode = @operatorInfixExpressionGeneration.new {
+    !leftExpressionGeneratedCode
+    !resultOperator
+    !rightExpressionGeneratedCode
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @infixOperatorMap checkWith
+  ?leftType:let @unifiedTypeMap-proxy inLeftType
+  ?rightType:let @unifiedTypeMap-proxy inRightType
+  ?operator:let @lstring inOperator
+  !resultType: @unifiedTypeMap-proxy outResultType
+  !opString:@abstractInfixOperatorGeneration outOpString
+{
+  let lkey = @lstring.new {![inLeftType key] + "." + [inRightType key] !inOperator.location}
+  if [self hasKey !lkey.string] then
+    [self searchKey !lkey ?outResultType ?outOpString]
+  else
+    error inOperator
+      : "infix operation '" + [inLeftType key] + " " + inOperator + " " + [inRightType key] + "' is not defined"
+      : outResultType, outOpString
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @infixOperatorExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze left expression
+  [mLeftExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let leftExpressionType
+    ?generatedCode:let leftExpressionGeneratedCode
+  ]
+#--- Analyze right expression
+  [mRightExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:leftExpressionType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let rightExpressionType
+    ?generatedCode:let rightExpressionGeneratedCode
+  ]
+#--- Check left type
+  @abstractInfixOperatorGeneration resultOperator
+  @infixOperatorMap operatorMap
+  switch mOp 
+  case equal : operatorMap = inContext.mEqualOperatorMap
+  case nonEqual : operatorMap = inContext.mNonEqualOperatorMap
+  case strictInf : operatorMap = inContext.mStrictInfOperatorMap
+  case infEqual : operatorMap = inContext.mInfEqualOperatorMap
+  case strictSup : operatorMap = inContext.mStrictSupOperatorMap
+  case supEqual : operatorMap = inContext.mSupEqualOperatorMap
+  case andOp : operatorMap = inContext.mAndOperatorMap
+  case andShortCircuitOp : operatorMap = inContext.mAndShortCircuitOperatorMap
+  case orOp : operatorMap = inContext.mOrOperatorMap
+  case orShortCircuitOp : operatorMap = inContext.mOrShortCircuitOperatorMap
+  case xorOp : operatorMap = inContext.mXorOperatorMap
+  case addOp : operatorMap = inContext.mAddOperatorMap
+  case subOp : operatorMap = inContext.mSubOperatorMap
+  case mulOp : operatorMap = inContext.mMulOperatorMap
+  case divOp : operatorMap = inContext.mDivOperatorMap
+  case modOp : operatorMap = inContext.mModOperatorMap
+  case leftShiftOp  : operatorMap = inContext.mLeftShiftOperatorMap
+  case rightShiftOp : operatorMap = inContext.mRightShiftOperatorMap
+  end
+  [operatorMap checkWith
+    !leftType:leftExpressionType
+    !rightType:rightExpressionType
+    !operator:mOperator
+    ?resultType:outExpressionType
+    ?opString:resultOperator
+  ]
+#--- Generate code
+  outGeneratedCode = @operatorInfixExpressionGeneration.new {
+    !leftExpressionGeneratedCode
+    !resultOperator
+    !rightExpressionGeneratedCode
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractInfixOperatorGeneration generateInfixExpression
+  ?@abstractExpressionGeneration inleft
+  ?@abstractExpressionGeneration inRight
+  -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @standardInfixOperatorGeneration generateInfixExpression
+  ?@abstractExpressionGeneration inleft
+  ?@abstractExpressionGeneration inRight
+  -> @string outCode
+{
+  outCode = "(" + [inleft expressionCode] + ") " + mInfixOperator + " (" + [inRight expressionCode] + ")"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @operatorInfixExpressionGeneration : @abstractExpressionGeneration {
+  @abstractExpressionGeneration mLeftExpression
+  @abstractInfixOperatorGeneration mOperator
+  @abstractExpressionGeneration mRightExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @operatorInfixExpressionGeneration expressionCode -> @string outCode {
+  outCode =  [mOperator generateInfixExpression !mLeftExpression !mRightExpression]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

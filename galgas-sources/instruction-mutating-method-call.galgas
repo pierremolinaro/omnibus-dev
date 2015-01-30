@@ -1,0 +1,197 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @mutatingMethodCallInstructionAST : @instructionAST {
+  @lstring mReceiverName
+  @lstring mMethodName
+  @procEffectiveParameterListAST mEffectiveParameterList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $[$
+    $!?$ ? let selector
+    if selector.string != "" then
+      error selector : "the selector should be '!?'"
+    end
+    $identifier$ ?let receiverName
+    $identifier$ ?let methodName
+    @procEffectiveParameterListAST effectiveParameterList = {}
+    repeat
+    while
+      $!$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.output !selector !effectiveParameterName
+    while
+      $!?$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.outputInput !selector !effectiveParameterName
+    while
+      $?$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.input !selector !effectiveParameterName
+    end
+    $]$
+    ioInstructionList += !@mutatingMethodCallInstructionAST.new {
+      !receiverName
+      !methodName
+      !effectiveParameterList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @mutatingMethodCallInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext unused inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Analyze receiver variable
+  [!?ioVariableMap searchForReadWriteAccess
+    !mReceiverName
+    ?let receiverType
+    ?let receiverVarAcceptedModeSet
+    ?let targetVar
+    ?*
+  ]
+#--- Check mode
+  if not [receiverVarAcceptedModeSet hasKey !inMode] then
+    error mReceiverName : "this variable cannot be used in $" + inMode + " mode"
+  end
+#--- Check parameters
+  @procEffectiveParameterList parameterList = {}
+  @string procMangledName = mMethodName.string
+  for () in mEffectiveParameterList do
+    procMangledName += " "
+    switch mEffectiveParameterKind 
+    case input :
+      procMangledName += "!" ;
+      [!?ioVariableMap searchForWriteAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let @string valueAccess
+        ?let isCopiable
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      if not isCopiable then
+        error mEffectiveParameterName : "the '" + mEffectiveParameterName + "' variable is not copiable"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
+    case output :
+      procMangledName += "?" ;
+      [!?ioVariableMap searchForReadAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let valueAccess
+        ?*
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
+    case outputInput :
+      procMangledName += "?!" ;
+      [!?ioVariableMap searchForReadWriteAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let valueAccess
+        ?*
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
+    end
+    procMangledName += mSelector.string
+  end
+#--- Search proc in proc map
+  let receiverTypeProcedureMap = [receiverType procedureMap]
+  [receiverTypeProcedureMap searchKey
+    !.new {!procMangledName !mMethodName.location}
+    ?let calledProcIsMutating
+    ?let procedureMode
+    ?let @procedureSignature calledProcSignature
+  ]
+#--- Check mode
+  if procedureMode.string != inMode then
+    error mMethodName : "this variable cannot be used in $" + inMode + " mode"
+  end
+#--- called method is not a mutating method
+  switch inReceiverType
+  case noReceiver :
+    if calledProcIsMutating then
+      error mMethodName : "a mutating method cannot be called from a non mutating procedure"
+    end
+  case receiver (* *) :
+    if calledProcIsMutating then
+      error mMethodName : "a mutating method cannot be called from a non mutating method"
+    end
+  case mutatingReceiver (* *) :
+  end
+#--- Check parameter list
+  if [calledProcSignature length] != [parameterList length] then
+    error mMethodName: "this proc requires " + [calledProcSignature length] + " argument(s), this call names "
+      + [parameterList length] + " argument(s)"
+  else
+    for () formal_ in calledProcSignature, () actual_ in parameterList do
+      if [formal_mType key] != [actual_mParameterType key] then
+        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
+           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+      end
+      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
+      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
+      if requiredPassingMode != testedPassingMode then
+        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
+      end
+    end  
+  end
+#--- Code generation
+  if calledProcIsMutating then
+    [!?parameterList insertAtIndex
+      !.outputInput
+      !["" nowhere]
+      !receiverType
+      !"& " + targetVar
+      !0
+    ]
+  else
+    [!?parameterList insertAtIndex
+      !.output
+      !["" nowhere]
+      !receiverType
+      !targetVar
+      !0
+    ]
+  end
+  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
+    ![receiverType key] + "_" + procMangledName
+    !parameterList
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

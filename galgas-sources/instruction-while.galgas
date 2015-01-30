@@ -1,0 +1,104 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @whileInstructionAST : @instructionAST {
+  @expressionAST mTestExpression
+  @location mEndOf_test_expression
+  @instructionListAST mWhileInstructionList
+  @location mEndOf_while_instruction
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $while$
+    <expression> ?let @expressionAST testExpression
+    let testExpressionEndLocation = @location.here
+    $do$
+    <instructionList> ?let instructionList
+    let endOfInstruction = @location.here
+    $end$
+    ioInstructionList += !@whileInstructionAST.new {
+      !testExpression
+      !testExpressionEndLocation
+      !instructionList
+      !endOfInstruction
+    }
+  }
+  
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @whileInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Analyze test expression
+  [mTestExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let testExpressionType
+    ?generatedCode:let testExpressionGeneratedCode
+  ]
+#--- Check inferred type
+  if [testExpressionType kind] != .boolean then
+    error mEndOf_test_expression : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
+  end
+  [!?ioVariableMap openOverrideForRepeatBlock]
+#--- Analyze instruction list
+  @instructionGenerationList instructionGenerationList = {}
+  [mWhileInstructionList analyzeBranchInstructionList
+    !endOfInstructionList:mEndOf_while_instruction
+    !optionalReceiverType:inReceiverType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?generatedCode:instructionGenerationList
+  ]
+  [!?ioVariableMap closeOverride !mEndOf_while_instruction]
+#--- Code generation
+  ioInstructionGenerationList += !@whileInstructionGeneration.new {
+    !testExpressionGeneratedCode
+    !instructionGenerationList
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @whileInstructionGeneration : @abstractInstructionGeneration {
+  @abstractExpressionGeneration mTestExpressionGeneration
+  @instructionGenerationList mInstructionGenerationList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @whileInstructionGeneration instructionCode -> @string outCode {
+  outCode = "while (" + [mTestExpressionGeneration expressionCode] + ") {\n"
+  outCode += [mInstructionGenerationList instructionListCode]
+  outCode += "}\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

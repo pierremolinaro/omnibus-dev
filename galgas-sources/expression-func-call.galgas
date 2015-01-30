@@ -1,0 +1,127 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @functionCallEffectiveParameterList {
+  @lstring mSelector
+  @expressionAST mExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @functionCallInExpressionAST : @expressionAST {
+  @lstring mFunctionVarName
+  @functionCallEffectiveParameterList mParameterList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <primary> !@expressionAST outExpression {
+    $identifier$ ?let functionName
+    $($
+    @functionCallEffectiveParameterList parameterList = {}
+    repeat
+    while
+      $!$ ?let selector
+      <expression> ?let expression
+      parameterList += !selector !expression
+    end
+    $)$
+    outExpression = @functionCallInExpressionAST.new {!functionName !parameterList}
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @functionCallInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @functionCallInExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Solve inferred type
+  outExpressionType = .null
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!""}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @functionCallInExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  [inContext.mFunctionMap searchKey
+    !mFunctionVarName
+    ?let functionMode
+    ?let formalParameterList
+    ?outExpressionType
+  ]
+#--- Check mode
+  if inMode != functionMode.string then
+    error mFunctionVarName : "this function should be called in $" + inMode + " mode"
+  end
+#---
+  var s = functionPrefix () + mFunctionVarName.string + " ("
+  if [formalParameterList length] != [mParameterList length] then
+    error mFunctionVarName : "this function declares " + [formalParameterList length] 
+      + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
+  else
+    for formal in formalParameterList, actual in mParameterList
+    do
+      if actual.mSelector.string != formal.mFormalSelector.string then
+        var s = "!"
+        if formal.mFormalSelector.string != "" then
+          s += formal.mFormalSelector.string + ":"
+        end
+        error actual.mSelector : "required selector: " + s
+      end
+      [actual.mExpression analyzeExpression
+        !optionalReceiverType:.noReceiver
+        !optionalTargetType:formal.mArgumentType
+        !context:inContext
+        !mode:inMode
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        ?expressionType:let argumentExpressionType
+        ?generatedCode:let argumentGeneratedCode
+      ]
+      s += [argumentGeneratedCode expressionCode]
+      if [argumentExpressionType key] != [formal.mArgumentType key] then
+        error actual.mSelector : "the actual parameter has the " + [argumentExpressionType key]
+         + ", but the formal argument has the " + [formal.mArgumentType key] + " type"
+      end
+    between 
+      s += ", "
+    end
+  end
+  s += ")"
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!s}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

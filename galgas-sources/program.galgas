@@ -1,0 +1,227 @@
+#----------------------------------------------------------------------------------------------------------------------*
+
+case . "plms"
+message "a source text file with the .plms extension"
+grammar plms_grammar
+?sourceFilePath:@lstring inSourceFile {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+case . "plm"
+message "a source text file with the .plm extension"
+grammar plm_grammar
+?sourceFilePath:@lstring inSourceFile {
+#--- Parsing
+  @ast ast = .default
+  grammar plm_grammar in inSourceFile !?ast ?importClauseList:let importedFileList ?endOfSourceFile:let endOfSourceFile
+#--- Recursively import files
+  @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
+  let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
+  recursiveImportFiles (
+    !?ast:ast
+    !currentDirectory:currentDirectory
+    !importClauseList:importedFileList
+    !?importedFilePathSet:importedFileAbsolutePathSet
+  )
+#--- Check target names are not duplicated
+  if @uint.errorCount == 0 then
+    @stringset targetNameSet = {}
+    for (targetName) in ast.mTargetList do
+      if [targetNameSet hasKey !targetName.string] then
+        error targetName : "Duplicated target"
+      end
+      targetNameSet += !targetName.string
+    end
+  end
+#--- Compile project for every target
+  if @uint.errorCount == 0 then
+    if [ast.mTargetList length] == 0 then
+      warning endOfSourceFile : "no target: only syntax analysis has been performed"
+    end
+    for (targetName) in ast.mTargetList do
+      if [targetName pathExtension] == "plms" then
+        compileProject (
+          !sourceFile:inSourceFile
+          !ast:ast
+          !forTarget:targetName
+          !endOfSourceFile:endOfSourceFile
+          !currentDirectory:currentDirectory
+          !importedFilePathSet:importedFileAbsolutePathSet
+        )
+      else
+        error targetName : "target path should have the .plms extension"
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc compileProject
+  ?sourceFile:let @lstring inSourceFile
+  ?ast:let @ast inAST
+  ?forTarget:let @lstring inTargetName
+  ?endOfSourceFile:let @location inEndOfSourceFile
+  ?currentDirectory:let @string inCurrentDirectory
+  ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
+{
+  @ast ast = inAST
+  @stringset importedFileAbsolutePathSet = inImportedFileAbsolutePathSet
+#--- Add target specific files
+  addTargetSpecificFiles (
+    !forTarget:inTargetName
+    !?toAST:ast
+    !currentDirectory:inCurrentDirectory
+    !?importedFilePathSet:importedFileAbsolutePathSet
+  )
+#--- Add Predefined types
+  addPredefinedTypes (!?declarationList:ast.mDeclarationList)
+#--- Ordered declaration list
+  buildOrderedDeclarationList (
+    !declarationList:ast.mDeclarationList
+    !procedureDeclarationList:ast.mProcedureListAST
+    !endOfSourceFile:inEndOfSourceFile
+    ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
+  )
+#--- Semantic context
+  if @uint.errorCount == 0 then
+    @globalLiteralStringMap globalLiteralStringMap = {}
+    buildSemanticContext (
+      !orderedDeclarationList:orderedDeclarationListAST
+      !procedureDeclarationList:ast.mProcedureListAST
+      !functionDeclarationList:ast.mFunctionListAST
+      !requiredProcList:ast.mRequiredProcList
+      !?staticStringMap:globalLiteralStringMap
+      ?context:let @semanticContext semanticContext
+    )
+  #--- Semantic analysis
+    if @uint.errorCount == 0 then
+      semanticAnalysis (
+        !orderedDeclarationList:orderedDeclarationListAST
+        !procedureDeclarationList:ast.mProcedureListAST
+        !functionDeclarationList:ast.mFunctionListAST
+        !context:semanticContext
+        !requiredProcList:ast.mRequiredProcList
+        !endOfSourceFile:inEndOfSourceFile
+        !?staticStringMap:globalLiteralStringMap
+        ?generation:let @orderedGenerationList orderedGenerationList
+      )
+    #--- Code generation
+      if @uint.errorCount == 0 then
+        codeGeneration (
+          !outputFile:inSourceFile.string
+          !staticStringMap:globalLiteralStringMap
+          !generation:orderedGenerationList
+          !target:inTargetName
+        )
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc addPredefinedTypes
+  ?!declarationList:@declarationListAST ioDeclarationList
+{
+#--- Add String type
+  ioDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
+}
+ 
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc addTargetSpecificFiles
+  ?forTarget:let @lstring inTargetName
+  ?!toAST:@ast ioAST
+  ?currentDirectory:let @string inCurrentDirectory
+  ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
+{
+  let targetFilePath = "targets/" + inTargetName
+  recursiveImportFiles (
+    !?ast:ioAST
+    !currentDirectory:inCurrentDirectory
+    !importClauseList:{!.new {!targetFilePath !inTargetName.location}}
+    !?importedFilePathSet:ioImportedFileAbsolutePathSet
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc recursiveImportFiles
+  ?!ast:@ast ioAST
+  ?currentDirectory:@string inCurrentDirectory
+  ?importClauseList:@lstringlist inImportedClauseList
+  ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
+{
+  for (path) in inImportedClauseList do
+    let absolutePath = [path.string absolutePathFromPath !inCurrentDirectory]
+    if [absolutePath fileExists] then # Exists in file system ?
+      if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
+        ioImportedFileAbsolutePathSet += !absolutePath
+        if [absolutePath pathExtension] == "plm" then
+          grammar plm_grammar in @lstring.new {!absolutePath !path.location}
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportFiles (
+            !?ast:ioAST
+            !currentDirectory:inCurrentDirectory
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        elsif [absolutePath pathExtension] == "plms" then
+          grammar plms_grammar in @lstring.new {!absolutePath !path.location}
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportFiles (
+            !?ast:ioAST
+            !currentDirectory:inCurrentDirectory
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        else
+          error path : "invalid extension (should be .plm or .plms)"
+        end
+      end
+    else
+      let @filewrapper fw = [filewrapper targetTemplates]
+      if [fw fileExistsAtPath !path.string] then
+        let embeddedPath = ":" + path
+        if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
+          ioImportedFileAbsolutePathSet += !embeddedPath
+          if [absolutePath pathExtension] == "plm" then
+            grammar plm_grammar on [fw textFileContentsAtPath !path.string]
+              !?ioAST
+              ?importClauseList:let importedFileList
+              ?endOfSourceFile:*
+            recursiveImportFiles (
+              !?ast:ioAST
+              !currentDirectory:inCurrentDirectory
+              !importClauseList:importedFileList
+              !?importedFilePathSet:ioImportedFileAbsolutePathSet
+            )
+          elsif [absolutePath pathExtension] == "plms" then
+            grammar plms_grammar on [fw textFileContentsAtPath !path.string]
+              !?ioAST
+              ?importClauseList:let importedFileList
+              ?endOfSourceFile:*
+            recursiveImportFiles (
+              !?ast:ioAST
+              !currentDirectory:inCurrentDirectory
+              !importClauseList:importedFileList
+              !?importedFilePathSet:ioImportedFileAbsolutePathSet
+            )
+          else
+            error path : "invalid extension (should be .plm or .plms)"
+          end
+        end
+      else
+        error path : "cannot find this file in file system and in embedded files"
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,39 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @requiredProcedureDeclarationListAST {
+  @lstring mRequiredProcedureName
+  @lstring mRequiredMode
+  @procFormalArgumentList mProcFormalArgumentList
+  @location mEndOfProcLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plms_specific_syntax {
+
+  rule <procedure_header>
+    !procMode:@lstring outProcMode
+    !name:@lstring outProcName
+    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $required$
+    <procedure_header>
+      ?procMode:let requiredMode
+      ?name:let procName
+      ?formalArguments:let procFormalArgumentList
+    ioAST.mRequiredProcList += !procName !requiredMode !procFormalArgumentList !.here
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

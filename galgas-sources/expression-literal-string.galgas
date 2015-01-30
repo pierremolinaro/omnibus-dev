@@ -1,0 +1,79 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalStringInExpressionAST : @expressionAST {
+  @lstring mLiteralString
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <primary> !@expressionAST outExpression {
+    $literal_string$ ?let @lstring stringLiteral
+    outExpression = @literalStringInExpressionAST.new {!stringLiteral}
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringInExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  @string literalStringName
+  if [ioGlobalLiteralStringMap hasKey !mLiteralString.string] then
+    [ioGlobalLiteralStringMap searchKey !mLiteralString ?literalStringName]
+  else
+    literalStringName = literalStringPrefix () + [ioGlobalLiteralStringMap count]
+    [!?ioGlobalLiteralStringMap insertKey !mLiteralString !literalStringName]
+  end
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!literalStringName}
+  outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalStringInExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string unused inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  @string literalStringName
+  if [ioGlobalLiteralStringMap hasKey !mLiteralString.string] then
+    [ioGlobalLiteralStringMap searchKey !mLiteralString ?literalStringName]
+  else
+    literalStringName = literalStringPrefix () + [ioGlobalLiteralStringMap count]
+    [!?ioGlobalLiteralStringMap insertKey !mLiteralString !literalStringName]
+  end
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!literalStringName}
+  outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,111 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalIntegerInExpressionAST : @expressionAST {
+  @luint64 mLiteralInteger
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <primary> !@expressionAST outExpression {
+    $integer$ ?let @luint64 integerLiteral
+    outExpression = @literalIntegerInExpressionAST.new {!integerLiteral}
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerInExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  if inOptionalTargetType == .null then
+    error mLiteralInteger : "Cannot infer type" : outExpressionType
+  else
+    switch [inOptionalTargetType kind]
+    case integer (* max) :
+      if mLiteralInteger.uint64 > max then
+        error mLiteralInteger : "literal integer is > " + [inOptionalTargetType key]
+          + " max value (" + max + ")" : outExpressionType
+      else
+        outExpressionType = inOptionalTargetType
+      end
+    case enumeration (*) :
+      error mLiteralInteger : "an enumeration cannot be assigned from a literal integer" : outExpressionType
+    case structure (*) :
+      error mLiteralInteger : "a structure cannot be assigned from a literal integer" : outExpressionType
+    case boolean :
+      error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outExpressionType
+    case literalString :
+      error mLiteralInteger : "a literal string cannot be assigned from a literal integer" : outExpressionType
+    case boolset :
+      error mLiteralInteger : "a boolset cannot be assigned from a literal integer" : outExpressionType
+    end
+  end
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {![mLiteralInteger.uint64 string]}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerInExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?mode:let @string unused inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  if inOptionalTargetType == .null then
+    error mLiteralInteger : "Cannot infer type" : outExpressionType
+  else
+    switch [inOptionalTargetType kind]
+    case integer (* max) :
+      if mLiteralInteger.uint64 > max then
+        error mLiteralInteger : "literal integer is > " + [inOptionalTargetType key]
+          + " max value (" + max + ")" : outExpressionType
+      else
+        outExpressionType = inOptionalTargetType
+      end
+    case enumeration (*) :
+      error mLiteralInteger : "an enumeration cannot be assigned from a literal integer" : outExpressionType
+    case structure (*) :
+      error mLiteralInteger : "a structure cannot be assigned from a literal integer" : outExpressionType
+    case boolean :
+      error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outExpressionType
+    case boolset :
+      error mLiteralInteger : "a boolset cannot be assigned from a literal integer" : outExpressionType
+    case literalString :
+      error mLiteralInteger : "a literal string cannot be assigned from a literal integer" : outExpressionType
+    end
+  end
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {
+   !"(" + typePrefix () + [inOptionalTargetType key] + ") " + mLiteralInteger.uint64
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

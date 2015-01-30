@@ -1,0 +1,227 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @booleanDeclaration : @abstractDeclaration {
+  @lstring mBooleanTypeName
+  @lstringlist mAttributeList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @booleanDeclaration location -> @location outLocation {
+  outLocation = mBooleanTypeName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $newBooleanType$
+    $Identifier$ ?let newBoolTypeName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end 
+    ioAST.mDeclarationList += !@booleanDeclaration.new {
+      !newBoolTypeName
+      !attributeList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @booleanDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mBooleanTypeName !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @booleanDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "bool " + mBooleanTypeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @booleanDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  var copiable = true
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      if not copiable then
+        error s : "duplicated attribute"
+      end
+      copiable = false
+    end
+  end
+#--- Constructors
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey !["false" nowhere] !"(" + typePrefix () + mBooleanTypeName + ") 0"]
+  [!?constructorMap insertKey !["true" nowhere] !"(" + typePrefix () + mBooleanTypeName + ") 1"]
+#--- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mBooleanTypeName
+    !kind:.boolean
+    !constructorMap:constructorMap
+    !procedureMap:{} # Procedure map
+    !copiable:copiable
+    !equatable:true
+    !comparable:true
+  ]
+#--- Enter boolean operators
+  enterBooleanOperators (
+    !integerTypeName:mBooleanTypeName
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterBooleanOperators
+  ?integerTypeName:@lstring inBooleanTypeName
+  ?!context:@semanticContext ioContext
+{
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+  [!?ioContext.mEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"=="}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"!="}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<"}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<="}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!">"}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!">="}
+  ]
+  [!?ioContext.mAndOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"&"}
+  ]
+  [!?ioContext.mAndShortCircuitOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"&&"}
+  ]
+  [!?ioContext.mOrOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"|"}
+  ]
+  [!?ioContext.mOrShortCircuitOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"||"}
+  ]
+  [!?ioContext.mXorOperatorMap insertKey
+    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"^"}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @booleanDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Get C type
+  var cType = "" # C type undefined
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      # Nothing to do: handled in 'enterInContext'
+    elsif cType != "" then
+      error s : "base type already defined as '" + cType + "'"
+    else
+      [inContext.mTargetBaseTypeMap searchKey !s ?cType ?* ?*]
+    end
+  end
+#---
+  ioOrderedGenerationList += !@booleanGeneration.new {
+    !mBooleanTypeName.string
+    !cType
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @booleanGeneration : @abstractGeneration {
+  @string mBooleanTypeName
+  @string mActualTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper booleanGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "boolean-declaration.galgasTemplate"
+    ?@string ENUMERATION_NAME
+    ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @booleanGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper booleanGenerationTemplate.declaration
+    !mBooleanTypeName
+    !mActualTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @booleanGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+

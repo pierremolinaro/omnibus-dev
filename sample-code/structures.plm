@@ -1,0 +1,101 @@
+enum Toto @size8 {
+  case a
+  case b
+  case c
+}
+
+//-----------------------------------------------------------------------------*
+
+struct ZeStruct {
+  var Toto mA = Toto.a
+  var Bool mB = .true
+  var UInt32 mC = 18
+}
+
+//-----------------------------------------------------------------------------*
+
+struct OtherBigStruct {
+  var ZeBigStruct mA = .init
+  mutating proc setA ?A:ZeBigStruct inA {
+    mA = inA
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+struct ZeBigStruct {
+  var ZeStruct mC = .init
+  var ZeStruct mD = .init
+  var Bool mB = .true
+  
+  proc myProc ?input: Toto inValue !output: Toto outValue !Bool azer {
+    outValue = inValue
+    azer = mB
+    [self otherProc ?azer]
+  }
+
+  proc otherProc !Bool azer {
+    azer = mB
+//    [self mutatingProc !mB ?azer]
+  }
+  mutating proc mutatingProc ?Bool azer !Bool ex {
+    mB = azer
+    [self otherProc ?ex]
+  }
+  mutating proc otherMutatingProc ?Bool azer !Bool ex {
+    mB = azer
+    [self otherProc ?ex]
+    [!?self mutatingProc !mB ?ex]
+    OtherBigStruct oz = .init
+    ZeBigStruct zz = .init
+    [!?oz setA !A:zz]
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+proc zeProc !Bool x {
+  var s2 = ZeBigStruct.init
+  [s2 otherProc ?x]
+  if x then
+    x = .false
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc intProc !UInt32 x {
+  x = 67
+  UInt32 y = 99 << 1
+  x = 12 + y + 18
+}
+
+//-----------------------------------------------------------------------------*
+
+//newtype MyBool : Bool
+
+//-----------------------------------------------------------------------------*
+
+boolset Boolset {
+  a, b, c
+}
+
+//-----------------------------------------------------------------------------*
+
+proc initBoolsetZero !Boolset s {
+  s = .none
+}
+
+//-----------------------------------------------------------------------------*
+
+proc initBoolsetAll !Boolset s {
+  s = .all
+}
+
+//-----------------------------------------------------------------------------*
+
+proc initBoolsetValues !Boolset s {
+  s = .a + .b - .c
+}
+
+//-----------------------------------------------------------------------------*

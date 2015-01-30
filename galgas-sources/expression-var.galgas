@@ -1,0 +1,94 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @varInExpressionAST : @expressionAST {
+  @lstring mSourceVarName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <primary> !@expressionAST outExpression {
+    $identifier$ ?let sourceVarName
+    outExpression = @varInExpressionAST.new {!sourceVarName}
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @varInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addEdge !inConstantName !mSourceVarName]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @varInExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze left expression
+  [inContext.mGlobalConstantMap searchKey
+    !mSourceVarName
+    ?let sourceVarType
+    ?let globalConstantValue
+  ]
+#--- Solve inferred type
+  outExpressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:sourceVarType
+    !errorLocation:mSourceVarName.location
+  )
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {![globalConstantValue expressionCode]}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @varInExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Search variable
+  [!?ioVariableMap searchForReadAccess
+    !mSourceVarName
+    ?let sourceVarType
+    ?let acceptedModeSet
+    ?let varAccess
+    ?*
+  ]
+#--- Check mode
+  if not [acceptedModeSet hasKey !inMode] then
+    error mSourceVarName : "this variable cannot be used in $" + inMode + " mode"
+  end
+#--- Solve inferred type
+  outExpressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:sourceVarType
+    !errorLocation:mSourceVarName.location
+  )
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!varAccess}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

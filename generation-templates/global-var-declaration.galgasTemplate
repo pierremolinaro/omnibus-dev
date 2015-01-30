@@ -1,0 +1,15 @@
+//---------------------------------------------------------------------------------------------------------------------*
+//%!["global variable " + GLOBAL_VAR_NAME stringByLeftAndRightPadding !117 !' ']%*
+//---------------------------------------------------------------------------------------------------------------------*
+
+%
+if GENERATE_VOLATILE then
+%volatile %
+end
+!typePrefix ()!GLOBAL_TYPE_NAME
+% %
+!GLOBAL_VAR_NAME
+% = %
+!INITIAL_VALUE_STRING
+% ;
+

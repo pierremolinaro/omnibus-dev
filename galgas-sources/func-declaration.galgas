@@ -1,0 +1,287 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @funcFormalArgumentList {
+  @lstring mSelector
+  @lstring mFormalArgumentTypeName
+  @lstring mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @functionDeclarationListAST {
+  @lstring mFunctionName
+  @lstring mFunctionMode
+  @funcFormalArgumentList mFuncFormalArgumentList
+  @lstring mResultTypeName
+  @lstring mResultVarName
+  @instructionListAST mInstructionList
+  @location mEndOfFuncLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $func$
+    @lstring funcMode
+    select
+      funcMode = .new {!"" !.here}
+    or
+      $modeName$ ?funcMode
+    end
+    $identifier$ ?let funcName
+    @funcFormalArgumentList funcFormalArgumentList = {}
+    $($
+    repeat
+    while
+      $?$ ?let selector
+      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentName
+      funcFormalArgumentList +=
+        !selector
+        !formalArgumentTypeName
+        !formalArgumentName
+    end
+    $)$
+    $->$
+    $Identifier$ ?let resultTypeName
+    $identifier$ ?let resultVarName
+    ${$
+    <instructionList> ?let instructionList
+    $}$
+    ioAST.mFunctionListAST +=
+      !funcName
+      !funcMode
+      !funcFormalArgumentList
+      !resultTypeName
+      !resultVarName
+      !instructionList
+      !.here
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @functionDeclarationListAST-element enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (* formalArgumentTypeName *) in mFuncFormalArgumentList do
+    [!?ioGraph noteNode !formalArgumentTypeName]
+  end
+  [!?ioGraph noteNode !mResultTypeName]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @funcSignature {
+  @lstring mFormalSelector
+  @unifiedTypeMap-proxy mArgumentType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @functionMap {
+  @lstring mFunctionMode
+  @funcSignature mSignature
+  @unifiedTypeMap-proxy mResultType
+
+  insert insertKey error message "the '%K' func is already declared in %L"
+  search searchKey error message "there is no '%K' func"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @functionDeclarationListAST-element mangledName -> @string outMangledName {
+  outMangledName = mFunctionName.string
+  for (selector * *) in mFuncFormalArgumentList do
+    outMangledName += " ?" + selector.string
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @functionDeclarationListAST-element enterInContext
+  ?!context:@semanticContext ioContext
+{
+#--- Signature
+  @funcSignature signature = {}
+  for (selector formalArgumentTypeName *) in mFuncFormalArgumentList do
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+    signature += !selector !typeProxy
+  end
+#--- Result type
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
+#--- Enter in context
+  [!?ioContext.mFunctionMap insertKey
+    !.new {![self mangledName] !mFunctionName.location}
+    !mFunctionMode
+    !signature
+    !resultType
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @funcFormalArgumentListForGeneration {
+  @unifiedTypeMap-proxy mFormalArgumentType
+  @string mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @functionGeneration : @abstractGeneration {
+  @string mFunctionMangledName
+  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionGenerationList mInstructionGenerationList
+  @unifiedTypeMap-proxy mResultType
+  @string mResultVarName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @functionDeclarationListAST-element semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+{
+  @variableMap variableMap = .emptyMap
+  @funcFormalArgumentListForGeneration formalArguments = {}
+#--- All mode set
+  let allModeSet = [inContext.mModeMap keySet] ;
+#--- Check mode
+  if mFunctionMode.string != "" then
+    [inContext.mModeMap searchKey !mFunctionMode]
+  end
+#--- Add registers (in read only mode)
+  for () in inContext.mRegisterMap do
+    [!?variableMap insertUsedLocalConstant
+      !lkey
+      !mType
+      !allModeSet
+      !lkey.string
+      !true
+    ]
+  end
+#--- Add global constants
+  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
+    [!?variableMap insertUsedLocalConstant
+      !constantName
+      !constantType
+      !allModeSet
+      ![sourceExpressionCode expressionCode]
+      !true
+    ]
+  end
+#--- Add global variables (only read access)
+  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
+    [!?variableMap insertUsedLocalConstant
+      !variableName
+      !variableType
+      !modeSet
+      !variableName.string
+      !true
+    ]
+  end
+#--- Add 'result" variable
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
+  [!?variableMap insertOutputFormalArgument
+    !mResultVarName
+    !resultType
+    !{!mFunctionMode.string}
+    !mResultVarName.string
+    !true
+  ]
+#--- Analyse formal arguments
+  for (* formalArgumentTypeName formalArgumentName) in mFuncFormalArgumentList do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+    [!?variableMap insertConstantInputFormalArgument
+      !formalArgumentName
+      !typeProxy
+      !{!mFunctionMode.string}
+      !inArgumentPrefix () + formalArgumentName.string
+      ![typeProxy copiable]
+    ]
+    formalArguments += !typeProxy !inArgumentPrefix () + formalArgumentName.string
+  end
+#--- Analyze instruction list
+  @instructionGenerationList instructionGenerationList = {}
+  [mInstructionList analyzeRoutineInstructionList
+    !optionalReceiverType:.noReceiver
+    !context:inContext
+    !mode:mFunctionMode.string
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfFuncLocation]
+#--- Code generation
+  ioOrderedGenerationList += !@functionGeneration.new {
+    ![self mangledName]
+    !formalArguments
+    !instructionGenerationList
+    !resultType
+    !mResultVarName.string
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper functionGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "function-declaration.galgasTemplate"
+    ?@string FUNCTION_MANGLED_NAME
+    ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
+    ?@unifiedTypeMap-proxy RESULT_TYPE
+
+  template implementation "function-implementation.galgasTemplate"
+    ?@string FUNCTION_MANGLED_NAME
+    ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
+    ?@instructionGenerationList INSTRUCTION_GENERATION_LIST
+    ?@unifiedTypeMap-proxy RESULT_TYPE
+    ?@string RESULT_VAR_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @functionGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper functionGenerationTemplate.declaration
+    !mFunctionMangledName
+    !mFormalArgumentListForGeneration
+    !mResultType
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @functionGeneration implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper functionGenerationTemplate.implementation
+    !mFunctionMangledName
+    !mFormalArgumentListForGeneration
+    !mInstructionGenerationList
+    !mResultType
+    !mResultVarName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

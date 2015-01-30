@@ -1,0 +1,135 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @incrementationInstructionAST : @instructionAST {
+  @lstring mVarName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @decrementationInstructionAST : @instructionAST {
+  @lstring mVarName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    $++$
+    ioInstructionList += !@incrementationInstructionAST.new {
+      !varName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    $--$
+    ioInstructionList += !@decrementationInstructionAST.new {
+      !varName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @incrementationInstructionAST analyze
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Get target type
+  [!?ioVariableMap searchForReadWriteAccess
+    !mVarName
+    ?let type
+    ?let acceptedModeSet
+    ?2*
+  ]
+#--- Check mode
+  if not [acceptedModeSet hasKey !inMode] then
+    error mVarName : "this variable cannot be used in $" + inMode + " mode"
+  end
+#--- Check type handle ++ operator
+  if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
+    error mVarName : [type key] + " type does handle ++ operator"
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@incrementInstructionGeneration.new {
+   !mVarName.string
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @decrementationInstructionAST analyze
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Get target type
+  [!?ioVariableMap searchForReadWriteAccess
+    !mVarName
+    ?let type
+    ?let acceptedModeSet
+    ?2*
+  ]
+#--- Check mode
+  if not [acceptedModeSet hasKey !inMode] then
+    error mVarName : "this variable cannot be used in $" + inMode + " mode"
+  end
+#--- Check type handle ++ operator
+  if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
+    error mVarName : [type key] + " type does handle -- operator"
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@decrementInstructionGeneration.new {
+   !mVarName.string
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @incrementInstructionGeneration : @abstractInstructionGeneration {
+  @string mLocalVariable
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @incrementInstructionGeneration instructionCode -> @string outCode {
+  outCode = mLocalVariable + " ++ ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @decrementInstructionGeneration : @abstractInstructionGeneration {
+  @string mLocalVariable
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @decrementInstructionGeneration instructionCode -> @string outCode {
+  outCode = mLocalVariable + " -- ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

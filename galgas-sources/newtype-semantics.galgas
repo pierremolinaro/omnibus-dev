@@ -1,0 +1,106 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newtypeDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mNewTypeName !self]
+  [!?ioGraph addEdge !mNewTypeName !mReferenceTypeName]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @newtypeDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "newtype " + mNewTypeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newtypeDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+{
+#--- Get reference type
+  [ioContext.mTypeMap searchKey
+    !lkey:mReferenceTypeName
+    ?kind:let kind
+    ?constructorMap:let constructorMap
+    ?procedureMap:let procedureMap
+    ?copiable:let copiable
+    ?equatable:let equatable
+    ?comparable:let comparable
+  ]
+#--- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mNewTypeName
+    !kind:kind
+    !constructorMap:constructorMap
+    !procedureMap:procedureMap
+    !copiable:copiable
+    !equatable:equatable
+    !comparable:comparable
+  ]
+#--- Enter operator handling
+  switch kind
+  case boolean : enterBooleanOperators (!integerTypeName:mNewTypeName !?context:ioContext)
+  case boolset : enterBoolsetOperators (!integerTypeName:mNewTypeName !?context:ioContext)
+  case enumeration (*) : enterEnumerationOperators (!integerTypeName:mNewTypeName !?context:ioContext)
+  case integer (**) : enterIntegerOperators (!integerTypeName:mNewTypeName !?context:ioContext)
+  case structure (*):
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newtypeDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+{
+#--- Generate code
+  ioOrderedGenerationList += !@newtypeGeneration.new {
+    !mNewTypeName.string
+    !mReferenceTypeName.string
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @newtypeGeneration : @abstractGeneration {
+  @string mNewTypeName
+  @string mReferenceTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper newtypeGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "newtype-declaration.galgasTemplate"
+    ?@string NEW_TYPE_NAME
+    ?@string REFERENCE_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @newtypeGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper newtypeGenerationTemplate.declaration
+    !mNewTypeName
+    !mReferenceTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @newtypeGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

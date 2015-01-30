@@ -1,0 +1,146 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @ifInstructionAST : @instructionAST {
+  @expressionAST mTestExpression
+  @location mTestExpressionEndLocation
+  @instructionListAST mThenInstructionList
+  @location mEndOfThenInstructionList
+  @instructionListAST mElseInstructionList
+  @location mEndOfElseInstructionList
+  @location mEndOf_if_instruction
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $if$
+    <if_instruction> ?let ifInstruction
+    ioInstructionList += !ifInstruction
+    $end$
+  }
+  
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <if_instruction> !@ifInstructionAST outIfInstruction {
+    <expression> ?let @expressionAST testExpression
+    let testExpressionEndLocation = @location.here
+    $then$
+    <instructionList> ?let thenInstructionList
+    let endOfThenBranch = @location.here
+    @instructionListAST elseInstructionList
+    select
+      elseInstructionList = {}
+    or
+      $else$
+      <instructionList> ?elseInstructionList
+    or
+      $elsif$
+      <if_instruction> ?let ifInstruction
+      elseInstructionList = {!ifInstruction}
+    end
+    let endOfElseBranch = @location.here
+    outIfInstruction = .new {
+      !testExpression
+      !testExpressionEndLocation
+      !thenInstructionList
+      !endOfThenBranch
+      !elseInstructionList
+      !endOfElseBranch
+      !.here
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @ifInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Analyze test expression
+  [mTestExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let testExpressionType
+    ?generatedCode:let testExpressionGeneratedCode
+  ]
+#--- Check inferred type
+  if [testExpressionType kind] != .boolean then
+    error mTestExpressionEndLocation : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
+  end
+  [!?ioVariableMap openOverrideForSelectBlock]
+#--- Analyze 'then' instruction list
+  @instructionGenerationList thenInstructionGenerationList = {}
+  [mThenInstructionList analyzeBranchInstructionList
+    !endOfInstructionList:mEndOfThenInstructionList
+    !optionalReceiverType:inReceiverType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?generatedCode:thenInstructionGenerationList
+  ]
+#--- Analyze 'else' instruction list
+  @instructionGenerationList elseInstructionGenerationList = {}
+  [mElseInstructionList analyzeBranchInstructionList
+    !endOfInstructionList:mEndOfElseInstructionList
+    !optionalReceiverType:inReceiverType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?generatedCode:elseInstructionGenerationList
+  ]
+  [!?ioVariableMap closeOverride !mEndOf_if_instruction]
+#--- Code generation
+  ioInstructionGenerationList += !@ifInstructionGeneration.new {
+    !testExpressionGeneratedCode
+    !thenInstructionGenerationList
+    !elseInstructionGenerationList
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @ifInstructionGeneration : @abstractInstructionGeneration {
+  @abstractExpressionGeneration mTestExpressionGeneration
+  @instructionGenerationList mThenInstructionGenerationList
+  @instructionGenerationList mElseInstructionGenerationList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @ifInstructionGeneration instructionCode -> @string outCode {
+  outCode = "if (" + [mTestExpressionGeneration expressionCode] + ") {\n"
+  outCode += [mThenInstructionGenerationList instructionListCode]
+  if [mElseInstructionGenerationList length] > 0 then
+    outCode += "}else{\n"
+    outCode += [mElseInstructionGenerationList instructionListCode]
+  end
+  outCode += "}\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
