@@ -1,0 +1,23 @@
+//---------------------------------------------------------------------------------------------------------------------*
+//%!["proc " + PROCEDURE_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
+//---------------------------------------------------------------------------------------------------------------------*
+
+void %![PROCEDURE_MANGLED_NAME identifierRepresentation]% (%?^
+if [FORMAL_ARGUMENT_LIST length] == 0 then
+  %void%
+else
+  for () in FORMAL_ARGUMENT_LIST
+  do
+    !typePrefix () ![mFormalArgumentType key]
+    switch mFormalArgumentKind
+    case input :
+    case output, inputOutput : % *%
+    end
+    % %!mFormalArgumentName
+  between
+    %,\n%!^
+  end
+end
+%) {
+%![INSTRUCTION_GENERATION_LIST instructionListCode]%}
+

@@ -1,0 +1,183 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @registerDeclaration : @abstractDeclaration {
+  @lstring mRegisterTypeName
+  @lstring mRegisterName
+  @luint64 mRegisterAddress
+  @lstringlist mAttributeList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @registerDeclaration location -> @location outLocation {
+  outLocation = mRegisterName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $register$
+    $Identifier$ ?let registerTypeName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end 
+    $identifier$ ?let registerName
+    $integer$ ?let @luint64 registerAddress
+    ioAST.mDeclarationList += !@registerDeclaration.new {
+      !registerTypeName
+      !registerName
+      !registerAddress
+      !attributeList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mRegisterName !self]
+  [!?ioGraph addEdge !mRegisterName !mRegisterTypeName]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @registerDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "register " + mRegisterName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
+#--- Analyze attributes
+  var isReadOnly = false
+  for (att) in mAttributeList do
+    if att.string != "ro" then
+      error att : "only @ro attribute (read only) is accepted here"
+    elsif isReadOnly then
+      error att : "duplicated attribute"
+    else
+      isReadOnly = true
+    end
+  end
+#---  
+  [!?ioContext.mRegisterMap insertKey
+    !mRegisterName
+    !registerType
+    !isReadOnly
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Check type
+  let registerType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mRegisterTypeName}
+  switch [registerType kind]
+  case boolean : error mRegisterTypeName : "a boolean type is not valid for a register"
+  case boolset : error mRegisterTypeName : "a boolset type is not valid for a register"
+  case integer (* *):
+  case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
+  case structure (*) : error mRegisterTypeName : "a structure type is not valid for a register"
+  case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
+  end
+#--- Check address value
+  [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?* ?let size ?let isSigned]
+  if isSigned then
+    error mRegisterName : "base type 'size' should be unsigned"
+  end
+  @uint64 maxAddress
+  if size == 8 then
+    maxAddress = 255L
+  elsif size == 16 then
+    maxAddress = 65535L
+  elsif size == 32 then
+    maxAddress = [@uint.max uint64]
+  elsif size == 16 then
+    maxAddress = @uint64.max
+  else
+    error mRegisterName : "base type 'size' has an invalid size" : maxAddress
+  end
+  if mRegisterAddress.uint64 > maxAddress then
+    error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
+  end
+#---
+  ioOrderedGenerationList += !@registerGeneration.new {
+    !mRegisterTypeName.string
+    !mRegisterName.string
+    !mRegisterAddress.uint64
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @registerGeneration : @abstractGeneration {
+  @string mRegisterTypeName
+  @string mRegisterName
+  @uint64 mRegisterAddress
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper registerGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "register-declaration.galgasTemplate"
+    ?@string REGISTER_TYPE_NAME
+    ?@string REGISTER_NAME
+    ?@uint64 REGISTER_ADDRESS
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @registerGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper registerGenerationTemplate.declaration
+    !mRegisterTypeName
+    !mRegisterName
+    !mRegisterAddress
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @registerGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+

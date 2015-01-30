@@ -1,0 +1,117 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    C O D E    G E N E R A T I O N                                                                                    *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @abstractExpressionGeneration
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractExpressionGeneration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractExpressionGeneration expressionCode -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @inLineExpressionGeneration
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @inLineExpressionGeneration : @abstractExpressionGeneration {
+  @string mCode
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @inLineExpressionGeneration expressionCode -> @string outCode {
+  outCode = mCode
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @abstractInstructionGeneration
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractInstructionGeneration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractInstructionGeneration instructionCode -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @instructionGenerationList
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @instructionGenerationList {
+  @abstractInstructionGeneration mInstructionGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @abstractGeneration
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractGeneration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractGeneration headerCodeGeneration -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractGeneration implementationCodeGeneration -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @orderedGenerationList
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @orderedGenerationList {
+  @abstractGeneration mGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc codeGeneration
+  ?outputFile:let @string inSourceFileName
+  ?staticStringMap:let @globalLiteralStringMap inGlobalLiteralStringMap
+  ?generation:let @orderedGenerationList inGenerationList
+  ?target:let @lstring inTargetName
+{
+#--- Create source directory (if does not exist)
+  let targetDirectory = [inSourceFileName stringByDeletingPathExtension] + "+" + inTargetName
+  let sourceDirectory = targetDirectory + "/sources"
+  [sourceDirectory makeDirectory] ;
+#--- Generate header file
+  let baseName = sourceDirectory + "/plm"
+  var header = "#ifndef PLM_HEADER_DEFINED\n"
+  header += "#define PLM_HEADER_DEFINED\n\n"
+  header += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
+  header += "#include <stdint.h>\n\n"
+  for (generation) in inGenerationList do
+    header += [generation headerCodeGeneration]
+  end
+  header += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
+  header += "#endif\n"
+  [header writeToFileWhenDifferentContents !baseName + ".h" ?*]
+#--- Generate C file
+  var code = "#include \"plm.h\"\n\n"
+  code += "//---------------------------------------------------------------------------------------------------------------------*\n"
+  code += "//   Static Strings                                                                                                    *\n"
+  code += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
+  for () in inGlobalLiteralStringMap do
+    code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
+  end
+  code += "\n"
+  for (generation) in inGenerationList do
+    code += [generation implementationCodeGeneration]
+  end
+  code += "//---------------------------------------------------------------------------------------------------------------------*\n"
+  [code writeToFileWhenDifferentContents !baseName + ".c" ?*]
+#--- Generate target files
+  generateTargets (
+    !targetDirectory:targetDirectory
+    !targetName:inTargetName
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,339 @@
+lexique plm_lexique {
+
+@string tokenString
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Identifiers and keywords                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Identifiers and keywords
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style keywordsStyle -> "Keywords"
+
+$identifier$ ! tokenString error message "an identifier"
+
+list keyWordList style keywordsStyle error message "the '%K' keyword" {
+  "boolset",
+  "enum",
+  "case",
+  "do",
+  "else",
+  "elsif",
+  "end",
+  "func",
+  "if",
+  "import",
+  "let",
+  "mutating",
+  "mode",
+  "newBooleanType",
+  "newIntegerType",
+  "newSignedBaseType",
+  "newUnsignedBaseType",
+  "proc",
+  "register",
+  "required",
+  "self",
+  "struct",
+  "target",
+  "then",
+  "var",
+  "while"
+}
+
+rule 'a'->'z' {
+  repeat
+    enterCharacterIntoString (!?tokenString !*)
+  while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
+  end
+  send search tokenString in keyWordList default $identifier$
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Type Names                                                                                                         *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Type Names
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style typeNameStyle -> "Type Names"
+
+$Identifier$ ! tokenString style typeNameStyle  error message "a type name"
+
+rule 'A'->'Z' {
+  repeat
+    enterCharacterIntoString (!?tokenString !*)
+  while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
+  end
+  send $Identifier$
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Attributes                                                                                                         *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Attributes
+
+style attributeStyle -> "Attributes"
+
+$attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
+
+message attributeError : "in an attribute name, a letter or a digit should follow the '%' character"
+
+rule '@' {
+  select
+  case 'a'->'z' | 'A'->'Z' | '0'->'9' :
+    repeat
+      enterCharacterIntoString (!?tokenString !*)
+    while 'a'->'z' | 'A'->'Z'| '0'->'9' :
+    end
+  default
+    error attributeError
+  end
+  send $attribute$ 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Mode Name                                                                                                          *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Mode
+
+style modeStyle -> "Modes"
+
+$modeName$ ! tokenString  style modeStyle error message "a mode $..."
+
+message modeError : "in a mode name, a letter or a digit should follow the '$' character"
+
+rule '$' {
+  select
+  case 'a'->'z' | 'A'->'Z' | '0'->'9' :
+    repeat
+      enterCharacterIntoString (!?tokenString !*)
+    while 'a'->'z' | 'A'->'Z'| '0'->'9' :
+    end
+  default
+    error modeError
+  end
+  send $modeName$ 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Literal integers                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Hex integers
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+rule "0x" {
+  repeat
+  while '0'->'9' :
+    enterCharacterIntoString (!?tokenString !* )
+  while 'a'->'f' :
+    enterCharacterIntoString (!?tokenString !* )
+  while 'A'->'F' :
+    enterCharacterIntoString (!?tokenString !* )
+  while '_' :
+  end
+  convertHexStringIntoUInt64 (!tokenString !?uint64value error decimalNumberTooLarge, internalError )
+  send $integer$
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Literal decimal integers
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style integerStyle -> "Integer Constants"
+@uint64 uint64value
+$integer$ !uint64value style integerStyle error message "a literal integer"
+
+message decimalNumberTooLarge : "decimal number too large"
+message internalError : "internal error"
+
+rule '0'->'9' {
+  enterCharacterIntoString (!?tokenString !*)
+  repeat
+  while '0'->'9' :
+    enterCharacterIntoString (!?tokenString !*)
+  while '_' :
+  end
+  convertDecimalStringIntoUInt64 (!tokenString !?uint64value error decimalNumberTooLarge, internalError)
+  send $integer$
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Literal character strings                                                                                          *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Literal character strings
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style stringStyle -> "Literal Strings"
+$literal_string$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
+
+
+message incorrectStringEnd : "string does not end with '\"'"
+
+rule '"' {
+  repeat
+   while ' ' | '!' | '#'-> '\uFFFD' :
+    enterCharacterIntoString (!?tokenString !*)
+  end
+  select
+  case '"' :
+    send $literal_string$
+  default
+    error incorrectStringEnd
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Comment                                                                                                            *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Comment
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style commentStyle -> "Comments"
+$comment$ style commentStyle %nonAtomicSelection error message "a comment"
+rule "//" {
+  repeat
+  while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
+  end
+  drop $comment$
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Delimiters                                                                                                         *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Delimiters
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style delimitersStyle -> "Delimiters"
+list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
+  ":", ".",  ",", ";", "{", "}", "=", "(", ")",
+  "==", "!=", "<", "<=", ">", ">=", "[", "]", "<<", ">>",
+  "&", "&&", "|", "||", "^", "+", "-", "*", "/", "%",
+  "++", "--", "->"
+}
+
+rule list delimitorsList
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#   S E L E C T O R S                                                                                                  *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Selectors
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+style selectorStyle -> "Selectors"
+
+$?$ !tokenString  style selectorStyle error message "the '?' or '?selector:' delimitor"
+$?!$ !tokenString  style selectorStyle error message "the '?!' or '?!selector:' delimitor"
+$!$ !tokenString  style selectorStyle error message "the '!' or '!selector:' delimitor"
+$!?$ !tokenString  style selectorStyle error message "the '!?' or '!?selector:' delimitor"
+
+rule '?' {
+  tag onlyInterrogationMark
+  select
+  case '!' :
+    tag onlyExclamationInterrogationMark
+    select
+    case 'a' -> 'z' | 'A' ->'Z' :
+      repeat
+        enterCharacterIntoString ( !?tokenString !* )
+      while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+      end
+      select
+      case ':' :
+        send $?!$
+      default
+        resetString ( !?tokenString )
+        rewind onlyExclamationInterrogationMark send $?!$
+      end
+    default
+      send $?!$
+    end
+  case 'a' -> 'z' | 'A' ->'Z' :
+    repeat
+      enterCharacterIntoString ( !?tokenString !* )
+    while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+    end
+    select
+    case ':' :
+      send $?$
+    default
+      resetString ( !?tokenString )
+      rewind onlyInterrogationMark send $?$
+    end
+  default
+    send $?$
+  end
+}
+
+rule '!' {
+  tag onlyExclamationMark
+  select
+  case '?' :
+    tag onlyInterrogationExclamationMark
+    select
+    case 'a' -> 'z' | 'A' ->'Z' :
+      repeat
+        enterCharacterIntoString ( !?tokenString !* )
+      while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+      end
+      select
+      case ':' :
+        send $!?$
+      default
+        resetString ( !?tokenString )
+        rewind onlyInterrogationExclamationMark send $!?$
+      end
+    default
+      send $!?$
+    end
+  case 'a' -> 'z' | 'A' ->'Z' :
+    repeat
+      enterCharacterIntoString ( !?tokenString !* )
+    while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
+    end
+    select
+    case ':' :
+      send $!$
+    default
+      resetString ( !?tokenString )
+      rewind onlyExclamationMark send $!$
+    end
+  default
+    send $!$
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Separators                                                                                                         *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Separators
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+rule '\u0001' -> ' ' {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+}
+

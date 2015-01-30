@@ -1,0 +1,66 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plm_specific_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $target$
+    $literal_string$ ?let targetName
+    ioAST.mTargetList += !targetName
+    if [targetName.string pathExtension] != "plms" then
+      error targetName : "the pah extension should be .plms"
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#    TARGET GENERATION                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+filewrapper targetTemplates in "../embedded-sources" {
+  "py", "ld", "mke", "h", "c", "s", "plm", "plms"
+}{
+}{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc generateTargets
+  ?targetDirectory:let @string inTargetDirectory
+  ?targetName:let @lstring inTargetName
+{
+  @filewrapper fw = [filewrapper targetTemplates]
+  let targetPath = "/targets/" + [inTargetName.string stringByDeletingPathExtension]
+  if [fw directoryExistsAtPath !targetPath] then
+    for (path) in [fw textFilesAtPath !targetPath] do
+      let s = [[fw textFileContentsAtPath !targetPath + "/" + path] stringByReplacingStringByString !"\\t" !"\t"]
+      if [path pathExtension] == "py" then
+        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]
+      elsif [path pathExtension] == "mke" then
+        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + [path stringByDeletingPathExtension] ?*]
+      else
+        [s writeToFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]
+      end
+    end
+    let sourcePath = targetPath + "/sources"
+    for (path) in [fw textFilesAtPath !sourcePath] do
+      let s = [[fw textFileContentsAtPath !sourcePath + "/" + path] stringByReplacingStringByString !"\\t" !"\t"]
+      [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + path ?*]
+    end
+  else
+    var s = "cannot find this target; available targets:"
+    for (dir) in [fw directoriesAtPath !""] do
+      s += "\n - " + dir
+    end
+    error inTargetName : s
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

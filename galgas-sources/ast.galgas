@@ -1,0 +1,28 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractDeclaration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractDeclaration location -> @location outLocation
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @declarationListAST {
+  @abstractDeclaration mDeclaration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+struct @ast {
+  @declarationListAST mDeclarationList
+  @procedureDeclarationListAST mProcedureListAST
+  @requiredProcedureDeclarationListAST mRequiredProcList
+  @functionDeclarationListAST mFunctionListAST
+  @lstringlist mTargetList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

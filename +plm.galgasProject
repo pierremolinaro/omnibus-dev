@@ -1,0 +1,100 @@
+project (0:0:1) -> "plm" {
+#--- Targets
+  %makefile-macosx
+  %makefile-unix
+  %makefile-x86linux32-on-macosx
+  %makefile-x86linux64-on-macosx
+  %makefile-win32-on-macosx
+  %Mavericks
+  %applicationBundleBase : "fr.irccyn.ec-nantes"
+
+#--- Source files
+  "galgas-sources/lexique.galgas"
+  "galgas-sources/options.galgas"
+  "galgas-sources/ast.galgas"
+  "galgas-sources/syntax-grammar.galgas"
+  "galgas-sources/cocoa.galgas"
+
+  "galgas-sources/generalized-type.galgas"
+
+#--- Signed and unsigned base type
+  "galgas-sources/new-base-type.galgas"
+
+#--- Bool
+  "galgas-sources/bool-type.galgas"
+
+#--- Boolset
+  "galgas-sources/boolset-type.galgas"
+
+#--- Mode
+  "galgas-sources/mode-declaration.galgas"
+
+#--- Enumeration
+  "galgas-sources/enumeration-declaration.galgas"
+
+#--- Structure
+  "galgas-sources/structure-declaration.galgas"
+
+#--- Global variables
+  "galgas-sources/global-variable-declaration.galgas"
+
+#--- Global constantes
+  "galgas-sources/global-constant-declaration.galgas"
+
+#--- Integer
+  "galgas-sources/type-integer.galgas"
+
+#--- Static string
+  "galgas-sources/type-static-string.galgas"
+
+#--- New Type
+#  "galgas-sources/newtype-syntax.galgas"
+#  "galgas-sources/newtype-semantics.galgas"
+
+#--- func
+  "galgas-sources/func-declaration.galgas"
+
+#--- proc
+  "galgas-sources/proc-declaration.galgas"
+  "galgas-sources/required-proc-declaration.galgas"
+
+#--- Registers
+  "galgas-sources/register-declaration.galgas"
+
+#--- Instructions
+  "galgas-sources/instructionList.galgas"
+  "galgas-sources/instruction-inc-dec.galgas"
+  "galgas-sources/instruction-var.galgas"
+  "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-if.galgas"
+  "galgas-sources/instruction-method-call.galgas"
+  "galgas-sources/instruction-mutating-method-call.galgas"
+  "galgas-sources/instruction-mutating-method-call-self.galgas"
+  "galgas-sources/instruction-proc-call.galgas"
+  "galgas-sources/instruction-while.galgas"
+
+#--- Expression
+  "galgas-sources/expression.galgas"
+  "galgas-sources/expression-constructor-call.galgas"
+  "galgas-sources/expression-infix-operators.galgas"
+  "galgas-sources/expression-literal-integer.galgas"
+  "galgas-sources/expression-literal-string.galgas"
+  "galgas-sources/expression-self.galgas"
+  "galgas-sources/expression-var.galgas"
+  "galgas-sources/expression-func-call.galgas"
+
+#--- Compilation phases
+  "galgas-sources/variable-map.galgas"
+  "galgas-sources/ordered-declaration-list.galgas"
+  "galgas-sources/semantic-context.galgas"
+  "galgas-sources/semantic-analysis.galgas"
+  "galgas-sources/generated-code-prefixes.galgas"
+  "galgas-sources/code-generation.galgas"
+
+#--- Target
+  "galgas-sources/target-generation.galgas"
+
+#--- Program
+  "galgas-sources/program.galgas"
+}
+

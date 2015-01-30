@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------------------------------------*
+//%!["structure " + STRUCTURE_NAME stringByLeftAndRightPadding !117 !' ']%*
+//---------------------------------------------------------------------------------------------------------------------*
+
+%!typePrefix () !STRUCTURE_NAME% %!structureInitRoutinePrefix () ![STRUCTURE_NAME identifierRepresentation]% (void) {
+  %!typePrefix () !STRUCTURE_NAME% result ;
+%
+for () in FIELD_LIST do
+  %  result.%!propertyPrefix () !mFieldName% = %![mInitExpression expressionCode]% ;\n%
+end
+%  return result ;
+}
+

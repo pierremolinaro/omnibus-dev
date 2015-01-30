@@ -1,0 +1,282 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @structureDeclaration : @abstractDeclaration {
+  @lstring mStructureName
+  @lstringlist mAttributeList
+  @structureFieldListAST mStructureFieldListAST
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @structureDeclaration location -> @location outLocation {
+  outLocation = mStructureName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @structureFieldListAST {
+  @lstring mFieldName
+  @lstring mOptionalFieldType
+  @expressionAST mInitExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $struct$
+    $Identifier$ ?let structureName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end 
+    ${$
+    @structureFieldListAST fieldList = {}
+    repeat
+    while
+      $var$
+      @lstring optionalFieldType
+#      select
+#        optionalFieldType = .new {!"" !.here}
+#      or
+        $Identifier$ ?optionalFieldType
+#      end
+      $identifier$ ?let fieldName
+      $=$
+      <expression> ?let initExpression
+      fieldList += !fieldName !optionalFieldType !initExpression
+    while
+      <procedure> !procedureKind:.structureProc {!structureTypeName:structureName !mutating:false} !?ioAST.mProcedureListAST
+    while
+      $mutating$
+      <procedure> !procedureKind:.structureProc {!structureTypeName:structureName !mutating:true} !?ioAST.mProcedureListAST
+    while
+      $;$
+    end
+    $}$
+    ioAST.mDeclarationList += !@structureDeclaration.new {
+      !structureName
+      !attributeList
+      !fieldList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @structureDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mStructureName !self]
+  for (* fieldTypeName *) in mStructureFieldListAST do
+    if fieldTypeName.string != "" then
+      [!?ioGraph addEdge !mStructureName !fieldTypeName]
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @structureDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "struct " + mStructureName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procedureDeclarationListAST-element getMangledName -> @string outMangledName {
+  outMangledName = mProcedureName.string
+  for (formalArgument selector * *) in mProcFormalArgumentList do
+    outMangledName += " "
+    switch formalArgument
+    case input : outMangledName += "?"
+    case output : outMangledName += "!"
+    case inputOutput : outMangledName += "?!"
+    end
+    outMangledName += selector.string
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @structureDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Attribute "unique"
+  var copiable = true
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      if not copiable then
+        error s : "duplicated attribute"
+      end
+      copiable = false
+    end
+  end
+#--- Properties
+  @propertyList propertyList = {}
+  for () in mStructureFieldListAST do
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
+    propertyList += !fieldTypeNameProxy !mFieldName
+  end
+#--- Constructors
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey
+    !.new {!"init" !mStructureName.location}
+    !structureInitRoutinePrefix () + [mStructureName identifierRepresentation] + " ()"
+  ]
+#--- Procedures
+  @procedureMap procedureMap = {}
+  for procedure in inProcedureListAST do
+    switch procedure.mProcedureKind
+    case standAloneProc :
+    case structureProc (structureTypeName mutating) :
+      if mStructureName.string == structureTypeName.string then
+        @procedureSignature signature = {}
+        for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
+          [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+          signature += !formalArgumentPassingMode !selector !typeProxy
+        end
+        [!?procedureMap insertKey
+          !.new {![procedure getMangledName] !procedure.mProcedureName.location}
+          !mutating
+          !procedure.mProcedureMode
+          !signature
+        ]
+      end
+    end
+  end
+#--- Enter in type map
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mStructureName
+    !kind:.structure {!propertyList:propertyList}
+    !constructorMap:constructorMap
+    !procedureMap:procedureMap
+    !copiable:copiable
+    !equatable:false
+    !comparable:false
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @structureDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+{
+#--- Attributes
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      # Nothing to do handled in 'enterInContext'
+    else
+      error s : "unknown attribute"
+    end
+  end
+#--- Analyze field declaration
+  @structureFieldListForGeneration structureFieldListForGeneration = {}
+  @stringset fieldNameSet = {}
+  for () in mStructureFieldListAST do
+  #--- Field type
+    let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
+      then .null
+      else .searchKey {!inContext.mTypeMap !mOptionalFieldType}
+    end
+  #--- Field name
+    if [fieldNameSet hasKey !mFieldName.string] then
+      error mFieldName : "the '" + mFieldName + "' field is already declared"
+    end
+    fieldNameSet += !mFieldName.string
+  #--- Init expression
+    [mInitExpression analyzeExpression
+      !optionalReceiverType:.noReceiver
+      !optionalTargetType:fieldType
+      !context:inContext
+      !mode:""
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:*
+      ?expressionType:let inferredType
+      ?generatedCode:let initExpressionGeneratedCode
+    ]
+  #---
+    structureFieldListForGeneration +=
+      !inferredType
+      !mFieldName.string
+      !initExpressionGeneratedCode
+  end
+#--- Generate code
+  ioOrderedGenerationList += !@structureGeneration.new {
+    !mStructureName.string
+    !structureFieldListForGeneration
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @structureFieldListForGeneration {
+  @unifiedTypeMap-proxy mFieldType
+  @string mFieldName
+  @abstractExpressionGeneration mInitExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @structureGeneration : @abstractGeneration {
+  @string mStructureName
+  @structureFieldListForGeneration mStructureFieldListForGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper structureGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "structure-declaration.galgasTemplate"
+    ?@string STRUCTURE_NAME
+    ?@structureFieldListForGeneration FIELD_LIST
+
+  template implementation "structure-implementation.galgasTemplate"
+    ?@string STRUCTURE_NAME
+    ?@structureFieldListForGeneration FIELD_LIST
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @structureGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper structureGenerationTemplate.declaration
+    !mStructureName
+    !mStructureFieldListForGeneration
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @structureGeneration implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper structureGenerationTemplate.implementation
+    !mStructureName
+    !mStructureFieldListForGeneration
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

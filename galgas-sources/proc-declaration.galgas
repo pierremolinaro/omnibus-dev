@@ -1,0 +1,438 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @procFormalArgumentPassingMode {
+  case input
+  case output
+  case inputOutput
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@lstring inSelector -> @string outResult {
+  switch self
+  case input : outResult = "!"
+  case output : outResult = "?"
+  case inputOutput : outResult = "!?"
+  end
+  if inSelector.string != "" then
+    outResult += inSelector.string + ":"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procFormalArgumentList {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @lstring mFormalArgumentTypeName
+  @lstring mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @procedureKindAST {
+  case standAloneProc
+  case structureProc (@lstring structureTypeName @bool mutating)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procedureDeclarationListAST {
+  @procedureKindAST mProcedureKind
+  @lstring mProcedureMode
+  @lstring mProcedureName
+  @procFormalArgumentList mProcFormalArgumentList
+  @instructionListAST mInstructionList
+  @location mEndOfProcLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <procedure>
+    ?procedureKind:let @procedureKindAST inProcedureKind
+    ?!@procedureDeclarationListAST ioProcListAST
+  {
+    <procedure_header>
+      ?procMode:let procMode
+      ?name:let procName
+      ?formalArguments:let procFormalArgumentList
+    ${$
+    <instructionList> ?let instructionList
+    $}$
+    ioProcListAST += !inProcedureKind !procMode !procName !procFormalArgumentList !instructionList !.here
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <procedure_header>
+    !procMode:@lstring outProcMode
+    !name:@lstring outProcName
+    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
+  {
+    $proc$
+    select
+      outProcMode = .new {!"" !.here}
+    or
+      $modeName$ ?outProcMode
+    end
+    $identifier$ ?outProcName
+    outProcFormalArgumentList = {}
+    $($
+    repeat
+    while
+      $!$ ?let selector
+      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentName
+      outProcFormalArgumentList +=
+        !@procFormalArgumentPassingMode.output
+        !selector
+        !formalArgumentTypeName
+        !formalArgumentName
+    while
+      $?!$ ?let selector
+      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentName
+      outProcFormalArgumentList +=
+        !@procFormalArgumentPassingMode.inputOutput
+        !selector
+        !formalArgumentTypeName
+        !formalArgumentName
+    while
+      $?$ ?let selector
+      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentName
+      outProcFormalArgumentList +=
+        !@procFormalArgumentPassingMode.input
+        !selector
+        !formalArgumentTypeName
+        !formalArgumentName
+    end
+    $)$
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @procedureDeclarationListAST-element enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+#--- Enter only stand alone procedures
+  switch mProcedureKind
+  case standAloneProc :
+    for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
+      [!?ioGraph noteNode !formalArgumentTypeName]
+    end
+  case structureProc (* *) :
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procedureSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @procedureMap {
+  @bool mMutating
+  @lstring mProcedureMode
+  @procedureSignature mSignature
+
+  insert insertKey error message "the '%K' proc is already declared in %L"
+  search searchKey error message "there is no '%K' proc"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledName
+  ?forProcedureKind:let @procedureKindAST inProcedureKind
+  ?procedureName:let @string inProcedureName
+  ?formalArgumentList:@procFormalArgumentList inProcFormalArgumentList
+  -> @string outMangledName
+{
+  outMangledName = ""
+  switch inProcedureKind
+  case standAloneProc :
+  case structureProc (structureTypeName *) :
+    outMangledName += structureTypeName.string + "_"
+  end
+  outMangledName += inProcedureName
+  for (formalArgument selector * *) in inProcFormalArgumentList do
+    outMangledName += " "
+    switch formalArgument
+    case input : outMangledName += "?"
+    case output : outMangledName += "!"
+    case inputOutput : outMangledName += "?!"
+    end
+    outMangledName += selector.string
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procedureDeclarationListAST-element mangledName -> @string outMangledName {
+  outMangledName = mangledName (
+    !forProcedureKind:mProcedureKind
+    !procedureName:mProcedureName.string
+    !formalArgumentList:mProcFormalArgumentList
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @procedureDeclarationListAST-element enterInContext
+  ?!context:@semanticContext ioContext
+{
+#--- Enter only stand alone procedures
+  switch mProcedureKind
+  case standAloneProc :
+  #--- Signature
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
+      signature += !formalArgumentPassingMode !selector !typeProxy
+    end
+  #--- Enter in context
+    [!?ioContext.mProcedureMap insertKey
+      !.new {
+        ![self mangledName]
+        !mProcedureName.location
+      }
+      !false # not mutating
+      !mProcedureMode
+      !signature
+    ]
+  case structureProc (* *) :
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procFormalArgumentListForGeneration {
+  @procFormalArgumentPassingMode mFormalArgumentKind
+  @unifiedTypeMap-proxy mFormalArgumentType
+  @string mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @procedureGeneration : @abstractGeneration {
+  @string mProcedureMangledName
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionGenerationList mInstructionGenerationList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @procedureDeclarationListAST-element semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+{
+#--- All mode set
+  let allModeSet = [inContext.mModeMap keySet] ;
+#--- Check mode
+  if mProcedureMode.string != "" then
+    [inContext.mModeMap searchKey !mProcedureMode]
+  end
+#--- Add registers
+  @variableMap variableMap = .emptyMap
+  @procFormalArgumentListForGeneration formalArguments = {}
+  for () in inContext.mRegisterMap do
+    if mIsReadOnly then
+      [!?variableMap insertUsedLocalConstant
+        !lkey
+        !mType
+        !allModeSet
+        !lkey.string
+        !true
+      ]
+    else
+      [!?variableMap insertDefinedLocalVariable
+        !lkey
+        !mType
+        !allModeSet
+        !lkey.string
+        !true
+      ]
+    end
+  end
+#--- Add global constants
+  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
+    [!?variableMap insertUsedLocalConstant
+      !constantName
+      !constantType
+      !allModeSet
+      ![sourceExpressionCode expressionCode]
+      !true
+    ]
+  end
+#--- Add global variables
+  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
+    [!?variableMap insertGlobalVariable
+      !variableName
+      !variableType
+      !modeSet
+      !variableName.string
+      !true
+    ]
+  end
+#--- Add receiver properties, and receiver as first argument
+  @receiverType receiverType
+  switch mProcedureKind
+  case standAloneProc :
+    receiverType = .noReceiver
+  case structureProc (structureTypeName mutating) :
+    let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !structureTypeName}
+    @propertyList propertyList
+    switch [type kind]
+    case structure (propList) : propertyList = propList
+    case enumeration (*) : propertyList = {}
+    case integer (* *) : propertyList = {}
+    case boolean : propertyList = {}
+    case boolset : propertyList = {}
+    case literalString : propertyList = {}
+    end
+    if mutating then
+      receiverType = .mutatingReceiver {
+        !type:type
+        !receiverPointer:receiverPtrName ()
+      }
+      for (propertyType propertyName) in propertyList do
+        [!?variableMap insertDefinedLocalVariable
+          !propertyName
+          !propertyType
+          !{!mProcedureMode.string}
+          !receiverPtrName () + "->" + propertyPrefix () + propertyName.string
+          ![propertyType copiable]
+        ]
+      end
+      formalArguments += !.inputOutput !type !receiverPtrName ()
+    else
+      receiverType = .receiver {
+        !type:type
+        !receiverValue:receiverName ()
+      }
+      for (propertyType propertyName) in propertyList do
+        [!?variableMap insertUsedLocalConstant
+          !propertyName
+          !propertyType
+          !{!mProcedureMode.string}
+          !receiverName () + "." + propertyPrefix () + propertyName.string
+          ![propertyType copiable]
+        ]
+      end
+      formalArguments += !.input !type !receiverName ()
+    end%if
+  end
+#--- Analyse formal arguments
+  for (argumentKind * formalArgumentTypeName formalArgumentName) in mProcFormalArgumentList do
+    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+    switch argumentKind
+    case input :
+      [!?variableMap insertConstantInputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !{!mProcedureMode.string}
+        !inArgumentPrefix () + formalArgumentName.string
+        ![typeProxy copiable]
+      ]
+      formalArguments += !argumentKind !typeProxy !inArgumentPrefix () + formalArgumentName.string
+    case inputOutput :
+      [!?variableMap insertInputOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !{!mProcedureMode.string}
+        !"*" + inOutArgumentPrefix () + formalArgumentName
+        ![typeProxy copiable]
+      ]
+      formalArguments += !argumentKind !typeProxy !inOutArgumentPrefix () + formalArgumentName.string
+    case output :
+      [!?variableMap insertOutputFormalArgument
+        !formalArgumentName
+        !typeProxy
+        !{!mProcedureMode.string}
+        !"*" + outArgumentPrefix () + formalArgumentName
+        ![typeProxy copiable]
+      ]
+      formalArguments += !argumentKind !typeProxy !outArgumentPrefix () + formalArgumentName.string
+    end
+  end
+#--- Analyze instruction list
+  @instructionGenerationList instructionGenerationList = {}
+  [mInstructionList analyzeRoutineInstructionList
+    !optionalReceiverType:receiverType
+    !context:inContext
+    !mode:mProcedureMode.string
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfProcLocation]
+#--- Code generation
+  ioOrderedGenerationList += !@procedureGeneration.new {
+    ![self mangledName]
+    !formalArguments
+    !instructionGenerationList
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper procedureGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "procedure-declaration.galgasTemplate"
+    ?@string PROCEDURE_MANGLED_NAME
+    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
+
+  template implementation "procedure-implementation.galgasTemplate"
+    ?@string PROCEDURE_MANGLED_NAME
+    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
+    ?@instructionGenerationList INSTRUCTION_GENERATION_LIST
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @procedureGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper procedureGenerationTemplate.declaration
+    !mProcedureMangledName
+    !mFormalArgumentListForGeneration
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @procedureGeneration implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper procedureGenerationTemplate.implementation
+    !mProcedureMangledName
+    !mFormalArgumentListForGeneration
+    !mInstructionGenerationList
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

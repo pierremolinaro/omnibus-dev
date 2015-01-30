@@ -1,0 +1,74 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @selfExpressionAST : @expressionAST {
+  @location mSelfLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $self$
+    outExpression = @selfExpressionAST.new {!.here}
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @selfExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @selfExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?mode:let @string unused inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  switch inReceiverType
+  case noReceiver :
+    error mSelfLocation : "'self' is undefined in this context" : outExpressionType, outGeneratedCode
+  case receiver (type receiverValue) :
+    outExpressionType = type
+    outGeneratedCode = @inLineExpressionGeneration.new {!receiverValue}
+  case mutatingReceiver (type receiverPointer) :
+    outExpressionType = type
+    outGeneratedCode = @inLineExpressionGeneration.new {!"* " + receiverPointer}
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @selfExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inTargetType
+  ?context:let @semanticContext unused inContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+  error mSelfLocation : "'self' is undefined in this context" : outExpressionType, outGeneratedCode
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

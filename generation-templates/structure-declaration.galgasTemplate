@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------------------------------------------------*
+//%!["structure " + STRUCTURE_NAME stringByLeftAndRightPadding !117 !' ']%*
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef struct {
+%
+for () in FIELD_LIST do
+  %  %!typePrefix () ![mFieldType key]% %!propertyPrefix () !mFieldName% ;\n%
+end
+%} %!typePrefix () !STRUCTURE_NAME% ;
+
+%!typePrefix () !STRUCTURE_NAME% %!structureInitRoutinePrefix () ![STRUCTURE_NAME identifierRepresentation]% (void) ;
+

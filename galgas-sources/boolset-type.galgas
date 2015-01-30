@@ -1,0 +1,265 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @boolsetDeclaration : @abstractDeclaration {
+  @lstring mBoolsetName
+  @lstringlist mAttributeList
+  @lstringlist mValueList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @boolsetDeclaration location -> @location outLocation {
+  outLocation = mBoolsetName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $boolset$
+    $Identifier$ ?let boolsetName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end 
+    ${$
+    @lstringlist valueList = {}
+    repeat
+      $identifier$ ?let constantName
+      valueList += !constantName
+    while
+      $,$
+    end
+    $}$
+    ioAST.mDeclarationList += !@boolsetDeclaration.new {
+      !boolsetName
+      !attributeList
+      !valueList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @boolsetDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mBoolsetName !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @boolsetDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "enum " + mBoolsetName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @boolsetDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  var copiable = true
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      if not copiable then
+        error s : "duplicated attribute"
+      end
+      copiable = false
+    end
+  end
+  @constructorMap constructorMap = {}
+  [!?constructorMap insertKey
+    !.new {!"none" !mBoolsetName.location}
+    !"0"
+  ]
+  let maskForAll = (1 << [mValueList length]) - 1
+  [!?constructorMap insertKey
+    !.new {!"all" !mBoolsetName.location}
+    ![maskForAll hexString]
+  ]
+  var idx = 0
+  for (cst) in mValueList do
+    [!?constructorMap insertKey !cst !"1 << " + [idx string]]
+    idx ++
+  end
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mBoolsetName
+    !kind:.boolset
+    !constructorMap:constructorMap
+    !procedureMap:{} # Procedure map
+    !copiable:copiable
+    !equatable:true
+    !comparable:true
+  ]
+#--- Infix operators
+  enterBoolsetOperators (
+    !integerTypeName:mBoolsetName
+    !mask:maskForAll
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterBoolsetOperators
+  ?integerTypeName:let @lstring inBoolsetTypeName
+  ?mask:let @uint inMask
+  ?!context:@semanticContext ioContext
+{
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBoolsetTypeName ?let selfTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
+  [!?ioContext.mEqualOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"=="}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"!="}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<"}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<="}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">"}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">="}
+  ]
+  [!?ioContext.mAddOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"|"}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
+    !selfTypeProxy
+    !@minusOperatorForBoolsetGeneration.new {!inMask}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @minusOperatorForBoolsetGeneration : @abstractInfixOperatorGeneration {
+  @uint mMask
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @minusOperatorForBoolsetGeneration generateInfixExpression
+  ?@abstractExpressionGeneration inleft
+  ?@abstractExpressionGeneration inRight
+  -> @string outCode
+{
+  outCode = "(" + [inleft expressionCode] + ") & (" + [mMask hexString] + " ^ (" + [inRight expressionCode] + "))"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @boolsetDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Get C type
+  var cType = ""
+  for (attribute) in mAttributeList do
+    if attribute.string == "unique" then
+      # Nothing to do: handled in 'enterInContext'
+    elsif cType != "" then
+      error attribute : "duplicated attribute"
+    else
+      [inContext.mTargetBaseTypeMap searchKey !attribute ?cType ?* ?let isSigned]
+      if isSigned then
+        var s = "an unsigned base type should be used here; possible values:"
+        for (baseTypeName * * baseTypeIsSigned) in inContext.mTargetBaseTypeMap do
+          if not baseTypeIsSigned then
+            s += "\n- %" + baseTypeName
+          end
+        end
+        error attribute : s
+      end
+    end
+  end
+#--- No explicit type attribute ? use "size"
+  if cType == "" then
+    [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
+  end
+#---
+  ioOrderedGenerationList += !@boolsetGeneration.new {
+    !mBoolsetName.string
+    !cType
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @boolsetGeneration : @abstractGeneration {
+  @string mBoolsetName
+  @string mActualTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper boolsetGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "boolset-declaration.galgasTemplate"
+    ?@string BOOLSET_NAME
+    ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @boolsetGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper boolsetGenerationTemplate.declaration
+    !mBoolsetName
+    !mActualTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @boolsetGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+

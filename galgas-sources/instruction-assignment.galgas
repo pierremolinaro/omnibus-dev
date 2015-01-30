@@ -1,0 +1,106 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @assignmentInstructionAST : @instructionAST {
+  @lstring mTargetVarName
+  @expressionAST mSourceExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@assignmentInstructionAST.new {
+      !varName
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @assignmentInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+#--- Get target type
+  [!?ioVariableMap neutralAccess
+    !mTargetVarName
+    ?let targetType
+    ?3*
+  ]
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:targetType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let inferredType
+    ?generatedCode:let expressionGeneratedCode
+  ]
+#--- Check inferred type
+  if [targetType key] != [inferredType key] then
+    error mTargetVarName : "source expression type is '" + [inferredType key]
+      + "', and is not compatible with target type '" + [targetType key] + "'"
+  end
+#--- Write local variable
+  [!?ioVariableMap searchForWriteAccess
+    !mTargetVarName
+    ?*
+    ?let acceptedModeSet
+    ?let targetVar
+    ?let isCopiable
+  ]
+#--- Check mode
+  if not [acceptedModeSet hasKey !inMode] then
+    error mTargetVarName : "this variable cannot be used in $" + inMode + " mode"
+  end
+  if not isCopiable then
+    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@assignmentInstructionGeneration.new {
+   !targetVar
+   !targetType
+   !expressionGeneratedCode
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @assignmentInstructionGeneration : @abstractInstructionGeneration {
+  @string mLocalVariable
+  @unifiedTypeMap-proxy mTargetVarType
+  @abstractExpressionGeneration mExpressionGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @assignmentInstructionGeneration instructionCode -> @string outCode {
+  outCode = mLocalVariable + " = (" + typePrefix () + [mTargetVarType key]
+  outCode += ") (" + [mExpressionGeneration expressionCode] + ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

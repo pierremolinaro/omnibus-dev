@@ -1,0 +1,108 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @newBaseTypeDeclaration : @abstractDeclaration {
+  @lstring mBaseTypeName
+  @lstring mCType
+  @luint64 mSize
+  @bool mIsSigned
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @newBaseTypeDeclaration location -> @location outLocation {
+  outLocation = mBaseTypeName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plms_specific_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $newSignedBaseType$
+    $attribute$ ?let newAttributeName
+    $literal_string$ ?let cType
+    $integer$ ?let size
+    ioAST.mDeclarationList += !@newBaseTypeDeclaration.new {
+      !newAttributeName
+      !cType
+      !size
+      !true
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $newUnsignedBaseType$
+    $attribute$ ?let newAttributeName
+    $literal_string$ ?let cType
+    $integer$ ?let size
+    ioAST.mDeclarationList += !@newBaseTypeDeclaration.new {
+      !newAttributeName
+      !cType
+      !size
+      !false
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newBaseTypeDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !.new {!"basetype " + mBaseTypeName !mBaseTypeName.location} !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @newBaseTypeDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "bool " + mBaseTypeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newBaseTypeDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Check size
+  if (mSize.uint64 != 8L) && (mSize.uint64 != 16L) && (mSize.uint64 != 32L) && (mSize.uint64 != 64L) then
+    error mSize : "Only 8, 16, 32 or 64 are accepted here"
+  end
+#---
+  [!?ioContext.mTargetBaseTypeMap insertKey
+    !mBaseTypeName
+    !mCType.string
+    ![mSize.uint64 uint]
+    !mIsSigned
+  ]
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @newBaseTypeDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!generation:@orderedGenerationList unused ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

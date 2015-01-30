@@ -1,0 +1,110 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @constructorCall : @expressionAST {
+  @lstring mOptionalTypeName
+  @lstring mConstructorName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <primary> !@expressionAST outExpression {
+    @lstring optionalTypeName
+    select
+      optionalTypeName = .new {!"" !.here}
+    or
+      $Identifier$ ?optionalTypeName
+    end
+    $.$
+    $identifier$ ?let constructorName
+#    select
+#    or
+#      ${$
+#      
+#      $}$
+#    end
+    outExpression = @constructorCall.new {!optionalTypeName !constructorName}
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @constructorCall addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  if mOptionalTypeName.string != "" then
+    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @constructorCall analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze constructor source type
+  let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
+    then .null
+    else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+  end
+#--- Solve inferred type
+  outExpressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:optionalSourceType
+    !errorLocation:mConstructorName.location
+  )
+#--- Get inferred type constructor map
+  let constructorMap = [outExpressionType constructorMap]
+#--- Check constructor
+  [constructorMap searchKey !mConstructorName ?let generatedCodeString]
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @constructorCall analyzeExpression
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string unused inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze constructor source type
+  let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
+    then .null
+    else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+  end
+#--- Solve inferred type
+  outExpressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:optionalSourceType
+    !errorLocation:mConstructorName.location
+  )
+#--- Get inferred type constructor map
+  let constructorMap = [outExpressionType constructorMap]
+#--- Check constructor
+  [constructorMap searchKey !mConstructorName ?let generatedCodeString]
+#--- Generate code
+  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

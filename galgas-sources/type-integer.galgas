@@ -1,0 +1,265 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @integerDeclaration : @abstractDeclaration {
+  @lstring mIntegerTypeName
+  @lstring mBaseType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @integerDeclaration location -> @location outLocation {
+  outLocation = mIntegerTypeName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plms_specific_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $newIntegerType$
+    $Identifier$ ?let newIntegerTypeName
+    $attribute$ ?let @lstring baseType
+    ioAST.mDeclarationList += !@integerDeclaration.new {
+      !newIntegerTypeName
+      !baseType
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @integerDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mIntegerTypeName !self]
+  [!?ioGraph addEdge !mIntegerTypeName !.new {!"basetype " + mBaseType !mBaseType.location}]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @integerDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "integer " + mIntegerTypeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @integerDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#-- Search for base type
+  [ioContext.mTargetBaseTypeMap searchKey !mBaseType ?* ?let size ?let isSigned]
+#--- Get min and max
+  @sint64 min
+  @uint64 max
+  if isSigned then
+    if size == 8 then
+      min = -128LS
+      max = 127L
+    elsif size == 16 then
+      min = -32768LS
+      max = 32767L
+    elsif size == 32 then
+      min = [@sint.min sint64]
+      max = [@sint.max uint64]
+    elsif size == 64 then
+      min = @sint64.min
+      max = [@sint64.max uint64]
+    else
+      error mIntegerTypeName : "internal error" : min, max
+    end
+  else # Unsigned
+    min = 0LS
+    if size == 8 then
+      max = 255L
+    elsif size == 16 then
+      max = 65535L
+    elsif size == 32 then
+      max = [@uint.max uint64]
+    elsif size == 64 then
+      max = @uint64.max
+    else
+      error mIntegerTypeName : "internal error" : max
+    end
+  end
+ #---
+  @constructorMap constructorMap = {}
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mIntegerTypeName
+    !kind:.integer {!min:min !max:max}
+    !constructorMap:constructorMap
+    !procedureMap:{}
+    !copiable:true
+    !equatable:true
+    !comparable:true
+  ]
+#--- Enter integer operators
+  enterIntegerOperators (
+    !integerTypeName:mIntegerTypeName
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterIntegerOperators
+  ?integerTypeName:@lstring inIntegerTypeName
+  ?!context:@semanticContext ioContext
+{
+#--- ++ and -- operators
+  ioContext.mTypeNameSetForIncDec += !inIntegerTypeName.string
+#--- Infix operators
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
+  [!?ioContext.mEqualOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"=="}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"!="}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<"}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<="}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">"}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">="}
+  ]
+  [!?ioContext.mAndOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"&"}
+  ]
+  [!?ioContext.mOrOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"^"}
+  ]
+  [!?ioContext.mXorOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"^"}
+  ]
+  [!?ioContext.mAddOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"+"}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"-"}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"*"}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"/"}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"%"}
+  ]
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<<"}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !@standardInfixOperatorGeneration.new {!">>"}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @integerDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#-- Search for base type
+  [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
+#---
+  ioOrderedGenerationList += !@integerGeneration.new {
+    !mIntegerTypeName.string
+    !cType
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @integerGeneration : @abstractGeneration {
+  @string mIntegerTypeName
+  @string mActualTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper integerGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "integer-declaration.galgasTemplate"
+    ?@string INTEGER_TYPE_NAME
+    ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @integerGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper integerGenerationTemplate.declaration
+    !mIntegerTypeName
+    !mActualTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @integerGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+

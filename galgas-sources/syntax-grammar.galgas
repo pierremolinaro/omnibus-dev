@@ -1,0 +1,69 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax common_syntax (plm_lexique) {
+
+  rule <start_symbol>
+    ?!@ast ioAst
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+  {
+    outImportedFileList = {}
+    repeat
+    while
+      <declaration> !?ioAst
+    while
+      <procedure> !procedureKind:.standAloneProc !?ioAst.mProcedureListAST
+    while
+      $import$
+      $literal_string$ ?let importedFile
+      outImportedFileList += !importedFile
+      if [importedFile.string pathExtension] != "plm" then
+        error importedFile : "the pah extension should be .plm"
+      end
+    end
+    outEndOfSourceFile = .here
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax plm_specific_syntax (plm_lexique) {
+
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax plms_specific_syntax (plm_lexique) {
+
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  GRAMMAR                                                                                                             *
+#----------------------------------------------------------------------------------------------------------------------*
+
+grammar plm_grammar "SLR" {
+  syntax common_syntax
+  syntax plm_specific_syntax
+  <start_symbol>
+    ?!@ast outAst
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+grammar plms_grammar "SLR" {
+  syntax common_syntax
+  syntax plms_specific_syntax
+  <start_symbol>
+    ?!@ast outAst
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

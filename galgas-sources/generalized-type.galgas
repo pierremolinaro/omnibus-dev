@@ -1,0 +1,78 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @generalizedTypeEnumAST {
+  case valueType (@lstring typeName)
+  case procType (@lstring procMode @procFormalArgumentList procFormalArgumentList)
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
+    $Identifier$ ?let typeName
+    outType = .valueType {!typeName:typeName}
+    $identifier$ ?outName
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
+    <procedure_header>
+      ?procMode:let requiredMode
+      ?name:outName
+      ?formalArguments:let procFormalArgumentList
+    outType = .procType {!procMode:requiredMode !procFormalArgumentList:procFormalArgumentList}
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterNodeInPrecedenceGraph
+  ?nodeName:@lstring inNodeName
+  ?nodeInfo:@abstractDeclaration inInfo
+  ?type:@generalizedTypeEnumAST inType
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !inNodeName !inInfo]
+  switch inType
+  case valueType (@lstring typeName) :
+    [!?ioGraph addEdge !inNodeName !typeName]
+  case procType (* procFormalArgumentList) :
+    for argument in procFormalArgumentList do
+      [!?ioGraph addEdge !inNodeName !argument.mFormalArgumentTypeName]
+    end
+  end
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+
+#----------------------------------------------------------------------------------------------------------------------*

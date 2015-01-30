@@ -1,0 +1,234 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @enumerationDeclaration : @abstractDeclaration {
+  @lstring mEnumerationName
+  @lstringlist mAttributeList
+  @lstringlist mCaseNameList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @enumerationDeclaration location -> @location outLocation {
+  outLocation = mEnumerationName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $enum$
+    $Identifier$ ?let enumName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      attributeList += !attribute
+    end 
+    ${$
+    @lstringlist enumCaseList = {}
+    repeat
+      $case$
+      $identifier$ ?let constantName
+      enumCaseList += !constantName
+    while
+    end
+    $}$
+    ioAST.mDeclarationList += !@enumerationDeclaration.new {
+      !enumName
+      !attributeList
+      !enumCaseList
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @enumerationDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mEnumerationName !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @enumerationDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "enum " + mEnumerationName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @enumConstantMap {
+  @uint mIndex
+  insert insertKey error message "the '%K' constant is already declared"
+  search searchKey error message "there is no '%K' constant"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @enumerationDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  var copiable = true
+  for (s) in mAttributeList do
+    if s.string == "unique" then
+      if not copiable then
+        error s : "duplicated attribute"
+      end
+      copiable = false
+    end
+  end
+  @enumConstantMap enumConstantMap = {}
+  @constructorMap constructorMap = {}
+  for (cst) in mCaseNameList do
+    let idx = [enumConstantMap count]
+    [!?enumConstantMap insertKey !cst !idx]
+    [!?constructorMap insertKey !cst !"(" + typePrefix () + mEnumerationName + ") " + [idx string]]
+  end
+  [!?ioContext.mTypeMap insertKey
+    !lkey:mEnumerationName
+    !kind:.enumeration {!constantMap:enumConstantMap}
+    !constructorMap:constructorMap
+    !procedureMap:{} # Procedure map
+    !copiable:copiable
+    !equatable:true
+    !comparable:true
+  ]
+#--- Infix operators
+  enterEnumerationOperators (
+    !integerTypeName:mEnumerationName
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc enterEnumerationOperators
+  ?integerTypeName:@lstring inEnumerationTypeName
+  ?!context:@semanticContext ioContext
+{
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
+  [!?ioContext.mEqualOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"=="}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"!="}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<"}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!"<="}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">"}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !BoolTypeProxy
+    !@standardInfixOperatorGeneration.new {!">="}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @enumerationDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+#--- Get C type
+  var cType = ""
+  for (attribute) in mAttributeList do
+    if attribute.string == "unique" then
+      # Nothing to do: handled in 'enterInContext'
+    elsif cType != "" then
+      error attribute : "duplicated attribute"
+    else
+      [inContext.mTargetBaseTypeMap searchKey !attribute ?cType ?* ?let isSigned]
+      if isSigned then
+        var s = "an unsigned base type should be used here; possible values:"
+        for (baseTypeName * * baseTypeIsSigned) in inContext.mTargetBaseTypeMap do
+          if not baseTypeIsSigned then
+            s += "\n- %" + baseTypeName
+          end
+        end
+        error attribute : s
+      end
+    end
+  end
+#--- No explicit type attribute ? use "size"
+  if cType == "" then
+    [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
+  end
+#---
+  ioOrderedGenerationList += !@enumerationGeneration.new {
+    !mEnumerationName.string
+    !cType
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @enumerationGeneration : @abstractGeneration {
+  @string mEnumerationName
+  @string mActualTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper enumerationGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "enumeration-declaration.galgasTemplate"
+    ?@string ENUMERATION_NAME
+    ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @enumerationGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper enumerationGenerationTemplate.declaration
+    !mEnumerationName
+    !mActualTypeName
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @enumerationGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

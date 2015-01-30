@@ -1,0 +1,83 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    S E M A N T I C    A N A L Y S I S                                                                                *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc semanticAnalysis
+  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
+  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
+  ?context:let @semanticContext inSemanticContext
+  ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
+  ?endOfSourceFile:let @location inEndOfSourceFile
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !generation:@orderedGenerationList outGenerationList
+{
+  outGenerationList = {}
+  for (declaration) in inDeclarationListAST do
+    [declaration semanticAnalysis
+       !context:inSemanticContext
+       !?generation:outGenerationList
+       !?staticStringMap:ioGlobalLiteralStringMap
+     ]
+  end
+  for procedure in inProcedureListAST do
+    [procedure semanticAnalysis
+      !context:inSemanticContext
+      !?generation:outGenerationList
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+  for function in inFunctionListAST do
+    [function semanticAnalysis
+      !context:inSemanticContext
+      !?generation:outGenerationList
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+#--- Check required procedure are defined
+  for requiredProc in inRequiredProcedureDeclarationListAST do
+    let requiredProcMangledName = mangledName (
+      !forProcedureKind:.standAloneProc
+      !procedureName:requiredProc.mRequiredProcedureName.string
+      !formalArgumentList:requiredProc.mProcFormalArgumentList
+    )
+    if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName] then
+      var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc "
+        + if requiredProc.mRequiredMode.string != "" then "$" + requiredProc.mRequiredMode + " " else "" end
+        + requiredProc.mRequiredProcedureName
+      for arg in requiredProc.mProcFormalArgumentList do
+        s += " "
+        switch arg.mFormalArgumentPassingMode
+        case input : s += "?"
+        case output : s += "!"
+        case inputOutput : s += "?!"
+        end
+        if arg.mSelector.string != "" then
+          s += arg.mSelector.string + ":"
+        end
+        s += arg.mFormalArgumentTypeName.string
+      end
+      error inEndOfSourceFile : s
+    else
+      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procMode ?*]
+      if procMode.string != requiredProc.mRequiredMode.string then
+        if requiredProc.mRequiredMode.string == "" then
+          error procMode : "the procedure mode should be empty"
+        else
+          error procMode : "the procedure mode should be $" + requiredProc.mRequiredMode
+        end 
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

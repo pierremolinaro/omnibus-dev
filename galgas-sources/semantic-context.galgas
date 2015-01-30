@@ -1,0 +1,227 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    B U I L D    S E M A N T I C    C O N T E X T                                                                     *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @typeKind {
+  case boolean
+  case boolset
+  case literalString
+  case enumeration (@enumConstantMap constantMap)
+  case structure (@propertyList propertyList)
+  case integer (@sint64 min @uint64 max)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @constructorMap {
+  @string mInlineGeneratedCode
+  insert insertKey error message "the '%K' constructor is already declared in %L"
+  search searchKey error message "there is no '%K' constructor"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractInfixOperatorGeneration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @standardInfixOperatorGeneration : @abstractInfixOperatorGeneration {
+  @string mInfixOperator
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @registerMap {
+  @unifiedTypeMap-proxy mType
+  @bool mIsReadOnly
+  insert insertKey error message "the '%K' register has been already declared in %L"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @infixOperatorMap {
+  @unifiedTypeMap-proxy mResultType
+  @abstractInfixOperatorGeneration mGeneratedInfixOperator
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @globalLiteralStringMap {
+  @string mLiteralStringCname
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @globalConstantMap {
+  @unifiedTypeMap-proxy mConstantType
+  @abstractExpressionGeneration mExpressionCode
+  insert insertKey error message "the '%K' constant is already declared in %L"
+  search searchKey error message "there is no '%K' constant"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @targetBaseTypeMap {
+  @string mCType
+  @uint mSize # 8, 16, 32, 64
+  @bool mIsSigned
+  insert insertKey error message "the '%K' base type is already declared in %L"
+  search searchKey error message "there is no '%K' base type"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @globalVariableMap {
+  @unifiedTypeMap-proxy mVariableType
+  @stringset mExecutionModeSet
+  @abstractExpressionGeneration mInitialValueExpressionCode
+  insert insertKey error message "the '%K' global variable is already declared in %L"
+  search searchKey error message "there is no '%K' global variable"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @modeMap {
+  insert insertKey error message "the '%K' mode is already declared in %L"
+  search searchKey error message "there is no '%K' mode"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+sharedmap @unifiedTypeMap %selectors {
+  @typeKind kind
+  @constructorMap constructorMap
+  @procedureMap procedureMap
+  @bool copiable
+  @bool equatable
+  @bool comparable
+
+  insert insertKey error message "the '%K' type is already declared in %L"
+  search searchKey error message "there is no '%K' type"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @propertyList {
+  @unifiedTypeMap-proxy mTypeProxy
+  @lstring mPropertyName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @typeList {
+  @unifiedTypeMap-proxy mActualType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+struct @semanticContext {
+  @targetBaseTypeMap mTargetBaseTypeMap
+  @unifiedTypeMap mTypeMap
+  @procedureMap mProcedureMap
+  @functionMap mFunctionMap
+  @registerMap mRegisterMap
+  @globalConstantMap mGlobalConstantMap
+  @globalVariableMap mGlobalVariableMap
+  @modeMap mModeMap
+  @stringset mTypeNameSetForIncDec              # ++ and --
+  @infixOperatorMap mEqualOperatorMap           # ==
+  @infixOperatorMap mNonEqualOperatorMap        # !=
+  @infixOperatorMap mStrictInfOperatorMap       # <
+  @infixOperatorMap mInfEqualOperatorMap        # <=
+  @infixOperatorMap mStrictSupOperatorMap       # >
+  @infixOperatorMap mSupEqualOperatorMap        # >=
+  @infixOperatorMap mAndOperatorMap             # &
+  @infixOperatorMap mAndShortCircuitOperatorMap # &&
+  @infixOperatorMap mOrOperatorMap              # |
+  @infixOperatorMap mOrShortCircuitOperatorMap  # ||
+  @infixOperatorMap mXorOperatorMap             # ^
+  @infixOperatorMap mAddOperatorMap             # +
+  @infixOperatorMap mSubOperatorMap             # -
+  @infixOperatorMap mMulOperatorMap             # *
+  @infixOperatorMap mDivOperatorMap             # /
+  @infixOperatorMap mModOperatorMap             # %
+  @infixOperatorMap mLeftShiftOperatorMap       # <<
+  @infixOperatorMap mRightShiftOperatorMap      # >>
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc buildSemanticContext
+  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
+  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
+  ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !context:@semanticContext outSemanticContext
+{
+#---
+  outSemanticContext = .default
+  for (declaration) in inDeclarationListAST do
+    [declaration enterInContext
+      !procedureDeclarationList:inProcedureListAST
+      !?context: outSemanticContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+#---
+  for procedure in inProcedureListAST do
+    [procedure enterInContext !?context: outSemanticContext]
+  end
+#---
+  for function in inFunctionListAST do
+    [function enterInContext !?context: outSemanticContext]
+  end
+#--- Check required procs mode
+  if @uint.errorCount == 0 then
+    for requiredProc in inRequiredProcedureDeclarationListAST do
+      if requiredProc.mRequiredMode.string != "" then
+        [outSemanticContext.mModeMap searchKey !requiredProc.mRequiredMode]
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func solveInferredType
+  ?targetType:let @unifiedTypeMap-proxy inTargetType
+  ?sourceType:let @unifiedTypeMap-proxy inSourceType
+  ?errorLocation:let @location inErrorLocation
+  -> @unifiedTypeMap-proxy outType
+{
+  if inSourceType == .null then
+    if inTargetType == .null then
+      error inErrorLocation : "Cannot infer type" : outType
+    else
+      outType = inTargetType
+    end
+  else
+    outType = inSourceType
+#  elsif inTargetType == .null then
+#    outType = inSourceType
+#  elsif [inSourceType key] == [inTargetType key] then
+#    outType = inSourceType
+#  else
+#    error inErrorLocation
+#     : "Target type '" + [inTargetType key] + "' should be identical to source expression type '" + [inSourceType key] + "'"
+#     : outType 
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

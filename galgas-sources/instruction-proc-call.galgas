@@ -1,0 +1,201 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @procEffectiveParameterPassingMode {
+  case input
+  case output
+  case outputInput
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procEffectiveParameterPassingMode passingModeForActualSelector ?@lstring inSelector -> @string outResult {
+  switch self
+  case input : outResult = "?"
+  case output : outResult = "!"
+  case outputInput : outResult = "!?"
+  end
+  if inSelector.string != "" then
+    outResult += inSelector.string + ":"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procEffectiveParameterListAST {
+  @procEffectiveParameterPassingMode mEffectiveParameterKind
+  @lstring mSelector
+  @lstring mEffectiveParameterName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @procCallInstructionAST : @instructionAST {
+  @lstring mProcRoutineName
+  @procEffectiveParameterListAST mEffectiveParameterList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let procRoutineName
+    @procEffectiveParameterListAST effectiveParameterList = {}
+    $($
+    repeat
+    while
+      $!$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.output !selector !effectiveParameterName
+    while
+      $!?$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.outputInput !selector !effectiveParameterName
+    while
+      $?$ ?let selector
+      $identifier$ ?let effectiveParameterName
+      effectiveParameterList += !.input !selector !effectiveParameterName
+    end
+    $)$
+    ioInstructionList += !@procCallInstructionAST.new {
+      !procRoutineName
+      !effectiveParameterList
+    }
+  }
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procEffectiveParameterList {
+  @procEffectiveParameterPassingMode mEffectiveParameterPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mParameterType
+  @string mParameterAccess
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @procCallInstructionAST analyze
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+  @string procMangledName = mProcRoutineName.string
+#--- Check parameters
+  @procEffectiveParameterList parameterList = {}
+  for () in mEffectiveParameterList do
+    procMangledName += " "
+    switch mEffectiveParameterKind 
+    case input :
+      procMangledName += "!" ;
+      [!?ioVariableMap searchForWriteAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let variableAccess
+        ?let isCopiable
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      if not isCopiable then
+        error mEffectiveParameterName : "the '" + mEffectiveParameterName + "' variable is not copiable"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + variableAccess + ")"
+    case output :
+      procMangledName += "?" ;
+      [!?ioVariableMap searchForReadAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let valueAccess
+        ?*
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
+    case outputInput :
+      procMangledName += "?!" ;
+      [!?ioVariableMap searchForReadWriteAccess
+        !mEffectiveParameterName
+        ?let type
+        ?let acceptedModeSet
+        ?let variableAccess
+        ?*
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + variableAccess + ")"
+    end
+    procMangledName += mSelector.string
+  end
+#--- Search proc in proc map
+  [inContext.mProcedureMap searchKey
+    !.new {!procMangledName !mProcRoutineName.location}
+    ?*
+    ?let procedureMode
+    ?let @procedureSignature procSignature
+  ]
+#--- Check mode
+  if procedureMode.string != inMode then
+    error mProcRoutineName : "this procedure cannot be used in $" + inMode + " mode"
+  end
+  if [procSignature length] != [parameterList length] then
+    error mProcRoutineName: "this proc requires " + [procSignature length] + " argument(s), this call names "
+      + [procSignature length] + " argument(s)"
+  else
+    for () formal_ in procSignature, () actual_ in parameterList do
+      if [formal_mType key] != [actual_mParameterType key] then
+        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
+           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+      end
+      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
+      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
+      if requiredPassingMode != testedPassingMode then
+        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
+      end
+    end  
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
+    !procMangledName
+    !parameterList
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @procCallInstructionGeneration : @abstractInstructionGeneration {
+  @string mProcName
+  @procEffectiveParameterList mParameters
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @procCallInstructionGeneration instructionCode -> @string outCode {
+  outCode = [mProcName identifierRepresentation] + " ("
+  for () in mParameters
+    do outCode += mParameterAccess
+    between outCode += ", "
+  end
+  outCode += ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

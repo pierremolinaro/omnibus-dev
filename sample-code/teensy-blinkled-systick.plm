@@ -1,0 +1,30 @@
+target "target-teensy-sequential-systick.plms"
+
+//-----------------------------------------------------------------------------*
+
+proc $user setup () {
+  portC_PCR5 = (1 << 8)
+  gpioC_PDDR = gpioC_PDDR | (1 << 5)
+}
+
+//-----------------------------------------------------------------------------*
+
+var $user UInt32 gCompteur = 0
+
+var $user proc $isr gProc () = 0
+
+//-----------------------------------------------------------------------------*
+
+proc $user loop () {
+  if gCompteur == 2_000_000 then
+    gCompteur = 0
+    gpioC_PSOR = 1 << 5
+  elsif gCompteur == 1_000_000 then
+    gpioC_PCOR = 1 << 5
+    gCompteur ++
+  else
+    gCompteur ++
+  end
+}
+
+//-----------------------------------------------------------------------------*

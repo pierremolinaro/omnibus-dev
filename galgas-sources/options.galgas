@@ -1,0 +1,5 @@
+option plm_options {
+
+  @stringlist pathList: '\0', "path" -> "search pathes for source files"
+
+}

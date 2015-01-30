@@ -1,0 +1,63 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T                                                    *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+graph @semanticTypePrecedenceGraph (@declarationListAST) {
+  insert addNode error message "the '%K' symbol is already declared at %L"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractDeclaration keyRepresentation -> @string outRepresentation
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc buildOrderedDeclarationList
+  ?declarationList:@declarationListAST inDeclarationListAST
+  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
+  ?endOfSourceFile:@location inEndOfSourceFile
+  !orderedDeclarationList:@declarationListAST outDeclarationListAST
+{
+#--- Build precedence graph
+  @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
+  for () in inDeclarationListAST do
+    [mDeclaration enterInPrecedenceGraph !?precedenceGraph] ;
+  end
+  for procedure in inProcedureListAST do
+    [procedure enterInPrecedenceGraph !?precedenceGraph] ;
+  end
+#---
+  outDeclarationListAST = {}
+  if [precedenceGraph undefinedNodeCount] > 0 then
+    for () in  [precedenceGraph undefinedNodeReferenceList] do
+      error mValue : "the '" + mValue + "' type is not defined"
+    end
+  else
+    [precedenceGraph topologicalSort
+      ?outDeclarationListAST
+      ?*
+      ?let @declarationListAST unsortedSemanticDeclarationListAST
+      ?*
+    ]
+    if [unsortedSemanticDeclarationListAST length] > 0 then
+      var s = "semantic analysis not performed, "
+            + [unsortedSemanticDeclarationListAST length]
+            + " declarations are involved in circular definition:"
+      for () in  unsortedSemanticDeclarationListAST do
+        s += "\n-  " + [mDeclaration keyRepresentation]
+      end
+      error inEndOfSourceFile : s
+      for () in  unsortedSemanticDeclarationListAST do
+        error [mDeclaration location] : "the " + [mDeclaration keyRepresentation] + " type is declared here"
+      end
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

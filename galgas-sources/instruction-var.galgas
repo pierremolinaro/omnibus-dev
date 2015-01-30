@@ -1,0 +1,190 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @varInstructionWithAssignmentAST : @instructionAST {
+  @lstring mVarName
+  @lstring mOptionalTypeName
+  @expressionAST mSourceExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @varInstructionAST : @instructionAST {
+  @lstring mVarName
+  @lstring mTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $var$
+    $Identifier$ ?let optionalTypeName
+    $identifier$ ?let varName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+      !varName
+      !optionalTypeName
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $var$
+    $identifier$ ?let varName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+      !varName
+      !.new {!"" !varName.location}
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $var$
+    $Identifier$ ?let typeName
+    $identifier$ ?let varName
+    ioInstructionList += !@varInstructionAST.new {
+      !varName
+      !typeName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $Identifier$ ?let optionalTypeName
+    $identifier$ ?let varName
+    $=$
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+      !varName
+      !optionalTypeName
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $Identifier$ ?let typeName
+    $identifier$ ?let varName
+    ioInstructionList += !@varInstructionAST.new {
+      !varName
+      !typeName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @varInstructionWithAssignmentAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+  let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
+    then .null
+    else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+  end
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:targetType
+    !context:inContext
+    !mode:inMode
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    ?expressionType:let inferredType
+    ?generatedCode:let expressionGeneratedCode
+  ]
+#--- Declare local variable
+  [!?ioVariableMap insertDefinedLocalVariable
+    !mVarName
+    !inferredType
+    !{!inMode}
+    !varPrefix () + mVarName.string
+    ![inferredType copiable]
+  ]
+#--- Code generation
+  ioInstructionGenerationList += !@varInstructionWithAssignmentGeneration.new {
+    !inferredType
+    !mVarName.string
+    !expressionGeneratedCode
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @varInstructionAST analyze
+  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+{
+  let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
+#--- Declare local variable
+  [!?ioVariableMap insertUndefinedLocalVariable
+    !mVarName
+    !targetType
+    !{!inMode}
+    !varPrefix () + mVarName.string
+    ![targetType copiable]
+  ]
+#--- Code generation
+  ioInstructionGenerationList += !@varInstructionGeneration.new {!targetType !mVarName.string}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @varInstructionWithAssignmentGeneration : @abstractInstructionGeneration {
+  @unifiedTypeMap-proxy mTargetType
+  @string mLocalVariable
+  @abstractExpressionGeneration mExpressionGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @varInstructionWithAssignmentGeneration instructionCode -> @string outCode {
+  outCode = typePrefix () + [mTargetType key] + " " + varPrefix () + mLocalVariable
+    + " = " + [mExpressionGeneration expressionCode] + " ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @varInstructionGeneration : @abstractInstructionGeneration {
+  @unifiedTypeMap-proxy mTargetType
+  @string mLocalVariable
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @varInstructionGeneration instructionCode -> @string outCode {
+  outCode = typePrefix () + [mTargetType key] + " " + varPrefix () + mLocalVariable + " ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

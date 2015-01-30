@@ -1,0 +1,73 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @modeDeclaration : @abstractDeclaration {
+  @lstring mModeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @modeDeclaration location -> @location outLocation {
+  outLocation = mModeName.location
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plms_specific_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $mode$
+    $modeName$ ?let modeName
+    ioAST.mDeclarationList += !@modeDeclaration.new {!modeName}
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @modeDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addNode !mModeName !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @modeDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "mode " + mModeName 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @modeDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+  [!?ioContext.mModeMap insertKey !mModeName] ;
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @modeDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!generation:@orderedGenerationList unused ioOrderedGenerationList
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

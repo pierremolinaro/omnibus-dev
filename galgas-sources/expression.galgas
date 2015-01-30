@@ -1,0 +1,54 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @expressionAST {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <expression> !@expressionAST outExpression {
+    <comparison> ?outExpression
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $($
+    <expression> ?outExpression
+    $)$
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @receiverType {
+  case noReceiver
+  case receiver (@unifiedTypeMap-proxy type @string receiverValue)
+  case mutatingReceiver (@unifiedTypeMap-proxy type @string receiverPointer)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @expressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+
+#----------------------------------------------------------------------------------------------------------------------*
