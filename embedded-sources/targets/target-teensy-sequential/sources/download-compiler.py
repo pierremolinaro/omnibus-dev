@@ -19,8 +19,11 @@ def downloadReportHook (a,b,c):
 #----------------------------------------------------------------------------------------------------------------------*
 
 def runCommand (cmd) :
-  print "+ " + cmd
-  childProcess = subprocess.Popen (cmd.split ())
+  str = "+"
+  for s in cmd:
+    str += " " + s
+  print str
+  childProcess = subprocess.Popen (cmd)
   childProcess.wait ()
   if childProcess.returncode != 0 :
     sys.exit (childProcess.returncode)
@@ -34,17 +37,18 @@ os.chdir (scriptDir)
 homeDir = os.path.expanduser ("~")
 #--- Get installation directory
 installDir = homeDir + "/plm-tools"
+runCommand (["mkdir", "-p", installDir])
 #---
-archiveName = "teensy-i386-Darwin-arm-gcc-4.9.2"
-compilerURL = "http://moniteur-tp-micro.rts-software.org/plm-tools/" + archiveName + ".tar.bz2"
-urllib.urlretrieve (compilerURL,  archiveName + ".tar.bz2", downloadReportHook)
+archiveName = "plm-teensy-i386-Darwin-arm-gcc-4.8.4"
+compilerURL = "http://plm.rts-software.org/plm-tools/" + archiveName + ".tar.bz2"
+urllib.urlretrieve (compilerURL, installDir + "/" + archiveName + ".tar.bz2", downloadReportHook)
 print ""
-runCommand ("bunzip2 -k " + archiveName + ".tar.bz2")
-runCommand ("rm " + archiveName + ".tar.bz2")
-runCommand ("tar xf " + archiveName + ".tar")
-runCommand ("rm " + archiveName + ".tar")
-runCommand ("rm -fr " + installDir + "/" + archiveName)
-runCommand ("mkdir -p " + installDir)
-runCommand ("mv " + archiveName + " " + installDir + "/" + archiveName)
+print "+ cd " + installDir
+os.chdir (installDir)
+runCommand (["bunzip2", "-k", archiveName + ".tar.bz2"])
+runCommand (["rm", archiveName + ".tar.bz2"])
+runCommand (["tar", "xf", archiveName + ".tar"])
+runCommand (["rm", archiveName + ".tar"])
+os.chdir (scriptDir)
 
 #----------------------------------------------------------------------------------------------------------------------*

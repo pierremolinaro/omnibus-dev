@@ -18300,7 +18300,7 @@ const char * gWrapperFileContent_7_targetTemplates = "#-------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-i386-Darwin-arm-gcc-4.9.2\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.8.4\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -18427,7 +18427,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "makefile.mke",
   "mke",
   true, // Text file
-  10563, // Text length
+  10567, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -18454,8 +18454,11 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runCommand (cmd) :\n"
-  "  print \"+ \" + cmd\n"
-  "  childProcess = subprocess.Popen (cmd.split ())\n"
+  "  str = \"+\"\n"
+  "  for s in cmd:\n"
+  "    str += \" \" + s\n"
+  "  print str\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
   "  childProcess.wait ()\n"
   "  if childProcess.returncode != 0 :\n"
   "    sys.exit (childProcess.returncode)\n"
@@ -18469,18 +18472,19 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "homeDir = os.path.expanduser (\"~\")\n"
   "#--- Get installation directory\n"
   "installDir = homeDir + \"/plm-tools\"\n"
+  "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
-  "compilerURL = \"http://moniteur-tp-micro.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
-  "urllib.urlretrieve (compilerURL,  archiveName + \".tar.bz2\", downloadReportHook)\n"
+  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.8.4\"\n"
+  "compilerURL = \"http://plm.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
-  "runCommand (\"bunzip2 -k \" + archiveName + \".tar.bz2\")\n"
-  "runCommand (\"rm \" + archiveName + \".tar.bz2\")\n"
-  "runCommand (\"tar xf \" + archiveName + \".tar\")\n"
-  "runCommand (\"rm \" + archiveName + \".tar\")\n"
-  "runCommand (\"rm -fr \" + installDir + \"/\" + archiveName)\n"
-  "runCommand (\"mkdir -p \" + installDir)\n"
-  "runCommand (\"mv \" + archiveName + \" \" + installDir + \"/\" + archiveName)\n"
+  "print \"+ cd \" + installDir\n"
+  "os.chdir (installDir)\n"
+  "runCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "runCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "runCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "runCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "os.chdir (scriptDir)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -18488,7 +18492,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1984, // Text length
+  1974, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -21326,7 +21330,7 @@ const char * gWrapperFileContent_16_targetTemplates = "#------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-i386-Darwin-arm-gcc-4.9.2\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.8.4\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -21453,7 +21457,7 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "makefile.mke",
   "mke",
   true, // Text file
-  10571, // Text length
+  10575, // Text length
   gWrapperFileContent_16_targetTemplates
 ) ;
 
@@ -21480,8 +21484,11 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runCommand (cmd) :\n"
-  "  print \"+ \" + cmd\n"
-  "  childProcess = subprocess.Popen (cmd.split ())\n"
+  "  str = \"+\"\n"
+  "  for s in cmd:\n"
+  "    str += \" \" + s\n"
+  "  print str\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
   "  childProcess.wait ()\n"
   "  if childProcess.returncode != 0 :\n"
   "    sys.exit (childProcess.returncode)\n"
@@ -21495,18 +21502,19 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "homeDir = os.path.expanduser (\"~\")\n"
   "#--- Get installation directory\n"
   "installDir = homeDir + \"/plm-tools\"\n"
+  "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
-  "compilerURL = \"http://moniteur-tp-micro.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
-  "urllib.urlretrieve (compilerURL,  archiveName + \".tar.bz2\", downloadReportHook)\n"
+  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.8.4\"\n"
+  "compilerURL = \"http://plm.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
-  "runCommand (\"bunzip2 -k \" + archiveName + \".tar.bz2\")\n"
-  "runCommand (\"rm \" + archiveName + \".tar.bz2\")\n"
-  "runCommand (\"tar xf \" + archiveName + \".tar\")\n"
-  "runCommand (\"rm \" + archiveName + \".tar\")\n"
-  "runCommand (\"rm -fr \" + installDir + \"/\" + archiveName)\n"
-  "runCommand (\"mkdir -p \" + installDir)\n"
-  "runCommand (\"mv \" + archiveName + \" \" + installDir + \"/\" + archiveName)\n"
+  "print \"+ cd \" + installDir\n"
+  "os.chdir (installDir)\n"
+  "runCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "runCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "runCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "runCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "os.chdir (scriptDir)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -21514,7 +21522,7 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1984, // Text length
+  1974, // Text length
   gWrapperFileContent_17_targetTemplates
 ) ;
 
