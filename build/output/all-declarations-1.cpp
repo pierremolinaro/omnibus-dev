@@ -18236,7 +18236,7 @@ const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
   "#---\n"
-  "tool = os.path.expanduser (\"~/plm-tools/teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
+  "tool = os.path.expanduser (\"~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
   "source = \"product/product.hex\"\n"
   "childProcess = subprocess.Popen ([tool, \"-w\", \"-v\", \"-mmcu=mk20dx128\", source], cwd=scriptDir)\n"
   "#--- Wait for subprocess termination\n"
@@ -18251,7 +18251,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
-  902, // Text length
+  906, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 
@@ -18300,7 +18300,7 @@ const char * gWrapperFileContent_7_targetTemplates = "#-------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.8.4\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -18474,8 +18474,8 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "installDir = homeDir + \"/plm-tools\"\n"
   "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.8.4\"\n"
-  "compilerURL = \"http://plm.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
+  "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
   "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
   "print \"+ cd \" + installDir\n"
@@ -18492,7 +18492,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1974, // Text length
+  1989, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -21266,7 +21266,7 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
   "#---\n"
-  "tool = os.path.expanduser (\"~/plm-tools/teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
+  "tool = os.path.expanduser (\"~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
   "source = \"product/product.hex\"\n"
   "childProcess = subprocess.Popen ([tool, \"-w\", \"-v\", \"-mmcu=mk20dx128\", source], cwd=scriptDir)\n"
   "#--- Wait for subprocess termination\n"
@@ -21281,7 +21281,7 @@ const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
-  902, // Text length
+  906, // Text length
   gWrapperFileContent_15_targetTemplates
 ) ;
 
@@ -21330,7 +21330,7 @@ const char * gWrapperFileContent_16_targetTemplates = "#------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.8.4\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -21504,8 +21504,8 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "installDir = homeDir + \"/plm-tools\"\n"
   "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.8.4\"\n"
-  "compilerURL = \"http://plm.rts-software.org/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
+  "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
   "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
   "print \"+ cd \" + installDir\n"
@@ -21522,7 +21522,7 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1974, // Text length
+  1989, // Text length
   gWrapperFileContent_17_targetTemplates
 ) ;
 
