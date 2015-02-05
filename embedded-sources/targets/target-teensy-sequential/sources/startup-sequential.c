@@ -3,27 +3,27 @@
 #include <stddef.h>
 
 #include "plm.h"
-// #include "mk20dx256.h"
+#include "mk20dx256.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void ResetISR (void) {
 //---------1- Inhiber le chien de garde
-  wdog_UNLOCK = 0xC520 ;
-  wdog_UNLOCK = 0xD928 ;
-  wdog_STCTRLH = 0x0010 ;
+  WDOG_UNLOCK = 0xC520 ;
+  WDOG_UNLOCK = 0xD928 ;
+  WDOG_STCTRLH = 0x0010 ;
   // enable clocks to always-used peripherals
-  sim_SCGC3 = sim_SCGC3_ADC1 | sim_SCGC3_FTM2;
-  sim_SCGC5 = 0x00043F82;    // clocks active to all GPIO
-  sim_SCGC6 = sim_SCGC6_RTC | sim_SCGC6_FTM0 | sim_SCGC6_FTM1 | sim_SCGC6_ADC0 | sim_SCGC6_FTFL;
+  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2;
+  SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO
+  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL;
   // if the RTC oscillator isn't enabled, get it started early
-  if (!(rtc_CR & rtc_CR_OSCE)) {
-    rtc_SR = 0;
-    rtc_CR = rtc_CR_SC16P | rtc_CR_SC4P | rtc_CR_OSCE;
+  if (!(RTC_CR & RTC_CR_OSCE)) {
+    RTC_SR = 0;
+    RTC_CR = RTC_CR_SC16P | RTC_CR_SC4P | RTC_CR_OSCE;
   }
 
   // release I/O pins hold, if we woke up from VLLS mode
-  if (pmc_REGSC & pmc_REGSC_ACKISO) pmc_REGSC |= pmc_REGSC_ACKISO;
+  if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;
 
   // TODO: do this while the PLL is waiting to lock....
 //  SCB_VTOR = 0;  // use vector table in flash
@@ -33,48 +33,48 @@ static void ResetISR (void) {
 //---------2- Initialisation de la PLL
   // start in FEI mode
   // enable capacitors for crystal
-  osc0_CR = osc_SC8P | osc_SC2P;
+  OSC0_CR = OSC_SC8P | OSC_SC2P;
   // enable osc, 8-32 MHz range, low power mode
-  mcg_C2 = mcg_C2_RANGE0(2) | mcg_C2_EREFS;
+  MCG_C2 = MCG_C2_RANGE0(2) | MCG_C2_EREFS;
   // switch to crystal as clock source, FLL input = 16 MHz / 512
-  mcg_C1 =  mcg_C1_CLKS(2) | mcg_C1_FRDIV(4);
+  MCG_C1 =  MCG_C1_CLKS(2) | MCG_C1_FRDIV(4);
   // wait for crystal oscillator to begin
-  while ((mcg_S & mcg_S_OSCINIT0) == 0) ;
+  while ((MCG_S & MCG_S_OSCINIT0) == 0) ;
   // wait for FLL to use oscillator
-  while ((mcg_S & mcg_S_IREFST) != 0) ;
+  while ((MCG_S & MCG_S_IREFST) != 0) ;
   // wait for MCGOUT to use oscillator
-  while ((mcg_S & mcg_S_CLKST_MASK) != mcg_S_CLKST(2)) ;
+  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(2)) ;
   // now we're in FBE mode
   // config PLL input for 16 MHz Crystal / 4 = 4 MHz
-  mcg_C5 = mcg_C5_PRDIV0(3);
+  MCG_C5 = MCG_C5_PRDIV0(3);
   // config PLL for 96 MHz output
-  mcg_C6 = mcg_C6_PLLS | mcg_C6_VDIV0(0);
+  MCG_C6 = MCG_C6_PLLS | MCG_C6_VDIV0(0);
   // wait for PLL to start using xtal as its input
-  while (!(mcg_S & mcg_S_PLLST)) ;
+  while (!(MCG_S & MCG_S_PLLST)) ;
   // wait for PLL to lock
-  while (!(mcg_S & mcg_S_LOCK0)) ;
+  while (!(MCG_S & MCG_S_LOCK0)) ;
   // now we're in PBE mode
 #if F_CPU == 96000000
   // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash
-  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(0) | sim_CLKDIV1_OUTDIV2(1) |   sim_CLKDIV1_OUTDIV4(3);
+  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);
 #elif F_CPU == 48000000
   // config divisors: 48 MHz core, 48 MHz bus, 24 MHz flash
-  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(1) | sim_CLKDIV1_OUTDIV2(1) |   sim_CLKDIV1_OUTDIV4(3);
+  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(1) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);
 #elif F_CPU == 24000000
   // config divisors: 24 MHz core, 24 MHz bus, 24 MHz flash
-  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(3) | sim_CLKDIV1_OUTDIV2(3) |   sim_CLKDIV1_OUTDIV4(3);
+  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(3) | SIM_CLKDIV1_OUTDIV2(3) |   SIM_CLKDIV1_OUTDIV4(3);
 #else
 #error "Error, F_CPU must be 96000000, 48000000, or 24000000"
 #endif
   // switch to PLL as clock source, FLL input = 16 MHz / 512
-  mcg_C1 = mcg_C1_CLKS(0) | mcg_C1_FRDIV(4);
+  MCG_C1 = MCG_C1_CLKS(0) | MCG_C1_FRDIV(4);
   // wait for PLL clock to be used
-  while ((mcg_S & mcg_S_CLKST_MASK) != mcg_S_CLKST(3)) ;
+  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(3)) ;
   // now we're in PEE mode
   // configure USB for 48 MHz clock
-//  sim_CLKDIV2 = sim_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2
+//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2
   // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0
-//  sim_SOPT2 = sim_SOPT2_USBSRC | sim_SOPT2_PLLFLLSEL | sim_SOPT2_TRACECLKSEL | sim_SOPT2_CLKOUTSEL(6);
+//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);
 
 //---------3- Initialisation de la section .bss
   extern unsigned __bss_start ;

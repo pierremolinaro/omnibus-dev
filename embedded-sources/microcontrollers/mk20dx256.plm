@@ -230,7 +230,7 @@ register UInt32 sim_SOPT2_PLLFLLSEL   0x00010000  // 0=FLL, 1=PLL
 register UInt32 sim_SOPT2_TRACECLKSEL   0x00001000  // 0=MCGOUTCLK, 1=CPU
 register UInt32 sim_SOPT2_PTD7PAD   0x00000800  // 0=normal, 1=double drive PTD7
 //register UInt32 sim_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.
-register UInt32 sim_SOPT2_RTCCLKOUTSEL   0x00000010  // RTC clock out select
+let UInt32 sim_SOPT2_RTCCLKOUTSEL = 0x00000010  // RTC clock out select
 register UInt32 sim_SOPT4   0x4004800C // System Options Register 4
 register UInt32 sim_SOPT5   0x40048010 // System Options Register 5
 register UInt32 sim_SOPT7   0x40048018 // System Options Register 7

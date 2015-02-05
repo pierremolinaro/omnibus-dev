@@ -13950,6 +13950,107 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Filewrapper 'globalConstantGenerationTemplate'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+//--- All files of 'platform' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_2 [1] = {
+  NULL
+} ;
+
+//--- All sub-directories of 'platform' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_2 [1] = {
+  NULL
+} ;
+
+//--- Directory 'platform'
+
+const cDirectoryWrapper gWrapperDirectory_2_globalConstantGenerationTemplate (
+  "platform",
+  0,
+  gWrapperAllFiles_globalConstantGenerationTemplate_2,
+  0,
+  gWrapperAllDirectories_globalConstantGenerationTemplate_2
+) ;
+
+//--- All files of 'target-teensy-seq' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_1 [1] = {
+  NULL
+} ;
+
+//--- All sub-directories of 'target-teensy-seq' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_1 [2] = {
+  & gWrapperDirectory_2_globalConstantGenerationTemplate,
+  NULL
+} ;
+
+//--- Directory 'target-teensy-seq'
+
+const cDirectoryWrapper gWrapperDirectory_1_globalConstantGenerationTemplate (
+  "target-teensy-seq",
+  0,
+  gWrapperAllFiles_globalConstantGenerationTemplate_1,
+  1,
+  gWrapperAllDirectories_globalConstantGenerationTemplate_1
+) ;
+
+//--- All files of '' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_0 [1] = {
+  NULL
+} ;
+
+//--- All sub-directories of '' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_0 [2] = {
+  & gWrapperDirectory_1_globalConstantGenerationTemplate,
+  NULL
+} ;
+
+//--- Directory ''
+
+const cDirectoryWrapper gWrapperDirectory_0_globalConstantGenerationTemplate (
+  "",
+  0,
+  gWrapperAllFiles_globalConstantGenerationTemplate_0,
+  1,
+  gWrapperAllDirectories_globalConstantGenerationTemplate_0
+) ;
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Filewrapper template 'globalConstantGenerationTemplate declaration'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (C_Compiler * inCompiler,
+                                                                                const GALGAS_string & in_GLOBAL_5F_CONSTANT_5F_NAME,
+                                                                                const GALGAS_string & in_CONSTANT_5F_VALUE
+                                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  C_String result ;
+  result << "//---------------------------------------------------------------------------------------------------------------------*\n"
+    "//" ;
+  result << GALGAS_string ("global constant ").add_operation (in_GLOBAL_5F_CONSTANT_5F_NAME, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgasTemplate", 2)).reader_stringByLeftAndRightPadding (GALGAS_uint ((uint32_t) 117U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("global-constant-declaration.galgasTemplate", 2)).stringValue () ;
+  result << "*\n"
+    "//---------------------------------------------------------------------------------------------------------------------*\n"
+    "\n"
+    "#define const_" ;
+  result << in_GLOBAL_5F_CONSTANT_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("global-constant-declaration.galgasTemplate", 5)).stringValue () ;
+  result << " (" ;
+  result << in_CONSTANT_5F_VALUE.stringValue () ;
+  result << ")\n"
+    "\n" ;
+  return GALGAS_string (result) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'enterIntegerOperators'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16273,7 +16374,7 @@ const char * gWrapperFileContent_0_targetTemplates = "// Teensyduino Core Librar
   "register UInt32 sim_SOPT2_TRACECLKSEL   0x00001000  // 0=MCGOUTCLK, 1=CPU\n"
   "register UInt32 sim_SOPT2_PTD7PAD   0x00000800  // 0=normal, 1=double drive PTD7\n"
   "//register UInt32 sim_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.\n"
-  "register UInt32 sim_SOPT2_RTCCLKOUTSEL   0x00000010  // RTC clock out select\n"
+  "let UInt32 sim_SOPT2_RTCCLKOUTSEL = 0x00000010  // RTC clock out select\n"
   "register UInt32 sim_SOPT4   0x4004800C // System Options Register 4\n"
   "register UInt32 sim_SOPT5   0x40048010 // System Options Register 5\n"
   "register UInt32 sim_SOPT7   0x40048018 // System Options Register 7\n"
@@ -18151,7 +18252,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  140899, // Text length
+  140894, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -18522,7 +18623,7 @@ const char * gWrapperFileContent_7_targetTemplates = "#-------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -18649,7 +18750,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "makefile.mke",
   "mke",
   true, // Text file
-  10569, // Text length
+  10603, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -18696,7 +18797,7 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "installDir = homeDir + \"/plm-tools\"\n"
   "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
+  "archiveName = \"teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\"\n"
   "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
   "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
@@ -18714,7 +18815,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1989, // Text length
+  2023, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -21091,27 +21192,27 @@ const char * gWrapperFileContent_11_targetTemplates = "//-----------------------
   "#include <stddef.h>\n"
   "\n"
   "#include \"plm.h\"\n"
-  "// #include \"mk20dx256.h\"\n"
+  "#include \"mk20dx256.h\"\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Inhiber le chien de garde\n"
-  "  wdog_UNLOCK = 0xC520 ;\n"
-  "  wdog_UNLOCK = 0xD928 ;\n"
-  "  wdog_STCTRLH = 0x0010 ;\n"
+  "  WDOG_UNLOCK = 0xC520 ;\n"
+  "  WDOG_UNLOCK = 0xD928 ;\n"
+  "  WDOG_STCTRLH = 0x0010 ;\n"
   "  // enable clocks to always-used peripherals\n"
-  "  sim_SCGC3 = sim_SCGC3_ADC1 | sim_SCGC3_FTM2;\n"
-  "  sim_SCGC5 = 0x00043F82;    // clocks active to all GPIO\n"
-  "  sim_SCGC6 = sim_SCGC6_RTC | sim_SCGC6_FTM0 | sim_SCGC6_FTM1 | sim_SCGC6_ADC0 | sim_SCGC6_FTFL;\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2;\n"
+  "  SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL;\n"
   "  // if the RTC oscillator isn't enabled, get it started early\n"
-  "  if (!(rtc_CR & rtc_CR_OSCE)) {\n"
-  "    rtc_SR = 0;\n"
-  "    rtc_CR = rtc_CR_SC16P | rtc_CR_SC4P | rtc_CR_OSCE;\n"
+  "  if (!(RTC_CR & RTC_CR_OSCE)) {\n"
+  "    RTC_SR = 0;\n"
+  "    RTC_CR = RTC_CR_SC16P | RTC_CR_SC4P | RTC_CR_OSCE;\n"
   "  }\n"
   "\n"
   "  // release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if (pmc_REGSC & pmc_REGSC_ACKISO) pmc_REGSC |= pmc_REGSC_ACKISO;\n"
+  "  if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;\n"
   "\n"
   "  // TODO: do this while the PLL is waiting to lock....\n"
   "//  SCB_VTOR = 0;  // use vector table in flash\n"
@@ -21121,48 +21222,48 @@ const char * gWrapperFileContent_11_targetTemplates = "//-----------------------
   "//---------2- Initialisation de la PLL\n"
   "  // start in FEI mode\n"
   "  // enable capacitors for crystal\n"
-  "  osc0_CR = osc_SC8P | osc_SC2P;\n"
+  "  OSC0_CR = OSC_SC8P | OSC_SC2P;\n"
   "  // enable osc, 8-32 MHz range, low power mode\n"
-  "  mcg_C2 = mcg_C2_RANGE0(2) | mcg_C2_EREFS;\n"
+  "  MCG_C2 = MCG_C2_RANGE0(2) | MCG_C2_EREFS;\n"
   "  // switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  mcg_C1 =  mcg_C1_CLKS(2) | mcg_C1_FRDIV(4);\n"
+  "  MCG_C1 =  MCG_C1_CLKS(2) | MCG_C1_FRDIV(4);\n"
   "  // wait for crystal oscillator to begin\n"
-  "  while ((mcg_S & mcg_S_OSCINIT0) == 0) ;\n"
+  "  while ((MCG_S & MCG_S_OSCINIT0) == 0) ;\n"
   "  // wait for FLL to use oscillator\n"
-  "  while ((mcg_S & mcg_S_IREFST) != 0) ;\n"
+  "  while ((MCG_S & MCG_S_IREFST) != 0) ;\n"
   "  // wait for MCGOUT to use oscillator\n"
-  "  while ((mcg_S & mcg_S_CLKST_MASK) != mcg_S_CLKST(2)) ;\n"
+  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(2)) ;\n"
   "  // now we're in FBE mode\n"
   "  // config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
-  "  mcg_C5 = mcg_C5_PRDIV0(3);\n"
+  "  MCG_C5 = MCG_C5_PRDIV0(3);\n"
   "  // config PLL for 96 MHz output\n"
-  "  mcg_C6 = mcg_C6_PLLS | mcg_C6_VDIV0(0);\n"
+  "  MCG_C6 = MCG_C6_PLLS | MCG_C6_VDIV0(0);\n"
   "  // wait for PLL to start using xtal as its input\n"
-  "  while (!(mcg_S & mcg_S_PLLST)) ;\n"
+  "  while (!(MCG_S & MCG_S_PLLST)) ;\n"
   "  // wait for PLL to lock\n"
-  "  while (!(mcg_S & mcg_S_LOCK0)) ;\n"
+  "  while (!(MCG_S & MCG_S_LOCK0)) ;\n"
   "  // now we're in PBE mode\n"
   "#if F_CPU == 96000000\n"
   "  // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(0) | sim_CLKDIV1_OUTDIV2(1) |   sim_CLKDIV1_OUTDIV4(3);\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);\n"
   "#elif F_CPU == 48000000\n"
   "  // config divisors: 48 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(1) | sim_CLKDIV1_OUTDIV2(1) |   sim_CLKDIV1_OUTDIV4(3);\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(1) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);\n"
   "#elif F_CPU == 24000000\n"
   "  // config divisors: 24 MHz core, 24 MHz bus, 24 MHz flash\n"
-  "  sim_CLKDIV1 = sim_CLKDIV1_OUTDIV1(3) | sim_CLKDIV1_OUTDIV2(3) |   sim_CLKDIV1_OUTDIV4(3);\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(3) | SIM_CLKDIV1_OUTDIV2(3) |   SIM_CLKDIV1_OUTDIV4(3);\n"
   "#else\n"
   "#error \"Error, F_CPU must be 96000000, 48000000, or 24000000\"\n"
   "#endif\n"
   "  // switch to PLL as clock source, FLL input = 16 MHz / 512\n"
-  "  mcg_C1 = mcg_C1_CLKS(0) | mcg_C1_FRDIV(4);\n"
+  "  MCG_C1 = MCG_C1_CLKS(0) | MCG_C1_FRDIV(4);\n"
   "  // wait for PLL clock to be used\n"
-  "  while ((mcg_S & mcg_S_CLKST_MASK) != mcg_S_CLKST(3)) ;\n"
+  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(3)) ;\n"
   "  // now we're in PEE mode\n"
   "  // configure USB for 48 MHz clock\n"
-  "//  sim_CLKDIV2 = sim_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
+  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
   "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
-  "//  sim_SOPT2 = sim_SOPT2_USBSRC | sim_SOPT2_PLLFLLSEL | sim_SOPT2_TRACECLKSEL | sim_SOPT2_CLKOUTSEL(6);\n"
+  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
   "\n"
   "//---------3- Initialisation de la section .bss\n"
   "  extern unsigned __bss_start ;\n"
@@ -21272,7 +21373,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "startup-sequential.c",
   "c",
   true, // Text file
-  7495, // Text length
+  7492, // Text length
   gWrapperFileContent_11_targetTemplates
 ) ;
 
@@ -21552,7 +21653,7 @@ const char * gWrapperFileContent_16_targetTemplates = "#------------------------
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2\n"
+  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -21679,7 +21780,7 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "makefile.mke",
   "mke",
   true, // Text file
-  10577, // Text length
+  10611, // Text length
   gWrapperFileContent_16_targetTemplates
 ) ;
 
@@ -21726,7 +21827,7 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "installDir = homeDir + \"/plm-tools\"\n"
   "runCommand ([\"mkdir\", \"-p\", installDir])\n"
   "#---\n"
-  "archiveName = \"plm-teensy-i386-Darwin-arm-gcc-4.9.2\"\n"
+  "archiveName = \"teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\"\n"
   "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
   "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
   "print \"\"\n"
@@ -21744,7 +21845,7 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "download-compiler.py",
   "py",
   true, // Text file
-  1989, // Text length
+  2023, // Text length
   gWrapperFileContent_17_targetTemplates
 ) ;
 

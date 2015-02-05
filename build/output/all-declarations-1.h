@@ -2160,6 +2160,36 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Filewrapper 'globalConstantGenerationTemplate'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_globalConstantGenerationTemplate ;
+extern const cDirectoryWrapper gWrapperDirectory_1_globalConstantGenerationTemplate ;
+extern const cDirectoryWrapper gWrapperDirectory_2_globalConstantGenerationTemplate ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Filewrapper template 'globalConstantGenerationTemplate declaration'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (class C_Compiler * inCompiler,
+                                                                                const class GALGAS_string & in_GLOBAL_5F_CONSTANT_5F_NAME,
+                                                                                const class GALGAS_string & in_CONSTANT_5F_VALUE
+                                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Routine 'enterIntegerOperators'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
