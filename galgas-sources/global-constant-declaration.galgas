@@ -118,12 +118,53 @@ abstract method @expressionAST analyzeStaticExpression
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @globalConstantDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!generation:@orderedGenerationList unused ioOrderedGenerationList
+  ?context:let @semanticContext inContext
+  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
 {
+#--- Code generation
+  [inContext.mGlobalConstantMap searchKey
+    !mConstantName
+    ?*
+    ?let expressionGeneratedCode
+  ]
+  ioOrderedGenerationList += !@globalConstantGeneration.new {
+    !mConstantName.string
+    !expressionGeneratedCode
+  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+
+class @globalConstantGeneration : @abstractGeneration {
+  @string mGlobalConstanteName
+  @abstractExpressionGeneration mValueExpressionGeneration
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private filewrapper globalConstantGenerationTemplate in "../generation-templates" {
+}{
+}{
+  template declaration "global-constant-declaration.galgasTemplate"
+    ?@string GLOBAL_CONSTANT_NAME
+    ?@string CONSTANT_VALUE
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalConstantGeneration headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper globalConstantGenerationTemplate.declaration
+    !mGlobalConstanteName
+    ![mValueExpressionGeneration expressionCode]
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @globalConstantGeneration implementationCodeGeneration -> @string outCode {
+  outCode = ""
+}
+
 #----------------------------------------------------------------------------------------------------------------------*

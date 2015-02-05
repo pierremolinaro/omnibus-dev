@@ -39,7 +39,7 @@ homeDir = os.path.expanduser ("~")
 installDir = homeDir + "/plm-tools"
 runCommand (["mkdir", "-p", installDir])
 #---
-archiveName = "plm-teensy-i386-Darwin-arm-gcc-4.9.2"
+archiveName = "teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19"
 compilerURL = "http://crossgcc.rts-software.org/downloads/plm-tools/" + archiveName + ".tar.bz2"
 urllib.urlretrieve (compilerURL, installDir + "/" + archiveName + ".tar.bz2", downloadReportHook)
 print ""
