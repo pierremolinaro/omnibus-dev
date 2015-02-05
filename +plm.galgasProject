@@ -72,6 +72,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/instruction-mutating-method-call-self.galgas"
   "galgas-sources/instruction-proc-call.galgas"
   "galgas-sources/instruction-while.galgas"
+  "galgas-sources/instruction-forever.galgas"
 
 #--- Expression
   "galgas-sources/expression.galgas"

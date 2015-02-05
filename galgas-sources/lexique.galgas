@@ -22,6 +22,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "else",
   "elsif",
   "end",
+  "forever",
   "func",
   "if",
   "import",
