@@ -76,7 +76,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
 //--- Terminal symbols enumeration
   public : enum {kToken_,
    kToken_identifier,
-   kToken_Identifier,
    kToken_attribute,
    kToken_modeName,
    kToken_integer,
@@ -86,6 +85,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3F__21_,
    kToken__21_,
    kToken__21__3F_,
+   kToken_at,
    kToken_boolset,
    kToken_enum,
    kToken_case,

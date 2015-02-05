@@ -89,7 +89,7 @@ syntax extension common_syntax {
     repeat
     while
       $!$ ?let selector
-      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentTypeName
       $identifier$ ?let formalArgumentName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
@@ -98,7 +98,7 @@ syntax extension common_syntax {
         !formalArgumentName
     while
       $?!$ ?let selector
-      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentTypeName
       $identifier$ ?let formalArgumentName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
@@ -107,7 +107,7 @@ syntax extension common_syntax {
         !formalArgumentName
     while
       $?$ ?let selector
-      $Identifier$ ?let formalArgumentTypeName
+      $identifier$ ?let formalArgumentTypeName
       $identifier$ ?let formalArgumentName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input

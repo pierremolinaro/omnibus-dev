@@ -25,7 +25,6 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $register$
-    $Identifier$ ?let registerTypeName
     @lstringlist attributeList = {}
     repeat
     while
@@ -33,6 +32,9 @@ syntax extension common_syntax {
       attributeList += !attribute
     end 
     $identifier$ ?let registerName
+    $:$
+    $identifier$ ?let registerTypeName
+    $at$
     $integer$ ?let @luint64 registerAddress
     ioAST.mDeclarationList += !@registerDeclaration.new {
       !registerTypeName

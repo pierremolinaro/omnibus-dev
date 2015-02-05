@@ -2338,12 +2338,13 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (cla
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Function 'functionPrefix'                                              *
+//                                          Function 'mangledNameForFunction'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_functionPrefix (class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForFunction (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -62,8 +62,8 @@ func %once staticStringTypeName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once functionPrefix -> @string outName {
-  outName = "func_"
+func mangledNameForFunction ?name:@string inName -> @string outName {
+  outName = "func_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

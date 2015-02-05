@@ -23,7 +23,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $newBooleanType$
-    $Identifier$ ?let newBoolTypeName
+    $identifier$ ?let newBoolTypeName
     @lstringlist attributeList = {}
     repeat
     while

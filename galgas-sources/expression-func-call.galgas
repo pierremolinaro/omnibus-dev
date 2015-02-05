@@ -86,7 +86,7 @@ override method @functionCallInExpressionAST analyzeExpression
     error mFunctionVarName : "this function should be called in $" + inMode + " mode"
   end
 #---
-  var s = functionPrefix () + mFunctionVarName.string + " ("
+  var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
   if [formalParameterList length] != [mParameterList length] then
     error mFunctionVarName : "this function declares " + [formalParameterList length] 
       + " formal parameters, the call names " + [mParameterList length] + " effective arguments"
