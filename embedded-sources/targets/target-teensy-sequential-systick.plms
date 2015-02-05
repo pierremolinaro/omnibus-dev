@@ -41,7 +41,7 @@ required proc $isr systickHandler ()
 
 //-----------------------------------------------------------------------------*
 
-var $isr $user UInt32 gUpTimeInMilliseconds = 0
+var $isr $user gUpTimeInMilliseconds : UInt32 = 0
 
 //-----------------------------------------------------------------------------*
 

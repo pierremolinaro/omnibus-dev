@@ -15,6 +15,7 @@ style keywordsStyle -> "Keywords"
 $identifier$ ! tokenString error message "an identifier"
 
 list keyWordList style keywordsStyle error message "the '%K' keyword" {
+  "at",
   "boolset",
   "enum",
   "case",
@@ -44,32 +45,12 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "while"
 }
 
-rule 'a'->'z' {
+rule 'a'->'z' | 'A'->'Z' {
   repeat
     enterCharacterIntoString (!?tokenString !*)
   while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
   end
   send search tokenString in keyWordList default $identifier$
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#   Type Names                                                                                                         *
-#----------------------------------------------------------------------------------------------------------------------*
-
-#! Type Names
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-style typeNameStyle -> "Type Names"
-
-$Identifier$ ! tokenString style typeNameStyle  error message "a type name"
-
-rule 'A'->'Z' {
-  repeat
-    enterCharacterIntoString (!?tokenString !*)
-  while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
-  end
-  send $Identifier$
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

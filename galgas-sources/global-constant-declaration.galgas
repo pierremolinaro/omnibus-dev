@@ -24,8 +24,9 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $let$
-    $Identifier$ ?let typeName
     $identifier$ ?let constantName
+    $:$
+    $identifier$ ?let typeName
     $=$
     <expression> ?let @expressionAST expression
     ioAST.mDeclarationList += !@globalConstantDeclaration.new {

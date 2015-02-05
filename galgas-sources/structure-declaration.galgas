@@ -32,7 +32,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $struct$
-    $Identifier$ ?let structureName
+    $identifier$ ?let structureName
     @lstringlist attributeList = {}
     repeat
     while
@@ -48,7 +48,7 @@ syntax extension common_syntax {
 #      select
 #        optionalFieldType = .new {!"" !.here}
 #      or
-        $Identifier$ ?optionalFieldType
+        $identifier$ ?optionalFieldType
 #      end
       $identifier$ ?let fieldName
       $=$

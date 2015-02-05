@@ -24,7 +24,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $boolset$
-    $Identifier$ ?let boolsetName
+    $identifier$ ?let boolsetName
     @lstringlist attributeList = {}
     repeat
     while

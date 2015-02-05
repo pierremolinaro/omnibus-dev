@@ -25,7 +25,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
-    $Identifier$ ?let optionalTypeName
+    $identifier$ ?let optionalTypeName
     $identifier$ ?let varName
     $=$
     <expression> ?let @expressionAST expression
@@ -54,7 +54,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
-    $Identifier$ ?let typeName
+    $identifier$ ?let typeName
     $identifier$ ?let varName
     ioInstructionList += !@varInstructionAST.new {
       !varName
@@ -65,7 +65,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    $Identifier$ ?let optionalTypeName
+    $identifier$ ?let optionalTypeName
     $identifier$ ?let varName
     $=$
     <expression> ?let @expressionAST expression
@@ -79,7 +79,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    $Identifier$ ?let typeName
+    $identifier$ ?let typeName
     $identifier$ ?let varName
     ioInstructionList += !@varInstructionAST.new {
       !varName

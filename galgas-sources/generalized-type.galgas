@@ -19,9 +19,10 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
-    $Identifier$ ?let typeName
-    outType = .valueType {!typeName:typeName}
     $identifier$ ?outName
+    $:$
+    $identifier$ ?let typeName
+    outType = .valueType {!typeName:typeName}
   }
 
   #--------------------------------------------------------------------------------------------------------------------*

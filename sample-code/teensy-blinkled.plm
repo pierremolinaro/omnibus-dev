@@ -3,18 +3,18 @@ target "target-teensy-sequential.plms"
 //-----------------------------------------------------------------------------*
 
 proc $user setup () {
-  portC_PCR5 = (1 << 8)
-  gpioC_PDDR = gpioC_PDDR | (1 << 5)
+  PORTC_PCR5 = (1 << 8)
+  GPIOC_PDDR = GPIOC_PDDR | (1 << 5)
 }
 
 //-----------------------------------------------------------------------------*
 
-var $user UInt32 gCompteur = 0
-var $user Bool gEtat = .false
+var $user gCompteur : UInt32 = 0
+var $user gEtat : Bool = .false
 
 //-----------------------------------------------------------------------------*
 
-let UInt32 periode = 1_000_000
+let periode : UInt32 = 1_000_000
 
 //-----------------------------------------------------------------------------*
 
@@ -23,9 +23,9 @@ proc $user loop () {
     gCompteur = 0
     gEtat = gEtat ^ .true
     if gEtat then
-     gpioC_PSOR = 1 << 5
+     GPIOC_PSOR = 1 << 5
     else
-     gpioC_PCOR = 1 << 5
+     GPIOC_PCOR = 1 << 5
     end
   else
     gCompteur ++
