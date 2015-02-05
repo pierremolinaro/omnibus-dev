@@ -2,5 +2,5 @@
 //%!["integer " + INTEGER_TYPE_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef %!ACTUAL_TYPE_NAME% %!typePrefix () !INTEGER_TYPE_NAME% ;
+typedef %!ACTUAL_TYPE_NAME% %!mangledNameForType (!name:INTEGER_TYPE_NAME)% ;
 

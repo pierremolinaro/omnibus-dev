@@ -1476,7 +1476,7 @@ class GALGAS_decrementInstructionGeneration : public GALGAS_abstractInstructionG
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mLocalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mMangledName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1497,17 +1497,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decrementInstructio
 
 class cPtr_decrementInstructionGeneration : public cPtr_abstractInstructionGeneration {
 //--- Attributes
-  public : GALGAS_string mAttribute_mLocalVariable ;
+  public : GALGAS_string mAttribute_mMangledName ;
 
 //--- Constructor
-  public : cPtr_decrementInstructionGeneration (const GALGAS_string & in_mLocalVariable
+  public : cPtr_decrementInstructionGeneration (const GALGAS_string & in_mMangledName
                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mLocalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mMangledName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1737,7 +1737,7 @@ class GALGAS_incrementInstructionGeneration : public GALGAS_abstractInstructionG
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mLocalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mMangledName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1758,17 +1758,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_incrementInstructio
 
 class cPtr_incrementInstructionGeneration : public cPtr_abstractInstructionGeneration {
 //--- Attributes
-  public : GALGAS_string mAttribute_mLocalVariable ;
+  public : GALGAS_string mAttribute_mMangledName ;
 
 //--- Constructor
-  public : cPtr_incrementInstructionGeneration (const GALGAS_string & in_mLocalVariable
+  public : cPtr_incrementInstructionGeneration (const GALGAS_string & in_mMangledName
                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mLocalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mMangledName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

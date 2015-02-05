@@ -59,7 +59,8 @@ override method @incrementationInstructionAST analyze
     !mVarName
     ?let type
     ?let acceptedModeSet
-    ?2*
+    ?let @string variableCName
+    ?*
   ]
 #--- Check mode
   if not [acceptedModeSet hasKey !inMode] then
@@ -71,7 +72,7 @@ override method @incrementationInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@incrementInstructionGeneration.new {
-   !mVarName.string
+   !variableCName
  }
 }
 
@@ -90,7 +91,8 @@ override method @decrementationInstructionAST analyze
     !mVarName
     ?let type
     ?let acceptedModeSet
-    ?2*
+    ?let @string variableCName
+    ?*
   ]
 #--- Check mode
   if not [acceptedModeSet hasKey !inMode] then
@@ -102,7 +104,7 @@ override method @decrementationInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@decrementInstructionGeneration.new {
-   !mVarName.string
+   !variableCName
  }
 }
 
@@ -111,25 +113,25 @@ override method @decrementationInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @incrementInstructionGeneration : @abstractInstructionGeneration {
-  @string mLocalVariable
+  @string mMangledName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @incrementInstructionGeneration instructionCode -> @string outCode {
-  outCode = mLocalVariable + " ++ ;\n"
+  outCode = mMangledName + " ++ ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @decrementInstructionGeneration : @abstractInstructionGeneration {
-  @string mLocalVariable
+  @string mMangledName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @decrementInstructionGeneration instructionCode -> @string outCode {
-  outCode = mLocalVariable + " -- ;\n"
+  outCode = mMangledName + " -- ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

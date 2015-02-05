@@ -99,7 +99,7 @@ override method @enumerationDeclaration enterInContext
   for (cst) in mCaseNameList do
     let idx = [enumConstantMap count]
     [!?enumConstantMap insertKey !cst !idx]
-    [!?constructorMap insertKey !cst !"(" + typePrefix () + mEnumerationName + ") " + [idx string]]
+    [!?constructorMap insertKey !cst !"(" + mangledNameForType (!name:mEnumerationName.string) + ") " + [idx string]]
   end
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName

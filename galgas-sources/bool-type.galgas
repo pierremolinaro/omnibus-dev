@@ -77,8 +77,8 @@ override method @booleanDeclaration enterInContext
   end
 #--- Constructors
   @constructorMap constructorMap = {}
-  [!?constructorMap insertKey !["false" nowhere] !"(" + typePrefix () + mBooleanTypeName + ") 0"]
-  [!?constructorMap insertKey !["true" nowhere] !"(" + typePrefix () + mBooleanTypeName + ") 1"]
+  [!?constructorMap insertKey !["false" nowhere] !"(" + mangledNameForType (!name:mBooleanTypeName.string) + ") 0"]
+  [!?constructorMap insertKey !["true" nowhere] !"(" + mangledNameForType (!name:mBooleanTypeName.string) + ") 1"]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mBooleanTypeName

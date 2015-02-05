@@ -1872,12 +1872,13 @@ GALGAS_string filewrapperTemplate_booleanGenerationTemplate_declaration (class C
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                Function 'typePrefix'                                                *
+//                                            Function 'mangledNameForType'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_typePrefix (class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2089,12 +2090,13 @@ GALGAS_string filewrapperTemplate_structureGenerationTemplate_implementation (cl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Function 'propertyPrefix'                                              *
+//                                          Function 'mangledNameForProperty'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_propertyPrefix (class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForProperty (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2160,6 +2162,16 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Function 'mangledNameForGlobalVariable'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string inArgument0,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   Filewrapper 'globalConstantGenerationTemplate'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2187,6 +2199,16 @@ GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (
                                                                                 const class GALGAS_string & in_GLOBAL_5F_CONSTANT_5F_NAME,
                                                                                 const class GALGAS_string & in_CONSTANT_5F_VALUE
                                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForConstant'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForConstant (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2417,6 +2439,27 @@ GALGAS_string filewrapperTemplate_registerGenerationTemplate_declaration (class 
                                                                           const class GALGAS_string & in_REGISTER_5F_NAME,
                                                                           const class GALGAS_uint_36__34_ & in_REGISTER_5F_ADDRESS
                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForRegister'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForRegister (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'initialVariableMap'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_variableMap function_initialVariableMap (const class GALGAS_semanticContext & constinArgument0,
+                                                      class GALGAS_bool inArgument1,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2655,39 +2698,33 @@ void categoryMethod_semanticAnalysis (const class GALGAS_procedureDeclarationLis
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                Function 'varPrefix'                                                 *
+//                                         Function 'mangledNameForInArgument'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_varPrefix (class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForInArgument (class GALGAS_string inArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Function 'inArgumentPrefix'                                             *
+//                                       Function 'mangledNameForInOutArgument'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_inArgumentPrefix (class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForInOutArgument (class GALGAS_string inArgument0,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'inOutArgumentPrefix'                                            *
+//                                        Function 'mangledNameForOutArgument'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_inOutArgumentPrefix (class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'outArgumentPrefix'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_outArgumentPrefix (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_mangledNameForOutArgument (class GALGAS_string inArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2724,6 +2761,16 @@ class GALGAS_string function_literalStringPrefix (class C_Compiler * inCompiler
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForVariable'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForVariable (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

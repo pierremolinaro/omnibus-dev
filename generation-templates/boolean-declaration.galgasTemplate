@@ -2,5 +2,5 @@
 //%!["boolean " + ENUMERATION_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef %!ACTUAL_TYPE_NAME% %!typePrefix () !ENUMERATION_NAME% ;
+typedef %!ACTUAL_TYPE_NAME% %!mangledNameForType (!name:ENUMERATION_NAME)% ;
 

@@ -2,5 +2,5 @@
 //%!["boolset " + BOOLSET_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef %!ACTUAL_TYPE_NAME% %!typePrefix () !BOOLSET_NAME% ;
+typedef %!ACTUAL_TYPE_NAME% %!mangledNameForType (!name:BOOLSET_NAME)% ;
 

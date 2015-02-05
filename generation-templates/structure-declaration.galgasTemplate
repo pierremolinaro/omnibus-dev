@@ -5,9 +5,9 @@
 typedef struct {
 %
 for () in FIELD_LIST do
-  %  %!typePrefix () ![mFieldType key]% %!propertyPrefix () !mFieldName% ;\n%
+  %  %!mangledNameForType (!name:[mFieldType key])% %!mangledNameForProperty (!name:mFieldName)% ;\n%
 end
-%} %!typePrefix () !STRUCTURE_NAME% ;
+%} %!mangledNameForType (!name:STRUCTURE_NAME)% ;
 
-%!typePrefix () !STRUCTURE_NAME% %!structureInitRoutinePrefix () ![STRUCTURE_NAME identifierRepresentation]% (void) ;
+%!mangledNameForType (!name:STRUCTURE_NAME)% %!structureInitRoutinePrefix () ![STRUCTURE_NAME identifierRepresentation]% (void) ;
 

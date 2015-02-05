@@ -2,20 +2,20 @@
 //%!["func " + FUNCTION_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-%!typePrefix () ![RESULT_TYPE key]% %!functionPrefix () ![FUNCTION_MANGLED_NAME identifierRepresentation]% (%?^
+%!mangledNameForType (!name:[RESULT_TYPE key])% %!functionPrefix () ![FUNCTION_MANGLED_NAME identifierRepresentation]% (%?^
 if [FORMAL_ARGUMENT_LIST length] == 0 then
   %void%
 else
   for () in FORMAL_ARGUMENT_LIST
   do
-    !typePrefix () ![mFormalArgumentType key]
+    !mangledNameForType (!name:[mFormalArgumentType key])
     % %!mFormalArgumentName
   between
     %,\n%!^
   end
 end
 %) {
-  %!typePrefix () ![RESULT_TYPE key]% %!RESULT_VAR_NAME% ;
+  %!mangledNameForType (!name:[RESULT_TYPE key])% %!RESULT_VAR_NAME% ;
 %![INSTRUCTION_GENERATION_LIST instructionListCode]
 %  return %!RESULT_VAR_NAME% ;
 }
