@@ -8,7 +8,7 @@ if [FORMAL_ARGUMENT_LIST length] == 0 then
 else
   for () in FORMAL_ARGUMENT_LIST
   do
-    !typePrefix () ![mFormalArgumentType key]
+    !mangledNameForType (!name:[mFormalArgumentType key])
     switch mFormalArgumentKind
     case input :
     case output, inputOutput : % *%

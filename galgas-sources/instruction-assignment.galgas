@@ -99,7 +99,7 @@ class @assignmentInstructionGeneration : @abstractInstructionGeneration {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @assignmentInstructionGeneration instructionCode -> @string outCode {
-  outCode = mLocalVariable + " = (" + typePrefix () + [mTargetVarType key]
+  outCode = mLocalVariable + " = (" + mangledNameForType (!name:[mTargetVarType key])
   outCode += ") (" + [mExpressionGeneration expressionCode] + ") ;\n"
 }
 

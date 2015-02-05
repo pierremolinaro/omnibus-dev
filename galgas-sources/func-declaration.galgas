@@ -160,44 +160,12 @@ method @functionDeclarationListAST-element semanticAnalysis
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
 {
-  @variableMap variableMap = .emptyMap
-  @funcFormalArgumentListForGeneration formalArguments = {}
-#--- All mode set
-  let allModeSet = [inContext.mModeMap keySet] ;
 #--- Check mode
   if mFunctionMode.string != "" then
     [inContext.mModeMap searchKey !mFunctionMode]
   end
-#--- Add registers (in read only mode)
-  for () in inContext.mRegisterMap do
-    [!?variableMap insertUsedLocalConstant
-      !lkey
-      !mType
-      !allModeSet
-      !lkey.string
-      !true
-    ]
-  end
-#--- Add global constants
-  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
-    [!?variableMap insertUsedLocalConstant
-      !constantName
-      !constantType
-      !allModeSet
-      ![sourceExpressionCode expressionCode]
-      !true
-    ]
-  end
-#--- Add global variables (only read access)
-  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
-    [!?variableMap insertUsedLocalConstant
-      !variableName
-      !variableType
-      !modeSet
-      !variableName.string
-      !true
-    ]
-  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:true)
 #--- Add 'result" variable
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
   [!?variableMap insertOutputFormalArgument
@@ -208,16 +176,17 @@ method @functionDeclarationListAST-element semanticAnalysis
     !true
   ]
 #--- Analyse formal arguments
+  @funcFormalArgumentListForGeneration formalArguments = {}
   for (* formalArgumentTypeName formalArgumentName) in mFuncFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     [!?variableMap insertConstantInputFormalArgument
       !formalArgumentName
       !typeProxy
       !{!mFunctionMode.string}
-      !inArgumentPrefix () + formalArgumentName.string
+      !mangledNameForInArgument (!name:formalArgumentName.string)
       ![typeProxy copiable]
     ]
-    formalArguments += !typeProxy !inArgumentPrefix () + formalArgumentName.string
+    formalArguments += !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
   end
 #--- Analyze instruction list
   @instructionGenerationList instructionGenerationList = {}

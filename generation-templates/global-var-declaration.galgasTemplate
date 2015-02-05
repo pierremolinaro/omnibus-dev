@@ -6,9 +6,9 @@
 if GENERATE_VOLATILE then
 %volatile %
 end
-!typePrefix ()!GLOBAL_TYPE_NAME
+!mangledNameForType (!name:GLOBAL_TYPE_NAME)
 % %
-!GLOBAL_VAR_NAME
+!mangledNameForGlobalVariable (!name:GLOBAL_VAR_NAME)
 % = %
 !INITIAL_VALUE_STRING
 % ;

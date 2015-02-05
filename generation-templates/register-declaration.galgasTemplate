@@ -2,5 +2,5 @@
 //%!["register " + REGISTER_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-#define %!REGISTER_NAME% (* ((volatile %!typePrefix () + REGISTER_TYPE_NAME% *) %![REGISTER_ADDRESS hexString]%))
+#define %!mangledNameForRegister (!name:REGISTER_NAME)% (* ((volatile %!mangledNameForType (!name:REGISTER_TYPE_NAME)% *) %![REGISTER_ADDRESS hexString]%))
 

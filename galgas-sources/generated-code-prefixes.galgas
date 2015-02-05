@@ -2,32 +2,26 @@
 #  CODE GENERATION PREFIXES                                                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once propertyPrefix -> @string outPrefix {
-  outPrefix = "property_"
+func mangledNameForProperty ?name:@string inName -> @string outPrefix {
+  outPrefix = "property_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once varPrefix -> @string outPrefix {
-  outPrefix = "var_"
+func mangledNameForInArgument ?name:@string inName -> @string outPrefix {
+  outPrefix = "in_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once inArgumentPrefix -> @string outPrefix {
-  outPrefix = "in_"
+func mangledNameForInOutArgument ?name:@string inName -> @string outPrefix {
+  outPrefix = "inout_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once inOutArgumentPrefix -> @string outPrefix {
-  outPrefix = "inout_"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-func %once outArgumentPrefix -> @string outPrefix {
-  outPrefix = "out_"
+func mangledNameForOutArgument ?name:@string inName -> @string outPrefix {
+  outPrefix = "out_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -44,8 +38,8 @@ func %once receiverPtrName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once typePrefix -> @string outName {
-  outName = "type_"
+func mangledNameForType ?name:@string inName -> @string outPrefix {
+  outPrefix = "type_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -63,13 +57,37 @@ func %once literalStringPrefix -> @string outName {
 #----------------------------------------------------------------------------------------------------------------------*
 
 func %once staticStringTypeName -> @string outName {
-  outName = "String"
+  outName = "StaticString"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 func %once functionPrefix -> @string outName {
   outName = "func_"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledNameForVariable ?name:@string inName -> @string outName {
+  outName = "var_" + [inName nameRepresentation]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledNameForGlobalVariable ?name:@string inName -> @string outName {
+  outName = "gvar_" + [inName nameRepresentation]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledNameForConstant ?name:@string inName -> @string outName {
+  outName = "const_" + [inName nameRepresentation]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledNameForRegister ?name:@string inName -> @string outName {
+  outName = "register_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -14,8 +14,12 @@ var $user Bool gEtat = .false
 
 //-----------------------------------------------------------------------------*
 
+let UInt32 periode = 1_000_000
+
+//-----------------------------------------------------------------------------*
+
 proc $user loop () {
-  if gCompteur == 1_000_000 then
+  if gCompteur == periode then
     gCompteur = 0
     gEtat = gEtat ^ .true
     if gEtat then

@@ -249,55 +249,14 @@ method @procedureDeclarationListAST-element semanticAnalysis
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
 {
-#--- All mode set
-  let allModeSet = [inContext.mModeMap keySet] ;
 #--- Check mode
   if mProcedureMode.string != "" then
     [inContext.mModeMap searchKey !mProcedureMode]
   end
-#--- Add registers
-  @variableMap variableMap = .emptyMap
-  @procFormalArgumentListForGeneration formalArguments = {}
-  for () in inContext.mRegisterMap do
-    if mIsReadOnly then
-      [!?variableMap insertUsedLocalConstant
-        !lkey
-        !mType
-        !allModeSet
-        !lkey.string
-        !true
-      ]
-    else
-      [!?variableMap insertDefinedLocalVariable
-        !lkey
-        !mType
-        !allModeSet
-        !lkey.string
-        !true
-      ]
-    end
-  end
-#--- Add global constants
-  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
-    [!?variableMap insertUsedLocalConstant
-      !constantName
-      !constantType
-      !allModeSet
-      ![sourceExpressionCode expressionCode]
-      !true
-    ]
-  end
-#--- Add global variables
-  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
-    [!?variableMap insertGlobalVariable
-      !variableName
-      !variableType
-      !modeSet
-      !variableName.string
-      !true
-    ]
-  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
 #--- Add receiver properties, and receiver as first argument
+  @procFormalArgumentListForGeneration formalArguments = {}
   @receiverType receiverType
   switch mProcedureKind
   case standAloneProc :
@@ -323,7 +282,7 @@ method @procedureDeclarationListAST-element semanticAnalysis
           !propertyName
           !propertyType
           !{!mProcedureMode.string}
-          !receiverPtrName () + "->" + propertyPrefix () + propertyName.string
+          !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           ![propertyType copiable]
         ]
       end
@@ -338,7 +297,7 @@ method @procedureDeclarationListAST-element semanticAnalysis
           !propertyName
           !propertyType
           !{!mProcedureMode.string}
-          !receiverName () + "." + propertyPrefix () + propertyName.string
+          !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           ![propertyType copiable]
         ]
       end
@@ -354,28 +313,28 @@ method @procedureDeclarationListAST-element semanticAnalysis
         !formalArgumentName
         !typeProxy
         !{!mProcedureMode.string}
-        !inArgumentPrefix () + formalArgumentName.string
+        !mangledNameForInArgument (!name:formalArgumentName.string)
         ![typeProxy copiable]
       ]
-      formalArguments += !argumentKind !typeProxy !inArgumentPrefix () + formalArgumentName.string
+      formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
     case inputOutput :
       [!?variableMap insertInputOutputFormalArgument
         !formalArgumentName
         !typeProxy
         !{!mProcedureMode.string}
-        !"*" + inOutArgumentPrefix () + formalArgumentName
+        !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
         ![typeProxy copiable]
       ]
-      formalArguments += !argumentKind !typeProxy !inOutArgumentPrefix () + formalArgumentName.string
+      formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!name:formalArgumentName.string)
     case output :
       [!?variableMap insertOutputFormalArgument
         !formalArgumentName
         !typeProxy
         !{!mProcedureMode.string}
-        !"*" + outArgumentPrefix () + formalArgumentName
+        !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
         ![typeProxy copiable]
       ]
-      formalArguments += !argumentKind !typeProxy !outArgumentPrefix () + formalArgumentName.string
+      formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!name:formalArgumentName.string)
     end
   end
 #--- Analyze instruction list

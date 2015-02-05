@@ -104,7 +104,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   end
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {
-   !"(" + typePrefix () + [inOptionalTargetType key] + ") " + mLiteralInteger.uint64
+   !"(" + mangledNameForType (!name:[inOptionalTargetType key]) + ") " + mLiteralInteger.uint64
   }
 }
 

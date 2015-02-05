@@ -13376,8 +13376,7 @@ GALGAS_string filewrapperTemplate_booleanGenerationTemplate_declaration (C_Compi
     "typedef " ;
   result << in_ACTUAL_5F_TYPE_5F_NAME.stringValue () ;
   result << " " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("boolean-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_ENUMERATION_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_ENUMERATION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("boolean-declaration.galgasTemplate", 5)).stringValue () ;
   result << " ;\n"
     "\n" ;
   return GALGAS_string (result) ;
@@ -13524,8 +13523,7 @@ GALGAS_string filewrapperTemplate_boolsetGenerationTemplate_declaration (C_Compi
     "typedef " ;
   result << in_ACTUAL_5F_TYPE_5F_NAME.stringValue () ;
   result << " " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("boolset-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_BOOLSET_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_BOOLSET_5F_NAME, inCompiler COMMA_SOURCE_FILE ("boolset-declaration.galgasTemplate", 5)).stringValue () ;
   result << " ;\n"
     "\n" ;
   return GALGAS_string (result) ;
@@ -13661,8 +13659,7 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (C_C
     "typedef " ;
   result << in_ACTUAL_5F_TYPE_5F_NAME.stringValue () ;
   result << " " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_ENUMERATION_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_ENUMERATION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgasTemplate", 5)).stringValue () ;
   result << " ;\n"
     "\n" ;
   return GALGAS_string (result) ;
@@ -13766,23 +13763,19 @@ GALGAS_string filewrapperTemplate_structureGenerationTemplate_declaration (C_Com
     cEnumerator_structureFieldListForGeneration enumerator_360 (in_FIELD_5F_LIST, kEnumeration_up) ;
     while (enumerator_360.hasCurrentObject ()) {
       result << "  " ;
-      result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)).stringValue () ;
-      result << enumerator_360.current_mFieldType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)).stringValue () ;
+      result << function_mangledNameForType (enumerator_360.current_mFieldType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)).stringValue () ;
       result << " " ;
-      result << function_propertyPrefix (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)).stringValue () ;
-      result << enumerator_360.current_mFieldName (HERE).stringValue () ;
+      result << function_mangledNameForProperty (enumerator_360.current_mFieldName (HERE), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 8)).stringValue () ;
       result << " ;\n" ;
       index_360_.increment () ;
       enumerator_360.gotoNextObject () ;
     }
   }
   result << "} " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 10)).stringValue () ;
-  result << in_STRUCTURE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_STRUCTURE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 10)).stringValue () ;
   result << " ;\n"
     "\n" ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 12)).stringValue () ;
-  result << in_STRUCTURE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_STRUCTURE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 12)).stringValue () ;
   result << " " ;
   result << function_structureInitRoutinePrefix (inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgasTemplate", 12)).stringValue () ;
   result << in_STRUCTURE_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("structure-declaration.galgasTemplate", 12)).stringValue () ;
@@ -13808,28 +13801,25 @@ GALGAS_string filewrapperTemplate_structureGenerationTemplate_implementation (C_
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n" ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 5)).stringValue () ;
-  result << in_STRUCTURE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_STRUCTURE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 5)).stringValue () ;
   result << " " ;
   result << function_structureInitRoutinePrefix (inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 5)).stringValue () ;
   result << in_STRUCTURE_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("structure-implementation.galgasTemplate", 5)).stringValue () ;
   result << " (void) {\n"
     "  " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 6)).stringValue () ;
-  result << in_STRUCTURE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_STRUCTURE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 6)).stringValue () ;
   result << " result ;\n" ;
-  GALGAS_uint index_505_ (0) ;
+  GALGAS_uint index_529_ (0) ;
   if (in_FIELD_5F_LIST.isValid ()) {
-    cEnumerator_structureFieldListForGeneration enumerator_505 (in_FIELD_5F_LIST, kEnumeration_up) ;
-    while (enumerator_505.hasCurrentObject ()) {
+    cEnumerator_structureFieldListForGeneration enumerator_529 (in_FIELD_5F_LIST, kEnumeration_up) ;
+    while (enumerator_529.hasCurrentObject ()) {
       result << "  result." ;
-      result << function_propertyPrefix (inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 9)).stringValue () ;
-      result << enumerator_505.current_mFieldName (HERE).stringValue () ;
+      result << function_mangledNameForProperty (enumerator_529.current_mFieldName (HERE), inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 9)).stringValue () ;
       result << " = " ;
-      result << callCategoryReader_expressionCode ((const cPtr_abstractExpressionGeneration *) enumerator_505.current_mInitExpression (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 9)).stringValue () ;
+      result << callCategoryReader_expressionCode ((const cPtr_abstractExpressionGeneration *) enumerator_529.current_mInitExpression (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("structure-implementation.galgasTemplate", 9)).stringValue () ;
       result << " ;\n" ;
-      index_505_.increment () ;
-      enumerator_505.gotoNextObject () ;
+      index_529_.increment () ;
+      enumerator_529.gotoNextObject () ;
     }
   }
   result << "  return result ;\n"
@@ -13937,10 +13927,9 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
     result << "volatile " ;
   }else if (kBoolFalse == test_0) {
   }
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("global-var-declaration.galgasTemplate", 9)).stringValue () ;
-  result << in_GLOBAL_5F_TYPE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_GLOBAL_5F_TYPE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("global-var-declaration.galgasTemplate", 9)).stringValue () ;
   result << " " ;
-  result << in_GLOBAL_5F_VAR_5F_NAME.stringValue () ;
+  result << function_mangledNameForGlobalVariable (in_GLOBAL_5F_VAR_5F_NAME, inCompiler COMMA_SOURCE_FILE ("global-var-declaration.galgasTemplate", 11)).stringValue () ;
   result << " = " ;
   result << in_INITIAL_5F_VALUE_5F_STRING.stringValue () ;
   result << " ;\n"
@@ -14040,8 +14029,8 @@ GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n"
-    "#define const_" ;
-  result << in_GLOBAL_5F_CONSTANT_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("global-constant-declaration.galgasTemplate", 5)).stringValue () ;
+    "#define " ;
+  result << function_mangledNameForConstant (in_GLOBAL_5F_CONSTANT_5F_NAME, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgasTemplate", 5)).stringValue () ;
   result << " (" ;
   result << in_CONSTANT_5F_VALUE.stringValue () ;
   result << ")\n"
@@ -14214,8 +14203,7 @@ GALGAS_string filewrapperTemplate_integerGenerationTemplate_declaration (C_Compi
     "typedef " ;
   result << in_ACTUAL_5F_TYPE_5F_NAME.stringValue () ;
   result << " " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("integer-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_INTEGER_5F_TYPE_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_INTEGER_5F_TYPE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("integer-declaration.galgasTemplate", 5)).stringValue () ;
   result << " ;\n"
     "\n" ;
   return GALGAS_string (result) ;
@@ -14363,8 +14351,7 @@ GALGAS_string filewrapperTemplate_literalStringGenerationTemplate_declaration (C
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n"
     "typedef const char * " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("literal-string-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_STATIC_5F_STRING_5F_NAME.stringValue () ;
+  result << function_mangledNameForType (in_STATIC_5F_STRING_5F_NAME, inCompiler COMMA_SOURCE_FILE ("literal-string-declaration.galgasTemplate", 5)).stringValue () ;
   result << " ;\n"
     "\n" ;
   return GALGAS_string (result) ;
@@ -14464,8 +14451,7 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (C_Comp
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n" ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
-  result << in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
+  result << function_mangledNameForType (in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)), inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
   result << " " ;
   result << function_functionPrefix (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
   result << in_FUNCTION_5F_MANGLED_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
@@ -14475,20 +14461,19 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (C_Comp
   if (kBoolTrue == test_0) {
     result << "void" ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_526_ (0) ;
+    GALGAS_uint index_538_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_funcFormalArgumentListForGeneration enumerator_526 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_526.hasCurrentObject ()) {
-        result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)).stringValue () ;
-        result << enumerator_526.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)).stringValue () ;
+      cEnumerator_funcFormalArgumentListForGeneration enumerator_538 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_538.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_538.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)).stringValue () ;
         result << " " ;
-        result << enumerator_526.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_526.hasNextObject ()) {
+        result << enumerator_538.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_538.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_526_.increment () ;
-        enumerator_526.gotoNextObject () ;
+        index_538_.increment () ;
+        enumerator_538.gotoNextObject () ;
       }
     }
   }
@@ -14518,8 +14503,7 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (C_C
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n" ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
-  result << in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
+  result << function_mangledNameForType (in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
   result << " " ;
   result << function_functionPrefix (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
   result << in_FUNCTION_5F_MANGLED_5F_NAME.reader_identifierRepresentation (SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
@@ -14529,27 +14513,25 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (C_C
   if (kBoolTrue == test_0) {
     result << "void" ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_526_ (0) ;
+    GALGAS_uint index_538_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_funcFormalArgumentListForGeneration enumerator_526 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_526.hasCurrentObject ()) {
-        result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)).stringValue () ;
-        result << enumerator_526.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)).stringValue () ;
+      cEnumerator_funcFormalArgumentListForGeneration enumerator_538 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_538.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_538.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)).stringValue () ;
         result << " " ;
-        result << enumerator_526.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_526.hasNextObject ()) {
+        result << enumerator_538.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_538.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_526_.increment () ;
-        enumerator_526.gotoNextObject () ;
+        index_538_.increment () ;
+        enumerator_538.gotoNextObject () ;
       }
     }
   }
   result << ") {\n"
     "  " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 18)).stringValue () ;
-  result << in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 18)).stringValue () ;
+  result << function_mangledNameForType (in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 18)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 18)).stringValue () ;
   result << " " ;
   result << in_RESULT_5F_VAR_5F_NAME.stringValue () ;
   result << " ;\n" ;
@@ -14767,8 +14749,7 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (C_Com
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
       cEnumerator_procFormalArgumentListForGeneration enumerator_478 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
       while (enumerator_478.hasCurrentObject ()) {
-        result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)).stringValue () ;
-        result << enumerator_478.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)).stringValue () ;
+        result << function_mangledNameForType (enumerator_478.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)).stringValue () ;
         switch (enumerator_478.current_mFormalArgumentKind (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt :
           break ;
@@ -14828,8 +14809,7 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (C_
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
       cEnumerator_procFormalArgumentListForGeneration enumerator_478 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
       while (enumerator_478.hasCurrentObject ()) {
-        result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)).stringValue () ;
-        result << enumerator_478.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)).stringValue () ;
+        result << function_mangledNameForType (enumerator_478.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)).stringValue () ;
         switch (enumerator_478.current_mFormalArgumentKind (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt :
           break ;
@@ -14954,15 +14934,109 @@ GALGAS_string filewrapperTemplate_registerGenerationTemplate_declaration (C_Comp
     "//---------------------------------------------------------------------------------------------------------------------*\n"
     "\n"
     "#define " ;
-  result << in_REGISTER_5F_NAME.stringValue () ;
+  result << function_mangledNameForRegister (in_REGISTER_5F_NAME, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgasTemplate", 5)).stringValue () ;
   result << " (* ((volatile " ;
-  result << function_typePrefix (inCompiler COMMA_SOURCE_FILE ("register-declaration.galgasTemplate", 5)).add_operation (in_REGISTER_5F_TYPE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgasTemplate", 5)).stringValue () ;
+  result << function_mangledNameForType (in_REGISTER_5F_TYPE_5F_NAME, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgasTemplate", 5)).stringValue () ;
   result << " *) " ;
   result << in_REGISTER_5F_ADDRESS.reader_hexString (SOURCE_FILE ("register-declaration.galgasTemplate", 5)).stringValue () ;
   result << "))\n"
     "\n" ;
   return GALGAS_string (result) ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'initialVariableMap'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_variableMap function_initialVariableMap (const GALGAS_semanticContext & constinArgument_inContext,
+                                                GALGAS_bool inArgument_inGlobalsAreConstant,
+                                                C_Compiler * inCompiler
+                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_variableMap result_outVariableMap ; // Returned variable
+  GALGAS_stringset var_allModeSet = constinArgument_inContext.mAttribute_mModeMap.reader_keySet (SOURCE_FILE ("variable-map.galgas", 13)) ;
+  result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 15)) ;
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("variable-map.galgas", 16)) ;
+  cEnumerator_registerMap enumerator_964 (constinArgument_inContext.mAttribute_mRegisterMap, kEnumeration_up) ;
+  while (enumerator_964.hasCurrentObject ()) {
+    GALGAS_bool test_0 = enumerator_964.current_mIsReadOnly (HERE) ;
+    if (kBoolTrue != test_0.boolEnum ()) {
+      test_0 = inArgument_inGlobalsAreConstant ;
+    }
+    const enumGalgasBool test_1 = test_0.boolEnum () ;
+    if (kBoolTrue == test_1) {
+      {
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_964.current_lkey (HERE), enumerator_964.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_964.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 23)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 19)) ;
+      }
+    }else if (kBoolFalse == test_1) {
+      {
+      result_outVariableMap.modifier_insertDefinedLocalVariable (enumerator_964.current_lkey (HERE), enumerator_964.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_964.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 31)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 27)) ;
+      }
+    }
+    enumerator_964.gotoNextObject () ;
+  }
+  cEnumerator_globalConstantMap enumerator_1496 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_1496.hasCurrentObject ()) {
+    {
+    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_1496.current_lkey (HERE), enumerator_1496.current_mConstantType (HERE), var_allModeSet, function_mangledNameForConstant (enumerator_1496.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 42)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 38)) ;
+    }
+    enumerator_1496.gotoNextObject () ;
+  }
+  cEnumerator_globalVariableMap enumerator_1787 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+  while (enumerator_1787.hasCurrentObject ()) {
+    const enumGalgasBool test_2 = inArgument_inGlobalsAreConstant.boolEnum () ;
+    if (kBoolTrue == test_2) {
+      {
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_1787.current_lkey (HERE), enumerator_1787.current_mVariableType (HERE), enumerator_1787.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_1787.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 53)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 49)) ;
+      }
+    }else if (kBoolFalse == test_2) {
+      {
+      result_outVariableMap.modifier_insertGlobalVariable (enumerator_1787.current_lkey (HERE), enumerator_1787.current_mVariableType (HERE), enumerator_1787.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_1787.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 61)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 57)) ;
+      }
+    }
+    enumerator_1787.gotoNextObject () ;
+  }
+//---
+  return result_outVariableMap ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_initialVariableMap [3] = {
+  & kTypeDescriptor_GALGAS_semanticContext,
+  & kTypeDescriptor_GALGAS_bool,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_initialVariableMap (C_Compiler * inCompiler,
+                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                   const GALGAS_location & /* §§ inErrorLocation */
+                                                                   COMMA_LOCATION_ARGS) {
+  const GALGAS_semanticContext operand0 = GALGAS_semanticContext::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                                 inCompiler
+                                                                                 COMMA_THERE) ;
+  const GALGAS_bool operand1 = GALGAS_bool::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                           inCompiler
+                                                           COMMA_THERE) ;
+  return function_initialVariableMap (operand0,
+                                      operand1,
+                                      inCompiler
+                                      COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_initialVariableMap ("initialVariableMap",
+                                                                    functionWithGenericHeader_initialVariableMap,
+                                                                    & kTypeDescriptor_GALGAS_variableMap,
+                                                                    2,
+                                                                    functionArgs_initialVariableMap) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -15237,353 +15311,191 @@ void routine_semanticAnalysis (const GALGAS_declarationListAST constinArgument_i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Once function 'propertyPrefix'                                            *
+//                                          Function 'mangledNameForProperty'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_propertyPrefix (C_Compiler * /* inCompiler */
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_string function_mangledNameForProperty (GALGAS_string inArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("property_") ;
+  result_outPrefix = GALGAS_string ("property_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 6)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 6)) ;
 //---
   return result_outPrefix ;
 }
 
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_propertyPrefix = false ;
-static GALGAS_string gOnceFunctionResult_propertyPrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_propertyPrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_propertyPrefix) {
-    gOnceFunctionResult_propertyPrefix = onceFunction_propertyPrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_propertyPrefix = true ;
-  }
-  return gOnceFunctionResult_propertyPrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_propertyPrefix (void) {
-  gOnceFunctionResult_propertyPrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_propertyPrefix (NULL,
-                                                            releaseOnceFunctionResult_propertyPrefix) ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_propertyPrefix [1] = {
+static const C_galgas_type_descriptor * functionArgs_mangledNameForProperty [2] = {
+  & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_propertyPrefix (C_Compiler * inCompiler,
-                                                               const cObjectArray & /* inEffectiveParameterArray */,
-                                                               const GALGAS_location & /* inErrorLocation */
-                                                               COMMA_LOCATION_ARGS) {
-  return function_propertyPrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_mangledNameForProperty (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* §§ inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForProperty (operand0,
+                                          inCompiler
+                                          COMMA_THERE).reader_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_propertyPrefix ("propertyPrefix",
-                                                                functionWithGenericHeader_propertyPrefix,
-                                                                & kTypeDescriptor_GALGAS_string,
-                                                                0,
-                                                                functionArgs_propertyPrefix) ;
+C_galgas_function_descriptor functionDescriptor_mangledNameForProperty ("mangledNameForProperty",
+                                                                        functionWithGenericHeader_mangledNameForProperty,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_mangledNameForProperty) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Once function 'varPrefix'                                              *
+//                                         Function 'mangledNameForInArgument'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_varPrefix (C_Compiler * /* inCompiler */
-                                             COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_string function_mangledNameForInArgument (GALGAS_string inArgument_inName,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("var_") ;
+  result_outPrefix = GALGAS_string ("in_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 12)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 12)) ;
 //---
   return result_outPrefix ;
 }
 
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_varPrefix = false ;
-static GALGAS_string gOnceFunctionResult_varPrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_varPrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_varPrefix) {
-    gOnceFunctionResult_varPrefix = onceFunction_varPrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_varPrefix = true ;
-  }
-  return gOnceFunctionResult_varPrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_varPrefix (void) {
-  gOnceFunctionResult_varPrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_varPrefix (NULL,
-                                                       releaseOnceFunctionResult_varPrefix) ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_varPrefix [1] = {
+static const C_galgas_type_descriptor * functionArgs_mangledNameForInArgument [2] = {
+  & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_varPrefix (C_Compiler * inCompiler,
-                                                          const cObjectArray & /* inEffectiveParameterArray */,
-                                                          const GALGAS_location & /* inErrorLocation */
-                                                          COMMA_LOCATION_ARGS) {
-  return function_varPrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_mangledNameForInArgument (C_Compiler * inCompiler,
+                                                                         const cObjectArray & inEffectiveParameterArray,
+                                                                         const GALGAS_location & /* §§ inErrorLocation */
+                                                                         COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForInArgument (operand0,
+                                            inCompiler
+                                            COMMA_THERE).reader_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_varPrefix ("varPrefix",
-                                                           functionWithGenericHeader_varPrefix,
-                                                           & kTypeDescriptor_GALGAS_string,
-                                                           0,
-                                                           functionArgs_varPrefix) ;
+C_galgas_function_descriptor functionDescriptor_mangledNameForInArgument ("mangledNameForInArgument",
+                                                                          functionWithGenericHeader_mangledNameForInArgument,
+                                                                          & kTypeDescriptor_GALGAS_string,
+                                                                          1,
+                                                                          functionArgs_mangledNameForInArgument) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Once function 'inArgumentPrefix'                                           *
+//                                       Function 'mangledNameForInOutArgument'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_inArgumentPrefix (C_Compiler * /* inCompiler */
+GALGAS_string function_mangledNameForInOutArgument (GALGAS_string inArgument_inName,
+                                                    C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("in_") ;
+  result_outPrefix = GALGAS_string ("inout_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 18)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 18)) ;
 //---
   return result_outPrefix ;
 }
 
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_inArgumentPrefix = false ;
-static GALGAS_string gOnceFunctionResult_inArgumentPrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_inArgumentPrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_inArgumentPrefix) {
-    gOnceFunctionResult_inArgumentPrefix = onceFunction_inArgumentPrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_inArgumentPrefix = true ;
-  }
-  return gOnceFunctionResult_inArgumentPrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_inArgumentPrefix (void) {
-  gOnceFunctionResult_inArgumentPrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_inArgumentPrefix (NULL,
-                                                              releaseOnceFunctionResult_inArgumentPrefix) ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_inArgumentPrefix [1] = {
+static const C_galgas_type_descriptor * functionArgs_mangledNameForInOutArgument [2] = {
+  & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_inArgumentPrefix (C_Compiler * inCompiler,
-                                                                 const cObjectArray & /* inEffectiveParameterArray */,
-                                                                 const GALGAS_location & /* inErrorLocation */
-                                                                 COMMA_LOCATION_ARGS) {
-  return function_inArgumentPrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_mangledNameForInOutArgument (C_Compiler * inCompiler,
+                                                                            const cObjectArray & inEffectiveParameterArray,
+                                                                            const GALGAS_location & /* §§ inErrorLocation */
+                                                                            COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForInOutArgument (operand0,
+                                               inCompiler
+                                               COMMA_THERE).reader_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_inArgumentPrefix ("inArgumentPrefix",
-                                                                  functionWithGenericHeader_inArgumentPrefix,
-                                                                  & kTypeDescriptor_GALGAS_string,
-                                                                  0,
-                                                                  functionArgs_inArgumentPrefix) ;
+C_galgas_function_descriptor functionDescriptor_mangledNameForInOutArgument ("mangledNameForInOutArgument",
+                                                                             functionWithGenericHeader_mangledNameForInOutArgument,
+                                                                             & kTypeDescriptor_GALGAS_string,
+                                                                             1,
+                                                                             functionArgs_mangledNameForInOutArgument) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Once function 'inOutArgumentPrefix'                                         *
+//                                        Function 'mangledNameForOutArgument'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_inOutArgumentPrefix (C_Compiler * /* inCompiler */
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_string function_mangledNameForOutArgument (GALGAS_string inArgument_inName,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("inout_") ;
+  result_outPrefix = GALGAS_string ("out_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 24)) ;
 //---
   return result_outPrefix ;
 }
 
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_inOutArgumentPrefix = false ;
-static GALGAS_string gOnceFunctionResult_inOutArgumentPrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_inOutArgumentPrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_inOutArgumentPrefix) {
-    gOnceFunctionResult_inOutArgumentPrefix = onceFunction_inOutArgumentPrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_inOutArgumentPrefix = true ;
-  }
-  return gOnceFunctionResult_inOutArgumentPrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_inOutArgumentPrefix (void) {
-  gOnceFunctionResult_inOutArgumentPrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_inOutArgumentPrefix (NULL,
-                                                                 releaseOnceFunctionResult_inOutArgumentPrefix) ;
-
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_inOutArgumentPrefix [1] = {
+static const C_galgas_type_descriptor * functionArgs_mangledNameForOutArgument [2] = {
+  & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_inOutArgumentPrefix (C_Compiler * inCompiler,
-                                                                    const cObjectArray & /* inEffectiveParameterArray */,
-                                                                    const GALGAS_location & /* inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  return function_inOutArgumentPrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_mangledNameForOutArgument (C_Compiler * inCompiler,
+                                                                          const cObjectArray & inEffectiveParameterArray,
+                                                                          const GALGAS_location & /* §§ inErrorLocation */
+                                                                          COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForOutArgument (operand0,
+                                             inCompiler
+                                             COMMA_THERE).reader_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_inOutArgumentPrefix ("inOutArgumentPrefix",
-                                                                     functionWithGenericHeader_inOutArgumentPrefix,
-                                                                     & kTypeDescriptor_GALGAS_string,
-                                                                     0,
-                                                                     functionArgs_inOutArgumentPrefix) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Once function 'outArgumentPrefix'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string onceFunction_outArgumentPrefix (C_Compiler * /* inCompiler */
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outPrefix ; // Returned variable
-  result_outPrefix = GALGAS_string ("out_") ;
-//---
-  return result_outPrefix ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_outArgumentPrefix = false ;
-static GALGAS_string gOnceFunctionResult_outArgumentPrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_outArgumentPrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_outArgumentPrefix) {
-    gOnceFunctionResult_outArgumentPrefix = onceFunction_outArgumentPrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_outArgumentPrefix = true ;
-  }
-  return gOnceFunctionResult_outArgumentPrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_outArgumentPrefix (void) {
-  gOnceFunctionResult_outArgumentPrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_outArgumentPrefix (NULL,
-                                                               releaseOnceFunctionResult_outArgumentPrefix) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_outArgumentPrefix [1] = {
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_outArgumentPrefix (C_Compiler * inCompiler,
-                                                                  const cObjectArray & /* inEffectiveParameterArray */,
-                                                                  const GALGAS_location & /* inErrorLocation */
-                                                                  COMMA_LOCATION_ARGS) {
-  return function_outArgumentPrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_outArgumentPrefix ("outArgumentPrefix",
-                                                                   functionWithGenericHeader_outArgumentPrefix,
-                                                                   & kTypeDescriptor_GALGAS_string,
-                                                                   0,
-                                                                   functionArgs_outArgumentPrefix) ;
+C_galgas_function_descriptor functionDescriptor_mangledNameForOutArgument ("mangledNameForOutArgument",
+                                                                           functionWithGenericHeader_mangledNameForOutArgument,
+                                                                           & kTypeDescriptor_GALGAS_string,
+                                                                           1,
+                                                                           functionArgs_mangledNameForOutArgument) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -15727,73 +15639,50 @@ C_galgas_function_descriptor functionDescriptor_receiverPtrName ("receiverPtrNam
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Once function 'typePrefix'                                              *
+//                                            Function 'mangledNameForType'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_typePrefix (C_Compiler * /* inCompiler */
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("type_") ;
+GALGAS_string function_mangledNameForType (GALGAS_string inArgument_inName,
+                                           C_Compiler * inCompiler
+                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outPrefix ; // Returned variable
+  result_outPrefix = GALGAS_string ("type_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)) ;
 //---
-  return result_outName ;
+  return result_outPrefix ;
 }
 
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_typePrefix = false ;
-static GALGAS_string gOnceFunctionResult_typePrefix ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_typePrefix (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_typePrefix) {
-    gOnceFunctionResult_typePrefix = onceFunction_typePrefix (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_typePrefix = true ;
-  }
-  return gOnceFunctionResult_typePrefix ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_typePrefix (void) {
-  gOnceFunctionResult_typePrefix.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_typePrefix (NULL,
-                                                        releaseOnceFunctionResult_typePrefix) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_typePrefix [1] = {
+static const C_galgas_type_descriptor * functionArgs_mangledNameForType [2] = {
+  & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_typePrefix (C_Compiler * inCompiler,
-                                                           const cObjectArray & /* inEffectiveParameterArray */,
-                                                           const GALGAS_location & /* inErrorLocation */
-                                                           COMMA_LOCATION_ARGS) {
-  return function_typePrefix (inCompiler COMMA_THERE).reader_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_mangledNameForType (C_Compiler * inCompiler,
+                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                   const GALGAS_location & /* §§ inErrorLocation */
+                                                                   COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForType (operand0,
+                                      inCompiler
+                                      COMMA_THERE).reader_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_typePrefix ("typePrefix",
-                                                            functionWithGenericHeader_typePrefix,
-                                                            & kTypeDescriptor_GALGAS_string,
-                                                            0,
-                                                            functionArgs_typePrefix) ;
+C_galgas_function_descriptor functionDescriptor_mangledNameForType ("mangledNameForType",
+                                                                    functionWithGenericHeader_mangledNameForType,
+                                                                    & kTypeDescriptor_GALGAS_string,
+                                                                    1,
+                                                                    functionArgs_mangledNameForType) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -15944,7 +15833,7 @@ C_galgas_function_descriptor functionDescriptor_literalStringPrefix ("literalStr
 static GALGAS_string onceFunction_staticStringTypeName (C_Compiler * /* inCompiler */
                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("String") ;
+  result_outName = GALGAS_string ("StaticString") ;
 //---
   return result_outName ;
 }
@@ -16074,6 +15963,194 @@ C_galgas_function_descriptor functionDescriptor_functionPrefix ("functionPrefix"
                                                                 & kTypeDescriptor_GALGAS_string,
                                                                 0,
                                                                 functionArgs_functionPrefix) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForVariable'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_mangledNameForVariable (GALGAS_string inArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("var_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 72)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 72)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_mangledNameForVariable [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_mangledNameForVariable (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* §§ inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForVariable (operand0,
+                                          inCompiler
+                                          COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_mangledNameForVariable ("mangledNameForVariable",
+                                                                        functionWithGenericHeader_mangledNameForVariable,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_mangledNameForVariable) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'mangledNameForGlobalVariable'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_mangledNameForGlobalVariable (GALGAS_string inArgument_inName,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("gvar_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 78)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_mangledNameForGlobalVariable [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_mangledNameForGlobalVariable (C_Compiler * inCompiler,
+                                                                             const cObjectArray & inEffectiveParameterArray,
+                                                                             const GALGAS_location & /* §§ inErrorLocation */
+                                                                             COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForGlobalVariable (operand0,
+                                                inCompiler
+                                                COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_mangledNameForGlobalVariable ("mangledNameForGlobalVariable",
+                                                                              functionWithGenericHeader_mangledNameForGlobalVariable,
+                                                                              & kTypeDescriptor_GALGAS_string,
+                                                                              1,
+                                                                              functionArgs_mangledNameForGlobalVariable) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForConstant'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_mangledNameForConstant (GALGAS_string inArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("const_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 84)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 84)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_mangledNameForConstant [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_mangledNameForConstant (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* §§ inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForConstant (operand0,
+                                          inCompiler
+                                          COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_mangledNameForConstant ("mangledNameForConstant",
+                                                                        functionWithGenericHeader_mangledNameForConstant,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_mangledNameForConstant) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForRegister'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_mangledNameForRegister (GALGAS_string inArgument_inName,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outName ; // Returned variable
+  result_outName = GALGAS_string ("register_").add_operation (inArgument_inName.reader_nameRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 90)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 90)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_mangledNameForRegister [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_mangledNameForRegister (C_Compiler * inCompiler,
+                                                                       const cObjectArray & inEffectiveParameterArray,
+                                                                       const GALGAS_location & /* §§ inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_mangledNameForRegister (operand0,
+                                          inCompiler
+                                          COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_mangledNameForRegister ("mangledNameForRegister",
+                                                                        functionWithGenericHeader_mangledNameForRegister,
+                                                                        & kTypeDescriptor_GALGAS_string,
+                                                                        1,
+                                                                        functionArgs_mangledNameForRegister) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

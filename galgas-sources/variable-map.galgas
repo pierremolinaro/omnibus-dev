@@ -4,6 +4,69 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+func initialVariableMap
+  ?context:let @semanticContext inContext
+  ?globalsAreConstant:@bool inGlobalsAreConstant
+  -> @variableMap outVariableMap
+{
+#--- All mode set
+  let allModeSet = [inContext.mModeMap keySet] ;
+#--- Add registers
+  outVariableMap = .emptyMap
+  @procFormalArgumentListForGeneration formalArguments = {}
+  for () in inContext.mRegisterMap do
+    if mIsReadOnly || inGlobalsAreConstant then
+      [!?outVariableMap insertUsedLocalConstant
+        !lkey
+        !mType
+        !allModeSet
+        !mangledNameForRegister (!name:lkey.string)
+        !true
+      ]
+    else
+      [!?outVariableMap insertDefinedLocalVariable
+        !lkey
+        !mType
+        !allModeSet
+        !mangledNameForRegister (!name:lkey.string)
+        !true
+      ]
+    end
+  end
+#--- Add global constants
+  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
+    [!?outVariableMap insertUsedLocalConstant
+      !constantName
+      !constantType
+      !allModeSet
+      !mangledNameForConstant (!name:constantName.string)
+      !true
+    ]
+  end
+#--- Add global variables
+  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
+    if inGlobalsAreConstant then
+      [!?outVariableMap insertUsedLocalConstant
+        !variableName
+        !variableType
+        !modeSet
+        !mangledNameForGlobalVariable (!name:variableName.string)
+        !true
+      ]
+    else
+      [!?outVariableMap insertGlobalVariable
+        !variableName
+        !variableType
+        !modeSet
+        !mangledNameForGlobalVariable (!name:variableName.string)
+        !true
+      ]
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
   @stringset mAcceptedModeSet
