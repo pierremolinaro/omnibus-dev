@@ -1433,6 +1433,90 @@ class cPtr_decrementInstructionGeneration : public cPtr_abstractInstructionGener
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         @foreverInstructionGeneration class                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_foreverInstructionGeneration : public GALGAS_abstractInstructionGeneration {
+//--- Constructor
+  public : GALGAS_foreverInstructionGeneration (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_foreverInstructionGeneration constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_foreverInstructionGeneration * ptr (void) const { return (const cPtr_foreverInstructionGeneration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_foreverInstructionGeneration (const cPtr_foreverInstructionGeneration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_foreverInstructionGeneration extractObject (const GALGAS_object & inObject,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_foreverInstructionGeneration constructor_new (const class GALGAS_instructionGenerationList & inOperand0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_foreverInstructionGeneration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionGenerationList reader_mInstructionGenerationList (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_foreverInstructionGeneration class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_foreverInstructionGeneration ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Pointer class for @foreverInstructionGeneration class                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_foreverInstructionGeneration : public cPtr_abstractInstructionGeneration {
+//--- Attributes
+  public : GALGAS_instructionGenerationList mAttribute_mInstructionGenerationList ;
+
+//--- Constructor
+  public : cPtr_foreverInstructionGeneration (const GALGAS_instructionGenerationList & in_mInstructionGenerationList
+                                              COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionGenerationList reader_mInstructionGenerationList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           @ifInstructionGeneration class                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

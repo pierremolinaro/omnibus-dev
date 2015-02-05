@@ -15,7 +15,7 @@ import atexit
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 #---
 tool = os.path.expanduser ("~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli")
-source = "product/product.hex"
+source = "product/product.ihex"
 childProcess = subprocess.Popen ([tool, "-w", "-v", "-mmcu=mk20dx128", source], cwd=scriptDir)
 #--- Wait for subprocess termination
 if childProcess.poll () == None :

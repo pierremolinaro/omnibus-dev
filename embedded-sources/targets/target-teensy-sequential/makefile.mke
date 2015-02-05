@@ -142,7 +142,7 @@ $(PRODUCT_DIR)/product.elf: $(OBJECTS)
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-$(PRODUCT_DIR)/product.hex: $(PRODUCT_DIR)/product.elf
+$(PRODUCT_DIR)/product.ihex: $(PRODUCT_DIR)/product.elf
 	@echo "- Building $@"
 	$(SILENT_CHAR)$(OBJCOPY_TOOL) -O ihex $< $@
 
@@ -152,7 +152,7 @@ $(PRODUCT_DIR)/product.hex: $(PRODUCT_DIR)/product.elf
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-all:$(PRODUCT_DIR)/product.hex
+all:$(PRODUCT_DIR)/product.ihex
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
