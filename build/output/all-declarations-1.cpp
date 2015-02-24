@@ -17767,9 +17767,53 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   gWrapperFileContent_2_targetTemplates
 ) ;
 
-//--- File 'target-teensy-sequential/build-verbose.py'
+//--- File 'target-teensy-sequential/build-as.py'
 
 const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_3_targetTemplates
+) ;
+
+//--- File 'target-teensy-sequential/build-verbose.py'
+
+const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -17803,17 +17847,17 @@ const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_4_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build.py'
 
-const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -18756,17 +18800,17 @@ const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   41653, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_5_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/clean.py'
 
-const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -18803,17 +18847,17 @@ const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_6_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -18847,17 +18891,17 @@ const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_7_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_7_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_8_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -19015,17 +19059,17 @@ const char * gWrapperFileContent_7_targetTemplates = "/*------------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_8_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_9_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -21213,17 +21257,17 @@ const char * gWrapperFileContent_8_targetTemplates = "/* Teensyduino Core Librar
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential.c'
 
-const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_10_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -21405,20 +21449,20 @@ const char * gWrapperFileContent_9_targetTemplates = "//------------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "startup-sequential.c",
   "c",
   true, // Text file
   7492, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [4] = {
-  & gWrapperFile_7_targetTemplates,
   & gWrapperFile_8_targetTemplates,
   & gWrapperFile_9_targetTemplates,
+  & gWrapperFile_10_targetTemplates,
   NULL
 } ;
 
@@ -21440,11 +21484,12 @@ const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
 
 //--- All files of 'target-teensy-sequential' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [5] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [6] = {
   & gWrapperFile_3_targetTemplates,
   & gWrapperFile_4_targetTemplates,
   & gWrapperFile_5_targetTemplates,
   & gWrapperFile_6_targetTemplates,
+  & gWrapperFile_7_targetTemplates,
   NULL
 } ;
 
@@ -21459,15 +21504,59 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
   "target-teensy-sequential",
-  4,
+  5,
   gWrapperAllFiles_targetTemplates_3,
   1,
   gWrapperAllDirectories_targetTemplates_3
 ) ;
 
+//--- File 'target-teensy-sequential-systick/build-as.py'
+
+const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_11_targetTemplates
+) ;
+
 //--- File 'target-teensy-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21501,17 +21590,17 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build.py'
 
-const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22454,17 +22543,17 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   41653, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22501,17 +22590,17 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -22545,17 +22634,17 @@ const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_14_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_16_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -22713,17 +22802,17 @@ const char * gWrapperFileContent_14_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_15_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_17_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -24911,17 +25000,17 @@ const char * gWrapperFileContent_15_targetTemplates = "/* Teensyduino Core Libra
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_16_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_18_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -25109,20 +25198,20 @@ const char * gWrapperFileContent_16_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   7714, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [4] = {
-  & gWrapperFile_14_targetTemplates,
-  & gWrapperFile_15_targetTemplates,
   & gWrapperFile_16_targetTemplates,
+  & gWrapperFile_17_targetTemplates,
+  & gWrapperFile_18_targetTemplates,
   NULL
 } ;
 
@@ -25144,11 +25233,12 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 
 //--- All files of 'target-teensy-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [5] = {
-  & gWrapperFile_10_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [6] = {
   & gWrapperFile_11_targetTemplates,
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
+  & gWrapperFile_14_targetTemplates,
+  & gWrapperFile_15_targetTemplates,
   NULL
 } ;
 
@@ -25163,7 +25253,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   "target-teensy-sequential-systick",
-  4,
+  5,
   gWrapperAllFiles_targetTemplates_5,
   1,
   gWrapperAllDirectories_targetTemplates_5
