@@ -13104,51 +13104,6 @@ void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_booleanGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_booleanGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_booleanGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_booleanGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_booleanGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_booleanGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_booleanGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_booleanGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_booleanGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_booleanGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_booleanGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_booleanGenerationTemplate_0 [1] = {
@@ -13157,8 +13112,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_booleanGenerationTemplate_0 
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_booleanGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_booleanGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_booleanGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13168,7 +13122,7 @@ const cDirectoryWrapper gWrapperDirectory_0_booleanGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_booleanGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_booleanGenerationTemplate_0
 ) ;
 
@@ -13251,51 +13205,6 @@ void routine_enterBoolsetOperators (const GALGAS_lstring constinArgument_inBools
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_boolsetGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_boolsetGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_boolsetGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_boolsetGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_boolsetGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_boolsetGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_boolsetGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_boolsetGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_boolsetGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_boolsetGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_boolsetGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_boolsetGenerationTemplate_0 [1] = {
@@ -13304,8 +13213,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_boolsetGenerationTemplate_0 
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_boolsetGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_boolsetGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_boolsetGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13315,7 +13223,7 @@ const cDirectoryWrapper gWrapperDirectory_0_boolsetGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_boolsetGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_boolsetGenerationTemplate_0
 ) ;
 
@@ -13387,51 +13295,6 @@ void routine_enterEnumerationOperators (GALGAS_lstring inArgument_inEnumerationT
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_enumerationGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_enumerationGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_enumerationGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_enumerationGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_enumerationGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_enumerationGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_enumerationGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_enumerationGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_enumerationGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_enumerationGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_enumerationGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_enumerationGenerationTemplate_0 [1] = {
@@ -13440,8 +13303,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_enumerationGenerationTemplat
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_enumerationGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_enumerationGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_enumerationGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13451,7 +13313,7 @@ const cDirectoryWrapper gWrapperDirectory_0_enumerationGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_enumerationGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_enumerationGenerationTemplate_0
 ) ;
 
@@ -13488,51 +13350,6 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (C_C
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_structureGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_structureGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_structureGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_structureGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_structureGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_structureGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_structureGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_structureGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_structureGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_structureGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_structureGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_structureGenerationTemplate_0 [1] = {
@@ -13541,8 +13358,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_structureGenerationTemplate_
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_structureGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_structureGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_structureGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13552,7 +13368,7 @@ const cDirectoryWrapper gWrapperDirectory_0_structureGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_structureGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_structureGenerationTemplate_0
 ) ;
 
@@ -13651,51 +13467,6 @@ GALGAS_string filewrapperTemplate_structureGenerationTemplate_implementation (C_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_globalVariableGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_globalVariableGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_globalVariableGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_globalVariableGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_globalVariableGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_globalVariableGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_globalVariableGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_globalVariableGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_globalVariableGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_globalVariableGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_globalVariableGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_globalVariableGenerationTemplate_0 [1] = {
@@ -13704,8 +13475,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_globalVariableGenerationTemp
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_globalVariableGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_globalVariableGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_globalVariableGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13715,7 +13485,7 @@ const cDirectoryWrapper gWrapperDirectory_0_globalVariableGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_globalVariableGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_globalVariableGenerationTemplate_0
 ) ;
 
@@ -13760,51 +13530,6 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_globalConstantGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_globalConstantGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_globalConstantGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_globalConstantGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_globalConstantGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_globalConstantGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_globalConstantGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemplate_0 [1] = {
@@ -13813,8 +13538,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_globalConstantGenerationTemp
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_globalConstantGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_globalConstantGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13824,7 +13548,7 @@ const cDirectoryWrapper gWrapperDirectory_0_globalConstantGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_globalConstantGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_globalConstantGenerationTemplate_0
 ) ;
 
@@ -13931,51 +13655,6 @@ void routine_enterIntegerOperators (GALGAS_lstring inArgument_inIntegerTypeName,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_integerGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_integerGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_integerGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_integerGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_integerGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_integerGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_integerGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_integerGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_integerGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_integerGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_integerGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_integerGenerationTemplate_0 [1] = {
@@ -13984,8 +13663,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_integerGenerationTemplate_0 
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_integerGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_integerGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_integerGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -13995,7 +13673,7 @@ const cDirectoryWrapper gWrapperDirectory_0_integerGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_integerGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_integerGenerationTemplate_0
 ) ;
 
@@ -14082,51 +13760,6 @@ void routine_enterStaticStringOperators (GALGAS_lstring inArgument_inBooleanType
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_literalStringGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_literalStringGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_literalStringGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_literalStringGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_literalStringGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_literalStringGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_literalStringGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_literalStringGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_literalStringGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_literalStringGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_literalStringGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_literalStringGenerationTemplate_0 [1] = {
@@ -14135,8 +13768,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_literalStringGenerationTempl
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_literalStringGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_literalStringGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_literalStringGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -14146,7 +13778,7 @@ const cDirectoryWrapper gWrapperDirectory_0_literalStringGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_literalStringGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_literalStringGenerationTemplate_0
 ) ;
 
@@ -14180,51 +13812,6 @@ GALGAS_string filewrapperTemplate_literalStringGenerationTemplate_declaration (C
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_functionGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_functionGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_functionGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_functionGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_functionGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_functionGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_functionGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_functionGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_functionGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_functionGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_functionGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_functionGenerationTemplate_0 [1] = {
@@ -14233,8 +13820,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_functionGenerationTemplate_0
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_functionGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_functionGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_functionGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -14244,7 +13830,7 @@ const cDirectoryWrapper gWrapperDirectory_0_functionGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_functionGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_functionGenerationTemplate_0
 ) ;
 
@@ -14465,51 +14051,6 @@ C_galgas_function_descriptor functionDescriptor_mangledName ("mangledName",
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_procedureGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_procedureGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_procedureGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_procedureGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_procedureGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_procedureGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_procedureGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_procedureGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_procedureGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_procedureGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_procedureGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_procedureGenerationTemplate_0 [1] = {
@@ -14518,8 +14059,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_procedureGenerationTemplate_
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_procedureGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_procedureGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_procedureGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -14529,7 +14069,7 @@ const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_procedureGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_procedureGenerationTemplate_0
 ) ;
 
@@ -14661,51 +14201,6 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (C_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- All files of 'platform' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_registerGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'platform' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_registerGenerationTemplate_2 [1] = {
-  NULL
-} ;
-
-//--- Directory 'platform'
-
-const cDirectoryWrapper gWrapperDirectory_2_registerGenerationTemplate (
-  "platform",
-  0,
-  gWrapperAllFiles_registerGenerationTemplate_2,
-  0,
-  gWrapperAllDirectories_registerGenerationTemplate_2
-) ;
-
-//--- All files of 'target-teensy-seq' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_registerGenerationTemplate_1 [1] = {
-  NULL
-} ;
-
-//--- All sub-directories of 'target-teensy-seq' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_registerGenerationTemplate_1 [2] = {
-  & gWrapperDirectory_2_registerGenerationTemplate,
-  NULL
-} ;
-
-//--- Directory 'target-teensy-seq'
-
-const cDirectoryWrapper gWrapperDirectory_1_registerGenerationTemplate (
-  "target-teensy-seq",
-  0,
-  gWrapperAllFiles_registerGenerationTemplate_1,
-  1,
-  gWrapperAllDirectories_registerGenerationTemplate_1
-) ;
-
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_registerGenerationTemplate_0 [1] = {
@@ -14714,8 +14209,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_registerGenerationTemplate_0
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_registerGenerationTemplate_0 [2] = {
-  & gWrapperDirectory_1_registerGenerationTemplate,
+static const cDirectoryWrapper * gWrapperAllDirectories_registerGenerationTemplate_0 [1] = {
   NULL
 } ;
 
@@ -14725,7 +14219,7 @@ const cDirectoryWrapper gWrapperDirectory_0_registerGenerationTemplate (
   "",
   0,
   gWrapperAllFiles_registerGenerationTemplate_0,
-  1,
+  0,
   gWrapperAllDirectories_registerGenerationTemplate_0
 ) ;
 
@@ -18298,8 +17792,9 @@ const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
   "atexit.register (cleanup)\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"make\", \"all\", \"--warn-undefined-variables\", \"SILENT_CHAR\?=\"], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -18312,7 +17807,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
-  1024, // Text length
+  1002, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
@@ -18321,49 +17816,951 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
 const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
   "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
   "if sys.version_info >= (2, 6) :\n"
   "  import multiprocessing\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\", \"startup-sequential.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  return os.path.expanduser (\"~/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadReportHook (a,b,fileSize): \n"
+  "  if fileSize < (1 << 10):\n"
+  "    sizeString = str (fileSize)\n"
+  "  else:\n"
+  "    if fileSize < (1 << 20):\n"
+  "      sizeString = str (fileSize >> 10) + \"Ki\"\n"
+  "    else:\n"
+  "      sizeString = str (fileSize >> 20) + \"Mi\"\n"
+  "  # \",\" at the end of the line is important!\n"
+  "  print \"% 3.1f%% of %sB\\r\" % (min(100.0, float(a * b) / fileSize * 100.0), sizeString),\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  print \"URL: \"+ archiveURL\n"
+  "  print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "  print \"\"\n"
+  "  fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "  ok = fileSize > 1000000\n"
+  "  if ok:\n"
+  "    runSingleCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "  else:\n"
+  "    print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "#--- Getting core count\n"
-  "if sys.version_info >= (2, 6) :\n"
-  "  coreCount = multiprocessing.cpu_count ()\n"
-  "else:\n"
-  "  coreCount = 1\n"
-  "#print coreCount\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runSingleCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar\"])\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"make\", \"all\", \"-j\" + str (coreCount), \"--warn-undefined-variables\", \"SILENT_CHAR\?=@\"], cwd=scriptDir)\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
   "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
 const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  1244, // Text length
+  41653, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -18395,8 +18792,9 @@ const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "#--- Directories to clean\n"
   "dir1 = scriptDir + \"/objects\"\n"
   "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -18409,7 +18807,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
-  1233, // Text length
+  1264, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -18428,12 +18826,19 @@ const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
   "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
   "#---\n"
-  "tool = os.path.expanduser (\"~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
-  "source = \"product/product.ihex\"\n"
-  "childProcess = subprocess.Popen ([tool, \"-w\", \"-v\", \"-mmcu=mk20dx128\", source], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -18446,254 +18851,13 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
-  907, // Text length
+  997, // Text length
   gWrapperFileContent_6_targetTemplates
-) ;
-
-//--- File 'target-teensy-sequential/makefile.mke'
-
-const char * gWrapperFileContent_7_targetTemplates = "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Source files                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "SOURCES := plm.c\n"
-  "SOURCES += startup-sequential.c\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Product directory                                                                                                  *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "PRODUCT_DIR := product\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#                         Object files directories                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJECT_DIR := objects\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Object files                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJECTS := $(patsubst %, $(OBJECT_DIR)/%.o, $(SOURCES))\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Compiler and linker definition                                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "USER_HOME_DIR := $(shell echo ~)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "C_COMPILER_TOOL := $(TOOL_DIR)/bin/arm-eabi-gcc -mthumb -mcpu=cortex-m4\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#    C Compiler options                                                                                                *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "C_COMPILER_OPTIONS := -Wall\n"
-  "C_COMPILER_OPTIONS += -Werror\n"
-  "C_COMPILER_OPTIONS += -Wreturn-type\n"
-  "C_COMPILER_OPTIONS += -Wformat\n"
-  "C_COMPILER_OPTIONS += -Wsign-compare\n"
-  "C_COMPILER_OPTIONS += -Wpointer-arith\n"
-  "C_COMPILER_OPTIONS += -Wparentheses\n"
-  "C_COMPILER_OPTIONS += -Wcast-align\n"
-  "C_COMPILER_OPTIONS += -Wcast-qual\n"
-  "C_COMPILER_OPTIONS += -Wwrite-strings\n"
-  "C_COMPILER_OPTIONS += -Wswitch\n"
-  "C_COMPILER_OPTIONS += -Wuninitialized\n"
-  "C_COMPILER_OPTIONS += -fno-builtin\n"
-  "C_COMPILER_OPTIONS += -Wno-aggressive-loop-optimizations\n"
-  "C_COMPILER_OPTIONS += -ffunction-sections\n"
-  "C_COMPILER_OPTIONS += -fdata-sections\n"
-  "C_COMPILER_OPTIONS += -std=c99\n"
-  "C_COMPILER_OPTIONS += -Wstrict-prototypes\n"
-  "C_COMPILER_OPTIONS += -Wbad-function-cast\n"
-  "C_COMPILER_OPTIONS += -Wmissing-declarations\n"
-  "C_COMPILER_OPTIONS += -Wimplicit-function-declaration\n"
-  "C_COMPILER_OPTIONS += -Wno-int-to-pointer-cast\n"
-  "C_COMPILER_OPTIONS += -Wno-pointer-to-int-cast\n"
-  "C_COMPILER_OPTIONS += -Wmissing-prototypes\n"
-  "C_COMPILER_OPTIONS += -Os\n"
-  "C_COMPILER_OPTIONS += -fomit-frame-pointer\n"
-  "C_COMPILER_OPTIONS += -foptimize-register-move \n"
-  "C_COMPILER_OPTIONS += -I../build \n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "LINKER_TOOL := $(TOOL_DIR)/bin/arm-eabi-gcc\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "LINKER_OPTIONS := -nostartfiles\n"
-  "LINKER_OPTIONS += -Wl,--fatal-warnings\n"
-  "LINKER_OPTIONS += -Wl,--warn-common\n"
-  "LINKER_OPTIONS += -Wl,--no-undefined\n"
-  "LINKER_OPTIONS += -Wl,--cref\n"
-  "LINKER_OPTIONS += -lc\n"
-  "LINKER_OPTIONS += -lgcc\n"
-  "LINKER_OPTIONS += -Wl,-static\n"
-  "LINKER_OPTIONS += -Wl,-s\n"
-  "LINKER_OPTIONS += -Wl,--gc-sections\n"
-  "LINKER_OPTIONS += -Tsources/linker-script.ld\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJCOPY_TOOL := $(TOOL_DIR)/bin/arm-eabi-objcopy\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Download compiler                                                                                                   *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(TOOL_DIR):\n"
-  "\t@echo \"- Download compiler for teensy\"\n"
-  "\t$(SILENT_CHAR)python sources/download-compiler.py\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   C Compiler  call                                                                                                   *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(OBJECT_DIR)/%.c.o:sources/%.c | $(TOOL_DIR)\n"
-  "\t$(SILENT_CHAR)mkdir -p $(OBJECT_DIR)\n"
-  "\t@echo \"- Compiling: $<\"\n"
-  "\t$(SILENT_CHAR)$(C_COMPILER_TOOL) -c $< -o $@ $(C_COMPILER_OPTIONS) -MD -MP -MF $(OBJECT_DIR)/$(@F).dep\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Linker call                                                                                                        *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(PRODUCT_DIR)/product.elf: $(OBJECTS)\n"
-  "\t$(SILENT_CHAR)mkdir -p $(PRODUCT_DIR)\n"
-  "\t@echo \"- Linking $@\"\n"
-  "\t$(SILENT_CHAR)$(LINKER_TOOL) $(OBJECTS) $(LINKER_OPTIONS) -Wl,-Map=$@.map -o $@\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   objcopy call                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(PRODUCT_DIR)/product.ihex: $(PRODUCT_DIR)/product.elf\n"
-  "\t@echo \"- Building $@\"\n"
-  "\t$(SILENT_CHAR)$(OBJCOPY_TOOL) -O ihex $< $@\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   ALL goal                                                                                                           *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "all:$(PRODUCT_DIR)/product.ihex\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Include dependency files                                                                                           *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "-include $(OBJECT_DIR)/*.dep\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
-  "makefile.mke",
-  "mke",
-  true, // Text file
-  10603, // Text length
-  gWrapperFileContent_7_targetTemplates
-) ;
-
-//--- File 'sources/download-compiler.py'
-
-const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import urllib\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def downloadReportHook (a,b,c): \n"
-  "    # ',' at the end of the line is important!\n"
-  "    print \"% 3.1f%% of %d bytes\\r\" % (min(100, float(a * b) / c * 100), c),\n"
-  "    sys.stdout.flush()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runCommand (cmd) :\n"
-  "  str = \"+\"\n"
-  "  for s in cmd:\n"
-  "    str += \" \" + s\n"
-  "  print str\n"
-  "  childProcess = subprocess.Popen (cmd)\n"
-  "  childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#--- Get home directory\n"
-  "homeDir = os.path.expanduser (\"~\")\n"
-  "#--- Get installation directory\n"
-  "installDir = homeDir + \"/plm-tools\"\n"
-  "runCommand ([\"mkdir\", \"-p\", installDir])\n"
-  "#---\n"
-  "archiveName = \"teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\"\n"
-  "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
-  "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
-  "print \"\"\n"
-  "print \"+ cd \" + installDir\n"
-  "os.chdir (installDir)\n"
-  "runCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
-  "runCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
-  "runCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
-  "runCommand ([\"rm\", archiveName + \".tar\"])\n"
-  "os.chdir (scriptDir)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
-  "download-compiler.py",
-  "py",
-  true, // Text file
-  2023, // Text length
-  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_9_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_7_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -18851,17 +19015,17 @@ const char * gWrapperFileContent_9_targetTemplates = "/*------------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_7_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_10_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_8_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -21049,17 +21213,17 @@ const char * gWrapperFileContent_10_targetTemplates = "/* Teensyduino Core Libra
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential.c'
 
-const char * gWrapperFileContent_11_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_9_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -21241,21 +21405,20 @@ const char * gWrapperFileContent_11_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "startup-sequential.c",
   "c",
   true, // Text file
   7492, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [5] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [4] = {
+  & gWrapperFile_7_targetTemplates,
   & gWrapperFile_8_targetTemplates,
   & gWrapperFile_9_targetTemplates,
-  & gWrapperFile_10_targetTemplates,
-  & gWrapperFile_11_targetTemplates,
   NULL
 } ;
 
@@ -21269,7 +21432,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
   "sources",
-  4,
+  3,
   gWrapperAllFiles_targetTemplates_4,
   0,
   gWrapperAllDirectories_targetTemplates_4
@@ -21277,12 +21440,11 @@ const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
 
 //--- All files of 'target-teensy-sequential' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [6] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [5] = {
   & gWrapperFile_3_targetTemplates,
   & gWrapperFile_4_targetTemplates,
   & gWrapperFile_5_targetTemplates,
   & gWrapperFile_6_targetTemplates,
-  & gWrapperFile_7_targetTemplates,
   NULL
 } ;
 
@@ -21297,7 +21459,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
   "target-teensy-sequential",
-  5,
+  4,
   gWrapperAllFiles_targetTemplates_3,
   1,
   gWrapperAllDirectories_targetTemplates_3
@@ -21305,7 +21467,7 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 
 //--- File 'target-teensy-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21328,8 +21490,9 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "atexit.register (cleanup)\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"make\", \"all\", \"--warn-undefined-variables\", \"SILENT_CHAR\?=\"], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -21338,68 +21501,970 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
-  1024, // Text length
-  gWrapperFileContent_12_targetTemplates
+  1002, // Text length
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
   "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
   "if sys.version_info >= (2, 6) :\n"
   "  import multiprocessing\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
   "\n"
-  "#------------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\", \"startup-sequential.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  return os.path.expanduser (\"~/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadReportHook (a,b,fileSize): \n"
+  "  if fileSize < (1 << 10):\n"
+  "    sizeString = str (fileSize)\n"
+  "  else:\n"
+  "    if fileSize < (1 << 20):\n"
+  "      sizeString = str (fileSize >> 10) + \"Ki\"\n"
+  "    else:\n"
+  "      sizeString = str (fileSize >> 20) + \"Mi\"\n"
+  "  # \",\" at the end of the line is important!\n"
+  "  print \"% 3.1f%% of %sB\\r\" % (min(100.0, float(a * b) / fileSize * 100.0), sizeString),\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  print \"URL: \"+ archiveURL\n"
+  "  print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "  print \"\"\n"
+  "  fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "  ok = fileSize > 1000000\n"
+  "  if ok:\n"
+  "    runSingleCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "  else:\n"
+  "    print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "#--- Getting core count\n"
-  "if sys.version_info >= (2, 6) :\n"
-  "  coreCount = multiprocessing.cpu_count ()\n"
-  "else:\n"
-  "  coreCount = 1\n"
-  "#print coreCount\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runSingleCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar\"])\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"make\", \"all\", \"-j\" + str (coreCount), \"--warn-undefined-variables\", \"SILENT_CHAR\?=@\"], cwd=scriptDir)\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
   "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  1244, // Text length
-  gWrapperFileContent_13_targetTemplates
+  41653, // Text length
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -21425,8 +22490,9 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "#--- Directories to clean\n"
   "dir1 = scriptDir + \"/objects\"\n"
   "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -21435,17 +22501,17 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
-  1233, // Text length
-  gWrapperFileContent_14_targetTemplates
+  1264, // Text length
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21458,12 +22524,19 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
   "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
   "#--- Get script absolute path\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
   "#---\n"
-  "tool = os.path.expanduser (\"~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli\")\n"
-  "source = \"product/product.ihex\"\n"
-  "childProcess = subprocess.Popen ([tool, \"-w\", \"-v\", \"-mmcu=mk20dx128\", source], cwd=scriptDir)\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -21472,258 +22545,17 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
-  907, // Text length
-  gWrapperFileContent_15_targetTemplates
-) ;
-
-//--- File 'target-teensy-sequential-systick/makefile.mke'
-
-const char * gWrapperFileContent_16_targetTemplates = "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Source files                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "SOURCES := plm.c\n"
-  "SOURCES += startup-sequential-systick.c\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Product directory                                                                                                  *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "PRODUCT_DIR := product\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#                         Object files directories                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJECT_DIR := objects\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Object files                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJECTS := $(patsubst %, $(OBJECT_DIR)/%.o, $(SOURCES))\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Compiler and linker definition                                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "USER_HOME_DIR := $(shell echo ~)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "TOOL_DIR := $(USER_HOME_DIR)/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "C_COMPILER_TOOL := $(TOOL_DIR)/bin/arm-eabi-gcc -mthumb -mcpu=cortex-m4\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#    C Compiler options                                                                                                *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "C_COMPILER_OPTIONS := -Wall\n"
-  "C_COMPILER_OPTIONS += -Werror\n"
-  "C_COMPILER_OPTIONS += -Wreturn-type\n"
-  "C_COMPILER_OPTIONS += -Wformat\n"
-  "C_COMPILER_OPTIONS += -Wsign-compare\n"
-  "C_COMPILER_OPTIONS += -Wpointer-arith\n"
-  "C_COMPILER_OPTIONS += -Wparentheses\n"
-  "C_COMPILER_OPTIONS += -Wcast-align\n"
-  "C_COMPILER_OPTIONS += -Wcast-qual\n"
-  "C_COMPILER_OPTIONS += -Wwrite-strings\n"
-  "C_COMPILER_OPTIONS += -Wswitch\n"
-  "C_COMPILER_OPTIONS += -Wuninitialized\n"
-  "C_COMPILER_OPTIONS += -fno-builtin\n"
-  "C_COMPILER_OPTIONS += -Wno-aggressive-loop-optimizations\n"
-  "C_COMPILER_OPTIONS += -ffunction-sections\n"
-  "C_COMPILER_OPTIONS += -fdata-sections\n"
-  "C_COMPILER_OPTIONS += -std=c99\n"
-  "C_COMPILER_OPTIONS += -Wstrict-prototypes\n"
-  "C_COMPILER_OPTIONS += -Wbad-function-cast\n"
-  "C_COMPILER_OPTIONS += -Wmissing-declarations\n"
-  "C_COMPILER_OPTIONS += -Wimplicit-function-declaration\n"
-  "C_COMPILER_OPTIONS += -Wno-int-to-pointer-cast\n"
-  "C_COMPILER_OPTIONS += -Wno-pointer-to-int-cast\n"
-  "C_COMPILER_OPTIONS += -Wmissing-prototypes\n"
-  "C_COMPILER_OPTIONS += -Os\n"
-  "C_COMPILER_OPTIONS += -fomit-frame-pointer\n"
-  "C_COMPILER_OPTIONS += -foptimize-register-move \n"
-  "C_COMPILER_OPTIONS += -I../build \n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "LINKER_TOOL := $(TOOL_DIR)/bin/arm-eabi-gcc\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "LINKER_OPTIONS := -nostartfiles\n"
-  "LINKER_OPTIONS += -Wl,--fatal-warnings\n"
-  "LINKER_OPTIONS += -Wl,--warn-common\n"
-  "LINKER_OPTIONS += -Wl,--no-undefined\n"
-  "LINKER_OPTIONS += -Wl,--cref\n"
-  "LINKER_OPTIONS += -lc\n"
-  "LINKER_OPTIONS += -lgcc\n"
-  "LINKER_OPTIONS += -Wl,-static\n"
-  "LINKER_OPTIONS += -Wl,-s\n"
-  "LINKER_OPTIONS += -Wl,--gc-sections\n"
-  "LINKER_OPTIONS += -Tsources/linker-script.ld\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "OBJCOPY_TOOL := $(TOOL_DIR)/bin/arm-eabi-objcopy\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Download compiler                                                                                                   *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(TOOL_DIR):\n"
-  "\t@echo \"- Download compiler for teensy\"\n"
-  "\t$(SILENT_CHAR)python sources/download-compiler.py\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   C Compiler  call                                                                                                   *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(OBJECT_DIR)/%.c.o:sources/%.c | $(TOOL_DIR)\n"
-  "\t$(SILENT_CHAR)mkdir -p $(OBJECT_DIR)\n"
-  "\t@echo \"- Compiling: $<\"\n"
-  "\t$(SILENT_CHAR)$(C_COMPILER_TOOL) -c $< -o $@ $(C_COMPILER_OPTIONS) -MD -MP -MF $(OBJECT_DIR)/$(@F).dep\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Linker call                                                                                                        *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(PRODUCT_DIR)/product.elf: $(OBJECTS)\n"
-  "\t$(SILENT_CHAR)mkdir -p $(PRODUCT_DIR)\n"
-  "\t@echo \"- Linking $@\"\n"
-  "\t$(SILENT_CHAR)$(LINKER_TOOL) $(OBJECTS) $(LINKER_OPTIONS) -Wl,-Map=$@.map -o $@\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   objcopy call                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "$(PRODUCT_DIR)/product.ihex: $(PRODUCT_DIR)/product.elf\n"
-  "\t@echo \"- Building $@\"\n"
-  "\t$(SILENT_CHAR)$(OBJCOPY_TOOL) -O ihex $< $@\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   ALL goal                                                                                                           *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "all:$(PRODUCT_DIR)/product.ihex\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Include dependency files                                                                                           *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "-include $(OBJECT_DIR)/*.dep\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
-  "makefile.mke",
-  "mke",
-  true, // Text file
-  10611, // Text length
-  gWrapperFileContent_16_targetTemplates
-) ;
-
-//--- File 'sources/download-compiler.py'
-
-const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import urllib\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def downloadReportHook (a,b,c): \n"
-  "    # ',' at the end of the line is important!\n"
-  "    print \"% 3.1f%% of %d bytes\\r\" % (min(100, float(a * b) / c * 100), c),\n"
-  "    sys.stdout.flush()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runCommand (cmd) :\n"
-  "  str = \"+\"\n"
-  "  for s in cmd:\n"
-  "    str += \" \" + s\n"
-  "  print str\n"
-  "  childProcess = subprocess.Popen (cmd)\n"
-  "  childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#--- Get home directory\n"
-  "homeDir = os.path.expanduser (\"~\")\n"
-  "#--- Get installation directory\n"
-  "installDir = homeDir + \"/plm-tools\"\n"
-  "runCommand ([\"mkdir\", \"-p\", installDir])\n"
-  "#---\n"
-  "archiveName = \"teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\"\n"
-  "compilerURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
-  "urllib.urlretrieve (compilerURL, installDir + \"/\" + archiveName + \".tar.bz2\", downloadReportHook)\n"
-  "print \"\"\n"
-  "print \"+ cd \" + installDir\n"
-  "os.chdir (installDir)\n"
-  "runCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
-  "runCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
-  "runCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
-  "runCommand ([\"rm\", archiveName + \".tar\"])\n"
-  "os.chdir (scriptDir)\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
-  "download-compiler.py",
-  "py",
-  true, // Text file
-  2023, // Text length
-  gWrapperFileContent_17_targetTemplates
+  997, // Text length
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_18_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_14_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -21881,17 +22713,17 @@ const char * gWrapperFileContent_18_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_19_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_15_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -24079,17 +24911,17 @@ const char * gWrapperFileContent_19_targetTemplates = "/* Teensyduino Core Libra
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_20_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_16_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -24277,21 +25109,20 @@ const char * gWrapperFileContent_20_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   7714, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [5] = {
-  & gWrapperFile_17_targetTemplates,
-  & gWrapperFile_18_targetTemplates,
-  & gWrapperFile_19_targetTemplates,
-  & gWrapperFile_20_targetTemplates,
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [4] = {
+  & gWrapperFile_14_targetTemplates,
+  & gWrapperFile_15_targetTemplates,
+  & gWrapperFile_16_targetTemplates,
   NULL
 } ;
 
@@ -24305,7 +25136,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_6 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
   "sources",
-  4,
+  3,
   gWrapperAllFiles_targetTemplates_6,
   0,
   gWrapperAllDirectories_targetTemplates_6
@@ -24313,12 +25144,11 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 
 //--- All files of 'target-teensy-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [6] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [5] = {
+  & gWrapperFile_10_targetTemplates,
+  & gWrapperFile_11_targetTemplates,
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
-  & gWrapperFile_14_targetTemplates,
-  & gWrapperFile_15_targetTemplates,
-  & gWrapperFile_16_targetTemplates,
   NULL
 } ;
 
@@ -24333,7 +25163,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   "target-teensy-sequential-systick",
-  5,
+  4,
   gWrapperAllFiles_targetTemplates_5,
   1,
   gWrapperAllDirectories_targetTemplates_5

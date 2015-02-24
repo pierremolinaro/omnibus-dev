@@ -24,8 +24,9 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 #--- Directories to clean
 dir1 = scriptDir + "/objects"
 dir2 = scriptDir + "/product"
+dir3 = scriptDir + "/as"
 #---
-childProcess = subprocess.Popen (["rm", "-fr", dir1, dir2], cwd=scriptDir)
+childProcess = subprocess.Popen (["rm", "-fr", dir1, dir2, dir3], cwd=scriptDir)
 #--- Wait for subprocess termination
 if childProcess.poll () == None :
   childProcess.wait ()

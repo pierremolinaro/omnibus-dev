@@ -11,12 +11,19 @@ import atexit
 
 #------------------------------------------------------------------------------*
 
+def cleanup():
+  if childProcess.poll () == None :
+    childProcess.kill ()
+
+#------------------------------------------------------------------------------*
+
+#--- Register a function for killing subprocess
+atexit.register (cleanup)
 #--- Get script absolute path
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
+os.chdir (scriptDir)
 #---
-tool = os.path.expanduser ("~/plm-tools/plm-teensy-i386-Darwin-arm-gcc-4.9.2/bin/teensy-loader-cli")
-source = "product/product.ihex"
-childProcess = subprocess.Popen ([tool, "-w", "-v", "-mmcu=mk20dx128", source], cwd=scriptDir)
+childProcess = subprocess.Popen (["python", "build.py", "run"])
 #--- Wait for subprocess termination
 if childProcess.poll () == None :
   childProcess.wait ()
