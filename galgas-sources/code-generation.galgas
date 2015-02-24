@@ -86,7 +86,8 @@ proc codeGeneration
   var header = "#ifndef PLM_HEADER_DEFINED\n"
   header += "#define PLM_HEADER_DEFINED\n\n"
   header += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
-  header += "#include <stdint.h>\n\n"
+  header += "#include <stdint.h>\n"
+  header += "#include <stddef.h>\n\n"
   for (generation) in inGenerationList do
     header += [generation headerCodeGeneration]
   end
