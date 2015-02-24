@@ -1730,20 +1730,20 @@ static void categoryMethod_varInstructionWithAssignmentAST_analyze (const cPtr_i
   GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, object->mAttribute_mOptionalTypeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-var.galgas", 107)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-var.galgas", 114)) ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mOptionalTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 108)) ;
+    temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mOptionalTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 115)) ;
   }
   GALGAS_unifiedTypeMap_2D_proxy var_targetType = temp_0 ;
   GALGAS_unifiedTypeMap_2D_proxy var_inferredType ;
   GALGAS_abstractExpressionGeneration var_expressionGeneratedCode ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inReceiverType, var_targetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_inferredType, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 111)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inReceiverType, var_targetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_inferredType, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 118)) ;
   {
-  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("instruction-var.galgas", 125)) ;
-  temp_2.addAssign_operation (constinArgument_inMode  COMMA_SOURCE_FILE ("instruction-var.galgas", 125)) ;
-  ioArgument_ioVariableMap.modifier_insertDefinedLocalVariable (object->mAttribute_mVarName, var_inferredType, temp_2, function_mangledNameForVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 126)), var_inferredType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 122)) ;
+  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("instruction-var.galgas", 132)) ;
+  temp_2.addAssign_operation (constinArgument_inMode  COMMA_SOURCE_FILE ("instruction-var.galgas", 132)) ;
+  ioArgument_ioVariableMap.modifier_insertDefinedLocalVariable (object->mAttribute_mVarName, var_inferredType, temp_2, function_mangledNameForVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 133)), var_inferredType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 129)) ;
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_varInstructionWithAssignmentGeneration::constructor_new (var_inferredType, object->mAttribute_mVarName.mAttribute_string, var_expressionGeneratedCode  COMMA_SOURCE_FILE ("instruction-var.galgas", 130))  COMMA_SOURCE_FILE ("instruction-var.galgas", 130)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_varInstructionWithAssignmentGeneration::constructor_new (var_inferredType, object->mAttribute_mVarName.mAttribute_string, var_expressionGeneratedCode  COMMA_SOURCE_FILE ("instruction-var.galgas", 137))  COMMA_SOURCE_FILE ("instruction-var.galgas", 137)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1773,13 +1773,13 @@ static void categoryMethod_varInstructionAST_analyze (const cPtr_instructionAST 
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_varInstructionAST * object = (const cPtr_varInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_varInstructionAST) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_targetType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 147)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_targetType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 154)) ;
   {
-  GALGAS_stringset temp_0 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("instruction-var.galgas", 152)) ;
-  temp_0.addAssign_operation (constinArgument_inMode  COMMA_SOURCE_FILE ("instruction-var.galgas", 152)) ;
-  ioArgument_ioVariableMap.modifier_insertUndefinedLocalVariable (object->mAttribute_mVarName, var_targetType, temp_0, function_mangledNameForVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 153)), var_targetType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 149)) ;
+  GALGAS_stringset temp_0 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("instruction-var.galgas", 159)) ;
+  temp_0.addAssign_operation (constinArgument_inMode  COMMA_SOURCE_FILE ("instruction-var.galgas", 159)) ;
+  ioArgument_ioVariableMap.modifier_insertUndefinedLocalVariable (object->mAttribute_mVarName, var_targetType, temp_0, function_mangledNameForVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 160)), var_targetType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 156)) ;
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_varInstructionGeneration::constructor_new (var_targetType, object->mAttribute_mVarName.mAttribute_string  COMMA_SOURCE_FILE ("instruction-var.galgas", 157))  COMMA_SOURCE_FILE ("instruction-var.galgas", 157)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_varInstructionGeneration::constructor_new (var_targetType, object->mAttribute_mVarName.mAttribute_string  COMMA_SOURCE_FILE ("instruction-var.galgas", 164))  COMMA_SOURCE_FILE ("instruction-var.galgas", 164)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1804,7 +1804,7 @@ static GALGAS_string categoryReader_varInstructionWithAssignmentGeneration_instr
   GALGAS_string result_outCode ; // Returned variable
   const cPtr_varInstructionWithAssignmentGeneration * object = (const cPtr_varInstructionWithAssignmentGeneration *) inObject ;
   macroValidSharedObject (object, cPtr_varInstructionWithAssignmentGeneration) ;
-  result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)).add_operation (function_mangledNameForVariable (object->mAttribute_mLocalVariable, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 173)).add_operation (callCategoryReader_expressionCode ((const cPtr_abstractExpressionGeneration *) object->mAttribute_mExpressionGeneration.ptr (), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 174)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 174)) ;
+  result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).add_operation (function_mangledNameForVariable (object->mAttribute_mLocalVariable, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).add_operation (callCategoryReader_expressionCode ((const cPtr_abstractExpressionGeneration *) object->mAttribute_mExpressionGeneration.ptr (), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 181)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 181)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 181)) ;
 //---
   return result_outCode ;
 }
@@ -1833,7 +1833,7 @@ static GALGAS_string categoryReader_varInstructionGeneration_instructionCode (co
   GALGAS_string result_outCode ; // Returned variable
   const cPtr_varInstructionGeneration * object = (const cPtr_varInstructionGeneration *) inObject ;
   macroValidSharedObject (object, cPtr_varInstructionGeneration) ;
-  result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)).add_operation (function_mangledNameForVariable (object->mAttribute_mLocalVariable, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)) ;
+  result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)).add_operation (function_mangledNameForVariable (object->mAttribute_mLocalVariable, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 194)) ;
 //---
   return result_outCode ;
 }

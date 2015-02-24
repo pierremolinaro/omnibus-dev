@@ -25,8 +25,14 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
-    $identifier$ ?let optionalTypeName
     $identifier$ ?let varName
+    @lstring optionalTypeName
+    select
+      optionalTypeName = ["" nowhere]
+    or
+      $:$
+      $identifier$ ?optionalTypeName
+    end
     $=$
     <expression> ?let @expressionAST expression
     ioInstructionList += !@varInstructionWithAssignmentAST.new {
@@ -38,24 +44,25 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    $var$
-    $identifier$ ?let varName
-    $=$
-    <expression> ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST.new {
-      !varName
-      !.new {!"" !varName.location}
-      !expression
-    }
-  }
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    $var$
+#    $identifier$ ?let varName
+#    $=$
+#    <expression> ?let @expressionAST expression
+#    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+#      !varName
+#      !.new {!"" !varName.location}
+#      !expression
+#    }
+#  }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
-    $identifier$ ?let typeName
     $identifier$ ?let varName
+    $:$
+    $identifier$ ?let typeName
     ioInstructionList += !@varInstructionAST.new {
       !varName
       !typeName
@@ -64,28 +71,28 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    $identifier$ ?let optionalTypeName
-    $identifier$ ?let varName
-    $=$
-    <expression> ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST.new {
-      !varName
-      !optionalTypeName
-      !expression
-    }
-  }
-
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    $identifier$ ?let optionalTypeName
+#    $identifier$ ?let varName
+#    $=$
+#    <expression> ?let @expressionAST expression
+#    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+#      !varName
+#      !optionalTypeName
+#      !expression
+#    }
+#  }
+#
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    $identifier$ ?let typeName
-    $identifier$ ?let varName
-    ioInstructionList += !@varInstructionAST.new {
-      !varName
-      !typeName
-    }
-  }
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    $identifier$ ?let typeName
+#    $identifier$ ?let varName
+#    ioInstructionList += !@varInstructionAST.new {
+#      !varName
+#      !typeName
+#    }
+#  }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
