@@ -2,7 +2,7 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @varInstructionWithAssignmentAST : @instructionAST {
+class @letInstructionWithAssignmentAST : @instructionAST {
   @lstring mVarName
   @lstring mOptionalTypeName
   @expressionAST mSourceExpression
@@ -10,10 +10,10 @@ class @varInstructionWithAssignmentAST : @instructionAST {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @varInstructionAST : @instructionAST {
-  @lstring mVarName
-  @lstring mTypeName
-}
+#class @varInstructionAST : @instructionAST {
+#  @lstring mVarName
+#  @lstring mTypeName
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  SYNTAX                                                                                                              *
@@ -24,7 +24,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    $var$
+    $let$
     $identifier$ ?let varName
     @lstring optionalTypeName
     select
@@ -35,7 +35,7 @@ syntax extension common_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+    ioInstructionList += !@letInstructionWithAssignmentAST.new {
       !varName
       !optionalTypeName
       !expression
@@ -44,16 +44,16 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    $var$
-    $identifier$ ?let varName
-    $:$
-    $identifier$ ?let typeName
-    ioInstructionList += !@varInstructionAST.new {
-      !varName
-      !typeName
-    }
-  }
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    $let$
+#    $identifier$ ?let varName
+#    $:$
+#    $identifier$ ?let typeName
+#    ioInstructionList += !@varInstructionAST.new {
+#      !varName
+#      !typeName
+#    }
+#  }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
@@ -63,7 +63,7 @@ syntax extension common_syntax {
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varInstructionWithAssignmentAST analyze
+override method @letInstructionWithAssignmentAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
@@ -86,8 +86,8 @@ override method @varInstructionWithAssignmentAST analyze
     ?expressionType:let inferredType
     ?generatedCode:let expressionGeneratedCode
   ]
-#--- Declare local variable
-  [!?ioVariableMap insertDefinedLocalVariable
+#--- Declare local constant
+  [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType
     !{!inMode}
@@ -95,7 +95,7 @@ override method @varInstructionWithAssignmentAST analyze
     ![inferredType copiable]
   ]
 #--- Code generation
-  ioInstructionGenerationList += !@varInstructionWithAssignmentGeneration.new {
+  ioInstructionGenerationList += !@letInstructionWithAssignmentGeneration.new {
     !inferredType
     !mVarName.string
     !expressionGeneratedCode
@@ -104,32 +104,32 @@ override method @varInstructionWithAssignmentAST analyze
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varInstructionAST analyze
-  ?optionalReceiverType:let @receiverType unused inReceiverType
-  ?context:let @semanticContext inContext
-  ?mode:let @string inMode
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
-{
-  let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
-#--- Declare local variable
-  [!?ioVariableMap insertUndefinedLocalVariable
-    !mVarName
-    !targetType
-    !{!inMode}
-    !mangledNameForVariable (!name:mVarName.string)
-    ![targetType copiable]
-  ]
-#--- Code generation
-  ioInstructionGenerationList += !@varInstructionGeneration.new {!targetType !mVarName.string}
-}
+#override method @varInstructionAST analyze
+#  ?optionalReceiverType:let @receiverType unused inReceiverType
+#  ?context:let @semanticContext inContext
+#  ?mode:let @string inMode
+#  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+#  ?!variableMap:@variableMap ioVariableMap
+#  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+#{
+#  let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
+##--- Declare local variable
+#  [!?ioVariableMap insertUndefinedLocalVariable
+#    !mVarName
+#    !targetType
+#    !{!inMode}
+#    !mangledNameForVariable (!name:mVarName.string)
+#    ![targetType copiable]
+#  ]
+##--- Code generation
+#  ioInstructionGenerationList += !@varInstructionGeneration.new {!targetType !mVarName.string}
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @varInstructionWithAssignmentGeneration : @abstractInstructionGeneration {
+class @letInstructionWithAssignmentGeneration : @abstractInstructionGeneration {
   @unifiedTypeMap-proxy mTargetType
   @string mLocalVariable
   @abstractExpressionGeneration mExpressionGeneration
@@ -137,22 +137,22 @@ class @varInstructionWithAssignmentGeneration : @abstractInstructionGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @varInstructionWithAssignmentGeneration instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable)
+override getter @letInstructionWithAssignmentGeneration instructionCode -> @string outCode {
+  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable)
     + " = " + [mExpressionGeneration expressionCode] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @varInstructionGeneration : @abstractInstructionGeneration {
-  @unifiedTypeMap-proxy mTargetType
-  @string mLocalVariable
-}
+#class @varInstructionGeneration : @abstractInstructionGeneration {
+#  @unifiedTypeMap-proxy mTargetType
+#  @string mLocalVariable
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @varInstructionGeneration instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable) + " ;\n"
-}
+#override getter @varInstructionGeneration instructionCode -> @string outCode {
+#  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable) + " ;\n"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
