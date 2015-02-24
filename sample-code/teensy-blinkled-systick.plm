@@ -9,22 +9,42 @@ proc $user setup () {
 
 //-----------------------------------------------------------------------------*
 
-var $user gCompteur : UInt32 = 0
+proc $user ledOn () {
+  GPIOC_PSOR = 1 << 5
+}
 
-var $user gProc : proc $isr () = 0
+//-----------------------------------------------------------------------------*
+
+proc $user ledOff () {
+  GPIOC_PCOR = 1 << 5
+}
+
+//-----------------------------------------------------------------------------*
+
+var $user $isr gCompteur : UInt32 = 0
+
+//-----------------------------------------------------------------------------*
+
+proc $isr systTick () {
+  gCompteur ++ 
+}
+
+//-----------------------------------------------------------------------------*
+
+proc $user waitMS (? UInt32 inDuration) {
+  var deadline = gCompteur + inDuration
+  while gCompteur < deadline do
+  end
+}
 
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
-  if gCompteur == 2_000_000 then
-    gCompteur = 0
-    GPIOC_PSOR = 1 << 5
-  elsif gCompteur == 1_000_000 then
-    GPIOC_PCOR = 1 << 5
-    gCompteur ++
-  else
-    gCompteur ++
-  end
+  var duration : UInt32 = 500
+  waitMS (!duration)
+  ledOn ()
+  waitMS (!duration)
+  ledOff ()
 }
 
 //-----------------------------------------------------------------------------*
