@@ -34,31 +34,31 @@ static void ResetISR (void) {
   // enable capacitors for crystal
   register_OSC0_CR = const_OSC_SC8P | const_OSC_SC2P;
   // enable osc, 8-32 MHz range, low power mode
-  register_MCG_C2 = const_MCG_C2_RANGE0(2) | const_MCG_C2_EREFS;
+  register_MCG_C2 = const_MCG_C2_RANGE0_2 | const_MCG_C2_EREFS;
   // switch to crystal as clock source, FLL input = 16 MHz / 512
-  register_MCG_C1 =  const_MCG_C1_CLKS(2) | const_MCG_C1_FRDIV(4);
+  register_MCG_C1 =  const_MCG_C1_CLKS_2 | const_MCG_C1_FRDIV_4;
   // wait for crystal oscillator to begin
   while ((register_MCG_S & const_MCG_S_OSCINIT0) == 0) ;
   // wait for FLL to use oscillator
   while ((register_MCG_S & const_MCG_S_IREFST) != 0) ;
   // wait for MCGOUT to use oscillator
-  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != register_MCG_S_CLKST(2)) ;
+  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_2) ;
   // now we're in FBE mode
   // config PLL input for 16 MHz Crystal / 4 = 4 MHz
-  register_MCG_C5 = const_MCG_C5_PRDIV0(3);
+  register_MCG_C5 = const_MCG_C5_PRDIV0_3 ;
   // config PLL for 96 MHz output
-  register_MCG_C6 = const_MCG_C6_PLLS | const_MCG_C6_VDIV0(0);
+  register_MCG_C6 = const_MCG_C6_PLLS | const_MCG_C6_VDIV0_0;
   // wait for PLL to start using xtal as its input
   while (!(register_MCG_S & const_MCG_S_PLLST)) ;
   // wait for PLL to lock
   while (!(register_MCG_S & const_MCG_S_LOCK0)) ;
   // now we're in PBE mode
   // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash
-  register_SIM_CLKDIV1 = const_SIM_CLKDIV1_OUTDIV1(0) | const_SIM_CLKDIV1_OUTDIV2(1) | const_SIM_CLKDIV1_OUTDIV4(3);
+  register_SIM_CLKDIV1 = const_SIM_CLKDIV1_OUTDIV1_0 | const_SIM_CLKDIV1_OUTDIV2_1 | const_SIM_CLKDIV1_OUTDIV4_3;
   // switch to PLL as clock source, FLL input = 16 MHz / 512
-  register_MCG_C1 = const_MCG_C1_CLKS(0) | const_MCG_C1_FRDIV(4);
+  register_MCG_C1 = const_MCG_C1_CLKS_0 | const_MCG_C1_FRDIV_4;
   // wait for PLL clock to be used
-  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST(3)) ;
+  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_3) ;
   // now we're in PEE mode
   // configure USB for 48 MHz clock
 //  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2
@@ -86,9 +86,9 @@ static void ResetISR (void) {
   }
 
 //----------- Configure systick interrupt
-  SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms
-  SYST_CVR = 0 ;
-  SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;
+  register_SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms
+  register_SYST_CVR = 0 ;
+  register_SYST_CSR = const_SYST_CSR_CLKSOURCE | const_SYST_CSR_TICKINT | const_SYST_CSR_ENABLE ;
 
 //---------5- Exécuter les constructeurs des variables globales
   extern void (* __constructor_array_start) (void) ;
