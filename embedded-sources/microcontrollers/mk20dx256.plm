@@ -1319,35 +1319,35 @@ register VREF_SC   : UInt8 at 0x40074001 // VREF Status and Control Register
 //register CMT_DMA   *(volatile uint8_t  *)0x4006200B // CMT Direct Memory Access Register
 //
 //// Chapter 39: Real Time Clock (RTC)
-//register RTC_TSR    0x4003D000 // RTC Time Seconds Register
-//register RTC_TPR    0x4003D004 // RTC Time Prescaler Register
-//register RTC_TAR    0x4003D008 // RTC Time Alarm Register
-//register RTC_TCR    0x4003D00C // RTC Time Compensation Register
+register RTC_TSR : UInt32 at  0x4003D000 // RTC Time Seconds Register
+register RTC_TPR : UInt32 at  0x4003D004 // RTC Time Prescaler Register
+register RTC_TAR : UInt32 at  0x4003D008 // RTC Time Alarm Register
+register RTC_TCR : UInt32 at  0x4003D00C // RTC Time Compensation Register
 //register RTC_TCR_CIC(n)   (((n) & 255) << 24)  // Compensation Interval Counter
 //register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value
 //register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register
 //register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register
-//register RTC_CR    0x4003D010 // RTC Control Register
-//register RTC_CR_SC2P    0x00002000  // 
-//register RTC_CR_SC4P    0x00001000  // 
-//register RTC_CR_SC8P    0x00000800  // 
-//register RTC_CR_SC16P    0x00000400  // 
-//register RTC_CR_CLKO    0x00000200  // 
-//register RTC_CR_OSCE    0x00000100  // 
-//register RTC_CR_UM    0x00000008  // 
-//register RTC_CR_SUP    0x00000004  // 
-//register RTC_CR_WPE    0x00000002  // 
-//register RTC_CR_SWR    0x00000001  // 
-//register RTC_SR    0x4003D014 // RTC Status Register
-//register RTC_SR_TCE    0x00000010  // 
-//register RTC_SR_TAF    0x00000004  // 
-//register RTC_SR_TOF    0x00000002  // 
-//register RTC_SR_TIF    0x00000001  // 
-//register RTC_LR    0x4003D018 // RTC Lock Register
-//register RTC_IER    0x4003D01C // RTC Interrupt Enable Register
-//register RTC_WAR    0x4003D800 // RTC Write Access Register
-//register RTC_RAR    0x4003D804 // RTC Read Access Register
-//
+register RTC_CR : UInt32 at  0x4003D010 // RTC Control Register
+let RTC_CR_SC2P : UInt32 = 0x00002000  // 
+let RTC_CR_SC4P : UInt32 = 0x00001000  // 
+let RTC_CR_SC8P : UInt32 = 0x00000800  // 
+let RTC_CR_SC16P : UInt32 = 0x00000400  // 
+let RTC_CR_CLKO : UInt32 = 0x00000200  // 
+let RTC_CR_OSCE : UInt32 = 0x00000100  // 
+let RTC_CR_UM : UInt32 = 0x00000008  // 
+let RTC_CR_SUP : UInt32 = 0x00000004  // 
+let RTC_CR_WPE : UInt32 = 0x00000002  // 
+let RTC_CR_SWR : UInt32 = 0x00000001  // 
+register RTC_SR : UInt32 at  0x4003D014 // RTC Status Register
+let RTC_SR_TCE : UInt32 = 0x00000010  // 
+let RTC_SR_TAF : UInt32 = 0x00000004  // 
+let RTC_SR_TOF : UInt32 = 0x00000002  // 
+let RTC_SR_TIF : UInt32 = 0x00000001  // 
+register RTC_LR: UInt32 at 0x4003D018 // RTC Lock Register
+register RTC_IER: UInt32 at 0x4003D01C // RTC Interrupt Enable Register
+register RTC_WAR: UInt32 at 0x4003D800 // RTC Write Access Register
+register RTC_RAR: UInt32 at 0x4003D804 // RTC Read Access Register
+
 //// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)
 //register USB0_PERID  *(const    uint8_t  *)0x40072000 // Peripheral ID register
 //register USB0_IDCOMP  *(const    uint8_t  *)0x40072004 // Peripheral ID Complement register

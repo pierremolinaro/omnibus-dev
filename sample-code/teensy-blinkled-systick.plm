@@ -25,14 +25,14 @@ var $user $isr gCompteur : UInt32 = 0
 
 //-----------------------------------------------------------------------------*
 
-proc $isr systTick () {
+proc $isr systickHandler () {
   gCompteur ++ 
 }
 
 //-----------------------------------------------------------------------------*
 
 proc $user waitMS (? UInt32 inDuration) {
-  var deadline = gCompteur + inDuration
+  let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
 }
@@ -40,7 +40,7 @@ proc $user waitMS (? UInt32 inDuration) {
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
-  var duration : UInt32 = 500
+  let duration : UInt32 = 500
   waitMS (!duration)
   ledOn ()
   waitMS (!duration)
