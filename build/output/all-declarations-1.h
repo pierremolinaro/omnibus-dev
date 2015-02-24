@@ -1856,8 +1856,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_booleanGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_booleanGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_booleanGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1992,8 +1990,6 @@ class cPtr_minusOperatorForBoolsetGeneration : public cPtr_abstractInfixOperator
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_boolsetGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_boolsetGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_boolsetGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2033,8 +2029,6 @@ void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_enumerationGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_enumerationGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_enumerationGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2063,8 +2057,6 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (cla
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_structureGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_structureGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_structureGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2144,8 +2136,6 @@ class GALGAS_string callCategoryReader_expressionCode (const class cPtr_abstract
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_globalVariableGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_globalVariableGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_globalVariableGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2186,8 +2176,6 @@ class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string i
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_globalConstantGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_globalConstantGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_globalConstantGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2237,8 +2225,6 @@ void routine_enterIntegerOperators (class GALGAS_lstring inArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_integerGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_integerGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_integerGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2278,8 +2264,6 @@ void routine_enterStaticStringOperators (class GALGAS_lstring inArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_literalStringGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_literalStringGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_literalStringGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2307,8 +2291,6 @@ GALGAS_string filewrapperTemplate_literalStringGenerationTemplate_declaration (c
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_functionGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_functionGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_functionGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2384,8 +2366,6 @@ class GALGAS_string function_mangledName (const class GALGAS_procedureKindAST & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_procedureGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_procedureGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2426,8 +2406,6 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (cl
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_registerGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_1_registerGenerationTemplate ;
-extern const cDirectoryWrapper gWrapperDirectory_2_registerGenerationTemplate ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2862,10 +2840,6 @@ extern const char * gWrapperFileContent_13_targetTemplates ;
 extern const char * gWrapperFileContent_14_targetTemplates ;
 extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
-extern const char * gWrapperFileContent_17_targetTemplates ;
-extern const char * gWrapperFileContent_18_targetTemplates ;
-extern const char * gWrapperFileContent_19_targetTemplates ;
-extern const char * gWrapperFileContent_20_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2889,10 +2863,6 @@ extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

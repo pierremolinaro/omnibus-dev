@@ -21,8 +21,9 @@ def cleanup():
 atexit.register (cleanup)
 #--- Get script absolute path
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
+os.chdir (scriptDir)
 #---
-childProcess = subprocess.Popen (["make", "all", "--warn-undefined-variables", "SILENT_CHAR?="], cwd=scriptDir)
+childProcess = subprocess.Popen (["python", "build.py", "all", "1"])
 #--- Wait for subprocess termination
 if childProcess.poll () == None :
   childProcess.wait ()
