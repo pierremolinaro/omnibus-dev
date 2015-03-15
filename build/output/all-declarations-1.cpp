@@ -15550,9 +15550,744 @@ void routine_codeGeneration (const GALGAS_string constinArgument_inSourceFileNam
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
+//--- File '/makefile.py'
+
+const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil, subprocess\n"
+  "import platform, json, operator\n"
+  "import threading\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   processorCount                                                           *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                    *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                         *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runCommand                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runInThread                                                              *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      job.mOutputLines.append (line)\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                  *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                        *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Job                                                                *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  mOutputLines = []\n"
+  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title, openSourceOnError):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "    self.mOutputLines = []\n"
+  "    self.mOpenSourceOnError = openSourceOnError\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Rule                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  mDeleteTargetOnError = False # No operation on error\n"
+  "  mCleanOperation = 0 # No operation on clean\n"
+  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    self.mDeleteTargetOnError = False # No operation on error\n"
+  "    self.mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "    self.mCleanOperation = 0 # No operation on clean\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def deleteTargetFileOnClean (self):\n"
+  "    self.mCleanOperation = 1\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def deleteTargetDirectoryOnClean (self):\n"
+  "    self.mCleanOperation = 2\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):\n"
+  "    if make.mSelectedGoal != \"clean\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if not os.path.exists (filePath):\n"
+  "        self.mSecondaryMostRecentModificationDate = sys.float_info.max # Very far in future\n"
+  "      else:\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ()\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\ \", \"\\x01\") # Replace escaped spaces by \\0x01\n"
+  "        s = s.replace (\"\\\\\\n\", \"\") # Suppress \\ at the end of lines\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (make.mModificationDateDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Make                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "  mSelectedGoal = \"\"\n"
+  "  mLinuxTextEditor = \"\"\n"
+  "  mMacTextEditor = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, goal):\n"
+  "    self.mRuleList = []\n"
+  "    self.mJobList = []\n"
+  "    self.mErrorCount = 0\n"
+  "    self.mModificationDateDictionary = {}\n"
+  "    self.mGoals = {}\n"
+  "    self.mSelectedGoal = goal\n"
+  "    self.mLinuxTextEditor = \"gEdit\"\n"
+  "    self.mMacTextEditor = \"TextEdit\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: \\\"\" + rule.mTarget + \"\\\"\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: \\\"\" + dep + \"\\\"\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: \\\"\" + rule.mTitle + \"\\\"\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: \\\"\" + title + \"\\\"\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle, rule.mOpenSourceOnError))"
+  "\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", os.path.dirname (job.mTarget)], \"Making \\\"\" + os.path.dirname (job.mTarget) + \"\\\" directory\", showComman"
+  "d)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if not os.path.exists (os.path.abspath (job.mTarget)): # Warning: target does not exist\n"
+  "                displayLock.acquire ()\n"
+  "                print MAGENTA () + BOLD () + \"Warning: target \\\"\" + job.mTarget + \"\\\" was not created by rule execution.\" + ENDC ()\n"
+  "                displayLock.release ()\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "              if job.mOpenSourceOnError:\n"
+  "                for line in job.mOutputLines:\n"
+  "                  components = line.split (':')\n"
+  "                  if (len (components) > 1) and os.path.exists (os.path.abspath (components [0])) :\n"
+  "                    if sys.platform == \"darwin\":\n"
+  "                      os.system (\"open -a \\\"\" + self.mMacTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
+  "                    elif sys.platform == \"linux2\":\n"
+  "                      os.system (\"\\\"\" + self.mLinuxTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    if self.mGoals.has_key (goal) or (goal == \"clean\") :\n"
+  "      self.enterError (\"The '\" + goal + \"' goal is already defined\")\n"
+  "    else:\n"
+  "      self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: \\\"\" + goalKey + \"\\\"\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: \\\"\" + target + \"\\\"\"\n"
+  "      print \"  Message: \\\"\" + message + \"\\\"\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (self.mSelectedGoal) :\n"
+  "      (targetList, message) = self.mGoals [self.mSelectedGoal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "      if self.mErrorCount > 0:\n"
+  "        for rule in self.mRuleList:\n"
+  "          if rule.mDeleteTargetOnError and os.path.exists (os.path.abspath (rule.mTarget)):\n"
+  "            runCommand ([\"rm\", rule.mTarget], \"Delete \\\"\" + rule.mTarget + \"\\\" on error\", showCommand)\n"
+  "    elif self.mSelectedGoal == \"clean\" :\n"
+  "      filesToRemoveList = []\n"
+  "      directoriesToRemoveSet = set ()\n"
+  "      for rule in self.mRuleList:\n"
+  "        if rule.mCleanOperation == 1: # Delete target\n"
+  "          filesToRemoveList.append (rule.mTarget)\n"
+  "        elif rule.mCleanOperation == 2: # Delete target directories\n"
+  "          directoriesToRemoveSet.add (os.path.dirname (rule.mTarget))\n"
+  "      for dir in directoriesToRemoveSet:\n"
+  "        if os.path.exists (os.path.abspath (dir)):\n"
+  "          runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
+  "      for file in filesToRemoveList:\n"
+  "        if os.path.exists (os.path.abspath (file)):\n"
+  "          runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + self.mSelectedGoal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_0_targetTemplates (
+  "makefile.py",
+  "py",
+  true, // Text file
+  28167, // Text length
+  gWrapperFileContent_0_targetTemplates
+) ;
+
 //--- File 'microcontrollers/mk20dx256.plm'
 
-const char * gWrapperFileContent_0_targetTemplates = "// Teensyduino Core Library\n"
+const char * gWrapperFileContent_1_targetTemplates = "// Teensyduino Core Library\n"
   "// http://www.pjrc.com/teensy/\n"
   "// Copyright (c) 2013 PJRC.COM, LLC.\n"
   "//\n"
@@ -17691,18 +18426,18 @@ const char * gWrapperFileContent_0_targetTemplates = "// Teensyduino Core Librar
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_0_targetTemplates (
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
   144402, // Text length
-  gWrapperFileContent_0_targetTemplates
+  gWrapperFileContent_1_targetTemplates
 ) ;
 
 //--- All files of 'microcontrollers' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [2] = {
-  & gWrapperFile_0_targetTemplates,
+  & gWrapperFile_1_targetTemplates,
   NULL
 } ;
 
@@ -17724,7 +18459,7 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
 
 //--- File 'targets/target-teensy-sequential-systick.plms'
 
-const char * gWrapperFileContent_1_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedBaseType @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedBaseType @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedBaseType @unsigned64 \"uint64_t\" 64\n"
@@ -17765,44 +18500,20 @@ const char * gWrapperFileContent_1_targetTemplates = "newUnsignedBaseType @unsig
   "required proc $user loop ()\n"
   "required proc $isr systickHandler ()\n"
   "\n"
-  "////-----------------------------------------------------------------------------*\n"
-  "//\n"
-  "//var $isr $user gUpTimeInMilliseconds : UInt32 = 0\n"
-  "//\n"
-  "////-----------------------------------------------------------------------------*\n"
-  "//\n"
-  "//proc $isr systickHandler () {\n"
-  "//  gUpTimeInMilliseconds ++\n"
-  "//}\n"
-  "//\n"
-  "////-----------------------------------------------------------------------------*\n"
-  "//\n"
-  "//func $user uptimeMS () ->UInt32 outUpTimeInMilliseconds {\n"
-  "//  outUpTimeInMilliseconds = gUpTimeInMilliseconds\n"
-  "//}\n"
-  "//\n"
-  "////-----------------------------------------------------------------------------*\n"
-  "//\n"
-  "//proc $user busyWaitingDuringMS (\?UInt32 inDurationInMS) {\n"
-  "//  var deadline = uptimeMS () + inDurationInMS\n"
-  "//  while (uptimeMS () < deadline) do\n"
-  "//  end\n"
-  "//}\n"
-  "//\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1998, // Text length
-  gWrapperFileContent_1_targetTemplates
+  1251, // Text length
+  gWrapperFileContent_2_targetTemplates
 ) ;
 
 //--- File 'targets/target-teensy-sequential.plms'
 
-const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_3_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedBaseType @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedBaseType @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedBaseType @unsigned64 \"uint64_t\" 64\n"
@@ -17827,6 +18538,7 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsig
   "newIntegerType Int64 @signed64\n"
   "\n"
   "import \"microcontrollers/mk20dx256.plm\"\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "mode $isr\n"
@@ -17834,19 +18546,20 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsig
   "\n"
   "required proc $user setup ()\n"
   "required proc $user loop ()\n"
-  "\n" ;
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "target-teensy-sequential.plms",
   "plms",
   true, // Text file
-  885, // Text length
-  gWrapperFileContent_2_targetTemplates
+  967, // Text length
+  gWrapperFileContent_3_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build-as.py'
 
-const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -17880,17 +18593,17 @@ const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_4_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build-verbose.py'
 
-const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -17924,17 +18637,17 @@ const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_5_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build.py'
 
-const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -18877,17 +19590,17 @@ const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   41653, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_6_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/clean.py'
 
-const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -18924,17 +19637,17 @@ const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_7_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -18968,17 +19681,17 @@ const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_8_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_9_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -19136,17 +19849,17 @@ const char * gWrapperFileContent_8_targetTemplates = "/*------------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_9_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_10_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -21334,17 +22047,17 @@ const char * gWrapperFileContent_9_targetTemplates = "/* Teensyduino Core Librar
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential.c'
 
-const char * gWrapperFileContent_10_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_11_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -21526,20 +22239,20 @@ const char * gWrapperFileContent_10_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "startup-sequential.c",
   "c",
   true, // Text file
   7492, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [4] = {
-  & gWrapperFile_8_targetTemplates,
   & gWrapperFile_9_targetTemplates,
   & gWrapperFile_10_targetTemplates,
+  & gWrapperFile_11_targetTemplates,
   NULL
 } ;
 
@@ -21562,11 +22275,11 @@ const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
 //--- All files of 'target-teensy-sequential' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [6] = {
-  & gWrapperFile_3_targetTemplates,
   & gWrapperFile_4_targetTemplates,
   & gWrapperFile_5_targetTemplates,
   & gWrapperFile_6_targetTemplates,
   & gWrapperFile_7_targetTemplates,
+  & gWrapperFile_8_targetTemplates,
   NULL
 } ;
 
@@ -21589,7 +22302,7 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 
 //--- File 'target-teensy-sequential-systick/build-as.py'
 
-const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21623,17 +22336,17 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -21667,17 +22380,17 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22620,17 +23333,17 @@ const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   41661, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22667,17 +23380,17 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -22711,17 +23424,17 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_16_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_17_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -22879,17 +23592,17 @@ const char * gWrapperFileContent_16_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_17_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_18_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include \"plm.h\"\n"
   "\n"
@@ -23066,19 +23779,19 @@ const char * gWrapperFileContent_17_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   7687, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [3] = {
-  & gWrapperFile_16_targetTemplates,
   & gWrapperFile_17_targetTemplates,
+  & gWrapperFile_18_targetTemplates,
   NULL
 } ;
 
@@ -23101,11 +23814,11 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 //--- All files of 'target-teensy-sequential-systick' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [6] = {
-  & gWrapperFile_11_targetTemplates,
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_15_targetTemplates,
+  & gWrapperFile_16_targetTemplates,
   NULL
 } ;
 
@@ -23129,8 +23842,8 @@ const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
 //--- All files of 'targets' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [3] = {
-  & gWrapperFile_1_targetTemplates,
   & gWrapperFile_2_targetTemplates,
+  & gWrapperFile_3_targetTemplates,
   NULL
 } ;
 
@@ -23154,7 +23867,8 @@ const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
 
 //--- All files of '' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [1] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [2] = {
+  & gWrapperFile_0_targetTemplates,
   NULL
 } ;
 
@@ -23170,7 +23884,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [3] = 
 
 const cDirectoryWrapper gWrapperDirectory_0_targetTemplates (
   "",
-  0,
+  1,
   gWrapperAllFiles_targetTemplates_0,
   2,
   gWrapperAllDirectories_targetTemplates_0

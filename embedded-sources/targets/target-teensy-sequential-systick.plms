@@ -39,29 +39,5 @@ required proc $user setup ()
 required proc $user loop ()
 required proc $isr systickHandler ()
 
-////-----------------------------------------------------------------------------*
-//
-//var $isr $user gUpTimeInMilliseconds : UInt32 = 0
-//
-////-----------------------------------------------------------------------------*
-//
-//proc $isr systickHandler () {
-//  gUpTimeInMilliseconds ++
-//}
-//
-////-----------------------------------------------------------------------------*
-//
-//func $user uptimeMS () ->UInt32 outUpTimeInMilliseconds {
-//  outUpTimeInMilliseconds = gUpTimeInMilliseconds
-//}
-//
-////-----------------------------------------------------------------------------*
-//
-//proc $user busyWaitingDuringMS (?UInt32 inDurationInMS) {
-//  var deadline = uptimeMS () + inDurationInMS
-//  while (uptimeMS () < deadline) do
-//  end
-//}
-//
 //-----------------------------------------------------------------------------*
 
