@@ -12906,7 +12906,9 @@ void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObj
 GALGAS_accessibleEntities::GALGAS_accessibleEntities (void) :
 mAttribute_mAccessibleRegisterSet (),
 mAttribute_mStaticStringSet (),
-mAttribute_mGlobalConstantSet () {
+mAttribute_mGlobalConstantSet (),
+mAttribute_mProcedureSet (),
+mAttribute_mFunctionSet () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12918,16 +12920,22 @@ GALGAS_accessibleEntities::~ GALGAS_accessibleEntities (void) {
 
 GALGAS_accessibleEntities::GALGAS_accessibleEntities (const GALGAS_stringset & inOperand0,
                                                       const GALGAS_stringset & inOperand1,
-                                                      const GALGAS_stringset & inOperand2) :
+                                                      const GALGAS_stringset & inOperand2,
+                                                      const GALGAS_stringset & inOperand3,
+                                                      const GALGAS_stringset & inOperand4) :
 mAttribute_mAccessibleRegisterSet (inOperand0),
 mAttribute_mStaticStringSet (inOperand1),
-mAttribute_mGlobalConstantSet (inOperand2) {
+mAttribute_mGlobalConstantSet (inOperand2),
+mAttribute_mProcedureSet (inOperand3),
+mAttribute_mFunctionSet (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_accessibleEntities (GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE),
+                                    GALGAS_stringset::constructor_emptySet (HERE),
                                     GALGAS_stringset::constructor_emptySet (HERE),
                                     GALGAS_stringset::constructor_emptySet (HERE)) ;
 }
@@ -12936,11 +12944,13 @@ GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_default (UNUSED
 
 GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_new (const GALGAS_stringset & inOperand0,
                                                                       const GALGAS_stringset & inOperand1,
-                                                                      const GALGAS_stringset & inOperand2 
+                                                                      const GALGAS_stringset & inOperand2,
+                                                                      const GALGAS_stringset & inOperand3,
+                                                                      const GALGAS_stringset & inOperand4 
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_accessibleEntities result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -12958,13 +12968,19 @@ typeComparisonResult GALGAS_accessibleEntities::objectCompare (const GALGAS_acce
   if (result == kOperandEqual) {
     result = mAttribute_mGlobalConstantSet.objectCompare (inOperand.mAttribute_mGlobalConstantSet) ;
   }
+  if (result == kOperandEqual) {
+    result = mAttribute_mProcedureSet.objectCompare (inOperand.mAttribute_mProcedureSet) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mFunctionSet.objectCompare (inOperand.mAttribute_mFunctionSet) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_accessibleEntities::isValid (void) const {
-  return mAttribute_mAccessibleRegisterSet.isValid () && mAttribute_mStaticStringSet.isValid () && mAttribute_mGlobalConstantSet.isValid () ;
+  return mAttribute_mAccessibleRegisterSet.isValid () && mAttribute_mStaticStringSet.isValid () && mAttribute_mGlobalConstantSet.isValid () && mAttribute_mProcedureSet.isValid () && mAttribute_mFunctionSet.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12973,6 +12989,8 @@ void GALGAS_accessibleEntities::drop (void) {
   mAttribute_mAccessibleRegisterSet.drop () ;
   mAttribute_mStaticStringSet.drop () ;
   mAttribute_mGlobalConstantSet.drop () ;
+  mAttribute_mProcedureSet.drop () ;
+  mAttribute_mFunctionSet.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12988,6 +13006,10 @@ void GALGAS_accessibleEntities::description (C_String & ioString,
     mAttribute_mStaticStringSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mGlobalConstantSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mProcedureSet.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mFunctionSet.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13008,6 +13030,18 @@ GALGAS_stringset GALGAS_accessibleEntities::reader_mStaticStringSet (UNUSED_LOCA
 
 GALGAS_stringset GALGAS_accessibleEntities::reader_mGlobalConstantSet (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mGlobalConstantSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::reader_mProcedureSet (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcedureSet ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_accessibleEntities::reader_mFunctionSet (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFunctionSet ;
 }
 
 
@@ -13126,10 +13160,10 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_instructionListIR inOb
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_2191 (temp_0, kEnumeration_up) ;
-  while (enumerator_2191.hasCurrentObject ()) {
-    callCategoryMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_2191.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 43)) ;
-    enumerator_2191.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_2244 (temp_0, kEnumeration_up) ;
+  while (enumerator_2244.hasCurrentObject ()) {
+    callCategoryMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_2244.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 45)) ;
+    enumerator_2244.gotoNextObject () ;
   }
 }
 
@@ -14654,7 +14688,7 @@ GALGAS_string categoryReader_implementationCodeGeneration (const GALGAS_function
                                                            C_Compiler * inCompiler
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outCode ; // Returned variable
-  result_outCode = GALGAS_string (filewrapperTemplate_functionGenerationTemplate_implementation (inCompiler, function_mangledNameForFunction (inObject.mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 240)), inObject.mAttribute_mFormalArgumentListForGeneration, inObject.mAttribute_mInstructionGenerationList, inObject.mAttribute_mResultType, inObject.mAttribute_mResultVarName COMMA_SOURCE_FILE ("func-declaration.galgas", 239))) ;
+  result_outCode = GALGAS_string (filewrapperTemplate_functionGenerationTemplate_implementation (inCompiler, inObject.mAttribute_lkey.mAttribute_string, inObject.mAttribute_mFormalArgumentListForGeneration, inObject.mAttribute_mInstructionGenerationList, inObject.mAttribute_mResultType, inObject.mAttribute_mResultVarName COMMA_SOURCE_FILE ("func-declaration.galgas", 239))) ;
 //---
   return result_outCode ;
 }
@@ -15058,7 +15092,8 @@ mAttribute_mGlobalVariableMap (),
 mAttribute_mGlobalConstantMap (),
 mAttribute_mTypeMapIR (),
 mAttribute_mProcedureMapIR (),
-mAttribute_mFunctionMapIR () {
+mAttribute_mFunctionMapIR (),
+mAttribute_mRequiredProcedureSet () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15074,14 +15109,16 @@ GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_globa
                                                               const GALGAS_globalConstantMapIR & inOperand3,
                                                               const GALGAS_typeMapIR & inOperand4,
                                                               const GALGAS_procedureMapIR & inOperand5,
-                                                              const GALGAS_functionMapIR & inOperand6) :
+                                                              const GALGAS_functionMapIR & inOperand6,
+                                                              const GALGAS_stringset & inOperand7) :
 mAttribute_mGlobalLiteralStringMap (inOperand0),
 mAttribute_mRegisterMap (inOperand1),
 mAttribute_mGlobalVariableMap (inOperand2),
 mAttribute_mGlobalConstantMap (inOperand3),
 mAttribute_mTypeMapIR (inOperand4),
 mAttribute_mProcedureMapIR (inOperand5),
-mAttribute_mFunctionMapIR (inOperand6) {
+mAttribute_mFunctionMapIR (inOperand6),
+mAttribute_mRequiredProcedureSet (inOperand7) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15093,7 +15130,8 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
                                         GALGAS_globalConstantMapIR::constructor_emptyMap (HERE),
                                         GALGAS_typeMapIR::constructor_emptyMap (HERE),
                                         GALGAS_procedureMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_functionMapIR::constructor_emptyMap (HERE)) ;
+                                        GALGAS_functionMapIR::constructor_emptyMap (HERE),
+                                        GALGAS_stringset::constructor_emptySet (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15104,11 +15142,12 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (co
                                                                               const GALGAS_globalConstantMapIR & inOperand3,
                                                                               const GALGAS_typeMapIR & inOperand4,
                                                                               const GALGAS_procedureMapIR & inOperand5,
-                                                                              const GALGAS_functionMapIR & inOperand6 
+                                                                              const GALGAS_functionMapIR & inOperand6,
+                                                                              const GALGAS_stringset & inOperand7 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
   }
   return result ;
 }
@@ -15138,13 +15177,16 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
   if (result == kOperandEqual) {
     result = mAttribute_mFunctionMapIR.objectCompare (inOperand.mAttribute_mFunctionMapIR) ;
   }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRequiredProcedureSet.objectCompare (inOperand.mAttribute_mRequiredProcedureSet) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mAttribute_mGlobalLiteralStringMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mTypeMapIR.isValid () && mAttribute_mProcedureMapIR.isValid () && mAttribute_mFunctionMapIR.isValid () ;
+  return mAttribute_mGlobalLiteralStringMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mTypeMapIR.isValid () && mAttribute_mProcedureMapIR.isValid () && mAttribute_mFunctionMapIR.isValid () && mAttribute_mRequiredProcedureSet.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15157,6 +15199,7 @@ void GALGAS_intermediateCodeStruct::drop (void) {
   mAttribute_mTypeMapIR.drop () ;
   mAttribute_mProcedureMapIR.drop () ;
   mAttribute_mFunctionMapIR.drop () ;
+  mAttribute_mRequiredProcedureSet.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15180,6 +15223,8 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     mAttribute_mProcedureMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mFunctionMapIR.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRequiredProcedureSet.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -15224,6 +15269,12 @@ GALGAS_procedureMapIR GALGAS_intermediateCodeStruct::reader_mProcedureMapIR (UNU
 
 GALGAS_functionMapIR GALGAS_intermediateCodeStruct::reader_mFunctionMapIR (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFunctionMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_intermediateCodeStruct::reader_mRequiredProcedureSet (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRequiredProcedureSet ;
 }
 
 
@@ -15287,79 +15338,79 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_variableKindIR inObjec
     break ;
   case GALGAS_variableKindIR::kEnum_register:
     {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_1052 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1052->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 18)) ;
+      const cEnumAssociatedValues_variableKindIR_register * extractPtr_1105 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1105->mAssociatedValue0 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 20)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_1151 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1151->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mGlobalConstantSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 20)) ;
+      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_1204 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1204->mAssociatedValue0 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mGlobalConstantSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 22)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_1197 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1197->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_1250 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1250->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_1242 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1242->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_1295 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1295->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_inArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1284 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1284->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1337 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1337->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_inOutArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1329 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1329->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1382 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1382->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_outArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1372 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1372->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1425 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1425->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1417 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1417->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1470 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1470->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_temporaryConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1463 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_1463->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1516 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_idx = extractPtr_1516->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localAccess:
     {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1508 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_access = extractPtr_1508->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1561 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_access = extractPtr_1561->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
     {
-      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_1597 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1597->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_value = extractPtr_1597->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_1650 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1650->mAssociatedValue0 ;
+      const GALGAS_uint_36__34_ extractedValue_value = extractPtr_1650->mAssociatedValue1 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalString:
     {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1708 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_1708->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_1708->mAssociatedValue1 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 31)) ;
+      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1761 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_value = extractPtr_1761->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_1761->mAssociatedValue1 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 33)) ;
     }
     break ;
   }
@@ -15376,7 +15427,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_procedureMapIR_2D_elem
                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 50)) ;
+  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 52)) ;
 }
 
 
@@ -15390,7 +15441,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_functionMapIR_2D_eleme
                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 56)) ;
+  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 58)) ;
 }
 
 
@@ -15431,65 +15482,65 @@ GALGAS_string categoryReader_mangledName (const GALGAS_variableKindIR & inObject
     break ;
   case GALGAS_variableKindIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_1039 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1039->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForVariable (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 16)) ;
+      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_1044 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1044->mAssociatedValue0 ;
+      result_outResult = function_mangledNameForLocalVariable (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 16)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_inArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1128 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1128->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1133 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1133->mAssociatedValue0 ;
       result_outResult = function_mangledNameForInArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 18)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_inOutArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1223 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1223->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1228 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1228->mAssociatedValue0 ;
       result_outResult = function_mangledNameForInOutArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 20)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_outArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1321 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1321->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1326 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1326->mAssociatedValue0 ;
       result_outResult = GALGAS_string ("* ").add_operation (function_mangledNameForOutArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 22)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1411 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1411->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1416 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1416->mAssociatedValue0 ;
       result_outResult = function_mangledNameForConstant (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 24)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_temporaryConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1509 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_1509->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1514 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_idx = extractPtr_1514->mAssociatedValue0 ;
       result_outResult = function_mangledNameForTemporaryConstant (extractedValue_idx, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 26)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localAccess:
     {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1570 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_access = extractPtr_1570->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1575 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_access = extractPtr_1575->mAssociatedValue0 ;
       result_outResult = extractedValue_access ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
     {
-      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_1727 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1727->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_value = extractPtr_1727->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_1732 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1732->mAssociatedValue0 ;
+      const GALGAS_uint_36__34_ extractedValue_value = extractPtr_1732->mAssociatedValue1 ;
       result_outResult = GALGAS_string ("((").add_operation (function_mangledNameForType (extractedValue_type.reader_key (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)).add_operation (GALGAS_string (") "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)).add_operation (extractedValue_value.reader_string (SOURCE_FILE ("code-generation.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 30)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalString:
     {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1788 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1788->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1793 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1793->mAssociatedValue1 ;
       result_outResult = extractedValue_name ;
     }
     break ;

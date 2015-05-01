@@ -109,7 +109,9 @@ override getter @whileInstructionIR instructionCode -> @string outCode {
   outCode = "LABEL_" + mLabelIndex + ": {\n"
   outCode += [mTestInstructionGenerationList instructionListCode]
   outCode += "  if (" + [mTestExpression mangledName] + ") {\n"
+  [!?outCode incIndentation !2]
   outCode += [mInstructionGenerationList instructionListCode]
+  [!?outCode decIndentation !2]
   outCode += "    goto LABEL_" + mLabelIndex + " ;\n"
   outCode += "  }\n"
   outCode += "}\n"

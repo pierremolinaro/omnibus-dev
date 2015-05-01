@@ -2,12 +2,6 @@ target "target-teensy-sequential-systick.plms"
 
 //-----------------------------------------------------------------------------*
 
-proc $user ggg (!StaticString outS ) {
-  outS = "azerty"
-}
-
-//-----------------------------------------------------------------------------*
-
 proc $user setup () {
   PORTC_PCR5 = (1 << 8)
   GPIOC_PDDR = GPIOC_PDDR | (1 << 5)
