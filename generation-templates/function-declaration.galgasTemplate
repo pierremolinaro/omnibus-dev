@@ -2,7 +2,7 @@
 //%!["proc " + FUNCTION_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-%!mangledNameForType (!name:[RESULT_TYPE key])% %!mangledNameForFunction (!name:FUNCTION_MANGLED_NAME)% (%?^
+%!mangledNameForType (!name:[RESULT_TYPE key])% %!FUNCTION_MANGLED_NAME% (%?^
 if [FORMAL_ARGUMENT_LIST length] == 0 then
   %void%
 else

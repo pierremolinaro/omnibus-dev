@@ -107,9 +107,9 @@ static void ResetISR (void) {
     ptr ++ ;
   }
 //---------7- Exécuter le programme utilisateur
-  setup () ;
+  proc_setup () ;
   while (1) {
-    loop () ;
+    proc_loop () ;
   }
 }
 
@@ -150,7 +150,7 @@ const vectorStructSeq vector __attribute__ ((section (".isr_vector"))) = {
     NULL, // 12
     NULL, // 13
     NULL, // 14
-    systickHandler // 15
+    proc_systickHandler // 15
   },
 //--- Non-Core Vectors
   { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,

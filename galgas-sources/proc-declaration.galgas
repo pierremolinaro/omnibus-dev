@@ -244,10 +244,11 @@ class @procedureGeneration : @abstractGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @procedureDeclarationListAST-element semanticAnalysis
+method @procedureDeclarationListAST-element procedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check mode
   if mProcedureMode.string != "" then
@@ -355,6 +356,11 @@ method @procedureDeclarationListAST-element semanticAnalysis
     !formalArguments
     !instructionGenerationList
   }
+  [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
+    !mProcedureName # [self mangledName]
+    !formalArguments
+    !instructionGenerationList
+  ]  
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -372,6 +378,25 @@ private filewrapper procedureGenerationTemplate in "../generation-templates" {
     ?@string PROCEDURE_MANGLED_NAME
     ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
     ?@instructionGenerationList INSTRUCTION_GENERATION_LIST
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procedureMapIR-element headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper procedureGenerationTemplate.declaration
+    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
+    !mFormalArgumentListForGeneration
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procedureMapIR-element implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper procedureGenerationTemplate.implementation
+    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
+    !mFormalArgumentListForGeneration
+    !mInstructionGenerationList
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

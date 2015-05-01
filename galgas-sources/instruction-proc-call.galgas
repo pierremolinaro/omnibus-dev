@@ -173,7 +173,7 @@ override method @procCallInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionGeneration.new {
-    !procMangledName
+    !mProcRoutineName.string # procMangledName
     !parameterList
   }
 }
@@ -190,7 +190,7 @@ class @procCallInstructionGeneration : @abstractInstructionGeneration {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @procCallInstructionGeneration instructionCode -> @string outCode {
-  outCode = [mProcName identifierRepresentation] + " ("
+  outCode = mangledNameForProcedure (!name:mProcName) + " ("
   for () in mParameters
     do outCode += mParameterAccess
     between outCode += ", "

@@ -2,7 +2,7 @@
 //%!["proc " + PROCEDURE_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-void %![PROCEDURE_MANGLED_NAME identifierRepresentation]% (%?^
+void %!PROCEDURE_MANGLED_NAME% (%?^
 if [FORMAL_ARGUMENT_LIST length] == 0 then
   %void%
 else

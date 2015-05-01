@@ -8,6 +8,7 @@ abstract method @abstractDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -20,27 +21,32 @@ proc semanticAnalysis
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   !generation:@orderedGenerationList outGenerationList
+  !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
+  outIntermediateCodeStruct = .default
   outGenerationList = {}
   for (declaration) in inDeclarationListAST do
     [declaration semanticAnalysis
-       !context:inSemanticContext
-       !?generation:outGenerationList
-       !?staticStringMap:ioGlobalLiteralStringMap
+      !context:inSemanticContext
+      !?generation:outGenerationList
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?intermediateCode:outIntermediateCodeStruct
      ]
   end
   for procedure in inProcedureListAST do
-    [procedure semanticAnalysis
+    [procedure procedureSemanticAnalysis
       !context:inSemanticContext
       !?generation:outGenerationList
       !?staticStringMap:ioGlobalLiteralStringMap
+      !?intermediateCode:outIntermediateCodeStruct
     ]
   end
   for function in inFunctionListAST do
-    [function semanticAnalysis
+    [function functionSemanticAnalysis
       !context:inSemanticContext
       !?generation:outGenerationList
       !?staticStringMap:ioGlobalLiteralStringMap
+      !?intermediateCode:outIntermediateCodeStruct
     ]
   end
 #--- Check required procedure are defined

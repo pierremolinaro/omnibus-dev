@@ -164,6 +164,7 @@ override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Get C type
   var cType = ""
@@ -194,10 +195,21 @@ override method @enumerationDeclaration semanticAnalysis
     !mEnumerationName.string
     !cType
   }
+  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+    !mEnumerationName
+    !@enumerationIR.new {!mEnumerationName.string !cType}
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @enumerationIR : @abstractTypeIR {
+  @string mEnumerationName
+  @string mActualTypeName
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @enumerationGeneration : @abstractGeneration {
@@ -213,6 +225,15 @@ private filewrapper enumerationGenerationTemplate in "../generation-templates" {
   template declaration "enumeration-declaration.galgasTemplate"
     ?@string ENUMERATION_NAME
     ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @enumerationIR headerCodeGenerationForType -> @string outCode {
+  outCode = [filewrapper enumerationGenerationTemplate.declaration
+    !mEnumerationName
+    !mActualTypeName
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

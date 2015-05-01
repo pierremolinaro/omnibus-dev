@@ -122,6 +122,7 @@ override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Code generation
   [inContext.mGlobalConstantMap searchKey
@@ -133,10 +134,15 @@ override method @globalConstantDeclaration semanticAnalysis
     !mConstantName.string
     !expressionGeneratedCode
   }
+  [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
+    !mConstantName
+    !expressionGeneratedCode
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
 
 class @globalConstantGeneration : @abstractGeneration {
   @string mGlobalConstanteName
@@ -151,6 +157,15 @@ private filewrapper globalConstantGenerationTemplate in "../generation-templates
   template declaration "global-constant-declaration.galgasTemplate"
     ?@string GLOBAL_CONSTANT_NAME
     ?@string CONSTANT_VALUE
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @globalConstantMapIR-element headerCodeGeneration -> @string outCode {
+  outCode = [filewrapper globalConstantGenerationTemplate.declaration
+    !lkey.string
+    ![mValueExpressionGeneration expressionCode]
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
