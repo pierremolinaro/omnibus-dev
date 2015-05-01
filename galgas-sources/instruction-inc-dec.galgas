@@ -50,16 +50,18 @@ override method @incrementationInstructionAST analyze
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get target type
   [!?ioVariableMap searchForReadWriteAccess
     !mVarName
     ?let type
     ?let acceptedModeSet
-    ?let @string variableCName
+    ?let @string unused variableCName
+    ?let variable
     ?*
   ]
 #--- Check mode
@@ -71,8 +73,8 @@ override method @incrementationInstructionAST analyze
     error mVarName : [type key] + " type does handle ++ operator"
   end
 #--- Code generation
-  ioInstructionGenerationList += !@incrementInstructionGeneration.new {
-   !variableCName
+  ioInstructionGenerationList += !@incrementInstructionIR.new {
+   !variable
  }
 }
 
@@ -82,16 +84,18 @@ override method @decrementationInstructionAST analyze
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get target type
   [!?ioVariableMap searchForReadWriteAccess
     !mVarName
     ?let type
     ?let acceptedModeSet
-    ?let @string variableCName
+    ?let @string unused variableCName
+    ?let variable
     ?*
   ]
 #--- Check mode
@@ -103,8 +107,8 @@ override method @decrementationInstructionAST analyze
     error mVarName : [type key] + " type does handle -- operator"
   end
 #--- Code generation
-  ioInstructionGenerationList += !@decrementInstructionGeneration.new {
-   !variableCName
+  ioInstructionGenerationList += !@decrementInstructionIR.new {
+   !variable
  }
 }
 
@@ -112,26 +116,26 @@ override method @decrementationInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @incrementInstructionGeneration : @abstractInstructionGeneration {
-  @string mMangledName
+class @incrementInstructionIR : @abstractInstructionIR {
+  @variableKindIR mVariable
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @incrementInstructionGeneration instructionCode -> @string outCode {
-  outCode = mMangledName + " ++ ;\n"
+override getter @incrementInstructionIR instructionCode -> @string outCode {
+  outCode = [mVariable mangledName] + " ++ ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @decrementInstructionGeneration : @abstractInstructionGeneration {
-  @string mMangledName
+class @decrementInstructionIR : @abstractInstructionIR {
+  @variableKindIR mVariable
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @decrementInstructionGeneration instructionCode -> @string outCode {
-  outCode = mMangledName + " -- ;\n"
+override getter @decrementInstructionIR instructionCode -> @string outCode {
+  outCode = [mVariable mangledName] + " -- ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

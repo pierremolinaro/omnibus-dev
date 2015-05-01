@@ -59,7 +59,7 @@ map @typeMapIR {
 
 map @procedureMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionGenerationList mInstructionGenerationList
+  @instructionListIR mInstructionGenerationList
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -68,7 +68,7 @@ map @procedureMapIR {
 
 map @functionMapIR {
   @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionGenerationList mInstructionGenerationList
+  @instructionListIR mInstructionGenerationList
   @unifiedTypeMap-proxy mResultType
   @string mResultVarName
   insert insertKey error message "** internal error **"

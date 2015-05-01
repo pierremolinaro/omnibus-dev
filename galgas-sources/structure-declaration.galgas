@@ -206,15 +206,20 @@ override method @structureDeclaration semanticAnalysis
     end
     fieldNameSet += !mFieldName.string
   #--- Init expression
+    @instructionListIR initInstructionGenerationList = {}
+    @uint ioTemporaryIndex = 0
     [mInitExpression analyzeExpression
       !optionalReceiverType:.noReceiver
       !optionalTargetType:fieldType
       !context:inContext
       !mode:""
+      !?temporary:ioTemporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:*
+      !?instructionListIR:initInstructionGenerationList
       ?expressionType:let inferredType
       ?generatedCode:let initExpressionGeneratedCode
+      ?result:@variableKindIR resultValueName
     ]
   #---
     structureFieldListForGeneration +=

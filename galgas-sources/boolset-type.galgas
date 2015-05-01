@@ -186,6 +186,16 @@ override getter @minusOperatorForBoolsetGeneration generateInfixExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override getter @minusOperatorForBoolsetGeneration generateCode
+  ?@variableKindIR inleft
+  ?@variableKindIR inRight
+  -> @string outCode
+{
+  outCode = "(" + [inleft mangledName] + ") & (" + [mMask hexString] + " ^ (" + [inRight mangledName] + "))"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 

@@ -38,21 +38,23 @@ override method @foreverInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
-  @instructionGenerationList instructionGenerationList = {}
+  @instructionListIR instructionGenerationList = {}
   [mWhileInstructionList analyzeBranchInstructionList
     !endOfInstructionList:mEndOf_while_instruction
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?generatedCode:instructionGenerationList
+    !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Code generation
@@ -65,8 +67,8 @@ override method @foreverInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @foreverInstructionGeneration : @abstractInstructionGeneration {
-  @instructionGenerationList mInstructionGenerationList
+class @foreverInstructionGeneration : @abstractInstructionIR {
+  @instructionListIR mInstructionGenerationList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

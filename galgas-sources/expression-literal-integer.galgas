@@ -74,10 +74,13 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @string unused inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResult
 {
   if inOptionalTargetType == .null then
     error mLiteralInteger : "Cannot infer type" : outExpressionType
@@ -106,6 +109,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   outGeneratedCode = @inLineExpressionGeneration.new {
    !"(" + mangledNameForType (!name:[inOptionalTargetType key]) + ") " + mLiteralInteger.uint64
   }
+  outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger.uint64}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
