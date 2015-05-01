@@ -153,7 +153,8 @@ class @functionCallIR : @abstractInstructionIR {
 
 override getter @functionCallIR instructionCode -> @string outCode {
   outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
-  outCode += mangledNameForFunction (!name:mFunctionName) + " (\n"
+  outCode += [mTempConstantTarget mangledName] + " = "
+  outCode += mangledNameForFunction (!name:mFunctionName) + " ("
   for (variable) in mVariableList
   do outCode += [variable mangledName]
   between outCode += ", "
@@ -164,6 +165,8 @@ override getter @functionCallIR instructionCode -> @string outCode {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @functionCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mFunctionSet += !mFunctionName
+  [mTempConstantTarget enterAccessibleEntities !?ioAccessibleEntities]
   for (variable) in mVariableList do
     [variable enterAccessibleEntities !?ioAccessibleEntities]
   end

@@ -96,7 +96,7 @@ override method @varInstructionWithAssignmentAST analyze
     !mVarName
     !inferredType
     !{!inMode}
-    !mangledNameForVariable (!name:mVarName.string)
+    !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![inferredType copiable]
   ]
@@ -126,7 +126,7 @@ override method @varInstructionAST analyze
     !mVarName
     !targetType
     !{!inMode}
-    !mangledNameForVariable (!name:mVarName.string)
+    !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![targetType copiable]
   ]

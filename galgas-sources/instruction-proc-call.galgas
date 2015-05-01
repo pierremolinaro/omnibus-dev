@@ -226,6 +226,7 @@ override getter @procCallInstructionIR instructionCode -> @string outCode {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mProcedureSet += !mProcName
   for () in mParameters do
     [mParameter enterAccessibleEntities !?ioAccessibleEntities]
   end

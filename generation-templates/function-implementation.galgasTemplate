@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------------------------------------------------*
-//%!["func " + FUNCTION_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
+//%!["func " + FUNCTION_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-%!mangledNameForType (!name:[RESULT_TYPE key])% %!FUNCTION_MANGLED_NAME% (%?^
+%!mangledNameForType (!name:[RESULT_TYPE key])% %!mangledNameForFunction (!name:FUNCTION_NAME)% (%?^
 if [FORMAL_ARGUMENT_LIST length] == 0 then
   %void%
 else
@@ -15,8 +15,8 @@ else
   end
 end
 %) {
-  %!mangledNameForType (!name:[RESULT_TYPE key])% %!RESULT_VAR_NAME% ;
+  %!mangledNameForType (!name:[RESULT_TYPE key])% %!mangledNameForLocalVariable (!name:RESULT_VAR_NAME)% ;
 %![INSTRUCTION_GENERATION_LIST instructionListCode]
-%  return %!RESULT_VAR_NAME% ;
+%  return %!mangledNameForLocalVariable (!name:RESULT_VAR_NAME)% ;
 }
 

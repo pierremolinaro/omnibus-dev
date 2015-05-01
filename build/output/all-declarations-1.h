@@ -4151,7 +4151,7 @@ extern const cDirectoryWrapper gWrapperDirectory_0_functionGenerationTemplate ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (class C_Compiler * inCompiler,
-                                                                          const class GALGAS_string & in_FUNCTION_5F_MANGLED_5F_NAME,
+                                                                          const class GALGAS_string & in_FUNCTION_5F_NAME,
                                                                           const class GALGAS_funcFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
                                                                           const class GALGAS_unifiedTypeMap_2D_proxy & in_RESULT_5F_TYPE
                                                                           COMMA_LOCATION_ARGS) ;
@@ -4163,12 +4163,32 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (class 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (class C_Compiler * inCompiler,
-                                                                             const class GALGAS_string & in_FUNCTION_5F_MANGLED_5F_NAME,
+                                                                             const class GALGAS_string & in_FUNCTION_5F_NAME,
                                                                              const class GALGAS_funcFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
                                                                              const class GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST,
                                                                              const class GALGAS_unifiedTypeMap_2D_proxy & in_RESULT_5F_TYPE,
                                                                              const class GALGAS_string & in_RESULT_5F_VAR_5F_NAME
                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForFunction'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForFunction (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'mangledNameForLocalVariable'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForLocalVariable (class GALGAS_string inArgument0,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4541,6 +4561,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_typeMapIR mAttribute_mTypeMapIR ;
   public : GALGAS_procedureMapIR mAttribute_mProcedureMapIR ;
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
+  public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
 
 
 //--------------------------------- Accessors
@@ -4563,7 +4584,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
                                           const GALGAS_typeMapIR & in_mTypeMapIR,
                                           const GALGAS_procedureMapIR & in_mProcedureMapIR,
-                                          const GALGAS_functionMapIR & in_mFunctionMapIR) ;
+                                          const GALGAS_functionMapIR & in_mFunctionMapIR,
+                                          const GALGAS_stringset & in_mRequiredProcedureSet) ;
 
 //-- Start of generic part --*
 
@@ -4582,7 +4604,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_globalConstantMapIR & inOperand3,
                                                                  const class GALGAS_typeMapIR & inOperand4,
                                                                  const class GALGAS_procedureMapIR & inOperand5,
-                                                                 const class GALGAS_functionMapIR & inOperand6
+                                                                 const class GALGAS_functionMapIR & inOperand6,
+                                                                 const class GALGAS_stringset & inOperand7
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -4608,6 +4631,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR reader_mProcedureMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_registerMapIR reader_mRegisterMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mRequiredProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_typeMapIR reader_mTypeMapIR (LOCATION_ARGS) const ;
 
@@ -4690,16 +4715,6 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'mangledNameForFunction'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForFunction (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Function 'mangledNameForProcedure'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4707,16 +4722,6 @@ class GALGAS_string function_mangledNameForFunction (class GALGAS_string inArgum
 class GALGAS_string function_mangledNameForProcedure (class GALGAS_string inArgument0,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'mangledNameForVariable'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForVariable (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4771,6 +4776,8 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_stringset mAttribute_mAccessibleRegisterSet ;
   public : GALGAS_stringset mAttribute_mStaticStringSet ;
   public : GALGAS_stringset mAttribute_mGlobalConstantSet ;
+  public : GALGAS_stringset mAttribute_mProcedureSet ;
+  public : GALGAS_stringset mAttribute_mFunctionSet ;
 
 
 //--------------------------------- Accessors
@@ -4789,7 +4796,9 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mAccessibleRegisterSet,
                                       const GALGAS_stringset & in_mStaticStringSet,
-                                      const GALGAS_stringset & in_mGlobalConstantSet) ;
+                                      const GALGAS_stringset & in_mGlobalConstantSet,
+                                      const GALGAS_stringset & in_mProcedureSet,
+                                      const GALGAS_stringset & in_mFunctionSet) ;
 
 //-- Start of generic part --*
 
@@ -4804,7 +4813,9 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_accessibleEntities constructor_new (const class GALGAS_stringset & inOperand0,
                                                              const class GALGAS_stringset & inOperand1,
-                                                             const class GALGAS_stringset & inOperand2
+                                                             const class GALGAS_stringset & inOperand2,
+                                                             const class GALGAS_stringset & inOperand3,
+                                                             const class GALGAS_stringset & inOperand4
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -4821,7 +4832,11 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mAccessibleRegisterSet (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mFunctionSet (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mGlobalConstantSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mStaticStringSet (LOCATION_ARGS) const ;
 

@@ -13,7 +13,7 @@ getter @variableKindIR mangledName -> @string outResult {
   case globalVariable (@string name) :
     outResult = mangledNameForGlobalVariable (!name:name)
   case localVariable (@string name) :
-    outResult = mangledNameForVariable (!name:name)
+    outResult = mangledNameForLocalVariable (!name:name)
   case inArgument (@string name) :
     outResult = mangledNameForInArgument (!name:name)
   case inOutArgument (@string name) :

@@ -8,6 +8,8 @@ struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
   @stringset mStaticStringSet
   @stringset mGlobalConstantSet
+  @stringset mProcedureSet
+  @stringset mFunctionSet
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -72,9 +74,12 @@ proc codeOptimisation
     s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
     s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
     s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
+    s += "  " + [ioIntermediateCodeStruct.mProcedureMapIR count] + " procedures\n"
+    s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
     message s
   #--- loop throught sub programs
     @accessibleEntities accessibleEntities = .default
+    accessibleEntities.mProcedureSet = ioIntermediateCodeStruct.mRequiredProcedureSet
     for procedure in ioIntermediateCodeStruct.mProcedureMapIR do
       [procedure enterAccessibleEntities !?accessibleEntities]
     end
@@ -95,7 +100,7 @@ proc codeOptimisation
     @globalConstantMapIR globalConstantMap = {}
     for (@lstring lkey
          @abstractExpressionGeneration valueExpressionGeneration)
-      in ioIntermediateCodeStruct.mGlobalConstantMap do
+    in ioIntermediateCodeStruct.mGlobalConstantMap do
       if [accessibleEntities.mGlobalConstantSet hasKey !lkey.string] then
         [!?globalConstantMap insertKey !lkey !valueExpressionGeneration]
       else
@@ -107,7 +112,7 @@ proc codeOptimisation
     @globalLiteralStringMap staticStringMap = {}
     for (@lstring lkey
          @string literalStringCname)
-      in ioIntermediateCodeStruct.mGlobalLiteralStringMap do
+    in ioIntermediateCodeStruct.mGlobalLiteralStringMap do
       if [accessibleEntities.mStaticStringSet hasKey !lkey.string] then
         [!?staticStringMap insertKey !lkey !literalStringCname]
       else
@@ -115,6 +120,35 @@ proc codeOptimisation
       end
     end
     ioIntermediateCodeStruct.mGlobalLiteralStringMap = staticStringMap
+  #--- Suppress unused procedures
+    @procedureMapIR procedureMap = {}
+    for (@lstring lkey
+         @procFormalArgumentListForGeneration formalArgumentListForGeneration
+         @instructionListIR instructionGenerationList)
+    in ioIntermediateCodeStruct.mProcedureMapIR do
+      if [accessibleEntities.mProcedureSet hasKey !lkey.string] then
+        [!?procedureMap insertKey !lkey !formalArgumentListForGeneration !instructionGenerationList]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mProcedureMapIR = procedureMap
+  #--- Suppress unused function
+    @functionMapIR functionMap = {}
+    for function in ioIntermediateCodeStruct.mFunctionMapIR do
+      if [accessibleEntities.mFunctionSet hasKey !function.lkey.string] then
+        [!?functionMap insertKey
+          !function.lkey
+          !function.mFormalArgumentListForGeneration
+          !function.mInstructionGenerationList
+          !function.mResultType
+          !function.mResultVarName
+        ]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mFunctionMapIR = functionMap
   end
 }
 

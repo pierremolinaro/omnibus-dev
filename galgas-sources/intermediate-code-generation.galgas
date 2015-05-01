@@ -13,6 +13,7 @@ struct @intermediateCodeStruct {
   @typeMapIR mTypeMapIR
   @procedureMapIR mProcedureMapIR
   @functionMapIR mFunctionMapIR
+  @stringset mRequiredProcedureSet
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
