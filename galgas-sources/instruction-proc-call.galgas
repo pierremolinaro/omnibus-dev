@@ -208,8 +208,7 @@ class @procCallInstructionIR : @abstractInstructionIR {
 
 override getter @procCallInstructionIR instructionCode -> @string outCode {
   outCode = mangledNameForProcedure (!name:mProcName) + " ("
-  for () in mParameters
-  do
+  for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input :
       outCode += "&(" + [mParameter mangledName] + ")"
@@ -222,6 +221,14 @@ override getter @procCallInstructionIR instructionCode -> @string outCode {
     outCode += ", "
   end
   outCode += ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  for () in mParameters do
+    [mParameter enterAccessibleEntities !?ioAccessibleEntities]
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

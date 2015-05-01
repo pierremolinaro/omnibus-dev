@@ -452,6 +452,13 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
+  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 abstract getter @abstractInfixOperatorGeneration generateCode
   ?@variableKindIR inleft
   ?@variableKindIR inRight

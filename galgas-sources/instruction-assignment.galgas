@@ -105,8 +105,13 @@ class @assignmentInstructionIR : @abstractInstructionIR {
 
 override getter @assignmentInstructionIR instructionCode -> @string outCode {
   outCode = [mTargetVariable mangledName] + " = " + [mSourceValue mangledName] + " ;\n"
-#  outCode = [mLocalVariable mangledName] + " = (" + mangledNameForType (!name:[mTargetVarType key])
-#  outCode += ") (" + [mExpressionGeneration expressionCode] + ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @assignmentInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTargetVariable enterAccessibleEntities !?ioAccessibleEntities]
+  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

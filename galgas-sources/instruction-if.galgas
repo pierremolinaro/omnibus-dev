@@ -150,3 +150,11 @@ override getter @ifInstructionIR instructionCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @ifInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTestVariable enterAccessibleEntities !?ioAccessibleEntities]
+  [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+  [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

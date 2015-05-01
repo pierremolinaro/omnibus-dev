@@ -136,3 +136,9 @@ override getter @constructorCallIR instructionCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @constructorCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTargetTemporaryVariable enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

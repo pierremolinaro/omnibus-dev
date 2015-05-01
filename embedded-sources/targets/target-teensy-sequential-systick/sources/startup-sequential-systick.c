@@ -4,25 +4,102 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+// Chapter 12: System Integration Module (SIM)
+#define SIM_SCGC3		*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3
+#define SIM_SCGC3_ADC1			(uint32_t)0x08000000		// ADC1 Clock Gate Control
+#define SIM_SCGC3_FTM2			(uint32_t)0x01000000		// FTM2 Clock Gate Control
+
+#define SIM_SCGC5		*(volatile uint32_t *)0x40048038 // System Clock Gating Control Register 5
+
+#define SIM_SCGC6		*(volatile uint32_t *)0x4004803C // System Clock Gating Control Register 6
+#define SIM_SCGC6_RTC			(uint32_t)0x20000000		// RTC Access
+#define SIM_SCGC6_ADC0			(uint32_t)0x08000000		// ADC0 Clock Gate Control
+#define SIM_SCGC6_FTM1			(uint32_t)0x02000000		// FTM1 Clock Gate Control
+#define SIM_SCGC6_FTM0			(uint32_t)0x01000000		// FTM0 Clock Gate Control
+#define SIM_SCGC6_FTFL			(uint32_t)0x00000001		// Flash Memory Clock Gate Control
+
+#define SIM_CLKDIV1		*(volatile uint32_t *)0x40048044 // System Clock Divider Register 1
+#define SIM_CLKDIV1_OUTDIV1(n)		(uint32_t)(((n) & 0x0F) << 28)	// divide value for the core/system clock
+#define SIM_CLKDIV1_OUTDIV2(n)		(uint32_t)(((n) & 0x0F) << 24)	// divide value for the peripheral clock
+#define SIM_CLKDIV1_OUTDIV4(n)		(uint32_t)(((n) & 0x0F) << 16)	// divide value for the flash clock
+
+// Chapter 15: Power Management Controller
+#define PMC_REGSC		*(volatile uint8_t  *)0x4007D002 // Regulator Status And Control register
+#define PMC_REGSC_ACKISO		(uint8_t)0x08			// Acknowledge Isolation
+
+// Chapter 24: Multipurpose Clock Generator (MCG)
+#define MCG_C1			*(volatile uint8_t  *)0x40064000 // MCG Control 1 Register
+#define MCG_C1_FRDIV(n)			(uint8_t)(((n) & 0x07) << 3)	// FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL
+#define MCG_C1_CLKS(n)			(uint8_t)(((n) & 0x03) << 6)	// Clock Source Select, Selects the clock source for MCGOUTCLK
+
+#define MCG_C2			*(volatile uint8_t  *)0x40064001 // MCG Control 2 Register
+#define MCG_C2_RANGE0(n)		(uint8_t)(((n) & 0x03) << 4)	// Frequency Range Select, Selects the frequency range for the crystal oscillator
+#define MCG_C2_EREFS			(uint8_t)0x04			// External Reference Select, Selects the source for the external reference clock. 
+
+#define MCG_C5			*(volatile uint8_t  *)0x40064004 // MCG Control 5 Register
+#define MCG_C5_PRDIV0(n)		(uint8_t)((n) & 0x1F)		// PLL External Reference Divider
+
+#define MCG_C6			*(volatile uint8_t  *)0x40064005 // MCG Control 6 Register
+#define MCG_C6_PLLS			(uint8_t)0x40			// PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. 
+#define MCG_C6_VDIV0(n)			(uint8_t)((n) & 0x1F)		// VCO 0 Divider
+
+// Chapter 25: Oscillator (OSC)
+#define OSC0_CR			*(volatile uint8_t  *)0x40065000 // OSC Control Register
+#define OSC_SC8P			(uint8_t)0x02			// Oscillator 8 pF Capacitor Load Configure
+#define OSC_SC4P			(uint8_t)0x04			// Oscillator 4 pF Capacitor Load Configure
+#define OSC_SC2P			(uint8_t)0x08			// Oscillator 2 pF Capacitor Load Configure
+
+// Chapter 23: Watchdog Timer (WDOG)
+#define WDOG_STCTRLH		*(volatile uint16_t *)0x40052000 // Watchdog Status and Control Register High
+#define WDOG_UNLOCK		*(volatile uint16_t *)0x4005200E // Watchdog Unlock register
+#define WDOG_UNLOCK_SEQ1		(uint16_t)0xC520
+#define WDOG_UNLOCK_SEQ2		(uint16_t)0xD928
+
+// Chapter 24: Multipurpose Clock Generator (MCG)
+#define MCG_S			*(volatile uint8_t  *)0x40064006 // MCG Status Register
+#define MCG_S_IRCST			(uint8_t)0x01			// Internal Reference Clock Status
+#define MCG_S_OSCINIT0			(uint8_t)0x02			// OSC Initialization,	resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
+#define MCG_S_CLKST(n)			(uint8_t)(((n) & 0x03) << 2)	// Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
+#define MCG_S_CLKST_MASK		(uint8_t)0x0C
+#define MCG_S_IREFST			(uint8_t)0x10			// Internal Reference Status
+#define MCG_S_PLLST			(uint8_t)0x20			// PLL Select Status
+#define MCG_S_LOCK0			(uint8_t)0x40			// Lock Status, 0=PLL Unlocked, 1=PLL Locked
+
+// Chapter 39: Real Time Clock (RTC)
+#define RTC_CR			*(volatile uint32_t *)0x4003D010 // RTC Control Register
+#define RTC_CR_SC4P			(uint32_t)0x00001000		// 
+#define RTC_CR_SC16P			(uint32_t)0x00000400		// 
+#define RTC_CR_OSCE			(uint32_t)0x00000100		// 
+
+#define RTC_SR			*(volatile uint32_t *)0x4003D014 // RTC Status Register
+
+#define SYST_CSR		*(volatile uint32_t *)0xE000E010 // SysTick Control and Status
+//#define SYST_CSR_COUNTFLAG		(uint32_t)0x00010000
+#define SYST_CSR_CLKSOURCE		(uint32_t)0x00000004
+#define SYST_CSR_TICKINT		(uint32_t)0x00000002
+#define SYST_CSR_ENABLE			(uint32_t)0x00000001
+#define SYST_RVR		*(volatile uint32_t *)0xE000E014 // SysTick Reload Value Register
+#define SYST_CVR		*(volatile uint32_t *)0xE000E018 // SysTick Current Value Register
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 static void ResetISR (void) {
 //---------1- Inhiber le chien de garde
-  register_WDOG_UNLOCK = 0xC520 ;
-  register_WDOG_UNLOCK = 0xD928 ;
-  register_WDOG_STCTRLH = 0x0010 ;
+  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1 ;
+  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2 ;
+  WDOG_STCTRLH = 0x0010 ;
   // enable clocks to always-used peripherals
-  register_SIM_SCGC3 = const_SIM_SCGC3_ADC1 | const_SIM_SCGC3_FTM2;
-  register_SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO
-  register_SIM_SCGC6 = const_SIM_SCGC6_RTC | const_SIM_SCGC6_FTM0 | const_SIM_SCGC6_FTM1 | const_SIM_SCGC6_ADC0 | const_SIM_SCGC6_FTFL;
+  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2;
+  SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO
+  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL;
   // if the RTC oscillator isn't enabled, get it started early
-  if (!(register_RTC_CR & const_RTC_CR_OSCE)) {
-    register_RTC_SR = 0;
-    register_RTC_CR = const_RTC_CR_SC16P | const_RTC_CR_SC4P | const_RTC_CR_OSCE;
+  if (!(RTC_CR & RTC_CR_OSCE)) {
+    RTC_SR = 0;
+    RTC_CR = RTC_CR_SC16P | RTC_CR_SC4P | RTC_CR_OSCE;
   }
 
   // release I/O pins hold, if we woke up from VLLS mode
-  if (register_PMC_REGSC & const_PMC_REGSC_ACKISO) {
-    register_PMC_REGSC |= const_PMC_REGSC_ACKISO ;
-  }
+  if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;
 
   // TODO: do this while the PLL is waiting to lock....
 //  SCB_VTOR = 0;  // use vector table in flash
@@ -32,33 +109,33 @@ static void ResetISR (void) {
 //---------2- Initialisation de la PLL
   // start in FEI mode
   // enable capacitors for crystal
-  register_OSC0_CR = const_OSC_SC8P | const_OSC_SC2P;
+  OSC0_CR = OSC_SC8P | OSC_SC2P;
   // enable osc, 8-32 MHz range, low power mode
-  register_MCG_C2 = const_MCG_C2_RANGE0_2 | const_MCG_C2_EREFS;
+  MCG_C2 = MCG_C2_RANGE0(2) | MCG_C2_EREFS;
   // switch to crystal as clock source, FLL input = 16 MHz / 512
-  register_MCG_C1 =  const_MCG_C1_CLKS_2 | const_MCG_C1_FRDIV_4;
+  MCG_C1 =  MCG_C1_CLKS(2) | MCG_C1_FRDIV(4);
   // wait for crystal oscillator to begin
-  while ((register_MCG_S & const_MCG_S_OSCINIT0) == 0) ;
+  while ((MCG_S & MCG_S_OSCINIT0) == 0) ;
   // wait for FLL to use oscillator
-  while ((register_MCG_S & const_MCG_S_IREFST) != 0) ;
+  while ((MCG_S & MCG_S_IREFST) != 0) ;
   // wait for MCGOUT to use oscillator
-  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_2) ;
+  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(2)) ;
   // now we're in FBE mode
   // config PLL input for 16 MHz Crystal / 4 = 4 MHz
-  register_MCG_C5 = const_MCG_C5_PRDIV0_3 ;
+  MCG_C5 = MCG_C5_PRDIV0(3);
   // config PLL for 96 MHz output
-  register_MCG_C6 = const_MCG_C6_PLLS | const_MCG_C6_VDIV0_0;
+  MCG_C6 = MCG_C6_PLLS | MCG_C6_VDIV0(0);
   // wait for PLL to start using xtal as its input
-  while (!(register_MCG_S & const_MCG_S_PLLST)) ;
+  while (!(MCG_S & MCG_S_PLLST)) ;
   // wait for PLL to lock
-  while (!(register_MCG_S & const_MCG_S_LOCK0)) ;
+  while (!(MCG_S & MCG_S_LOCK0)) ;
   // now we're in PBE mode
   // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash
-  register_SIM_CLKDIV1 = const_SIM_CLKDIV1_OUTDIV1_0 | const_SIM_CLKDIV1_OUTDIV2_1 | const_SIM_CLKDIV1_OUTDIV4_3;
+  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);
   // switch to PLL as clock source, FLL input = 16 MHz / 512
-  register_MCG_C1 = const_MCG_C1_CLKS_0 | const_MCG_C1_FRDIV_4;
+  MCG_C1 = MCG_C1_CLKS(0) | MCG_C1_FRDIV(4);
   // wait for PLL clock to be used
-  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_3) ;
+  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(3)) ;
   // now we're in PEE mode
   // configure USB for 48 MHz clock
 //  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2
@@ -86,9 +163,9 @@ static void ResetISR (void) {
   }
 
 //----------- Configure systick interrupt
-  register_SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms
-  register_SYST_CVR = 0 ;
-  register_SYST_CSR = const_SYST_CSR_CLKSOURCE | const_SYST_CSR_TICKINT | const_SYST_CSR_ENABLE ;
+  SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms
+  SYST_CVR = 0 ;
+  SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;
 
 //---------5- Exécuter les constructeurs des variables globales
   extern void (* __constructor_array_start) (void) ;

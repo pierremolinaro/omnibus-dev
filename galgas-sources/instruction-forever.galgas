@@ -80,3 +80,9 @@ override getter @foreverInstructionGeneration instructionCode -> @string outCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @foreverInstructionGeneration enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
