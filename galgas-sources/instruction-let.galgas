@@ -128,3 +128,10 @@ override getter @letInstructionWithAssignmentIR instructionCode -> @string outCo
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @letInstructionWithAssignmentIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTargetConstantIR enterAccessibleEntities !?ioAccessibleEntities]
+  [mSourceIR enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

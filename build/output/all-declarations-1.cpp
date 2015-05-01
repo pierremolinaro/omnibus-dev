@@ -18865,6 +18865,82 @@ C_galgas_function_descriptor functionDescriptor_mangledNameForRegister ("mangled
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Routine 'codeOptimisation'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_codeOptimisation (GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                               C_Compiler * inCompiler
+                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_uint var_pass = GALGAS_uint ((uint32_t) 0U) ;
+  GALGAS_bool var_optimizing = GALGAS_bool (true) ;
+  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 66)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 66)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 66)).isValid ()) {
+    uint32_t variant_3124 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 66)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 66)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 66)).uintValue () ;
+    bool loop_3124 = true ;
+    while (loop_3124) {
+      loop_3124 = var_optimizing.isValid () ;
+      if (loop_3124) {
+        loop_3124 = var_optimizing.boolValue () ;
+      }
+      if (loop_3124 && (0 == variant_3124)) {
+        loop_3124 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 66)) ;
+      }
+      if (loop_3124) {
+        variant_3124 -- ;
+        var_optimizing = GALGAS_bool (false) ;
+        var_pass.increment_operation (inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 69)) ;
+        GALGAS_string var_s = GALGAS_string ("Optimisation pass ").add_operation (var_pass.reader_string (SOURCE_FILE ("code-optimisation.galgas", 71)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 71)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 71)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 72)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 72)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 72)).add_operation (GALGAS_string (" registers\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 72))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 72)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 74)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 74)).add_operation (GALGAS_string (" global constants\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 74))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 74)) ;
+        inCompiler->printMessage (var_s  COMMA_SOURCE_FILE ("code-optimisation.galgas", 75)) ;
+        GALGAS_accessibleEntities var_accessibleEntities = GALGAS_accessibleEntities::constructor_default (SOURCE_FILE ("code-optimisation.galgas", 77)) ;
+        cEnumerator_procedureMapIR enumerator_3779 (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+        while (enumerator_3779.hasCurrentObject ()) {
+          categoryMethod_enterAccessibleEntities (enumerator_3779.current (HERE), var_accessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)) ;
+          enumerator_3779.gotoNextObject () ;
+        }
+        cEnumerator_functionMapIR enumerator_3913 (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+        while (enumerator_3913.hasCurrentObject ()) {
+          categoryMethod_enterAccessibleEntities (enumerator_3913.current (HERE), var_accessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 82)) ;
+          enumerator_3913.gotoNextObject () ;
+        }
+        GALGAS_registerMapIR var_usedRegisterMap = GALGAS_registerMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 85)) ;
+        cEnumerator_registerMapIR enumerator_4173 (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap, kEnumeration_up) ;
+        while (enumerator_4173.hasCurrentObject ()) {
+          const enumGalgasBool test_0 = var_accessibleEntities.mAttribute_mAccessibleRegisterSet.reader_hasKey (enumerator_4173.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 87)).boolEnum () ;
+          if (kBoolTrue == test_0) {
+            {
+            var_usedRegisterMap.modifier_insertKey (enumerator_4173.current_lkey (HERE), enumerator_4173.current_mRegisterTypeName (HERE), enumerator_4173.current_mRegisterAddress (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 88)) ;
+            }
+          }else if (kBoolFalse == test_0) {
+            var_optimizing = GALGAS_bool (true) ;
+          }
+          enumerator_4173.gotoNextObject () ;
+        }
+        ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap = var_usedRegisterMap ;
+        GALGAS_globalConstantMapIR var_globalConstantMap = GALGAS_globalConstantMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 95)) ;
+        cEnumerator_globalConstantMapIR enumerator_4670 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+        while (enumerator_4670.hasCurrentObject ()) {
+          const enumGalgasBool test_1 = var_accessibleEntities.mAttribute_mGlobalConstantSet.reader_hasKey (enumerator_4670.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 99)).boolEnum () ;
+          if (kBoolTrue == test_1) {
+            {
+            var_globalConstantMap.modifier_insertKey (enumerator_4670.current_lkey (HERE), enumerator_4670.current_mValueExpressionGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 100)) ;
+            }
+          }else if (kBoolFalse == test_1) {
+            var_optimizing = GALGAS_bool (true) ;
+          }
+          enumerator_4670.gotoNextObject () ;
+        }
+        ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap = var_globalConstantMap ;
+      }
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Once function 'separatorLine'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -27085,25 +27161,103 @@ const char * gWrapperFileContent_18_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "// Chapter 12: System Integration Module (SIM)\n"
+  "#define SIM_SCGC3\t\t*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3\n"
+  "#define SIM_SCGC3_ADC1\t\t\t(uint32_t)0x08000000\t\t// ADC1 Clock Gate Control\n"
+  "#define SIM_SCGC3_FTM2\t\t\t(uint32_t)0x01000000\t\t// FTM2 Clock Gate Control\n"
+  "\n"
+  "#define SIM_SCGC5\t\t*(volatile uint32_t *)0x40048038 // System Clock Gating Control Register 5\n"
+  "\n"
+  "#define SIM_SCGC6\t\t*(volatile uint32_t *)0x4004803C // System Clock Gating Control Register 6\n"
+  "#define SIM_SCGC6_RTC\t\t\t(uint32_t)0x20000000\t\t// RTC Access\n"
+  "#define SIM_SCGC6_ADC0\t\t\t(uint32_t)0x08000000\t\t// ADC0 Clock Gate Control\n"
+  "#define SIM_SCGC6_FTM1\t\t\t(uint32_t)0x02000000\t\t// FTM1 Clock Gate Control\n"
+  "#define SIM_SCGC6_FTM0\t\t\t(uint32_t)0x01000000\t\t// FTM0 Clock Gate Control\n"
+  "#define SIM_SCGC6_FTFL\t\t\t(uint32_t)0x00000001\t\t// Flash Memory Clock Gate Control\n"
+  "\n"
+  "#define SIM_CLKDIV1\t\t*(volatile uint32_t *)0x40048044 // System Clock Divider Register 1\n"
+  "#define SIM_CLKDIV1_OUTDIV1(n)\t\t(uint32_t)(((n) & 0x0F) << 28)\t// divide value for the core/system clock\n"
+  "#define SIM_CLKDIV1_OUTDIV2(n)\t\t(uint32_t)(((n) & 0x0F) << 24)\t// divide value for the peripheral clock\n"
+  "#define SIM_CLKDIV1_OUTDIV4(n)\t\t(uint32_t)(((n) & 0x0F) << 16)\t// divide value for the flash clock\n"
+  "\n"
+  "// Chapter 15: Power Management Controller\n"
+  "#define PMC_REGSC\t\t*(volatile uint8_t  *)0x4007D002 // Regulator Status And Control register\n"
+  "#define PMC_REGSC_ACKISO\t\t(uint8_t)0x08\t\t\t// Acknowledge Isolation\n"
+  "\n"
+  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
+  "#define MCG_C1\t\t\t*(volatile uint8_t  *)0x40064000 // MCG Control 1 Register\n"
+  "#define MCG_C1_FRDIV(n)\t\t\t(uint8_t)(((n) & 0x07) << 3)\t// FLL External Reference Divider, Selects the amount to divide down the external reference clo"
+  "ck for the FLL\n"
+  "#define MCG_C1_CLKS(n)\t\t\t(uint8_t)(((n) & 0x03) << 6)\t// Clock Source Select, Selects the clock source for MCGOUTCLK\n"
+  "\n"
+  "#define MCG_C2\t\t\t*(volatile uint8_t  *)0x40064001 // MCG Control 2 Register\n"
+  "#define MCG_C2_RANGE0(n)\t\t(uint8_t)(((n) & 0x03) << 4)\t// Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
+  "#define MCG_C2_EREFS\t\t\t(uint8_t)0x04\t\t\t// External Reference Select, Selects the source for the external reference clock. \n"
+  "\n"
+  "#define MCG_C5\t\t\t*(volatile uint8_t  *)0x40064004 // MCG Control 5 Register\n"
+  "#define MCG_C5_PRDIV0(n)\t\t(uint8_t)((n) & 0x1F)\t\t// PLL External Reference Divider\n"
+  "\n"
+  "#define MCG_C6\t\t\t*(volatile uint8_t  *)0x40064005 // MCG Control 6 Register\n"
+  "#define MCG_C6_PLLS\t\t\t(uint8_t)0x40\t\t\t// PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. \n"
+  "#define MCG_C6_VDIV0(n)\t\t\t(uint8_t)((n) & 0x1F)\t\t// VCO 0 Divider\n"
+  "\n"
+  "// Chapter 25: Oscillator (OSC)\n"
+  "#define OSC0_CR\t\t\t*(volatile uint8_t  *)0x40065000 // OSC Control Register\n"
+  "#define OSC_SC8P\t\t\t(uint8_t)0x02\t\t\t// Oscillator 8 pF Capacitor Load Configure\n"
+  "#define OSC_SC4P\t\t\t(uint8_t)0x04\t\t\t// Oscillator 4 pF Capacitor Load Configure\n"
+  "#define OSC_SC2P\t\t\t(uint8_t)0x08\t\t\t// Oscillator 2 pF Capacitor Load Configure\n"
+  "\n"
+  "// Chapter 23: Watchdog Timer (WDOG)\n"
+  "#define WDOG_STCTRLH\t\t*(volatile uint16_t *)0x40052000 // Watchdog Status and Control Register High\n"
+  "#define WDOG_UNLOCK\t\t*(volatile uint16_t *)0x4005200E // Watchdog Unlock register\n"
+  "#define WDOG_UNLOCK_SEQ1\t\t(uint16_t)0xC520\n"
+  "#define WDOG_UNLOCK_SEQ2\t\t(uint16_t)0xD928\n"
+  "\n"
+  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
+  "#define MCG_S\t\t\t*(volatile uint8_t  *)0x40064006 // MCG Status Register\n"
+  "#define MCG_S_IRCST\t\t\t(uint8_t)0x01\t\t\t// Internal Reference Clock Status\n"
+  "#define MCG_S_OSCINIT0\t\t\t(uint8_t)0x02\t\t\t// OSC Initialization,\tresets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
+  "#define MCG_S_CLKST(n)\t\t\t(uint8_t)(((n) & 0x03) << 2)\t// Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
+  "#define MCG_S_CLKST_MASK\t\t(uint8_t)0x0C\n"
+  "#define MCG_S_IREFST\t\t\t(uint8_t)0x10\t\t\t// Internal Reference Status\n"
+  "#define MCG_S_PLLST\t\t\t(uint8_t)0x20\t\t\t// PLL Select Status\n"
+  "#define MCG_S_LOCK0\t\t\t(uint8_t)0x40\t\t\t// Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
+  "\n"
+  "// Chapter 39: Real Time Clock (RTC)\n"
+  "#define RTC_CR\t\t\t*(volatile uint32_t *)0x4003D010 // RTC Control Register\n"
+  "#define RTC_CR_SC4P\t\t\t(uint32_t)0x00001000\t\t// \n"
+  "#define RTC_CR_SC16P\t\t\t(uint32_t)0x00000400\t\t// \n"
+  "#define RTC_CR_OSCE\t\t\t(uint32_t)0x00000100\t\t// \n"
+  "\n"
+  "#define RTC_SR\t\t\t*(volatile uint32_t *)0x4003D014 // RTC Status Register\n"
+  "\n"
+  "#define SYST_CSR\t\t*(volatile uint32_t *)0xE000E010 // SysTick Control and Status\n"
+  "//#define SYST_CSR_COUNTFLAG\t\t(uint32_t)0x00010000\n"
+  "#define SYST_CSR_CLKSOURCE\t\t(uint32_t)0x00000004\n"
+  "#define SYST_CSR_TICKINT\t\t(uint32_t)0x00000002\n"
+  "#define SYST_CSR_ENABLE\t\t\t(uint32_t)0x00000001\n"
+  "#define SYST_RVR\t\t*(volatile uint32_t *)0xE000E014 // SysTick Reload Value Register\n"
+  "#define SYST_CVR\t\t*(volatile uint32_t *)0xE000E018 // SysTick Current Value Register\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Inhiber le chien de garde\n"
-  "  register_WDOG_UNLOCK = 0xC520 ;\n"
-  "  register_WDOG_UNLOCK = 0xD928 ;\n"
-  "  register_WDOG_STCTRLH = 0x0010 ;\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1 ;\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2 ;\n"
+  "  WDOG_STCTRLH = 0x0010 ;\n"
   "  // enable clocks to always-used peripherals\n"
-  "  register_SIM_SCGC3 = const_SIM_SCGC3_ADC1 | const_SIM_SCGC3_FTM2;\n"
-  "  register_SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO\n"
-  "  register_SIM_SCGC6 = const_SIM_SCGC6_RTC | const_SIM_SCGC6_FTM0 | const_SIM_SCGC6_FTM1 | const_SIM_SCGC6_ADC0 | const_SIM_SCGC6_FTFL;\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2;\n"
+  "  SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL;\n"
   "  // if the RTC oscillator isn't enabled, get it started early\n"
-  "  if (!(register_RTC_CR & const_RTC_CR_OSCE)) {\n"
-  "    register_RTC_SR = 0;\n"
-  "    register_RTC_CR = const_RTC_CR_SC16P | const_RTC_CR_SC4P | const_RTC_CR_OSCE;\n"
+  "  if (!(RTC_CR & RTC_CR_OSCE)) {\n"
+  "    RTC_SR = 0;\n"
+  "    RTC_CR = RTC_CR_SC16P | RTC_CR_SC4P | RTC_CR_OSCE;\n"
   "  }\n"
   "\n"
   "  // release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if (register_PMC_REGSC & const_PMC_REGSC_ACKISO) {\n"
-  "    register_PMC_REGSC |= const_PMC_REGSC_ACKISO ;\n"
-  "  }\n"
+  "  if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;\n"
   "\n"
   "  // TODO: do this while the PLL is waiting to lock....\n"
   "//  SCB_VTOR = 0;  // use vector table in flash\n"
@@ -27113,33 +27267,33 @@ const char * gWrapperFileContent_18_targetTemplates = "//-----------------------
   "//---------2- Initialisation de la PLL\n"
   "  // start in FEI mode\n"
   "  // enable capacitors for crystal\n"
-  "  register_OSC0_CR = const_OSC_SC8P | const_OSC_SC2P;\n"
+  "  OSC0_CR = OSC_SC8P | OSC_SC2P;\n"
   "  // enable osc, 8-32 MHz range, low power mode\n"
-  "  register_MCG_C2 = const_MCG_C2_RANGE0_2 | const_MCG_C2_EREFS;\n"
+  "  MCG_C2 = MCG_C2_RANGE0(2) | MCG_C2_EREFS;\n"
   "  // switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  register_MCG_C1 =  const_MCG_C1_CLKS_2 | const_MCG_C1_FRDIV_4;\n"
+  "  MCG_C1 =  MCG_C1_CLKS(2) | MCG_C1_FRDIV(4);\n"
   "  // wait for crystal oscillator to begin\n"
-  "  while ((register_MCG_S & const_MCG_S_OSCINIT0) == 0) ;\n"
+  "  while ((MCG_S & MCG_S_OSCINIT0) == 0) ;\n"
   "  // wait for FLL to use oscillator\n"
-  "  while ((register_MCG_S & const_MCG_S_IREFST) != 0) ;\n"
+  "  while ((MCG_S & MCG_S_IREFST) != 0) ;\n"
   "  // wait for MCGOUT to use oscillator\n"
-  "  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_2) ;\n"
+  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(2)) ;\n"
   "  // now we're in FBE mode\n"
   "  // config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
-  "  register_MCG_C5 = const_MCG_C5_PRDIV0_3 ;\n"
+  "  MCG_C5 = MCG_C5_PRDIV0(3);\n"
   "  // config PLL for 96 MHz output\n"
-  "  register_MCG_C6 = const_MCG_C6_PLLS | const_MCG_C6_VDIV0_0;\n"
+  "  MCG_C6 = MCG_C6_PLLS | MCG_C6_VDIV0(0);\n"
   "  // wait for PLL to start using xtal as its input\n"
-  "  while (!(register_MCG_S & const_MCG_S_PLLST)) ;\n"
+  "  while (!(MCG_S & MCG_S_PLLST)) ;\n"
   "  // wait for PLL to lock\n"
-  "  while (!(register_MCG_S & const_MCG_S_LOCK0)) ;\n"
+  "  while (!(MCG_S & MCG_S_LOCK0)) ;\n"
   "  // now we're in PBE mode\n"
   "  // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  register_SIM_CLKDIV1 = const_SIM_CLKDIV1_OUTDIV1_0 | const_SIM_CLKDIV1_OUTDIV2_1 | const_SIM_CLKDIV1_OUTDIV4_3;\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);\n"
   "  // switch to PLL as clock source, FLL input = 16 MHz / 512\n"
-  "  register_MCG_C1 = const_MCG_C1_CLKS_0 | const_MCG_C1_FRDIV_4;\n"
+  "  MCG_C1 = MCG_C1_CLKS(0) | MCG_C1_FRDIV(4);\n"
   "  // wait for PLL clock to be used\n"
-  "  while ((register_MCG_S & const_MCG_S_CLKST_MASK) != const_MCG_S_CLKST_3) ;\n"
+  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(3)) ;\n"
   "  // now we're in PEE mode\n"
   "  // configure USB for 48 MHz clock\n"
   "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
@@ -27167,9 +27321,9 @@ const char * gWrapperFileContent_18_targetTemplates = "//-----------------------
   "  }\n"
   "\n"
   "//----------- Configure systick interrupt\n"
-  "  register_SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms\n"
-  "  register_SYST_CVR = 0 ;\n"
-  "  register_SYST_CSR = const_SYST_CSR_CLKSOURCE | const_SYST_CSR_TICKINT | const_SYST_CSR_ENABLE ;\n"
+  "  SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "  SYST_CVR = 0 ;\n"
+  "  SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;\n"
   "\n"
   "//---------5- Ex\xC3""\xA9""cuter les constructeurs des variables globales\n"
   "  extern void (* __constructor_array_start) (void) ;\n"
@@ -27260,7 +27414,7 @@ const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
-  7702, // Text length
+  12166, // Text length
   gWrapperFileContent_18_targetTemplates
 ) ;
 

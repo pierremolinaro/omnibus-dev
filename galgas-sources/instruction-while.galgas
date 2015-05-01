@@ -116,3 +116,11 @@ override getter @whileInstructionIR instructionCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @whileInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+  [mTestExpression enterAccessibleEntities !?ioAccessibleEntities]
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

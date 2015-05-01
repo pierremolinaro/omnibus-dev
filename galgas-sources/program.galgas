@@ -105,10 +105,11 @@ private proc compileProject
         !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile
         !?staticStringMap:globalLiteralStringMap
-        ?intermediateCode:let @intermediateCodeStruct intermediateCodeStruct
+        ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
       )
     #--- Code generation
       if @uint.errorCount == 0 then
+        codeOptimisation (!?intermediateCode:intermediateCodeStruct)
         codeGeneration (
           !outputFile:inSourceFile.string
           !intermediateCode:intermediateCodeStruct

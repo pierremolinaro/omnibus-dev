@@ -155,10 +155,18 @@ override getter @functionCallIR instructionCode -> @string outCode {
   outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
   outCode += mangledNameForFunction (!name:mFunctionName) + " (\n"
   for (variable) in mVariableList
-  do outCode += [variable mangledName] ;
+  do outCode += [variable mangledName]
   between outCode += ", "
   end
   outCode += ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @functionCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  for (variable) in mVariableList do
+    [variable enterAccessibleEntities !?ioAccessibleEntities]
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

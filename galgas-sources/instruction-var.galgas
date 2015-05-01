@@ -140,6 +140,8 @@ override method @varInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
+#! @varDeclarationInstructionWithSimpleAssignmentIR
+#----------------------------------------------------------------------------------------------------------------------*
 
 class @varDeclarationInstructionWithSimpleAssignmentIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
@@ -156,6 +158,17 @@ override getter @varDeclarationInstructionWithSimpleAssignmentIR instructionCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @varDeclarationInstructionWithSimpleAssignmentIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+{
+  [mTargetVar enterAccessibleEntities !?ioAccessibleEntities]
+  [mSourceVar enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @varDeclarationIR
+#----------------------------------------------------------------------------------------------------------------------*
+
 class @varDeclarationIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
   @variableKindIR mTargetVar
@@ -168,33 +181,9 @@ override getter @varDeclarationIR instructionCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
 
-class @varInstructionWithAssignmentGeneration : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @string mLocalVariable
-  @abstractExpressionGeneration mExpressionGeneration
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @varInstructionWithAssignmentGeneration instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable)
-    + " = " + [mExpressionGeneration expressionCode] + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @varInstructionGeneration : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @string mLocalVariable
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @varInstructionGeneration instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable) + " ;\n"
+override method @varDeclarationIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTargetVar enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

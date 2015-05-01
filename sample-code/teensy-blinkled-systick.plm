@@ -2,6 +2,16 @@ target "target-teensy-sequential-systick.plms"
 
 //-----------------------------------------------------------------------------*
 
+let s : StaticString = "azerty"
+
+//-----------------------------------------------------------------------------*
+
+proc $user ggg (!StaticString outS ) {
+  outS = s
+}
+
+//-----------------------------------------------------------------------------*
+
 proc $user setup () {
   PORTC_PCR5 = (1 << 8)
   GPIOC_PDDR = GPIOC_PDDR | (1 << 5)
@@ -17,7 +27,6 @@ proc $user ledOn () {
 
 proc $user ledOff () {
   GPIOC_PCOR = 1 << 5
-  var b : Bool = .true
 }
 
 //-----------------------------------------------------------------------------*

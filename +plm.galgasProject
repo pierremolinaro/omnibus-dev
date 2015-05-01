@@ -91,10 +91,11 @@ project (0:0:1) -> "plm" {
   "galgas-sources/semantic-context.galgas"
   "galgas-sources/semantic-analysis.galgas"
   "galgas-sources/generated-code-prefixes.galgas"
-  "galgas-sources/code-generation.galgas"
 
 #--- Intermediate code
   "galgas-sources/intermediate-code-generation.galgas"
+  "galgas-sources/code-optimisation.galgas"
+  "galgas-sources/code-generation.galgas"
 
 #--- Target
   "galgas-sources/target-generation.galgas"
