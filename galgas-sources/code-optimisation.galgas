@@ -27,8 +27,8 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   case temporaryConstant (@uint unused idx) :
   case localAccess (@string unused access) :
   case literalUnsignedInteger (@unifiedTypeMap-proxy unused type @uint64 unused value) :
-  case literalString (@string unused name) :
-    ioAccessibleEntities.mStaticStringSet += !name
+  case literalString (@string value @string unused name) :
+    ioAccessibleEntities.mStaticStringSet += !value
   end
 }
 
@@ -70,7 +70,7 @@ proc codeOptimisation
   #--- Display
     var s = "Optimisation pass " + pass + "\n"
     s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
-#    s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
+    s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
     s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
     message s
   #--- loop throught sub programs
@@ -103,6 +103,18 @@ proc codeOptimisation
       end
     end
     ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
+  #--- Suppress static strings
+    @globalLiteralStringMap staticStringMap = {}
+    for (@lstring lkey
+         @string literalStringCname)
+      in ioIntermediateCodeStruct.mGlobalLiteralStringMap do
+      if [accessibleEntities.mStaticStringSet hasKey !lkey.string] then
+        [!?staticStringMap insertKey !lkey !literalStringCname]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mGlobalLiteralStringMap = staticStringMap
   end
 }
 

@@ -120,7 +120,6 @@ abstract method @expressionAST analyzeStaticExpression
 
 override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Code generation

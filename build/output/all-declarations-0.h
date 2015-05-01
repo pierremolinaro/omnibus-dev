@@ -9069,7 +9069,8 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_string & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0
+  public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
+                                                                   const class GALGAS_string & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
@@ -9327,9 +9328,11 @@ class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnum
 
 class cEnumAssociatedValues_variableKindIR_literalString : public cEnumAssociatedValues {
   public : const GALGAS_string mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_string & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_string & inAssociatedValue0,
+                                                               const GALGAS_string & inAssociatedValue1
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

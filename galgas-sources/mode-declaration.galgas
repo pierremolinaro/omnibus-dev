@@ -64,7 +64,6 @@ override method @modeDeclaration enterInContext
 
 override method @modeDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }

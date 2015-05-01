@@ -162,7 +162,6 @@ proc enterEnumerationOperators
 
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Get C type

@@ -19,7 +19,7 @@ getter @variableKindIR mangledName -> @string outResult {
   case inOutArgument (@string name) :
     outResult = mangledNameForInOutArgument (!name:name)
   case outArgument (@string name) :
-    outResult = mangledNameForOutArgument (!name:name)
+    outResult = "* " + mangledNameForOutArgument (!name:name)
   case localConstant (@string name) :
     outResult = mangledNameForConstant (!name:name)
   case temporaryConstant (@uint idx) :
@@ -28,7 +28,7 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = access
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value) :
     outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value + ")"
-  case literalString (@string name) :
+  case literalString (* @string name) :
     outResult = name
   end
 }

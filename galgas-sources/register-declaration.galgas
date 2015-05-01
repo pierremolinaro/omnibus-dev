@@ -101,7 +101,6 @@ override method @registerDeclaration enterInContext
 
 override method @registerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check type

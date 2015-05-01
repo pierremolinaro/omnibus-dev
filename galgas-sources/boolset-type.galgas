@@ -201,7 +201,6 @@ override getter @minusOperatorForBoolsetGeneration generateCode
 
 override method @boolsetDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Get C type

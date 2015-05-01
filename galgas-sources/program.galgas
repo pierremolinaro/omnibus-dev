@@ -104,7 +104,7 @@ private proc compileProject
         !context:semanticContext
         !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile
-        !?staticStringMap:globalLiteralStringMap
+        !staticStringMap:globalLiteralStringMap
         ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
       )
     #--- Code generation
