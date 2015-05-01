@@ -1,0 +1,110 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    C O D E    O P T I M I S A T I O N                                                                                *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+struct @accessibleEntities {
+  @stringset mAccessibleRegisterSet
+  @stringset mStaticStringSet
+  @stringset mGlobalConstantSet
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  switch self
+  case register (@string name) :
+    ioAccessibleEntities.mAccessibleRegisterSet += !name
+  case globalConstant (@string unused name) :
+    ioAccessibleEntities.mGlobalConstantSet += !name
+  case globalVariable (@string unused name) :
+  case localVariable (@string unused name) :
+  case inArgument (@string unused name) :
+  case inOutArgument (@string unused name) :
+  case outArgument (@string unused name) :
+  case localConstant (@string unused name) :
+  case temporaryConstant (@uint unused idx) :
+  case localAccess (@string unused access) :
+  case literalUnsignedInteger (@unifiedTypeMap-proxy unused type @uint64 unused value) :
+  case literalString (@string unused name) :
+    ioAccessibleEntities.mStaticStringSet += !name
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  for (instruction) in self do
+    [instruction enterAccessibleEntities !?ioAccessibleEntities]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @procedureMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc codeOptimisation
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  @uint pass = 0
+  @bool optimizing = true
+  loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
+  while optimizing do
+    optimizing = false
+    pass ++
+  #--- Display
+    var s = "Optimisation pass " + pass + "\n"
+    s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
+#    s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
+    s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
+    message s
+  #--- loop throught sub programs
+    @accessibleEntities accessibleEntities = .default
+    for procedure in ioIntermediateCodeStruct.mProcedureMapIR do
+      [procedure enterAccessibleEntities !?accessibleEntities]
+    end
+    for function in ioIntermediateCodeStruct.mFunctionMapIR do
+      [function enterAccessibleEntities !?accessibleEntities]
+    end
+  #--- Suppress unused registers
+    @registerMapIR usedRegisterMap = {}
+    for (@lstring lkey @string registerTypeName @uint64 registerAddress) in ioIntermediateCodeStruct.mRegisterMap do
+      if [accessibleEntities.mAccessibleRegisterSet hasKey !lkey.string] then
+        [!?usedRegisterMap insertKey !lkey !registerTypeName !registerAddress]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mRegisterMap = usedRegisterMap
+  #--- Suppress global constant
+    @globalConstantMapIR globalConstantMap = {}
+    for (@lstring lkey
+         @abstractExpressionGeneration valueExpressionGeneration)
+      in ioIntermediateCodeStruct.mGlobalConstantMap do
+      if [accessibleEntities.mGlobalConstantSet hasKey !lkey.string] then
+        [!?globalConstantMap insertKey !lkey !valueExpressionGeneration]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
