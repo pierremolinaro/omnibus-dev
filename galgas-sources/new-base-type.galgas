@@ -100,7 +100,6 @@ override method @newBaseTypeDeclaration enterInContext
 
 override method @newBaseTypeDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }

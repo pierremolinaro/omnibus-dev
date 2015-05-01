@@ -213,7 +213,6 @@ proc enterIntegerOperators
 
 override method @integerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #-- Search for base type

@@ -106,7 +106,6 @@ override method @globalVarDeclaration enterInContext
 
 override method @globalVarDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check execution mode names

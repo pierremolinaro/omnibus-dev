@@ -124,7 +124,6 @@ proc enterStaticStringOperators
 
 override method @literalStringDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey

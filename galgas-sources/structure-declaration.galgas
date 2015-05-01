@@ -180,7 +180,6 @@ override method @structureDeclaration enterInContext
 
 override method @structureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Attributes
@@ -214,7 +213,7 @@ override method @structureDeclaration semanticAnalysis
       !context:inContext
       !mode:""
       !?temporary:ioTemporaryIndex
-      !?staticStringMap:ioGlobalLiteralStringMap
+      !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
       ?expressionType:let inferredType

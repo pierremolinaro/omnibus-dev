@@ -6,7 +6,6 @@
 
 abstract method @abstractDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -18,14 +17,14 @@ proc semanticAnalysis
   ?context:let @semanticContext inSemanticContext
   ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
   ?endOfSourceFile:let @location inEndOfSourceFile
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?staticStringMap:let @globalLiteralStringMap inGlobalLiteralStringMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
   outIntermediateCodeStruct = .default
+  outIntermediateCodeStruct.mGlobalLiteralStringMap = inGlobalLiteralStringMap
   for (declaration) in inDeclarationListAST do
     [declaration semanticAnalysis
       !context:inSemanticContext
-      !?staticStringMap:ioGlobalLiteralStringMap
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
@@ -34,7 +33,6 @@ proc semanticAnalysis
     [procedure procedureSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaryIndex
-      !?staticStringMap:ioGlobalLiteralStringMap
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
@@ -42,7 +40,6 @@ proc semanticAnalysis
     [function functionSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaryIndex
-      !?staticStringMap:ioGlobalLiteralStringMap
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end

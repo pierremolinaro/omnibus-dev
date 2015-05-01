@@ -77,7 +77,7 @@ override method @literalStringInExpressionAST analyzeExpression
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {!literalStringName}
   outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
-  outResultValueName = .literalString {!name:literalStringName}
+  outResultValueName = .literalString {!value:mLiteralString.string !name:literalStringName}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

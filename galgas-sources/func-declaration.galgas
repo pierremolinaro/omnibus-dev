@@ -148,7 +148,6 @@ list @funcFormalArgumentListForGeneration {
 method @functionDeclarationListAST-element functionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@uint ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check mode
@@ -188,7 +187,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !context:inContext
     !mode:mFunctionMode.string
     !?temporary:ioTemporaryIndex
-    !?staticStringMap:ioGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]

@@ -94,7 +94,7 @@ enum @variableKindIR {
   case temporaryConstant (@uint idx)
   case localAccess (@string access)
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value)
-  case literalString (@string name)
+  case literalString (@string value @string name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

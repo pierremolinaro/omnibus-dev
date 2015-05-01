@@ -4470,7 +4470,7 @@ void routine_semanticAnalysis (const class GALGAS_declarationListAST constinArgu
                                const class GALGAS_semanticContext constinArgument3,
                                const class GALGAS_requiredProcedureDeclarationListAST constinArgument4,
                                const class GALGAS_location constinArgument5,
-                               class GALGAS_globalLiteralStringMap & ioArgument6,
+                               const class GALGAS_globalLiteralStringMap constinArgument6,
                                class GALGAS_intermediateCodeStruct & outArgument7,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
@@ -4483,8 +4483,7 @@ void routine_semanticAnalysis (const class GALGAS_declarationListAST constinArgu
 
 typedef void (*categoryMethodSignature_abstractDeclaration_semanticAnalysis) (const class cPtr_abstractDeclaration * inObject,
                                                                               const class GALGAS_semanticContext constinArgument0,
-                                                                              class GALGAS_globalLiteralStringMap & ioArgument1,
-                                                                              class GALGAS_intermediateCodeStruct & ioArgument2,
+                                                                              class GALGAS_intermediateCodeStruct & ioArgument1,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -4497,7 +4496,6 @@ void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
 
 void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration * inObject,
                                           const GALGAS_semanticContext constin_inContext,
-                                          GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
@@ -4511,7 +4509,6 @@ void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration *
 void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclarationListAST_2D_element inObject,
                                               const class GALGAS_semanticContext constin_inContext,
                                               class GALGAS_uint & io_ioTemporaryIndex,
-                                              class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
@@ -4525,7 +4522,6 @@ void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclara
 void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
                                                const class GALGAS_semanticContext constin_inContext,
                                                class GALGAS_uint & io_ioTemporaryIndex,
-                                               class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
