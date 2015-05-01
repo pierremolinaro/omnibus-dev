@@ -236,17 +236,8 @@ list @procFormalArgumentListForGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @procedureGeneration : @abstractGeneration {
-  @string mProcedureMangledName
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionGenerationList mInstructionGenerationList
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @procedureDeclarationListAST-element procedureSemanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -351,11 +342,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfProcLocation]
 #--- Code generation
-  ioOrderedGenerationList += !@procedureGeneration.new {
-    ![self mangledName]
-    !formalArguments
-    !instructionGenerationList
-  }
   [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
     !mProcedureName # [self mangledName]
     !formalArguments
@@ -394,25 +380,6 @@ getter @procedureMapIR-element headerCodeGeneration -> @string outCode {
 getter @procedureMapIR-element implementationCodeGeneration -> @string outCode {
   outCode = [filewrapper procedureGenerationTemplate.implementation
     !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
-    !mFormalArgumentListForGeneration
-    !mInstructionGenerationList
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @procedureGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper procedureGenerationTemplate.declaration
-    !mProcedureMangledName
-    !mFormalArgumentListForGeneration
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @procedureGeneration implementationCodeGeneration -> @string outCode {
-  outCode = [filewrapper procedureGenerationTemplate.implementation
-    !mProcedureMangledName
     !mFormalArgumentListForGeneration
     !mInstructionGenerationList
   ]

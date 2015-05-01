@@ -48,32 +48,13 @@ list @instructionGenerationList {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @abstractGeneration
+#! @abstractTypeIR
 #----------------------------------------------------------------------------------------------------------------------*
 
 abstract getter @abstractTypeIR headerCodeGenerationForType -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-abstract class @abstractGeneration {
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractGeneration headerCodeGeneration -> @string outCode
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractGeneration implementationCodeGeneration -> @string outCode
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @orderedGenerationList
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @orderedGenerationList {
-  @abstractGeneration mGeneration
-}
-
+#! codeGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
 func %once separatorLine -> @string outResult {
@@ -82,16 +63,9 @@ func %once separatorLine -> @string outResult {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  @registerMapIR mRegisterMap
-#  @globalVariableMapIR mGlobalVariableMap
-#  @globalConstantMapIR mGlobalConstantMap
-#  @typeMapIR mTypeMapIR
-#  @procedureMapIR mProcedureMapIR
-#  @functionMapIR mFunctionMapIR
 
 proc codeGeneration
   ?outputFile:let @string inSourceFileName
-  ?generation:let @orderedGenerationList unused inGenerationList
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
 {

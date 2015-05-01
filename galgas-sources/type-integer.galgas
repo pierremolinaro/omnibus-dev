@@ -213,17 +213,12 @@ proc enterIntegerOperators
 
 override method @integerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #-- Search for base type
   [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
 #---
-  ioOrderedGenerationList += !@integerGeneration.new {
-    !mIntegerTypeName.string
-    !cType
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mIntegerTypeName
     !@integerIR.new { !mIntegerTypeName.string !cType}
@@ -232,13 +227,6 @@ override method @integerDeclaration semanticAnalysis
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @integerGeneration : @abstractGeneration {
-  @string mIntegerTypeName
-  @string mActualTypeName
-}
-
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @integerIR : @abstractTypeIR {
@@ -263,21 +251,6 @@ override getter @integerIR headerCodeGenerationForType -> @string outCode {
     !mIntegerTypeName
     !mActualTypeName
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @integerGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper integerGenerationTemplate.declaration
-    !mIntegerTypeName
-    !mActualTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @integerGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

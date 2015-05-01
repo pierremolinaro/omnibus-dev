@@ -106,7 +106,6 @@ override method @globalVarDeclaration enterInContext
 
 override method @globalVarDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -123,12 +122,6 @@ override method @globalVarDeclaration semanticAnalysis
     ?let executionModeSet
     ?let expressionGeneratedCode
   ]
-  ioOrderedGenerationList += !@globalVariableGeneration.new {
-    !mVarName.string
-    ![inferredType key]
-    ![executionModeSet count] > 1
-    !expressionGeneratedCode
-  }
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
     ![inferredType key]
@@ -139,15 +132,6 @@ override method @globalVarDeclaration semanticAnalysis
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @globalVariableGeneration : @abstractGeneration {
-  @string mGlobalVariableName
-  @string mActualTypeName
-  @bool mGenerateVolatile
-  @abstractExpressionGeneration mInitialValueExpressionGeneration
-}
-
 #----------------------------------------------------------------------------------------------------------------------*
 
 private filewrapper globalVariableGenerationTemplate in "../generation-templates" {
@@ -162,26 +146,9 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @globalVariableGeneration headerCodeGeneration -> @string outCode {
-  outCode = ""
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
   outCode = [filewrapper globalVariableGenerationTemplate.implementation
     !lkey.string # mGlobalVariableName
-    !mActualTypeName
-    !mGenerateVolatile
-    ![mInitialValueExpressionGeneration expressionCode]
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @globalVariableGeneration implementationCodeGeneration -> @string outCode {
-  outCode = [filewrapper globalVariableGenerationTemplate.implementation
-    !mGlobalVariableName
     !mActualTypeName
     !mGenerateVolatile
     ![mInitialValueExpressionGeneration expressionCode]

@@ -162,7 +162,6 @@ proc enterEnumerationOperators
 
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -191,10 +190,6 @@ override method @enumerationDeclaration semanticAnalysis
     [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
   end
 #---
-  ioOrderedGenerationList += !@enumerationGeneration.new {
-    !mEnumerationName.string
-    !cType
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mEnumerationName
     !@enumerationIR.new {!mEnumerationName.string !cType}
@@ -206,13 +201,6 @@ override method @enumerationDeclaration semanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @enumerationIR : @abstractTypeIR {
-  @string mEnumerationName
-  @string mActualTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @enumerationGeneration : @abstractGeneration {
   @string mEnumerationName
   @string mActualTypeName
 }
@@ -234,21 +222,6 @@ override getter @enumerationIR headerCodeGenerationForType -> @string outCode {
     !mEnumerationName
     !mActualTypeName
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @enumerationGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper enumerationGenerationTemplate.declaration
-    !mEnumerationName
-    !mActualTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @enumerationGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -180,7 +180,6 @@ override method @structureDeclaration enterInContext
 
 override method @structureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -224,10 +223,6 @@ override method @structureDeclaration semanticAnalysis
       !initExpressionGeneratedCode
   end
 #--- Generate code
-  ioOrderedGenerationList += !@structureGeneration.new {
-    !mStructureName.string
-    !structureFieldListForGeneration
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mStructureName
     !@structureIR.new {!mStructureName.string !structureFieldListForGeneration}
@@ -253,13 +248,6 @@ list @structureFieldListForGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @structureGeneration : @abstractGeneration {
-  @string mStructureName
-  @structureFieldListForGeneration mStructureFieldListForGeneration
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 private filewrapper structureGenerationTemplate in "../generation-templates" {
 }{
 }{
@@ -276,24 +264,6 @@ private filewrapper structureGenerationTemplate in "../generation-templates" {
 
 override getter @structureIR headerCodeGenerationForType -> @string outCode {
   outCode = [filewrapper structureGenerationTemplate.declaration
-    !mStructureName
-    !mStructureFieldListForGeneration
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @structureGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper structureGenerationTemplate.declaration
-    !mStructureName
-    !mStructureFieldListForGeneration
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @structureGeneration implementationCodeGeneration -> @string outCode {
-  outCode = [filewrapper structureGenerationTemplate.implementation
     !mStructureName
     !mStructureFieldListForGeneration
   ]
