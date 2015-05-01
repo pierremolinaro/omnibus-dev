@@ -182,6 +182,7 @@ override method @structureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Attributes
   for (s) in mAttributeList do
@@ -227,10 +228,21 @@ override method @structureDeclaration semanticAnalysis
     !mStructureName.string
     !structureFieldListForGeneration
   }
+  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+    !mStructureName
+    !@structureIR.new {!mStructureName.string !structureFieldListForGeneration}
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @structureIR : @abstractTypeIR {
+  @string mStructureName
+  @structureFieldListForGeneration mStructureFieldListForGeneration
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @structureFieldListForGeneration {
@@ -258,6 +270,15 @@ private filewrapper structureGenerationTemplate in "../generation-templates" {
   template implementation "structure-implementation.galgasTemplate"
     ?@string STRUCTURE_NAME
     ?@structureFieldListForGeneration FIELD_LIST
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @structureIR headerCodeGenerationForType -> @string outCode {
+  outCode = [filewrapper structureGenerationTemplate.declaration
+    !mStructureName
+    !mStructureFieldListForGeneration
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

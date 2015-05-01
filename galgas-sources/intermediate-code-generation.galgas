@@ -1,0 +1,78 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    C O D E    G E N E R A T I O N                                                                                    *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @intermediateCodeStruct
+
+struct @intermediateCodeStruct {
+  @globalLiteralStringMap mGlobalLiteralStringMap
+  @registerMapIR mRegisterMap
+  @globalVariableMapIR mGlobalVariableMap
+  @globalConstantMapIR mGlobalConstantMap
+  @typeMapIR mTypeMapIR
+  @procedureMapIR mProcedureMapIR
+  @functionMapIR mFunctionMapIR
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @registerMapIR {
+  @string mRegisterTypeName
+  @uint64 mRegisterAddress
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @globalVariableMapIR {
+  @string mActualTypeName
+  @bool mGenerateVolatile
+  @abstractExpressionGeneration mInitialValueExpressionGeneration
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @globalConstantMapIR {
+  @abstractExpressionGeneration mValueExpressionGeneration
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractTypeIR {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @typeMapIR {
+  @abstractTypeIR mType
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @procedureMapIR {
+  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionGenerationList mInstructionGenerationList
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @functionMapIR {
+  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @instructionGenerationList mInstructionGenerationList
+  @unifiedTypeMap-proxy mResultType
+  @string mResultVarName
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

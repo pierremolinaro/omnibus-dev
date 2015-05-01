@@ -108,6 +108,7 @@ override method @globalVarDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check execution mode names
   @stringset executionModes = {}
@@ -128,6 +129,12 @@ override method @globalVarDeclaration semanticAnalysis
     ![executionModeSet count] > 1
     !expressionGeneratedCode
   }
+  [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
+    !mVarName
+    ![inferredType key]
+    ![executionModeSet count] > 1
+    !expressionGeneratedCode
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -157,6 +164,17 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 
 override getter @globalVariableGeneration headerCodeGeneration -> @string outCode {
   outCode = ""
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
+  outCode = [filewrapper globalVariableGenerationTemplate.implementation
+    !lkey.string # mGlobalVariableName
+    !mActualTypeName
+    !mGenerateVolatile
+    ![mInitialValueExpressionGeneration expressionCode]
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

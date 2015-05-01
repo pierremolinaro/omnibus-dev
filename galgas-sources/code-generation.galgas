@@ -1,7 +1,8 @@
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#    C O D E    G E N E R A T I O N                                                                                    *
+#    I N T E R M E D I A T E    C O D E    G E N E R A T I O N                                                         *
 #                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
 #----------------------------------------------------------------------------------------------------------------------*
 #! @abstractExpressionGeneration
 #----------------------------------------------------------------------------------------------------------------------*
@@ -50,6 +51,10 @@ list @instructionGenerationList {
 #! @abstractGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
+abstract getter @abstractTypeIR headerCodeGenerationForType -> @string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 abstract class @abstractGeneration {
 }
 
@@ -71,12 +76,26 @@ list @orderedGenerationList {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+func %once separatorLine -> @string outResult {
+  outResult  = "//------------------------------------------------------------------------"
+  outResult += "---------------------------------------------*\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  @registerMapIR mRegisterMap
+#  @globalVariableMapIR mGlobalVariableMap
+#  @globalConstantMapIR mGlobalConstantMap
+#  @typeMapIR mTypeMapIR
+#  @procedureMapIR mProcedureMapIR
+#  @functionMapIR mFunctionMapIR
+
 proc codeGeneration
   ?outputFile:let @string inSourceFileName
-  ?staticStringMap:let @globalLiteralStringMap inGlobalLiteralStringMap
-  ?generation:let @orderedGenerationList inGenerationList
+  ?generation:let @orderedGenerationList unused inGenerationList
+  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
 {
+# log "ioIntermediateCodeStruct.mProcedureMapIR" : ioIntermediateCodeStruct.mProcedureMapIR
 #--- Create source directory (if does not exist)
   let targetDirectory = [inSourceFileName stringByDeletingPathExtension] + "+" + inTargetName
   let sourceDirectory = targetDirectory + "/sources"
@@ -85,28 +104,46 @@ proc codeGeneration
   let baseName = sourceDirectory + "/plm"
   var header = "#ifndef PLM_HEADER_DEFINED\n"
   header += "#define PLM_HEADER_DEFINED\n\n"
-  header += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
+  header += separatorLine () + "\n"
   header += "#include <stdint.h>\n"
   header += "#include <stddef.h>\n\n"
-  for (generation) in inGenerationList do
-    header += [generation headerCodeGeneration]
+  for register in inIntermediateCodeStruct.mRegisterMap do
+    header += [register headerCodeGenerationForRegister]
   end
-  header += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
+  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
+    header += [globalConstant headerCodeGeneration]
+  end
+  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
+    header += [type.mType headerCodeGenerationForType]
+  end
+  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+    header += [procedure headerCodeGeneration]
+  end
+  for function in inIntermediateCodeStruct.mFunctionMapIR do
+    header += [function headerCodeGeneration]
+  end
+  header += separatorLine () + "\n"
   header += "#endif\n"
   [header writeToFileWhenDifferentContents !baseName + ".h" ?*]
 #--- Generate C file
   var code = "#include \"plm.h\"\n\n"
-  code += "//---------------------------------------------------------------------------------------------------------------------*\n"
+  code += separatorLine ()
   code += "//   Static Strings                                                                                                    *\n"
-  code += "//---------------------------------------------------------------------------------------------------------------------*\n\n"
-  for () in inGlobalLiteralStringMap do
+  code += separatorLine () + "\n"
+  for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
     code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
   end
   code += "\n"
-  for (generation) in inGenerationList do
-    code += [generation implementationCodeGeneration]
+  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
+    code += [globalVariable implementationCodeGeneration]
   end
-  code += "//---------------------------------------------------------------------------------------------------------------------*\n"
+  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+    code += [procedure implementationCodeGeneration]
+  end
+  for function in inIntermediateCodeStruct.mFunctionMapIR do
+    code += [function implementationCodeGeneration]
+  end
+  code += separatorLine ()
   [code writeToFileWhenDifferentContents !baseName + ".c" ?*]
 #--- Generate target files
   generateTargets (
@@ -116,3 +153,4 @@ proc codeGeneration
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+

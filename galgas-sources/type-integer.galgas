@@ -215,6 +215,7 @@ override method @integerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #-- Search for base type
   [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
@@ -223,6 +224,10 @@ override method @integerDeclaration semanticAnalysis
     !mIntegerTypeName.string
     !cType
   }
+  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+    !mIntegerTypeName
+    !@integerIR.new { !mIntegerTypeName.string !cType}
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -236,12 +241,28 @@ class @integerGeneration : @abstractGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+class @integerIR : @abstractTypeIR {
+  @string mIntegerTypeName
+  @string mActualTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 private filewrapper integerGenerationTemplate in "../generation-templates" {
 }{
 }{
   template declaration "integer-declaration.galgasTemplate"
     ?@string INTEGER_TYPE_NAME
     ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @integerIR headerCodeGenerationForType -> @string outCode {
+  outCode = [filewrapper integerGenerationTemplate.declaration
+    !mIntegerTypeName
+    !mActualTypeName
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

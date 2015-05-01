@@ -66,6 +66,7 @@ override method @modeDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!generation:@orderedGenerationList unused ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
 

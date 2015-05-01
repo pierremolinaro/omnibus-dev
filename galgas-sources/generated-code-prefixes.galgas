@@ -68,6 +68,12 @@ func mangledNameForFunction ?name:@string inName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+func mangledNameForProcedure ?name:@string inName -> @string outName {
+  outName = "proc_" + [inName nameRepresentation]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 func mangledNameForVariable ?name:@string inName -> @string outName {
   outName = "var_" + [inName nameRepresentation]
 }

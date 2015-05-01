@@ -126,14 +126,25 @@ override method @literalStringDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   ioOrderedGenerationList += !@literalStringGeneration.new {
     !mLiteralStringTypeName.string
   }
+  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+    !mLiteralStringTypeName
+    !@literalStringTypeIR.new {!mLiteralStringTypeName.string}
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalStringTypeIR : @abstractTypeIR {
+  @string mLiteralStringTypeName
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @literalStringGeneration : @abstractGeneration {
@@ -147,6 +158,14 @@ private filewrapper literalStringGenerationTemplate in "../generation-templates"
 }{
   template declaration "literal-string-declaration.galgasTemplate"
     ?@string STATIC_STRING_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalStringTypeIR headerCodeGenerationForType -> @string outCode {
+  outCode = [filewrapper literalStringGenerationTemplate.declaration
+    !mLiteralStringTypeName
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

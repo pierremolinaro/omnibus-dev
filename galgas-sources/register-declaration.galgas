@@ -103,6 +103,7 @@ override method @registerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check type
   let registerType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mRegisterTypeName}
@@ -135,6 +136,11 @@ override method @registerDeclaration semanticAnalysis
     error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
   end
 #---
+  [!?ioIntermediateCodeStruct.mRegisterMap insertKey
+    !mRegisterName
+    !mRegisterTypeName.string
+    !mRegisterAddress.uint64
+  ]    
   ioOrderedGenerationList += !@registerGeneration.new {
     !mRegisterTypeName.string
     !mRegisterName.string
@@ -161,6 +167,16 @@ private filewrapper registerGenerationTemplate in "../generation-templates" {
     ?@string REGISTER_TYPE_NAME
     ?@string REGISTER_NAME
     ?@uint64 REGISTER_ADDRESS
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @registerMapIR-element headerCodeGenerationForRegister -> @string outCode {
+  outCode = [filewrapper registerGenerationTemplate.declaration
+    !mRegisterTypeName
+    !lkey.string
+    !mRegisterAddress
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

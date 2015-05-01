@@ -93,6 +93,9 @@ project (0:0:1) -> "plm" {
   "galgas-sources/generated-code-prefixes.galgas"
   "galgas-sources/code-generation.galgas"
 
+#--- Intermediate code
+  "galgas-sources/intermediate-code-generation.galgas"
+
 #--- Target
   "galgas-sources/target-generation.galgas"
 

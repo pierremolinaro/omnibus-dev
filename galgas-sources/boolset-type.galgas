@@ -193,6 +193,7 @@ override method @boolsetDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Get C type
   var cType = ""
@@ -223,10 +224,21 @@ override method @boolsetDeclaration semanticAnalysis
     !mBoolsetName.string
     !cType
   }
+  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+    !mBoolsetName
+    !@boolsetIR.new {!mBoolsetName.string !cType}
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @boolsetIR : @abstractTypeIR {
+  @string mBoolsetName
+  @string mActualTypeName
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @boolsetGeneration : @abstractGeneration {
@@ -242,6 +254,15 @@ private filewrapper boolsetGenerationTemplate in "../generation-templates" {
   template declaration "boolset-declaration.galgasTemplate"
     ?@string BOOLSET_NAME
     ?@string ACTUAL_TYPE_NAME
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @boolsetIR headerCodeGenerationForType -> @string outCode {
+  outCode = [filewrapper boolsetGenerationTemplate.declaration
+    !mBoolsetName
+    !mActualTypeName
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
