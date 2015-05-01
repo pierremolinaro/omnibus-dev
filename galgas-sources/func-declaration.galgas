@@ -147,6 +147,7 @@ list @funcFormalArgumentListForGeneration {
 
 method @functionDeclarationListAST-element functionSemanticAnalysis
   ?context:let @semanticContext inContext
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -163,6 +164,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !resultType
     !{!mFunctionMode.string}
     !mResultVarName.string
+    !.localVariable {!name:mResultVarName.string}
     !true
   ]
 #--- Analyse formal arguments
@@ -174,16 +176,18 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !typeProxy
       !{!mFunctionMode.string}
       !mangledNameForInArgument (!name:formalArgumentName.string)
+      !.inArgument {!name:formalArgumentName.string}
       ![typeProxy copiable]
     ]
     formalArguments += !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
   end
 #--- Analyze instruction list
-  @instructionGenerationList instructionGenerationList = {}
+  @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:.noReceiver
     !context:inContext
     !mode:mFunctionMode.string
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
@@ -215,7 +219,7 @@ private filewrapper functionGenerationTemplate in "../generation-templates" {
   template implementation "function-implementation.galgasTemplate"
     ?@string FUNCTION_MANGLED_NAME
     ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@instructionGenerationList INSTRUCTION_GENERATION_LIST
+    ?@instructionListIR INSTRUCTION_GENERATION_LIST
     ?@unifiedTypeMap-proxy RESULT_TYPE
     ?@string RESULT_VAR_NAME
 }

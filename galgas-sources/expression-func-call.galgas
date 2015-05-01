@@ -70,10 +70,13 @@ override method @functionCallInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResultValueName
 {
   [inContext.mFunctionMap searchKey
     !mFunctionVarName
@@ -86,6 +89,7 @@ override method @functionCallInExpressionAST analyzeExpression
     error mFunctionVarName : "this function should be called in $" + inMode + " mode"
   end
 #---
+  @variableListIR variableList = {}
   var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
   if [formalParameterList length] != [mParameterList length] then
     error mFunctionVarName : "this function declares " + [formalParameterList length] 
@@ -105,11 +109,15 @@ override method @functionCallInExpressionAST analyzeExpression
         !optionalTargetType:formal.mArgumentType
         !context:inContext
         !mode:inMode
+        !?temporary:ioTemporaryIndex
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?instructionListIR:ioInstructionGenerationList
         ?expressionType:let argumentExpressionType
         ?generatedCode:let argumentGeneratedCode
+        ?result:@variableKindIR resultValueName
       ]
+      variableList += !resultValueName
       s += [argumentGeneratedCode expressionCode]
       if [argumentExpressionType key] != [formal.mArgumentType key] then
         error actual.mSelector : "the actual parameter has the " + [argumentExpressionType key]
@@ -120,8 +128,37 @@ override method @functionCallInExpressionAST analyzeExpression
     end
   end
   s += ")"
+#---
+  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {!s}
+  ioInstructionGenerationList += !@functionCallIR.new {
+    !outExpressionType
+    !mFunctionVarName.string
+    !outResultValueName
+    !variableList
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @functionCallIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @string mFunctionName
+  @variableKindIR mTempConstantTarget
+  @variableListIR mVariableList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @functionCallIR instructionCode -> @string outCode {
+  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+  outCode += mangledNameForFunction (!name:mFunctionName) + " (\n"
+  for (variable) in mVariableList
+  do outCode += [variable mangledName] ;
+  between outCode += ", "
+  end
+  outCode += ") ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

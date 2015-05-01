@@ -45,20 +45,25 @@ override method @whileInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
+  @instructionListIR testInstructionGenerationList = {}
   [mTestExpression analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:testInstructionGenerationList
     ?expressionType:let testExpressionType
-    ?generatedCode:let testExpressionGeneratedCode
+    ?generatedCode:let unused testExpressionGeneratedCode
+    ?result:@variableKindIR testValueName
   ]
 #--- Check inferred type
   if [testExpressionType kind] != .boolean then
@@ -66,20 +71,23 @@ override method @whileInstructionAST analyze
   end
   [!?ioVariableMap openOverrideForRepeatBlock]
 #--- Analyze instruction list
-  @instructionGenerationList instructionGenerationList = {}
+  @instructionListIR instructionGenerationList = {}
   [mWhileInstructionList analyzeBranchInstructionList
     !endOfInstructionList:mEndOf_while_instruction
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?generatedCode:instructionGenerationList
+    !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Code generation
-  ioInstructionGenerationList += !@whileInstructionGeneration.new {
-    !testExpressionGeneratedCode
+  ioInstructionGenerationList += !@whileInstructionIR.new {
+    ![mEndOf_test_expression locationIndex]
+    !testInstructionGenerationList
+    !testValueName
     !instructionGenerationList
  }
 }
@@ -88,16 +96,22 @@ override method @whileInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @whileInstructionGeneration : @abstractInstructionGeneration {
-  @abstractExpressionGeneration mTestExpressionGeneration
-  @instructionGenerationList mInstructionGenerationList
+class @whileInstructionIR : @abstractInstructionIR {
+  @uint mLabelIndex
+  @instructionListIR mTestInstructionGenerationList
+  @variableKindIR mTestExpression
+  @instructionListIR mInstructionGenerationList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @whileInstructionGeneration instructionCode -> @string outCode {
-  outCode = "while (" + [mTestExpressionGeneration expressionCode] + ") {\n"
+override getter @whileInstructionIR instructionCode -> @string outCode {
+  outCode = "LABEL_" + mLabelIndex + ": {\n"
+  outCode += [mTestInstructionGenerationList instructionListCode]
+  outCode += "  if (" + [mTestExpression mangledName] + ") {\n"
   outCode += [mInstructionGenerationList instructionListCode]
+  outCode += "    goto LABEL_" + mLabelIndex + " ;\n"
+  outCode += "  }\n"
   outCode += "}\n"
 }
 

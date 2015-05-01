@@ -37,15 +37,16 @@ override method @assignmentInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get target type
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?3*
+    ?4*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -53,10 +54,13 @@ override method @assignmentInstructionAST analyze
     !optionalTargetType:targetType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-    ?generatedCode:let expressionGeneratedCode
+    ?generatedCode:let unused expressionGeneratedCode
+    ?result:@variableKindIR sourceValueName
   ]
 #--- Check inferred type
   if [targetType key] != [inferredType key] then
@@ -68,7 +72,8 @@ override method @assignmentInstructionAST analyze
     !mTargetVarName
     ?*
     ?let acceptedModeSet
-    ?let targetVar
+    ?let unused targetVar
+    ?let targetVariableKind
     ?let isCopiable
   ]
 #--- Check mode
@@ -79,10 +84,10 @@ override method @assignmentInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  ioInstructionGenerationList += !@assignmentInstructionGeneration.new {
-   !targetVar
+  ioInstructionGenerationList += !@assignmentInstructionIR.new {
+   !targetVariableKind
    !targetType
-   !expressionGeneratedCode
+   !sourceValueName
  }
 }
 
@@ -90,17 +95,18 @@ override method @assignmentInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @assignmentInstructionGeneration : @abstractInstructionGeneration {
-  @string mLocalVariable
+class @assignmentInstructionIR : @abstractInstructionIR {
+  @variableKindIR mTargetVariable
   @unifiedTypeMap-proxy mTargetVarType
-  @abstractExpressionGeneration mExpressionGeneration
+  @variableKindIR mSourceValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @assignmentInstructionGeneration instructionCode -> @string outCode {
-  outCode = mLocalVariable + " = (" + mangledNameForType (!name:[mTargetVarType key])
-  outCode += ") (" + [mExpressionGeneration expressionCode] + ") ;\n"
+override getter @assignmentInstructionIR instructionCode -> @string outCode {
+  outCode = [mTargetVariable mangledName] + " = " + [mSourceValue mangledName] + " ;\n"
+#  outCode = [mLocalVariable mangledName] + " = (" + mangledNameForType (!name:[mTargetVarType key])
+#  outCode += ") (" + [mExpressionGeneration expressionCode] + ") ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

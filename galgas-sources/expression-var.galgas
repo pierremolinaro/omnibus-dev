@@ -64,10 +64,13 @@ override method @varInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @string inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResultValueName
 {
 #--- Search variable
   [!?ioVariableMap searchForReadAccess
@@ -75,6 +78,7 @@ override method @varInExpressionAST analyzeExpression
     ?let sourceVarType
     ?let acceptedModeSet
     ?let varAccess
+    ?let variable
     ?*
   ]
 #--- Check mode
@@ -89,6 +93,7 @@ override method @varInExpressionAST analyzeExpression
   )
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {!varAccess}
+  outResultValueName = variable
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

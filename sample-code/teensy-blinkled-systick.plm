@@ -17,6 +17,7 @@ proc $user ledOn () {
 
 proc $user ledOff () {
   GPIOC_PCOR = 1 << 5
+  var b : Bool = .true
 }
 
 //-----------------------------------------------------------------------------*
@@ -40,7 +41,7 @@ proc $user waitMS (? UInt32 inDuration) {
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
-  let duration : UInt32 = 500
+  let duration : UInt32 = 100
   waitMS (!duration)
   ledOn ()
   waitMS (!duration)

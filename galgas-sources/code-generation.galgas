@@ -1,8 +1,38 @@
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#    I N T E R M E D I A T E    C O D E    G E N E R A T I O N                                                         *
+#    C O D E    G E N E R A T I O N                                                                                    *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
+
+getter @variableKindIR mangledName -> @string outResult {
+  switch self
+  case register (@string name) :
+    outResult = mangledNameForRegister (!name:name)
+  case globalConstant (@string name) :
+    outResult = mangledNameForConstant (!name:name)
+  case globalVariable (@string name) :
+    outResult = mangledNameForGlobalVariable (!name:name)
+  case localVariable (@string name) :
+    outResult = mangledNameForVariable (!name:name)
+  case inArgument (@string name) :
+    outResult = mangledNameForInArgument (!name:name)
+  case inOutArgument (@string name) :
+    outResult = mangledNameForInOutArgument (!name:name)
+  case outArgument (@string name) :
+    outResult = mangledNameForOutArgument (!name:name)
+  case localConstant (@string name) :
+    outResult = mangledNameForConstant (!name:name)
+  case temporaryConstant (@uint idx) :
+    outResult = mangledNameForTemporaryConstant (!idx:idx)
+  case localAccess (@string access) :
+    outResult = access
+  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value) :
+    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value + ")"
+  case literalString (@string name) :
+    outResult = name
+  end
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 #! @abstractExpressionGeneration
 #----------------------------------------------------------------------------------------------------------------------*
@@ -29,22 +59,29 @@ override getter @inLineExpressionGeneration expressionCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @abstractInstructionGeneration
+#! @abstractExpressionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract class @abstractInstructionGeneration {
+abstract class @abstractExpressionIR {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @abstractInstructionIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @abstractInstructionIR {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract getter @abstractInstructionGeneration instructionCode -> @string outCode
+abstract getter @abstractInstructionIR instructionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @instructionGenerationList
+#! @instructionListIR
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @instructionGenerationList {
-  @abstractInstructionGeneration mInstructionGeneration
+list @instructionListIR {
+  @abstractInstructionIR mInstructionGeneration
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -57,9 +57,10 @@ override method @selfMutatingMethodCallInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext unused inContext
   ?mode:let @string inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
 #--- Analyze self as receiver variable
   @unifiedTypeMap-proxy receiverType
@@ -87,6 +88,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let @string valueAccess
+        ?let unused variableKind
         ?let isCopiable
       ]
     #--- Check mode
@@ -104,6 +106,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
+        ?let unused variableKind
         ?*
       ]
     #--- Check mode
@@ -118,6 +121,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
+        ?let unused variableKind
         ?*
       ]
     #--- Check mode
@@ -187,10 +191,11 @@ override method @selfMutatingMethodCallInstructionAST analyze
       !0
     ]
   end
-  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
-    ![receiverType key] + "_" + procMangledName
-    !parameterList
-  }
+  error mMethodName : "internal error: no code generation"
+#  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
+#    ![receiverType key] + "_" + procMangledName
+#    !parameterList
+#  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

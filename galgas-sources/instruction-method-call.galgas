@@ -55,9 +55,10 @@ override method @methodCallInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze receiver expression
   [mReceiverExpression analyzeExpression
@@ -65,10 +66,13 @@ override method @methodCallInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let receiverExpressionType
-    ?generatedCode:let receiverExpressionGeneratedCode
+    ?generatedCode:let unused receiverExpressionGeneratedCode
+    ?result:@variableKindIR receiverValueName
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
@@ -83,6 +87,7 @@ override method @methodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let @string valueAccess
+        ?let unused variableKind
         ?let isCopiable
       ]
     #--- Check mode
@@ -100,6 +105,7 @@ override method @methodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
+        ?let unused variableKind
         ?*
       ]
     #--- Check mode
@@ -114,6 +120,7 @@ override method @methodCallInstructionAST analyze
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
+        ?let unused variableKind
         ?*
       ]
     #--- Check mode
@@ -183,10 +190,11 @@ override method @methodCallInstructionAST analyze
       !0
     ]
   end
-  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
-    ![receiverExpressionType key] + "_" + procMangledName
-    !parameterList
-  }
+  error mMethodName : "Internal error : no code generation"
+#  ioInstructionGenerationList += !@procCallInstructionIR.new {
+#    ![receiverExpressionType key] + "_" + procMangledName
+#    !parameterList
+#  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

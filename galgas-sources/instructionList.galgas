@@ -41,9 +41,10 @@ abstract method @instructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -52,9 +53,10 @@ method @instructionListAST analyzeBranchInstructionList
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Begin branch
   [!?ioVariableMap openBranch]
@@ -63,9 +65,10 @@ method @instructionListAST analyzeBranchInstructionList
       !optionalReceiverType:inReceiverType
       !context:inContext
       !mode:inMode
+      !?temporary:ioTemporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?generatedCode:ioInstructionGenerationList
+      !?instructionListIR:ioInstructionGenerationList
     ]
   end
 #--- End branch
@@ -78,18 +81,20 @@ method @instructionListAST analyzeRoutineInstructionList
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
   for () in self do
     [mInstruction analyze 
       !optionalReceiverType:inReceiverType
       !context:inContext
       !mode:inMode
+      !?temporary:ioTemporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?generatedCode:ioInstructionGenerationList
+      !?instructionListIR:ioInstructionGenerationList
     ]
   end
 }
@@ -98,7 +103,7 @@ method @instructionListAST analyzeRoutineInstructionList
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @instructionGenerationList instructionListCode -> @string outCode {
+getter @instructionListIR instructionListCode -> @string outCode {
   outCode = ""
   [!?outCode incIndentation !2]
   for () in self do

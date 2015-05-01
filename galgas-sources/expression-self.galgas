@@ -42,10 +42,13 @@ override method @selfExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @string unused inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResultValueName
 {
   switch inReceiverType
   case noReceiver :
@@ -57,6 +60,7 @@ override method @selfExpressionAST analyzeExpression
     outExpressionType = type
     outGeneratedCode = @inLineExpressionGeneration.new {!"* " + receiverPointer}
   end
+  error mSelfLocation : "internal error: no code generation" : outResultValueName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -89,6 +89,11 @@ func mangledNameForGlobalVariable ?name:@string inName -> @string outName {
 func mangledNameForConstant ?name:@string inName -> @string outName {
   outName = "const_" + [inName nameRepresentation]
 }
+#----------------------------------------------------------------------------------------------------------------------*
+
+func mangledNameForTemporaryConstant ?idx:@uint inIndex -> @string outName {
+  outName = "tempconst_" + inIndex
+}
 
 #----------------------------------------------------------------------------------------------------------------------*
 

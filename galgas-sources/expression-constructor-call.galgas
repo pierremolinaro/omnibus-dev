@@ -83,10 +83,13 @@ override method @constructorCall analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string unused inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResultValueName
 {
 #--- Analyze constructor source type
   let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
@@ -103,8 +106,33 @@ override method @constructorCall analyzeExpression
   let constructorMap = [outExpressionType constructorMap]
 #--- Check constructor
   [constructorMap searchKey !mConstructorName ?let generatedCodeString]
+#--- Temporary variable
+  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
+  ioInstructionGenerationList += !@constructorCallIR.new {
+    !outExpressionType
+    !outResultValueName
+    !generatedCodeString
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @constructorCallIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @variableKindIR mTargetTemporaryVariable
+  @string mCallExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @constructorCallIR instructionCode -> @string outCode {
+  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+  outCode += [mTargetTemporaryVariable mangledName] + " = "
+  outCode += mCallExpression + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -21,6 +21,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
+        !.register {!name:lkey.string}
         !true
       ]
     else
@@ -29,6 +30,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
+        !.register {!name:lkey.string}
         !true
       ]
     end
@@ -40,6 +42,7 @@ func initialVariableMap
       !constantType
       !allModeSet
       !mangledNameForConstant (!name:constantName.string)
+      !.globalConstant {!name:constantName.string}
       !true
     ]
   end
@@ -51,6 +54,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
+        !.globalVariable {!name:variableName.string}
         !true
       ]
     else
@@ -59,6 +63,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
+        !.globalVariable {!name:variableName.string}
         !true
       ]
     end
@@ -67,10 +72,44 @@ func initialVariableMap
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+proc getNewTempVariable
+  ?!@uint ioTemporaryIndex
+  !@variableKindIR outTempVariable
+{
+  outTempVariable = .temporaryConstant {!idx:ioTemporaryIndex}
+  ioTemporaryIndex ++
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @variableKindIR {
+  case register (@string name)
+  case globalConstant (@string name)
+  case globalVariable (@string name)
+  case localVariable (@string name)
+  case inArgument (@string name)
+  case inOutArgument (@string name)
+  case outArgument (@string name)
+  case localConstant (@string name)
+  case temporaryConstant (@uint idx)
+  case localAccess (@string access)
+  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value)
+  case literalString (@string name)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @variableListIR {
+  @variableKindIR mVar
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
   @stringset mAcceptedModeSet
   @string mCppName
+  @variableKindIR mVariableKind
   @bool copiable
 
 #--- Used global variable

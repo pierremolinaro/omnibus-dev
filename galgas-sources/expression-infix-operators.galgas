@@ -348,10 +348,13 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResult
 {
 #--- Analyze left expression
   [mLeftExpression analyzeExpression
@@ -359,10 +362,13 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let leftExpressionType
     ?generatedCode:let leftExpressionGeneratedCode
+    ?result:@variableKindIR leftResult
   ]
 #--- Analyze right expression
   [mRightExpression analyzeExpression
@@ -370,10 +376,13 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:leftExpressionType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let rightExpressionType
     ?generatedCode:let rightExpressionGeneratedCode
+    ?result:@variableKindIR rightResult
   ]
 #--- Check left type
   @abstractInfixOperatorGeneration resultOperator
@@ -405,16 +414,49 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?resultType:outExpressionType
     ?opString:resultOperator
   ]
+#--- Temp var
+  getNewTempVariable (!?ioTemporaryIndex ?outResult)
 #--- Generate code
   outGeneratedCode = @operatorInfixExpressionGeneration.new {
     !leftExpressionGeneratedCode
     !resultOperator
     !rightExpressionGeneratedCode
   }
+  ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
+    !outExpressionType
+    !outResult
+    !leftResult
+    !resultOperator
+    !rightResult
+  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @operatorInfixExpressionIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @variableKindIR mResult
+  @variableKindIR mLeftOperand
+  @abstractInfixOperatorGeneration mOperator
+  @variableKindIR mRighOperand
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
+  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+  outCode += " = " +  [mOperator generateCode !mLeftOperand !mRighOperand] + " ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract getter @abstractInfixOperatorGeneration generateCode
+  ?@variableKindIR inleft
+  ?@variableKindIR inRight
+  -> @string outCode
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 abstract getter @abstractInfixOperatorGeneration generateInfixExpression
@@ -430,6 +472,16 @@ override getter @standardInfixOperatorGeneration generateInfixExpression
   -> @string outCode
 {
   outCode = "(" + [inleft expressionCode] + ") " + mInfixOperator + " (" + [inRight expressionCode] + ")"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @standardInfixOperatorGeneration generateCode
+  ?@variableKindIR inleft
+  ?@variableKindIR inRight
+  -> @string outCode
+{
+  outCode = [inleft mangledName] + " " + mInfixOperator + " " + [inRight mangledName]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

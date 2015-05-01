@@ -70,9 +70,10 @@ override method @ifInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
   [mTestExpression analyzeExpression
@@ -80,10 +81,13 @@ override method @ifInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let testExpressionType
-    ?generatedCode:let testExpressionGeneratedCode
+    ?generatedCode:let unused testExpressionGeneratedCode
+    ?result:@variableKindIR testResult
   ]
 #--- Check inferred type
   if [testExpressionType kind] != .boolean then
@@ -91,31 +95,33 @@ override method @ifInstructionAST analyze
   end
   [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
-  @instructionGenerationList thenInstructionGenerationList = {}
+  @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !endOfInstructionList:mEndOfThenInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?generatedCode:thenInstructionGenerationList
+    !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
-  @instructionGenerationList elseInstructionGenerationList = {}
+  @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
     !endOfInstructionList:mEndOfElseInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?generatedCode:elseInstructionGenerationList
+    !?instructionListIR:elseInstructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
-  ioInstructionGenerationList += !@ifInstructionGeneration.new {
-    !testExpressionGeneratedCode
+  ioInstructionGenerationList += !@ifInstructionIR.new {
+    !testResult
     !thenInstructionGenerationList
     !elseInstructionGenerationList
  }
@@ -125,16 +131,16 @@ override method @ifInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @ifInstructionGeneration : @abstractInstructionGeneration {
-  @abstractExpressionGeneration mTestExpressionGeneration
-  @instructionGenerationList mThenInstructionGenerationList
-  @instructionGenerationList mElseInstructionGenerationList
+class @ifInstructionIR : @abstractInstructionIR {
+  @variableKindIR mTestVariable
+  @instructionListIR mThenInstructionGenerationList
+  @instructionListIR mElseInstructionGenerationList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @ifInstructionGeneration instructionCode -> @string outCode {
-  outCode = "if (" + [mTestExpressionGeneration expressionCode] + ") {\n"
+override getter @ifInstructionIR instructionCode -> @string outCode {
+  outCode = "if (" + [mTestVariable mangledName] + ") {\n"
   outCode += [mThenInstructionGenerationList instructionListCode]
   if [mElseInstructionGenerationList length] > 0 then
     outCode += "}else{\n"

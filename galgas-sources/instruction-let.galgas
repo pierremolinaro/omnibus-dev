@@ -67,9 +67,10 @@ override method @letInstructionWithAssignmentAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
     then .null
@@ -81,78 +82,49 @@ override method @letInstructionWithAssignmentAST analyze
     !optionalTargetType:targetType
     !context:inContext
     !mode:inMode
+    !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-    ?generatedCode:let expressionGeneratedCode
+    ?generatedCode:let unused expressionGeneratedCode
+    ?result:let @variableKindIR resultValueName
   ]
 #--- Declare local constant
+  let targetConstant = @variableKindIR.localConstant {!name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType
     !{!inMode}
     !mangledNameForVariable (!name:mVarName.string)
+    !targetConstant
     ![inferredType copiable]
   ]
 #--- Code generation
-  ioInstructionGenerationList += !@letInstructionWithAssignmentGeneration.new {
+  ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
     !inferredType
-    !mVarName.string
-    !expressionGeneratedCode
+    !targetConstant
+    !resultValueName
   }
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#override method @varInstructionAST analyze
-#  ?optionalReceiverType:let @receiverType unused inReceiverType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @string inMode
-#  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-#  ?!variableMap:@variableMap ioVariableMap
-#  ?!generatedCode:@instructionGenerationList ioInstructionGenerationList
-#{
-#  let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
-##--- Declare local variable
-#  [!?ioVariableMap insertUndefinedLocalVariable
-#    !mVarName
-#    !targetType
-#    !{!inMode}
-#    !mangledNameForVariable (!name:mVarName.string)
-#    ![targetType copiable]
-#  ]
-##--- Code generation
-#  ioInstructionGenerationList += !@varInstructionGeneration.new {!targetType !mVarName.string}
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @letInstructionWithAssignmentGeneration : @abstractInstructionGeneration {
+class @letInstructionWithAssignmentIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @string mLocalVariable
-  @abstractExpressionGeneration mExpressionGeneration
+  @variableKindIR mTargetConstantIR
+  @variableKindIR mSourceIR
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @letInstructionWithAssignmentGeneration instructionCode -> @string outCode {
-  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable)
-    + " = " + [mExpressionGeneration expressionCode] + " ;\n"
+override getter @letInstructionWithAssignmentIR instructionCode -> @string outCode {
+  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+          + [mTargetConstantIR mangledName]
+          + " = "
+          + [mSourceIR mangledName] + " ;\n"
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#class @varInstructionGeneration : @abstractInstructionGeneration {
-#  @unifiedTypeMap-proxy mTargetType
-#  @string mLocalVariable
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#override getter @varInstructionGeneration instructionCode -> @string outCode {
-#  outCode = mangledNameForType (!name:[mTargetType key]) + " " + mangledNameForVariable (!name:mLocalVariable) + " ;\n"
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*

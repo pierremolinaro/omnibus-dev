@@ -29,9 +29,11 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
+  @uint temporaryIndex = 0
   for procedure in inProcedureListAST do
     [procedure procedureSemanticAnalysis
       !context:inSemanticContext
+      !?temporary:temporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
       !?intermediateCode:outIntermediateCodeStruct
     ]
@@ -39,6 +41,7 @@ proc semanticAnalysis
   for function in inFunctionListAST do
     [function functionSemanticAnalysis
       !context:inSemanticContext
+      !?temporary:temporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
       !?intermediateCode:outIntermediateCodeStruct
     ]

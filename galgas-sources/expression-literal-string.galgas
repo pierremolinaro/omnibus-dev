@@ -59,10 +59,13 @@ override method @literalStringInExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string unused inMode
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResultValueName
 {
   @string literalStringName
   if [ioGlobalLiteralStringMap hasKey !mLiteralString.string] then
@@ -74,6 +77,7 @@ override method @literalStringInExpressionAST analyzeExpression
 #--- Generate code
   outGeneratedCode = @inLineExpressionGeneration.new {!literalStringName}
   outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
+  outResultValueName = .literalString {!name:literalStringName}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
