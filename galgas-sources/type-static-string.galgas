@@ -124,13 +124,9 @@ proc enterStaticStringOperators
 
 override method @literalStringDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  ioOrderedGenerationList += !@literalStringGeneration.new {
-    !mLiteralStringTypeName.string
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mLiteralStringTypeName
     !@literalStringTypeIR.new {!mLiteralStringTypeName.string}
@@ -142,12 +138,6 @@ override method @literalStringDeclaration semanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @literalStringTypeIR : @abstractTypeIR {
-  @string mLiteralStringTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @literalStringGeneration : @abstractGeneration {
   @string mLiteralStringTypeName
 }
 
@@ -166,20 +156,6 @@ override getter @literalStringTypeIR headerCodeGenerationForType -> @string outC
   outCode = [filewrapper literalStringGenerationTemplate.declaration
     !mLiteralStringTypeName
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @literalStringGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper literalStringGenerationTemplate.declaration
-    !mLiteralStringTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @literalStringGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

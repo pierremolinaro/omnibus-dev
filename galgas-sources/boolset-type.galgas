@@ -191,7 +191,6 @@ override getter @minusOperatorForBoolsetGeneration generateInfixExpression
 
 override method @boolsetDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -220,10 +219,6 @@ override method @boolsetDeclaration semanticAnalysis
     [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
   end
 #---
-  ioOrderedGenerationList += !@boolsetGeneration.new {
-    !mBoolsetName.string
-    !cType
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mBoolsetName
     !@boolsetIR.new {!mBoolsetName.string !cType}
@@ -235,13 +230,6 @@ override method @boolsetDeclaration semanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @boolsetIR : @abstractTypeIR {
-  @string mBoolsetName
-  @string mActualTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @boolsetGeneration : @abstractGeneration {
   @string mBoolsetName
   @string mActualTypeName
 }
@@ -263,21 +251,6 @@ override getter @boolsetIR headerCodeGenerationForType -> @string outCode {
     !mBoolsetName
     !mActualTypeName
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @boolsetGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper boolsetGenerationTemplate.declaration
-    !mBoolsetName
-    !mActualTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @boolsetGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

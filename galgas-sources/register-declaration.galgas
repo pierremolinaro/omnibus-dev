@@ -101,7 +101,6 @@ override method @registerDeclaration enterInContext
 
 override method @registerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -141,23 +140,10 @@ override method @registerDeclaration semanticAnalysis
     !mRegisterTypeName.string
     !mRegisterAddress.uint64
   ]    
-  ioOrderedGenerationList += !@registerGeneration.new {
-    !mRegisterTypeName.string
-    !mRegisterName.string
-    !mRegisterAddress.uint64
-  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @registerGeneration : @abstractGeneration {
-  @string mRegisterTypeName
-  @string mRegisterName
-  @uint64 mRegisterAddress
-}
-
 #----------------------------------------------------------------------------------------------------------------------*
 
 private filewrapper registerGenerationTemplate in "../generation-templates" {
@@ -177,22 +163,6 @@ getter @registerMapIR-element headerCodeGenerationForRegister -> @string outCode
     !lkey.string
     !mRegisterAddress
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @registerGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper registerGenerationTemplate.declaration
-    !mRegisterTypeName
-    !mRegisterName
-    !mRegisterAddress
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @registerGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

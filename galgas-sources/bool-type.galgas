@@ -166,7 +166,6 @@ proc enterBooleanOperators
 
 override method @booleanDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -182,10 +181,6 @@ override method @booleanDeclaration semanticAnalysis
     end
   end
 #---
-  ioOrderedGenerationList += !@booleanGeneration.new {
-    !mBooleanTypeName.string
-    !cType
-  }
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
     !mBooleanTypeName
     !@booleanIR.new {!mBooleanTypeName.string !cType}
@@ -197,13 +192,6 @@ override method @booleanDeclaration semanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @booleanIR : @abstractTypeIR {
-  @string mBooleanTypeName
-  @string mActualTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @booleanGeneration : @abstractGeneration {
   @string mBooleanTypeName
   @string mActualTypeName
 }
@@ -225,21 +213,6 @@ override getter @booleanIR headerCodeGenerationForType -> @string outCode {
     !mBooleanTypeName
     !mActualTypeName
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @booleanGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper booleanGenerationTemplate.declaration
-    !mBooleanTypeName
-    !mActualTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @booleanGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

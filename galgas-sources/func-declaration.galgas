@@ -145,19 +145,8 @@ list @funcFormalArgumentListForGeneration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @functionGeneration : @abstractGeneration {
-  @string mFunctionMangledName
-  @funcFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @instructionGenerationList mInstructionGenerationList
-  @unifiedTypeMap-proxy mResultType
-  @string mResultVarName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @functionDeclarationListAST-element functionSemanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -202,13 +191,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfFuncLocation]
 #--- Code generation
-  ioOrderedGenerationList += !@functionGeneration.new {
-    ![self mangledName]
-    !formalArguments
-    !instructionGenerationList
-    !resultType
-    !mResultVarName.string
-  }
   [!?ioIntermediateCodeStruct.mFunctionMapIR insertKey
     !mFunctionName # [self mangledName]
     !formalArguments
@@ -253,28 +235,6 @@ getter @functionMapIR-element headerCodeGeneration -> @string outCode {
 getter @functionMapIR-element implementationCodeGeneration -> @string outCode {
   outCode = [filewrapper functionGenerationTemplate.implementation
     !mangledNameForFunction (!name:lkey.string) # mFunctionMangledName
-    !mFormalArgumentListForGeneration
-    !mInstructionGenerationList
-    !mResultType
-    !mResultVarName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @functionGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper functionGenerationTemplate.declaration
-    !mangledNameForFunction (!name:mFunctionMangledName)
-    !mFormalArgumentListForGeneration
-    !mResultType
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @functionGeneration implementationCodeGeneration -> @string outCode {
-  outCode = [filewrapper functionGenerationTemplate.implementation
-    !mFunctionMangledName
     !mFormalArgumentListForGeneration
     !mInstructionGenerationList
     !mResultType

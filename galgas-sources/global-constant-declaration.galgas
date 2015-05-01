@@ -120,7 +120,6 @@ abstract method @expressionAST analyzeStaticExpression
 
 override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!generation:@orderedGenerationList ioOrderedGenerationList
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
@@ -130,10 +129,6 @@ override method @globalConstantDeclaration semanticAnalysis
     ?*
     ?let expressionGeneratedCode
   ]
-  ioOrderedGenerationList += !@globalConstantGeneration.new {
-    !mConstantName.string
-    !expressionGeneratedCode
-  }
   [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
     !mConstantName
     !expressionGeneratedCode
@@ -142,13 +137,6 @@ override method @globalConstantDeclaration semanticAnalysis
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @globalConstantGeneration : @abstractGeneration {
-  @string mGlobalConstanteName
-  @abstractExpressionGeneration mValueExpressionGeneration
-}
-
 #----------------------------------------------------------------------------------------------------------------------*
 
 private filewrapper globalConstantGenerationTemplate in "../generation-templates" {
@@ -166,21 +154,6 @@ getter @globalConstantMapIR-element headerCodeGeneration -> @string outCode {
     !lkey.string
     ![mValueExpressionGeneration expressionCode]
   ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @globalConstantGeneration headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper globalConstantGenerationTemplate.declaration
-    !mGlobalConstanteName
-    ![mValueExpressionGeneration expressionCode]
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @globalConstantGeneration implementationCodeGeneration -> @string outCode {
-  outCode = ""
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

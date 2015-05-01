@@ -105,14 +105,12 @@ private proc compileProject
         !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile
         !?staticStringMap:globalLiteralStringMap
-        ?generation:let @orderedGenerationList orderedGenerationList
         ?intermediateCode:let @intermediateCodeStruct intermediateCodeStruct
       )
     #--- Code generation
       if @uint.errorCount == 0 then
         codeGeneration (
           !outputFile:inSourceFile.string
-          !generation:orderedGenerationList
           !intermediateCode:intermediateCodeStruct
           !target:inTargetName
         )
