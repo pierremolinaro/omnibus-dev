@@ -23,6 +23,7 @@ struct @ast {
   @requiredProcedureDeclarationListAST mRequiredProcList
   @functionDeclarationListAST mFunctionListAST
   @lstringlist mTargetList
+  @initList mInitList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

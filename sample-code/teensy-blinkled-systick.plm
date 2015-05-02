@@ -40,7 +40,7 @@ proc $user waitMS (?inDuration : UInt32) {
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
-  let duration : UInt32 = 100
+  let duration : UInt32 = 200
   waitMS (!duration)
   ledOn ()
   waitMS (!duration)

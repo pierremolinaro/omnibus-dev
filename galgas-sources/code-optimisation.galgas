@@ -168,9 +168,13 @@ private proc suppressInaccessibleSubprograms
       ]        
     end
   end
+#--- Then, init clauses
+  for init in ioIntermediateCodeStruct.mInitList do
+    [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+  end
+#--- Explore procedures and functions
   @functionMapIR accessibleFunctionMap = {}
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
-#--- Explore procedures and functions
   var exploreProceduresAndFunctions = true
   loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
   while exploreProceduresAndFunctions do

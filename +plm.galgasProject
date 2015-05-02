@@ -51,6 +51,9 @@ project (0:0:1) -> "plm" {
 #  "galgas-sources/newtype-syntax.galgas"
 #  "galgas-sources/newtype-semantics.galgas"
 
+#--- Init
+  "galgas-sources/init-declaration.galgas"
+
 #--- func
   "galgas-sources/func-declaration.galgas"
 

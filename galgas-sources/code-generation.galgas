@@ -116,34 +116,13 @@ proc codeGeneration
     !targetName:inTargetName
     ?builtinFiles:let @stringlist builtinFiles
   )
-#--- Generate header file
-  let baseName = sourceDirectory + "/plm"
-#  var header = "#ifndef PLM_HEADER_DEFINED\n"
-#  header += "#define PLM_HEADER_DEFINED\n\n"
-#  header += separatorLine () + "\n"
-#  header += "#include <stdint.h>\n"
-#  header += "#include <stddef.h>\n\n"
-#  for register in inIntermediateCodeStruct.mRegisterMap do
-#    header += [register headerCodeGenerationForRegister]
-#  end
-#  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
-#    header += [globalConstant headerCodeGeneration]
-#  end
-#  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
-#    header += [type.mType headerCodeGenerationForType]
-#  end
-#  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-#    if procedure.mIsRequired then
-#      header += [procedure headerCodeGeneration]
-#    end
-#  end
-#  header += separatorLine () + "\n"
-#  header += "#endif\n"
-#  [header writeToFileWhenDifferentContents !baseName + ".h" ?*]
 #--- Generate C file
+  let baseName = sourceDirectory + "/plm"
   var code = "" # "#include \"plm.h\"\n\n"
   code += "#include <stdint.h>\n"
   code += "#include <stddef.h>\n\n"
+  code += separatorLine ()
+  code += "static void init (void) ;\n\n"
   code += separatorLine ()
   code += "//   Static Strings                                                                                                    *\n"
   code += separatorLine () + "\n"
@@ -174,6 +153,16 @@ proc codeGeneration
     code += "#include \"" + file + "\"\n"
   end
   code += "\n"
+#--- Init
+  code += separatorLine ()
+  code += "//   init                                                                                                        *\n"
+  code += separatorLine () + "\n"
+  code += "static void init (void) {\n"
+  for init in inIntermediateCodeStruct.mInitList do
+    code += [init.mInstructionListIR instructionListCode]
+  end
+  code += "}\n\n"
+  code += separatorLine () + "\n"
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]
   end
