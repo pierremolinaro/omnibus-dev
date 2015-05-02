@@ -27074,6 +27074,7 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "  rule.mCommand += cCompilerOptions ()\n"
   "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
   "  rule.mCommand += [\"-o\", object]\n"
+  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
   "  makefile.addRule (rule)\n"
   "  objectList.append (object)\n"
   "#--- Assembling\n"
@@ -27084,6 +27085,7 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "  rule.mCommand += cCompilerOptions ()\n"
   "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
   "  rule.mCommand += [\"-o\", asObject]\n"
+  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
   "  makefile.addRule (rule)\n"
   "  asObjectList.append (asObject)\n"
   "#--- Add linker rule\n"
@@ -27144,7 +27146,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  42964, // Text length
+  43074, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -27620,21 +27622,21 @@ const char * gWrapperFileContent_19_targetTemplates = "//-----------------------
   "  SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;\n"
   "\n"
   "//---------5- Ex\xC3""\xA9""cuter les constructeurs des variables globales\n"
-  "  extern void (* __constructor_array_start) (void) ;\n"
+  "/*  extern void (* __constructor_array_start) (void) ;\n"
   "  extern void (* __constructor_array_end) (void) ;\n"
   "  void (** ptr) (void) = & __constructor_array_start ;\n"
   "  while (ptr != & __constructor_array_end) {\n"
   "    (* ptr) () ;\n"
   "    ptr ++ ;\n"
-  "  }\n"
+  "  } */\n"
   "//---------6- Ex\xC3""\xA9""cuter les routines d'initialisation de la section init_routine_array\n"
-  "  extern void (* __init_routine_array_start) (void) ;\n"
+  "/*  extern void (* __init_routine_array_start) (void) ;\n"
   "  extern void (* __init_routine_array_end) (void) ;\n"
   "  ptr = & __init_routine_array_start ;\n"
   "  while (ptr != & __init_routine_array_end) {\n"
   "    (* ptr) () ;\n"
   "    ptr ++ ;\n"
-  "  }\n"
+  "  } */\n"
   "//---------7- Ex\xC3""\xA9""cuter le programme utilisateur\n"
   "  proc_setup () ;\n"
   "  while (1) {\n"
@@ -27708,7 +27710,7 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
-  12026, // Text length
+  12036, // Text length
   gWrapperFileContent_19_targetTemplates
 ) ;
 
