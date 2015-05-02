@@ -179,6 +179,7 @@ static void ResetISR (void) {
     (* ptr) () ;
     ptr ++ ;
   } */
+  init () ;
 //---------7- Exécuter le programme utilisateur
   proc_setup () ;
   while (1) {

@@ -14,6 +14,7 @@ proc semanticAnalysis
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
+  ?initList:let @initList inInitListAST
   ?context:let @semanticContext inSemanticContext
   ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
   ?endOfSourceFile:let @location inEndOfSourceFile
@@ -41,6 +42,13 @@ proc semanticAnalysis
   end
   for function in inFunctionListAST do
     [function functionSemanticAnalysis
+      !context:inSemanticContext
+      !?temporary:temporaryIndex
+      !?intermediateCode:outIntermediateCodeStruct
+    ]
+  end
+  for init in inInitListAST do
+    [init initSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaryIndex
       !?intermediateCode:outIntermediateCodeStruct

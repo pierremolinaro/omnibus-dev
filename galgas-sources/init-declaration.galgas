@@ -1,0 +1,81 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @initList {
+  @location mInitLocation
+  @instructionListAST mInstructionList
+  @location mEndOfInitLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $init$
+    let loc = @location.here
+    ${$
+    <instructionList> ?let instructionList
+    let endOfInit = @location.here
+    $}$
+    ioAST.mInitList +=
+      !loc
+      !instructionList
+      !endOfInit
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @initList-element initSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@uint ioTemporaryIndex
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  if not [inContext.mModeMap hasKey !"init"] then
+    error mInitLocation : "the $init mode should be defined in order to use init clauses"
+  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [mInstructionList analyzeRoutineInstructionList
+    !optionalReceiverType:.noReceiver
+    !context:inContext
+    !mode:"init"
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfInitLocation]
+#--- Code generation
+  ioIntermediateCodeStruct.mInitList +=
+    !mInitLocation
+    !instructionGenerationList
+    !mEndOfInitLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @initListIR {
+  @location mInitLocation
+  @instructionListIR mInstructionListIR
+  @location mEndOfInitLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
