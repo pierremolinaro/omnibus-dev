@@ -106,9 +106,8 @@ proc codeGeneration
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
 {
-# log "ioIntermediateCodeStruct.mProcedureMapIR" : ioIntermediateCodeStruct.mProcedureMapIR
 #--- Create source directory (if does not exist)
-  let targetDirectory = [inSourceFileName stringByDeletingPathExtension] + "+" + inTargetName
+  let targetDirectory = [inSourceFileName stringByDeletingPathExtension]
   let sourceDirectory = targetDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 #--- Generate header file
@@ -128,10 +127,9 @@ proc codeGeneration
     header += [type.mType headerCodeGenerationForType]
   end
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    header += [procedure headerCodeGeneration]
-  end
-  for function in inIntermediateCodeStruct.mFunctionMapIR do
-    header += [function headerCodeGeneration]
+    if procedure.mIsRequired then
+      header += [procedure headerCodeGeneration]
+    end
   end
   header += separatorLine () + "\n"
   header += "#endif\n"
@@ -147,6 +145,14 @@ proc codeGeneration
   code += "\n"
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
     code += [globalVariable implementationCodeGeneration]
+  end
+  for function in inIntermediateCodeStruct.mFunctionMapIR do
+    code += [function headerCodeGeneration]
+  end
+  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+    if not procedure.mIsRequired then
+      code += [procedure headerCodeGeneration]
+    end
   end
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]

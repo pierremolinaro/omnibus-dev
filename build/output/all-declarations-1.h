@@ -2319,6 +2319,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
                                                       const class GALGAS_instructionListIR & inOperand2,
+                                                      const class GALGAS_bool & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2326,6 +2327,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_procFormalArgumentListForGeneration constinArgument1,
                                                      class GALGAS_instructionListIR constinArgument2,
+                                                     class GALGAS_bool constinArgument3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2339,11 +2341,17 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void modifier_setMIsRequiredForKey (class GALGAS_bool constinArgument0,
+                                                                class GALGAS_string constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_procFormalArgumentListForGeneration & outArgument1,
                                                    class GALGAS_instructionListIR & outArgument2,
+                                                   class GALGAS_bool & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -2357,6 +2365,10 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mInstructionGenerationListForKey (const class GALGAS_string & constinOperand0,
                                                                                                     C_Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsRequiredForKey (const class GALGAS_string & constinOperand0,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR reader_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -2386,6 +2398,7 @@ class cEnumerator_procedureMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentListForGeneration current_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2404,11 +2417,13 @@ class cMapElement_procedureMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_procFormalArgumentListForGeneration mAttribute_mFormalArgumentListForGeneration ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
+  public : GALGAS_bool mAttribute_mIsRequired ;
 
 //--- Constructor
   public : cMapElement_procedureMapIR (const GALGAS_lstring & inKey,
                                        const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
-                                       const GALGAS_instructionListIR & in_mInstructionGenerationList
+                                       const GALGAS_instructionListIR & in_mInstructionGenerationList,
+                                       const GALGAS_bool & in_mIsRequired
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2435,6 +2450,7 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_procFormalArgumentListForGeneration mAttribute_mFormalArgumentListForGeneration ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
+  public : GALGAS_bool mAttribute_mIsRequired ;
 
 
 //--------------------------------- Accessors
@@ -2453,7 +2469,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_procedureMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                              const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
-                                             const GALGAS_instructionListIR & in_mInstructionGenerationList) ;
+                                             const GALGAS_instructionListIR & in_mInstructionGenerationList,
+                                             const GALGAS_bool & in_mIsRequired) ;
 
 //-- Start of generic part --*
 
@@ -2468,7 +2485,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_procedureMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                     const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
-                                                                    const class GALGAS_instructionListIR & inOperand2
+                                                                    const class GALGAS_instructionListIR & inOperand2,
+                                                                    const class GALGAS_bool & inOperand3
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -2488,6 +2506,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentListForGeneration reader_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mInstructionGenerationList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsRequired (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4237,7 +4257,8 @@ extern const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate ;
 
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (class C_Compiler * inCompiler,
                                                                            const class GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
-                                                                           const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST
+                                                                           const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
+                                                                           const class GALGAS_bool & in_STATIC
                                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4249,7 +4270,8 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (class
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (class C_Compiler * inCompiler,
                                                                               const class GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
                                                                               const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
-                                                                              const class GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST
+                                                                              const class GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST,
+                                                                              const class GALGAS_bool & in_STATIC
                                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4745,25 +4767,15 @@ void routine_codeOptimisation (class GALGAS_intermediateCodeStruct & ioArgument0
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Category method '@functionMapIR-element enterAccessibleEntities'                           *
+//                                      Routine 'suppressInaccessibleSubprograms'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category method '@procedureMapIR-element enterAccessibleEntities'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_procedureMapIR_2D_element inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void routine_suppressInaccessibleSubprograms (class GALGAS_intermediateCodeStruct & ioArgument0,
+                                              class GALGAS_accessibleEntities & outArgument1,
+                                              class GALGAS_bool & ioArgument2,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4778,6 +4790,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : GALGAS_stringset mAttribute_mGlobalConstantSet ;
   public : GALGAS_stringset mAttribute_mProcedureSet ;
   public : GALGAS_stringset mAttribute_mFunctionSet ;
+  public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
 
 
 //--------------------------------- Accessors
@@ -4798,7 +4811,8 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                       const GALGAS_stringset & in_mStaticStringSet,
                                       const GALGAS_stringset & in_mGlobalConstantSet,
                                       const GALGAS_stringset & in_mProcedureSet,
-                                      const GALGAS_stringset & in_mFunctionSet) ;
+                                      const GALGAS_stringset & in_mFunctionSet,
+                                      const GALGAS_stringset & in_mGlobalVariableSet) ;
 
 //-- Start of generic part --*
 
@@ -4815,7 +4829,8 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                                              const class GALGAS_stringset & inOperand1,
                                                              const class GALGAS_stringset & inOperand2,
                                                              const class GALGAS_stringset & inOperand3,
-                                                             const class GALGAS_stringset & inOperand4
+                                                             const class GALGAS_stringset & inOperand4,
+                                                             const class GALGAS_stringset & inOperand5
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -4836,6 +4851,8 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mGlobalConstantSet (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mGlobalVariableSet (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mProcedureSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mStaticStringSet (LOCATION_ARGS) const ;
@@ -4850,6 +4867,28 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Category method '@functionMapIR-element enterAccessibleEntities'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterAccessibleEntities (const class GALGAS_functionMapIR_2D_element inObject,
+                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Category method '@procedureMapIR-element enterAccessibleEntities'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterAccessibleEntities (const class GALGAS_procedureMapIR_2D_element inObject,
+                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5022,6 +5061,7 @@ extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
 extern const char * gWrapperFileContent_17_targetTemplates ;
 extern const char * gWrapperFileContent_18_targetTemplates ;
+extern const char * gWrapperFileContent_19_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5047,6 +5087,7 @@ extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
