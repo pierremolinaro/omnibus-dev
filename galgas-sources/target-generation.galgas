@@ -34,24 +34,26 @@ filewrapper targetTemplates in "../embedded-sources" {
 proc generateTargets
   ?targetDirectory:let @string inTargetDirectory
   ?targetName:let @lstring inTargetName
+  !builtinFiles:@stringlist outBuiltinFiles
 {
+  outBuiltinFiles = {}
   @filewrapper fw = [filewrapper targetTemplates]
   let targetPath = "/targets/" + [inTargetName.string stringByDeletingPathExtension]
   if [fw directoryExistsAtPath !targetPath] then
     for (path) in [fw textFilesAtPath !targetPath] do
-      let s = [[fw textFileContentsAtPath !targetPath + "/" + path] stringByReplacingStringByString !"\\t" !"\t"]
+      let s = [fw textFileContentsAtPath !targetPath + "/" + path]
       if [path pathExtension] == "py" then
-        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]
-      elsif [path pathExtension] == "mke" then
-        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + [path stringByDeletingPathExtension] ?*]
-      else
+        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]      else
         [s writeToFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]
       end
     end
     let sourcePath = targetPath + "/sources"
-    for (path) in [fw textFilesAtPath !sourcePath] do
-      let s = [[fw textFileContentsAtPath !sourcePath + "/" + path] stringByReplacingStringByString !"\\t" !"\t"]
-      [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + path ?*]
+    for (file) in [fw textFilesAtPath !sourcePath] do
+      let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
+      [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+      if [file pathExtension] == "c" then
+        outBuiltinFiles += !file
+      end
     end
   else
     var s = "cannot find this target; available targets:"

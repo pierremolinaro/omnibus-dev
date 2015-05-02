@@ -4257,8 +4257,7 @@ extern const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate ;
 
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (class C_Compiler * inCompiler,
                                                                            const class GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
-                                                                           const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
-                                                                           const class GALGAS_bool & in_STATIC
+                                                                           const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST
                                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4270,8 +4269,7 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (class
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (class C_Compiler * inCompiler,
                                                                               const class GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
                                                                               const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
-                                                                              const class GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST,
-                                                                              const class GALGAS_bool & in_STATIC
+                                                                              const class GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST
                                                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5033,6 +5031,7 @@ class GALGAS_string categoryReader_headerCodeGenerationForRegister (const class 
 
 void routine_generateTargets (const class GALGAS_string constinArgument0,
                               const class GALGAS_lstring constinArgument1,
+                              class GALGAS_stringlist & outArgument2,
                               class C_Compiler * inCompiler
                               COMMA_LOCATION_ARGS) ;
 
