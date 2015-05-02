@@ -110,32 +110,40 @@ proc codeGeneration
   let targetDirectory = [inSourceFileName stringByDeletingPathExtension]
   let sourceDirectory = targetDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
+#--- Generate target files
+  generateTargets (
+    !targetDirectory:targetDirectory
+    !targetName:inTargetName
+    ?builtinFiles:let @stringlist builtinFiles
+  )
 #--- Generate header file
   let baseName = sourceDirectory + "/plm"
-  var header = "#ifndef PLM_HEADER_DEFINED\n"
-  header += "#define PLM_HEADER_DEFINED\n\n"
-  header += separatorLine () + "\n"
-  header += "#include <stdint.h>\n"
-  header += "#include <stddef.h>\n\n"
-  for register in inIntermediateCodeStruct.mRegisterMap do
-    header += [register headerCodeGenerationForRegister]
-  end
-  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
-    header += [globalConstant headerCodeGeneration]
-  end
-  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
-    header += [type.mType headerCodeGenerationForType]
-  end
-  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    if procedure.mIsRequired then
-      header += [procedure headerCodeGeneration]
-    end
-  end
-  header += separatorLine () + "\n"
-  header += "#endif\n"
-  [header writeToFileWhenDifferentContents !baseName + ".h" ?*]
+#  var header = "#ifndef PLM_HEADER_DEFINED\n"
+#  header += "#define PLM_HEADER_DEFINED\n\n"
+#  header += separatorLine () + "\n"
+#  header += "#include <stdint.h>\n"
+#  header += "#include <stddef.h>\n\n"
+#  for register in inIntermediateCodeStruct.mRegisterMap do
+#    header += [register headerCodeGenerationForRegister]
+#  end
+#  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
+#    header += [globalConstant headerCodeGeneration]
+#  end
+#  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
+#    header += [type.mType headerCodeGenerationForType]
+#  end
+#  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+#    if procedure.mIsRequired then
+#      header += [procedure headerCodeGeneration]
+#    end
+#  end
+#  header += separatorLine () + "\n"
+#  header += "#endif\n"
+#  [header writeToFileWhenDifferentContents !baseName + ".h" ?*]
 #--- Generate C file
-  var code = "#include \"plm.h\"\n\n"
+  var code = "" # "#include \"plm.h\"\n\n"
+  code += "#include <stdint.h>\n"
+  code += "#include <stddef.h>\n\n"
   code += separatorLine ()
   code += "//   Static Strings                                                                                                    *\n"
   code += separatorLine () + "\n"
@@ -143,6 +151,15 @@ proc codeGeneration
     code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
   end
   code += "\n"
+  for register in inIntermediateCodeStruct.mRegisterMap do
+    code += [register headerCodeGenerationForRegister]
+  end
+  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
+    code += [globalConstant headerCodeGeneration]
+  end
+  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
+    code += [type.mType headerCodeGenerationForType]
+  end
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
     code += [globalVariable implementationCodeGeneration]
   end
@@ -150,10 +167,13 @@ proc codeGeneration
     code += [function headerCodeGeneration]
   end
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    if not procedure.mIsRequired then
-      code += [procedure headerCodeGeneration]
-    end
+    code += [procedure headerCodeGeneration]
   end
+  code += separatorLine () + "\n"
+  for (file) in builtinFiles do
+    code += "#include \"" + file + "\"\n"
+  end
+  code += "\n"
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]
   end
@@ -162,11 +182,6 @@ proc codeGeneration
   end
   code += separatorLine ()
   [code writeToFileWhenDifferentContents !baseName + ".c" ?*]
-#--- Generate target files
-  generateTargets (
-    !targetDirectory:targetDirectory
-    !targetName:inTargetName
-  )
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

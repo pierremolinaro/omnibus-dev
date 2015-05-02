@@ -1,9 +1,5 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
-#include "plm.h"
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 // Chapter 12: System Integration Module (SIM)
 #define SIM_SCGC3		*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3
 #define SIM_SCGC3_ADC1			(uint32_t)0x08000000		// ADC1 Clock Gate Control

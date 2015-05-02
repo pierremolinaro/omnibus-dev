@@ -2,7 +2,7 @@
 //%!["proc " + PROCEDURE_MANGLED_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-%if STATIC then !"static " end%void %!PROCEDURE_MANGLED_NAME% (%?^
+static void %!PROCEDURE_MANGLED_NAME% (%?^
 if [FORMAL_ARGUMENT_LIST length] == 0 then
   %void%
 else
