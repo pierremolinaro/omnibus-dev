@@ -3301,24 +3301,26 @@ GALGAS_typeMapIR GALGAS_typeMapIR::extractObject (const GALGAS_object & inObject
 
 cMapElement_procedureMapIR::cMapElement_procedureMapIR (const GALGAS_lstring & inKey,
                                                         const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
-                                                        const GALGAS_instructionListIR & in_mInstructionGenerationList
+                                                        const GALGAS_instructionListIR & in_mInstructionGenerationList,
+                                                        const GALGAS_bool & in_mIsRequired
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
-mAttribute_mInstructionGenerationList (in_mInstructionGenerationList) {
+mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
+mAttribute_mIsRequired (in_mIsRequired) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_procedureMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_procedureMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_procedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_procedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired COMMA_HERE)) ;
   return result ;
 }
 
@@ -3333,6 +3335,10 @@ void cMapElement_procedureMapIR::description (C_String & ioString, const int32_t
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInstructionGenerationList" ":" ;
   mAttribute_mInstructionGenerationList.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsRequired" ":" ;
+  mAttribute_mIsRequired.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3345,6 +3351,9 @@ typeComparisonResult cMapElement_procedureMapIR::compare (const cCollectionEleme
   }
   if (kOperandEqual == result) {
     result = mAttribute_mInstructionGenerationList.objectCompare (operand->mAttribute_mInstructionGenerationList) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mIsRequired.objectCompare (operand->mAttribute_mIsRequired) ;
   }
   return result ;
 }
@@ -3399,10 +3408,11 @@ GALGAS_procedureMapIR GALGAS_procedureMapIR::reader_overriddenMap (C_Compiler * 
 void GALGAS_procedureMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                  const GALGAS_procFormalArgumentListForGeneration & inArgument0,
                                                  const GALGAS_instructionListIR & inArgument1,
+                                                 const GALGAS_bool & inArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   cMapElement_procedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3416,10 +3426,11 @@ void GALGAS_procedureMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 void GALGAS_procedureMapIR::modifier_insertKey (GALGAS_lstring inKey,
                                                 GALGAS_procFormalArgumentListForGeneration inArgument0,
                                                 GALGAS_instructionListIR inArgument1,
+                                                GALGAS_bool inArgument2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_procedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3437,6 +3448,7 @@ const char * kSearchErrorMessage_procedureMapIR_searchKey = "** internal error *
 void GALGAS_procedureMapIR::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_procFormalArgumentListForGeneration & outArgument0,
                                               GALGAS_instructionListIR & outArgument1,
+                                              GALGAS_bool & outArgument2,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) performSearch (inKey,
@@ -3446,10 +3458,12 @@ void GALGAS_procedureMapIR::method_searchKey (GALGAS_lstring inKey,
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
+    outArgument2.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_procedureMapIR) ;
     outArgument0 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument1 = p->mAttribute_mInstructionGenerationList ;
+    outArgument2 = p->mAttribute_mIsRequired ;
   }
 }
 
@@ -3485,6 +3499,21 @@ GALGAS_instructionListIR GALGAS_procedureMapIR::reader_mInstructionGenerationLis
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_procedureMapIR::reader_mIsRequiredForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+    result = p->mAttribute_mIsRequired ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_procedureMapIR::modifier_setMFormalArgumentListForGenerationForKey (GALGAS_procFormalArgumentListForGeneration inAttributeValue,
                                                                                 GALGAS_string inKey,
                                                                                 C_Compiler * inCompiler
@@ -3513,6 +3542,20 @@ void GALGAS_procedureMapIR::modifier_setMInstructionGenerationListForKey (GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_procedureMapIR::modifier_setMIsRequiredForKey (GALGAS_bool inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_procedureMapIR * p = (cMapElement_procedureMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+    p->mAttribute_mIsRequired = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_procedureMapIR * GALGAS_procedureMapIR::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                        const GALGAS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) {
@@ -3534,7 +3577,7 @@ cGenericAbstractEnumerator () {
 GALGAS_procedureMapIR_2D_element cEnumerator_procedureMapIR::current (LOCATION_ARGS) const {
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_procedureMapIR) ;
-  return GALGAS_procedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList) ;
+  return GALGAS_procedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3559,6 +3602,14 @@ GALGAS_instructionListIR cEnumerator_procedureMapIR::current_mInstructionGenerat
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_procedureMapIR) ;
   return p->mAttribute_mInstructionGenerationList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_procedureMapIR::current_mIsRequired (LOCATION_ARGS) const {
+  const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+  return p->mAttribute_mIsRequired ;
 }
 
 
@@ -5469,19 +5520,19 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (8)
 , END
 // State S169 (index = 2241)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (220)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (220)
 , END
 // State S170 (index = 2244)
 , C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (221)
 , END
 // State S171 (index = 2247)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (222)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (222)
 , END
 // State S172 (index = 2250)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (223)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (223)
 , END
 // State S173 (index = 2253)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (224)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (224)
 , END
 // State S174 (index = 2256)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (11)
@@ -6427,31 +6478,21 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (59)
 , END
 // State S220 (index = 4004)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (65)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (265)
 , END
-// State S221 (index = 4009)
+// State S221 (index = 4007)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (266)
 , END
-// State S222 (index = 4012)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
+// State S222 (index = 4010)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (267)
 , END
-// State S223 (index = 4021)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
+// State S223 (index = 4013)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (268)
 , END
-// State S224 (index = 4030)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
+// State S224 (index = 4016)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (269)
 , END
-// State S225 (index = 4039)
+// State S225 (index = 4019)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (12)
@@ -6465,16 +6506,16 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (12)
 , END
-// State S226 (index = 4064)
+// State S226 (index = 4044)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (100)
 , END
-// State S227 (index = 4067)
+// State S227 (index = 4047)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (98)
 , END
-// State S228 (index = 4070)
+// State S228 (index = 4050)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (99)
 , END
-// State S229 (index = 4073)
+// State S229 (index = 4053)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (16)
@@ -6488,7 +6529,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (16)
 , END
-// State S230 (index = 4098)
+// State S230 (index = 4078)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (18)
@@ -6502,11 +6543,11 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (18)
 , END
-// State S231 (index = 4123)
+// State S231 (index = 4103)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (184)
 , END
-// State S232 (index = 4128)
+// State S232 (index = 4108)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (38)
@@ -6553,7 +6594,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (38)
 , END
-// State S233 (index = 4219)
+// State S233 (index = 4199)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (50)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (51)
@@ -6567,7 +6608,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, SHIFT (56)
 , C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (57)
 , END
-// State S234 (index = 4244)
+// State S234 (index = 4224)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (83)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (84)
 , C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (85)
@@ -6575,10 +6616,10 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_self, SHIFT (87)
 , C_Lexique_plm_5F_lexique::kToken__2E_, REDUCE (101)
 , END
-// State S235 (index = 4257)
+// State S235 (index = 4237)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (21)
 , END
-// State S236 (index = 4260)
+// State S236 (index = 4240)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (117)
@@ -6618,7 +6659,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (117)
 , END
-// State S237 (index = 4337)
+// State S237 (index = 4317)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (118)
@@ -6658,7 +6699,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (118)
 , END
-// State S238 (index = 4414)
+// State S238 (index = 4394)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (119)
@@ -6698,7 +6739,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (119)
 , END
-// State S239 (index = 4491)
+// State S239 (index = 4471)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (120)
@@ -6738,7 +6779,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (120)
 , END
-// State S240 (index = 4568)
+// State S240 (index = 4548)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (121)
@@ -6778,7 +6819,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (121)
 , END
-// State S241 (index = 4645)
+// State S241 (index = 4625)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (122)
@@ -6818,7 +6859,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (122)
 , END
-// State S242 (index = 4722)
+// State S242 (index = 4702)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (123)
@@ -6858,7 +6899,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (123)
 , END
-// State S243 (index = 4799)
+// State S243 (index = 4779)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (111)
@@ -6893,7 +6934,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (111)
 , END
-// State S244 (index = 4866)
+// State S244 (index = 4846)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (112)
@@ -6928,7 +6969,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (112)
 , END
-// State S245 (index = 4933)
+// State S245 (index = 4913)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (113)
@@ -6963,7 +7004,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (113)
 , END
-// State S246 (index = 5000)
+// State S246 (index = 4980)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (114)
@@ -6998,7 +7039,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (114)
 , END
-// State S247 (index = 5067)
+// State S247 (index = 5047)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (115)
@@ -7033,49 +7074,49 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (115)
 , END
-// State S248 (index = 5134)
+// State S248 (index = 5114)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (273)
 , END
-// State S249 (index = 5137)
+// State S249 (index = 5117)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (274)
 , END
-// State S250 (index = 5140)
+// State S250 (index = 5120)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (275)
 , END
-// State S251 (index = 5143)
+// State S251 (index = 5123)
 , C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (276)
 , END
-// State S252 (index = 5146)
+// State S252 (index = 5126)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (277)
 , END
-// State S253 (index = 5149)
+// State S253 (index = 5129)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (278)
 , END
-// State S254 (index = 5152)
+// State S254 (index = 5132)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (279)
 , END
-// State S255 (index = 5155)
+// State S255 (index = 5135)
 , C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (280)
 , END
-// State S256 (index = 5158)
+// State S256 (index = 5138)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (209)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (210)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (211)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (85)
 , END
-// State S257 (index = 5167)
+// State S257 (index = 5147)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (209)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (210)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (211)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (85)
 , END
-// State S258 (index = 5176)
+// State S258 (index = 5156)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (209)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (210)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (211)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (85)
 , END
-// State S259 (index = 5185)
+// State S259 (index = 5165)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (22)
@@ -7089,7 +7130,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (22)
 , END
-// State S260 (index = 5210)
+// State S260 (index = 5190)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (26)
@@ -7103,14 +7144,14 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (26)
 , END
-// State S261 (index = 5235)
+// State S261 (index = 5215)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (49)
 , END
-// State S262 (index = 5238)
+// State S262 (index = 5218)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (52)
 , C_Lexique_plm_5F_lexique::kToken_case, SHIFT (216)
 , END
-// State S263 (index = 5243)
+// State S263 (index = 5223)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (5)
@@ -7124,7 +7165,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
 , END
-// State S264 (index = 5268)
+// State S264 (index = 5248)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (83)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (84)
 , C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (85)
@@ -7132,20 +7173,30 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_self, SHIFT (87)
 , C_Lexique_plm_5F_lexique::kToken__2E_, REDUCE (101)
 , END
-// State S265 (index = 5281)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (66)
+// State S265 (index = 5261)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (65)
 , END
-// State S266 (index = 5284)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (286)
+// State S266 (index = 5266)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (287)
 , END
-// State S267 (index = 5287)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (72)
+// State S267 (index = 5269)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
 , END
-// State S268 (index = 5290)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (70)
+// State S268 (index = 5278)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
 , END
-// State S269 (index = 5293)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (71)
+// State S269 (index = 5287)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (113)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (114)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (115)
 , END
 // State S270 (index = 5296)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (125)
@@ -7240,30 +7291,45 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (9)
 , END
 // State S286 (index = 5432)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (294)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (66)
 , END
 // State S287 (index = 5435)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (92)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (298)
 , END
 // State S288 (index = 5438)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (90)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (72)
 , END
 // State S289 (index = 5441)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (91)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (70)
 , END
 // State S290 (index = 5444)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (96)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (71)
 , END
 // State S291 (index = 5447)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (94)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (92)
 , END
 // State S292 (index = 5450)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (95)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (90)
 , END
 // State S293 (index = 5453)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (57)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (91)
 , END
 // State S294 (index = 5456)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (96)
+, END
+// State S295 (index = 5459)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (94)
+, END
+// State S296 (index = 5462)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (95)
+, END
+// State S297 (index = 5465)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (57)
+, END
+// State S298 (index = 5468)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (299)
+, END
+// State S299 (index = 5471)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (50)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (51)
@@ -7277,10 +7343,10 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, SHIFT (56)
 , C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (57)
 , END
-// State S295 (index = 5481)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (296)
+// State S300 (index = 5496)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (301)
 , END
-// State S296 (index = 5484)
+// State S301 (index = 5499)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (9)
@@ -7295,7 +7361,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (9)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_grammar [297] = {
+static const uint32_t gActionTableIndex_plm_grammar [302] = {
   0  // S0
 , 25  // S1
 , 28  // S2
@@ -7517,55 +7583,55 @@ static const uint32_t gActionTableIndex_plm_grammar [297] = {
 , 3998  // S218
 , 4001  // S219
 , 4004  // S220
-, 4009  // S221
-, 4012  // S222
-, 4021  // S223
-, 4030  // S224
-, 4039  // S225
-, 4064  // S226
-, 4067  // S227
-, 4070  // S228
-, 4073  // S229
-, 4098  // S230
-, 4123  // S231
-, 4128  // S232
-, 4219  // S233
-, 4244  // S234
-, 4257  // S235
-, 4260  // S236
-, 4337  // S237
-, 4414  // S238
-, 4491  // S239
-, 4568  // S240
-, 4645  // S241
-, 4722  // S242
-, 4799  // S243
-, 4866  // S244
-, 4933  // S245
-, 5000  // S246
-, 5067  // S247
-, 5134  // S248
-, 5137  // S249
-, 5140  // S250
-, 5143  // S251
-, 5146  // S252
-, 5149  // S253
-, 5152  // S254
-, 5155  // S255
-, 5158  // S256
-, 5167  // S257
-, 5176  // S258
-, 5185  // S259
-, 5210  // S260
-, 5235  // S261
-, 5238  // S262
-, 5243  // S263
-, 5268  // S264
-, 5281  // S265
-, 5284  // S266
-, 5287  // S267
-, 5290  // S268
-, 5293  // S269
+, 4007  // S221
+, 4010  // S222
+, 4013  // S223
+, 4016  // S224
+, 4019  // S225
+, 4044  // S226
+, 4047  // S227
+, 4050  // S228
+, 4053  // S229
+, 4078  // S230
+, 4103  // S231
+, 4108  // S232
+, 4199  // S233
+, 4224  // S234
+, 4237  // S235
+, 4240  // S236
+, 4317  // S237
+, 4394  // S238
+, 4471  // S239
+, 4548  // S240
+, 4625  // S241
+, 4702  // S242
+, 4779  // S243
+, 4846  // S244
+, 4913  // S245
+, 4980  // S246
+, 5047  // S247
+, 5114  // S248
+, 5117  // S249
+, 5120  // S250
+, 5123  // S251
+, 5126  // S252
+, 5129  // S253
+, 5132  // S254
+, 5135  // S255
+, 5138  // S256
+, 5147  // S257
+, 5156  // S258
+, 5165  // S259
+, 5190  // S260
+, 5215  // S261
+, 5218  // S262
+, 5223  // S263
+, 5248  // S264
+, 5261  // S265
+, 5266  // S266
+, 5269  // S267
+, 5278  // S268
+, 5287  // S269
 , 5296  // S270
 , 5299  // S271
 , 5302  // S272
@@ -7591,8 +7657,13 @@ static const uint32_t gActionTableIndex_plm_grammar [297] = {
 , 5450  // S292
 , 5453  // S293
 , 5456  // S294
-, 5481  // S295
-, 5484  // S296
+, 5459  // S295
+, 5462  // S296
+, 5465  // S297
+, 5468  // S298
+, 5471  // S299
+, 5496  // S300
+, 5499  // S301
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7901,14 +7972,6 @@ static const int16_t gSuccessorTable_plm_grammar_208 [3] = {33, 255, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_214 [3] = {16, 261, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_220 [3] = {23, 265, -1} ;
-
-static const int16_t gSuccessorTable_plm_grammar_222 [3] = {25, 267, -1} ;
-
-static const int16_t gSuccessorTable_plm_grammar_223 [3] = {25, 268, -1} ;
-
-static const int16_t gSuccessorTable_plm_grammar_224 [3] = {25, 269, -1} ;
-
 static const int16_t gSuccessorTable_plm_grammar_231 [3] = {39, 270, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_233 [7] = {5, 271,
@@ -7938,27 +8001,35 @@ static const int16_t gSuccessorTable_plm_grammar_264 [13] = {8, 285,
   12, 93,
   35, 94, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_273 [3] = {32, 287, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_265 [3] = {23, 286, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_274 [3] = {32, 288, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_267 [3] = {25, 288, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_275 [3] = {32, 289, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_268 [3] = {25, 289, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_277 [3] = {33, 290, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_269 [3] = {25, 290, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_278 [3] = {33, 291, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_273 [3] = {32, 291, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_279 [3] = {33, 292, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_274 [3] = {32, 292, -1} ;
+
+static const int16_t gSuccessorTable_plm_grammar_275 [3] = {32, 293, -1} ;
+
+static const int16_t gSuccessorTable_plm_grammar_277 [3] = {33, 294, -1} ;
+
+static const int16_t gSuccessorTable_plm_grammar_278 [3] = {33, 295, -1} ;
+
+static const int16_t gSuccessorTable_plm_grammar_279 [3] = {33, 296, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_285 [7] = {3, 106,
   4, 15,
-  20, 293, -1} ;
+  20, 297, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_294 [7] = {5, 295,
+static const int16_t gSuccessorTable_plm_grammar_299 [7] = {5, 300,
   6, 59,
   27, 60, -1} ;
 
-static const int16_t * gSuccessorTable_plm_grammar [297] = {
+static const int16_t * gSuccessorTable_plm_grammar [302] = {
 gSuccessorTable_plm_grammar_0, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   gSuccessorTable_plm_grammar_8, gSuccessorTable_plm_grammar_9, gSuccessorTable_plm_grammar_10, NULL, 
@@ -8014,8 +8085,8 @@ gSuccessorTable_plm_grammar_0, NULL, NULL, NULL,
   gSuccessorTable_plm_grammar_208, NULL, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plm_grammar_214, NULL, 
   NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_grammar_220, NULL, gSuccessorTable_plm_grammar_222, gSuccessorTable_plm_grammar_223, 
-  gSuccessorTable_plm_grammar_224, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, gSuccessorTable_plm_grammar_231, 
   NULL, gSuccessorTable_plm_grammar_233, gSuccessorTable_plm_grammar_234, NULL, 
   NULL, NULL, NULL, NULL, 
@@ -8025,15 +8096,16 @@ gSuccessorTable_plm_grammar_0, NULL, NULL, NULL,
   NULL, NULL, NULL, NULL, 
   gSuccessorTable_plm_grammar_256, gSuccessorTable_plm_grammar_257, gSuccessorTable_plm_grammar_258, NULL, 
   NULL, NULL, gSuccessorTable_plm_grammar_262, NULL, 
-  gSuccessorTable_plm_grammar_264, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_grammar_264, gSuccessorTable_plm_grammar_265, NULL, gSuccessorTable_plm_grammar_267, 
+  gSuccessorTable_plm_grammar_268, gSuccessorTable_plm_grammar_269, NULL, NULL, 
   NULL, gSuccessorTable_plm_grammar_273, gSuccessorTable_plm_grammar_274, gSuccessorTable_plm_grammar_275, 
   NULL, gSuccessorTable_plm_grammar_277, gSuccessorTable_plm_grammar_278, gSuccessorTable_plm_grammar_279, 
   NULL, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plm_grammar_285, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_grammar_294, NULL, 
-  NULL} ;
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_grammar_299, 
+  NULL, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -8051,7 +8123,7 @@ static const int16_t gProductionsTable_plm_grammar [127 * 2] = {
   2, 6,
   2, 6,
   2, 6,
-  2, 12,
+  2, 13,
   3, 4,
   4, 6,
   2, 7,
@@ -8108,13 +8180,13 @@ static const int16_t gProductionsTable_plm_grammar [127 * 2] = {
   22, 0,
   22, 1,
   23, 0,
-  23, 4,
+  23, 5,
   24, 0,
   24, 1,
   25, 0,
-  25, 4,
-  25, 4,
-  25, 4,
+  25, 5,
+  25, 5,
+  25, 5,
   26, 0,
   26, 2,
   27, 0,
@@ -10742,19 +10814,19 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (8)
 , END
 // State S182 (index = 2592)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (233)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (233)
 , END
 // State S183 (index = 2595)
 , C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (234)
 , END
 // State S184 (index = 2598)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (235)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (235)
 , END
 // State S185 (index = 2601)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (236)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (236)
 , END
 // State S186 (index = 2604)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (237)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (237)
 , END
 // State S187 (index = 2607)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (11)
@@ -11800,31 +11872,21 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (63)
 , END
 // State S233 (index = 4555)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (124)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (278)
 , END
-// State S234 (index = 4560)
+// State S234 (index = 4558)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (279)
 , END
-// State S235 (index = 4563)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
+// State S235 (index = 4561)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (280)
 , END
-// State S236 (index = 4572)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
+// State S236 (index = 4564)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (281)
 , END
-// State S237 (index = 4581)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
+// State S237 (index = 4567)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (282)
 , END
-// State S238 (index = 4590)
+// State S238 (index = 4570)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (12)
@@ -11842,16 +11904,16 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (12)
 , END
-// State S239 (index = 4623)
+// State S239 (index = 4603)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (104)
 , END
-// State S240 (index = 4626)
+// State S240 (index = 4606)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (102)
 , END
-// State S241 (index = 4629)
+// State S241 (index = 4609)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (103)
 , END
-// State S242 (index = 4632)
+// State S242 (index = 4612)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (16)
@@ -11865,7 +11927,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (16)
 , END
-// State S243 (index = 4657)
+// State S243 (index = 4637)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (18)
@@ -11879,11 +11941,11 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (18)
 , END
-// State S244 (index = 4682)
+// State S244 (index = 4662)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (197)
 , END
-// State S245 (index = 4687)
+// State S245 (index = 4667)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (38)
@@ -11934,7 +11996,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (38)
 , END
-// State S246 (index = 4786)
+// State S246 (index = 4766)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
@@ -11948,7 +12010,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (68)
 , END
-// State S247 (index = 4811)
+// State S247 (index = 4791)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (96)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (97)
 , C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (98)
@@ -11956,10 +12018,10 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_self, SHIFT (100)
 , C_Lexique_plm_5F_lexique::kToken__2E_, REDUCE (105)
 , END
-// State S248 (index = 4824)
+// State S248 (index = 4804)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (21)
 , END
-// State S249 (index = 4827)
+// State S249 (index = 4807)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (121)
@@ -12003,7 +12065,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (121)
 , END
-// State S250 (index = 4912)
+// State S250 (index = 4892)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (122)
@@ -12047,7 +12109,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (122)
 , END
-// State S251 (index = 4997)
+// State S251 (index = 4977)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (123)
@@ -12091,7 +12153,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (123)
 , END
-// State S252 (index = 5082)
+// State S252 (index = 5062)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (124)
@@ -12135,7 +12197,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (124)
 , END
-// State S253 (index = 5167)
+// State S253 (index = 5147)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (125)
@@ -12179,7 +12241,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (125)
 , END
-// State S254 (index = 5252)
+// State S254 (index = 5232)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (126)
@@ -12223,7 +12285,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (126)
 , END
-// State S255 (index = 5337)
+// State S255 (index = 5317)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (127)
@@ -12267,7 +12329,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S256 (index = 5422)
+// State S256 (index = 5402)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (115)
@@ -12306,7 +12368,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (115)
 , END
-// State S257 (index = 5497)
+// State S257 (index = 5477)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (116)
@@ -12345,7 +12407,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (116)
 , END
-// State S258 (index = 5572)
+// State S258 (index = 5552)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (117)
@@ -12384,7 +12446,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (117)
 , END
-// State S259 (index = 5647)
+// State S259 (index = 5627)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (118)
@@ -12423,7 +12485,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (118)
 , END
-// State S260 (index = 5722)
+// State S260 (index = 5702)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (119)
@@ -12462,49 +12524,49 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (119)
 , END
-// State S261 (index = 5797)
+// State S261 (index = 5777)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (286)
 , END
-// State S262 (index = 5800)
+// State S262 (index = 5780)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (287)
 , END
-// State S263 (index = 5803)
+// State S263 (index = 5783)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (288)
 , END
-// State S264 (index = 5806)
+// State S264 (index = 5786)
 , C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (289)
 , END
-// State S265 (index = 5809)
+// State S265 (index = 5789)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (290)
 , END
-// State S266 (index = 5812)
+// State S266 (index = 5792)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (291)
 , END
-// State S267 (index = 5815)
+// State S267 (index = 5795)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (292)
 , END
-// State S268 (index = 5818)
+// State S268 (index = 5798)
 , C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (293)
 , END
-// State S269 (index = 5821)
+// State S269 (index = 5801)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (222)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (223)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (224)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (89)
 , END
-// State S270 (index = 5830)
+// State S270 (index = 5810)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (222)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (223)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (224)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (89)
 , END
-// State S271 (index = 5839)
+// State S271 (index = 5819)
 , C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (222)
 , C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (223)
 , C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (224)
 , C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (89)
 , END
-// State S272 (index = 5848)
+// State S272 (index = 5828)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (22)
@@ -12518,7 +12580,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (22)
 , END
-// State S273 (index = 5873)
+// State S273 (index = 5853)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (26)
@@ -12532,14 +12594,14 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (26)
 , END
-// State S274 (index = 5898)
+// State S274 (index = 5878)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (53)
 , END
-// State S275 (index = 5901)
+// State S275 (index = 5881)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (56)
 , C_Lexique_plm_5F_lexique::kToken_case, SHIFT (229)
 , END
-// State S276 (index = 5906)
+// State S276 (index = 5886)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (5)
@@ -12557,7 +12619,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
 , END
-// State S277 (index = 5939)
+// State S277 (index = 5919)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (96)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (97)
 , C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (98)
@@ -12565,20 +12627,30 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_self, SHIFT (100)
 , C_Lexique_plm_5F_lexique::kToken__2E_, REDUCE (105)
 , END
-// State S278 (index = 5952)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (70)
+// State S278 (index = 5932)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (124)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (69)
 , END
-// State S279 (index = 5955)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (299)
+// State S279 (index = 5937)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (300)
 , END
-// State S280 (index = 5958)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (76)
+// State S280 (index = 5940)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
 , END
-// State S281 (index = 5961)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (74)
+// State S281 (index = 5949)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
 , END
-// State S282 (index = 5964)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (75)
+// State S282 (index = 5958)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (126)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (73)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (127)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (128)
 , END
 // State S283 (index = 5967)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (129)
@@ -12673,30 +12745,45 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (9)
 , END
 // State S299 (index = 6103)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (307)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (70)
 , END
 // State S300 (index = 6106)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (96)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (311)
 , END
 // State S301 (index = 6109)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (94)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (76)
 , END
 // State S302 (index = 6112)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (95)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (74)
 , END
 // State S303 (index = 6115)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (100)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (75)
 , END
 // State S304 (index = 6118)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (98)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (96)
 , END
 // State S305 (index = 6121)
-, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (99)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (94)
 , END
 // State S306 (index = 6124)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (61)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (95)
 , END
 // State S307 (index = 6127)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (100)
+, END
+// State S308 (index = 6130)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (98)
+, END
+// State S309 (index = 6133)
+, C_Lexique_plm_5F_lexique::kToken__5D_, REDUCE (99)
+, END
+// State S310 (index = 6136)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (61)
+, END
+// State S311 (index = 6139)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (312)
+, END
+// State S312 (index = 6142)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
@@ -12710,10 +12797,10 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (68)
 , END
-// State S308 (index = 6152)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (309)
+// State S313 (index = 6167)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (314)
 , END
-// State S309 (index = 6155)
+// State S314 (index = 6170)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_newBooleanType, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_boolset, REDUCE (9)
@@ -12732,7 +12819,7 @@ static const int16_t gActionTable_plms_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (9)
 , END} ;
 
-static const uint32_t gActionTableIndex_plms_grammar [310] = {
+static const uint32_t gActionTableIndex_plms_grammar [315] = {
   0  // S0
 , 33  // S1
 , 36  // S2
@@ -12967,55 +13054,55 @@ static const uint32_t gActionTableIndex_plms_grammar [310] = {
 , 4549  // S231
 , 4552  // S232
 , 4555  // S233
-, 4560  // S234
-, 4563  // S235
-, 4572  // S236
-, 4581  // S237
-, 4590  // S238
-, 4623  // S239
-, 4626  // S240
-, 4629  // S241
-, 4632  // S242
-, 4657  // S243
-, 4682  // S244
-, 4687  // S245
-, 4786  // S246
-, 4811  // S247
-, 4824  // S248
-, 4827  // S249
-, 4912  // S250
-, 4997  // S251
-, 5082  // S252
-, 5167  // S253
-, 5252  // S254
-, 5337  // S255
-, 5422  // S256
-, 5497  // S257
-, 5572  // S258
-, 5647  // S259
-, 5722  // S260
-, 5797  // S261
-, 5800  // S262
-, 5803  // S263
-, 5806  // S264
-, 5809  // S265
-, 5812  // S266
-, 5815  // S267
-, 5818  // S268
-, 5821  // S269
-, 5830  // S270
-, 5839  // S271
-, 5848  // S272
-, 5873  // S273
-, 5898  // S274
-, 5901  // S275
-, 5906  // S276
-, 5939  // S277
-, 5952  // S278
-, 5955  // S279
-, 5958  // S280
-, 5961  // S281
-, 5964  // S282
+, 4558  // S234
+, 4561  // S235
+, 4564  // S236
+, 4567  // S237
+, 4570  // S238
+, 4603  // S239
+, 4606  // S240
+, 4609  // S241
+, 4612  // S242
+, 4637  // S243
+, 4662  // S244
+, 4667  // S245
+, 4766  // S246
+, 4791  // S247
+, 4804  // S248
+, 4807  // S249
+, 4892  // S250
+, 4977  // S251
+, 5062  // S252
+, 5147  // S253
+, 5232  // S254
+, 5317  // S255
+, 5402  // S256
+, 5477  // S257
+, 5552  // S258
+, 5627  // S259
+, 5702  // S260
+, 5777  // S261
+, 5780  // S262
+, 5783  // S263
+, 5786  // S264
+, 5789  // S265
+, 5792  // S266
+, 5795  // S267
+, 5798  // S268
+, 5801  // S269
+, 5810  // S270
+, 5819  // S271
+, 5828  // S272
+, 5853  // S273
+, 5878  // S274
+, 5881  // S275
+, 5886  // S276
+, 5919  // S277
+, 5932  // S278
+, 5937  // S279
+, 5940  // S280
+, 5949  // S281
+, 5958  // S282
 , 5967  // S283
 , 5970  // S284
 , 5973  // S285
@@ -13041,8 +13128,13 @@ static const uint32_t gActionTableIndex_plms_grammar [310] = {
 , 6121  // S305
 , 6124  // S306
 , 6127  // S307
-, 6152  // S308
-, 6155  // S309
+, 6130  // S308
+, 6133  // S309
+, 6136  // S310
+, 6139  // S311
+, 6142  // S312
+, 6167  // S313
+, 6170  // S314
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13353,14 +13445,6 @@ static const int16_t gSuccessorTable_plms_grammar_221 [3] = {33, 268, -1} ;
 
 static const int16_t gSuccessorTable_plms_grammar_227 [3] = {16, 274, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_233 [3] = {23, 278, -1} ;
-
-static const int16_t gSuccessorTable_plms_grammar_235 [3] = {25, 280, -1} ;
-
-static const int16_t gSuccessorTable_plms_grammar_236 [3] = {25, 281, -1} ;
-
-static const int16_t gSuccessorTable_plms_grammar_237 [3] = {25, 282, -1} ;
-
 static const int16_t gSuccessorTable_plms_grammar_244 [3] = {39, 283, -1} ;
 
 static const int16_t gSuccessorTable_plms_grammar_246 [7] = {5, 284,
@@ -13390,27 +13474,35 @@ static const int16_t gSuccessorTable_plms_grammar_277 [13] = {8, 298,
   12, 106,
   35, 107, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_286 [3] = {32, 300, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_278 [3] = {23, 299, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_287 [3] = {32, 301, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_280 [3] = {25, 301, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_288 [3] = {32, 302, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_281 [3] = {25, 302, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_290 [3] = {33, 303, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_282 [3] = {25, 303, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_291 [3] = {33, 304, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_286 [3] = {32, 304, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_292 [3] = {33, 305, -1} ;
+static const int16_t gSuccessorTable_plms_grammar_287 [3] = {32, 305, -1} ;
+
+static const int16_t gSuccessorTable_plms_grammar_288 [3] = {32, 306, -1} ;
+
+static const int16_t gSuccessorTable_plms_grammar_290 [3] = {33, 307, -1} ;
+
+static const int16_t gSuccessorTable_plms_grammar_291 [3] = {33, 308, -1} ;
+
+static const int16_t gSuccessorTable_plms_grammar_292 [3] = {33, 309, -1} ;
 
 static const int16_t gSuccessorTable_plms_grammar_298 [7] = {3, 119,
   4, 19,
-  20, 306, -1} ;
+  20, 310, -1} ;
 
-static const int16_t gSuccessorTable_plms_grammar_307 [7] = {5, 308,
+static const int16_t gSuccessorTable_plms_grammar_312 [7] = {5, 313,
   6, 70,
   27, 71, -1} ;
 
-static const int16_t * gSuccessorTable_plms_grammar [310] = {
+static const int16_t * gSuccessorTable_plms_grammar [315] = {
 gSuccessorTable_plms_grammar_0, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   gSuccessorTable_plms_grammar_8, gSuccessorTable_plms_grammar_9, gSuccessorTable_plms_grammar_10, NULL, 
@@ -13469,8 +13561,8 @@ gSuccessorTable_plms_grammar_0, NULL, NULL, NULL,
   gSuccessorTable_plms_grammar_220, gSuccessorTable_plms_grammar_221, NULL, NULL, 
   NULL, NULL, NULL, gSuccessorTable_plms_grammar_227, 
   NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plms_grammar_233, NULL, gSuccessorTable_plms_grammar_235, 
-  gSuccessorTable_plms_grammar_236, gSuccessorTable_plms_grammar_237, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   gSuccessorTable_plms_grammar_244, NULL, gSuccessorTable_plms_grammar_246, gSuccessorTable_plms_grammar_247, 
   NULL, NULL, NULL, NULL, 
@@ -13480,15 +13572,16 @@ gSuccessorTable_plms_grammar_0, NULL, NULL, NULL,
   NULL, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plms_grammar_269, gSuccessorTable_plms_grammar_270, gSuccessorTable_plms_grammar_271, 
   NULL, NULL, NULL, gSuccessorTable_plms_grammar_275, 
-  NULL, gSuccessorTable_plms_grammar_277, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plms_grammar_277, gSuccessorTable_plms_grammar_278, NULL, 
+  gSuccessorTable_plms_grammar_280, gSuccessorTable_plms_grammar_281, gSuccessorTable_plms_grammar_282, NULL, 
   NULL, NULL, gSuccessorTable_plms_grammar_286, gSuccessorTable_plms_grammar_287, 
   gSuccessorTable_plms_grammar_288, NULL, gSuccessorTable_plms_grammar_290, gSuccessorTable_plms_grammar_291, 
   gSuccessorTable_plms_grammar_292, NULL, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plms_grammar_298, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plms_grammar_307, 
-  NULL, NULL} ;
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plms_grammar_312, NULL, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -13506,7 +13599,7 @@ static const int16_t gProductionsTable_plms_grammar [131 * 2] = {
   2, 6,
   2, 6,
   2, 6,
-  2, 12,
+  2, 13,
   3, 4,
   4, 6,
   2, 7,
@@ -13567,13 +13660,13 @@ static const int16_t gProductionsTable_plms_grammar [131 * 2] = {
   22, 0,
   22, 1,
   23, 0,
-  23, 4,
+  23, 5,
   24, 0,
   24, 1,
   25, 0,
-  25, 4,
-  25, 4,
-  25, 4,
+  25, 5,
+  25, 5,
+  25, 5,
   26, 0,
   26, 2,
   27, 0,
@@ -17174,7 +17267,8 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (C_Comp
   result << GALGAS_string ("func ").add_operation (in_FUNCTION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 2)).reader_stringByLeftAndRightPadding (GALGAS_uint ((uint32_t) 117U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 2)).stringValue () ;
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
-    "\n" ;
+    "\n"
+    "static " ;
   result << function_mangledNameForType (in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)), inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
   result << " " ;
   result << function_mangledNameForFunction (in_FUNCTION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 5)).stringValue () ;
@@ -17184,19 +17278,19 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_declaration (C_Comp
   if (kBoolTrue == test_0) {
     result << "void" ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_507_ (0) ;
+    GALGAS_uint index_514_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_funcFormalArgumentListForGeneration enumerator_507 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_507.hasCurrentObject ()) {
-        result << function_mangledNameForType (enumerator_507.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)).stringValue () ;
+      cEnumerator_funcFormalArgumentListForGeneration enumerator_514 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_514.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_514.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-declaration.galgasTemplate", 11)).stringValue () ;
         result << " " ;
-        result << enumerator_507.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_507.hasNextObject ()) {
+        result << enumerator_514.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_514.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_507_.increment () ;
-        enumerator_507.gotoNextObject () ;
+        index_514_.increment () ;
+        enumerator_514.gotoNextObject () ;
       }
     }
   }
@@ -17225,7 +17319,8 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (C_C
   result << GALGAS_string ("func ").add_operation (in_FUNCTION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 2)).reader_stringByLeftAndRightPadding (GALGAS_uint ((uint32_t) 117U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 2)).stringValue () ;
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
-    "\n" ;
+    "\n"
+    "static " ;
   result << function_mangledNameForType (in_RESULT_5F_TYPE.reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
   result << " " ;
   result << function_mangledNameForFunction (in_FUNCTION_5F_NAME, inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 5)).stringValue () ;
@@ -17235,19 +17330,19 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (C_C
   if (kBoolTrue == test_0) {
     result << "void" ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_507_ (0) ;
+    GALGAS_uint index_514_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_funcFormalArgumentListForGeneration enumerator_507 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_507.hasCurrentObject ()) {
-        result << function_mangledNameForType (enumerator_507.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)).stringValue () ;
+      cEnumerator_funcFormalArgumentListForGeneration enumerator_514 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_514.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_514.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("function-implementation.galgasTemplate", 11)).stringValue () ;
         result << " " ;
-        result << enumerator_507.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_507.hasNextObject ()) {
+        result << enumerator_514.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_514.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_507_.increment () ;
-        enumerator_507.gotoNextObject () ;
+        index_514_.increment () ;
+        enumerator_514.gotoNextObject () ;
       }
     }
   }
@@ -17288,37 +17383,37 @@ GALGAS_string function_mangledName (const GALGAS_procedureKindAST & constinArgum
     break ;
   case GALGAS_procedureKindAST::kEnum_structureProc:
     {
-      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_6329 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (constinArgument_inProcedureKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_6329->mAssociatedValue0 ;
-      result_outMangledName.dotAssign_operation (extractedValue_structureTypeName.mAttribute_string.add_operation (GALGAS_string ("_"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 175))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 175)) ;
+      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_6359 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (constinArgument_inProcedureKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_6359->mAssociatedValue0 ;
+      result_outMangledName.dotAssign_operation (extractedValue_structureTypeName.mAttribute_string.add_operation (GALGAS_string ("_"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 178))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 178)) ;
     }
     break ;
   }
-  result_outMangledName.dotAssign_operation (constinArgument_inProcedureName  COMMA_SOURCE_FILE ("proc-declaration.galgas", 177)) ;
-  cEnumerator_procFormalArgumentList enumerator_6435 (inArgument_inProcFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_6435.hasCurrentObject ()) {
-    result_outMangledName.dotAssign_operation (GALGAS_string (" ")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 179)) ;
-    switch (enumerator_6435.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+  result_outMangledName.dotAssign_operation (constinArgument_inProcedureName  COMMA_SOURCE_FILE ("proc-declaration.galgas", 180)) ;
+  cEnumerator_procFormalArgumentList enumerator_6465 (inArgument_inProcFormalArgumentList, kEnumeration_up) ;
+  while (enumerator_6465.hasCurrentObject ()) {
+    result_outMangledName.dotAssign_operation (GALGAS_string (" ")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 182)) ;
+    switch (enumerator_6465.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
-        result_outMangledName.dotAssign_operation (GALGAS_string ("\?")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 181)) ;
+        result_outMangledName.dotAssign_operation (GALGAS_string ("\?")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 184)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
-        result_outMangledName.dotAssign_operation (GALGAS_string ("!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 182)) ;
+        result_outMangledName.dotAssign_operation (GALGAS_string ("!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 185)) ;
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
-        result_outMangledName.dotAssign_operation (GALGAS_string ("\?!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 183)) ;
+        result_outMangledName.dotAssign_operation (GALGAS_string ("\?!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 186)) ;
       }
       break ;
     }
-    result_outMangledName.dotAssign_operation (enumerator_6435.current_mSelector (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 185)) ;
-    enumerator_6435.gotoNextObject () ;
+    result_outMangledName.dotAssign_operation (enumerator_6465.current_mSelector (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 188)) ;
+    enumerator_6465.gotoNextObject () ;
   }
 //---
   return result_outMangledName ;
@@ -17403,7 +17498,8 @@ const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate (
 
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (C_Compiler * inCompiler,
                                                                            const GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
-                                                                           const GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST
+                                                                           const GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
+                                                                           const GALGAS_bool & in_STATIC
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
   uint32_t columnMarker = 0 ;
@@ -17412,21 +17508,26 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (C_Com
   result << GALGAS_string ("proc ").add_operation (in_PROCEDURE_5F_MANGLED_5F_NAME, inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 2)).reader_stringByLeftAndRightPadding (GALGAS_uint ((uint32_t) 117U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 2)).stringValue () ;
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
-    "\n"
-    "void " ;
+    "\n" ;
+  const enumGalgasBool test_0 = in_STATIC.boolEnum () ;
+  if (kBoolTrue == test_0) {
+    result << GALGAS_string ("static ").stringValue () ;
+  }else if (kBoolFalse == test_0) {
+  }
+  result << "void " ;
   result << in_PROCEDURE_5F_MANGLED_5F_NAME.stringValue () ;
   result << " (" ;
   columnMarker = result.currentColumn () ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, in_FORMAL_5F_ARGUMENT_5F_LIST.reader_length (SOURCE_FILE ("procedure-declaration.galgasTemplate", 6)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_0) {
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, in_FORMAL_5F_ARGUMENT_5F_LIST.reader_length (SOURCE_FILE ("procedure-declaration.galgasTemplate", 6)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_1) {
     result << "void" ;
-  }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_451_ (0) ;
+  }else if (kBoolFalse == test_1) {
+    GALGAS_uint index_482_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_procFormalArgumentListForGeneration enumerator_451 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_451.hasCurrentObject ()) {
-        result << function_mangledNameForType (enumerator_451.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)).stringValue () ;
-        switch (enumerator_451.current_mFormalArgumentKind (HERE).enumValue ()) {
+      cEnumerator_procFormalArgumentListForGeneration enumerator_482 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_482.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_482.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-declaration.galgasTemplate", 11)).stringValue () ;
+        switch (enumerator_482.current_mFormalArgumentKind (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt :
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input :
@@ -17439,13 +17540,13 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (C_Com
           break ;
         }
         result << " " ;
-        result << enumerator_451.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_451.hasNextObject ()) {
+        result << enumerator_482.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_482.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_451_.increment () ;
-        enumerator_451.gotoNextObject () ;
+        index_482_.increment () ;
+        enumerator_482.gotoNextObject () ;
       }
     }
   }
@@ -17463,7 +17564,8 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_declaration (C_Com
 GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (C_Compiler * inCompiler,
                                                                               const GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
                                                                               const GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
-                                                                              const GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST
+                                                                              const GALGAS_instructionListIR & in_INSTRUCTION_5F_GENERATION_5F_LIST,
+                                                                              const GALGAS_bool & in_STATIC
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
   uint32_t columnMarker = 0 ;
@@ -17472,21 +17574,26 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (C_
   result << GALGAS_string ("proc ").add_operation (in_PROCEDURE_5F_MANGLED_5F_NAME, inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 2)).reader_stringByLeftAndRightPadding (GALGAS_uint ((uint32_t) 117U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 2)).stringValue () ;
   result << "*\n"
     "//---------------------------------------------------------------------------------------------------------------------*\n"
-    "\n"
-    "void " ;
+    "\n" ;
+  const enumGalgasBool test_0 = in_STATIC.boolEnum () ;
+  if (kBoolTrue == test_0) {
+    result << GALGAS_string ("static ").stringValue () ;
+  }else if (kBoolFalse == test_0) {
+  }
+  result << "void " ;
   result << in_PROCEDURE_5F_MANGLED_5F_NAME.stringValue () ;
   result << " (" ;
   columnMarker = result.currentColumn () ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, in_FORMAL_5F_ARGUMENT_5F_LIST.reader_length (SOURCE_FILE ("procedure-implementation.galgasTemplate", 6)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_0) {
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, in_FORMAL_5F_ARGUMENT_5F_LIST.reader_length (SOURCE_FILE ("procedure-implementation.galgasTemplate", 6)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_1) {
     result << "void" ;
-  }else if (kBoolFalse == test_0) {
-    GALGAS_uint index_451_ (0) ;
+  }else if (kBoolFalse == test_1) {
+    GALGAS_uint index_482_ (0) ;
     if (in_FORMAL_5F_ARGUMENT_5F_LIST.isValid ()) {
-      cEnumerator_procFormalArgumentListForGeneration enumerator_451 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
-      while (enumerator_451.hasCurrentObject ()) {
-        result << function_mangledNameForType (enumerator_451.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)).stringValue () ;
-        switch (enumerator_451.current_mFormalArgumentKind (HERE).enumValue ()) {
+      cEnumerator_procFormalArgumentListForGeneration enumerator_482 (in_FORMAL_5F_ARGUMENT_5F_LIST, kEnumeration_up) ;
+      while (enumerator_482.hasCurrentObject ()) {
+        result << function_mangledNameForType (enumerator_482.current_mFormalArgumentType (HERE).reader_key (inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)), inCompiler COMMA_SOURCE_FILE ("procedure-implementation.galgasTemplate", 11)).stringValue () ;
+        switch (enumerator_482.current_mFormalArgumentKind (HERE).enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt :
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input :
@@ -17499,13 +17606,13 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (C_
           break ;
         }
         result << " " ;
-        result << enumerator_451.current_mFormalArgumentName (HERE).stringValue () ;
-        if (enumerator_451.hasNextObject ()) {
+        result << enumerator_482.current_mFormalArgumentName (HERE).stringValue () ;
+        if (enumerator_482.hasNextObject ()) {
           result << ",\n" ;
           result.appendSpacesUntilColumn (columnMarker) ;
         }
-        index_451_.increment () ;
-        enumerator_451.gotoNextObject () ;
+        index_482_.increment () ;
+        enumerator_482.gotoNextObject () ;
       }
     }
   }
@@ -18887,113 +18994,193 @@ void routine_codeOptimisation (GALGAS_intermediateCodeStruct & ioArgument_ioInte
                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_uint var_pass = GALGAS_uint ((uint32_t) 0U) ;
   GALGAS_bool var_optimizing = GALGAS_bool (true) ;
-  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 68)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 68)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 68)).isValid ()) {
-    uint32_t variant_3192 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 68)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 68)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 68)).uintValue () ;
-    bool loop_3192 = true ;
-    while (loop_3192) {
-      loop_3192 = var_optimizing.isValid () ;
-      if (loop_3192) {
-        loop_3192 = var_optimizing.boolValue () ;
+  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 70)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 70)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 70)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 70)).isValid ()) {
+    uint32_t variant_3277 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 70)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 70)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 70)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 70)).uintValue () ;
+    bool loop_3277 = true ;
+    while (loop_3277) {
+      loop_3277 = var_optimizing.isValid () ;
+      if (loop_3277) {
+        loop_3277 = var_optimizing.boolValue () ;
       }
-      if (loop_3192 && (0 == variant_3192)) {
-        loop_3192 = false ;
-        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 68)) ;
+      if (loop_3277 && (0 == variant_3277)) {
+        loop_3277 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 70)) ;
       }
-      if (loop_3192) {
-        variant_3192 -- ;
+      if (loop_3277) {
+        variant_3277 -- ;
         var_optimizing = GALGAS_bool (false) ;
-        var_pass.increment_operation (inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 71)) ;
-        GALGAS_string var_s = GALGAS_string ("Optimisation pass ").add_operation (var_pass.reader_string (SOURCE_FILE ("code-optimisation.galgas", 73)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 73)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 73)) ;
-        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 74)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 74)).add_operation (GALGAS_string (" registers\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 74))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 74)) ;
-        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 75)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 75)).add_operation (GALGAS_string (" static strings\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 75))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 75)) ;
-        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 76)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 76)).add_operation (GALGAS_string (" global constants\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 76))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 76)) ;
-        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 77)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 77)).add_operation (GALGAS_string (" procedures\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 77))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 77)) ;
-        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 78)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 78)).add_operation (GALGAS_string (" functions\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 78))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 78)) ;
-        inCompiler->printMessage (var_s  COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)) ;
-        GALGAS_accessibleEntities var_accessibleEntities = GALGAS_accessibleEntities::constructor_default (SOURCE_FILE ("code-optimisation.galgas", 81)) ;
-        var_accessibleEntities.mAttribute_mProcedureSet = ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet ;
-        cEnumerator_procedureMapIR enumerator_4096 (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
-        while (enumerator_4096.hasCurrentObject ()) {
-          categoryMethod_enterAccessibleEntities (enumerator_4096.current (HERE), var_accessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 84)) ;
-          enumerator_4096.gotoNextObject () ;
-        }
-        cEnumerator_functionMapIR enumerator_4230 (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-        while (enumerator_4230.hasCurrentObject ()) {
-          categoryMethod_enterAccessibleEntities (enumerator_4230.current (HERE), var_accessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 87)) ;
-          enumerator_4230.gotoNextObject () ;
+        var_pass.increment_operation (inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 73)) ;
+        GALGAS_string var_s = GALGAS_string ("Optimisation pass ").add_operation (var_pass.reader_string (SOURCE_FILE ("code-optimisation.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 75)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 75)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 76)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 76)).add_operation (GALGAS_string (" registers\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 76))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 76)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 77)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 77)).add_operation (GALGAS_string (" static strings\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 77))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 77)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 78)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 78)).add_operation (GALGAS_string (" global constants\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 78))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 78)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap.reader_count (SOURCE_FILE ("code-optimisation.galgas", 79)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 79)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)).add_operation (GALGAS_string (" global variables\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 79))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 80)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 80)).add_operation (GALGAS_string (" procedures\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 80))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 80)) ;
+        var_s.dotAssign_operation (GALGAS_string ("  ").add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 81)).reader_string (SOURCE_FILE ("code-optimisation.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 81)).add_operation (GALGAS_string (" functions\n"), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 81))  COMMA_SOURCE_FILE ("code-optimisation.galgas", 81)) ;
+        inCompiler->printMessage (var_s  COMMA_SOURCE_FILE ("code-optimisation.galgas", 82)) ;
+        GALGAS_accessibleEntities var_accessibleEntities ;
+        {
+        routine_suppressInaccessibleSubprograms (ioArgument_ioIntermediateCodeStruct, var_accessibleEntities, var_optimizing, inCompiler  COMMA_SOURCE_FILE ("code-optimisation.galgas", 84)) ;
         }
         GALGAS_registerMapIR var_usedRegisterMap = GALGAS_registerMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 90)) ;
-        cEnumerator_registerMapIR enumerator_4490 (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap, kEnumeration_up) ;
-        while (enumerator_4490.hasCurrentObject ()) {
-          const enumGalgasBool test_0 = var_accessibleEntities.mAttribute_mAccessibleRegisterSet.reader_hasKey (enumerator_4490.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 92)).boolEnum () ;
+        cEnumerator_registerMapIR enumerator_4456 (ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap, kEnumeration_up) ;
+        while (enumerator_4456.hasCurrentObject ()) {
+          const enumGalgasBool test_0 = var_accessibleEntities.mAttribute_mAccessibleRegisterSet.reader_hasKey (enumerator_4456.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 92)).boolEnum () ;
           if (kBoolTrue == test_0) {
             {
-            var_usedRegisterMap.modifier_insertKey (enumerator_4490.current_lkey (HERE), enumerator_4490.current_mRegisterTypeName (HERE), enumerator_4490.current_mRegisterAddress (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 93)) ;
+            var_usedRegisterMap.modifier_insertKey (enumerator_4456.current_lkey (HERE), enumerator_4456.current_mRegisterTypeName (HERE), enumerator_4456.current_mRegisterAddress (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 93)) ;
             }
           }else if (kBoolFalse == test_0) {
             var_optimizing = GALGAS_bool (true) ;
           }
-          enumerator_4490.gotoNextObject () ;
+          enumerator_4456.gotoNextObject () ;
         }
         ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap = var_usedRegisterMap ;
         GALGAS_globalConstantMapIR var_globalConstantMap = GALGAS_globalConstantMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 100)) ;
-        cEnumerator_globalConstantMapIR enumerator_4985 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-        while (enumerator_4985.hasCurrentObject ()) {
-          const enumGalgasBool test_1 = var_accessibleEntities.mAttribute_mGlobalConstantSet.reader_hasKey (enumerator_4985.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 104)).boolEnum () ;
+        cEnumerator_globalConstantMapIR enumerator_4951 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+        while (enumerator_4951.hasCurrentObject ()) {
+          const enumGalgasBool test_1 = var_accessibleEntities.mAttribute_mGlobalConstantSet.reader_hasKey (enumerator_4951.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 104)).boolEnum () ;
           if (kBoolTrue == test_1) {
             {
-            var_globalConstantMap.modifier_insertKey (enumerator_4985.current_lkey (HERE), enumerator_4985.current_mValueExpressionGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 105)) ;
+            var_globalConstantMap.modifier_insertKey (enumerator_4951.current_lkey (HERE), enumerator_4951.current_mValueExpressionGeneration (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 105)) ;
             }
           }else if (kBoolFalse == test_1) {
             var_optimizing = GALGAS_bool (true) ;
           }
-          enumerator_4985.gotoNextObject () ;
+          enumerator_4951.gotoNextObject () ;
         }
         ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap = var_globalConstantMap ;
         GALGAS_globalLiteralStringMap var_staticStringMap = GALGAS_globalLiteralStringMap::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 112)) ;
-        cEnumerator_globalLiteralStringMap enumerator_5454 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, kEnumeration_up) ;
-        while (enumerator_5454.hasCurrentObject ()) {
-          const enumGalgasBool test_2 = var_accessibleEntities.mAttribute_mStaticStringSet.reader_hasKey (enumerator_5454.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 116)).boolEnum () ;
+        cEnumerator_globalLiteralStringMap enumerator_5420 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, kEnumeration_up) ;
+        while (enumerator_5420.hasCurrentObject ()) {
+          const enumGalgasBool test_2 = var_accessibleEntities.mAttribute_mStaticStringSet.reader_hasKey (enumerator_5420.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 116)).boolEnum () ;
           if (kBoolTrue == test_2) {
             {
-            var_staticStringMap.modifier_insertKey (enumerator_5454.current_lkey (HERE), enumerator_5454.current_mLiteralStringCname (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 117)) ;
+            var_staticStringMap.modifier_insertKey (enumerator_5420.current_lkey (HERE), enumerator_5420.current_mLiteralStringCname (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 117)) ;
             }
           }else if (kBoolFalse == test_2) {
             var_optimizing = GALGAS_bool (true) ;
           }
-          enumerator_5454.gotoNextObject () ;
+          enumerator_5420.gotoNextObject () ;
         }
         ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap = var_staticStringMap ;
-        GALGAS_procedureMapIR var_procedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 124)) ;
-        cEnumerator_procedureMapIR enumerator_5995 (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
-        while (enumerator_5995.hasCurrentObject ()) {
-          const enumGalgasBool test_3 = var_accessibleEntities.mAttribute_mProcedureSet.reader_hasKey (enumerator_5995.current_lkey (HERE).mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 129)).boolEnum () ;
+        GALGAS_globalVariableMapIR var_globalVariableMap = GALGAS_globalVariableMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 124)) ;
+        cEnumerator_globalVariableMapIR enumerator_5843 (ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+        while (enumerator_5843.hasCurrentObject ()) {
+          const enumGalgasBool test_3 = var_accessibleEntities.mAttribute_mGlobalVariableSet.reader_hasKey (enumerator_5843.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 126)).boolEnum () ;
           if (kBoolTrue == test_3) {
             {
-            var_procedureMap.modifier_insertKey (enumerator_5995.current_lkey (HERE), enumerator_5995.current_mFormalArgumentListForGeneration (HERE), enumerator_5995.current_mInstructionGenerationList (HERE), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 130)) ;
+            var_globalVariableMap.modifier_insertKey (enumerator_5843.current (HERE).mAttribute_lkey, enumerator_5843.current (HERE).mAttribute_mActualTypeName, enumerator_5843.current (HERE).mAttribute_mGenerateVolatile, enumerator_5843.current (HERE).mAttribute_mInitialValueExpressionGeneration, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 127)) ;
             }
           }else if (kBoolFalse == test_3) {
             var_optimizing = GALGAS_bool (true) ;
           }
-          enumerator_5995.gotoNextObject () ;
+          enumerator_5843.gotoNextObject () ;
         }
-        ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR = var_procedureMap ;
-        GALGAS_functionMapIR var_functionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 137)) ;
-        cEnumerator_functionMapIR enumerator_6411 (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-        while (enumerator_6411.hasCurrentObject ()) {
-          const enumGalgasBool test_4 = var_accessibleEntities.mAttribute_mFunctionSet.reader_hasKey (enumerator_6411.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 139)).boolEnum () ;
-          if (kBoolTrue == test_4) {
-            {
-            var_functionMap.modifier_insertKey (enumerator_6411.current (HERE).mAttribute_lkey, enumerator_6411.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6411.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6411.current (HERE).mAttribute_mResultType, enumerator_6411.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 140)) ;
-            }
-          }else if (kBoolFalse == test_4) {
-            var_optimizing = GALGAS_bool (true) ;
-          }
-          enumerator_6411.gotoNextObject () ;
-        }
-        ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR = var_functionMap ;
+        ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalVariableMap = var_globalVariableMap ;
       }
     }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'suppressInaccessibleSubprograms'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                                              GALGAS_accessibleEntities & outArgument_outAccessibleEntities,
+                                              GALGAS_bool & ioArgument_ioOptimizing,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outAccessibleEntities.drop () ; // Release 'out' argument
+  outArgument_outAccessibleEntities = GALGAS_accessibleEntities::constructor_default (SOURCE_FILE ("code-optimisation.galgas", 148)) ;
+  GALGAS_procedureMapIR var_accessibleProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 149)) ;
+  GALGAS_procedureMapIR var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 150)) ;
+  cEnumerator_procedureMapIR enumerator_6820 (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+  while (enumerator_6820.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = enumerator_6820.current (HERE).mAttribute_mIsRequired.boolEnum () ;
+    if (kBoolTrue == test_0) {
+      {
+      var_accessibleProcedureMap.modifier_insertKey (enumerator_6820.current (HERE).mAttribute_lkey, enumerator_6820.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6820.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6820.current (HERE).mAttribute_mIsRequired, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 154)) ;
+      }
+      categoryMethod_enterAccessibleEntities (enumerator_6820.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 160)) ;
+      outArgument_outAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (enumerator_6820.current (HERE).mAttribute_lkey.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 161)) ;
+    }else if (kBoolFalse == test_0) {
+      {
+      var_nonExploredProcedureMap.modifier_insertKey (enumerator_6820.current (HERE).mAttribute_lkey, enumerator_6820.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6820.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6820.current (HERE).mAttribute_mIsRequired, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 163)) ;
+      }
+    }
+    enumerator_6820.gotoNextObject () ;
+  }
+  GALGAS_functionMapIR var_accessibleFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 171)) ;
+  GALGAS_functionMapIR var_nonExploredFunctionMap = ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR ;
+  GALGAS_bool var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
+  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 175)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 175)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 175)).isValid ()) {
+    uint32_t variant_7651 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 175)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 175)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 175)).uintValue () ;
+    bool loop_7651 = true ;
+    while (loop_7651) {
+      loop_7651 = var_exploreProceduresAndFunctions.isValid () ;
+      if (loop_7651) {
+        loop_7651 = var_exploreProceduresAndFunctions.boolValue () ;
+      }
+      if (loop_7651 && (0 == variant_7651)) {
+        loop_7651 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 175)) ;
+      }
+      if (loop_7651) {
+        variant_7651 -- ;
+        var_exploreProceduresAndFunctions = GALGAS_bool (false) ;
+        GALGAS_procedureMapIR var_exNonExploredProcedureMap = var_nonExploredProcedureMap ;
+        var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 179)) ;
+        cEnumerator_procedureMapIR enumerator_7995 (var_exNonExploredProcedureMap, kEnumeration_up) ;
+        while (enumerator_7995.hasCurrentObject ()) {
+          const enumGalgasBool test_1 = outArgument_outAccessibleEntities.mAttribute_mProcedureSet.reader_hasKey (enumerator_7995.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 181)).boolEnum () ;
+          if (kBoolTrue == test_1) {
+            {
+            var_accessibleProcedureMap.modifier_insertKey (enumerator_7995.current (HERE).mAttribute_lkey, enumerator_7995.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7995.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7995.current (HERE).mAttribute_mIsRequired, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)) ;
+            }
+            categoryMethod_enterAccessibleEntities (enumerator_7995.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 188)) ;
+            var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
+          }else if (kBoolFalse == test_1) {
+            {
+            var_nonExploredProcedureMap.modifier_insertKey (enumerator_7995.current (HERE).mAttribute_lkey, enumerator_7995.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_7995.current (HERE).mAttribute_mInstructionGenerationList, enumerator_7995.current (HERE).mAttribute_mIsRequired, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 191)) ;
+            }
+          }
+          enumerator_7995.gotoNextObject () ;
+        }
+        GALGAS_functionMapIR var_exNonExploredFunctionMap = var_nonExploredFunctionMap ;
+        var_nonExploredFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 200)) ;
+        cEnumerator_functionMapIR enumerator_8819 (var_exNonExploredFunctionMap, kEnumeration_up) ;
+        while (enumerator_8819.hasCurrentObject ()) {
+          const enumGalgasBool test_2 = outArgument_outAccessibleEntities.mAttribute_mFunctionSet.reader_hasKey (enumerator_8819.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 202)).boolEnum () ;
+          if (kBoolTrue == test_2) {
+            {
+            var_accessibleFunctionMap.modifier_insertKey (enumerator_8819.current (HERE).mAttribute_lkey, enumerator_8819.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8819.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8819.current (HERE).mAttribute_mResultType, enumerator_8819.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 203)) ;
+            }
+            categoryMethod_enterAccessibleEntities (enumerator_8819.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 210)) ;
+            var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
+          }else if (kBoolFalse == test_2) {
+            {
+            var_nonExploredFunctionMap.modifier_insertKey (enumerator_8819.current (HERE).mAttribute_lkey, enumerator_8819.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8819.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8819.current (HERE).mAttribute_mResultType, enumerator_8819.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 213)) ;
+            }
+          }
+          enumerator_8819.gotoNextObject () ;
+        }
+      }
+    }
+  }
+  const enumGalgasBool test_3 = GALGAS_bool (kIsNotEqual, ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.objectCompare (var_accessibleProcedureMap)).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR = var_accessibleProcedureMap ;
+    ioArgument_ioOptimizing = GALGAS_bool (true) ;
+  }
+  const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.objectCompare (var_accessibleFunctionMap)).boolEnum () ;
+  if (kBoolTrue == test_4) {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR = var_accessibleFunctionMap ;
+    ioArgument_ioOptimizing = GALGAS_bool (true) ;
   }
 }
 
@@ -19080,77 +19267,88 @@ void routine_codeGeneration (const GALGAS_string constinArgument_inSourceFileNam
                              const GALGAS_lstring constinArgument_inTargetName,
                              C_Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_targetDirectory = constinArgument_inSourceFileName.reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 111)).add_operation (GALGAS_string ("+"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 111)).add_operation (constinArgument_inTargetName.reader_string (SOURCE_FILE ("code-generation.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 111)) ;
-  GALGAS_string var_sourceDirectory = var_targetDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 112)) ;
-  var_sourceDirectory.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 113)) ;
-  GALGAS_string var_baseName = var_sourceDirectory.add_operation (GALGAS_string ("/plm"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 115)) ;
+  GALGAS_string var_targetDirectory = constinArgument_inSourceFileName.reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 110)) ;
+  GALGAS_string var_sourceDirectory = var_targetDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 111)) ;
+  var_sourceDirectory.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 112)) ;
+  GALGAS_string var_baseName = var_sourceDirectory.add_operation (GALGAS_string ("/plm"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 114)) ;
   GALGAS_string var_header = GALGAS_string ("#ifndef PLM_HEADER_DEFINED\n") ;
   var_header.dotAssign_operation (GALGAS_string ("#define PLM_HEADER_DEFINED\n"
-    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 117)) ;
-  var_header.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 118)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 118))  COMMA_SOURCE_FILE ("code-generation.galgas", 118)) ;
-  var_header.dotAssign_operation (GALGAS_string ("#include <stdint.h>\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 119)) ;
+    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 116)) ;
+  var_header.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 117)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 117))  COMMA_SOURCE_FILE ("code-generation.galgas", 117)) ;
+  var_header.dotAssign_operation (GALGAS_string ("#include <stdint.h>\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 118)) ;
   var_header.dotAssign_operation (GALGAS_string ("#include <stddef.h>\n"
-    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 120)) ;
-  cEnumerator_registerMapIR enumerator_5833 (constinArgument_inIntermediateCodeStruct.mAttribute_mRegisterMap, kEnumeration_up) ;
-  while (enumerator_5833.hasCurrentObject ()) {
-    var_header.dotAssign_operation (categoryReader_headerCodeGenerationForRegister (enumerator_5833.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 122))  COMMA_SOURCE_FILE ("code-generation.galgas", 122)) ;
-    enumerator_5833.gotoNextObject () ;
+    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 119)) ;
+  cEnumerator_registerMapIR enumerator_5720 (constinArgument_inIntermediateCodeStruct.mAttribute_mRegisterMap, kEnumeration_up) ;
+  while (enumerator_5720.hasCurrentObject ()) {
+    var_header.dotAssign_operation (categoryReader_headerCodeGenerationForRegister (enumerator_5720.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 121))  COMMA_SOURCE_FILE ("code-generation.galgas", 121)) ;
+    enumerator_5720.gotoNextObject () ;
   }
-  cEnumerator_globalConstantMapIR enumerator_5967 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_5967.hasCurrentObject ()) {
-    var_header.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_5967.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 125))  COMMA_SOURCE_FILE ("code-generation.galgas", 125)) ;
-    enumerator_5967.gotoNextObject () ;
+  cEnumerator_globalConstantMapIR enumerator_5854 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_5854.hasCurrentObject ()) {
+    var_header.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_5854.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 124))  COMMA_SOURCE_FILE ("code-generation.galgas", 124)) ;
+    enumerator_5854.gotoNextObject () ;
   }
-  cEnumerator_typeMapIR enumerator_6097 (constinArgument_inIntermediateCodeStruct.mAttribute_mTypeMapIR, kEnumeration_up) ;
-  while (enumerator_6097.hasCurrentObject ()) {
-    var_header.dotAssign_operation (callCategoryReader_headerCodeGenerationForType ((const cPtr_abstractTypeIR *) enumerator_6097.current (HERE).mAttribute_mType.ptr (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 128))  COMMA_SOURCE_FILE ("code-generation.galgas", 128)) ;
-    enumerator_6097.gotoNextObject () ;
+  cEnumerator_typeMapIR enumerator_5984 (constinArgument_inIntermediateCodeStruct.mAttribute_mTypeMapIR, kEnumeration_up) ;
+  while (enumerator_5984.hasCurrentObject ()) {
+    var_header.dotAssign_operation (callCategoryReader_headerCodeGenerationForType ((const cPtr_abstractTypeIR *) enumerator_5984.current (HERE).mAttribute_mType.ptr (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 127))  COMMA_SOURCE_FILE ("code-generation.galgas", 127)) ;
+    enumerator_5984.gotoNextObject () ;
   }
-  cEnumerator_procedureMapIR enumerator_6221 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
-  while (enumerator_6221.hasCurrentObject ()) {
-    var_header.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_6221.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 131))  COMMA_SOURCE_FILE ("code-generation.galgas", 131)) ;
-    enumerator_6221.gotoNextObject () ;
+  cEnumerator_procedureMapIR enumerator_6108 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+  while (enumerator_6108.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = enumerator_6108.current (HERE).mAttribute_mIsRequired.boolEnum () ;
+    if (kBoolTrue == test_0) {
+      var_header.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_6108.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 131))  COMMA_SOURCE_FILE ("code-generation.galgas", 131)) ;
+    }
+    enumerator_6108.gotoNextObject () ;
   }
-  cEnumerator_functionMapIR enumerator_6335 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-  while (enumerator_6335.hasCurrentObject ()) {
-    var_header.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_6335.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 134))  COMMA_SOURCE_FILE ("code-generation.galgas", 134)) ;
-    enumerator_6335.gotoNextObject () ;
-  }
-  var_header.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 136)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 136))  COMMA_SOURCE_FILE ("code-generation.galgas", 136)) ;
-  var_header.dotAssign_operation (GALGAS_string ("#endif\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 137)) ;
-  GALGAS_bool joker_6511 ; // Joker input parameter
-  var_header.method_writeToFileWhenDifferentContents (var_baseName.add_operation (GALGAS_string (".h"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 138)), joker_6511, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 138)) ;
+  var_header.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 134)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 134))  COMMA_SOURCE_FILE ("code-generation.galgas", 134)) ;
+  var_header.dotAssign_operation (GALGAS_string ("#endif\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 135)) ;
+  GALGAS_bool joker_6329 ; // Joker input parameter
+  var_header.method_writeToFileWhenDifferentContents (var_baseName.add_operation (GALGAS_string (".h"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 136)), joker_6329, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 136)) ;
   GALGAS_string var_code = GALGAS_string ("#include \"plm.h\"\n"
     "\n") ;
-  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 141))  COMMA_SOURCE_FILE ("code-generation.galgas", 141)) ;
-  var_code.dotAssign_operation (GALGAS_string ("//   Static Strings                                                                                                    *\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 142)) ;
-  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143))  COMMA_SOURCE_FILE ("code-generation.galgas", 143)) ;
-  cEnumerator_globalLiteralStringMap enumerator_6830 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, kEnumeration_up) ;
-  while (enumerator_6830.hasCurrentObject ()) {
-    var_code.dotAssign_operation (GALGAS_string ("static const char * ").add_operation (enumerator_6830.current_mLiteralStringCname (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 145)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 145)).add_operation (enumerator_6830.current_lkey (HERE).mAttribute_string.reader_utf_38_Representation (SOURCE_FILE ("code-generation.galgas", 145)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 145)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 145))  COMMA_SOURCE_FILE ("code-generation.galgas", 145)) ;
-    enumerator_6830.gotoNextObject () ;
+  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 139))  COMMA_SOURCE_FILE ("code-generation.galgas", 139)) ;
+  var_code.dotAssign_operation (GALGAS_string ("//   Static Strings                                                                                                    *\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 140)) ;
+  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 141)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 141))  COMMA_SOURCE_FILE ("code-generation.galgas", 141)) ;
+  cEnumerator_globalLiteralStringMap enumerator_6648 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, kEnumeration_up) ;
+  while (enumerator_6648.hasCurrentObject ()) {
+    var_code.dotAssign_operation (GALGAS_string ("static const char * ").add_operation (enumerator_6648.current_mLiteralStringCname (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143)).add_operation (enumerator_6648.current_lkey (HERE).mAttribute_string.reader_utf_38_Representation (SOURCE_FILE ("code-generation.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 143))  COMMA_SOURCE_FILE ("code-generation.galgas", 143)) ;
+    enumerator_6648.gotoNextObject () ;
   }
-  var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 147)) ;
-  cEnumerator_globalVariableMapIR enumerator_7031 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
-  while (enumerator_7031.hasCurrentObject ()) {
-    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_7031.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 149))  COMMA_SOURCE_FILE ("code-generation.galgas", 149)) ;
-    enumerator_7031.gotoNextObject () ;
+  var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 145)) ;
+  cEnumerator_globalVariableMapIR enumerator_6849 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+  while (enumerator_6849.hasCurrentObject ()) {
+    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_6849.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 147))  COMMA_SOURCE_FILE ("code-generation.galgas", 147)) ;
+    enumerator_6849.gotoNextObject () ;
   }
-  cEnumerator_procedureMapIR enumerator_7158 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
-  while (enumerator_7158.hasCurrentObject ()) {
-    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_7158.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 152))  COMMA_SOURCE_FILE ("code-generation.galgas", 152)) ;
-    enumerator_7158.gotoNextObject () ;
+  cEnumerator_functionMapIR enumerator_6974 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+  while (enumerator_6974.hasCurrentObject ()) {
+    var_code.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_6974.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 150))  COMMA_SOURCE_FILE ("code-generation.galgas", 150)) ;
+    enumerator_6974.gotoNextObject () ;
   }
-  cEnumerator_functionMapIR enumerator_7278 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-  while (enumerator_7278.hasCurrentObject ()) {
-    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_7278.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 155))  COMMA_SOURCE_FILE ("code-generation.galgas", 155)) ;
-    enumerator_7278.gotoNextObject () ;
+  cEnumerator_procedureMapIR enumerator_7087 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+  while (enumerator_7087.hasCurrentObject ()) {
+    const enumGalgasBool test_1 = enumerator_7087.current (HERE).mAttribute_mIsRequired.operator_not (SOURCE_FILE ("code-generation.galgas", 153)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      var_code.dotAssign_operation (categoryReader_headerCodeGeneration (enumerator_7087.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 154))  COMMA_SOURCE_FILE ("code-generation.galgas", 154)) ;
+    }
+    enumerator_7087.gotoNextObject () ;
   }
-  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 157))  COMMA_SOURCE_FILE ("code-generation.galgas", 157)) ;
-  GALGAS_bool joker_7426 ; // Joker input parameter
-  var_code.method_writeToFileWhenDifferentContents (var_baseName.add_operation (GALGAS_string (".c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 158)), joker_7426, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 158)) ;
+  cEnumerator_procedureMapIR enumerator_7249 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+  while (enumerator_7249.hasCurrentObject ()) {
+    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_7249.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 158))  COMMA_SOURCE_FILE ("code-generation.galgas", 158)) ;
+    enumerator_7249.gotoNextObject () ;
+  }
+  cEnumerator_functionMapIR enumerator_7369 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+  while (enumerator_7369.hasCurrentObject ()) {
+    var_code.dotAssign_operation (categoryReader_implementationCodeGeneration (enumerator_7369.current (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 161))  COMMA_SOURCE_FILE ("code-generation.galgas", 161)) ;
+    enumerator_7369.gotoNextObject () ;
+  }
+  var_code.dotAssign_operation (function_separatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 163))  COMMA_SOURCE_FILE ("code-generation.galgas", 163)) ;
+  GALGAS_bool joker_7517 ; // Joker input parameter
+  var_code.method_writeToFileWhenDifferentContents (var_baseName.add_operation (GALGAS_string (".c"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 164)), joker_7517, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 164)) ;
   {
-  routine_generateTargets (var_targetDirectory, constinArgument_inTargetName, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 160)) ;
+  routine_generateTargets (var_targetDirectory, constinArgument_inTargetName, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 166)) ;
   }
 }
 
@@ -26729,6 +26927,15 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#    C Compiler options                                                                                                *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -26927,6 +27134,7 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
   "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
   "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "makefile.addGoal (\"display-obj-size\", [productHEX], \"Display Object Size\")\n"
   "#--- Build\n"
   "#makefile.printRules ()\n"
   "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
@@ -26943,13 +27151,24 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
   "    sys.exit (childProcess.returncode)\n"
   "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"display-obj-size\":\n"
+  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
 const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  41773, // Text length
+  42996, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -27000,9 +27219,53 @@ const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   gWrapperFileContent_15_targetTemplates
 ) ;
 
-//--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
+//--- File 'target-teensy-sequential-systick/display-obj-size.py'
 
 const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-obj-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+  "display-obj-size.py",
+  "py",
+  true, // Text file
+  1010, // Text length
+  gWrapperFileContent_16_targetTemplates
+) ;
+
+//--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
+
+const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -27036,17 +27299,17 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_17_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_18_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -27204,17 +27467,17 @@ const char * gWrapperFileContent_17_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_18_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_19_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include \"plm.h\"\n"
   "\n"
@@ -27469,19 +27732,19 @@ const char * gWrapperFileContent_18_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   12166, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [3] = {
-  & gWrapperFile_17_targetTemplates,
   & gWrapperFile_18_targetTemplates,
+  & gWrapperFile_19_targetTemplates,
   NULL
 } ;
 
@@ -27503,12 +27766,13 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 
 //--- All files of 'target-teensy-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [6] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [7] = {
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_15_targetTemplates,
   & gWrapperFile_16_targetTemplates,
+  & gWrapperFile_17_targetTemplates,
   NULL
 } ;
 
@@ -27523,7 +27787,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   "target-teensy-sequential-systick",
-  5,
+  6,
   gWrapperAllFiles_targetTemplates_5,
   1,
   gWrapperAllDirectories_targetTemplates_5

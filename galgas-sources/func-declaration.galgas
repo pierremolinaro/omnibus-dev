@@ -42,8 +42,9 @@ syntax extension common_syntax {
     repeat
     while
       $?$ ?let selector
-      $identifier$ ?let formalArgumentTypeName
       $identifier$ ?let formalArgumentName
+      $:$
+      $identifier$ ?let formalArgumentTypeName
       funcFormalArgumentList +=
         !selector
         !formalArgumentTypeName
@@ -51,8 +52,9 @@ syntax extension common_syntax {
     end
     $)$
     $->$
-    $identifier$ ?let resultTypeName
     $identifier$ ?let resultVarName
+    $:$
+    $identifier$ ?let resultTypeName
     ${$
     <instructionList> ?let instructionList
     $}$

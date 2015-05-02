@@ -10,6 +10,7 @@ struct @accessibleEntities {
   @stringset mGlobalConstantSet
   @stringset mProcedureSet
   @stringset mFunctionSet
+  @stringset mGlobalVariableSet
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -21,6 +22,7 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   case globalConstant (@string unused name) :
     ioAccessibleEntities.mGlobalConstantSet += !name
   case globalVariable (@string unused name) :
+    ioAccessibleEntities.mGlobalVariableSet += !name
   case localVariable (@string unused name) :
   case inArgument (@string unused name) :
   case inOutArgument (@string unused name) :
@@ -74,18 +76,16 @@ proc codeOptimisation
     s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
     s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
     s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
+    s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
     s += "  " + [ioIntermediateCodeStruct.mProcedureMapIR count] + " procedures\n"
     s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
     message s
-  #--- loop throught sub programs
-    @accessibleEntities accessibleEntities = .default
-    accessibleEntities.mProcedureSet = ioIntermediateCodeStruct.mRequiredProcedureSet
-    for procedure in ioIntermediateCodeStruct.mProcedureMapIR do
-      [procedure enterAccessibleEntities !?accessibleEntities]
-    end
-    for function in ioIntermediateCodeStruct.mFunctionMapIR do
-      [function enterAccessibleEntities !?accessibleEntities]
-    end
+  #------------------------------------------- loop through sub programs
+    suppressInaccessibleSubprograms (
+      !?intermediateCode:ioIntermediateCodeStruct
+      ?@accessibleEntities accessibleEntities
+      !?optimizing
+    )
   #--- Suppress unused registers
     @registerMapIR usedRegisterMap = {}
     for (@lstring lkey @string registerTypeName @uint64 registerAddress) in ioIntermediateCodeStruct.mRegisterMap do
@@ -120,35 +120,113 @@ proc codeOptimisation
       end
     end
     ioIntermediateCodeStruct.mGlobalLiteralStringMap = staticStringMap
-  #--- Suppress unused procedures
-    @procedureMapIR procedureMap = {}
-    for (@lstring lkey
-         @procFormalArgumentListForGeneration formalArgumentListForGeneration
-         @instructionListIR instructionGenerationList)
-    in ioIntermediateCodeStruct.mProcedureMapIR do
-      if [accessibleEntities.mProcedureSet hasKey !lkey.string] then
-        [!?procedureMap insertKey !lkey !formalArgumentListForGeneration !instructionGenerationList]
-      else
-        optimizing = true
-      end
-    end
-    ioIntermediateCodeStruct.mProcedureMapIR = procedureMap
-  #--- Suppress unused function
-    @functionMapIR functionMap = {}
-    for function in ioIntermediateCodeStruct.mFunctionMapIR do
-      if [accessibleEntities.mFunctionSet hasKey !function.lkey.string] then
-        [!?functionMap insertKey
-          !function.lkey
-          !function.mFormalArgumentListForGeneration
-          !function.mInstructionGenerationList
-          !function.mResultType
-          !function.mResultVarName
+  #--- Suppress unused global variables
+    @globalVariableMapIR globalVariableMap = {}
+    for globalVariable in ioIntermediateCodeStruct.mGlobalVariableMap do
+      if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
+        [!?globalVariableMap insertKey
+          !globalVariable.lkey
+          !globalVariable.mActualTypeName
+          !globalVariable.mGenerateVolatile
+          !globalVariable.mInitialValueExpressionGeneration
         ]
       else
         optimizing = true
       end
     end
-    ioIntermediateCodeStruct.mFunctionMapIR = functionMap
+    ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc suppressInaccessibleSubprograms
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  !@accessibleEntities outAccessibleEntities
+  ?!@bool ioOptimizing
+{
+  outAccessibleEntities = .default
+  @procedureMapIR accessibleProcedureMap = {}
+  @procedureMapIR nonExploredProcedureMap = {}
+#--- First, required procedures
+  for procedure in ioIntermediateCodeStruct.mProcedureMapIR do
+    if procedure.mIsRequired then
+      [!?accessibleProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+      ]        
+      [procedure enterAccessibleEntities !?outAccessibleEntities]
+      outAccessibleEntities.mProcedureSet += !procedure.lkey.string
+    else
+      [!?nonExploredProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+      ]        
+    end
+  end
+  @functionMapIR accessibleFunctionMap = {}
+  @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR
+#--- Explore procedures and functions
+  var exploreProceduresAndFunctions = true
+  loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
+  while exploreProceduresAndFunctions do
+    exploreProceduresAndFunctions = false
+    let @procedureMapIR exNonExploredProcedureMap = nonExploredProcedureMap
+    nonExploredProcedureMap = {}
+    for procedure in exNonExploredProcedureMap do
+      if [outAccessibleEntities.mProcedureSet hasKey !procedure.lkey.string] then
+        [!?accessibleProcedureMap insertKey
+          !procedure.lkey
+          !procedure.mFormalArgumentListForGeneration
+          !procedure.mInstructionGenerationList
+          !procedure.mIsRequired
+        ]        
+        [procedure enterAccessibleEntities !?outAccessibleEntities]
+        exploreProceduresAndFunctions = true
+      else
+        [!?nonExploredProcedureMap insertKey
+          !procedure.lkey
+          !procedure.mFormalArgumentListForGeneration
+          !procedure.mInstructionGenerationList
+          !procedure.mIsRequired
+        ]        
+      end
+    end
+    let @functionMapIR exNonExploredFunctionMap = nonExploredFunctionMap
+    nonExploredFunctionMap = {}
+    for function in exNonExploredFunctionMap do
+      if [outAccessibleEntities.mFunctionSet hasKey !function.lkey.string] then
+        [!?accessibleFunctionMap insertKey
+          !function.lkey
+          !function.mFormalArgumentListForGeneration
+          !function.mInstructionGenerationList
+          !function.mResultType
+          !function.mResultVarName
+        ]        
+        [function enterAccessibleEntities !?outAccessibleEntities]
+        exploreProceduresAndFunctions = true
+      else
+        [!?nonExploredFunctionMap insertKey
+          !function.lkey
+          !function.mFormalArgumentListForGeneration
+          !function.mInstructionGenerationList
+          !function.mResultType
+          !function.mResultVarName
+        ]        
+      end
+    end
+  end
+  if ioIntermediateCodeStruct.mProcedureMapIR != accessibleProcedureMap then
+    ioIntermediateCodeStruct.mProcedureMapIR = accessibleProcedureMap
+    ioOptimizing = true
+  end
+  if ioIntermediateCodeStruct.mFunctionMapIR != accessibleFunctionMap then
+    ioIntermediateCodeStruct.mFunctionMapIR = accessibleFunctionMap
+    ioOptimizing = true
   end
 }
 

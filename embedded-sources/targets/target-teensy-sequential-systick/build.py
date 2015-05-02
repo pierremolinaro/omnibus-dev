@@ -726,6 +726,15 @@ def compiler ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   Display object size invocation                                                                                     *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def displayObjectSize ():
+  return [toolDir () + "/bin/arm-eabi-size"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #    C Compiler options                                                                                                *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -924,6 +933,7 @@ makefile.addRule (rule)
 makefile.addGoal ("run", [productHEX], "Building all and run")
 makefile.addGoal ("all", [productHEX], "Building all")
 makefile.addGoal ("as", asObjectList, "Assembling C files")
+makefile.addGoal ("display-obj-size", [productHEX], "Display Object Size")
 #--- Build
 #makefile.printRules ()
 makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)
@@ -933,6 +943,17 @@ makefile.printErrorCountAndExitOnError ()
 if goal == "run":
   print BOLD_BLUE () + "Loading Teensy..." + ENDC ()
   childProcess = subprocess.Popen ([teensyLoader (), "-w", "-v", "-mmcu=mk20dx128", productHEX])
+#--- Wait for subprocess termination
+  if childProcess.poll () == None :
+    childProcess.wait ()
+  if childProcess.returncode != 0 :
+    print BOLD_RED () + "Error " + str (childProcess.returncode) + ENDC ()
+    sys.exit (childProcess.returncode)
+  else:
+    print BOLD_GREEN () + "Success" + ENDC ()
+elif goal == "display-obj-size":
+  print BOLD_BLUE () + "Display Object Sizes" + ENDC ()
+  childProcess = subprocess.Popen (displayObjectSize () + objectList + ["-t"])
 #--- Wait for subprocess termination
   if childProcess.poll () == None :
     childProcess.wait ()

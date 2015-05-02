@@ -31,7 +31,7 @@ proc $isr systickHandler () {
 
 //-----------------------------------------------------------------------------*
 
-proc $user waitMS (? UInt32 inDuration) {
+proc $user waitMS (?inDuration : UInt32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
