@@ -897,6 +897,7 @@ for source in sourceList ():
   rule.mCommand += cCompilerOptions ()
   rule.mCommand += ["-c", "sources/" + source]
   rule.mCommand += ["-o", object]
+  rule.enterSecondaryDependanceFile (object + ".dep")
   makefile.addRule (rule)
   objectList.append (object)
 #--- Assembling
@@ -907,6 +908,7 @@ for source in sourceList ():
   rule.mCommand += cCompilerOptions ()
   rule.mCommand += ["-S", "sources/" + source]
   rule.mCommand += ["-o", asObject]
+  rule.enterSecondaryDependanceFile (asObject + ".dep")
   makefile.addRule (rule)
   asObjectList.append (asObject)
 #--- Add linker rule

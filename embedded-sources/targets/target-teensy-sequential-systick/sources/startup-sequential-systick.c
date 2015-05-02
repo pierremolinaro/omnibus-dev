@@ -164,21 +164,21 @@ static void ResetISR (void) {
   SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;
 
 //---------5- Exécuter les constructeurs des variables globales
-  extern void (* __constructor_array_start) (void) ;
+/*  extern void (* __constructor_array_start) (void) ;
   extern void (* __constructor_array_end) (void) ;
   void (** ptr) (void) = & __constructor_array_start ;
   while (ptr != & __constructor_array_end) {
     (* ptr) () ;
     ptr ++ ;
-  }
+  } */
 //---------6- Exécuter les routines d'initialisation de la section init_routine_array
-  extern void (* __init_routine_array_start) (void) ;
+/*  extern void (* __init_routine_array_start) (void) ;
   extern void (* __init_routine_array_end) (void) ;
   ptr = & __init_routine_array_start ;
   while (ptr != & __init_routine_array_end) {
     (* ptr) () ;
     ptr ++ ;
-  }
+  } */
 //---------7- Exécuter le programme utilisateur
   proc_setup () ;
   while (1) {
