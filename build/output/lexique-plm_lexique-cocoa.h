@@ -96,7 +96,9 @@ enum {plm_lexique_1_,
   plm_lexique_1__25_,
   plm_lexique_1__2B__2B_,
   plm_lexique_1__2D__2D_,
-  plm_lexique_1__2D__3E_
+  plm_lexique_1__2D__3E_,
+  plm_lexique_1__5C__2B__2B_,
+  plm_lexique_1__5C__2D__2D_
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

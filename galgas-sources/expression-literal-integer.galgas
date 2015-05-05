@@ -109,7 +109,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   outGeneratedCode = @inLineExpressionGeneration.new {
    !"(" + mangledNameForType (!name:[inOptionalTargetType key]) + ") " + mLiteralInteger.uint64
   }
-  outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger.uint64}
+  outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

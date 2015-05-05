@@ -2,13 +2,17 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @incrementationInstructionAST : @instructionAST {
-  @lstring mVarName
+enum @incDecKind {
+  case incWithOverflowCheck
+  case decWithOverflowCheck
+  case incNoOverflowCheck
+  case decNoOverflowCheck
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @decrementationInstructionAST : @instructionAST {
+class @incDecInstructionAST : @instructionAST {
+  @incDecKind mKind
   @lstring mVarName
 }
 
@@ -23,7 +27,8 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $identifier$ ?let varName
     $++$
-    ioInstructionList += !@incrementationInstructionAST.new {
+    ioInstructionList += !@incDecInstructionAST.new {
+      !.incWithOverflowCheck
       !varName
     }
   }
@@ -33,7 +38,30 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $identifier$ ?let varName
     $--$
-    ioInstructionList += !@decrementationInstructionAST.new {
+    ioInstructionList += !@incDecInstructionAST.new {
+      !.decWithOverflowCheck
+      !varName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    $\++$
+    ioInstructionList += !@incDecInstructionAST.new {
+      !.incNoOverflowCheck
+      !varName
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    $\--$
+    ioInstructionList += !@incDecInstructionAST.new {
+      !.decNoOverflowCheck
       !varName
     }
   }
@@ -46,7 +74,7 @@ syntax extension common_syntax {
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @incrementationInstructionAST analyze
+override method @incDecInstructionAST analyze
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
@@ -70,44 +98,26 @@ override method @incrementationInstructionAST analyze
   end
 #--- Check type handle ++ operator
   if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
-    error mVarName : [type key] + " type does handle ++ operator"
+    error mVarName : [type key] + " type does handle incrementation/decrementation operator"
+  end
+  @sint64 min
+  @uint64 max
+  switch [type kind]
+  case boolean, boolset, literalString :
+    error mVarName : "internal error" : min, max
+  case enumeration (*) :
+    error mVarName : "internal error" : min, max
+  case structure (*) :
+    error mVarName : "internal error" : min, max
+  case integer (kMin kMax) :
+    min = kMin
+    max = kMax
   end
 #--- Code generation
-  ioInstructionGenerationList += !@incrementInstructionIR.new {
-   !variable
- }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @decrementationInstructionAST analyze
-  ?optionalReceiverType:let @receiverType unused inReceiverType
-  ?context:let @semanticContext inContext
-  ?mode:let @string inMode
-  ?!temporary:@uint unused ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-#--- Get target type
-  [!?ioVariableMap searchForReadWriteAccess
-    !mVarName
-    ?let type
-    ?let acceptedModeSet
-    ?let @string unused variableCName
-    ?let variable
-    ?*
-  ]
-#--- Check mode
-  if not [acceptedModeSet hasKey !inMode] then
-    error mVarName : "this variable cannot be used in $" + inMode + " mode"
-  end
-#--- Check type handle ++ operator
-  if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
-    error mVarName : [type key] + " type does handle -- operator"
-  end
-#--- Code generation
-  ioInstructionGenerationList += !@decrementInstructionIR.new {
+  ioInstructionGenerationList += !@incDecInstructionIR.new {
+   !min
+   !max
+   !mKind
    !variable
  }
 }
@@ -116,37 +126,37 @@ override method @decrementationInstructionAST analyze
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @incrementInstructionIR : @abstractInstructionIR {
+class @incDecInstructionIR : @abstractInstructionIR {
+  @sint64 mMin
+  @uint64 mMax
+  @incDecKind mKind
   @variableKindIR mVariable
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @incrementInstructionIR instructionCode -> @string outCode {
-  outCode = [mVariable mangledName] + " ++ ;\n"
+override getter @incDecInstructionIR instructionCode -> @string outCode {
+  switch mKind
+  case incWithOverflowCheck :
+    outCode  = "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
+    outCode += "  exception (1, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+    outCode += "}\n"
+    outCode += [mVariable mangledName] + " ++ ;\n"
+  case decWithOverflowCheck :
+    outCode  = "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
+    outCode += "  exception (1, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+    outCode += "}\n"
+    outCode += [mVariable mangledName] + " -- ;\n"
+  case incNoOverflowCheck :
+    outCode = [mVariable mangledName] + " ++ ;\n"
+  case decNoOverflowCheck :
+    outCode = [mVariable mangledName] + " -- ;\n"
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @incrementInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mVariable enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @decrementInstructionIR : @abstractInstructionIR {
-  @variableKindIR mVariable
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @decrementInstructionIR instructionCode -> @string outCode {
-  outCode = [mVariable mangledName] + " -- ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @decrementInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @incDecInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mVariable enterAccessibleEntities !?ioAccessibleEntities]
 }
 

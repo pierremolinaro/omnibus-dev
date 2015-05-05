@@ -321,6 +321,16 @@ void categoryMethod_checkWith (const class GALGAS_infixOperatorMap inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Category Getter '@variableKindIR location' (as function)                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_location categoryReader_location (const class GALGAS_variableKindIR & inObject,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Category method '@variableKindIR enterAccessibleEntities'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

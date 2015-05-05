@@ -165,7 +165,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !resultType
     !{!mFunctionMode.string}
     !mResultVarName.string
-    !.localVariable {!name:mResultVarName.string}
+    !.localVariable {!name:mResultVarName}
     !true
   ]
 #--- Analyse formal arguments
@@ -177,7 +177,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !typeProxy
       !{!mFunctionMode.string}
       !mangledNameForInArgument (!name:formalArgumentName.string)
-      !.inArgument {!name:formalArgumentName.string}
+      !.inArgument {!name:formalArgumentName}
       ![typeProxy copiable]
     ]
     formalArguments += !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
