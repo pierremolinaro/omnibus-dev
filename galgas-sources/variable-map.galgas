@@ -4,6 +4,54 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+enum @variableKindIR {
+  case register (@lstring name)
+  case globalConstant (@lstring name)
+  case globalVariable (@lstring name)
+  case localVariable (@lstring name)
+  case inArgument (@lstring name)
+  case inOutArgument (@lstring name)
+  case outArgument (@lstring name)
+  case localConstant (@lstring name)
+  case temporaryConstant (@uint idx)
+  case localAccess (@string access @location location)
+  case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value)
+  case literalString (@lstring value @string name)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @variableKindIR location -> @location outLocation {
+  switch self
+  case register (@lstring name) :
+    outLocation = name.location
+  case globalConstant (@lstring name) :
+    outLocation = name.location
+  case globalVariable (@lstring name) :
+    outLocation = name.location
+  case localVariable (@lstring name) :
+    outLocation = name.location
+  case inArgument (@lstring name) :
+    outLocation = name.location
+  case inOutArgument (@lstring name) :
+    outLocation = name.location
+  case outArgument (@lstring name) :
+    outLocation = name.location
+  case localConstant (@lstring name) :
+    outLocation = name.location
+  case temporaryConstant (*) :
+    error .nowhere : "internal error: cannot get location of a temporary" : outLocation
+  case localAccess (* @location location) :
+    outLocation = location
+  case literalUnsignedInteger (* @luint64 value) :
+    outLocation = value.location
+  case literalString (@lstring value *) :
+    outLocation = value.location
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 func initialVariableMap
   ?context:let @semanticContext inContext
   ?globalsAreConstant:@bool inGlobalsAreConstant
@@ -21,7 +69,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey.string}
+        !.register {!name:lkey}
         !true
       ]
     else
@@ -30,7 +78,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey.string}
+        !.register {!name:lkey}
         !true
       ]
     end
@@ -42,7 +90,7 @@ func initialVariableMap
       !constantType
       !allModeSet
       !mangledNameForConstant (!name:constantName.string)
-      !.globalConstant {!name:constantName.string}
+      !.globalConstant {!name:constantName}
       !true
     ]
   end
@@ -54,7 +102,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName.string}
+        !.globalVariable {!name:variableName}
         !true
       ]
     else
@@ -63,7 +111,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName.string}
+        !.globalVariable {!name:variableName}
         !true
       ]
     end
@@ -78,23 +126,6 @@ proc getNewTempVariable
 {
   outTempVariable = .temporaryConstant {!idx:ioTemporaryIndex}
   ioTemporaryIndex ++
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-enum @variableKindIR {
-  case register (@string name)
-  case globalConstant (@string name)
-  case globalVariable (@string name)
-  case localVariable (@string name)
-  case inArgument (@string name)
-  case inOutArgument (@string name)
-  case outArgument (@string name)
-  case localConstant (@string name)
-  case temporaryConstant (@uint idx)
-  case localAccess (@string access)
-  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value)
-  case literalString (@string value @string name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
