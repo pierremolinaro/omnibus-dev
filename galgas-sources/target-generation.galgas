@@ -34,9 +34,9 @@ filewrapper targetTemplates in "../embedded-sources" {
 proc generateTargets
   ?targetDirectory:let @string inTargetDirectory
   ?targetName:let @lstring inTargetName
-  !builtinFiles:@stringlist outBuiltinFiles
+  !filesToInclude:@stringlist outFilesToInclude
 {
-  outBuiltinFiles = {}
+  outFilesToInclude = {}
   @filewrapper fw = [filewrapper targetTemplates]
   let targetPath = "/targets/" + [inTargetName.string stringByDeletingPathExtension]
   if [fw directoryExistsAtPath !targetPath] then
@@ -52,7 +52,7 @@ proc generateTargets
       let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
       [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
       if [file pathExtension] == "c" then
-        outBuiltinFiles += !file
+        outFilesToInclude += !file
       end
     end
   else

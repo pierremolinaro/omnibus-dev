@@ -101,6 +101,14 @@ func %once separatorLine -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+func titleComment ?@string inTitle -> @string outTitle {
+  outTitle  = separatorLine ()
+  outTitle += "//   " + [inTitle stringByRightPadding  !114!' '] + "*\n"
+  outTitle += separatorLine () + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 proc codeGeneration
   ?outputFile:let @string inSourceFileName
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
@@ -114,18 +122,39 @@ proc codeGeneration
   generateTargets (
     !targetDirectory:targetDirectory
     !targetName:inTargetName
-    ?builtinFiles:let @stringlist builtinFiles
+    ?filesToInclude:let @stringlist builtinFiles
   )
 #--- Generate C file
   let baseName = sourceDirectory + "/plm"
   var code = "" # "#include \"plm.h\"\n\n"
   code += "#include <stdint.h>\n"
   code += "#include <stddef.h>\n\n"
-  code += separatorLine ()
+  code += titleComment (!"Init")
   code += "static void init (void) ;\n\n"
-  code += separatorLine ()
-  code += "//   Static Strings                                                                                                    *\n"
-  code += separatorLine () + "\n"
+  code += titleComment (!"Exception")
+  code += "uint32_t readIPSR (void) ;\n\n"
+  code += "void raise_exception_internal (const int32_t inCode,\n"
+  code += "                                      const char * inSourceFile,\n"
+  code += "                                      const int32_t inSourceLine) ;\n\n"
+  code += "void raise_exception_via_svc (const int32_t inCode,\n"
+  code += "                                     const char * inSourceFile,\n"
+  code += "                                     const int32_t inSourceLine) ;\n\n"
+  code += " void raise_exception (const int32_t inCode,\n"
+  code += "                             const char * inSourceFile,\n"
+  code += "                             const int32_t inSourceLine) {\n"
+  code += "  uint32_t status ;\n"
+  code += "  __asm__ (\"mrs %[reg], IPSR\" : [reg]\"=r\"(status));\n"
+  code += "  if (0 == status) {\n"
+  code += "    raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
+  code += "  }else{\n"
+  code += "    raise_exception_via_svc (inCode, inSourceFile, inSourceLine) ;\n"
+  code += "  }\n"
+  code += "}\n\n"
+  code += "void raise_exception_internal (const int32_t inCode,\n"
+  code += "                               const char * inSourceFile,\n"
+  code += "                               const int32_t inSourceLine) {\n"
+  code += "}\n\n"
+  code += titleComment (!"Static Strings")
   for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
     code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
   end
@@ -148,21 +177,18 @@ proc codeGeneration
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure headerCodeGeneration]
   end
-  code += separatorLine () + "\n"
+  code += titleComment (!"System code")
   for (file) in builtinFiles do
     code += "#include \"" + file + "\"\n"
   end
   code += "\n"
 #--- Init
-  code += separatorLine ()
-  code += "//   init                                                                                                        *\n"
-  code += separatorLine () + "\n"
+  code += titleComment (!"Init")
   code += "static void init (void) {\n"
   for init in inIntermediateCodeStruct.mInitList do
     code += [init.mInstructionListIR instructionListCode]
   end
   code += "}\n\n"
-  code += separatorLine () + "\n"
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]
   end
