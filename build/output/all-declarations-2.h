@@ -166,6 +166,16 @@ class GALGAS_string function_separatorLine (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                               Function 'titleComment'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_titleComment (class GALGAS_string inArgument0,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              Routine 'codeGeneration'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -328,6 +338,7 @@ extern const char * gWrapperFileContent_16_targetTemplates ;
 extern const char * gWrapperFileContent_17_targetTemplates ;
 extern const char * gWrapperFileContent_18_targetTemplates ;
 extern const char * gWrapperFileContent_19_targetTemplates ;
+extern const char * gWrapperFileContent_20_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -354,6 +365,7 @@ extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
