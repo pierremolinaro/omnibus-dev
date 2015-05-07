@@ -52,7 +52,7 @@ override method @varInExpressionAST analyzeStaticExpression
     !errorLocation:mSourceVarName.location
   )
 #--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {![globalConstantValue expressionCode]}
+  outGeneratedCode = @inLineExpressionGeneration.new {![globalConstantValue mangledName]}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

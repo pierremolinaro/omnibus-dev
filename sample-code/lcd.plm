@@ -115,14 +115,10 @@ proc $init busyWaitingDuringMS (?inDuration : UInt32) {
 //-----------------------------------------------------------------------------*
 
 proc $init programLcd4BitDataBusOutput (?inValue : UInt8) {
-  let d4 = (inValue & 0x01) != 0
-  setD4 (!d4)
-  let d5 = (inValue & 0x02) != 0
-  setD5 (!d5)
-  let d6 = (inValue & 0x04) != 0
-  setD6 (!d6)
-  let d7 = (inValue & 0x08) != 0
-  setD7 (!d7)
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
 }
 
 //-----------------------------------------------------------------------------*

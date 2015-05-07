@@ -77,29 +77,31 @@ override method @globalConstantDeclaration enterInContext
 {
 #--- Get destination type
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?let constantType]
-#--- Variable map contains already computed global constants
-#  @variableMap variableMap = .emptyMap
-#  for (constantName constantType sourceExpressionCode) in ioContext.mGlobalConstantMap do
-#    [!?variableMap insertUsedLocalConstant
-#      !constantName
-#      !constantType
-#      ![sourceExpressionCode expressionCode]
-#      !true
-#    ]
-#  end
 #--- Analyze source expression
-  [mSourceExpression analyzeStaticExpression
-    !optionalTargetType:constantType
-    !context:ioContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-    ?expressionType:let inferredType
-    ?generatedCode:let expressionGeneratedCode
+  @uint temporaryIndex = 0
+  @instructionListIR instructionGenerationList = {}
+  @variableMap variableMap = .emptyMap
+  [mSourceExpression analyzeExpression
+     !optionalReceiverType:.noReceiver
+     !optionalTargetType:constantType
+     !context:ioContext
+     !mode:""
+     !?temporary:temporaryIndex
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:variableMap
+     !?instructionListIR:instructionGenerationList
+     ?expressionType:let @unifiedTypeMap-proxy expressionType
+     ?generatedCode:*
+     ?result:let @variableKindIR resultValueName
   ]
+  if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
+    error mConstantName : "source expression cannot be statically computed"
+  end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey
     !mConstantName
-    !inferredType
-    !expressionGeneratedCode
+    !expressionType
+    !resultValueName
   ]
 }
 
@@ -151,7 +153,7 @@ private filewrapper globalConstantGenerationTemplate in "../generation-templates
 getter @globalConstantMapIR-element headerCodeGeneration -> @string outCode {
   outCode = [filewrapper globalConstantGenerationTemplate.declaration
     !lkey.string
-    ![mValueExpressionGeneration expressionCode]
+    ![mValueExpressionGeneration mangledName]
   ]
 }
 

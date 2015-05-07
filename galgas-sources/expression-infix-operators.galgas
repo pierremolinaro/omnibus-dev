@@ -480,7 +480,7 @@ override method @asExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let expressionType
+    ?expressionType:let unused expressionType
     ?generatedCode:let expressionGeneratedCode
     ?result:@variableKindIR expressionResult
   ]
@@ -514,7 +514,7 @@ override method @asExpressionAST analyzeStaticExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !?staticStringMap:ioGlobalLiteralStringMap
-    ?expressionType:let expressionType
+    ?expressionType:let unused expressionType
     ?generatedCode:let expressionGeneratedCode
   ]
 #--- Analyze type

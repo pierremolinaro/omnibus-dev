@@ -31,6 +31,7 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   case temporaryConstant (@uint unused idx) :
   case localAccess (@string unused access *) :
   case literalUnsignedInteger (* *) :
+  case literalSignedInteger (* *) :
   case literalString (@lstring value @string unused name) :
     ioAccessibleEntities.mStaticStringSet += !value.string
   end
@@ -98,11 +99,9 @@ proc codeOptimisation
     ioIntermediateCodeStruct.mRegisterMap = usedRegisterMap
   #--- Suppress global constant
     @globalConstantMapIR globalConstantMap = {}
-    for (@lstring lkey
-         @abstractExpressionGeneration valueExpressionGeneration)
-    in ioIntermediateCodeStruct.mGlobalConstantMap do
-      if [accessibleEntities.mGlobalConstantSet hasKey !lkey.string] then
-        [!?globalConstantMap insertKey !lkey !valueExpressionGeneration]
+    for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
+      if [accessibleEntities.mGlobalConstantSet hasKey !constant.lkey.string] then
+        [!?globalConstantMap insertKey !constant.lkey !constant.mValueExpressionGeneration]
       else
         optimizing = true
       end

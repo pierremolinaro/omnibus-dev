@@ -16,6 +16,7 @@ enum @variableKindIR {
   case temporaryConstant (@uint idx)
   case localAccess (@string access @location location)
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value)
+  case literalSignedInteger (@unifiedTypeMap-proxy type @lsint64 value)
   case literalString (@lstring value @string name)
 }
 
@@ -45,8 +46,43 @@ getter @variableKindIR location -> @location outLocation {
     outLocation = location
   case literalUnsignedInteger (* @luint64 value) :
     outLocation = value.location
+  case literalSignedInteger (* @lsint64 value) :
+    outLocation = value.location
   case literalString (@lstring value *) :
     outLocation = value.location
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @variableKindIR isStatic -> @bool outResult {
+  switch self
+  case register (*) :
+    outResult = false
+  case globalConstant (*) :
+    outResult = false
+  case globalVariable (*) :
+    outResult = false
+  case localVariable (*) :
+    outResult = false
+  case inArgument (*) :
+    outResult = false
+  case inOutArgument (*) :
+    outResult = false
+  case outArgument (*) :
+    outResult = false
+  case localConstant (*) :
+    outResult = false
+  case temporaryConstant (*) :
+    outResult = false
+  case localAccess (* *) :
+    outResult = false
+  case literalUnsignedInteger (* *) :
+    outResult = true
+  case literalSignedInteger (* *) :
+    outResult = true
+  case literalString (* *) :
+    outResult = true
   end
 }
 

@@ -62,7 +62,7 @@ map @globalLiteralStringMap {
 
 map @globalConstantMap {
   @unifiedTypeMap-proxy mConstantType
-  @abstractExpressionGeneration mExpressionCode
+  @variableKindIR mExpressionCode
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }

@@ -40,7 +40,7 @@ map @globalVariableMapIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @globalConstantMapIR {
-  @abstractExpressionGeneration mValueExpressionGeneration
+  @variableKindIR mValueExpressionGeneration
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
