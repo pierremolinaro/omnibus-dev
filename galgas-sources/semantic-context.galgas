@@ -82,7 +82,7 @@ map @targetBaseTypeMap {
 map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
-  @abstractExpressionGeneration mInitialValueExpressionCode
+  @variableKindIR mInitialValue
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
 }

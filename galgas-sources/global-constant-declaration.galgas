@@ -106,17 +106,6 @@ override method @globalConstantDeclaration enterInContext
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SEMANTICS                                                                                                           *
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract method @expressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
-  ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 

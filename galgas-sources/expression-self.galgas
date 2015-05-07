@@ -64,15 +64,3 @@ override method @selfExpressionAST analyzeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-override method @selfExpressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inTargetType
-  ?context:let @semanticContext unused inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-  error mSelfLocation : "'self' is undefined in this context" : outExpressionType, outGeneratedCode
-}
-
-#----------------------------------------------------------------------------------------------------------------------*

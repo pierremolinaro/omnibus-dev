@@ -1143,7 +1143,7 @@ class GALGAS_globalVariableMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                       const class GALGAS_stringset & inOperand2,
-                                                      const class GALGAS_abstractExpressionGeneration & inOperand3,
+                                                      const class GALGAS_variableKindIR & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1151,7 +1151,7 @@ class GALGAS_globalVariableMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                      class GALGAS_stringset constinArgument2,
-                                                     class GALGAS_abstractExpressionGeneration constinArgument3,
+                                                     class GALGAS_variableKindIR constinArgument3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -1160,10 +1160,10 @@ class GALGAS_globalVariableMap : public AC_GALGAS_map {
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_setMInitialValueExpressionCodeForKey (class GALGAS_abstractExpressionGeneration constinArgument0,
-                                                                                class GALGAS_string constinArgument1,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void modifier_setMInitialValueForKey (class GALGAS_variableKindIR constinArgument0,
+                                                                  class GALGAS_string constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_setMVariableTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                                   class GALGAS_string constinArgument1,
@@ -1175,7 +1175,7 @@ class GALGAS_globalVariableMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                    class GALGAS_stringset & outArgument2,
-                                                   class GALGAS_abstractExpressionGeneration & outArgument3,
+                                                   class GALGAS_variableKindIR & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -1186,9 +1186,9 @@ class GALGAS_globalVariableMap : public AC_GALGAS_map {
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_abstractExpressionGeneration reader_mInitialValueExpressionCodeForKey (const class GALGAS_string & constinOperand0,
-                                                                                                                C_Compiler * inCompiler
-                                                                                                                COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mInitialValueForKey (const class GALGAS_string & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mVariableTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                              C_Compiler * inCompiler
@@ -1222,7 +1222,7 @@ class cEnumerator_globalVariableMap : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mVariableType (LOCATION_ARGS) const ;
   public : class GALGAS_stringset current_mExecutionModeSet (LOCATION_ARGS) const ;
-  public : class GALGAS_abstractExpressionGeneration current_mInitialValueExpressionCode (LOCATION_ARGS) const ;
+  public : class GALGAS_variableKindIR current_mInitialValue (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_globalVariableMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -1241,13 +1241,13 @@ class cMapElement_globalVariableMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mVariableType ;
   public : GALGAS_stringset mAttribute_mExecutionModeSet ;
-  public : GALGAS_abstractExpressionGeneration mAttribute_mInitialValueExpressionCode ;
+  public : GALGAS_variableKindIR mAttribute_mInitialValue ;
 
 //--- Constructor
   public : cMapElement_globalVariableMap (const GALGAS_lstring & inKey,
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType,
                                           const GALGAS_stringset & in_mExecutionModeSet,
-                                          const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionCode
+                                          const GALGAS_variableKindIR & in_mInitialValue
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -1274,7 +1274,7 @@ class GALGAS_globalVariableMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mVariableType ;
   public : GALGAS_stringset mAttribute_mExecutionModeSet ;
-  public : GALGAS_abstractExpressionGeneration mAttribute_mInitialValueExpressionCode ;
+  public : GALGAS_variableKindIR mAttribute_mInitialValue ;
 
 
 //--------------------------------- Accessors
@@ -1291,7 +1291,7 @@ class GALGAS_globalVariableMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_globalVariableMap_2D_element (const GALGAS_lstring & in_lkey,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType,
                                                 const GALGAS_stringset & in_mExecutionModeSet,
-                                                const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionCode) ;
+                                                const GALGAS_variableKindIR & in_mInitialValue) ;
 
 //-- Start of generic part --*
 
@@ -1307,7 +1307,7 @@ class GALGAS_globalVariableMap_2D_element : public AC_GALGAS_root {
   public : static GALGAS_globalVariableMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                        const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                        const class GALGAS_stringset & inOperand2,
-                                                                       const class GALGAS_abstractExpressionGeneration & inOperand3
+                                                                       const class GALGAS_variableKindIR & inOperand3
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1326,7 +1326,7 @@ class GALGAS_globalVariableMap_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mExecutionModeSet (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_abstractExpressionGeneration reader_mInitialValueExpressionCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mInitialValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mVariableType (LOCATION_ARGS) const ;
 
@@ -2275,7 +2275,7 @@ class GALGAS_globalVariableMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_string & inOperand1,
                                                       const class GALGAS_bool & inOperand2,
-                                                      const class GALGAS_abstractExpressionGeneration & inOperand3,
+                                                      const class GALGAS_variableKindIR & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2283,7 +2283,7 @@ class GALGAS_globalVariableMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_string constinArgument1,
                                                      class GALGAS_bool constinArgument2,
-                                                     class GALGAS_abstractExpressionGeneration constinArgument3,
+                                                     class GALGAS_variableKindIR constinArgument3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2297,17 +2297,17 @@ class GALGAS_globalVariableMapIR : public AC_GALGAS_map {
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_setMInitialValueExpressionGenerationForKey (class GALGAS_abstractExpressionGeneration constinArgument0,
-                                                                                      class GALGAS_string constinArgument1,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void modifier_setMInitialValueForKey (class GALGAS_variableKindIR constinArgument0,
+                                                                  class GALGAS_string constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_string & outArgument1,
                                                    class GALGAS_bool & outArgument2,
-                                                   class GALGAS_abstractExpressionGeneration & outArgument3,
+                                                   class GALGAS_variableKindIR & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -2322,9 +2322,9 @@ class GALGAS_globalVariableMapIR : public AC_GALGAS_map {
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_abstractExpressionGeneration reader_mInitialValueExpressionGenerationForKey (const class GALGAS_string & constinOperand0,
-                                                                                                                      C_Compiler * inCompiler
-                                                                                                                      COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mInitialValueForKey (const class GALGAS_string & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMapIR reader_overriddenMap (C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const ;
@@ -2354,7 +2354,7 @@ class cEnumerator_globalVariableMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mActualTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mGenerateVolatile (LOCATION_ARGS) const ;
-  public : class GALGAS_abstractExpressionGeneration current_mInitialValueExpressionGeneration (LOCATION_ARGS) const ;
+  public : class GALGAS_variableKindIR current_mInitialValue (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_globalVariableMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2373,13 +2373,13 @@ class cMapElement_globalVariableMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_string mAttribute_mActualTypeName ;
   public : GALGAS_bool mAttribute_mGenerateVolatile ;
-  public : GALGAS_abstractExpressionGeneration mAttribute_mInitialValueExpressionGeneration ;
+  public : GALGAS_variableKindIR mAttribute_mInitialValue ;
 
 //--- Constructor
   public : cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
                                             const GALGAS_string & in_mActualTypeName,
                                             const GALGAS_bool & in_mGenerateVolatile,
-                                            const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionGeneration
+                                            const GALGAS_variableKindIR & in_mInitialValue
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2406,7 +2406,7 @@ class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_string mAttribute_mActualTypeName ;
   public : GALGAS_bool mAttribute_mGenerateVolatile ;
-  public : GALGAS_abstractExpressionGeneration mAttribute_mInitialValueExpressionGeneration ;
+  public : GALGAS_variableKindIR mAttribute_mInitialValue ;
 
 
 //--------------------------------- Accessors
@@ -2423,7 +2423,7 @@ class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_globalVariableMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                                   const GALGAS_string & in_mActualTypeName,
                                                   const GALGAS_bool & in_mGenerateVolatile,
-                                                  const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionGeneration) ;
+                                                  const GALGAS_variableKindIR & in_mInitialValue) ;
 
 //-- Start of generic part --*
 
@@ -2439,7 +2439,7 @@ class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
   public : static GALGAS_globalVariableMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                          const class GALGAS_string & inOperand1,
                                                                          const class GALGAS_bool & inOperand2,
-                                                                         const class GALGAS_abstractExpressionGeneration & inOperand3
+                                                                         const class GALGAS_variableKindIR & inOperand3
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -2460,7 +2460,7 @@ class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mGenerateVolatile (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_abstractExpressionGeneration reader_mInitialValueExpressionGeneration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mInitialValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

@@ -127,7 +127,7 @@ proc codeOptimisation
           !globalVariable.lkey
           !globalVariable.mActualTypeName
           !globalVariable.mGenerateVolatile
-          !globalVariable.mInitialValueExpressionGeneration
+          !globalVariable.mInitialValue
         ]
       else
         optimizing = true

@@ -77,13 +77,25 @@ override method @globalVarDeclaration enterInContext
   case valueType (@lstring typeName) :
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let constantType]
   #--- Analyze source expression
-    [mSourceExpression analyzeStaticExpression
-      !optionalTargetType:constantType
-      !context:ioContext
-      !?staticStringMap:ioGlobalLiteralStringMap
-      ?expressionType:let inferredType
-      ?generatedCode:let expressionGeneratedCode
+    @uint temporaryIndex = 0
+    @instructionListIR instructionGenerationList = {}
+    @variableMap variableMap = .emptyMap
+    [mSourceExpression analyzeExpression
+       !optionalReceiverType:.noReceiver
+       !optionalTargetType:constantType
+       !context:ioContext
+       !mode:""
+       !?temporary:temporaryIndex
+       !?staticStringMap:ioGlobalLiteralStringMap
+       !?variableMap:variableMap
+       !?instructionListIR:instructionGenerationList
+       ?expressionType:let @unifiedTypeMap-proxy expressionType
+       ?generatedCode:*
+       ?result:let @variableKindIR resultValueName
     ]
+    if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
+      error mVarName : "source expression cannot be statically computed"
+    end
   #--- Execution mode set
     @stringset executionModes = {}
     for (m) in mModeList do
@@ -92,9 +104,9 @@ override method @globalVarDeclaration enterInContext
   #--- Enter in context
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !inferredType
+      !expressionType
       !executionModes
-      !expressionGeneratedCode
+      !resultValueName
     ]
   case procType (* *) :
   end
@@ -150,7 +162,7 @@ getter @globalVariableMapIR-element implementationCodeGeneration -> @string outC
     !lkey.string # mGlobalVariableName
     !mActualTypeName
     !mGenerateVolatile
-    ![mInitialValueExpressionGeneration expressionCode]
+    ![mInitialValue mangledName]
   ]
 }
 

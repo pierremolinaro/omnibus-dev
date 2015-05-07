@@ -36,37 +36,6 @@ void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Abstract category method '@expressionAST analyzeStaticExpression'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_expressionAST_analyzeStaticExpression) (const class cPtr_expressionAST * inObject,
-                                                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                               const class GALGAS_semanticContext constinArgument1,
-                                                                               class GALGAS_globalLiteralStringMap & ioArgument2,
-                                                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
-                                                                               class GALGAS_abstractExpressionGeneration & outArgument4,
-                                                                               class C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyzeStaticExpression (const int32_t inClassIndex,
-                                                  categoryMethodSignature_expressionAST_analyzeStaticExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyzeStaticExpression (const class cPtr_expressionAST * inObject,
-                                                 const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                                 const GALGAS_semanticContext constin_inContext,
-                                                 GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
-                                                 GALGAS_unifiedTypeMap_2D_proxy & out_outExpressionType,
-                                                 GALGAS_abstractExpressionGeneration & out_outGeneratedCode,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //         Category Getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector' (as function)         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
