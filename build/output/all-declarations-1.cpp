@@ -1507,25 +1507,25 @@ GALGAS_targetBaseTypeMap GALGAS_targetBaseTypeMap::extractObject (const GALGAS_o
 cMapElement_globalVariableMap::cMapElement_globalVariableMap (const GALGAS_lstring & inKey,
                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType,
                                                               const GALGAS_stringset & in_mExecutionModeSet,
-                                                              const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionCode
+                                                              const GALGAS_variableKindIR & in_mInitialValue
                                                               COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mVariableType (in_mVariableType),
 mAttribute_mExecutionModeSet (in_mExecutionModeSet),
-mAttribute_mInitialValueExpressionCode (in_mInitialValueExpressionCode) {
+mAttribute_mInitialValue (in_mInitialValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_globalVariableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mVariableType.isValid () && mAttribute_mExecutionModeSet.isValid () && mAttribute_mInitialValueExpressionCode.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mVariableType.isValid () && mAttribute_mExecutionModeSet.isValid () && mAttribute_mInitialValue.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_globalVariableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_globalVariableMap (mAttribute_lkey, mAttribute_mVariableType, mAttribute_mExecutionModeSet, mAttribute_mInitialValueExpressionCode COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_globalVariableMap (mAttribute_lkey, mAttribute_mVariableType, mAttribute_mExecutionModeSet, mAttribute_mInitialValue COMMA_HERE)) ;
   return result ;
 }
 
@@ -1542,8 +1542,8 @@ void cMapElement_globalVariableMap::description (C_String & ioString, const int3
   mAttribute_mExecutionModeSet.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInitialValueExpressionCode" ":" ;
-  mAttribute_mInitialValueExpressionCode.description (ioString, inIndentation) ;
+  ioString << "mInitialValue" ":" ;
+  mAttribute_mInitialValue.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1558,7 +1558,7 @@ typeComparisonResult cMapElement_globalVariableMap::compare (const cCollectionEl
     result = mAttribute_mExecutionModeSet.objectCompare (operand->mAttribute_mExecutionModeSet) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mInitialValueExpressionCode.objectCompare (operand->mAttribute_mInitialValueExpressionCode) ;
+    result = mAttribute_mInitialValue.objectCompare (operand->mAttribute_mInitialValue) ;
   }
   return result ;
 }
@@ -1613,7 +1613,7 @@ GALGAS_globalVariableMap GALGAS_globalVariableMap::reader_overriddenMap (C_Compi
 void GALGAS_globalVariableMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
                                                     const GALGAS_stringset & inArgument1,
-                                                    const GALGAS_abstractExpressionGeneration & inArgument2,
+                                                    const GALGAS_variableKindIR & inArgument2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMap * p = NULL ;
@@ -1631,7 +1631,7 @@ void GALGAS_globalVariableMap::addAssign_operation (const GALGAS_lstring & inKey
 void GALGAS_globalVariableMap::modifier_insertKey (GALGAS_lstring inKey,
                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                    GALGAS_stringset inArgument1,
-                                                   GALGAS_abstractExpressionGeneration inArgument2,
+                                                   GALGAS_variableKindIR inArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMap * p = NULL ;
@@ -1653,7 +1653,7 @@ const char * kSearchErrorMessage_globalVariableMap_searchKey = "there is no '%K'
 void GALGAS_globalVariableMap::method_searchKey (GALGAS_lstring inKey,
                                                  GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                  GALGAS_stringset & outArgument1,
-                                                 GALGAS_abstractExpressionGeneration & outArgument2,
+                                                 GALGAS_variableKindIR & outArgument2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) performSearch (inKey,
@@ -1668,7 +1668,7 @@ void GALGAS_globalVariableMap::method_searchKey (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_globalVariableMap) ;
     outArgument0 = p->mAttribute_mVariableType ;
     outArgument1 = p->mAttribute_mExecutionModeSet ;
-    outArgument2 = p->mAttribute_mInitialValueExpressionCode ;
+    outArgument2 = p->mAttribute_mInitialValue ;
   }
 }
 
@@ -1704,15 +1704,15 @@ GALGAS_stringset GALGAS_globalVariableMap::reader_mExecutionModeSetForKey (const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_abstractExpressionGeneration GALGAS_globalVariableMap::reader_mInitialValueExpressionCodeForKey (const GALGAS_string & inKey,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_variableKindIR GALGAS_globalVariableMap::reader_mInitialValueForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) attributes ;
-  GALGAS_abstractExpressionGeneration result ;
+  GALGAS_variableKindIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMap) ;
-    result = p->mAttribute_mInitialValueExpressionCode ;
+    result = p->mAttribute_mInitialValue ;
   }
   return result ;
 }
@@ -1747,15 +1747,15 @@ void GALGAS_globalVariableMap::modifier_setMExecutionModeSetForKey (GALGAS_strin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVariableMap::modifier_setMInitialValueExpressionCodeForKey (GALGAS_abstractExpressionGeneration inAttributeValue,
-                                                                              GALGAS_string inKey,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_globalVariableMap::modifier_setMInitialValueForKey (GALGAS_variableKindIR inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_globalVariableMap * p = (cMapElement_globalVariableMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMap) ;
-    p->mAttribute_mInitialValueExpressionCode = inAttributeValue ;
+    p->mAttribute_mInitialValue = inAttributeValue ;
   }
 }
 
@@ -1782,7 +1782,7 @@ cGenericAbstractEnumerator () {
 GALGAS_globalVariableMap_2D_element cEnumerator_globalVariableMap::current (LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMap) ;
-  return GALGAS_globalVariableMap_2D_element (p->mAttribute_lkey, p->mAttribute_mVariableType, p->mAttribute_mExecutionModeSet, p->mAttribute_mInitialValueExpressionCode) ;
+  return GALGAS_globalVariableMap_2D_element (p->mAttribute_lkey, p->mAttribute_mVariableType, p->mAttribute_mExecutionModeSet, p->mAttribute_mInitialValue) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1811,10 +1811,10 @@ GALGAS_stringset cEnumerator_globalVariableMap::current_mExecutionModeSet (LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_abstractExpressionGeneration cEnumerator_globalVariableMap::current_mInitialValueExpressionCode (LOCATION_ARGS) const {
+GALGAS_variableKindIR cEnumerator_globalVariableMap::current_mInitialValue (LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMap) ;
-  return p->mAttribute_mInitialValueExpressionCode ;
+  return p->mAttribute_mInitialValue ;
 }
 
 
@@ -3251,25 +3251,25 @@ GALGAS_registerMapIR GALGAS_registerMapIR::extractObject (const GALGAS_object & 
 cMapElement_globalVariableMapIR::cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
                                                                   const GALGAS_string & in_mActualTypeName,
                                                                   const GALGAS_bool & in_mGenerateVolatile,
-                                                                  const GALGAS_abstractExpressionGeneration & in_mInitialValueExpressionGeneration
+                                                                  const GALGAS_variableKindIR & in_mInitialValue
                                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mActualTypeName (in_mActualTypeName),
 mAttribute_mGenerateVolatile (in_mGenerateVolatile),
-mAttribute_mInitialValueExpressionGeneration (in_mInitialValueExpressionGeneration) {
+mAttribute_mInitialValue (in_mInitialValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_globalVariableMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mActualTypeName.isValid () && mAttribute_mGenerateVolatile.isValid () && mAttribute_mInitialValueExpressionGeneration.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mActualTypeName.isValid () && mAttribute_mGenerateVolatile.isValid () && mAttribute_mInitialValue.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_globalVariableMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_globalVariableMapIR (mAttribute_lkey, mAttribute_mActualTypeName, mAttribute_mGenerateVolatile, mAttribute_mInitialValueExpressionGeneration COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_globalVariableMapIR (mAttribute_lkey, mAttribute_mActualTypeName, mAttribute_mGenerateVolatile, mAttribute_mInitialValue COMMA_HERE)) ;
   return result ;
 }
 
@@ -3286,8 +3286,8 @@ void cMapElement_globalVariableMapIR::description (C_String & ioString, const in
   mAttribute_mGenerateVolatile.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mInitialValueExpressionGeneration" ":" ;
-  mAttribute_mInitialValueExpressionGeneration.description (ioString, inIndentation) ;
+  ioString << "mInitialValue" ":" ;
+  mAttribute_mInitialValue.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3302,7 +3302,7 @@ typeComparisonResult cMapElement_globalVariableMapIR::compare (const cCollection
     result = mAttribute_mGenerateVolatile.objectCompare (operand->mAttribute_mGenerateVolatile) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mInitialValueExpressionGeneration.objectCompare (operand->mAttribute_mInitialValueExpressionGeneration) ;
+    result = mAttribute_mInitialValue.objectCompare (operand->mAttribute_mInitialValue) ;
   }
   return result ;
 }
@@ -3357,7 +3357,7 @@ GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::reader_overriddenMap (C_C
 void GALGAS_globalVariableMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                       const GALGAS_string & inArgument0,
                                                       const GALGAS_bool & inArgument1,
-                                                      const GALGAS_abstractExpressionGeneration & inArgument2,
+                                                      const GALGAS_variableKindIR & inArgument2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMapIR * p = NULL ;
@@ -3375,7 +3375,7 @@ void GALGAS_globalVariableMapIR::addAssign_operation (const GALGAS_lstring & inK
 void GALGAS_globalVariableMapIR::modifier_insertKey (GALGAS_lstring inKey,
                                                      GALGAS_string inArgument0,
                                                      GALGAS_bool inArgument1,
-                                                     GALGAS_abstractExpressionGeneration inArgument2,
+                                                     GALGAS_variableKindIR inArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMapIR * p = NULL ;
@@ -3397,7 +3397,7 @@ const char * kSearchErrorMessage_globalVariableMapIR_searchKey = "** internal er
 void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
                                                    GALGAS_string & outArgument0,
                                                    GALGAS_bool & outArgument1,
-                                                   GALGAS_abstractExpressionGeneration & outArgument2,
+                                                   GALGAS_variableKindIR & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) performSearch (inKey,
@@ -3412,7 +3412,7 @@ void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
     outArgument0 = p->mAttribute_mActualTypeName ;
     outArgument1 = p->mAttribute_mGenerateVolatile ;
-    outArgument2 = p->mAttribute_mInitialValueExpressionGeneration ;
+    outArgument2 = p->mAttribute_mInitialValue ;
   }
 }
 
@@ -3448,15 +3448,15 @@ GALGAS_bool GALGAS_globalVariableMapIR::reader_mGenerateVolatileForKey (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_abstractExpressionGeneration GALGAS_globalVariableMapIR::reader_mInitialValueExpressionGenerationForKey (const GALGAS_string & inKey,
-                                                                                                                C_Compiler * inCompiler
-                                                                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_variableKindIR GALGAS_globalVariableMapIR::reader_mInitialValueForKey (const GALGAS_string & inKey,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) attributes ;
-  GALGAS_abstractExpressionGeneration result ;
+  GALGAS_variableKindIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-    result = p->mAttribute_mInitialValueExpressionGeneration ;
+    result = p->mAttribute_mInitialValue ;
   }
   return result ;
 }
@@ -3491,15 +3491,15 @@ void GALGAS_globalVariableMapIR::modifier_setMGenerateVolatileForKey (GALGAS_boo
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVariableMapIR::modifier_setMInitialValueExpressionGenerationForKey (GALGAS_abstractExpressionGeneration inAttributeValue,
-                                                                                      GALGAS_string inKey,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
+void GALGAS_globalVariableMapIR::modifier_setMInitialValueForKey (GALGAS_variableKindIR inAttributeValue,
+                                                                  GALGAS_string inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_globalVariableMapIR * p = (cMapElement_globalVariableMapIR *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-    p->mAttribute_mInitialValueExpressionGeneration = inAttributeValue ;
+    p->mAttribute_mInitialValue = inAttributeValue ;
   }
 }
 
@@ -3526,7 +3526,7 @@ cGenericAbstractEnumerator () {
 GALGAS_globalVariableMapIR_2D_element cEnumerator_globalVariableMapIR::current (LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-  return GALGAS_globalVariableMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mActualTypeName, p->mAttribute_mGenerateVolatile, p->mAttribute_mInitialValueExpressionGeneration) ;
+  return GALGAS_globalVariableMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mActualTypeName, p->mAttribute_mGenerateVolatile, p->mAttribute_mInitialValue) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3555,10 +3555,10 @@ GALGAS_bool cEnumerator_globalVariableMapIR::current_mGenerateVolatile (LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_abstractExpressionGeneration cEnumerator_globalVariableMapIR::current_mInitialValueExpressionGeneration (LOCATION_ARGS) const {
+GALGAS_variableKindIR cEnumerator_globalVariableMapIR::current_mInitialValue (LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-  return p->mAttribute_mInitialValueExpressionGeneration ;
+  return p->mAttribute_mInitialValue ;
 }
 
 
@@ -15825,8 +15825,8 @@ void GALGAS_procedureKindAST::method_structureProc (GALGAS_lstring & outAssociat
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_procedureKindAST_structureProc * ptr = (const cEnumAssociatedValues_procedureKindAST_structureProc *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -16537,7 +16537,7 @@ void GALGAS_variableKindIR::method_register (GALGAS_lstring & outAssociatedValue
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_register * ptr = (const cEnumAssociatedValues_variableKindIR_register *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16553,7 +16553,7 @@ void GALGAS_variableKindIR::method_globalConstant (GALGAS_lstring & outAssociate
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_globalConstant * ptr = (const cEnumAssociatedValues_variableKindIR_globalConstant *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16569,7 +16569,7 @@ void GALGAS_variableKindIR::method_globalVariable (GALGAS_lstring & outAssociate
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_globalVariable * ptr = (const cEnumAssociatedValues_variableKindIR_globalVariable *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16585,7 +16585,7 @@ void GALGAS_variableKindIR::method_localVariable (GALGAS_lstring & outAssociated
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_localVariable * ptr = (const cEnumAssociatedValues_variableKindIR_localVariable *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16601,7 +16601,7 @@ void GALGAS_variableKindIR::method_inArgument (GALGAS_lstring & outAssociatedVal
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_inArgument * ptr = (const cEnumAssociatedValues_variableKindIR_inArgument *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16617,7 +16617,7 @@ void GALGAS_variableKindIR::method_inOutArgument (GALGAS_lstring & outAssociated
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_inOutArgument * ptr = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16633,7 +16633,7 @@ void GALGAS_variableKindIR::method_outArgument (GALGAS_lstring & outAssociatedVa
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_outArgument * ptr = (const cEnumAssociatedValues_variableKindIR_outArgument *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16649,7 +16649,7 @@ void GALGAS_variableKindIR::method_localConstant (GALGAS_lstring & outAssociated
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_localConstant * ptr = (const cEnumAssociatedValues_variableKindIR_localConstant *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16665,7 +16665,7 @@ void GALGAS_variableKindIR::method_temporaryConstant (GALGAS_uint & outAssociate
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_temporaryConstant * ptr = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -16683,8 +16683,8 @@ void GALGAS_variableKindIR::method_localAccess (GALGAS_string & outAssociatedVal
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_localAccess * ptr = (const cEnumAssociatedValues_variableKindIR_localAccess *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -16702,8 +16702,8 @@ void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_unifiedTypeMap
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * ptr = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -16721,8 +16721,8 @@ void GALGAS_variableKindIR::method_literalSignedInteger (GALGAS_unifiedTypeMap_2
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_literalSignedInteger * ptr = (const cEnumAssociatedValues_variableKindIR_literalSignedInteger *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -16740,8 +16740,8 @@ void GALGAS_variableKindIR::method_literalString (GALGAS_lstring & outAssociated
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_literalString * ptr = (const cEnumAssociatedValues_variableKindIR_literalString *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -17061,7 +17061,7 @@ void GALGAS_procEffectiveParameterPassingModeAST::method_input (GALGAS_lstring &
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input * ptr = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17077,7 +17077,7 @@ void GALGAS_procEffectiveParameterPassingModeAST::method_output (GALGAS_expressi
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output * ptr = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17093,7 +17093,7 @@ void GALGAS_procEffectiveParameterPassingModeAST::method_outputInput (GALGAS_lst
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput * ptr = (const cEnumAssociatedValues_procEffectiveParameterPassingModeAST_outputInput *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17323,8 +17323,8 @@ void GALGAS_receiverType::method_receiver (GALGAS_unifiedTypeMap_2D_proxy & outA
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_receiverType_receiver * ptr = (const cEnumAssociatedValues_receiverType_receiver *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -17342,8 +17342,8 @@ void GALGAS_receiverType::method_mutatingReceiver (GALGAS_unifiedTypeMap_2D_prox
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_receiverType_mutatingReceiver * ptr = (const cEnumAssociatedValues_receiverType_mutatingReceiver *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -17624,7 +17624,7 @@ void GALGAS_typeKind::method_enumeration (GALGAS_enumConstantMap & outAssociated
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_typeKind_enumeration * ptr = (const cEnumAssociatedValues_typeKind_enumeration *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17640,7 +17640,7 @@ void GALGAS_typeKind::method_structure (GALGAS_propertyList & outAssociatedValue
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_typeKind_structure * ptr = (const cEnumAssociatedValues_typeKind_structure *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17658,8 +17658,8 @@ void GALGAS_typeKind::method_integer (GALGAS_sint_36__34_ & outAssociatedValue0,
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_typeKind_integer * ptr = (const cEnumAssociatedValues_typeKind_integer *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -17893,7 +17893,7 @@ void GALGAS_generalizedTypeEnumAST::method_valueType (GALGAS_lstring & outAssoci
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * ptr = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
@@ -17911,8 +17911,8 @@ void GALGAS_generalizedTypeEnumAST::method_procType (GALGAS_lstring & outAssocia
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_generalizedTypeEnumAST_procType * ptr = (const cEnumAssociatedValues_generalizedTypeEnumAST_procType *) unsafePointer () ;
-     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-     outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
@@ -19542,30 +19542,30 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outSemanticContext.drop () ; // Release 'out' argument
   outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("semantic-context.galgas", 174)) ;
-  cEnumerator_declarationListAST enumerator_7208 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_7208.hasCurrentObject ()) {
-    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_7208.current_mDeclaration (HERE).ptr (), constinArgument_inProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 176)) ;
-    enumerator_7208.gotoNextObject () ;
+  cEnumerator_declarationListAST enumerator_7180 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_7180.hasCurrentObject ()) {
+    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_7180.current_mDeclaration (HERE).ptr (), constinArgument_inProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 176)) ;
+    enumerator_7180.gotoNextObject () ;
   }
-  cEnumerator_procedureDeclarationListAST enumerator_7434 (constinArgument_inProcedureListAST, kEnumeration_up) ;
-  while (enumerator_7434.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_7434.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 184)) ;
-    enumerator_7434.gotoNextObject () ;
+  cEnumerator_procedureDeclarationListAST enumerator_7406 (constinArgument_inProcedureListAST, kEnumeration_up) ;
+  while (enumerator_7406.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_7406.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 184)) ;
+    enumerator_7406.gotoNextObject () ;
   }
-  cEnumerator_functionDeclarationListAST enumerator_7545 (constinArgument_inFunctionListAST, kEnumeration_up) ;
-  while (enumerator_7545.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_7545.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 188)) ;
-    enumerator_7545.gotoNextObject () ;
+  cEnumerator_functionDeclarationListAST enumerator_7517 (constinArgument_inFunctionListAST, kEnumeration_up) ;
+  while (enumerator_7517.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_7517.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 188)) ;
+    enumerator_7517.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 191)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_7739 (constinArgument_inRequiredProcedureDeclarationListAST, kEnumeration_up) ;
-    while (enumerator_7739.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_7739.current (HERE).mAttribute_mRequiredMode.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_7711 (constinArgument_inRequiredProcedureDeclarationListAST, kEnumeration_up) ;
+    while (enumerator_7711.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_7711.current (HERE).mAttribute_mRequiredMode.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_1) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_7739.current (HERE).mAttribute_mRequiredMode, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 194)) ;
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_7711.current (HERE).mAttribute_mRequiredMode, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 194)) ;
       }
-      enumerator_7739.gotoNextObject () ;
+      enumerator_7711.gotoNextObject () ;
     }
   }
 }

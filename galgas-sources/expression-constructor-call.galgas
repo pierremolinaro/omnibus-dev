@@ -50,34 +50,6 @@ override method @constructorCall addDependenceEdgeForStaticExpression
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @constructorCall analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-#--- Analyze constructor source type
-  let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
-    then .null
-    else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
-  end
-#--- Solve inferred type
-  outExpressionType = solveInferredType (
-    !targetType:inOptionalTargetType
-    !sourceType:optionalSourceType
-    !errorLocation:mConstructorName.location
-  )
-#--- Get inferred type constructor map
-  let constructorMap = [outExpressionType constructorMap]
-#--- Check constructor
-  [constructorMap searchKey !mConstructorName ?let generatedCodeString]
-#--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @constructorCall analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType

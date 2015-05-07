@@ -47,21 +47,6 @@ override method @functionCallInExpressionAST addDependenceEdgeForStaticExpressio
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-override method @functionCallInExpressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-#--- Solve inferred type
-  outExpressionType = .null
-#--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {!""}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 

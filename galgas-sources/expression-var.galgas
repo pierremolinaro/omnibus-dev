@@ -31,31 +31,6 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-override method @varInExpressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-#--- Analyze left expression
-  [inContext.mGlobalConstantMap searchKey
-    !mSourceVarName
-    ?let sourceVarType
-    ?let globalConstantValue
-  ]
-#--- Solve inferred type
-  outExpressionType = solveInferredType (
-    !targetType:inOptionalTargetType
-    !sourceType:sourceVarType
-    !errorLocation:mSourceVarName.location
-  )
-#--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {![globalConstantValue mangledName]}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 

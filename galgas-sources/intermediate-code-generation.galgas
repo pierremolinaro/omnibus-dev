@@ -32,7 +32,7 @@ map @registerMapIR {
 map @globalVariableMapIR {
   @string mActualTypeName
   @bool mGenerateVolatile
-  @abstractExpressionGeneration mInitialValueExpressionGeneration
+  @variableKindIR mInitialValue
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

@@ -285,68 +285,6 @@ override method @asExpressionAST addDependenceEdgeForStaticExpression
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @infixOperatorExpressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-#--- Analyze left expression
-  [mLeftExpression analyzeStaticExpression
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-    ?expressionType:let leftExpressionType
-    ?generatedCode:let leftExpressionGeneratedCode
-  ]
-#--- Analyze right expression
-  [mRightExpression analyzeStaticExpression
-    !optionalTargetType:leftExpressionType
-    !context:inContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-    ?expressionType:let rightExpressionType
-    ?generatedCode:let rightExpressionGeneratedCode
-  ]
-#--- Check left type
-  @infixOperatorMap operatorMap
-  switch mOp 
-  case equal : operatorMap = inContext.mEqualOperatorMap
-  case nonEqual : operatorMap = inContext.mNonEqualOperatorMap
-  case strictInf : operatorMap = inContext.mStrictInfOperatorMap
-  case infEqual : operatorMap = inContext.mInfEqualOperatorMap
-  case strictSup : operatorMap = inContext.mStrictSupOperatorMap
-  case supEqual : operatorMap = inContext.mSupEqualOperatorMap
-  case andOp : operatorMap = inContext.mAndOperatorMap
-  case andShortCircuitOp : operatorMap = inContext.mAndShortCircuitOperatorMap
-  case orOp : operatorMap = inContext.mOrOperatorMap
-  case orShortCircuitOp : operatorMap = inContext.mOrShortCircuitOperatorMap
-  case xorOp : operatorMap = inContext.mXorOperatorMap
-  case addOp : operatorMap = inContext.mAddOperatorMap
-  case subOp : operatorMap = inContext.mSubOperatorMap
-  case mulOp : operatorMap = inContext.mMulOperatorMap
-  case divOp : operatorMap = inContext.mDivOperatorMap
-  case modOp : operatorMap = inContext.mModOperatorMap
-  case leftShiftOp  : operatorMap = inContext.mLeftShiftOperatorMap
-  case rightShiftOp : operatorMap = inContext.mRightShiftOperatorMap
-  end
-  [operatorMap checkWith
-    !leftType:leftExpressionType
-    !rightType:rightExpressionType
-    !operator:mOperator
-    ?resultType:outExpressionType
-    ?opString:let @abstractInfixOperatorGeneration resultOperator
-  ]
-#--- Generate code
-  outGeneratedCode = @operatorInfixExpressionGeneration.new {
-    !leftExpressionGeneratedCode
-    !resultOperator
-    !rightExpressionGeneratedCode
-  }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @infixOperatorMap checkWith
   ?leftType:let @unifiedTypeMap-proxy inLeftType
   ?rightType:let @unifiedTypeMap-proxy inRightType
@@ -497,32 +435,6 @@ override method @asExpressionAST analyzeExpression
     !outExpressionType
     !outResult
     !expressionResult
-  }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @asExpressionAST analyzeStaticExpression
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
-{
-#--- Analyze left expression
-  [mExpression analyzeStaticExpression
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-    ?expressionType:let unused expressionType
-    ?generatedCode:let expressionGeneratedCode
-  ]
-#--- Analyze type
-  outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
-#--- Generate code
-  outGeneratedCode = @asOperatorInfixGeneration.new {
-    !expressionGeneratedCode
-    !outExpressionType
   }
 }
 
