@@ -15,6 +15,7 @@ proc semanticAnalysis
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
   ?initList:let @initList inInitListAST
+  ?exception:let @exceptionAST inException
   ?context:let @semanticContext inSemanticContext
   ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
   ?endOfSourceFile:let @location inEndOfSourceFile
@@ -54,6 +55,11 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
+  [inException exceptionSemanticAnalysis
+    !context:inSemanticContext
+    !?temporary:temporaryIndex
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
 #--- Check required procedure are defined
   for requiredProc in inRequiredProcedureDeclarationListAST do
     let requiredProcMangledName = mangledName (

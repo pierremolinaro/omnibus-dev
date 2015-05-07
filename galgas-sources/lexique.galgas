@@ -23,6 +23,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "else",
   "elsif",
   "end",
+  "exception",
   "forever",
   "func",
   "if",
@@ -208,7 +209,7 @@ list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
   "==", "!=", "<", "<=", ">", ">=", "[", "]", "<<", ">>",
   "&", "&&", "|", "||", "^", "+", "-", "*", "/", "%",
   "++", "--", "->",
-  "\\++", "\\--"
+  "&++", "&--"
 }
 
 rule list delimitorsList

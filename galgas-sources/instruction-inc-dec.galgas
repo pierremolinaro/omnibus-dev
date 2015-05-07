@@ -48,7 +48,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $identifier$ ?let varName
-    $\++$
+    $&++$
     ioInstructionList += !@incDecInstructionAST.new {
       !.incNoOverflowCheck
       !varName
@@ -59,7 +59,7 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $identifier$ ?let varName
-    $\--$
+    $&--$
     ioInstructionList += !@incDecInstructionAST.new {
       !.decNoOverflowCheck
       !varName
@@ -96,9 +96,12 @@ override method @incDecInstructionAST analyze
   if not [acceptedModeSet hasKey !inMode] then
     error mVarName : "this variable cannot be used in $" + inMode + " mode"
   end
+  if inMode == exceptionModeName () then
+    error mVarName : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+  end
 #--- Check type handle ++ operator
   if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
-    error mVarName : [type key] + " type does handle incrementation/decrementation operator"
+    error mVarName : [type key] + " type does not handle incrementation/decrementation operator"
   end
   @sint64 min
   @uint64 max

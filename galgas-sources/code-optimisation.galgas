@@ -172,6 +172,8 @@ private proc suppressInaccessibleSubprograms
   for init in ioIntermediateCodeStruct.mInitList do
     [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
+#--- Exception clause
+  [ioIntermediateCodeStruct.mExceptionInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
 #--- Explore procedures and functions
   @functionMapIR accessibleFunctionMap = {}
   @functionMapIR nonExploredFunctionMap = ioIntermediateCodeStruct.mFunctionMapIR

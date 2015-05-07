@@ -169,17 +169,6 @@ class GALGAS_string callCategoryReader_instructionCode (const class cPtr_abstrac
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Category Getter '@procEffectiveParameterPassingMode passingModeForActualSelector' (as function)           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_passingModeForActualSelector (const class GALGAS_procEffectiveParameterPassingMode & inObject,
-                                                                 class GALGAS_lstring inArgument0,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Abstract category method '@expressionAST analyzeExpression'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -303,6 +292,17 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
 class GALGAS_string categoryReader_mangledName (const class GALGAS_functionDeclarationListAST_2D_element & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//         Category Getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_passingModeForActualSelector (const class GALGAS_procEffectiveParameterPassingModeAST & inObject,
+                                                                 class GALGAS_lstring inArgument0,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

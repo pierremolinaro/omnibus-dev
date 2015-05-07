@@ -352,6 +352,7 @@ sharedmap @variableMap {
   insert insertInputFormalArgument state inputFormalParameter error message "redefinition of '%K' variable (previous declaration was in %L)"
   insert insertInputFormalArgumentDeclaredAsUnused state inputFormalArgumentDeclaredAsUnused error message "redefinition of '%K' variable (previous declaration was in %L)"
   insert insertConstantInputFormalArgument state constantInputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
+  insert insertUsedConstantInputFormalArgument state usedConstantInputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
   insert insertConstantInputFormalArgumentDeclaredAsUnused state constantInputFormalArgumentDeclaredAsUnused error message "redefinition of '%K' variable (previous declaration was in %L)"
   insert insertOutputFormalArgument state undefinedOutputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"
   insert insertInputOutputFormalArgument state unusedInputOutputFormalArgument error message "redefinition of '%K' variable (previous declaration was in %L)"

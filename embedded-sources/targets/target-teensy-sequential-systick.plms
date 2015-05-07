@@ -33,6 +33,7 @@ import "microcontrollers/mk20dx256.plm"
 mode $isr
 mode $user
 mode $init
+mode $exception
 
 //-----------------------------------------------------------------------------*
 
