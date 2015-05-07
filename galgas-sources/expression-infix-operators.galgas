@@ -33,6 +33,13 @@ class @infixOperatorExpressionAST : @expressionAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+class @asExpressionAST : @expressionAST {
+  @expressionAST mExpression
+  @lstring mTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -43,6 +50,13 @@ syntax extension common_syntax {
   rule <comparison> !@expressionAST outExpression {
     <multiplicative_expression> ?outExpression
     select
+    or
+      $as$
+      $identifier$ ?let typeIdentifier
+      outExpression = @asExpressionAST.new {
+        !outExpression
+        !typeIdentifier
+      }
     or
       $==$
       let operatorLocation = @location.here
@@ -259,6 +273,15 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @asExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -432,7 +455,104 @@ override method @infixOperatorExpressionAST analyzeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#! @asExpressionAST
+
+override method @asExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+  !result:@variableKindIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inMode
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?expressionType:let expressionType
+    ?generatedCode:let expressionGeneratedCode
+    ?result:@variableKindIR expressionResult
+  ]
+#--- Analyze type
+  outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
+#--- Temp var
+  getNewTempVariable (!?ioTemporaryIndex ?outResult)
+#--- Generate code
+  outGeneratedCode = @asOperatorInfixGeneration.new {
+    !expressionGeneratedCode
+    !outExpressionType
+  }
+  ioInstructionGenerationList += !@asOperatorInstructionIR.new {
+    !outExpressionType
+    !outResult
+    !expressionResult
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @asExpressionAST analyzeStaticExpression
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+{
+#--- Analyze left expression
+  [mExpression analyzeStaticExpression
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+    ?expressionType:let expressionType
+    ?generatedCode:let expressionGeneratedCode
+  ]
+#--- Analyze type
+  outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
+#--- Generate code
+  outGeneratedCode = @asOperatorInfixGeneration.new {
+    !expressionGeneratedCode
+    !outExpressionType
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @asOperatorInstructionIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @asOperatorInstructionIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @variableKindIR mTemporaryResultVariable
+  @variableKindIR mOperand
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @asOperatorInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @asOperatorInstructionIR instructionCode -> @string outCode {
+  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
+  outCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @operatorInfixExpressionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @operatorInfixExpressionIR : @abstractInstructionIR {
@@ -458,6 +578,8 @@ override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessible
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#! @abstractInfixOperatorGeneration
+#----------------------------------------------------------------------------------------------------------------------*
 
 abstract getter @abstractInfixOperatorGeneration generateCode
   ?@variableKindIR inleft
@@ -471,6 +593,8 @@ abstract getter @abstractInfixOperatorGeneration generateInfixExpression
   ?@abstractExpressionGeneration inRight
   -> @string outCode
 
+#----------------------------------------------------------------------------------------------------------------------*
+#! @standardInfixOperatorGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @standardInfixOperatorGeneration generateInfixExpression
@@ -492,6 +616,8 @@ override getter @standardInfixOperatorGeneration generateCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#! @operatorInfixExpressionGeneration
+#----------------------------------------------------------------------------------------------------------------------*
 
 class @operatorInfixExpressionGeneration : @abstractExpressionGeneration {
   @abstractExpressionGeneration mLeftExpression
@@ -503,6 +629,21 @@ class @operatorInfixExpressionGeneration : @abstractExpressionGeneration {
 
 override getter @operatorInfixExpressionGeneration expressionCode -> @string outCode {
   outCode =  [mOperator generateInfixExpression !mLeftExpression !mRightExpression]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @asOperatorInfixGeneration
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @asOperatorInfixGeneration : @abstractExpressionGeneration {
+  @abstractExpressionGeneration mExpression
+  @unifiedTypeMap-proxy mType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @asOperatorInfixGeneration expressionCode -> @string outCode {
+  outCode = "((" + mangledNameForType (!name:[mType key]) + ") " + [mExpression expressionCode] + ")"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
