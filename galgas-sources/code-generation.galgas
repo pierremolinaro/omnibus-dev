@@ -28,6 +28,8 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = access
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value) :
     outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value.uint64 + ")"
+  case literalSignedInteger (@unifiedTypeMap-proxy type @lsint64 value) :
+    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value.sint64 + ")"
   case literalString (* @string name) :
     outResult = name
   end
