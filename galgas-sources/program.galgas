@@ -102,6 +102,7 @@ private proc compileProject
         !procedureDeclarationList:ast.mProcedureListAST
         !functionDeclarationList:ast.mFunctionListAST
         !initList:ast.mInitList
+        !exception:ast.mException
         !context:semanticContext
         !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile

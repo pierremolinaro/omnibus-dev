@@ -29,15 +29,15 @@ syntax extension common_syntax {
     while
       $!$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.output !selector !effectiveParameterName
+      effectiveParameterList += !.output{!name:effectiveParameterName} !selector
     while
       $!?$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.outputInput !selector !effectiveParameterName
+      effectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
       $?$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.input !selector !effectiveParameterName
+      effectiveParameterList += !.input{!name:effectiveParameterName} !selector
     end
     $]$
     ioInstructionList += !@mutatingMethodCallInstructionAST.new {
@@ -69,7 +69,7 @@ override method @mutatingMethodCallInstructionAST analyze
     !mReceiverName
     ?let receiverType
     ?let receiverVarAcceptedModeSet
-    ?let targetVar
+    ?let unused targetVar
     ?let unused targetVariableKind
     ?*
   ]
@@ -83,10 +83,10 @@ override method @mutatingMethodCallInstructionAST analyze
   for () in mEffectiveParameterList do
     procMangledName += " "
     switch mEffectiveParameterKind 
-    case input :
+    case input (@lstring name) :
       procMangledName += "!" ;
       [!?ioVariableMap searchForWriteAccess
-        !mEffectiveParameterName
+        !name
         ?let type
         ?let acceptedModeSet
         ?let @string valueAccess
@@ -95,16 +95,16 @@ override method @mutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in $" + inMode + " mode"
       end
       if not isCopiable then
-        error mEffectiveParameterName : "the '" + mEffectiveParameterName + "' variable is not copiable"
+        error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
-    case output :
+    case output (@lstring name) :
       procMangledName += "?" ;
       [!?ioVariableMap searchForReadAccess
-        !mEffectiveParameterName
+        !name
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
@@ -113,13 +113,13 @@ override method @mutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in $" + inMode + " mode"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
-    case outputInput :
+    case outputInput (@lstring name) :
       procMangledName += "?!" ;
       [!?ioVariableMap searchForReadWriteAccess
-        !mEffectiveParameterName
+        !name
         ?let type
         ?let acceptedModeSet
         ?let valueAccess
@@ -128,7 +128,7 @@ override method @mutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in $" + inMode + " mode"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
     end
@@ -176,23 +176,23 @@ override method @mutatingMethodCallInstructionAST analyze
     end  
   end
 #--- Code generation
-  if calledProcIsMutating then
-    [!?parameterList insertAtIndex
-      !.outputInput
-      !["" nowhere]
-      !receiverType
-      !"& " + targetVar
-      !0
-    ]
-  else
-    [!?parameterList insertAtIndex
-      !.output
-      !["" nowhere]
-      !receiverType
-      !targetVar
-      !0
-    ]
-  end
+#  if calledProcIsMutating then
+#    [!?parameterList insertAtIndex
+#      !.outputInput
+#      !["" nowhere]
+#      !receiverType
+#      !"& " + targetVar
+#      !0
+#    ]
+#  else
+#    [!?parameterList insertAtIndex
+#      !.output
+#      !["" nowhere]
+#      !receiverType
+#      !targetVar
+#      !0
+#    ]
+#  end
   error mMethodName : "internal error: no code generation"
 #  ioInstructionGenerationList += !@procCallInstructionGeneration.new {
 #    ![receiverType key] + "_" + procMangledName

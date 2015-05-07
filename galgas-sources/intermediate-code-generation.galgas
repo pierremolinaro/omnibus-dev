@@ -15,6 +15,7 @@ struct @intermediateCodeStruct {
   @functionMapIR mFunctionMapIR
   @stringset mRequiredProcedureSet
   @initListIR mInitList
+  @instructionListIR mExceptionInstructionListIR
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -2,19 +2,19 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @procEffectiveParameterPassingMode {
-  case input
-  case output
-  case outputInput
+enum @procEffectiveParameterPassingModeAST {
+  case input (@lstring name)
+  case output (@expressionAST exp)
+  case outputInput (@lstring name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @procEffectiveParameterPassingMode passingModeForActualSelector ?@lstring inSelector -> @string outResult {
+getter @procEffectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
   switch self
-  case input : outResult = "?"
-  case output : outResult = "!"
-  case outputInput : outResult = "!?"
+  case input (*) : outResult = "?"
+  case output (*) : outResult = "!"
+  case outputInput (*) : outResult = "!?"
   end
   if inSelector.string != "" then
     outResult += inSelector.string + ":"
@@ -24,9 +24,8 @@ getter @procEffectiveParameterPassingMode passingModeForActualSelector ?@lstring
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @procEffectiveParameterListAST {
-  @procEffectiveParameterPassingMode mEffectiveParameterKind
+  @procEffectiveParameterPassingModeAST mEffectiveParameterKind
   @lstring mSelector
-  @lstring mEffectiveParameterName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -49,16 +48,16 @@ syntax extension common_syntax {
     repeat
     while
       $!$ ?let selector
-      $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.output !selector !effectiveParameterName
+      <expression> ?let expression
+      effectiveParameterList += !.output{!exp:expression} !selector
     while
       $!?$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.outputInput !selector !effectiveParameterName
+      effectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
     while
       $?$ ?let selector
       $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.input !selector !effectiveParameterName
+      effectiveParameterList += !.input{!name:effectiveParameterName} !selector
     end
     $)$
     ioInstructionList += !@procCallInstructionAST.new {
@@ -74,90 +73,33 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @procEffectiveParameterList {
-  @procEffectiveParameterPassingMode mEffectiveParameterPassingMode
+  @procEffectiveParameterPassingModeAST mEffectiveParameterPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
-  @string mParameterAccess
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @procCallEffectiveParameterListIR {
-  @procEffectiveParameterPassingMode mEffectiveParameterPassingMode
-  @lstring mSelector
-  @unifiedTypeMap-proxy mParameterType
-  @variableKindIR mParameter
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @procCallInstructionAST analyze
-  ?optionalReceiverType:let @receiverType unused inReceiverType
+  ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
-  ?!temporary:@uint unused ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+#--- Build proc mangled name
   @string procMangledName = mProcRoutineName.string
-#--- Check parameters
-  @procEffectiveParameterList parameterList = {}
-  @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
   for () in mEffectiveParameterList do
     procMangledName += " "
     switch mEffectiveParameterKind 
-    case input :
+    case input (*) :
       procMangledName += "!" ;
-      [!?ioVariableMap searchForWriteAccess
-        !mEffectiveParameterName
-        ?let type
-        ?let acceptedModeSet
-        ?let variableAccess
-        ?let parameterAccess
-        ?let isCopiable
-      ]
-    #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
-      end
-      if not isCopiable then
-        error mEffectiveParameterName : "the '" + mEffectiveParameterName + "' variable is not copiable"
-      end
-      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + variableAccess + ")"
-      procCallEffectiveParameterListIR += !mEffectiveParameterKind !mSelector !type !parameterAccess
-    case output :
+    case output (*) :
       procMangledName += "?" ;
-      [!?ioVariableMap searchForReadAccess
-        !mEffectiveParameterName
-        ?let type
-        ?let acceptedModeSet
-        ?let valueAccess
-        ?let parameterAccess
-        ?*
-      ]
-    #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
-      end
-      parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
-      procCallEffectiveParameterListIR += !mEffectiveParameterKind !mSelector !type !parameterAccess
-    case outputInput :
+    case outputInput (*) :
       procMangledName += "?!" ;
-      [!?ioVariableMap searchForReadWriteAccess
-        !mEffectiveParameterName
-        ?let type
-        ?let acceptedModeSet
-        ?let variableAccess
-        ?let parameterAccess
-        ?*
-      ]
-    #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error mEffectiveParameterName : "this variable cannot be used in $" + inMode + " mode"
-      end
-      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + variableAccess + ")"
-      procCallEffectiveParameterListIR += !mEffectiveParameterKind !mSelector !type !parameterAccess
     end
     procMangledName += mSelector.string
   end
@@ -168,6 +110,62 @@ override method @procCallInstructionAST analyze
     ?let procedureMode
     ?let @procedureSignature procSignature
   ]
+#--- Check parameters
+  @procEffectiveParameterList parameterList = {}
+  @procCallEffectiveParameterListIR procCallEffectiveParameterListIR = {}
+  for () formal_ in procSignature, () in mEffectiveParameterList do
+    switch mEffectiveParameterKind 
+    case input (@lstring name) :
+      [!?ioVariableMap searchForWriteAccess
+        !name
+        ?let type
+        ?let acceptedModeSet
+        ?let unused variableAccess
+        ?let parameterAccess
+        ?let isCopiable
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error name : "this variable cannot be used in $" + inMode + " mode"
+      end
+      if not isCopiable then
+        error name : "the '" + name + "' variable is not copiable"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type
+      procCallEffectiveParameterListIR += !.input !mSelector !type !parameterAccess
+    case output (@expressionAST expression) :
+      [expression analyzeExpression
+        !optionalReceiverType:inReceiverType
+        !optionalTargetType:formal_mType
+        !context:inContext
+        !mode:inMode
+        !?temporary:ioTemporaryIndex
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?instructionListIR:ioInstructionGenerationList
+        ?expressionType:let expressionType
+        ?generatedCode:let unused testExpressionGeneratedCode
+        ?result:let @variableKindIR expressionResult
+      ]
+      parameterList += !mEffectiveParameterKind !mSelector !expressionType
+      procCallEffectiveParameterListIR += !.output !mSelector !expressionType !expressionResult
+    case outputInput (@lstring name) :
+      [!?ioVariableMap searchForReadWriteAccess
+        !name
+        ?let type
+        ?let acceptedModeSet
+        ?let unused variableAccess
+        ?let parameterAccess
+        ?*
+      ]
+    #--- Check mode
+      if not [acceptedModeSet hasKey !inMode] then
+        error name : "this variable cannot be used in $" + inMode + " mode"
+      end
+      parameterList += !mEffectiveParameterKind !mSelector !type
+      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
+    end
+  end
 #--- Check mode
   if procedureMode.string != inMode then
     error mProcRoutineName : "this procedure cannot be used in $" + inMode + " mode"
@@ -190,13 +188,30 @@ override method @procCallInstructionAST analyze
   end
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
-    !mProcRoutineName.string # procMangledName
+    !mProcRoutineName.string
     !procCallEffectiveParameterListIR
   }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @procEffectiveParameterPassingModeIR {
+  case input
+  case output
+  case outputInput
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procCallEffectiveParameterListIR {
+  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mParameterType
+  @variableKindIR mParameter
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @procCallInstructionIR : @abstractInstructionIR {
@@ -210,11 +225,11 @@ override getter @procCallInstructionIR instructionCode -> @string outCode {
   outCode = mangledNameForProcedure (!name:mProcName) + " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
-    case input :
+    case input:
       outCode += "&(" + [mParameter mangledName] + ")"
-    case output :
+    case output:
       outCode += [mParameter mangledName]
-    case outputInput :
+    case outputInput:
       outCode += "&(" + [mParameter mangledName] + ")"
     end
   between

@@ -44,6 +44,7 @@ enum {plm_lexique_1_,
   plm_lexique_1_else,
   plm_lexique_1_elsif,
   plm_lexique_1_end,
+  plm_lexique_1_exception,
   plm_lexique_1_forever,
   plm_lexique_1_func,
   plm_lexique_1_if,
@@ -97,8 +98,8 @@ enum {plm_lexique_1_,
   plm_lexique_1__2B__2B_,
   plm_lexique_1__2D__2D_,
   plm_lexique_1__2D__3E_,
-  plm_lexique_1__5C__2B__2B_,
-  plm_lexique_1__5C__2D__2D_
+  plm_lexique_1__26__2B__2B_,
+  plm_lexique_1__26__2D__2D_
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
