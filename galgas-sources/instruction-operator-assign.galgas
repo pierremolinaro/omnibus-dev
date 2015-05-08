@@ -1,0 +1,166 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @operatorAssignKind {
+  case bitWiseOrAssign
+  case bitWiseAndAssign
+  case bitWiseXorAssign
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @operatorAssignInstructionAST : @instructionAST {
+  @lstring mTargetVarName
+  @expressionAST mSourceExpression
+  @operatorAssignKind mOperator
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $identifier$ ?let varName
+    @operatorAssignKind operatorAssign
+    select
+      $|=$
+      operatorAssign = .bitWiseOrAssign
+    or
+      $&=$
+      operatorAssign = .bitWiseAndAssign
+    or
+      $^=$
+      operatorAssign = .bitWiseXorAssign
+    end
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@operatorAssignInstructionAST.new {
+      !varName
+      !expression
+      !operatorAssign
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @operatorAssignInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Get target type
+  [!?ioVariableMap neutralAccess
+    !mTargetVarName
+    ?let targetType
+    ?4*
+  ]
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:targetType
+    !context:inContext
+    !mode:inMode
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?expressionType:let rightExpressionType
+    ?result:@variableKindIR sourceValueName
+  ]
+#--- Check inferred type
+  if [targetType key] != [rightExpressionType key] then
+    error mTargetVarName : "source expression type is '" + [rightExpressionType key]
+      + "', and is not compatible with target type '" + [targetType key] + "'"
+  end
+#--- Write local variable
+  [!?ioVariableMap searchForReadWriteAccess
+    !mTargetVarName
+    ?*
+    ?let acceptedModeSet
+    ?let unused targetVar
+    ?let targetVariableKind
+    ?let isCopiable
+  ]
+#--- Check operator is available for type
+  @infixOperatorMap operatorMap
+  @string generatedOperator
+  switch mOperator
+  case bitWiseAndAssign :
+    operatorMap = inContext.mAndOperatorMap
+    generatedOperator = "&="
+  case bitWiseOrAssign :
+    operatorMap = inContext.mOrOperatorMap
+    generatedOperator = "|="
+  case bitWiseXorAssign :
+    operatorMap = inContext.mXorOperatorMap
+    generatedOperator = "^="
+  end
+  [operatorMap checkWith
+    !leftType:targetType
+    !rightType:rightExpressionType
+    !operator:.new {!generatedOperator !mTargetVarName.location}
+    ?resultType:*
+    ?opString:*
+  ]
+#--- Check mode
+  if not [acceptedModeSet hasKey !inMode] then
+    error mTargetVarName : "this variable cannot be used in $" + inMode + " mode"
+  end
+  if not isCopiable then
+    error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
+  end
+#--- Code generation
+  ioInstructionGenerationList += !@operatorAssignInstructionIR.new {
+   !targetVariableKind
+   !targetType
+   !mOperator
+   !sourceValueName
+ }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @operatorAssignInstructionIR : @abstractInstructionIR {
+  @variableKindIR mTargetVariable
+  @unifiedTypeMap-proxy mTargetVarType
+  @operatorAssignKind mOperator
+  @variableKindIR mSourceValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @operatorAssignInstructionIR instructionCode -> @string outCode {
+  switch mOperator
+  case bitWiseOrAssign :
+    outCode = [mTargetVariable mangledName] + " |= " + [mSourceValue mangledName] + " ;\n"
+  case bitWiseAndAssign :
+    outCode = [mTargetVariable mangledName] + " &= " + [mSourceValue mangledName] + " ;\n"
+  case bitWiseXorAssign :
+    outCode = [mTargetVariable mangledName] + " ^= " + [mSourceValue mangledName] + " ;\n"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @operatorAssignInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mTargetVariable enterAccessibleEntities !?ioAccessibleEntities]
+  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
