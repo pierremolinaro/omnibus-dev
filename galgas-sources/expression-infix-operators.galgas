@@ -314,7 +314,6 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResult
 {
 #--- Analyze left expression
@@ -342,7 +341,6 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let rightExpressionType
-#    ?generatedCode:let rightExpressionGeneratedCode
     ?result:@variableKindIR rightResult
   ]
 #--- Check left type
@@ -376,18 +374,35 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?opString:resultOperator
   ]
 #---
-#  if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
-#    [leftResult literalUnsignedInteger ?type:let @unifiedTypeMap-proxy leftType ?value:let @luint64 leftValue]
-#    [rightResult literalUnsignedInteger ?type:let @unifiedTypeMap-proxy rightType ?value:let @luint64 rihgtValue]
-#  else
+  if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
+    [leftResult literalUnsignedInteger ?type:* ?value:let @luint64 leftValue]
+    [rightResult literalUnsignedInteger ?type:* ?value:let @luint64 rightValue]
+    @uint64 result
+    switch mOp 
+    case equal : result = [leftValue.uint64 == rightValue.uint64 uint64]
+    case nonEqual : result = [leftValue.uint64 != rightValue.uint64 uint64]
+    case strictInf : result = [leftValue.uint64 < rightValue.uint64 uint64]
+    case infEqual : result = [leftValue.uint64 <= rightValue.uint64 uint64]
+    case strictSup : result = [leftValue.uint64 > rightValue.uint64 uint64]
+    case supEqual : result = [leftValue.uint64 >= rightValue.uint64 uint64]
+    case andOp : result = leftValue.uint64 & rightValue.uint64
+    case andShortCircuitOp : result = [(leftValue.uint64 != 0L) && (rightValue.uint64 != 0L) uint64]
+    case orOp : result = leftValue.uint64 | rightValue.uint64
+    case orShortCircuitOp : result = [(leftValue.uint64 != 0L) && (rightValue.uint64 != 0L) uint64]
+    case xorOp : result = leftValue.uint64 ^ rightValue.uint64
+    case addOp : result = leftValue.uint64 + rightValue.uint64
+    case subOp : result = leftValue.uint64 - rightValue.uint64
+    case mulOp : result = leftValue.uint64 * rightValue.uint64
+    case divOp : result = leftValue.uint64 / rightValue.uint64
+    case modOp : result = leftValue.uint64 mod rightValue.uint64
+    case leftShiftOp  : result = leftValue.uint64 << [rightValue.uint64 uint]
+    case rightShiftOp : result = leftValue.uint64 >> [rightValue.uint64 uint]
+    end
+    outResult = .literalUnsignedInteger {!type:outExpressionType !value:.new{!result !mOperator.location}}
+  else
   #--- Temp var
     getNewTempVariable (!?ioTemporaryIndex ?outResult)
   #--- Generate code
-#    outGeneratedCode = @operatorInfixExpressionGeneration.new {
-#      !leftExpressionGeneratedCode
-#      !resultOperator
-#      !rightExpressionGeneratedCode
-#    }
     ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
       !outExpressionType
       !outResult
@@ -395,7 +410,7 @@ override method @infixOperatorExpressionAST analyzeExpression
       !resultOperator
       !rightResult
     }
-#  end
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

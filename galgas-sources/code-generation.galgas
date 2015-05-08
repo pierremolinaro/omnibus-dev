@@ -127,10 +127,12 @@ proc codeGeneration
     ?filesToInclude:let @stringlist builtinFiles
   )
 #--- Generate C file
-  let baseName = sourceDirectory + "/plm"
-  var code = "" # "#include \"plm.h\"\n\n"
+  var code = ""
   code += "#include <stdint.h>\n"
   code += "#include <stddef.h>\n\n"
+  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
+    code += [type.mType headerCodeGenerationForType]
+  end
   code += titleComment (!"Init")
   code += "static void init (void) ;\n\n"
   code += titleComment (!"Exception")
@@ -162,9 +164,6 @@ proc codeGeneration
   end
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
     code += [globalConstant headerCodeGeneration]
-  end
-  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
-    code += [type.mType headerCodeGenerationForType]
   end
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
     code += [globalVariable implementationCodeGeneration]
@@ -200,7 +199,7 @@ proc codeGeneration
     code += [function implementationCodeGeneration]
   end
   code += separatorLine ()
-  [code writeToFileWhenDifferentContents !baseName + ".c" ?*]
+  [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

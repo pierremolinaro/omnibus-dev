@@ -169,7 +169,6 @@ proc $init writeData (?inData : UInt8) {
 //   LCD INIT                                                                  *
 //-----------------------------------------------------------------------------*
 
-
 init {
   configurePorts () ;
 //--- Étape 1 : attendre 15 ms
@@ -211,7 +210,7 @@ init {
 //    B : Cursor Blink On : 0 (non)
   write8bitCommand (!0x0C) ;
   
-  printUnsigned (!123456789)
+  printUnsigned (!987654321)
 }
 
 //-----------------------------------------------------------------------------*
@@ -274,7 +273,6 @@ proc $init printUnsigned (?inValue : UInt32) {
 }
 
 //-----------------------------------------------------------------------------*
-
 
 //void printSigned (const int32_t inValue) {
 //  if (inValue < 0) {
