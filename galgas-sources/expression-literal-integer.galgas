@@ -43,7 +43,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResult
 {
   if inOptionalTargetType == .null then
@@ -70,9 +70,9 @@ override method @literalIntegerInExpressionAST analyzeExpression
     end
   end
 #--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {
-   !"(" + mangledNameForType (!name:[inOptionalTargetType key]) + ") " + mLiteralInteger.uint64
-  }
+#  outGeneratedCode = @inLineExpressionGeneration.new {
+#   !"(" + mangledNameForType (!name:[inOptionalTargetType key]) + ") " + mLiteralInteger.uint64
+#  }
   outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger}
 }
 

@@ -51,7 +51,7 @@ abstract method @expressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResultValueName
 
 #----------------------------------------------------------------------------------------------------------------------*

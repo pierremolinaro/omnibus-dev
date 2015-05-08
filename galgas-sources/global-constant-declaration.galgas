@@ -91,7 +91,7 @@ override method @globalConstantDeclaration enterInContext
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList
      ?expressionType:let @unifiedTypeMap-proxy expressionType
-     ?generatedCode:*
+#     ?generatedCode:*
      ?result:let @variableKindIR resultValueName
   ]
   if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then

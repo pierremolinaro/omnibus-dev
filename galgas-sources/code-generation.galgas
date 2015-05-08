@@ -39,26 +39,26 @@ getter @variableKindIR mangledName -> @string outResult {
 #! @abstractExpressionGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract class @abstractExpressionGeneration {
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractExpressionGeneration expressionCode -> @string outCode
+#abstract class @abstractExpressionGeneration {
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#abstract getter @abstractExpressionGeneration expressionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @inLineExpressionGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @inLineExpressionGeneration : @abstractExpressionGeneration {
-  @string mCode
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @inLineExpressionGeneration expressionCode -> @string outCode {
-  outCode = mCode
-}
+#class @inLineExpressionGeneration : @abstractExpressionGeneration {
+#  @string mCode
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override getter @inLineExpressionGeneration expressionCode -> @string outCode {
+#  outCode = mCode
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @abstractExpressionIR

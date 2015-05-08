@@ -59,7 +59,7 @@ override method @assignmentInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-    ?generatedCode:let unused expressionGeneratedCode
+#    ?generatedCode:let unused expressionGeneratedCode
     ?result:@variableKindIR sourceValueName
   ]
 #--- Check inferred type

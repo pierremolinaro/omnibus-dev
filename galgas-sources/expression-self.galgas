@@ -47,7 +47,7 @@ override method @selfExpressionAST analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResultValueName
 {
   switch inReceiverType

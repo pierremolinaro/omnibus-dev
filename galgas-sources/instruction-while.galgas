@@ -62,7 +62,7 @@ override method @whileInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:testInstructionGenerationList
     ?expressionType:let testExpressionType
-    ?generatedCode:let unused testExpressionGeneratedCode
+#    ?generatedCode:let unused testExpressionGeneratedCode
     ?result:@variableKindIR testValueName
   ]
 #--- Check inferred type

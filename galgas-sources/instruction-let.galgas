@@ -87,7 +87,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-    ?generatedCode:let unused expressionGeneratedCode
+#    ?generatedCode:let unused expressionGeneratedCode
     ?result:let @variableKindIR resultValueName
   ]
 #--- Declare local constant

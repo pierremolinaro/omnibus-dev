@@ -314,7 +314,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResult
 {
 #--- Analyze left expression
@@ -328,7 +328,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let leftExpressionType
-    ?generatedCode:let leftExpressionGeneratedCode
+#    ?generatedCode:let leftExpressionGeneratedCode
     ?result:@variableKindIR leftResult
   ]
 #--- Analyze right expression
@@ -342,7 +342,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let rightExpressionType
-    ?generatedCode:let rightExpressionGeneratedCode
+#    ?generatedCode:let rightExpressionGeneratedCode
     ?result:@variableKindIR rightResult
   ]
 #--- Check left type
@@ -375,21 +375,27 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?resultType:outExpressionType
     ?opString:resultOperator
   ]
-#--- Temp var
-  getNewTempVariable (!?ioTemporaryIndex ?outResult)
-#--- Generate code
-  outGeneratedCode = @operatorInfixExpressionGeneration.new {
-    !leftExpressionGeneratedCode
-    !resultOperator
-    !rightExpressionGeneratedCode
-  }
-  ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-    !outExpressionType
-    !outResult
-    !leftResult
-    !resultOperator
-    !rightResult
-  }
+#---
+#  if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
+#    [leftResult literalUnsignedInteger ?type:let @unifiedTypeMap-proxy leftType ?value:let @luint64 leftValue]
+#    [rightResult literalUnsignedInteger ?type:let @unifiedTypeMap-proxy rightType ?value:let @luint64 rihgtValue]
+#  else
+  #--- Temp var
+    getNewTempVariable (!?ioTemporaryIndex ?outResult)
+  #--- Generate code
+#    outGeneratedCode = @operatorInfixExpressionGeneration.new {
+#      !leftExpressionGeneratedCode
+#      !resultOperator
+#      !rightExpressionGeneratedCode
+#    }
+    ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
+      !outExpressionType
+      !outResult
+      !leftResult
+      !resultOperator
+      !rightResult
+    }
+#  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -405,7 +411,7 @@ override method @asExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResult
 {
 #--- Analyze expression
@@ -419,7 +425,7 @@ override method @asExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let unused expressionType
-    ?generatedCode:let expressionGeneratedCode
+#    ?generatedCode:let expressionGeneratedCode
     ?result:@variableKindIR expressionResult
   ]
 #--- Analyze type
@@ -427,10 +433,10 @@ override method @asExpressionAST analyzeExpression
 #--- Temp var
   getNewTempVariable (!?ioTemporaryIndex ?outResult)
 #--- Generate code
-  outGeneratedCode = @asOperatorInfixGeneration.new {
-    !expressionGeneratedCode
-    !outExpressionType
-  }
+#  outGeneratedCode = @asOperatorInfixGeneration.new {
+#    !expressionGeneratedCode
+#    !outExpressionType
+#  }
   ioInstructionGenerationList += !@asOperatorInstructionIR.new {
     !outExpressionType
     !outResult
@@ -498,24 +504,24 @@ abstract getter @abstractInfixOperatorGeneration generateCode
   ?@variableKindIR inRight
   -> @string outCode
 
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractInfixOperatorGeneration generateInfixExpression
-  ?@abstractExpressionGeneration inleft
-  ?@abstractExpressionGeneration inRight
-  -> @string outCode
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#abstract getter @abstractInfixOperatorGeneration generateInfixExpression
+#  ?@abstractExpressionGeneration inleft
+#  ?@abstractExpressionGeneration inRight
+#  -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @standardInfixOperatorGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @standardInfixOperatorGeneration generateInfixExpression
-  ?@abstractExpressionGeneration inleft
-  ?@abstractExpressionGeneration inRight
-  -> @string outCode
-{
-  outCode = "(" + [inleft expressionCode] + ") " + mInfixOperator + " (" + [inRight expressionCode] + ")"
-}
+#override getter @standardInfixOperatorGeneration generateInfixExpression
+#  ?@abstractExpressionGeneration inleft
+#  ?@abstractExpressionGeneration inRight
+#  -> @string outCode
+#{
+#  outCode = "(" + [inleft expressionCode] + ") " + mInfixOperator + " (" + [inRight expressionCode] + ")"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -531,31 +537,31 @@ override getter @standardInfixOperatorGeneration generateCode
 #! @operatorInfixExpressionGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @operatorInfixExpressionGeneration : @abstractExpressionGeneration {
-  @abstractExpressionGeneration mLeftExpression
-  @abstractInfixOperatorGeneration mOperator
-  @abstractExpressionGeneration mRightExpression
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @operatorInfixExpressionGeneration expressionCode -> @string outCode {
-  outCode =  [mOperator generateInfixExpression !mLeftExpression !mRightExpression]
-}
+#class @operatorInfixExpressionGeneration : @abstractExpressionGeneration {
+#  @abstractExpressionGeneration mLeftExpression
+#  @abstractInfixOperatorGeneration mOperator
+#  @abstractExpressionGeneration mRightExpression
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override getter @operatorInfixExpressionGeneration expressionCode -> @string outCode {
+#  outCode =  [mOperator generateInfixExpression !mLeftExpression !mRightExpression]
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @asOperatorInfixGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @asOperatorInfixGeneration : @abstractExpressionGeneration {
-  @abstractExpressionGeneration mExpression
-  @unifiedTypeMap-proxy mType
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @asOperatorInfixGeneration expressionCode -> @string outCode {
-  outCode = "((" + mangledNameForType (!name:[mType key]) + ") " + [mExpression expressionCode] + ")"
-}
+#class @asOperatorInfixGeneration : @abstractExpressionGeneration {
+#  @abstractExpressionGeneration mExpression
+#  @unifiedTypeMap-proxy mType
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override getter @asOperatorInfixGeneration expressionCode -> @string outCode {
+#  outCode = "((" + mangledNameForType (!name:[mType key]) + ") " + [mExpression expressionCode] + ")"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
