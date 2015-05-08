@@ -144,7 +144,7 @@ override method @procCallInstructionAST analyze
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
         ?expressionType:let expressionType
-        ?generatedCode:let unused testExpressionGeneratedCode
+#        ?generatedCode:let unused testExpressionGeneratedCode
         ?result:let @variableKindIR expressionResult
       ]
       parameterList += !mEffectiveParameterKind !mSelector !expressionType

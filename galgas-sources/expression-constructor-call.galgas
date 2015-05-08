@@ -60,7 +60,7 @@ override method @constructorCall analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !generatedCode:@abstractExpressionGeneration outGeneratedCode
+#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResultValueName
 {
 #--- Analyze constructor source type
@@ -81,7 +81,7 @@ override method @constructorCall analyzeExpression
 #--- Temporary variable
   getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
 #--- Generate code
-  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
+#  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
   ioInstructionGenerationList += !@constructorCallIR.new {
     !outExpressionType
     !outResultValueName

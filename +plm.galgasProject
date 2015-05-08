@@ -24,7 +24,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/bool-type.galgas"
 
 #--- Boolset
-  "galgas-sources/boolset-type.galgas"
+#  "galgas-sources/boolset-type.galgas"
 
 #--- Mode
   "galgas-sources/mode-declaration.galgas"
@@ -33,7 +33,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/enumeration-declaration.galgas"
 
 #--- Structure
-  "galgas-sources/structure-declaration.galgas"
+#  "galgas-sources/structure-declaration.galgas"
 
 #--- Global variables
   "galgas-sources/global-variable-declaration.galgas"
@@ -87,7 +87,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
   "galgas-sources/expression-literal-string.galgas"
-  "galgas-sources/expression-self.galgas"
+#  "galgas-sources/expression-self.galgas"
   "galgas-sources/expression-var.galgas"
   "galgas-sources/expression-func-call.galgas"
 
