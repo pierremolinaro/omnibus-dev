@@ -1089,7 +1089,7 @@ class GALGAS_operatorInfixExpressionIR : public GALGAS_abstractInstructionIR {
   public : static GALGAS_operatorInfixExpressionIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                     const class GALGAS_variableKindIR & inOperand1,
                                                                     const class GALGAS_variableKindIR & inOperand2,
-                                                                    const class GALGAS_abstractInfixOperatorGeneration & inOperand3,
+                                                                    const class GALGAS_infixOperatorIR & inOperand3,
                                                                     const class GALGAS_variableKindIR & inOperand4
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -1104,7 +1104,7 @@ class GALGAS_operatorInfixExpressionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mLeftOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_abstractInfixOperatorGeneration reader_mOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mResult (LOCATION_ARGS) const ;
 
@@ -1134,14 +1134,14 @@ class cPtr_operatorInfixExpressionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
   public : GALGAS_variableKindIR mAttribute_mResult ;
   public : GALGAS_variableKindIR mAttribute_mLeftOperand ;
-  public : GALGAS_abstractInfixOperatorGeneration mAttribute_mOperator ;
+  public : GALGAS_infixOperatorIR mAttribute_mOperator ;
   public : GALGAS_variableKindIR mAttribute_mRighOperand ;
 
 //--- Constructor
   public : cPtr_operatorInfixExpressionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
                                            const GALGAS_variableKindIR & in_mResult,
                                            const GALGAS_variableKindIR & in_mLeftOperand,
-                                           const GALGAS_abstractInfixOperatorGeneration & in_mOperator,
+                                           const GALGAS_infixOperatorIR & in_mOperator,
                                            const GALGAS_variableKindIR & in_mRighOperand
                                            COMMA_LOCATION_ARGS) ;
 
@@ -1152,7 +1152,7 @@ class cPtr_operatorInfixExpressionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mLeftOperand (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_abstractInfixOperatorGeneration reader_mOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_infixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mRighOperand (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2057,31 +2057,6 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Abstract category reader '@abstractInfixOperatorGeneration generateCode'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_string (*categoryReaderSignature_abstractInfixOperatorGeneration_generateCode) (const class cPtr_abstractInfixOperatorGeneration * inObject,
-                                                                                                     class GALGAS_variableKindIR inArgument0,
-                                                                                                     class GALGAS_variableKindIR inArgument1,
-                                                                                                     class C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_generateCode (const int32_t inClassIndex,
-                                       categoryReaderSignature_abstractInfixOperatorGeneration_generateCode inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string callCategoryReader_generateCode (const class cPtr_abstractInfixOperatorGeneration * inObject,
-                                                     GALGAS_variableKindIR in_inleft,
-                                                     GALGAS_variableKindIR in_inRight,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2148,6 +2123,31 @@ void categoryMethod_checkWith (const class GALGAS_infixOperatorMap inObject,
                                class GALGAS_abstractInfixOperatorGeneration & out_outOpString,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Abstract category reader '@abstractInfixOperatorGeneration generateCode'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_string (*categoryReaderSignature_abstractInfixOperatorGeneration_generateCode) (const class cPtr_abstractInfixOperatorGeneration * inObject,
+                                                                                                     class GALGAS_variableKindIR inArgument0,
+                                                                                                     class GALGAS_variableKindIR inArgument1,
+                                                                                                     class C_Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_generateCode (const int32_t inClassIndex,
+                                       categoryReaderSignature_abstractInfixOperatorGeneration_generateCode inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string callCategoryReader_generateCode (const class cPtr_abstractInfixOperatorGeneration * inObject,
+                                                     GALGAS_variableKindIR in_inleft,
+                                                     GALGAS_variableKindIR in_inRight,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

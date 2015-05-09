@@ -4,15 +4,6 @@
 
 @----------------------------------------------------------------------------*
 
-  .global readIPSR
-	.type	readIPSR, %function
-
-readIPSR:
-  mrs r0, IPSR
-  bx  lr
-
-@----------------------------------------------------------------------------*
-
   .global raise_exception_internal
 	.type	raise_exception_internal, %function
 

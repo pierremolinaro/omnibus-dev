@@ -60,7 +60,6 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-#  !generatedCode:@abstractExpressionGeneration outGeneratedCode
   !result:@variableKindIR outResultValueName
 {
   [inContext.mFunctionMap searchKey
@@ -99,11 +98,9 @@ override method @functionCallInExpressionAST analyzeExpression
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
         ?expressionType:let argumentExpressionType
-#        ?generatedCode:let argumentGeneratedCode
         ?result:@variableKindIR resultValueName
       ]
       variableList += !resultValueName
-#      s += [argumentGeneratedCode expressionCode]
       if [argumentExpressionType key] != [formal.mArgumentType key] then
         error actual.mSelector : "the actual parameter has the " + [argumentExpressionType key]
          + ", but the formal argument has the " + [formal.mArgumentType key] + " type"
@@ -114,9 +111,8 @@ override method @functionCallInExpressionAST analyzeExpression
   end
   s += ")"
 #---
-  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
+  getNewTempVariable (!?ioTemporaryIndex !mFunctionVarName.location ?outResultValueName)
 #--- Generate code
-#  outGeneratedCode = @inLineExpressionGeneration.new {!s}
   ioInstructionGenerationList += !@functionCallIR.new {
     !outExpressionType
     !mFunctionVarName.string

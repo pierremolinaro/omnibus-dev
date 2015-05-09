@@ -90,7 +90,6 @@ override method @globalVarDeclaration enterInContext
        !?variableMap:variableMap
        !?instructionListIR:instructionGenerationList
        ?expressionType:let @unifiedTypeMap-proxy expressionType
-#       ?generatedCode:*
        ?result:let @variableKindIR resultValueName
     ]
     if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
@@ -158,11 +157,18 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 #----------------------------------------------------------------------------------------------------------------------*
 
 getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
+  var initialValueString = [mInitialValue mangledName]
+  if [mInitialValue isLiteralUnsignedInteger] then
+    [mInitialValue literalUnsignedInteger ?type:* ?value:let @luint64 value] ;
+    if value.uint64 == 0L then
+      initialValueString = ""
+    end
+  end
   outCode = [filewrapper globalVariableGenerationTemplate.implementation
     !lkey.string # mGlobalVariableName
     !mActualTypeName
     !mGenerateVolatile
-    ![mInitialValue mangledName]
+    !initialValueString
   ]
 }
 
