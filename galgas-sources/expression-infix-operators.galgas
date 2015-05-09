@@ -31,7 +31,7 @@ enum @infixOperator {
 
 class @infixOperatorExpressionAST : @expressionAST {
   @expressionAST mLeftExpression
-  @lstring mOperator
+  @location mOperatorLocation
   @infixOperator mOp
   @expressionAST mRightExpression
 }
@@ -67,7 +67,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"==" !operatorLocation}
+        !operatorLocation
         !.equal
         !rightExpression
       }
@@ -77,7 +77,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"!=" !operatorLocation}
+        !operatorLocation
         !.nonEqual
         !rightExpression
       }
@@ -87,7 +87,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"<=" !operatorLocation}
+        !operatorLocation
         !.infEqual
         !rightExpression
       }
@@ -97,7 +97,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!">=" !operatorLocation}
+        !operatorLocation
         !.supEqual
         !rightExpression
       }
@@ -107,7 +107,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"<" !operatorLocation}
+        !operatorLocation
         !.strictInf
         !rightExpression
       }
@@ -117,7 +117,7 @@ syntax extension common_syntax {
       <additive_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!">" !operatorLocation}
+        !operatorLocation
         !.strictSup
         !rightExpression
       }
@@ -135,7 +135,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"|" !operatorLocation}
+        !operatorLocation
         !.orOp
         !rightExpression
       }
@@ -145,7 +145,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"^" !operatorLocation}
+        !operatorLocation
         !.xorOp
         !rightExpression
       }
@@ -155,7 +155,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"+" !operatorLocation}
+        !operatorLocation
         !.addOp
         !rightExpression
       }
@@ -165,7 +165,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&+" !operatorLocation}
+        !operatorLocation
         !.addOpNoOvf
         !rightExpression
       }
@@ -175,7 +175,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"-" !operatorLocation}
+        !operatorLocation
         !.subOp
         !rightExpression
       }
@@ -185,7 +185,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&-" !operatorLocation}
+        !operatorLocation
         !.subOpNoOvf
         !rightExpression
       }
@@ -195,7 +195,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"||" !operatorLocation}
+        !operatorLocation
         !.orShortCircuitOp
         !rightExpression
       }
@@ -205,7 +205,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"<<" !operatorLocation}
+        !operatorLocation
         !.leftShiftOp
         !rightExpression
       }
@@ -215,7 +215,7 @@ syntax extension common_syntax {
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!">>" !operatorLocation}
+        !operatorLocation
         !.rightShiftOp
         !rightExpression
       }
@@ -233,7 +233,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&" !operatorLocation}
+        !operatorLocation
         !.andOp
         !rightExpression
       }
@@ -243,7 +243,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"*" !operatorLocation}
+        !operatorLocation
         !.mulOp
         !rightExpression
       }
@@ -253,7 +253,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&*" !operatorLocation}
+        !operatorLocation
         !.mulOpNoOvf
         !rightExpression
       }
@@ -263,7 +263,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"%" !operatorLocation}
+        !operatorLocation
         !.modOp
         !rightExpression
       }
@@ -273,7 +273,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"*" !operatorLocation}
+        !operatorLocation
         !.divOp
         !rightExpression
       }
@@ -283,7 +283,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&/" !operatorLocation}
+        !operatorLocation
         !.divOpNoOvf
         !rightExpression
       }
@@ -293,7 +293,7 @@ syntax extension common_syntax {
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
-        !.new {!"&&" !operatorLocation}
+        !operatorLocation
         !.andShortCircuitOp
         !rightExpression
       }
@@ -332,17 +332,16 @@ override method @asExpressionAST addDependenceEdgeForStaticExpression
 method @infixOperatorMap checkWith
   ?leftType:let @unifiedTypeMap-proxy inLeftType
   ?rightType:let @unifiedTypeMap-proxy inRightType
-  ?operator:let @lstring inOperator
+  ?operatorLocation:let @location inOperatorLocation
   !resultType: @unifiedTypeMap-proxy outResultType
-  !opString:@abstractInfixOperatorGeneration outOpString
 {
-  let lkey = @lstring.new {![inLeftType key] + "." + [inRightType key] !inOperator.location}
+  let lkey = @lstring.new {![inLeftType key] + "." + [inRightType key] !inOperatorLocation}
   if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType ?outOpString]
+    [self searchKey !lkey ?outResultType]
   else
-    error inOperator
-      : "infix operation '" + [inLeftType key] + " " + inOperator + " " + [inRightType key] + "' is not defined"
-      : outResultType, outOpString
+    error inOperatorLocation
+      : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"
+      : outResultType
   end
 }
 
@@ -387,7 +386,6 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?result:@variableKindIR rightResult
   ]
 #--- Check left type
-  @abstractInfixOperatorGeneration resultOperator
   @infixOperatorMap operatorMap
   @infixOperatorIR infixOperatorIR
   switch mOp 
@@ -426,25 +424,25 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infix {!infixOperator:"^"}
   case addOp :
     operatorMap = inContext.mAddOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow"}
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:3}
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"+"}
   case subOpNoOvf :
     operatorMap = inContext.mSubNoOvfOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow"}
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:4}
   case subOp :
     operatorMap = inContext.mSubOperatorMap
     infixOperatorIR = .infix {!infixOperator:"-"}
   case mulOp :
     operatorMap = inContext.mMulOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow"}
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:5}
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"*"}
   case divOp :
     operatorMap = inContext.mDivOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_div_overflow"}
+    infixOperatorIR = .infixUnsignedDivide{!code:6}
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"/"}
@@ -461,9 +459,8 @@ override method @infixOperatorExpressionAST analyzeExpression
   [operatorMap checkWith
     !leftType:leftExpressionType
     !rightType:rightExpressionType
-    !operator:mOperator
+    !operatorLocation:mOperatorLocation
     ?resultType:outExpressionType
-    ?opString:resultOperator
   ]
 #---
   if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
@@ -494,10 +491,10 @@ override method @infixOperatorExpressionAST analyzeExpression
     case leftShiftOp  : result = leftValue.uint64 << [rightValue.uint64 uint]
     case rightShiftOp : result = leftValue.uint64 >> [rightValue.uint64 uint]
     end
-    outResult = .literalUnsignedInteger {!type:outExpressionType !value:.new{!result !mOperator.location}}
+    outResult = .literalUnsignedInteger {!type:outExpressionType !value:.new{!result !mOperatorLocation}}
   else
   #--- Temp var
-    getNewTempVariable (!?ioTemporaryIndex !mOperator.location ?outResult)
+    getNewTempVariable (!?ioTemporaryIndex !mOperatorLocation ?outResult)
   #--- Generate code
     ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
       !outExpressionType
@@ -580,7 +577,8 @@ override getter @asOperatorInstructionIR instructionCode -> @string outCode {
 
 enum @infixOperatorIR {
   case infix (@string infixOperator)
-  case infixOvf (@string builtinFunction)
+  case infixOvf (@string builtinFunction @uint code)
+  case infixUnsignedDivide (@uint code)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -600,7 +598,7 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
   case infix (@string infixOperator) :
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
-  case infixOvf (@string builtinFunction) :
+  case infixOvf (@string builtinFunction @uint code) :
     let ovfVar = "ovf" + [[mResult location] locationIndex]
     outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName] + " ;\n"
     outCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
@@ -608,8 +606,14 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
       + [mRighOperand mangledName]
       + ", &" + [mResult mangledName] + ") ;\n"
     outCode += "if (" + ovfVar + ") {\n"
-    outCode += "  raise_exception (3, " + [[[[mResult location] file] lastPathComponent] utf8Representation] + ", " + [[mResult location] line] + ") ;\n"
-    outCode += "}\n"    
+    outCode += "  raise_exception (" + code + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation] + ", " + [[mResult location] line] + ") ;\n"
+    outCode += "}\n" 
+  case infixUnsignedDivide (@uint code) :
+    outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    outCode += "  raise_exception (" + code + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation] + ", " + [[mResult location] line] + ") ;\n"
+    outCode += "}\n" 
+    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"
   end
 }
 
@@ -618,27 +622,6 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
 override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
   [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @abstractInfixOperatorGeneration
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractInfixOperatorGeneration generateCode
-  ?@variableKindIR inleft
-  ?@variableKindIR inRight
-  -> @string outCode
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @standardInfixOperatorGeneration
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @standardInfixOperatorGeneration generateCode
-  ?@variableKindIR inleft
-  ?@variableKindIR inRight
-  -> @string outCode
-{
-  outCode = [inleft mangledName] + " " + mInfixOperator + " " + [inRight mangledName]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

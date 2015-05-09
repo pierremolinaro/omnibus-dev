@@ -130,42 +130,34 @@ proc enterBoolsetOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"=="}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"!="}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<"}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<="}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">"}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">="}
   ]
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"|"}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
     !selfTypeProxy
-    !@minusOperatorForBoolsetGeneration.new {!inMask}
   ]
 }
 

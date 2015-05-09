@@ -127,32 +127,26 @@ proc enterEnumerationOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"=="}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"!="}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<"}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<="}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">"}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">="}
   ]
 }
 

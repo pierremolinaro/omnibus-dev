@@ -112,9 +112,8 @@ override method @operatorAssignInstructionAST analyze
   [operatorMap checkWith
     !leftType:targetType
     !rightType:rightExpressionType
-    !operator:.new {!generatedOperator !mTargetVarName.location}
+    !operatorLocation:mTargetVarName.location
     ?resultType:*
-    ?opString:*
   ]
 #--- Check mode
   if not [acceptedModeSet hasKey !inMode] then

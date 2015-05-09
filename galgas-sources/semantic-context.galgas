@@ -23,17 +23,6 @@ map @constructorMap {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract class @abstractInfixOperatorGeneration {
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @standardInfixOperatorGeneration : @abstractInfixOperatorGeneration {
-  @string mInfixOperator
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 map @registerMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
@@ -45,7 +34,6 @@ map @registerMap {
 
 map @infixOperatorMap {
   @unifiedTypeMap-proxy mResultType
-  @abstractInfixOperatorGeneration mGeneratedInfixOperator
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

@@ -128,82 +128,82 @@ proc enterIntegerOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"=="}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"!="}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<"}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<="}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">"}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
-    !@standardInfixOperatorGeneration.new {!">="}
   ]
   [!?ioContext.mAndOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"&"}
   ]
   [!?ioContext.mOrOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"^"}
   ]
   [!?ioContext.mXorOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"^"}
   ]
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"+"}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"-"}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"*"}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"/"}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
   ]
   [!?ioContext.mModOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"%"}
   ]
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<<"}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!">>"}
   ]
 }
 
