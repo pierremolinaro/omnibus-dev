@@ -37,6 +37,7 @@ override method @assignmentInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -54,12 +55,12 @@ override method @assignmentInstructionAST analyze
     !optionalTargetType:targetType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-#    ?generatedCode:let unused expressionGeneratedCode
     ?result:@variableKindIR sourceValueName
   ]
 #--- Check inferred type

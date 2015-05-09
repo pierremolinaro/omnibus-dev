@@ -45,6 +45,7 @@ override method @whileInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -57,12 +58,12 @@ override method @whileInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:testInstructionGenerationList
     ?expressionType:let testExpressionType
-#    ?generatedCode:let unused testExpressionGeneratedCode
     ?result:@variableKindIR testValueName
   ]
 #--- Check inferred type
@@ -77,6 +78,7 @@ override method @whileInstructionAST analyze
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

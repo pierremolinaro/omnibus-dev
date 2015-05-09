@@ -188,6 +188,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !optionalReceiverType:.noReceiver
     !context:inContext
     !mode:mFunctionMode.string
+    !allowException:mFunctionMode.string != exceptionModeName ()
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap

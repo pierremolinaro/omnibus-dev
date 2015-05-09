@@ -352,6 +352,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -365,6 +366,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -378,6 +380,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalTargetType:leftExpressionType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -423,24 +426,36 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mXorOperatorMap
     infixOperatorIR = .infix {!infixOperator:"^"}
   case addOp :
+    if inMode == exceptionModeName () then
+      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
     operatorMap = inContext.mAddOperatorMap
     infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:3}
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"+"}
-  case subOpNoOvf :
+  case subOp :
+    if inMode == exceptionModeName () then
+      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
     operatorMap = inContext.mSubNoOvfOperatorMap
     infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:4}
-  case subOp :
+  case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
     infixOperatorIR = .infix {!infixOperator:"-"}
   case mulOp :
+    if inMode == exceptionModeName () then
+      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
     operatorMap = inContext.mMulOperatorMap
     infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:5}
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"*"}
   case divOp :
+    if inMode == exceptionModeName () then
+      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
     operatorMap = inContext.mDivOperatorMap
     infixOperatorIR = .infixUnsignedDivide{!code:6}
   case divOpNoOvf :
@@ -514,6 +529,7 @@ override method @asExpressionAST analyzeExpression
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -527,6 +543,7 @@ override method @asExpressionAST analyzeExpression
     !optionalTargetType:inOptionalTargetType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
