@@ -78,6 +78,7 @@ override method @incDecInstructionAST analyze
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -96,10 +97,7 @@ override method @incDecInstructionAST analyze
   if not [acceptedModeSet hasKey !inMode] then
     error mVarName : "this variable cannot be used in $" + inMode + " mode"
   end
-  if inMode == exceptionModeName () then
-    error mVarName : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
-  end
-#--- Check type handle ++ operator
+#--- Check type inc / dec operator
   if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
     error mVarName : [type key] + " type does not handle incrementation/decrementation operator"
   end
@@ -115,6 +113,14 @@ override method @incDecInstructionAST analyze
   case integer (kMin kMax) :
     min = kMin
     max = kMax
+  end
+#--- Exception allowed ?
+  switch mKind
+  case incNoOverflowCheck, decNoOverflowCheck :
+  case incWithOverflowCheck, decWithOverflowCheck :
+    if inMode == exceptionModeName () then
+      error mVarName : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
   end
 #--- Code generation
   ioInstructionGenerationList += !@incDecInstructionIR.new {

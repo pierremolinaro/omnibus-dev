@@ -70,6 +70,7 @@ override method @ifInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -81,6 +82,7 @@ override method @ifInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -101,6 +103,7 @@ override method @ifInstructionAST analyze
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -113,6 +116,7 @@ override method @ifInstructionAST analyze
     !optionalReceiverType:inReceiverType
     !context:inContext
     !mode:inMode
+    !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

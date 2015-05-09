@@ -85,6 +85,7 @@ override method @globalVarDeclaration enterInContext
        !optionalTargetType:constantType
        !context:ioContext
        !mode:""
+       !allowException:true
        !?temporary:temporaryIndex
        !?staticStringMap:ioGlobalLiteralStringMap
        !?variableMap:variableMap

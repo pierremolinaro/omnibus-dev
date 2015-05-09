@@ -53,6 +53,7 @@ method @initList-element initSemanticAnalysis
     !optionalReceiverType:.noReceiver
     !context:inContext
     !mode:"init"
+    !allowException:true
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap

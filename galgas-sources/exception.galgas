@@ -93,7 +93,8 @@ method @exceptionAST exceptionSemanticAnalysis
     [mExceptionInstructionList analyzeRoutineInstructionList
       !optionalReceiverType:.noReceiver
       !context:inContext
-      !mode:"exception"
+      !mode:exceptionModeName ()
+      !allowException:false
       !?temporary:ioTemporaryIndex
       !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
       !?variableMap:variableMap

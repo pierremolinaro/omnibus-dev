@@ -349,6 +349,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !optionalReceiverType:receiverType
     !context:inContext
     !mode:mProcedureMode.string
+    !allowException:mProcedureMode.string != exceptionModeName ()
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap

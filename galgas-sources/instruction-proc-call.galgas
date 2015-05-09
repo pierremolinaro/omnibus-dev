@@ -84,6 +84,7 @@ override method @procCallInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -139,12 +140,12 @@ override method @procCallInstructionAST analyze
         !optionalTargetType:formal_mType
         !context:inContext
         !mode:inMode
+        !allowException:inAllowExceptions
         !?temporary:ioTemporaryIndex
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
         ?expressionType:let expressionType
-#        ?generatedCode:let unused testExpressionGeneratedCode
         ?result:let @variableKindIR expressionResult
       ]
       parameterList += !mEffectiveParameterKind !mSelector !expressionType
