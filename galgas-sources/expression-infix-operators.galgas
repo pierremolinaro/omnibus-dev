@@ -17,8 +17,11 @@ enum @infixOperator {
   case addOp
   case addOpNoOvf
   case subOp
+  case subOpNoOvf
   case mulOp
+  case mulOpNoOvf
   case divOp
+  case divOpNoOvf
   case modOp
   case leftShiftOp
   case rightShiftOp
@@ -177,6 +180,16 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
+      $&-$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"&-" !operatorLocation}
+        !.subOpNoOvf
+        !rightExpression
+      }
+    while
       $||$
       let operatorLocation = @location.here
       <multiplicative_expression> ?let rightExpression
@@ -235,6 +248,16 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
+      $&*$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"&*" !operatorLocation}
+        !.mulOpNoOvf
+        !rightExpression
+      }
+    while
       $%$
       let operatorLocation = @location.here
       <primary> ?let rightExpression
@@ -252,6 +275,16 @@ syntax extension common_syntax {
         !outExpression
         !.new {!"*" !operatorLocation}
         !.divOp
+        !rightExpression
+      }
+    while
+      $&/$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !.new {!"&/" !operatorLocation}
+        !.divOpNoOvf
         !rightExpression
       }
     while
@@ -397,14 +430,23 @@ override method @infixOperatorExpressionAST analyzeExpression
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"+"}
+  case subOpNoOvf :
+    operatorMap = inContext.mSubNoOvfOperatorMap
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow"}
   case subOp :
     operatorMap = inContext.mSubOperatorMap
     infixOperatorIR = .infix {!infixOperator:"-"}
   case mulOp :
     operatorMap = inContext.mMulOperatorMap
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow"}
+  case mulOpNoOvf :
+    operatorMap = inContext.mMulNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"*"}
   case divOp :
     operatorMap = inContext.mDivOperatorMap
+    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_div_overflow"}
+  case divOpNoOvf :
+    operatorMap = inContext.mDivNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"/"}
   case modOp :
     operatorMap = inContext.mModOperatorMap
@@ -443,8 +485,11 @@ override method @infixOperatorExpressionAST analyzeExpression
     case addOp : result = leftValue.uint64 &+ rightValue.uint64
     case addOpNoOvf : result = leftValue.uint64 + rightValue.uint64
     case subOp : result = leftValue.uint64 - rightValue.uint64
+    case subOpNoOvf : result = leftValue.uint64 &- rightValue.uint64
     case mulOp : result = leftValue.uint64 * rightValue.uint64
+    case mulOpNoOvf : result = leftValue.uint64 &* rightValue.uint64
     case divOp : result = leftValue.uint64 / rightValue.uint64
+    case divOpNoOvf : result = leftValue.uint64 &/ rightValue.uint64
     case modOp : result = leftValue.uint64 mod rightValue.uint64
     case leftShiftOp  : result = leftValue.uint64 << [rightValue.uint64 uint]
     case rightShiftOp : result = leftValue.uint64 >> [rightValue.uint64 uint]

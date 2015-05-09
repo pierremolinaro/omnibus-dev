@@ -147,8 +147,11 @@ struct @semanticContext {
   @infixOperatorMap mAddOperatorMap             # +
   @infixOperatorMap mAddNoOvfOperatorMap        # &+
   @infixOperatorMap mSubOperatorMap             # -
+  @infixOperatorMap mSubNoOvfOperatorMap        # &-
   @infixOperatorMap mMulOperatorMap             # *
+  @infixOperatorMap mMulNoOvfOperatorMap        # &*
   @infixOperatorMap mDivOperatorMap             # /
+  @infixOperatorMap mDivNoOvfOperatorMap        # &/
   @infixOperatorMap mModOperatorMap             # %
   @infixOperatorMap mLeftShiftOperatorMap       # <<
   @infixOperatorMap mRightShiftOperatorMap      # >>
