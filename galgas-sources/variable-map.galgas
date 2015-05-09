@@ -13,7 +13,7 @@ enum @variableKindIR {
   case inOutArgument (@lstring name)
   case outArgument (@lstring name)
   case localConstant (@lstring name)
-  case temporaryConstant (@uint idx)
+  case temporaryConstant (@luint idx)
   case localAccess (@string access @location location)
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value)
   case literalSignedInteger (@unifiedTypeMap-proxy type @lsint64 value)
@@ -40,8 +40,8 @@ getter @variableKindIR location -> @location outLocation {
     outLocation = name.location
   case localConstant (@lstring name) :
     outLocation = name.location
-  case temporaryConstant (*) :
-    error .nowhere : "internal error: cannot get location of a temporary" : outLocation
+  case temporaryConstant (@luint idx) :
+    outLocation = idx.location
   case localAccess (* @location location) :
     outLocation = location
   case literalUnsignedInteger (* @luint64 value) :
@@ -158,9 +158,10 @@ func initialVariableMap
 
 proc getNewTempVariable
   ?!@uint ioTemporaryIndex
+  ?let @location inLocation
   !@variableKindIR outTempVariable
 {
-  outTempVariable = .temporaryConstant {!idx:ioTemporaryIndex}
+  outTempVariable = .temporaryConstant {!idx:.new {!ioTemporaryIndex !inLocation}}
   ioTemporaryIndex ++
 }
 

@@ -22,8 +22,8 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = "* " + mangledNameForOutArgument (!name:name.string)
   case localConstant (@lstring name) :
     outResult = mangledNameForConstant (!name:name.string)
-  case temporaryConstant (@uint idx) :
-    outResult = mangledNameForTemporaryConstant (!idx:idx)
+  case temporaryConstant (@luint idx) :
+    outResult = mangledNameForTemporaryConstant (!idx:idx.uint)
   case localAccess (@string access @location unused location) :
     outResult = access
   case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value) :
@@ -34,31 +34,6 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = name
   end
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @abstractExpressionGeneration
-#----------------------------------------------------------------------------------------------------------------------*
-
-#abstract class @abstractExpressionGeneration {
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#abstract getter @abstractExpressionGeneration expressionCode -> @string outCode
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @inLineExpressionGeneration
-#----------------------------------------------------------------------------------------------------------------------*
-
-#class @inLineExpressionGeneration : @abstractExpressionGeneration {
-#  @string mCode
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#override getter @inLineExpressionGeneration expressionCode -> @string outCode {
-#  outCode = mCode
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @abstractExpressionIR
@@ -129,6 +104,7 @@ proc codeGeneration
 #--- Generate C file
   var code = ""
   code += "#include <stdint.h>\n"
+  code += "#include <stdbool.h>\n"
   code += "#include <stddef.h>\n\n"
   for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
     code += [type.mType headerCodeGenerationForType]

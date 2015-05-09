@@ -145,6 +145,7 @@ struct @semanticContext {
   @infixOperatorMap mOrShortCircuitOperatorMap  # ||
   @infixOperatorMap mXorOperatorMap             # ^
   @infixOperatorMap mAddOperatorMap             # +
+  @infixOperatorMap mAddNoOvfOperatorMap        # &+
   @infixOperatorMap mSubOperatorMap             # -
   @infixOperatorMap mMulOperatorMap             # *
   @infixOperatorMap mDivOperatorMap             # /
