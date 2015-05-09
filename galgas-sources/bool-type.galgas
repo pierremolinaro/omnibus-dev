@@ -106,57 +106,46 @@ proc enterBooleanOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"=="}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"!="}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<"}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"<="}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!">"}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!">="}
   ]
   [!?ioContext.mAndOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"&"}
   ]
   [!?ioContext.mAndShortCircuitOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"&&"}
   ]
   [!?ioContext.mOrOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"|"}
   ]
   [!?ioContext.mOrShortCircuitOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"||"}
   ]
   [!?ioContext.mXorOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !@standardInfixOperatorGeneration.new {!"^"}
   ]
 }
 
