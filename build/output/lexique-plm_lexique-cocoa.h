@@ -103,8 +103,11 @@ enum {plm_lexique_1_,
   plm_lexique_1__2B_,
   plm_lexique_1__26__2B_,
   plm_lexique_1__2D_,
+  plm_lexique_1__26__2D_,
   plm_lexique_1__2A_,
-  plm_lexique_1__2F_
+  plm_lexique_1__26__2A_,
+  plm_lexique_1__2F_,
+  plm_lexique_1__26__2F_
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
