@@ -27,6 +27,8 @@ newIntegerType Int64 @signed64
 //-----------------------------------------------------------------------------*
 
 import "microcontrollers/mk20dx256.plm"
+import "microcontrollers/lcd.plm"
+import "microcontrollers/leds.plm"
 
 //-----------------------------------------------------------------------------*
 

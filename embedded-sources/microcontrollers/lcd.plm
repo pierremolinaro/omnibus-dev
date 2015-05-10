@@ -471,18 +471,6 @@ proc $exception clearScreenInExceptionMode () {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception ledOnInExceptionMode () {
-  GPIOC_PSOR = 1 << 5
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $exception ledOffInExceptionMode () {
-  GPIOC_PCOR = 1 << 5
-}
-
-//-----------------------------------------------------------------------------*
-
 exception {
   clearScreenInExceptionMode ()
   waitMSInExceptionMode (!duration:4)
@@ -492,9 +480,9 @@ exception {
   printUnsignedInExceptionMode (!LINE)
   forever
     waitMSInExceptionMode (!duration:50)
-    ledOnInExceptionMode ()
+    ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
     waitMSInExceptionMode (!duration:50)
-    ledOffInExceptionMode ()
+    ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
   end
 }
 
