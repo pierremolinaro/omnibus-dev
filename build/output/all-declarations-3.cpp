@@ -10248,8 +10248,8 @@ static void categoryMethod_incDecInstructionAST_analyze (const cPtr_instructionA
   GALGAS_string var_variableCName ;
   GALGAS_variableKindIR var_variable ;
   {
-  GALGAS_bool joker_3568 ; // Joker input parameter
-  ioArgument_ioVariableMap.modifier_searchForReadWriteAccess (object->mAttribute_mVarName, var_type, var_acceptedModeSet, var_variableCName, var_variable, joker_3568, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 88)) ;
+  GALGAS_bool joker_3584 ; // Joker input parameter
+  ioArgument_ioVariableMap.modifier_searchForReadWriteAccess (object->mAttribute_mVarName, var_type, var_acceptedModeSet, var_variableCName, var_variable, joker_3584, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 88)) ;
   }
   const enumGalgasBool test_0 = var_acceptedModeSet.reader_hasKey (constinArgument_inMode COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 97)).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 97)).boolEnum () ;
   if (kBoolTrue == test_0) {
@@ -10294,9 +10294,9 @@ static void categoryMethod_incDecInstructionAST_analyze (const cPtr_instructionA
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_4267 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).unsafePointer ()) ;
-      const GALGAS_sint_36__34_ extractedValue_kMin = extractPtr_4267->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_kMax = extractPtr_4267->mAssociatedValue1 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_4283 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).unsafePointer ()) ;
+      const GALGAS_sint_36__34_ extractedValue_kMin = extractPtr_4283->mAssociatedValue0 ;
+      const GALGAS_uint_36__34_ extractedValue_kMax = extractPtr_4283->mAssociatedValue1 ;
       var_min = extractedValue_kMin ;
       var_max = extractedValue_kMax ;
     }
@@ -10321,7 +10321,7 @@ static void categoryMethod_incDecInstructionAST_analyze (const cPtr_instructionA
     }
     break ;
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_incDecInstructionIR::constructor_new (var_min, var_max, object->mAttribute_mKind, var_variable  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_incDecInstructionIR::constructor_new (var_min, var_max, object->mAttribute_mKind, var_variable, object->mAttribute_mVarName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10352,35 +10352,35 @@ static GALGAS_string categoryReader_incDecInstructionIR_instructionCode (const c
   case GALGAS_incDecKind::kEnum_incWithOverflowCheck:
     {
       result_outCode = GALGAS_string::makeEmptyString () ;
-      const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 151)).boolEnum () ;
+      const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 153)).boolEnum () ;
       if (kBoolTrue == test_0) {
-        result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152)).add_operation (GALGAS_string (" == "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152)).add_operation (object->mAttribute_mMax.reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 152)) ;
-        result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (1, ").add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).reader_file (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).reader_lastPathComponent (SOURCE_FILE ("instruction-inc-dec.galgas", 153)).reader_utf_38_Representation (SOURCE_FILE ("instruction-inc-dec.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).reader_line (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 153)) ;
-        result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)).add_operation (GALGAS_string (" == "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)).add_operation (object->mAttribute_mMax.reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 154)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 154)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (1, ").add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)).reader_file (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)).reader_lastPathComponent (SOURCE_FILE ("instruction-inc-dec.galgas", 156)).reader_utf_38_Representation (SOURCE_FILE ("instruction-inc-dec.galgas", 156)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 155)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)).add_operation (object->mAttribute_mVariableLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 157)).reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 156)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 157))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 155)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 158)) ;
       }
-      result_outCode.dotAssign_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)).add_operation (GALGAS_string (" ++ ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 156)) ;
+      result_outCode.dotAssign_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)).add_operation (GALGAS_string (" ++ ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)) ;
     }
     break ;
   case GALGAS_incDecKind::kEnum_decWithOverflowCheck:
     {
       result_outCode = GALGAS_string::makeEmptyString () ;
-      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 159)).boolEnum () ;
+      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 163)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)).add_operation (GALGAS_string (" == "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)).add_operation (object->mAttribute_mMin.reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 160)) ;
-        result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (2, ").add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).reader_file (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).reader_lastPathComponent (SOURCE_FILE ("instruction-inc-dec.galgas", 161)).reader_utf_38_Representation (SOURCE_FILE ("instruction-inc-dec.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).reader_line (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 161)) ;
-        result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 162)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)).add_operation (GALGAS_string (" == "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)).add_operation (object->mAttribute_mMin.reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 164)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (2, ").add_operation (categoryReader_location (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 166)).reader_file (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 166)).reader_lastPathComponent (SOURCE_FILE ("instruction-inc-dec.galgas", 166)).reader_utf_38_Representation (SOURCE_FILE ("instruction-inc-dec.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 165)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 166)).add_operation (object->mAttribute_mVariableLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 167)).reader_string (SOURCE_FILE ("instruction-inc-dec.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 167)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 167))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 165)) ;
+        result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 168)) ;
       }
-      result_outCode.dotAssign_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)).add_operation (GALGAS_string (" -- ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 164)) ;
+      result_outCode.dotAssign_operation (categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 170)).add_operation (GALGAS_string (" -- ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 170))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 170)) ;
     }
     break ;
   case GALGAS_incDecKind::kEnum_incNoOverflowCheck:
     {
-      result_outCode = categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 166)).add_operation (GALGAS_string (" ++ ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 166)) ;
+      result_outCode = categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 172)).add_operation (GALGAS_string (" ++ ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 172)) ;
     }
     break ;
   case GALGAS_incDecKind::kEnum_decNoOverflowCheck:
     {
-      result_outCode = categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 168)).add_operation (GALGAS_string (" -- ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 168)) ;
+      result_outCode = categoryReader_mangledName (object->mAttribute_mVariable, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 174)).add_operation (GALGAS_string (" -- ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 174)) ;
     }
     break ;
   }
@@ -10412,7 +10412,7 @@ static void categoryMethod_incDecInstructionIR_enterAccessibleEntities (const cP
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_incDecInstructionIR * object = (const cPtr_incDecInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_incDecInstructionIR) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mVariable, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 175)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mVariable, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 181)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
