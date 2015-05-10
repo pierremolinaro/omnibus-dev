@@ -205,6 +205,10 @@ proc enterIntegerOperators
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
   ]
+  [!?ioContext.mUnaryMinusOperatorMap insertKey
+    !inIntegerTypeName
+    !selfTypeProxy
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

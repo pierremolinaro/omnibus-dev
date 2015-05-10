@@ -385,6 +385,17 @@ proc $user printUnsigned (?inValue : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
+proc $user printSigned (?inValue : Int32) {
+  if inValue >= 0 then
+    printUnsigned (!inValue as UInt32)
+  else
+    writeData_inUserMode (!0x2D) // Signe -
+    printUnsigned (!(- inValue) as UInt32)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
 //void printSigned (const int32_t inValue) {
 //  if (inValue < 0) {
 //    printChar ('-') ;

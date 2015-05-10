@@ -110,14 +110,18 @@ proc $user teensyLedOff () {
 
 var $user $isr $init gCompteur : UInt32 = 0
 
+var $isr gClignotement : UInt32 = 0
+
 //-----------------------------------------------------------------------------*
 
 proc $isr systickHandler () {
-  gCompteur ++
-  if (gCompteur & 1) == 0 then
-    GPIOA_PCOR = 1 << 12
-  else
-    GPIOA_PSOR = 1 << 12
+  gCompteur &++
+  gClignotement ++
+  if gClignotement == 500 then
+    GPIOA_PSOR = 1 << 12 ;
+  elsif gClignotement == 1000 then
+    GPIOA_PCOR = 1 << 12 ;
+    gClignotement = 0
   end
 }
 
@@ -143,7 +147,9 @@ proc $user loop () {
   teensyLedOff ()
   gVar ++
   goto (!line:0 !column: 0)
-  printUnsigned (!gVar as UInt32)
+  printSpaces (!4)
+  goto (!line:0 !column: 0)
+  printSigned (!gVar as Int32)
 }
 
 //-----------------------------------------------------------------------------*

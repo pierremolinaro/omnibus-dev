@@ -113,22 +113,16 @@ proc codeGeneration
   code += "static void init (void) ;\n\n"
   if not [option plm_options.noExceptionGeneration value] then
     code += titleComment (!"Exception")
-    code += "void raise_exception_internal (const uint32_t inCode,\n"
-    code += "                               const char * inSourceFile,\n"
-    code += "                               const uint32_t inSourceLine) ;\n\n"
-    code += "void raise_exception_via_svc (const int32_t inCode,\n"
-    code += "                                     const char * inSourceFile,\n"
-    code += "                                     const int32_t inSourceLine) ;\n\n"
+    code += "static void raise_exception_internal (const uint32_t inCode,\n"
+    code += "                                      const char * inSourceFile,\n"
+    code += "                                      const uint32_t inSourceLine) ;\n\n"
     code += "static void raise_exception (const int32_t inCode,\n"
     code += "                             const char * inSourceFile,\n"
     code += "                             const int32_t inSourceLine) {\n"
-    code += "  uint32_t processorMode ;\n"
-    code += "  __asm__ (\"mrs %[reg], IPSR\" : [reg]\"=r\"(processorMode));\n"
-    code += "  if (0 != processorMode) {\n"
-    code += "    raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
-    code += "  }else{\n"
-    code += "    raise_exception_via_svc (inCode, inSourceFile, inSourceLine) ;\n"
-    code += "  }\n"
+    code += " //--- Mask interrupt: write 1 into FAULTMASK register\n"
+    code += "  const uint32_t maskValue = 1 ;\n"
+    code += "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
+    code += "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
     code += "}\n\n"
   end
   code += titleComment (!"Static Strings")
@@ -165,9 +159,9 @@ proc codeGeneration
   code += "}\n\n"
   if not [option plm_options.noExceptionGeneration value] then
     code += titleComment (!"Raise Exception internal")
-    code += "void raise_exception_internal (const uint32_t in_CODE,\n"
-    code += "                               const char * in_FILE,\n"
-    code += "                               const uint32_t in_LINE) {\n"
+    code += "static void raise_exception_internal (const uint32_t in_CODE,\n"
+    code += "                                      const char * in_FILE,\n"
+    code += "                                      const uint32_t in_LINE) {\n"
     code += [inIntermediateCodeStruct.mExceptionInstructionListIR instructionListCode]
     code += "}\n\n"
   end
