@@ -6,7 +6,7 @@
 
 enum @generalizedTypeEnumAST {
   case valueType (@lstring typeName)
-  case procType (@lstring procMode @procFormalArgumentList procFormalArgumentList)
+  case procType (@lstringlist procModeList @procFormalArgumentList procFormalArgumentList)
 }
 
 
@@ -29,10 +29,10 @@ syntax extension common_syntax {
 
   rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
     <procedure_header>
-      ?procMode:let requiredMode
+      ?procModes:let requiredModeList
       ?name:outName
       ?formalArguments:let procFormalArgumentList
-    outType = .procType {!procMode:requiredMode !procFormalArgumentList:procFormalArgumentList}
+    outType = .procType {!procModeList:requiredModeList !procFormalArgumentList:procFormalArgumentList}
   }
 
   #--------------------------------------------------------------------------------------------------------------------*

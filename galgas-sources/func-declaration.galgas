@@ -12,7 +12,7 @@ list @funcFormalArgumentList {
 
 list @functionDeclarationListAST {
   @lstring mFunctionName
-  @lstring mFunctionMode
+  @lstringlist mFunctionModeList
   @funcFormalArgumentList mFuncFormalArgumentList
   @lstring mResultTypeName
   @lstring mResultVarName
@@ -30,11 +30,11 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $func$
-    @lstring funcMode
-    select
-      funcMode = .new {!"" !.here}
-    or
-      $modeName$ ?funcMode
+    @lstringlist funcModeList = {}
+    repeat
+      $modeName$ ?let funcMode
+      funcModeList += !funcMode
+    while
     end
     $identifier$ ?let funcName
     @funcFormalArgumentList funcFormalArgumentList = {}
@@ -60,7 +60,7 @@ syntax extension common_syntax {
     $}$
     ioAST.mFunctionListAST +=
       !funcName
-      !funcMode
+      !funcModeList
       !funcFormalArgumentList
       !resultTypeName
       !resultVarName
@@ -97,7 +97,7 @@ list @funcSignature {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @functionMap {
-  @lstring mFunctionMode
+  @modeMap mFunctionModeMap
   @funcSignature mSignature
   @unifiedTypeMap-proxy mResultType
 
@@ -125,12 +125,17 @@ method @functionDeclarationListAST-element enterInContext
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
     signature += !selector !typeProxy
   end
+#--- Mode map
+  @modeMap functionModeMap = {}
+  for () in mFunctionModeList do
+    [!?functionModeMap insertKey !mValue] ;
+  end
 #--- Result type
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultType]
 #--- Enter in context
   [!?ioContext.mFunctionMap insertKey
     !.new {![self mangledName] !mFunctionName.location}
-    !mFunctionMode
+    !functionModeMap
     !signature
     !resultType
   ]
@@ -152,9 +157,11 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   ?!temporary:@uint ioTemporaryIndex
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check mode
-  if mFunctionMode.string != "" then
-    [inContext.mModeMap searchKey !mFunctionMode]
+#--- Check modes
+  @stringset functionModeSet = {}
+  for mode in mFunctionModeList do
+    [inContext.mModeMap searchKey !mode.mValue]
+    functionModeSet += !mode.mValue.string
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:true)
@@ -163,7 +170,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   [!?variableMap insertOutputFormalArgument
     !mResultVarName
     !resultType
-    !{!mFunctionMode.string}
+    !functionModeSet
     !mResultVarName.string
     !.localVariable {!name:mResultVarName.string}
     !true
@@ -175,7 +182,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     [!?variableMap insertConstantInputFormalArgument
       !formalArgumentName
       !typeProxy
-      !{!mFunctionMode.string}
+      !functionModeSet
       !mangledNameForInArgument (!name:formalArgumentName.string)
       !.inArgument {!name:formalArgumentName.string}
       ![typeProxy copiable]
@@ -187,8 +194,8 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:.noReceiver
     !context:inContext
-    !mode:mFunctionMode.string
-    !allowException:mFunctionMode.string != exceptionModeName ()
+    !modes:functionModeSet
+    !allowException:not [functionModeSet hasKey !exceptionModeName ()]
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap

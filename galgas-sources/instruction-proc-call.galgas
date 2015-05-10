@@ -83,7 +83,7 @@ list @procEffectiveParameterList {
 override method @procCallInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -108,7 +108,7 @@ override method @procCallInstructionAST analyze
   [inContext.mProcedureMap searchKey
     !.new {!procMangledName !mProcRoutineName.location}
     ?*
-    ?let procedureMode
+    ?let procedureModeMap
     ?let @procedureSignature procSignature
   ]
 #--- Check parameters
@@ -120,15 +120,17 @@ override method @procCallInstructionAST analyze
       [!?ioVariableMap searchForWriteAccess
         !name
         ?let type
-        ?let acceptedModeSet
+        ?let varModeSet
         ?let unused variableAccess
         ?let parameterAccess
         ?let isCopiable
       ]
     #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
-      end
+      checkMode (
+        !requiredModes:inModeSet
+        !possibleModes:varModeSet
+        !error:name.location
+      )
       if not isCopiable then
         error name : "the '" + name + "' variable is not copiable"
       end
@@ -139,7 +141,7 @@ override method @procCallInstructionAST analyze
         !optionalReceiverType:inReceiverType
         !optionalTargetType:formal_mType
         !context:inContext
-        !mode:inMode
+        !modes:inModeSet
         !allowException:inAllowExceptions
         !?temporary:ioTemporaryIndex
         !?staticStringMap:ioGlobalLiteralStringMap
@@ -154,23 +156,27 @@ override method @procCallInstructionAST analyze
       [!?ioVariableMap searchForReadWriteAccess
         !name
         ?let type
-        ?let acceptedModeSet
+        ?let varModeSet
         ?let unused variableAccess
         ?let parameterAccess
         ?*
       ]
     #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
-      end
+      checkMode (
+        !requiredModes:inModeSet
+        !possibleModes:varModeSet
+        !error:name.location
+      )
       parameterList += !mEffectiveParameterKind !mSelector !type
       procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
     end
   end
 #--- Check mode
-  if procedureMode.string != inMode then
-    error mProcRoutineName : "this procedure cannot be used in $" + inMode + " mode"
-  end
+  checkMode (
+    !requiredModes:inModeSet
+    !possibleModes:[procedureModeMap keySet]
+    !error:mProcRoutineName.location
+  )
   if [procSignature length] != [parameterList length] then
     error mProcRoutineName: "this proc requires " + [procSignature length] + " argument(s), this call names "
       + [procSignature length] + " argument(s)"

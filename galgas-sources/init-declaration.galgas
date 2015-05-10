@@ -52,7 +52,7 @@ method @initList-element initSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:.noReceiver
     !context:inContext
-    !mode:"init"
+    !modes:{!"init"}
     !allowException:true
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap

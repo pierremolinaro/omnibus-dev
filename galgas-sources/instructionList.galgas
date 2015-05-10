@@ -40,7 +40,7 @@ syntax extension common_syntax {
 abstract method @instructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -53,7 +53,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?endOfInstructionList:@location inEndOfInstructionList
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -66,7 +66,7 @@ method @instructionListAST analyzeBranchInstructionList
     [mInstruction analyze 
       !optionalReceiverType:inReceiverType
       !context:inContext
-      !mode:inMode
+      !modes:inModeSet
       !allowException:inAllowExceptions
       !?temporary:ioTemporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap
@@ -83,7 +83,7 @@ method @instructionListAST analyzeBranchInstructionList
 method @instructionListAST analyzeRoutineInstructionList
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -94,7 +94,7 @@ method @instructionListAST analyzeRoutineInstructionList
     [mInstruction analyze 
       !optionalReceiverType:inReceiverType
       !context:inContext
-      !mode:inMode
+      !modes:inModeSet
       !allowException:inAllowExceptions
       !?temporary:ioTemporaryIndex
       !?staticStringMap:ioGlobalLiteralStringMap

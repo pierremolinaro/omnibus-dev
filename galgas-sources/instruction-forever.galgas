@@ -37,7 +37,7 @@ syntax extension common_syntax {
 override method @foreverInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -51,7 +51,7 @@ override method @foreverInstructionAST analyze
     !endOfInstructionList:mEndOf_while_instruction
     !optionalReceiverType:inReceiverType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap

@@ -56,7 +56,7 @@ syntax extension common_syntax {
 override method @operatorAssignInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -74,7 +74,7 @@ override method @operatorAssignInstructionAST analyze
     !optionalReceiverType:inReceiverType
     !optionalTargetType:targetType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -92,7 +92,7 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap searchForReadWriteAccess
     !mTargetVarName
     ?*
-    ?let acceptedModeSet
+    ?let targetVarModeSet
     ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
@@ -118,9 +118,11 @@ override method @operatorAssignInstructionAST analyze
     ?resultType:*
   ]
 #--- Check mode
-  if not [acceptedModeSet hasKey !inMode] then
-    error mTargetVarName : "this variable cannot be used in $" + inMode + " mode"
-  end
+  checkMode (
+    !requiredModes:inModeSet
+    !possibleModes:targetVarModeSet
+    !error:mTargetVarName.location
+  )
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end

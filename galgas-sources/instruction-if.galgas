@@ -69,7 +69,7 @@ syntax extension common_syntax {
 override method @ifInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -81,14 +81,13 @@ override method @ifInstructionAST analyze
     !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let testExpressionType
-#    ?generatedCode:let unused testExpressionGeneratedCode
     ?result:@variableKindIR testResult
   ]
 #--- Check inferred type
@@ -102,7 +101,7 @@ override method @ifInstructionAST analyze
     !endOfInstructionList:mEndOfThenInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -115,7 +114,7 @@ override method @ifInstructionAST analyze
     !endOfInstructionList:mEndOfElseInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap

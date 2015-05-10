@@ -37,34 +37,34 @@ proc $init configurePorts () {
 
 //-----------------------------------------------------------------------------*
 
-proc $init driveHighE () {
+proc $init $exception $user driveHighE () {
   GPIOB_PSOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init driveLowE () {
+proc $init $exception $user driveLowE () {
   GPIOB_PCOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init driveHighRS () {
+proc $init $exception $user driveHighRS () {
   GPIOB_PSOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init driveLowRS () {
+proc $init $exception $user driveLowRS () {
   GPIOB_PCOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $init setD4 (?inValue : Bool) { // PTB0
+proc $init $exception $user setD4 (?inValue : Bool) { // PTB0
   if inValue then
     GPIOB_PSOR = 1 << 0 ;
   else
@@ -74,7 +74,7 @@ proc $init setD4 (?inValue : Bool) { // PTB0
 
 //-----------------------------------------------------------------------------*
 
-proc $init setD5 (?inValue : Bool) { // PTC0
+proc $init $exception $user setD5 (?inValue : Bool) { // PTC0
   if inValue then
     GPIOC_PSOR = 1 << 0 ;
   else
@@ -84,7 +84,7 @@ proc $init setD5 (?inValue : Bool) { // PTC0
 
 //-----------------------------------------------------------------------------*
 
-proc $init setD6 (?inValue : Bool) { // PTD1
+proc $init $exception $user setD6 (?inValue : Bool) { // PTD1
   if inValue then
     GPIOD_PSOR = 1 << 1 ;
   else
@@ -94,7 +94,7 @@ proc $init setD6 (?inValue : Bool) { // PTD1
 
 //-----------------------------------------------------------------------------*
 
-proc $init setD7 (?inValue : Bool) { // PTB2
+proc $init $exception $user setD7 (?inValue : Bool) { // PTB2
   if inValue then
     GPIOB_PSOR = 1 << 2 ;
   else
@@ -214,110 +214,43 @@ init {
 //   PRINT ROUTINES IN USER MODE                                               *
 //-----------------------------------------------------------------------------*
 
-proc $user driveHighE_inUserMode () {
-  GPIOB_PSOR = 1 << 1 ; // E is PTB1
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $user driveLowE_inUserMode () {
-  GPIOB_PCOR = 1 << 1 ; // E is PTB1
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $user driveHighRS_inUserMode () {
-  GPIOB_PSOR = 1 << 3 ; // RS is PTB3
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $user driveLowRS_inUserMode () {
-  GPIOB_PCOR = 1 << 3 ; // RS is PTB3
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $user setD4_inUserMode (?inValue : Bool) { // PTB0
-  if inValue then
-    GPIOB_PSOR = 1 << 0 ;
-  else
-    GPIOB_PCOR = 1 << 0 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $user setD5_inUserMode (?inValue : Bool) { // PTC0
-  if inValue then
-    GPIOC_PSOR = 1 << 0 ;
-  else
-    GPIOC_PCOR = 1 << 0 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $user setD6_inUserMode (?inValue : Bool) { // PTD1
-  if inValue then
-    GPIOD_PSOR = 1 << 1 ;
-  else
-    GPIOD_PCOR = 1 << 1 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $user setD7_inUserMode (?inValue : Bool) { // PTB2
-  if inValue then
-    GPIOB_PSOR = 1 << 2 ;
-  else
-    GPIOB_PCOR = 1 << 2 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
 proc $user programLcd4BitDataBusOutput_inUserMode (?inValue : UInt8) {
-  setD4_inUserMode (!(inValue & 0x01) != 0)
-  setD5_inUserMode (!(inValue & 0x02) != 0)
-  setD6_inUserMode (!(inValue & 0x04) != 0)
-  setD7_inUserMode (!(inValue & 0x08) != 0)
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
 }
 
 //-----------------------------------------------------------------------------*
 
 proc $user write8bitCommand_inUserMode (?inCommand : UInt8) {
   waitMS (!1) ;
-  driveLowRS_inUserMode () ;
+  driveLowRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
-  driveHighE_inUserMode () ;
+  driveHighE () ;
   waitMS (!1) ;
-  driveLowE_inUserMode () ;
+  driveLowE () ;
   waitMS (!1) ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand) ;
-  driveHighE_inUserMode () ;
+  driveHighE () ;
   waitMS (!1) ;
-  driveLowE_inUserMode () ;
+  driveLowE () ;
 }
 
 //-----------------------------------------------------------------------------*
 
 proc $user writeData_inUserMode (?inData : UInt8) {
   waitMS (!1) ;
-  driveHighRS_inUserMode () ;
+  driveHighRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
-  driveHighE_inUserMode () ;
+  driveHighE () ;
   waitMS (!1) ;
-  driveLowE_inUserMode () ;
+  driveLowE () ;
   waitMS (!1) ;
   programLcd4BitDataBusOutput_inUserMode (!inData) ;
-  driveHighE_inUserMode () ;
+  driveHighE () ;
   waitMS (!1) ;
-  driveLowE_inUserMode () ;
+  driveLowE () ;
 }
 
 //-----------------------------------------------------------------------------*
@@ -449,78 +382,11 @@ proc $user printSigned (?inValue : Int32) {
 //   EXCEPTION                                                                 *
 //-----------------------------------------------------------------------------*
 
-proc $exception driveHighE_inExceptionMode () {
-  GPIOB_PSOR = 1 << 1 ; // E is PTB1
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $exception driveLowE_inExceptionMode () {
-  GPIOB_PCOR = 1 << 1 ; // E is PTB1
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $exception driveHighRS_inExceptionMode () {
-  GPIOB_PSOR = 1 << 3 ; // RS is PTB3
-}
-
-//-----------------------------------------------------------------------------*
-
-
-proc $exception driveLowRS_inExceptionMode () {
-  GPIOB_PCOR = 1 << 3 ; // RS is PTB3
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $exception setD4_inExceptionMode (?inValue : Bool) { // PTB0
-  if inValue then
-    GPIOB_PSOR = 1 << 0 ;
-  else
-    GPIOB_PCOR = 1 << 0 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $exception setD5_inExceptionMode (?inValue : Bool) { // PTC0
-  if inValue then
-    GPIOC_PSOR = 1 << 0 ;
-  else
-    GPIOC_PCOR = 1 << 0 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $exception setD6_inExceptionMode (?inValue : Bool) { // PTD1
-  if inValue then
-    GPIOD_PSOR = 1 << 1 ;
-  else
-    GPIOD_PCOR = 1 << 1 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
-proc $exception setD7_inExceptionMode (?inValue : Bool) { // PTB2
-  if inValue then
-    GPIOB_PSOR = 1 << 2 ;
-  else
-    GPIOB_PCOR = 1 << 2 ;
-  end
-}
-
-//-----------------------------------------------------------------------------*
-
 proc $exception programLcd4BitDataBusOutput_inExceptionMode (?inValue : UInt8) {
-  setD4_inExceptionMode (!(inValue & 0x01) != 0)
-  setD5_inExceptionMode (!(inValue & 0x02) != 0)
-  setD6_inExceptionMode (!(inValue & 0x04) != 0)
-  setD7_inExceptionMode (!(inValue & 0x08) != 0)
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
 }
 
 //-----------------------------------------------------------------------------*
@@ -544,16 +410,16 @@ proc $exception waitMSInExceptionMode (?duration: inDuration : UInt32) {
 
 proc $exception writeDataInExceptionMode (?inData : UInt8) {
   waitOneMillisecondInExceptionMode () ;
-  driveHighRS_inExceptionMode () ;
+  driveHighRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
-  driveHighE_inExceptionMode () ;
+  driveHighE () ;
   waitOneMillisecondInExceptionMode () ;
-  driveLowE_inExceptionMode () ;
+  driveLowE () ;
   waitOneMillisecondInExceptionMode () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData) ;
-  driveHighE_inExceptionMode () ;
+  driveHighE () ;
   waitOneMillisecondInExceptionMode () ;
-  driveLowE_inExceptionMode () ;
+  driveLowE () ;
 }
 
 //-----------------------------------------------------------------------------*
@@ -569,16 +435,16 @@ proc $exception printUnsignedInExceptionMode (?inValue : UInt32) {
 
 proc $exception write8bitCommand_inExceptionMode (?inCommand : UInt8) {
   waitOneMillisecondInExceptionMode () ;
-  driveLowRS_inExceptionMode () ;
+  driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
-  driveHighE_inExceptionMode () ;
+  driveHighE () ;
   waitOneMillisecondInExceptionMode () ;
-  driveLowE_inExceptionMode () ;
+  driveLowE () ;
   waitOneMillisecondInExceptionMode () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand) ;
-  driveHighE_inExceptionMode () ;
+  driveHighE () ;
   waitOneMillisecondInExceptionMode () ;
-  driveLowE_inExceptionMode () ;
+  driveLowE () ;
 }
 
 //-----------------------------------------------------------------------------*
