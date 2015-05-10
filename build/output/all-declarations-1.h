@@ -4683,8 +4683,7 @@ class GALGAS_variableMap function_initialVariableMap (const class GALGAS_semanti
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTempVariable (class GALGAS_uint & ioArgument0,
-                                 const class GALGAS_location constinArgument1,
-                                 class GALGAS_variableKindIR & outArgument2,
+                                 class GALGAS_variableKindIR & outArgument1,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 

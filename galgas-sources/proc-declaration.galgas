@@ -280,7 +280,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
-            !location:propertyName.location
           }
           ![propertyType copiable]
         ]
@@ -299,7 +298,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
-            !location:propertyName.location
           }
           ![propertyType copiable]
         ]
@@ -317,7 +315,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !{!mProcedureMode.string}
         !mangledNameForInArgument (!name:formalArgumentName.string)
-        !.inArgument {!name:formalArgumentName}
+        !.inArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
@@ -327,7 +325,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !{!mProcedureMode.string}
         !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
-        !.inOutArgument {!name:formalArgumentName}
+        !.inOutArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!name:formalArgumentName.string)
@@ -337,7 +335,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !{!mProcedureMode.string}
         !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
-        !.outArgument {!name:formalArgumentName}
+        !.outArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!name:formalArgumentName.string)

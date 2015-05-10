@@ -93,7 +93,7 @@ override method @varInstructionWithAssignmentAST analyze
     ?result:@variableKindIR expressionResultValueName
   ]
 #--- Declare local variable
-  let targetVar = @variableKindIR.localVariable {!name:mVarName}
+  let targetVar = @variableKindIR.localVariable {!name:mVarName.string}
   [!?ioVariableMap insertDefinedLocalVariable
     !mVarName
     !inferredType
@@ -124,7 +124,7 @@ override method @varInstructionAST analyze
 {
   let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
 #--- Declare local variable
-  let targetVar = @variableKindIR.localVariable {!name:mVarName}
+  let targetVar = @variableKindIR.localVariable {!name:mVarName.string}
   [!?ioVariableMap insertUndefinedLocalVariable
     !mVarName
     !targetType

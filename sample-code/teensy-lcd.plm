@@ -145,7 +145,7 @@ proc $user loop () {
   teensyLedOn ()
   waitMS (!duration)
   teensyLedOff ()
-  gVar ++
+  gVar ++ // Engendre une exception
   goto (!line:0 !column: 0)
   printSpaces (!4)
   goto (!line:0 !column: 0)

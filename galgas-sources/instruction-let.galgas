@@ -92,7 +92,7 @@ override method @letInstructionWithAssignmentAST analyze
     ?result:let @variableKindIR resultValueName
   ]
 #--- Declare local constant
-  let targetConstant = @variableKindIR.localConstant {!name:mVarName}
+  let targetConstant = @variableKindIR.localConstant {!name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType

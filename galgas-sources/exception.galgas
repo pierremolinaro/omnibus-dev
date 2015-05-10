@@ -67,7 +67,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !uintType
       !{!exceptionModeName ()}
       !mangledNameForInArgument (!name:codeArg.string)
-      !.inArgument {!name:codeArg}
+      !.inArgument {!name:codeArg.string}
       ![uintType copiable]
     ]
     let fileArg = @lstring.new {!"FILE" !mExceptionLocation}
@@ -76,7 +76,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !StaticStringType
       !{!exceptionModeName ()}
       !mangledNameForInArgument (!name:fileArg.string)
-      !.inArgument {!name:fileArg}
+      !.inArgument {!name:fileArg.string}
       ![StaticStringType copiable]
     ]
     let lineArg = @lstring.new {!"LINE" !mExceptionLocation}
@@ -85,7 +85,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !uintType
       !{!exceptionModeName ()}
       !mangledNameForInArgument (!name:lineArg.string)
-      !.inArgument {!name:lineArg}
+      !.inArgument {!name:lineArg.string}
       ![uintType copiable]
     ]
   #--- Analyze instruction list

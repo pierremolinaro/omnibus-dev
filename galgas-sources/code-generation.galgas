@@ -6,30 +6,30 @@
 
 getter @variableKindIR mangledName -> @string outResult {
   switch self
-  case register (@lstring name) :
-    outResult = mangledNameForRegister (!name:name.string)
-  case globalConstant (@lstring name) :
-    outResult = mangledNameForConstant (!name:name.string)
-  case globalVariable (@lstring name) :
-    outResult = mangledNameForGlobalVariable (!name:name.string)
-  case localVariable (@lstring name) :
-    outResult = mangledNameForLocalVariable (!name:name.string)
-  case inArgument (@lstring name) :
-    outResult = mangledNameForInArgument (!name:name.string)
-  case inOutArgument (@lstring name) :
-    outResult = mangledNameForInOutArgument (!name:name.string)
-  case outArgument (@lstring name) :
-    outResult = "* " + mangledNameForOutArgument (!name:name.string)
-  case localConstant (@lstring name) :
-    outResult = mangledNameForConstant (!name:name.string)
-  case temporaryConstant (@luint idx) :
-    outResult = mangledNameForTemporaryConstant (!idx:idx.uint)
-  case localAccess (@string access @location unused location) :
+  case register (@string name) :
+    outResult = mangledNameForRegister (!name:name)
+  case globalConstant (@string name) :
+    outResult = mangledNameForConstant (!name:name)
+  case globalVariable (@string name) :
+    outResult = mangledNameForGlobalVariable (!name:name)
+  case localVariable (@string name) :
+    outResult = mangledNameForLocalVariable (!name:name)
+  case inArgument (@string name) :
+    outResult = mangledNameForInArgument (!name:name)
+  case inOutArgument (@string name) :
+    outResult = mangledNameForInOutArgument (!name:name)
+  case outArgument (@string name) :
+    outResult = "* " + mangledNameForOutArgument (!name:name)
+  case localConstant (@string name) :
+    outResult = mangledNameForConstant (!name:name)
+  case temporaryConstant (@uint idx) :
+    outResult = mangledNameForTemporaryConstant (!idx:idx)
+  case localAccess (@string access) :
     outResult = access
-  case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value) :
-    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value.uint64 + ")"
-  case literalSignedInteger (@unifiedTypeMap-proxy type @lsint64 value) :
-    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value.sint64 + ")"
+  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value) :
+    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value + ")"
+  case literalSignedInteger (@unifiedTypeMap-proxy type @sint64 value) :
+    outResult = "((" + mangledNameForType (!name:[type key]) + ") " + value + ")"
   case literalString (* @string name) :
     outResult = name
   end

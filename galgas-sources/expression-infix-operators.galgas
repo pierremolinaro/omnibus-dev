@@ -495,37 +495,37 @@ override method @infixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
-    [leftResult literalUnsignedInteger ?type:* ?value:let @luint64 leftValue]
-    [rightResult literalUnsignedInteger ?type:* ?value:let @luint64 rightValue]
+    [leftResult literalUnsignedInteger ?type:* ?value:let @uint64 leftValue]
+    [rightResult literalUnsignedInteger ?type:* ?value:let @uint64 rightValue]
     @uint64 result
     switch mOp 
-    case equal : result = [leftValue.uint64 == rightValue.uint64 uint64]
-    case nonEqual : result = [leftValue.uint64 != rightValue.uint64 uint64]
-    case strictInf : result = [leftValue.uint64 < rightValue.uint64 uint64]
-    case infEqual : result = [leftValue.uint64 <= rightValue.uint64 uint64]
-    case strictSup : result = [leftValue.uint64 > rightValue.uint64 uint64]
-    case supEqual : result = [leftValue.uint64 >= rightValue.uint64 uint64]
-    case andOp : result = leftValue.uint64 & rightValue.uint64
-    case andShortCircuitOp : result = [(leftValue.uint64 != 0L) && (rightValue.uint64 != 0L) uint64]
-    case orOp : result = leftValue.uint64 | rightValue.uint64
-    case orShortCircuitOp : result = [(leftValue.uint64 != 0L) && (rightValue.uint64 != 0L) uint64]
-    case xorOp : result = leftValue.uint64 ^ rightValue.uint64
-    case addOp : result = leftValue.uint64 &+ rightValue.uint64
-    case addOpNoOvf : result = leftValue.uint64 + rightValue.uint64
-    case subOp : result = leftValue.uint64 - rightValue.uint64
-    case subOpNoOvf : result = leftValue.uint64 &- rightValue.uint64
-    case mulOp : result = leftValue.uint64 * rightValue.uint64
-    case mulOpNoOvf : result = leftValue.uint64 &* rightValue.uint64
-    case divOp : result = leftValue.uint64 / rightValue.uint64
-    case divOpNoOvf : result = leftValue.uint64 &/ rightValue.uint64
-    case modOp : result = leftValue.uint64 mod rightValue.uint64
-    case leftShiftOp  : result = leftValue.uint64 << [rightValue.uint64 uint]
-    case rightShiftOp : result = leftValue.uint64 >> [rightValue.uint64 uint]
+    case equal : result = [leftValue == rightValue uint64]
+    case nonEqual : result = [leftValue != rightValue uint64]
+    case strictInf : result = [leftValue < rightValue uint64]
+    case infEqual : result = [leftValue <= rightValue uint64]
+    case strictSup : result = [leftValue > rightValue uint64]
+    case supEqual : result = [leftValue >= rightValue uint64]
+    case andOp : result = leftValue & rightValue
+    case andShortCircuitOp : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
+    case orOp : result = leftValue | rightValue
+    case orShortCircuitOp : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
+    case xorOp : result = leftValue ^ rightValue
+    case addOp : result = leftValue &+ rightValue
+    case addOpNoOvf : result = leftValue + rightValue
+    case subOp : result = leftValue - rightValue
+    case subOpNoOvf : result = leftValue &- rightValue
+    case mulOp : result = leftValue * rightValue
+    case mulOpNoOvf : result = leftValue &* rightValue
+    case divOp : result = leftValue / rightValue
+    case divOpNoOvf : result = leftValue &/ rightValue
+    case modOp : result = leftValue mod rightValue
+    case leftShiftOp  : result = leftValue << [rightValue uint]
+    case rightShiftOp : result = leftValue >> [rightValue uint]
     end
-    outResult = .literalUnsignedInteger {!type:outExpressionType !value:.new{!result !mOperatorLocation}}
+    outResult = .literalUnsignedInteger {!type:outExpressionType !value:result}
   else
   #--- Temp var
-    getNewTempVariable (!?ioTemporaryIndex !mOperatorLocation ?outResult)
+    getNewTempVariable (!?ioTemporaryIndex ?outResult)
   #--- Generate code
     ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
       !outExpressionType
@@ -533,6 +533,7 @@ override method @infixOperatorExpressionAST analyzeExpression
       !leftResult
       !infixOperatorIR
       !rightResult
+      !mOperatorLocation
     }
   end
 }
@@ -570,7 +571,7 @@ override method @asExpressionAST analyzeExpression
 #--- Analyze type
   outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
 #--- Temp var
-  getNewTempVariable (!?ioTemporaryIndex !mTypeName.location ?outResult)
+  getNewTempVariable (!?ioTemporaryIndex ?outResult)
 #--- Generate code
   ioInstructionGenerationList += !@asOperatorInstructionIR.new {
     !outExpressionType
@@ -622,6 +623,7 @@ class @operatorInfixExpressionIR : @abstractInstructionIR {
   @variableKindIR mLeftOperand
   @infixOperatorIR mOperator
   @variableKindIR mRighOperand
+  @location mOperatorLocation
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -632,7 +634,7 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
   case infixOvf (@string builtinFunction @uint code) :
-    let ovfVar = "ovf" + [[mResult location] locationIndex]
+    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
     outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName] + " ;\n"
     outCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
       +  [mLeftOperand mangledName] + ", "
@@ -640,14 +642,14 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
       + ", &" + [mResult mangledName] + ") ;\n"
     outCode += "if (" + ovfVar + ") {\n"
     outCode += "  raise_exception (" + code
-       + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation]
-       + ", " + [[mResult location] line] + ") ;\n"
+       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mOperatorLocation line] + ") ;\n"
     outCode += "}\n" 
   case infixUnsignedDivide (@uint code) :
     outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
     outCode += "  raise_exception (" + code
-      + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation]
-      + ", " + [[mResult location] line] + ") ;\n"
+      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+      + ", " + [mOperatorLocation line] + ") ;\n"
     outCode += "}\n"
     outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"

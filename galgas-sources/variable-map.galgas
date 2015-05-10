@@ -5,52 +5,19 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @variableKindIR {
-  case register (@lstring name)
-  case globalConstant (@lstring name)
-  case globalVariable (@lstring name)
-  case localVariable (@lstring name)
-  case inArgument (@lstring name)
-  case inOutArgument (@lstring name)
-  case outArgument (@lstring name)
-  case localConstant (@lstring name)
-  case temporaryConstant (@luint idx)
-  case localAccess (@string access @location location)
-  case literalUnsignedInteger (@unifiedTypeMap-proxy type @luint64 value)
-  case literalSignedInteger (@unifiedTypeMap-proxy type @lsint64 value)
-  case literalString (@lstring value @string name)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @variableKindIR location -> @location outLocation {
-  switch self
-  case register (@lstring name) :
-    outLocation = name.location
-  case globalConstant (@lstring name) :
-    outLocation = name.location
-  case globalVariable (@lstring name) :
-    outLocation = name.location
-  case localVariable (@lstring name) :
-    outLocation = name.location
-  case inArgument (@lstring name) :
-    outLocation = name.location
-  case inOutArgument (@lstring name) :
-    outLocation = name.location
-  case outArgument (@lstring name) :
-    outLocation = name.location
-  case localConstant (@lstring name) :
-    outLocation = name.location
-  case temporaryConstant (@luint idx) :
-    outLocation = idx.location
-  case localAccess (* @location location) :
-    outLocation = location
-  case literalUnsignedInteger (* @luint64 value) :
-    outLocation = value.location
-  case literalSignedInteger (* @lsint64 value) :
-    outLocation = value.location
-  case literalString (@lstring value *) :
-    outLocation = value.location
-  end
+  case register (@string name)
+  case globalConstant (@string name)
+  case globalVariable (@string name)
+  case localVariable (@string name)
+  case inArgument (@string name)
+  case inOutArgument (@string name)
+  case outArgument (@string name)
+  case localConstant (@string name)
+  case temporaryConstant (@uint idx)
+  case localAccess (@string access)
+  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value)
+  case literalSignedInteger (@unifiedTypeMap-proxy type @sint64 value)
+  case literalString (@string value @string name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -75,7 +42,7 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case temporaryConstant (*) :
     outResult = false
-  case localAccess (* *) :
+  case localAccess (*) :
     outResult = false
   case literalUnsignedInteger (* *) :
     outResult = true
@@ -105,7 +72,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey}
+        !.register {!name:lkey.string}
         !true
       ]
     else
@@ -114,7 +81,7 @@ func initialVariableMap
         !mType
         !allModeSet
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey}
+        !.register {!name:lkey.string}
         !true
       ]
     end
@@ -126,7 +93,7 @@ func initialVariableMap
       !constantType
       !allModeSet
       !mangledNameForConstant (!name:constantName.string)
-      !.globalConstant {!name:constantName}
+      !.globalConstant {!name:constantName.string}
       !true
     ]
   end
@@ -138,7 +105,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName}
+        !.globalVariable {!name:variableName.string}
         !true
       ]
     else
@@ -147,7 +114,7 @@ func initialVariableMap
         !variableType
         !modeSet
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName}
+        !.globalVariable {!name:variableName.string}
         !true
       ]
     end
@@ -158,10 +125,9 @@ func initialVariableMap
 
 proc getNewTempVariable
   ?!@uint ioTemporaryIndex
-  ?let @location inLocation
   !@variableKindIR outTempVariable
 {
-  outTempVariable = .temporaryConstant {!idx:.new {!ioTemporaryIndex !inLocation}}
+  outTempVariable = .temporaryConstant {!idx:ioTemporaryIndex}
   ioTemporaryIndex ++
 }
 
