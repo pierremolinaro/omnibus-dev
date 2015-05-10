@@ -122,9 +122,9 @@ proc codeGeneration
     code += "static void raise_exception (const int32_t inCode,\n"
     code += "                             const char * inSourceFile,\n"
     code += "                             const int32_t inSourceLine) {\n"
-    code += "  uint32_t status ;\n"
-    code += "  __asm__ (\"mrs %[reg], IPSR\" : [reg]\"=r\"(status));\n"
-    code += "  if (0 == status) {\n"
+    code += "  uint32_t processorMode ;\n"
+    code += "  __asm__ (\"mrs %[reg], IPSR\" : [reg]\"=r\"(processorMode));\n"
+    code += "  if (0 != processorMode) {\n"
     code += "    raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
     code += "  }else{\n"
     code += "    raise_exception_via_svc (inCode, inSourceFile, inSourceLine) ;\n"
@@ -145,14 +145,6 @@ proc codeGeneration
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
     code += [globalVariable implementationCodeGeneration]
   end
-  if not [option plm_options.noExceptionGeneration value] then
-    code += titleComment (!"Raise Exception internal")
-    code += "void raise_exception_internal (const uint32_t in_CODE,\n"
-    code += "                               const char * in_FILE,\n"
-    code += "                               const uint32_t in_LINE) {\n"
-    code += [inIntermediateCodeStruct.mExceptionInstructionListIR instructionListCode]
-    code += "}\n\n"
-  end
   for function in inIntermediateCodeStruct.mFunctionMapIR do
     code += [function headerCodeGeneration]
   end
@@ -171,6 +163,14 @@ proc codeGeneration
     code += [init.mInstructionListIR instructionListCode]
   end
   code += "}\n\n"
+  if not [option plm_options.noExceptionGeneration value] then
+    code += titleComment (!"Raise Exception internal")
+    code += "void raise_exception_internal (const uint32_t in_CODE,\n"
+    code += "                               const char * in_FILE,\n"
+    code += "                               const uint32_t in_LINE) {\n"
+    code += [inIntermediateCodeStruct.mExceptionInstructionListIR instructionListCode]
+    code += "}\n\n"
+  end
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]
   end

@@ -863,7 +863,8 @@ class GALGAS_incDecInstructionIR : public GALGAS_abstractInstructionIR {
   public : static GALGAS_incDecInstructionIR constructor_new (const class GALGAS_sint_36__34_ & inOperand0,
                                                               const class GALGAS_uint_36__34_ & inOperand1,
                                                               const class GALGAS_incDecKind & inOperand2,
-                                                              const class GALGAS_variableKindIR & inOperand3
+                                                              const class GALGAS_variableKindIR & inOperand3,
+                                                              const class GALGAS_location & inOperand4
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -882,6 +883,8 @@ class GALGAS_incDecInstructionIR : public GALGAS_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_sint_36__34_ reader_mMin (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mVariableLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -906,12 +909,14 @@ class cPtr_incDecInstructionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_uint_36__34_ mAttribute_mMax ;
   public : GALGAS_incDecKind mAttribute_mKind ;
   public : GALGAS_variableKindIR mAttribute_mVariable ;
+  public : GALGAS_location mAttribute_mVariableLocation ;
 
 //--- Constructor
   public : cPtr_incDecInstructionIR (const GALGAS_sint_36__34_ & in_mMin,
                                      const GALGAS_uint_36__34_ & in_mMax,
                                      const GALGAS_incDecKind & in_mKind,
-                                     const GALGAS_variableKindIR & in_mVariable
+                                     const GALGAS_variableKindIR & in_mVariable,
+                                     const GALGAS_location & in_mVariableLocation
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -922,6 +927,7 @@ class cPtr_incDecInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_uint_36__34_ reader_mMax (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_incDecKind reader_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mVariableLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

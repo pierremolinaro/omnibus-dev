@@ -7570,8 +7570,7 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def toolDir ():\n"
-  "  # return os.path.expanduser (\"~/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19\")\n"
-  "  return os.path.expanduser (\"~/plm-teensy-x86_64-Darwin-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-teensy-x86_64-Darwin-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7827,7 +7826,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  43106, // Text length
+  42999, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -12043,6 +12042,9 @@ typeComparisonResult cPtr_incDecInstructionIR::dynamicObjectCompare (const acPtr
   if (kOperandEqual == result) {
     result = mAttribute_mVariable.objectCompare (p->mAttribute_mVariable) ;
   }
+  if (kOperandEqual == result) {
+    result = mAttribute_mVariableLocation.objectCompare (p->mAttribute_mVariableLocation) ;
+  }
   return result ;
 }
 
@@ -12083,11 +12085,12 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GALGAS_sint_36__34_ & inAttribute_mMin,
                                                                         const GALGAS_uint_36__34_ & inAttribute_mMax,
                                                                         const GALGAS_incDecKind & inAttribute_mKind,
-                                                                        const GALGAS_variableKindIR & inAttribute_mVariable
+                                                                        const GALGAS_variableKindIR & inAttribute_mVariable,
+                                                                        const GALGAS_location & inAttribute_mVariableLocation
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_incDecInstructionIR result ;
-  if (inAttribute_mMin.isValid () && inAttribute_mMax.isValid () && inAttribute_mKind.isValid () && inAttribute_mVariable.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_incDecInstructionIR (inAttribute_mMin, inAttribute_mMax, inAttribute_mKind, inAttribute_mVariable COMMA_THERE)) ;
+  if (inAttribute_mMin.isValid () && inAttribute_mMax.isValid () && inAttribute_mKind.isValid () && inAttribute_mVariable.isValid () && inAttribute_mVariableLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_incDecInstructionIR (inAttribute_mMin, inAttribute_mMax, inAttribute_mKind, inAttribute_mVariable, inAttribute_mVariableLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -12165,19 +12168,39 @@ GALGAS_variableKindIR cPtr_incDecInstructionIR::reader_mVariable (UNUSED_LOCATIO
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
+    result = p->mAttribute_mVariableLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mVariableLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                    Pointer class for @incDecInstructionIR class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_incDecInstructionIR::cPtr_incDecInstructionIR (const GALGAS_sint_36__34_ & in_mMin,
                                                     const GALGAS_uint_36__34_ & in_mMax,
                                                     const GALGAS_incDecKind & in_mKind,
-                                                    const GALGAS_variableKindIR & in_mVariable
+                                                    const GALGAS_variableKindIR & in_mVariable,
+                                                    const GALGAS_location & in_mVariableLocation
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mMin (in_mMin),
 mAttribute_mMax (in_mMax),
 mAttribute_mKind (in_mKind),
-mAttribute_mVariable (in_mVariable) {
+mAttribute_mVariable (in_mVariable),
+mAttribute_mVariableLocation (in_mVariableLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12196,6 +12219,8 @@ void cPtr_incDecInstructionIR::description (C_String & ioString,
   mAttribute_mKind.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mVariable.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mVariableLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -12203,7 +12228,7 @@ void cPtr_incDecInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_incDecInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_incDecInstructionIR (mAttribute_mMin, mAttribute_mMax, mAttribute_mKind, mAttribute_mVariable COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_incDecInstructionIR (mAttribute_mMin, mAttribute_mMax, mAttribute_mKind, mAttribute_mVariable, mAttribute_mVariableLocation COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -712,8 +712,7 @@ def asDir ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def toolDir ():
-  # return os.path.expanduser ("~/plm-tools/teensy-Intel-Darwin-binutils-2.25-gcc-4.9.2-newlib-2.2.0-libusb-1.0.19")
-  return os.path.expanduser ("~/plm-teensy-x86_64-Darwin-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-teensy-x86_64-Darwin-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *

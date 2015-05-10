@@ -90,7 +90,7 @@ override method @incDecInstructionAST analyze
     ?let type
     ?let acceptedModeSet
     ?let @string unused variableCName
-    ?let variable
+    ?let @variableKindIR variable
     ?*
   ]
 #--- Check mode
@@ -128,6 +128,7 @@ override method @incDecInstructionAST analyze
    !max
    !mKind
    !variable
+   !mVarName.location
  }
 }
 
@@ -140,6 +141,7 @@ class @incDecInstructionIR : @abstractInstructionIR {
   @uint64 mMax
   @incDecKind mKind
   @variableKindIR mVariable
+  @location mVariableLocation
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -150,7 +152,9 @@ override getter @incDecInstructionIR instructionCode -> @string outCode {
     outCode = ""
     if not [option plm_options.noExceptionGeneration value] then
       outCode += "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
-      outCode += "  raise_exception (1, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+      outCode += "  raise_exception (1, "
+        + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", "
+        + [mVariableLocation line] + ") ;\n"
       outCode += "}\n"
     end
     outCode += [mVariable mangledName] + " ++ ;\n"
@@ -158,7 +162,9 @@ override getter @incDecInstructionIR instructionCode -> @string outCode {
     outCode = ""
     if not [option plm_options.noExceptionGeneration value] then
       outCode += "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
-      outCode += "  raise_exception (2, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+      outCode += "  raise_exception (2, "
+        + [[[[mVariable location] file] lastPathComponent] utf8Representation]
+        + ", " + [mVariableLocation line] + ") ;\n"
       outCode += "}\n"
     end
     outCode += [mVariable mangledName] + " -- ;\n"
