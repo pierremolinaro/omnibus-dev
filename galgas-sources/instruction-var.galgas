@@ -66,7 +66,7 @@ syntax extension common_syntax {
 override method @varInstructionWithAssignmentAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModes
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -82,14 +82,13 @@ override method @varInstructionWithAssignmentAST analyze
     !optionalReceiverType:inReceiverType
     !optionalTargetType:targetType
     !context:inContext
-    !mode:inMode
+    !modes:inModes
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?expressionType:let inferredType
-#    ?generatedCode:let unused expressionGeneratedCode
     ?result:@variableKindIR expressionResultValueName
   ]
 #--- Declare local variable
@@ -97,7 +96,7 @@ override method @varInstructionWithAssignmentAST analyze
   [!?ioVariableMap insertDefinedLocalVariable
     !mVarName
     !inferredType
-    !{!inMode}
+    !inModes
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![inferredType copiable]
@@ -115,7 +114,7 @@ override method @varInstructionWithAssignmentAST analyze
 override method @varInstructionAST analyze
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModes
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
@@ -128,7 +127,7 @@ override method @varInstructionAST analyze
   [!?ioVariableMap insertUndefinedLocalVariable
     !mVarName
     !targetType
-    !{!inMode}
+    !inModes
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![targetType copiable]

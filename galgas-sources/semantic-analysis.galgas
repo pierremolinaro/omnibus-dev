@@ -68,9 +68,11 @@ proc semanticAnalysis
       !formalArgumentList:requiredProc.mProcFormalArgumentList
     )
     if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName] then
-      var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc "
-        + if requiredProc.mRequiredMode.string != "" then "$" + requiredProc.mRequiredMode + " " else "" end
-        + requiredProc.mRequiredProcedureName
+      var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
+      for (mode) in requiredProc.mProcedureModeList do
+        s += " $" + mode
+      end
+      s += " " + requiredProc.mRequiredProcedureName
       for arg in requiredProc.mProcFormalArgumentList do
         s += " "
         switch arg.mFormalArgumentPassingMode
@@ -85,13 +87,15 @@ proc semanticAnalysis
       end
       error inEndOfSourceFile : s
     else
-      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procMode ?*]
-      if procMode.string != requiredProc.mRequiredMode.string then
-        if requiredProc.mRequiredMode.string == "" then
-          error procMode : "the procedure mode should be empty"
-        else
-          error procMode : "the procedure mode should be $" + requiredProc.mRequiredMode
-        end 
+      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procModes ?*]
+      let actualProcModeSet = [procModes keySet]
+      let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
+      if actualProcModeSet != requiredProcModeSet then
+        var s = "required modes:"
+        for (mode) in requiredProcModeSet do
+          s += " $" + mode
+        end
+        error [inSemanticContext.mProcedureMap locationForKey !requiredProcMangledName] : s
       end
     end
   end

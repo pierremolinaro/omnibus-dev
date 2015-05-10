@@ -54,7 +54,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -65,14 +65,16 @@ override method @functionCallInExpressionAST analyzeExpression
 {
   [inContext.mFunctionMap searchKey
     !mFunctionVarName
-    ?let functionMode
+    ?let functionModeSet
     ?let formalParameterList
     ?outExpressionType
   ]
 #--- Check mode
-  if inMode != functionMode.string then
-    error mFunctionVarName : "this function should be called in $" + inMode + " mode"
-  end
+  checkMode (
+    !requiredModes:inModeSet
+    !possibleModes:[functionModeSet keySet]
+    !error:mFunctionVarName.location
+  )
 #---
   @variableListIR variableList = {}
   var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
@@ -93,7 +95,7 @@ override method @functionCallInExpressionAST analyzeExpression
         !optionalReceiverType:.noReceiver
         !optionalTargetType:formal.mArgumentType
         !context:inContext
-        !mode:inMode
+        !modes:inModeSet
         !allowException:inAllowExceptions
         !?temporary:ioTemporaryIndex
         !?staticStringMap:ioGlobalLiteralStringMap

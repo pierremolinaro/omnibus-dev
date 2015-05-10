@@ -38,7 +38,7 @@ override method @varInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
@@ -51,15 +51,17 @@ override method @varInExpressionAST analyzeExpression
   [!?ioVariableMap searchForReadAccess
     !mSourceVarName
     ?let sourceVarType
-    ?let acceptedModeSet
+    ?let varModeSet
     ?let unused varAccess
     ?let variable
     ?*
   ]
 #--- Check mode
-  if not [acceptedModeSet hasKey !inMode] then
-    error mSourceVarName : "this variable cannot be used in $" + inMode + " mode"
-  end
+  checkMode (
+    !requiredModes:inModeSet
+    !possibleModes:varModeSet
+    !error:mSourceVarName.location
+  )
 #--- Solve inferred type
   outExpressionType = solveInferredType (
     !targetType:inOptionalTargetType

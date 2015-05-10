@@ -87,7 +87,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -101,7 +101,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -119,7 +119,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorIR = .prefix {!prefixOperator:"-"}
   case minus :
     operatorMap = inContext.mUnaryMinusOperatorMap
-    if inMode == exceptionModeName () then
+    if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation
         : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end

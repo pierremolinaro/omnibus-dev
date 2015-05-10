@@ -351,7 +351,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -365,7 +365,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -379,7 +379,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:leftExpressionType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -426,7 +426,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mXorOperatorMap
     infixOperatorIR = .infix {!infixOperator:"^"}
   case addOp :
-    if inMode == exceptionModeName () then
+    if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
@@ -439,7 +439,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mAddNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"+"}
   case subOp :
-    if inMode == exceptionModeName () then
+    if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
@@ -452,7 +452,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mSubOperatorMap
     infixOperatorIR = .infix {!infixOperator:"-"}
   case mulOp :
-    if inMode == exceptionModeName () then
+    if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
@@ -465,7 +465,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mMulNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"*"}
   case divOp :
-    if inMode == exceptionModeName () then
+    if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
@@ -545,7 +545,7 @@ override method @asExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -559,7 +559,7 @@ override method @asExpressionAST analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap

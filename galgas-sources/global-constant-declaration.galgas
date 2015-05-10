@@ -85,7 +85,7 @@ override method @globalConstantDeclaration enterInContext
      !optionalReceiverType:.noReceiver
      !optionalTargetType:constantType
      !context:ioContext
-     !mode:""
+     !modes:{}
      !allowException:true
      !?temporary:temporaryIndex
      !?staticStringMap:ioGlobalLiteralStringMap

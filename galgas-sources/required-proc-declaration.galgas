@@ -4,7 +4,7 @@
 
 list @requiredProcedureDeclarationListAST {
   @lstring mRequiredProcedureName
-  @lstring mRequiredMode
+  @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
   @location mEndOfProcLocation
 }
@@ -16,7 +16,7 @@ list @requiredProcedureDeclarationListAST {
 syntax extension plms_specific_syntax {
 
   rule <procedure_header>
-    !procMode:@lstring outProcMode
+    !procModes:@lstringlist outProcModeList
     !name:@lstring outProcName
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
 
@@ -25,10 +25,10 @@ syntax extension plms_specific_syntax {
   rule <declaration> ?!@ast ioAST {
     $required$
     <procedure_header>
-      ?procMode:let requiredMode
+      ?procModes:let requiredModeList
       ?name:let procName
       ?formalArguments:let procFormalArgumentList
-    ioAST.mRequiredProcList += !procName !requiredMode !procFormalArgumentList !.here
+    ioAST.mRequiredProcList += !procName !requiredModeList !procFormalArgumentList !.here
   }
 
   #--------------------------------------------------------------------------------------------------------------------*

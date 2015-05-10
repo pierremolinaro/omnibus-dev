@@ -54,7 +54,7 @@ override method @constructorCall analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?mode:let @string unused inMode
+  ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap

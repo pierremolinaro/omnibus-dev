@@ -66,7 +66,7 @@ syntax extension common_syntax {
 override method @letInstructionWithAssignmentAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
@@ -82,7 +82,7 @@ override method @letInstructionWithAssignmentAST analyze
     !optionalReceiverType:inReceiverType
     !optionalTargetType:targetType
     !context:inContext
-    !mode:inMode
+    !modes:inModeSet
     !allowException:inAllowExceptions
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -96,7 +96,7 @@ override method @letInstructionWithAssignmentAST analyze
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType
-    !{!inMode}
+    !inModeSet
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetConstant
     ![inferredType copiable]

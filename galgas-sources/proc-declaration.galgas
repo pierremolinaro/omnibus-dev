@@ -41,7 +41,7 @@ enum @procedureKindAST {
 
 list @procedureDeclarationListAST {
   @procedureKindAST mProcedureKind
-  @lstring mProcedureMode
+  @lstringlist mProcedureModeList
   @lstring mProcedureName
   @procFormalArgumentList mProcFormalArgumentList
   @instructionListAST mInstructionList
@@ -61,27 +61,28 @@ syntax extension common_syntax {
     ?!@procedureDeclarationListAST ioProcListAST
   {
     <procedure_header>
-      ?procMode:let procMode
+      ?procModes:let procModeList
       ?name:let procName
       ?formalArguments:let procFormalArgumentList
     ${$
     <instructionList> ?let instructionList
     $}$
-    ioProcListAST += !inProcedureKind !procMode !procName !procFormalArgumentList !instructionList !.here
+    ioProcListAST += !inProcedureKind !procModeList !procName !procFormalArgumentList !instructionList !.here
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <procedure_header>
-    !procMode:@lstring outProcMode
+    !procModes:@lstringlist outProcModeList
     !name:@lstring outProcName
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
     $proc$
-    select
-      outProcMode = .new {!"" !.here}
-    or
-      $modeName$ ?outProcMode
+    outProcModeList = {}
+    repeat
+      $modeName$ ?let procMode
+      outProcModeList += !procMode
+    while
     end
     $identifier$ ?outProcName
     outProcFormalArgumentList = {}
@@ -156,7 +157,7 @@ list @procedureSignature {
 
 map @procedureMap {
   @bool mMutating
-  @lstring mProcedureMode
+  @modeMap mProcedureModeMap
   @procedureSignature mSignature
 
   insert insertKey error message "the '%K' proc is already declared in %L"
@@ -213,6 +214,11 @@ method @procedureDeclarationListAST-element enterInContext
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
       signature += !formalArgumentPassingMode !selector !typeProxy
     end
+  #--- Mode map
+    @modeMap procedureModeMap = {}
+    for () in mProcedureModeList do
+      [!?procedureModeMap insertKey !mValue] ;
+    end
   #--- Enter in context
     [!?ioContext.mProcedureMap insertKey
       !.new {
@@ -220,7 +226,7 @@ method @procedureDeclarationListAST-element enterInContext
         !mProcedureName.location
       }
       !false # not mutating
-      !mProcedureMode
+      !procedureModeMap
       !signature
     ]
   case structureProc (* *) :
@@ -244,9 +250,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   ?!temporary:@uint ioTemporaryIndex
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check mode
-  if mProcedureMode.string != "" then
-    [inContext.mModeMap searchKey !mProcedureMode]
+#--- Check modes
+  @stringset procedureModeSet = {}
+  for mode in mProcedureModeList do
+    [inContext.mModeMap searchKey !mode.mValue]
+    procedureModeSet += !mode.mValue.string
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
@@ -276,7 +284,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         [!?variableMap insertDefinedLocalVariable
           !propertyName
           !propertyType
-          !{!mProcedureMode.string}
+          !procedureModeSet
           !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
@@ -294,7 +302,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         [!?variableMap insertUsedLocalConstant
           !propertyName
           !propertyType
-          !{!mProcedureMode.string}
+          !procedureModeSet
           !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
@@ -313,7 +321,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertConstantInputFormalArgument
         !formalArgumentName
         !typeProxy
-        !{!mProcedureMode.string}
+        !procedureModeSet
         !mangledNameForInArgument (!name:formalArgumentName.string)
         !.inArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
@@ -323,7 +331,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertInputOutputFormalArgument
         !formalArgumentName
         !typeProxy
-        !{!mProcedureMode.string}
+        !procedureModeSet
         !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
         !.inOutArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
@@ -333,7 +341,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertOutputFormalArgument
         !formalArgumentName
         !typeProxy
-        !{!mProcedureMode.string}
+        !procedureModeSet
         !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
         !.outArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
@@ -346,8 +354,8 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:receiverType
     !context:inContext
-    !mode:mProcedureMode.string
-    !allowException:mProcedureMode.string != exceptionModeName ()
+    !modes:procedureModeSet
+    !allowException:not [procedureModeSet hasKey !exceptionModeName ()]
     !?temporary:ioTemporaryIndex
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap

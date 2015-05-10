@@ -86,8 +86,28 @@ map @globalVariableMap {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @modeMap {
-  insert insertKey error message "the '%K' mode is already declared in %L"
-  search searchKey error message "there is no '%K' mode"
+  insert insertKey error message "the '%%%K' mode is already declared"
+  search searchKey error message "there is no '%%%K' mode"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc checkMode
+  ?requiredModes:let @stringset inRequiredModes
+  ?possibleModes:let @stringset inPossibleModes
+  ?error:let @location inErrorLocation
+{
+  if (inPossibleModes & inRequiredModes) != inRequiredModes  then
+    let missingModes = inRequiredModes - inPossibleModes
+    var s = "missing mode"
+    s += if [missingModes count] > 1 then "s" else "" end
+    s += ": "
+    for (m) in missingModes
+    do  s += "$" + m
+    between s += ", "
+    end
+    error inErrorLocation : s
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -191,8 +211,8 @@ proc buildSemanticContext
 #--- Check required procs mode
   if @uint.errorCount == 0 then
     for requiredProc in inRequiredProcedureDeclarationListAST do
-      if requiredProc.mRequiredMode.string != "" then
-        [outSemanticContext.mModeMap searchKey !requiredProc.mRequiredMode]
+      for (mode) in requiredProc.mProcedureModeList do
+        [outSemanticContext.mModeMap searchKey !mode]
       end
     end
   end
