@@ -430,7 +430,11 @@ override method @infixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:3}
+    if [option plm_options.noExceptionGeneration value] then
+      infixOperatorIR = .infix {!infixOperator:"+"}
+    else
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:3}
+    end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"+"}
@@ -439,7 +443,11 @@ override method @infixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:4}
+    if [option plm_options.noExceptionGeneration value] then
+      infixOperatorIR = .infix {!infixOperator:"-"}
+    else
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:4}
+    end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
     infixOperatorIR = .infix {!infixOperator:"-"}
@@ -448,7 +456,11 @@ override method @infixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
-    infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:5}
+    if [option plm_options.noExceptionGeneration value] then
+      infixOperatorIR = .infix {!infixOperator:"*"}
+    else
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:5}
+    end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"*"}
@@ -457,7 +469,11 @@ override method @infixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
-    infixOperatorIR = .infixUnsignedDivide{!code:6}
+    if [option plm_options.noExceptionGeneration value] then
+      infixOperatorIR = .infix {!infixOperator:"/"}
+    else
+      infixOperatorIR = .infixUnsignedDivide{!code:6}
+    end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
     infixOperatorIR = .infix {!infixOperator:"/"}
@@ -623,12 +639,16 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
       + [mRighOperand mangledName]
       + ", &" + [mResult mangledName] + ") ;\n"
     outCode += "if (" + ovfVar + ") {\n"
-    outCode += "  raise_exception (" + code + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation] + ", " + [[mResult location] line] + ") ;\n"
+    outCode += "  raise_exception (" + code
+       + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation]
+       + ", " + [[mResult location] line] + ") ;\n"
     outCode += "}\n" 
   case infixUnsignedDivide (@uint code) :
     outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
-    outCode += "  raise_exception (" + code + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation] + ", " + [[mResult location] line] + ") ;\n"
-    outCode += "}\n" 
+    outCode += "  raise_exception (" + code
+      + ", " + [[[[mResult location] file] lastPathComponent] utf8Representation]
+      + ", " + [[mResult location] line] + ") ;\n"
+    outCode += "}\n"
     outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"
   end

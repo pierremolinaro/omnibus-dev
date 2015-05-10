@@ -147,14 +147,20 @@ class @incDecInstructionIR : @abstractInstructionIR {
 override getter @incDecInstructionIR instructionCode -> @string outCode {
   switch mKind
   case incWithOverflowCheck :
-    outCode  = "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
-    outCode += "  raise_exception (1, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
-    outCode += "}\n"
+    outCode = ""
+    if not [option plm_options.noExceptionGeneration value] then
+      outCode += "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
+      outCode += "  raise_exception (1, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+      outCode += "}\n"
+    end
     outCode += [mVariable mangledName] + " ++ ;\n"
   case decWithOverflowCheck :
-    outCode  = "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
-    outCode += "  raise_exception (2, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
-    outCode += "}\n"
+    outCode = ""
+    if not [option plm_options.noExceptionGeneration value] then
+      outCode += "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
+      outCode += "  raise_exception (2, " + [[[[mVariable location] file] lastPathComponent] utf8Representation] + ", " + [[mVariable location] line] + ") ;\n"
+      outCode += "}\n"
+    end
     outCode += [mVariable mangledName] + " -- ;\n"
   case incNoOverflowCheck :
     outCode = [mVariable mangledName] + " ++ ;\n"

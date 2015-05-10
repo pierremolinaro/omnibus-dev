@@ -3362,6 +3362,8 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ;
+
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               UInt options                                                                          *

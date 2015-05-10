@@ -1,5 +1,6 @@
 option plm_options {
 
-  @stringlist pathList: '\0', "path" -> "search pathes for source files"
+  @stringlist pathList: '\0', "path" -> "Search pathes for source files"
+  @bool noExceptionGeneration: '\0', "no-exception-generation" -> "Do not generate exception code"
 
 }
