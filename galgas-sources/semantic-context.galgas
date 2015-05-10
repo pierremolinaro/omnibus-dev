@@ -40,6 +40,14 @@ map @infixOperatorMap {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+map @prefixOperatorMap {
+  @unifiedTypeMap-proxy mResultType
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 map @globalLiteralStringMap {
   @string mLiteralStringCname
   insert insertKey error message "** internal error **"
@@ -143,6 +151,7 @@ struct @semanticContext {
   @infixOperatorMap mModOperatorMap             # %
   @infixOperatorMap mLeftShiftOperatorMap       # <<
   @infixOperatorMap mRightShiftOperatorMap      # >>
+  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

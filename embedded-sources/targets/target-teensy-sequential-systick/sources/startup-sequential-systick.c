@@ -204,7 +204,6 @@ typedef struct {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern unsigned __system_stack_end ;
-extern void proc_svcHandler (void) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -221,7 +220,7 @@ const vectorStructSeq vector __attribute__ ((section (".isr_vector"))) = {
     NULL, // 8
     NULL, // 9
     NULL, // 10
-    proc_svcHandler, // 11 (svc)
+    NULL, // 11 (svc)
     NULL, // 12
     NULL, // 13
     NULL, // 14

@@ -1,0 +1,218 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @prefixOperator {
+  case minus
+  case minusNoOvf
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @prefixOperatorExpressionAST : @expressionAST {
+  @location mOperatorLocation
+  @prefixOperator mOp
+  @expressionAST mExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $-$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.minus
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $&-$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.minusNoOvf
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @prefixOperatorMap checkWith
+  ?type:let @unifiedTypeMap-proxy inType
+  ?operatorLocation:let @location inOperatorLocation
+  !resultType: @unifiedTypeMap-proxy outResultType
+{
+  let lkey = @lstring.new {![inType key] !inOperatorLocation}
+  if [self hasKey !lkey.string] then
+    [self searchKey !lkey ?outResultType]
+  else
+    error inOperatorLocation
+      : "prefix operation is not defined for '" + [inType key] + " type"
+      : outResultType
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @prefixOperatorExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @string inMode
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !result:@variableKindIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inMode
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?expressionType:let expressionType
+    ?result:@variableKindIR result
+  ]
+#--- Check expression type accepts prefix operator
+  @prefixOperatorMap operatorMap
+  @prefixOperatorIR prefixOperatorIR
+  switch mOp 
+  case minusNoOvf :
+    operatorMap = inContext.mUnaryMinusOperatorMap
+    prefixOperatorIR = .prefix {!prefixOperator:"-"}
+  case minus :
+    operatorMap = inContext.mUnaryMinusOperatorMap
+    if inMode == exceptionModeName () then
+      error mOperatorLocation
+        : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    end
+    if [option plm_options.noExceptionGeneration value] then
+      prefixOperatorIR = .prefix {!prefixOperator:"-"}
+    else
+      prefixOperatorIR = .prefixMinusOvf {!code:6}
+    end
+  end
+  [operatorMap checkWith
+    !type:expressionType
+    !operatorLocation:mOperatorLocation
+    ?resultType:outExpressionType
+  ]
+#---
+  if [result isLiteralSignedInteger] then
+    [result literalSignedInteger ?type:* ?value:let @lsint64 value]
+    @sint64 result
+    switch mOp 
+    case minusNoOvf : result = &- value.sint64
+    case minus : result = - value.sint64
+    end
+    outResult = .literalSignedInteger {!type:outExpressionType !value:.new{!result !mOperatorLocation}}
+  else
+  #--- Temp var
+    getNewTempVariable (!?ioTemporaryIndex !mOperatorLocation ?outResult)
+  #--- Generate code
+    ioInstructionGenerationList += !@prefixOperatorExpressionIR.new {
+      !outExpressionType
+      !outResult
+      !result
+      !prefixOperatorIR
+      !mOperatorLocation
+    }
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @prefixOperatorExpressionIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @prefixOperatorIR {
+  case prefix (@string prefixOperator)
+  case prefixMinusOvf (@uint code)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @prefixOperatorExpressionIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @variableKindIR mResult
+  @variableKindIR mOperand
+  @prefixOperatorIR mOperator
+  @location mOperatorLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
+  @sint64 minValue
+  switch [mTargetType kind]
+  case boolean, boolset, literalString :
+    error mOperatorLocation: "Internal Error" : minValue
+  case enumeration (*) :
+    error mOperatorLocation: "Internal Error" : minValue
+  case structure (*) :
+    error mOperatorLocation: "Internal Error" : minValue
+  case integer (@sint64 min *) :
+    minValue = min
+  end
+  switch mOperator 
+  case prefix (@string prefixOperator) :
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
+  case prefixMinusOvf (@uint code) :
+    let ovfVar = "ovf" + [[mResult location] locationIndex]
+    outCode  = "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
+    outCode += "if (" + ovfVar + ") {\n"
+    outCode += "  raise_exception (" + code
+       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n" 
+    outCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+       + " = - " + [mOperand mangledName] + " ;\n"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @prefixOperatorExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
