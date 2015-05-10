@@ -9084,47 +9084,46 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_variableKindIR constructor_globalConstant (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_globalConstant (const class GALGAS_string & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_globalVariable (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_globalVariable (const class GALGAS_string & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_inArgument (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_inArgument (const class GALGAS_string & inOperand0
                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_string & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                          const class GALGAS_lsint_36__34_ & inOperand1
+                                                                          const class GALGAS_sint_36__34_ & inOperand1
                                                                           COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_lstring & inOperand0,
+  public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
                                                                    const class GALGAS_string & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                            const class GALGAS_luint_36__34_ & inOperand1
+                                                                            const class GALGAS_uint_36__34_ & inOperand1
                                                                             COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_string & inOperand0,
-                                                                 const class GALGAS_location & inOperand1
+  public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_string & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_localConstant (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_localConstant (const class GALGAS_string & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_localVariable (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_localVariable (const class GALGAS_string & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_outArgument (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_outArgument (const class GALGAS_string & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_register (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_register (const class GALGAS_string & inOperand0
                                                               COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_temporaryConstant (const class GALGAS_luint & inOperand0
+  public : static GALGAS_variableKindIR constructor_temporaryConstant (const class GALGAS_uint & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -9136,59 +9135,58 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_string & outArgument0,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_string & outArgument0,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_inArgument (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_inArgument (class GALGAS_string & outArgument0,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_inOutArgument (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_inOutArgument (class GALGAS_string & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                              class GALGAS_lsint_36__34_ & outArgument1,
+                                                              class GALGAS_sint_36__34_ & outArgument1,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_string & outArgument0,
                                                        class GALGAS_string & outArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                                class GALGAS_luint_36__34_ & outArgument1,
+                                                                class GALGAS_uint_36__34_ & outArgument1,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localAccess (class GALGAS_string & outArgument0,
-                                                     class GALGAS_location & outArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_string & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_string & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_outArgument (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_outArgument (class GALGAS_string & outArgument0,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_string & outArgument0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_temporaryConstant (class GALGAS_luint & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_temporaryConstant (class GALGAS_uint & outArgument0,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const ;
 
@@ -9239,10 +9237,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_variableKindIR ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_register : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_register (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_register (const GALGAS_string & inAssociatedValue0
                                                           COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9255,10 +9253,10 @@ class cEnumAssociatedValues_variableKindIR_register : public cEnumAssociatedValu
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_globalConstant : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_globalConstant (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_globalConstant (const GALGAS_string & inAssociatedValue0
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9271,10 +9269,10 @@ class cEnumAssociatedValues_variableKindIR_globalConstant : public cEnumAssociat
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_globalVariable : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_string & inAssociatedValue0
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9287,10 +9285,10 @@ class cEnumAssociatedValues_variableKindIR_globalVariable : public cEnumAssociat
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_localVariable : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_localVariable (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_localVariable (const GALGAS_string & inAssociatedValue0
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9303,10 +9301,10 @@ class cEnumAssociatedValues_variableKindIR_localVariable : public cEnumAssociate
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_inArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_inArgument (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_inArgument (const GALGAS_string & inAssociatedValue0
                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9319,10 +9317,10 @@ class cEnumAssociatedValues_variableKindIR_inArgument : public cEnumAssociatedVa
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_inOutArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_inOutArgument (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_inOutArgument (const GALGAS_string & inAssociatedValue0
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9335,10 +9333,10 @@ class cEnumAssociatedValues_variableKindIR_inOutArgument : public cEnumAssociate
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_outArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_outArgument (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_outArgument (const GALGAS_string & inAssociatedValue0
                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9351,10 +9349,10 @@ class cEnumAssociatedValues_variableKindIR_outArgument : public cEnumAssociatedV
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_localConstant : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_localConstant (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_localConstant (const GALGAS_string & inAssociatedValue0
                                                                COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9367,10 +9365,10 @@ class cEnumAssociatedValues_variableKindIR_localConstant : public cEnumAssociate
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_temporaryConstant : public cEnumAssociatedValues {
-  public : const GALGAS_luint mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_temporaryConstant (const GALGAS_luint & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_temporaryConstant (const GALGAS_uint & inAssociatedValue0
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9384,11 +9382,9 @@ class cEnumAssociatedValues_variableKindIR_temporaryConstant : public cEnumAssoc
 
 class cEnumAssociatedValues_variableKindIR_localAccess : public cEnumAssociatedValues {
   public : const GALGAS_string mAssociatedValue0 ;
-  public : const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_localAccess (const GALGAS_string & inAssociatedValue0,
-                                                             const GALGAS_location & inAssociatedValue1
+  public : cEnumAssociatedValues_variableKindIR_localAccess (const GALGAS_string & inAssociatedValue0
                                                              COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9402,11 +9398,11 @@ class cEnumAssociatedValues_variableKindIR_localAccess : public cEnumAssociatedV
 
 class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_luint_36__34_ mAssociatedValue1 ;
+  public : const GALGAS_uint_36__34_ mAssociatedValue1 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                        const GALGAS_luint_36__34_ & inAssociatedValue1
+                                                                        const GALGAS_uint_36__34_ & inAssociatedValue1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9420,11 +9416,11 @@ class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnum
 
 class cEnumAssociatedValues_variableKindIR_literalSignedInteger : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_lsint_36__34_ mAssociatedValue1 ;
+  public : const GALGAS_sint_36__34_ mAssociatedValue1 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                      const GALGAS_lsint_36__34_ & inAssociatedValue1
+                                                                      const GALGAS_sint_36__34_ & inAssociatedValue1
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -9437,11 +9433,11 @@ class cEnumAssociatedValues_variableKindIR_literalSignedInteger : public cEnumAs
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_literalString : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_lstring & inAssociatedValue0,
+  public : cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_string & inAssociatedValue0,
                                                                const GALGAS_string & inAssociatedValue1
                                                                COMMA_LOCATION_ARGS) ;
 

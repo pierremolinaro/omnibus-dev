@@ -1491,7 +1491,8 @@ class GALGAS_operatorInfixExpressionIR : public GALGAS_abstractInstructionIR {
                                                                     const class GALGAS_variableKindIR & inOperand1,
                                                                     const class GALGAS_variableKindIR & inOperand2,
                                                                     const class GALGAS_infixOperatorIR & inOperand3,
-                                                                    const class GALGAS_variableKindIR & inOperand4
+                                                                    const class GALGAS_variableKindIR & inOperand4,
+                                                                    const class GALGAS_location & inOperand5
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1506,6 +1507,8 @@ class GALGAS_operatorInfixExpressionIR : public GALGAS_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mLeftOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mResult (LOCATION_ARGS) const ;
 
@@ -1537,13 +1540,15 @@ class cPtr_operatorInfixExpressionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_variableKindIR mAttribute_mLeftOperand ;
   public : GALGAS_infixOperatorIR mAttribute_mOperator ;
   public : GALGAS_variableKindIR mAttribute_mRighOperand ;
+  public : GALGAS_location mAttribute_mOperatorLocation ;
 
 //--- Constructor
   public : cPtr_operatorInfixExpressionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
                                            const GALGAS_variableKindIR & in_mResult,
                                            const GALGAS_variableKindIR & in_mLeftOperand,
                                            const GALGAS_infixOperatorIR & in_mOperator,
-                                           const GALGAS_variableKindIR & in_mRighOperand
+                                           const GALGAS_variableKindIR & in_mRighOperand,
+                                           const GALGAS_location & in_mOperatorLocation
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1555,6 +1560,7 @@ class cPtr_operatorInfixExpressionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mLeftOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_infixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mRighOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

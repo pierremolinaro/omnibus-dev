@@ -16417,7 +16417,7 @@ GALGAS_procedureKindAST GALGAS_procedureKindAST::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_register::cEnumAssociatedValues_variableKindIR_register (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_register::cEnumAssociatedValues_variableKindIR_register (const GALGAS_string & inAssociatedValue0
                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16446,7 +16446,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_register::compare (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_globalConstant::cEnumAssociatedValues_variableKindIR_globalConstant (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_globalConstant::cEnumAssociatedValues_variableKindIR_globalConstant (const GALGAS_string & inAssociatedValue0
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16475,7 +16475,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_globalConstant::compar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_globalVariable::cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_globalVariable::cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_string & inAssociatedValue0
                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16504,7 +16504,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_globalVariable::compar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_localVariable::cEnumAssociatedValues_variableKindIR_localVariable (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_localVariable::cEnumAssociatedValues_variableKindIR_localVariable (const GALGAS_string & inAssociatedValue0
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16533,7 +16533,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_localVariable::compare
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_inArgument::cEnumAssociatedValues_variableKindIR_inArgument (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_inArgument::cEnumAssociatedValues_variableKindIR_inArgument (const GALGAS_string & inAssociatedValue0
                                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16562,7 +16562,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_inArgument::compare (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_inOutArgument::cEnumAssociatedValues_variableKindIR_inOutArgument (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_inOutArgument::cEnumAssociatedValues_variableKindIR_inOutArgument (const GALGAS_string & inAssociatedValue0
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16591,7 +16591,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_inOutArgument::compare
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_outArgument::cEnumAssociatedValues_variableKindIR_outArgument (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_outArgument::cEnumAssociatedValues_variableKindIR_outArgument (const GALGAS_string & inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16620,7 +16620,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_outArgument::compare (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_localConstant::cEnumAssociatedValues_variableKindIR_localConstant (const GALGAS_lstring & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_localConstant::cEnumAssociatedValues_variableKindIR_localConstant (const GALGAS_string & inAssociatedValue0
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16649,7 +16649,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_localConstant::compare
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_temporaryConstant::cEnumAssociatedValues_variableKindIR_temporaryConstant (const GALGAS_luint & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_temporaryConstant::cEnumAssociatedValues_variableKindIR_temporaryConstant (const GALGAS_uint & inAssociatedValue0
                                                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -16678,12 +16678,10 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_temporaryConstant::com
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_localAccess::cEnumAssociatedValues_variableKindIR_localAccess (const GALGAS_string & inAssociatedValue0,
-                                                                                                    const GALGAS_location & inAssociatedValue1
+cEnumAssociatedValues_variableKindIR_localAccess::cEnumAssociatedValues_variableKindIR_localAccess (const GALGAS_string & inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
+mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16692,7 +16690,6 @@ void cEnumAssociatedValues_variableKindIR_localAccess::description (C_String & i
                                                                     const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
   ioString << ")" ;
 }
 
@@ -16705,16 +16702,13 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_localAccess::compare (
   if (result == kOperandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_variableKindIR_literalUnsignedInteger::cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                                          const GALGAS_luint_36__34_ & inAssociatedValue1
+                                                                                                                          const GALGAS_uint_36__34_ & inAssociatedValue1
                                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -16749,7 +16743,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_literalUnsignedInteger
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_variableKindIR_literalSignedInteger::cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                                                      const GALGAS_lsint_36__34_ & inAssociatedValue1
+                                                                                                                      const GALGAS_sint_36__34_ & inAssociatedValue1
                                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -16783,7 +16777,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_literalSignedInteger::
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_literalString::cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_lstring & inAssociatedValue0,
+cEnumAssociatedValues_variableKindIR_literalString::cEnumAssociatedValues_variableKindIR_literalString (const GALGAS_string & inAssociatedValue0,
                                                                                                         const GALGAS_string & inAssociatedValue1
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -16825,7 +16819,7 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_register (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_register (const GALGAS_string & inAssociatedValue0
                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16840,7 +16834,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_register (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalConstant (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalConstant (const GALGAS_string & inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16855,7 +16849,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalConstant (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalVariable (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalVariable (const GALGAS_string & inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16870,7 +16864,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_globalVariable (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localVariable (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localVariable (const GALGAS_string & inAssociatedValue0
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16885,7 +16879,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localVariable (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inArgument (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inArgument (const GALGAS_string & inAssociatedValue0
                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16900,7 +16894,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inArgument (const GALGA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inOutArgument (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inOutArgument (const GALGAS_string & inAssociatedValue0
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16915,7 +16909,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_inOutArgument (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_outArgument (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_outArgument (const GALGAS_string & inAssociatedValue0
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16930,7 +16924,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_outArgument (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localConstant (const GALGAS_lstring & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localConstant (const GALGAS_string & inAssociatedValue0
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16945,7 +16939,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localConstant (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_temporaryConstant (const GALGAS_luint & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_temporaryConstant (const GALGAS_uint & inAssociatedValue0
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -16960,14 +16954,13 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_temporaryConstant (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localAccess (const GALGAS_string & inAssociatedValue0,
-                                                                      const GALGAS_location & inAssociatedValue1
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localAccess (const GALGAS_string & inAssociatedValue0
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+  if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_localAccess ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_variableKindIR_localAccess (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_variableKindIR_localAccess (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -16977,7 +16970,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localAccess (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalUnsignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                                 const GALGAS_luint_36__34_ & inAssociatedValue1
+                                                                                 const GALGAS_uint_36__34_ & inAssociatedValue1
                                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
@@ -16993,7 +16986,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalUnsignedInteger 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalSignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                               const GALGAS_lsint_36__34_ & inAssociatedValue1
+                                                                               const GALGAS_sint_36__34_ & inAssociatedValue1
                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
@@ -17008,7 +17001,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalSignedInteger (c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalString (const GALGAS_lstring & inAssociatedValue0,
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalString (const GALGAS_string & inAssociatedValue0,
                                                                         const GALGAS_string & inAssociatedValue1
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
@@ -17024,7 +17017,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalString (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_register (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_register (GALGAS_string & outAssociatedValue0,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_register) {
@@ -17040,7 +17033,7 @@ void GALGAS_variableKindIR::method_register (GALGAS_lstring & outAssociatedValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_globalConstant (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_globalConstant (GALGAS_string & outAssociatedValue0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_globalConstant) {
@@ -17056,7 +17049,7 @@ void GALGAS_variableKindIR::method_globalConstant (GALGAS_lstring & outAssociate
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_globalVariable (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_globalVariable (GALGAS_string & outAssociatedValue0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_globalVariable) {
@@ -17072,7 +17065,7 @@ void GALGAS_variableKindIR::method_globalVariable (GALGAS_lstring & outAssociate
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_localVariable (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_localVariable (GALGAS_string & outAssociatedValue0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_localVariable) {
@@ -17088,7 +17081,7 @@ void GALGAS_variableKindIR::method_localVariable (GALGAS_lstring & outAssociated
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_inArgument (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_inArgument (GALGAS_string & outAssociatedValue0,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_inArgument) {
@@ -17104,7 +17097,7 @@ void GALGAS_variableKindIR::method_inArgument (GALGAS_lstring & outAssociatedVal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_inOutArgument (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_inOutArgument (GALGAS_string & outAssociatedValue0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_inOutArgument) {
@@ -17120,7 +17113,7 @@ void GALGAS_variableKindIR::method_inOutArgument (GALGAS_lstring & outAssociated
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_outArgument (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_outArgument (GALGAS_string & outAssociatedValue0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_outArgument) {
@@ -17136,7 +17129,7 @@ void GALGAS_variableKindIR::method_outArgument (GALGAS_lstring & outAssociatedVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_localConstant (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_localConstant (GALGAS_string & outAssociatedValue0,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_localConstant) {
@@ -17152,7 +17145,7 @@ void GALGAS_variableKindIR::method_localConstant (GALGAS_lstring & outAssociated
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_temporaryConstant (GALGAS_luint & outAssociatedValue0,
+void GALGAS_variableKindIR::method_temporaryConstant (GALGAS_uint & outAssociatedValue0,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_temporaryConstant) {
@@ -17169,26 +17162,23 @@ void GALGAS_variableKindIR::method_temporaryConstant (GALGAS_luint & outAssociat
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_variableKindIR::method_localAccess (GALGAS_string & outAssociatedValue0,
-                                                GALGAS_location & outAssociatedValue1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_localAccess) {
     outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
     C_String s ;
     s << "method @variableKindIR localAccess invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_variableKindIR_localAccess * ptr = (const cEnumAssociatedValues_variableKindIR_localAccess *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                           GALGAS_luint_36__34_ & outAssociatedValue1,
+                                                           GALGAS_uint_36__34_ & outAssociatedValue1,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_literalUnsignedInteger) {
@@ -17207,7 +17197,7 @@ void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_unifiedTypeMap
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_variableKindIR::method_literalSignedInteger (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
-                                                         GALGAS_lsint_36__34_ & outAssociatedValue1,
+                                                         GALGAS_sint_36__34_ & outAssociatedValue1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_literalSignedInteger) {
@@ -17225,7 +17215,7 @@ void GALGAS_variableKindIR::method_literalSignedInteger (GALGAS_unifiedTypeMap_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_literalString (GALGAS_lstring & outAssociatedValue0,
+void GALGAS_variableKindIR::method_literalString (GALGAS_string & outAssociatedValue0,
                                                   GALGAS_string & outAssociatedValue1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
@@ -19673,47 +19663,47 @@ GALGAS_variableMap function_initialVariableMap (const GALGAS_semanticContext & c
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_variableMap result_outVariableMap ; // Returned variable
-  GALGAS_stringset var_allModeSet = constinArgument_inContext.mAttribute_mModeMap.reader_keySet (SOURCE_FILE ("variable-map.galgas", 97)) ;
-  result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 99)) ;
-  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("variable-map.galgas", 100)) ;
-  cEnumerator_registerMap enumerator_3687 (constinArgument_inContext.mAttribute_mRegisterMap, kEnumeration_up) ;
-  while (enumerator_3687.hasCurrentObject ()) {
-    GALGAS_bool test_0 = enumerator_3687.current_mIsReadOnly (HERE) ;
+  GALGAS_stringset var_allModeSet = constinArgument_inContext.mAttribute_mModeMap.reader_keySet (SOURCE_FILE ("variable-map.galgas", 64)) ;
+  result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 66)) ;
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("variable-map.galgas", 67)) ;
+  cEnumerator_registerMap enumerator_2507 (constinArgument_inContext.mAttribute_mRegisterMap, kEnumeration_up) ;
+  while (enumerator_2507.hasCurrentObject ()) {
+    GALGAS_bool test_0 = enumerator_2507.current_mIsReadOnly (HERE) ;
     if (kBoolTrue != test_0.boolEnum ()) {
       test_0 = inArgument_inGlobalsAreConstant ;
     }
     const enumGalgasBool test_1 = test_0.boolEnum () ;
     if (kBoolTrue == test_1) {
       {
-      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3687.current_lkey (HERE), enumerator_3687.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_3687.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 107)), GALGAS_variableKindIR::constructor_register (enumerator_3687.current_lkey (HERE)  COMMA_SOURCE_FILE ("variable-map.galgas", 108)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 103)) ;
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_2507.current_lkey (HERE), enumerator_2507.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_2507.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 74)), GALGAS_variableKindIR::constructor_register (enumerator_2507.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 75)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 70)) ;
       }
     }else if (kBoolFalse == test_1) {
       {
-      result_outVariableMap.modifier_insertDefinedLocalVariable (enumerator_3687.current_lkey (HERE), enumerator_3687.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_3687.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 116)), GALGAS_variableKindIR::constructor_register (enumerator_3687.current_lkey (HERE)  COMMA_SOURCE_FILE ("variable-map.galgas", 117)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 112)) ;
+      result_outVariableMap.modifier_insertDefinedLocalVariable (enumerator_2507.current_lkey (HERE), enumerator_2507.current_mType (HERE), var_allModeSet, function_mangledNameForRegister (enumerator_2507.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 83)), GALGAS_variableKindIR::constructor_register (enumerator_2507.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 84)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 79)) ;
       }
     }
-    enumerator_3687.gotoNextObject () ;
+    enumerator_2507.gotoNextObject () ;
   }
-  cEnumerator_globalConstantMap enumerator_4283 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_4283.hasCurrentObject ()) {
+  cEnumerator_globalConstantMap enumerator_3117 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_3117.hasCurrentObject ()) {
     {
-    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_4283.current_lkey (HERE), enumerator_4283.current_mConstantType (HERE), var_allModeSet, function_mangledNameForConstant (enumerator_4283.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 128)), GALGAS_variableKindIR::constructor_globalConstant (enumerator_4283.current_lkey (HERE)  COMMA_SOURCE_FILE ("variable-map.galgas", 129)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 124)) ;
+    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3117.current_lkey (HERE), enumerator_3117.current_mConstantType (HERE), var_allModeSet, function_mangledNameForConstant (enumerator_3117.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 95)), GALGAS_variableKindIR::constructor_globalConstant (enumerator_3117.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 96)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 91)) ;
     }
-    enumerator_4283.gotoNextObject () ;
+    enumerator_3117.gotoNextObject () ;
   }
-  cEnumerator_globalVariableMap enumerator_4618 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
-  while (enumerator_4618.hasCurrentObject ()) {
+  cEnumerator_globalVariableMap enumerator_3459 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+  while (enumerator_3459.hasCurrentObject ()) {
     const enumGalgasBool test_2 = inArgument_inGlobalsAreConstant.boolEnum () ;
     if (kBoolTrue == test_2) {
       {
-      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_4618.current_lkey (HERE), enumerator_4618.current_mVariableType (HERE), enumerator_4618.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_4618.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 140)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_4618.current_lkey (HERE)  COMMA_SOURCE_FILE ("variable-map.galgas", 141)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 136)) ;
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3459.current_lkey (HERE), enumerator_3459.current_mVariableType (HERE), enumerator_3459.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_3459.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 107)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3459.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 108)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 103)) ;
       }
     }else if (kBoolFalse == test_2) {
       {
-      result_outVariableMap.modifier_insertGlobalVariable (enumerator_4618.current_lkey (HERE), enumerator_4618.current_mVariableType (HERE), enumerator_4618.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_4618.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 149)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_4618.current_lkey (HERE)  COMMA_SOURCE_FILE ("variable-map.galgas", 150)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 145)) ;
+      result_outVariableMap.modifier_insertGlobalVariable (enumerator_3459.current_lkey (HERE), enumerator_3459.current_mVariableType (HERE), enumerator_3459.current_mExecutionModeSet (HERE), function_mangledNameForGlobalVariable (enumerator_3459.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 116)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3459.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 117)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 112)) ;
       }
     }
-    enumerator_4618.gotoNextObject () ;
+    enumerator_3459.gotoNextObject () ;
   }
 //---
   return result_outVariableMap ;
@@ -19763,13 +19753,12 @@ C_galgas_function_descriptor functionDescriptor_initialVariableMap ("initialVari
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTempVariable (GALGAS_uint & ioArgument_ioTemporaryIndex,
-                                 const GALGAS_location constinArgument_inLocation,
                                  GALGAS_variableKindIR & outArgument_outTempVariable,
                                  C_Compiler * inCompiler
                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outTempVariable.drop () ; // Release 'out' argument
-  outArgument_outTempVariable = GALGAS_variableKindIR::constructor_temporaryConstant (GALGAS_luint::constructor_new (ioArgument_ioTemporaryIndex, constinArgument_inLocation  COMMA_SOURCE_FILE ("variable-map.galgas", 164))  COMMA_SOURCE_FILE ("variable-map.galgas", 164)) ;
-  ioArgument_ioTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 165)) ;
+  outArgument_outTempVariable = GALGAS_variableKindIR::constructor_temporaryConstant (ioArgument_ioTemporaryIndex  COMMA_SOURCE_FILE ("variable-map.galgas", 130)) ;
+  ioArgument_ioTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 131)) ;
 }
 
 

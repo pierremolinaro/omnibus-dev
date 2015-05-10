@@ -136,16 +136,16 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [result isLiteralSignedInteger] then
-    [result literalSignedInteger ?type:* ?value:let @lsint64 value]
+    [result literalSignedInteger ?type:* ?value:let @sint64 value]
     @sint64 result
     switch mOp 
-    case minusNoOvf : result = &- value.sint64
-    case minus : result = - value.sint64
+    case minusNoOvf : result = &- value
+    case minus : result = - value
     end
-    outResult = .literalSignedInteger {!type:outExpressionType !value:.new{!result !mOperatorLocation}}
+    outResult = .literalSignedInteger {!type:outExpressionType !value:result}
   else
   #--- Temp var
-    getNewTempVariable (!?ioTemporaryIndex !mOperatorLocation ?outResult)
+    getNewTempVariable (!?ioTemporaryIndex ?outResult)
   #--- Generate code
     ioInstructionGenerationList += !@prefixOperatorExpressionIR.new {
       !outExpressionType
@@ -197,7 +197,7 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
   case prefixMinusOvf (@uint code) :
-    let ovfVar = "ovf" + [[mResult location] locationIndex]
+    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
     outCode  = "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
     outCode += "if (" + ovfVar + ") {\n"
     outCode += "  raise_exception (" + code

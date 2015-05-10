@@ -113,7 +113,7 @@ override method @functionCallInExpressionAST analyzeExpression
   end
   s += ")"
 #---
-  getNewTempVariable (!?ioTemporaryIndex !mFunctionVarName.location ?outResultValueName)
+  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
 #--- Generate code
   ioInstructionGenerationList += !@functionCallIR.new {
     !outExpressionType

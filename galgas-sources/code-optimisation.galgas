@@ -17,23 +17,23 @@ struct @accessibleEntities {
 
 method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
-  case register (@lstring name) :
-    ioAccessibleEntities.mAccessibleRegisterSet += !name.string
-  case globalConstant (@lstring unused name) :
-    ioAccessibleEntities.mGlobalConstantSet += !name.string
-  case globalVariable (@lstring unused name) :
-    ioAccessibleEntities.mGlobalVariableSet += !name.string
-  case localVariable (@lstring unused name) :
-  case inArgument (@lstring unused name) :
-  case inOutArgument (@lstring unused name) :
-  case outArgument (@lstring unused name) :
-  case localConstant (@lstring unused name) :
-  case temporaryConstant (@luint unused idx) :
-  case localAccess (@string unused access *) :
+  case register (@string name) :
+    ioAccessibleEntities.mAccessibleRegisterSet += !name
+  case globalConstant (@string name) :
+    ioAccessibleEntities.mGlobalConstantSet += !name
+  case globalVariable (@string name) :
+    ioAccessibleEntities.mGlobalVariableSet += !name
+  case localVariable (@string unused name) :
+  case inArgument (@string unused name) :
+  case inOutArgument (@string unused name) :
+  case outArgument (@string unused name) :
+  case localConstant (@string unused name) :
+  case temporaryConstant (@uint unused idx) :
+  case localAccess (@string unused access) :
   case literalUnsignedInteger (* *) :
   case literalSignedInteger (* *) :
-  case literalString (@lstring value @string unused name) :
-    ioAccessibleEntities.mStaticStringSet += !value.string
+  case literalString (@string value @string unused name) :
+    ioAccessibleEntities.mStaticStringSet += !value
   end
 }
 

@@ -70,7 +70,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
     end
   end
 #--- Generate code
-  outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger}
+  outResult = .literalUnsignedInteger {!type:outExpressionType !value:mLiteralInteger.uint64}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
