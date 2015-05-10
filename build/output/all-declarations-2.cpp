@@ -1531,9 +1531,621 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   gWrapperFileContent_0_targetTemplates
 ) ;
 
+//--- File 'microcontrollers/lcd.plm'
+
+const char * gWrapperFileContent_1_targetTemplates = "\n"
+  "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   PORT CONFIGURATION                                                        *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//   D4 : PTB0\n"
+  "//   D5 : PTC0\n"
+  "//   D6 : PTD1\n"
+  "//   D7 : PTB2\n"
+  "//   RS : PTB3\n"
+  "//   E  : PTB1\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init configurePorts () {\n"
+  "//--- D4 (PTB0) is a GPIO (input by default)\n"
+  "  PORTB_PCR0 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)\n"
+  "//--- D5 (PTC0) is a GPIO (input by default)\n"
+  "  PORTC_PCR0 = (1 << 8) ;\n"
+  "  GPIOC_PDDR |= (1 << 0) ; // Program D5 as output (PTC0)\n"
+  "//--- D6 (PTD1) is a GPIO (input by default)\n"
+  "  PORTD_PCR1 = (1 << 8) ;\n"
+  "  GPIOD_PDDR |= (1 << 1) ; // Program D6 as output (PTD1)\n"
+  "//--- D7 (PTB2) is a GPIO (input by default)\n"
+  "  PORTB_PCR2 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 2) ; // Program D7 as output (PTB2)\n"
+  "//--- RS (PTB3) is an output\n"
+  "  PORTB_PCR3 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 3) ;\n"
+  "//--- E (PTB1) is an output\n"
+  "  PORTB_PCR1 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 1) ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init $exception $user driveHighE () {\n"
+  "  GPIOB_PSOR = 1 << 1 ; // E is PTB1\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc $init $exception $user driveLowE () {\n"
+  "  GPIOB_PCOR = 1 << 1 ; // E is PTB1\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc $init $exception $user driveHighRS () {\n"
+  "  GPIOB_PSOR = 1 << 3 ; // RS is PTB3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc $init $exception $user driveLowRS () {\n"
+  "  GPIOB_PCOR = 1 << 3 ; // RS is PTB3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init $exception $user setD4 (\?inValue : Bool) { // PTB0\n"
+  "  if inValue then\n"
+  "    GPIOB_PSOR = 1 << 0 ;\n"
+  "  else\n"
+  "    GPIOB_PCOR = 1 << 0 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init $exception $user setD5 (\?inValue : Bool) { // PTC0\n"
+  "  if inValue then\n"
+  "    GPIOC_PSOR = 1 << 0 ;\n"
+  "  else\n"
+  "    GPIOC_PCOR = 1 << 0 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init $exception $user setD6 (\?inValue : Bool) { // PTD1\n"
+  "  if inValue then\n"
+  "    GPIOD_PSOR = 1 << 1 ;\n"
+  "  else\n"
+  "    GPIOD_PCOR = 1 << 1 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init $exception $user setD7 (\?inValue : Bool) { // PTB2\n"
+  "  if inValue then\n"
+  "    GPIOB_PSOR = 1 << 2 ;\n"
+  "  else\n"
+  "    GPIOB_PCOR = 1 << 2 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   UTILITY ROUTINES                                                          *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init busyWaitingDuringMS (\?inDuration : UInt32) {\n"
+  "  let deadline = gCompteur + inDuration\n"
+  "  while gCompteur < deadline do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init programLcd4BitDataBusOutput (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init write4BitCommand (\?inValue : UInt8) {\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput (!inValue) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init write8bitCommand (\?inCommand : UInt8) {\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $init writeData (\?inData : UInt8) {\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveHighRS () ;\n"
+  "  programLcd4BitDataBusOutput (!inData >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput (!inData) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   LCD INIT                                                                  *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init {\n"
+  "  configurePorts () ;\n"
+  "//--- \xC3""\x89""tape 1 : attendre 15 ms\n"
+  "  busyWaitingDuringMS (!15) ;\n"
+  "//--- \xC3""\x89""tape 2 : \xC3""\xA9""crire la commande 0x30\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 3 : attendre 4,1 ms (en fait 5 ms)\n"
+  "  busyWaitingDuringMS (!5) ;\n"
+  "//--- \xC3""\x89""tape 4 : \xC3""\xA9""crire la commande 0x30 une 2e fois\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 5 : attendre 100 \xC2""\xB5""s\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "//--- \xC3""\x89""tape 6 : \xC3""\xA9""crire la commande 0x30 une 3e fois\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 7 : \xC3""\xA9""crire la commande 0x20 pour passer en 4 bits\n"
+  "  write4BitCommand (!0x2) ;\n"
+  "//--- \xC3""\x89""tape 8 : \xC3""\xA9""crire la commande 'Set Interface Length' : 0 0 1 DL N F * *\n"
+  "//    DL : Data interface length : 0 (4 bits)\n"
+  "//    N : Number of Display lines : 1 (2 lignes)\n"
+  "//    F : Character Font : 0 (5x7)\n"
+  "  write8bitCommand (!0x28) ;\n"
+  "//--- \xC3""\x89""tape 9 : \xC3""\xA9""crire la commande 'Display Off'\n"
+  "  write8bitCommand (!0x08) ;\n"
+  "//--- \xC3""\x89""tape 10 : \xC3""\xA9""crire la commande 'Clear Display'\n"
+  "  write8bitCommand (!0x01) ;\n"
+  "//--- \xC3""\x89""tape 11 : \xC3""\xA9""crire la commande 'Set Cursor Move Direction' : 0 0 0 0 0 1 ID S\n"
+  "//    ID : Increment Cursor after Each Byte Written to Display : 1 (oui)\n"
+  "//    S : Shift Display When Byte Written : 0 (non)\n"
+  "  write8bitCommand (!0x06) ;\n"
+  "//--- \xC3""\x89""tape 12 : \xC3""\xA9""crire la commande 'Move Cursor / Shift Display' : 0 0 0 1 SC RL * *\n"
+  "//    SC : Display Shift On : 1 (oui)\n"
+  "//    RL : Direction of Shift : 1 (vers la droite)\n"
+  "  write8bitCommand (!0x1C) ;\n"
+  "//--- \xC3""\x89""tape 13 : \xC3""\xA9""crire la commande 'Return Cursor and LCD to Home Position'\n"
+  "  write8bitCommand (!0x02) ;\n"
+  "//--- \xC3""\x89""tape 14 : \xC3""\xA9""crire la commande 'Enable Display / Cursor' : 0 0 0 0 1 D C B\n"
+  "//    D : Turn Display On : 1 (oui)\n"
+  "//    C : Turn Cursor On : 0 (non)\n"
+  "//    B : Cursor Blink On : 0 (non)\n"
+  "  write8bitCommand (!0x0C) ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   PRINT ROUTINES IN USER MODE                                               *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user programLcd4BitDataBusOutput_inUserMode (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user write8bitCommand_inUserMode (\?inCommand : UInt8) {\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user writeData_inUserMode (\?inData : UInt8) {\n"
+  "  waitMS (!1) ;\n"
+  "  driveHighRS () ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inData) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "// Line 0 : 00 -> 19\n"
+  "// Line 1 : 64 -> 83\n"
+  "// Line 2 : 20 -> 39\n"
+  "// Line 3 : 84 -> 103\n"
+  "\n"
+  "proc $user goto (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "  if inColumn < 20 then\n"
+  "    if inLine == 0 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;\n"
+  "    elsif inLine == 1 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;\n"
+  "    elsif inLine == 2 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;\n"
+  "    elsif inLine == 3 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;\n"
+  "    end\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printString (const char * inString) {\n"
+  "//  if (NULL != inString) {\n"
+  "//    while ('\\0' != *inString) {\n"
+  "//      writeData (*inString) ;\n"
+  "//      inString ++ ;\n"
+  "//    }\n"
+  "//  }\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printChar (const char inChar) {\n"
+  "//  writeData (inChar) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user clearScreen () {\n"
+  "  write8bitCommand_inUserMode (!0x01)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user printSpaces (\?inCount : UInt32) {\n"
+  "  var count = inCount\n"
+  "  while (count > 0) do\n"
+  "    writeData_inUserMode (!0x20)\n"
+  "    count -- ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user printUnsigned (\?inValue : UInt32) {\n"
+  "  if inValue > 9 then\n"
+  "    printUnsigned (!inValue / 10)\n"
+  "  end\n"
+  "  writeData_inUserMode (!0x30 + ((inValue % 10) as UInt8))\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user printSigned (\?inValue : Int32) {\n"
+  "  if inValue >= 0 then\n"
+  "    printUnsigned (!inValue as UInt32)\n"
+  "  else\n"
+  "    writeData_inUserMode (!0x2D) // Signe -\n"
+  "    printUnsigned (!(- inValue) as UInt32)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printSigned (const int32_t inValue) {\n"
+  "//  if (inValue < 0) {\n"
+  "//    printChar ('-') ;\n"
+  "//    printUnsigned ((uint32_t) -inValue) ;\n"
+  "//  }else{\n"
+  "//    printUnsigned ((uint32_t) inValue) ;\n"
+  "//  }\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex1 (const uint32_t inValue) {\n"
+  "//  const uint32_t v = inValue & 0xF ;\n"
+  "//  if (v < 10) {\n"
+  "//    printChar ('0' + v) ;\n"
+  "//  }else{\n"
+  "//    printChar ('A' + v - 10) ;\n"
+  "//  }  \n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex2 (const uint32_t inValue) {\n"
+  "//  printHex1 (inValue >> 4) ;\n"
+  "//  printHex1 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex4 (const uint32_t inValue) {\n"
+  "//  printHex2 (inValue >> 8) ;\n"
+  "//  printHex2 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "//void printHex8 (const uint32_t inValue) {\n"
+  "//  printHex4 (inValue >> 16) ;\n"
+  "//  printHex4 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex16 (const uint64_t inValue) {\n"
+  "//  printHex8 ((uint32_t) (inValue >> 32)) ;\n"
+  "//  printHex8 ((uint32_t) inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   EXCEPTION                                                                 *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception programLcd4BitDataBusOutput_inExceptionMode (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception waitOneMillisecondInExceptionMode () {\n"
+  "  while (SYST_CSR & SYST_CSR_COUNTFLAG) == 0 do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception waitMSInExceptionMode (\?duration: inDuration : UInt32) {\n"
+  "  var duration = inDuration\n"
+  "  while duration > 0 do\n"
+  "    waitOneMillisecondInExceptionMode ()\n"
+  "    duration &--\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception writeDataInExceptionMode (\?inData : UInt8) {\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveHighRS () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inData) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception printUnsignedInExceptionMode (\?inValue : UInt32) {\n"
+  "  if inValue > 9 then\n"
+  "    printUnsignedInExceptionMode (!inValue &/ 10)\n"
+  "  end\n"
+  "  writeDataInExceptionMode (!0x30 &+ ((inValue % 10) as UInt8))\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception write8bitCommand_inExceptionMode (\?inCommand : UInt8) {\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception gotoInExceptionMode (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "  if inColumn < 20 then\n"
+  "    if inLine == 0 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;\n"
+  "    elsif inLine == 1 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 64 &+ inColumn) ;\n"
+  "    elsif inLine == 2 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 20 &+ inColumn) ;\n"
+  "    elsif inLine == 3 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 84 &+ inColumn) ;\n"
+  "    end\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $exception clearScreenInExceptionMode () {\n"
+  "  write8bitCommand_inExceptionMode (!0x01)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception {\n"
+  "  clearScreenInExceptionMode ()\n"
+  "  waitMSInExceptionMode (!duration:4)\n"
+  "  gotoInExceptionMode (!line:0 !column:0)\n"
+  "  printUnsignedInExceptionMode (!CODE)\n"
+  "  gotoInExceptionMode (!line:1 !column:0)\n"
+  "  printUnsignedInExceptionMode (!LINE)\n"
+  "  forever\n"
+  "    waitMSInExceptionMode (!duration:50)\n"
+  "    ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "    waitMSInExceptionMode (!duration:50)\n"
+  "    ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+  "lcd.plm",
+  "plm",
+  true, // Text file
+  14766, // Text length
+  gWrapperFileContent_1_targetTemplates
+) ;
+
+//--- File 'microcontrollers/leds.plm'
+
+const char * gWrapperFileContent_2_targetTemplates = "target \"target-teensy-sequential-systick.plms\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   Led L0 : PTA12\n"
+  "//   Led L1 : PTA13\n"
+  "//   Led L2 : PTD7\n"
+  "//   Led L3 : PTD4\n"
+  "//   Led L4 : PTD2\n"
+  "//   Led sur carte Teensy : PTC5\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init {\n"
+  "//--- Led L0 : PTA12\n"
+  "  PORTA_PCR12 = (1 << 8)\n"
+  "  GPIOA_PDDR |= (1 << 12)\n"
+  "//--- Led L1 : PTA13\n"
+  "  PORTA_PCR13 = (1 << 8)\n"
+  "  GPIOA_PDDR |= (1 << 13)\n"
+  "//--- Led L2 : PTD13\n"
+  "  PORTD_PCR7 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 7)\n"
+  "//--- Led L3 : PTD4\n"
+  "  PORTD_PCR4 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 4)\n"
+  "//--- Led L4 : PTD2\n"
+  "  PORTD_PCR2 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 2)\n"
+  "//--- Led Teensy\n"
+  "  PORTC_PCR5 = (1 << 8)\n"
+  "  GPIOC_PDDR = GPIOC_PDDR | (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "let LED_L0 : UInt32 = (1 << 0)\n"
+  "let LED_L1 : UInt32 = (1 << 1)\n"
+  "let LED_L2 : UInt32 = (1 << 2)\n"
+  "let LED_L3 : UInt32 = (1 << 3)\n"
+  "let LED_L4 : UInt32 = (1 << 4)\n"
+  "let LED_TEENSY : UInt32 = (1 << 5)\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user $exception $isr ledOn (\?inLeds : UInt32) {\n"
+  "//--- Led L0\n"
+  "  if ((inLeds & LED_L0) != 0) then\n"
+  "    GPIOA_PSOR = 1 << 12 ;\n"
+  "  end\n"
+  "//--- Led L1\n"
+  "  if ((inLeds & LED_L1) != 0) then\n"
+  "    GPIOA_PSOR = 1 << 13 ;\n"
+  "  end\n"
+  "//--- Led L2\n"
+  "  if ((inLeds & LED_L2) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 7 ;\n"
+  "  end\n"
+  "//--- Led L3\n"
+  "  if ((inLeds & LED_L3) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 4 ;\n"
+  "  end\n"
+  "//--- Led L4\n"
+  "  if ((inLeds & LED_L4) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 2 ;\n"
+  "  end\n"
+  "//--- Led Teensy\n"
+  "  if ((inLeds & LED_TEENSY) != 0) then\n"
+  "    GPIOC_PSOR = 1 << 5 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc $user $exception $isr ledOff (\?inLeds : UInt32) {\n"
+  "//--- Led L0\n"
+  "  if ((inLeds & LED_L0) != 0) then\n"
+  "    GPIOA_PCOR = 1 << 12 ;\n"
+  "  end\n"
+  "//--- Led L1\n"
+  "  if ((inLeds & LED_L1) != 0) then\n"
+  "    GPIOA_PCOR = 1 << 13 ;\n"
+  "  end\n"
+  "//--- Led L2\n"
+  "  if ((inLeds & LED_L2) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 7 ;\n"
+  "  end\n"
+  "//--- Led L3\n"
+  "  if ((inLeds & LED_L3) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 4 ;\n"
+  "  end\n"
+  "//--- Led L4\n"
+  "  if ((inLeds & LED_L4) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 2 ;\n"
+  "  end\n"
+  "//--- Led Teensy\n"
+  "  if ((inLeds & LED_TEENSY) != 0) then\n"
+  "    GPIOC_PCOR = 1 << 5 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+  "leds.plm",
+  "plm",
+  true, // Text file
+  2394, // Text length
+  gWrapperFileContent_2_targetTemplates
+) ;
+
 //--- File 'microcontrollers/mk20dx256.plm'
 
-const char * gWrapperFileContent_1_targetTemplates = "// Teensyduino Core Library\n"
+const char * gWrapperFileContent_3_targetTemplates = "// Teensyduino Core Library\n"
   "// http://www.pjrc.com/teensy/\n"
   "// Copyright (c) 2013 PJRC.COM, LLC.\n"
   "//\n"
@@ -3672,18 +4284,20 @@ const char * gWrapperFileContent_1_targetTemplates = "// Teensyduino Core Librar
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
   144402, // Text length
-  gWrapperFileContent_1_targetTemplates
+  gWrapperFileContent_3_targetTemplates
 ) ;
 
 //--- All files of 'microcontrollers' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [2] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [4] = {
   & gWrapperFile_1_targetTemplates,
+  & gWrapperFile_2_targetTemplates,
+  & gWrapperFile_3_targetTemplates,
   NULL
 } ;
 
@@ -3697,7 +4311,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_1 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   "microcontrollers",
-  1,
+  3,
   gWrapperAllFiles_targetTemplates_1,
   0,
   gWrapperAllDirectories_targetTemplates_1
@@ -3705,7 +4319,7 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
 
 //--- File 'targets/target-teensy-sequential-systick.plms'
 
-const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_4_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedBaseType @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedBaseType @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedBaseType @unsigned64 \"uint64_t\" 64\n"
@@ -3734,6 +4348,8 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsig
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "import \"microcontrollers/mk20dx256.plm\"\n"
+  "import \"microcontrollers/lcd.plm\"\n"
+  "import \"microcontrollers/leds.plm\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -3771,17 +4387,17 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedBaseType @unsig
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1813, // Text length
-  gWrapperFileContent_2_targetTemplates
+  1882, // Text length
+  gWrapperFileContent_4_targetTemplates
 ) ;
 
 //--- File 'targets/target-teensy-sequential.plms'
 
-const char * gWrapperFileContent_3_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_5_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedBaseType @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedBaseType @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedBaseType @unsigned64 \"uint64_t\" 64\n"
@@ -3817,17 +4433,17 @@ const char * gWrapperFileContent_3_targetTemplates = "newUnsignedBaseType @unsig
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential.plms",
   "plms",
   true, // Text file
   967, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_5_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build-as.py'
 
-const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -3861,17 +4477,17 @@ const char * gWrapperFileContent_4_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_6_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build-verbose.py'
 
-const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -3905,17 +4521,17 @@ const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_7_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/build.py'
 
-const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -4858,17 +5474,17 @@ const char * gWrapperFileContent_6_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   41653, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/clean.py'
 
-const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -4905,17 +5521,17 @@ const char * gWrapperFileContent_7_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -4949,17 +5565,17 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_9_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_11_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -5117,17 +5733,17 @@ const char * gWrapperFileContent_9_targetTemplates = "/*------------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- File 'sources/mk20dx256.h'
 
-const char * gWrapperFileContent_10_targetTemplates = "/* Teensyduino Core Library\n"
+const char * gWrapperFileContent_12_targetTemplates = "/* Teensyduino Core Library\n"
   " * http://www.pjrc.com/teensy/\n"
   " * Copyright (c) 2013 PJRC.COM, LLC.\n"
   " *\n"
@@ -7315,17 +7931,17 @@ const char * gWrapperFileContent_10_targetTemplates = "/* Teensyduino Core Libra
   "#endif\n"
   "#endif\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "mk20dx256.h",
   "h",
   true, // Text file
   152136, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential.c'
 
-const char * gWrapperFileContent_11_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_13_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#include <stddef.h>\n"
   "\n"
@@ -7507,20 +8123,20 @@ const char * gWrapperFileContent_11_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "startup-sequential.c",
   "c",
   true, // Text file
   7492, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [4] = {
-  & gWrapperFile_9_targetTemplates,
-  & gWrapperFile_10_targetTemplates,
   & gWrapperFile_11_targetTemplates,
+  & gWrapperFile_12_targetTemplates,
+  & gWrapperFile_13_targetTemplates,
   NULL
 } ;
 
@@ -7543,11 +8159,11 @@ const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
 //--- All files of 'target-teensy-sequential' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [6] = {
-  & gWrapperFile_4_targetTemplates,
-  & gWrapperFile_5_targetTemplates,
   & gWrapperFile_6_targetTemplates,
   & gWrapperFile_7_targetTemplates,
   & gWrapperFile_8_targetTemplates,
+  & gWrapperFile_9_targetTemplates,
+  & gWrapperFile_10_targetTemplates,
   NULL
 } ;
 
@@ -7570,7 +8186,7 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 
 //--- File 'target-teensy-sequential-systick/build-as.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7604,17 +8220,17 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7648,17 +8264,17 @@ const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/build.py'
 
-const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -8624,17 +9240,17 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   42967, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -8671,17 +9287,17 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/display-obj-size.py'
 
-const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -8715,17 +9331,17 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "display-obj-size.py",
   "py",
   true, // Text file
   1010, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -8759,17 +9375,17 @@ const char * gWrapperFileContent_17_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_18_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_20_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -8927,17 +9543,17 @@ const char * gWrapperFileContent_18_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_20_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_19_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_21_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
   "#define SIM_SCGC3\t\t*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3\n"
@@ -9189,19 +9805,19 @@ const char * gWrapperFileContent_19_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   12054, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [3] = {
-  & gWrapperFile_18_targetTemplates,
-  & gWrapperFile_19_targetTemplates,
+  & gWrapperFile_20_targetTemplates,
+  & gWrapperFile_21_targetTemplates,
   NULL
 } ;
 
@@ -9224,12 +9840,12 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 //--- All files of 'target-teensy-sequential-systick' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [7] = {
-  & gWrapperFile_12_targetTemplates,
-  & gWrapperFile_13_targetTemplates,
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_15_targetTemplates,
   & gWrapperFile_16_targetTemplates,
   & gWrapperFile_17_targetTemplates,
+  & gWrapperFile_18_targetTemplates,
+  & gWrapperFile_19_targetTemplates,
   NULL
 } ;
 
@@ -9253,8 +9869,8 @@ const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
 //--- All files of 'targets' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [3] = {
-  & gWrapperFile_2_targetTemplates,
-  & gWrapperFile_3_targetTemplates,
+  & gWrapperFile_4_targetTemplates,
+  & gWrapperFile_5_targetTemplates,
   NULL
 } ;
 
@@ -18046,410 +18662,6 @@ GALGAS_incDecInstructionAST GALGAS_incDecInstructionAST::extractObject (const GA
       result = *p ;
     }else{
       inCompiler->castError ("incDecInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_letInstructionWithAssignmentAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOptionalTypeName.objectCompare (p->mAttribute_mOptionalTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_letInstructionWithAssignmentAST::objectCompare (const GALGAS_letInstructionWithAssignmentAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentAST::GALGAS_letInstructionWithAssignmentAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentAST::GALGAS_letInstructionWithAssignmentAST (const cPtr_letInstructionWithAssignmentAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_letInstructionWithAssignmentAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::constructor_new (const GALGAS_lstring & inAttribute_mVarName,
-                                                                                                const GALGAS_lstring & inAttribute_mOptionalTypeName,
-                                                                                                const GALGAS_expressionAST & inAttribute_mSourceExpression
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionWithAssignmentAST result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mOptionalTypeName.isValid () && inAttribute_mSourceExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_letInstructionWithAssignmentAST (inAttribute_mVarName, inAttribute_mOptionalTypeName, inAttribute_mSourceExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    result = p->mAttribute_mVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    result = p->mAttribute_mOptionalTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOptionalTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    result = p->mAttribute_mSourceExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                              Pointer class for @letInstructionWithAssignmentAST class                               *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_letInstructionWithAssignmentAST::cPtr_letInstructionWithAssignmentAST (const GALGAS_lstring & in_mVarName,
-                                                                            const GALGAS_lstring & in_mOptionalTypeName,
-                                                                            const GALGAS_expressionAST & in_mSourceExpression
-                                                                            COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (THERE),
-mAttribute_mVarName (in_mVarName),
-mAttribute_mOptionalTypeName (in_mOptionalTypeName),
-mAttribute_mSourceExpression (in_mSourceExpression) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_letInstructionWithAssignmentAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
-}
-
-void cPtr_letInstructionWithAssignmentAST::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "[@letInstructionWithAssignmentAST:" ;
-  mAttribute_mVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOptionalTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_letInstructionWithAssignmentAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_letInstructionWithAssignmentAST (mAttribute_mVarName, mAttribute_mOptionalTypeName, mAttribute_mSourceExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @letInstructionWithAssignmentAST type                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ("letInstructionWithAssignmentAST",
-                                                        & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_letInstructionWithAssignmentAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_letInstructionWithAssignmentAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_letInstructionWithAssignmentAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionWithAssignmentAST result ;
-  const GALGAS_letInstructionWithAssignmentAST * p = (const GALGAS_letInstructionWithAssignmentAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_letInstructionWithAssignmentAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("letInstructionWithAssignmentAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_operatorAssignInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarName.objectCompare (p->mAttribute_mTargetVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_operatorAssignInstructionAST::objectCompare (const GALGAS_operatorAssignInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionAST::GALGAS_operatorAssignInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionAST::GALGAS_operatorAssignInstructionAST (const cPtr_operatorAssignInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_operatorAssignInstructionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionAST GALGAS_operatorAssignInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mTargetVarName,
-                                                                                          const GALGAS_expressionAST & inAttribute_mSourceExpression,
-                                                                                          const GALGAS_operatorAssignKind & inAttribute_mOperator
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_operatorAssignInstructionAST result ;
-  if (inAttribute_mTargetVarName.isValid () && inAttribute_mSourceExpression.isValid () && inAttribute_mOperator.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_operatorAssignInstructionAST (inAttribute_mTargetVarName, inAttribute_mSourceExpression, inAttribute_mOperator COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
-    result = p->mAttribute_mTargetVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
-    result = p->mAttribute_mSourceExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST cPtr_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operatorAssignKind result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignKind cPtr_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                Pointer class for @operatorAssignInstructionAST class                                *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_operatorAssignInstructionAST::cPtr_operatorAssignInstructionAST (const GALGAS_lstring & in_mTargetVarName,
-                                                                      const GALGAS_expressionAST & in_mSourceExpression,
-                                                                      const GALGAS_operatorAssignKind & in_mOperator
-                                                                      COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (THERE),
-mAttribute_mTargetVarName (in_mTargetVarName),
-mAttribute_mSourceExpression (in_mSourceExpression),
-mAttribute_mOperator (in_mOperator) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_operatorAssignInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorAssignInstructionAST ;
-}
-
-void cPtr_operatorAssignInstructionAST::description (C_String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString << "[@operatorAssignInstructionAST:" ;
-  mAttribute_mTargetVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperator.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_operatorAssignInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_operatorAssignInstructionAST (mAttribute_mTargetVarName, mAttribute_mSourceExpression, mAttribute_mOperator COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @operatorAssignInstructionAST type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_operatorAssignInstructionAST ("operatorAssignInstructionAST",
-                                                     & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_operatorAssignInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorAssignInstructionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_operatorAssignInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_operatorAssignInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionAST GALGAS_operatorAssignInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_operatorAssignInstructionAST result ;
-  const GALGAS_operatorAssignInstructionAST * p = (const GALGAS_operatorAssignInstructionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_operatorAssignInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("operatorAssignInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
