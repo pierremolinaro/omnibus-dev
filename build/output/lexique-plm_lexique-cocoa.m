@@ -81,7 +81,7 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [31] = {
+static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [32] = {
   {"as", plm_lexique_1_as},
   {"at", plm_lexique_1_at},
   {"do", plm_lexique_1_do},
@@ -100,6 +100,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"then", plm_lexique_1_then},
   {"elsif", plm_lexique_1_elsif},
   {"while", plm_lexique_1_while},
+  {"assert", plm_lexique_1_assert},
   {"import", plm_lexique_1_import},
   {"struct", plm_lexique_1_struct},
   {"target", plm_lexique_1_target},
@@ -116,7 +117,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
 } ;
 
 static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedString) {
-  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 31) ;
+  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 32) ;
 }
 
 
@@ -421,7 +422,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 82 ;
+  return 83 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -451,7 +452,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [83] = {0,
+  static const NSUInteger kTerminalSymbolStyles [84] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_modeName */,
@@ -463,6 +464,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     8 /* plm_lexique_1__21_ */,
     8 /* plm_lexique_1__21__3F_ */,
     1 /* plm_lexique_1_as */,
+    1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_at */,
     1 /* plm_lexique_1_boolset */,
     1 /* plm_lexique_1_enum */,
@@ -545,7 +547,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [83] = {NO,
+  static const BOOL kTerminalAtomicSelection [84] = {NO,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1_attribute */,
     YES /* plm_lexique_1_modeName */,
@@ -557,6 +559,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1__21_ */,
     YES /* plm_lexique_1__21__3F_ */,
     YES /* plm_lexique_1_as */,
+    YES /* plm_lexique_1_assert */,
     YES /* plm_lexique_1_at */,
     YES /* plm_lexique_1_boolset */,
     YES /* plm_lexique_1_enum */,

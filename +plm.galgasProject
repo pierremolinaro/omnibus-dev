@@ -73,6 +73,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/instruction-var.galgas"
   "galgas-sources/instruction-let.galgas"
   "galgas-sources/instruction-assignment.galgas"
+  "galgas-sources/instruction-assert.galgas"
   "galgas-sources/instruction-operator-assign.galgas"
   "galgas-sources/instruction-if.galgas"
 #  "galgas-sources/instruction-method-call.galgas"

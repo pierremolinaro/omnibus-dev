@@ -4946,31 +4946,4 @@ class GALGAS_string function_receiverName (class C_Compiler * inCompiler
 class GALGAS_string function_receiverPtrName (class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'structureInitRoutinePrefix'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_structureInitRoutinePrefix (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'literalStringPrefix'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_literalStringPrefix (class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'staticStringTypeName'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
 #endif
