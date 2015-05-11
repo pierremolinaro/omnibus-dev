@@ -1,0 +1,106 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @assertInstructionAST : @instructionAST {
+  @location mAssertInstructionLocation
+  @expressionAST mExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    $assert$
+    let loc = @location.here
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !@assertInstructionAST.new {
+      !loc
+      !expression
+    }
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @assertInstructionAST analyze
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  if [inModeSet hasKey !exceptionModeName ()] then
+    error mAssertInstructionLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+  end
+#--- Analyze expression
+  @instructionListIR instructionGenerationList = {}
+  [mExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:.null
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:instructionGenerationList
+    ?expressionType:let expressionType
+    ?result:@variableKindIR expressionValueName
+  ]
+#--- Check inferred type
+  if not [[expressionType kind] isBoolean] then
+    error mAssertInstructionLocation : "expression is not boolean"
+  end
+#--- Code generation
+  if not [option plm_options.noExceptionGeneration value] then
+    ioInstructionGenerationList += !@assertInstructionIR.new {
+      !mAssertInstructionLocation
+      !instructionGenerationList
+      !expressionValueName
+    }
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @assertInstructionIR : @abstractInstructionIR {
+  @location mAssertInstructionLocation
+  @instructionListIR mInstructionList
+  @variableKindIR mExpressionValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @assertInstructionIR instructionCode -> @string outCode {
+  outCode = [mInstructionList instructionListCode]
+  outCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
+  outCode += "  raise_exception (9"
+     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
+     + ", " + [mAssertInstructionLocation line] + ") ;\n"
+  outCode += "}\n" 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
+  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
