@@ -31,6 +31,7 @@ syntax extension common_syntax {
     <procedure_header>
       ?procModes:let requiredModeList
       ?name:outName
+      ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
     outType = .procType {!procModeList:requiredModeList !procFormalArgumentList:procFormalArgumentList}
   }

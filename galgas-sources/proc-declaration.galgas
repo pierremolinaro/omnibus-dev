@@ -43,6 +43,7 @@ list @procedureDeclarationListAST {
   @procedureKindAST mProcedureKind
   @lstringlist mProcedureModeList
   @lstring mProcedureName
+  @lstringlist mProcedureAttributeList
   @procFormalArgumentList mProcFormalArgumentList
   @instructionListAST mInstructionList
   @location mEndOfProcLocation
@@ -63,11 +64,19 @@ syntax extension common_syntax {
     <procedure_header>
       ?procModes:let procModeList
       ?name:let procName
+      ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
     ${$
     <instructionList> ?let instructionList
     $}$
-    ioProcListAST += !inProcedureKind !procModeList !procName !procFormalArgumentList !instructionList !.here
+    ioProcListAST +=
+      !inProcedureKind
+      !procModeList
+      !procName
+      !attributeList
+      !procFormalArgumentList
+      !instructionList
+      !.here
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -75,6 +84,7 @@ syntax extension common_syntax {
   rule <procedure_header>
     !procModes:@lstringlist outProcModeList
     !name:@lstring outProcName
+    !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
     $proc$
@@ -84,8 +94,14 @@ syntax extension common_syntax {
       outProcModeList += !procMode
     while
     end
-    $identifier$ ?outProcName
+    outAttributeList = {}
+    repeat
+    while
+      $attribute$ ?let attribute
+      outAttributeList += !attribute
+    end
     outProcFormalArgumentList = {}
+    $identifier$ ?outProcName
     $($
     repeat
     while
@@ -256,6 +272,18 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     [inContext.mModeMap searchKey !mode.mValue]
     procedureModeSet += !mode.mValue.string
   end
+#--- Attribues
+  var warnIfUnused = true
+  for (attribute) in mProcedureAttributeList do
+    if attribute.string == noWarningIfUnusedAttribute () then
+      if not warnIfUnused then
+        error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+      end
+      warnIfUnused = false    
+    else
+      error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+    end
+  end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
 #--- Add receiver properties, and receiver as first argument
@@ -369,6 +397,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !formalArguments
     !instructionGenerationList
     ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+    !warnIfUnused
   ]  
 }
 

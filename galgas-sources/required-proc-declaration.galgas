@@ -18,6 +18,7 @@ syntax extension plms_specific_syntax {
   rule <procedure_header>
     !procModes:@lstringlist outProcModeList
     !name:@lstring outProcName
+    !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -27,6 +28,7 @@ syntax extension plms_specific_syntax {
     <procedure_header>
       ?procModes:let requiredModeList
       ?name:let procName
+      ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
     ioAST.mRequiredProcList += !procName !requiredModeList !procFormalArgumentList !.here
   }
