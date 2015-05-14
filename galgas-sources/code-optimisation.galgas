@@ -66,6 +66,7 @@ method @functionMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAc
 proc codeOptimisation
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+  let initialProcedureMap = ioIntermediateCodeStruct.mProcedureMapIR
   @uint pass = 0
   @bool optimizing = true
   loop ([ioIntermediateCodeStruct.mProcedureMapIR count] + [ioIntermediateCodeStruct.mFunctionMapIR count] + 1)
@@ -135,6 +136,12 @@ proc codeOptimisation
     end
     ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
   end
+#--- Warn on unused procedures
+  for () in initialProcedureMap do
+    if (not [ioIntermediateCodeStruct.mProcedureMapIR hasKey !lkey.string]) && mWarnIfUnused then
+      warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
+    end
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -155,6 +162,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mFormalArgumentListForGeneration
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
+        !procedure.mWarnIfUnused
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities]
       outAccessibleEntities.mProcedureSet += !procedure.lkey.string
@@ -164,6 +172,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mFormalArgumentListForGeneration
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
+        !procedure.mWarnIfUnused
       ]        
     end
   end
@@ -191,6 +200,7 @@ private proc suppressInaccessibleSubprograms
           !procedure.mFormalArgumentListForGeneration
           !procedure.mInstructionGenerationList
           !procedure.mIsRequired
+          !procedure.mWarnIfUnused
         ]        
         [procedure enterAccessibleEntities !?outAccessibleEntities]
         exploreProceduresAndFunctions = true
@@ -200,6 +210,7 @@ private proc suppressInaccessibleSubprograms
           !procedure.mFormalArgumentListForGeneration
           !procedure.mInstructionGenerationList
           !procedure.mIsRequired
+          !procedure.mWarnIfUnused
         ]        
       end
     end

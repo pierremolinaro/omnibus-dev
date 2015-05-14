@@ -64,6 +64,7 @@ map @procedureMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired
+  @bool mWarnIfUnused
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

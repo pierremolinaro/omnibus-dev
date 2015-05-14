@@ -149,22 +149,6 @@ proc $init write8bitCommand (?inCommand : UInt8) {
 }
 
 //-----------------------------------------------------------------------------*
-
-proc $init writeData (?inData : UInt8) {
-  busyWaitingDuringMS (!1) ;
-  driveHighRS () ;
-  programLcd4BitDataBusOutput (!inData >> 4) ;
-  driveHighE () ;
-  busyWaitingDuringMS (!1) ;
-  driveLowE () ;
-  busyWaitingDuringMS (!1) ;
-  programLcd4BitDataBusOutput (!inData) ;
-  driveHighE () ;
-  busyWaitingDuringMS (!1) ;
-  driveLowE () ;
-}
-
-//-----------------------------------------------------------------------------*
 //   LCD INIT                                                                  *
 //-----------------------------------------------------------------------------*
 
@@ -214,7 +198,7 @@ init {
 //   PRINT ROUTINES IN USER MODE                                               *
 //-----------------------------------------------------------------------------*
 
-proc $user programLcd4BitDataBusOutput_inUserMode (?inValue : UInt8) {
+proc $user @noWarningIfUnused programLcd4BitDataBusOutput_inUserMode (?inValue : UInt8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -223,7 +207,7 @@ proc $user programLcd4BitDataBusOutput_inUserMode (?inValue : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user write8bitCommand_inUserMode (?inCommand : UInt8) {
+proc $user @noWarningIfUnused write8bitCommand_inUserMode (?inCommand : UInt8) {
   waitMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
@@ -239,7 +223,7 @@ proc $user write8bitCommand_inUserMode (?inCommand : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user writeData_inUserMode (?inData : UInt8) {
+proc $user @noWarningIfUnused writeData_inUserMode (?inData : UInt8) {
   waitMS (!1) ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
@@ -260,7 +244,7 @@ proc $user writeData_inUserMode (?inData : UInt8) {
 // Line 2 : 20 -> 39
 // Line 3 : 84 -> 103
 
-proc $user goto (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+proc $user @noWarningIfUnused goto (?line:inLine : UInt32 ?column:inColumn : UInt8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -293,13 +277,13 @@ proc $user goto (?line:inLine : UInt32 ?column:inColumn : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user clearScreen () {
+proc $user @noWarningIfUnused clearScreen () {
   write8bitCommand_inUserMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $user printSpaces (?inCount : UInt32) {
+proc $user @noWarningIfUnused printSpaces (?inCount : UInt32) {
   var count = inCount
   while (count > 0) do
     writeData_inUserMode (!0x20)
@@ -309,7 +293,7 @@ proc $user printSpaces (?inCount : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user printUnsigned (?inValue : UInt32) {
+proc $user @noWarningIfUnused printUnsigned (?inValue : UInt32) {
   if inValue > 9 then
     printUnsigned (!inValue / 10)
   end
@@ -318,7 +302,7 @@ proc $user printUnsigned (?inValue : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user printSigned (?inValue : Int32) {
+proc $user @noWarningIfUnused printSigned (?inValue : Int32) {
   if inValue >= 0 then
     printUnsigned (!inValue as UInt32)
   else
