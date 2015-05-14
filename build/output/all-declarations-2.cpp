@@ -9776,6 +9776,15 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#    C Compiler options                                                                                                *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -9976,7 +9985,8 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
   "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
   "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
-  "makefile.addGoal (\"display-obj-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
   "#--- Build\n"
   "#makefile.printRules ()\n"
   "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
@@ -9994,9 +10004,20 @@ const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "    sys.exit (childProcess.returncode)\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
-  "elif goal == \"display-obj-size\":\n"
+  "elif goal == \"display-object-size\":\n"
   "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
   "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"object-dump\":\n"
+  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (dumpObjectCode () + objectList + [\"-d\"])\n"
   "#--- Wait for subprocess termination\n"
   "  if childProcess.poll () == None :\n"
   "    childProcess.wait ()\n"
@@ -10010,7 +10031,7 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  42967, // Text length
+  44176, // Text length
   gWrapperFileContent_16_targetTemplates
 ) ;
 
@@ -10061,7 +10082,7 @@ const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   gWrapperFileContent_17_targetTemplates
 ) ;
 
-//--- File 'target-teensy-sequential-systick/display-obj-size.py'
+//--- File 'target-teensy-sequential-systick/display-obj-dump.py'
 
 const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -10088,7 +10109,7 @@ const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
   "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
   "os.chdir (scriptDir)\n"
   "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-obj-size\"])\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
   "#--- Wait for subprocess termination\n"
   "if childProcess.poll () == None :\n"
   "  childProcess.wait ()\n"
@@ -10098,16 +10119,60 @@ const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
   "#------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+  "display-obj-dump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_18_targetTemplates
+) ;
+
+//--- File 'target-teensy-sequential-systick/display-obj-size.py'
+
+const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "display-obj-size.py",
   "py",
   true, // Text file
-  1010, // Text length
-  gWrapperFileContent_18_targetTemplates
+  1013, // Text length
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- File 'target-teensy-sequential-systick/flash-teensy-and-run.py'
 
-const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -10141,17 +10206,17 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "flash-teensy-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_20_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_20_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_21_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -10309,17 +10374,17 @@ const char * gWrapperFileContent_20_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- File 'sources/startup-sequential-systick.c'
 
-const char * gWrapperFileContent_21_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_22_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
   "#define SIM_SCGC3\t\t*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3\n"
@@ -10571,19 +10636,19 @@ const char * gWrapperFileContent_21_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
   12054, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_22_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [3] = {
-  & gWrapperFile_20_targetTemplates,
   & gWrapperFile_21_targetTemplates,
+  & gWrapperFile_22_targetTemplates,
   NULL
 } ;
 
@@ -10605,13 +10670,14 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 
 //--- All files of 'target-teensy-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [7] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [8] = {
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_15_targetTemplates,
   & gWrapperFile_16_targetTemplates,
   & gWrapperFile_17_targetTemplates,
   & gWrapperFile_18_targetTemplates,
   & gWrapperFile_19_targetTemplates,
+  & gWrapperFile_20_targetTemplates,
   NULL
 } ;
 
@@ -10626,7 +10692,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   "target-teensy-sequential-systick",
-  6,
+  7,
   gWrapperAllFiles_targetTemplates_5,
   1,
   gWrapperAllDirectories_targetTemplates_5
