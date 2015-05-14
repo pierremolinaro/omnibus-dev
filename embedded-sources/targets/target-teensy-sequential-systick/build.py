@@ -734,6 +734,15 @@ def displayObjectSize ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   Object Dump invocation                                                                                             *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def dumpObjectCode ():
+  return [toolDir () + "/bin/arm-eabi-objdump"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #    C Compiler options                                                                                                *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -934,7 +943,8 @@ makefile.addRule (rule)
 makefile.addGoal ("run", [productHEX], "Building all and run")
 makefile.addGoal ("all", [productHEX], "Building all")
 makefile.addGoal ("as", asObjectList, "Assembling C files")
-makefile.addGoal ("display-obj-size", [productHEX], "Display Object Size")
+makefile.addGoal ("display-object-size", [productHEX], "Display Object Size")
+makefile.addGoal ("object-dump", [productHEX], "Dump Object Code")
 #--- Build
 #makefile.printRules ()
 makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)
@@ -952,9 +962,20 @@ if goal == "run":
     sys.exit (childProcess.returncode)
   else:
     print BOLD_GREEN () + "Success" + ENDC ()
-elif goal == "display-obj-size":
+elif goal == "display-object-size":
   print BOLD_BLUE () + "Display Object Sizes" + ENDC ()
   childProcess = subprocess.Popen (displayObjectSize () + objectList + ["-t"])
+#--- Wait for subprocess termination
+  if childProcess.poll () == None :
+    childProcess.wait ()
+  if childProcess.returncode != 0 :
+    print BOLD_RED () + "Error " + str (childProcess.returncode) + ENDC ()
+    sys.exit (childProcess.returncode)
+  else:
+    print BOLD_GREEN () + "Success" + ENDC ()
+elif goal == "object-dump":
+  print BOLD_BLUE () + "Dump Object Code" + ENDC ()
+  childProcess = subprocess.Popen (dumpObjectCode () + objectList + ["-d"])
 #--- Wait for subprocess termination
   if childProcess.poll () == None :
     childProcess.wait ()
