@@ -975,7 +975,7 @@ elif goal == "display-object-size":
     print BOLD_GREEN () + "Success" + ENDC ()
 elif goal == "object-dump":
   print BOLD_BLUE () + "Dump Object Code" + ENDC ()
-  childProcess = subprocess.Popen (dumpObjectCode () + objectList + ["-d"])
+  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, "-Sdh", "-Mforce-thumb"])
 #--- Wait for subprocess termination
   if childProcess.poll () == None :
     childProcess.wait ()
