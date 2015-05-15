@@ -2226,15 +2226,15 @@ class cParser_common_5F_syntax {
 
   protected : void rule_common_5F_syntax_declaration_i12_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_instructionList_i13_ (GALGAS_instructionListAST & outArgument0,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_instructionList_i13_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_instruction_i14_ (GALGAS_instructionListAST & ioArgument0,
+  protected : void rule_common_5F_syntax_declaration_i13_ (GALGAS_ast & ioArgument0,
                                                            C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_instruction_i14_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_common_5F_syntax_declaration_i13_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_instructionList_i14_ (GALGAS_instructionListAST & outArgument0,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_instructionList_i14_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_instruction_i15_ (GALGAS_instructionListAST & ioArgument0,
                                                            C_Lexique_plm_5F_lexique * inLexique) ;
@@ -2291,15 +2291,15 @@ class cParser_common_5F_syntax {
 
   protected : void rule_common_5F_syntax_instruction_i25_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_if_5F_instruction_i26_ (GALGAS_ifInstructionAST & outArgument0,
-                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_if_5F_instruction_i26_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_instruction_i27_ (GALGAS_instructionListAST & ioArgument0,
+  protected : void rule_common_5F_syntax_instruction_i26_ (GALGAS_instructionListAST & ioArgument0,
                                                            C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_instruction_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_common_5F_syntax_instruction_i26_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_if_5F_instruction_i27_ (GALGAS_ifInstructionAST & outArgument0,
+                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_if_5F_instruction_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_instruction_i28_ (GALGAS_instructionListAST & ioArgument0,
                                                            C_Lexique_plm_5F_lexique * inLexique) ;
@@ -2311,40 +2311,40 @@ class cParser_common_5F_syntax {
 
   protected : void rule_common_5F_syntax_instruction_i29_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_expression_i30_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_common_5F_syntax_instruction_i30_ (GALGAS_instructionListAST & ioArgument0,
+                                                           C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_instruction_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_expression_i31_ (GALGAS_expressionAST & outArgument0,
                                                           C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_expression_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_primary_i31_ (GALGAS_expressionAST & outArgument0,
-                                                       C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_primary_i31_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_common_5F_syntax_expression_i31_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i32_ (GALGAS_expressionAST & outArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i32_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_comparison_i33_ (GALGAS_expressionAST & outArgument0,
-                                                          C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_comparison_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_additive_5F_expression_i34_ (GALGAS_expressionAST & outArgument0,
-                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_additive_5F_expression_i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_multiplicative_5F_expression_i35_ (GALGAS_expressionAST & outArgument0,
-                                                                            C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_multiplicative_5F_expression_i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_common_5F_syntax_primary_i36_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_common_5F_syntax_primary_i33_ (GALGAS_expressionAST & outArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_common_5F_syntax_primary_i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_common_5F_syntax_primary_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_comparison_i34_ (GALGAS_expressionAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_comparison_i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_additive_5F_expression_i35_ (GALGAS_expressionAST & outArgument0,
+                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_additive_5F_expression_i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_multiplicative_5F_expression_i36_ (GALGAS_expressionAST & outArgument0,
+                                                                            C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_multiplicative_5F_expression_i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i37_ (GALGAS_expressionAST & outArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
@@ -2370,6 +2370,11 @@ class cParser_common_5F_syntax {
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i41_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i42_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -6075,14 +6080,6 @@ class cParser_plms_5F_specific_5F_syntax {
 
   protected : virtual void nt_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_procedure_5F_header_ (class GALGAS_lstringlist & outArgument0,
-                                                    class GALGAS_lstring & outArgument1,
-                                                    class GALGAS_lstringlist & outArgument2,
-                                                    class GALGAS_procFormalArgumentList & outArgument3,
-                                                    class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_procedure_5F_header_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
 
 //--- Rule declarations
   protected : void rule_plms_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument0,
@@ -6104,11 +6101,6 @@ class cParser_plms_5F_specific_5F_syntax {
                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plms_5F_specific_5F_syntax_declaration_i3_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plms_5F_specific_5F_syntax_declaration_i4_ (GALGAS_ast & ioArgument0,
-                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plms_5F_specific_5F_syntax_declaration_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -8472,6 +8464,7 @@ class GALGAS_procedureMap : public AC_GALGAS_map {
                                                       const class GALGAS_bool & inOperand1,
                                                       const class GALGAS_modeMap & inOperand2,
                                                       const class GALGAS_procedureSignature & inOperand3,
+                                                      const class GALGAS_bool & inOperand4,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -8480,6 +8473,15 @@ class GALGAS_procedureMap : public AC_GALGAS_map {
                                                      class GALGAS_bool constinArgument1,
                                                      class GALGAS_modeMap constinArgument2,
                                                      class GALGAS_procedureSignature constinArgument3,
+                                                     class GALGAS_bool constinArgument4,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_removeKey (class GALGAS_lstring constinArgument0,
+                                                     class GALGAS_bool & outArgument1,
+                                                     class GALGAS_modeMap & outArgument2,
+                                                     class GALGAS_procedureSignature & outArgument3,
+                                                     class GALGAS_bool & outArgument4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -8498,12 +8500,18 @@ class GALGAS_procedureMap : public AC_GALGAS_map {
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void modifier_setMWeakProcedureForKey (class GALGAS_bool constinArgument0,
+                                                                   class GALGAS_string constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_bool & outArgument1,
                                                    class GALGAS_modeMap & outArgument2,
                                                    class GALGAS_procedureSignature & outArgument3,
+                                                   class GALGAS_bool & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -8521,6 +8529,10 @@ class GALGAS_procedureMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature reader_mSignatureForKey (const class GALGAS_string & constinOperand0,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWeakProcedureForKey (const class GALGAS_string & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMap reader_overriddenMap (C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const ;
@@ -8551,6 +8563,7 @@ class cEnumerator_procedureMap : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mMutating (LOCATION_ARGS) const ;
   public : class GALGAS_modeMap current_mProcedureModeMap (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mWeakProcedure (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procedureMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -8570,12 +8583,14 @@ class cMapElement_procedureMap : public cMapElement {
   public : GALGAS_bool mAttribute_mMutating ;
   public : GALGAS_modeMap mAttribute_mProcedureModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
+  public : GALGAS_bool mAttribute_mWeakProcedure ;
 
 //--- Constructor
   public : cMapElement_procedureMap (const GALGAS_lstring & inKey,
                                      const GALGAS_bool & in_mMutating,
                                      const GALGAS_modeMap & in_mProcedureModeMap,
-                                     const GALGAS_procedureSignature & in_mSignature
+                                     const GALGAS_procedureSignature & in_mSignature,
+                                     const GALGAS_bool & in_mWeakProcedure
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -8603,6 +8618,7 @@ class GALGAS_procedureMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mMutating ;
   public : GALGAS_modeMap mAttribute_mProcedureModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
+  public : GALGAS_bool mAttribute_mWeakProcedure ;
 
 
 //--------------------------------- Accessors
@@ -8622,7 +8638,8 @@ class GALGAS_procedureMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_procedureMap_2D_element (const GALGAS_lstring & in_lkey,
                                            const GALGAS_bool & in_mMutating,
                                            const GALGAS_modeMap & in_mProcedureModeMap,
-                                           const GALGAS_procedureSignature & in_mSignature) ;
+                                           const GALGAS_procedureSignature & in_mSignature,
+                                           const GALGAS_bool & in_mWeakProcedure) ;
 
 //-- Start of generic part --*
 
@@ -8638,7 +8655,8 @@ class GALGAS_procedureMap_2D_element : public AC_GALGAS_root {
   public : static GALGAS_procedureMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                   const class GALGAS_bool & inOperand1,
                                                                   const class GALGAS_modeMap & inOperand2,
-                                                                  const class GALGAS_procedureSignature & inOperand3
+                                                                  const class GALGAS_procedureSignature & inOperand3,
+                                                                  const class GALGAS_bool & inOperand4
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -8660,6 +8678,8 @@ class GALGAS_procedureMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_modeMap reader_mProcedureModeMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureSignature reader_mSignature (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWeakProcedure (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

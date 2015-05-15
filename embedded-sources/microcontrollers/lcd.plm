@@ -366,7 +366,7 @@ proc $user @noWarningIfUnused printSigned (?inValue : Int32) {
 //   EXCEPTION                                                                 *
 //-----------------------------------------------------------------------------*
 
-proc $exception programLcd4BitDataBusOutput_inExceptionMode (?inValue : UInt8) {
+proc $exception @noWarningIfUnused programLcd4BitDataBusOutput_inExceptionMode (?inValue : UInt8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -375,14 +375,14 @@ proc $exception programLcd4BitDataBusOutput_inExceptionMode (?inValue : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception waitOneMillisecondInExceptionMode () {
+proc $exception @noWarningIfUnused waitOneMillisecondInExceptionMode () {
   while (SYST_CSR & SYST_CSR_COUNTFLAG) == 0 do
   end
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $exception waitMSInExceptionMode (?duration: inDuration : UInt32) {
+proc $exception @noWarningIfUnused waitMSInExceptionMode (?duration: inDuration : UInt32) {
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
@@ -392,7 +392,7 @@ proc $exception waitMSInExceptionMode (?duration: inDuration : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception writeDataInExceptionMode (?inData : UInt8) {
+proc $exception @noWarningIfUnused writeDataInExceptionMode (?inData : UInt8) {
   waitOneMillisecondInExceptionMode () ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
@@ -408,7 +408,7 @@ proc $exception writeDataInExceptionMode (?inData : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception printUnsignedInExceptionMode (?inValue : UInt32) {
+proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt32) {
   if inValue > 9 then
     printUnsignedInExceptionMode (!inValue &/ 10)
   end
@@ -417,7 +417,7 @@ proc $exception printUnsignedInExceptionMode (?inValue : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception write8bitCommand_inExceptionMode (?inCommand : UInt8) {
+proc $exception @noWarningIfUnused write8bitCommand_inExceptionMode (?inCommand : UInt8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
@@ -433,7 +433,7 @@ proc $exception write8bitCommand_inExceptionMode (?inCommand : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception gotoInExceptionMode (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+proc $exception @noWarningIfUnused gotoInExceptionMode (?line:inLine : UInt32 ?column:inColumn : UInt8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;
@@ -449,7 +449,7 @@ proc $exception gotoInExceptionMode (?line:inLine : UInt32 ?column:inColumn : UI
 
 //-----------------------------------------------------------------------------*
 
-proc $exception clearScreenInExceptionMode () {
+proc $exception @noWarningIfUnused clearScreenInExceptionMode () {
   write8bitCommand_inExceptionMode (!0x01)
 }
 

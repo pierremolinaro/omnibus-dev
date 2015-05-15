@@ -175,9 +175,11 @@ map @procedureMap {
   @bool mMutating
   @modeMap mProcedureModeMap
   @procedureSignature mSignature
+  @bool mWeakProcedure
 
   insert insertKey error message "the '%K' proc is already declared in %L"
   search searchKey error message "there is no '%K' proc"
+  remove removeKey error message "there is no '%K' proc"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -235,16 +237,47 @@ method @procedureDeclarationListAST-element enterInContext
     for () in mProcedureModeList do
       [!?procedureModeMap insertKey !mValue] ;
     end
+  #--- Weak procedure ?
+    var weakProcedure = false
+    for (attribute) in mProcedureAttributeList while not weakProcedure do
+      weakProcedure = attribute.string == weakAttribute ()
+    end
   #--- Enter in context
-    [!?ioContext.mProcedureMap insertKey
-      !.new {
-        ![self mangledName]
-        !mProcedureName.location
-      }
-      !false # not mutating
-      !procedureModeMap
-      !signature
-    ]
+    let mangledName = [self mangledName]
+    let mangledNameWithLocation = @lstring.new {!mangledName !mProcedureName.location}
+    if [ioContext.mProcedureMap hasKey !mangledName] then
+      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mangledName]
+      if weakProcedure && not weak then
+        # redefined weak procedure is ignored
+      elsif weakProcedure && weak then
+        error mProcedureName : "this weak procedure overrides a weak procedure"
+      elsif (not weakProcedure) && weak then
+        [!?ioContext.mProcedureMap removeKey !mangledNameWithLocation ?4*] # Remove weak routine
+        [!?ioContext.mProcedureMap insertKey # Insert routine
+          !mangledNameWithLocation
+          !false # not mutating
+          !procedureModeMap
+          !signature
+          !weakProcedure
+        ]
+      else # (not weakProcedure) && (not weak)
+        [!?ioContext.mProcedureMap insertKey # Raises a redefinition error
+          !mangledNameWithLocation
+          !false # not mutating
+          !procedureModeMap
+          !signature
+          !weakProcedure
+        ]
+      end
+    else
+      [!?ioContext.mProcedureMap insertKey
+        !mangledNameWithLocation
+        !false # not mutating
+        !procedureModeMap
+        !signature
+        !weakProcedure
+      ]
+    end
   case structureProc (* *) :
   end
 }
@@ -274,14 +307,22 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 #--- Attribues
   var warnIfUnused = true
+  var weakProcedure = false
   for (attribute) in mProcedureAttributeList do
     if attribute.string == noWarningIfUnusedAttribute () then
       if not warnIfUnused then
         error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
       end
       warnIfUnused = false    
+    elsif attribute.string == weakAttribute () then
+      if weakProcedure then
+        error attribute : "duplicate @" + weakAttribute () + " attribute"
+      end
+      weakProcedure = true    
     else
-      error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+      error attribute : "unknown attribute; available attributes are @"
+        + noWarningIfUnusedAttribute ()
+        + ", @" + weakAttribute ()
     end
   end
 #--- Variable map
@@ -392,13 +433,42 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #---
   [variableMap checkAutomatonStates !mEndOfProcLocation]
 #--- Code generation
-  [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
-    !mProcedureName
-    !formalArguments
-    !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
-    !warnIfUnused
-  ]  
+  if [ioIntermediateCodeStruct.mProcedureMapIR hasKey !mProcedureName.string] then
+    let weak = [ioIntermediateCodeStruct.mProcedureMapIR mWeakForKey !mProcedureName.string]
+    if weakProcedure && not weak then
+      # redefined weak procedure is ignored
+    elsif weakProcedure && weak then
+      error mProcedureName : "this weak procedure overrides a weak procedure"
+    elsif (not weakProcedure) && weak then
+      [!?ioIntermediateCodeStruct.mProcedureMapIR removeKey !mProcedureName ?5*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
+        !mProcedureName
+        !formalArguments
+        !instructionGenerationList
+        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+        !warnIfUnused
+        !weakProcedure
+      ]  
+    else # (not weakProcedure) && (not weak)
+      [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey # Raises a redefinition error
+        !mProcedureName
+        !formalArguments
+        !instructionGenerationList
+        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+        !warnIfUnused
+        !weakProcedure
+      ]
+    end
+  else
+    [!?ioIntermediateCodeStruct.mProcedureMapIR insertKey
+      !mProcedureName
+      !formalArguments
+      !instructionGenerationList
+      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !mProcedureName.string]
+      !warnIfUnused
+      !weakProcedure
+    ]  
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

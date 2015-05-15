@@ -2987,6 +2987,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_instructionListIR & inOperand2,
                                                       const class GALGAS_bool & inOperand3,
                                                       const class GALGAS_bool & inOperand4,
+                                                      const class GALGAS_bool & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2996,6 +2997,16 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                      class GALGAS_instructionListIR constinArgument2,
                                                      class GALGAS_bool constinArgument3,
                                                      class GALGAS_bool constinArgument4,
+                                                     class GALGAS_bool constinArgument5,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_removeKey (class GALGAS_lstring constinArgument0,
+                                                     class GALGAS_procFormalArgumentListForGeneration & outArgument1,
+                                                     class GALGAS_instructionListIR & outArgument2,
+                                                     class GALGAS_bool & outArgument3,
+                                                     class GALGAS_bool & outArgument4,
+                                                     class GALGAS_bool & outArgument5,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -3019,6 +3030,11 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void modifier_setMWeakForKey (class GALGAS_bool constinArgument0,
+                                                          class GALGAS_string constinArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -3026,6 +3042,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                    class GALGAS_instructionListIR & outArgument2,
                                                    class GALGAS_bool & outArgument3,
                                                    class GALGAS_bool & outArgument4,
+                                                   class GALGAS_bool & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3047,6 +3064,10 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWarnIfUnusedForKey (const class GALGAS_string & constinOperand0,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWeakForKey (const class GALGAS_string & constinOperand0,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR reader_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -3078,6 +3099,7 @@ class cEnumerator_procedureMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3098,13 +3120,15 @@ class cMapElement_procedureMapIR : public cMapElement {
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
+  public : GALGAS_bool mAttribute_mWeak ;
 
 //--- Constructor
   public : cMapElement_procedureMapIR (const GALGAS_lstring & inKey,
                                        const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                        const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                        const GALGAS_bool & in_mIsRequired,
-                                       const GALGAS_bool & in_mWarnIfUnused
+                                       const GALGAS_bool & in_mWarnIfUnused,
+                                       const GALGAS_bool & in_mWeak
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3133,6 +3157,7 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
+  public : GALGAS_bool mAttribute_mWeak ;
 
 
 //--------------------------------- Accessors
@@ -3153,7 +3178,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                              const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                              const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                              const GALGAS_bool & in_mIsRequired,
-                                             const GALGAS_bool & in_mWarnIfUnused) ;
+                                             const GALGAS_bool & in_mWarnIfUnused,
+                                             const GALGAS_bool & in_mWeak) ;
 
 //-- Start of generic part --*
 
@@ -3170,7 +3196,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                                                     const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
                                                                     const class GALGAS_instructionListIR & inOperand2,
                                                                     const class GALGAS_bool & inOperand3,
-                                                                    const class GALGAS_bool & inOperand4
+                                                                    const class GALGAS_bool & inOperand4,
+                                                                    const class GALGAS_bool & inOperand5
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -3194,6 +3221,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsRequired (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWarnIfUnused (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWeak (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4825,93 +4854,5 @@ void categoryMethod_enterInPrecedenceGraph (const class GALGAS_procedureDeclarat
                                             class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                 Routine 'checkMode'                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_checkMode (const class GALGAS_stringset constinArgument0,
-                        const class GALGAS_stringset constinArgument1,
-                        const class GALGAS_location constinArgument2,
-                        class C_Compiler * inCompiler
-                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'buildSemanticContext'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
-                                   const class GALGAS_procedureDeclarationListAST constinArgument1,
-                                   const class GALGAS_functionDeclarationListAST constinArgument2,
-                                   const class GALGAS_requiredProcedureDeclarationListAST constinArgument3,
-                                   class GALGAS_globalLiteralStringMap & ioArgument4,
-                                   class GALGAS_semanticContext & outArgument5,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Abstract category method '@abstractDeclaration enterInContext'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
-                                                                            const class GALGAS_procedureDeclarationListAST constinArgument0,
-                                                                            class GALGAS_semanticContext & ioArgument1,
-                                                                            class GALGAS_globalLiteralStringMap & ioArgument2,
-                                                                            class C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
-                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
-                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                        GALGAS_semanticContext & io_ioContext,
-                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@functionDeclarationListAST-element enterInContext'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@procedureDeclarationListAST-element enterInContext'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
-                                    class GALGAS_semanticContext & io_ioContext,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'solveInferredType'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
-                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument1,
-                                                                 const class GALGAS_location & constinArgument2,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
 
 #endif

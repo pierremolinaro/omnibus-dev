@@ -29,6 +29,7 @@ newIntegerType Int64 @signed64
 import "microcontrollers/mk20dx256.plm"
 import "microcontrollers/lcd.plm"
 import "microcontrollers/leds.plm"
+import "microcontrollers/default-isr.plm"
 
 //-----------------------------------------------------------------------------*
 
@@ -42,7 +43,6 @@ mode $exception
 required proc $user setup ()
 required proc $user loop ()
 required proc $isr systickHandler ()
-required proc $isr userSystickHandler ()
 
 //-----------------------------------------------------------------------------*
 

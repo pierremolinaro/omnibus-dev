@@ -1,6 +1,5 @@
 target "target-teensy-sequential-systick.plms"
 
-
 //-----------------------------------------------------------------------------*
 
 proc $user setup () {
@@ -15,10 +14,10 @@ var $isr gClignotement : UInt32 = 0
 proc $isr userSystickHandler () {
   gClignotement ++
   if gClignotement == 500 then
-    GPIOA_PSOR = 1 << 12 ;
+    ledOn (!LED_L0) ;
   elsif gClignotement == 1000 then
-    GPIOA_PCOR = 1 << 12 ;
     gClignotement = 0
+    ledOff (!LED_L0) ;
   end
 }
 
@@ -29,10 +28,9 @@ var $user gVar : Int8 = 0
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
-  let duration : UInt32 = 100
-  waitMS (!duration)
+  waitMS (!100)
   ledOn (!LED_TEENSY)
-  waitMS (!duration)
+  waitMS (!100)
   ledOff (!LED_TEENSY)
   gVar ++ // Engendre une exception
   goto (!line:0 !column: 0)
