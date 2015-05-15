@@ -87,7 +87,7 @@ proc semanticAnalysis
       end
       error inEndOfSourceFile : s
     else
-      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procModes ?*]
+      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procModes ?2*]
       let actualProcModeSet = [procModes keySet]
       let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
       if actualProcModeSet != requiredProcModeSet then

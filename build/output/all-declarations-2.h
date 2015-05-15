@@ -11,6 +11,94 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                 Routine 'checkMode'                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_checkMode (const class GALGAS_stringset constinArgument0,
+                        const class GALGAS_stringset constinArgument1,
+                        const class GALGAS_location constinArgument2,
+                        class C_Compiler * inCompiler
+                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'buildSemanticContext'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
+                                   const class GALGAS_procedureDeclarationListAST constinArgument1,
+                                   const class GALGAS_functionDeclarationListAST constinArgument2,
+                                   const class GALGAS_requiredProcedureDeclarationListAST constinArgument3,
+                                   class GALGAS_globalLiteralStringMap & ioArgument4,
+                                   class GALGAS_semanticContext & outArgument5,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Abstract category method '@abstractDeclaration enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
+                                                                            const class GALGAS_procedureDeclarationListAST constinArgument0,
+                                                                            class GALGAS_semanticContext & ioArgument1,
+                                                                            class GALGAS_globalLiteralStringMap & ioArgument2,
+                                                                            class C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
+                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
+                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                        GALGAS_semanticContext & io_ioContext,
+                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@functionDeclarationListAST-element enterInContext'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@procedureDeclarationListAST-element enterInContext'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'solveInferredType'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
+                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument1,
+                                                                 const class GALGAS_location & constinArgument2,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Routine 'semanticAnalysis'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -329,6 +417,15 @@ class GALGAS_string function_mangledNameForTemporaryConstant (class GALGAS_uint 
 
 class GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'weakAttribute'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -654,14 +751,6 @@ extern const char * gWrapperFileContent_11_targetTemplates ;
 extern const char * gWrapperFileContent_12_targetTemplates ;
 extern const char * gWrapperFileContent_13_targetTemplates ;
 extern const char * gWrapperFileContent_14_targetTemplates ;
-extern const char * gWrapperFileContent_15_targetTemplates ;
-extern const char * gWrapperFileContent_16_targetTemplates ;
-extern const char * gWrapperFileContent_17_targetTemplates ;
-extern const char * gWrapperFileContent_18_targetTemplates ;
-extern const char * gWrapperFileContent_19_targetTemplates ;
-extern const char * gWrapperFileContent_20_targetTemplates ;
-extern const char * gWrapperFileContent_21_targetTemplates ;
-extern const char * gWrapperFileContent_22_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -683,14 +772,6 @@ extern const cRegularFileWrapper gWrapperFile_11_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_12_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -699,8 +780,6 @@ extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_6_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2879,5 +2958,179 @@ class cPtr_literalStringTypeIR : public cPtr_abstractTypeIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression) (const class cPtr_expressionAST * inObject,
+                                                                                            const class GALGAS_lstring constinArgument0,
+                                                                                            class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                                                            class C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
+                                                               categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_addDependenceEdgeForStaticExpression (const class cPtr_expressionAST * inObject,
+                                                              const GALGAS_lstring constin_inConstantName,
+                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//         Category Getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector' (as function)         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_requiredActualPassingModeForSelector (const class GALGAS_procFormalArgumentPassingMode & inObject,
+                                                                         class GALGAS_lstring inArgument0,
+                                                                         class C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Abstract category method '@instructionAST analyze'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_instructionAST_analyze) (const class cPtr_instructionAST * inObject,
+                                                                const class GALGAS_receiverType constinArgument0,
+                                                                const class GALGAS_semanticContext constinArgument1,
+                                                                const class GALGAS_stringset constinArgument2,
+                                                                const class GALGAS_bool constinArgument3,
+                                                                class GALGAS_uint & ioArgument4,
+                                                                class GALGAS_globalLiteralStringMap & ioArgument5,
+                                                                class GALGAS_variableMap & ioArgument6,
+                                                                class GALGAS_instructionListIR & ioArgument7,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_analyze (const int32_t inClassIndex,
+                                  categoryMethodSignature_instructionAST_analyze inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
+                                 const GALGAS_receiverType constin_inReceiverType,
+                                 const GALGAS_semanticContext constin_inContext,
+                                 const GALGAS_stringset constin_inModeSet,
+                                 const GALGAS_bool constin_inAllowExceptions,
+                                 GALGAS_uint & io_ioTemporaryIndex,
+                                 GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                 GALGAS_variableMap & io_ioVariableMap,
+                                 GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                 C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListAST analyzeBranchInstructionList'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
+                                                  class GALGAS_location in_inEndOfInstructionList,
+                                                  const class GALGAS_receiverType constin_inReceiverType,
+                                                  const class GALGAS_semanticContext constin_inContext,
+                                                  const class GALGAS_stringset constin_inModeSet,
+                                                  const class GALGAS_bool constin_inAllowExceptions,
+                                                  class GALGAS_uint & io_ioTemporaryIndex,
+                                                  class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                                  class GALGAS_variableMap & io_ioVariableMap,
+                                                  class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_receiverType constin_inReceiverType,
+                                                   const class GALGAS_semanticContext constin_inContext,
+                                                   const class GALGAS_stringset constin_inModeSet,
+                                                   const class GALGAS_bool constin_inAllowExceptions,
+                                                   class GALGAS_uint & io_ioTemporaryIndex,
+                                                   class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                                   class GALGAS_variableMap & io_ioVariableMap,
+                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category reader '@abstractInstructionIR instructionCode'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_string (*categoryReaderSignature_abstractInstructionIR_instructionCode) (const class cPtr_abstractInstructionIR * inObject,
+                                                                                              class C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_instructionCode (const int32_t inClassIndex,
+                                          categoryReaderSignature_abstractInstructionIR_instructionCode inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string callCategoryReader_instructionCode (const class cPtr_abstractInstructionIR * inObject,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Abstract category method '@expressionAST analyzeExpression'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
+                                                                         const class GALGAS_receiverType constinArgument0,
+                                                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                                                         const class GALGAS_semanticContext constinArgument2,
+                                                                         const class GALGAS_stringset constinArgument3,
+                                                                         const class GALGAS_bool constinArgument4,
+                                                                         class GALGAS_uint & ioArgument5,
+                                                                         class GALGAS_globalLiteralStringMap & ioArgument6,
+                                                                         class GALGAS_variableMap & ioArgument7,
+                                                                         class GALGAS_instructionListIR & ioArgument8,
+                                                                         class GALGAS_unifiedTypeMap_2D_proxy & outArgument9,
+                                                                         class GALGAS_variableKindIR & outArgument10,
+                                                                         class C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
+                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
+                                           const GALGAS_receiverType constin_inReceiverType,
+                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           const GALGAS_stringset constin_inModes,
+                                           const GALGAS_bool constin_inAllowExceptions,
+                                           GALGAS_uint & io_ioTemporaryIndex,
+                                           GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_variableMap & io_ioVariableMap,
+                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                           GALGAS_unifiedTypeMap_2D_proxy & out_outExpressionType,
+                                           GALGAS_variableKindIR & out_outResultValueName,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 #endif

@@ -163,6 +163,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
+        !procedure.mWeak
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities]
       outAccessibleEntities.mProcedureSet += !procedure.lkey.string
@@ -173,6 +174,7 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
+        !procedure.mWeak
       ]        
     end
   end
@@ -201,6 +203,7 @@ private proc suppressInaccessibleSubprograms
           !procedure.mInstructionGenerationList
           !procedure.mIsRequired
           !procedure.mWarnIfUnused
+          !procedure.mWeak
         ]        
         [procedure enterAccessibleEntities !?outAccessibleEntities]
         exploreProceduresAndFunctions = true
@@ -211,6 +214,7 @@ private proc suppressInaccessibleSubprograms
           !procedure.mInstructionGenerationList
           !procedure.mIsRequired
           !procedure.mWarnIfUnused
+          !procedure.mWeak
         ]        
       end
     end

@@ -110,6 +110,7 @@ override method @procCallInstructionAST analyze
     ?*
     ?let procedureModeMap
     ?let @procedureSignature procSignature
+    ?*
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}

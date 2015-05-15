@@ -65,8 +65,10 @@ map @procedureMapIR {
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired
   @bool mWarnIfUnused
+  @bool mWeak
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

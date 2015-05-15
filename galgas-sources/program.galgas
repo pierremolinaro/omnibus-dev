@@ -139,13 +139,21 @@ private proc addTargetSpecificFiles
   ?currentDirectory:let @string inCurrentDirectory
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
+  @ast ast = .default
   let targetFilePath = "targets/" + inTargetName
   recursiveImportFiles (
-    !?ast:ioAST
+    !?ast:ast
     !currentDirectory:inCurrentDirectory
     !importClauseList:{!.new {!targetFilePath !inTargetName.location}}
     !?importedFilePathSet:ioImportedFileAbsolutePathSet
   )
+  ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
+  ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
+  ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
+  ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST
+  ioAST.mTargetList += ast.mTargetList
+  ioAST.mInitList = ast.mInitList + ioAST.mInitList
+  ioAST.mException = ast.mException
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

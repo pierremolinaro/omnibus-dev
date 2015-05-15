@@ -13,13 +13,7 @@ list @requiredProcedureDeclarationListAST {
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
-syntax extension plms_specific_syntax {
-
-  rule <procedure_header>
-    !procModes:@lstringlist outProcModeList
-    !name:@lstring outProcName
-    !attributes:@lstringlist outAttributeList
-    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
+syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 

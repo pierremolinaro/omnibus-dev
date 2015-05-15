@@ -220,7 +220,7 @@ const vectorStructSeq vector __attribute__ ((section (".isr_vector"))) = {
     NULL, // 8
     NULL, // 9
     NULL, // 10
-    NULL, // 11 (svc)
+    proc_svc, // 11
     NULL, // 12
     NULL, // 13
     NULL, // 14

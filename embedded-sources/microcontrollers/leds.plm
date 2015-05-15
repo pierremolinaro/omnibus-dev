@@ -1,5 +1,3 @@
-target "target-teensy-sequential-systick.plms"
-
 //-----------------------------------------------------------------------------*
 //   Led L0 : PTA12
 //   Led L1 : PTA13
