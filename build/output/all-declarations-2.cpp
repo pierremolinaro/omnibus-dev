@@ -3035,6 +3035,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "    ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
   "    waitMSInExceptionMode (!duration:50)\n"
   "    ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "    SCB_AIRCR = (0x5FA << 16) | SCB_AIRCR_SYSRESETREQ\n"
   "  end\n"
   "}\n"
   "\n"
@@ -3045,7 +3046,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
-  14650, // Text length
+  14704, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -5271,7 +5272,8 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register SCB_ICSR   0xE000ED04 // Interrupt Control and State\n"
   "//register SCB_ICSR_PENDSTSET   0x04000000\n"
   "//register SCB_VTOR   0xE000ED08 // Vector Table Offset\n"
-  "//register SCB_AIRCR   0xE000ED0C // Application Interrupt and Reset Control\n"
+  "register SCB_AIRCR : UInt32 at 0xE000ED0C // Application Interrupt and Reset Control\n"
+  "let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004\n"
   "//register SCB_SCR    0xE000ED10 // System Control Register\n"
   "//register SCB_CCR    0xE000ED14 // Configuration and Control\n"
   "//register SCB_SHPR1   0xE000ED18 // System Handler Priority Register 1\n"
@@ -5303,7 +5305,7 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  144402, // Text length
+  144459, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 

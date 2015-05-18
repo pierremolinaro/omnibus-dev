@@ -2102,7 +2102,8 @@ register GPIOE_PDDR   : UInt32 at 0x400FF114 // Port Data Direction Register
 //register SCB_ICSR   0xE000ED04 // Interrupt Control and State
 //register SCB_ICSR_PENDSTSET   0x04000000
 //register SCB_VTOR   0xE000ED08 // Vector Table Offset
-//register SCB_AIRCR   0xE000ED0C // Application Interrupt and Reset Control
+register SCB_AIRCR : UInt32 at 0xE000ED0C // Application Interrupt and Reset Control
+let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
 //register SCB_SCR    0xE000ED10 // System Control Register
 //register SCB_CCR    0xE000ED14 // Configuration and Control
 //register SCB_SHPR1   0xE000ED18 // System Handler Priority Register 1
