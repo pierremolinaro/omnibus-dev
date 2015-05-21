@@ -50,7 +50,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
     error mLiteralInteger : "Cannot infer type" : outExpressionType
   else
     switch [inOptionalTargetType kind]
-    case integer (* max) :
+    case integer (* max * *) :
       if mLiteralInteger.uint64 > max then
         error mLiteralInteger : "literal integer is > " + [inOptionalTargetType key]
           + " max value (" + max + ")" : outExpressionType

@@ -7,6 +7,20 @@ class @registerDeclaration : @abstractDeclaration {
   @lstring mRegisterName
   @luint64 mRegisterAddress
   @lstringlist mAttributeList
+  @registerBitSliceList mRegisterBitSliceList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @registerBitSliceList {
+  @registerBitSlice mRegisterBitSlice
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @registerBitSlice {
+  case unusedBits (@luint64 count)
+  case namedBit (@lstring name @luint64 count)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -36,11 +50,38 @@ syntax extension common_syntax {
     $identifier$ ?let registerTypeName
     $at$
     $integer$ ?let @luint64 registerAddress
+    @registerBitSliceList registerBitSliceList = {}
+    select
+    or
+      ${$
+      repeat
+        @registerBitSlice registerBitSlice
+        select
+          $integer$ ?let @luint64 unusedBitCount
+          registerBitSlice = .unusedBits {!count:unusedBitCount}
+        or
+          $identifier$ ?let bitName
+          select
+            registerBitSlice = .namedBit {!name:bitName !count:.new{!1L !.here}}
+          or
+            $[$
+            $integer$ ?let @luint64 bitCount
+            $]$
+            registerBitSlice = .namedBit {!name:bitName !count:bitCount}
+          end
+        end
+        registerBitSliceList += !registerBitSlice
+      while
+        $,$
+      end
+      $}$
+    end
     ioAST.mDeclarationList += !@registerDeclaration.new {
       !registerTypeName
       !registerName
       !registerAddress
       !attributeList
+      !registerBitSliceList
     }
   }
 
@@ -69,6 +110,25 @@ override getter @registerDeclaration keyRepresentation -> @string outRepresentat
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
+map @registerBitSliceMap {
+  @uint mShiftCount
+  @uint mBitCount
+  insert insertKey error message "the '%K' register slice has been already declared"
+  search searchKey error message "the '%K' register slice is not declared"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @registerMap {
+  @unifiedTypeMap-proxy mType
+  @bool mIsReadOnly
+  @registerBitSliceMap mRegisterBitSliceMap
+  insert insertKey error message "the '%K' register has been already declared in %L"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @registerDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -87,11 +147,27 @@ override method @registerDeclaration enterInContext
       isReadOnly = true
     end
   end
+#--- Build bit slice map
+  @registerBitSliceMap registerBitSliceMap = {}
+  if [mRegisterBitSliceList length] > 0 then
+    @uint shiftCount = 0
+    for > () in mRegisterBitSliceList do
+      switch mRegisterBitSlice
+      case unusedBits (@luint64 count) :
+        shiftCount = shiftCount + [count.uint64 uint]
+      case namedBit (@lstring name @luint64 count) :
+        let bitCount = [count.uint64 uint]
+        [!?registerBitSliceMap insertKey !name !shiftCount !bitCount]
+        shiftCount = shiftCount + bitCount
+      end
+    end
+  end
 #---  
   [!?ioContext.mRegisterMap insertKey
     !mRegisterName
     !registerType
     !isReadOnly
+    !registerBitSliceMap
   ]
 }
 
@@ -108,7 +184,24 @@ override method @registerDeclaration semanticAnalysis
   switch [registerType kind]
   case boolean : error mRegisterTypeName : "a boolean type is not valid for a register"
   case boolset : error mRegisterTypeName : "a boolset type is not valid for a register"
-  case integer (* *):
+  case integer (* * @bool unsigned @uint size) :
+    if [mRegisterBitSliceList length] > 0 then
+      if not unsigned then
+        error mRegisterName:"the register type should be unsigned in order to define bit slices"
+      end
+      @uint shiftCount = 0
+      for > () in mRegisterBitSliceList do
+        switch mRegisterBitSlice
+        case unusedBits (@luint64 count) :
+          shiftCount = shiftCount + [count.uint64 uint]
+        case namedBit (* @luint64 count) :
+          shiftCount = shiftCount + [count.uint64 uint]
+        end
+      end
+      if size != shiftCount then
+        error mRegisterName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
+      end
+    end
   case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
   case structure (*) : error mRegisterTypeName : "a structure type is not valid for a register"
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"

@@ -33,7 +33,9 @@ let f_bus : UInt32 = 48_000_000
 let f_mem  : UInt32= 24_000_000
 
 // chapter 11: Port control and interrupts (PORT)
-register PORTA_PCR0 : UInt32 at 0x40049000 // Pin Control Register n
+ // Pin Control Register n
+register PORTA_PCR0 : UInt32 at 0x40049000
+ {7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps}
 let PORT_PCR_ISF  : UInt32  = 0x01000000  // Interrupt Status Flag
 //register UInt32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration
 let PORT_PCR_IRQC_MASK  : UInt32 = 0x000F0000

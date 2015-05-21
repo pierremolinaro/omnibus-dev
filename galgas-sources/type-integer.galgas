@@ -100,7 +100,7 @@ override method @integerDeclaration enterInContext
   @constructorMap constructorMap = {}
   [!?ioContext.mTypeMap insertKey
     !lkey:mIntegerTypeName
-    !kind:.integer {!min:min !max:max}
+    !kind:.integer {!min:min !max:max !unsigned:not isSigned !bitCount:size}
     !constructorMap:constructorMap
     !procedureMap:{}
     !copiable:true
