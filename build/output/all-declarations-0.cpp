@@ -7594,15 +7594,15 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i12_parse (C_Le
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_ (GALGAS_ast & ioArgument_ioAST,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_register) COMMA_SOURCE_FILE ("register-declaration.galgas", 27)) ;
-  GALGAS_lstringlist var_attributeList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("register-declaration.galgas", 28)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_register) COMMA_SOURCE_FILE ("register-declaration.galgas", 41)) ;
+  GALGAS_lstringlist var_attributeList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("register-declaration.galgas", 42)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_10 (inCompiler)) {
     case 2: {
       GALGAS_lstring var_attribute = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("register-declaration.galgas", 31)) ;
-      var_attributeList.addAssign_operation (var_attribute  COMMA_SOURCE_FILE ("register-declaration.galgas", 32)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("register-declaration.galgas", 45)) ;
+      var_attributeList.addAssign_operation (var_attribute  COMMA_SOURCE_FILE ("register-declaration.galgas", 46)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -7610,36 +7610,129 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_ (GALGAS_as
     }
   }
   GALGAS_lstring var_registerName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 34)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("register-declaration.galgas", 35)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 48)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("register-declaration.galgas", 49)) ;
   GALGAS_lstring var_registerTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 36)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_at) COMMA_SOURCE_FILE ("register-declaration.galgas", 37)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 50)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_at) COMMA_SOURCE_FILE ("register-declaration.galgas", 51)) ;
   GALGAS_luint_36__34_ var_registerAddress = inCompiler->synthetizedAttribute_uint_36__34_value () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 38)) ;
-  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_registerDeclaration::constructor_new (var_registerTypeName, var_registerName, var_registerAddress, var_attributeList  COMMA_SOURCE_FILE ("register-declaration.galgas", 39))  COMMA_SOURCE_FILE ("register-declaration.galgas", 39)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 52)) ;
+  GALGAS_registerBitSliceList var_registerBitSliceList = GALGAS_registerBitSliceList::constructor_emptyList (SOURCE_FILE ("register-declaration.galgas", 53)) ;
+  switch (select_common_5F_syntax_11 (inCompiler)) {
+  case 1: {
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("register-declaration.galgas", 56)) ;
+    bool repeatFlag_1 = true ;
+    while (repeatFlag_1) {
+      GALGAS_registerBitSlice var_registerBitSlice ;
+      switch (select_common_5F_syntax_13 (inCompiler)) {
+      case 1: {
+        GALGAS_luint_36__34_ var_unusedBitCount = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 60)) ;
+        var_registerBitSlice = GALGAS_registerBitSlice::constructor_unusedBits (var_unusedBitCount  COMMA_SOURCE_FILE ("register-declaration.galgas", 61)) ;
+      } break ;
+      case 2: {
+        GALGAS_lstring var_bitName = inCompiler->synthetizedAttribute_tokenString () ;
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 63)) ;
+        switch (select_common_5F_syntax_14 (inCompiler)) {
+        case 1: {
+          var_registerBitSlice = GALGAS_registerBitSlice::constructor_namedBit (var_bitName, GALGAS_luint_36__34_::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 1ULL), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 65))  COMMA_SOURCE_FILE ("register-declaration.galgas", 65))  COMMA_SOURCE_FILE ("register-declaration.galgas", 65)) ;
+        } break ;
+        case 2: {
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5B_) COMMA_SOURCE_FILE ("register-declaration.galgas", 67)) ;
+          GALGAS_luint_36__34_ var_bitCount = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 68)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("register-declaration.galgas", 69)) ;
+          var_registerBitSlice = GALGAS_registerBitSlice::constructor_namedBit (var_bitName, var_bitCount  COMMA_SOURCE_FILE ("register-declaration.galgas", 70)) ;
+        } break ;
+        default:
+          break ;
+        }
+      } break ;
+      default:
+        break ;
+      }
+      var_registerBitSliceList.addAssign_operation (var_registerBitSlice  COMMA_SOURCE_FILE ("register-declaration.galgas", 73)) ;
+      switch (select_common_5F_syntax_12 (inCompiler)) {
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("register-declaration.galgas", 75)) ;
+      } break ;
+      default:
+        repeatFlag_1 = false ;
+        break ;
+      }
+    }
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("register-declaration.galgas", 77)) ;
+  } break ;
+  default:
+    break ;
+  }
+  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_registerDeclaration::constructor_new (var_registerTypeName, var_registerName, var_registerAddress, var_attributeList, var_registerBitSliceList  COMMA_SOURCE_FILE ("register-declaration.galgas", 79))  COMMA_SOURCE_FILE ("register-declaration.galgas", 79)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i13_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_register) COMMA_SOURCE_FILE ("register-declaration.galgas", 27)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_register) COMMA_SOURCE_FILE ("register-declaration.galgas", 41)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_10 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("register-declaration.galgas", 31)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("register-declaration.galgas", 45)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 34)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("register-declaration.galgas", 35)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 36)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_at) COMMA_SOURCE_FILE ("register-declaration.galgas", 37)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 38)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 48)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("register-declaration.galgas", 49)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 50)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_at) COMMA_SOURCE_FILE ("register-declaration.galgas", 51)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 52)) ;
+  switch (select_common_5F_syntax_11 (inCompiler)) {
+  case 1: {
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("register-declaration.galgas", 56)) ;
+    bool repeatFlag_1 = true ;
+    while (repeatFlag_1) {
+      switch (select_common_5F_syntax_13 (inCompiler)) {
+      case 1: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 60)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 63)) ;
+        switch (select_common_5F_syntax_14 (inCompiler)) {
+        case 1: {
+        } break ;
+        case 2: {
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5B_) COMMA_SOURCE_FILE ("register-declaration.galgas", 67)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 68)) ;
+          inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("register-declaration.galgas", 69)) ;
+        } break ;
+        default:
+          break ;
+        }
+      } break ;
+      default:
+        break ;
+      }
+      switch (select_common_5F_syntax_12 (inCompiler)) {
+      case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("register-declaration.galgas", 75)) ;
+      } break ;
+      default:
+        repeatFlag_1 = false ;
+        break ;
+      }
+    }
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("register-declaration.galgas", 77)) ;
+  } break ;
+  default:
+    break ;
+  }
   inCompiler->resetTemplateString () ;
 }
 
@@ -7651,7 +7744,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instructionList_i14_ (GALGA
   outArgument_outInstructionList = GALGAS_instructionListAST::constructor_emptyList (SOURCE_FILE ("instructionList.galgas", 23)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_11 (inCompiler)) {
+    switch (select_common_5F_syntax_15 (inCompiler)) {
     case 2: {
       nt_instruction_ (outArgument_outInstructionList, inCompiler) ;
     } break ;
@@ -7670,7 +7763,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instructionList_i14_ (GALGA
 void cParser_common_5F_syntax::rule_common_5F_syntax_instructionList_i14_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_11 (inCompiler)) {
+    switch (select_common_5F_syntax_15 (inCompiler)) {
     case 2: {
       nt_instruction_parse (inCompiler) ;
     } break ;
@@ -7765,7 +7858,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i19_ (GALGAS_in
   GALGAS_lstring var_varName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-var.galgas", 28)) ;
   GALGAS_lstring var_optionalTypeName ;
-  switch (select_common_5F_syntax_12 (inCompiler)) {
+  switch (select_common_5F_syntax_16 (inCompiler)) {
   case 1: {
     var_optionalTypeName = GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("instruction-var.galgas", 31)) ;
   } break ;
@@ -7788,7 +7881,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i19_ (GALGAS_in
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i19_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_var) COMMA_SOURCE_FILE ("instruction-var.galgas", 27)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-var.galgas", 28)) ;
-  switch (select_common_5F_syntax_12 (inCompiler)) {
+  switch (select_common_5F_syntax_16 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -7834,7 +7927,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i21_ (GALGAS_in
   GALGAS_lstring var_varName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-let.galgas", 28)) ;
   GALGAS_lstring var_optionalTypeName ;
-  switch (select_common_5F_syntax_13 (inCompiler)) {
+  switch (select_common_5F_syntax_17 (inCompiler)) {
   case 1: {
     var_optionalTypeName = GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("instruction-let.galgas", 31)) ;
   } break ;
@@ -7857,7 +7950,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i21_ (GALGAS_in
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i21_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_let) COMMA_SOURCE_FILE ("instruction-let.galgas", 27)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-let.galgas", 28)) ;
-  switch (select_common_5F_syntax_13 (inCompiler)) {
+  switch (select_common_5F_syntax_17 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -7937,7 +8030,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i25_ (GALGAS_in
   GALGAS_lstring var_varName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 28)) ;
   GALGAS_operatorAssignKind var_operatorAssign ;
-  switch (select_common_5F_syntax_14 (inCompiler)) {
+  switch (select_common_5F_syntax_18 (inCompiler)) {
   case 1: {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C__3D_) COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 31)) ;
     var_operatorAssign = GALGAS_operatorAssignKind::constructor_bitWiseOrAssign (SOURCE_FILE ("instruction-operator-assign.galgas", 32)) ;
@@ -7962,7 +8055,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i25_ (GALGAS_in
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i25_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 28)) ;
-  switch (select_common_5F_syntax_14 (inCompiler)) {
+  switch (select_common_5F_syntax_18 (inCompiler)) {
   case 1: {
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C__3D_) COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 31)) ;
   } break ;
@@ -8012,7 +8105,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_if_5F_instruction_i27_ (GAL
   nt_instructionList_ (var_thenInstructionList, inCompiler) ;
   GALGAS_location var_endOfThenBranch = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-if.galgas", 37)) ;
   GALGAS_instructionListAST var_elseInstructionList ;
-  switch (select_common_5F_syntax_15 (inCompiler)) {
+  switch (select_common_5F_syntax_19 (inCompiler)) {
   case 1: {
     var_elseInstructionList = GALGAS_instructionListAST::constructor_emptyList (SOURCE_FILE ("instruction-if.galgas", 40)) ;
   } break ;
@@ -8041,7 +8134,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_if_5F_instruction_i27_parse
   nt_expression_parse (inCompiler) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_then) COMMA_SOURCE_FILE ("instruction-if.galgas", 35)) ;
   nt_instructionList_parse (inCompiler) ;
-  switch (select_common_5F_syntax_15 (inCompiler)) {
+  switch (select_common_5F_syntax_19 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8068,7 +8161,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i28_ (GALGAS_in
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 47)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_16 (inCompiler)) {
+    switch (select_common_5F_syntax_20 (inCompiler)) {
     case 2: {
       GALGAS_lstring var_selector = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 50)) ;
@@ -8106,7 +8199,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i28_parse (C_Le
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 47)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_16 (inCompiler)) {
+    switch (select_common_5F_syntax_20 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 50)) ;
       nt_expression_parse (inCompiler) ;
@@ -8216,7 +8309,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i33_ (GALGAS_expres
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_optionalTypeName ;
-  switch (select_common_5F_syntax_17 (inCompiler)) {
+  switch (select_common_5F_syntax_21 (inCompiler)) {
   case 1: {
     var_optionalTypeName = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 19))  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 19)) ;
   } break ;
@@ -8236,7 +8329,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i33_ (GALGAS_expres
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i33_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  switch (select_common_5F_syntax_17 (inCompiler)) {
+  switch (select_common_5F_syntax_21 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8256,7 +8349,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_ (GALGAS_exp
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_additive_5F_expression_ (outArgument_outExpression, inCompiler) ;
-  switch (select_common_5F_syntax_18 (inCompiler)) {
+  switch (select_common_5F_syntax_22 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8316,7 +8409,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_ (GALGAS_exp
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_additive_5F_expression_parse (inCompiler) ;
-  switch (select_common_5F_syntax_18 (inCompiler)) {
+  switch (select_common_5F_syntax_22 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8361,7 +8454,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_
   nt_multiplicative_5F_expression_ (outArgument_outExpression, inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_19 (inCompiler)) {
+    switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 134)) ;
@@ -8438,7 +8531,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_
   nt_multiplicative_5F_expression_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_19 (inCompiler)) {
+    switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
@@ -8491,7 +8584,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
   nt_primary_ (outArgument_outExpression, inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_20 (inCompiler)) {
+    switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
@@ -8554,7 +8647,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
   nt_primary_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_20 (inCompiler)) {
+    switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
       nt_primary_parse (inCompiler) ;
@@ -8693,7 +8786,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expres
   GALGAS_functionCallEffectiveParameterList var_parameterList = GALGAS_functionCallEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("expression-func-call.galgas", 26)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_21 (inCompiler)) {
+    switch (select_common_5F_syntax_25 (inCompiler)) {
     case 2: {
       GALGAS_lstring var_selector = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 29)) ;
@@ -8717,7 +8810,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexiqu
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 25)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_21 (inCompiler)) {
+    switch (select_common_5F_syntax_25 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 29)) ;
       nt_expression_parse (inCompiler) ;
@@ -14153,6 +14246,1041 @@ GALGAS_procFormalArgumentListForGeneration GALGAS_procFormalArgumentListForGener
       result = *p ;
     }else{
       inCompiler->castError ("procFormalArgumentListForGeneration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Class for element of '@registerBitSliceList' list                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cCollectionElement_registerBitSliceList : public cCollectionElement {
+  public : GALGAS_registerBitSliceList_2D_element mObject ;
+
+//--- Constructor
+  public : cCollectionElement_registerBitSliceList (const GALGAS_registerBitSlice & in_mRegisterBitSlice
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cCollectionElement * copy (void) ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement_registerBitSliceList::cCollectionElement_registerBitSliceList (const GALGAS_registerBitSlice & in_mRegisterBitSlice
+                                                                                  COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mRegisterBitSlice) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cCollectionElement_registerBitSliceList::isValid (void) const {
+  return mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cCollectionElement * cCollectionElement_registerBitSliceList::copy (void) {
+  cCollectionElement * result = NULL ;
+  macroMyNew (result, cCollectionElement_registerBitSliceList (mObject.mAttribute_mRegisterBitSlice COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cCollectionElement_registerBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mRegisterBitSlice" ":" ;
+  mObject.mAttribute_mRegisterBitSlice.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cCollectionElement_registerBitSliceList::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_registerBitSliceList * operand = (cCollectionElement_registerBitSliceList *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_registerBitSliceList) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList::GALGAS_registerBitSliceList (void) :
+AC_GALGAS_list () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList::GALGAS_registerBitSliceList (cSharedList * inSharedListPtr) :
+AC_GALGAS_list (inSharedListPtr) {
+  if (NULL == inSharedListPtr) {
+    createNewEmptyList (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_registerBitSliceList result ;
+  result.createNewEmptyList (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::constructor_listWithValue (const GALGAS_registerBitSlice & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceList result ;
+  if (inOperand0.isValid ()) {
+    result.createNewEmptyList (THERE) ;
+    capCollectionElement attributes ;
+    GALGAS_registerBitSliceList::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    result.addObject (attributes) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                             const GALGAS_registerBitSlice & in_mRegisterBitSlice
+                                                             COMMA_LOCATION_ARGS) {
+  cCollectionElement_registerBitSliceList * p = NULL ;
+  macroMyNew (p, cCollectionElement_registerBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::addAssign_operation (const GALGAS_registerBitSlice & inOperand0
+                                                       COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_registerBitSliceList (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObject (attributes) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::modifier_insertAtIndex (const GALGAS_registerBitSlice inOperand0,
+                                                          const GALGAS_uint inInsertionIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
+    cCollectionElement * p = NULL ;
+    macroMyNew (p, cCollectionElement_registerBitSliceList (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    addObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::modifier_removeAtIndex (GALGAS_registerBitSlice & outOperand0,
+                                                          const GALGAS_uint inRemoveIndex,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+    if (NULL == p) {
+      outOperand0.drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+      outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::modifier_popFirst (GALGAS_registerBitSlice & outOperand0,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::modifier_popLast (GALGAS_registerBitSlice & outOperand0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::method_first (GALGAS_registerBitSlice & outOperand0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::method_last (GALGAS_registerBitSlice & outOperand0,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    outOperand0 = p->mObject.mAttribute_mRegisterBitSlice ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::operator_concat (const GALGAS_registerBitSliceList & inOperand
+                                                                          COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::add_operation (const GALGAS_registerBitSliceList & inOperand,
+                                                                        C_Compiler * /* inCompiler */
+                                                                        COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::reader_subListWithRange (const GALGAS_range & inRange,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceList result = GALGAS_registerBitSliceList::constructor_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::reader_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceList result = GALGAS_registerBitSliceList::constructor_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceList::dotAssign_operation (const GALGAS_registerBitSliceList inOperand
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSlice GALGAS_registerBitSliceList::reader_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_registerBitSliceList * p = (cCollectionElement_registerBitSliceList *) attributes.ptr () ;
+  GALGAS_registerBitSlice result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+    result = p->mObject.mAttribute_mRegisterBitSlice ;
+  }
+  return result ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_registerBitSliceList::cEnumerator_registerBitSliceList (const GALGAS_registerBitSliceList & inEnumeratedObject,
+                                                                    const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList_2D_element cEnumerator_registerBitSliceList::current (LOCATION_ARGS) const {
+  const cCollectionElement_registerBitSliceList * p = (const cCollectionElement_registerBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+  return p->mObject ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSlice cEnumerator_registerBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
+  const cCollectionElement_registerBitSliceList * p = (const cCollectionElement_registerBitSliceList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_registerBitSliceList) ;
+  return p->mObject.mAttribute_mRegisterBitSlice ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @registerBitSliceList type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_registerBitSliceList ("registerBitSliceList",
+                                             NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_registerBitSliceList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerBitSliceList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_registerBitSliceList::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_registerBitSliceList (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceList GALGAS_registerBitSliceList::extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceList result ;
+  const GALGAS_registerBitSliceList * p = (const GALGAS_registerBitSliceList *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_registerBitSliceList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("registerBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerBitSliceMap::cMapElement_registerBitSliceMap (const GALGAS_lstring & inKey,
+                                                                  const GALGAS_uint & in_mShiftCount,
+                                                                  const GALGAS_uint & in_mBitCount
+                                                                  COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mShiftCount (in_mShiftCount),
+mAttribute_mBitCount (in_mBitCount) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_registerBitSliceMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mShiftCount.isValid () && mAttribute_mBitCount.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_registerBitSliceMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_registerBitSliceMap (mAttribute_lkey, mAttribute_mShiftCount, mAttribute_mBitCount COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_registerBitSliceMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mShiftCount" ":" ;
+  mAttribute_mShiftCount.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mBitCount" ":" ;
+  mAttribute_mBitCount.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_registerBitSliceMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_registerBitSliceMap * operand = (cMapElement_registerBitSliceMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mShiftCount.objectCompare (operand->mAttribute_mShiftCount) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mBitCount.objectCompare (operand->mAttribute_mBitCount) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap::GALGAS_registerBitSliceMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap::GALGAS_registerBitSliceMap (const GALGAS_registerBitSliceMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap & GALGAS_registerBitSliceMap::operator = (const GALGAS_registerBitSliceMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_registerBitSliceMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::constructor_mapWithMapToOverride (const GALGAS_registerBitSliceMap & inMapToOverride
+                                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::reader_overriddenMap (C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                      const GALGAS_uint & inArgument0,
+                                                      const GALGAS_uint & inArgument1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerBitSliceMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@registerBitSliceMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceMap::modifier_insertKey (GALGAS_lstring inKey,
+                                                     GALGAS_uint inArgument0,
+                                                     GALGAS_uint inArgument1,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerBitSliceMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' register slice has been already declared" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_registerBitSliceMap_searchKey = "the '%K' register slice is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceMap::method_searchKey (GALGAS_lstring inKey,
+                                                   GALGAS_uint & outArgument0,
+                                                   GALGAS_uint & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) performSearch (inKey,
+                                                                                                         inCompiler,
+                                                                                                         kSearchErrorMessage_registerBitSliceMap_searchKey
+                                                                                                         COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    outArgument0 = p->mAttribute_mShiftCount ;
+    outArgument1 = p->mAttribute_mBitCount ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_registerBitSliceMap::reader_mShiftCountForKey (const GALGAS_string & inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
+  GALGAS_uint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    result = p->mAttribute_mShiftCount ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_registerBitSliceMap::reader_mBitCountForKey (const GALGAS_string & inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
+  GALGAS_uint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    result = p->mAttribute_mBitCount ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceMap::modifier_setMShiftCountForKey (GALGAS_uint inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    p->mAttribute_mShiftCount = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceMap::modifier_setMBitCountForKey (GALGAS_uint inAttributeValue,
+                                                              GALGAS_string inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    p->mAttribute_mBitCount = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerBitSliceMap * GALGAS_registerBitSliceMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                 const GALGAS_string & inKey
+                                                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceMap * result = (cMapElement_registerBitSliceMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_registerBitSliceMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_registerBitSliceMap::cEnumerator_registerBitSliceMap (const GALGAS_registerBitSliceMap & inEnumeratedObject,
+                                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap_2D_element cEnumerator_registerBitSliceMap::current (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+  return GALGAS_registerBitSliceMap_2D_element (p->mAttribute_lkey, p->mAttribute_mShiftCount, p->mAttribute_mBitCount) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_registerBitSliceMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_registerBitSliceMap::current_mShiftCount (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+  return p->mAttribute_mShiftCount ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_registerBitSliceMap::current_mBitCount (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+  return p->mAttribute_mBitCount ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @registerBitSliceMap type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_registerBitSliceMap ("registerBitSliceMap",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_registerBitSliceMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerBitSliceMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_registerBitSliceMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_registerBitSliceMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceMap result ;
+  const GALGAS_registerBitSliceMap * p = (const GALGAS_registerBitSliceMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_registerBitSliceMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("registerBitSliceMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerMap::cMapElement_registerMap (const GALGAS_lstring & inKey,
+                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
+                                                  const GALGAS_bool & in_mIsReadOnly,
+                                                  const GALGAS_registerBitSliceMap & in_mRegisterBitSliceMap
+                                                  COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mType (in_mType),
+mAttribute_mIsReadOnly (in_mIsReadOnly),
+mAttribute_mRegisterBitSliceMap (in_mRegisterBitSliceMap) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_registerMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mRegisterBitSliceMap.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_registerMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_registerMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mRegisterBitSliceMap COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_registerMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mType" ":" ;
+  mAttribute_mType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsReadOnly" ":" ;
+  mAttribute_mIsReadOnly.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mRegisterBitSliceMap" ":" ;
+  mAttribute_mRegisterBitSliceMap.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_registerMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_registerMap * operand = (cMapElement_registerMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mType.objectCompare (operand->mAttribute_mType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mIsReadOnly.objectCompare (operand->mAttribute_mIsReadOnly) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mRegisterBitSliceMap.objectCompare (operand->mAttribute_mRegisterBitSliceMap) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap::GALGAS_registerMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap::GALGAS_registerMap (const GALGAS_registerMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap & GALGAS_registerMap::operator = (const GALGAS_registerMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_registerMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_registerMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_registerMap::constructor_mapWithMapToOverride (const GALGAS_registerMap & inMapToOverride
+                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_registerMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_registerMap::reader_overriddenMap (C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_registerMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                              const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                              const GALGAS_bool & inArgument1,
+                                              const GALGAS_registerBitSliceMap & inArgument2,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  cMapElement_registerMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@registerMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::modifier_insertKey (GALGAS_lstring inKey,
+                                             GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                             GALGAS_bool inArgument1,
+                                             GALGAS_registerBitSliceMap inArgument2,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
+  cMapElement_registerMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' register has been already declared in %L" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_registerMap_searchKey = "** internal error **" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::method_searchKey (GALGAS_lstring inKey,
+                                           GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                           GALGAS_bool & outArgument1,
+                                           GALGAS_registerBitSliceMap & outArgument2,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) performSearch (inKey,
+                                                                                         inCompiler,
+                                                                                         kSearchErrorMessage_registerMap_searchKey
+                                                                                         COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    outArgument0 = p->mAttribute_mType ;
+    outArgument1 = p->mAttribute_mIsReadOnly ;
+    outArgument2 = p->mAttribute_mRegisterBitSliceMap ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerMap::reader_mTypeForKey (const GALGAS_string & inKey,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    result = p->mAttribute_mType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_registerMap::reader_mIsReadOnlyForKey (const GALGAS_string & inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    result = p->mAttribute_mIsReadOnly ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap GALGAS_registerMap::reader_mRegisterBitSliceMapForKey (const GALGAS_string & inKey,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
+  GALGAS_registerBitSliceMap result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    result = p->mAttribute_mRegisterBitSliceMap ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                  GALGAS_string inKey,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    p->mAttribute_mType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::modifier_setMIsReadOnlyForKey (GALGAS_bool inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    p->mAttribute_mIsReadOnly = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::modifier_setMRegisterBitSliceMapForKey (GALGAS_registerBitSliceMap inAttributeValue,
+                                                                 GALGAS_string inKey,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    p->mAttribute_mRegisterBitSliceMap = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerMap * GALGAS_registerMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                 const GALGAS_string & inKey
+                                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_registerMap * result = (cMapElement_registerMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_registerMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_registerMap::cEnumerator_registerMap (const GALGAS_registerMap & inEnumeratedObject,
+                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap_2D_element cEnumerator_registerMap::current (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return GALGAS_registerMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mRegisterBitSliceMap) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_registerMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_registerMap::current_mType (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return p->mAttribute_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_registerMap::current_mIsReadOnly (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return p->mAttribute_mIsReadOnly ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap cEnumerator_registerMap::current_mRegisterBitSliceMap (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return p->mAttribute_mRegisterBitSliceMap ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                  @registerMap type                                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_registerMap ("registerMap",
+                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_registerMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_registerMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_registerMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_registerMap::extractObject (const GALGAS_object & inObject,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_registerMap result ;
+  const GALGAS_registerMap * p = (const GALGAS_registerMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_registerMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("registerMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -19699,370 +20827,6 @@ GALGAS_variableMap GALGAS_variableMap::extractObject (const GALGAS_object & inOb
       result = *p ;
     }else{
       inCompiler->castError ("variableMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy::GALGAS_variableMap_2D_proxy (void) :
-AC_GALGAS_uniqueMapProxy () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_null (LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.makeNullProxy (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap_2D_proxy::class_method_makeProxy (GALGAS_variableMap & ioMap,
-                                                          GALGAS_lstring inKey,
-                                                          GALGAS_variableMap_2D_proxy & outProxy
-                                                          COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_variableMap_2D_proxy::class_method_makeProxyFromString (GALGAS_variableMap & ioMap,
-                                                                    GALGAS_string inKey,
-                                                                    GALGAS_variableMap_2D_proxy & outProxy
-                                                                    COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_variableMap_2D_proxy::reader_mType (C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mType" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_mType;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_variableMap_2D_proxy::reader_mAcceptedModeSet (C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_stringset result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mAcceptedModeSet" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_mAcceptedModeSet;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_variableMap_2D_proxy::reader_mCppName (C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mCppName" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_mCppName;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_variableMap_2D_proxy::reader_mVariableKind (C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mVariableKind" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_mVariableKind;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_variableMap_2D_proxy::reader_copiable (C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "copiable" COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_copiable;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForReadAccess (const GALGAS_variableMap & inMap,
-                                                                                          const GALGAS_lstring & inKey,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForReadAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForWriteAccess (const GALGAS_variableMap & inMap,
-                                                                                           const GALGAS_lstring & inKey,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForWriteAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForReadWriteAccess (const GALGAS_variableMap & inMap,
-                                                                                               const GALGAS_lstring & inKey,
-                                                                                               C_Compiler * inCompiler
-                                                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForReadWriteAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_searchForDropAccess (const GALGAS_variableMap & inMap,
-                                                                                          const GALGAS_lstring & inKey,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_searchForDropAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::constructor_neutralAccess (const GALGAS_variableMap & inMap,
-                                                                                    const GALGAS_lstring & inKey,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_variableMap_neutralAccess, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @variableMap-proxy type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_variableMap_2D_proxy ("variableMap-proxy",
-                                             NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_variableMap_2D_proxy::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_variableMap_2D_proxy ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_variableMap_2D_proxy::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_variableMap_2D_proxy (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_variableMap_2D_proxy result ;
-  const GALGAS_variableMap_2D_proxy * p = (const GALGAS_variableMap_2D_proxy *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_variableMap_2D_proxy *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("variableMap-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        '@semanticTypePrecedenceGraph' graph                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph::GALGAS_semanticTypePrecedenceGraph (void) :
-AC_GALGAS_graph () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::constructor_emptyGraph (LOCATION_ARGS) {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  result.makeNewEmptyGraph (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::modifier_addNode (GALGAS_lstring inKey,
-                                                           GALGAS_abstractDeclaration inArgument_0,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  GALGAS_declarationListAST::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
-  const char * kErrorMessage = "the '%K' symbol is already declared at %L" ;
-  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_topologicalSort (GALGAS_declarationListAST & outSortedList,
-                                                                 GALGAS_lstringlist & outSortedKeyList,
-                                                                 GALGAS_declarationListAST & outUnsortedList,
-                                                                 GALGAS_lstringlist & outUnsortedKeyList,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  cSharedList * sortedList = NULL ;
-  cSharedList * unsortedList = NULL ;
-  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
-  outSortedList = GALGAS_declarationListAST (sortedList) ;
-  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
-  GALGAS_declarationListAST::detachSharedList (sortedList) ;
-  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_depthFirstTopologicalSort (GALGAS_declarationListAST & outSortedList,
-                                                                           GALGAS_lstringlist & outSortedKeyList,
-                                                                           GALGAS_declarationListAST & outUnsortedList,
-                                                                           GALGAS_lstringlist & outUnsortedKeyList,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
-  cSharedList * sortedList = NULL ;
-  cSharedList * unsortedList = NULL ;
-  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
-  outSortedList = GALGAS_declarationListAST (sortedList) ;
-  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
-  GALGAS_declarationListAST::detachSharedList (sortedList) ;
-  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::reader_reversedGraph (LOCATION_ARGS) const {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  result.reversedGraphFromGraph (*this COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoSuccessor (GALGAS_declarationListAST & outInfoList,
-                                                                      GALGAS_lstringlist & outKeyList
-                                                                      COMMA_LOCATION_ARGS) const {
-  cSharedList * infoList = NULL ;
-  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
-  outInfoList = GALGAS_declarationListAST (infoList) ;
-  GALGAS_declarationListAST::detachSharedList (infoList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoPredecessor (GALGAS_declarationListAST & outInfoList,
-                                                                        GALGAS_lstringlist & outKeyList
-                                                                        COMMA_LOCATION_ARGS) const {
-  cSharedList * infoList = NULL ;
-  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
-  outInfoList = GALGAS_declarationListAST (infoList) ;
-  GALGAS_declarationListAST::detachSharedList (infoList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::reader_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
-                                                                                                 const GALGAS_stringset & inKeysToExclude,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_semanticTypePrecedenceGraph::reader_accessibleNodesFromNodes (const GALGAS_lstringlist & inStartKeyList,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
-  GALGAS_semanticTypePrecedenceGraph resultingGraph ;
-  subGraph (resultingGraph,
-            inStartKeyList,
-            GALGAS_stringset::constructor_emptySet (HERE),
-            inCompiler
-            COMMA_THERE) ;
-  if (resultingGraph.isValid ()) {
-    result = resultingGraph.reader_lkeyList (THERE) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @semanticTypePrecedenceGraph type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ("semanticTypePrecedenceGraph",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticTypePrecedenceGraph::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticTypePrecedenceGraph::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticTypePrecedenceGraph (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  const GALGAS_semanticTypePrecedenceGraph * p = (const GALGAS_semanticTypePrecedenceGraph *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticTypePrecedenceGraph *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticTypePrecedenceGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

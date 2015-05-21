@@ -339,7 +339,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     switch [type kind]
     case structure (propList) : propertyList = propList
     case enumeration (*) : propertyList = {}
-    case integer (* *) : propertyList = {}
+    case integer (* * * *) : propertyList = {}
     case boolean : propertyList = {}
     case boolset : propertyList = {}
     case literalString : propertyList = {}

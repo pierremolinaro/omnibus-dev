@@ -112,7 +112,7 @@ override method @incDecInstructionAST analyze
     error mVarName : "internal error" : min, max
   case structure (*) :
     error mVarName : "internal error" : min, max
-  case integer (kMin kMax) :
+  case integer (kMin kMax * *) :
     min = kMin
     max = kMax
   end

@@ -189,7 +189,7 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
     error mOperatorLocation: "Internal Error" : minValue
   case structure (*) :
     error mOperatorLocation: "Internal Error" : minValue
-  case integer (@sint64 min *) :
+  case integer (@sint64 min * * *) :
     minValue = min
   end
   switch mOperator 
