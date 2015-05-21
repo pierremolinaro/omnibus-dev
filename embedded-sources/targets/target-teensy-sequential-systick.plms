@@ -42,18 +42,6 @@ mode $exception
 
 required proc $user setup ()
 required proc $user loop ()
-required proc $isr systickHandler ()
-
-//-----------------------------------------------------------------------------*
-
-proc $isr systickHandler () {
-  gCompteur &++
-  userSystickHandler ()
-}
-
-//-----------------------------------------------------------------------------*
-
-var $user $isr $init gCompteur : UInt32 = 0
 
 //-----------------------------------------------------------------------------*
 

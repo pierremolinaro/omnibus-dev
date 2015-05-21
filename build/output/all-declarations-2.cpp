@@ -2541,17 +2541,632 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
 
 const char * gWrapperFileContent_1_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr svc ()\n"
+  "required proc $isr NMIHandler ()\n"
   "\n"
-  "proc $isr @weak svc () {\n"
+  "proc $isr @weak NMIHandler () {\n"
+  "  throw 2\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr HardFaultHandler ()\n"
+  "\n"
+  "proc $isr @weak HardFaultHandler () {\n"
+  "  throw 3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr MemManageHandler ()\n"
+  "\n"
+  "proc $isr @weak MemManageHandler () {\n"
+  "  throw 4\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr BusFaultHandler ()\n"
+  "\n"
+  "proc $isr @weak BusFaultHandler () {\n"
+  "  throw 5\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UsageFaultHandler ()\n"
+  "\n"
+  "proc $isr @weak UsageFaultHandler () {\n"
+  "  throw 6\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr svcHandler ()\n"
+  "\n"
+  "proc $isr @weak svcHandler () {\n"
   "  throw 11\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr userSystickHandler ()\n"
+  "required proc $isr DebugMonitorHandler ()\n"
+  "\n"
+  "proc $isr @weak DebugMonitorHandler () {\n"
+  "  throw 12\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PendSVHandler ()\n"
+  "\n"
+  "proc $isr @weak PendSVHandler () {\n"
+  "  throw 14\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var $user $isr $init gCompteur : UInt32 = 0\n"
+  "\n"
+  "required proc $isr systickHandler ()\n"
+  "\n"
+  "proc $isr systickHandler () {\n"
+  "  gCompteur &++\n"
+  "  userSystickHandler ()\n"
+  "}\n"
   "\n"
   "proc $isr @weak userSystickHandler () {\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel0TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel0TranfertCompleteHandler () {\n"
+  "  throw 16\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel1TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel1TranfertCompleteHandler () {\n"
+  "  throw 17\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel2TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel2TranfertCompleteHandler () {\n"
+  "  throw 18\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel3TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel3TranfertCompleteHandler () {\n"
+  "  throw 19\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel4TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel4TranfertCompleteHandler () {\n"
+  "  throw 20\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel5TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel5TranfertCompleteHandler () {\n"
+  "  throw 21\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel6TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel6TranfertCompleteHandler () {\n"
+  "  throw 22\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel7TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel7TranfertCompleteHandler () {\n"
+  "  throw 23\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel8TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel8TranfertCompleteHandler () {\n"
+  "  throw 24\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel9TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel9TranfertCompleteHandler () {\n"
+  "  throw 25\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel10TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel10TranfertCompleteHandler () {\n"
+  "  throw 26\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel11TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel11TranfertCompleteHandler () {\n"
+  "  throw 27\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel12TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel12TranfertCompleteHandler () {\n"
+  "  throw 28\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel13TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel13TranfertCompleteHandler () {\n"
+  "  throw 29\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel14TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel14TranfertCompleteHandler () {\n"
+  "  throw 30\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAChannel15TranfertCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAChannel15TranfertCompleteHandler () {\n"
+  "  throw 31\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DMAErrorHandler ()\n"
+  "\n"
+  "proc $isr @weak DMAErrorHandler () {\n"
+  "  throw 32\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr flashMemoryCommandCompleteHandler ()\n"
+  "\n"
+  "proc $isr @weak flashMemoryCommandCompleteHandler () {\n"
+  "  throw 34\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr flashMemoryReadCollisionHandler ()\n"
+  "\n"
+  "proc $isr @weak flashMemoryReadCollisionHandler () {\n"
+  "  throw 35\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr modeControllerHandler ()\n"
+  "\n"
+  "proc $isr @weak modeControllerHandler () {\n"
+  "  throw 36\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr LLWUHandler ()\n"
+  "\n"
+  "proc $isr @weak LLWUHandler () {\n"
+  "  throw 37\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr WDOGEWMHandler ()\n"
+  "\n"
+  "proc $isr @weak WDOGEWMHandler () {\n"
+  "  throw 38\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr I2C0Handler ()\n"
+  "\n"
+  "proc $isr @weak I2C0Handler () {\n"
+  "  throw 40\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr I2C1Handler ()\n"
+  "\n"
+  "proc $isr @weak I2C1Handler () {\n"
+  "  throw 41\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr SPI0Handler ()\n"
+  "\n"
+  "proc $isr @weak SPI0Handler () {\n"
+  "  throw 42\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr SPI1Handler ()\n"
+  "\n"
+  "proc $isr @weak SPI1Handler () {\n"
+  "  throw 43\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0MessageBufferHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0MessageBufferHandler () {\n"
+  "  throw 45\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0BusOffHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0BusOffHandler () {\n"
+  "  throw 46\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0ErrorHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0ErrorHandler () {\n"
+  "  throw 47\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0TransmitWarningHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0TransmitWarningHandler () {\n"
+  "  throw 48\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0ReceiveWarningHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0ReceiveWarningHandler () {\n"
+  "  throw 49\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CAN0WakeUpHandler ()\n"
+  "\n"
+  "proc $isr @weak CAN0WakeUpHandler () {\n"
+  "  throw 50\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr I2S0TransmitHandler ()\n"
+  "\n"
+  "proc $isr @weak I2S0TransmitHandler () {\n"
+  "  throw 51\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr I2S0ReceiveHandler ()\n"
+  "\n"
+  "proc $isr @weak I2S0ReceiveHandler () {\n"
+  "  throw 52\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART0LONHandler ()\n"
+  "\n"
+  "proc $isr @weak UART0LONHandler () {\n"
+  "  throw 60\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART0StatusHandler ()\n"
+  "\n"
+  "proc $isr @weak UART0StatusHandler () {\n"
+  "  throw 61\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART0ErrorHandler ()\n"
+  "\n"
+  "proc $isr @weak UART0ErrorHandler () {\n"
+  "  throw 62\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART1StatusHandler ()\n"
+  "\n"
+  "proc $isr @weak UART1StatusHandler () {\n"
+  "  throw 63\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART1ErrorHandler ()\n"
+  "\n"
+  "proc $isr @weak UART1ErrorHandler () {\n"
+  "  throw 64\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART2StatusHandler ()\n"
+  "\n"
+  "proc $isr @weak UART2StatusHandler () {\n"
+  "  throw 64\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr UART2ErrorHandler ()\n"
+  "\n"
+  "proc $isr @weak UART2ErrorHandler () {\n"
+  "  throw 65\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr ADC0Handler ()\n"
+  "\n"
+  "proc $isr @weak ADC0Handler () {\n"
+  "  throw 73\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr ADC1Handler ()\n"
+  "\n"
+  "proc $isr @weak ADC1Handler () {\n"
+  "  throw 74\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CMP0Handler ()\n"
+  "\n"
+  "proc $isr @weak CMP0Handler () {\n"
+  "  throw 75\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CMP1Handler ()\n"
+  "\n"
+  "proc $isr @weak CMP1Handler () {\n"
+  "  throw 76\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CMP2Handler ()\n"
+  "\n"
+  "proc $isr @weak CMP2Handler () {\n"
+  "  throw 77\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr FMT0Handler ()\n"
+  "\n"
+  "proc $isr @weak FMT0Handler () {\n"
+  "  throw 78\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr FMT1Handler ()\n"
+  "\n"
+  "proc $isr @weak FMT1Handler () {\n"
+  "  throw 79\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr FMT2Handler ()\n"
+  "\n"
+  "proc $isr @weak FMT2Handler () {\n"
+  "  throw 80\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr CMTHandler ()\n"
+  "\n"
+  "proc $isr @weak CMTHandler () {\n"
+  "  throw 81\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr RTCAlarmHandler ()\n"
+  "\n"
+  "proc $isr @weak RTCAlarmHandler () {\n"
+  "  throw 82\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr RTCSecondHandler ()\n"
+  "\n"
+  "proc $isr @weak RTCSecondHandler () {\n"
+  "  throw 83\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PITChannel0Handler ()\n"
+  "\n"
+  "proc $isr @weak PITChannel0Handler () {\n"
+  "  throw 84\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PITChannel1Handler ()\n"
+  "\n"
+  "proc $isr @weak PITChannel1Handler () {\n"
+  "  throw 85\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PITChannel2Handler ()\n"
+  "\n"
+  "proc $isr @weak PITChannel2Handler () {\n"
+  "  throw 86\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PITChannel3Handler ()\n"
+  "\n"
+  "proc $isr @weak PITChannel3Handler () {\n"
+  "  throw 87\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr PDBHandler ()\n"
+  "\n"
+  "proc $isr @weak PDBHandler () {\n"
+  "  throw 88\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr USBOTGHandler ()\n"
+  "\n"
+  "proc $isr @weak USBOTGHandler () {\n"
+  "  throw 89\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr USBChargerDetectHandler ()\n"
+  "\n"
+  "proc $isr @weak USBChargerDetectHandler () {\n"
+  "  throw 90\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr DAC0Handler ()\n"
+  "\n"
+  "proc $isr @weak DAC0Handler () {\n"
+  "  throw 97\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr TSIHandler ()\n"
+  "\n"
+  "proc $isr @weak TSIHandler () {\n"
+  "  throw 99\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr MCGHandler ()\n"
+  "\n"
+  "proc $isr @weak MCGHandler () {\n"
+  "  throw 100\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr lowPowerTimerHandler ()\n"
+  "\n"
+  "proc $isr @weak lowPowerTimerHandler () {\n"
+  "  throw 101\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr pinDetectPortAHandler ()\n"
+  "\n"
+  "proc $isr @weak pinDetectPortAHandler () {\n"
+  "  throw 103\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr pinDetectPortBHandler ()\n"
+  "\n"
+  "proc $isr @weak pinDetectPortBHandler () {\n"
+  "  throw 104\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr pinDetectPortCHandler ()\n"
+  "\n"
+  "proc $isr @weak pinDetectPortCHandler () {\n"
+  "  throw 105\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr pinDetectPortDHandler ()\n"
+  "\n"
+  "proc $isr @weak pinDetectPortDHandler () {\n"
+  "  throw 106\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr pinDetectPortEHandler ()\n"
+  "\n"
+  "proc $isr @weak pinDetectPortEHandler () {\n"
+  "  throw 107\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc $isr softwareInterruptHandler ()\n"
+  "\n"
+  "proc $isr @weak softwareInterruptHandler () {\n"
+  "  throw 110\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
@@ -2560,7 +3175,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
-  396, // Text length
+  14387, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -5381,18 +5996,6 @@ const char * gWrapperFileContent_5_targetTemplates = "newUnsignedBaseType @unsig
   "\n"
   "required proc $user setup ()\n"
   "required proc $user loop ()\n"
-  "required proc $isr systickHandler ()\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "proc $isr systickHandler () {\n"
-  "  gCompteur &++\n"
-  "  userSystickHandler ()\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "var $user $isr $init gCompteur : UInt32 = 0\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -5409,7 +6012,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1883, // Text length
+  1564, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -7061,37 +7664,127 @@ const char * gWrapperFileContent_14_targetTemplates = "//-----------------------
   "  & __system_stack_end, // 0\n"
   "//--- ARM Core System Handler Vectors\n"
   "  { ResetISR, // 1\n"
-  "    NULL, // 2\n"
-  "    NULL, // 3\n"
-  "    NULL, // 4\n"
-  "    NULL, // 5\n"
-  "    NULL, // 6\n"
-  "    NULL, // 7\n"
-  "    NULL, // 8\n"
-  "    NULL, // 9\n"
-  "    NULL, // 10\n"
-  "    proc_svc, // 11\n"
-  "    NULL, // 12\n"
-  "    NULL, // 13\n"
-  "    NULL, // 14\n"
+  "    proc_NMIHandler, // 2\n"
+  "    proc_HardFaultHandler, // 3\n"
+  "    proc_MemManageHandler, // 4\n"
+  "    proc_BusFaultHandler, // 5\n"
+  "    proc_UsageFaultHandler, // 6\n"
+  "    NULL, // 7 (reserved)\n"
+  "    NULL, // 8 (reserved)\n"
+  "    NULL, // 9 (reserved)\n"
+  "    NULL, // 10 (reserved)\n"
+  "    proc_svcHandler, // 11\n"
+  "    proc_DebugMonitorHandler, // 12\n"
+  "    NULL, // 13 (reserved)\n"
+  "    proc_PendSVHandler, // 14\n"
   "    proc_systickHandler // 15\n"
   "  },\n"
   "//--- Non-Core Vectors\n"
-  "  { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL\n"
+  "  { proc_DMAChannel0TranfertCompleteHandler, // 16\n"
+  "    proc_DMAChannel1TranfertCompleteHandler, // 17\n"
+  "    proc_DMAChannel2TranfertCompleteHandler, // 18\n"
+  "    proc_DMAChannel3TranfertCompleteHandler, // 19\n"
+  "    proc_DMAChannel4TranfertCompleteHandler, // 20\n"
+  "    proc_DMAChannel5TranfertCompleteHandler, // 21\n"
+  "    proc_DMAChannel6TranfertCompleteHandler, // 22\n"
+  "    proc_DMAChannel7TranfertCompleteHandler, // 23\n"
+  "    proc_DMAChannel8TranfertCompleteHandler, // 24\n"
+  "    proc_DMAChannel9TranfertCompleteHandler, // 25\n"
+  "    proc_DMAChannel10TranfertCompleteHandler, // 26\n"
+  "    proc_DMAChannel11TranfertCompleteHandler, // 27\n"
+  "    proc_DMAChannel12TranfertCompleteHandler, // 28\n"
+  "    proc_DMAChannel13TranfertCompleteHandler, // 29\n"
+  "    proc_DMAChannel14TranfertCompleteHandler, // 30\n"
+  "    proc_DMAChannel15TranfertCompleteHandler, // 31\n"
+  "    proc_DMAErrorHandler, // 32\n"
+  "    NULL, // 33\n"
+  "    proc_flashMemoryCommandCompleteHandler, // 34\n"
+  "    proc_flashMemoryReadCollisionHandler, // 35\n"
+  "    proc_modeControllerHandler, // 36\n"
+  "    proc_LLWUHandler, // 37\n"
+  "    proc_WDOGEWMHandler, // 38\n"
+  "    NULL, // 39\n"
+  "    proc_I2C0Handler, // 40\n"
+  "    proc_I2C1Handler, // 41\n"
+  "    proc_SPI0Handler, // 42\n"
+  "    proc_SPI1Handler, // 43\n"
+  "    NULL, // 44\n"
+  "    proc_CAN0MessageBufferHandler, // 45\n"
+  "    proc_CAN0BusOffHandler, // 46\n"
+  "    proc_CAN0ErrorHandler, // 47\n"
+  "    proc_CAN0TransmitWarningHandler, // 48\n"
+  "    proc_CAN0ReceiveWarningHandler, // 49\n"
+  "    proc_CAN0WakeUpHandler, // 50\n"
+  "    proc_I2S0TransmitHandler, // 51\n"
+  "    proc_I2S0ReceiveHandler, // 52\n"
+  "    NULL, // 53\n"
+  "    NULL, // 54\n"
+  "    NULL, // 55\n"
+  "    NULL, // 56\n"
+  "    NULL, // 57\n"
+  "    NULL, // 58\n"
+  "    NULL, // 59\n"
+  "    proc_UART0LONHandler, // 60\n"
+  "    proc_UART0StatusHandler, // 61\n"
+  "    proc_UART0ErrorHandler, // 62\n"
+  "    proc_UART1StatusHandler, // 63\n"
+  "    proc_UART1ErrorHandler, // 64\n"
+  "    proc_UART2StatusHandler, // 65\n"
+  "    proc_UART2ErrorHandler, // 66\n"
+  "    NULL, // 67\n"
+  "    NULL, // 68\n"
+  "    NULL, // 69\n"
+  "    NULL, // 70\n"
+  "    NULL, // 71\n"
+  "    NULL, // 72\n"
+  "    proc_ADC0Handler, // 73\n"
+  "    proc_ADC1Handler, // 74\n"
+  "    proc_CMP0Handler, // 75\n"
+  "    proc_CMP1Handler, // 76\n"
+  "    proc_CMP2Handler, // 77\n"
+  "    proc_FMT0Handler, // 78\n"
+  "    proc_FMT1Handler, // 79\n"
+  "    proc_FMT2Handler, // 80\n"
+  "    proc_CMTHandler, // 81\n"
+  "    proc_RTCAlarmHandler, // 82\n"
+  "    proc_RTCSecondHandler, // 83\n"
+  "    proc_PITChannel0Handler, // 84\n"
+  "    proc_PITChannel1Handler, // 85\n"
+  "    proc_PITChannel2Handler, // 86\n"
+  "    proc_PITChannel3Handler, // 87\n"
+  "    proc_PDBHandler, // 88\n"
+  "    proc_USBOTGHandler, // 89\n"
+  "    proc_USBChargerDetectHandler, // 90\n"
+  "    NULL, // 91\n"
+  "    NULL, // 92\n"
+  "    NULL, // 93\n"
+  "    NULL, // 94\n"
+  "    NULL, // 95\n"
+  "    NULL, // 96\n"
+  "    proc_DAC0Handler, // 97\n"
+  "    NULL, // 98\n"
+  "    proc_TSIHandler, // 99\n"
+  "    proc_MCGHandler, // 100\n"
+  "    proc_lowPowerTimerHandler, // 101\n"
+  "    NULL, // 102\n"
+  "    proc_pinDetectPortAHandler, // 103\n"
+  "    proc_pinDetectPortBHandler, // 104\n"
+  "    proc_pinDetectPortCHandler, // 105\n"
+  "    proc_pinDetectPortDHandler, // 106\n"
+  "    proc_pinDetectPortEHandler, // 107\n"
+  "    NULL, // 108\n"
+  "    NULL, // 109\n"
+  "    proc_softwareInterruptHandler, // 110\n"
+  "    NULL, // 111\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
   "  },\n"
   "//--- Flash magic values\n"
   "  {-1, -1, -1, -2}\n"
@@ -7103,7 +7796,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
-  12052, // Text length
+  14790, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -18754,712 +19447,5 @@ void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration *
       f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
     }
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
-                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
-                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-//--- Find Reader
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      result = f (inObject, inCompiler COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (void) :
-mAttribute_mTargetBaseTypeMap (),
-mAttribute_mTypeMap (),
-mAttribute_mProcedureMap (),
-mAttribute_mFunctionMap (),
-mAttribute_mRegisterMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mModeMap (),
-mAttribute_mTypeNameSetForIncDec (),
-mAttribute_mEqualOperatorMap (),
-mAttribute_mNonEqualOperatorMap (),
-mAttribute_mStrictInfOperatorMap (),
-mAttribute_mInfEqualOperatorMap (),
-mAttribute_mStrictSupOperatorMap (),
-mAttribute_mSupEqualOperatorMap (),
-mAttribute_mAndOperatorMap (),
-mAttribute_mAndShortCircuitOperatorMap (),
-mAttribute_mOrOperatorMap (),
-mAttribute_mOrShortCircuitOperatorMap (),
-mAttribute_mXorOperatorMap (),
-mAttribute_mAddOperatorMap (),
-mAttribute_mAddNoOvfOperatorMap (),
-mAttribute_mSubOperatorMap (),
-mAttribute_mSubNoOvfOperatorMap (),
-mAttribute_mMulOperatorMap (),
-mAttribute_mMulNoOvfOperatorMap (),
-mAttribute_mDivOperatorMap (),
-mAttribute_mDivNoOvfOperatorMap (),
-mAttribute_mModOperatorMap (),
-mAttribute_mLeftShiftOperatorMap (),
-mAttribute_mRightShiftOperatorMap (),
-mAttribute_mUnaryMinusOperatorMap () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                const GALGAS_unifiedTypeMap & inOperand1,
-                                                const GALGAS_procedureMap & inOperand2,
-                                                const GALGAS_functionMap & inOperand3,
-                                                const GALGAS_registerMap & inOperand4,
-                                                const GALGAS_globalConstantMap & inOperand5,
-                                                const GALGAS_globalVariableMap & inOperand6,
-                                                const GALGAS_modeMap & inOperand7,
-                                                const GALGAS_stringset & inOperand8,
-                                                const GALGAS_infixOperatorMap & inOperand9,
-                                                const GALGAS_infixOperatorMap & inOperand10,
-                                                const GALGAS_infixOperatorMap & inOperand11,
-                                                const GALGAS_infixOperatorMap & inOperand12,
-                                                const GALGAS_infixOperatorMap & inOperand13,
-                                                const GALGAS_infixOperatorMap & inOperand14,
-                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                const GALGAS_prefixOperatorMap & inOperand31) :
-mAttribute_mTargetBaseTypeMap (inOperand0),
-mAttribute_mTypeMap (inOperand1),
-mAttribute_mProcedureMap (inOperand2),
-mAttribute_mFunctionMap (inOperand3),
-mAttribute_mRegisterMap (inOperand4),
-mAttribute_mGlobalConstantMap (inOperand5),
-mAttribute_mGlobalVariableMap (inOperand6),
-mAttribute_mModeMap (inOperand7),
-mAttribute_mTypeNameSetForIncDec (inOperand8),
-mAttribute_mEqualOperatorMap (inOperand9),
-mAttribute_mNonEqualOperatorMap (inOperand10),
-mAttribute_mStrictInfOperatorMap (inOperand11),
-mAttribute_mInfEqualOperatorMap (inOperand12),
-mAttribute_mStrictSupOperatorMap (inOperand13),
-mAttribute_mSupEqualOperatorMap (inOperand14),
-mAttribute_mAndOperatorMap (inOperand15),
-mAttribute_mAndShortCircuitOperatorMap (inOperand16),
-mAttribute_mOrOperatorMap (inOperand17),
-mAttribute_mOrShortCircuitOperatorMap (inOperand18),
-mAttribute_mXorOperatorMap (inOperand19),
-mAttribute_mAddOperatorMap (inOperand20),
-mAttribute_mAddNoOvfOperatorMap (inOperand21),
-mAttribute_mSubOperatorMap (inOperand22),
-mAttribute_mSubNoOvfOperatorMap (inOperand23),
-mAttribute_mMulOperatorMap (inOperand24),
-mAttribute_mMulNoOvfOperatorMap (inOperand25),
-mAttribute_mDivOperatorMap (inOperand26),
-mAttribute_mDivNoOvfOperatorMap (inOperand27),
-mAttribute_mModOperatorMap (inOperand28),
-mAttribute_mLeftShiftOperatorMap (inOperand29),
-mAttribute_mRightShiftOperatorMap (inOperand30),
-mAttribute_mUnaryMinusOperatorMap (inOperand31) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticContext (GALGAS_targetBaseTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_unifiedTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_procedureMap::constructor_emptyMap (HERE),
-                                 GALGAS_functionMap::constructor_emptyMap (HERE),
-                                 GALGAS_registerMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalConstantMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalVariableMap::constructor_emptyMap (HERE),
-                                 GALGAS_modeMap::constructor_emptyMap (HERE),
-                                 GALGAS_stringset::constructor_emptySet (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                                const GALGAS_unifiedTypeMap & inOperand1,
-                                                                const GALGAS_procedureMap & inOperand2,
-                                                                const GALGAS_functionMap & inOperand3,
-                                                                const GALGAS_registerMap & inOperand4,
-                                                                const GALGAS_globalConstantMap & inOperand5,
-                                                                const GALGAS_globalVariableMap & inOperand6,
-                                                                const GALGAS_modeMap & inOperand7,
-                                                                const GALGAS_stringset & inOperand8,
-                                                                const GALGAS_infixOperatorMap & inOperand9,
-                                                                const GALGAS_infixOperatorMap & inOperand10,
-                                                                const GALGAS_infixOperatorMap & inOperand11,
-                                                                const GALGAS_infixOperatorMap & inOperand12,
-                                                                const GALGAS_infixOperatorMap & inOperand13,
-                                                                const GALGAS_infixOperatorMap & inOperand14,
-                                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                                const GALGAS_prefixOperatorMap & inOperand31 
-                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid ()) {
-    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mTargetBaseTypeMap.objectCompare (inOperand.mAttribute_mTargetBaseTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureMap.objectCompare (inOperand.mAttribute_mProcedureMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionMap.objectCompare (inOperand.mAttribute_mFunctionMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModeMap.objectCompare (inOperand.mAttribute_mModeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeNameSetForIncDec.objectCompare (inOperand.mAttribute_mTypeNameSetForIncDec) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAndShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mAndShortCircuitOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOrShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mOrShortCircuitOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mTargetBaseTypeMap.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mProcedureMap.isValid () && mAttribute_mFunctionMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mTypeNameSetForIncDec.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mAndShortCircuitOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mOrShortCircuitOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::drop (void) {
-  mAttribute_mTargetBaseTypeMap.drop () ;
-  mAttribute_mTypeMap.drop () ;
-  mAttribute_mProcedureMap.drop () ;
-  mAttribute_mFunctionMap.drop () ;
-  mAttribute_mRegisterMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mModeMap.drop () ;
-  mAttribute_mTypeNameSetForIncDec.drop () ;
-  mAttribute_mEqualOperatorMap.drop () ;
-  mAttribute_mNonEqualOperatorMap.drop () ;
-  mAttribute_mStrictInfOperatorMap.drop () ;
-  mAttribute_mInfEqualOperatorMap.drop () ;
-  mAttribute_mStrictSupOperatorMap.drop () ;
-  mAttribute_mSupEqualOperatorMap.drop () ;
-  mAttribute_mAndOperatorMap.drop () ;
-  mAttribute_mAndShortCircuitOperatorMap.drop () ;
-  mAttribute_mOrOperatorMap.drop () ;
-  mAttribute_mOrShortCircuitOperatorMap.drop () ;
-  mAttribute_mXorOperatorMap.drop () ;
-  mAttribute_mAddOperatorMap.drop () ;
-  mAttribute_mAddNoOvfOperatorMap.drop () ;
-  mAttribute_mSubOperatorMap.drop () ;
-  mAttribute_mSubNoOvfOperatorMap.drop () ;
-  mAttribute_mMulOperatorMap.drop () ;
-  mAttribute_mMulNoOvfOperatorMap.drop () ;
-  mAttribute_mDivOperatorMap.drop () ;
-  mAttribute_mDivNoOvfOperatorMap.drop () ;
-  mAttribute_mModOperatorMap.drop () ;
-  mAttribute_mLeftShiftOperatorMap.drop () ;
-  mAttribute_mRightShiftOperatorMap.drop () ;
-  mAttribute_mUnaryMinusOperatorMap.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "<struct @semanticContext:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mTargetBaseTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeNameSetForIncDec.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAndShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOrShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_targetBaseTypeMap GALGAS_semanticContext::reader_mTargetBaseTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetBaseTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap GALGAS_semanticContext::reader_mTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_semanticContext::reader_mProcedureMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap GALGAS_semanticContext::reader_mFunctionMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMap GALGAS_semanticContext::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalConstantMap GALGAS_semanticContext::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVariableMap GALGAS_semanticContext::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_semanticContext::reader_mModeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_semanticContext::reader_mTypeNameSetForIncDec (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeNameSetForIncDec ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNonEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictInfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInfEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictSupOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSupEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndShortCircuitOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrShortCircuitOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mXorOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnaryMinusOperatorMap ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @semanticContext type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticContext ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticContext::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticContext (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  const GALGAS_semanticContext * p = (const GALGAS_semanticContext *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
 }
 
