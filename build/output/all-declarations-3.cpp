@@ -10,6 +10,713 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
+                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
+                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_string result ;
+//--- Find Reader
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
+    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      result = f (inObject, inCompiler COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::GALGAS_semanticContext (void) :
+mAttribute_mTargetBaseTypeMap (),
+mAttribute_mTypeMap (),
+mAttribute_mProcedureMap (),
+mAttribute_mFunctionMap (),
+mAttribute_mRegisterMap (),
+mAttribute_mGlobalConstantMap (),
+mAttribute_mGlobalVariableMap (),
+mAttribute_mModeMap (),
+mAttribute_mTypeNameSetForIncDec (),
+mAttribute_mEqualOperatorMap (),
+mAttribute_mNonEqualOperatorMap (),
+mAttribute_mStrictInfOperatorMap (),
+mAttribute_mInfEqualOperatorMap (),
+mAttribute_mStrictSupOperatorMap (),
+mAttribute_mSupEqualOperatorMap (),
+mAttribute_mAndOperatorMap (),
+mAttribute_mAndShortCircuitOperatorMap (),
+mAttribute_mOrOperatorMap (),
+mAttribute_mOrShortCircuitOperatorMap (),
+mAttribute_mXorOperatorMap (),
+mAttribute_mAddOperatorMap (),
+mAttribute_mAddNoOvfOperatorMap (),
+mAttribute_mSubOperatorMap (),
+mAttribute_mSubNoOvfOperatorMap (),
+mAttribute_mMulOperatorMap (),
+mAttribute_mMulNoOvfOperatorMap (),
+mAttribute_mDivOperatorMap (),
+mAttribute_mDivNoOvfOperatorMap (),
+mAttribute_mModOperatorMap (),
+mAttribute_mLeftShiftOperatorMap (),
+mAttribute_mRightShiftOperatorMap (),
+mAttribute_mUnaryMinusOperatorMap () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & inOperand0,
+                                                const GALGAS_unifiedTypeMap & inOperand1,
+                                                const GALGAS_procedureMap & inOperand2,
+                                                const GALGAS_functionMap & inOperand3,
+                                                const GALGAS_registerMap & inOperand4,
+                                                const GALGAS_globalConstantMap & inOperand5,
+                                                const GALGAS_globalVariableMap & inOperand6,
+                                                const GALGAS_modeMap & inOperand7,
+                                                const GALGAS_stringset & inOperand8,
+                                                const GALGAS_infixOperatorMap & inOperand9,
+                                                const GALGAS_infixOperatorMap & inOperand10,
+                                                const GALGAS_infixOperatorMap & inOperand11,
+                                                const GALGAS_infixOperatorMap & inOperand12,
+                                                const GALGAS_infixOperatorMap & inOperand13,
+                                                const GALGAS_infixOperatorMap & inOperand14,
+                                                const GALGAS_infixOperatorMap & inOperand15,
+                                                const GALGAS_infixOperatorMap & inOperand16,
+                                                const GALGAS_infixOperatorMap & inOperand17,
+                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                const GALGAS_infixOperatorMap & inOperand20,
+                                                const GALGAS_infixOperatorMap & inOperand21,
+                                                const GALGAS_infixOperatorMap & inOperand22,
+                                                const GALGAS_infixOperatorMap & inOperand23,
+                                                const GALGAS_infixOperatorMap & inOperand24,
+                                                const GALGAS_infixOperatorMap & inOperand25,
+                                                const GALGAS_infixOperatorMap & inOperand26,
+                                                const GALGAS_infixOperatorMap & inOperand27,
+                                                const GALGAS_infixOperatorMap & inOperand28,
+                                                const GALGAS_infixOperatorMap & inOperand29,
+                                                const GALGAS_infixOperatorMap & inOperand30,
+                                                const GALGAS_prefixOperatorMap & inOperand31) :
+mAttribute_mTargetBaseTypeMap (inOperand0),
+mAttribute_mTypeMap (inOperand1),
+mAttribute_mProcedureMap (inOperand2),
+mAttribute_mFunctionMap (inOperand3),
+mAttribute_mRegisterMap (inOperand4),
+mAttribute_mGlobalConstantMap (inOperand5),
+mAttribute_mGlobalVariableMap (inOperand6),
+mAttribute_mModeMap (inOperand7),
+mAttribute_mTypeNameSetForIncDec (inOperand8),
+mAttribute_mEqualOperatorMap (inOperand9),
+mAttribute_mNonEqualOperatorMap (inOperand10),
+mAttribute_mStrictInfOperatorMap (inOperand11),
+mAttribute_mInfEqualOperatorMap (inOperand12),
+mAttribute_mStrictSupOperatorMap (inOperand13),
+mAttribute_mSupEqualOperatorMap (inOperand14),
+mAttribute_mAndOperatorMap (inOperand15),
+mAttribute_mAndShortCircuitOperatorMap (inOperand16),
+mAttribute_mOrOperatorMap (inOperand17),
+mAttribute_mOrShortCircuitOperatorMap (inOperand18),
+mAttribute_mXorOperatorMap (inOperand19),
+mAttribute_mAddOperatorMap (inOperand20),
+mAttribute_mAddNoOvfOperatorMap (inOperand21),
+mAttribute_mSubOperatorMap (inOperand22),
+mAttribute_mSubNoOvfOperatorMap (inOperand23),
+mAttribute_mMulOperatorMap (inOperand24),
+mAttribute_mMulNoOvfOperatorMap (inOperand25),
+mAttribute_mDivOperatorMap (inOperand26),
+mAttribute_mDivNoOvfOperatorMap (inOperand27),
+mAttribute_mModOperatorMap (inOperand28),
+mAttribute_mLeftShiftOperatorMap (inOperand29),
+mAttribute_mRightShiftOperatorMap (inOperand30),
+mAttribute_mUnaryMinusOperatorMap (inOperand31) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_semanticContext (GALGAS_targetBaseTypeMap::constructor_emptyMap (HERE),
+                                 GALGAS_unifiedTypeMap::constructor_emptyMap (HERE),
+                                 GALGAS_procedureMap::constructor_emptyMap (HERE),
+                                 GALGAS_functionMap::constructor_emptyMap (HERE),
+                                 GALGAS_registerMap::constructor_emptyMap (HERE),
+                                 GALGAS_globalConstantMap::constructor_emptyMap (HERE),
+                                 GALGAS_globalVariableMap::constructor_emptyMap (HERE),
+                                 GALGAS_modeMap::constructor_emptyMap (HERE),
+                                 GALGAS_stringset::constructor_emptySet (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_targetBaseTypeMap & inOperand0,
+                                                                const GALGAS_unifiedTypeMap & inOperand1,
+                                                                const GALGAS_procedureMap & inOperand2,
+                                                                const GALGAS_functionMap & inOperand3,
+                                                                const GALGAS_registerMap & inOperand4,
+                                                                const GALGAS_globalConstantMap & inOperand5,
+                                                                const GALGAS_globalVariableMap & inOperand6,
+                                                                const GALGAS_modeMap & inOperand7,
+                                                                const GALGAS_stringset & inOperand8,
+                                                                const GALGAS_infixOperatorMap & inOperand9,
+                                                                const GALGAS_infixOperatorMap & inOperand10,
+                                                                const GALGAS_infixOperatorMap & inOperand11,
+                                                                const GALGAS_infixOperatorMap & inOperand12,
+                                                                const GALGAS_infixOperatorMap & inOperand13,
+                                                                const GALGAS_infixOperatorMap & inOperand14,
+                                                                const GALGAS_infixOperatorMap & inOperand15,
+                                                                const GALGAS_infixOperatorMap & inOperand16,
+                                                                const GALGAS_infixOperatorMap & inOperand17,
+                                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                                const GALGAS_infixOperatorMap & inOperand20,
+                                                                const GALGAS_infixOperatorMap & inOperand21,
+                                                                const GALGAS_infixOperatorMap & inOperand22,
+                                                                const GALGAS_infixOperatorMap & inOperand23,
+                                                                const GALGAS_infixOperatorMap & inOperand24,
+                                                                const GALGAS_infixOperatorMap & inOperand25,
+                                                                const GALGAS_infixOperatorMap & inOperand26,
+                                                                const GALGAS_infixOperatorMap & inOperand27,
+                                                                const GALGAS_infixOperatorMap & inOperand28,
+                                                                const GALGAS_infixOperatorMap & inOperand29,
+                                                                const GALGAS_infixOperatorMap & inOperand30,
+                                                                const GALGAS_prefixOperatorMap & inOperand31 
+                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_semanticContext result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid ()) {
+    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mTargetBaseTypeMap.objectCompare (inOperand.mAttribute_mTargetBaseTypeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mProcedureMap.objectCompare (inOperand.mAttribute_mProcedureMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mFunctionMap.objectCompare (inOperand.mAttribute_mFunctionMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mModeMap.objectCompare (inOperand.mAttribute_mModeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mTypeNameSetForIncDec.objectCompare (inOperand.mAttribute_mTypeNameSetForIncDec) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAndShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mAndShortCircuitOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mOrShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mOrShortCircuitOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_semanticContext::isValid (void) const {
+  return mAttribute_mTargetBaseTypeMap.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mProcedureMap.isValid () && mAttribute_mFunctionMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mTypeNameSetForIncDec.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mAndShortCircuitOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mOrShortCircuitOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticContext::drop (void) {
+  mAttribute_mTargetBaseTypeMap.drop () ;
+  mAttribute_mTypeMap.drop () ;
+  mAttribute_mProcedureMap.drop () ;
+  mAttribute_mFunctionMap.drop () ;
+  mAttribute_mRegisterMap.drop () ;
+  mAttribute_mGlobalConstantMap.drop () ;
+  mAttribute_mGlobalVariableMap.drop () ;
+  mAttribute_mModeMap.drop () ;
+  mAttribute_mTypeNameSetForIncDec.drop () ;
+  mAttribute_mEqualOperatorMap.drop () ;
+  mAttribute_mNonEqualOperatorMap.drop () ;
+  mAttribute_mStrictInfOperatorMap.drop () ;
+  mAttribute_mInfEqualOperatorMap.drop () ;
+  mAttribute_mStrictSupOperatorMap.drop () ;
+  mAttribute_mSupEqualOperatorMap.drop () ;
+  mAttribute_mAndOperatorMap.drop () ;
+  mAttribute_mAndShortCircuitOperatorMap.drop () ;
+  mAttribute_mOrOperatorMap.drop () ;
+  mAttribute_mOrShortCircuitOperatorMap.drop () ;
+  mAttribute_mXorOperatorMap.drop () ;
+  mAttribute_mAddOperatorMap.drop () ;
+  mAttribute_mAddNoOvfOperatorMap.drop () ;
+  mAttribute_mSubOperatorMap.drop () ;
+  mAttribute_mSubNoOvfOperatorMap.drop () ;
+  mAttribute_mMulOperatorMap.drop () ;
+  mAttribute_mMulNoOvfOperatorMap.drop () ;
+  mAttribute_mDivOperatorMap.drop () ;
+  mAttribute_mDivNoOvfOperatorMap.drop () ;
+  mAttribute_mModOperatorMap.drop () ;
+  mAttribute_mLeftShiftOperatorMap.drop () ;
+  mAttribute_mRightShiftOperatorMap.drop () ;
+  mAttribute_mUnaryMinusOperatorMap.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticContext::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "<struct @semanticContext:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mTargetBaseTypeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mProcedureMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mFunctionMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mModeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mTypeNameSetForIncDec.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAndShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mOrShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_targetBaseTypeMap GALGAS_semanticContext::reader_mTargetBaseTypeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetBaseTypeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap GALGAS_semanticContext::reader_mTypeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procedureMap GALGAS_semanticContext::reader_mProcedureMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcedureMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionMap GALGAS_semanticContext::reader_mFunctionMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFunctionMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_semanticContext::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRegisterMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMap GALGAS_semanticContext::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGlobalConstantMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMap GALGAS_semanticContext::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGlobalVariableMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_modeMap GALGAS_semanticContext::reader_mModeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mModeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_semanticContext::reader_mTypeNameSetForIncDec (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeNameSetForIncDec ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mNonEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStrictInfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInfEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStrictSupOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSupEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAndOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAndShortCircuitOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOrOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOrShortCircuitOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mXorOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAddOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAddNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMulOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMulNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mDivOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mDivNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mModOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLeftShiftOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRightShiftOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mUnaryMinusOperatorMap ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @semanticContext type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_semanticContext::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_semanticContext ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_semanticContext::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_semanticContext (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_semanticContext result ;
+  const GALGAS_semanticContext * p = (const GALGAS_semanticContext *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_semanticContext *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                           Abstract category method '@abstractDeclaration enterInContext'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
