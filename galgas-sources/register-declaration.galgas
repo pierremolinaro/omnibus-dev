@@ -2,11 +2,17 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @registerDeclaration : @abstractDeclaration {
-  @lstring mRegisterTypeName
+list @registerDeclarationList {
   @lstring mRegisterName
-  @luint64 mRegisterAddress
   @lstringlist mAttributeList
+  @luint64 mRegisterAddress
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @registerDeclaration : @abstractDeclaration {
+  @registerDeclarationList mRegisterDeclarationList
+  @lstring mRegisterTypeName
   @registerBitSliceList mRegisterBitSliceList
 }
 
@@ -26,7 +32,7 @@ enum @registerBitSlice {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @registerDeclaration location -> @location outLocation {
-  outLocation = mRegisterName.location
+  outLocation = mRegisterTypeName.location
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -39,17 +45,22 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $register$
-    @lstringlist attributeList = {}
+    @registerDeclarationList registerDeclarationList = {}
     repeat
+      @lstringlist attributeList = {}
+      repeat
+      while
+        $attribute$ ?let attribute
+        attributeList += !attribute
+      end 
+      $identifier$ ?let registerName
+      $at$
+      $integer$ ?let @luint64 registerAddress
+      registerDeclarationList += !registerName !attributeList !registerAddress
     while
-      $attribute$ ?let attribute
-      attributeList += !attribute
-    end 
-    $identifier$ ?let registerName
+    end
     $:$
     $identifier$ ?let registerTypeName
-    $at$
-    $integer$ ?let @luint64 registerAddress
     @registerBitSliceList registerBitSliceList = {}
     select
     or
@@ -77,10 +88,8 @@ syntax extension common_syntax {
       $}$
     end
     ioAST.mDeclarationList += !@registerDeclaration.new {
+      !registerDeclarationList
       !registerTypeName
-      !registerName
-      !registerAddress
-      !attributeList
       !registerBitSliceList
     }
   }
@@ -96,14 +105,14 @@ syntax extension common_syntax {
 override method @registerDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mRegisterName !self]
-  [!?ioGraph addEdge !mRegisterName !mRegisterTypeName]
+  [!?ioGraph addNode ![mRegisterDeclarationList mRegisterNameAtIndex !0] !self]
+  [!?ioGraph addEdge ![mRegisterDeclarationList mRegisterNameAtIndex !0] !mRegisterTypeName]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @registerDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "register " + mRegisterName 
+  outRepresentation = "register " + [mRegisterDeclarationList mRegisterNameAtIndex !0]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -136,17 +145,6 @@ override method @registerDeclaration enterInContext
 {
 #---
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
-#--- Analyze attributes
-  var isReadOnly = false
-  for (att) in mAttributeList do
-    if att.string != "ro" then
-      error att : "only @ro attribute (read only) is accepted here"
-    elsif isReadOnly then
-      error att : "duplicated attribute"
-    else
-      isReadOnly = true
-    end
-  end
 #--- Build bit slice map
   @registerBitSliceMap registerBitSliceMap = {}
   if [mRegisterBitSliceList length] > 0 then
@@ -163,12 +161,25 @@ override method @registerDeclaration enterInContext
     end
   end
 #---  
-  [!?ioContext.mRegisterMap insertKey
-    !mRegisterName
-    !registerType
-    !isReadOnly
-    !registerBitSliceMap
-  ]
+  for () in mRegisterDeclarationList do
+  #--- Analyze attributes
+    var isReadOnly = false
+    for (att) in mAttributeList do
+      if att.string != "ro" then
+        error att : "only @ro attribute (read only) is accepted here"
+      elsif isReadOnly then
+        error att : "duplicated attribute"
+      else
+        isReadOnly = true
+      end
+    end
+    [!?ioContext.mRegisterMap insertKey
+      !mRegisterName
+      !registerType
+      !isReadOnly
+      !registerBitSliceMap
+    ]
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -187,7 +198,7 @@ override method @registerDeclaration semanticAnalysis
   case integer (* * @bool unsigned @uint size) :
     if [mRegisterBitSliceList length] > 0 then
       if not unsigned then
-        error mRegisterName:"the register type should be unsigned in order to define bit slices"
+        error mRegisterTypeName:"the register type should be unsigned in order to define bit slices"
       end
       @uint shiftCount = 0
       for > () in mRegisterBitSliceList do
@@ -199,7 +210,7 @@ override method @registerDeclaration semanticAnalysis
         end
       end
       if size != shiftCount then
-        error mRegisterName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
+        error mRegisterTypeName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
       end
     end
   case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
@@ -209,7 +220,7 @@ override method @registerDeclaration semanticAnalysis
 #--- Check address value
   [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?* ?let size ?let isSigned]
   if isSigned then
-    error mRegisterName : "base type 'size' should be unsigned"
+    error mRegisterTypeName : "base type 'size' should be unsigned"
   end
   @uint64 maxAddress
   if size == 8 then
@@ -221,17 +232,19 @@ override method @registerDeclaration semanticAnalysis
   elsif size == 16 then
     maxAddress = @uint64.max
   else
-    error mRegisterName : "base type 'size' has an invalid size" : maxAddress
+    error mRegisterTypeName : "base type 'size' has an invalid size" : maxAddress
   end
-  if mRegisterAddress.uint64 > maxAddress then
-    error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
+  for () in mRegisterDeclarationList do
+    if mRegisterAddress.uint64 > maxAddress then
+      error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
+    end
+  #---
+    [!?ioIntermediateCodeStruct.mRegisterMap insertKey
+      !mRegisterName
+      !mRegisterTypeName.string
+      !mRegisterAddress.uint64
+    ]
   end
-#---
-  [!?ioIntermediateCodeStruct.mRegisterMap insertKey
-    !mRegisterName
-    !mRegisterTypeName.string
-    !mRegisterAddress.uint64
-  ]    
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -34,8 +34,170 @@ let f_mem  : UInt32= 24_000_000
 
 // chapter 11: Port control and interrupts (PORT)
  // Pin Control Register n
-register PORTA_PCR0 : UInt32 at 0x40049000
- {7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps}
+register
+  PORTA_PCR0   at 0x40049000
+  PORTA_PCR1   at 0x40049004
+  PORTA_PCR2   at 0x40049008
+  PORTA_PCR3   at 0x4004900C
+  PORTA_PCR4   at 0x40049010
+  PORTA_PCR5   at 0x40049014
+  PORTA_PCR6   at 0x40049018
+  PORTA_PCR7   at 0x4004901C
+  PORTA_PCR8   at 0x40049020
+  PORTA_PCR9   at 0x40049024
+  PORTA_PCR10  at 0x40049028
+  PORTA_PCR11  at 0x4004902C
+  PORTA_PCR12  at 0x40049030
+  PORTA_PCR13  at 0x40049034
+  PORTA_PCR14  at 0x40049038
+  PORTA_PCR15  at 0x4004903C
+  PORTA_PCR16  at 0x40049040
+  PORTA_PCR17  at 0x40049044
+  PORTA_PCR18  at 0x40049048
+  PORTA_PCR19  at 0x4004904C
+  PORTA_PCR20  at 0x40049050
+  PORTA_PCR21  at 0x40049054
+  PORTA_PCR22  at 0x40049058
+  PORTA_PCR23  at 0x4004905C
+  PORTA_PCR24  at 0x40049060
+  PORTA_PCR25  at 0x40049064
+  PORTA_PCR26  at 0x40049068
+  PORTA_PCR27  at 0x4004906C
+  PORTA_PCR28  at 0x40049070
+  PORTA_PCR29  at 0x40049074
+  PORTA_PCR30  at 0x40049078
+  PORTA_PCR31  at 0x4004907C
+  PORTB_PCR0   at 0x4004A000
+  PORTB_PCR1   at 0x4004A004
+  PORTB_PCR2   at 0x4004A008
+  PORTB_PCR3   at 0x4004A00C
+  PORTB_PCR4   at 0x4004A010
+  PORTB_PCR5   at 0x4004A014
+  PORTB_PCR6   at 0x4004A018
+  PORTB_PCR7   at 0x4004A01C
+  PORTB_PCR8   at 0x4004A020
+  PORTB_PCR9   at 0x4004A024
+  PORTB_PCR10  at 0x4004A028
+  PORTB_PCR11  at 0x4004A02C
+  PORTB_PCR12  at 0x4004A030
+  PORTB_PCR13  at 0x4004A034
+  PORTB_PCR14  at 0x4004A038
+  PORTB_PCR15  at 0x4004A03C
+  PORTB_PCR16  at 0x4004A040
+  PORTB_PCR17  at 0x4004A044
+  PORTB_PCR18  at 0x4004A048
+  PORTB_PCR19  at 0x4004A04C
+  PORTB_PCR20  at 0x4004A050
+  PORTB_PCR21  at 0x4004A054
+  PORTB_PCR22  at 0x4004A058
+  PORTB_PCR23  at 0x4004A05C
+  PORTB_PCR24  at 0x4004A060
+  PORTB_PCR25  at 0x4004A064
+  PORTB_PCR26  at 0x4004A068
+  PORTB_PCR27  at 0x4004A06C
+  PORTB_PCR28  at 0x4004A070
+  PORTB_PCR29  at 0x4004A074
+  PORTB_PCR30  at 0x4004A078
+  PORTB_PCR31  at 0x4004A07C
+  PORTC_PCR0   at 0x4004B000
+  PORTC_PCR1   at 0x4004B004
+  PORTC_PCR2   at 0x4004B008
+  PORTC_PCR3   at 0x4004B00C
+  PORTC_PCR4   at 0x4004B010
+  PORTC_PCR5   at 0x4004B014
+  PORTC_PCR6   at 0x4004B018
+  PORTC_PCR7   at 0x4004B01C
+  PORTC_PCR8   at 0x4004B020
+  PORTC_PCR9   at 0x4004B024
+  PORTC_PCR10  at 0x4004B028
+  PORTC_PCR11  at 0x4004B02C
+  PORTC_PCR12  at 0x4004B030
+  PORTC_PCR13  at 0x4004B034
+  PORTC_PCR14  at 0x4004B038
+  PORTC_PCR15  at 0x4004B03C
+  PORTC_PCR16  at 0x4004B040
+  PORTC_PCR17  at 0x4004B044
+  PORTC_PCR18  at 0x4004B048
+  PORTC_PCR19  at 0x4004B04C
+  PORTC_PCR20  at 0x4004B050
+  PORTC_PCR21  at 0x4004B054
+  PORTC_PCR22  at 0x4004B058
+  PORTC_PCR23  at 0x4004B05C
+  PORTC_PCR24  at 0x4004B060
+  PORTC_PCR25  at 0x4004B064
+  PORTC_PCR26  at 0x4004B068
+  PORTC_PCR27  at 0x4004B06C
+  PORTC_PCR28  at 0x4004B070
+  PORTC_PCR29  at 0x4004B074
+  PORTC_PCR30  at 0x4004B078
+  PORTC_PCR31  at 0x4004B07C
+  PORTD_PCR0   at 0x4004C000
+  PORTD_PCR1   at 0x4004C004
+  PORTD_PCR2   at 0x4004C008
+  PORTD_PCR3   at 0x4004C00C
+  PORTD_PCR4   at 0x4004C010
+  PORTD_PCR5   at 0x4004C014
+  PORTD_PCR6   at 0x4004C018
+  PORTD_PCR7   at 0x4004C01C
+  PORTD_PCR8   at 0x4004C020
+  PORTD_PCR9   at 0x4004C024
+  PORTD_PCR10  at 0x4004C028
+  PORTD_PCR11  at 0x4004C02C
+  PORTD_PCR12  at 0x4004C030
+  PORTD_PCR13  at 0x4004C034
+  PORTD_PCR14  at 0x4004C038
+  PORTD_PCR15  at 0x4004C03C
+  PORTD_PCR16  at 0x4004C040
+  PORTD_PCR17  at 0x4004C044
+  PORTD_PCR18  at 0x4004C048
+  PORTD_PCR19  at 0x4004C04C
+  PORTD_PCR20  at 0x4004C050
+  PORTD_PCR21  at 0x4004C054
+  PORTD_PCR22  at 0x4004C058
+  PORTD_PCR23  at 0x4004C05C
+  PORTD_PCR24  at 0x4004C060
+  PORTD_PCR25  at 0x4004C064
+  PORTD_PCR26  at 0x4004C068
+  PORTD_PCR27  at 0x4004C06C
+  PORTD_PCR28  at 0x4004C070
+  PORTD_PCR29  at 0x4004C074
+  PORTD_PCR30  at 0x4004C078
+  PORTD_PCR31  at 0x4004C07C
+  PORTE_PCR0   at 0x4004D000
+  PORTE_PCR1   at 0x4004D004
+  PORTE_PCR2   at 0x4004D008
+  PORTE_PCR3   at 0x4004D00C
+  PORTE_PCR4   at 0x4004D010
+  PORTE_PCR5   at 0x4004D014
+  PORTE_PCR6   at 0x4004D018
+  PORTE_PCR7   at 0x4004D01C
+  PORTE_PCR8   at 0x4004D020
+  PORTE_PCR9   at 0x4004D024
+  PORTE_PCR10  at 0x4004D028
+  PORTE_PCR11  at 0x4004D02C
+  PORTE_PCR12  at 0x4004D030
+  PORTE_PCR13  at 0x4004D034
+  PORTE_PCR14  at 0x4004D038
+  PORTE_PCR15  at 0x4004D03C
+  PORTE_PCR16  at 0x4004D040
+  PORTE_PCR17  at 0x4004D044
+  PORTE_PCR18  at 0x4004D048
+  PORTE_PCR19  at 0x4004D04C
+  PORTE_PCR20  at 0x4004D050
+  PORTE_PCR21  at 0x4004D054
+  PORTE_PCR22  at 0x4004D058
+  PORTE_PCR23  at 0x4004D05C
+  PORTE_PCR24  at 0x4004D060
+  PORTE_PCR25  at 0x4004D064
+  PORTE_PCR26  at 0x4004D068
+  PORTE_PCR27  at 0x4004D06C
+  PORTE_PCR28  at 0x4004D070
+  PORTE_PCR29  at 0x4004D074
+  PORTE_PCR30  at 0x4004D078
+  PORTE_PCR31  at 0x4004D07C
+:
+ UInt32 {7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps}
+
 let PORT_PCR_ISF  : UInt32  = 0x01000000  // Interrupt Status Flag
 //register UInt32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration
 let PORT_PCR_IRQC_MASK  : UInt32 = 0x000F0000
@@ -49,201 +211,46 @@ let PORT_PCR_SRE      : UInt32 = 0x00000004  // Slew Rate Enable
 let PORT_PCR_PE       : UInt32 = 0x00000002  // Pull Enable
 let PORT_PCR_PS       : UInt32 = 0x00000001  // Pull Select
 
-register PORTA_PCR1   : UInt32 at 0x40049004 // Pin Control Register n
-register PORTA_PCR2   : UInt32 at 0x40049008 // Pin Control Register n
-register PORTA_PCR3   : UInt32 at 0x4004900C // Pin Control Register n
-register PORTA_PCR4   : UInt32 at 0x40049010 // Pin Control Register n
-register PORTA_PCR5   : UInt32 at 0x40049014 // Pin Control Register n
-register PORTA_PCR6   : UInt32 at 0x40049018 // Pin Control Register n
-register PORTA_PCR7   : UInt32 at 0x4004901C // Pin Control Register n
-register PORTA_PCR8   : UInt32 at 0x40049020 // Pin Control Register n
-register PORTA_PCR9   : UInt32 at 0x40049024 // Pin Control Register n
-register PORTA_PCR10  : UInt32 at 0x40049028 // Pin Control Register n
-register PORTA_PCR11  : UInt32 at 0x4004902C // Pin Control Register n
-register PORTA_PCR12  : UInt32 at 0x40049030 // Pin Control Register n
-register PORTA_PCR13  : UInt32 at 0x40049034 // Pin Control Register n
-register PORTA_PCR14  : UInt32 at 0x40049038 // Pin Control Register n
-register PORTA_PCR15  : UInt32 at 0x4004903C // Pin Control Register n
-register PORTA_PCR16  : UInt32 at 0x40049040 // Pin Control Register n
-register PORTA_PCR17  : UInt32 at 0x40049044 // Pin Control Register n
-register PORTA_PCR18  : UInt32 at 0x40049048 // Pin Control Register n
-register PORTA_PCR19  : UInt32 at 0x4004904C // Pin Control Register n
-register PORTA_PCR20  : UInt32 at 0x40049050 // Pin Control Register n
-register PORTA_PCR21  : UInt32 at 0x40049054 // Pin Control Register n
-register PORTA_PCR22  : UInt32 at 0x40049058 // Pin Control Register n
-register PORTA_PCR23  : UInt32 at 0x4004905C // Pin Control Register n
-register PORTA_PCR24  : UInt32 at 0x40049060 // Pin Control Register n
-register PORTA_PCR25  : UInt32 at 0x40049064 // Pin Control Register n
-register PORTA_PCR26  : UInt32 at 0x40049068 // Pin Control Register n
-register PORTA_PCR27  : UInt32 at 0x4004906C // Pin Control Register n
-register PORTA_PCR28  : UInt32 at 0x40049070 // Pin Control Register n
-register PORTA_PCR29  : UInt32 at 0x40049074 // Pin Control Register n
-register PORTA_PCR30  : UInt32 at 0x40049078 // Pin Control Register n
-register PORTA_PCR31  : UInt32 at 0x4004907C // Pin Control Register n
-register PORTA_GPCLR  : UInt32 at 0x40049080 // Global Pin Control Low Register
-register PORTA_GPCHR  : UInt32 at 0x40049084 // Global Pin Control High Register
-register PORTA_ISFR   : UInt32 at 0x400490A0 // Interrupt Status Flag Register
-register PORTB_PCR0   : UInt32 at 0x4004A000 // Pin Control Register n
-register PORTB_PCR1   : UInt32 at 0x4004A004 // Pin Control Register n
-register PORTB_PCR2   : UInt32 at 0x4004A008 // Pin Control Register n
-register PORTB_PCR3   : UInt32 at 0x4004A00C // Pin Control Register n
-register PORTB_PCR4   : UInt32 at 0x4004A010 // Pin Control Register n
-register PORTB_PCR5   : UInt32 at 0x4004A014 // Pin Control Register n
-register PORTB_PCR6   : UInt32 at 0x4004A018 // Pin Control Register n
-register PORTB_PCR7   : UInt32 at 0x4004A01C // Pin Control Register n
-register PORTB_PCR8   : UInt32 at 0x4004A020 // Pin Control Register n
-register PORTB_PCR9   : UInt32 at 0x4004A024 // Pin Control Register n
-register PORTB_PCR10  : UInt32 at 0x4004A028 // Pin Control Register n
-register PORTB_PCR11  : UInt32 at 0x4004A02C // Pin Control Register n
-register PORTB_PCR12  : UInt32 at 0x4004A030 // Pin Control Register n
-register PORTB_PCR13  : UInt32 at 0x4004A034 // Pin Control Register n
-register PORTB_PCR14  : UInt32 at 0x4004A038 // Pin Control Register n
-register PORTB_PCR15  : UInt32 at 0x4004A03C // Pin Control Register n
-register PORTB_PCR16  : UInt32 at 0x4004A040 // Pin Control Register n
-register PORTB_PCR17  : UInt32 at 0x4004A044 // Pin Control Register n
-register PORTB_PCR18  : UInt32 at 0x4004A048 // Pin Control Register n
-register PORTB_PCR19  : UInt32 at 0x4004A04C // Pin Control Register n
-register PORTB_PCR20  : UInt32 at 0x4004A050 // Pin Control Register n
-register PORTB_PCR21  : UInt32 at 0x4004A054 // Pin Control Register n
-register PORTB_PCR22  : UInt32 at 0x4004A058 // Pin Control Register n
-register PORTB_PCR23  : UInt32 at 0x4004A05C // Pin Control Register n
-register PORTB_PCR24  : UInt32 at 0x4004A060 // Pin Control Register n
-register PORTB_PCR25  : UInt32 at 0x4004A064 // Pin Control Register n
-register PORTB_PCR26  : UInt32 at 0x4004A068 // Pin Control Register n
-register PORTB_PCR27  : UInt32 at 0x4004A06C // Pin Control Register n
-register PORTB_PCR28  : UInt32 at 0x4004A070 // Pin Control Register n
-register PORTB_PCR29  : UInt32 at 0x4004A074 // Pin Control Register n
-register PORTB_PCR30  : UInt32 at 0x4004A078 // Pin Control Register n
-register PORTB_PCR31  : UInt32 at 0x4004A07C // Pin Control Register n
-register PORTB_GPCLR  : UInt32 at 0x4004A080 // Global Pin Control Low Register
-register PORTB_GPCHR  : UInt32 at 0x4004A084 // Global Pin Control High Register
-register PORTB_ISFR   : UInt32 at 0x4004A0A0 // Interrupt Status Flag Register
-register PORTC_PCR0   : UInt32 at 0x4004B000 // Pin Control Register n
-register PORTC_PCR1   : UInt32 at 0x4004B004 // Pin Control Register n
-register PORTC_PCR2   : UInt32 at 0x4004B008 // Pin Control Register n
-register PORTC_PCR3   : UInt32 at 0x4004B00C // Pin Control Register n
-register PORTC_PCR4   : UInt32 at 0x4004B010 // Pin Control Register n
-register PORTC_PCR5   : UInt32 at 0x4004B014 // Pin Control Register n
-register PORTC_PCR6   : UInt32 at 0x4004B018 // Pin Control Register n
-register PORTC_PCR7   : UInt32 at 0x4004B01C // Pin Control Register n
-register PORTC_PCR8   : UInt32 at 0x4004B020 // Pin Control Register n
-register PORTC_PCR9   : UInt32 at 0x4004B024 // Pin Control Register n
-register PORTC_PCR10  : UInt32 at 0x4004B028 // Pin Control Register n
-register PORTC_PCR11  : UInt32 at 0x4004B02C // Pin Control Register n
-register PORTC_PCR12  : UInt32 at 0x4004B030 // Pin Control Register n
-register PORTC_PCR13  : UInt32 at 0x4004B034 // Pin Control Register n
-register PORTC_PCR14  : UInt32 at 0x4004B038 // Pin Control Register n
-register PORTC_PCR15  : UInt32 at 0x4004B03C // Pin Control Register n
-register PORTC_PCR16  : UInt32 at 0x4004B040 // Pin Control Register n
-register PORTC_PCR17  : UInt32 at 0x4004B044 // Pin Control Register n
-register PORTC_PCR18  : UInt32 at 0x4004B048 // Pin Control Register n
-register PORTC_PCR19  : UInt32 at 0x4004B04C // Pin Control Register n
-register PORTC_PCR20  : UInt32 at 0x4004B050 // Pin Control Register n
-register PORTC_PCR21  : UInt32 at 0x4004B054 // Pin Control Register n
-register PORTC_PCR22  : UInt32 at 0x4004B058 // Pin Control Register n
-register PORTC_PCR23  : UInt32 at 0x4004B05C // Pin Control Register n
-register PORTC_PCR24  : UInt32 at 0x4004B060 // Pin Control Register n
-register PORTC_PCR25  : UInt32 at 0x4004B064 // Pin Control Register n
-register PORTC_PCR26  : UInt32 at 0x4004B068 // Pin Control Register n
-register PORTC_PCR27  : UInt32 at 0x4004B06C // Pin Control Register n
-register PORTC_PCR28  : UInt32 at 0x4004B070 // Pin Control Register n
-register PORTC_PCR29  : UInt32 at 0x4004B074 // Pin Control Register n
-register PORTC_PCR30  : UInt32 at 0x4004B078 // Pin Control Register n
-register PORTC_PCR31  : UInt32 at 0x4004B07C // Pin Control Register n
-register PORTC_GPCLR  : UInt32 at 0x4004B080 // Global Pin Control Low Register
-register PORTC_GPCHR  : UInt32 at 0x4004B084 // Global Pin Control High Register
-register PORTC_ISFR   : UInt32 at 0x4004B0A0 // Interrupt Status Flag Register
-register PORTD_PCR0   : UInt32 at 0x4004C000 // Pin Control Register n
-register PORTD_PCR1   : UInt32 at 0x4004C004 // Pin Control Register n
-register PORTD_PCR2   : UInt32 at 0x4004C008 // Pin Control Register n
-register PORTD_PCR3   : UInt32 at 0x4004C00C // Pin Control Register n
-register PORTD_PCR4   : UInt32 at 0x4004C010 // Pin Control Register n
-register PORTD_PCR5   : UInt32 at 0x4004C014 // Pin Control Register n
-register PORTD_PCR6   : UInt32 at 0x4004C018 // Pin Control Register n
-register PORTD_PCR7   : UInt32 at 0x4004C01C // Pin Control Register n
-register PORTD_PCR8   : UInt32 at 0x4004C020 // Pin Control Register n
-register PORTD_PCR9   : UInt32 at 0x4004C024 // Pin Control Register n
-register PORTD_PCR10  : UInt32 at 0x4004C028 // Pin Control Register n
-register PORTD_PCR11  : UInt32 at 0x4004C02C // Pin Control Register n
-register PORTD_PCR12  : UInt32 at 0x4004C030 // Pin Control Register n
-register PORTD_PCR13  : UInt32 at 0x4004C034 // Pin Control Register n
-register PORTD_PCR14  : UInt32 at 0x4004C038 // Pin Control Register n
-register PORTD_PCR15  : UInt32 at 0x4004C03C // Pin Control Register n
-register PORTD_PCR16  : UInt32 at 0x4004C040 // Pin Control Register n
-register PORTD_PCR17  : UInt32 at 0x4004C044 // Pin Control Register n
-register PORTD_PCR18  : UInt32 at 0x4004C048 // Pin Control Register n
-register PORTD_PCR19  : UInt32 at 0x4004C04C // Pin Control Register n
-register PORTD_PCR20  : UInt32 at 0x4004C050 // Pin Control Register n
-register PORTD_PCR21  : UInt32 at 0x4004C054 // Pin Control Register n
-register PORTD_PCR22  : UInt32 at 0x4004C058 // Pin Control Register n
-register PORTD_PCR23  : UInt32 at 0x4004C05C // Pin Control Register n
-register PORTD_PCR24  : UInt32 at 0x4004C060 // Pin Control Register n
-register PORTD_PCR25  : UInt32 at 0x4004C064 // Pin Control Register n
-register PORTD_PCR26  : UInt32 at 0x4004C068 // Pin Control Register n
-register PORTD_PCR27  : UInt32 at 0x4004C06C // Pin Control Register n
-register PORTD_PCR28  : UInt32 at 0x4004C070 // Pin Control Register n
-register PORTD_PCR29  : UInt32 at 0x4004C074 // Pin Control Register n
-register PORTD_PCR30  : UInt32 at 0x4004C078 // Pin Control Register n
-register PORTD_PCR31  : UInt32 at 0x4004C07C // Pin Control Register n
-register PORTD_GPCLR  : UInt32 at 0x4004C080 // Global Pin Control Low Register
-register PORTD_GPCHR  : UInt32 at 0x4004C084 // Global Pin Control High Register
-register PORTD_ISFR   : UInt32 at 0x4004C0A0 // Interrupt Status Flag Register
-register PORTE_PCR0   : UInt32 at 0x4004D000 // Pin Control Register n
-register PORTE_PCR1   : UInt32 at 0x4004D004 // Pin Control Register n
-register PORTE_PCR2   : UInt32 at 0x4004D008 // Pin Control Register n
-register PORTE_PCR3   : UInt32 at 0x4004D00C // Pin Control Register n
-register PORTE_PCR4   : UInt32 at 0x4004D010 // Pin Control Register n
-register PORTE_PCR5   : UInt32 at 0x4004D014 // Pin Control Register n
-register PORTE_PCR6   : UInt32 at 0x4004D018 // Pin Control Register n
-register PORTE_PCR7   : UInt32 at 0x4004D01C // Pin Control Register n
-register PORTE_PCR8   : UInt32 at 0x4004D020 // Pin Control Register n
-register PORTE_PCR9   : UInt32 at 0x4004D024 // Pin Control Register n
-register PORTE_PCR10  : UInt32 at 0x4004D028 // Pin Control Register n
-register PORTE_PCR11  : UInt32 at 0x4004D02C // Pin Control Register n
-register PORTE_PCR12  : UInt32 at 0x4004D030 // Pin Control Register n
-register PORTE_PCR13  : UInt32 at 0x4004D034 // Pin Control Register n
-register PORTE_PCR14  : UInt32 at 0x4004D038 // Pin Control Register n
-register PORTE_PCR15  : UInt32 at 0x4004D03C // Pin Control Register n
-register PORTE_PCR16  : UInt32 at 0x4004D040 // Pin Control Register n
-register PORTE_PCR17  : UInt32 at 0x4004D044 // Pin Control Register n
-register PORTE_PCR18  : UInt32 at 0x4004D048 // Pin Control Register n
-register PORTE_PCR19  : UInt32 at 0x4004D04C // Pin Control Register n
-register PORTE_PCR20  : UInt32 at 0x4004D050 // Pin Control Register n
-register PORTE_PCR21  : UInt32 at 0x4004D054 // Pin Control Register n
-register PORTE_PCR22  : UInt32 at 0x4004D058 // Pin Control Register n
-register PORTE_PCR23  : UInt32 at 0x4004D05C // Pin Control Register n
-register PORTE_PCR24  : UInt32 at 0x4004D060 // Pin Control Register n
-register PORTE_PCR25  : UInt32 at 0x4004D064 // Pin Control Register n
-register PORTE_PCR26  : UInt32 at 0x4004D068 // Pin Control Register n
-register PORTE_PCR27  : UInt32 at 0x4004D06C // Pin Control Register n
-register PORTE_PCR28  : UInt32 at 0x4004D070 // Pin Control Register n
-register PORTE_PCR29  : UInt32 at 0x4004D074 // Pin Control Register n
-register PORTE_PCR30  : UInt32 at 0x4004D078 // Pin Control Register n
-register PORTE_PCR31  : UInt32 at 0x4004D07C // Pin Control Register n
-register PORTE_GPCLR  : UInt32 at 0x4004D080 // Global Pin Control Low Register
-register PORTE_GPCHR  : UInt32 at 0x4004D084 // Global Pin Control High Register
-register PORTE_ISFR   : UInt32 at 0x4004D0A0 // Interrupt Status Flag Register
+register PORTA_GPCLR  at 0x40049080 : UInt32 // Global Pin Control Low Register
+register PORTA_GPCHR  at 0x40049084 : UInt32 // Global Pin Control High Register
+register PORTA_ISFR   at 0x400490A0 : UInt32 // Interrupt Status Flag Register
+
+register PORTB_GPCLR  at 0x4004A080 : UInt32 // Global Pin Control Low Register
+register PORTB_GPCHR  at 0x4004A084 : UInt32 // Global Pin Control High Register
+register PORTB_ISFR   at 0x4004A0A0 : UInt32 // Interrupt Status Flag Register
+
+register PORTC_GPCLR  at 0x4004B080 : UInt32 // Global Pin Control Low Register
+register PORTC_GPCHR  at 0x4004B084 : UInt32 // Global Pin Control High Register
+register PORTC_ISFR   at 0x4004B0A0 : UInt32 // Interrupt Status Flag Register
+
+register PORTD_GPCLR  at 0x4004C080 : UInt32 // Global Pin Control Low Register
+register PORTD_GPCHR  at 0x4004C084 : UInt32 // Global Pin Control High Register
+register PORTD_ISFR   at 0x4004C0A0 : UInt32 // Interrupt Status Flag Register
+
+register PORTE_GPCLR  at 0x4004D080 : UInt32 // Global Pin Control Low Register
+register PORTE_GPCHR  at 0x4004D084 : UInt32 // Global Pin Control High Register
+register PORTE_ISFR   at 0x4004D0A0 : UInt32 // Interrupt Status Flag Register
 
 // Chapter 12: System Integration Module (SIM)
-register SIM_SOPT1    : UInt32 at 0x40047000 // System Options Register 1
-register SIM_SOPT1CFG : UInt32 at 0x40047004 // SOPT1 Configuration Register
-register SIM_SOPT2    : UInt32 at 0x40048004 // System Options Register 2
-register SIM_SOPT2_USBSRC : UInt32 at 0x00040000  // 0=USB_CLKIN, 1=FFL/PLL 
-register SIM_SOPT2_PLLFLLSEL : UInt32 at 0x00010000  // 0=FLL, 1=PLL
-register SIM_SOPT2_TRACECLKSEL : UInt32 at 0x00001000  // 0=MCGOUTCLK, 1=CPU
-register SIM_SOPT2_PTD7PAD : UInt32 at 0x00000800  // 0=normal, 1=double drive PTD7
+register SIM_SOPT1    at 0x40047000 : UInt32 // System Options Register 1
+register SIM_SOPT1CFG at 0x40047004 : UInt32 // SOPT1 Configuration Register
+register SIM_SOPT2    at 0x40048004 : UInt32 // System Options Register 2
+register SIM_SOPT2_USBSRC at 0x00040000  : UInt32 // 0=USB_CLKIN, 1=FFL/PLL 
+register SIM_SOPT2_PLLFLLSEL at 0x00010000  : UInt32 // 0=FLL, 1=PLL
+register SIM_SOPT2_TRACECLKSEL at 0x00001000  : UInt32 // 0=MCGOUTCLK, 1=CPU
+register SIM_SOPT2_PTD7PAD at 0x00000800  : UInt32 // 0=normal, 1=double drive PTD7
 //register UInt32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.
 let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select
-register SIM_SOPT4   : UInt32 at 0x4004800C // System Options Register 4
-register SIM_SOPT5   : UInt32 at 0x40048010 // System Options Register 5
-register SIM_SOPT7   : UInt32 at 0x40048018 // System Options Register 7
-register @ro SIM_SDID  : UInt32 at 0x40048024 // System Device Identification Register
-register SIM_SCGC2  : UInt32 at 0x4004802C // System Clock Gating Control Register 2
-let SIM_SCGC2_DAC0  : UInt32 =  0x00001000  // DAC0 Clock Gate Control
-register SIM_SCGC3  : UInt32 at 0x40048030 // System Clock Gating Control Register 3
-let SIM_SCGC3_ADC1 : UInt32 =  0x08000000  // ADC1 Clock Gate Control
-let SIM_SCGC3_FTM2 : UInt32 =  0x01000000  // FTM2 Clock Gate Control
-register SIM_SCGC4 : UInt32 at 0x40048034 // System Clock Gating Control Register 4
+register SIM_SOPT4   at 0x4004800C : UInt32 // System Options Register 4
+register SIM_SOPT5   at 0x40048010 : UInt32 // System Options Register 5
+register SIM_SOPT7   at 0x40048018 : UInt32 // System Options Register 7
+register @ro SIM_SDID  at 0x40048024 : UInt32 // System Device Identification Register
+register SIM_SCGC2  at 0x4004802C : UInt32 // System Clock Gating Control Register 2
+let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control
+register SIM_SCGC3  at 0x40048030 : UInt32 // System Clock Gating Control Register 3
+let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control
+let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control
+register SIM_SCGC4 at 0x40048034 : UInt32 // System Clock Gating Control Register 4
 let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control
 let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control
 let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control
@@ -254,7 +261,7 @@ let SIM_SCGC4_I2C1  : UInt32 =  0x00000080  // I2C1 Clock Gate Control
 let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control
 let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control
 let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control
-register SIM_SCGC5 : UInt32 at 0x40048038 // System Clock Gating Control Register 5
+register SIM_SCGC5 at 0x40048038 : UInt32 // System Clock Gating Control Register 5
 let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control
 let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control
 let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control
@@ -262,7 +269,7 @@ let SIM_SCGC5_PORTB  : UInt32 =  0x00000400  // Port B Clock Gate Control
 let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control
 let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control
 let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control
-register SIM_SCGC6 : UInt32 at 0x4004803C // System Clock Gating Control Register 6
+register SIM_SCGC6 at 0x4004803C : UInt32 // System Clock Gating Control Register 6
 let SIM_SCGC6_RTC   : UInt32 = 0x20000000  // RTC Access
 let SIM_SCGC6_ADC0  : UInt32 =   0x08000000  // ADC0 Clock Gate Control
 let SIM_SCGC6_FTM1  : UInt32 =   0x02000000  // FTM1 Clock Gate Control
@@ -278,10 +285,10 @@ let SIM_SCGC6_FLEXCAN0  : UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control
 let SIM_SCGC6_DMAMUX : UInt32 =  0x00000002  // DMA Mux Clock Gate Control
 let SIM_SCGC6_FTFL  : UInt32 =  0x00000001  // Flash Memory Clock Gate Control
 
-register SIM_SCGC7 : UInt32 at 0x40048040 // System Clock Gating Control Register 7
+register SIM_SCGC7 at 0x40048040 : UInt32 // System Clock Gating Control Register 7
 let SIM_SCGC7_DMA  : UInt32 =  0x00000002  // DMA Clock Gate Control
 
-register SIM_CLKDIV1 : UInt32 at 0x40048044 // System Clock Divider Register 1
+register SIM_CLKDIV1 at 0x40048044 : UInt32 // System Clock Divider Register 1
 //register UInt32 SIM_CLKDIV1_OUTDIV1(n)   (((n) & 0x0F) << 28) // divide value for the core/system clock
 let SIM_CLKDIV1_OUTDIV1_0 : UInt32 = 0 << 28
 //register UInt32 SIM_CLKDIV1_OUTDIV2(n)   (((n) & 0x0F) << 24) // divide value for the peripheral clock
@@ -289,40 +296,40 @@ let SIM_CLKDIV1_OUTDIV2_1 : UInt32 = 1 << 24
 //register UInt32 SIM_CLKDIV1_OUTDIV4(n)   (((n) & 0x0F) << 16) // divide value for the flash clock
 let SIM_CLKDIV1_OUTDIV4_3 : UInt32 = 3 << 16
 
-register SIM_CLKDIV2 : UInt32 at 0x40048048 // System Clock Divider Register 2
+register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2
 //register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)
 let SIM_CLKDIV2_USBFRAC  : UInt32 =  0x01
-register @ro SIM_FCFG1 : UInt32 at 0x4004804C // Flash Configuration Register 1
-register @ro SIM_FCFG2 : UInt32 at 0x40048050 // Flash Configuration Register 2
-register @ro SIM_UIDH  : UInt32 at 0x40048054 // Unique Identification Register High
-register @ro SIM_UIDMH : UInt32 at 0x40048058 // Unique Identification Register Mid-High
-register @ro SIM_UIDML : UInt32 at 0x4004805C // Unique Identification Register Mid Low
-register @ro SIM_UIDL  : UInt32 at 0x40048060 // Unique Identification Register Low
+register @ro SIM_FCFG1 at 0x4004804C : UInt32 // Flash Configuration Register 1
+register @ro SIM_FCFG2 at 0x40048050 : UInt32 // Flash Configuration Register 2
+register @ro SIM_UIDH  at 0x40048054 : UInt32 // Unique Identification Register High
+register @ro SIM_UIDMH at 0x40048058 : UInt32 // Unique Identification Register Mid-High
+register @ro SIM_UIDML at 0x4004805C : UInt32 // Unique Identification Register Mid Low
+register @ro SIM_UIDL  at 0x40048060 : UInt32 // Unique Identification Register Low
 
 // Chapter 13: Reset Control Module (RCM)
-register RCM_SRS0 : UInt8 at 0x4007F000 // System Reset Status Register 0
-register RCM_SRS1 : UInt8 at 0x4007F001 // System Reset Status Register 1
-register RCM_RPFC : UInt8 at 0x4007F004 // Reset Pin Filter Control Register
-register RCM_RPFW : UInt8 at 0x4007F005 // Reset Pin Filter Width Register
-register RCM_MR   : UInt8 at 0x4007F007 // Mode Register
+register RCM_SRS0 at 0x4007F000 : UInt8 // System Reset Status Register 0
+register RCM_SRS1 at 0x4007F001 : UInt8 // System Reset Status Register 1
+register RCM_RPFC at 0x4007F004 : UInt8 // Reset Pin Filter Control Register
+register RCM_RPFW at 0x4007F005 : UInt8 // Reset Pin Filter Width Register
+register RCM_MR   at 0x4007F007 : UInt8 // Mode Register
 
 // Chapter 14: System Mode Controller
-register SMC_PMPROT  : UInt8 at 0x4007E000 // Power Mode Protection Register
+register SMC_PMPROT  at 0x4007E000 : UInt8 // Power Mode Protection Register
 let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes
 let SMC_PMPROT_ALLS : UInt8  = 0x08   // Allow low leakage stop mode
 let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode
 
-register SMC_PMCTRL  : UInt8 at 0x4007E001 // Power Mode Control Register
+register SMC_PMCTRL  at 0x4007E001 : UInt8 // Power Mode Control Register
 let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt
 //register UInt8 SMC_PMCTRL_RUNM(n)  (uint8_t)(((n) & 0x03) << 5) // Run Mode Control
 let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted
 //register UInt8 SMC_PMCTRL_STOPM(n)  (uint8_t)((n) & 0x07)  // Stop Mode Control
 
-register SMC_VLLSCTRL : UInt8 at 0x4007E002 // VLLS Control Register
+register SMC_VLLSCTRL at 0x4007E002 : UInt8 // VLLS Control Register
 let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option
 //let UInt8 SMC_VLLSCTRL_VLLSM(n)  (uint8_t)((n) & 0x07)  // VLLS Mode Control
 
-register SMC_PMST : UInt8 at 0x4007E003 // Power Mode Status Register
+register SMC_PMST at 0x4007E003 : UInt8 // Power Mode Status Register
 let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN
 let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP
 let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR
@@ -332,75 +339,75 @@ let SMC_PMSTAT_LLS  : UInt8 = 0x20   // Current power mode is LLS
 let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS
 
 // Chapter 15: Power Management Controller
-register PMC_LVDSC1 : UInt8 at 0x4007D000 // Low Voltage Detect Status And Control 1 register
+register PMC_LVDSC1 at 0x4007D000 : UInt8 // Low Voltage Detect Status And Control 1 register
 let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag
 let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge
 let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable
 let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable
 //let UInt8 PMC_LVDSC1_LVDV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select
-register PMC_LVDSC2 : UInt8 at 0x4007D001 // Low Voltage Detect Status And Control 2 register
+register PMC_LVDSC2 at 0x4007D001 : UInt8 // Low Voltage Detect Status And Control 2 register
 let PMC_LVDSC2_LVWF : UInt8  = 0x80   // Low-Voltage Warning Flag
 let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge
 let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable
 //let UInt8 PMC_LVDSC2_LVWV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select
-register PMC_REGSC : UInt8 at 0x4007D002 // Regulator Status And Control register
+register PMC_REGSC at 0x4007D002 : UInt8 // Regulator Status And Control register
 let PMC_REGSC_BGEN  : UInt8 = 0x10   // Bandgap Enable In VLPx Operation
 let PMC_REGSC_ACKISO : UInt8 = 0x08   // Acknowledge Isolation
 let PMC_REGSC_REGONS : UInt8 = 0x04   // Regulator In Run Regulation Status
 let PMC_REGSC_BGBE  : UInt8 = 0x01   // Bandgap Buffer Enable
 
 // Chapter 16: Low-Leakage Wakeup Unit (LLWU)
-register LLWU_PE1  : UInt8 at 0x4007C000 // LLWU Pin Enable 1 register
-register LLWU_PE2  : UInt8 at 0x4007C001 // LLWU Pin Enable 2 register
-register LLWU_PE3  : UInt8 at 0x4007C002 // LLWU Pin Enable 3 register
-register LLWU_PE4  : UInt8 at 0x4007C003 // LLWU Pin Enable 4 register
-register LLWU_ME   : UInt8 at 0x4007C004 // LLWU Module Enable register
-register LLWU_F1   : UInt8 at 0x4007C005 // LLWU Flag 1 register
-register LLWU_F2   : UInt8 at 0x4007C006 // LLWU Flag 2 register
-register LLWU_F3   : UInt8 at 0x4007C007 // LLWU Flag 3 register
-register LLWU_FILT1: UInt8 at 0x4007C008 // LLWU Pin Filter 1 register
-register LLWU_FILT2: UInt8 at 0x4007C009 // LLWU Pin Filter 2 register
-register LLWU_RST  : UInt8 at 0x4007C00A // LLWU Reset Enable register
+register LLWU_PE1  at 0x4007C000 : UInt8 // LLWU Pin Enable 1 register
+register LLWU_PE2  at 0x4007C001 : UInt8 // LLWU Pin Enable 2 register
+register LLWU_PE3  at 0x4007C002 : UInt8 // LLWU Pin Enable 3 register
+register LLWU_PE4  at 0x4007C003 : UInt8 // LLWU Pin Enable 4 register
+register LLWU_ME   at 0x4007C004 : UInt8 // LLWU Module Enable register
+register LLWU_F1   at 0x4007C005 : UInt8 // LLWU Flag 1 register
+register LLWU_F2   at 0x4007C006 : UInt8 // LLWU Flag 2 register
+register LLWU_F3   at 0x4007C007 : UInt8 // LLWU Flag 3 register
+register LLWU_FILT1 at 0x4007C008 : UInt8 // LLWU Pin Filter 1 register
+register LLWU_FILT2 at 0x4007C009 : UInt8 // LLWU Pin Filter 2 register
+register LLWU_RST  at 0x4007C00A : UInt8 // LLWU Reset Enable register
 
 // Chapter 17: Miscellaneous Control Module (MCM)
-register MCM_PLASC : UInt16 at 0xE0080008 // Crossbar Switch (AXBS) Slave Configuration
+register MCM_PLASC at 0xE0080008 : UInt16 // Crossbar Switch (AXBS) Slave Configuration
 
-register MCM_PLAMC : UInt16 at 0xE008000A // Crossbar Switch (AXBS) Master Configuration
+register MCM_PLAMC at 0xE008000A : UInt16 // Crossbar Switch (AXBS) Master Configuration
 
-register MCM_PLACR : UInt32 at 0xE008000C // Crossbar Switch (AXBS) Control Register (MK20DX128)
+register MCM_PLACR at 0xE008000C : UInt32 // Crossbar Switch (AXBS) Control Register (MK20DX128)
 let MCM_PLACR_ARG   : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin
 
-register MCM_CR : UInt32 at 0xE008000C // RAM arbitration control register (MK20DX256)
+register MCM_CR at 0xE008000C : UInt32 // RAM arbitration control register (MK20DX256)
 let MCM_CR_SRAMLWP  : UInt32 =  0x4000_0000  // SRAM_L write protect
 //let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
 let MCM_CR_SRAMUWP  : UInt32 =  0x0400_0000  // SRAM_U write protect
 //let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA
 
 // Crossbar Switch (AXBS) - only programmable on MK20DX256
-register AXBS_PRS0   : UInt32 at 0x40004000 // Priority Registers Slave 0
-register AXBS_CRS0   : UInt32 at 0x40004010 // Control Register 0
-register AXBS_PRS1   : UInt32 at 0x40004100 // Priority Registers Slave 1
-register AXBS_CRS1   : UInt32 at 0x40004110 // Control Register 1
-register AXBS_PRS2   : UInt32 at 0x40004200 // Priority Registers Slave 2
-register AXBS_CRS2   : UInt32 at 0x40004210 // Control Register 2
-register AXBS_PRS3   : UInt32 at 0x40004300 // Priority Registers Slave 3
-register AXBS_CRS3   : UInt32 at 0x40004310 // Control Register 3
-register AXBS_PRS4   : UInt32 at 0x40004400 // Priority Registers Slave 4
-register AXBS_CRS4   : UInt32 at 0x40004410 // Control Register 4
-register AXBS_PRS5   : UInt32 at 0x40004500 // Priority Registers Slave 5
-register AXBS_CRS5   : UInt32 at 0x40004510 // Control Register 5
-register AXBS_PRS6   : UInt32 at 0x40004600 // Priority Registers Slave 6
-register AXBS_CRS6   : UInt32 at 0x40004610 // Control Register 6
-register AXBS_PRS7   : UInt32 at 0x40004700 // Priority Registers Slave 7
-register AXBS_CRS7   : UInt32 at 0x40004710 // Control Register 7
-register AXBS_MGPCR0 : UInt32 at 0x40004800 // Master 0 General Purpose Control Register
-register AXBS_MGPCR1 : UInt32 at 0x40004900 // Master 1 General Purpose Control Register
-register AXBS_MGPCR2 : UInt32 at 0x40004A00 // Master 2 General Purpose Control Register
-register AXBS_MGPCR3 : UInt32 at 0x40004B00 // Master 3 General Purpose Control Register
-register AXBS_MGPCR4 : UInt32 at 0x40004C00 // Master 4 General Purpose Control Register
-register AXBS_MGPCR5 : UInt32 at 0x40004D00 // Master 5 General Purpose Control Register
-register AXBS_MGPCR6 : UInt32 at 0x40004E00 // Master 6 General Purpose Control Register
-register AXBS_MGPCR7 : UInt32 at 0x40004F00 // Master 7 General Purpose Control Register
+register AXBS_PRS0   at 0x40004000 : UInt32 // Priority Registers Slave 0
+register AXBS_CRS0   at 0x40004010 : UInt32 // Control Register 0
+register AXBS_PRS1   at 0x40004100 : UInt32 // Priority Registers Slave 1
+register AXBS_CRS1   at 0x40004110 : UInt32 // Control Register 1
+register AXBS_PRS2   at 0x40004200 : UInt32 // Priority Registers Slave 2
+register AXBS_CRS2   at 0x40004210 : UInt32 // Control Register 2
+register AXBS_PRS3   at 0x40004300 : UInt32 // Priority Registers Slave 3
+register AXBS_CRS3   at 0x40004310 : UInt32 // Control Register 3
+register AXBS_PRS4   at 0x40004400 : UInt32 // Priority Registers Slave 4
+register AXBS_CRS4   at 0x40004410 : UInt32 // Control Register 4
+register AXBS_PRS5   at 0x40004500 : UInt32 // Priority Registers Slave 5
+register AXBS_CRS5   at 0x40004510 : UInt32 // Control Register 5
+register AXBS_PRS6   at 0x40004600 : UInt32 // Priority Registers Slave 6
+register AXBS_CRS6   at 0x40004610 : UInt32 // Control Register 6
+register AXBS_PRS7   at 0x40004700 : UInt32 // Priority Registers Slave 7
+register AXBS_CRS7   at 0x40004710 : UInt32 // Control Register 7
+register AXBS_MGPCR0 at 0x40004800 : UInt32 // Master 0 General Purpose Control Register
+register AXBS_MGPCR1 at 0x40004900 : UInt32 // Master 1 General Purpose Control Register
+register AXBS_MGPCR2 at 0x40004A00 : UInt32 // Master 2 General Purpose Control Register
+register AXBS_MGPCR3 at 0x40004B00 : UInt32 // Master 3 General Purpose Control Register
+register AXBS_MGPCR4 at 0x40004C00 : UInt32 // Master 4 General Purpose Control Register
+register AXBS_MGPCR5 at 0x40004D00 : UInt32 // Master 5 General Purpose Control Register
+register AXBS_MGPCR6 at 0x40004E00 : UInt32 // Master 6 General Purpose Control Register
+register AXBS_MGPCR7 at 0x40004F00 : UInt32 // Master 7 General Purpose Control Register
 let AXBS_CRS_READONLY  : UInt32=  0x80000000
 let AXBS_CRS_HALTLOWPRIORITY  : UInt32 = 0x40000000
 let AXBS_CRS_ARB_FIXED  : UInt32 = 0x00000000
@@ -413,22 +420,22 @@ let AXBS_CRS_PARK_NONE  : UInt32 =  0x00000020
 
 
 // Chapter 20: Direct Memory Access Multiplexer (DMAMUX)
-register DMAMUX0_CHCFG0  : UInt8 at 0x40021000 // Channel Configuration register
-register DMAMUX0_CHCFG1  : UInt8 at 0x40021001 // Channel Configuration register
-register DMAMUX0_CHCFG2  : UInt8 at 0x40021002 // Channel Configuration register
-register DMAMUX0_CHCFG3  : UInt8 at 0x40021003 // Channel Configuration register
-register DMAMUX0_CHCFG4  : UInt8 at 0x40021004 // Channel Configuration register
-register DMAMUX0_CHCFG5  : UInt8 at 0x40021005 // Channel Configuration register
-register DMAMUX0_CHCFG6  : UInt8 at 0x40021006 // Channel Configuration register
-register DMAMUX0_CHCFG7  : UInt8 at 0x40021007 // Channel Configuration register
-register DMAMUX0_CHCFG8  : UInt8 at 0x40021008 // Channel Configuration register
-register DMAMUX0_CHCFG9  : UInt8 at 0x40021009 // Channel Configuration register
-register DMAMUX0_CHCFG10 : UInt8 at 0x4002100A // Channel Configuration register
-register DMAMUX0_CHCFG11 : UInt8 at 0x4002100B // Channel Configuration register
-register DMAMUX0_CHCFG12 : UInt8 at 0x4002100C // Channel Configuration register
-register DMAMUX0_CHCFG13 : UInt8 at 0x4002100D // Channel Configuration register
-register DMAMUX0_CHCFG14 : UInt8 at 0x4002100E // Channel Configuration register
-register DMAMUX0_CHCFG15 : UInt8 at 0x4002100F // Channel Configuration register
+register DMAMUX0_CHCFG0  at 0x40021000 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG1  at 0x40021001 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG2  at 0x40021002 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG3  at 0x40021003 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG4  at 0x40021004 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG5  at 0x40021005 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG6  at 0x40021006 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG7  at 0x40021007 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG8  at 0x40021008 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG9  at 0x40021009 : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG10 at 0x4002100A : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG11 at 0x4002100B : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG12 at 0x4002100C : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG13 at 0x4002100D : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG14 at 0x4002100E : UInt8 // Channel Configuration register
+register DMAMUX0_CHCFG15 at 0x4002100F : UInt8 // Channel Configuration register
 let DMAMUX_DISABLE : UInt8 =  0
 let DMAMUX_TRIG  : UInt8 = 64
 let DMAMUX_ENABLE : UInt8 =  128
@@ -481,7 +488,7 @@ let DMAMUX_SOURCE_ALWAYS8 : UInt8 = 62
 let DMAMUX_SOURCE_ALWAYS9 : UInt8 = 63
 
 // Chapter 21: Direct Memory Access Controller (eDMA)
-register DMA_CR : UInt32 at 0x40008000 // Control Register
+register DMA_CR at 0x40008000 : UInt32 // Control Register
 let DMA_CR_CX   : UInt32  = 0x2_0000 // Cancel Transfer
 let DMA_CR_ECX   : UInt32 = 0x1_0000 // Error Cancel Transfer
 let DMA_CR_EMLM   : UInt32= 0x80 // Enable Minor Loop Mapping
@@ -490,13 +497,13 @@ let DMA_CR_HALT  : UInt32 = 0x20 // Halt DMA Operations
 let DMA_CR_HOE   : UInt32 = 0x10 // Halt On Error
 let DMA_CR_ERCA  : UInt32 = 0x04 // Enable Round Robin Channel Arbitration
 let DMA_CR_EDBG   : UInt32= 0x02 // Enable Debug
-register DMA_ES  : UInt32 at 0x40008004 // Error Status Register
-register DMA_ERQ : UInt32 at 0x4000800C // Enable Request Register
+register DMA_ES  at 0x40008004 : UInt32 // Error Status Register
+register DMA_ERQ at 0x4000800C : UInt32 // Enable Request Register
 let DMA_ERQ_ERQ0   : UInt32 = 1 // Enable DMA Request 0
 let DMA_ERQ_ERQ1   : UInt32 = 2 // Enable DMA Request 1
 let DMA_ERQ_ERQ2   : UInt32 = 4 // Enable DMA Request 2
 let DMA_ERQ_ERQ3   : UInt32 = 8 // Enable DMA Request 3
-register DMA_EEI : UInt32 at 0x40008014 // Enable Error Interrupt Register
+register DMA_EEI at 0x40008014 : UInt8 // Enable Error Interrupt Register
 let DMA_EEI_EEI0   : UInt32 = 1 // Enable Error Interrupt 0
 let DMA_EEI_EEI1   : UInt32 = 2 // Enable Error Interrupt 1
 let DMA_EEI_EEI2   : UInt32 = 4 // Enable Error Interrupt 2
@@ -850,7 +857,7 @@ let DMA_EEI_EEI3   : UInt32 = 8 // Enable Error Interrupt 3
 //register EWM_CMPH  *(volatile uint8_t  *)0x40061003 // Compare High Register
 //
 //// Chapter 23: Watchdog Timer (WDOG)
-register WDOG_STCTRLH : UInt16 at 0x40052000 // Watchdog Status and Control Register High
+register WDOG_STCTRLH at 0x40052000 : UInt16 // Watchdog Status and Control Register High
 let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.
 //register WDOG_STCTRLH_BYTESEL(n)  (uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.
 let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800
@@ -863,22 +870,22 @@ let WDOG_STCTRLH_WINEN : UInt16 = 0x0008
 let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004
 let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002
 let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001
-register WDOG_STCTRLL  : UInt16 at 0x40052002 // Watchdog Status and Control Register Low
-register WDOG_TOVALH   : UInt16 at 0x40052004 // Watchdog Time-out Value Register High
-register WDOG_TOVALL   : UInt16 at 0x40052006 // Watchdog Time-out Value Register Low
-register WDOG_WINH     : UInt16 at 0x40052008 // Watchdog Window Register High
-register WDOG_WINL     : UInt16 at 0x4005200A // Watchdog Window Register Low
-register WDOG_REFRESH  : UInt16 at 0x4005200C // Watchdog Refresh register
-register WDOG_UNLOCK   : UInt16 at 0x4005200E // Watchdog Unlock register
+register WDOG_STCTRLL  at 0x40052002 : UInt16 // Watchdog Status and Control Register Low
+register WDOG_TOVALH   at 0x40052004 : UInt16 // Watchdog Time-out Value Register High
+register WDOG_TOVALL   at 0x40052006 : UInt16 // Watchdog Time-out Value Register Low
+register WDOG_WINH     at 0x40052008 : UInt16 // Watchdog Window Register High
+register WDOG_WINL     at 0x4005200A : UInt16 // Watchdog Window Register Low
+register WDOG_REFRESH  at 0x4005200C : UInt16 // Watchdog Refresh register
+register WDOG_UNLOCK   at 0x4005200E : UInt16 // Watchdog Unlock register
 let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520
 let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928
-register WDOG_TMROUTH  : UInt16 at 0x40052010 // Watchdog Timer Output Register High
-register WDOG_TMROUTL  : UInt16 at 0x40052012 // Watchdog Timer Output Register Low
-register WDOG_RSTCNT   : UInt16 at 0x40052014 // Watchdog Reset Count register
-register WDOG_PRESC    : UInt16 at 0x40052016 // Watchdog Prescaler register
+register WDOG_TMROUTH  at 0x40052010 : UInt16 // Watchdog Timer Output Register High
+register WDOG_TMROUTL  at 0x40052012 : UInt16 // Watchdog Timer Output Register Low
+register WDOG_RSTCNT   at 0x40052014 : UInt16 // Watchdog Reset Count register
+register WDOG_PRESC    at 0x40052016 : UInt16 // Watchdog Prescaler register
 //
 //// Chapter 24: Multipurpose Clock Generator (MCG)
-register MCG_C1 : UInt8 at 0x40064000 // MCG Control 1 Register
+register MCG_C1 at 0x40064000 : UInt8 // MCG Control 1 Register
 let MCG_C1_IREFSTEN : UInt8 = 0x01   // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode.
 let MCG_C1_IRCLKEN : UInt8 = 0x02   // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK.
 let MCG_C1_IREFS : UInt8 = 0x04   // Internal Reference Select, Selects the reference clock source for the FLL.
@@ -896,7 +903,7 @@ let MCG_C1_CLKS_0 : UInt8 = 0 << 6
 let MCG_C1_CLKS_1 : UInt8 = 1 << 6
 let MCG_C1_CLKS_2 : UInt8 = 2 << 6
 let MCG_C1_CLKS_3 : UInt8 = 3 << 6
-register MCG_C2 : UInt8 at 0x40064001 // MCG Control 2 Register
+register MCG_C2 at 0x40064001 : UInt8 // MCG Control 2 Register
 let MCG_C2_IRCS : UInt8  = 0x01   // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.
 let MCG_C2_LP : UInt8 = 0x02   // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.
 let MCG_C2_EREFS : UInt8 = 0x04   // External Reference Select, Selects the source for the external reference clock. 
@@ -907,25 +914,25 @@ let MCG_C2_RANGE0_1 : UInt8 = 1 << 4
 let MCG_C2_RANGE0_2 : UInt8 = 2 << 4
 let MCG_C2_RANGE0_3 : UInt8 = 3 << 4
 let MCG_C2_LOCRE0 : UInt8 = 0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 
-register MCG_C3 : UInt8 at 0x40064002 // MCG Control 3 Register
+register MCG_C3 at 0x40064002 : UInt8 // MCG Control 3 Register
 //register MCG_C3_SCTRIM(n)  (uint8_t)(n)   // Slow Internal Reference Clock Trim Setting
-register MCG_C4 : UInt8 at 0x40064003 // MCG Control 4 Register
+register MCG_C4 at 0x40064003 : UInt8 // MCG Control 4 Register
 let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim
 //register MCG_C4_FCTRIM(n)  (uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting
 //register MCG_C4_DRST_DRS(n)  (uint8_t)(((n) & 0x03) << 5) // DCO Range Select
 let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed
-register MCG_C5 : UInt8 at 0x40064004 // MCG Control 5 Register
+register MCG_C5 at 0x40064004 : UInt8 // MCG Control 5 Register
 //register MCG_C5_PRDIV0(n)  (uint8_t)((n) & 0x1F)  // PLL External Reference Divider
 let MCG_C5_PRDIV0_3 : UInt8 = 3
 let MCG_C5_PLLSTEN0 : UInt8 = 0x20   // PLL Stop Enable
 let MCG_C5_PLLCLKEN0 : UInt8 = 0x40   // PLL Clock Enable
-register MCG_C6 : UInt8 at 0x40064005 // MCG Control 6 Register
+register MCG_C6 at 0x40064005 : UInt8 // MCG Control 6 Register
 //register MCG_C6_VDIV0(n)   (uint8_t)((n) & 0x1F)  // VCO 0 Divider
 let MCG_C6_VDIV0_0 : UInt8 = 0   // Clock Monitor Enable
 let MCG_C6_CME0 : UInt8 = 0x20   // Clock Monitor Enable
 let MCG_C6_PLLS : UInt8 = 0x40   // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. 
 //register MCG_C6_LOLIE0   (uint8_t)0x80   // Loss of Lock Interrrupt Enable
-register MCG_S  : UInt8 at 0x40064006 // MCG Status Register
+register MCG_S  at 0x40064006 : UInt8 // MCG Status Register
 let MCG_S_IRCST : UInt8 = 0x01   // Internal Reference Clock Status
 let MCG_S_OSCINIT0 : UInt8 = 0x02   // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator
 //register MCG_S_CLKST(n)   (uint8_t)(((n) & 0x03) << 2) // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL
@@ -941,7 +948,7 @@ let MCG_S_PLLST : UInt8 = 0x20   // PLL Select Status
 let MCG_S_LOCK0 : UInt8  = 0x40   // Lock Status, 0=PLL Unlocked, 1=PLL Locked
 let MCG_S_LOLS0 : UInt8  = 0x80   // Loss of Lock Status
 
-register MCG_SC : UInt8 at 0x40064008 // MCG Status and Control Register
+register MCG_SC at 0x40064008 : UInt8 // MCG Status and Control Register
 let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status
 //register MCG_SC_FCRDIV(n)  (uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider
 let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable
@@ -949,13 +956,13 @@ let MCG_SC_ATMF : UInt8 = 0x20   // Automatic Trim Machine Fail Flag
 let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select
 let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable
 
-register MCG_ATCVH : UInt8 at 0x4006400A // MCG Auto Trim Compare Value High Register
-register MCG_ATCVL : UInt8 at 0x4006400B // MCG Auto Trim Compare Value Low Register
-register MCG_C7    : UInt8 at 0x4006400C // MCG Control 7 Register
-register MCG_C8    : UInt8 at 0x4006400D // MCG Control 8 Register
+register MCG_ATCVH at 0x4006400A : UInt8 // MCG Auto Trim Compare Value High Register
+register MCG_ATCVL at 0x4006400B : UInt8 // MCG Auto Trim Compare Value Low Register
+register MCG_C7    at 0x4006400C : UInt8 // MCG Control 7 Register
+register MCG_C8    at 0x4006400D : UInt8 // MCG Control 8 Register
 //
 //// Chapter 25: Oscillator (OSC)
-register OSC0_CR : UInt8 at 0x40065000 // OSC Control Register
+register OSC0_CR at 0x40065000 : UInt8 // OSC Control Register
 let OSC_SC16P  : UInt8 = 0x01   // Oscillator 16 pF Capacitor Load Configure
 let OSC_SC8P   : UInt8 = 0x02   // Oscillator 8 pF Capacitor Load Configure
 let OSC_SC4P   : UInt8 = 0x04   // Oscillator 4 pF Capacitor Load Configure
@@ -964,24 +971,24 @@ let OSC_EREFSTEN : UInt8 = 0x20   // External Reference Stop Enable, Controls wh
 let OSC_ERCLKEN : UInt8 = 0x80   // External Reference Enable, Enables external reference clock (OSCERCLK).
 //
 //// Chapter 27: Flash Memory Controller (FMC)
-register FMC_PFAPR     : UInt32 at 0x4001F000 // Flash Access Protection
-register FMC_PFB0CR    : UInt32 at 0x4001F004 // Flash Control
-register FMC_TAGVDW0S0 : UInt32 at 0x4001F100 // Cache Tag Storage
-register FMC_TAGVDW0S1 : UInt32 at 0x4001F104 // Cache Tag Storage
-register FMC_TAGVDW1S0 : UInt32 at 0x4001F108 // Cache Tag Storage
-register FMC_TAGVDW1S1 : UInt32 at 0x4001F10C // Cache Tag Storage
-register FMC_TAGVDW2S0 : UInt32 at 0x4001F110 // Cache Tag Storage
-register FMC_TAGVDW2S1 : UInt32 at 0x4001F114 // Cache Tag Storage
-register FMC_TAGVDW3S0 : UInt32 at 0x4001F118 // Cache Tag Storage
-register FMC_TAGVDW3S1 : UInt32 at 0x4001F11C // Cache Tag Storage
-register FMC_DATAW0S0  : UInt32 at 0x4001F200 // Cache Data Storage
-register FMC_DATAW0S1  : UInt32 at 0x4001F204 // Cache Data Storage
-register FMC_DATAW1S0  : UInt32 at 0x4001F208 // Cache Data Storage
-register FMC_DATAW1S1  : UInt32 at 0x4001F20C // Cache Data Storage
-register FMC_DATAW2S0  : UInt32 at 0x4001F210 // Cache Data Storage
-register FMC_DATAW2S1  : UInt32 at 0x4001F214 // Cache Data Storage
-register FMC_DATAW3S0  : UInt32 at 0x4001F218 // Cache Data Storage
-register FMC_DATAW3S1  : UInt32 at 0x4001F21C // Cache Data Storage
+register FMC_PFAPR     at 0x4001F000 : UInt32 // Flash Access Protection
+register FMC_PFB0CR    at 0x4001F004 : UInt32 // Flash Control
+register FMC_TAGVDW0S0 at 0x4001F100 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW0S1 at 0x4001F104 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW1S0 at 0x4001F108 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW1S1 at 0x4001F10C : UInt32 // Cache Tag Storage
+register FMC_TAGVDW2S0 at 0x4001F110 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW2S1 at 0x4001F114 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW3S0 at 0x4001F118 : UInt32 // Cache Tag Storage
+register FMC_TAGVDW3S1 at 0x4001F11C : UInt32 // Cache Tag Storage
+register FMC_DATAW0S0  at 0x4001F200 : UInt32 // Cache Data Storage
+register FMC_DATAW0S1  at 0x4001F204 : UInt32 // Cache Data Storage
+register FMC_DATAW1S0  at 0x4001F208 : UInt32 // Cache Data Storage
+register FMC_DATAW1S1  at 0x4001F20C : UInt32 // Cache Data Storage
+register FMC_DATAW2S0  at 0x4001F210 : UInt32 // Cache Data Storage
+register FMC_DATAW2S1  at 0x4001F214 : UInt32 // Cache Data Storage
+register FMC_DATAW3S0  at 0x4001F218 : UInt32 // Cache Data Storage
+register FMC_DATAW3S1  at 0x4001F21C : UInt32 // Cache Data Storage
 //
 //// Chapter 28: Flash Memory Module (FTFL)
 //register FTFL_FST *(volatile uint8_t  *)0x40020000      // Flash Status Register
@@ -1018,35 +1025,35 @@ register FMC_DATAW3S1  : UInt32 at 0x4001F21C // Cache Data Storage
 //register FTFL_FPROT0  *(volatile uint8_t  *)0x40020013      // Program Flash Protection Registers
 //register FTFL_FEPROT  *(volatile uint8_t  *)0x40020016      // EEPROM Protection Register
 //register FTFL_FDPROT  *(volatile uint8_t  *)0x40020017      // Data Flash Protection Register
-//
-//// Chapter 30: Cyclic Redundancy Check (CRC)
-register CRC_CRC   : UInt32 at 0x40032000 // CRC Data register
-register CRC_GPOLY : UInt32 at 0x40032004 // CRC Polynomial register
-register CRC_CTRL  : UInt32 at 0x40032008 // CRC Control register
-//
-//// Chapter 31: Analog-to-Digital Converter (ADC)
-register ADC0_SC1A   : UInt32 at 0x4003B000 // ADC status and control registers 1
-register ADC0_SC1B   : UInt32 at 0x4003B004 // ADC status and control registers 1
+
+// Chapter 30: Cyclic Redundancy Check (CRC)
+register CRC_CRC   at 0x40032000 : UInt32 // CRC Data register
+register CRC_GPOLY at 0x40032004 : UInt32 // CRC Polynomial register
+register CRC_CTRL  at 0x40032008 : UInt32 // CRC Control register
+
+// Chapter 31: Analog-to-Digital Converter (ADC)
+register ADC0_SC1A   at 0x4003B000 : UInt32 // ADC status and control registers 1
+register ADC0_SC1B   at 0x4003B004 : UInt32 // ADC status and control registers 1
 let ADC_SC1_COCO  : UInt32 = 0x80   // Conversion complete flag
 let ADC_SC1_AIEN  : UInt32 = 0x40   // Interrupt enable
 let ADC_SC1_DIFF  : UInt32 = 0x20   // Differential mode enable
 //register ADC_SC1_ADCH(n)    ((n) & 0x1F)  // Input channel select
-register ADC0_CFG1   : UInt32 at 0x4003B008 // ADC configuration register 1
+register ADC0_CFG1   at 0x4003B008 : UInt32 // ADC configuration register 1
 let ADC_CFG1_ADLPC  : UInt32 = 0x80   // Low-power configuration
 //register ADC_CFG1_ADIV(n)   (((n) & 3) << 5) // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8
 let ADC_CFG1_ADLSMP  : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long
 //register ADC_CFG1_MODE(n)   (((n) & 3) << 2) // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit
 //register ADC_CFG1_ADICLK(n)   (((n) & 3) << 0) // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async
-register ADC0_CFG2  : UInt32 at 0x4003B00C // Configuration register 2
+register ADC0_CFG2  at 0x4003B00C : UInt32 // Configuration register 2
 let ADC_CFG2_MUXSEL  : UInt32 = 0x10   // 0=a channels, 1=b channels
 let ADC_CFG2_ADACKEN  : UInt32 = 0x08   // async clock enable
 let ADC_CFG2_ADHSC   : UInt32 = 0x04   // High speed configuration
 //register ADC_CFG2_ADLSTS(n)   (((n) & 3) << 0) // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles
-register ADC0_RA    : UInt32 at 0x4003B010 // ADC data result register
-register ADC0_RB    : UInt32 at 0x4003B014 // ADC data result register
-register ADC0_CV1   : UInt32 at 0x4003B018 // Compare value registers
-register ADC0_CV2   : UInt32 at 0x4003B01C // Compare value registers
-register ADC0_SC2   : UInt32 at 0x4003B020 // Status and control register 2
+register ADC0_RA    at 0x4003B010 : UInt32 // ADC data result register
+register ADC0_RB    at 0x4003B014 : UInt32 // ADC data result register
+register ADC0_CV1   at 0x4003B018 : UInt32 // Compare value registers
+register ADC0_CV2   at 0x4003B01C : UInt32 // Compare value registers
+register ADC0_SC2   at 0x4003B020 : UInt32 // Status and control register 2
 let ADC_SC2_ADACT  : UInt32 = 0x80   // Conversion active
 let ADC_SC2_ADTRG  : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware
 let ADC_SC2_ACFE   : UInt32 = 0x20   // Compare function enable
@@ -1054,82 +1061,82 @@ let ADC_SC2_ACFGT  : UInt32 = 0x10   // Compare function greater than enable
 let ADC_SC2_ACREN  : UInt32 = 0x08   // Compare function range enable
 let ADC_SC2_DMAEN  : UInt32= 0x04   // DMA enable
 //register ADC_SC2_REFSEL(n)   (((n) & 3) << 0) // Voltage reference, 0=vcc/external, 1=1.2 volts
-register ADC0_SC3   : UInt32 at 0x4003B024 // Status and control register 3
+register ADC0_SC3   at 0x4003B024 : UInt32 // Status and control register 3
 let ADC_SC3_CAL  : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress
 let ADC_SC3_CALF  : UInt32= 0x40   // Calibration failed flag
 let ADC_SC3_ADCO  : UInt32= 0x08   // Continuous conversion enable
 let ADC_SC3_AVGE  : UInt32= 0x04   // Hardware average enable
 //register ADC_SC3_AVGS(n)    (((n) & 3) << 0) // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples
-register ADC0_OFS   : UInt32 at 0x4003B028 // ADC offset correction register
-register ADC0_PG    : UInt32 at 0x4003B02C // ADC plus-side gain register
-register ADC0_MG    : UInt32 at 0x4003B030 // ADC minus-side gain register
-register ADC0_CLPD  : UInt32 at 0x4003B034 // ADC plus-side general calibration value register
-register ADC0_CLPS  : UInt32 at 0x4003B038 // ADC plus-side general calibration value register
-register ADC0_CLP4  : UInt32 at 0x4003B03C // ADC plus-side general calibration value register
-register ADC0_CLP3  : UInt32 at 0x4003B040 // ADC plus-side general calibration value register
-register ADC0_CLP2  : UInt32 at 0x4003B044 // ADC plus-side general calibration value register
-register ADC0_CLP1  : UInt32 at 0x4003B048 // ADC plus-side general calibration value register
-register ADC0_CLP0  : UInt32 at 0x4003B04C // ADC plus-side general calibration value register
-register ADC0_PGA   : UInt32 at 0x4003B050 // ADC Programmable Gain Amplifier
+register ADC0_OFS   at 0x4003B028 : UInt32 // ADC offset correction register
+register ADC0_PG    at 0x4003B02C : UInt32 // ADC plus-side gain register
+register ADC0_MG    at 0x4003B030 : UInt32 // ADC minus-side gain register
+register ADC0_CLPD  at 0x4003B034 : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLPS  at 0x4003B038 : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLP4  at 0x4003B03C : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLP3  at 0x4003B040 : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLP2  at 0x4003B044 : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLP1  at 0x4003B048 : UInt32 // ADC plus-side general calibration value register
+register ADC0_CLP0  at 0x4003B04C : UInt32 // ADC plus-side general calibration value register
+register ADC0_PGA   at 0x4003B050 : UInt32 // ADC Programmable Gain Amplifier
 let ADC0_PGA_PGAEN  : UInt32 = 0x00800000  // Enable
 let ADC0_PGA_PGALPB  : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal
 //register ADC0_PGA_PGAG(n)   (((n) & 15) << 16) // Gain, 0=1X, 1=2X, 2=4X, 3=8X, 4=16X, 5=32X, 6=64X
-register ADC0_CLMD   : UInt32 at 0x4003B054 // ADC minus-side general calibration value register
-register ADC0_CLMS   : UInt32 at 0x4003B058 // ADC minus-side general calibration value register
-register ADC0_CLM4   : UInt32 at 0x4003B05C // ADC minus-side general calibration value register
-register ADC0_CLM3   : UInt32 at 0x4003B060 // ADC minus-side general calibration value register
-register ADC0_CLM2   : UInt32 at 0x4003B064 // ADC minus-side general calibration value register
-register ADC0_CLM1   : UInt32 at 0x4003B068 // ADC minus-side general calibration value register
-register ADC0_CLM0   : UInt32 at 0x4003B06C // ADC minus-side general calibration value register
-//
-register ADC1_SC1A   : UInt32 at 0x400BB000 // ADC status and control registers 1
-register ADC1_SC1B   : UInt32 at 0x400BB004 // ADC status and control registers 1
-register ADC1_CFG1   : UInt32 at 0x400BB008 // ADC configuration register 1
-register ADC1_CFG2   : UInt32 at 0x400BB00C // Configuration register 2
-register ADC1_RA     : UInt32 at 0x400BB010 // ADC data result register
-register ADC1_RB     : UInt32 at 0x400BB014 // ADC data result register
-register ADC1_CV1    : UInt32 at 0x400BB018 // Compare value registers
-register ADC1_CV2    : UInt32 at 0x400BB01C // Compare value registers
-register ADC1_SC2    : UInt32 at 0x400BB020 // Status and control register 2
-register ADC1_SC3    : UInt32 at 0x400BB024 // Status and control register 3
-register ADC1_OFS    : UInt32 at 0x400BB028 // ADC offset correction register
-register ADC1_PG     : UInt32 at 0x400BB02C // ADC plus-side gain register
-register ADC1_MG     : UInt32 at 0x400BB030 // ADC minus-side gain register
-register ADC1_CLPD   : UInt32 at 0x400BB034 // ADC plus-side general calibration value register
-register ADC1_CLPS   : UInt32 at 0x400BB038 // ADC plus-side general calibration value register
-register ADC1_CLP4   : UInt32 at 0x400BB03C // ADC plus-side general calibration value register
-register ADC1_CLP3   : UInt32 at 0x400BB040 // ADC plus-side general calibration value register
-register ADC1_CLP2   : UInt32 at 0x400BB044 // ADC plus-side general calibration value register
-register ADC1_CLP1   : UInt32 at 0x400BB048 // ADC plus-side general calibration value register
-register ADC1_CLP0   : UInt32 at 0x400BB04C // ADC plus-side general calibration value register
-register ADC1_PGA    : UInt32 at 0x400BB050 // ADC Programmable Gain Amplifier
-register ADC1_CLMD   : UInt32 at 0x400BB054 // ADC minus-side general calibration value register
-register ADC1_CLMS   : UInt32 at 0x400BB058 // ADC minus-side general calibration value register
-register ADC1_CLM4   : UInt32 at 0x400BB05C // ADC minus-side general calibration value register
-register ADC1_CLM3   : UInt32 at 0x400BB060 // ADC minus-side general calibration value register
-register ADC1_CLM2   : UInt32 at 0x400BB064 // ADC minus-side general calibration value register
-register ADC1_CLM1   : UInt32 at 0x400BB068 // ADC minus-side general calibration value register
-register ADC1_CLM0   : UInt32 at 0x400BB06C // ADC minus-side general calibration value register
+register ADC0_CLMD   at 0x4003B054 : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLMS   at 0x4003B058 : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLM4   at 0x4003B05C : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLM3   at 0x4003B060 : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLM2   at 0x4003B064 : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLM1   at 0x4003B068 : UInt32 // ADC minus-side general calibration value register
+register ADC0_CLM0   at 0x4003B06C : UInt32 // ADC minus-side general calibration value register
 
-register DAC0_DAT0L : UInt8 at 0x400CC000 // DAC Data Low Register 
-register DAC0_DATH  : UInt8 at 0x400CC001 // DAC Data High Register 
-register DAC0_DAT1L : UInt8 at 0x400CC002 // DAC Data Low Register 
-register DAC0_DAT2L : UInt8 at 0x400CC004 // DAC Data Low Register 
-register DAC0_DAT3L : UInt8 at 0x400CC006 // DAC Data Low Register 
-register DAC0_DAT4L : UInt8 at 0x400CC008 // DAC Data Low Register 
-register DAC0_DAT5L : UInt8 at 0x400CC00A // DAC Data Low Register 
-register DAC0_DAT6L : UInt8 at 0x400CC00C // DAC Data Low Register 
-register DAC0_DAT7L : UInt8 at 0x400CC00E // DAC Data Low Register 
-register DAC0_DAT8L : UInt8 at 0x400CC010 // DAC Data Low Register 
-register DAC0_DAT9L : UInt8 at 0x400CC012 // DAC Data Low Register 
-register DAC0_DAT10L : UInt8 at 0x400CC014 // DAC Data Low Register 
-register DAC0_DAT11L : UInt8 at 0x400CC016 // DAC Data Low Register 
-register DAC0_DAT12L : UInt8 at 0x400CC018 // DAC Data Low Register 
-register DAC0_DAT13L : UInt8 at 0x400CC01A // DAC Data Low Register 
-register DAC0_DAT14L : UInt8 at 0x400CC01C // DAC Data Low Register 
-register DAC0_DAT15L : UInt8 at 0x400CC01E // DAC Data Low Register 
-register DAC0_SR     : UInt8 at 0x400CC020 // DAC Status Register 
-register DAC0_C0     : UInt8 at 0x400CC021 // DAC Control Register 
+register ADC1_SC1A   at 0x400BB000 : UInt32 // ADC status and control registers 1
+register ADC1_SC1B   at 0x400BB004 : UInt32 // ADC status and control registers 1
+register ADC1_CFG1   at 0x400BB008 : UInt32 // ADC configuration register 1
+register ADC1_CFG2   at 0x400BB00C : UInt32 // Configuration register 2
+register ADC1_RA     at 0x400BB010 : UInt32 // ADC data result register
+register ADC1_RB     at 0x400BB014 : UInt32 // ADC data result register
+register ADC1_CV1    at 0x400BB018 : UInt32 // Compare value registers
+register ADC1_CV2    at 0x400BB01C : UInt32 // Compare value registers
+register ADC1_SC2    at 0x400BB020 : UInt32 // Status and control register 2
+register ADC1_SC3    at 0x400BB024 : UInt32 // Status and control register 3
+register ADC1_OFS    at 0x400BB028 : UInt32 // ADC offset correction register
+register ADC1_PG     at 0x400BB02C : UInt32 // ADC plus-side gain register
+register ADC1_MG     at 0x400BB030 : UInt32 // ADC minus-side gain register
+register ADC1_CLPD   at 0x400BB034 : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLPS   at 0x400BB038 : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLP4   at 0x400BB03C : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLP3   at 0x400BB040 : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLP2   at 0x400BB044 : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLP1   at 0x400BB048 : UInt32 // ADC plus-side general calibration value register
+register ADC1_CLP0   at 0x400BB04C : UInt32 // ADC plus-side general calibration value register
+register ADC1_PGA    at 0x400BB050 : UInt32 // ADC Programmable Gain Amplifier
+register ADC1_CLMD   at 0x400BB054 : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLMS   at 0x400BB058 : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLM4   at 0x400BB05C : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLM3   at 0x400BB060 : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLM2   at 0x400BB064 : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLM1   at 0x400BB068 : UInt32 // ADC minus-side general calibration value register
+register ADC1_CLM0   at 0x400BB06C : UInt32 // ADC minus-side general calibration value register
+
+register DAC0_DAT0L at 0x400CC000 : UInt8 // DAC Data Low Register 
+register DAC0_DATH  at 0x400CC001 : UInt8 // DAC Data High Register 
+register DAC0_DAT1L at 0x400CC002 : UInt8 // DAC Data Low Register 
+register DAC0_DAT2L at 0x400CC004 : UInt8 // DAC Data Low Register 
+register DAC0_DAT3L at 0x400CC006 : UInt8 // DAC Data Low Register 
+register DAC0_DAT4L at 0x400CC008 : UInt8 // DAC Data Low Register 
+register DAC0_DAT5L at 0x400CC00A : UInt8 // DAC Data Low Register 
+register DAC0_DAT6L at 0x400CC00C : UInt8 // DAC Data Low Register 
+register DAC0_DAT7L at 0x400CC00E : UInt8 // DAC Data Low Register 
+register DAC0_DAT8L at 0x400CC010 : UInt8 // DAC Data Low Register 
+register DAC0_DAT9L at 0x400CC012 : UInt8 // DAC Data Low Register 
+register DAC0_DAT10L at 0x400CC014 : UInt8 // DAC Data Low Register 
+register DAC0_DAT11L at 0x400CC016 : UInt8 // DAC Data Low Register 
+register DAC0_DAT12L at 0x400CC018 : UInt8 // DAC Data Low Register 
+register DAC0_DAT13L at 0x400CC01A : UInt8 // DAC Data Low Register 
+register DAC0_DAT14L at 0x400CC01C : UInt8 // DAC Data Low Register 
+register DAC0_DAT15L at 0x400CC01E : UInt8 // DAC Data Low Register 
+register DAC0_SR     at 0x400CC020 : UInt8 // DAC Status Register 
+register DAC0_C0     at 0x400CC021 : UInt8 // DAC Control Register 
 let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable
 let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select
 let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select
@@ -1139,13 +1146,13 @@ let DAC_C0_DACBWIEN  : UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable
 let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable
 let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable
 
-register DAC0_C1  : UInt8 at 0x400CC022 // DAC Control Register 1 
+register DAC0_C1  at 0x400CC022 : UInt8 // DAC Control Register 1 
 let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select
 //register DAC_C1_DACBFWM(n)  (((n) & 3) << 3)  // DAC Buffer Watermark Select
 //register DAC_C1_DACBFMD(n)  (((n) & 3) << 0)  // DAC Buffer Work Mode Select
 let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable
 //
-register DAC0_C2  : UInt8 at 0x400CC023 // DAC Control Register 2 
+register DAC0_C2  at 0x400CC023 : UInt8 // DAC Control Register 2 
 //register DAC_C2_DACBFRP(n)  (((n) & 15) << 4)  // DAC Buffer Read Pointer
 //register DAC_C2_DACBFUP(n)  (((n) & 15) << 0)  // DAC Buffer Upper Limit
 //
@@ -1154,24 +1161,24 @@ register DAC0_C2  : UInt8 at 0x400CC023 // DAC Control Register 2
 ////register MCG_C2_LOCRE0   (uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 
 //
 //// Chapter 32: Comparator (CMP)
-register CMP0_CR0   : UInt8 at 0x40073000 // CMP Control Register 0
-register CMP0_CR1   : UInt8 at 0x40073001 // CMP Control Register 1
-register CMP0_FPR   : UInt8 at 0x40073002 // CMP Filter Period Register
-register CMP0_SCR   : UInt8 at 0x40073003 // CMP Status and Control Register
-register CMP0_DACCR : UInt8 at 0x40073004 // DAC Control Register
-register CMP0_MUXCR : UInt8 at 0x40073005 // MUX Control Register
-register CMP1_CR0   : UInt8 at 0x40073008 // CMP Control Register 0
-register CMP1_CR1   : UInt8 at 0x40073009 // CMP Control Register 1
-register CMP1_FPR   : UInt8 at 0x4007300A // CMP Filter Period Register
-register CMP1_SCR   : UInt8 at 0x4007300B // CMP Status and Control Register
-register CMP1_DACCR : UInt8 at 0x4007300C // DAC Control Register
-register CMP1_MUXCR : UInt8 at 0x4007300D // MUX Control Register
+register CMP0_CR0   at 0x40073000 : UInt8 // CMP Control Register 0
+register CMP0_CR1   at 0x40073001 : UInt8 // CMP Control Register 1
+register CMP0_FPR   at 0x40073002 : UInt8 // CMP Filter Period Register
+register CMP0_SCR   at 0x40073003 : UInt8 // CMP Status and Control Register
+register CMP0_DACCR at 0x40073004 : UInt8 // DAC Control Register
+register CMP0_MUXCR at 0x40073005 : UInt8 // MUX Control Register
+register CMP1_CR0   at 0x40073008 : UInt8 // CMP Control Register 0
+register CMP1_CR1   at 0x40073009 : UInt8 // CMP Control Register 1
+register CMP1_FPR   at 0x4007300A : UInt8 // CMP Filter Period Register
+register CMP1_SCR   at 0x4007300B : UInt8 // CMP Status and Control Register
+register CMP1_DACCR at 0x4007300C : UInt8 // DAC Control Register
+register CMP1_MUXCR at 0x4007300D : UInt8 // MUX Control Register
 //
 //// Chapter 33: Voltage Reference (VREFV1)
-register VREF_TRM  : UInt8 at 0x40074000 // VREF Trim Register
-register VREF_SC   : UInt8 at 0x40074001 // VREF Status and Control Register
-//
-//// Chapter 34: Programmable Delay Block (PDB)
+register VREF_TRM  at 0x40074000 : UInt8 // VREF Trim Register
+register VREF_SC   at 0x40074001 : UInt8 // VREF Status and Control Register
+
+// Chapter 34: Programmable Delay Block (PDB)
 //register PDB0_SC    0x40036000 // Status and Control Register
 //register PDB_SC_LDMOD(n)   (((n) & 3) << 18) // Load Mode Select
 //register PDB_SC_PDBEIE   0x00020000  // Sequence Error Interrupt Enable
@@ -1351,15 +1358,15 @@ register VREF_SC   : UInt8 at 0x40074001 // VREF Status and Control Register
 //register CMT_DMA   *(volatile uint8_t  *)0x4006200B // CMT Direct Memory Access Register
 //
 //// Chapter 39: Real Time Clock (RTC)
-register RTC_TSR : UInt32 at  0x4003D000 // RTC Time Seconds Register
-register RTC_TPR : UInt32 at  0x4003D004 // RTC Time Prescaler Register
-register RTC_TAR : UInt32 at  0x4003D008 // RTC Time Alarm Register
-register RTC_TCR : UInt32 at  0x4003D00C // RTC Time Compensation Register
+register RTC_TSR at  0x4003D000 : UInt32 // RTC Time Seconds Register
+register RTC_TPR at  0x4003D004 : UInt32 // RTC Time Prescaler Register
+register RTC_TAR at  0x4003D008 : UInt32 // RTC Time Alarm Register
+register RTC_TCR at  0x4003D00C : UInt32 // RTC Time Compensation Register
 //register RTC_TCR_CIC(n)   (((n) & 255) << 24)  // Compensation Interval Counter
 //register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value
 //register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register
 //register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register
-register RTC_CR : UInt32 at  0x4003D010 // RTC Control Register
+register RTC_CR at  0x4003D010 : UInt32 // RTC Control Register
 let RTC_CR_SC2P : UInt32 = 0x00002000  // 
 let RTC_CR_SC4P : UInt32 = 0x00001000  // 
 let RTC_CR_SC8P : UInt32 = 0x00000800  // 
@@ -1369,16 +1376,18 @@ let RTC_CR_OSCE : UInt32 = 0x00000100  //
 let RTC_CR_UM : UInt32 = 0x00000008  // 
 let RTC_CR_SUP : UInt32 = 0x00000004  // 
 let RTC_CR_WPE : UInt32 = 0x00000002  // 
-let RTC_CR_SWR : UInt32 = 0x00000001  // 
-register RTC_SR : UInt32 at  0x4003D014 // RTC Status Register
-let RTC_SR_TCE : UInt32 = 0x00000010  // 
+let RTC_CR_SWR : UInt32 = 0x00000001  //
+ 
+register RTC_SR at  0x4003D014 : UInt32 // RTC Status Register
+let RTC_SR_TCE : UInt32 = 0x00000010  
 let RTC_SR_TAF : UInt32 = 0x00000004  // 
 let RTC_SR_TOF : UInt32 = 0x00000002  // 
 let RTC_SR_TIF : UInt32 = 0x00000001  // 
-register RTC_LR: UInt32 at 0x4003D018 // RTC Lock Register
-register RTC_IER: UInt32 at 0x4003D01C // RTC Interrupt Enable Register
-register RTC_WAR: UInt32 at 0x4003D800 // RTC Write Access Register
-register RTC_RAR: UInt32 at 0x4003D804 // RTC Read Access Register
+
+register RTC_LR  at 0x4003D018 : UInt32 // RTC Lock Register
+register RTC_IER at 0x4003D01C : UInt32 // RTC Interrupt Enable Register
+register RTC_WAR at 0x4003D800 : UInt32 // RTC Write Access Register
+register RTC_RAR at 0x4003D804 : UInt32 // RTC Read Access Register
 
 //// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)
 //register USB0_PERID  *(const    uint8_t  *)0x40072000 // Peripheral ID register
@@ -1942,38 +1951,38 @@ register RTC_RAR: UInt32 at 0x4003D804 // RTC Read Access Register
 //register I2S0_MDR   0x4002F104 // SAI MCLK Divide Register
 //register I2S_MDR_FRACT(n)  ( (n & 0xff)<<12)    // MCLK Fraction
 //register I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide
-//
-//// Chapter 47: General-Purpose Input/Output (GPIO)
-register GPIOA_PDOR   : UInt32 at 0x400FF000 // Port Data Output Register
-register GPIOA_PSOR   : UInt32 at 0x400FF004 // Port Set Output Register
-register GPIOA_PCOR   : UInt32 at 0x400FF008 // Port Clear Output Register
-register GPIOA_PTOR   : UInt32 at 0x400FF00C // Port Toggle Output Register
-register GPIOA_PDIR   : UInt32 at 0x400FF010 // Port Data Input Register
-register GPIOA_PDDR   : UInt32 at 0x400FF014 // Port Data Direction Register
-register GPIOB_PDOR   : UInt32 at 0x400FF040 // Port Data Output Register
-register GPIOB_PSOR   : UInt32 at 0x400FF044 // Port Set Output Register
-register GPIOB_PCOR   : UInt32 at 0x400FF048 // Port Clear Output Register
-register GPIOB_PTOR   : UInt32 at 0x400FF04C // Port Toggle Output Register
-register GPIOB_PDIR   : UInt32 at 0x400FF050 // Port Data Input Register
-register GPIOB_PDDR   : UInt32 at 0x400FF054 // Port Data Direction Register
-register GPIOC_PDOR   : UInt32 at 0x400FF080 // Port Data Output Register
-register GPIOC_PSOR   : UInt32 at 0x400FF084 // Port Set Output Register
-register GPIOC_PCOR   : UInt32 at 0x400FF088 // Port Clear Output Register
-register GPIOC_PTOR   : UInt32 at 0x400FF08C // Port Toggle Output Register
-register GPIOC_PDIR   : UInt32 at 0x400FF090 // Port Data Input Register
-register GPIOC_PDDR   : UInt32 at 0x400FF094 // Port Data Direction Register
-register GPIOD_PDOR   : UInt32 at 0x400FF0C0 // Port Data Output Register
-register GPIOD_PSOR   : UInt32 at 0x400FF0C4 // Port Set Output Register
-register GPIOD_PCOR   : UInt32 at 0x400FF0C8 // Port Clear Output Register
-register GPIOD_PTOR   : UInt32 at 0x400FF0CC // Port Toggle Output Register
-register GPIOD_PDIR   : UInt32 at 0x400FF0D0 // Port Data Input Register
-register GPIOD_PDDR   : UInt32 at 0x400FF0D4 // Port Data Direction Register
-register GPIOE_PDOR   : UInt32 at 0x400FF100 // Port Data Output Register
-register GPIOE_PSOR   : UInt32 at 0x400FF104 // Port Set Output Register
-register GPIOE_PCOR   : UInt32 at 0x400FF108 // Port Clear Output Register
-register GPIOE_PTOR   : UInt32 at 0x400FF10C // Port Toggle Output Register
-register GPIOE_PDIR   : UInt32 at 0x400FF110 // Port Data Input Register
-register GPIOE_PDDR   : UInt32 at 0x400FF114 // Port Data Direction Register
+
+// Chapter 47: General-Purpose Input/Output (GPIO)
+register GPIOA_PDOR   at 0x400FF000 : UInt32 // Port Data Output Register
+register GPIOA_PSOR   at 0x400FF004 : UInt32 // Port Set Output Register
+register GPIOA_PCOR   at 0x400FF008 : UInt32 // Port Clear Output Register
+register GPIOA_PTOR   at 0x400FF00C : UInt32 // Port Toggle Output Register
+register GPIOA_PDIR   at 0x400FF010 : UInt32 // Port Data Input Register
+register GPIOA_PDDR   at 0x400FF014 : UInt32 // Port Data Direction Register
+register GPIOB_PDOR   at 0x400FF040 : UInt32 // Port Data Output Register
+register GPIOB_PSOR   at 0x400FF044 : UInt32 // Port Set Output Register
+register GPIOB_PCOR   at 0x400FF048 : UInt32 // Port Clear Output Register
+register GPIOB_PTOR   at 0x400FF04C : UInt32 // Port Toggle Output Register
+register GPIOB_PDIR   at 0x400FF050 : UInt32 // Port Data Input Register
+register GPIOB_PDDR   at 0x400FF054 : UInt32 // Port Data Direction Register
+register GPIOC_PDOR   at 0x400FF080 : UInt32 // Port Data Output Register
+register GPIOC_PSOR   at 0x400FF084 : UInt32 // Port Set Output Register
+register GPIOC_PCOR   at 0x400FF088 : UInt32 // Port Clear Output Register
+register GPIOC_PTOR   at 0x400FF08C : UInt32 // Port Toggle Output Register
+register GPIOC_PDIR   at 0x400FF090 : UInt32 // Port Data Input Register
+register GPIOC_PDDR   at 0x400FF094 : UInt32 // Port Data Direction Register
+register GPIOD_PDOR   at 0x400FF0C0 : UInt32 // Port Data Output Register
+register GPIOD_PSOR   at 0x400FF0C4 : UInt32 // Port Set Output Register
+register GPIOD_PCOR   at 0x400FF0C8 : UInt32 // Port Clear Output Register
+register GPIOD_PTOR   at 0x400FF0CC : UInt32 // Port Toggle Output Register
+register GPIOD_PDIR   at 0x400FF0D0 : UInt32 // Port Data Input Register
+register GPIOD_PDDR   at 0x400FF0D4 : UInt32 // Port Data Direction Register
+register GPIOE_PDOR   at 0x400FF100 : UInt32 // Port Data Output Register
+register GPIOE_PSOR   at 0x400FF104 : UInt32 // Port Set Output Register
+register GPIOE_PCOR   at 0x400FF108 : UInt32 // Port Clear Output Register
+register GPIOE_PTOR   at 0x400FF10C : UInt32 // Port Toggle Output Register
+register GPIOE_PDIR   at 0x400FF110 : UInt32 // Port Data Input Register
+register GPIOE_PDDR   at 0x400FF114 : UInt32 // Port Data Direction Register
 //
 //// Chapter 48: Touch sense input (TSI)
 //register TSI0_GENCS   0x40045000 // General Control and Status Register
@@ -2104,7 +2113,7 @@ register GPIOE_PDDR   : UInt32 at 0x400FF114 // Port Data Direction Register
 //register SCB_ICSR   0xE000ED04 // Interrupt Control and State
 //register SCB_ICSR_PENDSTSET   0x04000000
 //register SCB_VTOR   0xE000ED08 // Vector Table Offset
-register SCB_AIRCR : UInt32 at 0xE000ED0C // Application Interrupt and Reset Control
+register SCB_AIRCR at 0xE000ED0C : UInt32 // Application Interrupt and Reset Control
 let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
 //register SCB_SCR    0xE000ED10 // System Control Register
 //register SCB_CCR    0xE000ED14 // Configuration and Control
@@ -2117,14 +2126,14 @@ let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
 //register SCB_DFSR   0xE000ED30 // Debug Fault Status
 //register SCB_MMFAR   0xE000ED34 // MemManage Fault Address
 
-register SYST_CSR : UInt32 at 0xE000E010 // SysTick Control and Status
+register SYST_CSR at 0xE000E010 : UInt32 // SysTick Control and Status
 let SYST_CSR_COUNTFLAG  : UInt32 = 0x00010000
 let SYST_CSR_CLKSOURCE   : UInt32= 0x00000004
 let SYST_CSR_TICKINT  : UInt32 = 0x00000002
 let SYST_CSR_ENABLE   : UInt32 =  0x00000001
-register SYST_RVR   : UInt32 at 0xE000E014 // SysTick Reload Value Register
-register SYST_CVR   : UInt32 at 0xE000E018 // SysTick Current Value Register
-register @ro SYST_CALIB : UInt32 at 0xE000E01C // SysTick Calibration Value
+register SYST_RVR   at 0xE000E014 : UInt32 // SysTick Reload Value Register
+register SYST_CVR   at 0xE000E018 : UInt32 // SysTick Current Value Register
+register @ro SYST_CALIB at 0xE000E01C : UInt32 // SysTick Calibration Value
 
 
 //register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control

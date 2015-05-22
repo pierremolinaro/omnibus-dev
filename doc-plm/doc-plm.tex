@@ -551,15 +551,15 @@
 
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\newcommand\keywordStylePiccolo[1]{\textcolor{blue}{\textbf{#1}}}
-\newcommand\instructionStylePiccolo[1]{\textcolor{brown}{\textbf{#1}}}
-\newcommand\delimitersStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\integerStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\characterStylePiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\stringStylePiccolo[1]{\textcolor{gray}{#1}}
-\newcommand\commentStylePiccolo[1]{\textcolor{red}{#1}}
+\newcommand\keywordsStyleplm[1]{\textcolor{blue}{\textbf{#1}}}
+\newcommand\instructionStyleplm[1]{\textcolor{brown}{\textbf{#1}}}
+\newcommand\delimitersStyleplm[1]{\textcolor{orange}{#1}}
+\newcommand\integerStyleplm[1]{\textcolor{orange}{#1}}
+\newcommand\characterStyleplm[1]{\textcolor{orange}{#1}}
+\newcommand\stringStyleplm[1]{\textcolor{gray}{#1}}
+\newcommand\commentStyleplm[1]{\textcolor{red}{#1}}
 
-\newcommand\lexicalErrorPiccolo{\textcolor{red}{\textbullet ERRLEX\textbullet}}
+\newcommand\lexicalErrorplm{\textcolor{red}{\textbullet ERRLEX\textbullet}}
 
 \newmdenv[
   topline=false,
@@ -572,10 +572,10 @@
 \newwrite\tempfile
 
 \makeatletter
-\newenvironment{piccolo}{%
+\newenvironment{PLM}{%
   \begingroup
   \@bsphack
-  \immediate\openout\tempfile=temp.piccolo%
+  \immediate\openout\tempfile=temp.plm%
   \let\do\@makeother\dospecials
   \catcode`\^^M\active
   \verbatim@startline
@@ -587,8 +587,8 @@
   \immediate\closeout\tempfile
   \@esphack
   \endgroup
-  \immediate\write18{piccolo --mode=latex:Piccolo temp.piccolo}
-  {\singlespacing\begin{siderules}\ttfamily\input{temp.piccolo.tex}\end{siderules}}
+  \immediate\write18{plm --mode=latex:plm temp.plm}
+  {\singlespacing\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
 }
 \makeatother
 
@@ -596,28 +596,28 @@
 % COMMANDE \ggs : affichage de code en ligne galgas                                                                     *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\newcommand\keywordStylepiccolo[1]{\textcolor{blue}{\textbf{#1}}}
-\newcommand\instructionStylepiccolo[1]{\textcolor{brown}{\textbf{#1}}}
-\newcommand\delimitersStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\integerStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\characterStylepiccolo[1]{\textcolor{orange}{#1}}
-\newcommand\stringStylepiccolo[1]{\textcolor{gray}{#1}}
-\newcommand\commentStylepiccolo[1]{\textcolor{red}{#1}}
-
-\newcommand\lexicalErrorpiccolo{\textcolor{red}{\textbullet ERRLEX\textbullet}}
+%\newcommand\keywordStyleplm[1]{\textcolor{blue}{\textbf{#1}}}
+%\newcommand\instructionStyleplm[1]{\textcolor{brown}{\textbf{#1}}}
+%\newcommand\delimitersStyleplm[1]{\textcolor{orange}{#1}}
+%\newcommand\integerStyleplm[1]{\textcolor{orange}{#1}}
+%\newcommand\characterStyleplm[1]{\textcolor{orange}{#1}}
+%\newcommand\stringStyleplm[1]{\textcolor{gray}{#1}}
+%\newcommand\commentStyleplm[1]{\textcolor{red}{#1}}
+%
+%\newcommand\lexicalErrorplm{\textcolor{red}{\textbullet ERRLEX\textbullet}}
 
 
 \makeatletter
-\newcommand*\pic{%
+\newcommand*\plm{%
   \@bsphack%
   \begingroup%
   \let\do\@makeother\dospecials%
   \let\do\do@noligs\verbatim@nolig@list%
   \catcode`\^^M=15\relax%
   \@vobeyspaces%
-  \@pic{\temporary}%
+  \@plm{\temporary}%
 }%
-\newcommand\@pic[2]{%
+\newcommand\@plm[2]{%
   \catcode`-=12\relax%
   \catcode`<=12\relax%
   \catcode`>=12\relax%
@@ -636,11 +636,11 @@
       \expandafter#1%
       \expandafter{\@tempa}%
       \@esphack%
-      \immediate\openout\tempfile=temp.piccolo%
+      \immediate\openout\tempfile=temp.plm%
       \immediate\write\tempfile{##1}%
       \immediate\closeout\tempfile%
-      \immediate\write18{piccolo --mode=latex:Piccolo temp.piccolo}%
-      \colorbox{gray!6}{\ttfamily\input{temp.piccolo.tex}\unskip}%
+      \immediate\write18{plm --mode=latex:plm temp.plm}%
+      \colorbox{gray!6}{\ttfamily\input{temp.plm.tex}\unskip}%
     }%
   }%
   \ifnum`#2=`\~\else\@makeother\~\fi%
