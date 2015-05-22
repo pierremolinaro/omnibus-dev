@@ -39,7 +39,7 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar as Int32)
-  gZZZZ = PORTA_PCR3.mux
+  gZZZZ = PORTA_PCR3.mux.shift | PORTA_PCR3.pfe
 }
 
 //-----------------------------------------------------------------------------*
