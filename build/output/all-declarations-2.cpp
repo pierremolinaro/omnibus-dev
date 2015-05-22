@@ -476,7 +476,7 @@ void routine_buildOrderedDeclarationList (GALGAS_declarationListAST inArgument_i
       inCompiler->emitSemanticError (inArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 55)) ;
       cEnumerator_declarationListAST enumerator_2706 (var_unsortedSemanticDeclarationListAST, kEnumeration_up) ;
       while (enumerator_2706.hasCurrentObject ()) {
-        inCompiler->emitSemanticError (callCategoryReader_location ((const cPtr_abstractDeclaration *) enumerator_2706.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)), GALGAS_string ("the ").add_operation (callCategoryReader_keyRepresentation ((const cPtr_abstractDeclaration *) enumerator_2706.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)).add_operation (GALGAS_string (" type is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)) ;
+        inCompiler->emitSemanticError (callCategoryReader_location ((const cPtr_abstractDeclaration *) enumerator_2706.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)), GALGAS_string ("the ").add_operation (callCategoryReader_keyRepresentation ((const cPtr_abstractDeclaration *) enumerator_2706.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)).add_operation (GALGAS_string (" is declared here"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57))  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 57)) ;
         enumerator_2706.gotoNextObject () ;
       }
     }
@@ -4288,8 +4288,170 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "\n"
   "// chapter 11: Port control and interrupts (PORT)\n"
   " // Pin Control Register n\n"
-  "register PORTA_PCR0 : UInt32 at 0x40049000\n"
-  " {7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps}\n"
+  "register\n"
+  "  PORTA_PCR0   at 0x40049000\n"
+  "  PORTA_PCR1   at 0x40049004\n"
+  "  PORTA_PCR2   at 0x40049008\n"
+  "  PORTA_PCR3   at 0x4004900C\n"
+  "  PORTA_PCR4   at 0x40049010\n"
+  "  PORTA_PCR5   at 0x40049014\n"
+  "  PORTA_PCR6   at 0x40049018\n"
+  "  PORTA_PCR7   at 0x4004901C\n"
+  "  PORTA_PCR8   at 0x40049020\n"
+  "  PORTA_PCR9   at 0x40049024\n"
+  "  PORTA_PCR10  at 0x40049028\n"
+  "  PORTA_PCR11  at 0x4004902C\n"
+  "  PORTA_PCR12  at 0x40049030\n"
+  "  PORTA_PCR13  at 0x40049034\n"
+  "  PORTA_PCR14  at 0x40049038\n"
+  "  PORTA_PCR15  at 0x4004903C\n"
+  "  PORTA_PCR16  at 0x40049040\n"
+  "  PORTA_PCR17  at 0x40049044\n"
+  "  PORTA_PCR18  at 0x40049048\n"
+  "  PORTA_PCR19  at 0x4004904C\n"
+  "  PORTA_PCR20  at 0x40049050\n"
+  "  PORTA_PCR21  at 0x40049054\n"
+  "  PORTA_PCR22  at 0x40049058\n"
+  "  PORTA_PCR23  at 0x4004905C\n"
+  "  PORTA_PCR24  at 0x40049060\n"
+  "  PORTA_PCR25  at 0x40049064\n"
+  "  PORTA_PCR26  at 0x40049068\n"
+  "  PORTA_PCR27  at 0x4004906C\n"
+  "  PORTA_PCR28  at 0x40049070\n"
+  "  PORTA_PCR29  at 0x40049074\n"
+  "  PORTA_PCR30  at 0x40049078\n"
+  "  PORTA_PCR31  at 0x4004907C\n"
+  "  PORTB_PCR0   at 0x4004A000\n"
+  "  PORTB_PCR1   at 0x4004A004\n"
+  "  PORTB_PCR2   at 0x4004A008\n"
+  "  PORTB_PCR3   at 0x4004A00C\n"
+  "  PORTB_PCR4   at 0x4004A010\n"
+  "  PORTB_PCR5   at 0x4004A014\n"
+  "  PORTB_PCR6   at 0x4004A018\n"
+  "  PORTB_PCR7   at 0x4004A01C\n"
+  "  PORTB_PCR8   at 0x4004A020\n"
+  "  PORTB_PCR9   at 0x4004A024\n"
+  "  PORTB_PCR10  at 0x4004A028\n"
+  "  PORTB_PCR11  at 0x4004A02C\n"
+  "  PORTB_PCR12  at 0x4004A030\n"
+  "  PORTB_PCR13  at 0x4004A034\n"
+  "  PORTB_PCR14  at 0x4004A038\n"
+  "  PORTB_PCR15  at 0x4004A03C\n"
+  "  PORTB_PCR16  at 0x4004A040\n"
+  "  PORTB_PCR17  at 0x4004A044\n"
+  "  PORTB_PCR18  at 0x4004A048\n"
+  "  PORTB_PCR19  at 0x4004A04C\n"
+  "  PORTB_PCR20  at 0x4004A050\n"
+  "  PORTB_PCR21  at 0x4004A054\n"
+  "  PORTB_PCR22  at 0x4004A058\n"
+  "  PORTB_PCR23  at 0x4004A05C\n"
+  "  PORTB_PCR24  at 0x4004A060\n"
+  "  PORTB_PCR25  at 0x4004A064\n"
+  "  PORTB_PCR26  at 0x4004A068\n"
+  "  PORTB_PCR27  at 0x4004A06C\n"
+  "  PORTB_PCR28  at 0x4004A070\n"
+  "  PORTB_PCR29  at 0x4004A074\n"
+  "  PORTB_PCR30  at 0x4004A078\n"
+  "  PORTB_PCR31  at 0x4004A07C\n"
+  "  PORTC_PCR0   at 0x4004B000\n"
+  "  PORTC_PCR1   at 0x4004B004\n"
+  "  PORTC_PCR2   at 0x4004B008\n"
+  "  PORTC_PCR3   at 0x4004B00C\n"
+  "  PORTC_PCR4   at 0x4004B010\n"
+  "  PORTC_PCR5   at 0x4004B014\n"
+  "  PORTC_PCR6   at 0x4004B018\n"
+  "  PORTC_PCR7   at 0x4004B01C\n"
+  "  PORTC_PCR8   at 0x4004B020\n"
+  "  PORTC_PCR9   at 0x4004B024\n"
+  "  PORTC_PCR10  at 0x4004B028\n"
+  "  PORTC_PCR11  at 0x4004B02C\n"
+  "  PORTC_PCR12  at 0x4004B030\n"
+  "  PORTC_PCR13  at 0x4004B034\n"
+  "  PORTC_PCR14  at 0x4004B038\n"
+  "  PORTC_PCR15  at 0x4004B03C\n"
+  "  PORTC_PCR16  at 0x4004B040\n"
+  "  PORTC_PCR17  at 0x4004B044\n"
+  "  PORTC_PCR18  at 0x4004B048\n"
+  "  PORTC_PCR19  at 0x4004B04C\n"
+  "  PORTC_PCR20  at 0x4004B050\n"
+  "  PORTC_PCR21  at 0x4004B054\n"
+  "  PORTC_PCR22  at 0x4004B058\n"
+  "  PORTC_PCR23  at 0x4004B05C\n"
+  "  PORTC_PCR24  at 0x4004B060\n"
+  "  PORTC_PCR25  at 0x4004B064\n"
+  "  PORTC_PCR26  at 0x4004B068\n"
+  "  PORTC_PCR27  at 0x4004B06C\n"
+  "  PORTC_PCR28  at 0x4004B070\n"
+  "  PORTC_PCR29  at 0x4004B074\n"
+  "  PORTC_PCR30  at 0x4004B078\n"
+  "  PORTC_PCR31  at 0x4004B07C\n"
+  "  PORTD_PCR0   at 0x4004C000\n"
+  "  PORTD_PCR1   at 0x4004C004\n"
+  "  PORTD_PCR2   at 0x4004C008\n"
+  "  PORTD_PCR3   at 0x4004C00C\n"
+  "  PORTD_PCR4   at 0x4004C010\n"
+  "  PORTD_PCR5   at 0x4004C014\n"
+  "  PORTD_PCR6   at 0x4004C018\n"
+  "  PORTD_PCR7   at 0x4004C01C\n"
+  "  PORTD_PCR8   at 0x4004C020\n"
+  "  PORTD_PCR9   at 0x4004C024\n"
+  "  PORTD_PCR10  at 0x4004C028\n"
+  "  PORTD_PCR11  at 0x4004C02C\n"
+  "  PORTD_PCR12  at 0x4004C030\n"
+  "  PORTD_PCR13  at 0x4004C034\n"
+  "  PORTD_PCR14  at 0x4004C038\n"
+  "  PORTD_PCR15  at 0x4004C03C\n"
+  "  PORTD_PCR16  at 0x4004C040\n"
+  "  PORTD_PCR17  at 0x4004C044\n"
+  "  PORTD_PCR18  at 0x4004C048\n"
+  "  PORTD_PCR19  at 0x4004C04C\n"
+  "  PORTD_PCR20  at 0x4004C050\n"
+  "  PORTD_PCR21  at 0x4004C054\n"
+  "  PORTD_PCR22  at 0x4004C058\n"
+  "  PORTD_PCR23  at 0x4004C05C\n"
+  "  PORTD_PCR24  at 0x4004C060\n"
+  "  PORTD_PCR25  at 0x4004C064\n"
+  "  PORTD_PCR26  at 0x4004C068\n"
+  "  PORTD_PCR27  at 0x4004C06C\n"
+  "  PORTD_PCR28  at 0x4004C070\n"
+  "  PORTD_PCR29  at 0x4004C074\n"
+  "  PORTD_PCR30  at 0x4004C078\n"
+  "  PORTD_PCR31  at 0x4004C07C\n"
+  "  PORTE_PCR0   at 0x4004D000\n"
+  "  PORTE_PCR1   at 0x4004D004\n"
+  "  PORTE_PCR2   at 0x4004D008\n"
+  "  PORTE_PCR3   at 0x4004D00C\n"
+  "  PORTE_PCR4   at 0x4004D010\n"
+  "  PORTE_PCR5   at 0x4004D014\n"
+  "  PORTE_PCR6   at 0x4004D018\n"
+  "  PORTE_PCR7   at 0x4004D01C\n"
+  "  PORTE_PCR8   at 0x4004D020\n"
+  "  PORTE_PCR9   at 0x4004D024\n"
+  "  PORTE_PCR10  at 0x4004D028\n"
+  "  PORTE_PCR11  at 0x4004D02C\n"
+  "  PORTE_PCR12  at 0x4004D030\n"
+  "  PORTE_PCR13  at 0x4004D034\n"
+  "  PORTE_PCR14  at 0x4004D038\n"
+  "  PORTE_PCR15  at 0x4004D03C\n"
+  "  PORTE_PCR16  at 0x4004D040\n"
+  "  PORTE_PCR17  at 0x4004D044\n"
+  "  PORTE_PCR18  at 0x4004D048\n"
+  "  PORTE_PCR19  at 0x4004D04C\n"
+  "  PORTE_PCR20  at 0x4004D050\n"
+  "  PORTE_PCR21  at 0x4004D054\n"
+  "  PORTE_PCR22  at 0x4004D058\n"
+  "  PORTE_PCR23  at 0x4004D05C\n"
+  "  PORTE_PCR24  at 0x4004D060\n"
+  "  PORTE_PCR25  at 0x4004D064\n"
+  "  PORTE_PCR26  at 0x4004D068\n"
+  "  PORTE_PCR27  at 0x4004D06C\n"
+  "  PORTE_PCR28  at 0x4004D070\n"
+  "  PORTE_PCR29  at 0x4004D074\n"
+  "  PORTE_PCR30  at 0x4004D078\n"
+  "  PORTE_PCR31  at 0x4004D07C\n"
+  ":\n"
+  " UInt32 {7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps}\n"
+  "\n"
   "let PORT_PCR_ISF  : UInt32  = 0x01000000  // Interrupt Status Flag\n"
   "//register UInt32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration\n"
   "let PORT_PCR_IRQC_MASK  : UInt32 = 0x000F0000\n"
@@ -4303,201 +4465,46 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let PORT_PCR_PE       : UInt32 = 0x00000002  // Pull Enable\n"
   "let PORT_PCR_PS       : UInt32 = 0x00000001  // Pull Select\n"
   "\n"
-  "register PORTA_PCR1   : UInt32 at 0x40049004 // Pin Control Register n\n"
-  "register PORTA_PCR2   : UInt32 at 0x40049008 // Pin Control Register n\n"
-  "register PORTA_PCR3   : UInt32 at 0x4004900C // Pin Control Register n\n"
-  "register PORTA_PCR4   : UInt32 at 0x40049010 // Pin Control Register n\n"
-  "register PORTA_PCR5   : UInt32 at 0x40049014 // Pin Control Register n\n"
-  "register PORTA_PCR6   : UInt32 at 0x40049018 // Pin Control Register n\n"
-  "register PORTA_PCR7   : UInt32 at 0x4004901C // Pin Control Register n\n"
-  "register PORTA_PCR8   : UInt32 at 0x40049020 // Pin Control Register n\n"
-  "register PORTA_PCR9   : UInt32 at 0x40049024 // Pin Control Register n\n"
-  "register PORTA_PCR10  : UInt32 at 0x40049028 // Pin Control Register n\n"
-  "register PORTA_PCR11  : UInt32 at 0x4004902C // Pin Control Register n\n"
-  "register PORTA_PCR12  : UInt32 at 0x40049030 // Pin Control Register n\n"
-  "register PORTA_PCR13  : UInt32 at 0x40049034 // Pin Control Register n\n"
-  "register PORTA_PCR14  : UInt32 at 0x40049038 // Pin Control Register n\n"
-  "register PORTA_PCR15  : UInt32 at 0x4004903C // Pin Control Register n\n"
-  "register PORTA_PCR16  : UInt32 at 0x40049040 // Pin Control Register n\n"
-  "register PORTA_PCR17  : UInt32 at 0x40049044 // Pin Control Register n\n"
-  "register PORTA_PCR18  : UInt32 at 0x40049048 // Pin Control Register n\n"
-  "register PORTA_PCR19  : UInt32 at 0x4004904C // Pin Control Register n\n"
-  "register PORTA_PCR20  : UInt32 at 0x40049050 // Pin Control Register n\n"
-  "register PORTA_PCR21  : UInt32 at 0x40049054 // Pin Control Register n\n"
-  "register PORTA_PCR22  : UInt32 at 0x40049058 // Pin Control Register n\n"
-  "register PORTA_PCR23  : UInt32 at 0x4004905C // Pin Control Register n\n"
-  "register PORTA_PCR24  : UInt32 at 0x40049060 // Pin Control Register n\n"
-  "register PORTA_PCR25  : UInt32 at 0x40049064 // Pin Control Register n\n"
-  "register PORTA_PCR26  : UInt32 at 0x40049068 // Pin Control Register n\n"
-  "register PORTA_PCR27  : UInt32 at 0x4004906C // Pin Control Register n\n"
-  "register PORTA_PCR28  : UInt32 at 0x40049070 // Pin Control Register n\n"
-  "register PORTA_PCR29  : UInt32 at 0x40049074 // Pin Control Register n\n"
-  "register PORTA_PCR30  : UInt32 at 0x40049078 // Pin Control Register n\n"
-  "register PORTA_PCR31  : UInt32 at 0x4004907C // Pin Control Register n\n"
-  "register PORTA_GPCLR  : UInt32 at 0x40049080 // Global Pin Control Low Register\n"
-  "register PORTA_GPCHR  : UInt32 at 0x40049084 // Global Pin Control High Register\n"
-  "register PORTA_ISFR   : UInt32 at 0x400490A0 // Interrupt Status Flag Register\n"
-  "register PORTB_PCR0   : UInt32 at 0x4004A000 // Pin Control Register n\n"
-  "register PORTB_PCR1   : UInt32 at 0x4004A004 // Pin Control Register n\n"
-  "register PORTB_PCR2   : UInt32 at 0x4004A008 // Pin Control Register n\n"
-  "register PORTB_PCR3   : UInt32 at 0x4004A00C // Pin Control Register n\n"
-  "register PORTB_PCR4   : UInt32 at 0x4004A010 // Pin Control Register n\n"
-  "register PORTB_PCR5   : UInt32 at 0x4004A014 // Pin Control Register n\n"
-  "register PORTB_PCR6   : UInt32 at 0x4004A018 // Pin Control Register n\n"
-  "register PORTB_PCR7   : UInt32 at 0x4004A01C // Pin Control Register n\n"
-  "register PORTB_PCR8   : UInt32 at 0x4004A020 // Pin Control Register n\n"
-  "register PORTB_PCR9   : UInt32 at 0x4004A024 // Pin Control Register n\n"
-  "register PORTB_PCR10  : UInt32 at 0x4004A028 // Pin Control Register n\n"
-  "register PORTB_PCR11  : UInt32 at 0x4004A02C // Pin Control Register n\n"
-  "register PORTB_PCR12  : UInt32 at 0x4004A030 // Pin Control Register n\n"
-  "register PORTB_PCR13  : UInt32 at 0x4004A034 // Pin Control Register n\n"
-  "register PORTB_PCR14  : UInt32 at 0x4004A038 // Pin Control Register n\n"
-  "register PORTB_PCR15  : UInt32 at 0x4004A03C // Pin Control Register n\n"
-  "register PORTB_PCR16  : UInt32 at 0x4004A040 // Pin Control Register n\n"
-  "register PORTB_PCR17  : UInt32 at 0x4004A044 // Pin Control Register n\n"
-  "register PORTB_PCR18  : UInt32 at 0x4004A048 // Pin Control Register n\n"
-  "register PORTB_PCR19  : UInt32 at 0x4004A04C // Pin Control Register n\n"
-  "register PORTB_PCR20  : UInt32 at 0x4004A050 // Pin Control Register n\n"
-  "register PORTB_PCR21  : UInt32 at 0x4004A054 // Pin Control Register n\n"
-  "register PORTB_PCR22  : UInt32 at 0x4004A058 // Pin Control Register n\n"
-  "register PORTB_PCR23  : UInt32 at 0x4004A05C // Pin Control Register n\n"
-  "register PORTB_PCR24  : UInt32 at 0x4004A060 // Pin Control Register n\n"
-  "register PORTB_PCR25  : UInt32 at 0x4004A064 // Pin Control Register n\n"
-  "register PORTB_PCR26  : UInt32 at 0x4004A068 // Pin Control Register n\n"
-  "register PORTB_PCR27  : UInt32 at 0x4004A06C // Pin Control Register n\n"
-  "register PORTB_PCR28  : UInt32 at 0x4004A070 // Pin Control Register n\n"
-  "register PORTB_PCR29  : UInt32 at 0x4004A074 // Pin Control Register n\n"
-  "register PORTB_PCR30  : UInt32 at 0x4004A078 // Pin Control Register n\n"
-  "register PORTB_PCR31  : UInt32 at 0x4004A07C // Pin Control Register n\n"
-  "register PORTB_GPCLR  : UInt32 at 0x4004A080 // Global Pin Control Low Register\n"
-  "register PORTB_GPCHR  : UInt32 at 0x4004A084 // Global Pin Control High Register\n"
-  "register PORTB_ISFR   : UInt32 at 0x4004A0A0 // Interrupt Status Flag Register\n"
-  "register PORTC_PCR0   : UInt32 at 0x4004B000 // Pin Control Register n\n"
-  "register PORTC_PCR1   : UInt32 at 0x4004B004 // Pin Control Register n\n"
-  "register PORTC_PCR2   : UInt32 at 0x4004B008 // Pin Control Register n\n"
-  "register PORTC_PCR3   : UInt32 at 0x4004B00C // Pin Control Register n\n"
-  "register PORTC_PCR4   : UInt32 at 0x4004B010 // Pin Control Register n\n"
-  "register PORTC_PCR5   : UInt32 at 0x4004B014 // Pin Control Register n\n"
-  "register PORTC_PCR6   : UInt32 at 0x4004B018 // Pin Control Register n\n"
-  "register PORTC_PCR7   : UInt32 at 0x4004B01C // Pin Control Register n\n"
-  "register PORTC_PCR8   : UInt32 at 0x4004B020 // Pin Control Register n\n"
-  "register PORTC_PCR9   : UInt32 at 0x4004B024 // Pin Control Register n\n"
-  "register PORTC_PCR10  : UInt32 at 0x4004B028 // Pin Control Register n\n"
-  "register PORTC_PCR11  : UInt32 at 0x4004B02C // Pin Control Register n\n"
-  "register PORTC_PCR12  : UInt32 at 0x4004B030 // Pin Control Register n\n"
-  "register PORTC_PCR13  : UInt32 at 0x4004B034 // Pin Control Register n\n"
-  "register PORTC_PCR14  : UInt32 at 0x4004B038 // Pin Control Register n\n"
-  "register PORTC_PCR15  : UInt32 at 0x4004B03C // Pin Control Register n\n"
-  "register PORTC_PCR16  : UInt32 at 0x4004B040 // Pin Control Register n\n"
-  "register PORTC_PCR17  : UInt32 at 0x4004B044 // Pin Control Register n\n"
-  "register PORTC_PCR18  : UInt32 at 0x4004B048 // Pin Control Register n\n"
-  "register PORTC_PCR19  : UInt32 at 0x4004B04C // Pin Control Register n\n"
-  "register PORTC_PCR20  : UInt32 at 0x4004B050 // Pin Control Register n\n"
-  "register PORTC_PCR21  : UInt32 at 0x4004B054 // Pin Control Register n\n"
-  "register PORTC_PCR22  : UInt32 at 0x4004B058 // Pin Control Register n\n"
-  "register PORTC_PCR23  : UInt32 at 0x4004B05C // Pin Control Register n\n"
-  "register PORTC_PCR24  : UInt32 at 0x4004B060 // Pin Control Register n\n"
-  "register PORTC_PCR25  : UInt32 at 0x4004B064 // Pin Control Register n\n"
-  "register PORTC_PCR26  : UInt32 at 0x4004B068 // Pin Control Register n\n"
-  "register PORTC_PCR27  : UInt32 at 0x4004B06C // Pin Control Register n\n"
-  "register PORTC_PCR28  : UInt32 at 0x4004B070 // Pin Control Register n\n"
-  "register PORTC_PCR29  : UInt32 at 0x4004B074 // Pin Control Register n\n"
-  "register PORTC_PCR30  : UInt32 at 0x4004B078 // Pin Control Register n\n"
-  "register PORTC_PCR31  : UInt32 at 0x4004B07C // Pin Control Register n\n"
-  "register PORTC_GPCLR  : UInt32 at 0x4004B080 // Global Pin Control Low Register\n"
-  "register PORTC_GPCHR  : UInt32 at 0x4004B084 // Global Pin Control High Register\n"
-  "register PORTC_ISFR   : UInt32 at 0x4004B0A0 // Interrupt Status Flag Register\n"
-  "register PORTD_PCR0   : UInt32 at 0x4004C000 // Pin Control Register n\n"
-  "register PORTD_PCR1   : UInt32 at 0x4004C004 // Pin Control Register n\n"
-  "register PORTD_PCR2   : UInt32 at 0x4004C008 // Pin Control Register n\n"
-  "register PORTD_PCR3   : UInt32 at 0x4004C00C // Pin Control Register n\n"
-  "register PORTD_PCR4   : UInt32 at 0x4004C010 // Pin Control Register n\n"
-  "register PORTD_PCR5   : UInt32 at 0x4004C014 // Pin Control Register n\n"
-  "register PORTD_PCR6   : UInt32 at 0x4004C018 // Pin Control Register n\n"
-  "register PORTD_PCR7   : UInt32 at 0x4004C01C // Pin Control Register n\n"
-  "register PORTD_PCR8   : UInt32 at 0x4004C020 // Pin Control Register n\n"
-  "register PORTD_PCR9   : UInt32 at 0x4004C024 // Pin Control Register n\n"
-  "register PORTD_PCR10  : UInt32 at 0x4004C028 // Pin Control Register n\n"
-  "register PORTD_PCR11  : UInt32 at 0x4004C02C // Pin Control Register n\n"
-  "register PORTD_PCR12  : UInt32 at 0x4004C030 // Pin Control Register n\n"
-  "register PORTD_PCR13  : UInt32 at 0x4004C034 // Pin Control Register n\n"
-  "register PORTD_PCR14  : UInt32 at 0x4004C038 // Pin Control Register n\n"
-  "register PORTD_PCR15  : UInt32 at 0x4004C03C // Pin Control Register n\n"
-  "register PORTD_PCR16  : UInt32 at 0x4004C040 // Pin Control Register n\n"
-  "register PORTD_PCR17  : UInt32 at 0x4004C044 // Pin Control Register n\n"
-  "register PORTD_PCR18  : UInt32 at 0x4004C048 // Pin Control Register n\n"
-  "register PORTD_PCR19  : UInt32 at 0x4004C04C // Pin Control Register n\n"
-  "register PORTD_PCR20  : UInt32 at 0x4004C050 // Pin Control Register n\n"
-  "register PORTD_PCR21  : UInt32 at 0x4004C054 // Pin Control Register n\n"
-  "register PORTD_PCR22  : UInt32 at 0x4004C058 // Pin Control Register n\n"
-  "register PORTD_PCR23  : UInt32 at 0x4004C05C // Pin Control Register n\n"
-  "register PORTD_PCR24  : UInt32 at 0x4004C060 // Pin Control Register n\n"
-  "register PORTD_PCR25  : UInt32 at 0x4004C064 // Pin Control Register n\n"
-  "register PORTD_PCR26  : UInt32 at 0x4004C068 // Pin Control Register n\n"
-  "register PORTD_PCR27  : UInt32 at 0x4004C06C // Pin Control Register n\n"
-  "register PORTD_PCR28  : UInt32 at 0x4004C070 // Pin Control Register n\n"
-  "register PORTD_PCR29  : UInt32 at 0x4004C074 // Pin Control Register n\n"
-  "register PORTD_PCR30  : UInt32 at 0x4004C078 // Pin Control Register n\n"
-  "register PORTD_PCR31  : UInt32 at 0x4004C07C // Pin Control Register n\n"
-  "register PORTD_GPCLR  : UInt32 at 0x4004C080 // Global Pin Control Low Register\n"
-  "register PORTD_GPCHR  : UInt32 at 0x4004C084 // Global Pin Control High Register\n"
-  "register PORTD_ISFR   : UInt32 at 0x4004C0A0 // Interrupt Status Flag Register\n"
-  "register PORTE_PCR0   : UInt32 at 0x4004D000 // Pin Control Register n\n"
-  "register PORTE_PCR1   : UInt32 at 0x4004D004 // Pin Control Register n\n"
-  "register PORTE_PCR2   : UInt32 at 0x4004D008 // Pin Control Register n\n"
-  "register PORTE_PCR3   : UInt32 at 0x4004D00C // Pin Control Register n\n"
-  "register PORTE_PCR4   : UInt32 at 0x4004D010 // Pin Control Register n\n"
-  "register PORTE_PCR5   : UInt32 at 0x4004D014 // Pin Control Register n\n"
-  "register PORTE_PCR6   : UInt32 at 0x4004D018 // Pin Control Register n\n"
-  "register PORTE_PCR7   : UInt32 at 0x4004D01C // Pin Control Register n\n"
-  "register PORTE_PCR8   : UInt32 at 0x4004D020 // Pin Control Register n\n"
-  "register PORTE_PCR9   : UInt32 at 0x4004D024 // Pin Control Register n\n"
-  "register PORTE_PCR10  : UInt32 at 0x4004D028 // Pin Control Register n\n"
-  "register PORTE_PCR11  : UInt32 at 0x4004D02C // Pin Control Register n\n"
-  "register PORTE_PCR12  : UInt32 at 0x4004D030 // Pin Control Register n\n"
-  "register PORTE_PCR13  : UInt32 at 0x4004D034 // Pin Control Register n\n"
-  "register PORTE_PCR14  : UInt32 at 0x4004D038 // Pin Control Register n\n"
-  "register PORTE_PCR15  : UInt32 at 0x4004D03C // Pin Control Register n\n"
-  "register PORTE_PCR16  : UInt32 at 0x4004D040 // Pin Control Register n\n"
-  "register PORTE_PCR17  : UInt32 at 0x4004D044 // Pin Control Register n\n"
-  "register PORTE_PCR18  : UInt32 at 0x4004D048 // Pin Control Register n\n"
-  "register PORTE_PCR19  : UInt32 at 0x4004D04C // Pin Control Register n\n"
-  "register PORTE_PCR20  : UInt32 at 0x4004D050 // Pin Control Register n\n"
-  "register PORTE_PCR21  : UInt32 at 0x4004D054 // Pin Control Register n\n"
-  "register PORTE_PCR22  : UInt32 at 0x4004D058 // Pin Control Register n\n"
-  "register PORTE_PCR23  : UInt32 at 0x4004D05C // Pin Control Register n\n"
-  "register PORTE_PCR24  : UInt32 at 0x4004D060 // Pin Control Register n\n"
-  "register PORTE_PCR25  : UInt32 at 0x4004D064 // Pin Control Register n\n"
-  "register PORTE_PCR26  : UInt32 at 0x4004D068 // Pin Control Register n\n"
-  "register PORTE_PCR27  : UInt32 at 0x4004D06C // Pin Control Register n\n"
-  "register PORTE_PCR28  : UInt32 at 0x4004D070 // Pin Control Register n\n"
-  "register PORTE_PCR29  : UInt32 at 0x4004D074 // Pin Control Register n\n"
-  "register PORTE_PCR30  : UInt32 at 0x4004D078 // Pin Control Register n\n"
-  "register PORTE_PCR31  : UInt32 at 0x4004D07C // Pin Control Register n\n"
-  "register PORTE_GPCLR  : UInt32 at 0x4004D080 // Global Pin Control Low Register\n"
-  "register PORTE_GPCHR  : UInt32 at 0x4004D084 // Global Pin Control High Register\n"
-  "register PORTE_ISFR   : UInt32 at 0x4004D0A0 // Interrupt Status Flag Register\n"
+  "register PORTA_GPCLR  at 0x40049080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTA_GPCHR  at 0x40049084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTA_ISFR   at 0x400490A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTB_GPCLR  at 0x4004A080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTB_GPCHR  at 0x4004A084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTB_ISFR   at 0x4004A0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTC_GPCLR  at 0x4004B080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTC_GPCHR  at 0x4004B084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTC_ISFR   at 0x4004B0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTD_GPCLR  at 0x4004C080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTD_GPCHR  at 0x4004C084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTD_ISFR   at 0x4004C0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTE_GPCLR  at 0x4004D080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTE_GPCHR  at 0x4004D084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTE_ISFR   at 0x4004D0A0 : UInt32 // Interrupt Status Flag Register\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
-  "register SIM_SOPT1    : UInt32 at 0x40047000 // System Options Register 1\n"
-  "register SIM_SOPT1CFG : UInt32 at 0x40047004 // SOPT1 Configuration Register\n"
-  "register SIM_SOPT2    : UInt32 at 0x40048004 // System Options Register 2\n"
-  "register SIM_SOPT2_USBSRC : UInt32 at 0x00040000  // 0=USB_CLKIN, 1=FFL/PLL \n"
-  "register SIM_SOPT2_PLLFLLSEL : UInt32 at 0x00010000  // 0=FLL, 1=PLL\n"
-  "register SIM_SOPT2_TRACECLKSEL : UInt32 at 0x00001000  // 0=MCGOUTCLK, 1=CPU\n"
-  "register SIM_SOPT2_PTD7PAD : UInt32 at 0x00000800  // 0=normal, 1=double drive PTD7\n"
+  "register SIM_SOPT1    at 0x40047000 : UInt32 // System Options Register 1\n"
+  "register SIM_SOPT1CFG at 0x40047004 : UInt32 // SOPT1 Configuration Register\n"
+  "register SIM_SOPT2    at 0x40048004 : UInt32 // System Options Register 2\n"
+  "register SIM_SOPT2_USBSRC at 0x00040000  : UInt32 // 0=USB_CLKIN, 1=FFL/PLL \n"
+  "register SIM_SOPT2_PLLFLLSEL at 0x00010000  : UInt32 // 0=FLL, 1=PLL\n"
+  "register SIM_SOPT2_TRACECLKSEL at 0x00001000  : UInt32 // 0=MCGOUTCLK, 1=CPU\n"
+  "register SIM_SOPT2_PTD7PAD at 0x00000800  : UInt32 // 0=normal, 1=double drive PTD7\n"
   "//register UInt32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.\n"
   "let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select\n"
-  "register SIM_SOPT4   : UInt32 at 0x4004800C // System Options Register 4\n"
-  "register SIM_SOPT5   : UInt32 at 0x40048010 // System Options Register 5\n"
-  "register SIM_SOPT7   : UInt32 at 0x40048018 // System Options Register 7\n"
-  "register @ro SIM_SDID  : UInt32 at 0x40048024 // System Device Identification Register\n"
-  "register SIM_SCGC2  : UInt32 at 0x4004802C // System Clock Gating Control Register 2\n"
-  "let SIM_SCGC2_DAC0  : UInt32 =  0x00001000  // DAC0 Clock Gate Control\n"
-  "register SIM_SCGC3  : UInt32 at 0x40048030 // System Clock Gating Control Register 3\n"
-  "let SIM_SCGC3_ADC1 : UInt32 =  0x08000000  // ADC1 Clock Gate Control\n"
-  "let SIM_SCGC3_FTM2 : UInt32 =  0x01000000  // FTM2 Clock Gate Control\n"
-  "register SIM_SCGC4 : UInt32 at 0x40048034 // System Clock Gating Control Register 4\n"
+  "register SIM_SOPT4   at 0x4004800C : UInt32 // System Options Register 4\n"
+  "register SIM_SOPT5   at 0x40048010 : UInt32 // System Options Register 5\n"
+  "register SIM_SOPT7   at 0x40048018 : UInt32 // System Options Register 7\n"
+  "register @ro SIM_SDID  at 0x40048024 : UInt32 // System Device Identification Register\n"
+  "register SIM_SCGC2  at 0x4004802C : UInt32 // System Clock Gating Control Register 2\n"
+  "let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control\n"
+  "register SIM_SCGC3  at 0x40048030 : UInt32 // System Clock Gating Control Register 3\n"
+  "let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control\n"
+  "let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control\n"
+  "register SIM_SCGC4 at 0x40048034 : UInt32 // System Clock Gating Control Register 4\n"
   "let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control\n"
   "let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control\n"
   "let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control\n"
@@ -4508,7 +4515,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control\n"
   "let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control\n"
   "let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control\n"
-  "register SIM_SCGC5 : UInt32 at 0x40048038 // System Clock Gating Control Register 5\n"
+  "register SIM_SCGC5 at 0x40048038 : UInt32 // System Clock Gating Control Register 5\n"
   "let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control\n"
   "let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control\n"
   "let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control\n"
@@ -4516,7 +4523,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control\n"
   "let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
   "let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control\n"
-  "register SIM_SCGC6 : UInt32 at 0x4004803C // System Clock Gating Control Register 6\n"
+  "register SIM_SCGC6 at 0x4004803C : UInt32 // System Clock Gating Control Register 6\n"
   "let SIM_SCGC6_RTC   : UInt32 = 0x20000000  // RTC Access\n"
   "let SIM_SCGC6_ADC0  : UInt32 =   0x08000000  // ADC0 Clock Gate Control\n"
   "let SIM_SCGC6_FTM1  : UInt32 =   0x02000000  // FTM1 Clock Gate Control\n"
@@ -4532,10 +4539,10 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let SIM_SCGC6_DMAMUX : UInt32 =  0x00000002  // DMA Mux Clock Gate Control\n"
   "let SIM_SCGC6_FTFL  : UInt32 =  0x00000001  // Flash Memory Clock Gate Control\n"
   "\n"
-  "register SIM_SCGC7 : UInt32 at 0x40048040 // System Clock Gating Control Register 7\n"
+  "register SIM_SCGC7 at 0x40048040 : UInt32 // System Clock Gating Control Register 7\n"
   "let SIM_SCGC7_DMA  : UInt32 =  0x00000002  // DMA Clock Gate Control\n"
   "\n"
-  "register SIM_CLKDIV1 : UInt32 at 0x40048044 // System Clock Divider Register 1\n"
+  "register SIM_CLKDIV1 at 0x40048044 : UInt32 // System Clock Divider Register 1\n"
   "//register UInt32 SIM_CLKDIV1_OUTDIV1(n)   (((n) & 0x0F) << 28) // divide value for the core/system clock\n"
   "let SIM_CLKDIV1_OUTDIV1_0 : UInt32 = 0 << 28\n"
   "//register UInt32 SIM_CLKDIV1_OUTDIV2(n)   (((n) & 0x0F) << 24) // divide value for the peripheral clock\n"
@@ -4543,40 +4550,40 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register UInt32 SIM_CLKDIV1_OUTDIV4(n)   (((n) & 0x0F) << 16) // divide value for the flash clock\n"
   "let SIM_CLKDIV1_OUTDIV4_3 : UInt32 = 3 << 16\n"
   "\n"
-  "register SIM_CLKDIV2 : UInt32 at 0x40048048 // System Clock Divider Register 2\n"
+  "register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2\n"
   "//register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)\n"
   "let SIM_CLKDIV2_USBFRAC  : UInt32 =  0x01\n"
-  "register @ro SIM_FCFG1 : UInt32 at 0x4004804C // Flash Configuration Register 1\n"
-  "register @ro SIM_FCFG2 : UInt32 at 0x40048050 // Flash Configuration Register 2\n"
-  "register @ro SIM_UIDH  : UInt32 at 0x40048054 // Unique Identification Register High\n"
-  "register @ro SIM_UIDMH : UInt32 at 0x40048058 // Unique Identification Register Mid-High\n"
-  "register @ro SIM_UIDML : UInt32 at 0x4004805C // Unique Identification Register Mid Low\n"
-  "register @ro SIM_UIDL  : UInt32 at 0x40048060 // Unique Identification Register Low\n"
+  "register @ro SIM_FCFG1 at 0x4004804C : UInt32 // Flash Configuration Register 1\n"
+  "register @ro SIM_FCFG2 at 0x40048050 : UInt32 // Flash Configuration Register 2\n"
+  "register @ro SIM_UIDH  at 0x40048054 : UInt32 // Unique Identification Register High\n"
+  "register @ro SIM_UIDMH at 0x40048058 : UInt32 // Unique Identification Register Mid-High\n"
+  "register @ro SIM_UIDML at 0x4004805C : UInt32 // Unique Identification Register Mid Low\n"
+  "register @ro SIM_UIDL  at 0x40048060 : UInt32 // Unique Identification Register Low\n"
   "\n"
   "// Chapter 13: Reset Control Module (RCM)\n"
-  "register RCM_SRS0 : UInt8 at 0x4007F000 // System Reset Status Register 0\n"
-  "register RCM_SRS1 : UInt8 at 0x4007F001 // System Reset Status Register 1\n"
-  "register RCM_RPFC : UInt8 at 0x4007F004 // Reset Pin Filter Control Register\n"
-  "register RCM_RPFW : UInt8 at 0x4007F005 // Reset Pin Filter Width Register\n"
-  "register RCM_MR   : UInt8 at 0x4007F007 // Mode Register\n"
+  "register RCM_SRS0 at 0x4007F000 : UInt8 // System Reset Status Register 0\n"
+  "register RCM_SRS1 at 0x4007F001 : UInt8 // System Reset Status Register 1\n"
+  "register RCM_RPFC at 0x4007F004 : UInt8 // Reset Pin Filter Control Register\n"
+  "register RCM_RPFW at 0x4007F005 : UInt8 // Reset Pin Filter Width Register\n"
+  "register RCM_MR   at 0x4007F007 : UInt8 // Mode Register\n"
   "\n"
   "// Chapter 14: System Mode Controller\n"
-  "register SMC_PMPROT  : UInt8 at 0x4007E000 // Power Mode Protection Register\n"
+  "register SMC_PMPROT  at 0x4007E000 : UInt8 // Power Mode Protection Register\n"
   "let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes\n"
   "let SMC_PMPROT_ALLS : UInt8  = 0x08   // Allow low leakage stop mode\n"
   "let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode\n"
   "\n"
-  "register SMC_PMCTRL  : UInt8 at 0x4007E001 // Power Mode Control Register\n"
+  "register SMC_PMCTRL  at 0x4007E001 : UInt8 // Power Mode Control Register\n"
   "let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt\n"
   "//register UInt8 SMC_PMCTRL_RUNM(n)  (uint8_t)(((n) & 0x03) << 5) // Run Mode Control\n"
   "let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted\n"
   "//register UInt8 SMC_PMCTRL_STOPM(n)  (uint8_t)((n) & 0x07)  // Stop Mode Control\n"
   "\n"
-  "register SMC_VLLSCTRL : UInt8 at 0x4007E002 // VLLS Control Register\n"
+  "register SMC_VLLSCTRL at 0x4007E002 : UInt8 // VLLS Control Register\n"
   "let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option\n"
   "//let UInt8 SMC_VLLSCTRL_VLLSM(n)  (uint8_t)((n) & 0x07)  // VLLS Mode Control\n"
   "\n"
-  "register SMC_PMST : UInt8 at 0x4007E003 // Power Mode Status Register\n"
+  "register SMC_PMST at 0x4007E003 : UInt8 // Power Mode Status Register\n"
   "let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN\n"
   "let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP\n"
   "let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR\n"
@@ -4586,75 +4593,75 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS\n"
   "\n"
   "// Chapter 15: Power Management Controller\n"
-  "register PMC_LVDSC1 : UInt8 at 0x4007D000 // Low Voltage Detect Status And Control 1 register\n"
+  "register PMC_LVDSC1 at 0x4007D000 : UInt8 // Low Voltage Detect Status And Control 1 register\n"
   "let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag\n"
   "let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge\n"
   "let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
   "let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable\n"
   "//let UInt8 PMC_LVDSC1_LVDV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select\n"
-  "register PMC_LVDSC2 : UInt8 at 0x4007D001 // Low Voltage Detect Status And Control 2 register\n"
+  "register PMC_LVDSC2 at 0x4007D001 : UInt8 // Low Voltage Detect Status And Control 2 register\n"
   "let PMC_LVDSC2_LVWF : UInt8  = 0x80   // Low-Voltage Warning Flag\n"
   "let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
   "let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
   "//let UInt8 PMC_LVDSC2_LVWV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select\n"
-  "register PMC_REGSC : UInt8 at 0x4007D002 // Regulator Status And Control register\n"
+  "register PMC_REGSC at 0x4007D002 : UInt8 // Regulator Status And Control register\n"
   "let PMC_REGSC_BGEN  : UInt8 = 0x10   // Bandgap Enable In VLPx Operation\n"
   "let PMC_REGSC_ACKISO : UInt8 = 0x08   // Acknowledge Isolation\n"
   "let PMC_REGSC_REGONS : UInt8 = 0x04   // Regulator In Run Regulation Status\n"
   "let PMC_REGSC_BGBE  : UInt8 = 0x01   // Bandgap Buffer Enable\n"
   "\n"
   "// Chapter 16: Low-Leakage Wakeup Unit (LLWU)\n"
-  "register LLWU_PE1  : UInt8 at 0x4007C000 // LLWU Pin Enable 1 register\n"
-  "register LLWU_PE2  : UInt8 at 0x4007C001 // LLWU Pin Enable 2 register\n"
-  "register LLWU_PE3  : UInt8 at 0x4007C002 // LLWU Pin Enable 3 register\n"
-  "register LLWU_PE4  : UInt8 at 0x4007C003 // LLWU Pin Enable 4 register\n"
-  "register LLWU_ME   : UInt8 at 0x4007C004 // LLWU Module Enable register\n"
-  "register LLWU_F1   : UInt8 at 0x4007C005 // LLWU Flag 1 register\n"
-  "register LLWU_F2   : UInt8 at 0x4007C006 // LLWU Flag 2 register\n"
-  "register LLWU_F3   : UInt8 at 0x4007C007 // LLWU Flag 3 register\n"
-  "register LLWU_FILT1: UInt8 at 0x4007C008 // LLWU Pin Filter 1 register\n"
-  "register LLWU_FILT2: UInt8 at 0x4007C009 // LLWU Pin Filter 2 register\n"
-  "register LLWU_RST  : UInt8 at 0x4007C00A // LLWU Reset Enable register\n"
+  "register LLWU_PE1  at 0x4007C000 : UInt8 // LLWU Pin Enable 1 register\n"
+  "register LLWU_PE2  at 0x4007C001 : UInt8 // LLWU Pin Enable 2 register\n"
+  "register LLWU_PE3  at 0x4007C002 : UInt8 // LLWU Pin Enable 3 register\n"
+  "register LLWU_PE4  at 0x4007C003 : UInt8 // LLWU Pin Enable 4 register\n"
+  "register LLWU_ME   at 0x4007C004 : UInt8 // LLWU Module Enable register\n"
+  "register LLWU_F1   at 0x4007C005 : UInt8 // LLWU Flag 1 register\n"
+  "register LLWU_F2   at 0x4007C006 : UInt8 // LLWU Flag 2 register\n"
+  "register LLWU_F3   at 0x4007C007 : UInt8 // LLWU Flag 3 register\n"
+  "register LLWU_FILT1 at 0x4007C008 : UInt8 // LLWU Pin Filter 1 register\n"
+  "register LLWU_FILT2 at 0x4007C009 : UInt8 // LLWU Pin Filter 2 register\n"
+  "register LLWU_RST  at 0x4007C00A : UInt8 // LLWU Reset Enable register\n"
   "\n"
   "// Chapter 17: Miscellaneous Control Module (MCM)\n"
-  "register MCM_PLASC : UInt16 at 0xE0080008 // Crossbar Switch (AXBS) Slave Configuration\n"
+  "register MCM_PLASC at 0xE0080008 : UInt16 // Crossbar Switch (AXBS) Slave Configuration\n"
   "\n"
-  "register MCM_PLAMC : UInt16 at 0xE008000A // Crossbar Switch (AXBS) Master Configuration\n"
+  "register MCM_PLAMC at 0xE008000A : UInt16 // Crossbar Switch (AXBS) Master Configuration\n"
   "\n"
-  "register MCM_PLACR : UInt32 at 0xE008000C // Crossbar Switch (AXBS) Control Register (MK20DX128)\n"
+  "register MCM_PLACR at 0xE008000C : UInt32 // Crossbar Switch (AXBS) Control Register (MK20DX128)\n"
   "let MCM_PLACR_ARG   : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
   "\n"
-  "register MCM_CR : UInt32 at 0xE008000C // RAM arbitration control register (MK20DX256)\n"
+  "register MCM_CR at 0xE008000C : UInt32 // RAM arbitration control register (MK20DX256)\n"
   "let MCM_CR_SRAMLWP  : UInt32 =  0x4000_0000  // SRAM_L write protect\n"
   "//let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
   "let MCM_CR_SRAMUWP  : UInt32 =  0x0400_0000  // SRAM_U write protect\n"
   "//let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
   "\n"
   "// Crossbar Switch (AXBS) - only programmable on MK20DX256\n"
-  "register AXBS_PRS0   : UInt32 at 0x40004000 // Priority Registers Slave 0\n"
-  "register AXBS_CRS0   : UInt32 at 0x40004010 // Control Register 0\n"
-  "register AXBS_PRS1   : UInt32 at 0x40004100 // Priority Registers Slave 1\n"
-  "register AXBS_CRS1   : UInt32 at 0x40004110 // Control Register 1\n"
-  "register AXBS_PRS2   : UInt32 at 0x40004200 // Priority Registers Slave 2\n"
-  "register AXBS_CRS2   : UInt32 at 0x40004210 // Control Register 2\n"
-  "register AXBS_PRS3   : UInt32 at 0x40004300 // Priority Registers Slave 3\n"
-  "register AXBS_CRS3   : UInt32 at 0x40004310 // Control Register 3\n"
-  "register AXBS_PRS4   : UInt32 at 0x40004400 // Priority Registers Slave 4\n"
-  "register AXBS_CRS4   : UInt32 at 0x40004410 // Control Register 4\n"
-  "register AXBS_PRS5   : UInt32 at 0x40004500 // Priority Registers Slave 5\n"
-  "register AXBS_CRS5   : UInt32 at 0x40004510 // Control Register 5\n"
-  "register AXBS_PRS6   : UInt32 at 0x40004600 // Priority Registers Slave 6\n"
-  "register AXBS_CRS6   : UInt32 at 0x40004610 // Control Register 6\n"
-  "register AXBS_PRS7   : UInt32 at 0x40004700 // Priority Registers Slave 7\n"
-  "register AXBS_CRS7   : UInt32 at 0x40004710 // Control Register 7\n"
-  "register AXBS_MGPCR0 : UInt32 at 0x40004800 // Master 0 General Purpose Control Register\n"
-  "register AXBS_MGPCR1 : UInt32 at 0x40004900 // Master 1 General Purpose Control Register\n"
-  "register AXBS_MGPCR2 : UInt32 at 0x40004A00 // Master 2 General Purpose Control Register\n"
-  "register AXBS_MGPCR3 : UInt32 at 0x40004B00 // Master 3 General Purpose Control Register\n"
-  "register AXBS_MGPCR4 : UInt32 at 0x40004C00 // Master 4 General Purpose Control Register\n"
-  "register AXBS_MGPCR5 : UInt32 at 0x40004D00 // Master 5 General Purpose Control Register\n"
-  "register AXBS_MGPCR6 : UInt32 at 0x40004E00 // Master 6 General Purpose Control Register\n"
-  "register AXBS_MGPCR7 : UInt32 at 0x40004F00 // Master 7 General Purpose Control Register\n"
+  "register AXBS_PRS0   at 0x40004000 : UInt32 // Priority Registers Slave 0\n"
+  "register AXBS_CRS0   at 0x40004010 : UInt32 // Control Register 0\n"
+  "register AXBS_PRS1   at 0x40004100 : UInt32 // Priority Registers Slave 1\n"
+  "register AXBS_CRS1   at 0x40004110 : UInt32 // Control Register 1\n"
+  "register AXBS_PRS2   at 0x40004200 : UInt32 // Priority Registers Slave 2\n"
+  "register AXBS_CRS2   at 0x40004210 : UInt32 // Control Register 2\n"
+  "register AXBS_PRS3   at 0x40004300 : UInt32 // Priority Registers Slave 3\n"
+  "register AXBS_CRS3   at 0x40004310 : UInt32 // Control Register 3\n"
+  "register AXBS_PRS4   at 0x40004400 : UInt32 // Priority Registers Slave 4\n"
+  "register AXBS_CRS4   at 0x40004410 : UInt32 // Control Register 4\n"
+  "register AXBS_PRS5   at 0x40004500 : UInt32 // Priority Registers Slave 5\n"
+  "register AXBS_CRS5   at 0x40004510 : UInt32 // Control Register 5\n"
+  "register AXBS_PRS6   at 0x40004600 : UInt32 // Priority Registers Slave 6\n"
+  "register AXBS_CRS6   at 0x40004610 : UInt32 // Control Register 6\n"
+  "register AXBS_PRS7   at 0x40004700 : UInt32 // Priority Registers Slave 7\n"
+  "register AXBS_CRS7   at 0x40004710 : UInt32 // Control Register 7\n"
+  "register AXBS_MGPCR0 at 0x40004800 : UInt32 // Master 0 General Purpose Control Register\n"
+  "register AXBS_MGPCR1 at 0x40004900 : UInt32 // Master 1 General Purpose Control Register\n"
+  "register AXBS_MGPCR2 at 0x40004A00 : UInt32 // Master 2 General Purpose Control Register\n"
+  "register AXBS_MGPCR3 at 0x40004B00 : UInt32 // Master 3 General Purpose Control Register\n"
+  "register AXBS_MGPCR4 at 0x40004C00 : UInt32 // Master 4 General Purpose Control Register\n"
+  "register AXBS_MGPCR5 at 0x40004D00 : UInt32 // Master 5 General Purpose Control Register\n"
+  "register AXBS_MGPCR6 at 0x40004E00 : UInt32 // Master 6 General Purpose Control Register\n"
+  "register AXBS_MGPCR7 at 0x40004F00 : UInt32 // Master 7 General Purpose Control Register\n"
   "let AXBS_CRS_READONLY  : UInt32=  0x80000000\n"
   "let AXBS_CRS_HALTLOWPRIORITY  : UInt32 = 0x40000000\n"
   "let AXBS_CRS_ARB_FIXED  : UInt32 = 0x00000000\n"
@@ -4667,22 +4674,22 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "\n"
   "\n"
   "// Chapter 20: Direct Memory Access Multiplexer (DMAMUX)\n"
-  "register DMAMUX0_CHCFG0  : UInt8 at 0x40021000 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG1  : UInt8 at 0x40021001 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG2  : UInt8 at 0x40021002 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG3  : UInt8 at 0x40021003 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG4  : UInt8 at 0x40021004 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG5  : UInt8 at 0x40021005 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG6  : UInt8 at 0x40021006 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG7  : UInt8 at 0x40021007 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG8  : UInt8 at 0x40021008 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG9  : UInt8 at 0x40021009 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG10 : UInt8 at 0x4002100A // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG11 : UInt8 at 0x4002100B // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG12 : UInt8 at 0x4002100C // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG13 : UInt8 at 0x4002100D // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG14 : UInt8 at 0x4002100E // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG15 : UInt8 at 0x4002100F // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG0  at 0x40021000 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG1  at 0x40021001 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG2  at 0x40021002 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG3  at 0x40021003 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG4  at 0x40021004 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG5  at 0x40021005 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG6  at 0x40021006 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG7  at 0x40021007 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG8  at 0x40021008 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG9  at 0x40021009 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG10 at 0x4002100A : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG11 at 0x4002100B : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG12 at 0x4002100C : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG13 at 0x4002100D : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG14 at 0x4002100E : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG15 at 0x4002100F : UInt8 // Channel Configuration register\n"
   "let DMAMUX_DISABLE : UInt8 =  0\n"
   "let DMAMUX_TRIG  : UInt8 = 64\n"
   "let DMAMUX_ENABLE : UInt8 =  128\n"
@@ -4735,7 +4742,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let DMAMUX_SOURCE_ALWAYS9 : UInt8 = 63\n"
   "\n"
   "// Chapter 21: Direct Memory Access Controller (eDMA)\n"
-  "register DMA_CR : UInt32 at 0x40008000 // Control Register\n"
+  "register DMA_CR at 0x40008000 : UInt32 // Control Register\n"
   "let DMA_CR_CX   : UInt32  = 0x2_0000 // Cancel Transfer\n"
   "let DMA_CR_ECX   : UInt32 = 0x1_0000 // Error Cancel Transfer\n"
   "let DMA_CR_EMLM   : UInt32= 0x80 // Enable Minor Loop Mapping\n"
@@ -4744,13 +4751,13 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let DMA_CR_HOE   : UInt32 = 0x10 // Halt On Error\n"
   "let DMA_CR_ERCA  : UInt32 = 0x04 // Enable Round Robin Channel Arbitration\n"
   "let DMA_CR_EDBG   : UInt32= 0x02 // Enable Debug\n"
-  "register DMA_ES  : UInt32 at 0x40008004 // Error Status Register\n"
-  "register DMA_ERQ : UInt32 at 0x4000800C // Enable Request Register\n"
+  "register DMA_ES  at 0x40008004 : UInt32 // Error Status Register\n"
+  "register DMA_ERQ at 0x4000800C : UInt32 // Enable Request Register\n"
   "let DMA_ERQ_ERQ0   : UInt32 = 1 // Enable DMA Request 0\n"
   "let DMA_ERQ_ERQ1   : UInt32 = 2 // Enable DMA Request 1\n"
   "let DMA_ERQ_ERQ2   : UInt32 = 4 // Enable DMA Request 2\n"
   "let DMA_ERQ_ERQ3   : UInt32 = 8 // Enable DMA Request 3\n"
-  "register DMA_EEI : UInt32 at 0x40008014 // Enable Error Interrupt Register\n"
+  "register DMA_EEI at 0x40008014 : UInt8 // Enable Error Interrupt Register\n"
   "let DMA_EEI_EEI0   : UInt32 = 1 // Enable Error Interrupt 0\n"
   "let DMA_EEI_EEI1   : UInt32 = 2 // Enable Error Interrupt 1\n"
   "let DMA_EEI_EEI2   : UInt32 = 4 // Enable Error Interrupt 2\n"
@@ -5104,7 +5111,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register EWM_CMPH  *(volatile uint8_t  *)0x40061003 // Compare High Register\n"
   "//\n"
   "//// Chapter 23: Watchdog Timer (WDOG)\n"
-  "register WDOG_STCTRLH : UInt16 at 0x40052000 // Watchdog Status and Control Register High\n"
+  "register WDOG_STCTRLH at 0x40052000 : UInt16 // Watchdog Status and Control Register High\n"
   "let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
   "//register WDOG_STCTRLH_BYTESEL(n)  (uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.\n"
   "let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800\n"
@@ -5117,22 +5124,22 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004\n"
   "let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002\n"
   "let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001\n"
-  "register WDOG_STCTRLL  : UInt16 at 0x40052002 // Watchdog Status and Control Register Low\n"
-  "register WDOG_TOVALH   : UInt16 at 0x40052004 // Watchdog Time-out Value Register High\n"
-  "register WDOG_TOVALL   : UInt16 at 0x40052006 // Watchdog Time-out Value Register Low\n"
-  "register WDOG_WINH     : UInt16 at 0x40052008 // Watchdog Window Register High\n"
-  "register WDOG_WINL     : UInt16 at 0x4005200A // Watchdog Window Register Low\n"
-  "register WDOG_REFRESH  : UInt16 at 0x4005200C // Watchdog Refresh register\n"
-  "register WDOG_UNLOCK   : UInt16 at 0x4005200E // Watchdog Unlock register\n"
+  "register WDOG_STCTRLL  at 0x40052002 : UInt16 // Watchdog Status and Control Register Low\n"
+  "register WDOG_TOVALH   at 0x40052004 : UInt16 // Watchdog Time-out Value Register High\n"
+  "register WDOG_TOVALL   at 0x40052006 : UInt16 // Watchdog Time-out Value Register Low\n"
+  "register WDOG_WINH     at 0x40052008 : UInt16 // Watchdog Window Register High\n"
+  "register WDOG_WINL     at 0x4005200A : UInt16 // Watchdog Window Register Low\n"
+  "register WDOG_REFRESH  at 0x4005200C : UInt16 // Watchdog Refresh register\n"
+  "register WDOG_UNLOCK   at 0x4005200E : UInt16 // Watchdog Unlock register\n"
   "let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520\n"
   "let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928\n"
-  "register WDOG_TMROUTH  : UInt16 at 0x40052010 // Watchdog Timer Output Register High\n"
-  "register WDOG_TMROUTL  : UInt16 at 0x40052012 // Watchdog Timer Output Register Low\n"
-  "register WDOG_RSTCNT   : UInt16 at 0x40052014 // Watchdog Reset Count register\n"
-  "register WDOG_PRESC    : UInt16 at 0x40052016 // Watchdog Prescaler register\n"
+  "register WDOG_TMROUTH  at 0x40052010 : UInt16 // Watchdog Timer Output Register High\n"
+  "register WDOG_TMROUTL  at 0x40052012 : UInt16 // Watchdog Timer Output Register Low\n"
+  "register WDOG_RSTCNT   at 0x40052014 : UInt16 // Watchdog Reset Count register\n"
+  "register WDOG_PRESC    at 0x40052016 : UInt16 // Watchdog Prescaler register\n"
   "//\n"
   "//// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "register MCG_C1 : UInt8 at 0x40064000 // MCG Control 1 Register\n"
+  "register MCG_C1 at 0x40064000 : UInt8 // MCG Control 1 Register\n"
   "let MCG_C1_IREFSTEN : UInt8 = 0x01   // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the "
   "MCG enters Stop mode.\n"
   "let MCG_C1_IRCLKEN : UInt8 = 0x02   // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK.\n"
@@ -5152,7 +5159,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let MCG_C1_CLKS_1 : UInt8 = 1 << 6\n"
   "let MCG_C1_CLKS_2 : UInt8 = 2 << 6\n"
   "let MCG_C1_CLKS_3 : UInt8 = 3 << 6\n"
-  "register MCG_C2 : UInt8 at 0x40064001 // MCG Control 2 Register\n"
+  "register MCG_C2 at 0x40064001 : UInt8 // MCG Control 2 Register\n"
   "let MCG_C2_IRCS : UInt8  = 0x01   // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.\n"
   "let MCG_C2_LP : UInt8 = 0x02   // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.\n"
   "let MCG_C2_EREFS : UInt8 = 0x04   // External Reference Select, Selects the source for the external reference clock. \n"
@@ -5164,25 +5171,25 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let MCG_C2_RANGE0_3 : UInt8 = 3 << 4\n"
   "let MCG_C2_LOCRE0 : UInt8 = 0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 "
   "\n"
-  "register MCG_C3 : UInt8 at 0x40064002 // MCG Control 3 Register\n"
+  "register MCG_C3 at 0x40064002 : UInt8 // MCG Control 3 Register\n"
   "//register MCG_C3_SCTRIM(n)  (uint8_t)(n)   // Slow Internal Reference Clock Trim Setting\n"
-  "register MCG_C4 : UInt8 at 0x40064003 // MCG Control 4 Register\n"
+  "register MCG_C4 at 0x40064003 : UInt8 // MCG Control 4 Register\n"
   "let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
   "//register MCG_C4_FCTRIM(n)  (uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting\n"
   "//register MCG_C4_DRST_DRS(n)  (uint8_t)(((n) & 0x03) << 5) // DCO Range Select\n"
   "let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
-  "register MCG_C5 : UInt8 at 0x40064004 // MCG Control 5 Register\n"
+  "register MCG_C5 at 0x40064004 : UInt8 // MCG Control 5 Register\n"
   "//register MCG_C5_PRDIV0(n)  (uint8_t)((n) & 0x1F)  // PLL External Reference Divider\n"
   "let MCG_C5_PRDIV0_3 : UInt8 = 3\n"
   "let MCG_C5_PLLSTEN0 : UInt8 = 0x20   // PLL Stop Enable\n"
   "let MCG_C5_PLLCLKEN0 : UInt8 = 0x40   // PLL Clock Enable\n"
-  "register MCG_C6 : UInt8 at 0x40064005 // MCG Control 6 Register\n"
+  "register MCG_C6 at 0x40064005 : UInt8 // MCG Control 6 Register\n"
   "//register MCG_C6_VDIV0(n)   (uint8_t)((n) & 0x1F)  // VCO 0 Divider\n"
   "let MCG_C6_VDIV0_0 : UInt8 = 0   // Clock Monitor Enable\n"
   "let MCG_C6_CME0 : UInt8 = 0x20   // Clock Monitor Enable\n"
   "let MCG_C6_PLLS : UInt8 = 0x40   // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. \n"
   "//register MCG_C6_LOLIE0   (uint8_t)0x80   // Loss of Lock Interrrupt Enable\n"
-  "register MCG_S  : UInt8 at 0x40064006 // MCG Status Register\n"
+  "register MCG_S  at 0x40064006 : UInt8 // MCG Status Register\n"
   "let MCG_S_IRCST : UInt8 = 0x01   // Internal Reference Clock Status\n"
   "let MCG_S_OSCINIT0 : UInt8 = 0x02   // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
   "//register MCG_S_CLKST(n)   (uint8_t)(((n) & 0x03) << 2) // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
@@ -5198,7 +5205,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let MCG_S_LOCK0 : UInt8  = 0x40   // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
   "let MCG_S_LOLS0 : UInt8  = 0x80   // Loss of Lock Status\n"
   "\n"
-  "register MCG_SC : UInt8 at 0x40064008 // MCG Status and Control Register\n"
+  "register MCG_SC at 0x40064008 : UInt8 // MCG Status and Control Register\n"
   "let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
   "//register MCG_SC_FCRDIV(n)  (uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider\n"
   "let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable\n"
@@ -5206,13 +5213,13 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select\n"
   "let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable\n"
   "\n"
-  "register MCG_ATCVH : UInt8 at 0x4006400A // MCG Auto Trim Compare Value High Register\n"
-  "register MCG_ATCVL : UInt8 at 0x4006400B // MCG Auto Trim Compare Value Low Register\n"
-  "register MCG_C7    : UInt8 at 0x4006400C // MCG Control 7 Register\n"
-  "register MCG_C8    : UInt8 at 0x4006400D // MCG Control 8 Register\n"
+  "register MCG_ATCVH at 0x4006400A : UInt8 // MCG Auto Trim Compare Value High Register\n"
+  "register MCG_ATCVL at 0x4006400B : UInt8 // MCG Auto Trim Compare Value Low Register\n"
+  "register MCG_C7    at 0x4006400C : UInt8 // MCG Control 7 Register\n"
+  "register MCG_C8    at 0x4006400D : UInt8 // MCG Control 8 Register\n"
   "//\n"
   "//// Chapter 25: Oscillator (OSC)\n"
-  "register OSC0_CR : UInt8 at 0x40065000 // OSC Control Register\n"
+  "register OSC0_CR at 0x40065000 : UInt8 // OSC Control Register\n"
   "let OSC_SC16P  : UInt8 = 0x01   // Oscillator 16 pF Capacitor Load Configure\n"
   "let OSC_SC8P   : UInt8 = 0x02   // Oscillator 8 pF Capacitor Load Configure\n"
   "let OSC_SC4P   : UInt8 = 0x04   // Oscillator 4 pF Capacitor Load Configure\n"
@@ -5222,24 +5229,24 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let OSC_ERCLKEN : UInt8 = 0x80   // External Reference Enable, Enables external reference clock (OSCERCLK).\n"
   "//\n"
   "//// Chapter 27: Flash Memory Controller (FMC)\n"
-  "register FMC_PFAPR     : UInt32 at 0x4001F000 // Flash Access Protection\n"
-  "register FMC_PFB0CR    : UInt32 at 0x4001F004 // Flash Control\n"
-  "register FMC_TAGVDW0S0 : UInt32 at 0x4001F100 // Cache Tag Storage\n"
-  "register FMC_TAGVDW0S1 : UInt32 at 0x4001F104 // Cache Tag Storage\n"
-  "register FMC_TAGVDW1S0 : UInt32 at 0x4001F108 // Cache Tag Storage\n"
-  "register FMC_TAGVDW1S1 : UInt32 at 0x4001F10C // Cache Tag Storage\n"
-  "register FMC_TAGVDW2S0 : UInt32 at 0x4001F110 // Cache Tag Storage\n"
-  "register FMC_TAGVDW2S1 : UInt32 at 0x4001F114 // Cache Tag Storage\n"
-  "register FMC_TAGVDW3S0 : UInt32 at 0x4001F118 // Cache Tag Storage\n"
-  "register FMC_TAGVDW3S1 : UInt32 at 0x4001F11C // Cache Tag Storage\n"
-  "register FMC_DATAW0S0  : UInt32 at 0x4001F200 // Cache Data Storage\n"
-  "register FMC_DATAW0S1  : UInt32 at 0x4001F204 // Cache Data Storage\n"
-  "register FMC_DATAW1S0  : UInt32 at 0x4001F208 // Cache Data Storage\n"
-  "register FMC_DATAW1S1  : UInt32 at 0x4001F20C // Cache Data Storage\n"
-  "register FMC_DATAW2S0  : UInt32 at 0x4001F210 // Cache Data Storage\n"
-  "register FMC_DATAW2S1  : UInt32 at 0x4001F214 // Cache Data Storage\n"
-  "register FMC_DATAW3S0  : UInt32 at 0x4001F218 // Cache Data Storage\n"
-  "register FMC_DATAW3S1  : UInt32 at 0x4001F21C // Cache Data Storage\n"
+  "register FMC_PFAPR     at 0x4001F000 : UInt32 // Flash Access Protection\n"
+  "register FMC_PFB0CR    at 0x4001F004 : UInt32 // Flash Control\n"
+  "register FMC_TAGVDW0S0 at 0x4001F100 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW0S1 at 0x4001F104 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S0 at 0x4001F108 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S1 at 0x4001F10C : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S0 at 0x4001F110 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S1 at 0x4001F114 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S0 at 0x4001F118 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S1 at 0x4001F11C : UInt32 // Cache Tag Storage\n"
+  "register FMC_DATAW0S0  at 0x4001F200 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW0S1  at 0x4001F204 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW1S0  at 0x4001F208 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW1S1  at 0x4001F20C : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW2S0  at 0x4001F210 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW2S1  at 0x4001F214 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW3S0  at 0x4001F218 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW3S1  at 0x4001F21C : UInt32 // Cache Data Storage\n"
   "//\n"
   "//// Chapter 28: Flash Memory Module (FTFL)\n"
   "//register FTFL_FST *(volatile uint8_t  *)0x40020000      // Flash Status Register\n"
@@ -5276,35 +5283,35 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register FTFL_FPROT0  *(volatile uint8_t  *)0x40020013      // Program Flash Protection Registers\n"
   "//register FTFL_FEPROT  *(volatile uint8_t  *)0x40020016      // EEPROM Protection Register\n"
   "//register FTFL_FDPROT  *(volatile uint8_t  *)0x40020017      // Data Flash Protection Register\n"
-  "//\n"
-  "//// Chapter 30: Cyclic Redundancy Check (CRC)\n"
-  "register CRC_CRC   : UInt32 at 0x40032000 // CRC Data register\n"
-  "register CRC_GPOLY : UInt32 at 0x40032004 // CRC Polynomial register\n"
-  "register CRC_CTRL  : UInt32 at 0x40032008 // CRC Control register\n"
-  "//\n"
-  "//// Chapter 31: Analog-to-Digital Converter (ADC)\n"
-  "register ADC0_SC1A   : UInt32 at 0x4003B000 // ADC status and control registers 1\n"
-  "register ADC0_SC1B   : UInt32 at 0x4003B004 // ADC status and control registers 1\n"
+  "\n"
+  "// Chapter 30: Cyclic Redundancy Check (CRC)\n"
+  "register CRC_CRC   at 0x40032000 : UInt32 // CRC Data register\n"
+  "register CRC_GPOLY at 0x40032004 : UInt32 // CRC Polynomial register\n"
+  "register CRC_CTRL  at 0x40032008 : UInt32 // CRC Control register\n"
+  "\n"
+  "// Chapter 31: Analog-to-Digital Converter (ADC)\n"
+  "register ADC0_SC1A   at 0x4003B000 : UInt32 // ADC status and control registers 1\n"
+  "register ADC0_SC1B   at 0x4003B004 : UInt32 // ADC status and control registers 1\n"
   "let ADC_SC1_COCO  : UInt32 = 0x80   // Conversion complete flag\n"
   "let ADC_SC1_AIEN  : UInt32 = 0x40   // Interrupt enable\n"
   "let ADC_SC1_DIFF  : UInt32 = 0x20   // Differential mode enable\n"
   "//register ADC_SC1_ADCH(n)    ((n) & 0x1F)  // Input channel select\n"
-  "register ADC0_CFG1   : UInt32 at 0x4003B008 // ADC configuration register 1\n"
+  "register ADC0_CFG1   at 0x4003B008 : UInt32 // ADC configuration register 1\n"
   "let ADC_CFG1_ADLPC  : UInt32 = 0x80   // Low-power configuration\n"
   "//register ADC_CFG1_ADIV(n)   (((n) & 3) << 5) // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8\n"
   "let ADC_CFG1_ADLSMP  : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
   "//register ADC_CFG1_MODE(n)   (((n) & 3) << 2) // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit\n"
   "//register ADC_CFG1_ADICLK(n)   (((n) & 3) << 0) // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async\n"
-  "register ADC0_CFG2  : UInt32 at 0x4003B00C // Configuration register 2\n"
+  "register ADC0_CFG2  at 0x4003B00C : UInt32 // Configuration register 2\n"
   "let ADC_CFG2_MUXSEL  : UInt32 = 0x10   // 0=a channels, 1=b channels\n"
   "let ADC_CFG2_ADACKEN  : UInt32 = 0x08   // async clock enable\n"
   "let ADC_CFG2_ADHSC   : UInt32 = 0x04   // High speed configuration\n"
   "//register ADC_CFG2_ADLSTS(n)   (((n) & 3) << 0) // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles\n"
-  "register ADC0_RA    : UInt32 at 0x4003B010 // ADC data result register\n"
-  "register ADC0_RB    : UInt32 at 0x4003B014 // ADC data result register\n"
-  "register ADC0_CV1   : UInt32 at 0x4003B018 // Compare value registers\n"
-  "register ADC0_CV2   : UInt32 at 0x4003B01C // Compare value registers\n"
-  "register ADC0_SC2   : UInt32 at 0x4003B020 // Status and control register 2\n"
+  "register ADC0_RA    at 0x4003B010 : UInt32 // ADC data result register\n"
+  "register ADC0_RB    at 0x4003B014 : UInt32 // ADC data result register\n"
+  "register ADC0_CV1   at 0x4003B018 : UInt32 // Compare value registers\n"
+  "register ADC0_CV2   at 0x4003B01C : UInt32 // Compare value registers\n"
+  "register ADC0_SC2   at 0x4003B020 : UInt32 // Status and control register 2\n"
   "let ADC_SC2_ADACT  : UInt32 = 0x80   // Conversion active\n"
   "let ADC_SC2_ADTRG  : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
   "let ADC_SC2_ACFE   : UInt32 = 0x20   // Compare function enable\n"
@@ -5312,82 +5319,82 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let ADC_SC2_ACREN  : UInt32 = 0x08   // Compare function range enable\n"
   "let ADC_SC2_DMAEN  : UInt32= 0x04   // DMA enable\n"
   "//register ADC_SC2_REFSEL(n)   (((n) & 3) << 0) // Voltage reference, 0=vcc/external, 1=1.2 volts\n"
-  "register ADC0_SC3   : UInt32 at 0x4003B024 // Status and control register 3\n"
+  "register ADC0_SC3   at 0x4003B024 : UInt32 // Status and control register 3\n"
   "let ADC_SC3_CAL  : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
   "let ADC_SC3_CALF  : UInt32= 0x40   // Calibration failed flag\n"
   "let ADC_SC3_ADCO  : UInt32= 0x08   // Continuous conversion enable\n"
   "let ADC_SC3_AVGE  : UInt32= 0x04   // Hardware average enable\n"
   "//register ADC_SC3_AVGS(n)    (((n) & 3) << 0) // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples\n"
-  "register ADC0_OFS   : UInt32 at 0x4003B028 // ADC offset correction register\n"
-  "register ADC0_PG    : UInt32 at 0x4003B02C // ADC plus-side gain register\n"
-  "register ADC0_MG    : UInt32 at 0x4003B030 // ADC minus-side gain register\n"
-  "register ADC0_CLPD  : UInt32 at 0x4003B034 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLPS  : UInt32 at 0x4003B038 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP4  : UInt32 at 0x4003B03C // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP3  : UInt32 at 0x4003B040 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP2  : UInt32 at 0x4003B044 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP1  : UInt32 at 0x4003B048 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP0  : UInt32 at 0x4003B04C // ADC plus-side general calibration value register\n"
-  "register ADC0_PGA   : UInt32 at 0x4003B050 // ADC Programmable Gain Amplifier\n"
+  "register ADC0_OFS   at 0x4003B028 : UInt32 // ADC offset correction register\n"
+  "register ADC0_PG    at 0x4003B02C : UInt32 // ADC plus-side gain register\n"
+  "register ADC0_MG    at 0x4003B030 : UInt32 // ADC minus-side gain register\n"
+  "register ADC0_CLPD  at 0x4003B034 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLPS  at 0x4003B038 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP4  at 0x4003B03C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP3  at 0x4003B040 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP2  at 0x4003B044 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP1  at 0x4003B048 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP0  at 0x4003B04C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_PGA   at 0x4003B050 : UInt32 // ADC Programmable Gain Amplifier\n"
   "let ADC0_PGA_PGAEN  : UInt32 = 0x00800000  // Enable\n"
   "let ADC0_PGA_PGALPB  : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
   "//register ADC0_PGA_PGAG(n)   (((n) & 15) << 16) // Gain, 0=1X, 1=2X, 2=4X, 3=8X, 4=16X, 5=32X, 6=64X\n"
-  "register ADC0_CLMD   : UInt32 at 0x4003B054 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLMS   : UInt32 at 0x4003B058 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM4   : UInt32 at 0x4003B05C // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM3   : UInt32 at 0x4003B060 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM2   : UInt32 at 0x4003B064 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM1   : UInt32 at 0x4003B068 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM0   : UInt32 at 0x4003B06C // ADC minus-side general calibration value register\n"
-  "//\n"
-  "register ADC1_SC1A   : UInt32 at 0x400BB000 // ADC status and control registers 1\n"
-  "register ADC1_SC1B   : UInt32 at 0x400BB004 // ADC status and control registers 1\n"
-  "register ADC1_CFG1   : UInt32 at 0x400BB008 // ADC configuration register 1\n"
-  "register ADC1_CFG2   : UInt32 at 0x400BB00C // Configuration register 2\n"
-  "register ADC1_RA     : UInt32 at 0x400BB010 // ADC data result register\n"
-  "register ADC1_RB     : UInt32 at 0x400BB014 // ADC data result register\n"
-  "register ADC1_CV1    : UInt32 at 0x400BB018 // Compare value registers\n"
-  "register ADC1_CV2    : UInt32 at 0x400BB01C // Compare value registers\n"
-  "register ADC1_SC2    : UInt32 at 0x400BB020 // Status and control register 2\n"
-  "register ADC1_SC3    : UInt32 at 0x400BB024 // Status and control register 3\n"
-  "register ADC1_OFS    : UInt32 at 0x400BB028 // ADC offset correction register\n"
-  "register ADC1_PG     : UInt32 at 0x400BB02C // ADC plus-side gain register\n"
-  "register ADC1_MG     : UInt32 at 0x400BB030 // ADC minus-side gain register\n"
-  "register ADC1_CLPD   : UInt32 at 0x400BB034 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLPS   : UInt32 at 0x400BB038 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP4   : UInt32 at 0x400BB03C // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP3   : UInt32 at 0x400BB040 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP2   : UInt32 at 0x400BB044 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP1   : UInt32 at 0x400BB048 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP0   : UInt32 at 0x400BB04C // ADC plus-side general calibration value register\n"
-  "register ADC1_PGA    : UInt32 at 0x400BB050 // ADC Programmable Gain Amplifier\n"
-  "register ADC1_CLMD   : UInt32 at 0x400BB054 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLMS   : UInt32 at 0x400BB058 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM4   : UInt32 at 0x400BB05C // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM3   : UInt32 at 0x400BB060 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM2   : UInt32 at 0x400BB064 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM1   : UInt32 at 0x400BB068 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM0   : UInt32 at 0x400BB06C // ADC minus-side general calibration value register\n"
+  "register ADC0_CLMD   at 0x4003B054 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLMS   at 0x4003B058 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM4   at 0x4003B05C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM3   at 0x4003B060 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM2   at 0x4003B064 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM1   at 0x4003B068 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM0   at 0x4003B06C : UInt32 // ADC minus-side general calibration value register\n"
   "\n"
-  "register DAC0_DAT0L : UInt8 at 0x400CC000 // DAC Data Low Register \n"
-  "register DAC0_DATH  : UInt8 at 0x400CC001 // DAC Data High Register \n"
-  "register DAC0_DAT1L : UInt8 at 0x400CC002 // DAC Data Low Register \n"
-  "register DAC0_DAT2L : UInt8 at 0x400CC004 // DAC Data Low Register \n"
-  "register DAC0_DAT3L : UInt8 at 0x400CC006 // DAC Data Low Register \n"
-  "register DAC0_DAT4L : UInt8 at 0x400CC008 // DAC Data Low Register \n"
-  "register DAC0_DAT5L : UInt8 at 0x400CC00A // DAC Data Low Register \n"
-  "register DAC0_DAT6L : UInt8 at 0x400CC00C // DAC Data Low Register \n"
-  "register DAC0_DAT7L : UInt8 at 0x400CC00E // DAC Data Low Register \n"
-  "register DAC0_DAT8L : UInt8 at 0x400CC010 // DAC Data Low Register \n"
-  "register DAC0_DAT9L : UInt8 at 0x400CC012 // DAC Data Low Register \n"
-  "register DAC0_DAT10L : UInt8 at 0x400CC014 // DAC Data Low Register \n"
-  "register DAC0_DAT11L : UInt8 at 0x400CC016 // DAC Data Low Register \n"
-  "register DAC0_DAT12L : UInt8 at 0x400CC018 // DAC Data Low Register \n"
-  "register DAC0_DAT13L : UInt8 at 0x400CC01A // DAC Data Low Register \n"
-  "register DAC0_DAT14L : UInt8 at 0x400CC01C // DAC Data Low Register \n"
-  "register DAC0_DAT15L : UInt8 at 0x400CC01E // DAC Data Low Register \n"
-  "register DAC0_SR     : UInt8 at 0x400CC020 // DAC Status Register \n"
-  "register DAC0_C0     : UInt8 at 0x400CC021 // DAC Control Register \n"
+  "register ADC1_SC1A   at 0x400BB000 : UInt32 // ADC status and control registers 1\n"
+  "register ADC1_SC1B   at 0x400BB004 : UInt32 // ADC status and control registers 1\n"
+  "register ADC1_CFG1   at 0x400BB008 : UInt32 // ADC configuration register 1\n"
+  "register ADC1_CFG2   at 0x400BB00C : UInt32 // Configuration register 2\n"
+  "register ADC1_RA     at 0x400BB010 : UInt32 // ADC data result register\n"
+  "register ADC1_RB     at 0x400BB014 : UInt32 // ADC data result register\n"
+  "register ADC1_CV1    at 0x400BB018 : UInt32 // Compare value registers\n"
+  "register ADC1_CV2    at 0x400BB01C : UInt32 // Compare value registers\n"
+  "register ADC1_SC2    at 0x400BB020 : UInt32 // Status and control register 2\n"
+  "register ADC1_SC3    at 0x400BB024 : UInt32 // Status and control register 3\n"
+  "register ADC1_OFS    at 0x400BB028 : UInt32 // ADC offset correction register\n"
+  "register ADC1_PG     at 0x400BB02C : UInt32 // ADC plus-side gain register\n"
+  "register ADC1_MG     at 0x400BB030 : UInt32 // ADC minus-side gain register\n"
+  "register ADC1_CLPD   at 0x400BB034 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLPS   at 0x400BB038 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP4   at 0x400BB03C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP3   at 0x400BB040 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP2   at 0x400BB044 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP1   at 0x400BB048 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP0   at 0x400BB04C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_PGA    at 0x400BB050 : UInt32 // ADC Programmable Gain Amplifier\n"
+  "register ADC1_CLMD   at 0x400BB054 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLMS   at 0x400BB058 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM4   at 0x400BB05C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM3   at 0x400BB060 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM2   at 0x400BB064 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM1   at 0x400BB068 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM0   at 0x400BB06C : UInt32 // ADC minus-side general calibration value register\n"
+  "\n"
+  "register DAC0_DAT0L at 0x400CC000 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DATH  at 0x400CC001 : UInt8 // DAC Data High Register \n"
+  "register DAC0_DAT1L at 0x400CC002 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT2L at 0x400CC004 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT3L at 0x400CC006 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT4L at 0x400CC008 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT5L at 0x400CC00A : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT6L at 0x400CC00C : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT7L at 0x400CC00E : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT8L at 0x400CC010 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT9L at 0x400CC012 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT10L at 0x400CC014 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT11L at 0x400CC016 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT12L at 0x400CC018 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT13L at 0x400CC01A : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT14L at 0x400CC01C : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT15L at 0x400CC01E : UInt8 // DAC Data Low Register \n"
+  "register DAC0_SR     at 0x400CC020 : UInt8 // DAC Status Register \n"
+  "register DAC0_C0     at 0x400CC021 : UInt8 // DAC Control Register \n"
   "let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable\n"
   "let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select\n"
   "let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select\n"
@@ -5397,13 +5404,13 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
   "let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
   "\n"
-  "register DAC0_C1  : UInt8 at 0x400CC022 // DAC Control Register 1 \n"
+  "register DAC0_C1  at 0x400CC022 : UInt8 // DAC Control Register 1 \n"
   "let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select\n"
   "//register DAC_C1_DACBFWM(n)  (((n) & 3) << 3)  // DAC Buffer Watermark Select\n"
   "//register DAC_C1_DACBFMD(n)  (((n) & 3) << 0)  // DAC Buffer Work Mode Select\n"
   "let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable\n"
   "//\n"
-  "register DAC0_C2  : UInt8 at 0x400CC023 // DAC Control Register 2 \n"
+  "register DAC0_C2  at 0x400CC023 : UInt8 // DAC Control Register 2 \n"
   "//register DAC_C2_DACBFRP(n)  (((n) & 15) << 4)  // DAC Buffer Read Pointer\n"
   "//register DAC_C2_DACBFUP(n)  (((n) & 15) << 0)  // DAC Buffer Upper Limit\n"
   "//\n"
@@ -5413,24 +5420,24 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "s of OSC0 \n"
   "//\n"
   "//// Chapter 32: Comparator (CMP)\n"
-  "register CMP0_CR0   : UInt8 at 0x40073000 // CMP Control Register 0\n"
-  "register CMP0_CR1   : UInt8 at 0x40073001 // CMP Control Register 1\n"
-  "register CMP0_FPR   : UInt8 at 0x40073002 // CMP Filter Period Register\n"
-  "register CMP0_SCR   : UInt8 at 0x40073003 // CMP Status and Control Register\n"
-  "register CMP0_DACCR : UInt8 at 0x40073004 // DAC Control Register\n"
-  "register CMP0_MUXCR : UInt8 at 0x40073005 // MUX Control Register\n"
-  "register CMP1_CR0   : UInt8 at 0x40073008 // CMP Control Register 0\n"
-  "register CMP1_CR1   : UInt8 at 0x40073009 // CMP Control Register 1\n"
-  "register CMP1_FPR   : UInt8 at 0x4007300A // CMP Filter Period Register\n"
-  "register CMP1_SCR   : UInt8 at 0x4007300B // CMP Status and Control Register\n"
-  "register CMP1_DACCR : UInt8 at 0x4007300C // DAC Control Register\n"
-  "register CMP1_MUXCR : UInt8 at 0x4007300D // MUX Control Register\n"
+  "register CMP0_CR0   at 0x40073000 : UInt8 // CMP Control Register 0\n"
+  "register CMP0_CR1   at 0x40073001 : UInt8 // CMP Control Register 1\n"
+  "register CMP0_FPR   at 0x40073002 : UInt8 // CMP Filter Period Register\n"
+  "register CMP0_SCR   at 0x40073003 : UInt8 // CMP Status and Control Register\n"
+  "register CMP0_DACCR at 0x40073004 : UInt8 // DAC Control Register\n"
+  "register CMP0_MUXCR at 0x40073005 : UInt8 // MUX Control Register\n"
+  "register CMP1_CR0   at 0x40073008 : UInt8 // CMP Control Register 0\n"
+  "register CMP1_CR1   at 0x40073009 : UInt8 // CMP Control Register 1\n"
+  "register CMP1_FPR   at 0x4007300A : UInt8 // CMP Filter Period Register\n"
+  "register CMP1_SCR   at 0x4007300B : UInt8 // CMP Status and Control Register\n"
+  "register CMP1_DACCR at 0x4007300C : UInt8 // DAC Control Register\n"
+  "register CMP1_MUXCR at 0x4007300D : UInt8 // MUX Control Register\n"
   "//\n"
   "//// Chapter 33: Voltage Reference (VREFV1)\n"
-  "register VREF_TRM  : UInt8 at 0x40074000 // VREF Trim Register\n"
-  "register VREF_SC   : UInt8 at 0x40074001 // VREF Status and Control Register\n"
-  "//\n"
-  "//// Chapter 34: Programmable Delay Block (PDB)\n"
+  "register VREF_TRM  at 0x40074000 : UInt8 // VREF Trim Register\n"
+  "register VREF_SC   at 0x40074001 : UInt8 // VREF Status and Control Register\n"
+  "\n"
+  "// Chapter 34: Programmable Delay Block (PDB)\n"
   "//register PDB0_SC    0x40036000 // Status and Control Register\n"
   "//register PDB_SC_LDMOD(n)   (((n) & 3) << 18) // Load Mode Select\n"
   "//register PDB_SC_PDBEIE   0x00020000  // Sequence Error Interrupt Enable\n"
@@ -5610,15 +5617,15 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register CMT_DMA   *(volatile uint8_t  *)0x4006200B // CMT Direct Memory Access Register\n"
   "//\n"
   "//// Chapter 39: Real Time Clock (RTC)\n"
-  "register RTC_TSR : UInt32 at  0x4003D000 // RTC Time Seconds Register\n"
-  "register RTC_TPR : UInt32 at  0x4003D004 // RTC Time Prescaler Register\n"
-  "register RTC_TAR : UInt32 at  0x4003D008 // RTC Time Alarm Register\n"
-  "register RTC_TCR : UInt32 at  0x4003D00C // RTC Time Compensation Register\n"
+  "register RTC_TSR at  0x4003D000 : UInt32 // RTC Time Seconds Register\n"
+  "register RTC_TPR at  0x4003D004 : UInt32 // RTC Time Prescaler Register\n"
+  "register RTC_TAR at  0x4003D008 : UInt32 // RTC Time Alarm Register\n"
+  "register RTC_TCR at  0x4003D00C : UInt32 // RTC Time Compensation Register\n"
   "//register RTC_TCR_CIC(n)   (((n) & 255) << 24)  // Compensation Interval Counter\n"
   "//register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value\n"
   "//register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register\n"
   "//register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register\n"
-  "register RTC_CR : UInt32 at  0x4003D010 // RTC Control Register\n"
+  "register RTC_CR at  0x4003D010 : UInt32 // RTC Control Register\n"
   "let RTC_CR_SC2P : UInt32 = 0x00002000  // \n"
   "let RTC_CR_SC4P : UInt32 = 0x00001000  // \n"
   "let RTC_CR_SC8P : UInt32 = 0x00000800  // \n"
@@ -5628,16 +5635,18 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let RTC_CR_UM : UInt32 = 0x00000008  // \n"
   "let RTC_CR_SUP : UInt32 = 0x00000004  // \n"
   "let RTC_CR_WPE : UInt32 = 0x00000002  // \n"
-  "let RTC_CR_SWR : UInt32 = 0x00000001  // \n"
-  "register RTC_SR : UInt32 at  0x4003D014 // RTC Status Register\n"
-  "let RTC_SR_TCE : UInt32 = 0x00000010  // \n"
+  "let RTC_CR_SWR : UInt32 = 0x00000001  //\n"
+  " \n"
+  "register RTC_SR at  0x4003D014 : UInt32 // RTC Status Register\n"
+  "let RTC_SR_TCE : UInt32 = 0x00000010  \n"
   "let RTC_SR_TAF : UInt32 = 0x00000004  // \n"
   "let RTC_SR_TOF : UInt32 = 0x00000002  // \n"
   "let RTC_SR_TIF : UInt32 = 0x00000001  // \n"
-  "register RTC_LR: UInt32 at 0x4003D018 // RTC Lock Register\n"
-  "register RTC_IER: UInt32 at 0x4003D01C // RTC Interrupt Enable Register\n"
-  "register RTC_WAR: UInt32 at 0x4003D800 // RTC Write Access Register\n"
-  "register RTC_RAR: UInt32 at 0x4003D804 // RTC Read Access Register\n"
+  "\n"
+  "register RTC_LR  at 0x4003D018 : UInt32 // RTC Lock Register\n"
+  "register RTC_IER at 0x4003D01C : UInt32 // RTC Interrupt Enable Register\n"
+  "register RTC_WAR at 0x4003D800 : UInt32 // RTC Write Access Register\n"
+  "register RTC_RAR at 0x4003D804 : UInt32 // RTC Read Access Register\n"
   "\n"
   "//// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)\n"
   "//register USB0_PERID  *(const    uint8_t  *)0x40072000 // Peripheral ID register\n"
@@ -6203,38 +6212,38 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register I2S0_MDR   0x4002F104 // SAI MCLK Divide Register\n"
   "//register I2S_MDR_FRACT(n)  ( (n & 0xff)<<12)    // MCLK Fraction\n"
   "//register I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide\n"
-  "//\n"
-  "//// Chapter 47: General-Purpose Input/Output (GPIO)\n"
-  "register GPIOA_PDOR   : UInt32 at 0x400FF000 // Port Data Output Register\n"
-  "register GPIOA_PSOR   : UInt32 at 0x400FF004 // Port Set Output Register\n"
-  "register GPIOA_PCOR   : UInt32 at 0x400FF008 // Port Clear Output Register\n"
-  "register GPIOA_PTOR   : UInt32 at 0x400FF00C // Port Toggle Output Register\n"
-  "register GPIOA_PDIR   : UInt32 at 0x400FF010 // Port Data Input Register\n"
-  "register GPIOA_PDDR   : UInt32 at 0x400FF014 // Port Data Direction Register\n"
-  "register GPIOB_PDOR   : UInt32 at 0x400FF040 // Port Data Output Register\n"
-  "register GPIOB_PSOR   : UInt32 at 0x400FF044 // Port Set Output Register\n"
-  "register GPIOB_PCOR   : UInt32 at 0x400FF048 // Port Clear Output Register\n"
-  "register GPIOB_PTOR   : UInt32 at 0x400FF04C // Port Toggle Output Register\n"
-  "register GPIOB_PDIR   : UInt32 at 0x400FF050 // Port Data Input Register\n"
-  "register GPIOB_PDDR   : UInt32 at 0x400FF054 // Port Data Direction Register\n"
-  "register GPIOC_PDOR   : UInt32 at 0x400FF080 // Port Data Output Register\n"
-  "register GPIOC_PSOR   : UInt32 at 0x400FF084 // Port Set Output Register\n"
-  "register GPIOC_PCOR   : UInt32 at 0x400FF088 // Port Clear Output Register\n"
-  "register GPIOC_PTOR   : UInt32 at 0x400FF08C // Port Toggle Output Register\n"
-  "register GPIOC_PDIR   : UInt32 at 0x400FF090 // Port Data Input Register\n"
-  "register GPIOC_PDDR   : UInt32 at 0x400FF094 // Port Data Direction Register\n"
-  "register GPIOD_PDOR   : UInt32 at 0x400FF0C0 // Port Data Output Register\n"
-  "register GPIOD_PSOR   : UInt32 at 0x400FF0C4 // Port Set Output Register\n"
-  "register GPIOD_PCOR   : UInt32 at 0x400FF0C8 // Port Clear Output Register\n"
-  "register GPIOD_PTOR   : UInt32 at 0x400FF0CC // Port Toggle Output Register\n"
-  "register GPIOD_PDIR   : UInt32 at 0x400FF0D0 // Port Data Input Register\n"
-  "register GPIOD_PDDR   : UInt32 at 0x400FF0D4 // Port Data Direction Register\n"
-  "register GPIOE_PDOR   : UInt32 at 0x400FF100 // Port Data Output Register\n"
-  "register GPIOE_PSOR   : UInt32 at 0x400FF104 // Port Set Output Register\n"
-  "register GPIOE_PCOR   : UInt32 at 0x400FF108 // Port Clear Output Register\n"
-  "register GPIOE_PTOR   : UInt32 at 0x400FF10C // Port Toggle Output Register\n"
-  "register GPIOE_PDIR   : UInt32 at 0x400FF110 // Port Data Input Register\n"
-  "register GPIOE_PDDR   : UInt32 at 0x400FF114 // Port Data Direction Register\n"
+  "\n"
+  "// Chapter 47: General-Purpose Input/Output (GPIO)\n"
+  "register GPIOA_PDOR   at 0x400FF000 : UInt32 // Port Data Output Register\n"
+  "register GPIOA_PSOR   at 0x400FF004 : UInt32 // Port Set Output Register\n"
+  "register GPIOA_PCOR   at 0x400FF008 : UInt32 // Port Clear Output Register\n"
+  "register GPIOA_PTOR   at 0x400FF00C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOA_PDIR   at 0x400FF010 : UInt32 // Port Data Input Register\n"
+  "register GPIOA_PDDR   at 0x400FF014 : UInt32 // Port Data Direction Register\n"
+  "register GPIOB_PDOR   at 0x400FF040 : UInt32 // Port Data Output Register\n"
+  "register GPIOB_PSOR   at 0x400FF044 : UInt32 // Port Set Output Register\n"
+  "register GPIOB_PCOR   at 0x400FF048 : UInt32 // Port Clear Output Register\n"
+  "register GPIOB_PTOR   at 0x400FF04C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOB_PDIR   at 0x400FF050 : UInt32 // Port Data Input Register\n"
+  "register GPIOB_PDDR   at 0x400FF054 : UInt32 // Port Data Direction Register\n"
+  "register GPIOC_PDOR   at 0x400FF080 : UInt32 // Port Data Output Register\n"
+  "register GPIOC_PSOR   at 0x400FF084 : UInt32 // Port Set Output Register\n"
+  "register GPIOC_PCOR   at 0x400FF088 : UInt32 // Port Clear Output Register\n"
+  "register GPIOC_PTOR   at 0x400FF08C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOC_PDIR   at 0x400FF090 : UInt32 // Port Data Input Register\n"
+  "register GPIOC_PDDR   at 0x400FF094 : UInt32 // Port Data Direction Register\n"
+  "register GPIOD_PDOR   at 0x400FF0C0 : UInt32 // Port Data Output Register\n"
+  "register GPIOD_PSOR   at 0x400FF0C4 : UInt32 // Port Set Output Register\n"
+  "register GPIOD_PCOR   at 0x400FF0C8 : UInt32 // Port Clear Output Register\n"
+  "register GPIOD_PTOR   at 0x400FF0CC : UInt32 // Port Toggle Output Register\n"
+  "register GPIOD_PDIR   at 0x400FF0D0 : UInt32 // Port Data Input Register\n"
+  "register GPIOD_PDDR   at 0x400FF0D4 : UInt32 // Port Data Direction Register\n"
+  "register GPIOE_PDOR   at 0x400FF100 : UInt32 // Port Data Output Register\n"
+  "register GPIOE_PSOR   at 0x400FF104 : UInt32 // Port Set Output Register\n"
+  "register GPIOE_PCOR   at 0x400FF108 : UInt32 // Port Clear Output Register\n"
+  "register GPIOE_PTOR   at 0x400FF10C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOE_PDIR   at 0x400FF110 : UInt32 // Port Data Input Register\n"
+  "register GPIOE_PDDR   at 0x400FF114 : UInt32 // Port Data Direction Register\n"
   "//\n"
   "//// Chapter 48: Touch sense input (TSI)\n"
   "//register TSI0_GENCS   0x40045000 // General Control and Status Register\n"
@@ -6365,7 +6374,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register SCB_ICSR   0xE000ED04 // Interrupt Control and State\n"
   "//register SCB_ICSR_PENDSTSET   0x04000000\n"
   "//register SCB_VTOR   0xE000ED08 // Vector Table Offset\n"
-  "register SCB_AIRCR : UInt32 at 0xE000ED0C // Application Interrupt and Reset Control\n"
+  "register SCB_AIRCR at 0xE000ED0C : UInt32 // Application Interrupt and Reset Control\n"
   "let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004\n"
   "//register SCB_SCR    0xE000ED10 // System Control Register\n"
   "//register SCB_CCR    0xE000ED14 // Configuration and Control\n"
@@ -6378,14 +6387,14 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register SCB_DFSR   0xE000ED30 // Debug Fault Status\n"
   "//register SCB_MMFAR   0xE000ED34 // MemManage Fault Address\n"
   "\n"
-  "register SYST_CSR : UInt32 at 0xE000E010 // SysTick Control and Status\n"
+  "register SYST_CSR at 0xE000E010 : UInt32 // SysTick Control and Status\n"
   "let SYST_CSR_COUNTFLAG  : UInt32 = 0x00010000\n"
   "let SYST_CSR_CLKSOURCE   : UInt32= 0x00000004\n"
   "let SYST_CSR_TICKINT  : UInt32 = 0x00000002\n"
   "let SYST_CSR_ENABLE   : UInt32 =  0x00000001\n"
-  "register SYST_RVR   : UInt32 at 0xE000E014 // SysTick Reload Value Register\n"
-  "register SYST_CVR   : UInt32 at 0xE000E018 // SysTick Current Value Register\n"
-  "register @ro SYST_CALIB : UInt32 at 0xE000E01C // SysTick Calibration Value\n"
+  "register SYST_RVR   at 0xE000E014 : UInt32 // SysTick Reload Value Register\n"
+  "register SYST_CVR   at 0xE000E018 : UInt32 // SysTick Current Value Register\n"
+  "register @ro SYST_CALIB at 0xE000E01C : UInt32 // SysTick Calibration Value\n"
   "\n"
   "\n"
   "//register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control\n"
@@ -6398,7 +6407,7 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  144531, // Text length
+  137846, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -10278,16 +10287,10 @@ typeComparisonResult cPtr_registerDeclaration::dynamicObjectCompare (const acPtr
   const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_registerDeclaration) ;
   if (kOperandEqual == result) {
+    result = mAttribute_mRegisterDeclarationList.objectCompare (p->mAttribute_mRegisterDeclarationList) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mRegisterTypeName.objectCompare (p->mAttribute_mRegisterTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterAddress.objectCompare (p->mAttribute_mRegisterAddress) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mAttributeList.objectCompare (p->mAttribute_mAttributeList) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mRegisterBitSliceList.objectCompare (p->mAttribute_mRegisterBitSliceList) ;
@@ -10323,10 +10326,8 @@ GALGAS_abstractDeclaration () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_registerDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
+  return GALGAS_registerDeclaration::constructor_new (GALGAS_registerDeclarationList::constructor_emptyList (HERE),
                                                       GALGAS_lstring::constructor_default (HERE),
-                                                      GALGAS_luint_36__34_::constructor_default (HERE),
-                                                      GALGAS_lstringlist::constructor_emptyList (HERE),
                                                       GALGAS_registerBitSliceList::constructor_emptyList (HERE)
                                                       COMMA_THERE) ;
 }
@@ -10340,17 +10341,33 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mRegisterTypeName,
-                                                                        const GALGAS_lstring & inAttribute_mRegisterName,
-                                                                        const GALGAS_luint_36__34_ & inAttribute_mRegisterAddress,
-                                                                        const GALGAS_lstringlist & inAttribute_mAttributeList,
+GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_new (const GALGAS_registerDeclarationList & inAttribute_mRegisterDeclarationList,
+                                                                        const GALGAS_lstring & inAttribute_mRegisterTypeName,
                                                                         const GALGAS_registerBitSliceList & inAttribute_mRegisterBitSliceList
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_registerDeclaration result ;
-  if (inAttribute_mRegisterTypeName.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mAttributeList.isValid () && inAttribute_mRegisterBitSliceList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerDeclaration (inAttribute_mRegisterTypeName, inAttribute_mRegisterName, inAttribute_mRegisterAddress, inAttribute_mAttributeList, inAttribute_mRegisterBitSliceList COMMA_THERE)) ;
+  if (inAttribute_mRegisterDeclarationList.isValid () && inAttribute_mRegisterTypeName.isValid () && inAttribute_mRegisterBitSliceList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_registerDeclaration (inAttribute_mRegisterDeclarationList, inAttribute_mRegisterTypeName, inAttribute_mRegisterBitSliceList COMMA_THERE)) ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerDeclarationList GALGAS_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_registerDeclarationList result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerDeclaration) ;
+    result = p->mAttribute_mRegisterDeclarationList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerDeclarationList cPtr_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRegisterDeclarationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10369,60 +10386,6 @@ GALGAS_lstring GALGAS_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCA
 
 GALGAS_lstring cPtr_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_registerDeclaration::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mRegisterName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_registerDeclaration::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_luint_36__34_ GALGAS_registerDeclaration::reader_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  GALGAS_luint_36__34_ result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mRegisterAddress ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_luint_36__34_ cPtr_registerDeclaration::reader_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_registerDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mAttributeList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist cPtr_registerDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10447,17 +10410,13 @@ GALGAS_registerBitSliceList cPtr_registerDeclaration::reader_mRegisterBitSliceLi
 //                                    Pointer class for @registerDeclaration class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_registerDeclaration::cPtr_registerDeclaration (const GALGAS_lstring & in_mRegisterTypeName,
-                                                    const GALGAS_lstring & in_mRegisterName,
-                                                    const GALGAS_luint_36__34_ & in_mRegisterAddress,
-                                                    const GALGAS_lstringlist & in_mAttributeList,
+cPtr_registerDeclaration::cPtr_registerDeclaration (const GALGAS_registerDeclarationList & in_mRegisterDeclarationList,
+                                                    const GALGAS_lstring & in_mRegisterTypeName,
                                                     const GALGAS_registerBitSliceList & in_mRegisterBitSliceList
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
+mAttribute_mRegisterDeclarationList (in_mRegisterDeclarationList),
 mAttribute_mRegisterTypeName (in_mRegisterTypeName),
-mAttribute_mRegisterName (in_mRegisterName),
-mAttribute_mRegisterAddress (in_mRegisterAddress),
-mAttribute_mAttributeList (in_mAttributeList),
 mAttribute_mRegisterBitSliceList (in_mRegisterBitSliceList) {
 }
 
@@ -10470,13 +10429,9 @@ const C_galgas_type_descriptor * cPtr_registerDeclaration::classDescriptor (void
 void cPtr_registerDeclaration::description (C_String & ioString,
                                             const int32_t inIndentation) const {
   ioString << "[@registerDeclaration:" ;
+  mAttribute_mRegisterDeclarationList.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mRegisterTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mRegisterBitSliceList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -10486,7 +10441,7 @@ void cPtr_registerDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_registerDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerDeclaration (mAttribute_mRegisterTypeName, mAttribute_mRegisterName, mAttribute_mRegisterAddress, mAttribute_mAttributeList, mAttribute_mRegisterBitSliceList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerDeclaration (mAttribute_mRegisterDeclarationList, mAttribute_mRegisterTypeName, mAttribute_mRegisterBitSliceList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -19347,5 +19302,280 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     macroDetachSharedObject (commonLexique) ;
   }
   return returnCode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Abstract category reader '@abstractDeclaration location'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_location> gCategoryReaderTable_abstractDeclaration_location ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_location (const int32_t inClassIndex,
+                                   categoryReaderSignature_abstractDeclaration_location inReader) {
+  gCategoryReaderTable_abstractDeclaration_location.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryReader_abstractDeclaration_location (void) {
+  gCategoryReaderTable_abstractDeclaration_location.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gReader_abstractDeclaration_location (NULL,
+                                                         freeCategoryReader_abstractDeclaration_location) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location callCategoryReader_location (const cPtr_abstractDeclaration * inObject,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
+  GALGAS_location result ;
+//--- Find Reader
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryReaderSignature_abstractDeclaration_location f = NULL ;
+    if (classIndex < gCategoryReaderTable_abstractDeclaration_location.count ()) {
+      f = gCategoryReaderTable_abstractDeclaration_location (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_location.count ()) {
+           f = gCategoryReaderTable_abstractDeclaration_location (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryReaderTable_abstractDeclaration_location.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      result = f (inObject, inCompiler COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Abstract category method '@expressionAST addDependenceEdgeForStaticExpression'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression> gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_addDependenceEdgeForStaticExpression (const int32_t inClassIndex,
+                                                               categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression inMethod) {
+  gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_expressionAST_addDependenceEdgeForStaticExpression (void) {
+  gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_expressionAST_addDependenceEdgeForStaticExpression (NULL,
+                                                                               freeCategoryMethod_expressionAST_addDependenceEdgeForStaticExpression) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
+                                                              const GALGAS_lstring constin_inConstantName,
+                                                              GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_expressionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_expressionAST_addDependenceEdgeForStaticExpression f = NULL ;
+    if (classIndex < gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.count ()) {
+      f = gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.count ()) {
+           f = gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_expressionAST_addDependenceEdgeForStaticExpression.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inConstantName, io_ioGraph, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element::GALGAS_initList_2D_element (void) :
+mAttribute_mInitLocation (),
+mAttribute_mInstructionList (),
+mAttribute_mEndOfInitLocation () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element::~ GALGAS_initList_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element::GALGAS_initList_2D_element (const GALGAS_location & inOperand0,
+                                                        const GALGAS_instructionListAST & inOperand1,
+                                                        const GALGAS_location & inOperand2) :
+mAttribute_mInitLocation (inOperand0),
+mAttribute_mInstructionList (inOperand1),
+mAttribute_mEndOfInitLocation (inOperand2) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element GALGAS_initList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_initList_2D_element (GALGAS_location::constructor_nowhere (HERE),
+                                     GALGAS_instructionListAST::constructor_emptyList (HERE),
+                                     GALGAS_location::constructor_nowhere (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element GALGAS_initList_2D_element::constructor_new (const GALGAS_location & inOperand0,
+                                                                        const GALGAS_instructionListAST & inOperand1,
+                                                                        const GALGAS_location & inOperand2 
+                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_initList_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_initList_2D_element (inOperand0, inOperand1, inOperand2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_initList_2D_element::objectCompare (const GALGAS_initList_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mInitLocation.objectCompare (inOperand.mAttribute_mInitLocation) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mEndOfInitLocation.objectCompare (inOperand.mAttribute_mEndOfInitLocation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_initList_2D_element::isValid (void) const {
+  return mAttribute_mInitLocation.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfInitLocation.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initList_2D_element::drop (void) {
+  mAttribute_mInitLocation.drop () ;
+  mAttribute_mInstructionList.drop () ;
+  mAttribute_mEndOfInitLocation.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_initList_2D_element::description (C_String & ioString,
+                                              const int32_t inIndentation) const {
+  ioString << "<struct @initList-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mInitLocation.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mEndOfInitLocation.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_initList_2D_element::reader_mInitLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInitLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_instructionListAST GALGAS_initList_2D_element::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInstructionList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_initList_2D_element::reader_mEndOfInitLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEndOfInitLocation ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @initList-element type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_initList_2D_element ("initList-element",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_initList_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_initList_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_initList_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_initList_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList_2D_element GALGAS_initList_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_initList_2D_element result ;
+  const GALGAS_initList_2D_element * p = (const GALGAS_initList_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_initList_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("initList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
 }
 
