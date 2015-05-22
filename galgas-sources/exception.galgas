@@ -69,6 +69,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !mangledNameForInArgument (!name:codeArg.string)
       !.inArgument {!name:codeArg.string}
       ![uintType copiable]
+      !{}
     ]
     let fileArg = @lstring.new {!"FILE" !mExceptionLocation}
     [!?variableMap insertUsedConstantInputFormalArgument
@@ -78,6 +79,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !mangledNameForInArgument (!name:fileArg.string)
       !.inArgument {!name:fileArg.string}
       ![StaticStringType copiable]
+      !{}
     ]
     let lineArg = @lstring.new {!"LINE" !mExceptionLocation}
     [!?variableMap insertUsedConstantInputFormalArgument
@@ -87,6 +89,7 @@ method @exceptionAST exceptionSemanticAnalysis
       !mangledNameForInArgument (!name:lineArg.string)
       !.inArgument {!name:lineArg.string}
       ![uintType copiable]
+      !{}
     ]
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}

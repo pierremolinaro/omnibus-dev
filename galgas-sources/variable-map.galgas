@@ -74,6 +74,7 @@ func initialVariableMap
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
         !true
+        !mRegisterBitSliceMap
       ]
     else
       [!?outVariableMap insertDefinedLocalVariable
@@ -83,6 +84,7 @@ func initialVariableMap
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
         !true
+        !mRegisterBitSliceMap
       ]
     end
   end
@@ -95,6 +97,7 @@ func initialVariableMap
       !mangledNameForConstant (!name:constantName.string)
       !.globalConstant {!name:constantName.string}
       !true
+      !{}
     ]
   end
 #--- Add global variables
@@ -107,6 +110,7 @@ func initialVariableMap
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
         !true
+        !{}
       ]
     else
       [!?outVariableMap insertGlobalVariable
@@ -116,6 +120,7 @@ func initialVariableMap
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
         !true
+        !{}
       ]
     end
   end
@@ -145,6 +150,7 @@ sharedmap @variableMap {
   @string mCppName
   @variableKindIR mVariableKind
   @bool copiable
+  @registerBitSliceMap fieldMap
 
 #--- Used global variable
   state globalVariable {

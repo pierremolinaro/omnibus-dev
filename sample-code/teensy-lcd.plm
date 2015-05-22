@@ -25,6 +25,8 @@ proc $isr userSystickHandler () {
 
 var $user gVar : Int8 = 0
 
+var $user gZZZZ : UInt32 = 0
+
 //-----------------------------------------------------------------------------*
 
 proc $user loop () {
@@ -37,6 +39,7 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar as Int32)
+  gZZZZ = PORTA_PCR3.mux
 }
 
 //-----------------------------------------------------------------------------*

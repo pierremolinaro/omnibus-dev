@@ -22,3 +22,9 @@ La déclaration d'un registre s'effectue de la façon suivante :
 register nom_registre at 0x1234 : UInt32
 \end{PLM}
 
+Un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule :
+\begin{PLM}
+register @ro nom_registre at 0x1234 : UInt32
+\end{PLM}
+
+Toute tentative de faire figurer ce registre dans une construction qui provoque une écriture de celui-ci entraîne l'apparition d'une erreur de compilation.

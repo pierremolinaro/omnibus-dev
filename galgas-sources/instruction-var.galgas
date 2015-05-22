@@ -100,6 +100,7 @@ override method @varInstructionWithAssignmentAST analyze
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![inferredType copiable]
+    !{}
   ]
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationInstructionWithSimpleAssignmentIR.new {
@@ -131,6 +132,7 @@ override method @varInstructionAST analyze
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
     ![targetType copiable]
+    !{}
   ]
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationIR.new {
