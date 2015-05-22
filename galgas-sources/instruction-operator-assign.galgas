@@ -67,7 +67,7 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?4*
+    ?5*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -96,6 +96,7 @@ override method @operatorAssignInstructionAST analyze
     ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
+    ?*
   ]
 #--- Check operator is available for type
   @infixOperatorMap operatorMap

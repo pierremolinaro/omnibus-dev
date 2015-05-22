@@ -91,7 +91,7 @@ override method @incDecInstructionAST analyze
     ?let varModeSet
     ?let @string unused variableCName
     ?let @variableKindIR variable
-    ?*
+    ?2*
   ]
 #--- Check mode
   checkMode (

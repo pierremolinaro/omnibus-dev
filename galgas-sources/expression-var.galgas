@@ -4,6 +4,7 @@
 
 class @varInExpressionAST : @expressionAST {
   @lstring mSourceVarName
+  @lstringlist mFieldNameList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -14,7 +15,14 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let sourceVarName
-    outExpression = @varInExpressionAST.new {!sourceVarName}
+    @lstringlist fieldNameList = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let fieldName
+      fieldNameList += !fieldName
+    end 
+    outExpression = @varInExpressionAST.new {!sourceVarName !fieldNameList}
   }
 
 }
@@ -40,10 +48,10 @@ override method @varInExpressionAST analyzeExpression
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint unused ioTemporaryIndex
+  ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !result:@variableKindIR outResultValueName
 {
@@ -53,8 +61,9 @@ override method @varInExpressionAST analyzeExpression
     ?let sourceVarType
     ?let varModeSet
     ?let unused varAccess
-    ?let variable
+    ?@variableKindIR resultingVariable
     ?*
+    ?@registerBitSliceMap registerBitSliceMap
   ]
 #--- Check mode
   checkMode (
@@ -68,8 +77,27 @@ override method @varInExpressionAST analyzeExpression
     !sourceType:sourceVarType
     !errorLocation:mSourceVarName.location
   )
+#--- Field ?
+  for (field) in mFieldNameList do
+    [registerBitSliceMap searchKey
+      !field
+      ?let @infixOperatorIR accessOperator
+      ?let @variableKindIR accessRightOperand
+     ]
+  #--- Temp var
+    getNewTempVariable (!?ioTemporaryIndex ?let newResultingVariable)
+    ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
+      !sourceVarType
+      !newResultingVariable
+      !resultingVariable
+      !accessOperator
+      !accessRightOperand
+      !mSourceVarName.location
+    }
+    resultingVariable = newResultingVariable  
+  end
 #--- Generate code
-  outResultValueName = variable
+  outResultValueName = resultingVariable
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

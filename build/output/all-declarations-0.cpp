@@ -8327,51 +8327,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i32_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i33_ (GALGAS_expressionAST & outArgument_outExpression,
-                                                                   C_Lexique_plm_5F_lexique * inCompiler) {
-  outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_optionalTypeName ;
-  switch (select_common_5F_syntax_22 (inCompiler)) {
-  case 1: {
-    var_optionalTypeName = GALGAS_lstring::constructor_new (GALGAS_string::makeEmptyString (), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 19))  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 19)) ;
-  } break ;
-  case 2: {
-    var_optionalTypeName = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 21)) ;
-  } break ;
-  default:
-    break ;
-  }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 23)) ;
-  GALGAS_lstring var_constructorName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 24)) ;
-  outArgument_outExpression = GALGAS_constructorCall::constructor_new (var_optionalTypeName, var_constructorName  COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 31)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i33_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  switch (select_common_5F_syntax_22 (inCompiler)) {
-  case 1: {
-  } break ;
-  case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 21)) ;
-  } break ;
-  default:
-    break ;
-  }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 23)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-constructor-call.galgas", 24)) ;
-  inCompiler->resetTemplateString () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i33_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_additive_5F_expression_ (outArgument_outExpression, inCompiler) ;
-  switch (select_common_5F_syntax_23 (inCompiler)) {
+  switch (select_common_5F_syntax_22 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8429,9 +8389,9 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_ (GALGAS_exp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i33_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_additive_5F_expression_parse (inCompiler) ;
-  switch (select_common_5F_syntax_23 (inCompiler)) {
+  switch (select_common_5F_syntax_22 (inCompiler)) {
   case 1: {
   } break ;
   case 2: {
@@ -8470,13 +8430,13 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i34_parse (C_Lex
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i34_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                                   C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_multiplicative_5F_expression_ (outArgument_outExpression, inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_24 (inCompiler)) {
+    switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 134)) ;
@@ -8549,11 +8509,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i34_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_multiplicative_5F_expression_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_24 (inCompiler)) {
+    switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
@@ -8600,13 +8560,13 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i35_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expression_i36_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expression_i35_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                                         C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   nt_primary_ (outArgument_outExpression, inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_25 (inCompiler)) {
+    switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
       GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
@@ -8665,11 +8625,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expression_i36_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expression_i35_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   nt_primary_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    switch (select_common_5F_syntax_25 (inCompiler)) {
+    switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
       nt_primary_parse (inCompiler) ;
@@ -8708,7 +8668,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i36_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 27)) ;
@@ -8720,7 +8680,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i36_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 27)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
@@ -8728,7 +8688,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)) ;
@@ -8740,7 +8700,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i37_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)) ;
   nt_primary_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
@@ -8748,7 +8708,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_luint_36__34_ var_integerLiteral = inCompiler->synthetizedAttribute_uint_36__34_value () ;
@@ -8758,14 +8718,14 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 16)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_stringLiteral = inCompiler->synthetizedAttribute_tokenString () ;
@@ -8775,31 +8735,58 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("expression-literal-string.galgas", 16)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_sourceVarName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 16)) ;
-  outArgument_outExpression = GALGAS_varInExpressionAST::constructor_new (var_sourceVarName  COMMA_SOURCE_FILE ("expression-var.galgas", 17)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 17)) ;
+  GALGAS_lstringlist var_fieldNameList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("expression-var.galgas", 18)) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    switch (select_common_5F_syntax_25 (inCompiler)) {
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-var.galgas", 21)) ;
+      GALGAS_lstring var_fieldName = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 22)) ;
+      var_fieldNameList.addAssign_operation (var_fieldName  COMMA_SOURCE_FILE ("expression-var.galgas", 23)) ;
+    } break ;
+    default:
+      repeatFlag_0 = false ;
+      break ;
+    }
+  }
+  outArgument_outExpression = GALGAS_varInExpressionAST::constructor_new (var_sourceVarName, var_fieldNameList  COMMA_SOURCE_FILE ("expression-var.galgas", 25)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 16)) ;
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 17)) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    switch (select_common_5F_syntax_25 (inCompiler)) {
+    case 2: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2E_) COMMA_SOURCE_FILE ("expression-var.galgas", 21)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 22)) ;
+    } break ;
+    default:
+      repeatFlag_0 = false ;
+      break ;
+    }
+  }
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_functionName = inCompiler->synthetizedAttribute_tokenString () ;
@@ -8827,7 +8814,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 24)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 25)) ;
   bool repeatFlag_0 = true ;
@@ -15106,25 +15093,25 @@ GALGAS_registerBitSliceList GALGAS_registerBitSliceList::extractObject (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_registerBitSliceMap::cMapElement_registerBitSliceMap (const GALGAS_lstring & inKey,
-                                                                  const GALGAS_uint & in_mShiftCount,
-                                                                  const GALGAS_uint & in_mBitCount
+                                                                  const GALGAS_infixOperatorIR & in_mAccessOperator,
+                                                                  const GALGAS_variableKindIR & in_mAccessRightOperand
                                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mShiftCount (in_mShiftCount),
-mAttribute_mBitCount (in_mBitCount) {
+mAttribute_mAccessOperator (in_mAccessOperator),
+mAttribute_mAccessRightOperand (in_mAccessRightOperand) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_registerBitSliceMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mShiftCount.isValid () && mAttribute_mBitCount.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_registerBitSliceMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_registerBitSliceMap (mAttribute_lkey, mAttribute_mShiftCount, mAttribute_mBitCount COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_registerBitSliceMap (mAttribute_lkey, mAttribute_mAccessOperator, mAttribute_mAccessRightOperand COMMA_HERE)) ;
   return result ;
 }
 
@@ -15133,12 +15120,12 @@ cMapElement * cMapElement_registerBitSliceMap::copy (void) {
 void cMapElement_registerBitSliceMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mShiftCount" ":" ;
-  mAttribute_mShiftCount.description (ioString, inIndentation) ;
+  ioString << "mAccessOperator" ":" ;
+  mAttribute_mAccessOperator.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mBitCount" ":" ;
-  mAttribute_mBitCount.description (ioString, inIndentation) ;
+  ioString << "mAccessRightOperand" ":" ;
+  mAttribute_mAccessRightOperand.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15147,10 +15134,10 @@ typeComparisonResult cMapElement_registerBitSliceMap::compare (const cCollection
   cMapElement_registerBitSliceMap * operand = (cMapElement_registerBitSliceMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mShiftCount.objectCompare (operand->mAttribute_mShiftCount) ;
+    result = mAttribute_mAccessOperator.objectCompare (operand->mAttribute_mAccessOperator) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mBitCount.objectCompare (operand->mAttribute_mBitCount) ;
+    result = mAttribute_mAccessRightOperand.objectCompare (operand->mAttribute_mAccessRightOperand) ;
   }
   return result ;
 }
@@ -15203,8 +15190,8 @@ GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::reader_overriddenMap (C_C
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                      const GALGAS_uint & inArgument0,
-                                                      const GALGAS_uint & inArgument1,
+                                                      const GALGAS_infixOperatorIR & inArgument0,
+                                                      const GALGAS_variableKindIR & inArgument1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   cMapElement_registerBitSliceMap * p = NULL ;
@@ -15220,8 +15207,8 @@ void GALGAS_registerBitSliceMap::addAssign_operation (const GALGAS_lstring & inK
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_uint inArgument0,
-                                                     GALGAS_uint inArgument1,
+                                                     GALGAS_infixOperatorIR inArgument0,
+                                                     GALGAS_variableKindIR inArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   cMapElement_registerBitSliceMap * p = NULL ;
@@ -15241,8 +15228,8 @@ const char * kSearchErrorMessage_registerBitSliceMap_searchKey = "the '%K' regis
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceMap::method_searchKey (GALGAS_lstring inKey,
-                                                   GALGAS_uint & outArgument0,
-                                                   GALGAS_uint & outArgument1,
+                                                   GALGAS_infixOperatorIR & outArgument0,
+                                                   GALGAS_variableKindIR & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) performSearch (inKey,
@@ -15254,66 +15241,66 @@ void GALGAS_registerBitSliceMap::method_searchKey (GALGAS_lstring inKey,
     outArgument1.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-    outArgument0 = p->mAttribute_mShiftCount ;
-    outArgument1 = p->mAttribute_mBitCount ;
+    outArgument0 = p->mAttribute_mAccessOperator ;
+    outArgument1 = p->mAttribute_mAccessRightOperand ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_registerBitSliceMap::reader_mShiftCountForKey (const GALGAS_string & inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_infixOperatorIR GALGAS_registerBitSliceMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
-  GALGAS_uint result ;
+  GALGAS_infixOperatorIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-    result = p->mAttribute_mShiftCount ;
+    result = p->mAttribute_mAccessOperator ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_registerBitSliceMap::reader_mBitCountForKey (const GALGAS_string & inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_variableKindIR GALGAS_registerBitSliceMap::reader_mAccessRightOperandForKey (const GALGAS_string & inKey,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
-  GALGAS_uint result ;
+  GALGAS_variableKindIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-    result = p->mAttribute_mBitCount ;
+    result = p->mAttribute_mAccessRightOperand ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_setMShiftCountForKey (GALGAS_uint inAttributeValue,
-                                                                GALGAS_string inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceMap::modifier_setMAccessOperatorForKey (GALGAS_infixOperatorIR inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-    p->mAttribute_mShiftCount = inAttributeValue ;
+    p->mAttribute_mAccessOperator = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_setMBitCountForKey (GALGAS_uint inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceMap::modifier_setMAccessRightOperandForKey (GALGAS_variableKindIR inAttributeValue,
+                                                                        GALGAS_string inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-    p->mAttribute_mBitCount = inAttributeValue ;
+    p->mAttribute_mAccessRightOperand = inAttributeValue ;
   }
 }
 
@@ -15340,7 +15327,7 @@ cGenericAbstractEnumerator () {
 GALGAS_registerBitSliceMap_2D_element cEnumerator_registerBitSliceMap::current (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-  return GALGAS_registerBitSliceMap_2D_element (p->mAttribute_lkey, p->mAttribute_mShiftCount, p->mAttribute_mBitCount) ;
+  return GALGAS_registerBitSliceMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15353,18 +15340,18 @@ GALGAS_lstring cEnumerator_registerBitSliceMap::current_lkey (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cEnumerator_registerBitSliceMap::current_mShiftCount (LOCATION_ARGS) const {
+GALGAS_infixOperatorIR cEnumerator_registerBitSliceMap::current_mAccessOperator (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-  return p->mAttribute_mShiftCount ;
+  return p->mAttribute_mAccessOperator ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cEnumerator_registerBitSliceMap::current_mBitCount (LOCATION_ARGS) const {
+GALGAS_variableKindIR cEnumerator_registerBitSliceMap::current_mAccessRightOperand (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-  return p->mAttribute_mBitCount ;
+  return p->mAttribute_mAccessRightOperand ;
 }
 
 
@@ -15407,6 +15394,298 @@ GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::extractObject (const GALG
       result = *p ;
     }else{
       inCompiler->castError ("registerBitSliceMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infix::cEnumAssociatedValues_infixOperatorIR_infix (const GALGAS_string & inAssociatedValue0
+                                                                                          COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infix::description (C_String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infix::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infix * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infix *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixOvf::cEnumAssociatedValues_infixOperatorIR_infixOvf (const GALGAS_string & inAssociatedValue0,
+                                                                                                const GALGAS_uint & inAssociatedValue1
+                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixOvf::description (C_String & ioString,
+                                                                  const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixOvf::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixOvf *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR::GALGAS_infixOperatorIR (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infix (const GALGAS_string & inAssociatedValue0
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_infix ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infix (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixOvf (const GALGAS_string & inAssociatedValue0,
+                                                                     const GALGAS_uint & inAssociatedValue1
+                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_infixOvf ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixOvf (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_infixUnsignedDivide ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infix (GALGAS_string & outAssociatedValue0,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infix) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infix invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infix * ptr = (const cEnumAssociatedValues_infixOperatorIR_infix *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixOvf (GALGAS_string & outAssociatedValue0,
+                                              GALGAS_uint & outAssociatedValue1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixOvf) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixOvf invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixUnsignedDivide (GALGAS_uint & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixUnsignedDivide) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixUnsignedDivide invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_infixOperatorIR [4] = {
+  "(not built)",
+  "infix",
+  "infixOvf",
+  "infixUnsignedDivide"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfix (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infix == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixOvf (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixOvf == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixUnsignedDivide (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixUnsignedDivide == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "<enum @infixOperatorIR: " << gEnumNameArrayFor_infixOperatorIR [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_infixOperatorIR::objectCompare (const GALGAS_infixOperatorIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @infixOperatorIR type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_infixOperatorIR ("infixOperatorIR",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_infixOperatorIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_infixOperatorIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_infixOperatorIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_infixOperatorIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  const GALGAS_infixOperatorIR * p = (const GALGAS_infixOperatorIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_infixOperatorIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("infixOperatorIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -18220,298 +18499,6 @@ GALGAS_infixOperatorMap GALGAS_infixOperatorMap::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_infixOperatorIR_infix::cEnumAssociatedValues_infixOperatorIR_infix (const GALGAS_string & inAssociatedValue0
-                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infix::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infix::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infix * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infix *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixOvf::cEnumAssociatedValues_infixOperatorIR_infixOvf (const GALGAS_string & inAssociatedValue0,
-                                                                                                const GALGAS_uint & inAssociatedValue1
-                                                                                                COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixOvf::description (C_String & ioString,
-                                                                  const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixOvf::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixOvf *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
-                                                                                                                      COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::description (C_String & ioString,
-                                                                             const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR::GALGAS_infixOperatorIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infix (const GALGAS_string & inAssociatedValue0
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_infix ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infix (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixOvf (const GALGAS_string & inAssociatedValue0,
-                                                                     const GALGAS_uint & inAssociatedValue1
-                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_infixOvf ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixOvf (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_infixUnsignedDivide ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infix (GALGAS_string & outAssociatedValue0,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infix) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infix invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infix * ptr = (const cEnumAssociatedValues_infixOperatorIR_infix *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixOvf (GALGAS_string & outAssociatedValue0,
-                                              GALGAS_uint & outAssociatedValue1,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixOvf) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixOvf invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixUnsignedDivide (GALGAS_uint & outAssociatedValue0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixUnsignedDivide) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixUnsignedDivide invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_infixOperatorIR [4] = {
-  "(not built)",
-  "infix",
-  "infixOvf",
-  "infixUnsignedDivide"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfix (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infix == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixOvf (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixOvf == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixUnsignedDivide (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixUnsignedDivide == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "<enum @infixOperatorIR: " << gEnumNameArrayFor_infixOperatorIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_infixOperatorIR::objectCompare (const GALGAS_infixOperatorIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @infixOperatorIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixOperatorIR ("infixOperatorIR",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_infixOperatorIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixOperatorIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_infixOperatorIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_infixOperatorIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  const GALGAS_infixOperatorIR * p = (const GALGAS_infixOperatorIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_infixOperatorIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("infixOperatorIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_prefixOperator::GALGAS_prefixOperator (void) :
 mEnum (kNotBuilt) {
 }
@@ -19880,27 +19867,29 @@ cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_stringset & in_mAcceptedModeSet,
                                                   const GALGAS_string & in_mCppName,
                                                   const GALGAS_variableKindIR & in_mVariableKind,
-                                                  const GALGAS_bool & in_copiable
+                                                  const GALGAS_bool & in_copiable,
+                                                  const GALGAS_registerBitSliceMap & in_fieldMap
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mType (in_mType),
 mAttribute_mAcceptedModeSet (in_mAcceptedModeSet),
 mAttribute_mCppName (in_mCppName),
 mAttribute_mVariableKind (in_mVariableKind),
-mAttribute_copiable (in_copiable) {
+mAttribute_copiable (in_copiable),
+mAttribute_fieldMap (in_fieldMap) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_variableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mAcceptedModeSet.isValid () && mAttribute_mCppName.isValid () && mAttribute_mVariableKind.isValid () && mAttribute_copiable.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mAcceptedModeSet.isValid () && mAttribute_mCppName.isValid () && mAttribute_mVariableKind.isValid () && mAttribute_copiable.isValid () && mAttribute_fieldMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_variableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_mType, mAttribute_mAcceptedModeSet, mAttribute_mCppName, mAttribute_mVariableKind, mAttribute_copiable COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_mType, mAttribute_mAcceptedModeSet, mAttribute_mCppName, mAttribute_mVariableKind, mAttribute_copiable, mAttribute_fieldMap COMMA_HERE)) ;
   return result ;
 }
 
@@ -19927,6 +19916,10 @@ void cMapElement_variableMap::description (C_String & ioString, const int32_t in
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "copiable" ":" ;
   mAttribute_copiable.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "fieldMap" ":" ;
+  mAttribute_fieldMap.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -19948,6 +19941,9 @@ typeComparisonResult cMapElement_variableMap::compare (const cCollectionElement 
   }
   if (kOperandEqual == result) {
     result = mAttribute_copiable.objectCompare (operand->mAttribute_copiable) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_fieldMap.objectCompare (operand->mAttribute_fieldMap) ;
   }
   return result ;
 }
@@ -20444,10 +20440,11 @@ void GALGAS_variableMap::modifier_insertGlobalVariable (GALGAS_lstring inKey,
                                                         GALGAS_string inArgument2,
                                                         GALGAS_variableKindIR inArgument3,
                                                         GALGAS_bool inArgument4,
+                                                        GALGAS_registerBitSliceMap inArgument5,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20470,10 +20467,11 @@ void GALGAS_variableMap::modifier_insertMutableAttribute (GALGAS_lstring inKey,
                                                           GALGAS_string inArgument2,
                                                           GALGAS_variableKindIR inArgument3,
                                                           GALGAS_bool inArgument4,
+                                                          GALGAS_registerBitSliceMap inArgument5,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20496,10 +20494,11 @@ void GALGAS_variableMap::modifier_insertNonMutableAttribute (GALGAS_lstring inKe
                                                              GALGAS_string inArgument2,
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
+                                                             GALGAS_registerBitSliceMap inArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20522,10 +20521,11 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalVariable (GALGAS_lstring i
                                                                 GALGAS_string inArgument2,
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
+                                                                GALGAS_registerBitSliceMap inArgument5,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20548,10 +20548,11 @@ void GALGAS_variableMap::modifier_insertDefinedLocalVariable (GALGAS_lstring inK
                                                               GALGAS_string inArgument2,
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
+                                                              GALGAS_registerBitSliceMap inArgument5,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20574,10 +20575,11 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalConstant (GALGAS_lstring i
                                                                 GALGAS_string inArgument2,
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
+                                                                GALGAS_registerBitSliceMap inArgument5,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20600,10 +20602,11 @@ void GALGAS_variableMap::modifier_insertLocalConstant (GALGAS_lstring inKey,
                                                        GALGAS_string inArgument2,
                                                        GALGAS_variableKindIR inArgument3,
                                                        GALGAS_bool inArgument4,
+                                                       GALGAS_registerBitSliceMap inArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20626,10 +20629,11 @@ void GALGAS_variableMap::modifier_insertUsedLocalConstant (GALGAS_lstring inKey,
                                                            GALGAS_string inArgument2,
                                                            GALGAS_variableKindIR inArgument3,
                                                            GALGAS_bool inArgument4,
+                                                           GALGAS_registerBitSliceMap inArgument5,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20652,10 +20656,11 @@ void GALGAS_variableMap::modifier_insertInputFormalArgument (GALGAS_lstring inKe
                                                              GALGAS_string inArgument2,
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
+                                                             GALGAS_registerBitSliceMap inArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20678,10 +20683,11 @@ void GALGAS_variableMap::modifier_insertInputFormalArgumentDeclaredAsUnused (GAL
                                                                              GALGAS_string inArgument2,
                                                                              GALGAS_variableKindIR inArgument3,
                                                                              GALGAS_bool inArgument4,
+                                                                             GALGAS_registerBitSliceMap inArgument5,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20704,10 +20710,11 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgument (GALGAS_lstr
                                                                      GALGAS_string inArgument2,
                                                                      GALGAS_variableKindIR inArgument3,
                                                                      GALGAS_bool inArgument4,
+                                                                     GALGAS_registerBitSliceMap inArgument5,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20730,10 +20737,11 @@ void GALGAS_variableMap::modifier_insertUsedConstantInputFormalArgument (GALGAS_
                                                                          GALGAS_string inArgument2,
                                                                          GALGAS_variableKindIR inArgument3,
                                                                          GALGAS_bool inArgument4,
+                                                                         GALGAS_registerBitSliceMap inArgument5,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20756,10 +20764,11 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgumentDeclaredAsUnu
                                                                                      GALGAS_string inArgument2,
                                                                                      GALGAS_variableKindIR inArgument3,
                                                                                      GALGAS_bool inArgument4,
+                                                                                     GALGAS_registerBitSliceMap inArgument5,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20782,10 +20791,11 @@ void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inK
                                                               GALGAS_string inArgument2,
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
+                                                              GALGAS_registerBitSliceMap inArgument5,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20808,10 +20818,11 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstrin
                                                                    GALGAS_string inArgument2,
                                                                    GALGAS_variableKindIR inArgument3,
                                                                    GALGAS_bool inArgument4,
+                                                                   GALGAS_registerBitSliceMap inArgument5,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20834,10 +20845,11 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgumentDeclaredAsUnuse
                                                                                    GALGAS_string inArgument2,
                                                                                    GALGAS_variableKindIR inArgument3,
                                                                                    GALGAS_bool inArgument4,
+                                                                                   GALGAS_registerBitSliceMap inArgument5,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -20864,6 +20876,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
                                                        GALGAS_string & outArgument2,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
+                                                       GALGAS_registerBitSliceMap & outArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -20884,6 +20897,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -20891,6 +20905,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mCppName ;
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
+    outArgument5 = p->mAttribute_fieldMap ;
   }
 }
 
@@ -20906,6 +20921,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
                                                         GALGAS_string & outArgument2,
                                                         GALGAS_variableKindIR & outArgument3,
                                                         GALGAS_bool & outArgument4,
+                                                        GALGAS_registerBitSliceMap & outArgument5,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -20926,6 +20942,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -20933,6 +20950,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mCppName ;
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
+    outArgument5 = p->mAttribute_fieldMap ;
   }
 }
 
@@ -20948,6 +20966,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
                                                             GALGAS_string & outArgument2,
                                                             GALGAS_variableKindIR & outArgument3,
                                                             GALGAS_bool & outArgument4,
+                                                            GALGAS_registerBitSliceMap & outArgument5,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -20968,6 +20987,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -20975,6 +20995,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
     outArgument2 = p->mAttribute_mCppName ;
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
+    outArgument5 = p->mAttribute_fieldMap ;
   }
 }
 
@@ -20990,6 +21011,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
                                                        GALGAS_string & outArgument2,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
+                                                       GALGAS_registerBitSliceMap & outArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21010,6 +21032,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -21017,6 +21040,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mCppName ;
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
+    outArgument5 = p->mAttribute_fieldMap ;
   }
 }
 
@@ -21032,6 +21056,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
                                                  GALGAS_string & outArgument2,
                                                  GALGAS_variableKindIR & outArgument3,
                                                  GALGAS_bool & outArgument4,
+                                                 GALGAS_registerBitSliceMap & outArgument5,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21052,6 +21077,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -21059,6 +21085,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mCppName ;
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
+    outArgument5 = p->mAttribute_fieldMap ;
   }
 }
 
@@ -21139,6 +21166,21 @@ GALGAS_bool GALGAS_variableMap::reader_copiableForKey (const GALGAS_string & inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_registerBitSliceMap GALGAS_variableMap::reader_fieldMapForKey (const GALGAS_string & inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) attributes ;
+  GALGAS_registerBitSliceMap result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    result = p->mAttribute_fieldMap ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_variableMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                   GALGAS_string inKey,
                                                   C_Compiler * inCompiler
@@ -21209,6 +21251,20 @@ void GALGAS_variableMap::modifier_setCopiableForKey (GALGAS_bool inAttributeValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceMap inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    p->mAttribute_fieldMap = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_variableMap * GALGAS_variableMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                  const GALGAS_string & inKey
                                                                                  COMMA_LOCATION_ARGS) {
@@ -21271,6 +21327,14 @@ GALGAS_bool cEnumerator_variableMap::current_copiable (LOCATION_ARGS) const {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_variableMap) ;
   return p->mAttribute_copiable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerBitSliceMap cEnumerator_variableMap::current_fieldMap (LOCATION_ARGS) const {
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_variableMap) ;
+  return p->mAttribute_fieldMap ;
 }
 
 

@@ -125,6 +125,7 @@ override method @procCallInstructionAST analyze
         ?let unused variableAccess
         ?let parameterAccess
         ?let isCopiable
+        ?*
       ]
     #--- Check mode
       checkMode (
@@ -160,7 +161,7 @@ override method @procCallInstructionAST analyze
         ?let varModeSet
         ?let unused variableAccess
         ?let parameterAccess
-        ?*
+        ?2*
       ]
     #--- Check mode
       checkMode (
