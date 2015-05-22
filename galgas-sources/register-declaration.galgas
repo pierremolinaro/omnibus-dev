@@ -122,6 +122,7 @@ override getter @registerDeclaration keyRepresentation -> @string outRepresentat
 map @registerBitSliceMap {
   @infixOperatorIR mAccessOperator
   @variableKindIR mAccessRightOperand
+  @registerBitSliceMap mSubMap
   insert insertKey error message "the '%K' register slice has been already declared"
   search searchKey error message "the '%K' register slice is not declared"
 }
@@ -154,12 +155,20 @@ override method @registerDeclaration enterInContext
       case unusedBits (@luint64 count) :
         shiftCount = shiftCount + [count.uint64 uint]
       case namedBit (@lstring name @luint64 count) :
+        @registerBitSliceMap registerSubMap = {}
+        [!?registerSubMap insertKey
+          !.new{!"shift" !name.location}
+          !.infix {!infixOperator:">>"}
+          !.literalUnsignedInteger{!type:registerType !value:[shiftCount uint64]}
+          !{}
+        ]
         let bitCount = [count.uint64 uint]
         let mask = ((1L << bitCount) - 1L) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
           !.infix {!infixOperator:"&"}
           !.literalUnsignedInteger{!type:registerType !value:mask}
+          !registerSubMap
         ]
         shiftCount = shiftCount + bitCount
       end

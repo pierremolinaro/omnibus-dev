@@ -83,6 +83,7 @@ override method @varInExpressionAST analyzeExpression
       !field
       ?let @infixOperatorIR accessOperator
       ?let @variableKindIR accessRightOperand
+      ?let submap
      ]
   #--- Temp var
     getNewTempVariable (!?ioTemporaryIndex ?let newResultingVariable)
@@ -94,7 +95,8 @@ override method @varInExpressionAST analyzeExpression
       !accessRightOperand
       !mSourceVarName.location
     }
-    resultingVariable = newResultingVariable  
+    resultingVariable = newResultingVariable 
+    registerBitSliceMap = submap 
   end
 #--- Generate code
   outResultValueName = resultingVariable
