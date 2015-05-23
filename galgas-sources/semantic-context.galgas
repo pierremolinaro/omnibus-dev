@@ -132,6 +132,7 @@ list @typeList {
 
 struct @semanticContext {
   @targetBaseTypeMap mTargetBaseTypeMap
+  @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap mTypeMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
@@ -147,10 +148,11 @@ struct @semanticContext {
   @infixOperatorMap mStrictSupOperatorMap       # >
   @infixOperatorMap mSupEqualOperatorMap        # >=
   @infixOperatorMap mAndOperatorMap             # &
-  @infixOperatorMap mAndShortCircuitOperatorMap # &&
+  @infixOperatorMap mBooleanAndOperatorMap      # and
   @infixOperatorMap mOrOperatorMap              # |
-  @infixOperatorMap mOrShortCircuitOperatorMap  # ||
+  @infixOperatorMap mBooleanOrOperatorMap       # or
   @infixOperatorMap mXorOperatorMap             # ^
+  @infixOperatorMap mBooleanXorOperatorMap      # xor
   @infixOperatorMap mAddOperatorMap             # +
   @infixOperatorMap mAddNoOvfOperatorMap        # &+
   @infixOperatorMap mSubOperatorMap             # -

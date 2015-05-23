@@ -91,6 +91,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
   "galgas-sources/expression-literal-string.galgas"
+  "galgas-sources/expression-true-false.galgas"
 #  "galgas-sources/expression-self.galgas"
   "galgas-sources/expression-var.galgas"
   "galgas-sources/expression-func-call.galgas"
