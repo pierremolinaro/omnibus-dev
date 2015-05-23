@@ -2,14 +2,14 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @registerBooleanConstantInExpressionAST : @expressionAST {
+class @registerConstantInExpressionAST : @expressionAST {
   @lstring mRegisterName
   @lstring mFieldName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @registerIntegerConstantInExpressionAST : @expressionAST {
+class @registerIntegerExpInExpressionAST : @expressionAST {
   @lstring mRegisterName
   @lstring mFieldName
   @expressionAST mExpression
@@ -26,7 +26,7 @@ syntax extension common_syntax {
     $identifier$ ?let registerName
     $::$
     $identifier$ ?let fieldName
-    outExpression = @registerBooleanConstantInExpressionAST.new {!registerName !fieldName}
+    outExpression = @registerConstantInExpressionAST.new {!registerName !fieldName}
   }
 
   rule <primary> !@expressionAST outExpression {
@@ -37,7 +37,7 @@ syntax extension common_syntax {
     <expression> ?let expression
     let endOfExpression = @location.here
     $)$
-    outExpression = @registerIntegerConstantInExpressionAST.new {!registerName !fieldName !expression !endOfExpression}
+    outExpression = @registerIntegerExpInExpressionAST.new {!registerName !fieldName !expression !endOfExpression}
   }
 
 }
@@ -46,7 +46,7 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerBooleanConstantInExpressionAST addDependenceEdgeForStaticExpression
+override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -55,7 +55,7 @@ override method @registerBooleanConstantInExpressionAST addDependenceEdgeForStat
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerIntegerConstantInExpressionAST addDependenceEdgeForStaticExpression
+override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -66,7 +66,7 @@ override method @registerIntegerConstantInExpressionAST addDependenceEdgeForStat
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerBooleanConstantInExpressionAST analyzeExpression
+override method @registerConstantInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -93,17 +93,13 @@ override method @registerBooleanConstantInExpressionAST analyzeExpression
     ?let @uint bitIndex
     ?let @uint bitCount
   ]
-#--- Check
-  if bitCount != 1 then
-    error mFieldName : "this field is not a boolean field (size: " + bitCount + " bits)"
-  end
 #--- Generate code
-  outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:1L << bitIndex}
+  outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:((1L << bitCount) - 1L) << bitIndex}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerIntegerConstantInExpressionAST analyzeExpression
+override method @registerIntegerExpInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext

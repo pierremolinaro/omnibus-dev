@@ -8944,7 +8944,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_ (GALGAS_expres
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 27)) ;
   GALGAS_lstring var_fieldName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 28)) ;
-  outArgument_outExpression = GALGAS_registerBooleanConstantInExpressionAST::constructor_new (var_registerName, var_fieldName  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 29)) ;
+  outArgument_outExpression = GALGAS_registerConstantInExpressionAST::constructor_new (var_registerName, var_fieldName  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 29)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8971,7 +8971,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_ (GALGAS_expres
   nt_expression_ (var_expression, inCompiler) ;
   GALGAS_location var_endOfExpression = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 38)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__29_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 39)) ;
-  outArgument_outExpression = GALGAS_registerIntegerConstantInExpressionAST::constructor_new (var_registerName, var_fieldName, var_expression, var_endOfExpression  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 40)) ;
+  outArgument_outExpression = GALGAS_registerIntegerExpInExpressionAST::constructor_new (var_registerName, var_fieldName, var_expression, var_endOfExpression  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 40)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

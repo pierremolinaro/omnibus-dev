@@ -40,7 +40,7 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar as Int32)
-  gYYYYY = ICSR::VECTPENDING (gZZZZ)
+  gYYYYY = ICSR::VECTPENDING
 }
 
 //-----------------------------------------------------------------------------*

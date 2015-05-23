@@ -2,15 +2,15 @@
 %!TEX root = ../doc-plm.tex
 
 
-\chapter{Déclaration des registres}
+\chapter{Les registres de contrôle}
 
-La déclaration d'un registre obéit à une syntaxe particulière, ne serait-ce que parce que son adresse absolue doit y être spécifiée. Pour de nombreux registres, un bit ou un groupe de bits ont une signification particulière, et obtenir la valeur d'un champ ou modifier sa valeur est une opération courante.
+La déclaration d'un registre de contrôle obéit à une syntaxe particulière, ne serait-ce que parce que son adresse absolue doit y être spécifiée. Pour de nombreux registres, un bit ou un groupe de bits ont une signification particulière, et obtenir la valeur d'un champ ou modifier sa valeur est une opération courante.
 
-À titre d'exemple, nous allons nous intéresser au registre \texttt{ICSR} du processeur ARMv7-M. Le \emph{manuel de référence de l'architecture ARMv7-M}\footnote{\url{http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0403e.b/index.html}} décrit ce registre comme indiqué à la \refFigure{}{definitionICSR}. Le manuel de référence indique par ailleurs que l'adresse de ce registre est \texttt{0xE000ED04}.
+À titre d'exemple, nous allons nous intéresser au registre \texttt{ICSR} du processeur ARMv7-M. Le \emph{manuel de référence de l'architecture ARMv7-M}\footnote{\url{http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0403e.b/index.html}} décrit ce registre comme indiqué à la \refFigure{}{definitionICSR}, et indique que son adresse est \texttt{0xE000ED04}.
 
 \begin{figure}[t]
 \centering
-\includegraphics{chapitres/icsr-armv7m.pdf}
+\includegraphics[width=14cm]{chapitres/icsr-armv7m.pdf}
 \caption{Registre de contrôle \texttt{ICSR} intégré dans l'ARMv7}
 \labelFigure{definitionICSR}
 \ligne
@@ -85,19 +85,12 @@ La description commence par le bit le plus significatif : comme le type du regis
 Cette écriture n'est autorisée que si le type nommé (ici \plm+UInt32+) est une type entier non signé. Les types signés (\plm+Int32+, ...) sont interdits. Le compilateur vérifie que la description des champs définit exactement le nombre de bits du type nommé, ici les 32 bits du type \plm+UInt32+.
 
 
-\subsection{Constantes associées aux champs booléens}
 
-Le délimiteur \plm+::+ permet de définir des constantes correspondant aux bits d'un registre. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
-\begin{PLM}
-ICSR = ICSR::PENDSVSET
-\end{PLM}
 
-La constante \plm+ICSR::PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+UInt32+.
 
-De façon analogue, si on voulait activer simultanément les interruptions \texttt{PendSV} et \texttt{SysTick}, il faut mettre à $1$ les bits \texttt{PENDSVSET} et \texttt{PENDSTSET}. On écrit donc :
-\begin{PLM}
-ICSR = ICSR::PENDSVSET | ICSR::PENDSTSET
-\end{PLM}
+
+
+
 
 
 \subsection{Accès en lecture aux champs booléens}
@@ -125,9 +118,49 @@ let x : Bool = ICSR.ISRPENDING.bool // false ou true
 
 
 
+
+
+\subsection{Accès en lecture aux champs entiers}
+
+Comme pour un champ booléen, l'accès à un champ entier s'effectue par la notation pointée \plm+.+. Par exemple :
+\begin{PLM}
+let x : UInt32 = ICSR.VECTPENDING
+\end{PLM}
+
+\plm+ICSR.VECTPENDING+ applique un masquage de la valeur de \plm+ICSR+ pour ne conserver que les bits correspondants au champ \plm+VECTPENDING+. Aucun décalage n'est effectué.
+
+
+Pour obtenir une valeur justifiée à droite, on ajoute l'accesseur \plm+.shift+ :
+\begin{PLM}
+let x : UInt32 = ICSR.VECTPENDING.shift
+\end{PLM}
+
+La valeur renvoyée est alors comprise en $0$ et $2^9-1$.
+
+
+
+\subsection{Constantes associées aux champs booléens}
+
+Le délimiteur \plm+::+ permet de définir des constantes correspondant aux bits d'un registre. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
+\begin{PLM}
+ICSR = ICSR::PENDSVSET
+\end{PLM}
+
+La constante \plm+ICSR::PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+UInt32+.
+
+De façon analogue, si on voulait activer simultanément les interruptions \texttt{PendSV} et \texttt{SysTick}, il faut mettre à $1$ les bits \texttt{PENDSVSET} et \texttt{PENDSTSET}. On écrit donc :
+\begin{PLM}
+ICSR = ICSR::PENDSVSET | ICSR::PENDSTSET
+\end{PLM}
+
+
+
+
+
+
 \subsectionLabel{Expressions associées aux champs entiers}{constructionChampEntierRegistre}
 
-Le délimiteur \plm+::+ permet de simplifier l'écriture d'une valeur correspondant à un champ entier. Par exemple :
+Le délimiteur \plm+::+ permet de simplifier la composition d'une valeur correspondant à un champ entier. Par exemple :
 
 \begin{PLM}
 let y : UInt32 = ICSR::VECTPENDING (x) // x : expression entière non signée
@@ -139,7 +172,7 @@ Le champ \texttt{VECTPENDING} est un champ de 9 bits, il peut donc accepter une 
 \item si \plm+x+ est une expression non calculable statiquement :
   \begin{itemize}
   \item si \plm+x+ est du type \plm+UInt8+, alors toute valeur de \plm+x+ est acceptable : le code engendré se borne à faire le décalage à gauche de la valeur de \plm+x+ ;
-  \item sinon, une assertion (code : voir \refTableauPage{tableauCodeExceptions}) est engendrée ; la valeur de \plm+x+ est ensuite masquée pour pallier un éventuel débordement, puis décalé. 
+  \item sinon, une assertion (code : voir \refTableauPage{tableauCodeExceptions}) est engendrée ; la valeur de \plm+x+ est ensuite masquée pour pallier un éventuel débordement, puis décalée. 
   \end{itemize}
 \end{itemize}
 
@@ -149,22 +182,25 @@ D'une manière générale, si \plm+x+ n'est pas calculable statiquement, le code
 
 
 
-\subsection{Accès en lecture aux champs entiers}
+\subsection{Masques associés aux champs entiers}
 
-Comme pour un champ booléen, l'accès à un champ entier s'effectue par la notation pointée \plm+.+. Par exemple :
+Le délimiteur \plm+::+ permet de simplifier la composition d'un masque correspondant à un champ entier. Par exemple :
+
 \begin{PLM}
-let x : UInt32 = ICSR.VECTPENDING
+let y : UInt32 = ICSR::VECTPENDING // y vaut 0x1F_F000
 \end{PLM}
 
-\plm+ICSR.VECTPENDING+ applique un masquage de la valeur de \plm+ICSR+ pour ne conserver que les bits correspondants au champ \plm+VECTPENDING+. Aucun déclage n'est effectué.
+Le champ \texttt{VECTPENDING} est un champ de 9 bits commençant au bit 12. La valeur du masque \plm+ICSR::VECTPENDING+ est donc $(2^9 - 1)^{12}$, soit \texttt{0x1F\_F000}.
+
+Les masques ainsi obtenus sont des expressions statiques.
 
 
-Pour obtenir une valeur justifiée à droite, on ajoute l'accesseur \plm+.shift+ :
-\begin{PLM}
-let x : UInt32 = ICSR.VECTPENDING.shift
-\end{PLM}
 
-La valeur renvoyée est alors comprise en $0$ et $2^9-1$.
+
+
+
+
+
 
 \section{Attribut \texttt{@ro}}
 La déclaration d'un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule. Par exemple :
@@ -173,5 +209,4 @@ register SYST_CALIB @ro at 0xE000_E01C : UInt32
 \end{PLM}
 
 Toute tentative de faire figurer ce registre dans une construction qui provoque une écriture de celui-ci entraîne l'apparition d'une erreur de compilation.
-
 
