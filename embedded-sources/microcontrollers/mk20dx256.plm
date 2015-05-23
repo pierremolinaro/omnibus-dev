@@ -244,7 +244,7 @@ let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select
 register SIM_SOPT4   at 0x4004800C : UInt32 // System Options Register 4
 register SIM_SOPT5   at 0x40048010 : UInt32 // System Options Register 5
 register SIM_SOPT7   at 0x40048018 : UInt32 // System Options Register 7
-register @ro SIM_SDID  at 0x40048024 : UInt32 // System Device Identification Register
+register SIM_SDID @ro at 0x40048024 : UInt32 // System Device Identification Register
 register SIM_SCGC2  at 0x4004802C : UInt32 // System Clock Gating Control Register 2
 let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control
 register SIM_SCGC3  at 0x40048030 : UInt32 // System Clock Gating Control Register 3
@@ -299,12 +299,12 @@ let SIM_CLKDIV1_OUTDIV4_3 : UInt32 = 3 << 16
 register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2
 //register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)
 let SIM_CLKDIV2_USBFRAC  : UInt32 =  0x01
-register @ro SIM_FCFG1 at 0x4004804C : UInt32 // Flash Configuration Register 1
-register @ro SIM_FCFG2 at 0x40048050 : UInt32 // Flash Configuration Register 2
-register @ro SIM_UIDH  at 0x40048054 : UInt32 // Unique Identification Register High
-register @ro SIM_UIDMH at 0x40048058 : UInt32 // Unique Identification Register Mid-High
-register @ro SIM_UIDML at 0x4004805C : UInt32 // Unique Identification Register Mid Low
-register @ro SIM_UIDL  at 0x40048060 : UInt32 // Unique Identification Register Low
+register SIM_FCFG1 @ro at 0x4004804C : UInt32 // Flash Configuration Register 1
+register SIM_FCFG2 @ro at 0x40048050 : UInt32 // Flash Configuration Register 2
+register SIM_UIDH  @ro at 0x40048054 : UInt32 // Unique Identification Register High
+register SIM_UIDMH @ro at 0x40048058 : UInt32 // Unique Identification Register Mid-High
+register SIM_UIDML @ro at 0x4004805C : UInt32 // Unique Identification Register Mid Low
+register SIM_UIDL  @ro at 0x40048060 : UInt32 // Unique Identification Register Low
 
 // Chapter 13: Reset Control Module (RCM)
 register RCM_SRS0 at 0x4007F000 : UInt8 // System Reset Status Register 0
@@ -2110,8 +2110,12 @@ register GPIOE_PDDR   at 0x400FF114 : UInt32 // Port Data Direction Register
 //
 //// System Control Space (SCS), ARMv7 ref manual, B3.2, page 708
 //register SCB_CPUID  *(const    uint32_t *)0xE000ED00 // CPUID Base Register
-//register SCB_ICSR   0xE000ED04 // Interrupt Control and State
-//register SCB_ICSR_PENDSTSET   0x04000000
+
+register ICSR at 0xE000_ED04 : UInt32 { // Interrupt Control and State
+  NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,
+  ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]
+}
+
 //register SCB_VTOR   0xE000ED08 // Vector Table Offset
 register SCB_AIRCR at 0xE000ED0C : UInt32 // Application Interrupt and Reset Control
 let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
@@ -2126,14 +2130,13 @@ let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
 //register SCB_DFSR   0xE000ED30 // Debug Fault Status
 //register SCB_MMFAR   0xE000ED34 // MemManage Fault Address
 
-register SYST_CSR at 0xE000E010 : UInt32 // SysTick Control and Status
-let SYST_CSR_COUNTFLAG  : UInt32 = 0x00010000
-let SYST_CSR_CLKSOURCE   : UInt32= 0x00000004
-let SYST_CSR_TICKINT  : UInt32 = 0x00000002
-let SYST_CSR_ENABLE   : UInt32 =  0x00000001
-register SYST_RVR   at 0xE000E014 : UInt32 // SysTick Reload Value Register
-register SYST_CVR   at 0xE000E018 : UInt32 // SysTick Current Value Register
-register @ro SYST_CALIB at 0xE000E01C : UInt32 // SysTick Calibration Value
+register SYST_CSR at 0xE000_E010 // SysTick Control and Status
+  : UInt32 {15, COUNTFLAG, 13, CLKSOURCE, TICKINT, ENABLE}
+
+
+register SYST_RVR   at 0xE000_E014 : UInt32 // SysTick Reload Value Register
+register SYST_CVR   at 0xE000_E018 : UInt32 // SysTick Current Value Register
+register SYST_CALIB  @ro at 0xE000_E01C : UInt32 // SysTick Calibration Value
 
 
 //register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control

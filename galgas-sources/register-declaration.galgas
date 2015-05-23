@@ -47,13 +47,13 @@ syntax extension common_syntax {
     $register$
     @registerDeclarationList registerDeclarationList = {}
     repeat
+      $identifier$ ?let registerName
       @lstringlist attributeList = {}
       repeat
       while
         $attribute$ ?let attribute
         attributeList += !attribute
       end 
-      $identifier$ ?let registerName
       $at$
       $integer$ ?let @luint64 registerAddress
       registerDeclarationList += !registerName !attributeList !registerAddress

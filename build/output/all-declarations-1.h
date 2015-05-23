@@ -4136,6 +4136,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_infixOperatorMap mAttribute_mLeftShiftOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mRightShiftOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mUnaryMinusOperatorMap ;
+  public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
 
 
 //--------------------------------- Accessors
@@ -4183,7 +4184,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_infixOperatorMap & in_mModOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mLeftShiftOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mRightShiftOperatorMap,
-                                   const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap) ;
+                                   const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap,
+                                   const GALGAS_prefixOperatorMap & in_mNotOperatorMap) ;
 
 //-- Start of generic part --*
 
@@ -4227,7 +4229,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand28,
                                                           const class GALGAS_infixOperatorMap & inOperand29,
                                                           const class GALGAS_infixOperatorMap & inOperand30,
-                                                          const class GALGAS_prefixOperatorMap & inOperand31
+                                                          const class GALGAS_prefixOperatorMap & inOperand31,
+                                                          const class GALGAS_prefixOperatorMap & inOperand32
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -4275,6 +4278,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mMulOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mNonEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap reader_mNotOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mOrOperatorMap (LOCATION_ARGS) const ;
 
@@ -4482,44 +4487,5 @@ void routine_enterIntegerOperators (class GALGAS_lstring inArgument0,
                                     class GALGAS_semanticContext & ioArgument1,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Filewrapper 'integerGenerationTemplate'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_integerGenerationTemplate ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Filewrapper template 'integerGenerationTemplate declaration'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_integerGenerationTemplate_declaration (class C_Compiler * inCompiler,
-                                                                         const class GALGAS_string & in_INTEGER_5F_TYPE_5F_NAME,
-                                                                         const class GALGAS_string & in_ACTUAL_5F_TYPE_5F_NAME
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'enterStaticStringOperators'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterStaticStringOperators (class GALGAS_lstring inArgument0,
-                                         class GALGAS_semanticContext & ioArgument1,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 
 #endif

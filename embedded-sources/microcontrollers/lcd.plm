@@ -376,7 +376,7 @@ proc $exception @noWarningIfUnused programLcd4BitDataBusOutput_inExceptionMode (
 //-----------------------------------------------------------------------------*
 
 proc $exception @noWarningIfUnused waitOneMillisecondInExceptionMode () {
-  while (SYST_CSR & SYST_CSR_COUNTFLAG) == 0 do
+  while not SYST_CSR.COUNTFLAG.bool do
   end
 }
 

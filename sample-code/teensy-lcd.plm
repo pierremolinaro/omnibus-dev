@@ -25,7 +25,7 @@ proc $isr userSystickHandler () {
 
 var $user gVar : Int8 = 0
 
-var $user gZZZZ : UInt32 = 0
+var $user gZZZZ : UInt8 = 0
 var $user gYYYYY : UInt32 = 0
 
 //-----------------------------------------------------------------------------*
@@ -40,10 +40,7 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar as Int32)
-  gYYYYY = PORTA_PCR3.mux.shift
-  if PORTA_PCR3.mux.bool then
-   gZZZZ ++
-  end
+  gYYYYY = ICSR::VECTPENDING (gZZZZ)
 }
 
 //-----------------------------------------------------------------------------*
