@@ -16716,10 +16716,10 @@ GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST::extractOb
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_registerBooleanConstantInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_registerConstantInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_registerBooleanConstantInExpressionAST * p = (const cPtr_registerBooleanConstantInExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_registerBooleanConstantInExpressionAST) ;
+  const cPtr_registerConstantInExpressionAST * p = (const cPtr_registerConstantInExpressionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_registerConstantInExpressionAST) ;
   if (kOperandEqual == result) {
     result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
   }
@@ -16732,7 +16732,7 @@ typeComparisonResult cPtr_registerBooleanConstantInExpressionAST::dynamicObjectC
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_registerBooleanConstantInExpressionAST::objectCompare (const GALGAS_registerBooleanConstantInExpressionAST & inOperand) const {
+typeComparisonResult GALGAS_registerConstantInExpressionAST::objectCompare (const GALGAS_registerConstantInExpressionAST & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -16750,44 +16750,44 @@ typeComparisonResult GALGAS_registerBooleanConstantInExpressionAST::objectCompar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBooleanConstantInExpressionAST::GALGAS_registerBooleanConstantInExpressionAST (void) :
+GALGAS_registerConstantInExpressionAST::GALGAS_registerConstantInExpressionAST (void) :
 GALGAS_expressionAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBooleanConstantInExpressionAST GALGAS_registerBooleanConstantInExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_registerBooleanConstantInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                                         GALGAS_lstring::constructor_default (HERE)
-                                                                         COMMA_THERE) ;
+GALGAS_registerConstantInExpressionAST GALGAS_registerConstantInExpressionAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_registerConstantInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                                  GALGAS_lstring::constructor_default (HERE)
+                                                                  COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBooleanConstantInExpressionAST::GALGAS_registerBooleanConstantInExpressionAST (const cPtr_registerBooleanConstantInExpressionAST * inSourcePtr) :
+GALGAS_registerConstantInExpressionAST::GALGAS_registerConstantInExpressionAST (const cPtr_registerConstantInExpressionAST * inSourcePtr) :
 GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerBooleanConstantInExpressionAST) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerConstantInExpressionAST) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBooleanConstantInExpressionAST GALGAS_registerBooleanConstantInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName,
-                                                                                                              const GALGAS_lstring & inAttribute_mFieldName
-                                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_registerBooleanConstantInExpressionAST result ;
+GALGAS_registerConstantInExpressionAST GALGAS_registerConstantInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName,
+                                                                                                const GALGAS_lstring & inAttribute_mFieldName
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_registerConstantInExpressionAST result ;
   if (inAttribute_mRegisterName.isValid () && inAttribute_mFieldName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerBooleanConstantInExpressionAST (inAttribute_mRegisterName, inAttribute_mFieldName COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_registerConstantInExpressionAST (inAttribute_mRegisterName, inAttribute_mFieldName COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerBooleanConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerBooleanConstantInExpressionAST * p = (const cPtr_registerBooleanConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerBooleanConstantInExpressionAST) ;
+    const cPtr_registerConstantInExpressionAST * p = (const cPtr_registerConstantInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerConstantInExpressionAST) ;
     result = p->mAttribute_mRegisterName ;
   }
   return result ;
@@ -16795,17 +16795,17 @@ GALGAS_lstring GALGAS_registerBooleanConstantInExpressionAST::reader_mRegisterNa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerBooleanConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerBooleanConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerBooleanConstantInExpressionAST * p = (const cPtr_registerBooleanConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerBooleanConstantInExpressionAST) ;
+    const cPtr_registerConstantInExpressionAST * p = (const cPtr_registerConstantInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerConstantInExpressionAST) ;
     result = p->mAttribute_mFieldName ;
   }
   return result ;
@@ -16813,17 +16813,17 @@ GALGAS_lstring GALGAS_registerBooleanConstantInExpressionAST::reader_mFieldName 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerBooleanConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                           Pointer class for @registerBooleanConstantInExpressionAST class                           *
+//                              Pointer class for @registerConstantInExpressionAST class                               *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_registerBooleanConstantInExpressionAST::cPtr_registerBooleanConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                                                                          const GALGAS_lstring & in_mFieldName
-                                                                                          COMMA_LOCATION_ARGS) :
+cPtr_registerConstantInExpressionAST::cPtr_registerConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
+                                                                            const GALGAS_lstring & in_mFieldName
+                                                                            COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mRegisterName (in_mRegisterName),
 mAttribute_mFieldName (in_mFieldName) {
@@ -16831,13 +16831,13 @@ mAttribute_mFieldName (in_mFieldName) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_registerBooleanConstantInExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerBooleanConstantInExpressionAST ;
+const C_galgas_type_descriptor * cPtr_registerConstantInExpressionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerConstantInExpressionAST ;
 }
 
-void cPtr_registerBooleanConstantInExpressionAST::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "[@registerBooleanConstantInExpressionAST:" ;
+void cPtr_registerConstantInExpressionAST::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "[@registerConstantInExpressionAST:" ;
   mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mFieldName.description (ioString, inIndentation+1) ;
@@ -16846,51 +16846,51 @@ void cPtr_registerBooleanConstantInExpressionAST::description (C_String & ioStri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_registerBooleanConstantInExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_registerConstantInExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerBooleanConstantInExpressionAST (mAttribute_mRegisterName, mAttribute_mFieldName COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerConstantInExpressionAST (mAttribute_mRegisterName, mAttribute_mFieldName COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    @registerBooleanConstantInExpressionAST type                                     *
+//                                        @registerConstantInExpressionAST type                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerBooleanConstantInExpressionAST ("registerBooleanConstantInExpressionAST",
-                                                               & kTypeDescriptor_GALGAS_expressionAST) ;
+kTypeDescriptor_GALGAS_registerConstantInExpressionAST ("registerConstantInExpressionAST",
+                                                        & kTypeDescriptor_GALGAS_expressionAST) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerBooleanConstantInExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerBooleanConstantInExpressionAST ;
+const C_galgas_type_descriptor * GALGAS_registerConstantInExpressionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerConstantInExpressionAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerBooleanConstantInExpressionAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_registerConstantInExpressionAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerBooleanConstantInExpressionAST (*this)) ;
+    macroMyNew (result, GALGAS_registerConstantInExpressionAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBooleanConstantInExpressionAST GALGAS_registerBooleanConstantInExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_registerBooleanConstantInExpressionAST result ;
-  const GALGAS_registerBooleanConstantInExpressionAST * p = (const GALGAS_registerBooleanConstantInExpressionAST *) inObject.embeddedObject () ;
+GALGAS_registerConstantInExpressionAST GALGAS_registerConstantInExpressionAST::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_registerConstantInExpressionAST result ;
+  const GALGAS_registerConstantInExpressionAST * p = (const GALGAS_registerConstantInExpressionAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerBooleanConstantInExpressionAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_registerConstantInExpressionAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerBooleanConstantInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("registerConstantInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -16900,10 +16900,10 @@ GALGAS_registerBooleanConstantInExpressionAST GALGAS_registerBooleanConstantInEx
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_registerIntegerConstantInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_registerIntegerExpInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_registerIntegerConstantInExpressionAST * p = (const cPtr_registerIntegerConstantInExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionAST) ;
+  const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_registerIntegerExpInExpressionAST) ;
   if (kOperandEqual == result) {
     result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
   }
@@ -16922,7 +16922,7 @@ typeComparisonResult cPtr_registerIntegerConstantInExpressionAST::dynamicObjectC
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_registerIntegerConstantInExpressionAST::objectCompare (const GALGAS_registerIntegerConstantInExpressionAST & inOperand) const {
+typeComparisonResult GALGAS_registerIntegerExpInExpressionAST::objectCompare (const GALGAS_registerIntegerExpInExpressionAST & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -16940,38 +16940,38 @@ typeComparisonResult GALGAS_registerIntegerConstantInExpressionAST::objectCompar
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerConstantInExpressionAST::GALGAS_registerIntegerConstantInExpressionAST (void) :
+GALGAS_registerIntegerExpInExpressionAST::GALGAS_registerIntegerExpInExpressionAST (void) :
 GALGAS_expressionAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerConstantInExpressionAST::GALGAS_registerIntegerConstantInExpressionAST (const cPtr_registerIntegerConstantInExpressionAST * inSourcePtr) :
+GALGAS_registerIntegerExpInExpressionAST::GALGAS_registerIntegerExpInExpressionAST (const cPtr_registerIntegerExpInExpressionAST * inSourcePtr) :
 GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerIntegerConstantInExpressionAST) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerIntegerExpInExpressionAST) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerConstantInExpressionAST GALGAS_registerIntegerConstantInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName,
-                                                                                                              const GALGAS_lstring & inAttribute_mFieldName,
-                                                                                                              const GALGAS_expressionAST & inAttribute_mExpression,
-                                                                                                              const GALGAS_location & inAttribute_mExpressionLocation
-                                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_registerIntegerConstantInExpressionAST result ;
+GALGAS_registerIntegerExpInExpressionAST GALGAS_registerIntegerExpInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName,
+                                                                                                    const GALGAS_lstring & inAttribute_mFieldName,
+                                                                                                    const GALGAS_expressionAST & inAttribute_mExpression,
+                                                                                                    const GALGAS_location & inAttribute_mExpressionLocation
+                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_registerIntegerExpInExpressionAST result ;
   if (inAttribute_mRegisterName.isValid () && inAttribute_mFieldName.isValid () && inAttribute_mExpression.isValid () && inAttribute_mExpressionLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerIntegerConstantInExpressionAST (inAttribute_mRegisterName, inAttribute_mFieldName, inAttribute_mExpression, inAttribute_mExpressionLocation COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_registerIntegerExpInExpressionAST (inAttribute_mRegisterName, inAttribute_mFieldName, inAttribute_mExpression, inAttribute_mExpressionLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerIntegerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionAST * p = (const cPtr_registerIntegerConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionAST) ;
+    const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerIntegerExpInExpressionAST) ;
     result = p->mAttribute_mRegisterName ;
   }
   return result ;
@@ -16979,17 +16979,17 @@ GALGAS_lstring GALGAS_registerIntegerConstantInExpressionAST::reader_mRegisterNa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerIntegerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerIntegerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionAST * p = (const cPtr_registerIntegerConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionAST) ;
+    const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerIntegerExpInExpressionAST) ;
     result = p->mAttribute_mFieldName ;
   }
   return result ;
@@ -16997,17 +16997,17 @@ GALGAS_lstring GALGAS_registerIntegerConstantInExpressionAST::reader_mFieldName 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerIntegerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_registerIntegerConstantInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_registerIntegerExpInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionAST * p = (const cPtr_registerIntegerConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionAST) ;
+    const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerIntegerExpInExpressionAST) ;
     result = p->mAttribute_mExpression ;
   }
   return result ;
@@ -17015,17 +17015,17 @@ GALGAS_expressionAST GALGAS_registerIntegerConstantInExpressionAST::reader_mExpr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_registerIntegerConstantInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_registerIntegerExpInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_registerIntegerConstantInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_registerIntegerExpInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionAST * p = (const cPtr_registerIntegerConstantInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionAST) ;
+    const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_registerIntegerExpInExpressionAST) ;
     result = p->mAttribute_mExpressionLocation ;
   }
   return result ;
@@ -17033,19 +17033,19 @@ GALGAS_location GALGAS_registerIntegerConstantInExpressionAST::reader_mExpressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_registerIntegerConstantInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_registerIntegerExpInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                           Pointer class for @registerIntegerConstantInExpressionAST class                           *
+//                             Pointer class for @registerIntegerExpInExpressionAST class                              *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_registerIntegerConstantInExpressionAST::cPtr_registerIntegerConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                                                                          const GALGAS_lstring & in_mFieldName,
-                                                                                          const GALGAS_expressionAST & in_mExpression,
-                                                                                          const GALGAS_location & in_mExpressionLocation
-                                                                                          COMMA_LOCATION_ARGS) :
+cPtr_registerIntegerExpInExpressionAST::cPtr_registerIntegerExpInExpressionAST (const GALGAS_lstring & in_mRegisterName,
+                                                                                const GALGAS_lstring & in_mFieldName,
+                                                                                const GALGAS_expressionAST & in_mExpression,
+                                                                                const GALGAS_location & in_mExpressionLocation
+                                                                                COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mRegisterName (in_mRegisterName),
 mAttribute_mFieldName (in_mFieldName),
@@ -17055,13 +17055,13 @@ mAttribute_mExpressionLocation (in_mExpressionLocation) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_registerIntegerConstantInExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionAST ;
+const C_galgas_type_descriptor * cPtr_registerIntegerExpInExpressionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerIntegerExpInExpressionAST ;
 }
 
-void cPtr_registerIntegerConstantInExpressionAST::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "[@registerIntegerConstantInExpressionAST:" ;
+void cPtr_registerIntegerExpInExpressionAST::description (C_String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString << "[@registerIntegerExpInExpressionAST:" ;
   mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mFieldName.description (ioString, inIndentation+1) ;
@@ -17074,51 +17074,51 @@ void cPtr_registerIntegerConstantInExpressionAST::description (C_String & ioStri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_registerIntegerConstantInExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_registerIntegerExpInExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerIntegerConstantInExpressionAST (mAttribute_mRegisterName, mAttribute_mFieldName, mAttribute_mExpression, mAttribute_mExpressionLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerIntegerExpInExpressionAST (mAttribute_mRegisterName, mAttribute_mFieldName, mAttribute_mExpression, mAttribute_mExpressionLocation COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    @registerIntegerConstantInExpressionAST type                                     *
+//                                       @registerIntegerExpInExpressionAST type                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionAST ("registerIntegerConstantInExpressionAST",
-                                                               & kTypeDescriptor_GALGAS_expressionAST) ;
+kTypeDescriptor_GALGAS_registerIntegerExpInExpressionAST ("registerIntegerExpInExpressionAST",
+                                                          & kTypeDescriptor_GALGAS_expressionAST) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerIntegerConstantInExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionAST ;
+const C_galgas_type_descriptor * GALGAS_registerIntegerExpInExpressionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerIntegerExpInExpressionAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerIntegerConstantInExpressionAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_registerIntegerExpInExpressionAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerIntegerConstantInExpressionAST (*this)) ;
+    macroMyNew (result, GALGAS_registerIntegerExpInExpressionAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerConstantInExpressionAST GALGAS_registerIntegerConstantInExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_registerIntegerConstantInExpressionAST result ;
-  const GALGAS_registerIntegerConstantInExpressionAST * p = (const GALGAS_registerIntegerConstantInExpressionAST *) inObject.embeddedObject () ;
+GALGAS_registerIntegerExpInExpressionAST GALGAS_registerIntegerExpInExpressionAST::extractObject (const GALGAS_object & inObject,
+                                                                                                  C_Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_registerIntegerExpInExpressionAST result ;
+  const GALGAS_registerIntegerExpInExpressionAST * p = (const GALGAS_registerIntegerExpInExpressionAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerIntegerConstantInExpressionAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_registerIntegerExpInExpressionAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerIntegerConstantInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("registerIntegerExpInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
