@@ -94,6 +94,7 @@ project (0:0:1) -> "plm" {
 #  "galgas-sources/expression-self.galgas"
   "galgas-sources/expression-var.galgas"
   "galgas-sources/expression-func-call.galgas"
+  "galgas-sources/expression-cst-registre.galgas"
 
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"

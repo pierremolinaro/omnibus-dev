@@ -2,9 +2,9 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @varInExpressionAST : @expressionAST {
-  @lstring mSourceVarName
-  @lstringlist mFieldNameList
+class @registerConstantInExpressionAST : @expressionAST {
+  @lstring mRegisterName
+  @lstring mFieldName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -14,15 +14,10 @@ class @varInExpressionAST : @expressionAST {
 syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let sourceVarName
-    @lstringlist fieldNameList = {}
-    repeat
-    while
-      $.$
-      $identifier$ ?let fieldName
-      fieldNameList += !fieldName
-    end 
-    outExpression = @varInExpressionAST.new {!sourceVarName !fieldNameList}
+    $identifier$ ?let registerName
+    $::$
+    $identifier$ ?let fieldName
+    outExpression = @registerConstantInExpressionAST.new {!registerName !fieldName}
   }
 
 }
@@ -31,77 +26,50 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varInExpressionAST addDependenceEdgeForStaticExpression
+override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mSourceVarName]
+  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varInExpressionAST analyzeExpression
+override method @registerConstantInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?modes:let @stringset inModeSet
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@uint unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!variableMap:@variableMap unused ioVariableMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
   !result:@variableKindIR outResultValueName
 {
 #--- Search variable
-  [!?ioVariableMap searchForReadAccess
-    !mSourceVarName
-    ?let variableType
-    ?let varModeSet
-    ?let unused varAccess
-    ?@variableKindIR resultingVariable
-    ?*
-    ?@registerBitSliceAccessMap registerBitSliceMap
+  [inContext.mRegisterMap searchKey
+    !mRegisterName
+    ?outExpressionType
+    ?let unused readOnly
+    ?let @registerBitSliceAccessMap unused registerBitSliceMap
+    ?let @registerFieldMap registerFieldMap
   ]
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:varModeSet
-    !error:mSourceVarName.location
-  )
-#--- Solve inferred type
-  outExpressionType = solveInferredType (
-    !targetType:inOptionalTargetType
-    !sourceType:variableType
-    !errorLocation:mSourceVarName.location
-  )
-#--- Field ?
-  for (field) in mFieldNameList do
-    [registerBitSliceMap searchKey
-      !field
-      ?let @infixOperatorIR accessOperator
-      ?let @variableKindIR accessRightOperand
-      ?let submap
-      ?let newResultType
-     ]
-  #--- Temp var
-    getNewTempVariable (!?ioTemporaryIndex ?let newResultingVariable)
-    ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-      !newResultType
-      !newResultingVariable
-      !resultingVariable
-      !accessOperator
-      !accessRightOperand
-      !mSourceVarName.location
-    }
-    resultingVariable = newResultingVariable 
-    registerBitSliceMap = submap
-    outExpressionType = newResultType
+#--- Field
+  [registerFieldMap searchKey
+    !mFieldName
+    ?let @uint bitIndex
+    ?let @uint bitCount
+  ]
+#--- Check
+  if bitCount != 1 then
+    error mFieldName : "this field is not a boolean field (size: " + bitCount + " bits)"
   end
 #--- Generate code
-  outResultValueName = resultingVariable
+  outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:1L << bitIndex}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

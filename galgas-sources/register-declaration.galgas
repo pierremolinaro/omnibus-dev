@@ -119,10 +119,20 @@ override getter @registerDeclaration keyRepresentation -> @string outRepresentat
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @registerBitSliceMap {
+map @registerFieldMap {
+  @uint mBitIndex
+  @uint mBitCount
+  insert insertKey error message "the '%K' register slice has been already declared"
+  search searchKey error message "the '%K' register slice is not declared"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @registerBitSliceAccessMap {
   @infixOperatorIR mAccessOperator
   @variableKindIR mAccessRightOperand
-  @registerBitSliceMap mSubMap
+  @registerBitSliceAccessMap mSubMap
+  @unifiedTypeMap-proxy mResultType
   insert insertKey error message "the '%K' register slice has been already declared"
   search searchKey error message "the '%K' register slice is not declared"
 }
@@ -132,7 +142,8 @@ map @registerBitSliceMap {
 map @registerMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
-  @registerBitSliceMap mRegisterBitSliceMap
+  @registerBitSliceAccessMap mRegisterFieldAccessMap
+  @registerFieldMap mRegisterFieldMap
   insert insertKey error message "the '%K' register has been already declared in %L"
   search searchKey error message "** internal error **"
 }
@@ -146,8 +157,10 @@ override method @registerDeclaration enterInContext
 {
 #---
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
 #--- Build bit slice map
-  @registerBitSliceMap registerBitSliceMap = {}
+  @registerFieldMap registerFieldMap = {}
+  @registerBitSliceAccessMap registerBitSliceMap = {}
   if [mRegisterBitSliceList length] > 0 then
     @uint shiftCount = 0
     for > () in mRegisterBitSliceList do
@@ -155,20 +168,34 @@ override method @registerDeclaration enterInContext
       case unusedBits (@luint64 count) :
         shiftCount = shiftCount + [count.uint64 uint]
       case namedBit (@lstring name @luint64 count) :
-        @registerBitSliceMap registerSubMap = {}
+        let bitCount = [count.uint64 uint]
+        [!?registerFieldMap insertKey
+          !name
+          !shiftCount
+          !bitCount
+        ]
+        @registerBitSliceAccessMap registerSubMap = {}
         [!?registerSubMap insertKey
           !.new{!"shift" !name.location}
           !.infix {!infixOperator:">>"}
           !.literalUnsignedInteger{!type:registerType !value:[shiftCount uint64]}
           !{}
+          !registerType
         ]
-        let bitCount = [count.uint64 uint]
+        [!?registerSubMap insertKey
+          !.new{!"bool" !name.location}
+          !.infix {!infixOperator:"!="}
+          !.literalUnsignedInteger{!type:registerType !value:0L}
+          !{}
+          !BoolTypeProxy
+        ]
         let mask = ((1L << bitCount) - 1L) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
           !.infix {!infixOperator:"&"}
           !.literalUnsignedInteger{!type:registerType !value:mask}
           !registerSubMap
+          !registerType
         ]
         shiftCount = shiftCount + bitCount
       end
@@ -192,6 +219,7 @@ override method @registerDeclaration enterInContext
       !registerType
       !isReadOnly
       !registerBitSliceMap
+      !registerFieldMap
     ]
   end
 }

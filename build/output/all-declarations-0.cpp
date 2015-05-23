@@ -1915,6 +1915,29 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2D__3E_ [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$::$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3A__3A_ [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE (':'),
+  TO_UNICODE (':'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('l'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('m'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$++$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique__2B__2B_ [] = {
   TO_UNICODE ('t'),
@@ -2329,7 +2352,7 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [85] = {kEndOfSourceLexicalErrorMessage,
+  static const utf32 * syntaxErrorMessageArray [86] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_modeName,
@@ -2396,6 +2419,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__7C__7C_,
     gSyntaxErrorMessage_plm_5F_lexique__25_,
     gSyntaxErrorMessage_plm_5F_lexique__2D__3E_,
+    gSyntaxErrorMessage_plm_5F_lexique__3A__3A_,
     gSyntaxErrorMessage_plm_5F_lexique__2B__2B_,
     gSyntaxErrorMessage_plm_5F_lexique__26__2B__2B_,
     gSyntaxErrorMessage_plm_5F_lexique__2D__2D_,
@@ -2583,6 +2607,13 @@ static const utf32 kUnicodeString_plm_5F_lexique__30_x [] = {
 
 //--- Unicode string for '$_3A_$'
 static const utf32 kUnicodeString_plm_5F_lexique__3A_ [] = {
+  TO_UNICODE (':'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$_3A__3A_$'
+static const utf32 kUnicodeString_plm_5F_lexique__3A__3A_ [] = {
+  TO_UNICODE (':'),
   TO_UNICODE (':'),
   TO_UNICODE (0)
 } ;
@@ -3075,7 +3106,7 @@ static const utf32 kUnicodeString_plm_5F_lexique__7D_ [] = {
 //             Key words table 'delimitorsList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_delimitorsList = 41 ;
+static const int32_t ktable_size_plm_5F_lexique_delimitorsList = 42 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsList [ktable_size_plm_5F_lexique_delimitorsList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25_, 1, C_Lexique_plm_5F_lexique::kToken__25_),
@@ -3109,6 +3140,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsL
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__2B__2B_, 2, C_Lexique_plm_5F_lexique::kToken__2B__2B_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__2D__2D_, 2, C_Lexique_plm_5F_lexique::kToken__2D__2D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__2D__3E_, 2, C_Lexique_plm_5F_lexique::kToken__2D__3E_),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__3A__3A_, 2, C_Lexique_plm_5F_lexique::kToken__3A__3A_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__3C__3C_, 2, C_Lexique_plm_5F_lexique::kToken__3C__3C_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__3C__3D_, 2, C_Lexique_plm_5F_lexique::kToken__3C__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__3D__3D_, 2, C_Lexique_plm_5F_lexique::kToken__3D__3D_),
@@ -3534,6 +3566,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("->") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken__3A__3A_:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("::") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken__2B__2B_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("++") ;
@@ -3790,6 +3827,9 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__3C__3C_, 2, true)) {
         token.mTokenCode = kToken__3C__3C_ ;
+        enterToken (token) ;
+      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__3A__3A_, 2, true)) {
+        token.mTokenCode = kToken__3A__3A_ ;
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__2D__3E_, 2, true)) {
         token.mTokenCode = kToken__2D__3E_ ;
@@ -4142,6 +4182,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("||") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("%") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("->") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("::") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("++") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("&++") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("--") COMMA_THERE) ;
@@ -4168,7 +4209,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [85] = {0,
+  static const uint32_t kTerminalSymbolStyles [86] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_modeName */,
@@ -4235,6 +4276,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     7 /* plm_lexique_1__7C__7C_ */,
     7 /* plm_lexique_1__25_ */,
     7 /* plm_lexique_1__2D__3E_ */,
+    7 /* plm_lexique_1__3A__3A_ */,
     7 /* plm_lexique_1__2B__2B_ */,
     7 /* plm_lexique_1__26__2B__2B_ */,
     7 /* plm_lexique_1__2D__2D_ */,
@@ -8830,6 +8872,28 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexiqu
     }
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__29_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 33)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expressionAST & outArgument_outExpression,
+                                                                   C_Lexique_plm_5F_lexique * inCompiler) {
+  outArgument_outExpression.drop () ; // Release 'out' argument
+  GALGAS_lstring var_registerName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 17)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 18)) ;
+  GALGAS_lstring var_fieldName = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 19)) ;
+  outArgument_outExpression = GALGAS_registerConstantInExpressionAST::constructor_new (var_registerName, var_fieldName  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 20)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 17)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 18)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 19)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -15092,34 +15156,345 @@ GALGAS_registerBitSliceList GALGAS_registerBitSliceList::extractObject (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_registerBitSliceMap::cMapElement_registerBitSliceMap (const GALGAS_lstring & inKey,
-                                                                  const GALGAS_infixOperatorIR & in_mAccessOperator,
-                                                                  const GALGAS_variableKindIR & in_mAccessRightOperand,
-                                                                  const GALGAS_registerBitSliceMap & in_mSubMap
-                                                                  COMMA_LOCATION_ARGS) :
+cMapElement_registerFieldMap::cMapElement_registerFieldMap (const GALGAS_lstring & inKey,
+                                                            const GALGAS_uint & in_mBitIndex,
+                                                            const GALGAS_uint & in_mBitCount
+                                                            COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mAccessOperator (in_mAccessOperator),
-mAttribute_mAccessRightOperand (in_mAccessRightOperand),
-mAttribute_mSubMap (in_mSubMap) {
+mAttribute_mBitIndex (in_mBitIndex),
+mAttribute_mBitCount (in_mBitCount) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_registerBitSliceMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () && mAttribute_mSubMap.isValid () ;
+bool cMapElement_registerFieldMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mBitIndex.isValid () && mAttribute_mBitCount.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_registerBitSliceMap::copy (void) {
+cMapElement * cMapElement_registerFieldMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_registerBitSliceMap (mAttribute_lkey, mAttribute_mAccessOperator, mAttribute_mAccessRightOperand, mAttribute_mSubMap COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_registerFieldMap (mAttribute_lkey, mAttribute_mBitIndex, mAttribute_mBitCount COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_registerBitSliceMap::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_registerFieldMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mBitIndex" ":" ;
+  mAttribute_mBitIndex.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mBitCount" ":" ;
+  mAttribute_mBitCount.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_registerFieldMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_registerFieldMap * operand = (cMapElement_registerFieldMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mBitIndex.objectCompare (operand->mAttribute_mBitIndex) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mBitCount.objectCompare (operand->mAttribute_mBitCount) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap::GALGAS_registerFieldMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap::GALGAS_registerFieldMap (const GALGAS_registerFieldMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap & GALGAS_registerFieldMap::operator = (const GALGAS_registerFieldMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap GALGAS_registerFieldMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_registerFieldMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap GALGAS_registerFieldMap::constructor_mapWithMapToOverride (const GALGAS_registerFieldMap & inMapToOverride
+                                                                                   COMMA_LOCATION_ARGS) {
+  GALGAS_registerFieldMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap GALGAS_registerFieldMap::reader_overriddenMap (C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const {
+  GALGAS_registerFieldMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerFieldMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                   const GALGAS_uint & inArgument0,
+                                                   const GALGAS_uint & inArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  cMapElement_registerFieldMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerFieldMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@registerFieldMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerFieldMap::modifier_insertKey (GALGAS_lstring inKey,
+                                                  GALGAS_uint inArgument0,
+                                                  GALGAS_uint inArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cMapElement_registerFieldMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerFieldMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' register slice has been already declared" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_registerFieldMap_searchKey = "the '%K' register slice is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerFieldMap::method_searchKey (GALGAS_lstring inKey,
+                                                GALGAS_uint & outArgument0,
+                                                GALGAS_uint & outArgument1,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_registerFieldMap_searchKey
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+    outArgument0 = p->mAttribute_mBitIndex ;
+    outArgument1 = p->mAttribute_mBitCount ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_registerFieldMap::reader_mBitIndexForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) attributes ;
+  GALGAS_uint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+    result = p->mAttribute_mBitIndex ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_registerFieldMap::reader_mBitCountForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) attributes ;
+  GALGAS_uint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+    result = p->mAttribute_mBitCount ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerFieldMap::modifier_setMBitIndexForKey (GALGAS_uint inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerFieldMap * p = (cMapElement_registerFieldMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+    p->mAttribute_mBitIndex = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerFieldMap::modifier_setMBitCountForKey (GALGAS_uint inAttributeValue,
+                                                           GALGAS_string inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerFieldMap * p = (cMapElement_registerFieldMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+    p->mAttribute_mBitCount = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerFieldMap * GALGAS_registerFieldMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                           const GALGAS_string & inKey
+                                                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_registerFieldMap * result = (cMapElement_registerFieldMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_registerFieldMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_registerFieldMap::cEnumerator_registerFieldMap (const GALGAS_registerFieldMap & inEnumeratedObject,
+                                                            const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap_2D_element cEnumerator_registerFieldMap::current (LOCATION_ARGS) const {
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+  return GALGAS_registerFieldMap_2D_element (p->mAttribute_lkey, p->mAttribute_mBitIndex, p->mAttribute_mBitCount) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_registerFieldMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_registerFieldMap::current_mBitIndex (LOCATION_ARGS) const {
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+  return p->mAttribute_mBitIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint cEnumerator_registerFieldMap::current_mBitCount (LOCATION_ARGS) const {
+  const cMapElement_registerFieldMap * p = (const cMapElement_registerFieldMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerFieldMap) ;
+  return p->mAttribute_mBitCount ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @registerFieldMap type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_registerFieldMap ("registerFieldMap",
+                                         NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_registerFieldMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerFieldMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_registerFieldMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_registerFieldMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap GALGAS_registerFieldMap::extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_registerFieldMap result ;
+  const GALGAS_registerFieldMap * p = (const GALGAS_registerFieldMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_registerFieldMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("registerFieldMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerBitSliceAccessMap::cMapElement_registerBitSliceAccessMap (const GALGAS_lstring & inKey,
+                                                                              const GALGAS_infixOperatorIR & in_mAccessOperator,
+                                                                              const GALGAS_variableKindIR & in_mAccessRightOperand,
+                                                                              const GALGAS_registerBitSliceAccessMap & in_mSubMap,
+                                                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
+                                                                              COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mAccessOperator (in_mAccessOperator),
+mAttribute_mAccessRightOperand (in_mAccessRightOperand),
+mAttribute_mSubMap (in_mSubMap),
+mAttribute_mResultType (in_mResultType) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_registerBitSliceAccessMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () && mAttribute_mSubMap.isValid () && mAttribute_mResultType.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_registerBitSliceAccessMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_registerBitSliceAccessMap (mAttribute_lkey, mAttribute_mAccessOperator, mAttribute_mAccessRightOperand, mAttribute_mSubMap, mAttribute_mResultType COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_registerBitSliceAccessMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAccessOperator" ":" ;
@@ -15132,12 +15507,16 @@ void cMapElement_registerBitSliceMap::description (C_String & ioString, const in
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mSubMap" ":" ;
   mAttribute_mSubMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mResultType" ":" ;
+  mAttribute_mResultType.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_registerBitSliceMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_registerBitSliceMap * operand = (cMapElement_registerBitSliceMap *) inOperand ;
+typeComparisonResult cMapElement_registerBitSliceAccessMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_registerBitSliceAccessMap * operand = (cMapElement_registerBitSliceAccessMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
     result = mAttribute_mAccessOperator.objectCompare (operand->mAttribute_mAccessOperator) ;
@@ -15148,82 +15527,87 @@ typeComparisonResult cMapElement_registerBitSliceMap::compare (const cCollection
   if (kOperandEqual == result) {
     result = mAttribute_mSubMap.objectCompare (operand->mAttribute_mSubMap) ;
   }
+  if (kOperandEqual == result) {
+    result = mAttribute_mResultType.objectCompare (operand->mAttribute_mResultType) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap::GALGAS_registerBitSliceMap (void) :
+GALGAS_registerBitSliceAccessMap::GALGAS_registerBitSliceAccessMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap::GALGAS_registerBitSliceMap (const GALGAS_registerBitSliceMap & inSource) :
+GALGAS_registerBitSliceAccessMap::GALGAS_registerBitSliceAccessMap (const GALGAS_registerBitSliceAccessMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap & GALGAS_registerBitSliceMap::operator = (const GALGAS_registerBitSliceMap & inSource) {
+GALGAS_registerBitSliceAccessMap & GALGAS_registerBitSliceAccessMap::operator = (const GALGAS_registerBitSliceAccessMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_registerBitSliceMap result ;
+GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_registerBitSliceAccessMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::constructor_mapWithMapToOverride (const GALGAS_registerBitSliceMap & inMapToOverride
-                                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSliceMap result ;
+GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::constructor_mapWithMapToOverride (const GALGAS_registerBitSliceAccessMap & inMapToOverride
+                                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceAccessMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::reader_overriddenMap (C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceMap result ;
+GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::reader_overriddenMap (C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_registerBitSliceAccessMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                      const GALGAS_infixOperatorIR & inArgument0,
-                                                      const GALGAS_variableKindIR & inArgument1,
-                                                      const GALGAS_registerBitSliceMap & inArgument2,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cMapElement_registerBitSliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerBitSliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                            const GALGAS_infixOperatorIR & inArgument0,
+                                                            const GALGAS_variableKindIR & inArgument1,
+                                                            const GALGAS_registerBitSliceAccessMap & inArgument2,
+                                                            const GALGAS_unifiedTypeMap_2D_proxy & inArgument3,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceAccessMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerBitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@registerBitSliceMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@registerBitSliceAccessMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_infixOperatorIR inArgument0,
-                                                     GALGAS_variableKindIR inArgument1,
-                                                     GALGAS_registerBitSliceMap inArgument2,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_registerBitSliceMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerBitSliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+void GALGAS_registerBitSliceAccessMap::modifier_insertKey (GALGAS_lstring inKey,
+                                                           GALGAS_infixOperatorIR inArgument0,
+                                                           GALGAS_variableKindIR inArgument1,
+                                                           GALGAS_registerBitSliceAccessMap inArgument2,
+                                                           GALGAS_unifiedTypeMap_2D_proxy inArgument3,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceAccessMap * p = NULL ;
+  macroMyNew (p, cMapElement_registerBitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -15234,42 +15618,45 @@ void GALGAS_registerBitSliceMap::modifier_insertKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_registerBitSliceMap_searchKey = "the '%K' register slice is not declared" ;
+const char * kSearchErrorMessage_registerBitSliceAccessMap_searchKey = "the '%K' register slice is not declared" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::method_searchKey (GALGAS_lstring inKey,
-                                                   GALGAS_infixOperatorIR & outArgument0,
-                                                   GALGAS_variableKindIR & outArgument1,
-                                                   GALGAS_registerBitSliceMap & outArgument2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) performSearch (inKey,
-                                                                                                         inCompiler,
-                                                                                                         kSearchErrorMessage_registerBitSliceMap_searchKey
-                                                                                                         COMMA_THERE) ;
+void GALGAS_registerBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
+                                                         GALGAS_infixOperatorIR & outArgument0,
+                                                         GALGAS_variableKindIR & outArgument1,
+                                                         GALGAS_registerBitSliceAccessMap & outArgument2,
+                                                         GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) performSearch (inKey,
+                                                                                                                     inCompiler,
+                                                                                                                     kSearchErrorMessage_registerBitSliceAccessMap_searchKey
+                                                                                                                     COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
+    outArgument3.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     outArgument0 = p->mAttribute_mAccessOperator ;
     outArgument1 = p->mAttribute_mAccessRightOperand ;
     outArgument2 = p->mAttribute_mSubMap ;
+    outArgument3 = p->mAttribute_mResultType ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperatorIR GALGAS_registerBitSliceMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
+GALGAS_infixOperatorIR GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
   GALGAS_infixOperatorIR result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mAccessOperator ;
   }
   return result ;
@@ -15277,14 +15664,14 @@ GALGAS_infixOperatorIR GALGAS_registerBitSliceMap::reader_mAccessOperatorForKey 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_registerBitSliceMap::reader_mAccessRightOperandForKey (const GALGAS_string & inKey,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
+GALGAS_variableKindIR GALGAS_registerBitSliceAccessMap::reader_mAccessRightOperandForKey (const GALGAS_string & inKey,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
   GALGAS_variableKindIR result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mAccessRightOperand ;
   }
   return result ;
@@ -15292,14 +15679,14 @@ GALGAS_variableKindIR GALGAS_registerBitSliceMap::reader_mAccessRightOperandForK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::reader_mSubMapForKey (const GALGAS_string & inKey,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
+GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::reader_mSubMapForKey (const GALGAS_string & inKey,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) attributes ;
-  GALGAS_registerBitSliceMap result ;
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
+  GALGAS_registerBitSliceAccessMap result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mSubMap ;
   }
   return result ;
@@ -15307,75 +15694,104 @@ GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::reader_mSubMapForKey (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_setMAccessOperatorForKey (GALGAS_infixOperatorIR inAttributeValue,
-                                                                    GALGAS_string inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerBitSliceAccessMap::reader_mResultTypeForKey (const GALGAS_string & inKey,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
+    result = p->mAttribute_mResultType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_infixOperatorIR inAttributeValue,
+                                                                          GALGAS_string inKey,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     p->mAttribute_mAccessOperator = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_setMAccessRightOperandForKey (GALGAS_variableKindIR inAttributeValue,
-                                                                        GALGAS_string inKey,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::modifier_setMAccessRightOperandForKey (GALGAS_variableKindIR inAttributeValue,
+                                                                              GALGAS_string inKey,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
+  cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     p->mAttribute_mAccessRightOperand = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceMap::modifier_setMSubMapForKey (GALGAS_registerBitSliceMap inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_registerBitSliceAccessMap::modifier_setMSubMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
+                                                                  GALGAS_string inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_registerBitSliceMap * p = (cMapElement_registerBitSliceMap *) attributes ;
+  cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     p->mAttribute_mSubMap = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_registerBitSliceMap * GALGAS_registerBitSliceMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                 const GALGAS_string & inKey
-                                                                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_registerBitSliceMap * result = (cMapElement_registerBitSliceMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_registerBitSliceMap) ;
+void GALGAS_registerBitSliceAccessMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                                      GALGAS_string inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerBitSliceAccessMap * p = (cMapElement_registerBitSliceAccessMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
+    p->mAttribute_mResultType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_registerBitSliceAccessMap * GALGAS_registerBitSliceAccessMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                             const GALGAS_string & inKey
+                                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_registerBitSliceAccessMap * result = (cMapElement_registerBitSliceAccessMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_registerBitSliceAccessMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_registerBitSliceMap::cEnumerator_registerBitSliceMap (const GALGAS_registerBitSliceMap & inEnumeratedObject,
-                                                                  const typeEnumerationOrder inOrder) :
+cEnumerator_registerBitSliceAccessMap::cEnumerator_registerBitSliceAccessMap (const GALGAS_registerBitSliceAccessMap & inEnumeratedObject,
+                                                                              const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap_2D_element cEnumerator_registerBitSliceMap::current (LOCATION_ARGS) const {
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
-  return GALGAS_registerBitSliceMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand, p->mAttribute_mSubMap) ;
+GALGAS_registerBitSliceAccessMap_2D_element cEnumerator_registerBitSliceAccessMap::current (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
+  return GALGAS_registerBitSliceAccessMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand, p->mAttribute_mSubMap, p->mAttribute_mResultType) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_registerBitSliceMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_registerBitSliceAccessMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
@@ -15383,68 +15799,76 @@ GALGAS_lstring cEnumerator_registerBitSliceMap::current_lkey (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperatorIR cEnumerator_registerBitSliceMap::current_mAccessOperator (LOCATION_ARGS) const {
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+GALGAS_infixOperatorIR cEnumerator_registerBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mAccessOperator ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cEnumerator_registerBitSliceMap::current_mAccessRightOperand (LOCATION_ARGS) const {
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+GALGAS_variableKindIR cEnumerator_registerBitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mAccessRightOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap cEnumerator_registerBitSliceMap::current_mSubMap (LOCATION_ARGS) const {
-  const cMapElement_registerBitSliceMap * p = (const cMapElement_registerBitSliceMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_registerBitSliceMap) ;
+GALGAS_registerBitSliceAccessMap cEnumerator_registerBitSliceAccessMap::current_mSubMap (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mSubMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_registerBitSliceAccessMap::current_mResultType (LOCATION_ARGS) const {
+  const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
+  return p->mAttribute_mResultType ;
 }
 
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              @registerBitSliceMap type                                              *
+//                                           @registerBitSliceAccessMap type                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerBitSliceMap ("registerBitSliceMap",
-                                            NULL) ;
+kTypeDescriptor_GALGAS_registerBitSliceAccessMap ("registerBitSliceAccessMap",
+                                                  NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_registerBitSliceMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerBitSliceMap ;
+const C_galgas_type_descriptor * GALGAS_registerBitSliceAccessMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_registerBitSliceAccessMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_registerBitSliceMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_registerBitSliceAccessMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_registerBitSliceMap (*this)) ;
+    macroMyNew (result, GALGAS_registerBitSliceAccessMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerBitSliceMap::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_registerBitSliceMap result ;
-  const GALGAS_registerBitSliceMap * p = (const GALGAS_registerBitSliceMap *) inObject.embeddedObject () ;
+GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_registerBitSliceAccessMap result ;
+  const GALGAS_registerBitSliceAccessMap * p = (const GALGAS_registerBitSliceAccessMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerBitSliceMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_registerBitSliceAccessMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("registerBitSliceMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("registerBitSliceAccessMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -15747,25 +16171,27 @@ GALGAS_infixOperatorIR GALGAS_infixOperatorIR::extractObject (const GALGAS_objec
 cMapElement_registerMap::cMapElement_registerMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                   const GALGAS_bool & in_mIsReadOnly,
-                                                  const GALGAS_registerBitSliceMap & in_mRegisterBitSliceMap
+                                                  const GALGAS_registerBitSliceAccessMap & in_mRegisterFieldAccessMap,
+                                                  const GALGAS_registerFieldMap & in_mRegisterFieldMap
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mType (in_mType),
 mAttribute_mIsReadOnly (in_mIsReadOnly),
-mAttribute_mRegisterBitSliceMap (in_mRegisterBitSliceMap) {
+mAttribute_mRegisterFieldAccessMap (in_mRegisterFieldAccessMap),
+mAttribute_mRegisterFieldMap (in_mRegisterFieldMap) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_registerMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mRegisterBitSliceMap.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_registerMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_registerMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mRegisterBitSliceMap COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_registerMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mRegisterFieldAccessMap, mAttribute_mRegisterFieldMap COMMA_HERE)) ;
   return result ;
 }
 
@@ -15782,8 +16208,12 @@ void cMapElement_registerMap::description (C_String & ioString, const int32_t in
   mAttribute_mIsReadOnly.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRegisterBitSliceMap" ":" ;
-  mAttribute_mRegisterBitSliceMap.description (ioString, inIndentation) ;
+  ioString << "mRegisterFieldAccessMap" ":" ;
+  mAttribute_mRegisterFieldAccessMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mRegisterFieldMap" ":" ;
+  mAttribute_mRegisterFieldMap.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15798,7 +16228,10 @@ typeComparisonResult cMapElement_registerMap::compare (const cCollectionElement 
     result = mAttribute_mIsReadOnly.objectCompare (operand->mAttribute_mIsReadOnly) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRegisterBitSliceMap.objectCompare (operand->mAttribute_mRegisterBitSliceMap) ;
+    result = mAttribute_mRegisterFieldAccessMap.objectCompare (operand->mAttribute_mRegisterFieldAccessMap) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mRegisterFieldMap.objectCompare (operand->mAttribute_mRegisterFieldMap) ;
   }
   return result ;
 }
@@ -15853,11 +16286,12 @@ GALGAS_registerMap GALGAS_registerMap::reader_overriddenMap (C_Compiler * inComp
 void GALGAS_registerMap::addAssign_operation (const GALGAS_lstring & inKey,
                                               const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
                                               const GALGAS_bool & inArgument1,
-                                              const GALGAS_registerBitSliceMap & inArgument2,
+                                              const GALGAS_registerBitSliceAccessMap & inArgument2,
+                                              const GALGAS_registerFieldMap & inArgument3,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   cMapElement_registerMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -15871,11 +16305,12 @@ void GALGAS_registerMap::addAssign_operation (const GALGAS_lstring & inKey,
 void GALGAS_registerMap::modifier_insertKey (GALGAS_lstring inKey,
                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                              GALGAS_bool inArgument1,
-                                             GALGAS_registerBitSliceMap inArgument2,
+                                             GALGAS_registerBitSliceAccessMap inArgument2,
+                                             GALGAS_registerFieldMap inArgument3,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
   cMapElement_registerMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -15893,7 +16328,8 @@ const char * kSearchErrorMessage_registerMap_searchKey = "** internal error **" 
 void GALGAS_registerMap::method_searchKey (GALGAS_lstring inKey,
                                            GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                            GALGAS_bool & outArgument1,
-                                           GALGAS_registerBitSliceMap & outArgument2,
+                                           GALGAS_registerBitSliceAccessMap & outArgument2,
+                                           GALGAS_registerFieldMap & outArgument3,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) performSearch (inKey,
@@ -15904,11 +16340,13 @@ void GALGAS_registerMap::method_searchKey (GALGAS_lstring inKey,
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
+    outArgument3.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_registerMap) ;
     outArgument0 = p->mAttribute_mType ;
     outArgument1 = p->mAttribute_mIsReadOnly ;
-    outArgument2 = p->mAttribute_mRegisterBitSliceMap ;
+    outArgument2 = p->mAttribute_mRegisterFieldAccessMap ;
+    outArgument3 = p->mAttribute_mRegisterFieldMap ;
   }
 }
 
@@ -15944,15 +16382,30 @@ GALGAS_bool GALGAS_registerMap::reader_mIsReadOnlyForKey (const GALGAS_string & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_registerMap::reader_mRegisterBitSliceMapForKey (const GALGAS_string & inKey,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_registerBitSliceAccessMap GALGAS_registerMap::reader_mRegisterFieldAccessMapForKey (const GALGAS_string & inKey,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
-  GALGAS_registerBitSliceMap result ;
+  GALGAS_registerBitSliceAccessMap result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerMap) ;
-    result = p->mAttribute_mRegisterBitSliceMap ;
+    result = p->mAttribute_mRegisterFieldAccessMap ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap GALGAS_registerMap::reader_mRegisterFieldMapForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
+  GALGAS_registerFieldMap result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    result = p->mAttribute_mRegisterFieldMap ;
   }
   return result ;
 }
@@ -15987,15 +16440,29 @@ void GALGAS_registerMap::modifier_setMIsReadOnlyForKey (GALGAS_bool inAttributeV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMap::modifier_setMRegisterBitSliceMapForKey (GALGAS_registerBitSliceMap inAttributeValue,
-                                                                 GALGAS_string inKey,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
+void GALGAS_registerMap::modifier_setMRegisterFieldAccessMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerMap) ;
-    p->mAttribute_mRegisterBitSliceMap = inAttributeValue ;
+    p->mAttribute_mRegisterFieldAccessMap = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_registerMap::modifier_setMRegisterFieldMapForKey (GALGAS_registerFieldMap inAttributeValue,
+                                                              GALGAS_string inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    p->mAttribute_mRegisterFieldMap = inAttributeValue ;
   }
 }
 
@@ -16022,7 +16489,7 @@ cGenericAbstractEnumerator () {
 GALGAS_registerMap_2D_element cEnumerator_registerMap::current (LOCATION_ARGS) const {
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerMap) ;
-  return GALGAS_registerMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mRegisterBitSliceMap) ;
+  return GALGAS_registerMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16051,10 +16518,18 @@ GALGAS_bool cEnumerator_registerMap::current_mIsReadOnly (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap cEnumerator_registerMap::current_mRegisterBitSliceMap (LOCATION_ARGS) const {
+GALGAS_registerBitSliceAccessMap cEnumerator_registerMap::current_mRegisterFieldAccessMap (LOCATION_ARGS) const {
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerMap) ;
-  return p->mAttribute_mRegisterBitSliceMap ;
+  return p->mAttribute_mRegisterFieldAccessMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerFieldMap cEnumerator_registerMap::current_mRegisterFieldMap (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return p->mAttribute_mRegisterFieldMap ;
 }
 
 
@@ -19919,7 +20394,7 @@ cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_string & in_mCppName,
                                                   const GALGAS_variableKindIR & in_mVariableKind,
                                                   const GALGAS_bool & in_copiable,
-                                                  const GALGAS_registerBitSliceMap & in_fieldMap
+                                                  const GALGAS_registerBitSliceAccessMap & in_fieldMap
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mType (in_mType),
@@ -20491,7 +20966,7 @@ void GALGAS_variableMap::modifier_insertGlobalVariable (GALGAS_lstring inKey,
                                                         GALGAS_string inArgument2,
                                                         GALGAS_variableKindIR inArgument3,
                                                         GALGAS_bool inArgument4,
-                                                        GALGAS_registerBitSliceMap inArgument5,
+                                                        GALGAS_registerBitSliceAccessMap inArgument5,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20518,7 +20993,7 @@ void GALGAS_variableMap::modifier_insertMutableAttribute (GALGAS_lstring inKey,
                                                           GALGAS_string inArgument2,
                                                           GALGAS_variableKindIR inArgument3,
                                                           GALGAS_bool inArgument4,
-                                                          GALGAS_registerBitSliceMap inArgument5,
+                                                          GALGAS_registerBitSliceAccessMap inArgument5,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20545,7 +21020,7 @@ void GALGAS_variableMap::modifier_insertNonMutableAttribute (GALGAS_lstring inKe
                                                              GALGAS_string inArgument2,
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
-                                                             GALGAS_registerBitSliceMap inArgument5,
+                                                             GALGAS_registerBitSliceAccessMap inArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20572,7 +21047,7 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalVariable (GALGAS_lstring i
                                                                 GALGAS_string inArgument2,
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
-                                                                GALGAS_registerBitSliceMap inArgument5,
+                                                                GALGAS_registerBitSliceAccessMap inArgument5,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20599,7 +21074,7 @@ void GALGAS_variableMap::modifier_insertDefinedLocalVariable (GALGAS_lstring inK
                                                               GALGAS_string inArgument2,
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
-                                                              GALGAS_registerBitSliceMap inArgument5,
+                                                              GALGAS_registerBitSliceAccessMap inArgument5,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20626,7 +21101,7 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalConstant (GALGAS_lstring i
                                                                 GALGAS_string inArgument2,
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
-                                                                GALGAS_registerBitSliceMap inArgument5,
+                                                                GALGAS_registerBitSliceAccessMap inArgument5,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20653,7 +21128,7 @@ void GALGAS_variableMap::modifier_insertLocalConstant (GALGAS_lstring inKey,
                                                        GALGAS_string inArgument2,
                                                        GALGAS_variableKindIR inArgument3,
                                                        GALGAS_bool inArgument4,
-                                                       GALGAS_registerBitSliceMap inArgument5,
+                                                       GALGAS_registerBitSliceAccessMap inArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20680,7 +21155,7 @@ void GALGAS_variableMap::modifier_insertUsedLocalConstant (GALGAS_lstring inKey,
                                                            GALGAS_string inArgument2,
                                                            GALGAS_variableKindIR inArgument3,
                                                            GALGAS_bool inArgument4,
-                                                           GALGAS_registerBitSliceMap inArgument5,
+                                                           GALGAS_registerBitSliceAccessMap inArgument5,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20707,7 +21182,7 @@ void GALGAS_variableMap::modifier_insertInputFormalArgument (GALGAS_lstring inKe
                                                              GALGAS_string inArgument2,
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
-                                                             GALGAS_registerBitSliceMap inArgument5,
+                                                             GALGAS_registerBitSliceAccessMap inArgument5,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20734,7 +21209,7 @@ void GALGAS_variableMap::modifier_insertInputFormalArgumentDeclaredAsUnused (GAL
                                                                              GALGAS_string inArgument2,
                                                                              GALGAS_variableKindIR inArgument3,
                                                                              GALGAS_bool inArgument4,
-                                                                             GALGAS_registerBitSliceMap inArgument5,
+                                                                             GALGAS_registerBitSliceAccessMap inArgument5,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20761,7 +21236,7 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgument (GALGAS_lstr
                                                                      GALGAS_string inArgument2,
                                                                      GALGAS_variableKindIR inArgument3,
                                                                      GALGAS_bool inArgument4,
-                                                                     GALGAS_registerBitSliceMap inArgument5,
+                                                                     GALGAS_registerBitSliceAccessMap inArgument5,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20788,7 +21263,7 @@ void GALGAS_variableMap::modifier_insertUsedConstantInputFormalArgument (GALGAS_
                                                                          GALGAS_string inArgument2,
                                                                          GALGAS_variableKindIR inArgument3,
                                                                          GALGAS_bool inArgument4,
-                                                                         GALGAS_registerBitSliceMap inArgument5,
+                                                                         GALGAS_registerBitSliceAccessMap inArgument5,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20815,7 +21290,7 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgumentDeclaredAsUnu
                                                                                      GALGAS_string inArgument2,
                                                                                      GALGAS_variableKindIR inArgument3,
                                                                                      GALGAS_bool inArgument4,
-                                                                                     GALGAS_registerBitSliceMap inArgument5,
+                                                                                     GALGAS_registerBitSliceAccessMap inArgument5,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20842,7 +21317,7 @@ void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inK
                                                               GALGAS_string inArgument2,
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
-                                                              GALGAS_registerBitSliceMap inArgument5,
+                                                              GALGAS_registerBitSliceAccessMap inArgument5,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20869,7 +21344,7 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstrin
                                                                    GALGAS_string inArgument2,
                                                                    GALGAS_variableKindIR inArgument3,
                                                                    GALGAS_bool inArgument4,
-                                                                   GALGAS_registerBitSliceMap inArgument5,
+                                                                   GALGAS_registerBitSliceAccessMap inArgument5,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20896,7 +21371,7 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgumentDeclaredAsUnuse
                                                                                    GALGAS_string inArgument2,
                                                                                    GALGAS_variableKindIR inArgument3,
                                                                                    GALGAS_bool inArgument4,
-                                                                                   GALGAS_registerBitSliceMap inArgument5,
+                                                                                   GALGAS_registerBitSliceAccessMap inArgument5,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
@@ -20927,7 +21402,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
                                                        GALGAS_string & outArgument2,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
-                                                       GALGAS_registerBitSliceMap & outArgument5,
+                                                       GALGAS_registerBitSliceAccessMap & outArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -20972,7 +21447,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
                                                         GALGAS_string & outArgument2,
                                                         GALGAS_variableKindIR & outArgument3,
                                                         GALGAS_bool & outArgument4,
-                                                        GALGAS_registerBitSliceMap & outArgument5,
+                                                        GALGAS_registerBitSliceAccessMap & outArgument5,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21017,7 +21492,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
                                                             GALGAS_string & outArgument2,
                                                             GALGAS_variableKindIR & outArgument3,
                                                             GALGAS_bool & outArgument4,
-                                                            GALGAS_registerBitSliceMap & outArgument5,
+                                                            GALGAS_registerBitSliceAccessMap & outArgument5,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21062,7 +21537,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
                                                        GALGAS_string & outArgument2,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
-                                                       GALGAS_registerBitSliceMap & outArgument5,
+                                                       GALGAS_registerBitSliceAccessMap & outArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21107,7 +21582,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
                                                  GALGAS_string & outArgument2,
                                                  GALGAS_variableKindIR & outArgument3,
                                                  GALGAS_bool & outArgument4,
-                                                 GALGAS_registerBitSliceMap & outArgument5,
+                                                 GALGAS_registerBitSliceAccessMap & outArgument5,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -21217,12 +21692,12 @@ GALGAS_bool GALGAS_variableMap::reader_copiableForKey (const GALGAS_string & inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap GALGAS_variableMap::reader_fieldMapForKey (const GALGAS_string & inKey,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_registerBitSliceAccessMap GALGAS_variableMap::reader_fieldMapForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) attributes ;
-  GALGAS_registerBitSliceMap result ;
+  GALGAS_registerBitSliceAccessMap result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
     result = p->mAttribute_fieldMap ;
@@ -21302,7 +21777,7 @@ void GALGAS_variableMap::modifier_setCopiableForKey (GALGAS_bool inAttributeValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceMap inAttributeValue,
+void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceAccessMap inAttributeValue,
                                                      GALGAS_string inKey,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -21382,7 +21857,7 @@ GALGAS_bool cEnumerator_variableMap::current_copiable (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceMap cEnumerator_variableMap::current_fieldMap (LOCATION_ARGS) const {
+GALGAS_registerBitSliceAccessMap cEnumerator_variableMap::current_fieldMap (LOCATION_ARGS) const {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_variableMap) ;
   return p->mAttribute_fieldMap ;
