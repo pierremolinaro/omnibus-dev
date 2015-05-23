@@ -108,6 +108,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_newIntegerType,
    kToken_newSignedBaseType,
    kToken_newUnsignedBaseType,
+   kToken_not,
    kToken_proc,
    kToken_register,
    kToken_required,
@@ -190,7 +191,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 85 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 86 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -2376,6 +2377,16 @@ class cParser_common_5F_syntax {
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i43_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i43_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i44_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -4696,6 +4707,7 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
+    kEnum_notOperator,
     kEnum_minus,
     kEnum_minusNoOvf
   } enumeration ;
@@ -4723,6 +4735,8 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 
   public : static GALGAS_prefixOperator constructor_minusNoOvf (LOCATION_ARGS) ;
 
+  public : static GALGAS_prefixOperator constructor_notOperator (LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of reader 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -4738,6 +4752,8 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMinus (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMinusNoOvf (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isNotOperator (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -5013,22 +5029,22 @@ class cPtr_procCallInstructionAST : public cPtr_instructionAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       @registerConstantInExpressionAST class                                        *
+//                                    @registerBooleanConstantInExpressionAST class                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_registerConstantInExpressionAST : public GALGAS_expressionAST {
+class GALGAS_registerBooleanConstantInExpressionAST : public GALGAS_expressionAST {
 //--- Constructor
-  public : GALGAS_registerConstantInExpressionAST (void) ;
+  public : GALGAS_registerBooleanConstantInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_registerConstantInExpressionAST constructor_default (LOCATION_ARGS) ;
+  public : static GALGAS_registerBooleanConstantInExpressionAST constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_registerConstantInExpressionAST * ptr (void) const { return (const cPtr_registerConstantInExpressionAST *) mObjectPtr ; }
+  public : inline const class cPtr_registerBooleanConstantInExpressionAST * ptr (void) const { return (const cPtr_registerBooleanConstantInExpressionAST *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_registerConstantInExpressionAST (const cPtr_registerConstantInExpressionAST * inSourcePtr) ;
+  public : GALGAS_registerBooleanConstantInExpressionAST (const cPtr_registerBooleanConstantInExpressionAST * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -5036,17 +5052,17 @@ class GALGAS_registerConstantInExpressionAST : public GALGAS_expressionAST {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_registerConstantInExpressionAST extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_registerBooleanConstantInExpressionAST extractObject (const GALGAS_object & inObject,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_registerConstantInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                          const class GALGAS_lstring & inOperand1
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_registerBooleanConstantInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                 const class GALGAS_lstring & inOperand1
+                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_registerConstantInExpressionAST & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_registerBooleanConstantInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5062,28 +5078,28 @@ class GALGAS_registerConstantInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_registerConstantInExpressionAST class
+} ; // End of GALGAS_registerBooleanConstantInExpressionAST class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerConstantInExpressionAST ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerBooleanConstantInExpressionAST ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Pointer class for @registerConstantInExpressionAST class                               *
+//                           Pointer class for @registerBooleanConstantInExpressionAST class                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_registerConstantInExpressionAST : public cPtr_expressionAST {
+class cPtr_registerBooleanConstantInExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mRegisterName ;
   public : GALGAS_lstring mAttribute_mFieldName ;
 
 //--- Constructor
-  public : cPtr_registerConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                                 const GALGAS_lstring & in_mFieldName
-                                                 COMMA_LOCATION_ARGS) ;
+  public : cPtr_registerBooleanConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
+                                                        const GALGAS_lstring & in_mFieldName
+                                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -5459,6 +5475,105 @@ class cPtr_registerDeclaration : public cPtr_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_registerDeclarationList reader_mRegisterDeclarationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mRegisterTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_registerBitSliceList reader_mRegisterBitSliceList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    @registerIntegerConstantInExpressionAST class                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_registerIntegerConstantInExpressionAST : public GALGAS_expressionAST {
+//--- Constructor
+  public : GALGAS_registerIntegerConstantInExpressionAST (void) ;
+
+//---
+  public : inline const class cPtr_registerIntegerConstantInExpressionAST * ptr (void) const { return (const cPtr_registerIntegerConstantInExpressionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_registerIntegerConstantInExpressionAST (const cPtr_registerIntegerConstantInExpressionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_registerIntegerConstantInExpressionAST extractObject (const GALGAS_object & inObject,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_registerIntegerConstantInExpressionAST constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                 const class GALGAS_lstring & inOperand1,
+                                                                                 const class GALGAS_expressionAST & inOperand2,
+                                                                                 const class GALGAS_location & inOperand3
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_registerIntegerConstantInExpressionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST reader_mExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mExpressionLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFieldName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mRegisterName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_registerIntegerConstantInExpressionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Pointer class for @registerIntegerConstantInExpressionAST class                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_registerIntegerConstantInExpressionAST : public cPtr_expressionAST {
+//--- Attributes
+  public : GALGAS_lstring mAttribute_mRegisterName ;
+  public : GALGAS_lstring mAttribute_mFieldName ;
+  public : GALGAS_expressionAST mAttribute_mExpression ;
+  public : GALGAS_location mAttribute_mExpressionLocation ;
+
+//--- Constructor
+  public : cPtr_registerIntegerConstantInExpressionAST (const GALGAS_lstring & in_mRegisterName,
+                                                        const GALGAS_lstring & in_mFieldName,
+                                                        const GALGAS_expressionAST & in_mExpression,
+                                                        const GALGAS_location & in_mExpressionLocation
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mRegisterName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mFieldName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST reader_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mExpressionLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

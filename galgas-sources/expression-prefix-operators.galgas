@@ -3,6 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @prefixOperator {
+  case notOperator
   case minus
   case minusNoOvf
 }
@@ -20,6 +21,19 @@ class @prefixOperatorExpressionAST : @expressionAST {
 #----------------------------------------------------------------------------------------------------------------------*
 
 syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $not$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.notOperator
+      !expression
+    }
+  }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
@@ -114,6 +128,9 @@ override method @prefixOperatorExpressionAST analyzeExpression
   @prefixOperatorMap operatorMap
   @prefixOperatorIR prefixOperatorIR
   switch mOp 
+  case notOperator :
+    operatorMap = inContext.mNotOperatorMap
+    prefixOperatorIR = .prefix {!prefixOperator:"!"}
   case minusNoOvf :
     operatorMap = inContext.mUnaryMinusOperatorMap
     prefixOperatorIR = .prefix {!prefixOperator:"-"}
@@ -141,6 +158,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     switch mOp 
     case minusNoOvf : result = &- value
     case minus : result = - value
+    case notOperator : result = 1LS ^ value
     end
     outResult = .literalSignedInteger {!type:outExpressionType !value:result}
   else
@@ -181,22 +199,22 @@ class @prefixOperatorExpressionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
-  @sint64 minValue
-  switch [mTargetType kind]
-  case boolean, boolset, literalString :
-    error mOperatorLocation: "Internal Error" : minValue
-  case enumeration (*) :
-    error mOperatorLocation: "Internal Error" : minValue
-  case structure (*) :
-    error mOperatorLocation: "Internal Error" : minValue
-  case integer (@sint64 min * * *) :
-    minValue = min
-  end
   switch mOperator 
   case prefix (@string prefixOperator) :
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
   case prefixMinusOvf (@uint code) :
+    @sint64 minValue
+    switch [mTargetType kind]
+    case boolean, boolset, literalString :
+      error mOperatorLocation: "Internal Error" : minValue
+    case enumeration (*) :
+      error mOperatorLocation: "Internal Error" : minValue
+    case structure (*) :
+      error mOperatorLocation: "Internal Error" : minValue
+    case integer (@sint64 min * * *) :
+      minValue = min
+    end
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]
     outCode  = "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
     outCode += "if (" + ovfVar + ") {\n"

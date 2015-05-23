@@ -2,9 +2,18 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @registerConstantInExpressionAST : @expressionAST {
+class @registerBooleanConstantInExpressionAST : @expressionAST {
   @lstring mRegisterName
   @lstring mFieldName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @registerIntegerConstantInExpressionAST : @expressionAST {
+  @lstring mRegisterName
+  @lstring mFieldName
+  @expressionAST mExpression
+  @location mExpressionLocation
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -17,7 +26,18 @@ syntax extension common_syntax {
     $identifier$ ?let registerName
     $::$
     $identifier$ ?let fieldName
-    outExpression = @registerConstantInExpressionAST.new {!registerName !fieldName}
+    outExpression = @registerBooleanConstantInExpressionAST.new {!registerName !fieldName}
+  }
+
+  rule <primary> !@expressionAST outExpression {
+    $identifier$ ?let registerName
+    $::$
+    $identifier$ ?let fieldName
+    $($
+    <expression> ?let expression
+    let endOfExpression = @location.here
+    $)$
+    outExpression = @registerIntegerConstantInExpressionAST.new {!registerName !fieldName !expression !endOfExpression}
   }
 
 }
@@ -26,7 +46,16 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
+override method @registerBooleanConstantInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [!?ioGraph addEdge !inConstantName !mRegisterName]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerIntegerConstantInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -37,7 +66,7 @@ override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpre
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerConstantInExpressionAST analyzeExpression
+override method @registerBooleanConstantInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -70,6 +99,135 @@ override method @registerConstantInExpressionAST analyzeExpression
   end
 #--- Generate code
   outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:1L << bitIndex}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerIntegerConstantInExpressionAST analyzeExpression
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !result:@variableKindIR outResultValueName
+{
+#--- Search variable
+  [inContext.mRegisterMap searchKey
+    !mRegisterName
+    ?outExpressionType
+    ?let unused readOnly
+    ?let @registerBitSliceAccessMap unused registerBitSliceMap
+    ?let @registerFieldMap registerFieldMap
+  ]
+#--- Field
+  [registerFieldMap searchKey
+    !mFieldName
+    ?let @uint fieldBitIndex
+    ?let @uint fieldBitCount
+  ]
+#--- Check field
+  if fieldBitCount == 1 then
+    error mFieldName : "this field is not an integer field"
+  end
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?expressionType:let @unifiedTypeMap-proxy expressionType
+    ?result:let @variableKindIR expressionResult
+  ]
+#--- Check expression type
+  switch [expressionType kind]
+  case enumeration (*) :
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+  case structure (*) :
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+  case boolset, boolean :
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+  case literalString :
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+  case integer (@sint64 unused min @uint64 unused max @bool unsigned @uint expressionBitCount) :
+    if not unsigned then
+      error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    elsif [expressionResult isLiteralSignedInteger] then
+      error mExpressionLocation: "internal error" : outResultValueName
+    elsif [expressionResult isLiteralString] then
+      error mExpressionLocation: "internal error" : outResultValueName
+    elsif [expressionResult isLiteralUnsignedInteger] then
+      [expressionResult literalUnsignedInteger ?type:* ?value:let @uint64 value]
+      if value < (1L << fieldBitCount) then
+        outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:value << fieldBitIndex}        
+      else # Overflow, detected at compile time
+        error mExpressionLocation
+        : "static unsigned integer expression overflow: maximum value is " + ((1L << fieldBitCount) - 1L)
+        : outResultValueName
+      end
+    else
+      getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
+      ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
+        !mExpressionLocation
+        !expressionResult
+        !(1L << fieldBitCount) - 1L
+        !fieldBitIndex
+        !outResultValueName
+        !outExpressionType
+        !expressionBitCount <= fieldBitCount
+      }
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
+  @location mInstructionLocation
+  @variableKindIR mExpressionValue
+  @uint64 mMaxBound
+  @uint mBitShift
+  @variableKindIR mResultVariable
+  @unifiedTypeMap-proxy mTargetType
+  @bool mNoCheck
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @registerIntegerConstantInExpressionIR instructionCode -> @string outCode {
+  if mNoCheck then
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
+            + " = ((" + mangledNameForType (!name:[mTargetType key]) + " *) "
+            + [mExpressionValue mangledName] + ") << " + mBitShift + "\n" 
+  else
+    outCode  = "if (" + [mExpressionValue mangledName] + " > " + mMaxBound + ") {\n"
+    outCode += "  raise_exception (1003"
+       + ", " + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mInstructionLocation line] + ") ;\n"
+    outCode += "}\n" 
+    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
+               + " = (" + [mExpressionValue mangledName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+{
+#  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
+  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

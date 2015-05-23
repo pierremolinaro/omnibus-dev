@@ -147,6 +147,10 @@ proc enterBooleanOperators
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
+  [!?ioContext.mNotOperatorMap insertKey
+    !inBooleanTypeName
+    !selfTypeProxy
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -1,0 +1,31 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Exceptions}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lp{10cm}l}
+  \textbf{Numéros} & \textbf{Signification} & \textbf{Lien} \\
+  \hline
+   0 à 999 & Exceptions liées aux vecteurs d'interruption & \\
+   1000 & Dépassement de capacité de l'incrémentation (\plm-++-) & \\
+   1001 & Dépassement de capacité de l'incrémentation (\plm+--+) & \\
+   1002 & Dépassement de capacité de la négation (\plm+-+) & \\
+   1003 & Dépassement de la construction d'un champ entier d'un registre (\plm+registre::champ (...)+) & \refSubsectionPage{constructionChampEntierRegistre}\\
+   1010 & Dépassement de capacité de l'addition (\plm-+-) & \\
+   1011 & Dépassement de capacité de la soustraction (\plm+-+) & \\
+   1012 & Dépassement de capacité de la multiplication (\plm+*+) & \\
+   1013 & Dépassement de capacité de la division (\plm+/+) & \\
+   1020 & Échec de l'instruction \plm+assert+ & \\
+   1021 & Instruction \plm+throw+ & \\
+\end{tabular}
+\caption{Code des exceptions}
+\labelTableau{tableauCodeExceptions}
+\end{table}
+
