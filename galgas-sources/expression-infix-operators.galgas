@@ -10,10 +10,11 @@ enum @infixOperator {
   case infEqual
   case supEqual
   case andOp
-  case andShortCircuitOp
+  case booleanAnd
   case orOp
-  case orShortCircuitOp
+  case booleanOrOp
   case xorOp
+  case booleanXorOp
   case addOp
   case addOpNoOvf
   case subOp
@@ -150,6 +151,16 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
+      $xor$
+      let operatorLocation = @location.here
+      <multiplicative_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.booleanXorOp
+        !rightExpression
+      }
+    while
       $+$
       let operatorLocation = @location.here
       <multiplicative_expression> ?let rightExpression
@@ -190,13 +201,13 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
-      $||$
+      $or$
       let operatorLocation = @location.here
       <multiplicative_expression> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.orShortCircuitOp
+        !.booleanOrOp
         !rightExpression
       }
     while
@@ -288,13 +299,13 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
-      $&&$
+      $and$
       let operatorLocation = @location.here
       <primary> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.andShortCircuitOp
+        !.booleanAnd
         !rightExpression
       }
     end
@@ -413,17 +424,20 @@ override method @infixOperatorExpressionAST analyzeExpression
   case andOp :
     operatorMap = inContext.mAndOperatorMap
     infixOperatorIR = .infix {!infixOperator:"&"}
-  case andShortCircuitOp :
-    operatorMap = inContext.mAndShortCircuitOperatorMap
+  case booleanAnd :
+    operatorMap = inContext.mBooleanAndOperatorMap
     infixOperatorIR = .infix {!infixOperator:"&&"}
   case orOp :
     operatorMap = inContext.mOrOperatorMap
     infixOperatorIR = .infix {!infixOperator:"|"}
-  case orShortCircuitOp :
-    operatorMap = inContext.mOrShortCircuitOperatorMap
+  case booleanOrOp :
+    operatorMap = inContext.mBooleanOrOperatorMap
     infixOperatorIR = .infix {!infixOperator:"||"}
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
+    infixOperatorIR = .infix {!infixOperator:"^"}
+  case booleanXorOp :
+    operatorMap = inContext.mBooleanXorOperatorMap
     infixOperatorIR = .infix {!infixOperator:"^"}
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
@@ -506,10 +520,10 @@ override method @infixOperatorExpressionAST analyzeExpression
     case strictSup : result = [leftValue > rightValue uint64]
     case supEqual : result = [leftValue >= rightValue uint64]
     case andOp : result = leftValue & rightValue
-    case andShortCircuitOp : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
+    case booleanAnd : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
     case orOp : result = leftValue | rightValue
-    case orShortCircuitOp : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
-    case xorOp : result = leftValue ^ rightValue
+    case booleanOrOp : result = [(leftValue != 0L) || (rightValue != 0L) uint64]
+    case xorOp, booleanXorOp : result = leftValue ^ rightValue
     case addOp : result = leftValue &+ rightValue
     case addOpNoOvf : result = leftValue + rightValue
     case subOp : result = leftValue - rightValue

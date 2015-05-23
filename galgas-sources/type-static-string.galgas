@@ -89,7 +89,7 @@ proc enterStaticStringOperators
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
-  [!?ioContext.mAndShortCircuitOperatorMap insertKey
+  [!?ioContext.mBooleanAndOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
@@ -97,7 +97,7 @@ proc enterStaticStringOperators
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
-  [!?ioContext.mOrShortCircuitOperatorMap insertKey
+  [!?ioContext.mBooleanOrOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]

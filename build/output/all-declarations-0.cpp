@@ -570,6 +570,28 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__21__3F_ [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$and$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_and [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$as$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_as [] = {
   TO_UNICODE ('t'),
@@ -815,6 +837,30 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_exception [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('o'),
   TO_UNICODE ('n'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
+//--- Syntax error message for terminal '$false$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_false [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('f'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('l'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('e'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('k'),
@@ -1179,6 +1225,27 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_not [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$or$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_or [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$proc$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_proc [] = {
   TO_UNICODE ('t'),
@@ -1376,6 +1443,29 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_throw [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$true$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_true [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('u'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$var$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_var [] = {
   TO_UNICODE ('t'),
@@ -1410,6 +1500,28 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_while [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('l'),
   TO_UNICODE ('e'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
+//--- Syntax error message for terminal '$xor$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_xor [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('x'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('k'),
@@ -1832,52 +1944,6 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__3E__3E_ [] = {
   TO_UNICODE ('\''),
   TO_UNICODE ('>'),
   TO_UNICODE ('>'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
-
-//--- Syntax error message for terminal '$&&$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__26_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('&'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
-
-//--- Syntax error message for terminal '$||$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique__7C__7C_ [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('|'),
-  TO_UNICODE ('|'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('d'),
@@ -2374,7 +2440,7 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [87] = {kEndOfSourceLexicalErrorMessage,
+  static const utf32 * syntaxErrorMessageArray [90] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_modeName,
@@ -2385,6 +2451,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__3F__21_,
     gSyntaxErrorMessage_plm_5F_lexique__21_,
     gSyntaxErrorMessage_plm_5F_lexique__21__3F_,
+    gSyntaxErrorMessage_plm_5F_lexique_and,
     gSyntaxErrorMessage_plm_5F_lexique_as,
     gSyntaxErrorMessage_plm_5F_lexique_assert,
     gSyntaxErrorMessage_plm_5F_lexique_at,
@@ -2396,6 +2463,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_elsif,
     gSyntaxErrorMessage_plm_5F_lexique_end,
     gSyntaxErrorMessage_plm_5F_lexique_exception,
+    gSyntaxErrorMessage_plm_5F_lexique_false,
     gSyntaxErrorMessage_plm_5F_lexique_forever,
     gSyntaxErrorMessage_plm_5F_lexique_func,
     gSyntaxErrorMessage_plm_5F_lexique_if,
@@ -2409,6 +2477,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_newSignedBaseType,
     gSyntaxErrorMessage_plm_5F_lexique_newUnsignedBaseType,
     gSyntaxErrorMessage_plm_5F_lexique_not,
+    gSyntaxErrorMessage_plm_5F_lexique_or,
     gSyntaxErrorMessage_plm_5F_lexique_proc,
     gSyntaxErrorMessage_plm_5F_lexique_register,
     gSyntaxErrorMessage_plm_5F_lexique_required,
@@ -2417,8 +2486,10 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_target,
     gSyntaxErrorMessage_plm_5F_lexique_then,
     gSyntaxErrorMessage_plm_5F_lexique_throw,
+    gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_var,
     gSyntaxErrorMessage_plm_5F_lexique_while,
+    gSyntaxErrorMessage_plm_5F_lexique_xor,
     gSyntaxErrorMessage_plm_5F_lexique__3A_,
     gSyntaxErrorMessage_plm_5F_lexique__2E_,
     gSyntaxErrorMessage_plm_5F_lexique__2C_,
@@ -2438,8 +2509,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique__5D_,
     gSyntaxErrorMessage_plm_5F_lexique__3C__3C_,
     gSyntaxErrorMessage_plm_5F_lexique__3E__3E_,
-    gSyntaxErrorMessage_plm_5F_lexique__26__26_,
-    gSyntaxErrorMessage_plm_5F_lexique__7C__7C_,
     gSyntaxErrorMessage_plm_5F_lexique__25_,
     gSyntaxErrorMessage_plm_5F_lexique__2D__3E_,
     gSyntaxErrorMessage_plm_5F_lexique__3A__3A_,
@@ -2483,13 +2552,6 @@ static const utf32 kUnicodeString_plm_5F_lexique__25_ [] = {
 
 //--- Unicode string for '$_26_$'
 static const utf32 kUnicodeString_plm_5F_lexique__26_ [] = {
-  TO_UNICODE ('&'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$_26__26_$'
-static const utf32 kUnicodeString_plm_5F_lexique__26__26_ [] = {
-  TO_UNICODE ('&'),
   TO_UNICODE ('&'),
   TO_UNICODE (0)
 } ;
@@ -2725,6 +2787,14 @@ static const utf32 kUnicodeString_plm_5F_lexique__5E__3D_ [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$and$'
+static const utf32 kUnicodeString_plm_5F_lexique_and [] = {
+  TO_UNICODE ('a'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$as$'
 static const utf32 kUnicodeString_plm_5F_lexique_as [] = {
   TO_UNICODE ('a'),
@@ -2825,6 +2895,16 @@ static const utf32 kUnicodeString_plm_5F_lexique_exception [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('o'),
   TO_UNICODE ('n'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$false$'
+static const utf32 kUnicodeString_plm_5F_lexique_false [] = {
+  TO_UNICODE ('f'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('l'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('e'),
   TO_UNICODE (0)
 } ;
 
@@ -2998,6 +3078,13 @@ static const utf32 kUnicodeString_plm_5F_lexique_not [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$or$'
+static const utf32 kUnicodeString_plm_5F_lexique_or [] = {
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$proc$'
 static const utf32 kUnicodeString_plm_5F_lexique_proc [] = {
   TO_UNICODE ('p'),
@@ -3083,6 +3170,15 @@ static const utf32 kUnicodeString_plm_5F_lexique_throw [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$true$'
+static const utf32 kUnicodeString_plm_5F_lexique_true [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('u'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$var$'
 static const utf32 kUnicodeString_plm_5F_lexique_var [] = {
   TO_UNICODE ('v'),
@@ -3098,6 +3194,14 @@ static const utf32 kUnicodeString_plm_5F_lexique_while [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('l'),
   TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$xor$'
+static const utf32 kUnicodeString_plm_5F_lexique_xor [] = {
+  TO_UNICODE ('x'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
   TO_UNICODE (0)
 } ;
 
@@ -3120,13 +3224,6 @@ static const utf32 kUnicodeString_plm_5F_lexique__7C__3D_ [] = {
   TO_UNICODE (0)
 } ;
 
-//--- Unicode string for '$_7C__7C_$'
-static const utf32 kUnicodeString_plm_5F_lexique__7C__7C_ [] = {
-  TO_UNICODE ('|'),
-  TO_UNICODE ('|'),
-  TO_UNICODE (0)
-} ;
-
 //--- Unicode string for '$_7D_$'
 static const utf32 kUnicodeString_plm_5F_lexique__7D_ [] = {
   TO_UNICODE ('}'),
@@ -3137,7 +3234,7 @@ static const utf32 kUnicodeString_plm_5F_lexique__7D_ [] = {
 //             Key words table 'delimitorsList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_delimitorsList = 42 ;
+static const int32_t ktable_size_plm_5F_lexique_delimitorsList = 40 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsList [ktable_size_plm_5F_lexique_delimitorsList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__25_, 1, C_Lexique_plm_5F_lexique::kToken__25_),
@@ -3162,7 +3259,6 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsL
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7C_, 1, C_Lexique_plm_5F_lexique::kToken__7C_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7D_, 1, C_Lexique_plm_5F_lexique::kToken__7D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__21__3D_, 2, C_Lexique_plm_5F_lexique::kToken__21__3D_),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__26_, 2, C_Lexique_plm_5F_lexique::kToken__26__26_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__2A_, 2, C_Lexique_plm_5F_lexique::kToken__26__2A_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__2B_, 2, C_Lexique_plm_5F_lexique::kToken__26__2B_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__2D_, 2, C_Lexique_plm_5F_lexique::kToken__26__2D_),
@@ -3179,7 +3275,6 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_delimitorsL
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__3E__3E_, 2, C_Lexique_plm_5F_lexique::kToken__3E__3E_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__5E__3D_, 2, C_Lexique_plm_5F_lexique::kToken__5E__3D_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7C__3D_, 2, C_Lexique_plm_5F_lexique::kToken__7C__3D_),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__7C__7C_, 2, C_Lexique_plm_5F_lexique::kToken__7C__7C_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__2B__2B_, 3, C_Lexique_plm_5F_lexique::kToken__26__2B__2B_),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique__26__2D__2D_, 3, C_Lexique_plm_5F_lexique::kToken__26__2D__2D_)
 } ;
@@ -3192,17 +3287,20 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 34 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 39 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_as, 2, C_Lexique_plm_5F_lexique::kToken_as),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_at, 2, C_Lexique_plm_5F_lexique::kToken_at),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_do, 2, C_Lexique_plm_5F_lexique::kToken_do),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_if, 2, C_Lexique_plm_5F_lexique::kToken_if),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_or, 2, C_Lexique_plm_5F_lexique::kToken_or),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_and, 3, C_Lexique_plm_5F_lexique::kToken_and),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_end, 3, C_Lexique_plm_5F_lexique::kToken_end),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_let, 3, C_Lexique_plm_5F_lexique::kToken_let),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_not, 3, C_Lexique_plm_5F_lexique::kToken_not),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_var, 3, C_Lexique_plm_5F_lexique::kToken_var),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_xor, 3, C_Lexique_plm_5F_lexique::kToken_xor),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_case, 4, C_Lexique_plm_5F_lexique::kToken_case),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_else, 4, C_Lexique_plm_5F_lexique::kToken_else),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_enum, 4, C_Lexique_plm_5F_lexique::kToken_enum),
@@ -3212,7 +3310,9 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_proc, 4, C_Lexique_plm_5F_lexique::kToken_proc),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_self, 4, C_Lexique_plm_5F_lexique::kToken_self),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_then, 4, C_Lexique_plm_5F_lexique::kToken_then),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_true, 4, C_Lexique_plm_5F_lexique::kToken_true),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_elsif, 5, C_Lexique_plm_5F_lexique::kToken_elsif),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_throw, 5, C_Lexique_plm_5F_lexique::kToken_throw),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_while, 5, C_Lexique_plm_5F_lexique::kToken_while),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_assert, 6, C_Lexique_plm_5F_lexique::kToken_assert),
@@ -3318,6 +3418,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
+    case kToken_and:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("and") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_as:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("as") ;
@@ -3371,6 +3476,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_exception:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("exception") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_false:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("false") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_forever:
@@ -3438,6 +3548,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("not") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_or:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("or") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_proc:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("proc") ;
@@ -3478,6 +3593,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("throw") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_true:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("true") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_var:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("var") ;
@@ -3486,6 +3606,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_while:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("while") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_xor:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("xor") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3A_:
@@ -3581,16 +3706,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken__3E__3E_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString (">>") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken__26__26_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("&&") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken__7C__7C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("||") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__25_:
@@ -3841,9 +3956,6 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__26__2B__2B_, 3, true)) {
         token.mTokenCode = kToken__26__2B__2B_ ;
         enterToken (token) ;
-      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__7C__7C_, 2, true)) {
-        token.mTokenCode = kToken__7C__7C_ ;
-        enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__7C__3D_, 2, true)) {
         token.mTokenCode = kToken__7C__3D_ ;
         enterToken (token) ;
@@ -3891,9 +4003,6 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__26__2A_, 2, true)) {
         token.mTokenCode = kToken__26__2A_ ;
-        enterToken (token) ;
-      }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__26__26_, 2, true)) {
-        token.mTokenCode = kToken__26__26_ ;
         enterToken (token) ;
       }else if (testForInputUTF32String (kUnicodeString_plm_5F_lexique__21__3D_, 2, true)) {
         token.mTokenCode = kToken__21__3D_ ;
@@ -4163,6 +4272,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("\?!") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!\?") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("and") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("as") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("assert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("at") COMMA_THERE) ;
@@ -4174,6 +4284,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("elsif") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("end") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("exception") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("false") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("forever") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("func") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("if") COMMA_THERE) ;
@@ -4187,6 +4298,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("newSignedBaseType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("newUnsignedBaseType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("not") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("or") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("proc") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("register") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("required") COMMA_THERE) ;
@@ -4195,8 +4307,10 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("then") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("throw") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("var") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("while") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("xor") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (":") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (".") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (",") COMMA_THERE) ;
@@ -4216,8 +4330,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("]") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("<<") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (">>") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("&&") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("||") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("%") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("->") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("::") COMMA_THERE) ;
@@ -4247,7 +4359,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [87] = {0,
+  static const uint32_t kTerminalSymbolStyles [90] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_modeName */,
@@ -4258,6 +4370,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     8 /* plm_lexique_1__3F__21_ */,
     8 /* plm_lexique_1__21_ */,
     8 /* plm_lexique_1__21__3F_ */,
+    1 /* plm_lexique_1_and */,
     1 /* plm_lexique_1_as */,
     1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_at */,
@@ -4269,6 +4382,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_elsif */,
     1 /* plm_lexique_1_end */,
     1 /* plm_lexique_1_exception */,
+    1 /* plm_lexique_1_false */,
     1 /* plm_lexique_1_forever */,
     1 /* plm_lexique_1_func */,
     1 /* plm_lexique_1_if */,
@@ -4282,6 +4396,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_newSignedBaseType */,
     1 /* plm_lexique_1_newUnsignedBaseType */,
     1 /* plm_lexique_1_not */,
+    1 /* plm_lexique_1_or */,
     1 /* plm_lexique_1_proc */,
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
@@ -4290,8 +4405,10 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_then */,
     1 /* plm_lexique_1_throw */,
+    1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_var */,
     1 /* plm_lexique_1_while */,
+    1 /* plm_lexique_1_xor */,
     7 /* plm_lexique_1__3A_ */,
     7 /* plm_lexique_1__2E_ */,
     7 /* plm_lexique_1__2C_ */,
@@ -4311,8 +4428,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     7 /* plm_lexique_1__5D_ */,
     7 /* plm_lexique_1__3C__3C_ */,
     7 /* plm_lexique_1__3E__3E_ */,
-    7 /* plm_lexique_1__26__26_ */,
-    7 /* plm_lexique_1__7C__7C_ */,
     7 /* plm_lexique_1__25_ */,
     7 /* plm_lexique_1__2D__3E_ */,
     7 /* plm_lexique_1__3A__3A_ */,
@@ -8416,52 +8531,52 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i33_ (GALGAS_exp
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_as) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 58)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_as) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 59)) ;
     GALGAS_lstring var_typeIdentifier = inCompiler->synthetizedAttribute_tokenString () ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 59)) ;
-    outArgument_outExpression = GALGAS_asExpressionAST::constructor_new (outArgument_outExpression, var_typeIdentifier  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 60)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 60)) ;
+    outArgument_outExpression = GALGAS_asExpressionAST::constructor_new (outArgument_outExpression, var_typeIdentifier  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 61)) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 65)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 66)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 66)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 67)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_equal (SOURCE_FILE ("expression-infix-operators.galgas", 71)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_equal (SOURCE_FILE ("expression-infix-operators.galgas", 72)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 69)) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 75)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 76)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 76)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 77)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_nonEqual (SOURCE_FILE ("expression-infix-operators.galgas", 81)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 78)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_nonEqual (SOURCE_FILE ("expression-infix-operators.galgas", 82)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 79)) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 86)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 86)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 87)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_infEqual (SOURCE_FILE ("expression-infix-operators.galgas", 91)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 88)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_infEqual (SOURCE_FILE ("expression-infix-operators.galgas", 92)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 89)) ;
   } break ;
   case 6: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 95)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 96)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 96)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 97)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_supEqual (SOURCE_FILE ("expression-infix-operators.galgas", 101)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 98)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_supEqual (SOURCE_FILE ("expression-infix-operators.galgas", 102)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 99)) ;
   } break ;
   case 7: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 105)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 106)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 106)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 107)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_strictInf (SOURCE_FILE ("expression-infix-operators.galgas", 111)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 108)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_strictInf (SOURCE_FILE ("expression-infix-operators.galgas", 112)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 109)) ;
   } break ;
   case 8: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 115)) ;
-    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 116)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 116)) ;
+    GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 117)) ;
     GALGAS_expressionAST var_rightExpression ;
     nt_additive_5F_expression_ (var_rightExpression, inCompiler) ;
-    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_strictSup (SOURCE_FILE ("expression-infix-operators.galgas", 121)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 118)) ;
+    outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_strictSup (SOURCE_FILE ("expression-infix-operators.galgas", 122)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 119)) ;
   } break ;
   default:
     break ;
@@ -8476,31 +8591,31 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_comparison_i33_parse (C_Lex
   case 1: {
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_as) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 58)) ;
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 59)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_as) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 59)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 60)) ;
   } break ;
   case 3: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 65)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3D__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 66)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   case 4: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 75)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__21__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 76)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   case 5: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 85)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 86)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   case 6: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 95)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 96)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   case 7: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 105)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 106)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   case 8: {
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 115)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 116)) ;
     nt_additive_5F_expression_parse (inCompiler) ;
   } break ;
   default:
@@ -8519,67 +8634,74 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i34_
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 134)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 134)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 135)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_orOp (SOURCE_FILE ("expression-infix-operators.galgas", 139)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 136)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_orOp (SOURCE_FILE ("expression-infix-operators.galgas", 140)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 137)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 143)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 144)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 144)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 145)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_xorOp (SOURCE_FILE ("expression-infix-operators.galgas", 149)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 146)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_xorOp (SOURCE_FILE ("expression-infix-operators.galgas", 150)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 147)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 153)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 154)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_xor) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 154)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 155)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_addOp (SOURCE_FILE ("expression-infix-operators.galgas", 159)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 156)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_booleanXorOp (SOURCE_FILE ("expression-infix-operators.galgas", 160)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 157)) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 163)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 164)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 164)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 165)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_addOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 169)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 166)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_addOp (SOURCE_FILE ("expression-infix-operators.galgas", 170)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 167)) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 173)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 174)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 174)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 175)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_subOp (SOURCE_FILE ("expression-infix-operators.galgas", 179)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 176)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_addOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 180)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 177)) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 184)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 184)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 185)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_subOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 189)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 186)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_subOp (SOURCE_FILE ("expression-infix-operators.galgas", 190)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 187)) ;
     } break ;
     case 8: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 193)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 195)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_orShortCircuitOp (SOURCE_FILE ("expression-infix-operators.galgas", 199)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 196)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_subOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 200)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 197)) ;
     } break ;
     case 9: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 203)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 204)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_or) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 204)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 205)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_leftShiftOp (SOURCE_FILE ("expression-infix-operators.galgas", 209)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 206)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_booleanOrOp (SOURCE_FILE ("expression-infix-operators.galgas", 210)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 207)) ;
     } break ;
     case 10: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 214)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 214)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 215)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_rightShiftOp (SOURCE_FILE ("expression-infix-operators.galgas", 219)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 216)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_leftShiftOp (SOURCE_FILE ("expression-infix-operators.galgas", 220)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 217)) ;
+    } break ;
+    case 11: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 225)) ;
+      GALGAS_expressionAST var_rightExpression ;
+      nt_multiplicative_5F_expression_ (var_rightExpression, inCompiler) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_rightShiftOp (SOURCE_FILE ("expression-infix-operators.galgas", 230)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 227)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -8596,39 +8718,43 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_additive_5F_expression_i34_
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_23 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 133)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 134)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 143)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 144)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 153)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_xor) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 154)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 163)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 164)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 173)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2B_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 174)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 184)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 8: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7C__7C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 193)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2D_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 9: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 203)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_or) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 204)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     case 10: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 213)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3C__3C_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 214)) ;
+      nt_multiplicative_5F_expression_parse (inCompiler) ;
+    } break ;
+    case 11: {
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3E__3E_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 224)) ;
       nt_multiplicative_5F_expression_parse (inCompiler) ;
     } break ;
     default:
@@ -8649,53 +8775,53 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 242)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 243)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_andOp (SOURCE_FILE ("expression-infix-operators.galgas", 237)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 234)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_andOp (SOURCE_FILE ("expression-infix-operators.galgas", 248)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 245)) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 241)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 242)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 252)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 253)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_mulOp (SOURCE_FILE ("expression-infix-operators.galgas", 247)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 244)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_mulOp (SOURCE_FILE ("expression-infix-operators.galgas", 258)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 255)) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 252)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 262)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 263)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_mulOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 257)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 254)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_mulOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 268)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 265)) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 261)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 262)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 272)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 273)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_modOp (SOURCE_FILE ("expression-infix-operators.galgas", 267)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 264)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_modOp (SOURCE_FILE ("expression-infix-operators.galgas", 278)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 275)) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 271)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 272)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 282)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 283)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_divOp (SOURCE_FILE ("expression-infix-operators.galgas", 277)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 274)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_divOp (SOURCE_FILE ("expression-infix-operators.galgas", 288)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 285)) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 281)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 282)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 292)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 293)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_divOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 287)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 284)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_divOpNoOvf (SOURCE_FILE ("expression-infix-operators.galgas", 298)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 295)) ;
     } break ;
     case 8: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 291)) ;
-      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 292)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_and) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 302)) ;
+      GALGAS_location var_operatorLocation = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 303)) ;
       GALGAS_expressionAST var_rightExpression ;
       nt_primary_ (var_rightExpression, inCompiler) ;
-      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_andShortCircuitOp (SOURCE_FILE ("expression-infix-operators.galgas", 297)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 294)) ;
+      outArgument_outExpression = GALGAS_infixOperatorExpressionAST::constructor_new (outArgument_outExpression, var_operatorLocation, GALGAS_infixOperator::constructor_booleanAnd (SOURCE_FILE ("expression-infix-operators.galgas", 308)), var_rightExpression  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 305)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -8712,31 +8838,31 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_multiplicative_5F_expressio
   while (repeatFlag_0) {
     switch (select_common_5F_syntax_24 (inCompiler)) {
     case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 242)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 3: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 241)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 252)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 4: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2A_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 262)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 5: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 261)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__25_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 272)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 6: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 271)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 282)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 7: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 281)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__2F_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 292)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     case 8: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__26__26_) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 291)) ;
+      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_and) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 302)) ;
       nt_primary_parse (inCompiler) ;
     } break ;
     default:
@@ -8846,6 +8972,38 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i40_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_true) COMMA_SOURCE_FILE ("expression-true-false.galgas", 16)) ;
+  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 1ULL)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 17)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_true) COMMA_SOURCE_FILE ("expression-true-false.galgas", 16)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expressionAST & outArgument_outExpression,
+                                                                   C_Lexique_plm_5F_lexique * inCompiler) {
+  outArgument_outExpression.drop () ; // Release 'out' argument
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_false) COMMA_SOURCE_FILE ("expression-true-false.galgas", 21)) ;
+  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 0ULL)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 22)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_false) COMMA_SOURCE_FILE ("expression-true-false.galgas", 21)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_ (GALGAS_expressionAST & outArgument_outExpression,
+                                                                   C_Lexique_plm_5F_lexique * inCompiler) {
+  outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_sourceVarName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 17)) ;
   GALGAS_lstringlist var_fieldNameList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("expression-var.galgas", 18)) ;
@@ -8868,7 +9026,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-var.galgas", 17)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
@@ -8887,7 +9045,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i41_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_functionName = inCompiler->synthetizedAttribute_tokenString () ;
@@ -8915,7 +9073,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-func-call.galgas", 24)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__28_) COMMA_SOURCE_FILE ("expression-func-call.galgas", 25)) ;
   bool repeatFlag_0 = true ;
@@ -8936,7 +9094,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i42_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i45_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_registerName = inCompiler->synthetizedAttribute_tokenString () ;
@@ -8949,7 +9107,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i45_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 26)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 27)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 28)) ;
@@ -8958,7 +9116,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i43_parse (C_Lexiqu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_ (GALGAS_expressionAST & outArgument_outExpression,
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i46_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   GALGAS_lstring var_registerName = inCompiler->synthetizedAttribute_tokenString () ;
@@ -8976,7 +9134,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_ (GALGAS_expres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i44_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i46_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 33)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 34)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 35)) ;
@@ -18509,9 +18667,9 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_andOp (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperator GALGAS_infixOperator::constructor_andShortCircuitOp (UNUSED_LOCATION_ARGS) {
+GALGAS_infixOperator GALGAS_infixOperator::constructor_booleanAnd (UNUSED_LOCATION_ARGS) {
   GALGAS_infixOperator result ;
-  result.mEnum = kEnum_andShortCircuitOp ;
+  result.mEnum = kEnum_booleanAnd ;
   return result ;
 }
 
@@ -18525,9 +18683,9 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_orOp (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperator GALGAS_infixOperator::constructor_orShortCircuitOp (UNUSED_LOCATION_ARGS) {
+GALGAS_infixOperator GALGAS_infixOperator::constructor_booleanOrOp (UNUSED_LOCATION_ARGS) {
   GALGAS_infixOperator result ;
-  result.mEnum = kEnum_orShortCircuitOp ;
+  result.mEnum = kEnum_booleanOrOp ;
   return result ;
 }
 
@@ -18536,6 +18694,14 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_orShortCircuitOp (UNUSED_
 GALGAS_infixOperator GALGAS_infixOperator::constructor_xorOp (UNUSED_LOCATION_ARGS) {
   GALGAS_infixOperator result ;
   result.mEnum = kEnum_xorOp ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperator GALGAS_infixOperator::constructor_booleanXorOp (UNUSED_LOCATION_ARGS) {
+  GALGAS_infixOperator result ;
+  result.mEnum = kEnum_booleanXorOp ;
   return result ;
 }
 
@@ -18629,7 +18795,7 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_rightShiftOp (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_infixOperator [23] = {
+static const char * gEnumNameArrayFor_infixOperator [24] = {
   "(not built)",
   "equal",
   "nonEqual",
@@ -18638,10 +18804,11 @@ static const char * gEnumNameArrayFor_infixOperator [23] = {
   "infEqual",
   "supEqual",
   "andOp",
-  "andShortCircuitOp",
+  "booleanAnd",
   "orOp",
-  "orShortCircuitOp",
+  "booleanOrOp",
   "xorOp",
+  "booleanXorOp",
   "addOp",
   "addOpNoOvf",
   "subOp",
@@ -18699,8 +18866,8 @@ GALGAS_bool GALGAS_infixOperator::reader_isAndOp (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_infixOperator::reader_isAndShortCircuitOp (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_andShortCircuitOp == mEnum) ;
+GALGAS_bool GALGAS_infixOperator::reader_isBooleanAnd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanAnd == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -18711,14 +18878,20 @@ GALGAS_bool GALGAS_infixOperator::reader_isOrOp (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_infixOperator::reader_isOrShortCircuitOp (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_orShortCircuitOp == mEnum) ;
+GALGAS_bool GALGAS_infixOperator::reader_isBooleanOrOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanOrOp == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_infixOperator::reader_isXorOp (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_xorOp == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperator::reader_isBooleanXorOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanXorOp == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

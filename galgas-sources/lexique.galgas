@@ -15,6 +15,7 @@ style keywordsStyle -> "Keywords"
 $identifier$ ! tokenString error message "an identifier"
 
 list keyWordList style keywordsStyle error message "the '%K' keyword" {
+  "and",
   "as",
   "assert",
   "at",
@@ -26,6 +27,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "elsif",
   "end",
   "exception",
+  "false",
   "forever",
   "func",
   "if",
@@ -39,6 +41,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "newSignedBaseType",
   "newUnsignedBaseType",
   "not",
+  "or",
   "proc",
   "register",
   "required",
@@ -47,8 +50,10 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "target",
   "then",
   "throw",
+  "true",
   "var",
-  "while"
+  "while",
+  "xor"
 }
 
 rule 'a'->'z' | 'A'->'Z' {
@@ -211,7 +216,7 @@ style delimitersStyle -> "Delimiters"
 list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
   ":", ".",  ",", ";", "{", "}", "=", "(", ")",
   "==", "!=", "<", "<=", ">", ">=", "[", "]", "<<", ">>",
-  "&&", "||", "%",
+  "%",
   "->", "::",
   "++", "&++",
   "--", "&--",

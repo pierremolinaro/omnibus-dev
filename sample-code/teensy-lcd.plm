@@ -25,8 +25,7 @@ proc $isr userSystickHandler () {
 
 var $user gVar : Int8 = 0
 
-var $user gZZZZ : UInt8 = 0
-var $user gYYYYY : UInt32 = 0
+var $user gYYYYY : Bool = false or true
 
 //-----------------------------------------------------------------------------*
 
@@ -40,7 +39,7 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar as Int32)
-  gYYYYY = ICSR::VECTPENDING
+  gYYYYY = true
 }
 
 //-----------------------------------------------------------------------------*

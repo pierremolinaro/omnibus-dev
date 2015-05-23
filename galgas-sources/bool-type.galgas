@@ -75,20 +75,19 @@ override method @booleanDeclaration enterInContext
       copiable = false
     end
   end
-#--- Constructors
-  @constructorMap constructorMap = {}
-  [!?constructorMap insertKey !["false" nowhere] !"(" + mangledNameForType (!name:mBooleanTypeName.string) + ") 0"]
-  [!?constructorMap insertKey !["true" nowhere] !"(" + mangledNameForType (!name:mBooleanTypeName.string) + ") 1"]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mBooleanTypeName
     !kind:.boolean
-    !constructorMap:constructorMap
+    !constructorMap:{}
     !procedureMap:{} # Procedure map
     !copiable:copiable
     !equatable:true
     !comparable:true
   ]
+#--- Enter boolean type
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolType]
+  ioContext.mBooleanType = boolType
 #--- Enter boolean operators
   enterBooleanOperators (
     !integerTypeName:mBooleanTypeName
@@ -127,23 +126,15 @@ proc enterBooleanOperators
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
-  [!?ioContext.mAndOperatorMap insertKey
+  [!?ioContext.mBooleanAndOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
-  [!?ioContext.mAndShortCircuitOperatorMap insertKey
+  [!?ioContext.mBooleanOrOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]
-  [!?ioContext.mOrOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-  ]
-  [!?ioContext.mOrShortCircuitOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-  ]
-  [!?ioContext.mXorOperatorMap insertKey
+  [!?ioContext.mBooleanXorOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
   ]

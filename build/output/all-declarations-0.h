@@ -85,6 +85,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3F__21_,
    kToken__21_,
    kToken__21__3F_,
+   kToken_and,
    kToken_as,
    kToken_assert,
    kToken_at,
@@ -96,6 +97,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_elsif,
    kToken_end,
    kToken_exception,
+   kToken_false,
    kToken_forever,
    kToken_func,
    kToken_if,
@@ -109,6 +111,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_newSignedBaseType,
    kToken_newUnsignedBaseType,
    kToken_not,
+   kToken_or,
    kToken_proc,
    kToken_register,
    kToken_required,
@@ -117,8 +120,10 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_target,
    kToken_then,
    kToken_throw,
+   kToken_true,
    kToken_var,
    kToken_while,
+   kToken_xor,
    kToken__3A_,
    kToken__2E_,
    kToken__2C_,
@@ -138,8 +143,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__5D_,
    kToken__3C__3C_,
    kToken__3E__3E_,
-   kToken__26__26_,
-   kToken__7C__7C_,
    kToken__25_,
    kToken__2D__3E_,
    kToken__3A__3A_,
@@ -191,7 +194,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 86 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 89 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -2388,6 +2391,16 @@ class cParser_common_5F_syntax {
 
   protected : void rule_common_5F_syntax_primary_i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
+  protected : void rule_common_5F_syntax_primary_i45_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i45_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i46_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
 
 
 //--- Select methods
@@ -4025,10 +4038,11 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
     kEnum_infEqual,
     kEnum_supEqual,
     kEnum_andOp,
-    kEnum_andShortCircuitOp,
+    kEnum_booleanAnd,
     kEnum_orOp,
-    kEnum_orShortCircuitOp,
+    kEnum_booleanOrOp,
     kEnum_xorOp,
+    kEnum_booleanXorOp,
     kEnum_addOp,
     kEnum_addOpNoOvf,
     kEnum_subOp,
@@ -4067,7 +4081,11 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : static GALGAS_infixOperator constructor_andOp (LOCATION_ARGS) ;
 
-  public : static GALGAS_infixOperator constructor_andShortCircuitOp (LOCATION_ARGS) ;
+  public : static GALGAS_infixOperator constructor_booleanAnd (LOCATION_ARGS) ;
+
+  public : static GALGAS_infixOperator constructor_booleanOrOp (LOCATION_ARGS) ;
+
+  public : static GALGAS_infixOperator constructor_booleanXorOp (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_divOp (LOCATION_ARGS) ;
 
@@ -4088,8 +4106,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : static GALGAS_infixOperator constructor_nonEqual (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_orOp (LOCATION_ARGS) ;
-
-  public : static GALGAS_infixOperator constructor_orShortCircuitOp (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_rightShiftOp (LOCATION_ARGS) ;
 
@@ -4123,7 +4139,11 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAndOp (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAndShortCircuitOp (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanAnd (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanOrOp (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanXorOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isDivOp (LOCATION_ARGS) const ;
 
@@ -4144,8 +4164,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isNonEqual (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isOrOp (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isOrShortCircuitOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRightShiftOp (LOCATION_ARGS) const ;
 
@@ -4293,6 +4311,90 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mOptionalTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST reader_mSourceExpression (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        @literalBooleanInExpressionAST class                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
+//--- Constructor
+  public : GALGAS_literalBooleanInExpressionAST (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_literalBooleanInExpressionAST constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_literalBooleanInExpressionAST * ptr (void) const { return (const cPtr_literalBooleanInExpressionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literalBooleanInExpressionAST (const cPtr_literalBooleanInExpressionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literalBooleanInExpressionAST extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literalBooleanInExpressionAST constructor_new (const class GALGAS_uint_36__34_ & inOperand0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mValue (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literalBooleanInExpressionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalBooleanInExpressionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Pointer class for @literalBooleanInExpressionAST class                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
+//--- Attributes
+  public : GALGAS_uint_36__34_ mAttribute_mValue ;
+
+//--- Constructor
+  public : cPtr_literalBooleanInExpressionAST (const GALGAS_uint_36__34_ & in_mValue
+                                               COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_uint_36__34_ reader_mValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

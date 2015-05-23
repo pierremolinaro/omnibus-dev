@@ -12,6 +12,1111 @@
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_incDecInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_incDecInstructionAST * p = (const cPtr_incDecInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_incDecInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mKind.objectCompare (p->mAttribute_mKind) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_incDecInstructionAST::objectCompare (const GALGAS_incDecInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecInstructionAST::GALGAS_incDecInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecInstructionAST::GALGAS_incDecInstructionAST (const cPtr_incDecInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_incDecInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecInstructionAST GALGAS_incDecInstructionAST::constructor_new (const GALGAS_incDecKind & inAttribute_mKind,
+                                                                          const GALGAS_lstring & inAttribute_mVarName
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_incDecInstructionAST result ;
+  if (inAttribute_mKind.isValid () && inAttribute_mVarName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_incDecInstructionAST (inAttribute_mKind, inAttribute_mVarName COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecKind GALGAS_incDecInstructionAST::reader_mKind (UNUSED_LOCATION_ARGS) const {
+  GALGAS_incDecKind result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_incDecInstructionAST * p = (const cPtr_incDecInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_incDecInstructionAST) ;
+    result = p->mAttribute_mKind ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecKind cPtr_incDecInstructionAST::reader_mKind (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_incDecInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_incDecInstructionAST * p = (const cPtr_incDecInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_incDecInstructionAST) ;
+    result = p->mAttribute_mVarName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_incDecInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mVarName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                    Pointer class for @incDecInstructionAST class                                    *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_incDecInstructionAST::cPtr_incDecInstructionAST (const GALGAS_incDecKind & in_mKind,
+                                                      const GALGAS_lstring & in_mVarName
+                                                      COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mKind (in_mKind),
+mAttribute_mVarName (in_mVarName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_incDecInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_incDecInstructionAST ;
+}
+
+void cPtr_incDecInstructionAST::description (C_String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString << "[@incDecInstructionAST:" ;
+  mAttribute_mKind.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_incDecInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_incDecInstructionAST (mAttribute_mKind, mAttribute_mVarName COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @incDecInstructionAST type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_incDecInstructionAST ("incDecInstructionAST",
+                                             & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_incDecInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_incDecInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_incDecInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_incDecInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecInstructionAST GALGAS_incDecInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_incDecInstructionAST result ;
+  const GALGAS_incDecInstructionAST * p = (const GALGAS_incDecInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_incDecInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("incDecInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_letInstructionWithAssignmentAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOptionalTypeName.objectCompare (p->mAttribute_mOptionalTypeName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_letInstructionWithAssignmentAST::objectCompare (const GALGAS_letInstructionWithAssignmentAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_letInstructionWithAssignmentAST::GALGAS_letInstructionWithAssignmentAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_letInstructionWithAssignmentAST::GALGAS_letInstructionWithAssignmentAST (const cPtr_letInstructionWithAssignmentAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_letInstructionWithAssignmentAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::constructor_new (const GALGAS_lstring & inAttribute_mVarName,
+                                                                                                const GALGAS_lstring & inAttribute_mOptionalTypeName,
+                                                                                                const GALGAS_expressionAST & inAttribute_mSourceExpression
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_letInstructionWithAssignmentAST result ;
+  if (inAttribute_mVarName.isValid () && inAttribute_mOptionalTypeName.isValid () && inAttribute_mSourceExpression.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_letInstructionWithAssignmentAST (inAttribute_mVarName, inAttribute_mOptionalTypeName, inAttribute_mSourceExpression COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
+    result = p->mAttribute_mVarName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mVarName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
+    result = p->mAttribute_mOptionalTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOptionalTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST cPtr_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                              Pointer class for @letInstructionWithAssignmentAST class                               *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_letInstructionWithAssignmentAST::cPtr_letInstructionWithAssignmentAST (const GALGAS_lstring & in_mVarName,
+                                                                            const GALGAS_lstring & in_mOptionalTypeName,
+                                                                            const GALGAS_expressionAST & in_mSourceExpression
+                                                                            COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mVarName (in_mVarName),
+mAttribute_mOptionalTypeName (in_mOptionalTypeName),
+mAttribute_mSourceExpression (in_mSourceExpression) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_letInstructionWithAssignmentAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
+}
+
+void cPtr_letInstructionWithAssignmentAST::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "[@letInstructionWithAssignmentAST:" ;
+  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mOptionalTypeName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_letInstructionWithAssignmentAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_letInstructionWithAssignmentAST (mAttribute_mVarName, mAttribute_mOptionalTypeName, mAttribute_mSourceExpression COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        @letInstructionWithAssignmentAST type                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ("letInstructionWithAssignmentAST",
+                                                        & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_letInstructionWithAssignmentAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_letInstructionWithAssignmentAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_letInstructionWithAssignmentAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::extractObject (const GALGAS_object & inObject,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_letInstructionWithAssignmentAST result ;
+  const GALGAS_letInstructionWithAssignmentAST * p = (const GALGAS_letInstructionWithAssignmentAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_letInstructionWithAssignmentAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("letInstructionWithAssignmentAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_operatorAssignInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mTargetVarName.objectCompare (p->mAttribute_mTargetVarName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_operatorAssignInstructionAST::objectCompare (const GALGAS_operatorAssignInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignInstructionAST::GALGAS_operatorAssignInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignInstructionAST::GALGAS_operatorAssignInstructionAST (const cPtr_operatorAssignInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_operatorAssignInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignInstructionAST GALGAS_operatorAssignInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mTargetVarName,
+                                                                                          const GALGAS_expressionAST & inAttribute_mSourceExpression,
+                                                                                          const GALGAS_operatorAssignKind & inAttribute_mOperator
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_operatorAssignInstructionAST result ;
+  if (inAttribute_mTargetVarName.isValid () && inAttribute_mSourceExpression.isValid () && inAttribute_mOperator.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_operatorAssignInstructionAST (inAttribute_mTargetVarName, inAttribute_mSourceExpression, inAttribute_mOperator COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
+    result = p->mAttribute_mTargetVarName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetVarName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_expressionAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST cPtr_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operatorAssignKind result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_operatorAssignInstructionAST) ;
+    result = p->mAttribute_mOperator ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignKind cPtr_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                Pointer class for @operatorAssignInstructionAST class                                *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_operatorAssignInstructionAST::cPtr_operatorAssignInstructionAST (const GALGAS_lstring & in_mTargetVarName,
+                                                                      const GALGAS_expressionAST & in_mSourceExpression,
+                                                                      const GALGAS_operatorAssignKind & in_mOperator
+                                                                      COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mTargetVarName (in_mTargetVarName),
+mAttribute_mSourceExpression (in_mSourceExpression),
+mAttribute_mOperator (in_mOperator) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_operatorAssignInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_operatorAssignInstructionAST ;
+}
+
+void cPtr_operatorAssignInstructionAST::description (C_String & ioString,
+                                                     const int32_t inIndentation) const {
+  ioString << "[@operatorAssignInstructionAST:" ;
+  mAttribute_mTargetVarName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mOperator.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_operatorAssignInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_operatorAssignInstructionAST (mAttribute_mTargetVarName, mAttribute_mSourceExpression, mAttribute_mOperator COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @operatorAssignInstructionAST type                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_operatorAssignInstructionAST ("operatorAssignInstructionAST",
+                                                     & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_operatorAssignInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_operatorAssignInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_operatorAssignInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_operatorAssignInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operatorAssignInstructionAST GALGAS_operatorAssignInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_operatorAssignInstructionAST result ;
+  const GALGAS_operatorAssignInstructionAST * p = (const GALGAS_operatorAssignInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_operatorAssignInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("operatorAssignInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_procCallInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mProcRoutineName.objectCompare (p->mAttribute_mProcRoutineName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mEffectiveParameterList.objectCompare (p->mAttribute_mEffectiveParameterList) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_procCallInstructionAST::objectCompare (const GALGAS_procCallInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procCallInstructionAST::GALGAS_procCallInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_procCallInstructionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                         GALGAS_procEffectiveParameterListAST::constructor_emptyList (HERE)
+                                                         COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procCallInstructionAST::GALGAS_procCallInstructionAST (const cPtr_procCallInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_procCallInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mProcRoutineName,
+                                                                              const GALGAS_procEffectiveParameterListAST & inAttribute_mEffectiveParameterList
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_procCallInstructionAST result ;
+  if (inAttribute_mProcRoutineName.isValid () && inAttribute_mEffectiveParameterList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionAST (inAttribute_mProcRoutineName, inAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_procCallInstructionAST::reader_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
+    result = p->mAttribute_mProcRoutineName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_procCallInstructionAST::reader_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcRoutineName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procEffectiveParameterListAST GALGAS_procCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+  GALGAS_procEffectiveParameterListAST result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_procCallInstructionAST) ;
+    result = p->mAttribute_mEffectiveParameterList ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procEffectiveParameterListAST cPtr_procCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEffectiveParameterList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                   Pointer class for @procCallInstructionAST class                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_procCallInstructionAST::cPtr_procCallInstructionAST (const GALGAS_lstring & in_mProcRoutineName,
+                                                          const GALGAS_procEffectiveParameterListAST & in_mEffectiveParameterList
+                                                          COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mProcRoutineName (in_mProcRoutineName),
+mAttribute_mEffectiveParameterList (in_mEffectiveParameterList) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_procCallInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_procCallInstructionAST ;
+}
+
+void cPtr_procCallInstructionAST::description (C_String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString << "[@procCallInstructionAST:" ;
+  mAttribute_mProcRoutineName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mEffectiveParameterList.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_procCallInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_procCallInstructionAST (mAttribute_mProcRoutineName, mAttribute_mEffectiveParameterList COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @procCallInstructionAST type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_procCallInstructionAST ("procCallInstructionAST",
+                                               & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_procCallInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_procCallInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_procCallInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_procCallInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_procCallInstructionAST result ;
+  const GALGAS_procCallInstructionAST * p = (const GALGAS_procCallInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_procCallInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("procCallInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_throwInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_throwInstructionAST * p = (const cPtr_throwInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_throwInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mThrowInstructionCode.objectCompare (p->mAttribute_mThrowInstructionCode) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_throwInstructionAST::objectCompare (const GALGAS_throwInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_throwInstructionAST::GALGAS_throwInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_throwInstructionAST GALGAS_throwInstructionAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_throwInstructionAST::constructor_new (GALGAS_luint_36__34_::constructor_default (HERE)
+                                                      COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_throwInstructionAST::GALGAS_throwInstructionAST (const cPtr_throwInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_throwInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_throwInstructionAST GALGAS_throwInstructionAST::constructor_new (const GALGAS_luint_36__34_ & inAttribute_mThrowInstructionCode
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_throwInstructionAST result ;
+  if (inAttribute_mThrowInstructionCode.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_throwInstructionAST (inAttribute_mThrowInstructionCode COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_luint_36__34_ GALGAS_throwInstructionAST::reader_mThrowInstructionCode (UNUSED_LOCATION_ARGS) const {
+  GALGAS_luint_36__34_ result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_throwInstructionAST * p = (const cPtr_throwInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_throwInstructionAST) ;
+    result = p->mAttribute_mThrowInstructionCode ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_luint_36__34_ cPtr_throwInstructionAST::reader_mThrowInstructionCode (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mThrowInstructionCode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                    Pointer class for @throwInstructionAST class                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_throwInstructionAST::cPtr_throwInstructionAST (const GALGAS_luint_36__34_ & in_mThrowInstructionCode
+                                                    COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mThrowInstructionCode (in_mThrowInstructionCode) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_throwInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_throwInstructionAST ;
+}
+
+void cPtr_throwInstructionAST::description (C_String & ioString,
+                                            const int32_t inIndentation) const {
+  ioString << "[@throwInstructionAST:" ;
+  mAttribute_mThrowInstructionCode.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_throwInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_throwInstructionAST (mAttribute_mThrowInstructionCode COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @throwInstructionAST type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_throwInstructionAST ("throwInstructionAST",
+                                            & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_throwInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_throwInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_throwInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_throwInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_throwInstructionAST GALGAS_throwInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_throwInstructionAST result ;
+  const GALGAS_throwInstructionAST * p = (const GALGAS_throwInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_throwInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("throwInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_varInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_varInstructionAST * p = (const cPtr_varInstructionAST *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_varInstructionAST) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mTypeName.objectCompare (p->mAttribute_mTypeName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_varInstructionAST::objectCompare (const GALGAS_varInstructionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_varInstructionAST::GALGAS_varInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_varInstructionAST GALGAS_varInstructionAST::constructor_default (LOCATION_ARGS) {
+  return GALGAS_varInstructionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                    GALGAS_lstring::constructor_default (HERE)
+                                                    COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_varInstructionAST::GALGAS_varInstructionAST (const cPtr_varInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_varInstructionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_varInstructionAST GALGAS_varInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mVarName,
+                                                                    const GALGAS_lstring & inAttribute_mTypeName
+                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_varInstructionAST result ;
+  if (inAttribute_mVarName.isValid () && inAttribute_mTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_varInstructionAST (inAttribute_mVarName, inAttribute_mTypeName COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_varInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_varInstructionAST * p = (const cPtr_varInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_varInstructionAST) ;
+    result = p->mAttribute_mVarName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_varInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mVarName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_varInstructionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_varInstructionAST * p = (const cPtr_varInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_varInstructionAST) ;
+    result = p->mAttribute_mTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_varInstructionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                     Pointer class for @varInstructionAST class                                      *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_varInstructionAST::cPtr_varInstructionAST (const GALGAS_lstring & in_mVarName,
+                                                const GALGAS_lstring & in_mTypeName
+                                                COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (THERE),
+mAttribute_mVarName (in_mVarName),
+mAttribute_mTypeName (in_mTypeName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_varInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_varInstructionAST ;
+}
+
+void cPtr_varInstructionAST::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "[@varInstructionAST:" ;
+  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mTypeName.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_varInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_varInstructionAST (mAttribute_mVarName, mAttribute_mTypeName COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @varInstructionAST type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_varInstructionAST ("varInstructionAST",
+                                          & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_varInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_varInstructionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_varInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_varInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_varInstructionAST GALGAS_varInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_varInstructionAST result ;
+  const GALGAS_varInstructionAST * p = (const GALGAS_varInstructionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_varInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("varInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_varInstructionWithAssignmentAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) inOperandPtr ;
@@ -1361,670 +2466,6 @@ GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclarati
     }else{
       result = f (inObject, inCompiler COMMA_THERE) ;
     }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (void) :
-mAttribute_mTargetBaseTypeMap (),
-mAttribute_mTypeMap (),
-mAttribute_mProcedureMap (),
-mAttribute_mFunctionMap (),
-mAttribute_mRegisterMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mModeMap (),
-mAttribute_mTypeNameSetForIncDec (),
-mAttribute_mEqualOperatorMap (),
-mAttribute_mNonEqualOperatorMap (),
-mAttribute_mStrictInfOperatorMap (),
-mAttribute_mInfEqualOperatorMap (),
-mAttribute_mStrictSupOperatorMap (),
-mAttribute_mSupEqualOperatorMap (),
-mAttribute_mAndOperatorMap (),
-mAttribute_mAndShortCircuitOperatorMap (),
-mAttribute_mOrOperatorMap (),
-mAttribute_mOrShortCircuitOperatorMap (),
-mAttribute_mXorOperatorMap (),
-mAttribute_mAddOperatorMap (),
-mAttribute_mAddNoOvfOperatorMap (),
-mAttribute_mSubOperatorMap (),
-mAttribute_mSubNoOvfOperatorMap (),
-mAttribute_mMulOperatorMap (),
-mAttribute_mMulNoOvfOperatorMap (),
-mAttribute_mDivOperatorMap (),
-mAttribute_mDivNoOvfOperatorMap (),
-mAttribute_mModOperatorMap (),
-mAttribute_mLeftShiftOperatorMap (),
-mAttribute_mRightShiftOperatorMap (),
-mAttribute_mUnaryMinusOperatorMap (),
-mAttribute_mNotOperatorMap () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                const GALGAS_unifiedTypeMap & inOperand1,
-                                                const GALGAS_procedureMap & inOperand2,
-                                                const GALGAS_functionMap & inOperand3,
-                                                const GALGAS_registerMap & inOperand4,
-                                                const GALGAS_globalConstantMap & inOperand5,
-                                                const GALGAS_globalVariableMap & inOperand6,
-                                                const GALGAS_modeMap & inOperand7,
-                                                const GALGAS_stringset & inOperand8,
-                                                const GALGAS_infixOperatorMap & inOperand9,
-                                                const GALGAS_infixOperatorMap & inOperand10,
-                                                const GALGAS_infixOperatorMap & inOperand11,
-                                                const GALGAS_infixOperatorMap & inOperand12,
-                                                const GALGAS_infixOperatorMap & inOperand13,
-                                                const GALGAS_infixOperatorMap & inOperand14,
-                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                const GALGAS_prefixOperatorMap & inOperand31,
-                                                const GALGAS_prefixOperatorMap & inOperand32) :
-mAttribute_mTargetBaseTypeMap (inOperand0),
-mAttribute_mTypeMap (inOperand1),
-mAttribute_mProcedureMap (inOperand2),
-mAttribute_mFunctionMap (inOperand3),
-mAttribute_mRegisterMap (inOperand4),
-mAttribute_mGlobalConstantMap (inOperand5),
-mAttribute_mGlobalVariableMap (inOperand6),
-mAttribute_mModeMap (inOperand7),
-mAttribute_mTypeNameSetForIncDec (inOperand8),
-mAttribute_mEqualOperatorMap (inOperand9),
-mAttribute_mNonEqualOperatorMap (inOperand10),
-mAttribute_mStrictInfOperatorMap (inOperand11),
-mAttribute_mInfEqualOperatorMap (inOperand12),
-mAttribute_mStrictSupOperatorMap (inOperand13),
-mAttribute_mSupEqualOperatorMap (inOperand14),
-mAttribute_mAndOperatorMap (inOperand15),
-mAttribute_mAndShortCircuitOperatorMap (inOperand16),
-mAttribute_mOrOperatorMap (inOperand17),
-mAttribute_mOrShortCircuitOperatorMap (inOperand18),
-mAttribute_mXorOperatorMap (inOperand19),
-mAttribute_mAddOperatorMap (inOperand20),
-mAttribute_mAddNoOvfOperatorMap (inOperand21),
-mAttribute_mSubOperatorMap (inOperand22),
-mAttribute_mSubNoOvfOperatorMap (inOperand23),
-mAttribute_mMulOperatorMap (inOperand24),
-mAttribute_mMulNoOvfOperatorMap (inOperand25),
-mAttribute_mDivOperatorMap (inOperand26),
-mAttribute_mDivNoOvfOperatorMap (inOperand27),
-mAttribute_mModOperatorMap (inOperand28),
-mAttribute_mLeftShiftOperatorMap (inOperand29),
-mAttribute_mRightShiftOperatorMap (inOperand30),
-mAttribute_mUnaryMinusOperatorMap (inOperand31),
-mAttribute_mNotOperatorMap (inOperand32) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticContext (GALGAS_targetBaseTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_unifiedTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_procedureMap::constructor_emptyMap (HERE),
-                                 GALGAS_functionMap::constructor_emptyMap (HERE),
-                                 GALGAS_registerMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalConstantMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalVariableMap::constructor_emptyMap (HERE),
-                                 GALGAS_modeMap::constructor_emptyMap (HERE),
-                                 GALGAS_stringset::constructor_emptySet (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                                const GALGAS_unifiedTypeMap & inOperand1,
-                                                                const GALGAS_procedureMap & inOperand2,
-                                                                const GALGAS_functionMap & inOperand3,
-                                                                const GALGAS_registerMap & inOperand4,
-                                                                const GALGAS_globalConstantMap & inOperand5,
-                                                                const GALGAS_globalVariableMap & inOperand6,
-                                                                const GALGAS_modeMap & inOperand7,
-                                                                const GALGAS_stringset & inOperand8,
-                                                                const GALGAS_infixOperatorMap & inOperand9,
-                                                                const GALGAS_infixOperatorMap & inOperand10,
-                                                                const GALGAS_infixOperatorMap & inOperand11,
-                                                                const GALGAS_infixOperatorMap & inOperand12,
-                                                                const GALGAS_infixOperatorMap & inOperand13,
-                                                                const GALGAS_infixOperatorMap & inOperand14,
-                                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                                const GALGAS_prefixOperatorMap & inOperand31,
-                                                                const GALGAS_prefixOperatorMap & inOperand32 
-                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid ()) {
-    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mTargetBaseTypeMap.objectCompare (inOperand.mAttribute_mTargetBaseTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureMap.objectCompare (inOperand.mAttribute_mProcedureMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionMap.objectCompare (inOperand.mAttribute_mFunctionMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModeMap.objectCompare (inOperand.mAttribute_mModeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeNameSetForIncDec.objectCompare (inOperand.mAttribute_mTypeNameSetForIncDec) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAndShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mAndShortCircuitOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOrShortCircuitOperatorMap.objectCompare (inOperand.mAttribute_mOrShortCircuitOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mNotOperatorMap.objectCompare (inOperand.mAttribute_mNotOperatorMap) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mTargetBaseTypeMap.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mProcedureMap.isValid () && mAttribute_mFunctionMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mTypeNameSetForIncDec.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mAndShortCircuitOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mOrShortCircuitOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::drop (void) {
-  mAttribute_mTargetBaseTypeMap.drop () ;
-  mAttribute_mTypeMap.drop () ;
-  mAttribute_mProcedureMap.drop () ;
-  mAttribute_mFunctionMap.drop () ;
-  mAttribute_mRegisterMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mModeMap.drop () ;
-  mAttribute_mTypeNameSetForIncDec.drop () ;
-  mAttribute_mEqualOperatorMap.drop () ;
-  mAttribute_mNonEqualOperatorMap.drop () ;
-  mAttribute_mStrictInfOperatorMap.drop () ;
-  mAttribute_mInfEqualOperatorMap.drop () ;
-  mAttribute_mStrictSupOperatorMap.drop () ;
-  mAttribute_mSupEqualOperatorMap.drop () ;
-  mAttribute_mAndOperatorMap.drop () ;
-  mAttribute_mAndShortCircuitOperatorMap.drop () ;
-  mAttribute_mOrOperatorMap.drop () ;
-  mAttribute_mOrShortCircuitOperatorMap.drop () ;
-  mAttribute_mXorOperatorMap.drop () ;
-  mAttribute_mAddOperatorMap.drop () ;
-  mAttribute_mAddNoOvfOperatorMap.drop () ;
-  mAttribute_mSubOperatorMap.drop () ;
-  mAttribute_mSubNoOvfOperatorMap.drop () ;
-  mAttribute_mMulOperatorMap.drop () ;
-  mAttribute_mMulNoOvfOperatorMap.drop () ;
-  mAttribute_mDivOperatorMap.drop () ;
-  mAttribute_mDivNoOvfOperatorMap.drop () ;
-  mAttribute_mModOperatorMap.drop () ;
-  mAttribute_mLeftShiftOperatorMap.drop () ;
-  mAttribute_mRightShiftOperatorMap.drop () ;
-  mAttribute_mUnaryMinusOperatorMap.drop () ;
-  mAttribute_mNotOperatorMap.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "<struct @semanticContext:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mTargetBaseTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeNameSetForIncDec.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAndShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOrShortCircuitOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mNotOperatorMap.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_targetBaseTypeMap GALGAS_semanticContext::reader_mTargetBaseTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetBaseTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap GALGAS_semanticContext::reader_mTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_semanticContext::reader_mProcedureMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap GALGAS_semanticContext::reader_mFunctionMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMap GALGAS_semanticContext::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalConstantMap GALGAS_semanticContext::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVariableMap GALGAS_semanticContext::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_semanticContext::reader_mModeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_semanticContext::reader_mTypeNameSetForIncDec (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeNameSetForIncDec ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNonEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictInfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInfEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictSupOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSupEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndShortCircuitOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrShortCircuitOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrShortCircuitOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mXorOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnaryMinusOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mNotOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNotOperatorMap ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @semanticContext type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticContext ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticContext::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticContext (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  const GALGAS_semanticContext * p = (const GALGAS_semanticContext *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
   }
   return result ;
 }
@@ -4810,14 +5251,14 @@ void categoryMethod_checkWith (const GALGAS_infixOperatorMap inObject,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultType.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 338)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 338)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 338)), constinArgument_inOperatorLocation  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 338)) ;
+  GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 349)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 349)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 349)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 349)), constinArgument_inOperatorLocation  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 349)) ;
   const GALGAS_infixOperatorMap temp_0 = inObject ;
-  const enumGalgasBool test_1 = temp_0.reader_hasKey (var_lkey.mAttribute_string COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 339)).boolEnum () ;
+  const enumGalgasBool test_1 = temp_0.reader_hasKey (var_lkey.mAttribute_string COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 350)).boolEnum () ;
   if (kBoolTrue == test_1) {
     const GALGAS_infixOperatorMap temp_2 = inObject ;
-    temp_2.method_searchKey (var_lkey, outArgument_outResultType, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 340)) ;
+    temp_2.method_searchKey (var_lkey, outArgument_outResultType, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 351)) ;
   }else if (kBoolFalse == test_1) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between '").add_operation (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343)).add_operation (GALGAS_string (" and "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343)).add_operation (GALGAS_string ("' is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 343))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 342)) ;
+    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between '").add_operation (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354)).add_operation (GALGAS_string (" and "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354)).add_operation (GALGAS_string ("' is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 354))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 353)) ;
     outArgument_outResultType.drop () ; // Release error dropped variable
   }
 }
@@ -4935,6 +5376,704 @@ GALGAS_bool categoryReader_isStatic (const GALGAS_variableKindIR & inObject,
 
 
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::GALGAS_semanticContext (void) :
+mAttribute_mTargetBaseTypeMap (),
+mAttribute_mBooleanType (),
+mAttribute_mTypeMap (),
+mAttribute_mProcedureMap (),
+mAttribute_mFunctionMap (),
+mAttribute_mRegisterMap (),
+mAttribute_mGlobalConstantMap (),
+mAttribute_mGlobalVariableMap (),
+mAttribute_mModeMap (),
+mAttribute_mTypeNameSetForIncDec (),
+mAttribute_mEqualOperatorMap (),
+mAttribute_mNonEqualOperatorMap (),
+mAttribute_mStrictInfOperatorMap (),
+mAttribute_mInfEqualOperatorMap (),
+mAttribute_mStrictSupOperatorMap (),
+mAttribute_mSupEqualOperatorMap (),
+mAttribute_mAndOperatorMap (),
+mAttribute_mBooleanAndOperatorMap (),
+mAttribute_mOrOperatorMap (),
+mAttribute_mBooleanOrOperatorMap (),
+mAttribute_mXorOperatorMap (),
+mAttribute_mBooleanXorOperatorMap (),
+mAttribute_mAddOperatorMap (),
+mAttribute_mAddNoOvfOperatorMap (),
+mAttribute_mSubOperatorMap (),
+mAttribute_mSubNoOvfOperatorMap (),
+mAttribute_mMulOperatorMap (),
+mAttribute_mMulNoOvfOperatorMap (),
+mAttribute_mDivOperatorMap (),
+mAttribute_mDivNoOvfOperatorMap (),
+mAttribute_mModOperatorMap (),
+mAttribute_mLeftShiftOperatorMap (),
+mAttribute_mRightShiftOperatorMap (),
+mAttribute_mUnaryMinusOperatorMap (),
+mAttribute_mNotOperatorMap () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & inOperand0,
+                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                const GALGAS_unifiedTypeMap & inOperand2,
+                                                const GALGAS_procedureMap & inOperand3,
+                                                const GALGAS_functionMap & inOperand4,
+                                                const GALGAS_registerMap & inOperand5,
+                                                const GALGAS_globalConstantMap & inOperand6,
+                                                const GALGAS_globalVariableMap & inOperand7,
+                                                const GALGAS_modeMap & inOperand8,
+                                                const GALGAS_stringset & inOperand9,
+                                                const GALGAS_infixOperatorMap & inOperand10,
+                                                const GALGAS_infixOperatorMap & inOperand11,
+                                                const GALGAS_infixOperatorMap & inOperand12,
+                                                const GALGAS_infixOperatorMap & inOperand13,
+                                                const GALGAS_infixOperatorMap & inOperand14,
+                                                const GALGAS_infixOperatorMap & inOperand15,
+                                                const GALGAS_infixOperatorMap & inOperand16,
+                                                const GALGAS_infixOperatorMap & inOperand17,
+                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                const GALGAS_infixOperatorMap & inOperand20,
+                                                const GALGAS_infixOperatorMap & inOperand21,
+                                                const GALGAS_infixOperatorMap & inOperand22,
+                                                const GALGAS_infixOperatorMap & inOperand23,
+                                                const GALGAS_infixOperatorMap & inOperand24,
+                                                const GALGAS_infixOperatorMap & inOperand25,
+                                                const GALGAS_infixOperatorMap & inOperand26,
+                                                const GALGAS_infixOperatorMap & inOperand27,
+                                                const GALGAS_infixOperatorMap & inOperand28,
+                                                const GALGAS_infixOperatorMap & inOperand29,
+                                                const GALGAS_infixOperatorMap & inOperand30,
+                                                const GALGAS_infixOperatorMap & inOperand31,
+                                                const GALGAS_infixOperatorMap & inOperand32,
+                                                const GALGAS_prefixOperatorMap & inOperand33,
+                                                const GALGAS_prefixOperatorMap & inOperand34) :
+mAttribute_mTargetBaseTypeMap (inOperand0),
+mAttribute_mBooleanType (inOperand1),
+mAttribute_mTypeMap (inOperand2),
+mAttribute_mProcedureMap (inOperand3),
+mAttribute_mFunctionMap (inOperand4),
+mAttribute_mRegisterMap (inOperand5),
+mAttribute_mGlobalConstantMap (inOperand6),
+mAttribute_mGlobalVariableMap (inOperand7),
+mAttribute_mModeMap (inOperand8),
+mAttribute_mTypeNameSetForIncDec (inOperand9),
+mAttribute_mEqualOperatorMap (inOperand10),
+mAttribute_mNonEqualOperatorMap (inOperand11),
+mAttribute_mStrictInfOperatorMap (inOperand12),
+mAttribute_mInfEqualOperatorMap (inOperand13),
+mAttribute_mStrictSupOperatorMap (inOperand14),
+mAttribute_mSupEqualOperatorMap (inOperand15),
+mAttribute_mAndOperatorMap (inOperand16),
+mAttribute_mBooleanAndOperatorMap (inOperand17),
+mAttribute_mOrOperatorMap (inOperand18),
+mAttribute_mBooleanOrOperatorMap (inOperand19),
+mAttribute_mXorOperatorMap (inOperand20),
+mAttribute_mBooleanXorOperatorMap (inOperand21),
+mAttribute_mAddOperatorMap (inOperand22),
+mAttribute_mAddNoOvfOperatorMap (inOperand23),
+mAttribute_mSubOperatorMap (inOperand24),
+mAttribute_mSubNoOvfOperatorMap (inOperand25),
+mAttribute_mMulOperatorMap (inOperand26),
+mAttribute_mMulNoOvfOperatorMap (inOperand27),
+mAttribute_mDivOperatorMap (inOperand28),
+mAttribute_mDivNoOvfOperatorMap (inOperand29),
+mAttribute_mModOperatorMap (inOperand30),
+mAttribute_mLeftShiftOperatorMap (inOperand31),
+mAttribute_mRightShiftOperatorMap (inOperand32),
+mAttribute_mUnaryMinusOperatorMap (inOperand33),
+mAttribute_mNotOperatorMap (inOperand34) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_semanticContext (GALGAS_targetBaseTypeMap::constructor_emptyMap (HERE),
+                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
+                                 GALGAS_unifiedTypeMap::constructor_emptyMap (HERE),
+                                 GALGAS_procedureMap::constructor_emptyMap (HERE),
+                                 GALGAS_functionMap::constructor_emptyMap (HERE),
+                                 GALGAS_registerMap::constructor_emptyMap (HERE),
+                                 GALGAS_globalConstantMap::constructor_emptyMap (HERE),
+                                 GALGAS_globalVariableMap::constructor_emptyMap (HERE),
+                                 GALGAS_modeMap::constructor_emptyMap (HERE),
+                                 GALGAS_stringset::constructor_emptySet (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE),
+                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_targetBaseTypeMap & inOperand0,
+                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                const GALGAS_unifiedTypeMap & inOperand2,
+                                                                const GALGAS_procedureMap & inOperand3,
+                                                                const GALGAS_functionMap & inOperand4,
+                                                                const GALGAS_registerMap & inOperand5,
+                                                                const GALGAS_globalConstantMap & inOperand6,
+                                                                const GALGAS_globalVariableMap & inOperand7,
+                                                                const GALGAS_modeMap & inOperand8,
+                                                                const GALGAS_stringset & inOperand9,
+                                                                const GALGAS_infixOperatorMap & inOperand10,
+                                                                const GALGAS_infixOperatorMap & inOperand11,
+                                                                const GALGAS_infixOperatorMap & inOperand12,
+                                                                const GALGAS_infixOperatorMap & inOperand13,
+                                                                const GALGAS_infixOperatorMap & inOperand14,
+                                                                const GALGAS_infixOperatorMap & inOperand15,
+                                                                const GALGAS_infixOperatorMap & inOperand16,
+                                                                const GALGAS_infixOperatorMap & inOperand17,
+                                                                const GALGAS_infixOperatorMap & inOperand18,
+                                                                const GALGAS_infixOperatorMap & inOperand19,
+                                                                const GALGAS_infixOperatorMap & inOperand20,
+                                                                const GALGAS_infixOperatorMap & inOperand21,
+                                                                const GALGAS_infixOperatorMap & inOperand22,
+                                                                const GALGAS_infixOperatorMap & inOperand23,
+                                                                const GALGAS_infixOperatorMap & inOperand24,
+                                                                const GALGAS_infixOperatorMap & inOperand25,
+                                                                const GALGAS_infixOperatorMap & inOperand26,
+                                                                const GALGAS_infixOperatorMap & inOperand27,
+                                                                const GALGAS_infixOperatorMap & inOperand28,
+                                                                const GALGAS_infixOperatorMap & inOperand29,
+                                                                const GALGAS_infixOperatorMap & inOperand30,
+                                                                const GALGAS_infixOperatorMap & inOperand31,
+                                                                const GALGAS_infixOperatorMap & inOperand32,
+                                                                const GALGAS_prefixOperatorMap & inOperand33,
+                                                                const GALGAS_prefixOperatorMap & inOperand34 
+                                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_semanticContext result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid ()) {
+    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mTargetBaseTypeMap.objectCompare (inOperand.mAttribute_mTargetBaseTypeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBooleanType.objectCompare (inOperand.mAttribute_mBooleanType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mProcedureMap.objectCompare (inOperand.mAttribute_mProcedureMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mFunctionMap.objectCompare (inOperand.mAttribute_mFunctionMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mModeMap.objectCompare (inOperand.mAttribute_mModeMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mTypeNameSetForIncDec.objectCompare (inOperand.mAttribute_mTypeNameSetForIncDec) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBooleanAndOperatorMap.objectCompare (inOperand.mAttribute_mBooleanAndOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBooleanOrOperatorMap.objectCompare (inOperand.mAttribute_mBooleanOrOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBooleanXorOperatorMap.objectCompare (inOperand.mAttribute_mBooleanXorOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mNotOperatorMap.objectCompare (inOperand.mAttribute_mNotOperatorMap) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_semanticContext::isValid (void) const {
+  return mAttribute_mTargetBaseTypeMap.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mProcedureMap.isValid () && mAttribute_mFunctionMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mTypeNameSetForIncDec.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mBooleanAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mBooleanOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticContext::drop (void) {
+  mAttribute_mTargetBaseTypeMap.drop () ;
+  mAttribute_mBooleanType.drop () ;
+  mAttribute_mTypeMap.drop () ;
+  mAttribute_mProcedureMap.drop () ;
+  mAttribute_mFunctionMap.drop () ;
+  mAttribute_mRegisterMap.drop () ;
+  mAttribute_mGlobalConstantMap.drop () ;
+  mAttribute_mGlobalVariableMap.drop () ;
+  mAttribute_mModeMap.drop () ;
+  mAttribute_mTypeNameSetForIncDec.drop () ;
+  mAttribute_mEqualOperatorMap.drop () ;
+  mAttribute_mNonEqualOperatorMap.drop () ;
+  mAttribute_mStrictInfOperatorMap.drop () ;
+  mAttribute_mInfEqualOperatorMap.drop () ;
+  mAttribute_mStrictSupOperatorMap.drop () ;
+  mAttribute_mSupEqualOperatorMap.drop () ;
+  mAttribute_mAndOperatorMap.drop () ;
+  mAttribute_mBooleanAndOperatorMap.drop () ;
+  mAttribute_mOrOperatorMap.drop () ;
+  mAttribute_mBooleanOrOperatorMap.drop () ;
+  mAttribute_mXorOperatorMap.drop () ;
+  mAttribute_mBooleanXorOperatorMap.drop () ;
+  mAttribute_mAddOperatorMap.drop () ;
+  mAttribute_mAddNoOvfOperatorMap.drop () ;
+  mAttribute_mSubOperatorMap.drop () ;
+  mAttribute_mSubNoOvfOperatorMap.drop () ;
+  mAttribute_mMulOperatorMap.drop () ;
+  mAttribute_mMulNoOvfOperatorMap.drop () ;
+  mAttribute_mDivOperatorMap.drop () ;
+  mAttribute_mDivNoOvfOperatorMap.drop () ;
+  mAttribute_mModOperatorMap.drop () ;
+  mAttribute_mLeftShiftOperatorMap.drop () ;
+  mAttribute_mRightShiftOperatorMap.drop () ;
+  mAttribute_mUnaryMinusOperatorMap.drop () ;
+  mAttribute_mNotOperatorMap.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticContext::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "<struct @semanticContext:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mTargetBaseTypeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBooleanType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mProcedureMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mFunctionMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mModeMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mTypeNameSetForIncDec.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBooleanAndOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBooleanOrOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBooleanXorOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mNotOperatorMap.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_targetBaseTypeMap GALGAS_semanticContext::reader_mTargetBaseTypeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetBaseTypeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::reader_mBooleanType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBooleanType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap GALGAS_semanticContext::reader_mTypeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procedureMap GALGAS_semanticContext::reader_mProcedureMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mProcedureMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_functionMap GALGAS_semanticContext::reader_mFunctionMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFunctionMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_registerMap GALGAS_semanticContext::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRegisterMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMap GALGAS_semanticContext::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGlobalConstantMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMap GALGAS_semanticContext::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mGlobalVariableMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_modeMap GALGAS_semanticContext::reader_mModeMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mModeMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_stringset GALGAS_semanticContext::reader_mTypeNameSetForIncDec (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTypeNameSetForIncDec ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mNonEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStrictInfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInfEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStrictSupOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSupEqualOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAndOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanAndOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBooleanAndOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOrOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanOrOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBooleanOrOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mXorOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanXorOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBooleanXorOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAddOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAddNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMulOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMulNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mDivOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mDivNoOvfOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mModOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLeftShiftOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRightShiftOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mUnaryMinusOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mNotOperatorMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mNotOperatorMap ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @semanticContext type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_semanticContext::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_semanticContext ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_semanticContext::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_semanticContext (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_semanticContext result ;
+  const GALGAS_semanticContext * p = (const GALGAS_semanticContext *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_semanticContext *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -10941,18 +12080,16 @@ static void categoryMethod_booleanDeclaration_enterInContext (const cPtr_abstrac
     }
     enumerator_3147.gotoNextObject () ;
   }
-  GALGAS_constructorMap var_constructorMap = GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("bool-type.galgas", 79)) ;
   {
-  var_constructorMap.modifier_insertKey (GALGAS_string ("false").reader_nowhere (SOURCE_FILE ("bool-type.galgas", 80)), GALGAS_string ("(").add_operation (function_mangledNameForType (object->mAttribute_mBooleanTypeName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 80)).add_operation (GALGAS_string (") 0"), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 80)) ;
+  ioArgument_ioContext.mAttribute_mTypeMap.modifier_insertKey (object->mAttribute_mBooleanTypeName, GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("bool-type.galgas", 81)), GALGAS_constructorMap::constructor_emptyMap (SOURCE_FILE ("bool-type.galgas", 82)), GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("bool-type.galgas", 83)), var_copiable, GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 79)) ;
   }
+  GALGAS_unifiedTypeMap_2D_proxy var_boolType ;
   {
-  var_constructorMap.modifier_insertKey (GALGAS_string ("true").reader_nowhere (SOURCE_FILE ("bool-type.galgas", 81)), GALGAS_string ("(").add_operation (function_mangledNameForType (object->mAttribute_mBooleanTypeName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 81)).add_operation (GALGAS_string (") 1"), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 81)) ;
+  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, object->mAttribute_mBooleanTypeName, var_boolType COMMA_SOURCE_FILE ("bool-type.galgas", 89)) ;
   }
+  ioArgument_ioContext.mAttribute_mBooleanType = var_boolType ;
   {
-  ioArgument_ioContext.mAttribute_mTypeMap.modifier_insertKey (object->mAttribute_mBooleanTypeName, GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("bool-type.galgas", 85)), var_constructorMap, GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("bool-type.galgas", 87)), var_copiable, GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 83)) ;
-  }
-  {
-  routine_enterBooleanOperators (object->mAttribute_mBooleanTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("bool-type.galgas", 93)) ;
+  routine_enterBooleanOperators (object->mAttribute_mBooleanTypeName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("bool-type.galgas", 92)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10980,25 +12117,25 @@ static void categoryMethod_booleanDeclaration_semanticAnalysis (const cPtr_abstr
   const cPtr_booleanDeclaration * object = (const cPtr_booleanDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_booleanDeclaration) ;
   GALGAS_string var_cType = GALGAS_string::makeEmptyString () ;
-  cEnumerator_lstringlist enumerator_6751 (object->mAttribute_mAttributeList, kEnumeration_up) ;
-  while (enumerator_6751.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_6751.current_mValue (HERE).mAttribute_string.objectCompare (GALGAS_string ("unique"))).boolEnum () ;
+  cEnumerator_lstringlist enumerator_6287 (object->mAttribute_mAttributeList, kEnumeration_up) ;
+  while (enumerator_6287.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_6287.current_mValue (HERE).mAttribute_string.objectCompare (GALGAS_string ("unique"))).boolEnum () ;
     if (kBoolTrue == test_0) {
     }else if (kBoolFalse == test_0) {
       const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_cType.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_1) {
-        GALGAS_location location_2 (enumerator_6751.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_2, GALGAS_string ("base type already defined as '").add_operation (var_cType, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 170)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 170))  COMMA_SOURCE_FILE ("bool-type.galgas", 170)) ;
+        GALGAS_location location_2 (enumerator_6287.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_2, GALGAS_string ("base type already defined as '").add_operation (var_cType, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 161)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 161))  COMMA_SOURCE_FILE ("bool-type.galgas", 161)) ;
       }else if (kBoolFalse == test_1) {
-        GALGAS_uint joker_6995 ; // Joker input parameter
-        GALGAS_bool joker_6998 ; // Joker input parameter
-        constinArgument_inContext.mAttribute_mTargetBaseTypeMap.method_searchKey (enumerator_6751.current_mValue (HERE), var_cType, joker_6995, joker_6998, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 172)) ;
+        GALGAS_uint joker_6531 ; // Joker input parameter
+        GALGAS_bool joker_6534 ; // Joker input parameter
+        constinArgument_inContext.mAttribute_mTargetBaseTypeMap.method_searchKey (enumerator_6287.current_mValue (HERE), var_cType, joker_6531, joker_6534, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 163)) ;
       }
     }
-    enumerator_6751.gotoNextObject () ;
+    enumerator_6287.gotoNextObject () ;
   }
   {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mTypeMapIR.modifier_insertKey (object->mAttribute_mBooleanTypeName, GALGAS_booleanIR::constructor_new (object->mAttribute_mBooleanTypeName.mAttribute_string, var_cType  COMMA_SOURCE_FILE ("bool-type.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 176)) ;
+  ioArgument_ioIntermediateCodeStruct.mAttribute_mTypeMapIR.modifier_insertKey (object->mAttribute_mBooleanTypeName, GALGAS_booleanIR::constructor_new (object->mAttribute_mBooleanTypeName.mAttribute_string, var_cType  COMMA_SOURCE_FILE ("bool-type.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 167)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11024,7 +12161,7 @@ static GALGAS_string categoryReader_booleanIR_headerCodeGenerationForType (const
   GALGAS_string result_outCode ; // Returned variable
   const cPtr_booleanIR * object = (const cPtr_booleanIR *) inObject ;
   macroValidSharedObject (object, cPtr_booleanIR) ;
-  result_outCode = GALGAS_string (filewrapperTemplate_booleanGenerationTemplate_declaration (inCompiler, object->mAttribute_mBooleanTypeName, object->mAttribute_mActualTypeName COMMA_SOURCE_FILE ("bool-type.galgas", 204))) ;
+  result_outCode = GALGAS_string (filewrapperTemplate_booleanGenerationTemplate_declaration (inCompiler, object->mAttribute_mBooleanTypeName, object->mAttribute_mActualTypeName COMMA_SOURCE_FILE ("bool-type.galgas", 195))) ;
 //---
   return result_outCode ;
 }
@@ -14111,8 +15248,8 @@ static void categoryMethod_infixOperatorExpressionAST_addDependenceEdgeForStatic
                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_infixOperatorExpressionAST * object = (const cPtr_infixOperatorExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_infixOperatorExpressionAST) ;
-  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 315)) ;
-  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 316)) ;
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 326)) ;
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 327)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14138,7 +15275,7 @@ static void categoryMethod_asExpressionAST_addDependenceEdgeForStaticExpression 
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_asExpressionAST * object = (const cPtr_asExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_asExpressionAST) ;
-  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 325)) ;
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 336)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14175,10 +15312,10 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
   macroValidSharedObject (object, cPtr_infixOperatorExpressionAST) ;
   GALGAS_unifiedTypeMap_2D_proxy var_leftExpressionType ;
   GALGAS_variableKindIR var_leftResult ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_leftExpressionType, var_leftResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 364)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_leftExpressionType, var_leftResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 375)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_rightExpressionType ;
   GALGAS_variableKindIR var_rightResult ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inReceiverType, var_leftExpressionType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_rightExpressionType, var_rightResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 378)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inReceiverType, var_leftExpressionType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_rightExpressionType, var_rightResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 389)) ;
   GALGAS_infixOperatorMap var_operatorMap ;
   GALGAS_infixOperatorIR var_infixOperatorIR ;
   switch (object->mAttribute_mOp.enumValue ()) {
@@ -14187,250 +15324,257 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
   case GALGAS_infixOperator::kEnum_equal:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mEqualOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("==")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 397)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("==")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 408)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_nonEqual:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mNonEqualOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("!=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 400)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("!=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 411)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_strictInf:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mStrictInfOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 403)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 414)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_infEqual:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mInfEqualOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 406)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 417)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_strictSup:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mStrictSupOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 409)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 420)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_supEqual:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mSupEqualOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 412)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">=")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 423)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_andOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mAndOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("&")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 415)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("&")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 426)) ;
     }
     break ;
-  case GALGAS_infixOperator::kEnum_andShortCircuitOp:
+  case GALGAS_infixOperator::kEnum_booleanAnd:
     {
-      var_operatorMap = constinArgument_inContext.mAttribute_mAndShortCircuitOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("&&")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 418)) ;
+      var_operatorMap = constinArgument_inContext.mAttribute_mBooleanAndOperatorMap ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("&&")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 429)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_orOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mOrOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("|")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 421)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("|")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 432)) ;
     }
     break ;
-  case GALGAS_infixOperator::kEnum_orShortCircuitOp:
+  case GALGAS_infixOperator::kEnum_booleanOrOp:
     {
-      var_operatorMap = constinArgument_inContext.mAttribute_mOrShortCircuitOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("||")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 424)) ;
+      var_operatorMap = constinArgument_inContext.mAttribute_mBooleanOrOperatorMap ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("||")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 435)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_xorOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mXorOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("^")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 427)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("^")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 438)) ;
+    }
+    break ;
+  case GALGAS_infixOperator::kEnum_booleanXorOp:
+    {
+      var_operatorMap = constinArgument_inContext.mAttribute_mBooleanXorOperatorMap ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("^")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 441)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_addOp:
     {
-      const enumGalgasBool test_0 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 429)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 429)).boolEnum () ;
+      const enumGalgasBool test_0 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443)).boolEnum () ;
       if (kBoolTrue == test_0) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 430)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 430)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 430))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 430)) ;
+        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 444)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 444)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 444))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 444)) ;
       }
       var_operatorMap = constinArgument_inContext.mAttribute_mAddOperatorMap ;
       const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
       if (kBoolTrue == test_1) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("+")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 434)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("+")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 448)) ;
       }else if (kBoolFalse == test_1) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_add_overflow"), GALGAS_uint ((uint32_t) 3U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 436)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_add_overflow"), GALGAS_uint ((uint32_t) 3U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 450)) ;
       }
     }
     break ;
   case GALGAS_infixOperator::kEnum_addOpNoOvf:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("+")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 440)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("+")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 454)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_subOp:
     {
-      const enumGalgasBool test_2 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 442)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 442)).boolEnum () ;
+      const enumGalgasBool test_2 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 443)) ;
+        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 457)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 457)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 457))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 457)) ;
       }
       var_operatorMap = constinArgument_inContext.mAttribute_mSubNoOvfOperatorMap ;
       const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
       if (kBoolTrue == test_3) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("-")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 447)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("-")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 461)) ;
       }else if (kBoolFalse == test_3) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_sub_overflow"), GALGAS_uint ((uint32_t) 4U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 449)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_sub_overflow"), GALGAS_uint ((uint32_t) 4U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 463)) ;
       }
     }
     break ;
   case GALGAS_infixOperator::kEnum_subOpNoOvf:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mSubOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("-")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 453)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("-")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 467)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_mulOp:
     {
-      const enumGalgasBool test_4 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 455)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 455)).boolEnum () ;
+      const enumGalgasBool test_4 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469)).boolEnum () ;
       if (kBoolTrue == test_4) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 456)) ;
+        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 470)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 470)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 470))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 470)) ;
       }
       var_operatorMap = constinArgument_inContext.mAttribute_mMulOperatorMap ;
       const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
       if (kBoolTrue == test_5) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("*")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 460)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("*")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 474)) ;
       }else if (kBoolFalse == test_5) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_mul_overflow"), GALGAS_uint ((uint32_t) 5U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 462)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixOvf (GALGAS_string ("__builtin_mul_overflow"), GALGAS_uint ((uint32_t) 5U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 476)) ;
       }
     }
     break ;
   case GALGAS_infixOperator::kEnum_mulOpNoOvf:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("*")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 466)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("*")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 480)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_divOp:
     {
-      const enumGalgasBool test_6 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 468)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 468)).boolEnum () ;
+      const enumGalgasBool test_6 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 482)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 482)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 469)) ;
+        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exception are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 483)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 483)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 483))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 483)) ;
       }
       var_operatorMap = constinArgument_inContext.mAttribute_mDivOperatorMap ;
       const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
       if (kBoolTrue == test_7) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("/")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 473)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("/")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 487)) ;
       }else if (kBoolFalse == test_7) {
-        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (GALGAS_uint ((uint32_t) 6U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 475)) ;
+        var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (GALGAS_uint ((uint32_t) 6U)  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 489)) ;
       }
     }
     break ;
   case GALGAS_infixOperator::kEnum_divOpNoOvf:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("/")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 479)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("/")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 493)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_modOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mModOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("%")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 482)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("%")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 496)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_leftShiftOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mLeftShiftOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<<")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 485)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string ("<<")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 499)) ;
     }
     break ;
   case GALGAS_infixOperator::kEnum_rightShiftOp:
     {
       var_operatorMap = constinArgument_inContext.mAttribute_mRightShiftOperatorMap ;
-      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">>")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 488)) ;
+      var_infixOperatorIR = GALGAS_infixOperatorIR::constructor_infix (GALGAS_string (">>")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 502)) ;
     }
     break ;
   }
-  categoryMethod_checkWith (var_operatorMap, var_leftExpressionType, var_rightExpressionType, object->mAttribute_mOperatorLocation, outArgument_outExpressionType, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 490)) ;
-  GALGAS_bool test_8 = var_leftResult.reader_isLiteralUnsignedInteger (SOURCE_FILE ("expression-infix-operators.galgas", 497)) ;
+  categoryMethod_checkWith (var_operatorMap, var_leftExpressionType, var_rightExpressionType, object->mAttribute_mOperatorLocation, outArgument_outExpressionType, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 504)) ;
+  GALGAS_bool test_8 = var_leftResult.reader_isLiteralUnsignedInteger (SOURCE_FILE ("expression-infix-operators.galgas", 511)) ;
   if (kBoolTrue == test_8.boolEnum ()) {
-    test_8 = var_rightResult.reader_isLiteralUnsignedInteger (SOURCE_FILE ("expression-infix-operators.galgas", 497)) ;
+    test_8 = var_rightResult.reader_isLiteralUnsignedInteger (SOURCE_FILE ("expression-infix-operators.galgas", 511)) ;
   }
   const enumGalgasBool test_9 = test_8.boolEnum () ;
   if (kBoolTrue == test_9) {
     GALGAS_uint_36__34_ var_leftValue ;
-    GALGAS_unifiedTypeMap_2D_proxy joker_16651 ; // Joker input parameter
-    var_leftResult.method_literalUnsignedInteger (joker_16651, var_leftValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 498)) ;
+    GALGAS_unifiedTypeMap_2D_proxy joker_17031 ; // Joker input parameter
+    var_leftResult.method_literalUnsignedInteger (joker_17031, var_leftValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 512)) ;
     GALGAS_uint_36__34_ var_rightValue ;
-    GALGAS_unifiedTypeMap_2D_proxy joker_16729 ; // Joker input parameter
-    var_rightResult.method_literalUnsignedInteger (joker_16729, var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 499)) ;
+    GALGAS_unifiedTypeMap_2D_proxy joker_17109 ; // Joker input parameter
+    var_rightResult.method_literalUnsignedInteger (joker_17109, var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 513)) ;
     GALGAS_uint_36__34_ var_result ;
     switch (object->mAttribute_mOp.enumValue ()) {
     case GALGAS_infixOperator::kNotBuilt:
       break ;
     case GALGAS_infixOperator::kEnum_equal:
       {
-        var_result = GALGAS_bool (kIsEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 502)) ;
+        var_result = GALGAS_bool (kIsEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 516)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_nonEqual:
       {
-        var_result = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 503)) ;
+        var_result = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 517)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_strictInf:
       {
-        var_result = GALGAS_bool (kIsStrictInf, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 504)) ;
+        var_result = GALGAS_bool (kIsStrictInf, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 518)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_infEqual:
       {
-        var_result = GALGAS_bool (kIsInfOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 505)) ;
+        var_result = GALGAS_bool (kIsInfOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 519)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_strictSup:
       {
-        var_result = GALGAS_bool (kIsStrictSup, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 506)) ;
+        var_result = GALGAS_bool (kIsStrictSup, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 520)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_supEqual:
       {
-        var_result = GALGAS_bool (kIsSupOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 507)) ;
+        var_result = GALGAS_bool (kIsSupOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 521)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_andOp:
       {
-        var_result = var_leftValue.operator_and (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 508)) ;
+        var_result = var_leftValue.operator_and (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 522)) ;
       }
       break ;
-    case GALGAS_infixOperator::kEnum_andShortCircuitOp:
+    case GALGAS_infixOperator::kEnum_booleanAnd:
       {
         GALGAS_bool test_10 = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (GALGAS_uint_36__34_ ((uint64_t) 0ULL))) ;
         if (kBoolTrue == test_10.boolEnum ()) {
           test_10 = GALGAS_bool (kIsNotEqual, var_rightValue.objectCompare (GALGAS_uint_36__34_ ((uint64_t) 0ULL))) ;
         }
-        var_result = test_10.reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 509)) ;
+        var_result = test_10.reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 523)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_orOp:
       {
-        var_result = var_leftValue.operator_or (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 510)) ;
+        var_result = var_leftValue.operator_or (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 524)) ;
       }
       break ;
-    case GALGAS_infixOperator::kEnum_orShortCircuitOp:
+    case GALGAS_infixOperator::kEnum_booleanOrOp:
       {
         GALGAS_bool test_11 = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (GALGAS_uint_36__34_ ((uint64_t) 0ULL))) ;
-        if (kBoolTrue == test_11.boolEnum ()) {
+        if (kBoolTrue != test_11.boolEnum ()) {
           test_11 = GALGAS_bool (kIsNotEqual, var_rightValue.objectCompare (GALGAS_uint_36__34_ ((uint64_t) 0ULL))) ;
         }
-        var_result = test_11.reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 511)) ;
+        var_result = test_11.reader_uint_36__34_ (SOURCE_FILE ("expression-infix-operators.galgas", 525)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_xorOp:
+    case GALGAS_infixOperator::kEnum_booleanXorOp:
       {
-        var_result = var_leftValue.operator_xor (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 512)) ;
+        var_result = var_leftValue.operator_xor (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 526)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_addOp:
@@ -14440,12 +15584,12 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
       break ;
     case GALGAS_infixOperator::kEnum_addOpNoOvf:
       {
-        var_result = var_leftValue.add_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 514)) ;
+        var_result = var_leftValue.add_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 528)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_subOp:
       {
-        var_result = var_leftValue.substract_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 515)) ;
+        var_result = var_leftValue.substract_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 529)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_subOpNoOvf:
@@ -14455,7 +15599,7 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
       break ;
     case GALGAS_infixOperator::kEnum_mulOp:
       {
-        var_result = var_leftValue.multiply_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 517)) ;
+        var_result = var_leftValue.multiply_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 531)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_mulOpNoOvf:
@@ -14465,7 +15609,7 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
       break ;
     case GALGAS_infixOperator::kEnum_divOp:
       {
-        var_result = var_leftValue.divide_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 519)) ;
+        var_result = var_leftValue.divide_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 533)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_divOpNoOvf:
@@ -14475,26 +15619,26 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
       break ;
     case GALGAS_infixOperator::kEnum_modOp:
       {
-        var_result = var_leftValue.modulo_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 521)) ;
+        var_result = var_leftValue.modulo_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 535)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_leftShiftOp:
       {
-        var_result = var_leftValue.left_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 522)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 522)) ;
+        var_result = var_leftValue.left_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 536)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 536)) ;
       }
       break ;
     case GALGAS_infixOperator::kEnum_rightShiftOp:
       {
-        var_result = var_leftValue.right_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 523)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 523)) ;
+        var_result = var_leftValue.right_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 537)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 537)) ;
       }
       break ;
     }
-    outArgument_outResult = GALGAS_variableKindIR::constructor_literalUnsignedInteger (outArgument_outExpressionType, var_result  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 525)) ;
+    outArgument_outResult = GALGAS_variableKindIR::constructor_literalUnsignedInteger (outArgument_outExpressionType, var_result  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 539)) ;
   }else if (kBoolFalse == test_9) {
     {
-    routine_getNewTempVariable (ioArgument_ioTemporaryIndex, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 528)) ;
+    routine_getNewTempVariable (ioArgument_ioTemporaryIndex, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 542)) ;
     }
-    ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_operatorInfixExpressionIR::constructor_new (outArgument_outExpressionType, outArgument_outResult, var_leftResult, var_infixOperatorIR, var_rightResult, object->mAttribute_mOperatorLocation  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 530))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 530)) ;
+    ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_operatorInfixExpressionIR::constructor_new (outArgument_outExpressionType, outArgument_outResult, var_leftResult, var_infixOperatorIR, var_rightResult, object->mAttribute_mOperatorLocation  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 544))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 544)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14532,12 +15676,12 @@ static void categoryMethod_asExpressionAST_analyzeExpression (const cPtr_express
   macroValidSharedObject (object, cPtr_asExpressionAST) ;
   GALGAS_unifiedTypeMap_2D_proxy var_expressionType ;
   GALGAS_variableKindIR var_expressionResult ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_expressionType, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 558)) ;
-  outArgument_outExpressionType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 572)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_expressionType, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 572)) ;
+  outArgument_outExpressionType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 586)) ;
   {
-  routine_getNewTempVariable (ioArgument_ioTemporaryIndex, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 574)) ;
+  routine_getNewTempVariable (ioArgument_ioTemporaryIndex, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 588)) ;
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_asOperatorInstructionIR::constructor_new (outArgument_outExpressionType, outArgument_outResult, var_expressionResult  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 576))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 576)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_asOperatorInstructionIR::constructor_new (outArgument_outExpressionType, outArgument_outResult, var_expressionResult  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 590))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 590)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14562,7 +15706,7 @@ static void categoryMethod_asOperatorInstructionIR_enterAccessibleEntities (cons
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_asOperatorInstructionIR * object = (const cPtr_asOperatorInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_asOperatorInstructionIR) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 598)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 612)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14587,8 +15731,8 @@ static GALGAS_string categoryReader_asOperatorInstructionIR_instructionCode (con
   GALGAS_string result_outCode ; // Returned variable
   const cPtr_asOperatorInstructionIR * object = (const cPtr_asOperatorInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_asOperatorInstructionIR) ;
-  result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)).add_operation (categoryReader_mangledName (object->mAttribute_mTemporaryResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 604)) ;
-  result_outCode.dotAssign_operation (GALGAS_string (" = ((").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)).add_operation (GALGAS_string (") "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)).add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 605)) ;
+  result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)).add_operation (categoryReader_mangledName (object->mAttribute_mTemporaryResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 618)) ;
+  result_outCode.dotAssign_operation (GALGAS_string (" = ((").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)).add_operation (GALGAS_string (") "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)).add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 619)) ;
 //---
   return result_outCode ;
 }
@@ -14622,34 +15766,34 @@ static GALGAS_string categoryReader_operatorInfixExpressionIR_instructionCode (c
     break ;
   case GALGAS_infixOperatorIR::kEnum_infix:
     {
-      const cEnumAssociatedValues_infixOperatorIR_infix * extractPtr_22697 = (const cEnumAssociatedValues_infixOperatorIR_infix *) (object->mAttribute_mOperator.unsafePointer ()) ;
-      const GALGAS_string extractedValue_infixOperator = extractPtr_22697->mAssociatedValue0 ;
-      result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 634)) ;
-      result_outCode.dotAssign_operation (GALGAS_string (" = ").add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)).add_operation (extractedValue_infixOperator, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 635)) ;
+      const cEnumAssociatedValues_infixOperatorIR_infix * extractPtr_23079 = (const cEnumAssociatedValues_infixOperatorIR_infix *) (object->mAttribute_mOperator.unsafePointer ()) ;
+      const GALGAS_string extractedValue_infixOperator = extractPtr_23079->mAssociatedValue0 ;
+      result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 648)) ;
+      result_outCode.dotAssign_operation (GALGAS_string (" = ").add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (extractedValue_infixOperator, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)) ;
     }
     break ;
   case GALGAS_infixOperatorIR::kEnum_infixOvf:
     {
-      const cEnumAssociatedValues_infixOperatorIR_infixOvf * extractPtr_23345 = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) (object->mAttribute_mOperator.unsafePointer ()) ;
-      const GALGAS_string extractedValue_builtinFunction = extractPtr_23345->mAssociatedValue0 ;
-      const GALGAS_uint extractedValue_code = extractPtr_23345->mAssociatedValue1 ;
-      GALGAS_string var_ovfVar = GALGAS_string ("ovf").add_operation (object->mAttribute_mOperatorLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 637)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 637)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 637)) ;
-      result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 638)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("const bool ").add_operation (var_ovfVar, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)).add_operation (extractedValue_builtinFunction, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)).add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 640)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 640)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 641)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 640)).add_operation (GALGAS_string (", &"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 641)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 642)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 642)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 642))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 639)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (var_ovfVar, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 643)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 643))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 643)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (").add_operation (extractedValue_code.reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 644)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 644)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 644)).add_operation (object->mAttribute_mOperatorLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 645)).reader_lastPathComponent (SOURCE_FILE ("expression-infix-operators.galgas", 645)).reader_utf_38_Representation (SOURCE_FILE ("expression-infix-operators.galgas", 645)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 645)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 645)).add_operation (object->mAttribute_mOperatorLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 646)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 646)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 646)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 646))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 644)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 647)) ;
+      const cEnumAssociatedValues_infixOperatorIR_infixOvf * extractPtr_23727 = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) (object->mAttribute_mOperator.unsafePointer ()) ;
+      const GALGAS_string extractedValue_builtinFunction = extractPtr_23727->mAssociatedValue0 ;
+      const GALGAS_uint extractedValue_code = extractPtr_23727->mAssociatedValue1 ;
+      GALGAS_string var_ovfVar = GALGAS_string ("ovf").add_operation (object->mAttribute_mOperatorLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 651)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 651)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 651)) ;
+      result_outCode = function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("const bool ").add_operation (var_ovfVar, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)).add_operation (extractedValue_builtinFunction, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)).add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)).add_operation (GALGAS_string (", &"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 656)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 656)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 656))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("if (").add_operation (var_ovfVar, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 657)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 657))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 657)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (").add_operation (extractedValue_code.reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 658)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 658)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 658)).add_operation (object->mAttribute_mOperatorLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 659)).reader_lastPathComponent (SOURCE_FILE ("expression-infix-operators.galgas", 659)).reader_utf_38_Representation (SOURCE_FILE ("expression-infix-operators.galgas", 659)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 659)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 659)).add_operation (object->mAttribute_mOperatorLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 660)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 660)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 660)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 660))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 658)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 661)) ;
     }
     break ;
   case GALGAS_infixOperatorIR::kEnum_infixUnsignedDivide:
     {
-      const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * extractPtr_23849 = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) (object->mAttribute_mOperator.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_code = extractPtr_23849->mAssociatedValue0 ;
-      result_outCode = GALGAS_string ("if (0 == ").add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 649)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (").add_operation (extractedValue_code.reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 650)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 650)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 650)).add_operation (object->mAttribute_mOperatorLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 651)).reader_lastPathComponent (SOURCE_FILE ("expression-infix-operators.galgas", 651)).reader_utf_38_Representation (SOURCE_FILE ("expression-infix-operators.galgas", 651)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 651)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 651)).add_operation (object->mAttribute_mOperatorLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 652)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 652))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 650)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 653)) ;
-      result_outCode.dotAssign_operation (GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 654)) ;
-      result_outCode.dotAssign_operation (GALGAS_string (" = ").add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)).add_operation (GALGAS_string (" / "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 655)) ;
+      const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * extractPtr_24231 = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) (object->mAttribute_mOperator.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_code = extractPtr_24231->mAssociatedValue0 ;
+      result_outCode = GALGAS_string ("if (0 == ").add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 663)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 663)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 663)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (").add_operation (extractedValue_code.reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 664)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 664)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 664)).add_operation (object->mAttribute_mOperatorLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 665)).reader_lastPathComponent (SOURCE_FILE ("expression-infix-operators.galgas", 665)).reader_utf_38_Representation (SOURCE_FILE ("expression-infix-operators.galgas", 665)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 665)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 665)).add_operation (object->mAttribute_mOperatorLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 666)).reader_string (SOURCE_FILE ("expression-infix-operators.galgas", 666)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 666)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 666))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 664)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 667)) ;
+      result_outCode.dotAssign_operation (GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)).add_operation (categoryReader_mangledName (object->mAttribute_mResult, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 668)) ;
+      result_outCode.dotAssign_operation (GALGAS_string (" = ").add_operation (categoryReader_mangledName (object->mAttribute_mLeftOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)).add_operation (GALGAS_string (" / "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)).add_operation (categoryReader_mangledName (object->mAttribute_mRighOperand, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 669)) ;
     }
     break ;
   }
@@ -14681,8 +15825,8 @@ static void categoryMethod_operatorInfixExpressionIR_enterAccessibleEntities (co
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_operatorInfixExpressionIR * object = (const cPtr_operatorInfixExpressionIR *) inObject ;
   macroValidSharedObject (object, cPtr_operatorInfixExpressionIR) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mLeftOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 662)) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mRighOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 663)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mLeftOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 676)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mRighOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 677)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -15122,6 +16266,65 @@ C_PrologueEpilogue gMethod_literalStringInExpressionAST_analyzeExpression (defin
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//          Overriding category method '@literalBooleanInExpressionAST addDependenceEdgeForStaticExpression'           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * /* inObject */,
+                                                                                               const GALGAS_lstring /* constinArgument_inConstantName */,
+                                                                                               GALGAS_semanticTypePrecedenceGraph & /* ioArgument_ioGraph */,
+                                                                                               C_Compiler * /* inCompiler */
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_literalBooleanInExpressionAST.mSlotID,
+                                                            categoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_literalBooleanInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Overriding category method '@literalBooleanInExpressionAST analyzeExpression'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_literalBooleanInExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
+                                                                            const GALGAS_receiverType /* constinArgument_inReceiverType */,
+                                                                            const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
+                                                                            const GALGAS_semanticContext constinArgument_inContext,
+                                                                            const GALGAS_stringset /* constinArgument_inModeSet */,
+                                                                            const GALGAS_bool /* constinArgument_inAllowExceptions */,
+                                                                            GALGAS_uint & /* ioArgument_ioTemporaryIndex */,
+                                                                            GALGAS_globalLiteralStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
+                                                                            GALGAS_variableMap & /* ioArgument_ioVariableMap */,
+                                                                            GALGAS_instructionListIR & /* ioArgument_ioInstructionGenerationList */,
+                                                                            GALGAS_unifiedTypeMap_2D_proxy & outArgument_outExpressionType,
+                                                                            GALGAS_variableKindIR & outArgument_outResultValueName,
+                                                                            C_Compiler * /* inCompiler */
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_literalBooleanInExpressionAST * object = (const cPtr_literalBooleanInExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_literalBooleanInExpressionAST) ;
+  outArgument_outExpressionType = constinArgument_inContext.mAttribute_mBooleanType ;
+  outArgument_outResultValueName = GALGAS_variableKindIR::constructor_literalUnsignedInteger (outArgument_outExpressionType, object->mAttribute_mValue  COMMA_SOURCE_FILE ("expression-true-false.galgas", 57)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_literalBooleanInExpressionAST_analyzeExpression (void) {
+  enterCategoryMethod_analyzeExpression (kTypeDescriptor_GALGAS_literalBooleanInExpressionAST.mSlotID,
+                                         categoryMethod_literalBooleanInExpressionAST_analyzeExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_literalBooleanInExpressionAST_analyzeExpression (defineCategoryMethod_literalBooleanInExpressionAST_analyzeExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                Overriding category method '@varInExpressionAST addDependenceEdgeForStaticExpression'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15316,358 +16519,4 @@ static void defineCategoryMethod_functionCallInExpressionAST_analyzeExpression (
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_functionCallInExpressionAST_analyzeExpression (defineCategoryMethod_functionCallInExpressionAST_analyzeExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Overriding category reader '@functionCallIR instructionCode'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string categoryReader_functionCallIR_instructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  const cPtr_functionCallIR * object = (const cPtr_functionCallIR *) inObject ;
-  macroValidSharedObject (object, cPtr_functionCallIR) ;
-  result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 140)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 140)) ;
-  result_outCode.dotAssign_operation (categoryReader_mangledName (object->mAttribute_mTempConstantTarget, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 141)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 141))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 141)) ;
-  result_outCode.dotAssign_operation (function_mangledNameForFunction (object->mAttribute_mFunctionName, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 142)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 142))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 142)) ;
-  cEnumerator_variableListIR enumerator_5890 (object->mAttribute_mVariableList, kEnumeration_up) ;
-  while (enumerator_5890.hasCurrentObject ()) {
-    result_outCode.dotAssign_operation (categoryReader_mangledName (enumerator_5890.current_mVar (HERE), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 144))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 144)) ;
-    if (enumerator_5890.hasNextObject ()) {
-      result_outCode.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("expression-func-call.galgas", 145)) ;
-    }
-    enumerator_5890.gotoNextObject () ;
-  }
-  result_outCode.dotAssign_operation (GALGAS_string (") ;\n")  COMMA_SOURCE_FILE ("expression-func-call.galgas", 147)) ;
-//---
-  return result_outCode ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryReader_functionCallIR_instructionCode (void) {
-  enterCategoryReader_instructionCode (kTypeDescriptor_GALGAS_functionCallIR.mSlotID,
-                                       categoryReader_functionCallIR_instructionCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_functionCallIR_instructionCode (defineCategoryReader_functionCallIR_instructionCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding category method '@functionCallIR enterAccessibleEntities'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_functionCallIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                   GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_functionCallIR * object = (const cPtr_functionCallIR *) inObject ;
-  macroValidSharedObject (object, cPtr_functionCallIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mFunctionSet.addAssign_operation (object->mAttribute_mFunctionName  COMMA_SOURCE_FILE ("expression-func-call.galgas", 153)) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mTempConstantTarget, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 154)) ;
-  cEnumerator_variableListIR enumerator_6367 (object->mAttribute_mVariableList, kEnumeration_up) ;
-  while (enumerator_6367.hasCurrentObject ()) {
-    categoryMethod_enterAccessibleEntities (enumerator_6367.current_mVar (HERE), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 156)) ;
-    enumerator_6367.gotoNextObject () ;
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_functionCallIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_functionCallIR.mSlotID,
-                                               categoryMethod_functionCallIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_functionCallIR_enterAccessibleEntities (defineCategoryMethod_functionCallIR_enterAccessibleEntities, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//         Overriding category method '@registerConstantInExpressionAST addDependenceEdgeForStaticExpression'          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
-                                                                                                 const GALGAS_lstring constinArgument_inConstantName,
-                                                                                                 GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                                 C_Compiler * /* inCompiler */
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerConstantInExpressionAST * object = (const cPtr_registerConstantInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_registerConstantInExpressionAST) ;
-  {
-  ioArgument_ioGraph.modifier_addEdge (constinArgument_inConstantName, object->mAttribute_mRegisterName COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 53)) ;
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression (void) {
-  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_registerConstantInExpressionAST.mSlotID,
-                                                            categoryMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_registerConstantInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//        Overriding category method '@registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression'         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
-                                                                                                   const GALGAS_lstring constinArgument_inConstantName,
-                                                                                                   GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                                   C_Compiler * /* inCompiler */
-                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerIntegerExpInExpressionAST * object = (const cPtr_registerIntegerExpInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_registerIntegerExpInExpressionAST) ;
-  {
-  ioArgument_ioGraph.modifier_addEdge (constinArgument_inConstantName, object->mAttribute_mRegisterName COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 62)) ;
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression (void) {
-  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_registerIntegerExpInExpressionAST.mSlotID,
-                                                            categoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_registerIntegerExpInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Overriding category method '@registerConstantInExpressionAST analyzeExpression'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerConstantInExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
-                                                                              const GALGAS_receiverType /* constinArgument_inReceiverType */,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
-                                                                              const GALGAS_semanticContext constinArgument_inContext,
-                                                                              const GALGAS_stringset /* constinArgument_inModeSet */,
-                                                                              const GALGAS_bool /* constinArgument_inAllowExceptions */,
-                                                                              GALGAS_uint & /* ioArgument_ioTemporaryIndex */,
-                                                                              GALGAS_globalLiteralStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                              GALGAS_variableMap & /* ioArgument_ioVariableMap */,
-                                                                              GALGAS_instructionListIR & /* ioArgument_ioInstructionGenerationList */,
-                                                                              GALGAS_unifiedTypeMap_2D_proxy & outArgument_outExpressionType,
-                                                                              GALGAS_variableKindIR & outArgument_outResultValueName,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerConstantInExpressionAST * object = (const cPtr_registerConstantInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_registerConstantInExpressionAST) ;
-  GALGAS_bool var_readOnly ;
-  GALGAS_registerBitSliceAccessMap var_registerBitSliceMap ;
-  GALGAS_registerFieldMap var_registerFieldMap ;
-  constinArgument_inContext.mAttribute_mRegisterMap.method_searchKey (object->mAttribute_mRegisterName, outArgument_outExpressionType, var_readOnly, var_registerBitSliceMap, var_registerFieldMap, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 83)) ;
-  GALGAS_uint var_bitIndex ;
-  GALGAS_uint var_bitCount ;
-  var_registerFieldMap.method_searchKey (object->mAttribute_mFieldName, var_bitIndex, var_bitCount, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 91)) ;
-  outArgument_outResultValueName = GALGAS_variableKindIR::constructor_literalUnsignedInteger (outArgument_outExpressionType, GALGAS_uint_36__34_ ((uint64_t) 1ULL).left_shift_operation (var_bitCount COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 97)).substract_operation (GALGAS_uint_36__34_ ((uint64_t) 1ULL), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 97)).left_shift_operation (var_bitIndex COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 97))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 97)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerConstantInExpressionAST_analyzeExpression (void) {
-  enterCategoryMethod_analyzeExpression (kTypeDescriptor_GALGAS_registerConstantInExpressionAST.mSlotID,
-                                         categoryMethod_registerConstantInExpressionAST_analyzeExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerConstantInExpressionAST_analyzeExpression (defineCategoryMethod_registerConstantInExpressionAST_analyzeExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Overriding category method '@registerIntegerExpInExpressionAST analyzeExpression'                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
-                                                                                const GALGAS_receiverType constinArgument_inReceiverType,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inOptionalTargetType,
-                                                                                const GALGAS_semanticContext constinArgument_inContext,
-                                                                                const GALGAS_stringset constinArgument_inModeSet,
-                                                                                const GALGAS_bool constinArgument_inAllowExceptions,
-                                                                                GALGAS_uint & ioArgument_ioTemporaryIndex,
-                                                                                GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                                                GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                                                GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                                GALGAS_unifiedTypeMap_2D_proxy & outArgument_outExpressionType,
-                                                                                GALGAS_variableKindIR & outArgument_outResultValueName,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerIntegerExpInExpressionAST * object = (const cPtr_registerIntegerExpInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_registerIntegerExpInExpressionAST) ;
-  GALGAS_bool var_readOnly ;
-  GALGAS_registerBitSliceAccessMap var_registerBitSliceMap ;
-  GALGAS_registerFieldMap var_registerFieldMap ;
-  constinArgument_inContext.mAttribute_mRegisterMap.method_searchKey (object->mAttribute_mRegisterName, outArgument_outExpressionType, var_readOnly, var_registerBitSliceMap, var_registerFieldMap, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 116)) ;
-  GALGAS_uint var_fieldBitIndex ;
-  GALGAS_uint var_fieldBitCount ;
-  var_registerFieldMap.method_searchKey (object->mAttribute_mFieldName, var_fieldBitIndex, var_fieldBitCount, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 124)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_fieldBitCount.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (object->mAttribute_mFieldName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("this field is not an integer field")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 131)) ;
-  }
-  GALGAS_unifiedTypeMap_2D_proxy var_expressionType ;
-  GALGAS_variableKindIR var_expressionResult ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaryIndex, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_expressionType, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 134)) ;
-  switch (var_expressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 148)).enumValue ()) {
-  case GALGAS_typeKind::kNotBuilt:
-    break ;
-  case GALGAS_typeKind::kEnum_enumeration:
-    {
-      inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 150)) ;
-      outArgument_outResultValueName.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_structure:
-    {
-      inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 152)) ;
-      outArgument_outResultValueName.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_boolset:
-  case GALGAS_typeKind::kEnum_boolean:
-    {
-      inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 154)) ;
-      outArgument_outResultValueName.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_literalString:
-    {
-      inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 156)) ;
-      outArgument_outResultValueName.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_integer:
-    {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_7858 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 148)).unsafePointer ()) ;
-      const GALGAS_sint_36__34_ extractedValue_min = extractPtr_7858->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_max = extractPtr_7858->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_7858->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_7858->mAssociatedValue3 ;
-      const enumGalgasBool test_2 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 158)).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 159)) ;
-        outArgument_outResultValueName.drop () ; // Release error dropped variable
-      }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = var_expressionResult.reader_isLiteralSignedInteger (SOURCE_FILE ("expression-cst-registre.galgas", 160)).boolEnum () ;
-        if (kBoolTrue == test_3) {
-          inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 161)) ;
-          outArgument_outResultValueName.drop () ; // Release error dropped variable
-        }else if (kBoolFalse == test_3) {
-          const enumGalgasBool test_4 = var_expressionResult.reader_isLiteralString (SOURCE_FILE ("expression-cst-registre.galgas", 162)).boolEnum () ;
-          if (kBoolTrue == test_4) {
-            inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 163)) ;
-            outArgument_outResultValueName.drop () ; // Release error dropped variable
-          }else if (kBoolFalse == test_4) {
-            const enumGalgasBool test_5 = var_expressionResult.reader_isLiteralUnsignedInteger (SOURCE_FILE ("expression-cst-registre.galgas", 164)).boolEnum () ;
-            if (kBoolTrue == test_5) {
-              GALGAS_uint_36__34_ var_value ;
-              GALGAS_unifiedTypeMap_2D_proxy joker_7055 ; // Joker input parameter
-              var_expressionResult.method_literalUnsignedInteger (joker_7055, var_value, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 165)) ;
-              const enumGalgasBool test_6 = GALGAS_bool (kIsStrictInf, var_value.objectCompare (GALGAS_uint_36__34_ ((uint64_t) 1ULL).left_shift_operation (var_fieldBitCount COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 166)))).boolEnum () ;
-              if (kBoolTrue == test_6) {
-                outArgument_outResultValueName = GALGAS_variableKindIR::constructor_literalUnsignedInteger (outArgument_outExpressionType, var_value.left_shift_operation (var_fieldBitIndex COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167)) ;
-              }else if (kBoolFalse == test_6) {
-                inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("static unsigned integer expression overflow: maximum value is ").add_operation (GALGAS_uint_36__34_ ((uint64_t) 1ULL).left_shift_operation (var_fieldBitCount COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 170)).substract_operation (GALGAS_uint_36__34_ ((uint64_t) 1ULL), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 170)).reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 170)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 170))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 169)) ;
-                outArgument_outResultValueName.drop () ; // Release error dropped variable
-              }
-            }else if (kBoolFalse == test_5) {
-              {
-              routine_getNewTempVariable (ioArgument_ioTemporaryIndex, outArgument_outResultValueName, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 174)) ;
-              }
-              ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_registerIntegerConstantInExpressionIR::constructor_new (object->mAttribute_mExpressionLocation, var_expressionResult, GALGAS_uint_36__34_ ((uint64_t) 1ULL).left_shift_operation (var_fieldBitCount COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 178)).substract_operation (GALGAS_uint_36__34_ ((uint64_t) 1ULL), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 178)), var_fieldBitIndex, outArgument_outResultValueName, outArgument_outExpressionType, GALGAS_bool (kIsInfOrEqual, extractedValue_expressionBitCount.objectCompare (var_fieldBitCount))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 175))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 175)) ;
-            }
-          }
-        }
-      }
-    }
-    break ;
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (void) {
-  enterCategoryMethod_analyzeExpression (kTypeDescriptor_GALGAS_registerIntegerExpInExpressionAST.mSlotID,
-                                         categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerIntegerExpInExpressionAST_analyzeExpression (defineCategoryMethod_registerIntegerExpInExpressionAST_analyzeExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                 Overriding category reader '@registerIntegerConstantInExpressionIR instructionCode'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string categoryReader_registerIntegerConstantInExpressionIR_instructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  const cPtr_registerIntegerConstantInExpressionIR * object = (const cPtr_registerIntegerConstantInExpressionIR *) inObject ;
-  macroValidSharedObject (object, cPtr_registerIntegerConstantInExpressionIR) ;
-  const enumGalgasBool test_0 = object->mAttribute_mNoCheck.boolEnum () ;
-  if (kBoolTrue == test_0) {
-    result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)).add_operation (categoryReader_mangledName (object->mAttribute_mResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)).add_operation (GALGAS_string (" = (("), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)).add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 207)).add_operation (GALGAS_string (" *) "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 207)).add_operation (categoryReader_mangledName (object->mAttribute_mExpressionValue, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 207)).add_operation (GALGAS_string (") << "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 208)).add_operation (object->mAttribute_mBitShift.reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 208)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 208)) ;
-  }else if (kBoolFalse == test_0) {
-    result_outCode = GALGAS_string ("if (").add_operation (categoryReader_mangledName (object->mAttribute_mExpressionValue, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 210)).add_operation (GALGAS_string (" > "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 210)).add_operation (object->mAttribute_mMaxBound.reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 210)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 210)) ;
-    result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (1003").add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 211)).add_operation (object->mAttribute_mInstructionLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 212)).reader_lastPathComponent (SOURCE_FILE ("expression-cst-registre.galgas", 212)).reader_utf_38_Representation (SOURCE_FILE ("expression-cst-registre.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 212)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 212)).add_operation (object->mAttribute_mInstructionLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 213)).reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 213)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 213)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 213))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 211)) ;
-    result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 214)) ;
-    result_outCode.dotAssign_operation (GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)).add_operation (categoryReader_mangledName (object->mAttribute_mResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)).add_operation (GALGAS_string (" = ("), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)).add_operation (categoryReader_mangledName (object->mAttribute_mExpressionValue, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)).add_operation (GALGAS_string (" & "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)).add_operation (object->mAttribute_mMaxBound.reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)).add_operation (GALGAS_string (") << "), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)).add_operation (object->mAttribute_mBitShift.reader_string (SOURCE_FILE ("expression-cst-registre.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 216))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 215)) ;
-  }
-//---
-  return result_outCode ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryReader_registerIntegerConstantInExpressionIR_instructionCode (void) {
-  enterCategoryReader_instructionCode (kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR.mSlotID,
-                                       categoryReader_registerIntegerConstantInExpressionIR_instructionCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_registerIntegerConstantInExpressionIR_instructionCode (defineCategoryReader_registerIntegerConstantInExpressionIR_instructionCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//             Overriding category method '@registerIntegerConstantInExpressionIR enterAccessibleEntities'             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                                          GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerIntegerConstantInExpressionIR * object = (const cPtr_registerIntegerConstantInExpressionIR *) inObject ;
-  macroValidSharedObject (object, cPtr_registerIntegerConstantInExpressionIR) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mExpressionValue, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 226)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR.mSlotID,
-                                               categoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (defineCategoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities, NULL) ;
 
