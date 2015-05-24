@@ -6223,7 +6223,8 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
   public : static GALGAS_procEffectiveParameterPassingModeAST constructor_input (const class GALGAS_lstring & inOperand0
                                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_procEffectiveParameterPassingModeAST constructor_output (const class GALGAS_expressionAST & inOperand0
+  public : static GALGAS_procEffectiveParameterPassingModeAST constructor_output (const class GALGAS_expressionAST & inOperand0,
+                                                                                  const class GALGAS_location & inOperand1
                                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_procEffectiveParameterPassingModeAST constructor_outputInput (const class GALGAS_lstring & inOperand0
@@ -6243,6 +6244,7 @@ class GALGAS_procEffectiveParameterPassingModeAST : public AC_GALGAS_root {
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_output (class GALGAS_expressionAST & outArgument0,
+                                                class GALGAS_location & outArgument1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -6294,9 +6296,11 @@ class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_input : public 
 
 class cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output : public cEnumAssociatedValues {
   public : const GALGAS_expressionAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output (const GALGAS_expressionAST & inAssociatedValue0
+  public : cEnumAssociatedValues_procEffectiveParameterPassingModeAST_output (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                              const GALGAS_location & inAssociatedValue1
                                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

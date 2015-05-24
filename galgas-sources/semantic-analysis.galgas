@@ -4,6 +4,29 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+proc checkAssignmentCompatibility
+  ?sourceType:let @unifiedTypeMap-proxy inSourceType
+  ?targetType:let @unifiedTypeMap-proxy inTargetType
+  ?errorLocation:let @location inErrorLocation
+{
+  if inTargetType != inSourceType then
+    var ok = false
+    if [[inSourceType kind] isBoolean] then
+      ok = [[inTargetType kind] isInteger]    
+    elsif [[inSourceType kind] isInteger] && [[inTargetType kind] isInteger] then
+      [[inSourceType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+      [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+      ok = (minTarget <= minSource) && (maxTarget >= maxSource)
+    end
+    if not ok then
+      error inErrorLocation
+      : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceType key]
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 abstract method @abstractDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
