@@ -177,23 +177,23 @@ override method @registerDeclaration enterInContext
         @registerBitSliceAccessMap registerSubMap = {}
         [!?registerSubMap insertKey
           !.new{!"shift" !name.location}
-          !.infix {!infixOperator:">>"}
-          !.literalUnsignedInteger{!type:registerType !value:[shiftCount uint64]}
+          !.infixNoOvf {!infixOperator:">>"}
+          !.literalUnsignedInteger{!value:[shiftCount uint64]}
           !{}
           !registerType
         ]
         [!?registerSubMap insertKey
           !.new{!"bool" !name.location}
-          !.infix {!infixOperator:"!="}
-          !.literalUnsignedInteger{!type:registerType !value:0L}
+          !.infixNoOvf {!infixOperator:"!="}
+          !.literalUnsignedInteger{!value:0L}
           !{}
           !BoolTypeProxy
         ]
         let mask = ((1L << bitCount) - 1L) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
-          !.infix {!infixOperator:"&"}
-          !.literalUnsignedInteger{!type:registerType !value:mask}
+          !.infixNoOvf {!infixOperator:"&"}
+          !.literalUnsignedInteger{!value:mask}
           !registerSubMap
           !registerType
         ]

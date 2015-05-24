@@ -170,7 +170,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [result isLiteralSignedInteger] then
-    [result literalSignedInteger ?type:* ?value:let @sint64 value]
+    [result literalSignedInteger ?value:let @sint64 value]
     @sint64 result
     switch mOp 
     case minusNoOvf : result = &- value
@@ -178,9 +178,9 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case minus : result = - value
     case notOperator : result = 1LS ^ value
     end
-    outResult = .literalSignedInteger {!type:outExpressionType !value:result}
+    outResult = .literalSignedInteger {!value:result}
   elsif [result isLiteralUnsignedInteger] then
-    [result literalSignedInteger ?type:* ?value:let @sint64 value]
+    [result literalSignedInteger ?value:let @sint64 value]
     @sint64 result
     switch mOp 
     case minusNoOvf, minus, notOperator :
@@ -188,7 +188,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case unsignedComplement :
       result = ~ value
     end
-    outResult = .literalSignedInteger {!type:outExpressionType !value:result}
+    outResult = .literalSignedInteger {!value:result}
   else
   #--- Temp var
     getNewTempVariable (!?ioTemporaryIndex ?outResult)

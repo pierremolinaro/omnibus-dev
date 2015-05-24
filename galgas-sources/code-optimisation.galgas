@@ -30,8 +30,8 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   case localConstant (@string unused name) :
   case temporaryConstant (@uint unused idx) :
   case localAccess (@string unused access) :
-  case literalUnsignedInteger (* *) :
-  case literalSignedInteger (* *) :
+  case literalUnsignedInteger (*) :
+  case literalSignedInteger (*) :
   case literalString (@string value @string unused name) :
     ioAccessibleEntities.mStaticStringSet += !value
   end

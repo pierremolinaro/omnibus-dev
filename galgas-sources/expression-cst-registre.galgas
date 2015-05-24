@@ -94,7 +94,7 @@ override method @registerConstantInExpressionAST analyzeExpression
     ?let @uint bitCount
   ]
 #--- Generate code
-  outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:((1L << bitCount) - 1L) << bitIndex}
+  outResultValueName = .literalUnsignedInteger {!value:((1L << bitCount) - 1L) << bitIndex}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -162,9 +162,9 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     elsif [expressionResult isLiteralString] then
       error mExpressionLocation: "internal error" : outResultValueName
     elsif [expressionResult isLiteralUnsignedInteger] then
-      [expressionResult literalUnsignedInteger ?type:* ?value:let @uint64 value]
+      [expressionResult literalUnsignedInteger ?value:let @uint64 value]
       if value < (1L << fieldBitCount) then
-        outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:value << fieldBitIndex}        
+        outResultValueName = .literalUnsignedInteger {!value:value << fieldBitIndex}        
       else # Overflow, detected at compile time
         error mExpressionLocation
         : "static unsigned integer expression overflow: maximum value is " + ((1L << fieldBitCount) - 1L)

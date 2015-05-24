@@ -15,8 +15,8 @@ enum @variableKindIR {
   case localConstant (@string name)
   case temporaryConstant (@uint idx)
   case localAccess (@string access)
-  case literalUnsignedInteger (@unifiedTypeMap-proxy type @uint64 value)
-  case literalSignedInteger (@unifiedTypeMap-proxy type @sint64 value)
+  case literalUnsignedInteger (@uint64 value)
+  case literalSignedInteger (@sint64 value)
   case literalString (@string value @string name)
 }
 
@@ -44,9 +44,9 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case localAccess (*) :
     outResult = false
-  case literalUnsignedInteger (* *) :
+  case literalUnsignedInteger (*) :
     outResult = true
-  case literalSignedInteger (* *) :
+  case literalSignedInteger (*) :
     outResult = true
   case literalString (* *) :
     outResult = true

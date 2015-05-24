@@ -41,9 +41,15 @@ var v : Int8 = 128 // Erreur de compilation :
 var v : Int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
 
+Une constante litérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
+\begin{PLM}
+var v = 28 // Erreur, le type ne peut pas être inféré
+\end{PLM}
 
-
-
+Dans ce cas, il faut que la déclaration contienne l'annotation de type :
+\begin{PLM}
+var v : Int32 = 28 // Ok
+\end{PLM}
 
 
 
@@ -76,7 +82,7 @@ L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'express
 
 L'opérateur \plm+\+ ne peut pas apparaître dans une expression statique.
 
-De plus, une erreur de compilation est déclenchée si il est utilisé alors qu'une conversion implicite est possible :
+De plus, une erreur de compilation est déclenchée si l'opérateur \plm+\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
 let v : UInt8 = ...
 let y : Int16 = v \ Int16 // Erreur, la conversion implicite est possible
@@ -93,7 +99,7 @@ let x : UInt16 = x &\ UInt16
 
 L'opérateur \plm+&\+ ne peut pas apparaître dans une expression statique.
 
-De plus, une erreur de compilation est déclenchée si il est utilisé alors qu'une conversion implicite est possible :
+De plus, une erreur de compilation est déclenchée si l'opérateur \plm+&\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
 let v : UInt8 = ...
 let y : Int16 = v &\ Int16 // Erreur, la conversion implicite est possible
@@ -103,7 +109,7 @@ let y : Int16 = v &\ Int16 // Erreur, la conversion implicite est possible
 
 
 
-\section{Les opérateurs infix de comparaison}
+\section{Opérateurs infix de comparaison}
 
 Les valeurs entières sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés.
 
@@ -117,14 +123,90 @@ La comparaison ne peut s'effectuer qu'entre valeurs de même type entier.
 
 
 
-\section{Les opérateurs infixes \texttt{and}, \texttt{or} et \texttt{xor}}
+\section{Opérateurs infixes arithmétiques}
 
-Les opérateurs infixes \plm=and=, \plm=or= et \plm=xor= implémentent respectivement le \emph{et} logique, \emph{ou} logique, \emph{ou exclusif} logique. Les deux premiers évaluent les opérandes en \emph{court-circuit}, c'est-à-dire que si la valeur de l'opérande de gauche détermine la valeur de l'expression, alors l'opérande de droite n'est pas évalué.
+Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateursInfixesArithmetiques} avec leur signification.
 
-Noter que les opérateurs infixes \plm=&=, \plm=|= et \plm=^= sont des opérateurs bit-à-bit sur les entiers non signés, et ne peuvent pas être appliqués à des valeurs booléennes.
+\begin{table}[h]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Opérateur} & \textbf{Signification} \\
+  \hline
+  \plm=+= & Addition avec détection de débordement\\
+  \plm=-= & Soustraction avec détection de débordement\\
+  \plm=*= & Multiplication avec détection de débordement\\
+  \plm=/= & Division avec détection de débordement\\
+  \plm=%= & Modulo avec détection de division par zéro\\
+  \plm=&+= & Addition sans détection de débordement\\
+  \plm=&-= & Soustraction sans détection de débordement\\
+  \plm=&*= & Multiplication sans détection de débordement\\
+  \plm=&/= & Division sans détection de débordement\\
+  \plm=&%= & Modulo sans détection de division par zéro\\
+\end{tabular}
+\caption{Opérateurs infixes arithmétiques}
+\labelTableau{operateursInfixesArithmetiques}
+\ligne
+\end{table}
 
 
-\section{L'opérateur préfixé \texttt{not}}
 
-L'opérateur préfixé \plm=not= est la complémentation booléenne. Noter que l'opérateur préfixé \plm=~= effectue la complémentation bit-à-bit d'un entier non signé et ne peut pas être appliqué à une valeur booléenne.
 
+\section{Opérateurs préfixés de négation arithmétique}
+
+\subsectionLabel{Opérateur \texttt{-}}{negationOvf}
+
+L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Elle n'est acceptée que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
+
+
+\subsectionLabel{Opérateur \texttt{\&-}}{negationNoOvf}
+
+L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Elle n'est acceptée que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) retourne cette même valeur.
+
+
+
+
+\section{Opérateurs infixes bit-à-bit}
+
+Les opérateurs infixes bit-à-bit acceptent les types entiers non signés (\refTableau{operateursInfixesBitABit}).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Opérateur} & \textbf{Signification} \\
+  \hline
+  \plm=|= & \emph{ou} bit-à-bit\\
+  \plm=&= & \emph{et} bit-à-bit\\
+  \plm=^= & \emph{ou exclusif} bit-à-bit\\
+\end{tabular}
+\caption{Opérateurs infixes bit-à-bit sur les entiers non signés}
+\labelTableau{operateursInfixesBitABit}
+\ligne
+\end{table}
+
+
+
+
+
+\section{Opérateur préfixé bit-à-bit}
+
+L'opérateur préfixé \plm=~= retourne la complémentation bit-à-bit d'une valeur entière non signée.
+
+
+
+
+\section{Opérateurs infixes de décalage}
+
+Les opérateurs infixes \plm=<<= et \plm=>>= réalisent respectivement le décalage à gauche et à droite de l'opérande de gauche. L'amplitude du décalage est spécifiée par la valeur de l'opérande droite (\refTableau{operateursInfixesDecalage}). \plm=a= est une expression entière signée ou non signée, et l'expression renvoie une valeur de même type que \plm=a=. L'expression \plm=b= est une expression entière non signée.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lllll}
+  \textbf{Expression} & \textbf{Signification} \\
+  \hline
+  \plm=a << b= & Décalage à gauche de \plm=a= d'une amplitude de \plm=b= bits\\
+  \plm=a >> b= & Décalage à droite de \plm=a= d'une amplitude de \plm=b= bits\\
+\end{tabular}
+\caption{Opérateurs infixes de décalage sur les entiers}
+\labelTableau{operateursInfixesDecalage}
+\ligne
+\end{table}
