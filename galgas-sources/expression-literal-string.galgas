@@ -54,7 +54,6 @@ override method @literalStringInExpressionAST analyzeExpression
     [!?ioGlobalLiteralStringMap insertKey !mLiteralString !literalStringName]
   end
 #--- Generate code
-#  outGeneratedCode = @inLineExpressionGeneration.new {!literalStringName}
   outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
   outResultValueName = .literalString {!value:mLiteralString.string !name:literalStringName}
 }

@@ -61,6 +61,7 @@ override method @conversionExpressionAST addDependenceEdgeForStaticExpression
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 #! @conversionExpressionAST
+#----------------------------------------------------------------------------------------------------------------------*
 
 override method @conversionExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType inReceiverType
