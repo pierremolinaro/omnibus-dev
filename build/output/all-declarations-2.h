@@ -107,6 +107,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_infixOperatorMap mAttribute_mRightShiftOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mUnaryMinusOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
+  public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
 
 
 //--------------------------------- Accessors
@@ -157,7 +158,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_infixOperatorMap & in_mLeftShiftOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mRightShiftOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap,
-                                   const GALGAS_prefixOperatorMap & in_mNotOperatorMap) ;
+                                   const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
+                                   const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap) ;
 
 //-- Start of generic part --*
 
@@ -204,7 +206,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand31,
                                                           const class GALGAS_infixOperatorMap & inOperand32,
                                                           const class GALGAS_prefixOperatorMap & inOperand33,
-                                                          const class GALGAS_prefixOperatorMap & inOperand34
+                                                          const class GALGAS_prefixOperatorMap & inOperand34,
+                                                          const class GALGAS_prefixOperatorMap & inOperand35
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -286,6 +289,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mTypeNameSetForIncDec (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap reader_mUnaryMinusOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap reader_mUnsignedComplementOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mXorOperatorMap (LOCATION_ARGS) const ;
 
@@ -461,8 +466,9 @@ class GALGAS_string function_mangledNameForConstant (class GALGAS_string inArgum
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterIntegerOperators (class GALGAS_lstring inArgument0,
-                                    class GALGAS_semanticContext & ioArgument1,
+void routine_enterIntegerOperators (const class GALGAS_lstring constinArgument0,
+                                    const class GALGAS_bool constinArgument1,
+                                    class GALGAS_semanticContext & ioArgument2,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 

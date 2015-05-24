@@ -144,6 +144,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3C__3C_,
    kToken__3E__3E_,
    kToken__25_,
+   kToken__7E_,
    kToken__2D__3E_,
    kToken__3A__3A_,
    kToken__2B__2B_,
@@ -194,7 +195,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 89 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 90 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -2400,6 +2401,11 @@ class cParser_common_5F_syntax {
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_primary_i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i47_ (GALGAS_expressionAST & outArgument0,
+                                                       C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_common_5F_syntax_primary_i47_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -4811,6 +4817,7 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_notOperator,
     kEnum_minus,
+    kEnum_unsignedComplement,
     kEnum_minusNoOvf
   } enumeration ;
   
@@ -4839,6 +4846,8 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 
   public : static GALGAS_prefixOperator constructor_notOperator (LOCATION_ARGS) ;
 
+  public : static GALGAS_prefixOperator constructor_unsignedComplement (LOCATION_ARGS) ;
+
 //--------------------------------- Implementation of reader 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
@@ -4856,6 +4865,8 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMinusNoOvf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isNotOperator (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isUnsignedComplement (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

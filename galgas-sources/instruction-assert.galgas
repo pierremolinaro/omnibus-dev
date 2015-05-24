@@ -44,7 +44,7 @@ override method @assertInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if [inModeSet hasKey !exceptionModeName ()] then
-    error mAssertInstructionLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    error mAssertInstructionLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}

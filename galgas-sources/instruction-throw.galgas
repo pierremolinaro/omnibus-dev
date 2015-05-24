@@ -39,7 +39,7 @@ override method @throwInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if [inModeSet hasKey !exceptionModeName ()] then
-    error mThrowInstructionCode : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+    error mThrowInstructionCode : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
   end
   @uint code
   if mThrowInstructionCode.uint64 <= [@uint.max uint64] then

@@ -166,6 +166,7 @@ struct @semanticContext {
   @infixOperatorMap mRightShiftOperatorMap      # >>
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
   @prefixOperatorMap mNotOperatorMap            # not
+  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
