@@ -377,7 +377,6 @@ override method @infixOperatorExpressionAST analyzeExpression
   [mRightExpression analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:leftExpressionType
- #   !optionalTargetType:if inOptionalTargetType == .null then leftExpressionType else inOptionalTargetType end
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
