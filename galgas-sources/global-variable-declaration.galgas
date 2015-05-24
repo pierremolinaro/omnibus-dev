@@ -166,7 +166,7 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
   var initialValueString = [mInitialValue mangledName]
   if [mInitialValue isLiteralUnsignedInteger] then
-    [mInitialValue literalUnsignedInteger ?type:* ?value:let @uint64 value] ;
+    [mInitialValue literalUnsignedInteger ?value:let @uint64 value] ;
     if value == 0L then
       initialValueString = ""
     end

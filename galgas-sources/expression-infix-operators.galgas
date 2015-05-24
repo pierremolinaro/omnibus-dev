@@ -24,6 +24,7 @@ enum @infixOperator {
   case divOp
   case divOpNoOvf
   case modOp
+  case modOpNoOvf
   case leftShiftOp
   case rightShiftOp
 }
@@ -265,6 +266,16 @@ syntax extension common_syntax {
         !rightExpression
       }
     while
+      $&%$
+      let operatorLocation = @location.here
+      <primary> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.modOpNoOvf
+        !rightExpression
+      }
+    while
       $/$
       let operatorLocation = @location.here
       <primary> ?let rightExpression
@@ -366,6 +377,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   [mRightExpression analyzeExpression
     !optionalReceiverType:inReceiverType
     !optionalTargetType:leftExpressionType
+ #   !optionalTargetType:if inOptionalTargetType == .null then leftExpressionType else inOptionalTargetType end
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
@@ -382,101 +394,111 @@ override method @infixOperatorExpressionAST analyzeExpression
   switch mOp 
   case equal :
     operatorMap = inContext.mEqualOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"=="}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"=="}
   case nonEqual :
     operatorMap = inContext.mNonEqualOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"!="}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"!="}
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"<"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"<"}
   case infEqual :
     operatorMap = inContext.mInfEqualOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"<="}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"<="}
   case strictSup :
     operatorMap = inContext.mStrictSupOperatorMap
-    infixOperatorIR = .infix {!infixOperator:">"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:">"}
   case supEqual :
     operatorMap = inContext.mSupEqualOperatorMap
-    infixOperatorIR = .infix {!infixOperator:">="}
+    infixOperatorIR = .infixNoOvf {!infixOperator:">="}
   case andOp :
     operatorMap = inContext.mAndOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"&"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"&"}
   case booleanAnd :
     operatorMap = inContext.mBooleanAndOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"&&"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"&&"}
   case orOp :
     operatorMap = inContext.mOrOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"|"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"|"}
   case booleanOrOp :
     operatorMap = inContext.mBooleanOrOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"||"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"||"}
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"^"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"^"}
   case booleanXorOp :
     operatorMap = inContext.mBooleanXorOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"^"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"^"}
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infix {!infixOperator:"+"}
+      infixOperatorIR = .infixNoOvf {!infixOperator:"+"}
     else
       infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
     end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"+"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"+"}
   case subOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infix {!infixOperator:"-"}
+      infixOperatorIR = .infixNoOvf {!infixOperator:"-"}
     else
       infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
     end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"-"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"-"}
   case mulOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infix {!infixOperator:"*"}
+      infixOperatorIR = .infixNoOvf {!infixOperator:"*"}
     else
       infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:12}
     end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"*"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"*"}
   case divOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infix {!infixOperator:"/"}
+      infixOperatorIR = .infixNoOvf {!infixOperator:"/"}
     else
       infixOperatorIR = .infixUnsignedDivide{!code:13}
     end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"/"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"/"}
   case modOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
     operatorMap = inContext.mModOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"%"}
+    if [option plm_options.noExceptionGeneration value] then
+      infixOperatorIR = .infixNoOvf {!infixOperator:"%"}
+    else
+      infixOperatorIR = .infixModulo{!code:14}
+    end
+  case modOpNoOvf :
+    operatorMap = inContext.mModOperatorMap
+    infixOperatorIR = .infixNoOvf {!infixOperator:"%"}
   case leftShiftOp :
     operatorMap = inContext.mLeftShiftOperatorMap
-    infixOperatorIR = .infix {!infixOperator:"<<"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:"<<"}
   case rightShiftOp :
     operatorMap = inContext.mRightShiftOperatorMap
-    infixOperatorIR = .infix {!infixOperator:">>"}
+    infixOperatorIR = .infixNoOvf {!infixOperator:">>"}
   end
   [operatorMap checkWith
     !leftType:leftExpressionType
@@ -486,8 +508,8 @@ override method @infixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
-    [leftResult literalUnsignedInteger ?type:* ?value:let @uint64 leftValue]
-    [rightResult literalUnsignedInteger ?type:* ?value:let @uint64 rightValue]
+    [leftResult literalUnsignedInteger ?value:let @uint64 leftValue]
+    [rightResult literalUnsignedInteger ?value:let @uint64 rightValue]
     @uint64 result
     switch mOp 
     case equal : result = [leftValue == rightValue uint64]
@@ -510,10 +532,11 @@ override method @infixOperatorExpressionAST analyzeExpression
     case divOp : result = leftValue / rightValue
     case divOpNoOvf : result = leftValue &/ rightValue
     case modOp : result = leftValue mod rightValue
+    case modOpNoOvf : result = leftValue mod rightValue
     case leftShiftOp  : result = leftValue << [rightValue uint]
     case rightShiftOp : result = leftValue >> [rightValue uint]
     end
-    outResult = .literalUnsignedInteger {!type:outExpressionType !value:result}
+    outResult = .literalUnsignedInteger {!value:result}
   else
   #--- Temp var
     getNewTempVariable (!?ioTemporaryIndex ?outResult)
@@ -536,9 +559,10 @@ override method @infixOperatorExpressionAST analyzeExpression
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @infixOperatorIR {
-  case infix (@string infixOperator)
+  case infixNoOvf (@string infixOperator)
   case infixOvf (@string builtinFunction @uint code)
   case infixUnsignedDivide (@uint code)
+  case infixModulo (@uint code)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -556,7 +580,7 @@ class @operatorInfixExpressionIR : @abstractInstructionIR {
 
 override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
   switch mOperator 
-  case infix (@string infixOperator) :
+  case infixNoOvf (@string infixOperator) :
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
   case infixOvf (@string builtinFunction @uint code) :
@@ -579,6 +603,14 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
     outCode += "}\n"
     outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"
+  case infixModulo (@uint code) :
+    outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    outCode += "  raise_exception (" + code
+      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+      + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n"
+    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mLeftOperand mangledName] + " % " + [mRighOperand mangledName] + " ;\n"
   end
 }
 

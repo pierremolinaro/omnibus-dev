@@ -54,7 +54,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
 #--- Result type
   outExpressionType = inContext.mBooleanType
 #--- Result value
-  outResultValueName = .literalUnsignedInteger {!type:outExpressionType !value:mValue}
+  outResultValueName = .literalUnsignedInteger {!value:mValue}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

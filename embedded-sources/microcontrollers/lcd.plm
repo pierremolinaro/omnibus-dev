@@ -412,7 +412,7 @@ proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt
   if inValue > 9 then
     printUnsignedInExceptionMode (!inValue &/ 10)
   end
-  writeDataInExceptionMode (!0x30 &+ ((inValue % 10) &\ UInt8))
+  writeDataInExceptionMode (!0x30 &+ ((inValue &% 10) &\ UInt8))
 }
 
 //-----------------------------------------------------------------------------*

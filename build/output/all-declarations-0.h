@@ -143,6 +143,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3C__3C_,
    kToken__3E__3E_,
    kToken__25_,
+   kToken__26__25_,
    kToken__7E_,
    kToken__5C_,
    kToken__26__5C_,
@@ -196,7 +197,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 91 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 92 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -4083,6 +4084,7 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
     kEnum_divOp,
     kEnum_divOpNoOvf,
     kEnum_modOp,
+    kEnum_modOpNoOvf,
     kEnum_leftShiftOp,
     kEnum_rightShiftOp
   } enumeration ;
@@ -4129,6 +4131,8 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : static GALGAS_infixOperator constructor_leftShiftOp (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_modOp (LOCATION_ARGS) ;
+
+  public : static GALGAS_infixOperator constructor_modOpNoOvf (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_mulOp (LOCATION_ARGS) ;
 
@@ -4187,6 +4191,8 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLeftShiftOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isModOp (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isModOpNoOvf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMulOp (LOCATION_ARGS) const ;
 
@@ -10095,9 +10101,10 @@ class GALGAS_infixOperatorIR : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_infix,
+    kEnum_infixNoOvf,
     kEnum_infixOvf,
-    kEnum_infixUnsignedDivide
+    kEnum_infixUnsignedDivide,
+    kEnum_infixModulo
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -10124,8 +10131,11 @@ class GALGAS_infixOperatorIR : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_infixOperatorIR constructor_infix (const class GALGAS_string & inOperand0
-                                                            COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_infixOperatorIR constructor_infixModulo (const class GALGAS_uint & inOperand0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : static GALGAS_infixOperatorIR constructor_infixNoOvf (const class GALGAS_string & inOperand0
+                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperatorIR constructor_infixOvf (const class GALGAS_string & inOperand0,
                                                                const class GALGAS_uint & inOperand1
@@ -10143,9 +10153,13 @@ class GALGAS_infixOperatorIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_infix (class GALGAS_string & outArgument0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_infixModulo (class GALGAS_uint & outArgument0,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_infixNoOvf (class GALGAS_string & outArgument0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_infixOvf (class GALGAS_string & outArgument0,
                                                   class GALGAS_uint & outArgument1,
@@ -10159,7 +10173,9 @@ class GALGAS_infixOperatorIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInfix (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInfixModulo (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInfixNoOvf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInfixOvf (LOCATION_ARGS) const ;
 
@@ -10240,16 +10256,14 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_string & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                          const class GALGAS_sint_36__34_ & inOperand1
+  public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_sint_36__34_ & inOperand0
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
                                                                    const class GALGAS_string & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                            const class GALGAS_uint_36__34_ & inOperand1
+  public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_uint_36__34_ & inOperand0
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_string & inOperand0
@@ -10295,8 +10309,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                              class GALGAS_sint_36__34_ & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_sint_36__34_ & outArgument0,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
@@ -10305,8 +10318,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                                class GALGAS_uint_36__34_ & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_uint_36__34_ & outArgument0,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -10497,18 +10509,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerBitSliceAcc
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_infixOperatorIR_infix : public cEnumAssociatedValues {
+class cEnumAssociatedValues_infixOperatorIR_infixNoOvf : public cEnumAssociatedValues {
   public : const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_infixOperatorIR_infix (const GALGAS_string & inAssociatedValue0
-                                                        COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_infixOperatorIR_infixNoOvf (const GALGAS_string & inAssociatedValue0
+                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_infixOperatorIR_infix (void) {}
+  public : virtual ~ cEnumAssociatedValues_infixOperatorIR_infixNoOvf (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10543,6 +10555,22 @@ class cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide : public cEnumAs
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_infixOperatorIR_infixModulo : public cEnumAssociatedValues {
+  public : const GALGAS_uint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_infixOperatorIR_infixModulo (const GALGAS_uint & inAssociatedValue0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_infixOperatorIR_infixModulo (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11689,12 +11717,10 @@ class cEnumAssociatedValues_variableKindIR_localAccess : public cEnumAssociatedV
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_uint_36__34_ mAssociatedValue1 ;
+  public : const GALGAS_uint_36__34_ mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                        const GALGAS_uint_36__34_ & inAssociatedValue1
+  public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -11707,12 +11733,10 @@ class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnum
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_literalSignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_sint_36__34_ mAssociatedValue1 ;
+  public : const GALGAS_sint_36__34_ mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                      const GALGAS_sint_36__34_ & inAssociatedValue1
+  public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

@@ -23,9 +23,10 @@ proc $isr userSystickHandler () {
 
 //-----------------------------------------------------------------------------*
 
-var $user gVar : UInt8 = 12
+var $user gVar : UInt32 = 12
 
-var $user gYYYYY : Bool = false or true
+var $user gYYYYY : UInt8 = 5
+var $user gZZZZZ : UInt32 = 5
 
 //-----------------------------------------------------------------------------*
 
@@ -38,9 +39,10 @@ proc $user loop () {
   goto (!line:0 !column: 0)
   printSpaces (!4)
   goto (!line:0 !column: 0)
-  printSigned (!gVar)
-  gYYYYY = true
-  var x : Int16 = gVar
+  printUnsigned (!gVar)
+  if 0 == (gVar & 15) then
+    gZZZZZ = gYYYYY + gVar
+  end
 }
 
 //-----------------------------------------------------------------------------*
