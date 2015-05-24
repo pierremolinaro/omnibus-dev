@@ -229,14 +229,6 @@ func solveInferredType
     end
   else
     outType = inSourceType
-#  elsif inTargetType == .null then
-#    outType = inSourceType
-#  elsif [inSourceType key] == [inTargetType key] then
-#    outType = inSourceType
-#  else
-#    error inErrorLocation
-#     : "Target type '" + [inTargetType key] + "' should be identical to source expression type '" + [inSourceType key] + "'"
-#     : outType 
   end
 }
 

@@ -73,7 +73,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
+  @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
     then .null
     else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
@@ -88,23 +88,32 @@ override method @varInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let inferredType
+    ?expressionType:let expressionType
     ?result:@variableKindIR expressionResultValueName
   ]
+#--- Check type compatibility
+  if targetType == .null then
+    targetType = expressionType
+  end
+  checkAssignmentCompatibility (
+    !sourceType:expressionType
+    !targetType:targetType
+    !errorLocation:mVarName.location
+  )
 #--- Declare local variable
   let targetVar = @variableKindIR.localVariable {!name:mVarName.string}
   [!?ioVariableMap insertDefinedLocalVariable
     !mVarName
-    !inferredType
+    !targetType
     !inModes
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
-    ![inferredType copiable]
+    ![targetType copiable]
     !{}
   ]
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationInstructionWithSimpleAssignmentIR.new {
-    !inferredType
+    !targetType
     !targetVar
     !expressionResultValueName
   }

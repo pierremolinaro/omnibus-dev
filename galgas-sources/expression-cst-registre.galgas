@@ -216,8 +216,8 @@ override getter @registerIntegerConstantInExpressionIR instructionCode -> @strin
             + " = (" + [mExpressionValue mangledName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
     outCode  = "if (" + [mExpressionValue mangledName] + " > " + mMaxBound + ") {\n"
-    outCode += "  raise_exception (1003"
-       + ", " + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
+    outCode += "  raise_exception (4, "
+       + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
        + ", " + [mInstructionLocation line] + ") ;\n"
     outCode += "}\n" 
     outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]

@@ -67,6 +67,20 @@ project (0:0:1) -> "plm" {
 #--- Registers
   "galgas-sources/register-declaration.galgas"
 
+#--- Expression
+  "galgas-sources/expression.galgas"
+  "galgas-sources/expression-conversion.galgas"
+#  "galgas-sources/expression-constructor-call.galgas"
+  "galgas-sources/expression-infix-operators.galgas"
+  "galgas-sources/expression-prefix-operators.galgas"
+  "galgas-sources/expression-literal-integer.galgas"
+  "galgas-sources/expression-literal-string.galgas"
+  "galgas-sources/expression-true-false.galgas"
+#  "galgas-sources/expression-self.galgas"
+  "galgas-sources/expression-var.galgas"
+  "galgas-sources/expression-func-call.galgas"
+  "galgas-sources/expression-cst-registre.galgas"
+
 #--- Instructions
   "galgas-sources/instructionList.galgas"
   "galgas-sources/instruction-inc-dec.galgas"
@@ -83,19 +97,6 @@ project (0:0:1) -> "plm" {
   "galgas-sources/instruction-proc-call.galgas"
   "galgas-sources/instruction-while.galgas"
   "galgas-sources/instruction-forever.galgas"
-
-#--- Expression
-  "galgas-sources/expression.galgas"
-#  "galgas-sources/expression-constructor-call.galgas"
-  "galgas-sources/expression-infix-operators.galgas"
-  "galgas-sources/expression-prefix-operators.galgas"
-  "galgas-sources/expression-literal-integer.galgas"
-  "galgas-sources/expression-literal-string.galgas"
-  "galgas-sources/expression-true-false.galgas"
-#  "galgas-sources/expression-self.galgas"
-  "galgas-sources/expression-var.galgas"
-  "galgas-sources/expression-func-call.galgas"
-  "galgas-sources/expression-cst-registre.galgas"
 
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"

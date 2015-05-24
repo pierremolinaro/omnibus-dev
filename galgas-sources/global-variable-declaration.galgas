@@ -67,6 +67,29 @@ override getter @globalVarDeclaration keyRepresentation -> @string outRepresenta
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
+proc checkAssignmentCompatibility
+  ?sourceType:let @unifiedTypeMap-proxy inSourceType
+  ?targetType:let @unifiedTypeMap-proxy inTargetType
+  ?errorLocation:let @location inErrorLocation
+{
+  if inTargetType != inSourceType then
+    var ok = false
+    if [[inSourceType kind] isBoolean] then
+      ok = [[inTargetType kind] isInteger]    
+    elsif [[inSourceType kind] isInteger] && [[inTargetType kind] isInteger] then
+      [[inSourceType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+      [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+      ok = (minTarget <= minSource) && (maxTarget >= maxSource)
+    end
+    if not ok then
+      error inErrorLocation
+      : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceType key]
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @globalVarDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -75,14 +98,14 @@ override method @globalVarDeclaration enterInContext
 #--- Get destination type
   switch mType
   case valueType (@lstring typeName) :
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let constantType]
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let variableType]
   #--- Analyze source expression
     @uint temporaryIndex = 0
     @instructionListIR instructionGenerationList = {}
     @variableMap variableMap = .emptyMap
     [mSourceExpression analyzeExpression
        !optionalReceiverType:.noReceiver
-       !optionalTargetType:constantType
+       !optionalTargetType:variableType
        !context:ioContext
        !modes:{}
        !allowException:true
@@ -101,10 +124,16 @@ override method @globalVarDeclaration enterInContext
     for (m) in mModeList do
       executionModes += !m.string
     end
+  #--- Check variable type and expression type
+    checkAssignmentCompatibility (
+      !sourceType:expressionType
+      !targetType:variableType
+      !errorLocation:mVarName.location
+    )
   #--- Enter in context
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !expressionType
+      !variableType
       !executionModes
       !resultValueName
     ]
