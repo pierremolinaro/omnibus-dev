@@ -5,18 +5,34 @@
 
 
 
-\chapter{Le type \texttt{Bool}}
+\chapter{Le type booléen}
 
+
+
+
+
+\section{Le type \texttt{Bool}}
+
+L'identificateur \plm=Bool= dénote le type booléen. Sa taille est fixée par la définition de la cible.
 
 \section{Les mots réservés \texttt{true} et \texttt{false}}
 
+Les mots réservés \plm+true+ et \plm+false+ dénotent respectivement la valeur logique \emph{vraie} et la valeur logique \emph{fausse}.
 
 \section{Les opérateurs infix de comparaison}
 
+Les valeurs booléennes sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés, avec \plm=false= < \plm=true=.
+ 
+\section{Les opérateurs infixes \texttt{and}, \texttt{or} et \texttt{xor}}
 
-\section{Les opérateurs infix \texttt{and}, \texttt{or} et \texttt{xor}}
+Les opérateurs infixes \plm=and=, \plm=or= et \plm=xor= implémentent respectivement le \emph{et} logique, \emph{ou} logique, \emph{ou exclusif} logique. Les deux premiers évaluent les opérandes en \emph{court-circuit}, c'est-à-dire que si la valeur de l'opérande de gauche détermine la valeur de l'expression, alors l'opérande de droite n'est pas évalué.
+
+Noter que les opérateurs infixes \plm=&=, \plm=|= et \plm=^= sont des opérateurs bit-à-bit sur les entiers non signés.
+
 
 \section{L'opérateur préfixé \texttt{not}}
+
+L'opérateur préfixé \plm=not= est la complémentation booléenne. Noter que l'opérateur préfixé \plm=~= effectue la complémentation bit-à-bit d'un entier non signé.
 
 \section{Conversion en une valeur entière}
 
@@ -25,6 +41,6 @@
 Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un booléen. Il suffit d'utiliser des opérateurs entre entiers comme \plm+==+ ou \plm+!=+ pour réaliser une conversion :
 
 \begin{PLM}
-let result : Bool = x != 0 // X est une expression entière
+let result : Bool = x != 0 // x est une expression entière
 \end{PLM}
 

@@ -110,6 +110,7 @@ override method @integerDeclaration enterInContext
 #--- Enter integer operators
   enterIntegerOperators (
     !integerTypeName:mIntegerTypeName
+    !signed:isSigned
     !?context:ioContext
   )
 }
@@ -117,7 +118,8 @@ override method @integerDeclaration enterInContext
 #----------------------------------------------------------------------------------------------------------------------*
 
 proc enterIntegerOperators
-  ?integerTypeName:@lstring inIntegerTypeName
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?signed:let @bool inIsSigned
   ?!context:@semanticContext ioContext
 {
 #--- ++ and -- operators
@@ -125,6 +127,7 @@ proc enterIntegerOperators
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
+#--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
@@ -149,18 +152,33 @@ proc enterIntegerOperators
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !BoolTypeProxy
   ]
-  [!?ioContext.mAndOperatorMap insertKey
-    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !selfTypeProxy
-  ]
-  [!?ioContext.mOrOperatorMap insertKey
-    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !selfTypeProxy
-  ]
-  [!?ioContext.mXorOperatorMap insertKey
-    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !selfTypeProxy
-  ]
+#--- Bit Wise operators (for unsigned integers)
+  if not inIsSigned then
+    [!?ioContext.mAndOperatorMap insertKey
+      !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+      !selfTypeProxy
+    ]
+    [!?ioContext.mOrOperatorMap insertKey
+      !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+      !selfTypeProxy
+    ]
+    [!?ioContext.mXorOperatorMap insertKey
+      !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+      !selfTypeProxy
+    ]
+    [!?ioContext.mUnsignedComplementOperatorMap insertKey
+      !inIntegerTypeName
+      !selfTypeProxy
+    ]
+  end
+#--- Negate operator (for signed integers)
+  if not inIsSigned then
+    [!?ioContext.mUnaryMinusOperatorMap insertKey
+      !inIntegerTypeName
+      !selfTypeProxy
+    ]
+  end
+#--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
@@ -197,16 +215,13 @@ proc enterIntegerOperators
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
   ]
+#--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !selfTypeProxy
-  ]
-  [!?ioContext.mUnaryMinusOperatorMap insertKey
-    !inIntegerTypeName
     !selfTypeProxy
   ]
 }

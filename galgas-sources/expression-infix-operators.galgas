@@ -441,7 +441,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infix {!infixOperator:"^"}
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
     if [option plm_options.noExceptionGeneration value] then
@@ -454,7 +454,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infix {!infixOperator:"+"}
   case subOp :
     if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
     if [option plm_options.noExceptionGeneration value] then
@@ -467,7 +467,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infix {!infixOperator:"-"}
   case mulOp :
     if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
     if [option plm_options.noExceptionGeneration value] then
@@ -480,7 +480,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infix {!infixOperator:"*"}
   case divOp :
     if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
     if [option plm_options.noExceptionGeneration value] then

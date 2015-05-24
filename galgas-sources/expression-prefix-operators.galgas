@@ -5,6 +5,7 @@
 enum @prefixOperator {
   case notOperator
   case minus
+  case unsignedComplement
   case minusNoOvf
 }
 
@@ -21,6 +22,19 @@ class @prefixOperatorExpressionAST : @expressionAST {
 #----------------------------------------------------------------------------------------------------------------------*
 
 syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <primary> !@expressionAST outExpression {
+    $~$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.unsignedComplement
+      !expression
+    }
+  }
 
   #--------------------------------------------------------------------------------------------------------------------*
 
@@ -128,6 +142,9 @@ override method @prefixOperatorExpressionAST analyzeExpression
   @prefixOperatorMap operatorMap
   @prefixOperatorIR prefixOperatorIR
   switch mOp 
+  case unsignedComplement :
+    operatorMap = inContext.mUnsignedComplementOperatorMap
+    prefixOperatorIR = .prefix {!prefixOperator:"~"}
   case notOperator :
     operatorMap = inContext.mNotOperatorMap
     prefixOperatorIR = .prefix {!prefixOperator:"!"}
@@ -138,7 +155,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mUnaryMinusOperatorMap
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation
-        : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+        : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     if [option plm_options.noExceptionGeneration value] then
       prefixOperatorIR = .prefix {!prefixOperator:"-"}
@@ -157,8 +174,19 @@ override method @prefixOperatorExpressionAST analyzeExpression
     @sint64 result
     switch mOp 
     case minusNoOvf : result = &- value
+    case unsignedComplement : error mOperatorLocation : "internal error" : result
     case minus : result = - value
     case notOperator : result = 1LS ^ value
+    end
+    outResult = .literalSignedInteger {!type:outExpressionType !value:result}
+  elsif [result isLiteralUnsignedInteger] then
+    [result literalSignedInteger ?type:* ?value:let @sint64 value]
+    @sint64 result
+    switch mOp 
+    case minusNoOvf, minus, notOperator :
+      error mOperatorLocation : "internal error" : result
+    case unsignedComplement :
+      result = ~ value
     end
     outResult = .literalSignedInteger {!type:outExpressionType !value:result}
   else

@@ -171,6 +171,11 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
         : outResultValueName
       end
     else
+      let assertGenerated = expressionBitCount > fieldBitCount
+      if assertGenerated && [inModeSet hasKey !exceptionModeName ()] then
+        error mExpressionLocation
+          : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+      end
       getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
         !mExpressionLocation
@@ -179,7 +184,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
         !fieldBitIndex
         !outResultValueName
         !outExpressionType
-        !expressionBitCount <= fieldBitCount
+        !not assertGenerated
       }
     end
   end
@@ -206,6 +211,9 @@ override getter @registerIntegerConstantInExpressionIR instructionCode -> @strin
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
             + " = ((" + mangledNameForType (!name:[mTargetType key]) + " *) "
             + [mExpressionValue mangledName] + ") << " + mBitShift + "\n" 
+  elsif [option plm_options.noExceptionGeneration value] then
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
+            + " = (" + [mExpressionValue mangledName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
     outCode  = "if (" + [mExpressionValue mangledName] + " > " + mMaxBound + ") {\n"
     outCode += "  raise_exception (1003"
@@ -213,7 +221,7 @@ override getter @registerIntegerConstantInExpressionIR instructionCode -> @strin
        + ", " + [mInstructionLocation line] + ") ;\n"
     outCode += "}\n" 
     outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
-               + " = (" + [mExpressionValue mangledName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
+               + " = " + [mExpressionValue mangledName] + " << " + mBitShift + "\n" 
   end
 }
 
@@ -222,7 +230,6 @@ override getter @registerIntegerConstantInExpressionIR instructionCode -> @strin
 override method @registerIntegerConstantInExpressionIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
 {
-#  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
   [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 

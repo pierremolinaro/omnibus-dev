@@ -121,7 +121,7 @@ override method @incDecInstructionAST analyze
   case incNoOverflowCheck, decNoOverflowCheck :
   case incWithOverflowCheck, decWithOverflowCheck :
     if [inModeSet hasKey !exceptionModeName ()] then
-      error mVarName : "operations that can generate exception are not allowed in $" + exceptionModeName () + " mode"
+      error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
   end
 #--- Code generation
