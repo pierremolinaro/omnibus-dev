@@ -13,17 +13,17 @@
 \begin{tabular}{lp{10cm}l}
   \textbf{Numéros} & \textbf{Signification} & \textbf{Lien} \\
   \hline
-   0 à 999 & Exceptions liées aux vecteurs d'interruption & \\
-   1000 & Dépassement de capacité de l'incrémentation (\plm-++-) & \\
-   1001 & Dépassement de capacité de l'incrémentation (\plm+--+) & \\
-   1002 & Dépassement de capacité de la négation (\plm+-+) & \\
-   1003 & Dépassement de la construction d'un champ entier d'un registre (\plm+registre::champ (...)+) & \refSubsectionPage{constructionChampEntierRegistre}\\
-   1010 & Dépassement de capacité de l'addition (\plm-+-) & \\
-   1011 & Dépassement de capacité de la soustraction (\plm+-+) & \\
-   1012 & Dépassement de capacité de la multiplication (\plm+*+) & \\
-   1013 & Dépassement de capacité de la division (\plm+/+) & \\
-   1020 & Échec de l'instruction \plm+assert+ & \\
-   1021 & Instruction \plm+throw+ & \\
+   < 0 & Exceptions liées aux vecteurs d'interruption & \\
+   1 & Dépassement de capacité de l'incrémentation (\plm-++-) & \\
+   2 & Dépassement de capacité de l'incrémentation (\plm+--+) & \\
+   3 & Dépassement de capacité de la négation (\plm+-+) & \\
+   4 & Dépassement de la construction d'un champ entier d'un registre (\plm+registre::champ (...)+) & \refSubsectionPage{constructionChampEntierRegistre}\\
+   5 & Dépassement de capacité d'une conversion entre entiers (\plm+\+) & \\
+   10 & Dépassement de capacité de l'addition (\plm-+-) & \\
+   11 & Dépassement de capacité de la soustraction (\plm+-+) & \\
+   12 & Dépassement de capacité de la multiplication (\plm+*+) & \\
+   13 & Dépassement de capacité de la division (\plm+/+) & \\
+   20 & Échec de l'instruction \plm+assert+ & \\
 \end{tabular}
 \caption{Code des exceptions}
 \labelTableau{tableauCodeExceptions}

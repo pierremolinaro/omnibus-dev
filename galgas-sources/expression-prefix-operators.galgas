@@ -160,7 +160,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     if [option plm_options.noExceptionGeneration value] then
       prefixOperatorIR = .prefix {!prefixOperator:"-"}
     else
-      prefixOperatorIR = .prefixMinusOvf {!code:6}
+      prefixOperatorIR = .prefixMinusOvf {!code:3}
     end
   end
   [operatorMap checkWith

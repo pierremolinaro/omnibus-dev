@@ -113,7 +113,7 @@ proc codeGeneration
   code += "static void init (void) ;\n\n"
   if not [option plm_options.noExceptionGeneration value] then
     code += titleComment (!"Exception")
-    code += "static void raise_exception_internal (const uint32_t inCode,\n"
+    code += "static void raise_exception_internal (const int32_t inCode,\n"
     code += "                                      const char * inSourceFile,\n"
     code += "                                      const uint32_t inSourceLine) ;\n\n"
     code += "static void raise_exception (const int32_t inCode,\n"
@@ -159,7 +159,7 @@ proc codeGeneration
   code += "}\n\n"
   if not [option plm_options.noExceptionGeneration value] then
     code += titleComment (!"Raise Exception internal")
-    code += "static void raise_exception_internal (const uint32_t in_CODE,\n"
+    code += "static void raise_exception_internal (const int32_t in_CODE,\n"
     code += "                                      const char * in_FILE,\n"
     code += "                                      const uint32_t in_LINE) {\n"
     code += [inIntermediateCodeStruct.mExceptionInstructionListIR instructionListCode]

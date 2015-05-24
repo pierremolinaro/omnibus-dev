@@ -7,3 +7,122 @@
 
 \chapter{Les types entiers}
 
+Les types entiers ne sont pas prédéfinis dans le langage. C'est la configuration de la cible qui définit les types entiers disponibles (voir \refChapterPage{chapitreConfCible}).
+
+À titre d'exemple, le \refTableau{typesEntiersTeensy} liste les types entiers définis par la cible \texttt{target-teensy-sequential-systick}.
+
+\begin{table}[h]
+\centering
+\ligne\\
+\begin{tabular}{lllll}
+  \textbf{Nature} & \textbf{8 bits} & \textbf{16 bits} & \textbf{32 bits} & \textbf{64 bits} \\
+  \hline
+  Signé & \plm=Int8= & \plm=Int16= & \plm=Int32= & \plm=Int64= \\
+  Non signé & \plm=UInt8= & \plm=UInt16= & \plm=UInt32= & \plm=UInt64= \\
+\end{tabular}
+\caption{Types entiers définis par la cible \texttt{target-teensy-sequential-systick}}
+\labelTableau{typesEntiersTeensy}
+\ligne
+\end{table}
+
+
+
+\section{Constante litérale entière}
+
+Le langage accepte des constantes litérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
+
+\begin{PLM}
+var v : Int8 = 128 // Erreur de compilation :
+                   // 128 non représentable par un entier signé 8 bits
+\end{PLM}
+
+\colorbox{red}{Erreur à corriger}
+\begin{PLM}
+var v : Int8 = -128 // Devrait être accepté, erreur actuellement
+\end{PLM}
+
+
+
+
+
+
+
+
+\section{Conversion entre valeurs entières}
+
+\subsection{Conversions implicites silencieuses}
+Les conversions qui sont toujours possibles sans débordement sont acceptées silencieusement. Par exemple :
+\begin{PLM}
+let v : UInt8 = ...
+let x : UInt16 = v
+let y : Int16 = v
+\end{PLM}
+
+Par contre, une conversion pouvant provoquer un débordement est rejetée à la compilation :
+\begin{PLM}
+let s : Int8 = ...
+let x : UInt16 = x // Erreur de compilation
+\end{PLM}
+
+\subsection{L'opérateur \texttt{\textbackslash}}
+L'opérateur \plm+\+ permet de spécifier une conversion explicite.
+
+\begin{PLM}
+let s : Int8 = ...
+let x : UInt16 = x \ UInt16
+\end{PLM}
+
+L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+UInt16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+\+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=&\=.
+
+L'opérateur \plm+\+ ne peut pas apparaître dans une expression statique.
+
+De plus, une erreur de compilation est déclenchée si il est utilisé alors qu'une conversion implicite est possible :
+\begin{PLM}
+let v : UInt8 = ...
+let y : Int16 = v \ Int16 // Erreur, la conversion implicite est possible
+\end{PLM}
+
+\subsection{L'opérateur \texttt{\&\textbackslash}}
+
+L'opérateur \plm+&\+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{\&\textbackslash} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
+
+\begin{PLM}
+let s : Int8 = -10
+let x : UInt16 = x &\ UInt16
+\end{PLM}
+
+L'opérateur \plm+&\+ ne peut pas apparaître dans une expression statique.
+
+De plus, une erreur de compilation est déclenchée si il est utilisé alors qu'une conversion implicite est possible :
+\begin{PLM}
+let v : UInt8 = ...
+let y : Int16 = v &\ Int16 // Erreur, la conversion implicite est possible
+\end{PLM}
+
+
+
+\section{Les opérateurs infix de comparaison}
+
+Les valeurs entières sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés.
+
+La comparaison ne peut s'effectuer qu'entre valeurs de même type entier.
+
+
+
+
+
+
+
+
+
+\section{Les opérateurs infixes \texttt{and}, \texttt{or} et \texttt{xor}}
+
+Les opérateurs infixes \plm=and=, \plm=or= et \plm=xor= implémentent respectivement le \emph{et} logique, \emph{ou} logique, \emph{ou exclusif} logique. Les deux premiers évaluent les opérandes en \emph{court-circuit}, c'est-à-dire que si la valeur de l'opérande de gauche détermine la valeur de l'expression, alors l'opérande de droite n'est pas évalué.
+
+Noter que les opérateurs infixes \plm=&=, \plm=|= et \plm=^= sont des opérateurs bit-à-bit sur les entiers non signés, et ne peuvent pas être appliqués à des valeurs booléennes.
+
+
+\section{L'opérateur préfixé \texttt{not}}
+
+L'opérateur préfixé \plm=not= est la complémentation booléenne. Noter que l'opérateur préfixé \plm=~= effectue la complémentation bit-à-bit d'un entier non signé et ne peut pas être appliqué à une valeur booléenne.
+

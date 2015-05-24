@@ -90,7 +90,7 @@ class @assertInstructionIR : @abstractInstructionIR {
 override getter @assertInstructionIR instructionCode -> @string outCode {
   outCode = [mInstructionList instructionListCode]
   outCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
-  outCode += "  raise_exception (9"
+  outCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mAssertInstructionLocation line] + ") ;\n"
   outCode += "}\n" 

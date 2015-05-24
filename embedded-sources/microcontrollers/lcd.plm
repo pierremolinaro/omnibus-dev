@@ -297,17 +297,17 @@ proc $user @noWarningIfUnused printUnsigned (?inValue : UInt32) {
   if inValue > 9 then
     printUnsigned (!inValue / 10)
   end
-  writeData_inUserMode (!0x30 + ((inValue % 10) as UInt8))
+  writeData_inUserMode (!0x30 + ((inValue % 10) &\ UInt8))
 }
 
 //-----------------------------------------------------------------------------*
 
 proc $user @noWarningIfUnused printSigned (?inValue : Int32) {
   if inValue >= 0 then
-    printUnsigned (!inValue as UInt32)
+    printUnsigned (!inValue &\ UInt32)
   else
     writeData_inUserMode (!0x2D) // Signe -
-    printUnsigned (!(- inValue) as UInt32)
+    printUnsigned (!(- inValue) &\ UInt32)
   end
 }
 
@@ -412,7 +412,7 @@ proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt
   if inValue > 9 then
     printUnsignedInExceptionMode (!inValue &/ 10)
   end
-  writeDataInExceptionMode (!0x30 &+ ((inValue % 10) as UInt8))
+  writeDataInExceptionMode (!0x30 &+ ((inValue % 10) &\ UInt8))
 }
 
 //-----------------------------------------------------------------------------*

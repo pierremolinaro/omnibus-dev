@@ -38,13 +38,6 @@ class @infixOperatorExpressionAST : @expressionAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-class @asExpressionAST : @expressionAST {
-  @expressionAST mExpression
-  @lstring mTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -55,13 +48,6 @@ syntax extension common_syntax {
   rule <comparison> !@expressionAST outExpression {
     <additive_expression> ?outExpression
     select
-    or
-      $as$
-      $identifier$ ?let typeIdentifier
-      outExpression = @asExpressionAST.new {
-        !outExpression
-        !typeIdentifier
-      }
     or
       $==$
       let operatorLocation = @location.here
@@ -328,15 +314,6 @@ override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-override method @asExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -447,7 +424,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     if [option plm_options.noExceptionGeneration value] then
       infixOperatorIR = .infix {!infixOperator:"+"}
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:3}
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
     end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
@@ -460,7 +437,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     if [option plm_options.noExceptionGeneration value] then
       infixOperatorIR = .infix {!infixOperator:"-"}
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:4}
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
     end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
@@ -473,7 +450,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     if [option plm_options.noExceptionGeneration value] then
       infixOperatorIR = .infix {!infixOperator:"*"}
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:5}
+      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:12}
     end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
@@ -486,7 +463,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     if [option plm_options.noExceptionGeneration value] then
       infixOperatorIR = .infix {!infixOperator:"/"}
     else
-      infixOperatorIR = .infixUnsignedDivide{!code:6}
+      infixOperatorIR = .infixUnsignedDivide{!code:13}
     end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
@@ -553,72 +530,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @asExpressionAST
-
-override method @asExpressionAST analyzeExpression
-  ?optionalReceiverType:let @receiverType inReceiverType
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
-{
-#--- Analyze expression
-  [mExpression analyzeExpression
-    !optionalReceiverType:inReceiverType
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !modes:inModeSet
-    !allowException:inAllowExceptions
-    !?temporary:ioTemporaryIndex
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let unused expressionType
-    ?result:@variableKindIR expressionResult
-  ]
-#--- Analyze type
-  outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
-#--- Temp var
-  getNewTempVariable (!?ioTemporaryIndex ?outResult)
-#--- Generate code
-  ioInstructionGenerationList += !@asOperatorInstructionIR.new {
-    !outExpressionType
-    !outResult
-    !expressionResult
-  }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-#! @asOperatorInstructionIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @asOperatorInstructionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mTemporaryResultVariable
-  @variableKindIR mOperand
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @asOperatorInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @asOperatorInstructionIR instructionCode -> @string outCode {
-  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-  outCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-}
-
 #----------------------------------------------------------------------------------------------------------------------*
 #! @operatorInfixExpressionIR
 #----------------------------------------------------------------------------------------------------------------------*

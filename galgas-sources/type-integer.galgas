@@ -172,7 +172,7 @@ proc enterIntegerOperators
     ]
   end
 #--- Negate operator (for signed integers)
-  if not inIsSigned then
+  if inIsSigned then
     [!?ioContext.mUnaryMinusOperatorMap insertKey
       !inIntegerTypeName
       !selfTypeProxy

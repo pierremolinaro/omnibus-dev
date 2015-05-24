@@ -60,14 +60,22 @@ override method @assignmentInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let inferredType
+    ?expressionType:let expressionType
     ?result:@variableKindIR sourceValueName
   ]
 #--- Check inferred type
-  if [targetType key] != [inferredType key] then
-    error mTargetVarName : "source expression type is '" + [inferredType key]
-      + "', and is not compatible with target type '" + [targetType key] + "'"
-  end
+#  if [targetType key] != [expressionType key] then
+#    error mTargetVarName : "source expression type is '" + [expressionType key]
+#      + "', and is not compatible with target type '" + [targetType key] + "'"
+#  end
+#  if mTargetVarName.string == "x" then
+#  log expressionType, targetType
+#  end
+  checkAssignmentCompatibility (
+    !sourceType:expressionType
+    !targetType:targetType
+    !errorLocation:mTargetVarName.location
+  )
 #--- Write local variable
   [!?ioVariableMap searchForWriteAccess
     !mTargetVarName
