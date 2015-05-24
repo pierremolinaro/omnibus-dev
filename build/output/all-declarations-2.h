@@ -573,18 +573,6 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (cla
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'checkAssignmentCompatibility'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_checkAssignmentCompatibility (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
-                                           const class GALGAS_location constinArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                   Filewrapper 'globalVariableGenerationTemplate'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1110,6 +1098,18 @@ class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GAL
                                                                  const class GALGAS_location & constinArgument2,
                                                                  class C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'checkAssignmentCompatibility'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_checkAssignmentCompatibility (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                           const class GALGAS_location constinArgument2,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
