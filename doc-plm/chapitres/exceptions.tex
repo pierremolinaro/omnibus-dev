@@ -27,14 +27,14 @@
    14 & Modulo par zéro (\plm+%+) & \\
    20 & Échec de l'instruction \plm+assert+ & \refSectionPage{instructionAssert} \\
 \end{tabular}
-\caption{Code des exceptions}
+\caption{Code des exceptions}\index{Exception!Code}
 \labelTableau{tableauCodeExceptions}
 \end{table}
 
 
 
 
-\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}
+\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}\index{assert@\plm=assert=}
 
 L'instruction \plm=assert= a la syntaxe suivante :
 \begin{PLM}
@@ -54,7 +54,7 @@ assert true // Erreur, l'expression est calculable statiquement
 
 
 
-\section{L'instruction \texttt{throw}}
+\section{L'instruction \texttt{throw}}\index{throw@\plm=throw=}
 
 L'instruction \plm=throw= a la syntaxe suivante :
 \begin{PLM}
@@ -70,7 +70,7 @@ Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation},
 
 
 
-\sectionLabel{Définition des types liés aux exceptions}{typeLiesException}
+\sectionLabel{Définition des types liés aux exceptions}{typeLiesException}\index{exception:@\plm=exception:=}
 
 Une exception est caractérisée par trois informations :
 \begin{itemize}
@@ -106,7 +106,7 @@ Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont 
 
 Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans un ordre quelconque. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
 
-\subsection{Routines d'exception \texttt{setup} et \texttt{loop}}
+\subsection{Routines d'exception \texttt{setup} et \texttt{loop}}\index{exception loop@\plm=exception loop=}\index{exception setup@\plm=exception setup=}
 
 Leur syntaxe est la suivante :
 \begin{PLM}
@@ -117,7 +117,7 @@ exception nom {
 
 \plm=nom= est soit \texttt{setup}, soit \texttt{loop}.
 
-\plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage est détecté par le compilateur. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
+\plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
 
 Trois constantes sont prédéfinies :
 \begin{itemize}
@@ -130,5 +130,11 @@ Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler
 
 \colorbox{red}{Actuellement, \texttt{FILE} n'est pas exploitable.}
 
+\section{Exemples}
 
-
+Pour redémarrer un processeur ARMv7 lors d'une exception, on peut écrire la routine d'exception \texttt{loop} suivante :
+\begin{PLM}
+exception loop {
+  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
+}
+\end{PLM}

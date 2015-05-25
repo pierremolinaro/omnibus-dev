@@ -4318,15 +4318,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
                                                   const C_String & inSourceFilePath) ;
 
-//------------------------------------- 'var_declaration' non terminal
-//--- 'parse' label
-  public : virtual void nt_var_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_var_5F_declaration_ (GALGAS_generalizedTypeEnumAST & outArgument0,
-                                                GALGAS_lstring & outArgument1,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
   public : virtual int32_t select_common_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
@@ -4527,15 +4518,6 @@ class cGrammar_plms_5F_grammar : public cParser_common_5F_syntax,
 //--- Only syntax analysis
   public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
                                                   const C_String & inSourceFilePath) ;
-
-//------------------------------------- 'var_declaration' non terminal
-//--- 'parse' label
-  public : virtual void nt_var_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_var_5F_declaration_ (GALGAS_generalizedTypeEnumAST & outArgument0,
-                                                GALGAS_lstring & outArgument1,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
   public : virtual int32_t select_common_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 

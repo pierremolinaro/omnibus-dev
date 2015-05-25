@@ -26,5 +26,4 @@ do
   /usr/texbin/pdflatex --file-line-error --shell-escape '\newcommand\afficherDetailSchema{false}\input{doc-plm.tex}' &&
   iteration=$((iteration+=1))
 done &&
-cp doc-plm.pdf doc-plm-couleur.pdf &&
 echo "---------------- SUCCES $iteration iterations"

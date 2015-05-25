@@ -22,7 +22,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <declaration> ?!@ast ioAST {
-    $newBooleanType$
+    $booleanType$
     $identifier$ ?let newBoolTypeName
     @lstringlist attributeList = {}
     repeat
@@ -86,6 +86,9 @@ override method @booleanDeclaration enterInContext
     !comparable:true
   ]
 #--- Enter boolean type
+  if ioContext.mBooleanType != .null then
+    error mBooleanTypeName : "Boolean type already defined"
+  end
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mBooleanTypeName ?let boolType]
   ioContext.mBooleanType = boolType
 #--- Enter boolean operators
@@ -97,7 +100,7 @@ override method @booleanDeclaration enterInContext
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-proc enterBooleanOperators
+private proc enterBooleanOperators
   ?integerTypeName:@lstring inBooleanTypeName
   ?!context:@semanticContext ioContext
 {
