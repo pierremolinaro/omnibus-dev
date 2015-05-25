@@ -133,6 +133,8 @@ list @typeList {
 struct @semanticContext {
   @targetBaseTypeMap mTargetBaseTypeMap
   @unifiedTypeMap-proxy mBooleanType
+  @unifiedTypeMap-proxy mExceptionCodeType
+  @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
@@ -183,6 +185,7 @@ proc buildSemanticContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
   ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
+  ?exceptionTypeList:let @exceptionTypesAST inExceptionTypes
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
 {
@@ -191,9 +194,27 @@ proc buildSemanticContext
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inProcedureListAST
-      !?context: outSemanticContext
+      !?context:outSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
+  end
+#--- Solve exception types
+  if [inExceptionTypes length] != 1 then
+    error ["" nowhere]
+    : "exactly one exception type declaration should be provided (found:" + [inExceptionTypes length] + ")"
+    for () in inExceptionTypes do
+      error mExceptionCodeTypeName:"exception type declaration is here"
+    end
+  else
+    [inExceptionTypes first ?let @lstring exceptionCodeTypeName ?let @lstring exceptionLineTypeName]
+    outSemanticContext.mExceptionCodeType = @unifiedTypeMap-proxy.searchKey {
+      !outSemanticContext.mTypeMap
+      !exceptionCodeTypeName
+    }
+    outSemanticContext.mExceptionLineType = @unifiedTypeMap-proxy.searchKey {
+      !outSemanticContext.mTypeMap
+      !exceptionLineTypeName
+    }
   end
 #---
   for procedure in inProcedureListAST do

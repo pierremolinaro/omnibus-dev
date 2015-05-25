@@ -184,7 +184,8 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Exception clause (if exception code is generated)
   if not [option plm_options.noExceptionGeneration value] then
-    [ioIntermediateCodeStruct.mExceptionInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [ioIntermediateCodeStruct.mExceptionSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+    [ioIntermediateCodeStruct.mExceptionLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
 #--- Explore procedures and functions
   @functionMapIR accessibleFunctionMap = {}

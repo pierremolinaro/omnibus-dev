@@ -40,9 +40,9 @@ proc $user loop () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printUnsigned (!gVar)
-  if 0 == (gVar & 15) then
-    gZZZZZ = gYYYYY + gVar
-  end
+//  if 0 == (gVar & 15) then
+//    gZZZZZ = gYYYYY + gVar
+//  end
 }
 
 //-----------------------------------------------------------------------------*

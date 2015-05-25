@@ -92,6 +92,7 @@ private proc compileProject
       !procedureDeclarationList:ast.mProcedureListAST
       !functionDeclarationList:ast.mFunctionListAST
       !requiredProcList:ast.mRequiredProcList
+      !exceptionTypeList:ast.mExceptionTypes
       !?staticStringMap:globalLiteralStringMap
       ?context:let @semanticContext semanticContext
     )
@@ -102,7 +103,7 @@ private proc compileProject
         !procedureDeclarationList:ast.mProcedureListAST
         !functionDeclarationList:ast.mFunctionListAST
         !initList:ast.mInitList
-        !exception:ast.mException
+        !exceptionClauses:ast.mExceptionClauses
         !context:semanticContext
         !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile
@@ -153,7 +154,8 @@ private proc addTargetSpecificFiles
   ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST
   ioAST.mTargetList += ast.mTargetList
   ioAST.mInitList = ast.mInitList + ioAST.mInitList
-  ioAST.mException = ast.mException
+  ioAST.mExceptionClauses = ast.mExceptionClauses + ioAST.mExceptionClauses
+  ioAST.mExceptionTypes = ast.mExceptionTypes + ioAST.mExceptionTypes
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

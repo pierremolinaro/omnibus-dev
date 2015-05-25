@@ -180,15 +180,16 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
     outResult = .literalSignedInteger {!value:result}
   elsif [result isLiteralUnsignedInteger] then
-    [result literalSignedInteger ?value:let @sint64 value]
-    @sint64 result
+    [result literalUnsignedInteger ?value:let @uint64 value]
     switch mOp 
-    case minusNoOvf, minus, notOperator :
-      error mOperatorLocation : "internal error" : result
+    case minusNoOvf, minus :
+      let @sint64 signedValue = [value sint64]
+      outResult = .literalSignedInteger {!value:- signedValue}
+    case notOperator :
+      outResult = .literalUnsignedInteger {!value:1L ^ value}
     case unsignedComplement :
-      result = ~ value
+      outResult = .literalUnsignedInteger {!value:~ value}
     end
-    outResult = .literalSignedInteger {!value:result}
   else
   #--- Temp var
     getNewTempVariable (!?ioTemporaryIndex ?outResult)

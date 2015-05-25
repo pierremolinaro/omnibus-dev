@@ -3,7 +3,8 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @throwInstructionAST : @instructionAST {
-  @luint64 mThrowInstructionCode
+  @location mThrowLocation
+  @expressionAST mCodeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -16,8 +17,9 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $throw$
-    $integer$ ?let @luint64 throwCode
-    ioInstructionList += !@throwInstructionAST.new {!throwCode}
+    let loc = @location.here
+    <expression> ?let @expressionAST codeExpression
+    ioInstructionList += !@throwInstructionAST.new {!loc !codeExpression}
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -29,29 +31,48 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @throwInstructionAST analyze
-  ?optionalReceiverType:let @receiverType unused inReceiverType
-  ?context:let @semanticContext unused inContext
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint unused ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@uint ioTemporaryIndex
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+#--- Exception allowed ?
   if [inModeSet hasKey !exceptionModeName ()] then
-    error mThrowInstructionCode : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    error mThrowLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
   end
-  @uint code
-  if mThrowInstructionCode.uint64 <= [@uint.max uint64] then
-    code = [mThrowInstructionCode.uint64 uint]
-  else
-    error mThrowInstructionCode: "throw code should be <= " + @uint.max : code
+#--- Analyze expression
+  @instructionListIR unusedInstructionListIR = {}
+  [mCodeExpression analyzeExpression
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inContext.mExceptionCodeType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:unusedInstructionListIR
+    ?expressionType:let expressionType
+    ?result:@variableKindIR result
+  ]
+#--- Expression type check
+  if [expressionType key] != [inContext.mExceptionCodeType key] then
+    error mThrowLocation
+    : "throw expression type is " + [expressionType key] + ", required type is " + [inContext.mExceptionCodeType key]
+  end
+#--- Expression is static ?
+  if ([unusedInstructionListIR length] > 0) || not [result isStatic] then
+    error mThrowLocation : "throw expression cannot be statically computed"
   end
 #--- Code generation
   if not [option plm_options.noExceptionGeneration value] then
     ioInstructionGenerationList += !@throwInstructionIR.new {
-      !mThrowInstructionCode.location
-      !code
+      !mThrowLocation
+      !result
     }
   end
 }
@@ -62,13 +83,13 @@ override method @throwInstructionAST analyze
 
 class @throwInstructionIR : @abstractInstructionIR {
   @location mThrowInstructionLocation
-  @uint mCode
+  @variableKindIR mCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @throwInstructionIR instructionCode -> @string outCode {
-  outCode = "raise_exception (" + mCode
+  outCode = "raise_exception (" + [mCode mangledName]
      + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mThrowInstructionLocation line] + ") ;\n"
 }

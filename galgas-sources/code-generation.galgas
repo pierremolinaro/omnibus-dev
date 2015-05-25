@@ -162,7 +162,12 @@ proc codeGeneration
     code += "static void raise_exception_internal (const int32_t in_CODE,\n"
     code += "                                      const char * in_FILE,\n"
     code += "                                      const uint32_t in_LINE) {\n"
-    code += [inIntermediateCodeStruct.mExceptionInstructionListIR instructionListCode]
+    code += [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListCode]
+    [!?code incIndentation !2]
+    code += "while (1) {\n"
+    code += [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListCode]
+    code += "}\n"
+    [!?code decIndentation !2]
     code += "}\n\n"
   end
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do

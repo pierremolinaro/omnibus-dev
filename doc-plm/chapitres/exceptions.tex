@@ -7,6 +7,7 @@
 
 \chapter{Exceptions}
 
+
 \begin{table}[ht]
 \centering
 \small
@@ -24,9 +25,110 @@
    12 & Dépassement de capacité de la multiplication (\plm+*+) & \\
    13 & Dépassement de capacité de la division (\plm+/+) & \\
    14 & Modulo par zéro (\plm+%+) & \\
-   20 & Échec de l'instruction \plm+assert+ & \\
+   20 & Échec de l'instruction \plm+assert+ & \refSectionPage{instructionAssert} \\
 \end{tabular}
 \caption{Code des exceptions}
 \labelTableau{tableauCodeExceptions}
 \end{table}
+
+
+
+
+\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}
+
+L'instruction \plm=assert= a la syntaxe suivante :
+\begin{PLM}
+assert expression
+\end{PLM}
+
+L'\plm=expression= est une expression booléenne non calculable statiquement.
+
+Si le programme est compilé avec les exceptions activées, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une exception (dont le code est donné par le \refTableau{tableauCodeExceptions}) est levée.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
+
+Noter que \plm=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \plm=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
+\begin{PLM}
+assert true // Erreur, l'expression est calculable statiquement
+\end{PLM}
+
+
+
+\section{L'instruction \texttt{throw}}
+
+L'instruction \plm=throw= a la syntaxe suivante :
+\begin{PLM}
+throw expression
+\end{PLM}
+
+L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typeLiesException}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
+
+Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=throw= lève une exception dont le code est la valeur de l'\plm=expression=.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
+
+
+
+
+\sectionLabel{Définition des types liés aux exceptions}{typeLiesException}
+
+Une exception est caractérisée par trois informations :
+\begin{itemize}
+  \item son code (\refTableauPage{tableauCodeExceptions}) ;
+  \item le nom du fichier source de l'instruction qui a levé l'exception ;
+  \item le numéro de ligne du fichier source de l'instruction qui a levé l'exception.
+\end{itemize}
+
+Le type du code et du numéro de ligne ne sont pas prédéfinis par le langage. La construction suivante définit ces types :
+\begin{PLM}
+exception : nomDuTypeDuCode nomDuTypeDuNumeroDeLigne
+\end{PLM}
+
+Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits :
+\begin{PLM}
+exception : Int32 UInt32
+\end{PLM}
+
+Cette construction doit apparaître exactement une fois. Normalement, c'est le fichier de définition de la cible qui la contient.
+
+
+\section{Routines exécutées lors de l'occurrence d'une exception}
+
+
+Lors de l'occurrence d'une exception, l'exécution séquentielle des instructions est abandonnée, et :
+\begin{itemize}
+  \item les interruptions sont masquées, si elles ne le sont pas déjà ;
+  \item les routines d'exception \texttt{setup} sont exécutées une fois ;
+  \item les routines d'exception \texttt{loop} sont exécutées indéfiniment.
+\end{itemize}
+
+Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans un ordre quelconque. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
+
+Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans un ordre quelconque. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
+
+\subsection{Routines d'exception \texttt{setup} et \texttt{loop}}
+
+Leur syntaxe est la suivante :
+\begin{PLM}
+exception nom {
+  liste_instructions
+}
+\end{PLM}
+
+\plm=nom= est soit \texttt{setup}, soit \texttt{loop}.
+
+\plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage est détecté par le compilateur. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
+
+Trois constantes sont prédéfinies :
+\begin{itemize}
+  \item \plm=CODE=, qui contient le code de l'exception, et dont le type est défini par la construction \plm=exception:= (\refSectionPage{typeLiesException}) ;
+  \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a levé l'exception, et dont le type est \plm=StaticString= ;
+  \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a levé l'exception, et dont le type est défini par la construction \plm=exception:= (\refSectionPage{typeLiesException}).
+\end{itemize}
+
+Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler les caractéristiques de l'exception.
+
+\colorbox{red}{Actuellement, \texttt{FILE} n'est pas exploitable.}
+
+
 

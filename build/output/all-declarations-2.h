@@ -263,6 +263,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_targetBaseTypeMap mAttribute_mTargetBaseTypeMap ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionCodeType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_procedureMap mAttribute_mProcedureMap ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
@@ -315,6 +317,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & in_mTargetBaseTypeMap,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionCodeType,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_procedureMap & in_mProcedureMap,
                                    const GALGAS_functionMap & in_mFunctionMap,
@@ -363,16 +367,16 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_semanticContext constructor_new (const class GALGAS_targetBaseTypeMap & inOperand0,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                          const class GALGAS_unifiedTypeMap & inOperand2,
-                                                          const class GALGAS_procedureMap & inOperand3,
-                                                          const class GALGAS_functionMap & inOperand4,
-                                                          const class GALGAS_registerMap & inOperand5,
-                                                          const class GALGAS_globalConstantMap & inOperand6,
-                                                          const class GALGAS_globalVariableMap & inOperand7,
-                                                          const class GALGAS_modeMap & inOperand8,
-                                                          const class GALGAS_stringset & inOperand9,
-                                                          const class GALGAS_infixOperatorMap & inOperand10,
-                                                          const class GALGAS_infixOperatorMap & inOperand11,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                          const class GALGAS_unifiedTypeMap & inOperand4,
+                                                          const class GALGAS_procedureMap & inOperand5,
+                                                          const class GALGAS_functionMap & inOperand6,
+                                                          const class GALGAS_registerMap & inOperand7,
+                                                          const class GALGAS_globalConstantMap & inOperand8,
+                                                          const class GALGAS_globalVariableMap & inOperand9,
+                                                          const class GALGAS_modeMap & inOperand10,
+                                                          const class GALGAS_stringset & inOperand11,
                                                           const class GALGAS_infixOperatorMap & inOperand12,
                                                           const class GALGAS_infixOperatorMap & inOperand13,
                                                           const class GALGAS_infixOperatorMap & inOperand14,
@@ -394,9 +398,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand30,
                                                           const class GALGAS_infixOperatorMap & inOperand31,
                                                           const class GALGAS_infixOperatorMap & inOperand32,
-                                                          const class GALGAS_prefixOperatorMap & inOperand33,
-                                                          const class GALGAS_prefixOperatorMap & inOperand34,
-                                                          const class GALGAS_prefixOperatorMap & inOperand35
+                                                          const class GALGAS_infixOperatorMap & inOperand33,
+                                                          const class GALGAS_infixOperatorMap & inOperand34,
+                                                          const class GALGAS_prefixOperatorMap & inOperand35,
+                                                          const class GALGAS_prefixOperatorMap & inOperand36,
+                                                          const class GALGAS_prefixOperatorMap & inOperand37
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -430,6 +436,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mDivOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mExceptionCodeType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mExceptionLineType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMap reader_mFunctionMap (LOCATION_ARGS) const ;
 
@@ -1033,8 +1043,9 @@ void routine_buildSemanticContext (const class GALGAS_declarationListAST constin
                                    const class GALGAS_procedureDeclarationListAST constinArgument1,
                                    const class GALGAS_functionDeclarationListAST constinArgument2,
                                    const class GALGAS_requiredProcedureDeclarationListAST constinArgument3,
-                                   class GALGAS_globalLiteralStringMap & ioArgument4,
-                                   class GALGAS_semanticContext & outArgument5,
+                                   const class GALGAS_exceptionTypesAST constinArgument4,
+                                   class GALGAS_globalLiteralStringMap & ioArgument5,
+                                   class GALGAS_semanticContext & outArgument6,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1121,7 +1132,7 @@ void routine_semanticAnalysis (const class GALGAS_declarationListAST constinArgu
                                const class GALGAS_procedureDeclarationListAST constinArgument1,
                                const class GALGAS_functionDeclarationListAST constinArgument2,
                                const class GALGAS_initList constinArgument3,
-                               const class GALGAS_exceptionAST constinArgument4,
+                               const class GALGAS_exceptionClauseListAST constinArgument4,
                                const class GALGAS_semanticContext constinArgument5,
                                const class GALGAS_requiredProcedureDeclarationListAST constinArgument6,
                                const class GALGAS_location constinArgument7,
@@ -1157,11 +1168,11 @@ void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@exceptionAST exceptionSemanticAnalysis'                              *
+//                     Category method '@exceptionClauseListAST-element exceptionSemanticAnalysis'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_exceptionAST inObject,
+void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_exceptionClauseListAST_2D_element inObject,
                                                const class GALGAS_semanticContext constin_inContext,
                                                class GALGAS_uint & io_ioTemporaryIndex,
                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
@@ -1224,7 +1235,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
   public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
   public : GALGAS_initListIR mAttribute_mInitList ;
-  public : GALGAS_instructionListIR mAttribute_mExceptionInstructionListIR ;
+  public : GALGAS_instructionListIR mAttribute_mExceptionSetupInstructionListIR ;
+  public : GALGAS_instructionListIR mAttribute_mExceptionLoopInstructionListIR ;
 
 
 //--------------------------------- Accessors
@@ -1250,7 +1262,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_functionMapIR & in_mFunctionMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
                                           const GALGAS_initListIR & in_mInitList,
-                                          const GALGAS_instructionListIR & in_mExceptionInstructionListIR) ;
+                                          const GALGAS_instructionListIR & in_mExceptionSetupInstructionListIR,
+                                          const GALGAS_instructionListIR & in_mExceptionLoopInstructionListIR) ;
 
 //-- Start of generic part --*
 
@@ -1272,7 +1285,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_functionMapIR & inOperand6,
                                                                  const class GALGAS_stringset & inOperand7,
                                                                  const class GALGAS_initListIR & inOperand8,
-                                                                 const class GALGAS_instructionListIR & inOperand9
+                                                                 const class GALGAS_instructionListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1287,7 +1301,9 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mExceptionInstructionListIR (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mExceptionLoopInstructionListIR (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mExceptionSetupInstructionListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_functionMapIR reader_mFunctionMapIR (LOCATION_ARGS) const ;
 
@@ -3302,9 +3318,6 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_throwInstructionIR (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_throwInstructionIR constructor_default (LOCATION_ARGS) ;
-
 //---
   public : inline const class cPtr_throwInstructionIR * ptr (void) const { return (const cPtr_throwInstructionIR *) mObjectPtr ; }
 
@@ -3323,7 +3336,7 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_throwInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                             const class GALGAS_uint & inOperand1
+                                                             const class GALGAS_variableKindIR & inOperand1
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3335,7 +3348,7 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mCode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
 
@@ -3359,11 +3372,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_throwInstructionIR 
 class cPtr_throwInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mThrowInstructionLocation ;
-  public : GALGAS_uint mAttribute_mCode ;
+  public : GALGAS_variableKindIR mAttribute_mCode ;
 
 //--- Constructor
   public : cPtr_throwInstructionIR (const GALGAS_location & in_mThrowInstructionLocation,
-                                    const GALGAS_uint & in_mCode
+                                    const GALGAS_variableKindIR & in_mCode
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3371,7 +3384,7 @@ class cPtr_throwInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mCode (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

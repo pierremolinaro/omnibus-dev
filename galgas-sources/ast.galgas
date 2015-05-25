@@ -24,7 +24,8 @@ struct @ast {
   @functionDeclarationListAST mFunctionListAST
   @lstringlist mTargetList
   @initList mInitList
-  @exceptionAST mException
+  @exceptionClauseListAST mExceptionClauses
+  @exceptionTypesAST mExceptionTypes
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
