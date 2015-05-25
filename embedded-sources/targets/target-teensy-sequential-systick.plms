@@ -26,10 +26,7 @@ newIntegerType Int64 @signed64
 
 //-----------------------------------------------------------------------------*
 
-import "microcontrollers/mk20dx256.plm"
-import "microcontrollers/lcd.plm"
-import "microcontrollers/leds.plm"
-import "microcontrollers/default-isr.plm"
+exception : Int32 UInt32
 
 //-----------------------------------------------------------------------------*
 
@@ -37,6 +34,13 @@ mode $isr
 mode $user
 mode $init
 mode $exception
+
+//-----------------------------------------------------------------------------*
+
+import "microcontrollers/mk20dx256.plm"
+import "microcontrollers/lcd.plm"
+import "microcontrollers/leds.plm"
+import "microcontrollers/default-isr.plm"
 
 //-----------------------------------------------------------------------------*
 

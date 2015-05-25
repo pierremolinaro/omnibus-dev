@@ -2,8 +2,8 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @assertInstructionAST : @instructionAST {
-  @location mAssertInstructionLocation
+class @checkInstructionAST : @instructionAST {
+  @location mCheckInstructionLocation
   @expressionAST mExpression
 }
 
@@ -16,10 +16,10 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    $assert$
+    $check$
     let loc = @location.here
     <expression> ?let @expressionAST expression
-    ioInstructionList += !@assertInstructionAST.new {
+    ioInstructionList += !@checkInstructionAST.new {
       !loc
       !expression
     }
@@ -33,7 +33,7 @@ syntax extension common_syntax {
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @assertInstructionAST analyze
+override method @checkInstructionAST analyze
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -41,11 +41,8 @@ override method @assertInstructionAST analyze
   ?!temporary:@uint ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-  if [inModeSet hasKey !exceptionModeName ()] then
-    error mAssertInstructionLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-  end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
   [mExpression analyzeExpression
@@ -63,48 +60,17 @@ override method @assertInstructionAST analyze
   ]
 #--- Check inferred type
   if not [[expressionType kind] isBoolean] then
-    error mAssertInstructionLocation : "expression is not boolean"
+    error mCheckInstructionLocation : "expression is not boolean"
   end
-#--- Check expression is not static
-  if [expressionValueName isStatic] then
-    error mAssertInstructionLocation : "expression is static: use check directive"
+#--- Check expression is static, and true
+  if not [expressionValueName isStatic] then
+    error mCheckInstructionLocation : "expression is not static: use assert instruction"
+  else
+    [expressionValueName literalUnsignedInteger ?value:@uint64 value]
+    if value != 1L then
+      error mCheckInstructionLocation : "check expression value is false"
+    end
   end
-#--- Code generation
-  if not [option plm_options.noExceptionGeneration value] then
-    ioInstructionGenerationList += !@assertInstructionIR.new {
-      !mAssertInstructionLocation
-      !instructionGenerationList
-      !expressionValueName
-    }
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @assertInstructionIR : @abstractInstructionIR {
-  @location mAssertInstructionLocation
-  @instructionListIR mInstructionList
-  @variableKindIR mExpressionValue
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @assertInstructionIR instructionCode -> @string outCode {
-  outCode = [mInstructionList instructionListCode]
-  outCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
-  outCode += "  raise_exception (20"
-     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
-     + ", " + [mAssertInstructionLocation line] + ") ;\n"
-  outCode += "}\n" 
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
-  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

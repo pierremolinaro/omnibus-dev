@@ -19,6 +19,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "assert",
   "at",
   "boolset",
+  "check",
   "enum",
   "case",
   "do",

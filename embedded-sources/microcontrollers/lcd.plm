@@ -417,6 +417,17 @@ proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt
 
 //-----------------------------------------------------------------------------*
 
+proc $exception @noWarningIfUnused printSignedInExceptionMode (?inValue : Int32) {
+  if inValue >= 0 then
+    printUnsignedInExceptionMode (!inValue &\ UInt32)
+  else
+    writeDataInExceptionMode (!0x2D) // Signe -
+    printUnsignedInExceptionMode (!(&- inValue) &\ UInt32)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
 proc $exception @noWarningIfUnused write8bitCommand_inExceptionMode (?inCommand : UInt8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
@@ -455,20 +466,21 @@ proc $exception @noWarningIfUnused clearScreenInExceptionMode () {
 
 //-----------------------------------------------------------------------------*
 
-exception {
+exception setup {
   clearScreenInExceptionMode ()
   waitMSInExceptionMode (!duration:4)
   gotoInExceptionMode (!line:0 !column:0)
-  printUnsignedInExceptionMode (!CODE)
+  printSignedInExceptionMode (!CODE)
   gotoInExceptionMode (!line:1 !column:0)
   printUnsignedInExceptionMode (!LINE)
-  forever
-    waitMSInExceptionMode (!duration:50)
-    ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
-    waitMSInExceptionMode (!duration:50)
-    ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
-    SCB_AIRCR = (0x5FA << 16) | SCB_AIRCR_SYSRESETREQ
-  end
+}
+
+exception loop {
+  waitMSInExceptionMode (!duration:50)
+  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
+  waitMSInExceptionMode (!duration:50)
+  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
+//  SCB_AIRCR = (0x5FA << 16) | SCB_AIRCR_SYSRESETREQ
 }
 
 //-----------------------------------------------------------------------------*

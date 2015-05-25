@@ -2,11 +2,17 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-struct @exceptionAST {
-  @location mExceptionLocation
+list @exceptionTypesAST {
+  @lstring mExceptionCodeTypeName
+  @lstring mExceptionLineTypeName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @exceptionClauseListAST {
+  @lstring mExceptionClauseName
   @instructionListAST mExceptionInstructionList
   @location mEndOfExceptionInstructions
-  @bool mExceptionDefined
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -19,20 +25,27 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $exception$
-    let loc = @location.here
-    if ioAST.mException.mExceptionDefined then
-      error loc : "exception clause already defined"
-    end
+    $identifier$ ?let exceptionClauseName
     ${$
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mException.mExceptionLocation = loc
-    ioAST.mException.mExceptionInstructionList = instructionList
-    ioAST.mException.mEndOfExceptionInstructions = endOfInstructionList
-    ioAST.mException.mExceptionDefined = true
+    ioAST.mExceptionClauses +=
+      !exceptionClauseName
+      !instructionList
+      !endOfInstructionList
   }
 
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $exception$
+    $:$
+    $identifier$ ?let exceptionCodeTypeName 
+    $identifier$ ?let exceptionLineTypeName
+    ioAST.mExceptionTypes += !exceptionCodeTypeName !exceptionLineTypeName
+  }
+  
   #--------------------------------------------------------------------------------------------------------------------*
 
 }
@@ -47,66 +60,69 @@ func %once exceptionModeName -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @exceptionAST exceptionSemanticAnalysis
+method @exceptionClauseListAST-element exceptionSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@uint ioTemporaryIndex
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if mExceptionDefined then
-    if not [inContext.mModeMap hasKey !exceptionModeName ()] then
-      error mExceptionLocation : "the $exception mode should be defined in order to use an exception clause"
-    end
-  #--- Variable map
-    @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
-  #--- Insert predefined input arguments
-    let uintType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["UInt32" nowhere]}
-    let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["StaticString" nowhere]}
-    let codeArg = @lstring.new {!"CODE" !mExceptionLocation}
-    [!?variableMap insertUsedConstantInputFormalArgument
-      !codeArg
-      !uintType
-      !{!exceptionModeName ()}
-      !mangledNameForInArgument (!name:codeArg.string)
-      !.inArgument {!name:codeArg.string}
-      ![uintType copiable]
-      !{}
-    ]
-    let fileArg = @lstring.new {!"FILE" !mExceptionLocation}
-    [!?variableMap insertUsedConstantInputFormalArgument
-      !fileArg
-      !StaticStringType
-      !{!exceptionModeName ()}
-      !mangledNameForInArgument (!name:fileArg.string)
-      !.inArgument {!name:fileArg.string}
-      ![StaticStringType copiable]
-      !{}
-    ]
-    let lineArg = @lstring.new {!"LINE" !mExceptionLocation}
-    [!?variableMap insertUsedConstantInputFormalArgument
-      !lineArg
-      !uintType
-      !{!exceptionModeName ()}
-      !mangledNameForInArgument (!name:lineArg.string)
-      !.inArgument {!name:lineArg.string}
-      ![uintType copiable]
-      !{}
-    ]
-  #--- Analyze instruction list
-    @instructionListIR instructionGenerationList = {}
-    [mExceptionInstructionList analyzeRoutineInstructionList
-      !optionalReceiverType:.noReceiver
-      !context:inContext
-      !modes:{!exceptionModeName ()}
-      !allowException:false
-      !?temporary:ioTemporaryIndex
-      !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
-      !?variableMap:variableMap
-      !?generatedCode:instructionGenerationList
-    ]
-  #---
-    [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
-  #--- Code generation
-    ioIntermediateCodeStruct.mExceptionInstructionListIR = instructionGenerationList
+  if not [inContext.mModeMap hasKey !exceptionModeName ()] then
+    error mExceptionClauseName : "the $" + exceptionModeName () + " mode should be defined in order to use an exception clause"
+  end
+#--- Variable map
+  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
+#--- Insert predefined input arguments
+  let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["StaticString" nowhere]}
+  let codeArg = @lstring.new {!"CODE" !mExceptionClauseName.location}
+  [!?variableMap insertUsedConstantInputFormalArgument
+    !codeArg
+    !inContext.mExceptionCodeType
+    !{!exceptionModeName ()}
+    !mangledNameForInArgument (!name:codeArg.string)
+    !.inArgument {!name:codeArg.string}
+    ![inContext.mExceptionCodeType copiable]
+    !{}
+  ]
+  let fileArg = @lstring.new {!"FILE" !mExceptionClauseName.location}
+  [!?variableMap insertUsedConstantInputFormalArgument
+    !fileArg
+    !StaticStringType
+    !{!exceptionModeName ()}
+    !mangledNameForInArgument (!name:fileArg.string)
+    !.inArgument {!name:fileArg.string}
+    ![StaticStringType copiable]
+    !{}
+  ]
+  let lineArg = @lstring.new {!"LINE" !mExceptionClauseName.location}
+  [!?variableMap insertUsedConstantInputFormalArgument
+    !lineArg
+    !inContext.mExceptionLineType
+    !{!exceptionModeName ()}
+    !mangledNameForInArgument (!name:lineArg.string)
+    !.inArgument {!name:lineArg.string}
+    ![inContext.mExceptionLineType copiable]
+    !{}
+  ]
+#--- Analyze instruction list
+  @instructionListIR instructionGenerationList = {}
+  [mExceptionInstructionList analyzeRoutineInstructionList
+    !optionalReceiverType:.noReceiver
+    !context:inContext
+    !modes:{!exceptionModeName ()}
+    !allowException:false
+    !?temporary:ioTemporaryIndex
+    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?variableMap:variableMap
+    !?generatedCode:instructionGenerationList
+  ]
+#---
+  [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
+#--- Code generation
+  if mExceptionClauseName.string == "setup" then
+    ioIntermediateCodeStruct.mExceptionSetupInstructionListIR += instructionGenerationList
+  elsif mExceptionClauseName.string == "loop" then
+    ioIntermediateCodeStruct.mExceptionLoopInstructionListIR += instructionGenerationList
+  else
+    error mExceptionClauseName : "exception clause name should be \"setup\" or \"loop\""
   end
 }
 

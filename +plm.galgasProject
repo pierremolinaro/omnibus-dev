@@ -82,6 +82,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/expression-cst-registre.galgas"
 
 #--- Instructions
+  "galgas-sources/directive-check.galgas"
   "galgas-sources/instructionList.galgas"
   "galgas-sources/instruction-inc-dec.galgas"
   "galgas-sources/instruction-var.galgas"
