@@ -550,15 +550,17 @@
 \usepackage{lineno}
 
 %-----------------------------------------------------------------------------------------------------------------------*
+% http://en.wikibooks.org/wiki/LaTeX/Colors
 
 \newcommand\keywordsStyleplm[1]{\textcolor{blue}{\textbf{#1}}}
-\newcommand\attributeStyleplm[1]{\textcolor{pink}{#1}}
+\newcommand\attributeStyleplm[1]{\textcolor{purple}{#1}}
 \newcommand\delimitersStyleplm[1]{\textcolor{brown}{\textbf{#1}}}
 \newcommand\integerStyleplm[1]{\textcolor{orange}{#1}}
+\newcommand\commentStyleplm[1]{\textcolor{red}{#1}}
+\newcommand\modeStyleplm[1]{\textcolor{violet}{#1}}
 
 \newcommand\characterStyleplm[1]{\textcolor{orange}{#1}}
 \newcommand\stringStyleplm[1]{\textcolor{gray}{#1}}
-\newcommand\commentStyleplm[1]{\textcolor{red}{#1}}
 
 \newcommand\lexicalErrorplm{\textcolor{red}{\textbullet ERRLEX\textbullet}}
 
@@ -818,7 +820,12 @@
 \input{chapitres/type-booleen.tex}
 \input{chapitres/types-entiers.tex}
 \input{chapitres/types-flottants.tex}
+\input{chapitres/type-caractere.tex}
+\input{chapitres/types-chaine-de-caracteres.tex}
+\input{chapitres/declaration-constante.tex}
+\input{chapitres/modes.tex}
 \input{chapitres/declaration-var-globale.tex}
+\input{chapitres/routines.tex}
 \input{chapitres/registres.tex}
 \input{chapitres/directives.tex}
 \input{chapitres/exceptions.tex}

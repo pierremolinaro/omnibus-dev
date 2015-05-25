@@ -14,7 +14,7 @@
 
 //-----------------------------------------------------------------------------*
 
-proc $init configurePorts () {
+proc configurePorts $init () {
 //--- D4 (PTB0) is a GPIO (input by default)
   PORTB_PCR0 = (1 << 8) ;
   GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)
@@ -37,34 +37,34 @@ proc $init configurePorts () {
 
 //-----------------------------------------------------------------------------*
 
-proc $init $exception $user driveHighE () {
+proc driveHighE $init $exception $user () {
   GPIOB_PSOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init $exception $user driveLowE () {
+proc driveLowE $init $exception $user () {
   GPIOB_PCOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init $exception $user driveHighRS () {
+proc driveHighRS $init $exception $user () {
   GPIOB_PSOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc $init $exception $user driveLowRS () {
+proc driveLowRS $init $exception $user () {
   GPIOB_PCOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $init $exception $user setD4 (?inValue : Bool) { // PTB0
+proc setD4 $init $exception $user (?inValue : Bool) { // PTB0
   if inValue then
     GPIOB_PSOR = 1 << 0 ;
   else
@@ -74,7 +74,7 @@ proc $init $exception $user setD4 (?inValue : Bool) { // PTB0
 
 //-----------------------------------------------------------------------------*
 
-proc $init $exception $user setD5 (?inValue : Bool) { // PTC0
+proc setD5 $init $exception $user (?inValue : Bool) { // PTC0
   if inValue then
     GPIOC_PSOR = 1 << 0 ;
   else
@@ -84,7 +84,7 @@ proc $init $exception $user setD5 (?inValue : Bool) { // PTC0
 
 //-----------------------------------------------------------------------------*
 
-proc $init $exception $user setD6 (?inValue : Bool) { // PTD1
+proc setD6 $init $exception $user (?inValue : Bool) { // PTD1
   if inValue then
     GPIOD_PSOR = 1 << 1 ;
   else
@@ -94,7 +94,7 @@ proc $init $exception $user setD6 (?inValue : Bool) { // PTD1
 
 //-----------------------------------------------------------------------------*
 
-proc $init $exception $user setD7 (?inValue : Bool) { // PTB2
+proc setD7 $init $exception $user (?inValue : Bool) { // PTB2
   if inValue then
     GPIOB_PSOR = 1 << 2 ;
   else
@@ -106,7 +106,7 @@ proc $init $exception $user setD7 (?inValue : Bool) { // PTB2
 //   UTILITY ROUTINES                                                          *
 //-----------------------------------------------------------------------------*
 
-proc $init busyWaitingDuringMS (?inDuration : UInt32) {
+proc busyWaitingDuringMS $init (?inDuration : UInt32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
@@ -114,7 +114,7 @@ proc $init busyWaitingDuringMS (?inDuration : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $init programLcd4BitDataBusOutput (?inValue : UInt8) {
+proc programLcd4BitDataBusOutput $init (?inValue : UInt8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -123,7 +123,7 @@ proc $init programLcd4BitDataBusOutput (?inValue : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $init write4BitCommand (?inValue : UInt8) {
+proc write4BitCommand $init (?inValue : UInt8) {
   busyWaitingDuringMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput (!inValue) ;
@@ -134,7 +134,7 @@ proc $init write4BitCommand (?inValue : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $init write8bitCommand (?inCommand : UInt8) {
+proc write8bitCommand $init (?inCommand : UInt8) {
   busyWaitingDuringMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput (!inCommand >> 4) ;
@@ -198,7 +198,7 @@ init {
 //   PRINT ROUTINES IN USER MODE                                               *
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused programLcd4BitDataBusOutput_inUserMode (?inValue : UInt8) {
+proc programLcd4BitDataBusOutput_inUserMode $user @noWarningIfUnused (?inValue : UInt8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -207,7 +207,7 @@ proc $user @noWarningIfUnused programLcd4BitDataBusOutput_inUserMode (?inValue :
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused write8bitCommand_inUserMode (?inCommand : UInt8) {
+proc write8bitCommand_inUserMode $user @noWarningIfUnused (?inCommand : UInt8) {
   waitMS (!1) ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
@@ -223,7 +223,7 @@ proc $user @noWarningIfUnused write8bitCommand_inUserMode (?inCommand : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused writeData_inUserMode (?inData : UInt8) {
+proc writeData_inUserMode $user @noWarningIfUnused (?inData : UInt8) {
   waitMS (!1) ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
@@ -244,7 +244,7 @@ proc $user @noWarningIfUnused writeData_inUserMode (?inData : UInt8) {
 // Line 2 : 20 -> 39
 // Line 3 : 84 -> 103
 
-proc $user @noWarningIfUnused goto (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+proc goto $user @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -277,13 +277,13 @@ proc $user @noWarningIfUnused goto (?line:inLine : UInt32 ?column:inColumn : UIn
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused clearScreen () {
+proc clearScreen $user @noWarningIfUnused () {
   write8bitCommand_inUserMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused printSpaces (?inCount : UInt32) {
+proc printSpaces $user @noWarningIfUnused (?inCount : UInt32) {
   var count = inCount
   while (count > 0) do
     writeData_inUserMode (!0x20)
@@ -293,7 +293,7 @@ proc $user @noWarningIfUnused printSpaces (?inCount : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused printUnsigned (?inValue : UInt32) {
+proc printUnsigned $user @noWarningIfUnused (?inValue : UInt32) {
   if inValue > 9 then
     printUnsigned (!inValue / 10)
   end
@@ -302,7 +302,7 @@ proc $user @noWarningIfUnused printUnsigned (?inValue : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user @noWarningIfUnused printSigned (?inValue : Int32) {
+proc printSigned $user @noWarningIfUnused (?inValue : Int32) {
   if inValue >= 0 then
     printUnsigned (!inValue &\ UInt32)
   else
@@ -366,7 +366,7 @@ proc $user @noWarningIfUnused printSigned (?inValue : Int32) {
 //   EXCEPTION                                                                 *
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused programLcd4BitDataBusOutput_inExceptionMode (?inValue : UInt8) {
+proc programLcd4BitDataBusOutput_inExceptionMode $exception @noWarningIfUnused (?inValue : UInt8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -375,14 +375,14 @@ proc $exception @noWarningIfUnused programLcd4BitDataBusOutput_inExceptionMode (
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused waitOneMillisecondInExceptionMode () {
+proc waitOneMillisecondInExceptionMode $exception @noWarningIfUnused () {
   while not SYST_CSR.COUNTFLAG.bool do
   end
 }
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused waitMSInExceptionMode (?duration: inDuration : UInt32) {
+proc waitMSInExceptionMode $exception @noWarningIfUnused (?duration: inDuration : UInt32) {
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
@@ -392,7 +392,7 @@ proc $exception @noWarningIfUnused waitMSInExceptionMode (?duration: inDuration 
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused writeDataInExceptionMode (?inData : UInt8) {
+proc writeDataInExceptionMode $exception @noWarningIfUnused (?inData : UInt8) {
   waitOneMillisecondInExceptionMode () ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
@@ -408,7 +408,7 @@ proc $exception @noWarningIfUnused writeDataInExceptionMode (?inData : UInt8) {
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt32) {
+proc printUnsignedInExceptionMode $exception @noWarningIfUnused (?inValue : UInt32) {
   if inValue > 9 then
     printUnsignedInExceptionMode (!inValue &/ 10)
   end
@@ -417,7 +417,7 @@ proc $exception @noWarningIfUnused printUnsignedInExceptionMode (?inValue : UInt
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused printSignedInExceptionMode (?inValue : Int32) {
+proc printSignedInExceptionMode $exception @noWarningIfUnused (?inValue : Int32) {
   if inValue >= 0 then
     printUnsignedInExceptionMode (!inValue &\ UInt32)
   else
@@ -428,7 +428,7 @@ proc $exception @noWarningIfUnused printSignedInExceptionMode (?inValue : Int32)
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused write8bitCommand_inExceptionMode (?inCommand : UInt8) {
+proc write8bitCommand_inExceptionMode $exception @noWarningIfUnused (?inCommand : UInt8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
@@ -444,7 +444,7 @@ proc $exception @noWarningIfUnused write8bitCommand_inExceptionMode (?inCommand 
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused gotoInExceptionMode (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+proc gotoInExceptionMode $exception @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;
@@ -460,7 +460,7 @@ proc $exception @noWarningIfUnused gotoInExceptionMode (?line:inLine : UInt32 ?c
 
 //-----------------------------------------------------------------------------*
 
-proc $exception @noWarningIfUnused clearScreenInExceptionMode () {
+proc clearScreenInExceptionMode $exception @noWarningIfUnused () {
   write8bitCommand_inExceptionMode (!0x01)
 }
 
@@ -480,7 +480,7 @@ exception loop {
   ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
   waitMSInExceptionMode (!duration:50)
   ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
-//  SCB_AIRCR = (0x5FA << 16) | SCB_AIRCR_SYSRESETREQ
+  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
 }
 
 //-----------------------------------------------------------------------------*

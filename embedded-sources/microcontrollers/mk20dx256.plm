@@ -2117,8 +2117,12 @@ register ICSR at 0xE000_ED04 : UInt32 { // Interrupt Control and State
 }
 
 //register SCB_VTOR   0xE000ED08 // Vector Table Offset
-register SCB_AIRCR at 0xE000ED0C : UInt32 // Application Interrupt and Reset Control
-let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004
+
+register AIRCR at 0xE000ED0C : UInt32 { // Application Interrupt and Reset Control
+  VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],
+  5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET 
+}
+
 //register SCB_SCR    0xE000ED10 // System Control Register
 //register SCB_CCR    0xE000ED14 // Configuration and Control
 //register SCB_SHPR1   0xE000ED18 // System Handler Priority Register 1

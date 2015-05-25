@@ -2,16 +2,16 @@ target "target-teensy-sequential-systick.plms"
 
 //-----------------------------------------------------------------------------*
 
-proc $user setup () {
+proc setup $user () {
 }
 
 //-----------------------------------------------------------------------------*
 
-var $isr gClignotement : UInt32 = 0
+var gClignotement $isr : UInt32 = 0
 
 //-----------------------------------------------------------------------------*
 
-proc $isr userSystickHandler () {
+proc userSystickHandler $isr () {
   gClignotement ++
   if gClignotement == 500 then
     ledOn (!LED_L0) ;
@@ -23,14 +23,14 @@ proc $isr userSystickHandler () {
 
 //-----------------------------------------------------------------------------*
 
-var $user gVar : UInt32 = 12
+var gVar $user : UInt32 = 12
 
-var $user gYYYYY : UInt8 = 5
-var $user gZZZZZ : UInt32 = 5
+var gYYYYY $user : UInt8 = 5
+var gZZZZZ $user : UInt32 = 5
 
 //-----------------------------------------------------------------------------*
 
-proc $user loop () {
+proc loop $user () {
   waitMS (!100)
   ledOn (!LED_TEENSY)
   waitMS (!100)

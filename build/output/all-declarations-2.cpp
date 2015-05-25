@@ -2709,30 +2709,30 @@ void routine_enterNodeInPrecedenceGraph (GALGAS_lstring inArgument_inNodeName,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   {
-  ioArgument_ioGraph.modifier_addNode (inArgument_inNodeName, inArgument_inInfo, inCompiler COMMA_SOURCE_FILE ("generalized-type.galgas", 53)) ;
+  ioArgument_ioGraph.modifier_addNode (inArgument_inNodeName, inArgument_inInfo, inCompiler COMMA_SOURCE_FILE ("generalized-type.galgas", 51)) ;
   }
   switch (inArgument_inType.enumValue ()) {
   case GALGAS_generalizedTypeEnumAST::kNotBuilt:
     break ;
   case GALGAS_generalizedTypeEnumAST::kEnum_valueType:
     {
-      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_2662 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (inArgument_inType.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_typeName = extractPtr_2662->mAssociatedValue0 ;
+      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_2565 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (inArgument_inType.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_typeName = extractPtr_2565->mAssociatedValue0 ;
       {
-      ioArgument_ioGraph.modifier_addEdge (inArgument_inNodeName, extractedValue_typeName COMMA_SOURCE_FILE ("generalized-type.galgas", 56)) ;
+      ioArgument_ioGraph.modifier_addEdge (inArgument_inNodeName, extractedValue_typeName COMMA_SOURCE_FILE ("generalized-type.galgas", 54)) ;
       }
     }
     break ;
   case GALGAS_generalizedTypeEnumAST::kEnum_procType:
     {
-      const cEnumAssociatedValues_generalizedTypeEnumAST_procType * extractPtr_2833 = (const cEnumAssociatedValues_generalizedTypeEnumAST_procType *) (inArgument_inType.unsafePointer ()) ;
-      const GALGAS_procFormalArgumentList extractedValue_procFormalArgumentList = extractPtr_2833->mAssociatedValue1 ;
-      cEnumerator_procFormalArgumentList enumerator_2750 (extractedValue_procFormalArgumentList, kEnumeration_up) ;
-      while (enumerator_2750.hasCurrentObject ()) {
+      const cEnumAssociatedValues_generalizedTypeEnumAST_procType * extractPtr_2736 = (const cEnumAssociatedValues_generalizedTypeEnumAST_procType *) (inArgument_inType.unsafePointer ()) ;
+      const GALGAS_procFormalArgumentList extractedValue_procFormalArgumentList = extractPtr_2736->mAssociatedValue1 ;
+      cEnumerator_procFormalArgumentList enumerator_2653 (extractedValue_procFormalArgumentList, kEnumeration_up) ;
+      while (enumerator_2653.hasCurrentObject ()) {
         {
-        ioArgument_ioGraph.modifier_addEdge (inArgument_inNodeName, enumerator_2750.current (HERE).mAttribute_mFormalArgumentTypeName COMMA_SOURCE_FILE ("generalized-type.galgas", 59)) ;
+        ioArgument_ioGraph.modifier_addEdge (inArgument_inNodeName, enumerator_2653.current (HERE).mAttribute_mFormalArgumentTypeName COMMA_SOURCE_FILE ("generalized-type.galgas", 57)) ;
         }
-        enumerator_2750.gotoNextObject () ;
+        enumerator_2653.gotoNextObject () ;
       }
     }
     break ;
@@ -2752,37 +2752,37 @@ void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_unifiedTypeMap_2D_proxy var_selfTypeProxy ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inArgument_inBooleanTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("bool-type.galgas", 104)) ;
+  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inArgument_inBooleanTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("bool-type.galgas", 107)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 106)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 106)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 106)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 105)) ;
+  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 109)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 108)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 110)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 110)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 110)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 110)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)) ;
+  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 113)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 112)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 114)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 114)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 114)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)) ;
+  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 117)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 116)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 118)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 118)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 118)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)) ;
+  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 121)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 120)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 122)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 122)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 122)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)) ;
+  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 125)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 125)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 124)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 126)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 126)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 126)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)) ;
+  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 129)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 128)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanAndOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 130)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 130)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 130)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)) ;
+  ioArgument_ioContext.mAttribute_mBooleanAndOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 133)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 132)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanOrOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 134)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 134)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 134)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)) ;
+  ioArgument_ioContext.mAttribute_mBooleanOrOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 137)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 137)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 136)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanXorOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 138)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 138)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 138)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)) ;
+  ioArgument_ioContext.mAttribute_mBooleanXorOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 141)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 140)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNotOperatorMap.modifier_insertKey (inArgument_inBooleanTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)) ;
+  ioArgument_ioContext.mAttribute_mNotOperatorMap.modifier_insertKey (inArgument_inBooleanTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 144)) ;
   }
 }
 
@@ -6607,631 +6607,631 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
 
 const char * gWrapperFileContent_1_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr NMIHandler ()\n"
+  "required proc NMIHandler $isr ()\n"
   "\n"
-  "proc $isr @weak NMIHandler () {\n"
+  "proc NMIHandler $isr @weak () {\n"
   "  throw 2\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr HardFaultHandler ()\n"
+  "required proc HardFaultHandler $isr ()\n"
   "\n"
-  "proc $isr @weak HardFaultHandler () {\n"
+  "proc HardFaultHandler $isr @weak () {\n"
   "  throw 3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr MemManageHandler ()\n"
+  "required proc MemManageHandler $isr ()\n"
   "\n"
-  "proc $isr @weak MemManageHandler () {\n"
+  "proc MemManageHandler $isr @weak () {\n"
   "  throw 4\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr BusFaultHandler ()\n"
+  "required proc BusFaultHandler $isr ()\n"
   "\n"
-  "proc $isr @weak BusFaultHandler () {\n"
+  "proc BusFaultHandler $isr @weak () {\n"
   "  throw 5\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UsageFaultHandler ()\n"
+  "required proc UsageFaultHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UsageFaultHandler () {\n"
+  "proc UsageFaultHandler $isr @weak () {\n"
   "  throw 6\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr svcHandler ()\n"
+  "required proc svcHandler $isr ()\n"
   "\n"
-  "proc $isr @weak svcHandler () {\n"
+  "proc svcHandler $isr @weak () {\n"
   "  throw 11\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DebugMonitorHandler ()\n"
+  "required proc DebugMonitorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DebugMonitorHandler () {\n"
+  "proc DebugMonitorHandler $isr @weak () {\n"
   "  throw 12\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PendSVHandler ()\n"
+  "required proc PendSVHandler $isr ()\n"
   "\n"
-  "proc $isr @weak PendSVHandler () {\n"
+  "proc PendSVHandler $isr @weak () {\n"
   "  throw 14\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var $user $isr $init gCompteur : UInt32 = 0\n"
+  "var gCompteur $user $isr $init : UInt32 = 0\n"
   "\n"
-  "required proc $isr systickHandler ()\n"
+  "required proc systickHandler $isr ()\n"
   "\n"
-  "proc $isr systickHandler () {\n"
+  "proc systickHandler $isr @weak () {\n"
   "  gCompteur &++\n"
   "  userSystickHandler ()\n"
   "}\n"
   "\n"
-  "proc $isr @weak userSystickHandler () {\n"
+  "proc userSystickHandler $isr @weak () {\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel0TranfertCompleteHandler ()\n"
+  "required proc DMAChannel0TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel0TranfertCompleteHandler () {\n"
+  "proc DMAChannel0TranfertCompleteHandler $isr @weak () {\n"
   "  throw 16\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel1TranfertCompleteHandler ()\n"
+  "required proc DMAChannel1TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel1TranfertCompleteHandler () {\n"
+  "proc DMAChannel1TranfertCompleteHandler $isr @weak () {\n"
   "  throw 17\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel2TranfertCompleteHandler ()\n"
+  "required proc DMAChannel2TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel2TranfertCompleteHandler () {\n"
+  "proc DMAChannel2TranfertCompleteHandler $isr @weak () {\n"
   "  throw 18\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel3TranfertCompleteHandler ()\n"
+  "required proc DMAChannel3TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel3TranfertCompleteHandler () {\n"
+  "proc DMAChannel3TranfertCompleteHandler $isr @weak () {\n"
   "  throw 19\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel4TranfertCompleteHandler ()\n"
+  "required proc DMAChannel4TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel4TranfertCompleteHandler () {\n"
+  "proc DMAChannel4TranfertCompleteHandler $isr @weak () {\n"
   "  throw 20\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel5TranfertCompleteHandler ()\n"
+  "required proc DMAChannel5TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel5TranfertCompleteHandler () {\n"
+  "proc DMAChannel5TranfertCompleteHandler $isr @weak () {\n"
   "  throw 21\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel6TranfertCompleteHandler ()\n"
+  "required proc DMAChannel6TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel6TranfertCompleteHandler () {\n"
+  "proc DMAChannel6TranfertCompleteHandler $isr @weak () {\n"
   "  throw 22\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel7TranfertCompleteHandler ()\n"
+  "required proc DMAChannel7TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel7TranfertCompleteHandler () {\n"
+  "proc DMAChannel7TranfertCompleteHandler $isr @weak () {\n"
   "  throw 23\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel8TranfertCompleteHandler ()\n"
+  "required proc DMAChannel8TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel8TranfertCompleteHandler () {\n"
+  "proc DMAChannel8TranfertCompleteHandler $isr @weak () {\n"
   "  throw 24\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel9TranfertCompleteHandler ()\n"
+  "required proc DMAChannel9TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel9TranfertCompleteHandler () {\n"
+  "proc DMAChannel9TranfertCompleteHandler $isr @weak () {\n"
   "  throw 25\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel10TranfertCompleteHandler ()\n"
+  "required proc DMAChannel10TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel10TranfertCompleteHandler () {\n"
+  "proc DMAChannel10TranfertCompleteHandler $isr @weak () {\n"
   "  throw 26\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel11TranfertCompleteHandler ()\n"
+  "required proc DMAChannel11TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel11TranfertCompleteHandler () {\n"
+  "proc DMAChannel11TranfertCompleteHandler $isr @weak () {\n"
   "  throw 27\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel12TranfertCompleteHandler ()\n"
+  "required proc DMAChannel12TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel12TranfertCompleteHandler () {\n"
+  "proc DMAChannel12TranfertCompleteHandler $isr @weak () {\n"
   "  throw 28\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel13TranfertCompleteHandler ()\n"
+  "required proc DMAChannel13TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel13TranfertCompleteHandler () {\n"
+  "proc DMAChannel13TranfertCompleteHandler $isr @weak () {\n"
   "  throw 29\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel14TranfertCompleteHandler ()\n"
+  "required proc DMAChannel14TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel14TranfertCompleteHandler () {\n"
+  "proc DMAChannel14TranfertCompleteHandler $isr @weak () {\n"
   "  throw 30\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAChannel15TranfertCompleteHandler ()\n"
+  "required proc DMAChannel15TranfertCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAChannel15TranfertCompleteHandler () {\n"
+  "proc DMAChannel15TranfertCompleteHandler $isr @weak () {\n"
   "  throw 31\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DMAErrorHandler ()\n"
+  "required proc DMAErrorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak DMAErrorHandler () {\n"
+  "proc DMAErrorHandler $isr @weak () {\n"
   "  throw 32\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr flashMemoryCommandCompleteHandler ()\n"
+  "required proc flashMemoryCommandCompleteHandler $isr ()\n"
   "\n"
-  "proc $isr @weak flashMemoryCommandCompleteHandler () {\n"
+  "proc flashMemoryCommandCompleteHandler $isr @weak () {\n"
   "  throw 34\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr flashMemoryReadCollisionHandler ()\n"
+  "required proc flashMemoryReadCollisionHandler $isr ()\n"
   "\n"
-  "proc $isr @weak flashMemoryReadCollisionHandler () {\n"
+  "proc flashMemoryReadCollisionHandler $isr @weak () {\n"
   "  throw 35\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr modeControllerHandler ()\n"
+  "required proc modeControllerHandler $isr ()\n"
   "\n"
-  "proc $isr @weak modeControllerHandler () {\n"
+  "proc modeControllerHandler $isr @weak () {\n"
   "  throw 36\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr LLWUHandler ()\n"
+  "required proc LLWUHandler $isr ()\n"
   "\n"
-  "proc $isr @weak LLWUHandler () {\n"
+  "proc LLWUHandler $isr @weak () {\n"
   "  throw 37\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr WDOGEWMHandler ()\n"
+  "required proc WDOGEWMHandler $isr ()\n"
   "\n"
-  "proc $isr @weak WDOGEWMHandler () {\n"
+  "proc WDOGEWMHandler $isr @weak () {\n"
   "  throw 38\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr I2C0Handler ()\n"
+  "required proc I2C0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak I2C0Handler () {\n"
+  "proc I2C0Handler $isr @weak () {\n"
   "  throw 40\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr I2C1Handler ()\n"
+  "required proc I2C1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak I2C1Handler () {\n"
+  "proc I2C1Handler $isr @weak () {\n"
   "  throw 41\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr SPI0Handler ()\n"
+  "required proc SPI0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak SPI0Handler () {\n"
+  "proc SPI0Handler $isr @weak () {\n"
   "  throw 42\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr SPI1Handler ()\n"
+  "required proc SPI1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak SPI1Handler () {\n"
+  "proc SPI1Handler $isr @weak () {\n"
   "  throw 43\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0MessageBufferHandler ()\n"
+  "required proc CAN0MessageBufferHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0MessageBufferHandler () {\n"
+  "proc CAN0MessageBufferHandler $isr @weak () {\n"
   "  throw 45\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0BusOffHandler ()\n"
+  "required proc CAN0BusOffHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0BusOffHandler () {\n"
+  "proc CAN0BusOffHandler $isr @weak () {\n"
   "  throw 46\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0ErrorHandler ()\n"
+  "required proc CAN0ErrorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0ErrorHandler () {\n"
+  "proc CAN0ErrorHandler $isr @weak () {\n"
   "  throw 47\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0TransmitWarningHandler ()\n"
+  "required proc CAN0TransmitWarningHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0TransmitWarningHandler () {\n"
+  "proc CAN0TransmitWarningHandler $isr @weak () {\n"
   "  throw 48\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0ReceiveWarningHandler ()\n"
+  "required proc CAN0ReceiveWarningHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0ReceiveWarningHandler () {\n"
+  "proc CAN0ReceiveWarningHandler $isr @weak () {\n"
   "  throw 49\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CAN0WakeUpHandler ()\n"
+  "required proc CAN0WakeUpHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CAN0WakeUpHandler () {\n"
+  "proc CAN0WakeUpHandler $isr @weak () {\n"
   "  throw 50\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr I2S0TransmitHandler ()\n"
+  "required proc I2S0TransmitHandler $isr ()\n"
   "\n"
-  "proc $isr @weak I2S0TransmitHandler () {\n"
+  "proc I2S0TransmitHandler $isr @weak () {\n"
   "  throw 51\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr I2S0ReceiveHandler ()\n"
+  "required proc I2S0ReceiveHandler $isr ()\n"
   "\n"
-  "proc $isr @weak I2S0ReceiveHandler () {\n"
+  "proc I2S0ReceiveHandler $isr @weak () {\n"
   "  throw 52\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART0LONHandler ()\n"
+  "required proc UART0LONHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART0LONHandler () {\n"
+  "proc UART0LONHandler $isr @weak () {\n"
   "  throw 60\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART0StatusHandler ()\n"
+  "required proc UART0StatusHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART0StatusHandler () {\n"
+  "proc UART0StatusHandler $isr @weak () {\n"
   "  throw 61\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART0ErrorHandler ()\n"
+  "required proc UART0ErrorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART0ErrorHandler () {\n"
+  "proc UART0ErrorHandler $isr @weak () {\n"
   "  throw 62\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART1StatusHandler ()\n"
+  "required proc UART1StatusHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART1StatusHandler () {\n"
+  "proc UART1StatusHandler $isr @weak () {\n"
   "  throw 63\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART1ErrorHandler ()\n"
+  "required proc UART1ErrorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART1ErrorHandler () {\n"
+  "proc UART1ErrorHandler $isr @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART2StatusHandler ()\n"
+  "required proc UART2StatusHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART2StatusHandler () {\n"
+  "proc UART2StatusHandler $isr @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr UART2ErrorHandler ()\n"
+  "required proc UART2ErrorHandler $isr ()\n"
   "\n"
-  "proc $isr @weak UART2ErrorHandler () {\n"
+  "proc UART2ErrorHandler $isr @weak () {\n"
   "  throw 65\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr ADC0Handler ()\n"
+  "required proc ADC0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak ADC0Handler () {\n"
+  "proc ADC0Handler $isr @weak () {\n"
   "  throw 73\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr ADC1Handler ()\n"
+  "required proc ADC1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak ADC1Handler () {\n"
+  "proc ADC1Handler $isr @weak () {\n"
   "  throw 74\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CMP0Handler ()\n"
+  "required proc CMP0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak CMP0Handler () {\n"
+  "proc CMP0Handler $isr @weak () {\n"
   "  throw 75\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CMP1Handler ()\n"
+  "required proc CMP1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak CMP1Handler () {\n"
+  "proc CMP1Handler $isr @weak () {\n"
   "  throw 76\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CMP2Handler ()\n"
+  "required proc CMP2Handler $isr ()\n"
   "\n"
-  "proc $isr @weak CMP2Handler () {\n"
+  "proc CMP2Handler $isr @weak () {\n"
   "  throw 77\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr FMT0Handler ()\n"
+  "required proc FMT0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak FMT0Handler () {\n"
+  "proc FMT0Handler $isr @weak () {\n"
   "  throw 78\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr FMT1Handler ()\n"
+  "required proc FMT1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak FMT1Handler () {\n"
+  "proc FMT1Handler $isr @weak () {\n"
   "  throw 79\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr FMT2Handler ()\n"
+  "required proc FMT2Handler $isr ()\n"
   "\n"
-  "proc $isr @weak FMT2Handler () {\n"
+  "proc FMT2Handler $isr @weak () {\n"
   "  throw 80\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr CMTHandler ()\n"
+  "required proc CMTHandler $isr ()\n"
   "\n"
-  "proc $isr @weak CMTHandler () {\n"
+  "proc CMTHandler $isr @weak () {\n"
   "  throw 81\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr RTCAlarmHandler ()\n"
+  "required proc RTCAlarmHandler $isr ()\n"
   "\n"
-  "proc $isr @weak RTCAlarmHandler () {\n"
+  "proc RTCAlarmHandler $isr @weak () {\n"
   "  throw 82\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr RTCSecondHandler ()\n"
+  "required proc RTCSecondHandler $isr ()\n"
   "\n"
-  "proc $isr @weak RTCSecondHandler () {\n"
+  "proc RTCSecondHandler $isr @weak () {\n"
   "  throw 83\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PITChannel0Handler ()\n"
+  "required proc PITChannel0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak PITChannel0Handler () {\n"
+  "proc PITChannel0Handler $isr @weak () {\n"
   "  throw 84\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PITChannel1Handler ()\n"
+  "required proc PITChannel1Handler $isr ()\n"
   "\n"
-  "proc $isr @weak PITChannel1Handler () {\n"
+  "proc PITChannel1Handler $isr @weak () {\n"
   "  throw 85\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PITChannel2Handler ()\n"
+  "required proc PITChannel2Handler $isr ()\n"
   "\n"
-  "proc $isr @weak PITChannel2Handler () {\n"
+  "proc PITChannel2Handler $isr @weak () {\n"
   "  throw 86\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PITChannel3Handler ()\n"
+  "required proc PITChannel3Handler $isr ()\n"
   "\n"
-  "proc $isr @weak PITChannel3Handler () {\n"
+  "proc PITChannel3Handler $isr @weak () {\n"
   "  throw 87\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr PDBHandler ()\n"
+  "required proc PDBHandler $isr ()\n"
   "\n"
-  "proc $isr @weak PDBHandler () {\n"
+  "proc PDBHandler $isr @weak () {\n"
   "  throw 88\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr USBOTGHandler ()\n"
+  "required proc USBOTGHandler $isr ()\n"
   "\n"
-  "proc $isr @weak USBOTGHandler () {\n"
+  "proc USBOTGHandler $isr @weak () {\n"
   "  throw 89\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr USBChargerDetectHandler ()\n"
+  "required proc USBChargerDetectHandler $isr ()\n"
   "\n"
-  "proc $isr @weak USBChargerDetectHandler () {\n"
+  "proc USBChargerDetectHandler $isr @weak () {\n"
   "  throw 90\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr DAC0Handler ()\n"
+  "required proc DAC0Handler $isr ()\n"
   "\n"
-  "proc $isr @weak DAC0Handler () {\n"
+  "proc DAC0Handler $isr @weak () {\n"
   "  throw 97\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr TSIHandler ()\n"
+  "required proc TSIHandler $isr ()\n"
   "\n"
-  "proc $isr @weak TSIHandler () {\n"
+  "proc TSIHandler $isr @weak () {\n"
   "  throw 99\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr MCGHandler ()\n"
+  "required proc MCGHandler $isr ()\n"
   "\n"
-  "proc $isr @weak MCGHandler () {\n"
+  "proc MCGHandler $isr @weak () {\n"
   "  throw 100\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr lowPowerTimerHandler ()\n"
+  "required proc lowPowerTimerHandler $isr ()\n"
   "\n"
-  "proc $isr @weak lowPowerTimerHandler () {\n"
+  "proc lowPowerTimerHandler $isr @weak () {\n"
   "  throw 101\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr pinDetectPortAHandler ()\n"
+  "required proc pinDetectPortAHandler $isr ()\n"
   "\n"
-  "proc $isr @weak pinDetectPortAHandler () {\n"
+  "proc pinDetectPortAHandler $isr @weak () {\n"
   "  throw 103\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr pinDetectPortBHandler ()\n"
+  "required proc pinDetectPortBHandler $isr ()\n"
   "\n"
-  "proc $isr @weak pinDetectPortBHandler () {\n"
+  "proc pinDetectPortBHandler $isr @weak () {\n"
   "  throw 104\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr pinDetectPortCHandler ()\n"
+  "required proc pinDetectPortCHandler $isr ()\n"
   "\n"
-  "proc $isr @weak pinDetectPortCHandler () {\n"
+  "proc pinDetectPortCHandler $isr @weak () {\n"
   "  throw 105\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr pinDetectPortDHandler ()\n"
+  "required proc pinDetectPortDHandler $isr ()\n"
   "\n"
-  "proc $isr @weak pinDetectPortDHandler () {\n"
+  "proc pinDetectPortDHandler $isr @weak () {\n"
   "  throw 106\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr pinDetectPortEHandler ()\n"
+  "required proc pinDetectPortEHandler $isr ()\n"
   "\n"
-  "proc $isr @weak pinDetectPortEHandler () {\n"
+  "proc pinDetectPortEHandler $isr @weak () {\n"
   "  throw 107\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $isr softwareInterruptHandler ()\n"
+  "required proc softwareInterruptHandler $isr ()\n"
   "\n"
-  "proc $isr @weak softwareInterruptHandler () {\n"
+  "proc softwareInterruptHandler $isr @weak () {\n"
   "  throw 110\n"
   "}\n"
   "\n"
@@ -7241,7 +7241,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
-  14387, // Text length
+  14393, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -7263,7 +7263,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init configurePorts () {\n"
+  "proc configurePorts $init () {\n"
   "//--- D4 (PTB0) is a GPIO (input by default)\n"
   "  PORTB_PCR0 = (1 << 8) ;\n"
   "  GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)\n"
@@ -7286,34 +7286,34 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init $exception $user driveHighE () {\n"
+  "proc driveHighE $init $exception $user () {\n"
   "  GPIOB_PSOR = 1 << 1 ; // E is PTB1\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc $init $exception $user driveLowE () {\n"
+  "proc driveLowE $init $exception $user () {\n"
   "  GPIOB_PCOR = 1 << 1 ; // E is PTB1\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc $init $exception $user driveHighRS () {\n"
+  "proc driveHighRS $init $exception $user () {\n"
   "  GPIOB_PSOR = 1 << 3 ; // RS is PTB3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "proc $init $exception $user driveLowRS () {\n"
+  "proc driveLowRS $init $exception $user () {\n"
   "  GPIOB_PCOR = 1 << 3 ; // RS is PTB3\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init $exception $user setD4 (\?inValue : Bool) { // PTB0\n"
+  "proc setD4 $init $exception $user (\?inValue : Bool) { // PTB0\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -7323,7 +7323,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init $exception $user setD5 (\?inValue : Bool) { // PTC0\n"
+  "proc setD5 $init $exception $user (\?inValue : Bool) { // PTC0\n"
   "  if inValue then\n"
   "    GPIOC_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -7333,7 +7333,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init $exception $user setD6 (\?inValue : Bool) { // PTD1\n"
+  "proc setD6 $init $exception $user (\?inValue : Bool) { // PTD1\n"
   "  if inValue then\n"
   "    GPIOD_PSOR = 1 << 1 ;\n"
   "  else\n"
@@ -7343,7 +7343,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init $exception $user setD7 (\?inValue : Bool) { // PTB2\n"
+  "proc setD7 $init $exception $user (\?inValue : Bool) { // PTB2\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 2 ;\n"
   "  else\n"
@@ -7355,7 +7355,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "//   UTILITY ROUTINES                                                          *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init busyWaitingDuringMS (\?inDuration : UInt32) {\n"
+  "proc busyWaitingDuringMS $init (\?inDuration : UInt32) {\n"
   "  let deadline = gCompteur + inDuration\n"
   "  while gCompteur < deadline do\n"
   "  end\n"
@@ -7363,7 +7363,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init programLcd4BitDataBusOutput (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput $init (\?inValue : UInt8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -7372,7 +7372,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init write4BitCommand (\?inValue : UInt8) {\n"
+  "proc write4BitCommand $init (\?inValue : UInt8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inValue) ;\n"
@@ -7383,7 +7383,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $init write8bitCommand (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand $init (\?inCommand : UInt8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
@@ -7447,7 +7447,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "//   PRINT ROUTINES IN USER MODE                                               *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused programLcd4BitDataBusOutput_inUserMode (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput_inUserMode $user @noWarningIfUnused (\?inValue : UInt8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -7456,7 +7456,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused write8bitCommand_inUserMode (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand_inUserMode $user @noWarningIfUnused (\?inCommand : UInt8) {\n"
   "  waitMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;\n"
@@ -7472,7 +7472,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused writeData_inUserMode (\?inData : UInt8) {\n"
+  "proc writeData_inUserMode $user @noWarningIfUnused (\?inData : UInt8) {\n"
   "  waitMS (!1) ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;\n"
@@ -7493,7 +7493,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "// Line 2 : 20 -> 39\n"
   "// Line 3 : 84 -> 103\n"
   "\n"
-  "proc $user @noWarningIfUnused goto (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "proc goto $user @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;\n"
@@ -7526,13 +7526,13 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused clearScreen () {\n"
+  "proc clearScreen $user @noWarningIfUnused () {\n"
   "  write8bitCommand_inUserMode (!0x01)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused printSpaces (\?inCount : UInt32) {\n"
+  "proc printSpaces $user @noWarningIfUnused (\?inCount : UInt32) {\n"
   "  var count = inCount\n"
   "  while (count > 0) do\n"
   "    writeData_inUserMode (!0x20)\n"
@@ -7542,7 +7542,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused printUnsigned (\?inValue : UInt32) {\n"
+  "proc printUnsigned $user @noWarningIfUnused (\?inValue : UInt32) {\n"
   "  if inValue > 9 then\n"
   "    printUnsigned (!inValue / 10)\n"
   "  end\n"
@@ -7551,7 +7551,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user @noWarningIfUnused printSigned (\?inValue : Int32) {\n"
+  "proc printSigned $user @noWarningIfUnused (\?inValue : Int32) {\n"
   "  if inValue >= 0 then\n"
   "    printUnsigned (!inValue &\\ UInt32)\n"
   "  else\n"
@@ -7615,7 +7615,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "//   EXCEPTION                                                                 *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused programLcd4BitDataBusOutput_inExceptionMode (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput_inExceptionMode $exception @noWarningIfUnused (\?inValue : UInt8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -7624,14 +7624,14 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused waitOneMillisecondInExceptionMode () {\n"
+  "proc waitOneMillisecondInExceptionMode $exception @noWarningIfUnused () {\n"
   "  while not SYST_CSR.COUNTFLAG.bool do\n"
   "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused waitMSInExceptionMode (\?duration: inDuration : UInt32) {\n"
+  "proc waitMSInExceptionMode $exception @noWarningIfUnused (\?duration: inDuration : UInt32) {\n"
   "  var duration = inDuration\n"
   "  while duration > 0 do\n"
   "    waitOneMillisecondInExceptionMode ()\n"
@@ -7641,7 +7641,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused writeDataInExceptionMode (\?inData : UInt8) {\n"
+  "proc writeDataInExceptionMode $exception @noWarningIfUnused (\?inData : UInt8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;\n"
@@ -7657,7 +7657,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused printUnsignedInExceptionMode (\?inValue : UInt32) {\n"
+  "proc printUnsignedInExceptionMode $exception @noWarningIfUnused (\?inValue : UInt32) {\n"
   "  if inValue > 9 then\n"
   "    printUnsignedInExceptionMode (!inValue &/ 10)\n"
   "  end\n"
@@ -7666,7 +7666,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused printSignedInExceptionMode (\?inValue : Int32) {\n"
+  "proc printSignedInExceptionMode $exception @noWarningIfUnused (\?inValue : Int32) {\n"
   "  if inValue >= 0 then\n"
   "    printUnsignedInExceptionMode (!inValue &\\ UInt32)\n"
   "  else\n"
@@ -7677,7 +7677,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused write8bitCommand_inExceptionMode (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand_inExceptionMode $exception @noWarningIfUnused (\?inCommand : UInt8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;\n"
@@ -7693,7 +7693,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused gotoInExceptionMode (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "proc gotoInExceptionMode $exception @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;\n"
@@ -7709,7 +7709,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $exception @noWarningIfUnused clearScreenInExceptionMode () {\n"
+  "proc clearScreenInExceptionMode $exception @noWarningIfUnused () {\n"
   "  write8bitCommand_inExceptionMode (!0x01)\n"
   "}\n"
   "\n"
@@ -7729,7 +7729,7 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
   "  waitMSInExceptionMode (!duration:50)\n"
   "  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
-  "//  SCB_AIRCR = (0x5FA << 16) | SCB_AIRCR_SYSRESETREQ\n"
+  "  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -7739,7 +7739,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
-  15061, // Text length
+  15060, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -7786,7 +7786,7 @@ const char * gWrapperFileContent_3_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user $exception $isr ledOn (\?inLeds : UInt32) {\n"
+  "proc ledOn $user $exception $isr (\?inLeds : UInt32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PSOR = 1 << 12 ;\n"
@@ -7815,7 +7815,7 @@ const char * gWrapperFileContent_3_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user $exception $isr ledOff (\?inLeds : UInt32) {\n"
+  "proc ledOff $user $exception $isr (\?inLeds : UInt32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PCOR = 1 << 12 ;\n"
@@ -9980,7 +9980,12 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "}\n"
   "\n"
   "//register SCB_VTOR   0xE000ED08 // Vector Table Offset\n"
-  "register SCB_AIRCR at 0xE000ED0C : UInt32 // Application Interrupt and Reset Control\n"
+  "\n"
+  "register AIRCR at 0xE000ED0C : UInt32 { // Application Interrupt and Reset Control\n"
+  "  VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
+  "  5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET \n"
+  "}\n"
+  "\n"
   "let SCB_AIRCR_SYSRESETREQ  : UInt32 = 0x00000004\n"
   "//register SCB_SCR    0xE000ED10 // System Control Register\n"
   "//register SCB_CCR    0xE000ED14 // Configuration and Control\n"
@@ -10012,7 +10017,7 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  137826, // Text length
+  137915, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -10044,21 +10049,21 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
 
 //--- File 'targets/target-teensy-sequential-systick.plms'
 
-const char * gWrapperFileContent_5_targetTemplates = "newUnsignedBaseType @unsigned8  \"uint8_t\"   8\n"
-  "newUnsignedBaseType @unsigned16 \"uint16_t\" 16\n"
-  "newUnsignedBaseType @unsigned32 \"uint32_t\" 32\n"
-  "newUnsignedBaseType @unsigned64 \"uint64_t\" 64\n"
+const char * gWrapperFileContent_5_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
   "\n"
-  "newSignedBaseType @signed8  \"int8_t\"   8\n"
-  "newSignedBaseType @signed16 \"int16_t\" 16\n"
-  "newSignedBaseType @signed32 \"int32_t\" 32\n"
-  "newSignedBaseType @signed64 \"int64_t\" 64\n"
+  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
   "\n"
-  "newUnsignedBaseType @size \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "newBooleanType Bool @unsigned8\n"
+  "booleanType Bool @unsigned8\n"
   "\n"
   "newIntegerType UInt8  @unsigned8\n"
   "newIntegerType UInt16 @unsigned16\n"
@@ -10090,12 +10095,12 @@ const char * gWrapperFileContent_5_targetTemplates = "newUnsignedBaseType @unsig
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "required proc $user setup ()\n"
-  "required proc $user loop ()\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc $user $init waitMS (\?inDuration : UInt32) {\n"
+  "proc waitMS $user $init  (\?inDuration : UInt32) {\n"
   "  let deadline = gCompteur + inDuration\n"
   "  while gCompteur < deadline do\n"
   "  end\n"
@@ -10108,7 +10113,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1672, // Text length
+  1724, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -13654,10 +13659,10 @@ GALGAS_modeDeclaration GALGAS_modeDeclaration::extractObject (const GALGAS_objec
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_newBaseTypeDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_newIntegerRepresentationDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_newBaseTypeDeclaration * p = (const cPtr_newBaseTypeDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_newBaseTypeDeclaration) ;
+  const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
   if (kOperandEqual == result) {
     result = mAttribute_mBaseTypeName.objectCompare (p->mAttribute_mBaseTypeName) ;
   }
@@ -13676,7 +13681,7 @@ typeComparisonResult cPtr_newBaseTypeDeclaration::dynamicObjectCompare (const ac
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_newBaseTypeDeclaration::objectCompare (const GALGAS_newBaseTypeDeclaration & inOperand) const {
+typeComparisonResult GALGAS_newIntegerRepresentationDeclaration::objectCompare (const GALGAS_newIntegerRepresentationDeclaration & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -13694,48 +13699,48 @@ typeComparisonResult GALGAS_newBaseTypeDeclaration::objectCompare (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newBaseTypeDeclaration::GALGAS_newBaseTypeDeclaration (void) :
+GALGAS_newIntegerRepresentationDeclaration::GALGAS_newIntegerRepresentationDeclaration (void) :
 GALGAS_abstractDeclaration () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newBaseTypeDeclaration GALGAS_newBaseTypeDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_newBaseTypeDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                         GALGAS_lstring::constructor_default (HERE),
-                                                         GALGAS_luint_36__34_::constructor_default (HERE),
-                                                         GALGAS_bool::constructor_default (HERE)
-                                                         COMMA_THERE) ;
+GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_newIntegerRepresentationDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
+                                                                      GALGAS_lstring::constructor_default (HERE),
+                                                                      GALGAS_luint_36__34_::constructor_default (HERE),
+                                                                      GALGAS_bool::constructor_default (HERE)
+                                                                      COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newBaseTypeDeclaration::GALGAS_newBaseTypeDeclaration (const cPtr_newBaseTypeDeclaration * inSourcePtr) :
+GALGAS_newIntegerRepresentationDeclaration::GALGAS_newIntegerRepresentationDeclaration (const cPtr_newIntegerRepresentationDeclaration * inSourcePtr) :
 GALGAS_abstractDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_newBaseTypeDeclaration) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_newIntegerRepresentationDeclaration) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newBaseTypeDeclaration GALGAS_newBaseTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mBaseTypeName,
-                                                                              const GALGAS_lstring & inAttribute_mCType,
-                                                                              const GALGAS_luint_36__34_ & inAttribute_mSize,
-                                                                              const GALGAS_bool & inAttribute_mIsSigned
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_newBaseTypeDeclaration result ;
+GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mBaseTypeName,
+                                                                                                        const GALGAS_lstring & inAttribute_mCType,
+                                                                                                        const GALGAS_luint_36__34_ & inAttribute_mSize,
+                                                                                                        const GALGAS_bool & inAttribute_mIsSigned
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_newIntegerRepresentationDeclaration result ;
   if (inAttribute_mBaseTypeName.isValid () && inAttribute_mCType.isValid () && inAttribute_mSize.isValid () && inAttribute_mIsSigned.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_newBaseTypeDeclaration (inAttribute_mBaseTypeName, inAttribute_mCType, inAttribute_mSize, inAttribute_mIsSigned COMMA_THERE)) ;
+    macroMyNew (result.mObjectPtr, cPtr_newIntegerRepresentationDeclaration (inAttribute_mBaseTypeName, inAttribute_mCType, inAttribute_mSize, inAttribute_mIsSigned COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_newBaseTypeDeclaration::reader_mBaseTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_newIntegerRepresentationDeclaration::reader_mBaseTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_newBaseTypeDeclaration * p = (const cPtr_newBaseTypeDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_newBaseTypeDeclaration) ;
+    const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
     result = p->mAttribute_mBaseTypeName ;
   }
   return result ;
@@ -13743,17 +13748,17 @@ GALGAS_lstring GALGAS_newBaseTypeDeclaration::reader_mBaseTypeName (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_newBaseTypeDeclaration::reader_mBaseTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_newIntegerRepresentationDeclaration::reader_mBaseTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mBaseTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_newBaseTypeDeclaration::reader_mCType (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_newIntegerRepresentationDeclaration::reader_mCType (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
-    const cPtr_newBaseTypeDeclaration * p = (const cPtr_newBaseTypeDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_newBaseTypeDeclaration) ;
+    const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
     result = p->mAttribute_mCType ;
   }
   return result ;
@@ -13761,17 +13766,17 @@ GALGAS_lstring GALGAS_newBaseTypeDeclaration::reader_mCType (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_newBaseTypeDeclaration::reader_mCType (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_newIntegerRepresentationDeclaration::reader_mCType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_newBaseTypeDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint_36__34_ GALGAS_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
   GALGAS_luint_36__34_ result ;
   if (NULL != mObjectPtr) {
-    const cPtr_newBaseTypeDeclaration * p = (const cPtr_newBaseTypeDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_newBaseTypeDeclaration) ;
+    const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
     result = p->mAttribute_mSize ;
   }
   return result ;
@@ -13779,17 +13784,17 @@ GALGAS_luint_36__34_ GALGAS_newBaseTypeDeclaration::reader_mSize (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cPtr_newBaseTypeDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_luint_36__34_ cPtr_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_newBaseTypeDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_newIntegerRepresentationDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
-    const cPtr_newBaseTypeDeclaration * p = (const cPtr_newBaseTypeDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_newBaseTypeDeclaration) ;
+    const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
     result = p->mAttribute_mIsSigned ;
   }
   return result ;
@@ -13797,19 +13802,19 @@ GALGAS_bool GALGAS_newBaseTypeDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_newBaseTypeDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_newIntegerRepresentationDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIsSigned ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                   Pointer class for @newBaseTypeDeclaration class                                   *
+//                            Pointer class for @newIntegerRepresentationDeclaration class                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_newBaseTypeDeclaration::cPtr_newBaseTypeDeclaration (const GALGAS_lstring & in_mBaseTypeName,
-                                                          const GALGAS_lstring & in_mCType,
-                                                          const GALGAS_luint_36__34_ & in_mSize,
-                                                          const GALGAS_bool & in_mIsSigned
-                                                          COMMA_LOCATION_ARGS) :
+cPtr_newIntegerRepresentationDeclaration::cPtr_newIntegerRepresentationDeclaration (const GALGAS_lstring & in_mBaseTypeName,
+                                                                                    const GALGAS_lstring & in_mCType,
+                                                                                    const GALGAS_luint_36__34_ & in_mSize,
+                                                                                    const GALGAS_bool & in_mIsSigned
+                                                                                    COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
 mAttribute_mBaseTypeName (in_mBaseTypeName),
 mAttribute_mCType (in_mCType),
@@ -13819,13 +13824,13 @@ mAttribute_mIsSigned (in_mIsSigned) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_newBaseTypeDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_newBaseTypeDeclaration ;
+const C_galgas_type_descriptor * cPtr_newIntegerRepresentationDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_newIntegerRepresentationDeclaration ;
 }
 
-void cPtr_newBaseTypeDeclaration::description (C_String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString << "[@newBaseTypeDeclaration:" ;
+void cPtr_newIntegerRepresentationDeclaration::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "[@newIntegerRepresentationDeclaration:" ;
   mAttribute_mBaseTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mCType.description (ioString, inIndentation+1) ;
@@ -13838,51 +13843,51 @@ void cPtr_newBaseTypeDeclaration::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_newBaseTypeDeclaration::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_newIntegerRepresentationDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_newBaseTypeDeclaration (mAttribute_mBaseTypeName, mAttribute_mCType, mAttribute_mSize, mAttribute_mIsSigned COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_newIntegerRepresentationDeclaration (mAttribute_mBaseTypeName, mAttribute_mCType, mAttribute_mSize, mAttribute_mIsSigned COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @newBaseTypeDeclaration type                                             *
+//                                      @newIntegerRepresentationDeclaration type                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_newBaseTypeDeclaration ("newBaseTypeDeclaration",
-                                               & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+kTypeDescriptor_GALGAS_newIntegerRepresentationDeclaration ("newIntegerRepresentationDeclaration",
+                                                            & kTypeDescriptor_GALGAS_abstractDeclaration) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_newBaseTypeDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_newBaseTypeDeclaration ;
+const C_galgas_type_descriptor * GALGAS_newIntegerRepresentationDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_newIntegerRepresentationDeclaration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_newBaseTypeDeclaration::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_newIntegerRepresentationDeclaration::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_newBaseTypeDeclaration (*this)) ;
+    macroMyNew (result, GALGAS_newIntegerRepresentationDeclaration (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_newBaseTypeDeclaration GALGAS_newBaseTypeDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_newBaseTypeDeclaration result ;
-  const GALGAS_newBaseTypeDeclaration * p = (const GALGAS_newBaseTypeDeclaration *) inObject.embeddedObject () ;
+GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_newIntegerRepresentationDeclaration result ;
+  const GALGAS_newIntegerRepresentationDeclaration * p = (const GALGAS_newIntegerRepresentationDeclaration *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_newBaseTypeDeclaration *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_newIntegerRepresentationDeclaration *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("newBaseTypeDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("newIntegerRepresentationDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

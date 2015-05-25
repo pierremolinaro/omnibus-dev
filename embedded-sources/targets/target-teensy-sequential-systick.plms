@@ -1,18 +1,18 @@
-newUnsignedBaseType @unsigned8  "uint8_t"   8
-newUnsignedBaseType @unsigned16 "uint16_t" 16
-newUnsignedBaseType @unsigned32 "uint32_t" 32
-newUnsignedBaseType @unsigned64 "uint64_t" 64
+newUnsignedRepresentation @unsigned8  "uint8_t"   8
+newUnsignedRepresentation @unsigned16 "uint16_t" 16
+newUnsignedRepresentation @unsigned32 "uint32_t" 32
+newUnsignedRepresentation @unsigned64 "uint64_t" 64
 
-newSignedBaseType @signed8  "int8_t"   8
-newSignedBaseType @signed16 "int16_t" 16
-newSignedBaseType @signed32 "int32_t" 32
-newSignedBaseType @signed64 "int64_t" 64
+newSignedRepresentation @signed8  "int8_t"   8
+newSignedRepresentation @signed16 "int16_t" 16
+newSignedRepresentation @signed32 "int32_t" 32
+newSignedRepresentation @signed64 "int64_t" 64
 
-newUnsignedBaseType @size "uint32_t" 32
+newUnsignedRepresentation @size "uint32_t" 32
 
 //-----------------------------------------------------------------------------*
 
-newBooleanType Bool @unsigned8
+booleanType Bool @unsigned8
 
 newIntegerType UInt8  @unsigned8
 newIntegerType UInt16 @unsigned16
@@ -44,12 +44,12 @@ import "microcontrollers/default-isr.plm"
 
 //-----------------------------------------------------------------------------*
 
-required proc $user setup ()
-required proc $user loop ()
+required proc setup $user ()
+required proc loop $user ()
 
 //-----------------------------------------------------------------------------*
 
-proc $user $init waitMS (?inDuration : UInt32) {
+proc waitMS $user $init  (?inDuration : UInt32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end

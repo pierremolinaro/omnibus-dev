@@ -2,7 +2,7 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @newBaseTypeDeclaration : @abstractDeclaration {
+class @newIntegerRepresentationDeclaration : @abstractDeclaration {
   @lstring mBaseTypeName
   @lstring mCType
   @luint64 mSize
@@ -11,7 +11,7 @@ class @newBaseTypeDeclaration : @abstractDeclaration {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @newBaseTypeDeclaration location -> @location outLocation {
+override getter @newIntegerRepresentationDeclaration location -> @location outLocation {
   outLocation = mBaseTypeName.location
 }
 
@@ -24,11 +24,11 @@ syntax extension plms_specific_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <declaration> ?!@ast ioAST {
-    $newSignedBaseType$
+    $newSignedRepresentation$
     $attribute$ ?let newAttributeName
     $literal_string$ ?let cType
     $integer$ ?let size
-    ioAST.mDeclarationList += !@newBaseTypeDeclaration.new {
+    ioAST.mDeclarationList += !@newIntegerRepresentationDeclaration.new {
       !newAttributeName
       !cType
       !size
@@ -39,11 +39,11 @@ syntax extension plms_specific_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <declaration> ?!@ast ioAST {
-    $newUnsignedBaseType$
+    $newUnsignedRepresentation$
     $attribute$ ?let newAttributeName
     $literal_string$ ?let cType
     $integer$ ?let size
-    ioAST.mDeclarationList += !@newBaseTypeDeclaration.new {
+    ioAST.mDeclarationList += !@newIntegerRepresentationDeclaration.new {
       !newAttributeName
       !cType
       !size
@@ -59,7 +59,7 @@ syntax extension plms_specific_syntax {
 #  PRECEDENCE GRAPH                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @newBaseTypeDeclaration enterInPrecedenceGraph
+override method @newIntegerRepresentationDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !.new {!"basetype " + mBaseTypeName !mBaseTypeName.location} !self]
@@ -67,7 +67,7 @@ override method @newBaseTypeDeclaration enterInPrecedenceGraph
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @newBaseTypeDeclaration keyRepresentation -> @string outRepresentation {
+override getter @newIntegerRepresentationDeclaration keyRepresentation -> @string outRepresentation {
   outRepresentation = "bool " + mBaseTypeName 
 }
 
@@ -75,7 +75,7 @@ override getter @newBaseTypeDeclaration keyRepresentation -> @string outRepresen
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @newBaseTypeDeclaration enterInContext
+override method @newIntegerRepresentationDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
@@ -98,7 +98,7 @@ override method @newBaseTypeDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @newBaseTypeDeclaration semanticAnalysis
+override method @newIntegerRepresentationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {

@@ -39,7 +39,7 @@ let LED_TEENSY : UInt32 = (1 << 5)
 
 //-----------------------------------------------------------------------------*
 
-proc $user $exception $isr ledOn (?inLeds : UInt32) {
+proc ledOn $user $exception $isr (?inLeds : UInt32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PSOR = 1 << 12 ;
@@ -68,7 +68,7 @@ proc $user $exception $isr ledOn (?inLeds : UInt32) {
 
 //-----------------------------------------------------------------------------*
 
-proc $user $exception $isr ledOff (?inLeds : UInt32) {
+proc ledOff $user $exception $isr (?inLeds : UInt32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PCOR = 1 << 12 ;

@@ -107,7 +107,7 @@ let y : Int16 = v &\ Int16 // Erreur, la conversion implicite est possible
 
 \section{Opérateurs infixes et conversions implicites}
 
-
+\colorbox{red}{À définir.}
 
 \section{Opérateurs infix de comparaison}
 
@@ -155,12 +155,12 @@ Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateu
 
 \subsectionLabel{Opérateur \texttt{-}}{negationOvf}
 
-L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Elle n'est acceptée que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
+L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
 
 
 \subsectionLabel{Opérateur \texttt{\&-}}{negationNoOvf}
 
-L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Elle n'est acceptée que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) retourne cette même valeur.
+L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) retourne cette même valeur. Cet opérateur n'engendre jamais d'exception.
 
 
 
