@@ -6758,6 +6758,12 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
+  "init 0 { // Configure Systick interrupt every ms\n"
+  "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "  SYST_CVR = 0\n"
+  "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "}\n"
+  "\n"
   "var gCompteur $user $isr $init : UInt32 = 0\n"
   "\n"
   "required proc systickHandler $isr ()\n"
@@ -7334,7 +7340,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
-  14524, // Text length
+  14738, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -7822,7 +7828,6 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
   "  waitMSInExceptionMode (!duration:50)\n"
   "  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
-  "  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -7832,7 +7837,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
-  15067, // Text length
+  15014, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -8237,13 +8242,13 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "register SIM_SCGC7 at 0x40048040 : UInt32 // System Clock Gating Control Register 7\n"
   "let SIM_SCGC7_DMA  : UInt32 =  0x00000002  // DMA Clock Gate Control\n"
   "\n"
-  "register SIM_CLKDIV1 at 0x40048044 : UInt32 // System Clock Divider Register 1\n"
-  "//register UInt32 SIM_CLKDIV1_OUTDIV1(n)   (((n) & 0x0F) << 28) // divide value for the core/system clock\n"
-  "let SIM_CLKDIV1_OUTDIV1_0 : UInt32 = 0 << 28\n"
-  "//register UInt32 SIM_CLKDIV1_OUTDIV2(n)   (((n) & 0x0F) << 24) // divide value for the peripheral clock\n"
-  "let SIM_CLKDIV1_OUTDIV2_1 : UInt32 = 1 << 24\n"
-  "//register UInt32 SIM_CLKDIV1_OUTDIV4(n)   (((n) & 0x0F) << 16) // divide value for the flash clock\n"
-  "let SIM_CLKDIV1_OUTDIV4_3 : UInt32 = 3 << 16\n"
+  "register SIM_CLKDIV1 at 0x4004_8044 : UInt32 {// System Clock Divider Register 1\n"
+  "  OUTDIV1[4], // Divide value for the core/system clock\n"
+  "  OUTDIV2[4], // Divide value for the peripheral clock\n"
+  "  4,\n"
+  "  OUTDIV4[4], // Divide value for the flash clock\n"
+  "  16\n"
+  "}\n"
   "\n"
   "register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2\n"
   "//register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)\n"
@@ -8299,11 +8304,10 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
   "let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
   "//let UInt8 PMC_LVDSC2_LVWV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select\n"
-  "register PMC_REGSC at 0x4007D002 : UInt8 // Regulator Status And Control register\n"
-  "let PMC_REGSC_BGEN  : UInt8 = 0x10   // Bandgap Enable In VLPx Operation\n"
-  "let PMC_REGSC_ACKISO : UInt8 = 0x08   // Acknowledge Isolation\n"
-  "let PMC_REGSC_REGONS : UInt8 = 0x04   // Regulator In Run Regulation Status\n"
-  "let PMC_REGSC_BGBE  : UInt8 = 0x01   // Bandgap Buffer Enable\n"
+  "\n"
+  "register PMC_REGSC at 0x4007D002 : UInt8 { // Regulator Status And Control register\n"
+  "  3, BGEN, ACKISO, REGONS, BGBE, 1\n"
+  "}\n"
   "\n"
   "// Chapter 16: Low-Leakage Wakeup Unit (LLWU)\n"
   "register LLWU_PE1  at 0x4007C000 : UInt8 // LLWU Pin Enable 1 register\n"
@@ -8832,73 +8836,60 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "register WDOG_TMROUTL  at 0x40052012 : UInt16 // Watchdog Timer Output Register Low\n"
   "register WDOG_RSTCNT   at 0x40052014 : UInt16 // Watchdog Reset Count register\n"
   "register WDOG_PRESC    at 0x40052016 : UInt16 // Watchdog Prescaler register\n"
-  "//\n"
-  "//// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "register MCG_C1 at 0x40064000 : UInt8 // MCG Control 1 Register\n"
-  "let MCG_C1_IREFSTEN : UInt8 = 0x01   // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the "
-  "MCG enters Stop mode.\n"
-  "let MCG_C1_IRCLKEN : UInt8 = 0x02   // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK.\n"
-  "let MCG_C1_IREFS : UInt8 = 0x04   // Internal Reference Select, Selects the reference clock source for the FLL.\n"
-  "//register MCG_C1_FRDIV(n)   (uint8_t)(((n) & 0x07) << 3) // FLL External Reference Divider, Selects the amount to divide down the external reference "
-  "clock for the FLL\n"
-  "let MCG_C1_FRDIV_0 : UInt8 = 0 << 3\n"
-  "let MCG_C1_FRDIV_1 : UInt8 = 1 << 3\n"
-  "let MCG_C1_FRDIV_2 : UInt8 = 2 << 3\n"
-  "let MCG_C1_FRDIV_3 : UInt8 = 3 << 3\n"
-  "let MCG_C1_FRDIV_4 : UInt8 = 4 << 3\n"
-  "let MCG_C1_FRDIV_5 : UInt8 = 5 << 3\n"
-  "let MCG_C1_FRDIV_6 : UInt8 = 6 << 3\n"
-  "let MCG_C1_FRDIV_7 : UInt8 = 7 << 3\n"
-  "//register MCG_C1_CLKS(n)   (uint8_t)(((n) & 0x03) << 6) // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
-  "let MCG_C1_CLKS_0 : UInt8 = 0 << 6\n"
-  "let MCG_C1_CLKS_1 : UInt8 = 1 << 6\n"
-  "let MCG_C1_CLKS_2 : UInt8 = 2 << 6\n"
-  "let MCG_C1_CLKS_3 : UInt8 = 3 << 6\n"
-  "register MCG_C2 at 0x40064001 : UInt8 // MCG Control 2 Register\n"
-  "let MCG_C2_IRCS : UInt8  = 0x01   // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.\n"
-  "let MCG_C2_LP : UInt8 = 0x02   // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.\n"
-  "let MCG_C2_EREFS : UInt8 = 0x04   // External Reference Select, Selects the source for the external reference clock. \n"
-  "let MCG_C2_HGO0 : UInt8 = 0x08   // High Gain Oscillator Select, Controls the crystal oscillator mode of operation\n"
-  "//register MCG_C2_RANGE0(n)  (uint8_t)(((n) & 0x03) << 4) // Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
-  "let MCG_C2_RANGE0_0 : UInt8 = 0 << 4\n"
-  "let MCG_C2_RANGE0_1 : UInt8 = 1 << 4\n"
-  "let MCG_C2_RANGE0_2 : UInt8 = 2 << 4\n"
-  "let MCG_C2_RANGE0_3 : UInt8 = 3 << 4\n"
-  "let MCG_C2_LOCRE0 : UInt8 = 0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a loss of OSC0 "
   "\n"
-  "register MCG_C3 at 0x40064002 : UInt8 // MCG Control 3 Register\n"
+  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
+  "register MCG_C1 at 0x40064000 : UInt8 { // MCG Control 1 Register\n"
+  "  CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
+  "  FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
+  "  IREFS, // Internal Reference Select, Selects the reference clock source for the FLL\n"
+  "  IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK\n"
+  "  IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode\n"
+  "}\n"
+  "\n"
+  "register MCG_C2 at 0x4006_4001 : UInt8 { // MCG Control 2 Register\n"
+  "  LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt \n"
+  "          // or a reset request is made following a loss of OSC0\n"
+  "  1,\n"
+  "  RANGE0[2], // Frequency Range Select, Selects the frequency range\n"
+  "             // for the crystal oscillator\n"
+  "  HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation  \n"
+  "  EREFS, // External Reference Select, selects the source for the external reference clock\n"
+  "  LP, // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.\n"
+  "  IRCS // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.\n"
+  "}\n"
+  "\n"
+  "register MCG_C3 at 0x4006_4002 : UInt8 // MCG Control 3 Register\n"
   "//register MCG_C3_SCTRIM(n)  (uint8_t)(n)   // Slow Internal Reference Clock Trim Setting\n"
   "register MCG_C4 at 0x40064003 : UInt8 // MCG Control 4 Register\n"
   "let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
   "//register MCG_C4_FCTRIM(n)  (uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting\n"
   "//register MCG_C4_DRST_DRS(n)  (uint8_t)(((n) & 0x03) << 5) // DCO Range Select\n"
   "let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
-  "register MCG_C5 at 0x40064004 : UInt8 // MCG Control 5 Register\n"
-  "//register MCG_C5_PRDIV0(n)  (uint8_t)((n) & 0x1F)  // PLL External Reference Divider\n"
-  "let MCG_C5_PRDIV0_3 : UInt8 = 3\n"
-  "let MCG_C5_PLLSTEN0 : UInt8 = 0x20   // PLL Stop Enable\n"
-  "let MCG_C5_PLLCLKEN0 : UInt8 = 0x40   // PLL Clock Enable\n"
-  "register MCG_C6 at 0x40064005 : UInt8 // MCG Control 6 Register\n"
-  "//register MCG_C6_VDIV0(n)   (uint8_t)((n) & 0x1F)  // VCO 0 Divider\n"
-  "let MCG_C6_VDIV0_0 : UInt8 = 0   // Clock Monitor Enable\n"
-  "let MCG_C6_CME0 : UInt8 = 0x20   // Clock Monitor Enable\n"
-  "let MCG_C6_PLLS : UInt8 = 0x40   // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. \n"
-  "//register MCG_C6_LOLIE0   (uint8_t)0x80   // Loss of Lock Interrrupt Enable\n"
-  "register MCG_S  at 0x40064006 : UInt8 // MCG Status Register\n"
-  "let MCG_S_IRCST : UInt8 = 0x01   // Internal Reference Clock Status\n"
-  "let MCG_S_OSCINIT0 : UInt8 = 0x02   // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
-  "//register MCG_S_CLKST(n)   (uint8_t)(((n) & 0x03) << 2) // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
-  "let MCG_S_CLKST_0 : UInt8 = 0 << 2 \n"
-  "let MCG_S_CLKST_1 : UInt8 = 1 << 2 \n"
-  "let MCG_S_CLKST_2 : UInt8 = 2 << 2 \n"
-  "let MCG_S_CLKST_3 : UInt8 = 3 << 2 \n"
   "\n"
   "\n"
-  "let MCG_S_CLKST_MASK : UInt8 = 0x0C\n"
-  "let MCG_S_IREFST : UInt8 = 0x10   // Internal Reference Status\n"
-  "let MCG_S_PLLST : UInt8 = 0x20   // PLL Select Status\n"
-  "let MCG_S_LOCK0 : UInt8  = 0x40   // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
-  "let MCG_S_LOLS0 : UInt8  = 0x80   // Loss of Lock Status\n"
+  "register MCG_C5 at 0x4006_4004 : UInt8 { // MCG Control 5 Register\n"
+  " 1,\n"
+  " PLLCLKEN0, // PLL Clock Enable\n"
+  " PLLSTEN0,  // PLL Stop Enable\n"
+  " PRDIV0 [5] // PLL External Reference Divider\n"
+  "}\n"
+  "\n"
+  "register MCG_C6 at 0x4006_4005 : UInt8 { // MCG Control 6 Register\n"
+  " LOLIE0, // Loss of Lock Interrrupt Enable\n"
+  " PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00\n"
+  " CME0,   // Clock Monitor Enable\n"
+  " VDIV0[5] // VCO 0 Divider\n"
+  "}\n"
+  "\n"
+  "register MCG_S @ro at 0x40064006 : UInt8 { // MCG Status Register\n"
+  " LOLS0, // Loss of Lock Status\n"
+  " LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
+  " PLLST, // PLL Select Status\n"
+  " IREFST, // Internal Reference Status\n"
+  " CLKST [2], // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
+  " OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
+  " IRCST   // Internal Reference Clock Status\n"
+  "}\n"
   "\n"
   "register MCG_SC at 0x40064008 : UInt8 // MCG Status and Control Register\n"
   "let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
@@ -8914,15 +8905,20 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "register MCG_C8    at 0x4006400D : UInt8 // MCG Control 8 Register\n"
   "//\n"
   "//// Chapter 25: Oscillator (OSC)\n"
-  "register OSC0_CR at 0x40065000 : UInt8 // OSC Control Register\n"
-  "let OSC_SC16P  : UInt8 = 0x01   // Oscillator 16 pF Capacitor Load Configure\n"
-  "let OSC_SC8P   : UInt8 = 0x02   // Oscillator 8 pF Capacitor Load Configure\n"
-  "let OSC_SC4P   : UInt8 = 0x04   // Oscillator 4 pF Capacitor Load Configure\n"
-  "let OSC_SC2P   : UInt8 = 0x08   // Oscillator 2 pF Capacitor Load Configure\n"
-  "let OSC_EREFSTEN : UInt8 = 0x20   // External Reference Stop Enable, Controls whether or not the external reference clock (OSCERCLK) remains enabled w"
-  "hen MCU enters Stop mode.\n"
-  "let OSC_ERCLKEN : UInt8 = 0x80   // External Reference Enable, Enables external reference clock (OSCERCLK).\n"
-  "//\n"
+  "register OSC_CR at 0x40065000 : UInt8 {// OSC Control Register\n"
+  "  ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)\n"
+  "  1,\n"
+  "  EREFSTEN, // External Reference Stop Enable, Controls whether or not \n"
+  "            // the external reference clock (OSCERCLK) remains enabled when\n"
+  "            // MCU enters Stop mode.\n"
+  "  1,\n"
+  "  SC2P, // Oscillator 2 pF Capacitor Load Configure\n"
+  "  SC4P, // Oscillator 4 pF Capacitor Load Configure\n"
+  "  SC8P, // Oscillator 8 pF Capacitor Load Configure\n"
+  "  SC16P // Oscillator 16 pF Capacitor Load Configure\n"
+  "}\n"
+  "let OSC_SC16P  : UInt8 = 0x01   \n"
+  "\n"
   "//// Chapter 27: Flash Memory Controller (FMC)\n"
   "register FMC_PFAPR     at 0x4001F000 : UInt32 // Flash Access Protection\n"
   "register FMC_PFB0CR    at 0x4001F004 : UInt32 // Flash Control\n"
@@ -9320,17 +9316,9 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value\n"
   "//register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register\n"
   "//register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register\n"
-  "register RTC_CR at  0x4003D010 : UInt32 // RTC Control Register\n"
-  "let RTC_CR_SC2P : UInt32 = 0x00002000  // \n"
-  "let RTC_CR_SC4P : UInt32 = 0x00001000  // \n"
-  "let RTC_CR_SC8P : UInt32 = 0x00000800  // \n"
-  "let RTC_CR_SC16P : UInt32 = 0x00000400  // \n"
-  "let RTC_CR_CLKO : UInt32 = 0x00000200  // \n"
-  "let RTC_CR_OSCE : UInt32 = 0x00000100  // \n"
-  "let RTC_CR_UM : UInt32 = 0x00000008  // \n"
-  "let RTC_CR_SUP : UInt32 = 0x00000004  // \n"
-  "let RTC_CR_WPE : UInt32 = 0x00000002  // \n"
-  "let RTC_CR_SWR : UInt32 = 0x00000001  //\n"
+  "register RTC_CR at  0x4003D010 : UInt32 {// RTC Control Register\n"
+  "  18, SC2P, SC4P, SC8P, SC16P,CKLO, OSCE, 4, UM, SUP, WPE, SWR\n"
+  "}\n"
   " \n"
   "register RTC_SR at  0x4003D014 : UInt32 // RTC Status Register\n"
   "let RTC_SR_TCE : UInt32 = 0x00000010  \n"
@@ -10064,7 +10052,8 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register IRQ_SOFTWARE  94\n"
   "//register NVIC_NUM_INTERRUPTS 95\n"
   "//\n"
-  "//// System Control Space (SCS), ARMv7 ref manual, B3.2, page 708\n"
+  "\n"
+  "//System Control Space (SCS), ARMv7 ref manual, B3.2, page 708\n"
   "//register SCB_CPUID  *(const    uint32_t *)0xE000ED00 // CPUID Base Register\n"
   "\n"
   "register ICSR at 0xE000_ED04 : UInt32 { // Interrupt Control and State\n"
@@ -10072,7 +10061,7 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "  ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]\n"
   "}\n"
   "\n"
-  "//register SCB_VTOR   0xE000ED08 // Vector Table Offset\n"
+  "register VTOR at 0xE000ED08 : UInt32 // Vector Table Offset\n"
   "\n"
   "register AIRCR at 0xE000ED0C : UInt32 { // Application Interrupt and Reset Control\n"
   "  VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
@@ -10090,12 +10079,19 @@ const char * gWrapperFileContent_4_targetTemplates = "// Teensyduino Core Librar
   "//register SCB_DFSR   0xE000ED30 // Debug Fault Status\n"
   "//register SCB_MMFAR   0xE000ED34 // MemManage Fault Address\n"
   "\n"
-  "register SYST_CSR at 0xE000_E010 // SysTick Control and Status\n"
-  "  : UInt32 {15, COUNTFLAG, 13, CLKSOURCE, TICKINT, ENABLE}\n"
-  "\n"
+  "register SYST_CSR at 0xE000_E010 : UInt32 { // SysTick Control and Status\n"
+  "  15, \n"
+  "  COUNTFLAG,\n"
+  "  13,\n"
+  "  CLKSOURCE,\n"
+  "  TICKINT,\n"
+  "  ENABLE\n"
+  "}\n"
   "\n"
   "register SYST_RVR   at 0xE000_E014 : UInt32 // SysTick Reload Value Register\n"
+  "\n"
   "register SYST_CVR   at 0xE000_E018 : UInt32 // SysTick Current Value Register\n"
+  "\n"
   "register SYST_CALIB  @ro at 0xE000_E01C : UInt32 // SysTick Calibration Value\n"
   "\n"
   "\n"
@@ -10109,7 +10105,7 @@ const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  137866, // Text length
+  135415, // Text length
   gWrapperFileContent_4_targetTemplates
 ) ;
 
@@ -10192,13 +10188,75 @@ const char * gWrapperFileContent_5_targetTemplates = "newUnsignedRepresentation 
   "required proc loop $user ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "boot 10 {\n"
+  "//---------1- Inhiber le chien de garde\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "  WDOG_STCTRLH = 0x0010\n"
+  "//--- Enable clocks to always-used peripherals\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
+  "  SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
+  "//--- If the RTC oscillator isn't enabled, get it started early\n"
+  "  if not RTC_CR.OSCE.bool then\n"
+  "    RTC_SR = 0\n"
+  "    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE\n"
+  "  end\n"
+  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "  if PMC_REGSC.ACKISO != 0 then\n"
+  "    PMC_REGSC |= PMC_REGSC::ACKISO\n"
+  "  end\n"
+  "// TODO: do this while the PLL is waiting to lock....\n"
+  "  VTOR = 0  // use vector table in flash\n"
+  "//  // default all interrupts to medium priority level\n"
+  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "//---------2- Initialisation de la PLL\n"
+  "// start in FEI mode\n"
+  "//--- Enable capacitors for crystal\n"
+  "  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P\n"
+  "//--- Enable osc, 8-32 MHz range, low power mode\n"
+  "  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS\n"
+  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for crystal oscillator to begin\n"
+  "  while MCG_S.OSCINIT0 == 0 do\n"
+  "  end\n"
+  "//--- Wait for FLL to use oscillator\n"
+  "  while MCG_S.IREFST != 0 do\n"
+  "  end\n"
+  "//--- Wait for MCGOUT to use oscillator\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(2) do\n"
+  "  end\n"
+  "//--- Now we're in FBE mode\n"
+  "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
+  "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
+  "//--- Config PLL for 96 MHz output\n"
+  "  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)\n"
+  "//--- Wait for PLL to start using xtal as its input\n"
+  "  while MCG_S.PLLST == 0 do\n"
+  "  end\n"
+  "//--- Wait for PLL to lock\n"
+  "  while MCG_S.LOCK0 == 0 do\n"
+  "  end\n"
+  "//--- Now we're in PBE mode\n"
+  "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1::OUTDIV1(0) | SIM_CLKDIV1::OUTDIV2(1) | SIM_CLKDIV1::OUTDIV4(3)\n"
+  "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for PLL clock to be used\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1522, // Text length
+  3818, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -11638,147 +11696,16 @@ const cRegularFileWrapper gWrapperFile_13_targetTemplates (
 
 const char * gWrapperFileContent_14_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "// Chapter 12: System Integration Module (SIM)\n"
-  "#define SIM_SCGC3\t\t*(volatile uint32_t *)0x40048030 // System Clock Gating Control Register 3\n"
-  "#define SIM_SCGC3_ADC1\t\t\t(uint32_t)0x08000000\t\t// ADC1 Clock Gate Control\n"
-  "#define SIM_SCGC3_FTM2\t\t\t(uint32_t)0x01000000\t\t// FTM2 Clock Gate Control\n"
-  "\n"
-  "#define SIM_SCGC5\t\t*(volatile uint32_t *)0x40048038 // System Clock Gating Control Register 5\n"
-  "\n"
-  "#define SIM_SCGC6\t\t*(volatile uint32_t *)0x4004803C // System Clock Gating Control Register 6\n"
-  "#define SIM_SCGC6_RTC\t\t\t(uint32_t)0x20000000\t\t// RTC Access\n"
-  "#define SIM_SCGC6_ADC0\t\t\t(uint32_t)0x08000000\t\t// ADC0 Clock Gate Control\n"
-  "#define SIM_SCGC6_FTM1\t\t\t(uint32_t)0x02000000\t\t// FTM1 Clock Gate Control\n"
-  "#define SIM_SCGC6_FTM0\t\t\t(uint32_t)0x01000000\t\t// FTM0 Clock Gate Control\n"
-  "#define SIM_SCGC6_FTFL\t\t\t(uint32_t)0x00000001\t\t// Flash Memory Clock Gate Control\n"
-  "\n"
-  "#define SIM_CLKDIV1\t\t*(volatile uint32_t *)0x40048044 // System Clock Divider Register 1\n"
-  "#define SIM_CLKDIV1_OUTDIV1(n)\t\t(uint32_t)(((n) & 0x0F) << 28)\t// divide value for the core/system clock\n"
-  "#define SIM_CLKDIV1_OUTDIV2(n)\t\t(uint32_t)(((n) & 0x0F) << 24)\t// divide value for the peripheral clock\n"
-  "#define SIM_CLKDIV1_OUTDIV4(n)\t\t(uint32_t)(((n) & 0x0F) << 16)\t// divide value for the flash clock\n"
-  "\n"
-  "// Chapter 15: Power Management Controller\n"
-  "#define PMC_REGSC\t\t*(volatile uint8_t  *)0x4007D002 // Regulator Status And Control register\n"
-  "#define PMC_REGSC_ACKISO\t\t(uint8_t)0x08\t\t\t// Acknowledge Isolation\n"
-  "\n"
-  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "#define MCG_C1\t\t\t*(volatile uint8_t  *)0x40064000 // MCG Control 1 Register\n"
-  "#define MCG_C1_FRDIV(n)\t\t\t(uint8_t)(((n) & 0x07) << 3)\t// FLL External Reference Divider, Selects the amount to divide down the external reference clo"
-  "ck for the FLL\n"
-  "#define MCG_C1_CLKS(n)\t\t\t(uint8_t)(((n) & 0x03) << 6)\t// Clock Source Select, Selects the clock source for MCGOUTCLK\n"
-  "\n"
-  "#define MCG_C2\t\t\t*(volatile uint8_t  *)0x40064001 // MCG Control 2 Register\n"
-  "#define MCG_C2_RANGE0(n)\t\t(uint8_t)(((n) & 0x03) << 4)\t// Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
-  "#define MCG_C2_EREFS\t\t\t(uint8_t)0x04\t\t\t// External Reference Select, Selects the source for the external reference clock. \n"
-  "\n"
-  "#define MCG_C5\t\t\t*(volatile uint8_t  *)0x40064004 // MCG Control 5 Register\n"
-  "#define MCG_C5_PRDIV0(n)\t\t(uint8_t)((n) & 0x1F)\t\t// PLL External Reference Divider\n"
-  "\n"
-  "#define MCG_C6\t\t\t*(volatile uint8_t  *)0x40064005 // MCG Control 6 Register\n"
-  "#define MCG_C6_PLLS\t\t\t(uint8_t)0x40\t\t\t// PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00. \n"
-  "#define MCG_C6_VDIV0(n)\t\t\t(uint8_t)((n) & 0x1F)\t\t// VCO 0 Divider\n"
-  "\n"
-  "// Chapter 25: Oscillator (OSC)\n"
-  "#define OSC0_CR\t\t\t*(volatile uint8_t  *)0x40065000 // OSC Control Register\n"
-  "#define OSC_SC8P\t\t\t(uint8_t)0x02\t\t\t// Oscillator 8 pF Capacitor Load Configure\n"
-  "#define OSC_SC4P\t\t\t(uint8_t)0x04\t\t\t// Oscillator 4 pF Capacitor Load Configure\n"
-  "#define OSC_SC2P\t\t\t(uint8_t)0x08\t\t\t// Oscillator 2 pF Capacitor Load Configure\n"
-  "\n"
-  "// Chapter 23: Watchdog Timer (WDOG)\n"
-  "#define WDOG_STCTRLH\t\t*(volatile uint16_t *)0x40052000 // Watchdog Status and Control Register High\n"
-  "#define WDOG_UNLOCK\t\t*(volatile uint16_t *)0x4005200E // Watchdog Unlock register\n"
-  "#define WDOG_UNLOCK_SEQ1\t\t(uint16_t)0xC520\n"
-  "#define WDOG_UNLOCK_SEQ2\t\t(uint16_t)0xD928\n"
-  "\n"
-  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "#define MCG_S\t\t\t*(volatile uint8_t  *)0x40064006 // MCG Status Register\n"
-  "#define MCG_S_IRCST\t\t\t(uint8_t)0x01\t\t\t// Internal Reference Clock Status\n"
-  "#define MCG_S_OSCINIT0\t\t\t(uint8_t)0x02\t\t\t// OSC Initialization,\tresets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
-  "#define MCG_S_CLKST(n)\t\t\t(uint8_t)(((n) & 0x03) << 2)\t// Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
-  "#define MCG_S_CLKST_MASK\t\t(uint8_t)0x0C\n"
-  "#define MCG_S_IREFST\t\t\t(uint8_t)0x10\t\t\t// Internal Reference Status\n"
-  "#define MCG_S_PLLST\t\t\t(uint8_t)0x20\t\t\t// PLL Select Status\n"
-  "#define MCG_S_LOCK0\t\t\t(uint8_t)0x40\t\t\t// Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
-  "\n"
-  "// Chapter 39: Real Time Clock (RTC)\n"
-  "#define RTC_CR\t\t\t*(volatile uint32_t *)0x4003D010 // RTC Control Register\n"
-  "#define RTC_CR_SC4P\t\t\t(uint32_t)0x00001000\t\t// \n"
-  "#define RTC_CR_SC16P\t\t\t(uint32_t)0x00000400\t\t// \n"
-  "#define RTC_CR_OSCE\t\t\t(uint32_t)0x00000100\t\t// \n"
-  "\n"
-  "#define RTC_SR\t\t\t*(volatile uint32_t *)0x4003D014 // RTC Status Register\n"
-  "\n"
-  "#define SYST_CSR\t\t*(volatile uint32_t *)0xE000E010 // SysTick Control and Status\n"
-  "//#define SYST_CSR_COUNTFLAG\t\t(uint32_t)0x00010000\n"
-  "#define SYST_CSR_CLKSOURCE\t\t(uint32_t)0x00000004\n"
-  "#define SYST_CSR_TICKINT\t\t(uint32_t)0x00000002\n"
-  "#define SYST_CSR_ENABLE\t\t\t(uint32_t)0x00000001\n"
-  "#define SYST_RVR\t\t*(volatile uint32_t *)0xE000E014 // SysTick Reload Value Register\n"
-  "#define SYST_CVR\t\t*(volatile uint32_t *)0xE000E018 // SysTick Current Value Register\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
   "static void ResetISR (void) {\n"
+  "//---------1- Boot routines\n"
   "  boot () ;\n"
-  "//---------1- Inhiber le chien de garde\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1 ;\n"
-  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2 ;\n"
-  "  WDOG_STCTRLH = 0x0010 ;\n"
-  "  // enable clocks to always-used peripherals\n"
-  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2;\n"
-  "  SIM_SCGC5 = 0x00043F82;    // clocks active to all GPIO\n"
-  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL;\n"
-  "  // if the RTC oscillator isn't enabled, get it started early\n"
-  "  if (!(RTC_CR & RTC_CR_OSCE)) {\n"
-  "    RTC_SR = 0;\n"
-  "    RTC_CR = RTC_CR_SC16P | RTC_CR_SC4P | RTC_CR_OSCE;\n"
-  "  }\n"
-  "\n"
-  "  // release I/O pins hold, if we woke up from VLLS mode\n"
-  "  if (PMC_REGSC & PMC_REGSC_ACKISO) PMC_REGSC |= PMC_REGSC_ACKISO;\n"
-  "\n"
-  "  // TODO: do this while the PLL is waiting to lock....\n"
-  "//  SCB_VTOR = 0;  // use vector table in flash\n"
-  "\n"
-  "  // default all interrupts to medium priority level\n"
-  "//  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
-  "//---------2- Initialisation de la PLL\n"
-  "  // start in FEI mode\n"
-  "  // enable capacitors for crystal\n"
-  "  OSC0_CR = OSC_SC8P | OSC_SC2P;\n"
-  "  // enable osc, 8-32 MHz range, low power mode\n"
-  "  MCG_C2 = MCG_C2_RANGE0(2) | MCG_C2_EREFS;\n"
-  "  // switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 =  MCG_C1_CLKS(2) | MCG_C1_FRDIV(4);\n"
-  "  // wait for crystal oscillator to begin\n"
-  "  while ((MCG_S & MCG_S_OSCINIT0) == 0) ;\n"
-  "  // wait for FLL to use oscillator\n"
-  "  while ((MCG_S & MCG_S_IREFST) != 0) ;\n"
-  "  // wait for MCGOUT to use oscillator\n"
-  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(2)) ;\n"
-  "  // now we're in FBE mode\n"
-  "  // config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
-  "  MCG_C5 = MCG_C5_PRDIV0(3);\n"
-  "  // config PLL for 96 MHz output\n"
-  "  MCG_C6 = MCG_C6_PLLS | MCG_C6_VDIV0(0);\n"
-  "  // wait for PLL to start using xtal as its input\n"
-  "  while (!(MCG_S & MCG_S_PLLST)) ;\n"
-  "  // wait for PLL to lock\n"
-  "  while (!(MCG_S & MCG_S_LOCK0)) ;\n"
-  "  // now we're in PBE mode\n"
-  "  // config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  SIM_CLKDIV1 = SIM_CLKDIV1_OUTDIV1(0) | SIM_CLKDIV1_OUTDIV2(1) |   SIM_CLKDIV1_OUTDIV4(3);\n"
-  "  // switch to PLL as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = MCG_C1_CLKS(0) | MCG_C1_FRDIV(4);\n"
-  "  // wait for PLL clock to be used\n"
-  "  while ((MCG_S & MCG_S_CLKST_MASK) != MCG_S_CLKST(3)) ;\n"
   "  // now we're in PEE mode\n"
   "  // configure USB for 48 MHz clock\n"
   "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
   "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
   "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
   "\n"
-  "//---------3- Initialisation de la section .bss\n"
+  "//---------2- Initialisation de la section .bss\n"
   "  extern unsigned __bss_start ;\n"
   "  extern unsigned __bss_end ;\n"
   "  unsigned * p = & __bss_start ;\n"
@@ -11786,7 +11713,7 @@ const char * gWrapperFileContent_14_targetTemplates = "//-----------------------
   "    * p = 0 ;\n"
   "    p ++ ;\n"
   "  }\n"
-  "//---------4- Copy de la section .data\n"
+  "//---------3- Copy de la section .data\n"
   "  extern unsigned __data_start ;\n"
   "  extern unsigned __data_end ;\n"
   "  extern unsigned __data_load_start ;\n"
@@ -11797,30 +11724,9 @@ const char * gWrapperFileContent_14_targetTemplates = "//-----------------------
   "    pDest ++ ;\n"
   "    pSrc ++ ;\n"
   "  }\n"
-  "\n"
-  "//----------- Configure systick interrupt\n"
-  "  SYST_RVR = 96000 - 1 ; // Interrupt every 96000 core clocks, i.e. every ms\n"
-  "  SYST_CVR = 0 ;\n"
-  "  SYST_CSR = SYST_CSR_CLKSOURCE | SYST_CSR_TICKINT | SYST_CSR_ENABLE ;\n"
-  "\n"
-  "//---------5- Ex\xC3""\xA9""cuter les constructeurs des variables globales\n"
-  "/*  extern void (* __constructor_array_start) (void) ;\n"
-  "  extern void (* __constructor_array_end) (void) ;\n"
-  "  void (** ptr) (void) = & __constructor_array_start ;\n"
-  "  while (ptr != & __constructor_array_end) {\n"
-  "    (* ptr) () ;\n"
-  "    ptr ++ ;\n"
-  "  } */\n"
-  "//---------6- Ex\xC3""\xA9""cuter les routines d'initialisation de la section init_routine_array\n"
-  "/*  extern void (* __init_routine_array_start) (void) ;\n"
-  "  extern void (* __init_routine_array_end) (void) ;\n"
-  "  ptr = & __init_routine_array_start ;\n"
-  "  while (ptr != & __init_routine_array_end) {\n"
-  "    (* ptr) () ;\n"
-  "    ptr ++ ;\n"
-  "  } */\n"
+  "//---------4- Init Routines\n"
   "  init () ;\n"
-  "//---------7- Ex\xC3""\xA9""cuter le programme utilisateur\n"
+  "//---------5- User routines\n"
   "  proc_setup () ;\n"
   "  while (1) {\n"
   "    proc_loop () ;\n"
@@ -11983,7 +11889,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "startup-sequential-systick.c",
   "c",
   true, // Text file
-  14802, // Text length
+  6877, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -12238,8 +12144,9 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
   ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 149)) ;
   ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 150)) ;
   ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 151)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 152)) ;
-  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 153)) ;
+  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 152)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 153)) ;
+  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 154)) ;
 }
 
 
@@ -12255,78 +12162,78 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
                                    GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_6043 (inArgument_inImportedClauseList, kEnumeration_up) ;
-  while (enumerator_6043.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath = enumerator_6043.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 165)) ;
-    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 166)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_6078 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_6078.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath = enumerator_6078.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 166)) ;
+    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 167)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 167)).operator_not (SOURCE_FILE ("program.galgas", 167)).boolEnum () ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 168)).operator_not (SOURCE_FILE ("program.galgas", 168)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 168)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 169)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 169)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 170)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
         if (kBoolTrue == test_2) {
           GALGAS_lstringlist var_importedFileList ;
           var_importedFileList.drop () ;
-          GALGAS_location joker_6546 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6043.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 170)), ioArgument_ioAST, var_importedFileList, joker_6546  COMMA_SOURCE_FILE ("program.galgas", 170)) ;
+          GALGAS_location joker_6581 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6078.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 171)), ioArgument_ioAST, var_importedFileList, joker_6581  COMMA_SOURCE_FILE ("program.galgas", 171)) ;
           {
-          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 174)) ;
+          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 175)) ;
           }
         }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 180)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 181)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
           if (kBoolTrue == test_3) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_7013 ; // Joker input parameter
-            cGrammar_plms_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6043.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 181)), ioArgument_ioAST, var_importedFileList, joker_7013  COMMA_SOURCE_FILE ("program.galgas", 181)) ;
+            GALGAS_location joker_7048 ; // Joker input parameter
+            cGrammar_plms_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6078.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 182)), ioArgument_ioAST, var_importedFileList, joker_7048  COMMA_SOURCE_FILE ("program.galgas", 182)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 185)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 186)) ;
             }
           }else if (kBoolFalse == test_3) {
-            GALGAS_location location_4 (enumerator_6043.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 192)) ;
+            GALGAS_location location_4 (enumerator_6078.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 193)) ;
           }
         }
       }
     }else if (kBoolFalse == test_0) {
       GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_6043.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 197)).boolEnum () ;
+      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_6078.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 198)).boolEnum () ;
       if (kBoolTrue == test_5) {
-        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_6043.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 198)) ;
-        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 199)).operator_not (SOURCE_FILE ("program.galgas", 199)).boolEnum () ;
+        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_6078.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 199)) ;
+        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 200)).operator_not (SOURCE_FILE ("program.galgas", 200)).boolEnum () ;
         if (kBoolTrue == test_6) {
-          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 200)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 201)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 201)) ;
+          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 202)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
           if (kBoolTrue == test_7) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_7870 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6043.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 202)), ioArgument_ioAST, var_importedFileList, joker_7870  COMMA_SOURCE_FILE ("program.galgas", 202)) ;
+            GALGAS_location joker_7905 ; // Joker input parameter
+            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6078.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 203)), ioArgument_ioAST, var_importedFileList, joker_7905  COMMA_SOURCE_FILE ("program.galgas", 203)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 206)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 207)) ;
             }
           }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 212)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 213)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
             if (kBoolTrue == test_8) {
               GALGAS_lstringlist var_importedFileList ;
               var_importedFileList.drop () ;
-              GALGAS_location joker_8356 ; // Joker input parameter
-              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6043.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 213)), ioArgument_ioAST, var_importedFileList, joker_8356  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
+              GALGAS_location joker_8391 ; // Joker input parameter
+              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6078.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 214)), ioArgument_ioAST, var_importedFileList, joker_8391  COMMA_SOURCE_FILE ("program.galgas", 214)) ;
               {
-              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 217)) ;
+              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 218)) ;
               }
             }else if (kBoolFalse == test_8) {
-              GALGAS_location location_9 (enumerator_6043.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 224)) ;
+              GALGAS_location location_9 (enumerator_6078.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 225)) ;
             }
           }
         }
       }else if (kBoolFalse == test_5) {
-        GALGAS_location location_10 (enumerator_6043.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 228)) ;
+        GALGAS_location location_10 (enumerator_6078.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 229)) ;
       }
     }
-    enumerator_6043.gotoNextObject () ;
+    enumerator_6078.gotoNextObject () ;
   }
 }
 
@@ -18759,6 +18666,250 @@ GALGAS_integerIR GALGAS_integerIR::extractObject (const GALGAS_object & inObject
       result = *p ;
     }else{
       inCompiler->castError ("integerIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_literalStringTypeIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_literalStringTypeIR * p = (const cPtr_literalStringTypeIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_literalStringTypeIR) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mLiteralStringTypeName.objectCompare (p->mAttribute_mLiteralStringTypeName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_literalStringTypeIR::objectCompare (const GALGAS_literalStringTypeIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalStringTypeIR::GALGAS_literalStringTypeIR (void) :
+GALGAS_abstractTypeIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_literalStringTypeIR::constructor_new (GALGAS_string::constructor_default (HERE)
+                                                      COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalStringTypeIR::GALGAS_literalStringTypeIR (const cPtr_literalStringTypeIR * inSourcePtr) :
+GALGAS_abstractTypeIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_literalStringTypeIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::constructor_new (const GALGAS_string & inAttribute_mLiteralStringTypeName
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_literalStringTypeIR result ;
+  if (inAttribute_mLiteralStringTypeName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_literalStringTypeIR (inAttribute_mLiteralStringTypeName COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_literalStringTypeIR * p = (const cPtr_literalStringTypeIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_literalStringTypeIR) ;
+    result = p->mAttribute_mLiteralStringTypeName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cPtr_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLiteralStringTypeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                    Pointer class for @literalStringTypeIR class                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_literalStringTypeIR::cPtr_literalStringTypeIR (const GALGAS_string & in_mLiteralStringTypeName
+                                                    COMMA_LOCATION_ARGS) :
+cPtr_abstractTypeIR (THERE),
+mAttribute_mLiteralStringTypeName (in_mLiteralStringTypeName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_literalStringTypeIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_literalStringTypeIR ;
+}
+
+void cPtr_literalStringTypeIR::description (C_String & ioString,
+                                            const int32_t inIndentation) const {
+  ioString << "[@literalStringTypeIR:" ;
+  mAttribute_mLiteralStringTypeName.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_literalStringTypeIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_literalStringTypeIR (mAttribute_mLiteralStringTypeName COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @literalStringTypeIR type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_literalStringTypeIR ("literalStringTypeIR",
+                                            & kTypeDescriptor_GALGAS_abstractTypeIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_literalStringTypeIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_literalStringTypeIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_literalStringTypeIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_literalStringTypeIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_literalStringTypeIR result ;
+  const GALGAS_literalStringTypeIR * p = (const GALGAS_literalStringTypeIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_literalStringTypeIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("literalStringTypeIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+
+typeComparisonResult GALGAS_expressionAST::objectCompare (const GALGAS_expressionAST & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST::GALGAS_expressionAST (void) :
+AC_GALGAS_class () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST::GALGAS_expressionAST (const cPtr_expressionAST * inSourcePtr) :
+AC_GALGAS_class (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_expressionAST) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                       Pointer class for @expressionAST class                                        *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_expressionAST::cPtr_expressionAST (LOCATION_ARGS) :
+acPtr_class (THERE) {
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                 @expressionAST type                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_expressionAST ("expressionAST",
+                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_expressionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_expressionAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_expressionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_expressionAST (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_expressionAST GALGAS_expressionAST::extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_expressionAST result ;
+  const GALGAS_expressionAST * p = (const GALGAS_expressionAST *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_expressionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("expressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

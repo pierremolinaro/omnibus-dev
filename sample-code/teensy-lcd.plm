@@ -23,12 +23,13 @@ proc userSystickHandler $isr () {
 
 //-----------------------------------------------------------------------------*
 
-var gVar $user : UInt32 = 12
-
-var gYYYYY $user : UInt8 = 5
-var gZZZZZ $user : UInt32 = 5
+var gVar $user : Int8 = 12
 
 //-----------------------------------------------------------------------------*
+
+//exception setup 255 {
+//  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
+//}
 
 proc loop $user () {
   waitMS (!100)
@@ -39,7 +40,7 @@ proc loop $user () {
   goto (!line:0 !column: 0)
   printSpaces (!4)
   goto (!line:0 !column: 0)
-  printUnsigned (!gVar)
+  printSigned (!gVar)
 //  if 0 == (gVar & 15) then
 //    gZZZZZ = gYYYYY + gVar
 //  end
