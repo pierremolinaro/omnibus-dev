@@ -9,10 +9,13 @@ list @exceptionTypesAST {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @exceptionClauseListAST {
+sortedlist @exceptionClauseListAST {
   @lstring mExceptionClauseName
   @instructionListAST mExceptionInstructionList
   @location mEndOfExceptionInstructions
+  @uint mOrder
+}{
+  mOrder <
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -26,6 +29,10 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $exception$
     $identifier$ ?let exceptionClauseName
+    $integer$ ?let priority
+    if priority.uint64 > 255L then
+      error priority : "priority should be <= 255"
+    end
     ${$
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
@@ -34,6 +41,7 @@ syntax extension common_syntax {
       !exceptionClauseName
       !instructionList
       !endOfInstructionList
+      ![priority.uint64 uint]
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
