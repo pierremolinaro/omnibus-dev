@@ -480,7 +480,6 @@ exception loop 0 {
   ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
   waitMSInExceptionMode (!duration:50)
   ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
-  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
 }
 
 //-----------------------------------------------------------------------------*

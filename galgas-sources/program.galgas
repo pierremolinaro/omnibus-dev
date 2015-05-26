@@ -149,6 +149,7 @@ private proc addTargetSpecificFiles
   ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST
   ioAST.mTargetList += ast.mTargetList
   ioAST.mInitList += ast.mInitList
+  ioAST.mBootList += ast.mBootList
   ioAST.mExceptionClauses += ast.mExceptionClauses
   ioAST.mExceptionTypes = ast.mExceptionTypes + ioAST.mExceptionTypes
 }
