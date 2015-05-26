@@ -6683,6 +6683,12 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "proc userSystickHandler $isr @weak () {\n"
   "}\n"
   "\n"
+  "proc waitMS $user $init  (\?inDuration : UInt32) {\n"
+  "  let deadline = gCompteur + inDuration\n"
+  "  while gCompteur < deadline do\n"
+  "  end\n"
+  "}\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "required proc DMAChannel0TranfertCompleteHandler $isr ()\n"
@@ -7241,7 +7247,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
-  14393, // Text length
+  14524, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -10098,21 +10104,13 @@ const char * gWrapperFileContent_5_targetTemplates = "newUnsignedRepresentation 
   "required proc loop $user ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "proc waitMS $user $init  (\?inDuration : UInt32) {\n"
-  "  let deadline = gCompteur + inDuration\n"
-  "  while gCompteur < deadline do\n"
-  "  end\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1724, // Text length
+  1511, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 

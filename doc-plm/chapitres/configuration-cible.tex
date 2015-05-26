@@ -10,9 +10,27 @@
 \sectionLabel{Déclaration \texttt{newUnsignedRepresentation}}{DefNewUnsignedRepresentation}
 \index{newUnsignedRepresentation@\plm=newUnsignedRepresentation=!Definition@Définition}
 
-\colorbox{red}{À écrire}
+La déclaration \plm=newUnsignedRepresentation= permet de définir une représentation entière non signée. Sa syntaxe est la suivante :
 
 
+\begin{PLM}
+newUnsignedRepresentation @nom "type-c" taille
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=@nom= est le nom donné à la représentation ;
+  \item \plm="type-c"= est le nom du type C qui sera utilisé lors de la génération de code ;
+  \item \plm=taille= est le nombre de bits de cette représentation.
+\end{itemize}
+
+Par exemple, la représentation des entiers non signés habituels peut être définie par :
+\begin{PLM}
+newUnsignedRepresentation @unsigned8  "uint8_t"   8
+newUnsignedRepresentation @unsigned16 "uint16_t" 16
+newUnsignedRepresentation @unsigned32 "uint32_t" 32
+newUnsignedRepresentation @unsigned64 "uint64_t" 64
+\end{PLM}
 
 
 
@@ -24,5 +42,63 @@
 \sectionLabel{Déclaration \texttt{newSignedRepresentation}}{DefNewSignedRepresentation}
 \index{newSignedRepresentation@\plm=newSignedRepresentation=!Definition@Définition}
 
-\colorbox{red}{À écrire}
+La déclaration \plm=newSignedRepresentation= permet de définir une représentation entière signée. Sa syntaxe est la suivante :
+
+
+\begin{PLM}
+newSignedRepresentation @representation "type-c" taille
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=@representation= est le nom donné à la représentation ;
+  \item \plm="type-c"= est le nom du type C qui sera utilisé lors de la génération de code ;
+  \item \plm=taille= est le nombre de bits de cette représentation.
+\end{itemize}
+
+Par exemple, la représentation des entiers signés habituels peut être définie par :
+\begin{PLM}
+newSignedRepresentation @signed8  "int8_t"   8
+newSignedRepresentation @signed16 "int16_t" 16
+newSignedRepresentation @signed32 "int32_t" 32
+newSignedRepresentation @signed64 "int64_t" 64
+\end{PLM}
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Déclaration \texttt{newIntegerType}}{DefNewIntegerType}
+\index{newIntegerType@\plm=newIntegerType=!Definition@Définition}
+
+La déclaration \plm=newIntegerType= permet de définir un nouveau type entier signé ou non signé. Elle a la syntaxe suivante :
+\begin{PLM}
+newIntegerType NomDeType @representation
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=NomDeType= est le nom donné au type entier.
+  \item \plm=@representation= est le nom de la représentation, qui doit avoir été défini soit par une déclaration \plm=newUnsignedRepresentation= (\refSectionPage{DefNewUnsignedRepresentation})\index{newUnsignedRepresentation@\plm=newUnsignedRepresentation=}, soit par une déclaration \plm=newSignedRepresentation= (\refSectionPage{DefNewSignedRepresentation}\index{newSignedRepresentation@\plm=newSignedRepresentation=}).
+\end{itemize}
+
+Le type entier ainsi déclaré est non signé si la représentation est non signée (c'est-à-dire déclarée avec \plm=newUnsignedRepresentation=), et signé si la représentation est signée (c'est-à-dire déclarée avec \plm=newSignedRepresentation=). Les types usuels peuvent ainsi être déclarés :
+\begin{PLM}
+newIntegerType UInt8  @unsigned8
+newIntegerType UInt16 @unsigned16
+newIntegerType UInt32 @unsigned32
+newIntegerType UInt64 @unsigned64
+newIntegerType Int8  @signed8
+newIntegerType Int16 @signed16
+newIntegerType Int32 @signed32
+newIntegerType Int64 @signed64
+\end{PLM}
+
+
+
 
