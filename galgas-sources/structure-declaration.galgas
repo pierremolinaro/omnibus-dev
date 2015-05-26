@@ -206,7 +206,7 @@ override method @structureDeclaration semanticAnalysis
     fieldNameSet += !mFieldName.string
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
-    @uint ioTemporaryIndex = 0
+    @semanticTemporariesStruct ioTemporaries = 0
     [mInitExpression analyzeExpression
       !optionalReceiverType:.noReceiver
       !optionalTargetType:fieldType

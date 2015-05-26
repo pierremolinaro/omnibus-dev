@@ -42,7 +42,7 @@ abstract method @instructionAST analyze
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -55,7 +55,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -68,7 +68,7 @@ method @instructionListAST analyzeBranchInstructionList
       !context:inContext
       !modes:inModeSet
       !allowException:inAllowExceptions
-      !?temporary:ioTemporaryIndex
+      !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?instructionListIR:ioInstructionGenerationList
@@ -85,7 +85,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
@@ -96,7 +96,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !context:inContext
       !modes:inModeSet
       !allowException:inAllowExceptions
-      !?temporary:ioTemporaryIndex
+      !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?instructionListIR:ioInstructionGenerationList

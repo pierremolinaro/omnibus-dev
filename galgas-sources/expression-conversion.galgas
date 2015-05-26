@@ -69,7 +69,7 @@ override method @conversionExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -83,7 +83,7 @@ override method @conversionExpressionAST analyzeExpression
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
-    !?temporary:ioTemporaryIndex
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
@@ -110,7 +110,7 @@ override method @conversionExpressionAST analyzeExpression
       end
   end
 #--- Temp var
-  getNewTempVariable (!?ioTemporaryIndex ?outResult)
+  getNewTempVariable (!?ioTemporaries ?outResult)
 #--- Generate code
   ioInstructionGenerationList += !@conversionInstructionIR.new {
     !outExpressionType

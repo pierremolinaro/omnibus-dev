@@ -927,10 +927,96 @@ class GALGAS_variableMap function_initialVariableMap (const class GALGAS_semanti
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_getNewTempVariable (class GALGAS_uint & ioArgument0,
+void routine_getNewTempVariable (class GALGAS_semanticTemporariesStruct & ioArgument0,
                                  class GALGAS_variableKindIR & outArgument1,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @semanticTemporariesStruct struct                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_uint mAttribute_mTemporaryIndex ;
+  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionSetupRoutinePriorityMap ;
+  public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
+  public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
+  public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_semanticTemporariesStruct constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_semanticTemporariesStruct (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticTemporariesStruct (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_semanticTemporariesStruct (const GALGAS_uint & in_mTemporaryIndex,
+                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
+                                             const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
+                                             const GALGAS_initRoutinePriorityMap & in_mInitRoutinePriorityMap,
+                                             const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_semanticTemporariesStruct extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_semanticTemporariesStruct constructor_new (const class GALGAS_uint & inOperand0,
+                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                    const class GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                    const class GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bootRoutinePriorityMap reader_mBootRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap reader_mExceptionLoopRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap reader_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_initRoutinePriorityMap reader_mInitRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mTemporaryIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_semanticTemporariesStruct class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1128,16 +1214,11 @@ void routine_checkAssignmentCompatibility (const class GALGAS_unifiedTypeMap_2D_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_semanticAnalysis (const class GALGAS_declarationListAST constinArgument0,
-                               const class GALGAS_procedureDeclarationListAST constinArgument1,
-                               const class GALGAS_functionDeclarationListAST constinArgument2,
-                               const class GALGAS_initList constinArgument3,
-                               const class GALGAS_exceptionClauseListAST constinArgument4,
-                               const class GALGAS_semanticContext constinArgument5,
-                               const class GALGAS_requiredProcedureDeclarationListAST constinArgument6,
-                               const class GALGAS_location constinArgument7,
-                               const class GALGAS_globalLiteralStringMap constinArgument8,
-                               class GALGAS_intermediateCodeStruct & outArgument9,
+void routine_semanticAnalysis (const class GALGAS_ast constinArgument0,
+                               const class GALGAS_semanticContext constinArgument1,
+                               const class GALGAS_location constinArgument2,
+                               const class GALGAS_globalLiteralStringMap constinArgument3,
+                               class GALGAS_intermediateCodeStruct & outArgument4,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -1168,13 +1249,26 @@ void callCategoryMethod_semanticAnalysis (const class cPtr_abstractDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Category method '@bootList-element bootSemanticAnalysis'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_bootSemanticAnalysis (const class GALGAS_bootList_2D_element inObject,
+                                          const class GALGAS_semanticContext constin_inContext,
+                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                          class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Category method '@exceptionClauseListAST-element exceptionSemanticAnalysis'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_exceptionClauseListAST_2D_element inObject,
                                                const class GALGAS_semanticContext constin_inContext,
-                                               class GALGAS_uint & io_ioTemporaryIndex,
+                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
@@ -1187,7 +1281,7 @@ void categoryMethod_exceptionSemanticAnalysis (const class GALGAS_exceptionClaus
 
 void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclarationListAST_2D_element inObject,
                                               const class GALGAS_semanticContext constin_inContext,
-                                              class GALGAS_uint & io_ioTemporaryIndex,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
@@ -1200,7 +1294,7 @@ void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclara
 
 void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element inObject,
                                           const class GALGAS_semanticContext constin_inContext,
-                                          class GALGAS_uint & io_ioTemporaryIndex,
+                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
@@ -1213,7 +1307,7 @@ void categoryMethod_initSemanticAnalysis (const class GALGAS_initList_2D_element
 
 void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDeclarationListAST_2D_element inObject,
                                                const class GALGAS_semanticContext constin_inContext,
-                                               class GALGAS_uint & io_ioTemporaryIndex,
+                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
@@ -1234,6 +1328,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : GALGAS_procedureMapIR mAttribute_mProcedureMapIR ;
   public : GALGAS_functionMapIR mAttribute_mFunctionMapIR ;
   public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
+  public : GALGAS_bootListIR mAttribute_mBootList ;
   public : GALGAS_initListIR mAttribute_mInitList ;
   public : GALGAS_instructionListIR mAttribute_mExceptionSetupInstructionListIR ;
   public : GALGAS_instructionListIR mAttribute_mExceptionLoopInstructionListIR ;
@@ -1261,6 +1356,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                           const GALGAS_procedureMapIR & in_mProcedureMapIR,
                                           const GALGAS_functionMapIR & in_mFunctionMapIR,
                                           const GALGAS_stringset & in_mRequiredProcedureSet,
+                                          const GALGAS_bootListIR & in_mBootList,
                                           const GALGAS_initListIR & in_mInitList,
                                           const GALGAS_instructionListIR & in_mExceptionSetupInstructionListIR,
                                           const GALGAS_instructionListIR & in_mExceptionLoopInstructionListIR) ;
@@ -1284,9 +1380,10 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                  const class GALGAS_procedureMapIR & inOperand5,
                                                                  const class GALGAS_functionMapIR & inOperand6,
                                                                  const class GALGAS_stringset & inOperand7,
-                                                                 const class GALGAS_initListIR & inOperand8,
-                                                                 const class GALGAS_instructionListIR & inOperand9,
-                                                                 const class GALGAS_instructionListIR & inOperand10
+                                                                 const class GALGAS_bootListIR & inOperand8,
+                                                                 const class GALGAS_initListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10,
+                                                                 const class GALGAS_instructionListIR & inOperand11
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1301,6 +1398,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bootListIR reader_mBootList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mExceptionLoopInstructionListIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mExceptionSetupInstructionListIR (LOCATION_ARGS) const ;

@@ -178,7 +178,10 @@ private proc suppressInaccessibleSubprograms
       ]        
     end
   end
-#--- Then, init clauses
+#--- Then, boot and init clauses
+  for boot in ioIntermediateCodeStruct.mBootList do
+    [boot.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
+  end
   for init in ioIntermediateCodeStruct.mInitList do
     [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end

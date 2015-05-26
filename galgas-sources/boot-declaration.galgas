@@ -2,10 +2,10 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-sortedlist @initList {
-  @location mInitLocation
+sortedlist @bootList {
+  @location mBootLocation
   @instructionListAST mInstructionList
-  @location mEndOfInitLocation
+  @location mEndOfBootLocation
   @uint64 mPriority
   @location mPriorityLocation
 }{
@@ -21,13 +21,13 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <declaration> ?!@ast ioAST {
-    $init$
+    $boot$
     $integer$ ?let @luint64 priority
     ${$
     <instructionList> ?let instructionList
     let endOfInit = @location.here
     $}$
-    ioAST.mInitList +=
+    ioAST.mBootList +=
       !priority.location
       !instructionList
       !endOfInit
@@ -43,21 +43,21 @@ syntax extension common_syntax {
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @initRoutinePriorityMap {
-  insert insertKey error message "an init routine with priority %K has been already declared"
+map @bootRoutinePriorityMap {
+  insert insertKey error message "a boot routine with priority %K has been already declared"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @initList-element initSemanticAnalysis
+method @bootList-element bootSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !"init"] then
-    error mInitLocation : "the $init mode should be defined in order to use init routines"
+  if not [inContext.mModeMap hasKey !"boot"] then
+    error mBootLocation : "the $boot mode should be defined in order to use boot routines"
   end
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
 #--- Variable map
   @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
 #--- Analyze instruction list
@@ -65,7 +65,7 @@ method @initList-element initSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:.noReceiver
     !context:inContext
-    !modes:{!"init"}
+    !modes:{!"boot"}
     !allowException:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
@@ -73,19 +73,19 @@ method @initList-element initSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #---
-  [variableMap checkAutomatonStates !mEndOfInitLocation]
+  [variableMap checkAutomatonStates !mEndOfBootLocation]
 #--- Code generation
-  ioIntermediateCodeStruct.mInitList +=
-    !mInitLocation
+  ioIntermediateCodeStruct.mBootList +=
+    !mBootLocation
     !instructionGenerationList
-    !mEndOfInitLocation
+    !mEndOfBootLocation
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @initListIR {
+list @bootListIR {
   @location mInitLocation
   @instructionListIR mInstructionListIR
   @location mEndOfInitLocation

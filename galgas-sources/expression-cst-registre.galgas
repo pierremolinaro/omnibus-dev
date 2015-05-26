@@ -72,7 +72,7 @@ override method @registerConstantInExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint unused ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
@@ -105,7 +105,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -137,7 +137,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
-    !?temporary:ioTemporaryIndex
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
@@ -176,7 +176,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
         error mExpressionLocation
           : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
       end
-      getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
+      getNewTempVariable (!?ioTemporaries ?outResultValueName)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
         !mExpressionLocation
         !expressionResult

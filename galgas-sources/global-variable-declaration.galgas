@@ -79,7 +79,7 @@ override method @globalVarDeclaration enterInContext
   case valueType (@lstring typeName) :
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let variableType]
   #--- Analyze source expression
-    @uint temporaryIndex = 0
+  @semanticTemporariesStruct temporaries = .default
     @instructionListIR instructionGenerationList = {}
     @variableMap variableMap = .emptyMap
     [mSourceExpression analyzeExpression
@@ -88,7 +88,7 @@ override method @globalVarDeclaration enterInContext
        !context:ioContext
        !modes:{}
        !allowException:true
-       !?temporary:temporaryIndex
+       !?temporary:temporaries
        !?staticStringMap:ioGlobalLiteralStringMap
        !?variableMap:variableMap
        !?instructionListIR:instructionGenerationList

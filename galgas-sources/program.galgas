@@ -99,13 +99,8 @@ private proc compileProject
   #--- Semantic analysis
     if @uint.errorCount == 0 then
       semanticAnalysis (
-        !orderedDeclarationList:orderedDeclarationListAST
-        !procedureDeclarationList:ast.mProcedureListAST
-        !functionDeclarationList:ast.mFunctionListAST
-        !initList:ast.mInitList
-        !exceptionClauses:ast.mExceptionClauses
+        !ast:ast
         !context:semanticContext
-        !requiredProcList:ast.mRequiredProcList
         !endOfSourceFile:inEndOfSourceFile
         !staticStringMap:globalLiteralStringMap
         ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
@@ -153,7 +148,7 @@ private proc addTargetSpecificFiles
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
   ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST
   ioAST.mTargetList += ast.mTargetList
-  ioAST.mInitList = ast.mInitList + ioAST.mInitList
+  ioAST.mInitList += ast.mInitList
   ioAST.mExceptionClauses += ast.mExceptionClauses
   ioAST.mExceptionTypes = ast.mExceptionTypes + ioAST.mExceptionTypes
 }

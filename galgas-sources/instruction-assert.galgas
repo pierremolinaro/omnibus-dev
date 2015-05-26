@@ -38,7 +38,7 @@ override method @assertInstructionAST analyze
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -54,7 +54,7 @@ override method @assertInstructionAST analyze
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
-    !?temporary:ioTemporaryIndex
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:instructionGenerationList

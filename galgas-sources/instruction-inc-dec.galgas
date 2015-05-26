@@ -79,7 +79,7 @@ override method @incDecInstructionAST analyze
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint unused ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList

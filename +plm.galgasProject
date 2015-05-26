@@ -51,7 +51,8 @@ project (0:0:1) -> "plm" {
 #  "galgas-sources/newtype-syntax.galgas"
 #  "galgas-sources/newtype-semantics.galgas"
 
-#--- Init
+#--- Boot and init
+  "galgas-sources/boot-declaration.galgas"
   "galgas-sources/init-declaration.galgas"
 
 #--- Exception
