@@ -43,7 +43,17 @@
 %--- Ce paquetage permet d'effectuer certaines césures, et ainsi d'éviter les messages "Overfull \hbox"
 \usepackage[T1]{fontenc}
 
-\usepackage{lmodern} % for French
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
+%   C H O I X    D E    L A    P O L I C E                                                                              *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+
+%\usepackage{lmodern} % for French
+\usepackage{fouriernc}
+%\usepackage[scaled=0.875]{helvet}
+
+\usepackage[scaled=0.85]{sourcecodepro}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -76,9 +86,9 @@
 %---------------------------------------------------- Mise en page
 % Voir "Une courte introduction à Latex2e", § 6.4
 
-%--- Marge gauche : 2,8 cm ; le paramètre \hoffset contient cette valeur, moins 1 pouce
-%    \hoffset = 2,8 cm - 2,54 cm = 0,26 cm
-\setlength{\hoffset}{-0.26 cm}
+%--- Marge gauche : 2 cm ; le paramètre \hoffset contient cette valeur, moins 1 pouce
+%    \hoffset = 2 cm - 2,54 cm = -0,54 cm
+\setlength{\hoffset}{-0.54 cm}
 %
 %%--- Hauteur de la page : 29,7 cm
 %\setlength{\paperheight}{29.7 cm}
@@ -91,7 +101,7 @@
 %\setlength{\evensidemargin}{0 cm}
 %
 %--- Largeur du texte
-\setlength{\textwidth}{14 cm}
+\setlength{\textwidth}{14cm}
 %
 %%--- Marge haute : 2,8 cm ; le paramètre \voffset contient cette valeur, moins 1 pouce
 %%    \voffset = 2,8 cm - 2,54 cm = 0,26 cm
@@ -415,18 +425,6 @@
 % Pour créer des tableaux d'équations, bien alignées
 % Voir courte-intro-latex.pdf, page §3.5.2 page 83
 %\usepackage[retainorgcmds]{IEEEtrantools}
-
-%-----------------------------------------------------------------------------------------------------------------------*
-%                                                                                                                       *
-%   C H O I X    D E    L A    P O L I C E                                                                              *
-%                                                                                                                       *
-%-----------------------------------------------------------------------------------------------------------------------*
-
-%---------------------------------------------------- Pour utiliser la police "Fourier"
-\usepackage{fouriernc}
-%\usepackage[scaled=0.875]{helvet}
-
-\usepackage[scaled=0.9]{sourcecodepro}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
