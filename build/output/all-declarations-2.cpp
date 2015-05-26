@@ -2844,6 +2844,76 @@ GALGAS_string filewrapperTemplate_booleanGenerationTemplate_declaration (C_Compi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Once function 'bootModeName'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_bootModeName (C_Compiler * /* inCompiler */
+                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("boot") ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_bootModeName = false ;
+static GALGAS_string gOnceFunctionResult_bootModeName ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_bootModeName (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_bootModeName) {
+    gOnceFunctionResult_bootModeName = onceFunction_bootModeName (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_bootModeName = true ;
+  }
+  return gOnceFunctionResult_bootModeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_bootModeName (void) {
+  gOnceFunctionResult_bootModeName.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_bootModeName (NULL,
+                                                          releaseOnceFunctionResult_bootModeName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_bootModeName [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_bootModeName (C_Compiler * inCompiler,
+                                                             const cObjectArray & /* inEffectiveParameterArray */,
+                                                             const GALGAS_location & /* inErrorLocation */
+                                                             COMMA_LOCATION_ARGS) {
+  return function_bootModeName (inCompiler COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_bootModeName ("bootModeName",
+                                                              functionWithGenericHeader_bootModeName,
+                                                              & kTypeDescriptor_GALGAS_string,
+                                                              0,
+                                                              functionArgs_bootModeName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                         Routine 'enterEnumerationOperators'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4007,7 +4077,7 @@ void routine_checkMode (const GALGAS_stringset constinArgument_inRequiredModes,
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inPossibleModes.operator_and (constinArgument_inRequiredModes COMMA_SOURCE_FILE ("semantic-context.galgas", 91)).objectCompare (constinArgument_inRequiredModes)).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_stringset var_missingModes = constinArgument_inRequiredModes.substract_operation (constinArgument_inPossibleModes, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 92)) ;
-    GALGAS_string var_s = GALGAS_string ("missing mode") ;
+    GALGAS_string var_s = GALGAS_string ("cannot be accessed in mode") ;
     GALGAS_string temp_1 ;
     const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_missingModes.reader_count (SOURCE_FILE ("semantic-context.galgas", 94)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
     if (kBoolTrue == test_2) {
@@ -4017,13 +4087,13 @@ void routine_checkMode (const GALGAS_stringset constinArgument_inRequiredModes,
     }
     var_s.dotAssign_operation (temp_1  COMMA_SOURCE_FILE ("semantic-context.galgas", 94)) ;
     var_s.dotAssign_operation (GALGAS_string (": ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 95)) ;
-    cEnumerator_stringset enumerator_3976 (var_missingModes, kEnumeration_up) ;
-    while (enumerator_3976.hasCurrentObject ()) {
-      var_s.dotAssign_operation (GALGAS_string ("$").add_operation (enumerator_3976.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 97))  COMMA_SOURCE_FILE ("semantic-context.galgas", 97)) ;
-      if (enumerator_3976.hasNextObject ()) {
+    cEnumerator_stringset enumerator_3990 (var_missingModes, kEnumeration_up) ;
+    while (enumerator_3990.hasCurrentObject ()) {
+      var_s.dotAssign_operation (GALGAS_string ("$").add_operation (enumerator_3990.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 97))  COMMA_SOURCE_FILE ("semantic-context.galgas", 97)) ;
+      if (enumerator_3990.hasNextObject ()) {
         var_s.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 98)) ;
       }
-      enumerator_3976.gotoNextObject () ;
+      enumerator_3990.gotoNextObject () ;
     }
     inCompiler->emitSemanticError (constinArgument_inErrorLocation, var_s  COMMA_SOURCE_FILE ("semantic-context.galgas", 100)) ;
   }
@@ -4047,20 +4117,20 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outSemanticContext.drop () ; // Release 'out' argument
   outArgument_outSemanticContext = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("semantic-context.galgas", 193)) ;
-  cEnumerator_declarationListAST enumerator_7945 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_7945.hasCurrentObject ()) {
-    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_7945.current_mDeclaration (HERE).ptr (), constinArgument_inProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 195)) ;
-    enumerator_7945.gotoNextObject () ;
+  cEnumerator_declarationListAST enumerator_7959 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_7959.hasCurrentObject ()) {
+    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_7959.current_mDeclaration (HERE).ptr (), constinArgument_inProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 195)) ;
+    enumerator_7959.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inExceptionTypes.reader_length (SOURCE_FILE ("semantic-context.galgas", 202)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 203)).reader_location (HERE)) ; // Implicit use of 'location' reader
     inCompiler->emitSemanticError (location_1, GALGAS_string ("exactly one exception type declaration should be provided (found:").add_operation (constinArgument_inExceptionTypes.reader_length (SOURCE_FILE ("semantic-context.galgas", 204)).reader_string (SOURCE_FILE ("semantic-context.galgas", 204)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 204)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 204))  COMMA_SOURCE_FILE ("semantic-context.galgas", 203)) ;
-    cEnumerator_exceptionTypesAST enumerator_8357 (constinArgument_inExceptionTypes, kEnumeration_up) ;
-    while (enumerator_8357.hasCurrentObject ()) {
-      GALGAS_location location_2 (enumerator_8357.current_mExceptionCodeTypeName (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+    cEnumerator_exceptionTypesAST enumerator_8371 (constinArgument_inExceptionTypes, kEnumeration_up) ;
+    while (enumerator_8371.hasCurrentObject ()) {
+      GALGAS_location location_2 (enumerator_8371.current_mExceptionCodeTypeName (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
       inCompiler->emitSemanticError (location_2, GALGAS_string ("exception type declaration is here")  COMMA_SOURCE_FILE ("semantic-context.galgas", 206)) ;
-      enumerator_8357.gotoNextObject () ;
+      enumerator_8371.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_lstring var_exceptionCodeTypeName ;
@@ -4069,26 +4139,26 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
     outArgument_outSemanticContext.mAttribute_mExceptionCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 210)) ;
     outArgument_outSemanticContext.mAttribute_mExceptionLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionLineTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 214)) ;
   }
-  cEnumerator_procedureDeclarationListAST enumerator_8893 (constinArgument_inProcedureListAST, kEnumeration_up) ;
-  while (enumerator_8893.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_8893.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 221)) ;
-    enumerator_8893.gotoNextObject () ;
+  cEnumerator_procedureDeclarationListAST enumerator_8907 (constinArgument_inProcedureListAST, kEnumeration_up) ;
+  while (enumerator_8907.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_8907.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 221)) ;
+    enumerator_8907.gotoNextObject () ;
   }
-  cEnumerator_functionDeclarationListAST enumerator_9004 (constinArgument_inFunctionListAST, kEnumeration_up) ;
-  while (enumerator_9004.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9004.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 225)) ;
-    enumerator_9004.gotoNextObject () ;
+  cEnumerator_functionDeclarationListAST enumerator_9018 (constinArgument_inFunctionListAST, kEnumeration_up) ;
+  while (enumerator_9018.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9018.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 225)) ;
+    enumerator_9018.gotoNextObject () ;
   }
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 228)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_9198 (constinArgument_inRequiredProcedureDeclarationListAST, kEnumeration_up) ;
-    while (enumerator_9198.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_9253 (enumerator_9198.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_9253.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_9253.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 231)) ;
-        enumerator_9253.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_9212 (constinArgument_inRequiredProcedureDeclarationListAST, kEnumeration_up) ;
+    while (enumerator_9212.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_9267 (enumerator_9212.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_9267.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_9267.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 231)) ;
+        enumerator_9267.gotoNextObject () ;
       }
-      enumerator_9198.gotoNextObject () ;
+      enumerator_9212.gotoNextObject () ;
     }
   }
 }
@@ -10107,6 +10177,7 @@ const char * gWrapperFileContent_5_targetTemplates = "newUnsignedRepresentation 
   "mode $user\n"
   "mode $init\n"
   "mode $exception\n"
+  "mode $boot\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -10127,7 +10198,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "target-teensy-sequential-systick.plms",
   "plms",
   true, // Text file
-  1511, // Text length
+  1522, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -18688,163 +18759,6 @@ GALGAS_integerIR GALGAS_integerIR::extractObject (const GALGAS_object & inObject
       result = *p ;
     }else{
       inCompiler->castError ("integerIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_literalStringTypeIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_literalStringTypeIR * p = (const cPtr_literalStringTypeIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_literalStringTypeIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mLiteralStringTypeName.objectCompare (p->mAttribute_mLiteralStringTypeName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_literalStringTypeIR::objectCompare (const GALGAS_literalStringTypeIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalStringTypeIR::GALGAS_literalStringTypeIR (void) :
-GALGAS_abstractTypeIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_literalStringTypeIR::constructor_new (GALGAS_string::constructor_default (HERE)
-                                                      COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalStringTypeIR::GALGAS_literalStringTypeIR (const cPtr_literalStringTypeIR * inSourcePtr) :
-GALGAS_abstractTypeIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_literalStringTypeIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::constructor_new (const GALGAS_string & inAttribute_mLiteralStringTypeName
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_literalStringTypeIR result ;
-  if (inAttribute_mLiteralStringTypeName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_literalStringTypeIR (inAttribute_mLiteralStringTypeName COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_literalStringTypeIR * p = (const cPtr_literalStringTypeIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_literalStringTypeIR) ;
-    result = p->mAttribute_mLiteralStringTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLiteralStringTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @literalStringTypeIR class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_literalStringTypeIR::cPtr_literalStringTypeIR (const GALGAS_string & in_mLiteralStringTypeName
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractTypeIR (THERE),
-mAttribute_mLiteralStringTypeName (in_mLiteralStringTypeName) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_literalStringTypeIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_literalStringTypeIR ;
-}
-
-void cPtr_literalStringTypeIR::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@literalStringTypeIR:" ;
-  mAttribute_mLiteralStringTypeName.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_literalStringTypeIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_literalStringTypeIR (mAttribute_mLiteralStringTypeName COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @literalStringTypeIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_literalStringTypeIR ("literalStringTypeIR",
-                                            & kTypeDescriptor_GALGAS_abstractTypeIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_literalStringTypeIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_literalStringTypeIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_literalStringTypeIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_literalStringTypeIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_literalStringTypeIR result ;
-  const GALGAS_literalStringTypeIR * p = (const GALGAS_literalStringTypeIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_literalStringTypeIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("literalStringTypeIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

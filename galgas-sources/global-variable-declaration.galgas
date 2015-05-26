@@ -132,6 +132,9 @@ override method @globalVarDeclaration semanticAnalysis
   @stringset executionModes = {}
   for (m) in mModeList do
     [inContext.mModeMap searchKey !m]
+    if m.string == bootModeName () then
+      error m: "a global variable does not accept the $" + bootModeName () + " mode"
+    end
     executionModes += !m.string
   end
 #--- Code generation

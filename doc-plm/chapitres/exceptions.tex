@@ -115,7 +115,7 @@ exception nom priorite {
 }
 \end{PLM}
 
-\plm=nom= est soit \texttt{setup}, soit \texttt{loop}. \plm=priorite= est une constante entière, comprise entre \texttt{0} et \texttt{255}. Si il y a plusieurs routines d'exceptions de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Si elles sont même priorité, l'ordre d'exécution est indéfini.
+\plm=nom= est soit \texttt{setup}, soit \texttt{loop}. \plm=priorite= est une constante entière, comprise entre $0$ et $2^{64}-1$. Si il y a plusieurs routines d'exception de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines d'exception de même nom n'ont pas la même priorité.
 
 \plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
 

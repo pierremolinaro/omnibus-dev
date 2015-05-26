@@ -54,8 +54,8 @@ method @bootList-element bootSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !"boot"] then
-    error mBootLocation : "the $boot mode should be defined in order to use boot routines"
+  if not [inContext.mModeMap hasKey !bootModeName ()] then
+    error mBootLocation : "the $" + bootModeName () + " mode should be defined in order to use boot routines"
   end
   [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
 #--- Variable map
@@ -65,7 +65,7 @@ method @bootList-element bootSemanticAnalysis
   [mInstructionList analyzeRoutineInstructionList
     !optionalReceiverType:.noReceiver
     !context:inContext
-    !modes:{!"boot"}
+    !modes:{!bootModeName ()}
     !allowException:true
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
