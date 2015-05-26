@@ -90,7 +90,7 @@ proc checkMode
 {
   if (inPossibleModes & inRequiredModes) != inRequiredModes  then
     let missingModes = inRequiredModes - inPossibleModes
-    var s = "missing mode"
+    var s = "cannot be accessed in mode"
     s += if [missingModes count] > 1 then "s" else "" end
     s += ": "
     for (m) in missingModes

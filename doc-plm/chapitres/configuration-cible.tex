@@ -102,3 +102,74 @@ newIntegerType Int64 @signed64
 
 
 
+
+\sectionLabel{\texttt{boot} routines}{bootRoutine}
+\index{boot\plm=boot=!Routine}
+
+Une routine \plm=boot= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, avant que les variables globales ne soient initialisées. Elle a la syntaxe suivante :
+\begin{PLM}
+boot priorite {
+  liste_instructions
+}
+\end{PLM}
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
+
+Les routines \plm=boot= s'exécutent dans le mode \plm=$boot=.
+
+Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer le mode \plm=$boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
+
+Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
+
+
+
+
+
+
+
+\sectionLabel{\texttt{init} routines}{initRoutine}
+\index{init\plm=init=!Routine}
+
+Une routine \plm=init= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, après l'initialisation des variables globales. Elle a la syntaxe suivante :
+\begin{PLM}
+init priorite {
+  liste_instructions
+}
+\end{PLM}
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
+
+Les routines \plm=init= s'exécutent dans le mode \plm=$init=.
+
+Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=$init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
+
+
+\sectionLabel{Séquence de démarrage du micro-contrôleur}{demarrageMicro}
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Démarrage}} ;
+    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}} ;
+    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
+    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
+    \node [block] (setup) [below=of init] {Procédure \texttt{setup}} ;
+    \node [block] (loop) [below=of setup] {Procédure \texttt{loop}} ;
+
+    \draw [-stealth, thick] (start) -- (boot) ;
+    \draw [-stealth, thick] (boot) -- (raz) ;
+    \draw [-stealth, thick] (raz) -- (init) ;
+    \draw [-stealth, thick] (init) -- (setup) ;
+    \draw [-stealth, thick] (setup) -- (loop) ;
+    \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(1.75, -.25) -- +(1.75, 1.75)-- +(0, 1.75) ;
+  \end{tikzpicture}
+  \caption{Organigramme de la séquence de démarrage}
+  \labelFigure{sequenceDemarrage}
+  \ligne
+\end{figure}
+
+
