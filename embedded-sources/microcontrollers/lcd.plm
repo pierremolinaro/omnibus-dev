@@ -152,7 +152,7 @@ proc write8bitCommand $init (?inCommand : UInt8) {
 //   LCD INIT                                                                  *
 //-----------------------------------------------------------------------------*
 
-init {
+init 10 {
   configurePorts () ;
 //--- Étape 1 : attendre 15 ms
   busyWaitingDuringMS (!15) ;

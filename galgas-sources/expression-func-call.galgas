@@ -56,7 +56,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -97,7 +97,7 @@ override method @functionCallInExpressionAST analyzeExpression
         !context:inContext
         !modes:inModeSet
         !allowException:inAllowExceptions
-        !?temporary:ioTemporaryIndex
+        !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
@@ -115,7 +115,7 @@ override method @functionCallInExpressionAST analyzeExpression
   end
   s += ")"
 #---
-  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
+  getNewTempVariable (!?ioTemporaries ?outResultValueName)
 #--- Generate code
   ioInstructionGenerationList += !@functionCallIR.new {
     !outExpressionType

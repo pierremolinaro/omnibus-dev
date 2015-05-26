@@ -129,11 +129,11 @@ func initialVariableMap
 #----------------------------------------------------------------------------------------------------------------------*
 
 proc getNewTempVariable
-  ?!@uint ioTemporaryIndex
+  ?!@semanticTemporariesStruct ioTemporaries
   !@variableKindIR outTempVariable
 {
-  outTempVariable = .temporaryConstant {!idx:ioTemporaryIndex}
-  ioTemporaryIndex ++
+  outTempVariable = .temporaryConstant {!idx:ioTemporaries.mTemporaryIndex}
+  ioTemporaries.mTemporaryIndex ++
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

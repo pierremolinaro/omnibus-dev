@@ -296,7 +296,7 @@ list @procFormalArgumentListForGeneration {
 
 method @procedureDeclarationListAST-element procedureSemanticAnalysis
   ?context:let @semanticContext inContext
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check modes
@@ -430,7 +430,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !context:inContext
     !modes:procedureModeSet
     !allowException:not [procedureModeSet hasKey !exceptionModeName ()]
-    !?temporary:ioTemporaryIndex
+    !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList

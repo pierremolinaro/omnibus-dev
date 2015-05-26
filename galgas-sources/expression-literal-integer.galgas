@@ -39,7 +39,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint unused ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList

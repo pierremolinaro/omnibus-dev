@@ -48,7 +48,7 @@ override method @varInExpressionAST analyzeExpression
   ?context:let @semanticContext unused inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -87,7 +87,7 @@ override method @varInExpressionAST analyzeExpression
       ?let newResultType
      ]
   #--- Temp var
-    getNewTempVariable (!?ioTemporaryIndex ?let newResultingVariable)
+    getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
     ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
       !newResultType
       !newResultingVariable

@@ -80,6 +80,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 static void ResetISR (void) {
+  boot () ;
 //---------1- Inhiber le chien de garde
   WDOG_UNLOCK = WDOG_UNLOCK_SEQ1 ;
   WDOG_UNLOCK = WDOG_UNLOCK_SEQ2 ;

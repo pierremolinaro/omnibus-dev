@@ -23,6 +23,7 @@ struct @ast {
   @requiredProcedureDeclarationListAST mRequiredProcList
   @functionDeclarationListAST mFunctionListAST
   @lstringlist mTargetList
+  @bootList mBootList
   @initList mInitList
   @exceptionClauseListAST mExceptionClauses
   @exceptionTypesAST mExceptionTypes

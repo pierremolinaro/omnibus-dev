@@ -78,7 +78,7 @@ override method @globalConstantDeclaration enterInContext
 #--- Get destination type
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?let constantType]
 #--- Analyze source expression
-  @uint temporaryIndex = 0
+  @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   @variableMap variableMap = .emptyMap
   [mSourceExpression analyzeExpression
@@ -87,7 +87,7 @@ override method @globalConstantDeclaration enterInContext
      !context:ioContext
      !modes:{}
      !allowException:true
-     !?temporary:temporaryIndex
+     !?temporary:temporaries
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList

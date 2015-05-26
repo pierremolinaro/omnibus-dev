@@ -33,60 +33,72 @@ abstract method @abstractDeclaration semanticAnalysis
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+struct @semanticTemporariesStruct {
+  @uint mTemporaryIndex
+  @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
+  @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
+  @initRoutinePriorityMap mInitRoutinePriorityMap
+  @bootRoutinePriorityMap mBootRoutinePriorityMap
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 proc semanticAnalysis
-  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
-  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
-  ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
-  ?initList:let @initList inInitListAST
-  ?exceptionClauses:let @exceptionClauseListAST inExceptionClauses
+  ?ast:let @ast inAST
   ?context:let @semanticContext inSemanticContext
-  ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
   ?endOfSourceFile:let @location inEndOfSourceFile
   ?staticStringMap:let @globalLiteralStringMap inGlobalLiteralStringMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
   outIntermediateCodeStruct = .default
   outIntermediateCodeStruct.mGlobalLiteralStringMap = inGlobalLiteralStringMap
-  for requiredProc in inRequiredProcedureDeclarationListAST do
+  for requiredProc in inAST.mRequiredProcList do
     outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
   end 
-  for (declaration) in inDeclarationListAST do
+  for (declaration) in inAST.mDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-  @uint temporaryIndex = 0
-  for procedure in inProcedureListAST do
+  @semanticTemporariesStruct temporaries = .default
+  for procedure in inAST.mProcedureListAST do
     [procedure procedureSemanticAnalysis
       !context:inSemanticContext
-      !?temporary:temporaryIndex
+      !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for function in inFunctionListAST do
+  for function in inAST.mFunctionListAST do
     [function functionSemanticAnalysis
       !context:inSemanticContext
-      !?temporary:temporaryIndex
+      !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for init in inInitListAST do
+  for boot in inAST.mBootList do
+    [boot bootSemanticAnalysis
+      !context:inSemanticContext
+      !?temporary:temporaries
+      !?intermediateCode:outIntermediateCodeStruct
+    ]
+  end
+  for init in inAST.mInitList do
     [init initSemanticAnalysis
       !context:inSemanticContext
-      !?temporary:temporaryIndex
+      !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for exception in inExceptionClauses do
+  for exception in inAST.mExceptionClauses do
     [exception exceptionSemanticAnalysis
       !context:inSemanticContext
-      !?temporary:temporaryIndex
+      !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
 #--- Check required procedure are defined
-  for requiredProc in inRequiredProcedureDeclarationListAST do
+  for requiredProc in inAST.mRequiredProcList do
     let requiredProcMangledName = mangledName (
       !forProcedureKind:.standAloneProc
       !procedureName:requiredProc.mRequiredProcedureName.string

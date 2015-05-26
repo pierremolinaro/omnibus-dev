@@ -13,9 +13,10 @@ sortedlist @exceptionClauseListAST {
   @lstring mExceptionClauseName
   @instructionListAST mExceptionInstructionList
   @location mEndOfExceptionInstructions
-  @uint mOrder
+  @uint64 mPriority
+  @location mLocationPriority
 }{
-  mOrder <
+  mPriority <
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -30,9 +31,6 @@ syntax extension common_syntax {
     $exception$
     $identifier$ ?let exceptionClauseName
     $integer$ ?let priority
-    if priority.uint64 > 255L then
-      error priority : "priority should be <= 255"
-    end
     ${$
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
@@ -41,7 +39,8 @@ syntax extension common_syntax {
       !exceptionClauseName
       !instructionList
       !endOfInstructionList
-      ![priority.uint64 uint]
+      !priority.uint64
+      !priority.location
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -68,9 +67,16 @@ func %once exceptionModeName -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+map @exceptionRoutinePriorityMap {
+  insert insertSetupKey error message "an exception setup routine with priority %K has been already declared"
+  insert insertLoopKey error message "an exception loop routine with priority %K has been already declared"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 method @exceptionClauseListAST-element exceptionSemanticAnalysis
   ?context:let @semanticContext inContext
-  ?!temporary:@uint ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   if not [inContext.mModeMap hasKey !exceptionModeName ()] then
@@ -117,7 +123,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !context:inContext
     !modes:{!exceptionModeName ()}
     !allowException:false
-    !?temporary:ioTemporaryIndex
+    !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
@@ -126,11 +132,13 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   [variableMap checkAutomatonStates !mEndOfExceptionInstructions]
 #--- Code generation
   if mExceptionClauseName.string == "setup" then
+    [!?ioTemporaries.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mExceptionSetupInstructionListIR += instructionGenerationList
   elsif mExceptionClauseName.string == "loop" then
+    [!?ioTemporaries.mExceptionLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
     ioIntermediateCodeStruct.mExceptionLoopInstructionListIR += instructionGenerationList
   else
-    error mExceptionClauseName : "exception clause name should be \"setup\" or \"loop\""
+    error mExceptionClauseName : "exception routine name should be \"setup\" or \"loop\""
   end
 }
 
