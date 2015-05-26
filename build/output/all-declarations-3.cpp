@@ -6660,7 +6660,7 @@ GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                      GALGAS_lstringlist::constructor_emptyList (HERE),
                      GALGAS_initList::constructor_emptyList (HERE),
-                     GALGAS_exceptionClauseListAST::constructor_emptyList (HERE),
+                     GALGAS_exceptionClauseListAST::constructor_emptySortedList (HERE),
                      GALGAS_exceptionTypesAST::constructor_emptyList (HERE)) ;
 }
 
@@ -6883,7 +6883,8 @@ void categoryMethod_initSemanticAnalysis (const GALGAS_initList_2D_element inObj
 GALGAS_exceptionClauseListAST_2D_element::GALGAS_exceptionClauseListAST_2D_element (void) :
 mAttribute_mExceptionClauseName (),
 mAttribute_mExceptionInstructionList (),
-mAttribute_mEndOfExceptionInstructions () {
+mAttribute_mEndOfExceptionInstructions (),
+mAttribute_mOrder () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6895,10 +6896,12 @@ GALGAS_exceptionClauseListAST_2D_element::~ GALGAS_exceptionClauseListAST_2D_ele
 
 GALGAS_exceptionClauseListAST_2D_element::GALGAS_exceptionClauseListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                     const GALGAS_instructionListAST & inOperand1,
-                                                                                    const GALGAS_location & inOperand2) :
+                                                                                    const GALGAS_location & inOperand2,
+                                                                                    const GALGAS_uint & inOperand3) :
 mAttribute_mExceptionClauseName (inOperand0),
 mAttribute_mExceptionInstructionList (inOperand1),
-mAttribute_mEndOfExceptionInstructions (inOperand2) {
+mAttribute_mEndOfExceptionInstructions (inOperand2),
+mAttribute_mOrder (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6906,18 +6909,20 @@ mAttribute_mEndOfExceptionInstructions (inOperand2) {
 GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_exceptionClauseListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
                                                    GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE)) ;
+                                                   GALGAS_location::constructor_nowhere (HERE),
+                                                   GALGAS_uint::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                     const GALGAS_instructionListAST & inOperand1,
-                                                                                                    const GALGAS_location & inOperand2 
+                                                                                                    const GALGAS_location & inOperand2,
+                                                                                                    const GALGAS_uint & inOperand3 
                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_exceptionClauseListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_exceptionClauseListAST_2D_element (inOperand0, inOperand1, inOperand2) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_exceptionClauseListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
   }
   return result ;
 }
@@ -6935,13 +6940,16 @@ typeComparisonResult GALGAS_exceptionClauseListAST_2D_element::objectCompare (co
   if (result == kOperandEqual) {
     result = mAttribute_mEndOfExceptionInstructions.objectCompare (inOperand.mAttribute_mEndOfExceptionInstructions) ;
   }
+  if (result == kOperandEqual) {
+    result = mAttribute_mOrder.objectCompare (inOperand.mAttribute_mOrder) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_exceptionClauseListAST_2D_element::isValid (void) const {
-  return mAttribute_mExceptionClauseName.isValid () && mAttribute_mExceptionInstructionList.isValid () && mAttribute_mEndOfExceptionInstructions.isValid () ;
+  return mAttribute_mExceptionClauseName.isValid () && mAttribute_mExceptionInstructionList.isValid () && mAttribute_mEndOfExceptionInstructions.isValid () && mAttribute_mOrder.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6950,6 +6958,7 @@ void GALGAS_exceptionClauseListAST_2D_element::drop (void) {
   mAttribute_mExceptionClauseName.drop () ;
   mAttribute_mExceptionInstructionList.drop () ;
   mAttribute_mEndOfExceptionInstructions.drop () ;
+  mAttribute_mOrder.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6965,6 +6974,8 @@ void GALGAS_exceptionClauseListAST_2D_element::description (C_String & ioString,
     mAttribute_mExceptionInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mEndOfExceptionInstructions.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mOrder.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -6985,6 +6996,12 @@ GALGAS_instructionListAST GALGAS_exceptionClauseListAST_2D_element::reader_mExce
 
 GALGAS_location GALGAS_exceptionClauseListAST_2D_element::reader_mEndOfExceptionInstructions (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfExceptionInstructions ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_exceptionClauseListAST_2D_element::reader_mOrder (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOrder ;
 }
 
 
@@ -14941,46 +14958,46 @@ void categoryMethod_exceptionSemanticAnalysis (const GALGAS_exceptionClauseListA
                                                GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 68)) COMMA_SOURCE_FILE ("exception.galgas", 68)).operator_not (SOURCE_FILE ("exception.galgas", 68)).boolEnum () ;
+  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 76)) COMMA_SOURCE_FILE ("exception.galgas", 76)).operator_not (SOURCE_FILE ("exception.galgas", 76)).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (inObject.mAttribute_mExceptionClauseName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("the $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 69)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 69)).add_operation (GALGAS_string (" mode should be defined in order to use an exception clause"), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 69))  COMMA_SOURCE_FILE ("exception.galgas", 69)) ;
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("the $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 77)).add_operation (GALGAS_string (" mode should be defined in order to use an exception clause"), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 77))  COMMA_SOURCE_FILE ("exception.galgas", 77)) ;
   }
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 72)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, GALGAS_string ("StaticString").reader_nowhere (SOURCE_FILE ("exception.galgas", 74)), inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 74)) ;
-  GALGAS_lstring var_codeArg = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 75)) ;
+  GALGAS_variableMap var_variableMap = function_initialVariableMap (constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 80)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, GALGAS_string ("StaticString").reader_nowhere (SOURCE_FILE ("exception.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 82)) ;
+  GALGAS_lstring var_codeArg = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 83)) ;
   {
-  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 79)) ;
-  temp_2.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 79))  COMMA_SOURCE_FILE ("exception.galgas", 79)) ;
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_codeArg, constinArgument_inContext.mAttribute_mExceptionCodeType, temp_2, function_mangledNameForInArgument (var_codeArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 80)), GALGAS_variableKindIR::constructor_inArgument (var_codeArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 81)), constinArgument_inContext.mAttribute_mExceptionCodeType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 82)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 76)) ;
+  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 87)) ;
+  temp_2.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 87))  COMMA_SOURCE_FILE ("exception.galgas", 87)) ;
+  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_codeArg, constinArgument_inContext.mAttribute_mExceptionCodeType, temp_2, function_mangledNameForInArgument (var_codeArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 88)), GALGAS_variableKindIR::constructor_inArgument (var_codeArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 89)), constinArgument_inContext.mAttribute_mExceptionCodeType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 90)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 84)) ;
   }
-  GALGAS_lstring var_fileArg = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 85)) ;
+  GALGAS_lstring var_fileArg = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 93)) ;
   {
-  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 89)) ;
-  temp_3.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 89))  COMMA_SOURCE_FILE ("exception.galgas", 89)) ;
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_fileArg, var_StaticStringType, temp_3, function_mangledNameForInArgument (var_fileArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 90)), GALGAS_variableKindIR::constructor_inArgument (var_fileArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 91)), var_StaticStringType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 92)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 86)) ;
+  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 97)) ;
+  temp_3.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 97))  COMMA_SOURCE_FILE ("exception.galgas", 97)) ;
+  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_fileArg, var_StaticStringType, temp_3, function_mangledNameForInArgument (var_fileArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 98)), GALGAS_variableKindIR::constructor_inArgument (var_fileArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 99)), var_StaticStringType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 100)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 94)) ;
   }
-  GALGAS_lstring var_lineArg = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 95)) ;
+  GALGAS_lstring var_lineArg = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 103)) ;
   {
-  GALGAS_stringset temp_4 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 99)) ;
-  temp_4.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 99))  COMMA_SOURCE_FILE ("exception.galgas", 99)) ;
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_lineArg, constinArgument_inContext.mAttribute_mExceptionLineType, temp_4, function_mangledNameForInArgument (var_lineArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 100)), GALGAS_variableKindIR::constructor_inArgument (var_lineArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 101)), constinArgument_inContext.mAttribute_mExceptionLineType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 102)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 96)) ;
+  GALGAS_stringset temp_4 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 107)) ;
+  temp_4.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 107))  COMMA_SOURCE_FILE ("exception.galgas", 107)) ;
+  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_lineArg, constinArgument_inContext.mAttribute_mExceptionLineType, temp_4, function_mangledNameForInArgument (var_lineArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 108)), GALGAS_variableKindIR::constructor_inArgument (var_lineArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 109)), constinArgument_inContext.mAttribute_mExceptionLineType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 110)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 111)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)) ;
   }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("exception.galgas", 106)) ;
-  GALGAS_stringset temp_5 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 110)) ;
-  temp_5.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 110))  COMMA_SOURCE_FILE ("exception.galgas", 110)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mExceptionInstructionList, GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("exception.galgas", 108)), constinArgument_inContext, temp_5, GALGAS_bool (false), ioArgument_ioTemporaryIndex, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 107)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfExceptionInstructions, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 118)) ;
+  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("exception.galgas", 114)) ;
+  GALGAS_stringset temp_5 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 118)) ;
+  temp_5.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 118))  COMMA_SOURCE_FILE ("exception.galgas", 118)) ;
+  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mExceptionInstructionList, GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("exception.galgas", 116)), constinArgument_inContext, temp_5, GALGAS_bool (false), ioArgument_ioTemporaryIndex, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 115)) ;
+  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfExceptionInstructions, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 126)) ;
   const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("setup"))).boolEnum () ;
   if (kBoolTrue == test_6) {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 121)) ;
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 129)) ;
   }else if (kBoolFalse == test_6) {
     const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("loop"))).boolEnum () ;
     if (kBoolTrue == test_7) {
-      ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 123)) ;
+      ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 131)) ;
     }else if (kBoolFalse == test_7) {
       GALGAS_location location_8 (inObject.mAttribute_mExceptionClauseName.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_8, GALGAS_string ("exception clause name should be \"setup\" or \"loop\"")  COMMA_SOURCE_FILE ("exception.galgas", 125)) ;
+      inCompiler->emitSemanticError (location_8, GALGAS_string ("exception clause name should be \"setup\" or \"loop\"")  COMMA_SOURCE_FILE ("exception.galgas", 133)) ;
     }
   }
 }

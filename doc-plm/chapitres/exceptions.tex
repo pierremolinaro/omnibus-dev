@@ -110,12 +110,12 @@ Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont e
 
 Leur syntaxe est la suivante :
 \begin{PLM}
-exception nom {
+exception nom priorite {
   liste_instructions
 }
 \end{PLM}
 
-\plm=nom= est soit \texttt{setup}, soit \texttt{loop}.
+\plm=nom= est soit \texttt{setup}, soit \texttt{loop}. \plm=priorite= est une constante entière, comprise entre \texttt{0} et \texttt{255}. Si il y a plusieurs routines d'exceptions de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Si elles sont même priorité, l'ordre d'exécution est indéfini.
 
 \plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
 
@@ -132,9 +132,9 @@ Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler
 
 \section{Exemples}
 
-Pour redémarrer un processeur ARMv7 lors d'une exception, on peut écrire la routine d'exception \texttt{loop} suivante :
+Pour redémarrer un processeur ARMv7 lors d'une exception, on peut écrire la routine d'exception \texttt{setup} suivante :
 \begin{PLM}
-exception loop {
+exception setup 255 {
   AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
 }
 \end{PLM}

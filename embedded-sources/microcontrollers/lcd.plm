@@ -466,7 +466,7 @@ proc clearScreenInExceptionMode $exception @noWarningIfUnused () {
 
 //-----------------------------------------------------------------------------*
 
-exception setup {
+exception setup 0 {
   clearScreenInExceptionMode ()
   waitMSInExceptionMode (!duration:4)
   gotoInExceptionMode (!line:0 !column:0)
@@ -475,7 +475,7 @@ exception setup {
   printUnsignedInExceptionMode (!LINE)
 }
 
-exception loop {
+exception loop 0 {
   waitMSInExceptionMode (!duration:50)
   ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
   waitMSInExceptionMode (!duration:50)
