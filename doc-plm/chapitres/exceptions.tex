@@ -94,6 +94,29 @@ Cette construction doit apparaître exactement une fois. Normalement, c'est le f
 
 \section{Routines exécutées lors de l'occurrence d'une exception}
 
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Occurrence d'une exception}} ;
+    \node [block] (raz) [below=of start] {Masquage des interruptions} ;
+    \node [block] (setup) [below=of raz] {Routines \texttt{\bf exception} \texttt{setup}} ;
+    \node [block] (loop) [below=of setup] {Routines \texttt{\bf exception} \texttt{loop}} ;
+
+    \draw [-stealth, thick] (start) -- (raz) ;
+    \draw [-stealth, thick] (raz) -- (setup) ;
+    \draw [-stealth, thick] (setup) -- (loop) ;
+    \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(2.75, -.25) -- +(2.75, 0.75)-- +(0, 0.75) ;
+  \end{tikzpicture}
+  \caption{Organigramme de la réponse à une exception}
+  \labelFigure{sequenceException}
+  \ligne
+\end{figure}
 
 Lors de l'occurrence d'une exception, l'exécution séquentielle des instructions est abandonnée, et :
 \begin{itemize}
@@ -101,10 +124,11 @@ Lors de l'occurrence d'une exception, l'exécution séquentielle des instruction
   \item les routines d'exception \texttt{setup} sont exécutées une fois ;
   \item les routines d'exception \texttt{loop} sont exécutées indéfiniment.
 \end{itemize}
+Ce fonctionnement est illustré à \refFigure{}{sequenceException}.
 
-Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans un ordre quelconque. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
+Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans l'ordre de leurs prioritées relatives. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
 
-Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans un ordre quelconque. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
+Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans l'ordre de leurs prioritées relatives. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
 
 \subsection{Routines d'exception \texttt{setup} et \texttt{loop}}\index{exception loop@\plm=exception loop=}\index{exception setup@\plm=exception setup=}
 
