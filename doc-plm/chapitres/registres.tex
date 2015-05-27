@@ -202,7 +202,7 @@ Les masques ainsi obtenus sont des expressions statiques.
 
 
 
-\section{Attribut \texttt{@ro}}
+\sectionLabel{Attribut \texttt{@ro}}{attributRo}\index{"@ro}
 La déclaration d'un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule. Par exemple :
 \begin{PLM}
 register SYST_CALIB @ro at 0xE000_E01C : UInt32
@@ -213,7 +213,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 
 \section{Déclaration de plusieurs registres}
 
-Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux registres est montrée) :
+Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux premiers registres est montrée) :
 
 \begin{PLM}
 register

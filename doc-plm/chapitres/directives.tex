@@ -18,23 +18,3 @@
 \section{Directive \texttt{import}}\index{import@\plm=import=}
 
 
-\sectionLabel{Directive \texttt{check}}{directiveCheck}\index{check@\plm=check=}
-
-La directive \plm=check= apparaît dans une liste d'instructions et a la syntaxe suivante :
-\begin{PLM}
-check expression
-\end{PLM}
-
-L'\plm=expression= est une expression booléenne calculée statiquement.
-
-Contrairement à l'instruction \plm=assert= (\refSectionPage{instructionAssert}) qui évalue l'expression booléenne à l'exécution, la directive \plm=check= est toujours évaluée à la compilation. Elle permet d'exprimer des assertions qui sont évaluées lors de la compilation.
-
-Aucun code n'est engendré. La directive \plm=check= peut donc apparaître dans des listes d'instructions où les exceptions sont interdites.
-
-Exemples :
-\begin{PLM}
-check true  // Ok
-check false // Erreur, expression fausse
-\end{PLM}
-
-

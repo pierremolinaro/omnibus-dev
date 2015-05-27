@@ -34,40 +34,6 @@
 
 
 
-\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}\index{assert@\plm=assert=}
-
-L'instruction \plm=assert= a la syntaxe suivante :
-\begin{PLM}
-assert expression
-\end{PLM}
-
-L'\plm=expression= est une expression booléenne non calculable statiquement.
-
-Si le programme est compilé avec les exceptions activées, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une exception (dont le code est donné par le \refTableau{tableauCodeExceptions}) est levée.
-
-Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
-
-Noter que \plm=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \plm=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
-\begin{PLM}
-assert true // Erreur, l'expression est calculable statiquement
-\end{PLM}
-
-
-
-\section{L'instruction \texttt{throw}}\index{throw@\plm=throw=}
-
-L'instruction \plm=throw= a la syntaxe suivante :
-\begin{PLM}
-throw expression
-\end{PLM}
-
-L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typeLiesException}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
-
-Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=throw= lève une exception dont le code est la valeur de l'\plm=expression=.
-
-Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
-
-
 
 
 \sectionLabel{Définition des types liés aux exceptions}{typeLiesException}\index{exception:@\plm=exception:=}
@@ -92,7 +58,7 @@ exception : Int32 UInt32
 Cette construction doit apparaître exactement une fois. Normalement, c'est le fichier de définition de la cible qui la contient.
 
 
-\section{Routines exécutées lors de l'occurrence d'une exception}
+\sectionLabel{Routines exécutées lors de l'occurrence d'une exception}{routineException}
 
 \begin{figure}[t]
   \centering
