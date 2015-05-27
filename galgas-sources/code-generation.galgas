@@ -90,6 +90,8 @@ proc codeGeneration
   ?outputFile:let @string inSourceFileName
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
+  ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
+  ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
 {
 #--- Create source directory (if does not exist)
   let targetDirectory = [inSourceFileName stringByDeletingPathExtension]
@@ -115,12 +117,12 @@ proc codeGeneration
   code += "static void init (void) ;\n\n"
   if not [option plm_options.noExceptionGeneration value] then
     code += titleComment (!"Exception")
-    code += "static void raise_exception_internal (const int32_t inCode,\n"
+    code += "static void raise_exception_internal (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
     code += "                                      const char * inSourceFile,\n"
-    code += "                                      const uint32_t inSourceLine) ;\n\n"
-    code += "static void raise_exception (const int32_t inCode,\n"
+    code += "                                      const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) ;\n\n"
+    code += "static void raise_exception (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
     code += "                             const char * inSourceFile,\n"
-    code += "                             const int32_t inSourceLine) {\n"
+    code += "                             const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) {\n"
     code += " //--- Mask interrupt: write 1 into FAULTMASK register\n"
     code += "  const uint32_t maskValue = 1 ;\n"
     code += "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
