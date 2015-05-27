@@ -33,7 +33,9 @@ Où :
   \item \plm=expression_statique= est l'expression qui fournit la valeur initiale de cette variable ; cette expression est calculée lors de la compilation.
 \end{itemize}
 
-La portée d'une variable globale est le programme dans son intégralité : peut importe où est déclarée la variable.
+La portée d'une variable globale est le programme dans son intégralité : peu importe où est déclarée la variable.
+
+L'\plm=expression_statique= peut utiliser la valeur des constantes globales : le compilateur évalue les constantes globales avant d'évaluer les valeurs initiales des variables globales. Par contre, \plm=expression_statique= ne peut pas utiliser les valeurs d'une autre variable globale.
 
 Note : si plusieurs modes sont mentionnés dans la déclaration d'une variable globale, le compilateur ajoute le qualificatif \texttt{volatile} dans le code C engendré pour déclarer cette variable.
 

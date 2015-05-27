@@ -33,12 +33,13 @@ Où :
 
 La portée d'une constante globale est le programme dans son intégralité : peut importe le fichier et la ligne où elle est déclarée.
 
+L'\plm=expression_statique= ne peut pas nommer une autre constante globale, ni une variable globale. 
 
 
 
 \sectionLabel{Déclaration d'une constante locale}{declarationConstanteLocale}\index{Constante!locale}
 
-La déclaration d'une constante locale apparaît dans une liste d'instruction et sa syntaxe est la suivante :
+La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante :
 
 \begin{PLM}
 let nom : Type = expression
@@ -50,3 +51,5 @@ Où :
   \item \plm=Type= est le nom du type de la constante globale ;
   \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
 \end{itemize}
+
+Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constantes locales et globales, variables locales et globales.
