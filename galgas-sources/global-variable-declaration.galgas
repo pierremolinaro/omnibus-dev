@@ -81,7 +81,7 @@ override method @globalVarDeclaration enterInContext
   #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
     @instructionListIR instructionGenerationList = {}
-    @variableMap variableMap = .emptyMap
+    @variableMap variableMap = variableMapWithConstants (!context:ioContext)
     [mSourceExpression analyzeExpression
        !optionalReceiverType:.noReceiver
        !optionalTargetType:variableType

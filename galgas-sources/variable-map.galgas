@@ -89,13 +89,13 @@ func initialVariableMap
     end
   end
 #--- Add global constants
-  for (constantName constantType sourceExpressionCode) in inContext.mGlobalConstantMap do
+  for (constantName constantType expressionCode) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
       !constantName
       !constantType
       !allModeSet
       !mangledNameForConstant (!name:constantName.string)
-      !.globalConstant {!name:constantName.string}
+      !expressionCode
       !true
       !{}
     ]
@@ -123,6 +123,29 @@ func initialVariableMap
         !{}
       ]
     end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func variableMapWithConstants
+  ?context:let @semanticContext inContext
+  -> @variableMap outVariableMap
+{
+  outVariableMap = .emptyMap
+#--- All mode set
+  let allModeSet = [inContext.mModeMap keySet] ;
+#--- Add global constants
+  for (constantName constantType expressionCode) in inContext.mGlobalConstantMap do
+    [!?outVariableMap insertUsedLocalConstant
+      !constantName
+      !constantType
+      !allModeSet
+      !mangledNameForConstant (!name:constantName.string)
+      !expressionCode
+      !true
+      !{}
+    ]
   end
 }
 

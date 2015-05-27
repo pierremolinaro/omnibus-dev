@@ -17028,15 +17028,15 @@ static void categoryMethod_globalVarDeclaration_enterInContext (const cPtr_abstr
     break ;
   case GALGAS_generalizedTypeEnumAST::kEnum_valueType:
     {
-      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_4847 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (object->mAttribute_mType.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_typeName = extractPtr_4847->mAssociatedValue0 ;
+      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_4883 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (object->mAttribute_mType.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_typeName = extractPtr_4883->mAssociatedValue0 ;
       GALGAS_unifiedTypeMap_2D_proxy var_variableType ;
       {
       GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, extractedValue_typeName, var_variableType COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 80)) ;
       }
       GALGAS_semanticTemporariesStruct var_temporaries = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("global-variable-declaration.galgas", 82)) ;
       GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("global-variable-declaration.galgas", 83)) ;
-      GALGAS_variableMap var_variableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("global-variable-declaration.galgas", 84)) ;
+      GALGAS_variableMap var_variableMap = function_variableMapWithConstants (ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 84)) ;
       GALGAS_unifiedTypeMap_2D_proxy var_expressionType ;
       GALGAS_variableKindIR var_resultValueName ;
       callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("global-variable-declaration.galgas", 86)), var_variableType, ioArgument_ioContext, GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("global-variable-declaration.galgas", 89)), GALGAS_bool (true), var_temporaries, ioArgument_ioGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, var_expressionType, var_resultValueName, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 85)) ;
@@ -17050,10 +17050,10 @@ static void categoryMethod_globalVarDeclaration_enterInContext (const cPtr_abstr
         inCompiler->emitSemanticError (location_2, GALGAS_string ("source expression cannot be statically computed")  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 99)) ;
       }
       GALGAS_stringset var_executionModes = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("global-variable-declaration.galgas", 102)) ;
-      cEnumerator_lstringlist enumerator_4454 (object->mAttribute_mModeList, kEnumeration_up) ;
-      while (enumerator_4454.hasCurrentObject ()) {
-        var_executionModes.addAssign_operation (enumerator_4454.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 104)) ;
-        enumerator_4454.gotoNextObject () ;
+      cEnumerator_lstringlist enumerator_4490 (object->mAttribute_mModeList, kEnumeration_up) ;
+      while (enumerator_4490.hasCurrentObject ()) {
+        var_executionModes.addAssign_operation (enumerator_4490.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 104)) ;
+        enumerator_4490.gotoNextObject () ;
       }
       {
       routine_checkAssignmentCompatibility (var_expressionType, var_variableType, object->mAttribute_mVarName.mAttribute_location, inCompiler  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 107)) ;
@@ -17094,16 +17094,16 @@ static void categoryMethod_globalVarDeclaration_semanticAnalysis (const cPtr_abs
   const cPtr_globalVarDeclaration * object = (const cPtr_globalVarDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_globalVarDeclaration) ;
   GALGAS_stringset var_executionModes = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("global-variable-declaration.galgas", 132)) ;
-  cEnumerator_lstringlist enumerator_5501 (object->mAttribute_mModeList, kEnumeration_up) ;
-  while (enumerator_5501.hasCurrentObject ()) {
-    constinArgument_inContext.mAttribute_mModeMap.method_searchKey (enumerator_5501.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 134)) ;
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_5501.current_mValue (HERE).mAttribute_string.objectCompare (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 135)))).boolEnum () ;
+  cEnumerator_lstringlist enumerator_5537 (object->mAttribute_mModeList, kEnumeration_up) ;
+  while (enumerator_5537.hasCurrentObject ()) {
+    constinArgument_inContext.mAttribute_mModeMap.method_searchKey (enumerator_5537.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 134)) ;
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_5537.current_mValue (HERE).mAttribute_string.objectCompare (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 135)))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_location location_1 (enumerator_5501.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+      GALGAS_location location_1 (enumerator_5537.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
       inCompiler->emitSemanticError (location_1, GALGAS_string ("a global variable does not accept the $").add_operation (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 136)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 136))  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 136)) ;
     }
-    var_executionModes.addAssign_operation (enumerator_5501.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 138)) ;
-    enumerator_5501.gotoNextObject () ;
+    var_executionModes.addAssign_operation (enumerator_5537.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 138)) ;
+    enumerator_5537.gotoNextObject () ;
   }
   GALGAS_unifiedTypeMap_2D_proxy var_inferredType ;
   GALGAS_stringset var_executionModeSet ;
