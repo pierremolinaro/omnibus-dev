@@ -210,3 +210,17 @@ register SYST_CALIB @ro at 0xE000_E01C : UInt32
 
 Toute tentative de faire figurer ce registre dans une construction qui provoque une écriture de celui-ci entraîne l'apparition d'une erreur de compilation.
 
+
+\section{Déclaration de plusieurs registres}
+
+Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux registres est montrée) :
+
+\begin{PLM}
+register
+  PORTA_PCR0 at 0x4004_9000
+  PORTA_PCR1 at 0x4004_9004
+: UInt32 {
+  7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps
+}
+\end{PLM}
+
