@@ -112,6 +112,8 @@ private proc compileProject
           !outputFile:inSourceFile.string
           !intermediateCode:intermediateCodeStruct
           !target:inTargetName
+          !exceptionCodeType:semanticContext.mExceptionCodeType
+          !exceptionLineType:semanticContext.mExceptionLineType
         )
       end
     end

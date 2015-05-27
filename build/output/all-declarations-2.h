@@ -1739,6 +1739,8 @@ class GALGAS_string function_titleComment (class GALGAS_string inArgument0,
 void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_intermediateCodeStruct constinArgument1,
                              const class GALGAS_lstring constinArgument2,
+                             const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
+                             const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
