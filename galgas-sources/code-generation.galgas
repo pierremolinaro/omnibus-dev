@@ -8,8 +8,6 @@ getter @variableKindIR mangledName -> @string outResult {
   switch self
   case register (@string name) :
     outResult = mangledNameForRegister (!name:name)
-  case globalConstant (@string name) :
-    outResult = mangledNameForConstant (!name:name)
   case globalVariable (@string name) :
     outResult = mangledNameForGlobalVariable (!name:name)
   case localVariable (@string name) :
