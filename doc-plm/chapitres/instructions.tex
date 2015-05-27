@@ -1,0 +1,227 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Instructions}
+
+
+
+
+
+\sectionLabel{Déclaration d'une variable locale}{declarationVariableLocale}\index{Variable!locale}
+
+La déclaration d'une variable locale peut prendre plusieurs formes, suivant que la variable est initialisée ou non.
+
+\subsection{Déclaration d'une variable locale initialisée}
+
+\begin{PLM}
+var nom : Type = expression
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la variable locale ;
+  \item \plm=Type= est le nom du type de la variable globale ;
+  \item \plm=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
+\end{itemize}
+
+L'annotation de type peut être omise ; la variable a alors le type de l'expression qui l'initialise :
+\begin{PLM}
+var nom = expression
+\end{PLM}
+
+
+\subsection{Déclaration d'une variable locale non initialisée}
+\begin{PLM}
+var nom : Type
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la variable locale ;
+  \item \plm=Type= est le nom du type de la variable globale.
+\end{itemize}
+
+Le compilateur garantit qu'aucune lecture n'est fait avant que la variable reçoive une valeur.
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Déclaration d'une constante locale}{declarationConstanteLocale}\index{Constante!locale}
+
+La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante :
+
+\begin{PLM}
+let nom : Type = expression
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la constante globale ;
+  \item \plm=Type= est le nom du type de la constante globale ;
+  \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
+\end{itemize}
+
+Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constantes locales et globales, variables locales et globales.
+
+
+
+
+
+
+\section {Instruction d'affectation}
+
+L'instruction d'affectation est la suivante :
+
+\begin{PLM}
+nom = expression
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom d'une variable glogale ou locale, ou le nom d'un registre de contrôle ;
+  \item \plm=expression= est l'expression qui fournit la valeur.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\section {Incrémentation et décrémentation}
+
+
+
+
+
+
+
+
+
+
+
+\section {Opérateurs combinés avec une affectation}
+
+
+
+\sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\plm=check=}
+
+La directive \plm=check= apparaît dans une liste d'instructions et a la syntaxe suivante :
+\begin{PLM}
+check expression
+\end{PLM}
+
+L'\plm=expression= est une expression booléenne calculée statiquement.
+
+Contrairement à l'instruction \plm=assert= (\refSectionPage{instructionAssert}) qui évalue l'expression booléenne à l'exécution, la directive \plm=check= est toujours évaluée à la compilation. Elle permet d'exprimer des assertions qui sont évaluées lors de la compilation.
+
+Aucun code n'est engendré. La directive \plm=check= peut donc apparaître dans des listes d'instructions où les exceptions sont interdites.
+
+Exemples :
+\begin{PLM}
+check true  // Ok
+check false // Erreur, expression fausse
+\end{PLM}
+
+
+
+\sectionLabel{L'instruction \texttt{assert}}{instructionAssert}\index{assert@\plm=assert=}
+
+L'instruction \plm=assert= a la syntaxe suivante :
+\begin{PLM}
+assert expression
+\end{PLM}
+
+L'\plm=expression= est une expression booléenne non calculable statiquement.
+
+Si le programme est compilé avec les exceptions activées, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une exception (dont le code est donné par le \refTableau{tableauCodeExceptions}) est levée.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
+
+Noter que \plm=expression= ne doit pas être calculable statiquement. Si elle est calculable statiquement, il faut utiliser la directive \plm=check=, \refSectionPage{directiveCheck}. Par exemple, le code suivant provoque une erreur de compilation :
+\begin{PLM}
+assert true // Erreur, l'expression est calculable statiquement
+\end{PLM}
+
+
+
+\section{L'instruction \texttt{throw}}\index{throw@\plm=throw=}
+
+L'instruction \plm=throw= a la syntaxe suivante :
+\begin{PLM}
+throw expression
+\end{PLM}
+
+L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typeLiesException}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
+
+Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=throw= lève une exception dont le code est la valeur de l'\plm=expression=.
+
+Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
+
+
+
+
+\section{Instruction d'appel de procédure}
+
+
+
+
+\section{Instruction \texttt{if}}
+
+L'instruction \plm=if= a une structure classique, où \plm=condition= est une expression booléenne :
+\begin{PLM}
+if condition then
+  instructions_then
+else
+  instructions_else
+end
+\end{PLM}
+
+Le compilateur vérifie que la \plm=condition= n'est pas une expression statique : une erreur de compilation est émise si elle l'est.
+
+La branche \plm=else= est optionnelle :
+\begin{PLM}
+if condition then
+  instructions_then
+end
+\end{PLM}
+
+
+Une ou plusieurs branches \plm=elsif= peuvent être ajoutées :
+\begin{PLM}
+if condition then
+  instructions_then
+elsif condition2 then
+  instructions_elsif
+end
+\end{PLM}
+
+
+
+
+
+
+\section{Instruction \texttt{while}}
+
+L'instruction \plm=while= permet d'exprimer une répétition, où la \plm=condition= est testée avant l'exécution des instructions de la boucle :
+\begin{PLM}
+while condition do
+  instructions_while
+end
+\end{PLM}
+
+\plm=condition= est une expression booléenne, qui ne doit pas être statique : une erreur de compilation est émise si elle l'est.
+

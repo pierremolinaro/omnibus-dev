@@ -5,12 +5,12 @@
 
 
 
-\chapter{Déclaration des constantes}
+\chapter{Déclaration des constantes globales}
 
 Les constantes peuvent être déclarées en deux endroits :
 \begin{itemize}
-  \item en dehors de toute routine : c'est une constante globale ;
-  \item parmi les instructions d'une routine : c'est une constante locale à la routine.
+  \item en dehors de toute routine : c'est une constante globale (voir ci-après) ;
+  \item parmi les instructions d'une routine : c'est une constante locale à la routine (voir \refSectionPage{declarationConstanteLocale}).
 \end{itemize}
 
 
@@ -35,21 +35,3 @@ La portée d'une constante globale est le programme dans son intégralité : peu
 
 L'\plm=expression_statique= ne peut pas nommer une autre constante globale, ni une variable globale. 
 
-
-
-\sectionLabel{Déclaration d'une constante locale}{declarationConstanteLocale}\index{Constante!locale}
-
-La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante :
-
-\begin{PLM}
-let nom : Type = expression
-\end{PLM}
-
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la constante globale ;
-  \item \plm=Type= est le nom du type de la constante globale ;
-  \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
-\end{itemize}
-
-Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constantes locales et globales, variables locales et globales.

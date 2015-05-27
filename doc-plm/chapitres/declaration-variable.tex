@@ -5,12 +5,12 @@
 
 
 
-\chapter{Déclaration des variables}
+\chapter{Déclaration des variables globales}
 
 Les variables peuvent être déclarées en deux endroits :
 \begin{itemize}
-  \item en dehors de toute routine : c'est une variable globale ;
-  \item parmi les instructions d'une routine : c'est une variable locale à la routine.
+  \item en dehors de toute routine : c'est une variable globale (voir ci-après) ;
+  \item parmi les instructions d'une routine : c'est une variable locale à la routine (voir \refSectionPage{declarationVariableLocale}).
 \end{itemize}
 
 
@@ -28,7 +28,7 @@ var nom $mode1 $mode2 : Type = expression_statique
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la variable globale ;
-  \item \plm=$mode1=, \plm=$mode2= est la liste (non vide) des modes où la variable peut être accédée ; le mode \plm=$boot= y est interdit, car une routine \plm=boot= n'a pas le droit d'accéder aux variables globales (\refSectionPage{bootRoutine}) ;
+  \item \plm=$mode1=, \plm=$mode2= est la liste (non vide) des modes où la variable peut être accédée ; le mode \plm=$boot=\index{\$boot} y est interdit, car une routine \plm=boot= n'a pas le droit d'accéder aux variables globales (\refSectionPage{bootRoutine}) ;
   \item \plm=Type= est le nom du type de la variable globale ;
   \item \plm=expression_statique= est l'expression qui fournit la valeur initiale de cette variable ; cette expression est calculée lors de la compilation.
 \end{itemize}
@@ -40,39 +40,3 @@ L'\plm=expression_statique= peut utiliser la valeur des constantes globales : le
 Note : si plusieurs modes sont mentionnés dans la déclaration d'une variable globale, le compilateur ajoute le qualificatif \texttt{volatile} dans le code C engendré pour déclarer cette variable.
 
 
-
-
-\sectionLabel{Déclaration d'une variable locale}{declarationVariableLocale}\index{Variable!locale}
-
-La déclaration d'une variable locale peut prendre plusieurs formes, suivant que la variable est initialisée ou non.
-
-\subsection{Déclaration d'une variable locale initialisée}
-
-\begin{PLM}
-var nom : Type = expression
-\end{PLM}
-
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=Type= est le nom du type de la variable globale ;
-  \item \plm=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
-\end{itemize}
-
-L'annotation de type peut être omise ; la variable a alors le type de l'expression qui l'initialise :
-\begin{PLM}
-var nom = expression
-\end{PLM}
-
-
-\subsection{Déclaration d'une variable locale non initialisée}
-\begin{PLM}
-var nom : Type
-\end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=Type= est le nom du type de la variable globale.
-\end{itemize}
-
-Le compilateur garantit qu'aucune lecture n'est fait avant que la variable reçoive une valeur.

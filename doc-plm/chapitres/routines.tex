@@ -7,7 +7,70 @@
 
 \chapter{Procédures et fonctions}
 
-\colorbox{red}{Doc à écrire.}
+Le langage définit plusieurs natures de sous-programmes :
+\begin{itemize}
+  \item les \emph{procédures}, dont l'appel est une instruction ;
+  \item les \emph{fonctions}, dont l'appel apparaît dans une expression ;
+  \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
+  \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
+  \item les \emph{routines d'exception}, exécutées lors d'une exception (\refSectionPage{routineException}).
+\end{itemize}
+
+Ce chapitre décrit les \emph{procédures} et les \emph{fonctions}. Les \emph{routines} se distinguent des \emph{procédures} par le fait qu'elles n'ont pas d'arguments formels explicites. Elles sont présentées dans des sections particulières.
+
+\section{Arguments formels et paramètres effectifs}
+
+
+Une \emph{procédure} déclare zéro, un ou plusieurs arguments formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs arguments formels en \emph{entrée}.
+
+La syntaxe des différents arguments formels et de leur paramètre effectif est résumée dans le \refTableau{argumentsFormelsParametresEffectifs}.
+
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{llll}
+    \textbf{Argument formel} & \textbf{Sélecteur} & \textbf{Paramètre effectif} & \textbf{Sélecteur} \\
+    Entrée & \plm+?+         & Sortie & \plm+!expression+ \\
+           & \plm+?selecteur:+ & & \plm+!selecteur:expression+ \\
+    Sortie & \plm+!+         & Entrée & \plm+?variable+ \\
+           & \plm+!selecteur:+ & & \plm+?selecteur:variable+ \\
+    Entrée/sortie & \plm+?!+         & Sortie/entrée & \plm+!?variable+ \\
+           & \plm+?!selecteur:+ & & \plm+!?selecteur:variable+ \\
+  \end{tabular}
+  \caption{Argument formel et paramètre effectif}
+  \labelTableau{argumentsFormelsParametresEffectifs}
+  \ligne
+\end{table}
+
+
+\section{Déclaration d'une procédure}
+
+La déclaration d'une procédure est la suivante :
+\begin{PLM}
+proc nom $mode @attribut (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la procédure ;
+  \item \plm=$mode= est la liste non vide de l'ensemble des modes où la procédure peut être appelée ;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la procédure.
+\end{itemize}
+
+\subsection{Exemples}
+
+\begin{PLM}
+proc setup $user () {
+}
+\end{PLM}
+
+Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
+
+\begin{PLM}
+proc goto $user @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+}
+\end{PLM}
 
 
 \section{Procédures requises}
@@ -15,12 +78,12 @@
 \colorbox{red}{Doc à écrire.}
 
 
-\section{Procédures surchargeables}
+\sectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
 
 \colorbox{red}{Doc à écrire.}
 
 
-\section{Procédures inutilisées}
+\sectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
 
 \colorbox{red}{Doc à écrire.}
 
