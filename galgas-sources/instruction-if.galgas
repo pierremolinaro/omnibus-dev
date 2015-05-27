@@ -94,6 +94,9 @@ override method @ifInstructionAST analyze
   if [testExpressionType kind] != .boolean then
     error mTestExpressionEndLocation : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
   end
+  if [testResult isStatic] then
+    error mTestExpressionEndLocation : "test expression type should not be static"
+  end
   [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}

@@ -70,9 +70,12 @@ override method @whileInstructionAST analyze
   if [testExpressionType kind] != .boolean then
     error mEndOf_test_expression : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
   end
-  [!?ioVariableMap openOverrideForRepeatBlock]
+  if [testValueName isStatic] then
+    error mEndOf_test_expression : "test expression type should not be static"
+  end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
+  [!?ioVariableMap openOverrideForRepeatBlock]
   [mWhileInstructionList analyzeBranchInstructionList
     !endOfInstructionList:mEndOf_while_instruction
     !optionalReceiverType:inReceiverType

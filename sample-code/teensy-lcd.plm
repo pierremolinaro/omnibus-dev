@@ -42,9 +42,6 @@ proc loop $user () {
   printSpaces (!4)
   goto (!line:0 !column: 0)
   printSigned (!gVar)
-//  if 0 == (gVar & 15) then
-//    gZZZZZ = gYYYYY + gVar
-//  end
 }
 
 //-----------------------------------------------------------------------------*
