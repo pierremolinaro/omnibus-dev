@@ -19,8 +19,6 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   switch self
   case register (@string name) :
     ioAccessibleEntities.mAccessibleRegisterSet += !name
-  case globalConstant (@string name) :
-    ioAccessibleEntities.mGlobalConstantSet += !name
   case globalVariable (@string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   case localVariable (@string unused name) :

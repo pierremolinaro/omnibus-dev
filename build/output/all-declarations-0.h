@@ -11563,7 +11563,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_register,
-    kEnum_globalConstant,
     kEnum_globalVariable,
     kEnum_localVariable,
     kEnum_inArgument,
@@ -11601,9 +11600,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_variableKindIR constructor_globalConstant (const class GALGAS_string & inOperand0
-                                                                    COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_variableKindIR constructor_globalVariable (const class GALGAS_string & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -11650,10 +11646,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_string & outArgument0,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_string & outArgument0,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
@@ -11706,8 +11698,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalConstant (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInArgument (LOCATION_ARGS) const ;

@@ -153,22 +153,6 @@ class cEnumAssociatedValues_variableKindIR_register : public cEnumAssociatedValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_variableKindIR_globalConstant : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_globalConstant (const GALGAS_string & inAssociatedValue0
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_globalConstant (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 class cEnumAssociatedValues_variableKindIR_globalVariable : public cEnumAssociatedValues {
   public : const GALGAS_string mAssociatedValue0 ;
 

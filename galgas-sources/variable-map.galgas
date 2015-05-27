@@ -6,7 +6,6 @@
 
 enum @variableKindIR {
   case register (@string name)
-  case globalConstant (@string name)
   case globalVariable (@string name)
   case localVariable (@string name)
   case inArgument (@string name)
@@ -25,8 +24,6 @@ enum @variableKindIR {
 getter @variableKindIR isStatic -> @bool outResult {
   switch self
   case register (*) :
-    outResult = false
-  case globalConstant (*) :
     outResult = false
   case globalVariable (*) :
     outResult = false
