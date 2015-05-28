@@ -3960,6 +3960,17 @@ GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::reader_re
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_semanticTypePrecedenceGraph::method_circularities (GALGAS_declarationListAST & outInfoList,
+                                                               GALGAS_lstringlist & outKeyList
+                                                               COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_declarationListAST (infoList) ;
+  GALGAS_declarationListAST::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoSuccessor (GALGAS_declarationListAST & outInfoList,
                                                                       GALGAS_lstringlist & outKeyList
                                                                       COMMA_LOCATION_ARGS) const {

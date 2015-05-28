@@ -17165,6 +17165,17 @@ GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::reader_revers
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_subprogramInvocationGraph::method_circularities (GALGAS_lstringlist & outInfoList,
+                                                             GALGAS_lstringlist & outKeyList
+                                                             COMMA_LOCATION_ARGS) const {
+  cSharedList * infoList = NULL ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+  GALGAS_lstringlist::detachSharedList (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_subprogramInvocationGraph::method_nodesWithNoSuccessor (GALGAS_lstringlist & outInfoList,
                                                                     GALGAS_lstringlist & outKeyList
                                                                     COMMA_LOCATION_ARGS) const {

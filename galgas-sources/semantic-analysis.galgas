@@ -139,13 +139,13 @@ proc semanticAnalysis
     end
   end
 #--- Print procedure invocation graph
-  if @uint.errorCount == 0 then
+  if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
     let s = [temporaries.mSubprogramInvocationGraph graphviz]
     let filePath = [inSourceFile stringByDeletingPathExtension] + ".subprogramInvocation.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #--- Check procedure invocation graph
-  if @uint.errorCount == 0 then
+  if (@uint.errorCount == 0) && not [option plm_options.doNotDetectRecursiveCalls value] then
     let undefinedNodeKeyList = [temporaries.mSubprogramInvocationGraph undefinedNodeKeyList]
     if [undefinedNodeKeyList length] > 0 then
         var s = "subprogram invocation graph error, undefined nodes:"
@@ -154,9 +154,7 @@ proc semanticAnalysis
         end
         error inEndOfSourceFile : s
     else
-      [temporaries.mSubprogramInvocationGraph topologicalSort
-         ?let @lstringlist unused sortedInformationList
-         ?let @lstringlist unused sortedLKeyList
+      [temporaries.mSubprogramInvocationGraph circularities
          ?let @lstringlist unused unsortedInformationList
          ?let @lstringlist unsortedLKeyList
       ]

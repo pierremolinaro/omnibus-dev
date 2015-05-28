@@ -2596,11 +2596,23 @@ GALGAS_generalizedTypeEnumAST GALGAS_generalizedTypeEnumAST::extractObject (cons
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
+C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ("plm_options",
+                                         "doNotDetectRecursiveCalls",
+                                         114,
+                                         "do-not-detect-recursive-calls",
+                                         "Do not detect recursive calls") ;
+
 C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ("plm_options",
                                          "noExceptionGeneration",
                                          0,
                                          "no-exception-generation",
                                          "Do not generate exception code") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ("plm_options",
+                                         "writeRoutineInvocationGraphFile",
+                                         105,
+                                         "write-routine-invocation-graph-file",
+                                         "Write routine invocation graph file") ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4387,42 +4399,48 @@ void routine_semanticAnalysis (const GALGAS_string constinArgument_inSourceFile,
     }
     enumerator_4292.gotoNextObject () ;
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 142)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_3) {
+  GALGAS_bool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 142)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_3.boolEnum ()) {
+    test_3 = GALGAS_bool (gOption_plm_5F_options_writeRoutineInvocationGraphFile.reader_value ()) ;
+  }
+  const enumGalgasBool test_4 = test_3.boolEnum () ;
+  if (kBoolTrue == test_4) {
     GALGAS_string var_s = var_temporaries.mAttribute_mSubprogramInvocationGraph.reader_graphviz (SOURCE_FILE ("semantic-analysis.galgas", 143)) ;
     GALGAS_string var_filePath = constinArgument_inSourceFile.reader_stringByDeletingPathExtension (SOURCE_FILE ("semantic-analysis.galgas", 144)).add_operation (GALGAS_string (".subprogramInvocation.dot"), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 144)) ;
-    GALGAS_bool joker_6081 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_6081, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 145)) ;
+    GALGAS_bool joker_6145 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (var_filePath, joker_6145, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 145)) ;
   }
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 148)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_4) {
+  GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-analysis.galgas", 148)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  if (kBoolTrue == test_5.boolEnum ()) {
+    test_5 = GALGAS_bool (gOption_plm_5F_options_doNotDetectRecursiveCalls.reader_value ()).operator_not (SOURCE_FILE ("semantic-analysis.galgas", 148)) ;
+  }
+  const enumGalgasBool test_6 = test_5.boolEnum () ;
+  if (kBoolTrue == test_6) {
     GALGAS_stringlist var_undefinedNodeKeyList = var_temporaries.mAttribute_mSubprogramInvocationGraph.reader_undefinedNodeKeyList (SOURCE_FILE ("semantic-analysis.galgas", 149)) ;
-    const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, var_undefinedNodeKeyList.reader_length (SOURCE_FILE ("semantic-analysis.galgas", 150)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-    if (kBoolTrue == test_5) {
+    const enumGalgasBool test_7 = GALGAS_bool (kIsStrictSup, var_undefinedNodeKeyList.reader_length (SOURCE_FILE ("semantic-analysis.galgas", 150)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    if (kBoolTrue == test_7) {
       GALGAS_string var_s = GALGAS_string ("subprogram invocation graph error, undefined nodes:") ;
-      cEnumerator_stringlist enumerator_6410 (var_undefinedNodeKeyList, kEnumeration_up) ;
-      while (enumerator_6410.hasCurrentObject ()) {
+      cEnumerator_stringlist enumerator_6536 (var_undefinedNodeKeyList, kEnumeration_up) ;
+      while (enumerator_6536.hasCurrentObject ()) {
         var_s.dotAssign_operation (GALGAS_string ("\n"
-          " - ").add_operation (enumerator_6410.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 153))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 153)) ;
-        enumerator_6410.gotoNextObject () ;
+          " - ").add_operation (enumerator_6536.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 153))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 153)) ;
+        enumerator_6536.gotoNextObject () ;
       }
       inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 155)) ;
-    }else if (kBoolFalse == test_5) {
-      GALGAS_lstringlist var_sortedInformationList ;
-      GALGAS_lstringlist var_sortedLKeyList ;
+    }else if (kBoolFalse == test_7) {
       GALGAS_lstringlist var_unsortedInformationList ;
       GALGAS_lstringlist var_unsortedLKeyList ;
-      var_temporaries.mAttribute_mSubprogramInvocationGraph.method_topologicalSort (var_sortedInformationList, var_sortedLKeyList, var_unsortedInformationList, var_unsortedLKeyList, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 157)) ;
-      const enumGalgasBool test_6 = GALGAS_bool (kIsStrictSup, var_unsortedLKeyList.reader_length (SOURCE_FILE ("semantic-analysis.galgas", 163)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-      if (kBoolTrue == test_6) {
+      var_temporaries.mAttribute_mSubprogramInvocationGraph.method_circularities (var_unsortedInformationList, var_unsortedLKeyList COMMA_SOURCE_FILE ("semantic-analysis.galgas", 157)) ;
+      const enumGalgasBool test_8 = GALGAS_bool (kIsStrictSup, var_unsortedLKeyList.reader_length (SOURCE_FILE ("semantic-analysis.galgas", 161)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_8) {
         GALGAS_string var_s = GALGAS_string ("the following routines are recursive:") ;
-        cEnumerator_lstringlist enumerator_6914 (var_unsortedLKeyList, kEnumeration_up) ;
-        while (enumerator_6914.hasCurrentObject ()) {
+        cEnumerator_lstringlist enumerator_6933 (var_unsortedLKeyList, kEnumeration_up) ;
+        while (enumerator_6933.hasCurrentObject ()) {
           var_s.dotAssign_operation (GALGAS_string ("\n"
-            " - ").add_operation (enumerator_6914.current_mValue (HERE).reader_string (SOURCE_FILE ("semantic-analysis.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 166))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 166)) ;
-          enumerator_6914.gotoNextObject () ;
+            " - ").add_operation (enumerator_6933.current_mValue (HERE).reader_string (SOURCE_FILE ("semantic-analysis.galgas", 164)), inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 164))  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 164)) ;
+          enumerator_6933.gotoNextObject () ;
         }
-        inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 168)) ;
+        inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("semantic-analysis.galgas", 166)) ;
       }
     }
   }
@@ -7672,10 +7690,20 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "proc printUnsigned $user @noWarningIfUnused (\?inValue : UInt32) {\n"
-  "  if inValue > 9 then\n"
-  "    printUnsigned (!inValue / 10)\n"
+  "  var divisor : UInt32 = 1_000_000_000\n"
+  "  var value = inValue\n"
+  "  var isPrinting = false\n"
+  "  while divisor > 0 do\n"
+  "    if isPrinting or (value >= divisor) then\n"
+  "      writeData_inUserMode (!0x30 + ((value / divisor) \\ UInt8))\n"
+  "      value = value % divisor\n"
+  "      isPrinting = true\n"
+  "    end\n"
+  "    divisor = divisor / 10\n"
   "  end\n"
-  "  writeData_inUserMode (!0x30 + ((inValue % 10) &\\ UInt8))\n"
+  "  if not isPrinting then\n"
+  "    writeData_inUserMode (!0x30)\n"
+  "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -7787,10 +7815,20 @@ const char * gWrapperFileContent_2_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "proc printUnsignedInExceptionMode $exception @noWarningIfUnused (\?inValue : UInt32) {\n"
-  "  if inValue > 9 then\n"
-  "    printUnsignedInExceptionMode (!inValue &/ 10)\n"
+  "  var divisor : UInt32 = 1_000_000_000\n"
+  "  var value = inValue\n"
+  "  var isPrinting = false\n"
+  "  while divisor > 0 do\n"
+  "    if isPrinting or (value >= divisor) then\n"
+  "      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\\ UInt8))\n"
+  "      value = value &% divisor\n"
+  "      isPrinting = true\n"
+  "    end\n"
+  "    divisor = divisor &/ 10\n"
   "  end\n"
-  "  writeDataInExceptionMode (!0x30 &+ ((inValue &% 10) &\\ UInt8))\n"
+  "  if not isPrinting then\n"
+  "    writeDataInExceptionMode (!0x30)\n"
+  "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -7867,7 +7905,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
-  15014, // Text length
+  15519, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
