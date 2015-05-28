@@ -17,10 +17,28 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   OC_GGS_CommandLineOption * option ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"doNotDetectRecursiveCalls"
+    commandChar:114
+    commandString:@"do-not-detect-recursive-calls"
+    comment:@"Do not detect recursive calls"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"noExceptionGeneration"
     commandChar:0
     commandString:@"no-exception-generation"
     comment:@"Do not generate exception code"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"writeRoutineInvocationGraphFile"
+    commandChar:105
+    commandString:@"write-routine-invocation-graph-file"
+    comment:@"Write routine invocation graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

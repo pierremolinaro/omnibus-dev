@@ -294,10 +294,20 @@ proc printSpaces $user @noWarningIfUnused (?inCount : UInt32) {
 //-----------------------------------------------------------------------------*
 
 proc printUnsigned $user @noWarningIfUnused (?inValue : UInt32) {
-  if inValue > 9 then
-    printUnsigned (!inValue / 10)
+  var divisor : UInt32 = 1_000_000_000
+  var value = inValue
+  var isPrinting = false
+  while divisor > 0 do
+    if isPrinting or (value >= divisor) then
+      writeData_inUserMode (!0x30 + ((value / divisor) \ UInt8))
+      value = value % divisor
+      isPrinting = true
+    end
+    divisor = divisor / 10
   end
-  writeData_inUserMode (!0x30 + ((inValue % 10) &\ UInt8))
+  if not isPrinting then
+    writeData_inUserMode (!0x30)
+  end
 }
 
 //-----------------------------------------------------------------------------*
@@ -409,10 +419,20 @@ proc writeDataInExceptionMode $exception @noWarningIfUnused (?inData : UInt8) {
 //-----------------------------------------------------------------------------*
 
 proc printUnsignedInExceptionMode $exception @noWarningIfUnused (?inValue : UInt32) {
-  if inValue > 9 then
-    printUnsignedInExceptionMode (!inValue &/ 10)
+  var divisor : UInt32 = 1_000_000_000
+  var value = inValue
+  var isPrinting = false
+  while divisor > 0 do
+    if isPrinting or (value >= divisor) then
+      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\ UInt8))
+      value = value &% divisor
+      isPrinting = true
+    end
+    divisor = divisor &/ 10
   end
-  writeDataInExceptionMode (!0x30 &+ ((inValue &% 10) &\ UInt8))
+  if not isPrinting then
+    writeDataInExceptionMode (!0x30)
+  end
 }
 
 //-----------------------------------------------------------------------------*
