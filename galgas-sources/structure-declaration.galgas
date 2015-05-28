@@ -208,6 +208,7 @@ override method @structureDeclaration semanticAnalysis
     @instructionListIR initInstructionGenerationList = {}
     @semanticTemporariesStruct ioTemporaries = 0
     [mInitExpression analyzeExpression
+      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
       !optionalReceiverType:.noReceiver
       !optionalTargetType:fieldType
       !context:inContext

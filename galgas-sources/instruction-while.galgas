@@ -55,6 +55,7 @@ override method @whileInstructionAST analyze
 #--- Analyze test expression
   @instructionListIR testInstructionGenerationList = {}
   [mTestExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext

@@ -38,6 +38,7 @@ override method @selfExpressionAST addDependenceEdgeForStaticExpression
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @selfExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext

@@ -146,6 +146,7 @@ override method @procCallInstructionAST analyze
       procCallEffectiveParameterListIR += !.input !mSelector !type !parameterAccess
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
+        !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
         !optionalReceiverType:inReceiverType
         !optionalTargetType:formal_mType
         !context:inContext

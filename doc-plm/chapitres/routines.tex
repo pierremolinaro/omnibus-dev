@@ -90,3 +90,9 @@ proc goto $user @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UIn
 \colorbox{red}{Doc à écrire.}
 
 
+\sectionLabel{Récursivité}{routinesRecursives}\index{Routines!recursives@récursives}
+
+Par défaut, le compilateur émet un message d'erreur si une ou plusieurs routines récursives sont détectées. L'option \texttt{-{}-do-not-detect-recursive-calls} permet d'inhiber cette recherche.
+
+L'option \texttt{-{}-routine-invocation-graph} permet d'obtenir un fichier contenant le graphe d'invocation, qui peut être affiché par le logiciel \texttt{graphviz}\index{graphviz}. Si le fichier source est \texttt{source.plm}, le fichier engendré s'appelle \texttt{source.subprogramInvocation.dot}.
+

@@ -3,6 +3,6 @@ option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noExceptionGeneration: '\0', "no-exception-generation" -> "Do not generate exception code"
 
-  @bool writeRoutineInvocationGraphFile : 'i', "write-routine-invocation-graph-file" -> "Write routine invocation graph file"
+  @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
 }

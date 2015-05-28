@@ -62,6 +62,7 @@ override method @methodCallInstructionAST analyze
 {
 #--- Analyze receiver expression
   [mReceiverExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
     !optionalTargetType:.null
     !context:inContext

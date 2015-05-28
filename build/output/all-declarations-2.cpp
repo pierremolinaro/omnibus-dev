@@ -2611,7 +2611,7 @@ C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ("plm_optio
 C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ("plm_options",
                                          "writeRoutineInvocationGraphFile",
                                          105,
-                                         "write-routine-invocation-graph-file",
+                                         "routine-invocation-graph",
                                          "Write routine invocation graph file") ;
 
 //---------------------------------------------------------------------------------------------------------------------*
