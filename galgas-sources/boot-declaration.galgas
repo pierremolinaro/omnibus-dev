@@ -58,11 +58,20 @@ method @bootList-element bootSemanticAnalysis
     error mBootLocation : "the $" + bootModeName () + " mode should be defined in order to use boot routines"
   end
   [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+#---
+  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineNameForInvocationGraph
+      !routineNameForInvocationGraph
+    ]
+  end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:routineNameForInvocationGraph
     !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:{!bootModeName ()}

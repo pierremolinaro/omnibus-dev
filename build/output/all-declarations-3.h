@@ -95,14 +95,15 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef void (*categoryMethodSignature_instructionAST_analyze) (const class cPtr_instructionAST * inObject,
-                                                                const class GALGAS_receiverType constinArgument0,
-                                                                const class GALGAS_semanticContext constinArgument1,
-                                                                const class GALGAS_stringset constinArgument2,
-                                                                const class GALGAS_bool constinArgument3,
-                                                                class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                class GALGAS_globalLiteralStringMap & ioArgument5,
-                                                                class GALGAS_variableMap & ioArgument6,
-                                                                class GALGAS_instructionListIR & ioArgument7,
+                                                                const class GALGAS_lstring constinArgument0,
+                                                                const class GALGAS_receiverType constinArgument1,
+                                                                const class GALGAS_semanticContext constinArgument2,
+                                                                const class GALGAS_stringset constinArgument3,
+                                                                const class GALGAS_bool constinArgument4,
+                                                                class GALGAS_semanticTemporariesStruct & ioArgument5,
+                                                                class GALGAS_globalLiteralStringMap & ioArgument6,
+                                                                class GALGAS_variableMap & ioArgument7,
+                                                                class GALGAS_instructionListIR & ioArgument8,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -114,6 +115,7 @@ void enterCategoryMethod_analyze (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
+                                 const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
                                  const GALGAS_receiverType constin_inReceiverType,
                                  const GALGAS_semanticContext constin_inContext,
                                  const GALGAS_stringset constin_inModeSet,
@@ -132,6 +134,7 @@ void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
+                                                  const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
                                                   class GALGAS_location in_inEndOfInstructionList,
                                                   const class GALGAS_receiverType constin_inReceiverType,
                                                   const class GALGAS_semanticContext constin_inContext,
@@ -151,6 +154,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_lstring constin_inRoutineNameForInvocationGraph,
                                                    const class GALGAS_receiverType constin_inReceiverType,
                                                    const class GALGAS_semanticContext constin_inContext,
                                                    const class GALGAS_stringset constin_inModeSet,

@@ -47,12 +47,12 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <comparison> !@expressionAST outExpression {
-    <additive_expression> ?outExpression
+    <conversion> ?outExpression
     select
     or
       $==$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -62,7 +62,7 @@ syntax extension common_syntax {
     or
       $!=$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -72,7 +72,7 @@ syntax extension common_syntax {
     or
       $<=$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -82,7 +82,7 @@ syntax extension common_syntax {
     or
       $>=$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -92,7 +92,7 @@ syntax extension common_syntax {
     or
       $<$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
@@ -102,11 +102,39 @@ syntax extension common_syntax {
     or
       $>$
       let operatorLocation = @location.here
-      <additive_expression> ?let rightExpression
+      <conversion> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
         !.strictSup
+        !rightExpression
+      }
+    end
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <shift_expression> !@expressionAST outExpression {
+    <additive_expression> ?outExpression
+    repeat
+    while
+      $<<$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.leftShiftOp
+        !rightExpression
+      }
+    while
+      $>>$
+      let operatorLocation = @location.here
+      <additive_expression> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.rightShiftOp
         !rightExpression
       }
     end
@@ -195,26 +223,6 @@ syntax extension common_syntax {
         !outExpression
         !operatorLocation
         !.booleanOrOp
-        !rightExpression
-      }
-    while
-      $<<$
-      let operatorLocation = @location.here
-      <multiplicative_expression> ?let rightExpression
-      outExpression = @infixOperatorExpressionAST.new {
-        !outExpression
-        !operatorLocation
-        !.leftShiftOp
-        !rightExpression
-      }
-    while
-      $>>$
-      let operatorLocation = @location.here
-      <multiplicative_expression> ?let rightExpression
-      outExpression = @infixOperatorExpressionAST.new {
-        !outExpression
-        !operatorLocation
-        !.rightShiftOp
         !rightExpression
       }
     end

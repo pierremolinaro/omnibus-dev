@@ -81,6 +81,7 @@ list @procEffectiveParameterList {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @procCallInstructionAST analyze
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -102,7 +103,7 @@ override method @procCallInstructionAST analyze
     case outputInput (*) :
       procMangledName += "?!" ;
     end
-    procMangledName += mSelector.string
+    procMangledName += mSelector.string + ":"
   end
 #--- Search proc in proc map
   [inContext.mProcedureMap searchKey
@@ -111,6 +112,11 @@ override method @procCallInstructionAST analyze
     ?let procedureModeMap
     ?let @procedureSignature procSignature
     ?*
+  ]
+#--- Enter in invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+    !inRoutineNameForInvocationGraph
+    !.new {!"proc " + procMangledName !mProcRoutineName.location}
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}

@@ -204,7 +204,7 @@ func mangledName
     case output : outMangledName += "!"
     case inputOutput : outMangledName += "?!"
     end
-    outMangledName += selector.string
+    outMangledName += selector.string + ":"
   end
 }
 
@@ -290,6 +290,12 @@ list @procFormalArgumentListForGeneration {
   @procFormalArgumentPassingMode mFormalArgumentKind
   @unifiedTypeMap-proxy mFormalArgumentType
   @string mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+graph @subprogramInvocationGraph (@lstringlist) {
+  insert addNode error message "the '%K' subprogram is already declared at %L"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -385,7 +391,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     end%if
   end
 #--- Analyse formal arguments
-  for (argumentKind * formalArgumentTypeName formalArgumentName) in mProcFormalArgumentList do
+  for (argumentKind selector formalArgumentTypeName formalArgumentName) in mProcFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     switch argumentKind
     case input :
@@ -423,9 +429,18 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!name:formalArgumentName.string)
     end
   end
+#--- Enter subprogram invocation graph
+  let procNameForInvocationGraph = @lstring.new {!"proc " + [self mangledName] !mProcedureName.location}
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !procNameForInvocationGraph
+      !mProcedureName
+    ]
+  end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:procNameForInvocationGraph
     !optionalReceiverType:receiverType
     !context:inContext
     !modes:procedureModeSet

@@ -7,4 +7,19 @@
 
 \chapter{Expressions}
 
-\colorbox{red}{Doc à écrire.}
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{llll}
+  \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire} & \textbf{Lien} \\
+  \hline
+   0 (le plus prioritaire) & \plm+~+, \plm+-+, \plm+&-+, \plm+not+ & Opérateurs préfixés & \\
+   1 & \plm+&+, \plm+*+, \plm+&*+, \plm-%-, \plm-&%-, \plm+/+, \plm+&/+, \plm+and+ & Opérateurs Multiplicatifs & \\
+   2 & \plm+|+, \plm+^+, \plm-+-, \plm-&+-, \plm+-+, \plm+&-+, \plm+or+, \plm+xor+ & Opérateurs additifs & \\
+   3 & \plm+<<+, \plm+>>+ & Décalage & \\
+   4 & \plm=\=, \plm=&\= & Conversion &\\
+   5 (le moins prioritaire) & \plm+==+, \plm+!=+, \plm+<=+, \plm+<+, \plm+>=+, \plm+>+ & Comparaison & \\
+\end{tabular}
+\caption{Priorité des opérateurs}\index{Operateur@Opérateur!Priorite@Priorité}
+\labelTableau{tableauPrioriteOperateurs}
+\end{table}
