@@ -92,11 +92,14 @@ Lors de l'occurrence d'une exception, l'exécution séquentielle des instruction
 \end{itemize}
 Ce fonctionnement est illustré à \refFigure{}{sequenceException}.
 
-Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans l'ordre de leurs prioritées relatives. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
+Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
 
-Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans l'ordre de leurs prioritées relatives. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
+Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
 
-\subsection{Routines d'exception \texttt{setup} et \texttt{loop}}\index{exception loop@\plm=exception loop=}\index{exception setup@\plm=exception setup=}
+\subsection{Routines d'exception \texttt{setup} et \texttt{loop}}
+\index{exception loop@\plm=exception loop=}
+\index{exception setup@\plm=exception setup=}
+\index{Routine!exception@\plm=exception=}
 
 Leur syntaxe est la suivante :
 \begin{PLM}
