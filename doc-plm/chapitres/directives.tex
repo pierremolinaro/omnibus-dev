@@ -9,12 +9,27 @@
 
 
 
-\section{Directive \texttt{target}}\index{target@\plm=target=}
+\sectionLabel{Directive \texttt{target}}{directiveTarget}\index{target@\plm=target=}
+
+La directive \plm=target= fixe la cible pour laquelle le code source est compilé. Sa syntaxe est la suivante :
+\begin{PLM}
+target "cible.plms"
+\end{PLM} 
+Où \plm="cible.plms"= est le nom du descriptif de la cible.
+
+L'extension \texttt{.plms} doit être mentionnée dans le descriptif.
 
 
 
+\sectionLabel{Directive \texttt{import}}{directiveImport}\index{import@\plm=import=}
 
 
-\section{Directive \texttt{import}}\index{import@\plm=import=}
+La directive \plm=import= permet d'ajouter les définitions contenues dans le fichier texte nommé. Sa syntaxe est la suivante :
+\begin{PLM}
+import "chemin.plm"
+\end{PLM} 
+Où \plm="chemin.plm"= est un chemin (absolu, relatif) vers le fichier à importer.
 
+Importer plusieurs fois le même fichier n'est pas une erreur. Le compilateur garde trace des importations déjà effectuées et ignore les importations des fichiers déjà importés.
 
+L'extension \texttt{.plm} doit être mentionnée dans le chemin.

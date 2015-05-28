@@ -37,6 +37,7 @@ var v : Int8 = 128 // Erreur de compilation :
 \end{PLM}
 
 \colorbox{red}{Erreur à corriger}
+
 \begin{PLM}
 var v : Int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
@@ -55,6 +56,8 @@ var v : Int32 = 28 // Ok
 
 
 \section{Conversion entre valeurs entières}
+
+\colorbox{red}{À compléter}
 
 \subsection{Conversions implicites silencieuses}
 Les conversions qui sont toujours possibles sans débordement sont acceptées silencieusement. Par exemple :
@@ -165,7 +168,10 @@ L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection d
 
 
 
-\section{Opérateurs infixes bit-à-bit}
+\sectionLabel{Opérateurs infixes bit-à-bit}{operateurBitABitEntier}
+\index{\&!Entier}
+\index{\textbar!Entier}
+\index{\^!Entier}
 
 Les opérateurs infixes bit-à-bit acceptent les types entiers non signés (\refTableau{operateursInfixesBitABit}).
 
@@ -210,3 +216,49 @@ Les opérateurs infixes \plm=<<= et \plm=>>= réalisent respectivement le décal
 \labelTableau{operateursInfixesDecalage}
 \ligne
 \end{table}
+
+
+
+\sectionLabel {Incrémentation et décrémentation}{incDecEntier}
+\index{Incrementation@Incrémentation!Entier}
+\index{Decrementation@Decrémentation!Entier}
+
+Les opérateurs postfixés \plm=++= et \plm=--= réalisent respectivement l'incrémentation et la décrémentation. Ils s'utilisent dans une instruction :
+\begin{PLM}
+variable ++
+\end{PLM}
+
+\plm=++= et \plm=--= déclenchent une exception (dont le code est donné par le \refTableauPage{tableauCodeExceptions}) en cas de débordement de capacité :
+\begin{PLM}
+var variable : UInt8 = 255
+variable ++ // Déclenchement d'une exception
+\end{PLM}
+
+Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :
+\begin{PLM}
+var variable : UInt8 = 255
+variable &++ // variable vaut 0
+\end{PLM}
+
+
+
+
+
+
+\sectionLabel{Opérateurs combinées avec une affectation}{operateursCombinesAffectationEntier}
+\index{\&=!Entier}
+\index{\textbar=!Entier}
+\index{\^{}=!Entier}
+
+Les trois opérateurs \plm!&=!, \plm!|=! et \plm!^=! sont définis pour les entiers.
+
+\plm!a &= b! est équivalent à \plm!a = a & b!.
+
+\plm!a |= b! est équivalent à \plm!a = a | b!.
+
+\plm!a ^= b! est équivalent à \plm!a = a ^ b!.
+
+Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sont décrits à la \refSectionPage{operateurBitABitEntier}.
+
+
+

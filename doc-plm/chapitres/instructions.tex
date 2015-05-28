@@ -101,20 +101,38 @@ Où :
 
 
 
-\section {Incrémentation et décrémentation}
+\section {Instructions d'incrémentation et de décrémentation}
+\index{Incrementation@Incrémentation!Instruction}
+\index{Decrementation@Decrémentation!Instruction}
+
+Les opérateurs postfixés \plm=++= et \plm=--= réalisent respectivement l'incrémentation et la décrémentation de la variable nommée dans l'instruction :
+\begin{PLM}
+variable ++
+\end{PLM}
+
+\plm=++= et \plm=--= engendrent une exception sur dépassement de capacité.
+
+Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité.
+
+Les instructions d'incrémentation et de décrémentation de variables entières sont détaillées à la \refSectionPage{incDecEntier}.
 
 
 
 
 
 
+\sectionLabel {Opérateurs combinés avec une affectation}{operateursCombinesAffectation}
+\index{\&=}
+\index{\textbar=}
+\index{\^{}=}
 
+\plm!a &= b! est équivalent à \plm!a = a & b!.
 
+\plm!a |= b! est équivalent à \plm!a = a | b!.
 
+\plm!a ^= b! est équivalent à \plm!a = a ^ b!.
 
-
-\section {Opérateurs combinés avec une affectation}
-
+Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sur les entiers sont décrits à la \refSectionPage{operateursCombinesAffectationEntier}.
 
 
 \sectionLabel{Instruction \texttt{check}}{directiveCheck}\index{check@\plm=check=}
