@@ -18,7 +18,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <conversion> !@expressionAST outExpression {
-    <comparison> ?outExpression
+    <shift_expression> ?outExpression
     let endOfExpression = @location.here
     select
     or

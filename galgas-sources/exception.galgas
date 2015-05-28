@@ -116,9 +116,21 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     ![inContext.mExceptionLineType copiable]
     !{}
   ]
+#---
+  let routineNameForInvocationGraph = @lstring.new  {
+    !"exception " + mExceptionClauseName + " " + mPriority
+    !mExceptionClauseName.location
+  }
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineNameForInvocationGraph
+      !routineNameForInvocationGraph
+    ]
+  end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mExceptionInstructionList analyzeRoutineInstructionList
+    !routineNameForInvocationGraph:routineNameForInvocationGraph
     !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:{!exceptionModeName ()}

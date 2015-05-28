@@ -99,6 +99,7 @@ private proc compileProject
   #--- Semantic analysis
     if @uint.errorCount == 0 then
       semanticAnalysis (
+        !sourceFile:inSourceFile.string
         !ast:ast
         !context:semanticContext
         !endOfSourceFile:inEndOfSourceFile

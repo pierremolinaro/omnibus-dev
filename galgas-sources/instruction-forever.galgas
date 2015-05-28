@@ -35,6 +35,7 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @foreverInstructionAST analyze
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -48,6 +49,7 @@ override method @foreverInstructionAST analyze
   [!?ioVariableMap openOverrideForRepeatBlock]
   @instructionListIR instructionGenerationList = {}
   [mWhileInstructionList analyzeBranchInstructionList
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !optionalReceiverType:inReceiverType
     !context:inContext

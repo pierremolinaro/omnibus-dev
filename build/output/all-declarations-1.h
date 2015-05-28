@@ -4955,6 +4955,14 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_procFormalArgumentList & outArgument3,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'shift_expression' non terminal
+//--- 'parse' label
+  public : virtual void nt_shift_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_shift_5F_expression_ (GALGAS_expressionAST & outArgument0,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -5047,6 +5055,8 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_26 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_27 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_28 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5156,6 +5166,14 @@ class cGrammar_plms_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_procFormalArgumentList & outArgument3,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'shift_expression' non terminal
+//--- 'parse' label
+  public : virtual void nt_shift_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_shift_5F_expression_ (GALGAS_expressionAST & outArgument0,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -5248,6 +5266,8 @@ class cGrammar_plms_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_26 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_27 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_28 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

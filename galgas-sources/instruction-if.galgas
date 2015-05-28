@@ -67,6 +67,7 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @ifInstructionAST analyze
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
@@ -101,6 +102,7 @@ override method @ifInstructionAST analyze
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfThenInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext
@@ -114,6 +116,7 @@ override method @ifInstructionAST analyze
 #--- Analyze 'else' instruction list
   @instructionListIR elseInstructionGenerationList = {}
   [mElseInstructionList analyzeBranchInstructionList
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !endOfInstructionList:mEndOfElseInstructionList
     !optionalReceiverType:inReceiverType
     !context:inContext

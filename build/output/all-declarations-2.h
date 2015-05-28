@@ -964,6 +964,7 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
   public : GALGAS_exceptionRoutinePriorityMap mAttribute_mExceptionLoopRoutinePriorityMap ;
   public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
   public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
+  public : GALGAS_subprogramInvocationGraph mAttribute_mSubprogramInvocationGraph ;
 
 
 //--------------------------------- Accessors
@@ -984,7 +985,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
                                              const GALGAS_exceptionRoutinePriorityMap & in_mExceptionSetupRoutinePriorityMap,
                                              const GALGAS_exceptionRoutinePriorityMap & in_mExceptionLoopRoutinePriorityMap,
                                              const GALGAS_initRoutinePriorityMap & in_mInitRoutinePriorityMap,
-                                             const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap) ;
+                                             const GALGAS_bootRoutinePriorityMap & in_mBootRoutinePriorityMap,
+                                             const GALGAS_subprogramInvocationGraph & in_mSubprogramInvocationGraph) ;
 
 //-- Start of generic part --*
 
@@ -1001,7 +1003,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
                                                                     const class GALGAS_exceptionRoutinePriorityMap & inOperand1,
                                                                     const class GALGAS_exceptionRoutinePriorityMap & inOperand2,
                                                                     const class GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4
+                                                                    const class GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                    const class GALGAS_subprogramInvocationGraph & inOperand5
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1023,6 +1026,8 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_exceptionRoutinePriorityMap reader_mExceptionSetupRoutinePriorityMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initRoutinePriorityMap reader_mInitRoutinePriorityMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_subprogramInvocationGraph reader_mSubprogramInvocationGraph (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mTemporaryIndex (LOCATION_ARGS) const ;
 
@@ -1233,11 +1238,12 @@ void routine_checkAssignmentCompatibility (const class GALGAS_unifiedTypeMap_2D_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_semanticAnalysis (const class GALGAS_ast constinArgument0,
-                               const class GALGAS_semanticContext constinArgument1,
-                               const class GALGAS_location constinArgument2,
-                               const class GALGAS_globalLiteralStringMap constinArgument3,
-                               class GALGAS_intermediateCodeStruct & outArgument4,
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_semanticContext constinArgument2,
+                               const class GALGAS_location constinArgument3,
+                               const class GALGAS_globalLiteralStringMap constinArgument4,
+                               class GALGAS_intermediateCodeStruct & outArgument5,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

@@ -82,7 +82,7 @@ proc systickHandler $isr @weak () {
 proc userSystickHandler $isr @weak () {
 }
 
-proc waitMS $user $init  (?inDuration : UInt32) {
+proc waitMS $user $init (?inDuration : UInt32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
