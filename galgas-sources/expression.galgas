@@ -42,6 +42,7 @@ enum @receiverType {
 #----------------------------------------------------------------------------------------------------------------------*
 
 abstract method @expressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
   ?context:let @semanticContext inContext

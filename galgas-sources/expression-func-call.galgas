@@ -51,6 +51,7 @@ override method @functionCallInExpressionAST addDependenceEdgeForStaticExpressio
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @functionCallInExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -69,12 +70,22 @@ override method @functionCallInExpressionAST analyzeExpression
     ?let formalParameterList
     ?outExpressionType
   ]
+#--- Mangled name
+  var mangledName = mFunctionVarName.string
+  for actual in mParameterList do
+    mangledName += "?" + actual.mSelector + ":"
+  end
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet
     !possibleModes:[functionModeSet keySet]
     !error:mFunctionVarName.location
   )
+#--- Enter in invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+    !inRoutineNameForInvocationGraph
+    !.new {!"func " + mangledName !mFunctionVarName.location}
+  ]
 #---
   @variableListIR variableList = {}
   var s = mangledNameForFunction (!name:mFunctionVarName.string) + " ("
@@ -92,6 +103,7 @@ override method @functionCallInExpressionAST analyzeExpression
         error actual.mSelector : "required selector: " + s
       end
       [actual.mExpression analyzeExpression
+        !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
         !optionalReceiverType:.noReceiver
         !optionalTargetType:formal.mArgumentType
         !context:inContext

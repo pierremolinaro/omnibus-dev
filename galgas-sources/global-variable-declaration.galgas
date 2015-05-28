@@ -83,6 +83,7 @@ override method @globalVarDeclaration enterInContext
     @instructionListIR instructionGenerationList = {}
     @variableMap variableMap = variableMapWithConstants (!context:ioContext)
     [mSourceExpression analyzeExpression
+       !routineNameForInvocationGraph:["compiler" nowhere]
        !optionalReceiverType:.noReceiver
        !optionalTargetType:variableType
        !context:ioContext

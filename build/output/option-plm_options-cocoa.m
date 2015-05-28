@@ -37,7 +37,7 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     initWithDomainName:@"plm_options"
     identifier:@"writeRoutineInvocationGraphFile"
     commandChar:105
-    commandString:@"write-routine-invocation-graph-file"
+    commandString:@"routine-invocation-graph"
     comment:@"Write routine invocation graph file"
     defaultValue:@""
   ] ;

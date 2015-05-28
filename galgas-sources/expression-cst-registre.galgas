@@ -67,6 +67,7 @@ override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExp
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @registerConstantInExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -100,6 +101,7 @@ override method @registerConstantInExpressionAST analyzeExpression
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @registerIntegerExpInExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -132,6 +134,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   end
 #--- Analyze expression
   [mExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext

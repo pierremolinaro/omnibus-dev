@@ -355,6 +355,7 @@ method @infixOperatorMap checkWith
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @infixOperatorExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
@@ -369,6 +370,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 {
 #--- Analyze left expression
   [mLeftExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
     !optionalTargetType:inOptionalTargetType
     !context:inContext
@@ -383,6 +385,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ]
 #--- Analyze right expression
   [mRightExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
     !optionalTargetType:leftExpressionType
     !context:inContext
