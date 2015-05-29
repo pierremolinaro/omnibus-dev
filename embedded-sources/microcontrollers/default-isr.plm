@@ -71,7 +71,7 @@ init 0 { // Configure Systick interrupt every ms
 }
 
 var gCompteur : UInt32 = 0 {
-  proc systickHandler ()
+  @rw proc systickHandler ()
   proc waitMS (?inDuration : UInt32)
   proc busyWaitingDuringMS (?inDuration : UInt32)
 }

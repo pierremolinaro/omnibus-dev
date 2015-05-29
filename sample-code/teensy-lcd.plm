@@ -10,7 +10,7 @@ proc setup $user () {
 let cst : UInt32 = 2
 
 var gClignotement : UInt32 = cst {
-  proc userSystickHandler ()
+  @rw proc userSystickHandler ()
 }
 
 //-----------------------------------------------------------------------------*
@@ -28,7 +28,7 @@ proc userSystickHandler $isr () {
 //-----------------------------------------------------------------------------*
 
 var gVar : Int8 = 0 {
-  proc loop ()
+  @rw proc loop ()
 }
 
 //-----------------------------------------------------------------------------*

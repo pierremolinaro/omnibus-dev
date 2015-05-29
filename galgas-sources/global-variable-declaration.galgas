@@ -3,6 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @allowedProcList {
+  @bool mHasWriteAccess
   @lstring mProcName
   @procFormalArgumentList mProcFormalArgumentList
 }
@@ -34,10 +35,20 @@ syntax extension common_syntax {
     @allowedProcList allowedProcList = {}
     ${$
     repeat
+      @bool hasWriteAccess
+      select
+        hasWriteAccess = false
+      or
+        $attribute$ ?let attribute
+        if attribute.string != "rw" then
+          error attribute: "attribute should be @rw"
+        end
+        hasWriteAccess = true
+      end
       $proc$
       $identifier$ ?let procName
       <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList procFormalArgumentList
-      allowedProcList += !procName !procFormalArgumentList
+      allowedProcList += !hasWriteAccess !procName !procFormalArgumentList
     while
     end
     $}$
@@ -57,7 +68,7 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @allowedProcedureMap {
-
+  @bool mHasWriteAccess
   insert insertKey error message "the '%K' proc is already declared in %L"
   search searchKey error message "there is no '%K' proc"
 }
@@ -123,7 +134,7 @@ method @globalVarDeclarationList-element enterInContext
       for () in procedureModeMap do
         executionModes += !lkey.string
       end
-      [!?allowedProcedureMap  insertKey !allowedProcMangledNameWithLocation]
+      [!?allowedProcedureMap insertKey !allowedProcMangledNameWithLocation !mHasWriteAccess]
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
