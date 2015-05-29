@@ -48,7 +48,7 @@ override method @assignmentInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?6*
+    ?5*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -65,14 +65,6 @@ override method @assignmentInstructionAST analyze
     ?expressionType:let expressionType
     ?result:@variableKindIR sourceValueName
   ]
-#--- Check inferred type
-#  if [targetType key] != [expressionType key] then
-#    error mTargetVarName : "source expression type is '" + [expressionType key]
-#      + "', and is not compatible with target type '" + [targetType key] + "'"
-#  end
-#  if mTargetVarName.string == "x" then
-#  log expressionType, targetType
-#  end
   checkAssignmentCompatibility (
     !sourceType:expressionType
     !targetType:targetType
@@ -82,7 +74,6 @@ override method @assignmentInstructionAST analyze
   [!?ioVariableMap searchForWriteAccess
     !mTargetVarName
     ?*
-    ?let varModeSet
     ?let accessIsAllowed
     ?let unused targetVar
     ?let targetVariableKind
@@ -92,12 +83,6 @@ override method @assignmentInstructionAST analyze
   if not accessIsAllowed then
     error mTargetVarName : "routine has no access right on the this variable"
   end
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:varModeSet
-    !error:mTargetVarName.location
-  )
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end

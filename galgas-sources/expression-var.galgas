@@ -47,7 +47,7 @@ override method @varInExpressionAST analyzeExpression
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext unused inContext
-  ?modes:let @stringset inModeSet
+  ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
@@ -60,7 +60,6 @@ override method @varInExpressionAST analyzeExpression
   [!?ioVariableMap searchForReadAccess
     !mSourceVarName
     ?let variableType
-    ?let varModeSet
     ?let accessIsAllowed
     ?let unused varAccess
     ?@variableKindIR resultingVariable
@@ -70,12 +69,6 @@ override method @varInExpressionAST analyzeExpression
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on the this variable"
   end
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:varModeSet
-    !error:mSourceVarName.location
-  )
 #--- Solve inferred type
   outExpressionType = solveInferredType (
     !targetType:inOptionalTargetType

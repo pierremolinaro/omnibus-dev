@@ -107,7 +107,6 @@ override method @varInstructionWithAssignmentAST analyze
   [!?ioVariableMap insertDefinedLocalVariable
     !mVarName
     !targetType
-    !inModes
     !true
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar
@@ -128,7 +127,7 @@ override method @varInstructionAST analyze
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModes
+  ?modes:let @stringset unused inModes
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
@@ -141,7 +140,6 @@ override method @varInstructionAST analyze
   [!?ioVariableMap insertUndefinedLocalVariable
     !mVarName
     !targetType
-    !inModes
     !true
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetVar

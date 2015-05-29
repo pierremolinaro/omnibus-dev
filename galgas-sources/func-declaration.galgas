@@ -174,7 +174,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
   [!?variableMap insertOutputFormalArgument
     !mResultVarName
     !resultType
-    !functionModeSet
     !true
     !mResultVarName.string
     !.localVariable {!name:mResultVarName.string}
@@ -188,7 +187,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     [!?variableMap insertConstantInputFormalArgument
       !formalArgumentName
       !typeProxy
-      !functionModeSet
       !true
       !mangledNameForInArgument (!name:formalArgumentName.string)
       !.inArgument {!name:formalArgumentName.string}

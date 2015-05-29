@@ -362,7 +362,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         [!?variableMap insertDefinedLocalVariable
           !propertyName
           !propertyType
-          !procedureModeSet
           !true
           !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
@@ -382,7 +381,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         [!?variableMap insertUsedLocalConstant
           !propertyName
           !propertyType
-          !procedureModeSet
           !true
           !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
@@ -403,7 +401,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertConstantInputFormalArgument
         !formalArgumentName
         !typeProxy
-        !procedureModeSet
         !true
         !mangledNameForInArgument (!name:formalArgumentName.string)
         !.inArgument {!name:formalArgumentName.string}
@@ -415,7 +412,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertInputOutputFormalArgument
         !formalArgumentName
         !typeProxy
-        !procedureModeSet
         !true
         !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
         !.inOutArgument {!name:formalArgumentName.string}
@@ -427,7 +423,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
       [!?variableMap insertOutputFormalArgument
         !formalArgumentName
         !typeProxy
-        !procedureModeSet
         !true
         !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
         !.outArgument {!name:formalArgumentName.string}

@@ -94,7 +94,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   [!?variableMap insertUsedConstantInputFormalArgument
     !codeArg
     !inContext.mExceptionCodeType
-    !{!exceptionModeName ()}
     !true
     !mangledNameForInArgument (!name:codeArg.string)
     !.inArgument {!name:codeArg.string}
@@ -105,7 +104,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   [!?variableMap insertUsedConstantInputFormalArgument
     !fileArg
     !StaticStringType
-    !{!exceptionModeName ()}
     !true
     !mangledNameForInArgument (!name:fileArg.string)
     !.inArgument {!name:fileArg.string}
@@ -116,7 +114,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   [!?variableMap insertUsedConstantInputFormalArgument
     !lineArg
     !inContext.mExceptionLineType
-    !{!exceptionModeName ()}
     !true
     !mangledNameForInArgument (!name:lineArg.string)
     !.inArgument {!name:lineArg.string}

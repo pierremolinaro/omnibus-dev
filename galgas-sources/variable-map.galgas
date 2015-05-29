@@ -58,8 +58,6 @@ func initialVariableMap
   ?globalsAreConstant:@bool inGlobalsAreConstant
   -> @variableMap outVariableMap
 {
-#--- All mode set
-  let allModeSet = [inContext.mModeMap keySet] ;
 #--- Add registers
   outVariableMap = .emptyMap
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -68,7 +66,6 @@ func initialVariableMap
       [!?outVariableMap insertUsedLocalConstant
         !lkey
         !mType
-        !allModeSet
         !true
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
@@ -79,7 +76,6 @@ func initialVariableMap
       [!?outVariableMap insertDefinedLocalVariable
         !lkey
         !mType
-        !allModeSet
         !true
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
@@ -93,7 +89,6 @@ func initialVariableMap
     [!?outVariableMap insertUsedLocalConstant
       !constantName
       !constantType
-      !allModeSet
       !true
       !mangledNameForConstant (!name:constantName.string)
       !expressionCode
@@ -107,7 +102,6 @@ func initialVariableMap
       [!?outVariableMap insertUsedLocalConstant
         !variableName
         !variableType
-        !modeSet
         ![allowedProcedureMap hasKey !inMangledName]
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
@@ -118,7 +112,6 @@ func initialVariableMap
       [!?outVariableMap insertGlobalVariable
         !variableName
         !variableType
-        !modeSet
         ![allowedProcedureMap hasKey !inMangledName]
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
@@ -136,14 +129,11 @@ func variableMapWithConstants
   -> @variableMap outVariableMap
 {
   outVariableMap = .emptyMap
-#--- All mode set
-  let allModeSet = [inContext.mModeMap keySet] ;
 #--- Add global constants
   for (constantName constantType expressionCode) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedLocalConstant
       !constantName
       !constantType
-      !allModeSet
       !true
       !mangledNameForConstant (!name:constantName.string)
       !expressionCode
@@ -173,7 +163,6 @@ list @variableListIR {
 
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
-  @stringset mAcceptedModeSet
   @bool mAccessAllowed
   @string mCppName
   @variableKindIR mVariableKind
