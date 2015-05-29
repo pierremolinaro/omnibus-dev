@@ -70,7 +70,11 @@ init 0 { // Configure Systick interrupt every ms
   SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
 }
 
-var gCompteur $user $isr $init : UInt32 = 0
+var gCompteur : UInt32 = 0 {
+  proc systickHandler ()
+  proc waitMS (?inDuration : UInt32)
+  proc busyWaitingDuringMS (?inDuration : UInt32)
+}
 
 required proc systickHandler $isr ()
 

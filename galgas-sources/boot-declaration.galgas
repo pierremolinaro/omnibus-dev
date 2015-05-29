@@ -67,7 +67,11 @@ method @bootList-element bootSemanticAnalysis
     ]
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
+  @variableMap variableMap = initialVariableMap (
+    !routineMangledName:routineNameForInvocationGraph.string
+    !context:inContext
+    !globalsAreConstant:false
+  )
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [mInstructionList analyzeRoutineInstructionList

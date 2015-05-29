@@ -63,6 +63,7 @@ project (0:0:1) -> "plm" {
 
 #--- proc
   "galgas-sources/proc-declaration.galgas"
+  "galgas-sources/procedure-signature.galgas"
   "galgas-sources/required-proc-declaration.galgas"
 
 #--- Registers

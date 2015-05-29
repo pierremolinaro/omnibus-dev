@@ -57,6 +57,13 @@ proc semanticAnalysis
   for requiredProc in inAST.mRequiredProcList do
     outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
   end 
+#--- Global variables
+  for globalVar in inAST.mGlobalVarDeclarationList do
+    [globalVar semanticAnalysis
+      !context:inSemanticContext
+      !?intermediateCode:outIntermediateCodeStruct
+     ]
+  end
   for (declaration) in inAST.mDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext
@@ -100,44 +107,11 @@ proc semanticAnalysis
     ]
   end
 #--- Check required procedure are defined
-  for requiredProc in inAST.mRequiredProcList do
-    let requiredProcMangledName = mangledName (
-      !forProcedureKind:.standAloneProc
-      !procedureName:requiredProc.mRequiredProcedureName.string
-      !formalArgumentList:requiredProc.mProcFormalArgumentList
-    )
-    if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName] then
-      var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
-      for (mode) in requiredProc.mProcedureModeList do
-        s += " $" + mode
-      end
-      s += " " + requiredProc.mRequiredProcedureName
-      for arg in requiredProc.mProcFormalArgumentList do
-        s += " "
-        switch arg.mFormalArgumentPassingMode
-        case input : s += "?"
-        case output : s += "!"
-        case inputOutput : s += "?!"
-        end
-        if arg.mSelector.string != "" then
-          s += arg.mSelector.string + ":"
-        end
-        s += arg.mFormalArgumentTypeName.string
-      end
-      error inEndOfSourceFile : s
-    else
-      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procModes ?2*]
-      let actualProcModeSet = [procModes keySet]
-      let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
-      if actualProcModeSet != requiredProcModeSet then
-        var s = "required modes:"
-        for (mode) in requiredProcModeSet do
-          s += " $" + mode
-        end
-        error [inSemanticContext.mProcedureMap locationForKey !requiredProcMangledName] : s
-      end
-    end
-  end
+  checkRequiredProcedures (
+    !ast:inAST
+    !context:inSemanticContext
+    !endOfSourceFile:inEndOfSourceFile
+  )
 #--- Print procedure invocation graph
   if (@uint.errorCount == 0) && [option plm_options.writeRoutineInvocationGraphFile value] then
     let s = [temporaries.mSubprogramInvocationGraph graphviz]

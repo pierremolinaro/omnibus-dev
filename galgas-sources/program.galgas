@@ -79,8 +79,7 @@ private proc compileProject
   addPredefinedTypes (!?declarationList:ast.mDeclarationList)
 #--- Ordered declaration list
   buildOrderedDeclarationList (
-    !declarationList:ast.mDeclarationList
-    !procedureDeclarationList:ast.mProcedureListAST
+    !ast:ast
     !endOfSourceFile:inEndOfSourceFile
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )
@@ -89,10 +88,7 @@ private proc compileProject
     @globalLiteralStringMap globalLiteralStringMap = {}
     buildSemanticContext (
       !orderedDeclarationList:orderedDeclarationListAST
-      !procedureDeclarationList:ast.mProcedureListAST
-      !functionDeclarationList:ast.mFunctionListAST
-      !requiredProcList:ast.mRequiredProcList
-      !exceptionTypeList:ast.mExceptionTypes
+      !ast:ast
       !?staticStringMap:globalLiteralStringMap
       ?context:let @semanticContext semanticContext
     )
@@ -147,6 +143,7 @@ private proc addTargetSpecificFiles
     !?importedFilePathSet:ioImportedFileAbsolutePathSet
   )
   ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
+  ioAST.mGlobalVarDeclarationList = ast.mGlobalVarDeclarationList + ioAST.mGlobalVarDeclarationList
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
   ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
   ioAST.mFunctionListAST = ast.mFunctionListAST + ioAST.mFunctionListAST

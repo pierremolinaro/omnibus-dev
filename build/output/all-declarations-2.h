@@ -886,6 +886,18 @@ GALGAS_string filewrapperTemplate_procedureGenerationTemplate_implementation (cl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Routine 'checkRequiredProcedures'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
+                                      const class GALGAS_semanticContext constinArgument1,
+                                      const class GALGAS_location constinArgument2,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Filewrapper 'registerGenerationTemplate'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -929,8 +941,9 @@ class GALGAS_string function_mangledNameForRegister (class GALGAS_string inArgum
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_variableMap function_initialVariableMap (const class GALGAS_semanticContext & constinArgument0,
-                                                      class GALGAS_bool inArgument1,
+class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
+                                                      const class GALGAS_semanticContext & constinArgument1,
+                                                      class GALGAS_bool inArgument2,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1052,10 +1065,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporaries
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_buildOrderedDeclarationList (class GALGAS_declarationListAST inArgument0,
-                                          const class GALGAS_procedureDeclarationListAST constinArgument1,
-                                          class GALGAS_location inArgument2,
-                                          class GALGAS_declarationListAST & outArgument3,
+void routine_buildOrderedDeclarationList (class GALGAS_ast inArgument0,
+                                          class GALGAS_location inArgument1,
+                                          class GALGAS_declarationListAST & outArgument2,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -1154,12 +1166,9 @@ void routine_checkMode (const class GALGAS_stringset constinArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
-                                   const class GALGAS_procedureDeclarationListAST constinArgument1,
-                                   const class GALGAS_functionDeclarationListAST constinArgument2,
-                                   const class GALGAS_requiredProcedureDeclarationListAST constinArgument3,
-                                   const class GALGAS_exceptionTypesAST constinArgument4,
-                                   class GALGAS_globalLiteralStringMap & ioArgument5,
-                                   class GALGAS_semanticContext & outArgument6,
+                                   const class GALGAS_ast constinArgument1,
+                                   class GALGAS_globalLiteralStringMap & ioArgument2,
+                                   class GALGAS_semanticContext & outArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1198,6 +1207,18 @@ void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * i
 
 void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAST_2D_element inObject,
                                     class GALGAS_semanticContext & io_ioContext,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@globalVarDeclarationList-element enterInContext'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
+                                    class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -1314,6 +1335,18 @@ void categoryMethod_functionSemanticAnalysis (const class GALGAS_functionDeclara
                                               class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Category method '@globalVarDeclarationList-element semanticAnalysis'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_semanticAnalysis (const class GALGAS_globalVarDeclarationList_2D_element inObject,
+                                      const class GALGAS_semanticContext constin_inContext,
+                                      class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

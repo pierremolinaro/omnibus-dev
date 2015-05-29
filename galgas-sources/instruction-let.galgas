@@ -99,6 +99,7 @@ override method @letInstructionWithAssignmentAST analyze
     !mVarName
     !inferredType
     !inModeSet
+    !true
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetConstant
     ![inferredType copiable]

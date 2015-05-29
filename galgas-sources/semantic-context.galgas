@@ -69,6 +69,7 @@ map @targetBaseTypeMap {
 map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
+  @allowedProcedureMap mAllowedProcedureMap
   @variableKindIR mInitialValue
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
@@ -182,10 +183,7 @@ abstract method @abstractDeclaration enterInContext
 
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
-  ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
-  ?functionDeclarationList:let @functionDeclarationListAST inFunctionListAST
-  ?requiredProcList:let @requiredProcedureDeclarationListAST inRequiredProcedureDeclarationListAST
-  ?exceptionTypeList:let @exceptionTypesAST inExceptionTypes
+  ?ast:let @ast inAST
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
 {
@@ -193,20 +191,20 @@ proc buildSemanticContext
   outSemanticContext = .default
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
-      !procedureDeclarationList:inProcedureListAST
+      !procedureDeclarationList:inAST.mProcedureListAST
       !?context:outSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
 #--- Solve exception types
-  if [inExceptionTypes length] != 1 then
+  if [inAST.mExceptionTypes length] != 1 then
     error ["" nowhere]
-    : "exactly one exception type declaration should be provided (found:" + [inExceptionTypes length] + ")"
-    for () in inExceptionTypes do
+    : "exactly one exception type declaration should be provided (found:" + [inAST.mExceptionTypes length] + ")"
+    for () in inAST.mExceptionTypes do
       error mExceptionCodeTypeName:"exception type declaration is here"
     end
   else
-    [inExceptionTypes first ?let @lstring exceptionCodeTypeName ?let @lstring exceptionLineTypeName]
+    [inAST.mExceptionTypes first ?let @lstring exceptionCodeTypeName ?let @lstring exceptionLineTypeName]
     outSemanticContext.mExceptionCodeType = @unifiedTypeMap-proxy.searchKey {
       !outSemanticContext.mTypeMap
       !exceptionCodeTypeName
@@ -217,20 +215,27 @@ proc buildSemanticContext
     }
   end
 #---
-  for procedure in inProcedureListAST do
+  for procedure in inAST.mProcedureListAST do
     [procedure enterInContext !?context: outSemanticContext]
   end
 #---
-  for function in inFunctionListAST do
+  for function in inAST.mFunctionListAST do
     [function enterInContext !?context: outSemanticContext]
   end
 #--- Check required procs mode
   if @uint.errorCount == 0 then
-    for requiredProc in inRequiredProcedureDeclarationListAST do
+    for requiredProc in inAST.mRequiredProcList do
       for (mode) in requiredProc.mProcedureModeList do
         [outSemanticContext.mModeMap searchKey !mode]
       end
     end
+  end
+#--- Check global var declaration
+  for globalVar in inAST.mGlobalVarDeclarationList do
+    [globalVar enterInContext
+      !?context:outSemanticContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
   end
 }
 

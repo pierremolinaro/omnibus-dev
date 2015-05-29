@@ -53,6 +53,7 @@ getter @variableKindIR isStatic -> @bool outResult {
 #----------------------------------------------------------------------------------------------------------------------*
 
 func initialVariableMap
+  ?routineMangledName:let @string inMangledName
   ?context:let @semanticContext inContext
   ?globalsAreConstant:@bool inGlobalsAreConstant
   -> @variableMap outVariableMap
@@ -68,6 +69,7 @@ func initialVariableMap
         !lkey
         !mType
         !allModeSet
+        !true
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
         !true
@@ -78,6 +80,7 @@ func initialVariableMap
         !lkey
         !mType
         !allModeSet
+        !true
         !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey.string}
         !true
@@ -91,6 +94,7 @@ func initialVariableMap
       !constantName
       !constantType
       !allModeSet
+      !true
       !mangledNameForConstant (!name:constantName.string)
       !expressionCode
       !true
@@ -98,12 +102,13 @@ func initialVariableMap
     ]
   end
 #--- Add global variables
-  for (variableName variableType modeSet *) in inContext.mGlobalVariableMap do
+  for (variableName variableType modeSet allowedProcedureMap *) in inContext.mGlobalVariableMap do
     if inGlobalsAreConstant then
       [!?outVariableMap insertUsedLocalConstant
         !variableName
         !variableType
         !modeSet
+        ![allowedProcedureMap hasKey !inMangledName]
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
         !true
@@ -114,6 +119,7 @@ func initialVariableMap
         !variableName
         !variableType
         !modeSet
+        ![allowedProcedureMap hasKey !inMangledName]
         !mangledNameForGlobalVariable (!name:variableName.string)
         !.globalVariable {!name:variableName.string}
         !true
@@ -138,6 +144,7 @@ func variableMapWithConstants
       !constantName
       !constantType
       !allModeSet
+      !true
       !mangledNameForConstant (!name:constantName.string)
       !expressionCode
       !true
@@ -167,6 +174,7 @@ list @variableListIR {
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
   @stringset mAcceptedModeSet
+  @bool mAccessAllowed
   @string mCppName
   @variableKindIR mVariableKind
   @bool copiable
