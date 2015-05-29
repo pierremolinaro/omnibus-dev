@@ -98,7 +98,6 @@ override method @letInstructionWithAssignmentAST analyze
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType
-    !inModeSet
     !true
     !mangledNameForLocalVariable (!name:mVarName.string)
     !targetConstant

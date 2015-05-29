@@ -68,7 +68,7 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?6*
+    ?5*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -94,7 +94,6 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap searchForReadWriteAccess
     !mTargetVarName
     ?*
-    ?let targetVarModeSet
     ?let accessIsAllowed
     ?let unused targetVar
     ?let targetVariableKind
@@ -124,12 +123,6 @@ override method @operatorAssignInstructionAST analyze
     !operatorLocation:mTargetVarName.location
     ?resultType:*
   ]
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:targetVarModeSet
-    !error:mTargetVarName.location
-  )
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end

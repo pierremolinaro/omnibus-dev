@@ -126,7 +126,6 @@ override method @procCallInstructionAST analyze
       [!?ioVariableMap searchForWriteAccess
         !name
         ?let type
-        ?let varModeSet
         ?let accessIsAllowed
         ?let unused variableAccess
         ?let parameterAccess
@@ -136,12 +135,6 @@ override method @procCallInstructionAST analyze
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
       end
-    #--- Check mode
-      checkMode (
-        !requiredModes:inModeSet
-        !possibleModes:varModeSet
-        !error:name.location
-      )
       if not isCopiable then
         error name : "the '" + name + "' variable is not copiable"
       end
@@ -173,7 +166,6 @@ override method @procCallInstructionAST analyze
       [!?ioVariableMap searchForReadWriteAccess
         !name
         ?let type
-        ?let varModeSet
         ?let accessIsAllowed
         ?let unused variableAccess
         ?let parameterAccess
@@ -182,12 +174,6 @@ override method @procCallInstructionAST analyze
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
       end
-    #--- Check mode
-      checkMode (
-        !requiredModes:inModeSet
-        !possibleModes:varModeSet
-        !error:name.location
-      )
       parameterList += !mEffectiveParameterKind !mSelector !type
       procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
     end

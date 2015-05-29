@@ -89,7 +89,6 @@ override method @incDecInstructionAST analyze
   [!?ioVariableMap searchForReadWriteAccess
     !mVarName
     ?let type
-    ?let varModeSet
     ?let accessIsAllowed
     ?let @string unused variableCName
     ?let @variableKindIR variable
@@ -98,12 +97,6 @@ override method @incDecInstructionAST analyze
   if not accessIsAllowed then
     error mVarName : "routine has no access right on the this variable"
   end
-#--- Check mode
-  checkMode (
-    !requiredModes:inModeSet
-    !possibleModes:varModeSet
-    !error:mVarName.location
-  )
 #--- Check type inc / dec operator
   if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
     error mVarName : [type key] + " type does not handle incrementation/decrementation operator"
