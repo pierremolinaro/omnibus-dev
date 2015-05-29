@@ -10,6 +10,15 @@ enum @procFormalArgumentPassingMode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+list @procFormalArgumentList {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @lstring mFormalArgumentTypeName
+  @lstring mFormalArgumentName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@lstring inSelector -> @string outResult {
   switch self
   case input : outResult = "!"
@@ -19,15 +28,6 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@lst
   if inSelector.string != "" then
     outResult += inSelector.string + ":"
   end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @procFormalArgumentList {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @lstring mFormalArgumentTypeName
-  @lstring mFormalArgumentName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -101,6 +101,14 @@ syntax extension common_syntax {
       $attribute$ ?let attribute
       outAttributeList += !attribute
     end
+    <procedure_formal_arguments> ?formalArguments:outProcFormalArgumentList
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <procedure_formal_arguments>
+    !formalArguments:@procFormalArgumentList outProcFormalArgumentList
+  {
     outProcFormalArgumentList = {}
     $($
     repeat
@@ -163,14 +171,6 @@ method @procedureDeclarationListAST-element enterInPrecedenceGraph
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @procedureSignature {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @unifiedTypeMap-proxy mType
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 map @procedureMap {
   @bool mMutating
   @modeMap mProcedureModeMap
@@ -198,7 +198,6 @@ func mangledName
   end
   outMangledName += inProcedureName
   for (formalArgument selector * *) in inProcFormalArgumentList do
-    outMangledName += " "
     switch formalArgument
     case input : outMangledName += "?"
     case output : outMangledName += "!"
@@ -332,7 +331,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     end
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
+  @variableMap variableMap = initialVariableMap (
+    !routineMangledName:[self mangledName]
+    !context:inContext
+    !globalsAreConstant:false
+  )
 #--- Add receiver properties, and receiver as first argument
   @procFormalArgumentListForGeneration formalArguments = {}
   @receiverType receiverType
@@ -360,6 +363,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !procedureModeSet
+          !true
           !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
@@ -379,6 +383,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !procedureModeSet
+          !true
           !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
@@ -399,6 +404,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !procedureModeSet
+        !true
         !mangledNameForInArgument (!name:formalArgumentName.string)
         !.inArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
@@ -410,6 +416,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !procedureModeSet
+        !true
         !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
         !.inOutArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
@@ -421,6 +428,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !procedureModeSet
+        !true
         !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
         !.outArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]

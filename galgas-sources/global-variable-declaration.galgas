@@ -2,17 +2,18 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @globalVarDeclaration : @abstractDeclaration {
-  @lstringlist mModeList
-  @generalizedTypeEnumAST mType
-  @lstring mVarName
-  @expressionAST mSourceExpression
+list @allowedProcList {
+  @lstring mProcName
+  @procFormalArgumentList mProcFormalArgumentList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @globalVarDeclaration location -> @location outLocation {
-  outLocation = mVarName.location
+list @globalVarDeclarationList {
+  @generalizedTypeEnumAST mType
+  @lstring mVarName
+  @expressionAST mSourceExpression
+  @allowedProcList mAllowedProcList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -26,22 +27,25 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $var$
     $identifier$ ?let varName
-    @lstringlist modeList = {}
-    repeat
-      $modeName$ ?let modeName
-      modeList += !modeName
-    while
-    end
     $:$
     $identifier$ ?let typeName
     $=$
     <expression> ?let @expressionAST expression
-    ioAST.mDeclarationList += !@globalVarDeclaration.new {
-      !modeList
+    @allowedProcList allowedProcList = {}
+    ${$
+    repeat
+      $proc$
+      $identifier$ ?let procName
+      <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList procFormalArgumentList
+      allowedProcList += !procName !procFormalArgumentList
+    while
+    end
+    $}$
+    ioAST.mGlobalVarDeclarationList +=
       !.valueType {!typeName:typeName}
       !varName
       !expression
-    }
+      !allowedProcList
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -49,28 +53,18 @@ syntax extension common_syntax {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  PRECEDENCE GRAPH                                                                                                    *
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @globalVarDeclaration enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  enterNodeInPrecedenceGraph (!nodeName:mVarName !nodeInfo:self !type:mType !?ioGraph)
-  [mSourceExpression addDependenceEdgeForStaticExpression !mVarName !?ioGraph]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @globalVarDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "global variable " + mVarName 
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @globalVarDeclaration enterInContext
-  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+map @allowedProcedureMap {
+
+  insert insertKey error message "the '%K' proc is already declared in %L"
+  search searchKey error message "there is no '%K' proc"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
 {
@@ -79,7 +73,7 @@ override method @globalVarDeclaration enterInContext
   case valueType (@lstring typeName) :
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let variableType]
   #--- Analyze source expression
-  @semanticTemporariesStruct temporaries = .default
+    @semanticTemporariesStruct temporaries = .default
     @instructionListIR instructionGenerationList = {}
     @variableMap variableMap = variableMapWithConstants (!context:ioContext)
     [mSourceExpression analyzeExpression
@@ -99,22 +93,43 @@ override method @globalVarDeclaration enterInContext
     if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
       error mVarName : "source expression cannot be statically computed"
     end
-  #--- Execution mode set
-    @stringset executionModes = {}
-    for (m) in mModeList do
-      executionModes += !m.string
-    end
   #--- Check variable type and expression type
     checkAssignmentCompatibility (
       !sourceType:expressionType
       !targetType:variableType
       !errorLocation:mVarName.location
     )
-  #--- Enter in context
+  #--- Check allowed procedures are defined
+    @stringset executionModes = {}
+    @allowedProcedureMap allowedProcedureMap = {}
+    for () in mAllowedProcList do
+      var allowedProcMangledName = mProcName.string
+      for () in mProcFormalArgumentList do
+        switch mFormalArgumentPassingMode
+        case input : allowedProcMangledName += "?"
+        case output : allowedProcMangledName += "?"
+        case inputOutput : allowedProcMangledName += "?!"
+        end
+        allowedProcMangledName += mSelector.string + ":"
+      end
+      let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
+      [ioContext.mProcedureMap searchKey
+        !allowedProcMangledNameWithLocation
+        ?*
+        ?let procedureModeMap
+        ?let signature
+        ?*
+      ]
+      for () in procedureModeMap do
+        executionModes += !lkey.string
+      end
+      [!?allowedProcedureMap  insertKey !allowedProcMangledNameWithLocation]
+    end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
       !variableType
       !executionModes
+      !allowedProcedureMap
       !resultValueName
     ]
   case procType (* *) :
@@ -125,24 +140,16 @@ override method @globalVarDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @globalVarDeclaration semanticAnalysis
+method @globalVarDeclarationList-element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check execution mode names
-  @stringset executionModes = {}
-  for (m) in mModeList do
-    [inContext.mModeMap searchKey !m]
-    if m.string == bootModeName () then
-      error m: "a global variable does not accept the $" + bootModeName () + " mode"
-    end
-    executionModes += !m.string
-  end
 #--- Code generation
   [inContext.mGlobalVariableMap searchKey
     !mVarName
     ?let inferredType
     ?let executionModeSet
+    ?let unused allowedProcedureMap
     ?let expressionGeneratedCode
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey

@@ -68,7 +68,7 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?5*
+    ?6*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -95,11 +95,15 @@ override method @operatorAssignInstructionAST analyze
     !mTargetVarName
     ?*
     ?let targetVarModeSet
+    ?let accessIsAllowed
     ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
     ?*
   ]
+  if not accessIsAllowed then
+    error mTargetVarName : "routine has no access right on the this variable"
+  end
 #--- Check operator is available for type
   @infixOperatorMap operatorMap
   @string generatedOperator

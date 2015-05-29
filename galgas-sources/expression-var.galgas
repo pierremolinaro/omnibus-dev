@@ -61,11 +61,15 @@ override method @varInExpressionAST analyzeExpression
     !mSourceVarName
     ?let variableType
     ?let varModeSet
+    ?let accessIsAllowed
     ?let unused varAccess
     ?@variableKindIR resultingVariable
     ?*
     ?@registerBitSliceAccessMap registerBitSliceMap
   ]
+  if not accessIsAllowed then
+    error mSourceVarName : "routine has no access right on the this variable"
+  end
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet

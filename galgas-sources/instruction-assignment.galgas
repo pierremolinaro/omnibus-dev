@@ -48,7 +48,7 @@ override method @assignmentInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?5*
+    ?6*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -83,11 +83,15 @@ override method @assignmentInstructionAST analyze
     !mTargetVarName
     ?*
     ?let varModeSet
+    ?let accessIsAllowed
     ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
     ?*
   ]
+  if not accessIsAllowed then
+    error mTargetVarName : "routine has no access right on the this variable"
+  end
 #--- Check mode
   checkMode (
     !requiredModes:inModeSet

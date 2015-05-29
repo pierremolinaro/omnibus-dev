@@ -164,13 +164,18 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     functionModeSet += !mode.mValue.string
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:true)
+  @variableMap variableMap = initialVariableMap (
+    !routineMangledName:[self mangledName]
+    !context:inContext
+    !globalsAreConstant:true
+  )
 #--- Add 'result" variable
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mResultTypeName}
   [!?variableMap insertOutputFormalArgument
     !mResultVarName
     !resultType
     !functionModeSet
+    !true
     !mResultVarName.string
     !.localVariable {!name:mResultVarName.string}
     !true
@@ -184,6 +189,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !formalArgumentName
       !typeProxy
       !functionModeSet
+      !true
       !mangledNameForInArgument (!name:formalArgumentName.string)
       !.inArgument {!name:formalArgumentName.string}
       ![typeProxy copiable]

@@ -18,6 +18,7 @@ list @declarationListAST {
 #----------------------------------------------------------------------------------------------------------------------*
 
 struct @ast {
+  @globalVarDeclarationList mGlobalVarDeclarationList
   @declarationListAST mDeclarationList
   @procedureDeclarationListAST mProcedureListAST
   @requiredProcedureDeclarationListAST mRequiredProcList

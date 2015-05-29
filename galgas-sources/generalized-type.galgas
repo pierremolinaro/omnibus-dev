@@ -9,36 +9,6 @@ enum @generalizedTypeEnumAST {
 
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
-
-#syntax extension common_syntax {
-#
-#  #--------------------------------------------------------------------------------------------------------------------*
-#
-#  rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
-#    $identifier$ ?outName
-#    $:$
-#    $identifier$ ?let typeName
-#    outType = .valueType {!typeName:typeName}
-#  }
-#
-#  #--------------------------------------------------------------------------------------------------------------------*
-#
-#  rule <var_declaration> !@generalizedTypeEnumAST outType !@lstring outName {
-#    <procedure_header>
-#      ?procModes:let requiredModeList
-#      ?name:outName
-#      ?attributes:let unused attributeList
-#      ?formalArguments:let procFormalArgumentList
-#    outType = .procType {!procModeList:requiredModeList !procFormalArgumentList:procFormalArgumentList}
-#  }
-#
-#  #--------------------------------------------------------------------------------------------------------------------*
-#
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 

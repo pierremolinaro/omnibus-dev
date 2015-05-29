@@ -94,7 +94,6 @@ override method @procCallInstructionAST analyze
 #--- Build proc mangled name
   @string procMangledName = mProcRoutineName.string
   for () in mEffectiveParameterList do
-    procMangledName += " "
     switch mEffectiveParameterKind 
     case input (*) :
       procMangledName += "!" ;
@@ -128,11 +127,15 @@ override method @procCallInstructionAST analyze
         !name
         ?let type
         ?let varModeSet
+        ?let accessIsAllowed
         ?let unused variableAccess
         ?let parameterAccess
         ?let isCopiable
         ?*
       ]
+      if not accessIsAllowed then
+        error name : "routine has no access right on the this variable"
+      end
     #--- Check mode
       checkMode (
         !requiredModes:inModeSet
@@ -171,10 +174,14 @@ override method @procCallInstructionAST analyze
         !name
         ?let type
         ?let varModeSet
+        ?let accessIsAllowed
         ?let unused variableAccess
         ?let parameterAccess
         ?2*
       ]
+      if not accessIsAllowed then
+        error name : "routine has no access right on the this variable"
+      end
     #--- Check mode
       checkMode (
         !requiredModes:inModeSet

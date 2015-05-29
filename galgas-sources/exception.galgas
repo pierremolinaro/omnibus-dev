@@ -83,7 +83,11 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     error mExceptionClauseName : "the $" + exceptionModeName () + " mode should be defined in order to use an exception clause"
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (!context:inContext !globalsAreConstant:false)
+  @variableMap variableMap = initialVariableMap (
+    !routineMangledName:"exception " + mPriority
+    !context:inContext
+    !globalsAreConstant:false
+  )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["StaticString" nowhere]}
   let codeArg = @lstring.new {!"CODE" !mExceptionClauseName.location}
@@ -91,6 +95,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !codeArg
     !inContext.mExceptionCodeType
     !{!exceptionModeName ()}
+    !true
     !mangledNameForInArgument (!name:codeArg.string)
     !.inArgument {!name:codeArg.string}
     ![inContext.mExceptionCodeType copiable]
@@ -101,6 +106,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !fileArg
     !StaticStringType
     !{!exceptionModeName ()}
+    !true
     !mangledNameForInArgument (!name:fileArg.string)
     !.inArgument {!name:fileArg.string}
     ![StaticStringType copiable]
@@ -111,6 +117,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !lineArg
     !inContext.mExceptionLineType
     !{!exceptionModeName ()}
+    !true
     !mangledNameForInArgument (!name:lineArg.string)
     !.inArgument {!name:lineArg.string}
     ![inContext.mExceptionLineType copiable]
