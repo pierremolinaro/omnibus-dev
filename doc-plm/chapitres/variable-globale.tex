@@ -1,0 +1,102 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Variables globales}
+
+Les variables peuvent être déclarées en deux endroits :
+\begin{itemize}
+  \item en dehors de toute routine : c'est une variable globale (voir ci-après) ;
+  \item parmi les instructions d'une routine : c'est une variable locale à la routine (voir \refSectionPage{declarationVariableLocale}).
+\end{itemize}
+
+
+
+
+
+\sectionLabel{Déclaration d'une variable globale}{declarationVariableGlobale}\index{Variable!globale}
+
+La déclaration d'une variable globale est la suivante :
+
+\begin{PLM}
+var nom : Type = expression_statique {
+  en_tetes_routines_autorisees
+}
+\end{PLM}
+
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la variable globale ;
+  \item \plm=Type= est le nom du type de la variable globale ;
+  \item \plm=expression_statique= est l'expression qui fournit la valeur initiale de cette variable ; cette expression est calculée lors de la compilation ;
+  \item \plm=en_tetes_routines_autorisees= est la liste des routines qui sont autorisées à accéder à la variable globale ; par défaut, l'accès est autorisé en lecture seule ; pour avoir l'autorisation d'écrire la variable, l'attribut \plm=@rw=\index{"@rw} doit être placé avant la routine.
+\end{itemize}
+
+La portée d'une variable globale est le programme dans son intégralité : peu importe où est déclarée la variable. Toutefois, seules les routines autorisées peuvent y accéder.
+
+L'\plm=expression_statique= peut utiliser la valeur des constantes globales : le compilateur évalue les constantes globales avant d'évaluer les valeurs initiales des variables globales. Par contre, \plm=expression_statique= ne peut pas utiliser les valeurs d'une autre variable globale.
+
+Par exemple, voici comment on peut implémenter une variable globale \texttt{gCompteur}, incrémentée par la routine d'interruption \texttt{timerHandler}, et écrire un service d'attente de délai \texttt{wait} avec une boucle d'attente active :
+
+\begin{PLM}
+var gCompteur : UInt32 = 0 {
+  @rw proc timerHandler ()
+  proc waitMS (?inDuration : UInt32)
+}
+
+proc timerHandler $isr () {
+  gCompteur &++
+}
+
+proc wait $user (?inDuration : UInt32) {
+  let deadline = gCompteur + inDuration
+  while gCompteur < deadline do
+  end
+}
+\end{PLM}
+
+Note : si une variable globale est accéder par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code C engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=$isr= et \plm=$user=.
+
+
+
+
+
+\section{Restrictions d'usage des variables globales}
+\index{Parametre effectif@Paramètre effectif!Variable globale}
+
+Une variable globale ne peut pas :
+\begin{itemize}
+  \item apparaître comme paramètre effectif en entrée d'une procédure ;
+  \item apparaître comme paramètre effectif en sourtie/entrée d'une procédure.
+\end{itemize}
+
+Prenons un exemple ; la procédure \texttt{uneProcedure} présente un argument formel en sortie, et la variable globale \texttt{gGlobale} peut être accédée en lecture et écriture par la procédure \texttt{autreProcedure} :
+\begin{PLM}
+proc uneProcedure $user (!outValue : UInt32) {
+  outValue = 5
+}
+
+var gGlobale : UInt32 {
+  @rw proc autreProcedure ()
+}
+\end{PLM}
+
+L'écriture suivante est correcte (écriture de la variable globale) :
+\begin{PLM}
+proc autreProcedure $user () {
+  gGlobale = 10 // Ok
+}
+\end{PLM}
+
+
+Par contre, l'écriture suivante est rejetée par le compilateur (passage d'une variable globale comme paramètre effectif en entrée) :
+\begin{PLM}
+proc autreProcedure $user () {
+  uneProcedure (?gGlobale) // Erreur, variable globale comme paramètre
+                           // effectif en entrée
+}
+\end{PLM}
+
