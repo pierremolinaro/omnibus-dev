@@ -112,6 +112,7 @@ override method @varInstructionWithAssignmentAST analyze
     !targetVar
     ![targetType copiable]
     !{}
+    !true
   ]
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationInstructionWithSimpleAssignmentIR.new {
@@ -145,6 +146,7 @@ override method @varInstructionAST analyze
     !targetVar
     ![targetType copiable]
     !{}
+    !true
   ]
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationIR.new {

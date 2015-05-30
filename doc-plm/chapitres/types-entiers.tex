@@ -27,22 +27,22 @@ Les types entiers ne sont pas prédéfinis dans le langage. C'est la configurati
 
 
 
-\section{Constante litérale entière}
+\section{Constante littérale entière}
 
-Le langage accepte des constantes litérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
+Le langage accepte des constantes littérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
 var v : Int8 = 128 // Erreur de compilation :
                    // 128 non représentable par un entier signé 8 bits
 \end{PLM}
 
-\colorbox{red}{Erreur à corriger}
+\colorbox{red}{C'est une erreur à corriger}
 
 \begin{PLM}
 var v : Int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
 
-Une constante litérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
+Une constante littérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
 \begin{PLM}
 var v = 28 // Erreur, le type ne peut pas être inféré
 \end{PLM}

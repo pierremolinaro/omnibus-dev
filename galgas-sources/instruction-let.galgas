@@ -103,6 +103,7 @@ override method @letInstructionWithAssignmentAST analyze
     !targetConstant
     ![inferredType copiable]
     !{}
+    !true
   ]
 #--- Code generation
   ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {

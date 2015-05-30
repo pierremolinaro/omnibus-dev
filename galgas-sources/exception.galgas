@@ -99,6 +99,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !.inArgument {!name:codeArg.string}
     ![inContext.mExceptionCodeType copiable]
     !{}
+    !false
   ]
   let fileArg = @lstring.new {!"FILE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -109,6 +110,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !.inArgument {!name:fileArg.string}
     ![StaticStringType copiable]
     !{}
+    !false
   ]
   let lineArg = @lstring.new {!"LINE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -119,6 +121,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !.inArgument {!name:lineArg.string}
     ![inContext.mExceptionLineType copiable]
     !{}
+    !false
   ]
 #---
   let routineNameForInvocationGraph = @lstring.new  {

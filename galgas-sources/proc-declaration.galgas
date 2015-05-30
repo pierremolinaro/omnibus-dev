@@ -369,6 +369,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           }
           ![propertyType copiable]
           !{}
+          !true
         ]
       end
       formalArguments += !.inputOutput !type !receiverPtrName ()
@@ -388,6 +389,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           }
           ![propertyType copiable]
           !{}
+          !true
         ]
       end
       formalArguments += !.input !type !receiverName ()
@@ -406,6 +408,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !.inArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
+        !true
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
     case inputOutput :
@@ -417,6 +420,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !.inOutArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
+        !true
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!name:formalArgumentName.string)
     case output :
@@ -428,6 +432,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !.outArgument {!name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
+        !true
       ]
       formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!name:formalArgumentName.string)
     end
