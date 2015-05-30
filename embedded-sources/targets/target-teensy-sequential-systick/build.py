@@ -713,7 +713,7 @@ def asDir ():
 
 def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
-  return os.path.expanduser ("~/plm-tools/plm-teensy-" + MACHINE + "-" + SYSTEM_NAME + "-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + MACHINE + "-" + SYSTEM_NAME + "-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
