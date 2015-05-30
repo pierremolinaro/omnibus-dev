@@ -92,7 +92,7 @@ override method @incDecInstructionAST analyze
     ?let accessIsAllowed
     ?let @string unused variableCName
     ?let @variableKindIR variable
-    ?2*
+    ?3*
   ]
   if not accessIsAllowed then
     error mVarName : "routine has no access right on the this variable"

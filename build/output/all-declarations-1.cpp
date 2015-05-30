@@ -3885,7 +3885,8 @@ cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_string & in_mCppName,
                                                   const GALGAS_variableKindIR & in_mVariableKind,
                                                   const GALGAS_bool & in_copiable,
-                                                  const GALGAS_registerBitSliceAccessMap & in_fieldMap
+                                                  const GALGAS_registerBitSliceAccessMap & in_fieldMap,
+                                                  const GALGAS_bool & in_mCanBeUsedAsInputParameter
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mType (in_mType),
@@ -3893,20 +3894,21 @@ mAttribute_mAccessAllowed (in_mAccessAllowed),
 mAttribute_mCppName (in_mCppName),
 mAttribute_mVariableKind (in_mVariableKind),
 mAttribute_copiable (in_copiable),
-mAttribute_fieldMap (in_fieldMap) {
+mAttribute_fieldMap (in_fieldMap),
+mAttribute_mCanBeUsedAsInputParameter (in_mCanBeUsedAsInputParameter) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_variableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mAccessAllowed.isValid () && mAttribute_mCppName.isValid () && mAttribute_mVariableKind.isValid () && mAttribute_copiable.isValid () && mAttribute_fieldMap.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mAccessAllowed.isValid () && mAttribute_mCppName.isValid () && mAttribute_mVariableKind.isValid () && mAttribute_copiable.isValid () && mAttribute_fieldMap.isValid () && mAttribute_mCanBeUsedAsInputParameter.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_variableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_mType, mAttribute_mAccessAllowed, mAttribute_mCppName, mAttribute_mVariableKind, mAttribute_copiable, mAttribute_fieldMap COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_mType, mAttribute_mAccessAllowed, mAttribute_mCppName, mAttribute_mVariableKind, mAttribute_copiable, mAttribute_fieldMap, mAttribute_mCanBeUsedAsInputParameter COMMA_HERE)) ;
   return result ;
 }
 
@@ -3937,6 +3939,10 @@ void cMapElement_variableMap::description (C_String & ioString, const int32_t in
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "fieldMap" ":" ;
   mAttribute_fieldMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mCanBeUsedAsInputParameter" ":" ;
+  mAttribute_mCanBeUsedAsInputParameter.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3961,6 +3967,9 @@ typeComparisonResult cMapElement_variableMap::compare (const cCollectionElement 
   }
   if (kOperandEqual == result) {
     result = mAttribute_fieldMap.objectCompare (operand->mAttribute_fieldMap) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mCanBeUsedAsInputParameter.objectCompare (operand->mAttribute_mCanBeUsedAsInputParameter) ;
   }
   return result ;
 }
@@ -4458,10 +4467,11 @@ void GALGAS_variableMap::modifier_insertGlobalVariable (GALGAS_lstring inKey,
                                                         GALGAS_variableKindIR inArgument3,
                                                         GALGAS_bool inArgument4,
                                                         GALGAS_registerBitSliceAccessMap inArgument5,
+                                                        GALGAS_bool inArgument6,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4485,10 +4495,11 @@ void GALGAS_variableMap::modifier_insertMutableAttribute (GALGAS_lstring inKey,
                                                           GALGAS_variableKindIR inArgument3,
                                                           GALGAS_bool inArgument4,
                                                           GALGAS_registerBitSliceAccessMap inArgument5,
+                                                          GALGAS_bool inArgument6,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4512,10 +4523,11 @@ void GALGAS_variableMap::modifier_insertNonMutableAttribute (GALGAS_lstring inKe
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
                                                              GALGAS_registerBitSliceAccessMap inArgument5,
+                                                             GALGAS_bool inArgument6,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4539,10 +4551,11 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalVariable (GALGAS_lstring i
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
                                                                 GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                GALGAS_bool inArgument6,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4566,10 +4579,11 @@ void GALGAS_variableMap::modifier_insertDefinedLocalVariable (GALGAS_lstring inK
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
                                                               GALGAS_registerBitSliceAccessMap inArgument5,
+                                                              GALGAS_bool inArgument6,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4593,10 +4607,11 @@ void GALGAS_variableMap::modifier_insertUndefinedLocalConstant (GALGAS_lstring i
                                                                 GALGAS_variableKindIR inArgument3,
                                                                 GALGAS_bool inArgument4,
                                                                 GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                GALGAS_bool inArgument6,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4620,10 +4635,11 @@ void GALGAS_variableMap::modifier_insertLocalConstant (GALGAS_lstring inKey,
                                                        GALGAS_variableKindIR inArgument3,
                                                        GALGAS_bool inArgument4,
                                                        GALGAS_registerBitSliceAccessMap inArgument5,
+                                                       GALGAS_bool inArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4647,10 +4663,11 @@ void GALGAS_variableMap::modifier_insertUsedLocalConstant (GALGAS_lstring inKey,
                                                            GALGAS_variableKindIR inArgument3,
                                                            GALGAS_bool inArgument4,
                                                            GALGAS_registerBitSliceAccessMap inArgument5,
+                                                           GALGAS_bool inArgument6,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4674,10 +4691,11 @@ void GALGAS_variableMap::modifier_insertInputFormalArgument (GALGAS_lstring inKe
                                                              GALGAS_variableKindIR inArgument3,
                                                              GALGAS_bool inArgument4,
                                                              GALGAS_registerBitSliceAccessMap inArgument5,
+                                                             GALGAS_bool inArgument6,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4701,10 +4719,11 @@ void GALGAS_variableMap::modifier_insertInputFormalArgumentDeclaredAsUnused (GAL
                                                                              GALGAS_variableKindIR inArgument3,
                                                                              GALGAS_bool inArgument4,
                                                                              GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                             GALGAS_bool inArgument6,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4728,10 +4747,11 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgument (GALGAS_lstr
                                                                      GALGAS_variableKindIR inArgument3,
                                                                      GALGAS_bool inArgument4,
                                                                      GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                     GALGAS_bool inArgument6,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4755,10 +4775,11 @@ void GALGAS_variableMap::modifier_insertUsedConstantInputFormalArgument (GALGAS_
                                                                          GALGAS_variableKindIR inArgument3,
                                                                          GALGAS_bool inArgument4,
                                                                          GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                         GALGAS_bool inArgument6,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4782,10 +4803,11 @@ void GALGAS_variableMap::modifier_insertConstantInputFormalArgumentDeclaredAsUnu
                                                                                      GALGAS_variableKindIR inArgument3,
                                                                                      GALGAS_bool inArgument4,
                                                                                      GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                                     GALGAS_bool inArgument6,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4809,10 +4831,11 @@ void GALGAS_variableMap::modifier_insertOutputFormalArgument (GALGAS_lstring inK
                                                               GALGAS_variableKindIR inArgument3,
                                                               GALGAS_bool inArgument4,
                                                               GALGAS_registerBitSliceAccessMap inArgument5,
+                                                              GALGAS_bool inArgument6,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4836,10 +4859,11 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgument (GALGAS_lstrin
                                                                    GALGAS_variableKindIR inArgument3,
                                                                    GALGAS_bool inArgument4,
                                                                    GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                   GALGAS_bool inArgument6,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4863,10 +4887,11 @@ void GALGAS_variableMap::modifier_insertInputOutputFormalArgumentDeclaredAsUnuse
                                                                                    GALGAS_variableKindIR inArgument3,
                                                                                    GALGAS_bool inArgument4,
                                                                                    GALGAS_registerBitSliceAccessMap inArgument5,
+                                                                                   GALGAS_bool inArgument6,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_variableMap * p = NULL ;
-  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_variableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4894,6 +4919,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
                                                        GALGAS_registerBitSliceAccessMap & outArgument5,
+                                                       GALGAS_bool & outArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -4915,6 +4941,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
+    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -4923,6 +4950,7 @@ void GALGAS_variableMap::modifier_searchForReadAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
     outArgument5 = p->mAttribute_fieldMap ;
+    outArgument6 = p->mAttribute_mCanBeUsedAsInputParameter ;
   }
 }
 
@@ -4939,6 +4967,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
                                                         GALGAS_variableKindIR & outArgument3,
                                                         GALGAS_bool & outArgument4,
                                                         GALGAS_registerBitSliceAccessMap & outArgument5,
+                                                        GALGAS_bool & outArgument6,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -4960,6 +4989,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
+    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -4968,6 +4998,7 @@ void GALGAS_variableMap::modifier_searchForWriteAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
     outArgument5 = p->mAttribute_fieldMap ;
+    outArgument6 = p->mAttribute_mCanBeUsedAsInputParameter ;
   }
 }
 
@@ -4984,6 +5015,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
                                                             GALGAS_variableKindIR & outArgument3,
                                                             GALGAS_bool & outArgument4,
                                                             GALGAS_registerBitSliceAccessMap & outArgument5,
+                                                            GALGAS_bool & outArgument6,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -5005,6 +5037,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
+    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -5013,6 +5046,7 @@ void GALGAS_variableMap::modifier_searchForReadWriteAccess (GALGAS_lstring inKey
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
     outArgument5 = p->mAttribute_fieldMap ;
+    outArgument6 = p->mAttribute_mCanBeUsedAsInputParameter ;
   }
 }
 
@@ -5029,6 +5063,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
                                                        GALGAS_variableKindIR & outArgument3,
                                                        GALGAS_bool & outArgument4,
                                                        GALGAS_registerBitSliceAccessMap & outArgument5,
+                                                       GALGAS_bool & outArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -5050,6 +5085,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
+    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -5058,6 +5094,7 @@ void GALGAS_variableMap::modifier_searchForDropAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
     outArgument5 = p->mAttribute_fieldMap ;
+    outArgument6 = p->mAttribute_mCanBeUsedAsInputParameter ;
   }
 }
 
@@ -5074,6 +5111,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
                                                  GALGAS_variableKindIR & outArgument3,
                                                  GALGAS_bool & outArgument4,
                                                  GALGAS_registerBitSliceAccessMap & outArgument5,
+                                                 GALGAS_bool & outArgument6,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) performSearch (inKey,
@@ -5095,6 +5133,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
+    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_mType ;
@@ -5103,6 +5142,7 @@ void GALGAS_variableMap::modifier_neutralAccess (GALGAS_lstring inKey,
     outArgument3 = p->mAttribute_mVariableKind ;
     outArgument4 = p->mAttribute_copiable ;
     outArgument5 = p->mAttribute_fieldMap ;
+    outArgument6 = p->mAttribute_mCanBeUsedAsInputParameter ;
   }
 }
 
@@ -5198,6 +5238,21 @@ GALGAS_registerBitSliceAccessMap GALGAS_variableMap::reader_fieldMapForKey (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_variableMap::reader_mCanBeUsedAsInputParameterForKey (const GALGAS_string & inKey,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    result = p->mAttribute_mCanBeUsedAsInputParameter ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_variableMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                   GALGAS_string inKey,
                                                   C_Compiler * inCompiler
@@ -5282,6 +5337,20 @@ void GALGAS_variableMap::modifier_setFieldMapForKey (GALGAS_registerBitSliceAcce
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_variableMap::modifier_setMCanBeUsedAsInputParameterForKey (GALGAS_bool inAttributeValue,
+                                                                       GALGAS_string inKey,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    p->mAttribute_mCanBeUsedAsInputParameter = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_variableMap * GALGAS_variableMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                  const GALGAS_string & inKey
                                                                                  COMMA_LOCATION_ARGS) {
@@ -5352,6 +5421,14 @@ GALGAS_registerBitSliceAccessMap cEnumerator_variableMap::current_fieldMap (LOCA
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_variableMap) ;
   return p->mAttribute_fieldMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_variableMap::current_mCanBeUsedAsInputParameter (LOCATION_ARGS) const {
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_variableMap) ;
+  return p->mAttribute_mCanBeUsedAsInputParameter ;
 }
 
 
@@ -5505,6 +5582,19 @@ GALGAS_registerBitSliceAccessMap GALGAS_variableMap_2D_proxy::reader_fieldMap (C
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
     result = p->mAttribute_fieldMap;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_variableMap_2D_proxy::reader_mCanBeUsedAsInputParameter (C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mCanBeUsedAsInputParameter" COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    result = p->mAttribute_mCanBeUsedAsInputParameter;
   }
   return result ;
 }

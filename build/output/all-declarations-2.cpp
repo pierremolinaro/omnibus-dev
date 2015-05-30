@@ -3939,45 +3939,45 @@ GALGAS_variableMap function_initialVariableMap (const GALGAS_string & constinArg
     const enumGalgasBool test_1 = test_0.boolEnum () ;
     if (kBoolTrue == test_1) {
       {
-      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_2343.current_lkey (HERE), enumerator_2343.current_mType (HERE), GALGAS_bool (true), function_mangledNameForRegister (enumerator_2343.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 70)), GALGAS_variableKindIR::constructor_register (enumerator_2343.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 71)), GALGAS_bool (true), enumerator_2343.current_mRegisterFieldAccessMap (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 66)) ;
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_2343.current_lkey (HERE), enumerator_2343.current_mType (HERE), GALGAS_bool (true), function_mangledNameForRegister (enumerator_2343.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 70)), GALGAS_variableKindIR::constructor_register (enumerator_2343.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 71)), GALGAS_bool (true), enumerator_2343.current_mRegisterFieldAccessMap (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 66)) ;
       }
     }else if (kBoolFalse == test_1) {
       {
-      result_outVariableMap.modifier_insertDefinedLocalVariable (enumerator_2343.current_lkey (HERE), enumerator_2343.current_mType (HERE), GALGAS_bool (true), function_mangledNameForRegister (enumerator_2343.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 80)), GALGAS_variableKindIR::constructor_register (enumerator_2343.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 81)), GALGAS_bool (true), enumerator_2343.current_mRegisterFieldAccessMap (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 76)) ;
+      result_outVariableMap.modifier_insertDefinedLocalVariable (enumerator_2343.current_lkey (HERE), enumerator_2343.current_mType (HERE), GALGAS_bool (true), function_mangledNameForRegister (enumerator_2343.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 81)), GALGAS_variableKindIR::constructor_register (enumerator_2343.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 82)), GALGAS_bool (true), enumerator_2343.current_mRegisterFieldAccessMap (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 77)) ;
       }
     }
     enumerator_2343.gotoNextObject () ;
   }
-  cEnumerator_globalConstantMap enumerator_3001 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_3001.hasCurrentObject ()) {
+  cEnumerator_globalConstantMap enumerator_3103 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_3103.hasCurrentObject ()) {
     {
-    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3001.current_lkey (HERE), enumerator_3001.current_mConstantType (HERE), GALGAS_bool (true), function_mangledNameForConstant (enumerator_3001.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 93)), enumerator_3001.current_mExpressionCode (HERE), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 89)) ;
+    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3103.current_lkey (HERE), enumerator_3103.current_mConstantType (HERE), GALGAS_bool (true), function_mangledNameForConstant (enumerator_3103.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 95)), enumerator_3103.current_mExpressionCode (HERE), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 98)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 91)) ;
     }
-    enumerator_3001.gotoNextObject () ;
+    enumerator_3103.gotoNextObject () ;
   }
-  cEnumerator_globalVariableMap enumerator_3338 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
-  while (enumerator_3338.hasCurrentObject ()) {
-    GALGAS_bool var_allowedAccess = enumerator_3338.current_mAllowedProcedureMap (HERE).reader_hasKey (constinArgument_inMangledName COMMA_SOURCE_FILE ("variable-map.galgas", 101)) ;
+  cEnumerator_globalVariableMap enumerator_3489 (constinArgument_inContext.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+  while (enumerator_3489.hasCurrentObject ()) {
+    GALGAS_bool var_allowedAccess = enumerator_3489.current_mAllowedProcedureMap (HERE).reader_hasKey (constinArgument_inMangledName COMMA_SOURCE_FILE ("variable-map.galgas", 104)) ;
     GALGAS_bool var_writeAccess = GALGAS_bool (false) ;
     const enumGalgasBool test_2 = var_allowedAccess.boolEnum () ;
     if (kBoolTrue == test_2) {
-      var_writeAccess = enumerator_3338.current_mAllowedProcedureMap (HERE).reader_mHasWriteAccessForKey (constinArgument_inMangledName, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 104)) ;
+      var_writeAccess = enumerator_3489.current_mAllowedProcedureMap (HERE).reader_mHasWriteAccessForKey (constinArgument_inMangledName, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 107)) ;
     }
     GALGAS_bool test_3 = inArgument_inGlobalsAreConstant ;
     if (kBoolTrue != test_3.boolEnum ()) {
-      test_3 = var_writeAccess.operator_not (SOURCE_FILE ("variable-map.galgas", 106)) ;
+      test_3 = var_writeAccess.operator_not (SOURCE_FILE ("variable-map.galgas", 109)) ;
     }
     const enumGalgasBool test_4 = test_3.boolEnum () ;
     if (kBoolTrue == test_4) {
       {
-      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3338.current_lkey (HERE), enumerator_3338.current_mVariableType (HERE), var_allowedAccess, function_mangledNameForGlobalVariable (enumerator_3338.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 111)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3338.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 112)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 107)) ;
+      result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_3489.current_lkey (HERE), enumerator_3489.current_mVariableType (HERE), var_allowedAccess, function_mangledNameForGlobalVariable (enumerator_3489.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 114)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3489.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 115)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 117)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 110)) ;
       }
     }else if (kBoolFalse == test_4) {
       {
-      result_outVariableMap.modifier_insertGlobalVariable (enumerator_3338.current_lkey (HERE), enumerator_3338.current_mVariableType (HERE), var_allowedAccess, function_mangledNameForGlobalVariable (enumerator_3338.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 121)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3338.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 122)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 124)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 117)) ;
+      result_outVariableMap.modifier_insertGlobalVariable (enumerator_3489.current_lkey (HERE), enumerator_3489.current_mVariableType (HERE), var_allowedAccess, function_mangledNameForGlobalVariable (enumerator_3489.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 125)), GALGAS_variableKindIR::constructor_globalVariable (enumerator_3489.current_lkey (HERE).mAttribute_string  COMMA_SOURCE_FILE ("variable-map.galgas", 126)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 128)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 121)) ;
       }
     }
-    enumerator_3338.gotoNextObject () ;
+    enumerator_3489.gotoNextObject () ;
   }
 //---
   return result_outVariableMap ;
@@ -4035,13 +4035,13 @@ GALGAS_variableMap function_variableMapWithConstants (const GALGAS_semanticConte
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_variableMap result_outVariableMap ; // Returned variable
-  result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 136)) ;
-  cEnumerator_globalConstantMap enumerator_4526 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_4526.hasCurrentObject ()) {
+  result_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 141)) ;
+  cEnumerator_globalConstantMap enumerator_4779 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_4779.hasCurrentObject ()) {
     {
-    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_4526.current_lkey (HERE), enumerator_4526.current_mConstantType (HERE), GALGAS_bool (true), function_mangledNameForConstant (enumerator_4526.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 143)), enumerator_4526.current_mExpressionCode (HERE), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 146)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 139)) ;
+    result_outVariableMap.modifier_insertUsedLocalConstant (enumerator_4779.current_lkey (HERE), enumerator_4779.current_mConstantType (HERE), GALGAS_bool (true), function_mangledNameForConstant (enumerator_4779.current_lkey (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 148)), enumerator_4779.current_mExpressionCode (HERE), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 151)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 144)) ;
     }
-    enumerator_4526.gotoNextObject () ;
+    enumerator_4779.gotoNextObject () ;
   }
 //---
   return result_outVariableMap ;
@@ -4090,8 +4090,8 @@ void routine_getNewTempVariable (GALGAS_semanticTemporariesStruct & ioArgument_i
                                  C_Compiler * inCompiler
                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outTempVariable.drop () ; // Release 'out' argument
-  outArgument_outTempVariable = GALGAS_variableKindIR::constructor_temporaryConstant (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex  COMMA_SOURCE_FILE ("variable-map.galgas", 157)) ;
-  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 158)) ;
+  outArgument_outTempVariable = GALGAS_variableKindIR::constructor_temporaryConstant (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex  COMMA_SOURCE_FILE ("variable-map.galgas", 163)) ;
+  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 164)) ;
 }
 
 

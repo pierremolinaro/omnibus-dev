@@ -71,6 +71,7 @@ func initialVariableMap
         !.register {!name:lkey.string}
         !true
         !mRegisterFieldAccessMap
+        !false # Cannot be used as input parameter
       ]
     else
       [!?outVariableMap insertDefinedLocalVariable
@@ -81,6 +82,7 @@ func initialVariableMap
         !.register {!name:lkey.string}
         !true
         !mRegisterFieldAccessMap
+        !false # Cannot be used as input parameter
       ]
     end
   end
@@ -94,6 +96,7 @@ func initialVariableMap
       !expressionCode
       !true
       !{}
+      !false # Cannot be used as input parameter
     ]
   end
 #--- Add global variables
@@ -112,6 +115,7 @@ func initialVariableMap
         !.globalVariable {!name:variableName.string}
         !true
         !{}
+        !false # Cannot be used as input parameter
       ]
     else
       [!?outVariableMap insertGlobalVariable
@@ -122,6 +126,7 @@ func initialVariableMap
         !.globalVariable {!name:variableName.string}
         !true
         !{}
+        !false # Cannot be used as input parameter
       ]
     end
   end
@@ -144,6 +149,7 @@ func variableMapWithConstants
       !expressionCode
       !true
       !{}
+      !false
     ]
   end
 }
@@ -173,6 +179,7 @@ sharedmap @variableMap {
   @variableKindIR mVariableKind
   @bool copiable
   @registerBitSliceAccessMap fieldMap
+  @bool mCanBeUsedAsInputParameter
 
 #--- Used global variable
   state globalVariable {
