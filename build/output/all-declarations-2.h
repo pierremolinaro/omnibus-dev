@@ -272,6 +272,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
   public : GALGAS_procedureMap mAttribute_mProcedureMap ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
+  public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
   public : GALGAS_registerMap mAttribute_mRegisterMap ;
   public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
@@ -326,6 +327,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
                                    const GALGAS_procedureMap & in_mProcedureMap,
                                    const GALGAS_functionMap & in_mFunctionMap,
+                                   const GALGAS_initRoutineMap & in_mInitRoutineMap,
                                    const GALGAS_registerMap & in_mRegisterMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
@@ -376,12 +378,12 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_unifiedTypeMap & inOperand4,
                                                           const class GALGAS_procedureMap & inOperand5,
                                                           const class GALGAS_functionMap & inOperand6,
-                                                          const class GALGAS_registerMap & inOperand7,
-                                                          const class GALGAS_globalConstantMap & inOperand8,
-                                                          const class GALGAS_globalVariableMap & inOperand9,
-                                                          const class GALGAS_modeMap & inOperand10,
-                                                          const class GALGAS_stringset & inOperand11,
-                                                          const class GALGAS_infixOperatorMap & inOperand12,
+                                                          const class GALGAS_initRoutineMap & inOperand7,
+                                                          const class GALGAS_registerMap & inOperand8,
+                                                          const class GALGAS_globalConstantMap & inOperand9,
+                                                          const class GALGAS_globalVariableMap & inOperand10,
+                                                          const class GALGAS_modeMap & inOperand11,
+                                                          const class GALGAS_stringset & inOperand12,
                                                           const class GALGAS_infixOperatorMap & inOperand13,
                                                           const class GALGAS_infixOperatorMap & inOperand14,
                                                           const class GALGAS_infixOperatorMap & inOperand15,
@@ -404,9 +406,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand32,
                                                           const class GALGAS_infixOperatorMap & inOperand33,
                                                           const class GALGAS_infixOperatorMap & inOperand34,
-                                                          const class GALGAS_prefixOperatorMap & inOperand35,
+                                                          const class GALGAS_infixOperatorMap & inOperand35,
                                                           const class GALGAS_prefixOperatorMap & inOperand36,
-                                                          const class GALGAS_prefixOperatorMap & inOperand37
+                                                          const class GALGAS_prefixOperatorMap & inOperand37,
+                                                          const class GALGAS_prefixOperatorMap & inOperand38
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -452,6 +455,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap reader_mGlobalVariableMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mInfEqualOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_initRoutineMap reader_mInitRoutineMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mLeftShiftOperatorMap (LOCATION_ARGS) const ;
 
@@ -1219,6 +1224,17 @@ void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAS
 void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
                                     class GALGAS_semanticContext & io_ioContext,
                                     class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Category method '@initList-element enterInContext'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_enterInContext (const class GALGAS_initList_2D_element inObject,
+                                    class GALGAS_semanticContext & io_ioContext,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 

@@ -69,7 +69,7 @@ map @targetBaseTypeMap {
 map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
-  @allowedProcedureMap mAllowedProcedureMap
+  @allowedRoutineMap mAllowedProcedureMap
   @variableKindIR mInitialValue
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
@@ -139,6 +139,7 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
+  @initRoutineMap mInitRoutineMap
   @registerMap mRegisterMap
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
@@ -187,8 +188,14 @@ proc buildSemanticContext
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
 {
-#---
   outSemanticContext = .default
+#--- Enter init routine
+  for initRoutine in inAST.mInitList do
+    [initRoutine enterInContext
+      !?context:outSemanticContext
+    ]
+  end
+#---
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mProcedureListAST

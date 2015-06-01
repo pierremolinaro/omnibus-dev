@@ -10,11 +10,19 @@ list @allowedProcList {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+list @allowedInitList {
+  @bool mHasWriteAccess
+  @luint64 mInitPriority
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 list @globalVarDeclarationList {
   @generalizedTypeEnumAST mType
   @lstring mVarName
   @expressionAST mSourceExpression
   @allowedProcList mAllowedProcList
+  @allowedInitList mAllowedInitList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -33,6 +41,7 @@ syntax extension common_syntax {
     $=$
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}
+    @allowedInitList allowedInitList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -45,10 +54,16 @@ syntax extension common_syntax {
         end
         hasWriteAccess = true
       end
-      $proc$
-      $identifier$ ?let procName
-      <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList procFormalArgumentList
-      allowedProcList += !hasWriteAccess !procName !procFormalArgumentList
+      select
+        $proc$
+        $identifier$ ?let procName
+        <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList procFormalArgumentList
+        allowedProcList += !hasWriteAccess !procName !procFormalArgumentList
+      or
+        $init$
+        $integer$ ?let @luint64 priority
+        allowedInitList += !hasWriteAccess !priority
+      end
     while
     end
     $}$
@@ -57,6 +72,7 @@ syntax extension common_syntax {
       !varName
       !expression
       !allowedProcList
+      !allowedInitList
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -67,10 +83,10 @@ syntax extension common_syntax {
 #  ENTER IN CONTEXT                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @allowedProcedureMap {
+map @allowedRoutineMap {
   @bool mHasWriteAccess
-  insert insertKey error message "the '%K' proc is already declared in %L"
-  search searchKey error message "there is no '%K' proc"
+  insert insertKey error message "the '%K' is already declared in %L"
+  search searchKey error message "there is no '%K'"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -110,9 +126,17 @@ method @globalVarDeclarationList-element enterInContext
       !targetType:variableType
       !errorLocation:mVarName.location
     )
-  #--- Check allowed procedures are defined
     @stringset executionModes = {}
-    @allowedProcedureMap allowedProcedureMap = {}
+    @allowedRoutineMap allowedProcedureMap = {}
+  #--- Check allowed init routines are defined
+    for () in mAllowedInitList do
+      [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.uint64 string] !mInitPriority.location}]
+      [!?allowedProcedureMap insertKey
+         !.new {!"init " + [mInitPriority.uint64 string] !mInitPriority.location}
+         !mHasWriteAccess
+      ]
+    end
+  #--- Check allowed procedures are defined
     for () in mAllowedProcList do
       var allowedProcMangledName = mProcName.string
       for () in mProcFormalArgumentList do
@@ -134,7 +158,10 @@ method @globalVarDeclarationList-element enterInContext
       for () in procedureModeMap do
         executionModes += !lkey.string
       end
-      [!?allowedProcedureMap insertKey !allowedProcMangledNameWithLocation !mHasWriteAccess]
+      [!?allowedProcedureMap insertKey
+         !.new {!"proc " + allowedProcMangledName !mProcName.location}
+         !mHasWriteAccess
+      ]
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
