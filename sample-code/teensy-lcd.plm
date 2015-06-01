@@ -29,12 +29,14 @@ proc userSystickHandler $isr () {
 
 var gVar : Int8 = 0 {
   @rw proc loop ()
+//  @rw exception setup 255
 }
 
 //-----------------------------------------------------------------------------*
 
 //exception setup 255 {
-//  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
+//  gVar = 88
+////  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
 //}
 
 proc loop $user () {

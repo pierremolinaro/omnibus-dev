@@ -140,6 +140,8 @@ struct @semanticContext {
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
+  @exceptionRoutinePriorityMap mExceptionSetupRoutinePriorityMap 
+  @exceptionRoutinePriorityMap mExceptionLoopRoutinePriorityMap 
   @registerMap mRegisterMap
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
@@ -189,9 +191,15 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default
-#--- Enter init routine
+#--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext
+      !?context:outSemanticContext
+    ]
+  end
+#--- Enter exception routines
+  for execptionRoutine in inAST.mExceptionClauses do
+    [execptionRoutine enterInContext
       !?context:outSemanticContext
     ]
   end

@@ -58,9 +58,25 @@ proc wait $user (?inDuration : UInt32) {
 }
 \end{PLM}
 
-Note : si une variable globale est accéder par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code C engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=$isr= et \plm=$user=.
+Note : si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code C engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=$isr= et \plm=$user=.
 
 
+Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=init=!Routine} et les routines d'exception (\refSubsectionPage{routinesException})\index{Routine!exception@\plm=exception=}
+ doivent de même être déclarées pour pouvoir accéder à une variable globale (et avec l'attribut \plm=@rw= si on veut l'accès en écriture). Par Exemple :
+\begin{PLM}
+var gCompteur : UInt32 = 0 {
+  @rw init 112
+  @rw exception loop 179
+}
+
+proc init 112 {
+  gCompteur = 10
+}
+
+proc exception loop 179 {
+  gCompteur = 100
+}
+\end{PLM}
 
 
 

@@ -58,6 +58,22 @@ syntax extension common_syntax {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @exceptionClauseListAST-element enterInContext
+  ?!context:@semanticContext ioContext
+{
+  if mExceptionClauseName.string == "setup" then
+    [!?ioContext.mExceptionSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
+  elsif mExceptionClauseName.string == "loop" then
+    [!?ioContext.mExceptionLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
+  else
+    error mExceptionClauseName : "exception routine name should be \"setup\" or \"loop\""
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -70,6 +86,8 @@ func %once exceptionModeName -> @string outResult {
 map @exceptionRoutinePriorityMap {
   insert insertSetupKey error message "an exception setup routine with priority %K has been already declared"
   insert insertLoopKey error message "an exception loop routine with priority %K has been already declared"
+  search searchSetupKey error message "there is no exception setup routine with priority %K"
+  search searchLoopKey error message "there is no  exception loop routine with priority %K"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -82,9 +100,13 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   if not [inContext.mModeMap hasKey !exceptionModeName ()] then
     error mExceptionClauseName : "the $" + exceptionModeName () + " mode should be defined in order to use an exception clause"
   end
+  let routineNameForInvocationGraph = @lstring.new  {
+    !"exception " + mExceptionClauseName + " " + mPriority
+    !mExceptionClauseName.location
+  }
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:"exception " + mPriority
+    !routineMangledName:routineNameForInvocationGraph.string
     !context:inContext
     !globalsAreConstant:false
   )
@@ -124,10 +146,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !false
   ]
 #---
-  let routineNameForInvocationGraph = @lstring.new  {
-    !"exception " + mExceptionClauseName + " " + mPriority
-    !mExceptionClauseName.location
-  }
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
