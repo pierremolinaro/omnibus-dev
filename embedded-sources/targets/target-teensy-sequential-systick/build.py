@@ -713,6 +713,8 @@ def asDir ():
 
 def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
+  if SYSTEM_NAME == "Darwin":
+    MACHINE = "i386"
   return os.path.expanduser ("~/plm-tools/plm-" + MACHINE + "-" + SYSTEM_NAME + "-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*

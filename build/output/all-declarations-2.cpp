@@ -11184,6 +11184,8 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "def toolDir ():\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
   "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11461,7 +11463,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  44277, // Text length
+  44328, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
