@@ -40,6 +40,23 @@ syntax extension common_syntax {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @initRoutineMap {
+  insert insertKey error message "the '%%%K' init routine is already declared"
+  search searchKey error message "there is no '%%%K' init routine"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @initList-element enterInContext
+  ?!context:@semanticContext ioContext
+{
+  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriorityLocation}]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 

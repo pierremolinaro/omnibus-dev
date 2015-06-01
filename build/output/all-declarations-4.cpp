@@ -10,6 +10,208 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//             Overriding category method '@conversionExpressionAST addDependenceEdgeForStaticExpression'              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_conversionExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
+                                                                                         const GALGAS_lstring constinArgument_inConstantName,
+                                                                                         GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_conversionExpressionAST * object = (const cPtr_conversionExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_conversionExpressionAST) ;
+  callCategoryMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 57)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_conversionExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterCategoryMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_conversionExpressionAST.mSlotID,
+                                                            categoryMethod_conversionExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_conversionExpressionAST_addDependenceEdgeForStaticExpression (defineCategoryMethod_conversionExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Overriding category method '@conversionExpressionAST analyzeExpression'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_conversionExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
+                                                                      const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
+                                                                      const GALGAS_receiverType constinArgument_inReceiverType,
+                                                                      const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inOptionalTargetType,
+                                                                      const GALGAS_semanticContext constinArgument_inContext,
+                                                                      const GALGAS_stringset constinArgument_inModeSet,
+                                                                      const GALGAS_bool constinArgument_inAllowExceptions,
+                                                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                      GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                      GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                      GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                      GALGAS_unifiedTypeMap_2D_proxy & outArgument_outExpressionType,
+                                                                      GALGAS_variableKindIR & outArgument_outResult,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_conversionExpressionAST * object = (const cPtr_conversionExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_conversionExpressionAST) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_convertedExpressionType ;
+  GALGAS_variableKindIR var_expressionResult ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_convertedExpressionType, var_expressionResult, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 81)) ;
+  GALGAS_bool test_0 = constinArgument_inAllowExceptions.operator_not (SOURCE_FILE ("expression-conversion.galgas", 96)) ;
+  if (kBoolTrue == test_0.boolEnum ()) {
+    test_0 = object->mAttribute_mSilently.operator_not (SOURCE_FILE ("expression-conversion.galgas", 96)) ;
+  }
+  const enumGalgasBool test_1 = test_0.boolEnum () ;
+  if (kBoolTrue == test_1) {
+    GALGAS_location location_2 (object->mAttribute_mTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_2, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 97)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 97)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 97))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 97)) ;
+  }
+  outArgument_outExpressionType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("expression-conversion.galgas", 100)) ;
+  const enumGalgasBool test_3 = outArgument_outExpressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 102)).reader_isInteger (SOURCE_FILE ("expression-conversion.galgas", 102)).operator_not (SOURCE_FILE ("expression-conversion.galgas", 102)).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    GALGAS_location location_4 (object->mAttribute_mTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_4, GALGAS_string ("this type is not an integer type")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 103)) ;
+  }else if (kBoolFalse == test_3) {
+    const enumGalgasBool test_5 = var_convertedExpressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 104)).reader_isInteger (SOURCE_FILE ("expression-conversion.galgas", 104)).operator_not (SOURCE_FILE ("expression-conversion.galgas", 104)).boolEnum () ;
+    if (kBoolTrue == test_5) {
+      inCompiler->emitSemanticError (object->mAttribute_mEndOfExpression, GALGAS_string ("expression type is not an integer type")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 105)) ;
+    }else if (kBoolFalse == test_5) {
+      GALGAS_sint_36__34_ var_minSource ;
+      GALGAS_uint_36__34_ var_maxSource ;
+      GALGAS_bool joker_4722 ; // Joker input parameter
+      GALGAS_uint joker_4734 ; // Joker input parameter
+      var_convertedExpressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 107)).method_integer (var_minSource, var_maxSource, joker_4722, joker_4734, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 107)) ;
+      GALGAS_sint_36__34_ var_minTarget ;
+      GALGAS_uint_36__34_ var_maxTarget ;
+      GALGAS_bool joker_4825 ; // Joker input parameter
+      GALGAS_uint joker_4837 ; // Joker input parameter
+      outArgument_outExpressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 108)).method_integer (var_minTarget, var_maxTarget, joker_4825, joker_4837, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 108)) ;
+      GALGAS_bool test_6 = GALGAS_bool (kIsInfOrEqual, var_minTarget.objectCompare (var_minSource)) ;
+      if (kBoolTrue == test_6.boolEnum ()) {
+        test_6 = GALGAS_bool (kIsSupOrEqual, var_maxTarget.objectCompare (var_maxSource)) ;
+      }
+      GALGAS_bool var_alwaysPossible = test_6 ;
+      const enumGalgasBool test_7 = var_alwaysPossible.boolEnum () ;
+      if (kBoolTrue == test_7) {
+        GALGAS_location location_8 (object->mAttribute_mTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_8, GALGAS_string ("useless explicit conversion")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 111)) ;
+      }
+    }
+  }
+  {
+  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-conversion.galgas", 115)) ;
+  }
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_conversionInstructionIR::constructor_new (outArgument_outExpressionType, var_convertedExpressionType, outArgument_outResult, var_expressionResult, object->mAttribute_mSilently, object->mAttribute_mTypeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-conversion.galgas", 117))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 117)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_conversionExpressionAST_analyzeExpression (void) {
+  enterCategoryMethod_analyzeExpression (kTypeDescriptor_GALGAS_conversionExpressionAST.mSlotID,
+                                         categoryMethod_conversionExpressionAST_analyzeExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_conversionExpressionAST_analyzeExpression (defineCategoryMethod_conversionExpressionAST_analyzeExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                    Overriding category method '@conversionInstructionIR enterAccessibleEntities'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_conversionInstructionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                            GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_conversionInstructionIR * object = (const cPtr_conversionInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_conversionInstructionIR) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mOperand, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 145)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_conversionInstructionIR_enterAccessibleEntities (void) {
+  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_conversionInstructionIR.mSlotID,
+                                               categoryMethod_conversionInstructionIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_conversionInstructionIR_enterAccessibleEntities (defineCategoryMethod_conversionInstructionIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding category reader '@conversionInstructionIR instructionCode'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string categoryReader_conversionInstructionIR_instructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outCode ; // Returned variable
+  const cPtr_conversionInstructionIR * object = (const cPtr_conversionInstructionIR *) inObject ;
+  macroValidSharedObject (object, cPtr_conversionInstructionIR) ;
+  GALGAS_bool test_0 = object->mAttribute_mSilently ;
+  if (kBoolTrue != test_0.boolEnum ()) {
+    test_0 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()) ;
+  }
+  const enumGalgasBool test_1 = test_0.boolEnum () ;
+  if (kBoolTrue == test_1) {
+    result_outCode = GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)).add_operation (categoryReader_mangledName (object->mAttribute_mTemporaryResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 152)) ;
+    result_outCode.dotAssign_operation (GALGAS_string (" = ((").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)).add_operation (GALGAS_string (") "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)).add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 153))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 153)) ;
+  }else if (kBoolFalse == test_1) {
+    GALGAS_string var_okVar = GALGAS_string ("ok").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 155)).reader_string (SOURCE_FILE ("expression-conversion.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 155)) ;
+    GALGAS_sint_36__34_ var_minSource ;
+    GALGAS_uint_36__34_ var_maxSource ;
+    GALGAS_bool joker_7016 ; // Joker input parameter
+    GALGAS_uint joker_7028 ; // Joker input parameter
+    object->mAttribute_mConvertedExpressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 156)).method_integer (var_minSource, var_maxSource, joker_7016, joker_7028, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 156)) ;
+    GALGAS_sint_36__34_ var_minTarget ;
+    GALGAS_uint_36__34_ var_maxTarget ;
+    GALGAS_bool joker_7111 ; // Joker input parameter
+    GALGAS_uint joker_7123 ; // Joker input parameter
+    object->mAttribute_mTargetType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 157)).method_integer (var_minTarget, var_maxTarget, joker_7111, joker_7123, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 157)) ;
+    result_outCode = GALGAS_string ("const bool ").add_operation (var_okVar, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 158)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 158)) ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_minTarget.objectCompare (var_minSource)).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      result_outCode.dotAssign_operation (GALGAS_string ("(").add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 160)).add_operation (GALGAS_string (" >= "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 160)).add_operation (var_minTarget.reader_string (SOURCE_FILE ("expression-conversion.galgas", 160)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 160)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 160))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 160)) ;
+    }
+    const enumGalgasBool test_3 = GALGAS_bool (kIsStrictInf, var_maxTarget.objectCompare (var_maxSource)).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_minTarget.objectCompare (var_minSource)).boolEnum () ;
+      if (kBoolTrue == test_4) {
+        result_outCode.dotAssign_operation (GALGAS_string (" && ")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 164)) ;
+      }
+      result_outCode.dotAssign_operation (GALGAS_string ("(").add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 166)).add_operation (GALGAS_string (" <= "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 166)).add_operation (var_maxTarget.reader_string (SOURCE_FILE ("expression-conversion.galgas", 166)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 166)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 166))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 166)) ;
+    }
+    result_outCode.dotAssign_operation (GALGAS_string (" ;\n")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 168)) ;
+    result_outCode.dotAssign_operation (GALGAS_string ("if (!").add_operation (var_okVar, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 169)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 169))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 169)) ;
+    result_outCode.dotAssign_operation (GALGAS_string ("  raise_exception (5, ").add_operation (object->mAttribute_mLocation.reader_file (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 171)).reader_lastPathComponent (SOURCE_FILE ("expression-conversion.galgas", 171)).reader_utf_38_Representation (SOURCE_FILE ("expression-conversion.galgas", 171)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 170)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 171)).add_operation (object->mAttribute_mLocation.reader_line (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 172)).reader_string (SOURCE_FILE ("expression-conversion.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 172)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 172))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 170)) ;
+    result_outCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("expression-conversion.galgas", 173)) ;
+    result_outCode.dotAssign_operation (GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)).add_operation (categoryReader_mangledName (object->mAttribute_mTemporaryResultVariable, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 174))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 174)) ;
+    result_outCode.dotAssign_operation (GALGAS_string (" = ((").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)).add_operation (GALGAS_string (") "), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)).add_operation (categoryReader_mangledName (object->mAttribute_mOperand, inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)).add_operation (GALGAS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("expression-conversion.galgas", 175))  COMMA_SOURCE_FILE ("expression-conversion.galgas", 175)) ;
+  }
+//---
+  return result_outCode ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryReader_conversionInstructionIR_instructionCode (void) {
+  enterCategoryReader_instructionCode (kTypeDescriptor_GALGAS_conversionInstructionIR.mSlotID,
+                                       categoryReader_conversionInstructionIR_instructionCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gReader_conversionInstructionIR_instructionCode (defineCategoryReader_conversionInstructionIR_instructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //            Overriding category method '@infixOperatorExpressionAST addDependenceEdgeForStaticExpression'            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

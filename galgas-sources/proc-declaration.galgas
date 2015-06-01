@@ -332,7 +332,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:[self mangledName]
+    !routineMangledName:"proc " + [self mangledName]
     !context:inContext
     !globalsAreConstant:false
   )
