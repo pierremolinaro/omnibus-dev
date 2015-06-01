@@ -10,6 +10,154 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Overriding category method '@registerDeclaration semanticAnalysis'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_registerDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
+                                                                 const GALGAS_semanticContext constinArgument_inContext,
+                                                                 GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_registerDeclaration * object = (const cPtr_registerDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_registerDeclaration) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_registerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mRegisterTypeName, inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 236)) ;
+  switch (var_registerType.reader_kind (inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 237)).enumValue ()) {
+  case GALGAS_typeKind::kNotBuilt:
+    break ;
+  case GALGAS_typeKind::kEnum_boolean:
+    {
+      GALGAS_location location_0 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_0, GALGAS_string ("a boolean type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 238)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_boolset:
+    {
+      GALGAS_location location_1 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_1, GALGAS_string ("a boolset type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 239)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_integer:
+    {
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_9925 = (const cEnumAssociatedValues_typeKind_integer *) (var_registerType.reader_kind (inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 237)).unsafePointer ()) ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_9925->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_size = extractPtr_9925->mAssociatedValue3 ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, object->mAttribute_mRegisterBitSliceList.reader_length (SOURCE_FILE ("register-declaration.galgas", 241)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        const enumGalgasBool test_3 = extractedValue_unsigned.operator_not (SOURCE_FILE ("register-declaration.galgas", 242)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_location location_4 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+          inCompiler->emitSemanticError (location_4, GALGAS_string ("the register type should be unsigned in order to define bit slices")  COMMA_SOURCE_FILE ("register-declaration.galgas", 243)) ;
+        }
+        GALGAS_uint var_shiftCount = GALGAS_uint ((uint32_t) 0U) ;
+        cEnumerator_registerBitSliceList enumerator_9513 (object->mAttribute_mRegisterBitSliceList, kEnumeration_down) ;
+        while (enumerator_9513.hasCurrentObject ()) {
+          switch (enumerator_9513.current_mRegisterBitSlice (HERE).enumValue ()) {
+          case GALGAS_registerBitSlice::kNotBuilt:
+            break ;
+          case GALGAS_registerBitSlice::kEnum_unusedBits:
+            {
+              const cEnumAssociatedValues_registerBitSlice_unusedBits * extractPtr_9648 = (const cEnumAssociatedValues_registerBitSlice_unusedBits *) (enumerator_9513.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+              const GALGAS_luint_36__34_ extractedValue_count = extractPtr_9648->mAssociatedValue0 ;
+              var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_uint_36__34_.reader_uint (inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 249)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 249)) ;
+            }
+            break ;
+          case GALGAS_registerBitSlice::kEnum_namedBit:
+            {
+              const cEnumAssociatedValues_registerBitSlice_namedBit * extractPtr_9747 = (const cEnumAssociatedValues_registerBitSlice_namedBit *) (enumerator_9513.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
+              const GALGAS_luint_36__34_ extractedValue_count = extractPtr_9747->mAssociatedValue1 ;
+              var_shiftCount = var_shiftCount.add_operation (extractedValue_count.mAttribute_uint_36__34_.reader_uint (inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 251)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 251)) ;
+            }
+            break ;
+          }
+          enumerator_9513.gotoNextObject () ;
+        }
+        const enumGalgasBool test_5 = GALGAS_bool (kIsNotEqual, extractedValue_size.objectCompare (var_shiftCount)).boolEnum () ;
+        if (kBoolTrue == test_5) {
+          GALGAS_location location_6 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+          inCompiler->emitSemanticError (location_6, GALGAS_string ("total bit slice count is ").add_operation (var_shiftCount.reader_string (SOURCE_FILE ("register-declaration.galgas", 255)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 255)).add_operation (GALGAS_string (" (should be "), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 255)).add_operation (extractedValue_size.reader_string (SOURCE_FILE ("register-declaration.galgas", 255)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 255)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 255))  COMMA_SOURCE_FILE ("register-declaration.galgas", 255)) ;
+        }
+      }
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_literalString:
+    {
+      GALGAS_location location_7 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_7, GALGAS_string ("a literal string type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 258)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_structure:
+    {
+      GALGAS_location location_8 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_8, GALGAS_string ("a structure type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 259)) ;
+    }
+    break ;
+  case GALGAS_typeKind::kEnum_enumeration:
+    {
+      GALGAS_location location_9 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_9, GALGAS_string ("an enumeration type is not valid for a register")  COMMA_SOURCE_FILE ("register-declaration.galgas", 260)) ;
+    }
+    break ;
+  }
+  GALGAS_uint var_size ;
+  GALGAS_bool var_isSigned ;
+  GALGAS_string joker_10316 ; // Joker input parameter
+  constinArgument_inContext.mAttribute_mTargetBaseTypeMap.method_searchKey (GALGAS_string ("size").reader_nowhere (SOURCE_FILE ("register-declaration.galgas", 263)), joker_10316, var_size, var_isSigned, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 263)) ;
+  const enumGalgasBool test_10 = var_isSigned.boolEnum () ;
+  if (kBoolTrue == test_10) {
+    GALGAS_location location_11 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_11, GALGAS_string ("base type 'size' should be unsigned")  COMMA_SOURCE_FILE ("register-declaration.galgas", 265)) ;
+  }
+  GALGAS_uint_36__34_ var_maxAddress ;
+  const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, var_size.objectCompare (GALGAS_uint ((uint32_t) 8U))).boolEnum () ;
+  if (kBoolTrue == test_12) {
+    var_maxAddress = GALGAS_uint_36__34_ ((uint64_t) 255ULL) ;
+  }else if (kBoolFalse == test_12) {
+    const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, var_size.objectCompare (GALGAS_uint ((uint32_t) 16U))).boolEnum () ;
+    if (kBoolTrue == test_13) {
+      var_maxAddress = GALGAS_uint_36__34_ ((uint64_t) 65535ULL) ;
+    }else if (kBoolFalse == test_13) {
+      const enumGalgasBool test_14 = GALGAS_bool (kIsEqual, var_size.objectCompare (GALGAS_uint ((uint32_t) 32U))).boolEnum () ;
+      if (kBoolTrue == test_14) {
+        var_maxAddress = GALGAS_uint::constructor_max (SOURCE_FILE ("register-declaration.galgas", 273)).reader_uint_36__34_ (SOURCE_FILE ("register-declaration.galgas", 273)) ;
+      }else if (kBoolFalse == test_14) {
+        const enumGalgasBool test_15 = GALGAS_bool (kIsEqual, var_size.objectCompare (GALGAS_uint ((uint32_t) 16U))).boolEnum () ;
+        if (kBoolTrue == test_15) {
+          var_maxAddress = GALGAS_uint_36__34_::constructor_max (SOURCE_FILE ("register-declaration.galgas", 275)) ;
+        }else if (kBoolFalse == test_15) {
+          GALGAS_location location_16 (object->mAttribute_mRegisterTypeName.reader_location (HERE)) ; // Implicit use of 'location' reader
+          inCompiler->emitSemanticError (location_16, GALGAS_string ("base type 'size' has an invalid size")  COMMA_SOURCE_FILE ("register-declaration.galgas", 277)) ;
+          var_maxAddress.drop () ; // Release error dropped variable
+        }
+      }
+    }
+  }
+  cEnumerator_registerDeclarationList enumerator_10791 (object->mAttribute_mRegisterDeclarationList, kEnumeration_up) ;
+  while (enumerator_10791.hasCurrentObject ()) {
+    const enumGalgasBool test_17 = GALGAS_bool (kIsStrictSup, enumerator_10791.current_mRegisterAddress (HERE).mAttribute_uint_36__34_.objectCompare (var_maxAddress)).boolEnum () ;
+    if (kBoolTrue == test_17) {
+      GALGAS_location location_18 (enumerator_10791.current_mRegisterAddress (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_18, GALGAS_string ("register address should be lower or equal to ").add_operation (var_maxAddress.reader_hexString (SOURCE_FILE ("register-declaration.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 281))  COMMA_SOURCE_FILE ("register-declaration.galgas", 281)) ;
+    }
+    {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mRegisterMap.modifier_insertKey (enumerator_10791.current_mRegisterName (HERE), object->mAttribute_mRegisterTypeName.mAttribute_string, enumerator_10791.current_mRegisterAddress (HERE).mAttribute_uint_36__34_, inCompiler COMMA_SOURCE_FILE ("register-declaration.galgas", 284)) ;
+    }
+    enumerator_10791.gotoNextObject () ;
+  }
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_registerDeclaration_semanticAnalysis (void) {
+  enterCategoryMethod_semanticAnalysis (kTypeDescriptor_GALGAS_registerDeclaration.mSlotID,
+                                        categoryMethod_registerDeclaration_semanticAnalysis) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_registerDeclaration_semanticAnalysis (defineCategoryMethod_registerDeclaration_semanticAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //             Overriding category method '@conversionExpressionAST addDependenceEdgeForStaticExpression'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

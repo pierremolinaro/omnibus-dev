@@ -17,12 +17,21 @@ list @allowedInitList {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+list @allowedExceptionList {
+  @bool mHasWriteAccess
+  @lstring mExceptionName
+  @luint64 mExceptionPriority
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 list @globalVarDeclarationList {
   @generalizedTypeEnumAST mType
   @lstring mVarName
   @expressionAST mSourceExpression
   @allowedProcList mAllowedProcList
   @allowedInitList mAllowedInitList
+  @allowedExceptionList mAllowedExceptionList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -42,6 +51,7 @@ syntax extension common_syntax {
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}
     @allowedInitList allowedInitList = {}
+    @allowedExceptionList allowedExceptionList = {}
     ${$
     repeat
       @bool hasWriteAccess
@@ -63,6 +73,11 @@ syntax extension common_syntax {
         $init$
         $integer$ ?let @luint64 priority
         allowedInitList += !hasWriteAccess !priority
+      or
+        $exception$
+        $identifier$ ?let exceptionName
+        $integer$ ?let @luint64 priority
+        allowedExceptionList += !hasWriteAccess !exceptionName !priority
       end
     while
     end
@@ -73,6 +88,7 @@ syntax extension common_syntax {
       !expression
       !allowedProcList
       !allowedInitList
+      !allowedExceptionList
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -134,6 +150,26 @@ method @globalVarDeclarationList-element enterInContext
       [!?allowedProcedureMap insertKey
          !.new {!"init " + [mInitPriority.uint64 string] !mInitPriority.location}
          !mHasWriteAccess
+      ]
+    end
+  #--- Check allowed exception routines are defined
+    for () in mAllowedExceptionList do
+      if mExceptionName.string == "setup" then
+        [ioContext.mExceptionSetupRoutinePriorityMap searchSetupKey
+          !.new{![mExceptionPriority.uint64 string]
+          !mExceptionPriority.location}
+        ]
+      elsif mExceptionName.string == "loop" then
+        [ioContext.mExceptionLoopRoutinePriorityMap searchLoopKey
+          !.new{![mExceptionPriority.uint64 string]
+          !mExceptionPriority.location}
+        ]
+      else
+        error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
+      end
+      [!?allowedProcedureMap insertKey
+        !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.uint64 string] !mExceptionName.location}
+        !mHasWriteAccess
       ]
     end
   #--- Check allowed procedures are defined
