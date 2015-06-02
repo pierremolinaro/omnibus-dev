@@ -1981,6 +1981,7 @@ extern const char * gWrapperFileContent_11_targetTemplates ;
 extern const char * gWrapperFileContent_12_targetTemplates ;
 extern const char * gWrapperFileContent_13_targetTemplates ;
 extern const char * gWrapperFileContent_14_targetTemplates ;
+extern const char * gWrapperFileContent_15_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2002,6 +2003,7 @@ extern const cRegularFileWrapper gWrapperFile_11_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_12_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -49,9 +49,16 @@ proc generateTargets
     end
     let sourcePath = targetPath + "/sources"
     for (file) in [fw textFilesAtPath !sourcePath] do
-      let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-      [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
-      if [file pathExtension] == "c" then
+      if file == "linker-script.ld" then
+        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
+        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+      elsif file == "target.c" then
+        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
+        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+        outFilesToInclude += !file
+      elsif (file == "target-exception.c") && not [option plm_options.noExceptionGeneration value] then
+        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
+        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
         outFilesToInclude += !file
       end
     end

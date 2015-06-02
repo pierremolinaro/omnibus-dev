@@ -118,14 +118,6 @@ proc codeGeneration
     code += "static void raise_exception_internal (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
     code += "                                      const char * inSourceFile,\n"
     code += "                                      const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) ;\n\n"
-    code += "static void raise_exception (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
-    code += "                             const char * inSourceFile,\n"
-    code += "                             const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) {\n"
-    code += " //--- Mask interrupt: write 1 into FAULTMASK register\n"
-    code += "  const uint32_t maskValue = 1 ;\n"
-    code += "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
-    code += "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
-    code += "}\n\n"
   end
   code += titleComment (!"Static Strings")
   for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
