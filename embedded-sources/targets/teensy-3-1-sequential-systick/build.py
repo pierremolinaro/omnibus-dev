@@ -136,6 +136,7 @@ def runSingleCommand (cmd) :
   childProcess.wait ()
   if childProcess.returncode != 0 :
     sys.exit (childProcess.returncode)
+  sys.stdout.flush()
 
 #----------------------------------------------------------------------------------------------------------------------*
 #   runCommand                                                                                                         *
@@ -156,6 +157,7 @@ def runCommand (cmd, title, showCommand) :
   childProcess.wait ()
   if childProcess.returncode != 0 :
     sys.exit (childProcess.returncode)
+  sys.stdout.flush()
 
 #----------------------------------------------------------------------------------------------------------------------*
 #   runInThread                                                                                                        *
@@ -833,36 +835,40 @@ def teensyLoader ():
 #   ARCHIVE DOWNLOAD                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
-def downloadReportHook (a,b,fileSize): 
-  if fileSize < (1 << 10):
-    sizeString = str (fileSize)
-  else:
-    if fileSize < (1 << 20):
-      sizeString = str (fileSize >> 10) + "Ki"
-    else:
-      sizeString = str (fileSize >> 20) + "Mi"
-  # "," at the end of the line is important!
-  print "% 3.1f%% of %sB\r" % (min(100.0, float(a * b) / fileSize * 100.0), sizeString),
-  sys.stdout.flush()
+downloadProgression = 0.0
+
+def downloadReportHook (a, b, fileSize) :
+  global downloadProgression
+  newProgression = min (100.0, float(a * b) / fileSize * 100.0)
+  if newProgression > downloadProgression :
+    downloadProgression = downloadProgression + 1.0
+    sys.stdout.write(".")
+    sys.stdout.flush()
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def downloadArchive (archiveURL, archivePath):
+  global downloadProgression
+  downloadProgression = 0.0
   runSingleCommand (["rm", "-f", archivePath + ".downloading"])
   runSingleCommand (["rm", "-f", archivePath + ".tar.bz2"])
   runSingleCommand (["mkdir", "-p", os.path.dirname (archivePath)])
   print "URL: "+ archiveURL
   print "Downloading... " + archivePath + ".downloading"
-  urllib.urlretrieve (archiveURL,  archivePath + ".downloading", downloadReportHook)
-  print ""
-  fileSize = os.path.getsize (archivePath + ".downloading")
-  ok = fileSize > 1000000
-  if ok:
-    runSingleCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
-  else:
-    print BOLD_RED () + "Error: cannot download file" + ENDC ()
+  try:
+    urllib.urlretrieve (archiveURL,  archivePath + ".downloading", downloadReportHook)
+    print ""
+    fileSize = os.path.getsize (archivePath + ".downloading")
+    ok = fileSize > 1000000
+    if ok:
+      runSingleCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
+    else:
+      print BOLD_RED () + "Error: cannot download file" + ENDC ()
+      sys.exit (1)
+  except:
+    print BOLD_RED () + "Error: no network connection" + ENDC ()
     sys.exit (1)
-
+    
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
 #   MAIN                                                                                                               *

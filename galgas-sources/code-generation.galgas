@@ -91,8 +91,9 @@ proc codeGeneration
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
 {
+  let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
-  let targetDirectory = [inSourceFileName stringByDeletingPathExtension]
+  let targetDirectory = homeDir + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
   let sourceDirectory = targetDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 #--- Generate target files
@@ -179,6 +180,10 @@ proc codeGeneration
   end
   code += separatorLine ()
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
+#--- Perform C compilation
+  let buildScript = "python " + targetDirectory + "/build.py"
+  let result = [buildScript system]
+  log result
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
