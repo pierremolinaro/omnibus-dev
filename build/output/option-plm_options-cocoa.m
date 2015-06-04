@@ -17,6 +17,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   OC_GGS_CommandLineOption * option ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"compileOnly"
+    commandChar:99
+    commandString:@"no-c-compilation"
+    comment:@"Do not compile generated C code"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"doNotDetectRecursiveCalls"
     commandChar:114
     commandString:@"do-not-detect-recursive-calls"
@@ -30,6 +39,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:0
     commandString:@"no-exception-generation"
     comment:@"Do not generate exception code"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"noFlashing"
+    commandChar:102
+    commandString:@"no-flash"
+    comment:@"Do not flash target"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
