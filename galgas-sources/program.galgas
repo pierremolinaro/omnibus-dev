@@ -107,6 +107,7 @@ private proc compileProject
         codeOptimisation (!?intermediateCode:intermediateCodeStruct)
         codeGeneration (
           !outputFile:inSourceFile.string
+          !eof:inEndOfSourceFile
           !intermediateCode:intermediateCodeStruct
           !target:inTargetName
           !exceptionCodeType:semanticContext.mExceptionCodeType

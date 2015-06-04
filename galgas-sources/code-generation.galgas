@@ -86,6 +86,7 @@ func titleComment ?@string inTitle -> @string outTitle {
 
 proc codeGeneration
   ?outputFile:let @string inSourceFileName
+  ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
@@ -181,9 +182,19 @@ proc codeGeneration
   code += separatorLine ()
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
 #--- Perform C compilation
-  let buildScript = "python " + targetDirectory + "/build.py"
-  let result = [buildScript system]
-  log result
+  if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
+    let buildScript = "python " + targetDirectory + "/build.py"
+    var result = [buildScript system]
+    if result != 0S then
+      error inEndOfSourceFileLocation: "error during C compilation"
+    elsif not [option plm_options.noFlashing value] then
+      let flashScript = "python " + targetDirectory + "/flash-and-run.py"
+      result = [flashScript system]
+      if result != 0S then
+        error inEndOfSourceFileLocation: "error during target flashing"
+      end
+    end
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
