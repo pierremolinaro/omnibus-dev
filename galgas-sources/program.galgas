@@ -136,11 +136,10 @@ private proc addTargetSpecificFiles
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
   @ast ast = .default
-  let targetFilePath = "targets/" + inTargetName
   recursiveImportFiles (
     !?ast:ast
     !currentDirectory:inCurrentDirectory
-    !importClauseList:{!.new {!targetFilePath !inTargetName.location}}
+    !importClauseList:{!inTargetName}
     !?importedFilePathSet:ioImportedFileAbsolutePathSet
   )
   ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList

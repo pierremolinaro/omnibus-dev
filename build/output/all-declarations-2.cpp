@@ -6812,9 +6812,208 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   gWrapperFileContent_0_targetTemplates
 ) ;
 
+//--- File '/teensy-3-1-interrupt.plms'
+
+const char * gWrapperFileContent_1_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+  "\n"
+  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "\n"
+  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "booleanType Bool @unsigned8\n"
+  "\n"
+  "newIntegerType UInt8  @unsigned8\n"
+  "newIntegerType UInt16 @unsigned16\n"
+  "newIntegerType UInt32 @unsigned32\n"
+  "newIntegerType UInt64 @unsigned64\n"
+  "\n"
+  "newIntegerType Int8  @signed8\n"
+  "newIntegerType Int16 @signed16\n"
+  "newIntegerType Int32 @signed32\n"
+  "newIntegerType Int64 @signed64\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception : Int32 UInt32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "mode $isr\n"
+  "mode $user\n"
+  "mode $init\n"
+  "mode $exception\n"
+  "mode $boot\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "import \"microcontrollers/mk20dx256.plm\"\n"
+  "import \"microcontrollers/lcd.plm\"\n"
+  "import \"microcontrollers/leds.plm\"\n"
+  "import \"microcontrollers/default-isr.plm\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "boot 10 {\n"
+  "//---------1- Inhiber le chien de garde\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "  WDOG_STCTRLH = 0x0010\n"
+  "//--- Enable clocks to always-used peripherals\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
+  "  SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
+  "//--- If the RTC oscillator isn't enabled, get it started early\n"
+  "  if not RTC_CR.OSCE.bool then\n"
+  "    RTC_SR = 0\n"
+  "    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE\n"
+  "  end\n"
+  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "  if PMC_REGSC.ACKISO != 0 then\n"
+  "    PMC_REGSC |= PMC_REGSC::ACKISO\n"
+  "  end\n"
+  "// TODO: do this while the PLL is waiting to lock....\n"
+  "  VTOR = 0  // use vector table in flash\n"
+  "//  // default all interrupts to medium priority level\n"
+  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "//---------2- Initialisation de la PLL\n"
+  "// start in FEI mode\n"
+  "//--- Enable capacitors for crystal\n"
+  "  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P\n"
+  "//--- Enable osc, 8-32 MHz range, low power mode\n"
+  "  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS\n"
+  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for crystal oscillator to begin\n"
+  "  while MCG_S.OSCINIT0 == 0 do\n"
+  "  end\n"
+  "//--- Wait for FLL to use oscillator\n"
+  "  while MCG_S.IREFST != 0 do\n"
+  "  end\n"
+  "//--- Wait for MCGOUT to use oscillator\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(2) do\n"
+  "  end\n"
+  "//--- Now we're in FBE mode\n"
+  "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
+  "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
+  "//--- Config PLL for 96 MHz output\n"
+  "  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)\n"
+  "//--- Wait for PLL to start using xtal as its input\n"
+  "  while MCG_S.PLLST == 0 do\n"
+  "  end\n"
+  "//--- Wait for PLL to lock\n"
+  "  while MCG_S.LOCK0 == 0 do\n"
+  "  end\n"
+  "//--- Now we're in PBE mode\n"
+  "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1::OUTDIV1(0) | SIM_CLKDIV1::OUTDIV2(1) | SIM_CLKDIV1::OUTDIV4(3)\n"
+  "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for PLL clock to be used\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+  "teensy-3-1-interrupt.plms",
+  "plms",
+  true, // Text file
+  3818, // Text length
+  gWrapperFileContent_1_targetTemplates
+) ;
+
+//--- File '/teensy-3-1-sequential-systick.plms'
+
+const char * gWrapperFileContent_2_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+  "\n"
+  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "\n"
+  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "booleanType Bool @unsigned8\n"
+  "\n"
+  "newIntegerType UInt8  @unsigned8\n"
+  "newIntegerType UInt16 @unsigned16\n"
+  "newIntegerType UInt32 @unsigned32\n"
+  "newIntegerType UInt64 @unsigned64\n"
+  "\n"
+  "newIntegerType Int8  @signed8\n"
+  "newIntegerType Int16 @signed16\n"
+  "newIntegerType Int32 @signed32\n"
+  "newIntegerType Int64 @signed64\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception : Int32 UInt32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "mode $isr\n"
+  "mode $user\n"
+  "mode $init\n"
+  "mode $exception\n"
+  "mode $boot\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "import \"microcontrollers/mk20dx256.plm\"\n"
+  "import \"microcontrollers/boot-teensy-3-1.plm\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc systickHandler $isr ()\n"
+  "\n"
+  "proc systickHandler $isr @weak () {\n"
+  "}\n"
+  "\n"
+  "init 0 { // Configure Systick interrupt every ms\n"
+  "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "  SYST_CVR = 0\n"
+  "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+  "teensy-3-1-sequential-systick.plms",
+  "plms",
+  true, // Text file
+  1830, // Text length
+  gWrapperFileContent_2_targetTemplates
+) ;
+
 //--- File 'microcontrollers/boot-teensy-3-1.plm'
 
-const char * gWrapperFileContent_1_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_3_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 0 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -6879,17 +7078,17 @@ const char * gWrapperFileContent_1_targetTemplates = "//------------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_targetTemplates (
+const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "boot-teensy-3-1.plm",
   "plm",
   true, // Text file
   2377, // Text length
-  gWrapperFileContent_1_targetTemplates
+  gWrapperFileContent_3_targetTemplates
 ) ;
 
 //--- File 'microcontrollers/default-isr.plm'
 
-const char * gWrapperFileContent_2_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_4_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "required proc NMIHandler $isr ()\n"
   "\n"
@@ -7537,17 +7736,17 @@ const char * gWrapperFileContent_2_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_targetTemplates (
+const cRegularFileWrapper gWrapperFile_4_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
   14840, // Text length
-  gWrapperFileContent_2_targetTemplates
+  gWrapperFileContent_4_targetTemplates
 ) ;
 
 //--- File 'microcontrollers/lcd.plm'
 
-const char * gWrapperFileContent_3_targetTemplates = "\n"
+const char * gWrapperFileContent_5_targetTemplates = "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -8054,17 +8253,17 @@ const char * gWrapperFileContent_3_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_targetTemplates (
+const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
   15519, // Text length
-  gWrapperFileContent_3_targetTemplates
+  gWrapperFileContent_5_targetTemplates
 ) ;
 
 //--- File 'microcontrollers/leds.plm'
 
-const char * gWrapperFileContent_4_targetTemplates = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_6_targetTemplates = "//-----------------------------------------------------------------------------*\n"
   "//   Led L0 : PTA12\n"
   "//   Led L1 : PTA13\n"
   "//   Led L2 : PTD7\n"
@@ -8163,17 +8362,17 @@ const char * gWrapperFileContent_4_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_targetTemplates (
+const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "leds.plm",
   "plm",
   true, // Text file
   2338, // Text length
-  gWrapperFileContent_4_targetTemplates
+  gWrapperFileContent_6_targetTemplates
 ) ;
 
 //--- File 'microcontrollers/mk20dx256.plm'
 
-const char * gWrapperFileContent_5_targetTemplates = "// Teensyduino Core Library\n"
+const char * gWrapperFileContent_7_targetTemplates = "// Teensyduino Core Library\n"
   "// http://www.pjrc.com/teensy/\n"
   "// Copyright (c) 2013 PJRC.COM, LLC.\n"
   "//\n"
@@ -10323,22 +10522,22 @@ const char * gWrapperFileContent_5_targetTemplates = "// Teensyduino Core Librar
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_targetTemplates (
+const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
   135418, // Text length
-  gWrapperFileContent_5_targetTemplates
+  gWrapperFileContent_7_targetTemplates
 ) ;
 
 //--- All files of 'microcontrollers' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [6] = {
-  & gWrapperFile_1_targetTemplates,
-  & gWrapperFile_2_targetTemplates,
   & gWrapperFile_3_targetTemplates,
   & gWrapperFile_4_targetTemplates,
   & gWrapperFile_5_targetTemplates,
+  & gWrapperFile_6_targetTemplates,
+  & gWrapperFile_7_targetTemplates,
   NULL
 } ;
 
@@ -10358,9 +10557,9 @@ const cDirectoryWrapper gWrapperDirectory_1_targetTemplates (
   gWrapperAllDirectories_targetTemplates_1
 ) ;
 
-//--- File 'targets/teensy-3-1-interrupt.plms'
+//--- File 'plms/teensy-3-1-interrupt.plms'
 
-const char * gWrapperFileContent_6_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_8_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
@@ -10475,17 +10674,17 @@ const char * gWrapperFileContent_6_targetTemplates = "newUnsignedRepresentation 
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_targetTemplates (
+const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "teensy-3-1-interrupt.plms",
   "plms",
   true, // Text file
   3818, // Text length
-  gWrapperFileContent_6_targetTemplates
+  gWrapperFileContent_8_targetTemplates
 ) ;
 
-//--- File 'targets/teensy-3-1-sequential-systick.plms'
+//--- File 'plms/teensy-3-1-sequential-systick.plms'
 
-const char * gWrapperFileContent_7_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_9_targetTemplates = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
@@ -10549,17 +10748,17 @@ const char * gWrapperFileContent_7_targetTemplates = "newUnsignedRepresentation 
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_targetTemplates (
+const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "teensy-3-1-sequential-systick.plms",
   "plms",
   true, // Text file
   1830, // Text length
-  gWrapperFileContent_7_targetTemplates
+  gWrapperFileContent_9_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build-as.py'
 
-const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -10593,17 +10792,17 @@ const char * gWrapperFileContent_8_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_targetTemplates (
+const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_8_targetTemplates
+  gWrapperFileContent_10_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build-verbose.py'
 
-const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -10637,17 +10836,17 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_targetTemplates (
+const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_9_targetTemplates
+  gWrapperFileContent_11_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build.py'
 
-const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11637,17 +11836,17 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_targetTemplates (
+const cRegularFileWrapper gWrapperFile_12_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   44328, // Text length
-  gWrapperFileContent_10_targetTemplates
+  gWrapperFileContent_12_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/clean.py'
 
-const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -11684,17 +11883,17 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_targetTemplates (
+const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_11_targetTemplates
+  gWrapperFileContent_13_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-dump.py'
 
-const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -11728,17 +11927,17 @@ const char * gWrapperFileContent_12_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "display-obj-dump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_12_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-size.py'
 
-const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -11772,17 +11971,17 @@ const char * gWrapperFileContent_13_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "display-obj-size.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_13_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-interrupt/flash-and-run.py'
 
-const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_16_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -11816,17 +12015,17 @@ const char * gWrapperFileContent_14_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "flash-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_14_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_15_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_17_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -11984,17 +12183,17 @@ const char * gWrapperFileContent_15_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_15_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'sources/target-exception.c'
 
-const char * gWrapperFileContent_16_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_18_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void raise_exception (const type_Int32 inCode,\n"
   "                             const char * inSourceFile,\n"
@@ -12007,17 +12206,17 @@ const char * gWrapperFileContent_16_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "target-exception.c",
   "c",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_16_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File 'sources/target.c'
 
-const char * gWrapperFileContent_17_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_19_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Boot routines\n"
@@ -12208,20 +12407,20 @@ const char * gWrapperFileContent_17_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   6877, // Text length
-  gWrapperFileContent_17_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [4] = {
-  & gWrapperFile_15_targetTemplates,
-  & gWrapperFile_16_targetTemplates,
   & gWrapperFile_17_targetTemplates,
+  & gWrapperFile_18_targetTemplates,
+  & gWrapperFile_19_targetTemplates,
   NULL
 } ;
 
@@ -12244,13 +12443,13 @@ const cDirectoryWrapper gWrapperDirectory_4_targetTemplates (
 //--- All files of 'teensy-3-1-interrupt' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [8] = {
-  & gWrapperFile_8_targetTemplates,
-  & gWrapperFile_9_targetTemplates,
   & gWrapperFile_10_targetTemplates,
   & gWrapperFile_11_targetTemplates,
   & gWrapperFile_12_targetTemplates,
   & gWrapperFile_13_targetTemplates,
   & gWrapperFile_14_targetTemplates,
+  & gWrapperFile_15_targetTemplates,
+  & gWrapperFile_16_targetTemplates,
   NULL
 } ;
 
@@ -12273,7 +12472,7 @@ const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
 
 //--- File 'teensy-3-1-sequential-systick/build-as.py'
 
-const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -12307,17 +12506,17 @@ const char * gWrapperFileContent_18_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_20_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -12351,17 +12550,17 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_21_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/build.py'
 
-const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_22_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -13357,17 +13556,17 @@ const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
   "build.py",
   "py",
   true, // Text file
   44460, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_22_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_23_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -13404,17 +13603,17 @@ const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_23_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/display-obj-dump.py'
 
-const char * gWrapperFileContent_22_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_24_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -13448,17 +13647,17 @@ const char * gWrapperFileContent_22_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   "display-obj-dump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_22_targetTemplates
+  gWrapperFileContent_24_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/display-obj-size.py'
 
-const char * gWrapperFileContent_23_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_25_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -13492,17 +13691,17 @@ const char * gWrapperFileContent_23_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "display-obj-size.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_23_targetTemplates
+  gWrapperFileContent_25_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/flash-and-run.py'
 
-const char * gWrapperFileContent_24_targetTemplates = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_26_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -13536,17 +13735,17 @@ const char * gWrapperFileContent_24_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_26_targetTemplates (
   "flash-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_24_targetTemplates
+  gWrapperFileContent_26_targetTemplates
 ) ;
 
 //--- File 'sources/linker-script.ld'
 
-const char * gWrapperFileContent_25_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_27_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -13704,17 +13903,17 @@ const char * gWrapperFileContent_25_targetTemplates = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_targetTemplates (
+const cRegularFileWrapper gWrapperFile_27_targetTemplates (
   "linker-script.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_25_targetTemplates
+  gWrapperFileContent_27_targetTemplates
 ) ;
 
 //--- File 'sources/target-exception.c'
 
-const char * gWrapperFileContent_26_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_28_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void raise_exception (const type_Int32 inCode,\n"
   "                             const char * inSourceFile,\n"
@@ -13727,17 +13926,17 @@ const char * gWrapperFileContent_26_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_targetTemplates (
+const cRegularFileWrapper gWrapperFile_28_targetTemplates (
   "target-exception.c",
   "c",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_26_targetTemplates
+  gWrapperFileContent_28_targetTemplates
 ) ;
 
 //--- File 'sources/target.c'
 
-const char * gWrapperFileContent_27_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_29_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Boot routines\n"
@@ -13928,20 +14127,20 @@ const char * gWrapperFileContent_27_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_targetTemplates (
+const cRegularFileWrapper gWrapperFile_29_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   5256, // Text length
-  gWrapperFileContent_27_targetTemplates
+  gWrapperFileContent_29_targetTemplates
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [4] = {
-  & gWrapperFile_25_targetTemplates,
-  & gWrapperFile_26_targetTemplates,
   & gWrapperFile_27_targetTemplates,
+  & gWrapperFile_28_targetTemplates,
+  & gWrapperFile_29_targetTemplates,
   NULL
 } ;
 
@@ -13964,13 +14163,13 @@ const cDirectoryWrapper gWrapperDirectory_6_targetTemplates (
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [8] = {
-  & gWrapperFile_18_targetTemplates,
-  & gWrapperFile_19_targetTemplates,
   & gWrapperFile_20_targetTemplates,
   & gWrapperFile_21_targetTemplates,
   & gWrapperFile_22_targetTemplates,
   & gWrapperFile_23_targetTemplates,
   & gWrapperFile_24_targetTemplates,
+  & gWrapperFile_25_targetTemplates,
+  & gWrapperFile_26_targetTemplates,
   NULL
 } ;
 
@@ -13991,15 +14190,15 @@ const cDirectoryWrapper gWrapperDirectory_5_targetTemplates (
   gWrapperAllDirectories_targetTemplates_5
 ) ;
 
-//--- All files of 'targets' directory
+//--- All files of 'plms' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [3] = {
-  & gWrapperFile_6_targetTemplates,
-  & gWrapperFile_7_targetTemplates,
+  & gWrapperFile_8_targetTemplates,
+  & gWrapperFile_9_targetTemplates,
   NULL
 } ;
 
-//--- All sub-directories of 'targets' directory
+//--- All sub-directories of 'plms' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [3] = {
   & gWrapperDirectory_3_targetTemplates,
@@ -14007,28 +14206,3466 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [3] = 
   NULL
 } ;
 
-//--- Directory 'targets'
+//--- Directory 'plms'
 
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
-  "targets",
+  "plms",
   2,
   gWrapperAllFiles_targetTemplates_2,
   2,
   gWrapperAllDirectories_targetTemplates_2
 ) ;
 
+//--- File 'teensy-3-1-interrupt/build-as.py'
+
+const char * gWrapperFileContent_30_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_30_targetTemplates (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_30_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/build-verbose.py'
+
+const char * gWrapperFileContent_31_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_31_targetTemplates (
+  "build-verbose.py",
+  "py",
+  true, // Text file
+  1002, // Text length
+  gWrapperFileContent_31_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/build.py'
+
+const char * gWrapperFileContent_32_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadReportHook (a,b,fileSize): \n"
+  "  if fileSize < (1 << 10):\n"
+  "    sizeString = str (fileSize)\n"
+  "  else:\n"
+  "    if fileSize < (1 << 20):\n"
+  "      sizeString = str (fileSize >> 10) + \"Ki\"\n"
+  "    else:\n"
+  "      sizeString = str (fileSize >> 20) + \"Mi\"\n"
+  "  # \",\" at the end of the line is important!\n"
+  "  print \"% 3.1f%% of %sB\\r\" % (min(100.0, float(a * b) / fileSize * 100.0), sizeString),\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  print \"URL: \"+ archiveURL\n"
+  "  print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "  print \"\"\n"
+  "  fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "  ok = fileSize > 1000000\n"
+  "  if ok:\n"
+  "    runSingleCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "  else:\n"
+  "    print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runSingleCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "#---\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"display-object-size\":\n"
+  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"object-dump\":\n"
+  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, \"-Sdh\", \"-Mforce-thumb\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
+
+const cRegularFileWrapper gWrapperFile_32_targetTemplates (
+  "build.py",
+  "py",
+  true, // Text file
+  44328, // Text length
+  gWrapperFileContent_32_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/clean.py'
+
+const char * gWrapperFileContent_33_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Directories to clean\n"
+  "dir1 = scriptDir + \"/objects\"\n"
+  "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_33_targetTemplates (
+  "clean.py",
+  "py",
+  true, // Text file
+  1264, // Text length
+  gWrapperFileContent_33_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/display-obj-dump.py'
+
+const char * gWrapperFileContent_34_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_34_targetTemplates (
+  "display-obj-dump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_34_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/display-obj-size.py'
+
+const char * gWrapperFileContent_35_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_35_targetTemplates (
+  "display-obj-size.py",
+  "py",
+  true, // Text file
+  1013, // Text length
+  gWrapperFileContent_35_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-interrupt/flash-and-run.py'
+
+const char * gWrapperFileContent_36_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_36_targetTemplates (
+  "flash-and-run.py",
+  "py",
+  true, // Text file
+  997, // Text length
+  gWrapperFileContent_36_targetTemplates
+) ;
+
+//--- File 'sources/linker-script.ld'
+
+const char * gWrapperFileContent_37_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                   Memory                                   */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 256k \n"
+  "  sram_u (rwx) : ORIGIN = 0x20000000, LENGTH = 32k \n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__sram_u_end = 0x20000000 + 32k ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                ISR Vectors                                 */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Code                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "  } > flash\n"
+  "\n"
+  "  .ARM.exidx : {\n"
+  "    *(.ARM.exidx* .gnu.linkonce.armexidx.*);\n"
+  "    __code_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          Data (initialized data)                           */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > sram_u AT > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          BSS (uninitialized data)                          */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                System stack                                */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .system_stack :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_start = . ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Heap                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __sram_u_end ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_37_targetTemplates (
+  "linker-script.ld",
+  "ld",
+  true, // Text file
+  5218, // Text length
+  gWrapperFileContent_37_targetTemplates
+) ;
+
+//--- File 'sources/target-exception.c'
+
+const char * gWrapperFileContent_38_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void raise_exception (const type_Int32 inCode,\n"
+  "                             const char * inSourceFile,\n"
+  "                             const type_UInt32 inSourceLine) {\n"
+  " //--- Mask interrupt: write 1 into FAULTMASK register\n"
+  "  const uint32_t maskValue = 1 ;\n"
+  "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
+  "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_38_targetTemplates (
+  "target-exception.c",
+  "c",
+  true, // Text file
+  634, // Text length
+  gWrapperFileContent_38_targetTemplates
+) ;
+
+//--- File 'sources/target.c'
+
+const char * gWrapperFileContent_39_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void ResetISR (void) {\n"
+  "//---------1- Boot routines\n"
+  "  boot () ;\n"
+  "  // now we're in PEE mode\n"
+  "  // configure USB for 48 MHz clock\n"
+  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
+  "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
+  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
+  "\n"
+  "//---------2- Initialisation de la section .bss\n"
+  "  extern unsigned __bss_start ;\n"
+  "  extern unsigned __bss_end ;\n"
+  "  unsigned * p = & __bss_start ;\n"
+  "  while (p != & __bss_end) {\n"
+  "    * p = 0 ;\n"
+  "    p ++ ;\n"
+  "  }\n"
+  "//---------3- Copy de la section .data\n"
+  "  extern unsigned __data_start ;\n"
+  "  extern unsigned __data_end ;\n"
+  "  extern unsigned __data_load_start ;\n"
+  "  unsigned * pSrc = & __data_load_start ;\n"
+  "  unsigned * pDest = & __data_start ;\n"
+  "  while (pDest != & __data_end) {\n"
+  "    * pDest = * pSrc ;\n"
+  "    pDest ++ ;\n"
+  "    pSrc ++ ;\n"
+  "  }\n"
+  "//---------4- Init Routines\n"
+  "  init () ;\n"
+  "//---------5- User routines\n"
+  "  proc_setup () ;\n"
+  "  while (1) {\n"
+  "    proc_loop () ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   Vector table                                                                                                      *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned * mStackPointer ;\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  void (* mCoreSystemHandlerVector [15]) (void) ;\n"
+  "//--- Non-Core Vectors\n"
+  "  void (* mNonCoreHandlerVector [240]) (void) ;\n"
+  "//--- Flash magic values\n"
+  "  int mFlash [4] ;\n"
+  "} vectorStructSeq ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "extern unsigned __system_stack_end ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "const vectorStructSeq vector __attribute__ ((section (\".isr_vector\"))) = {\n"
+  "  & __system_stack_end, // 0\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  { ResetISR, // 1\n"
+  "    proc_NMIHandler, // 2\n"
+  "    proc_HardFaultHandler, // 3\n"
+  "    proc_MemManageHandler, // 4\n"
+  "    proc_BusFaultHandler, // 5\n"
+  "    proc_UsageFaultHandler, // 6\n"
+  "    NULL, // 7 (reserved)\n"
+  "    NULL, // 8 (reserved)\n"
+  "    NULL, // 9 (reserved)\n"
+  "    NULL, // 10 (reserved)\n"
+  "    proc_svcHandler, // 11\n"
+  "    proc_DebugMonitorHandler, // 12\n"
+  "    NULL, // 13 (reserved)\n"
+  "    proc_PendSVHandler, // 14\n"
+  "    proc_systickHandler // 15\n"
+  "  },\n"
+  "//--- Non-Core Vectors\n"
+  "  { proc_DMAChannel0TranfertCompleteHandler, // 16\n"
+  "    proc_DMAChannel1TranfertCompleteHandler, // 17\n"
+  "    proc_DMAChannel2TranfertCompleteHandler, // 18\n"
+  "    proc_DMAChannel3TranfertCompleteHandler, // 19\n"
+  "    proc_DMAChannel4TranfertCompleteHandler, // 20\n"
+  "    proc_DMAChannel5TranfertCompleteHandler, // 21\n"
+  "    proc_DMAChannel6TranfertCompleteHandler, // 22\n"
+  "    proc_DMAChannel7TranfertCompleteHandler, // 23\n"
+  "    proc_DMAChannel8TranfertCompleteHandler, // 24\n"
+  "    proc_DMAChannel9TranfertCompleteHandler, // 25\n"
+  "    proc_DMAChannel10TranfertCompleteHandler, // 26\n"
+  "    proc_DMAChannel11TranfertCompleteHandler, // 27\n"
+  "    proc_DMAChannel12TranfertCompleteHandler, // 28\n"
+  "    proc_DMAChannel13TranfertCompleteHandler, // 29\n"
+  "    proc_DMAChannel14TranfertCompleteHandler, // 30\n"
+  "    proc_DMAChannel15TranfertCompleteHandler, // 31\n"
+  "    proc_DMAErrorHandler, // 32\n"
+  "    NULL, // 33\n"
+  "    proc_flashMemoryCommandCompleteHandler, // 34\n"
+  "    proc_flashMemoryReadCollisionHandler, // 35\n"
+  "    proc_modeControllerHandler, // 36\n"
+  "    proc_LLWUHandler, // 37\n"
+  "    proc_WDOGEWMHandler, // 38\n"
+  "    NULL, // 39\n"
+  "    proc_I2C0Handler, // 40\n"
+  "    proc_I2C1Handler, // 41\n"
+  "    proc_SPI0Handler, // 42\n"
+  "    proc_SPI1Handler, // 43\n"
+  "    NULL, // 44\n"
+  "    proc_CAN0MessageBufferHandler, // 45\n"
+  "    proc_CAN0BusOffHandler, // 46\n"
+  "    proc_CAN0ErrorHandler, // 47\n"
+  "    proc_CAN0TransmitWarningHandler, // 48\n"
+  "    proc_CAN0ReceiveWarningHandler, // 49\n"
+  "    proc_CAN0WakeUpHandler, // 50\n"
+  "    proc_I2S0TransmitHandler, // 51\n"
+  "    proc_I2S0ReceiveHandler, // 52\n"
+  "    NULL, // 53\n"
+  "    NULL, // 54\n"
+  "    NULL, // 55\n"
+  "    NULL, // 56\n"
+  "    NULL, // 57\n"
+  "    NULL, // 58\n"
+  "    NULL, // 59\n"
+  "    proc_UART0LONHandler, // 60\n"
+  "    proc_UART0StatusHandler, // 61\n"
+  "    proc_UART0ErrorHandler, // 62\n"
+  "    proc_UART1StatusHandler, // 63\n"
+  "    proc_UART1ErrorHandler, // 64\n"
+  "    proc_UART2StatusHandler, // 65\n"
+  "    proc_UART2ErrorHandler, // 66\n"
+  "    NULL, // 67\n"
+  "    NULL, // 68\n"
+  "    NULL, // 69\n"
+  "    NULL, // 70\n"
+  "    NULL, // 71\n"
+  "    NULL, // 72\n"
+  "    proc_ADC0Handler, // 73\n"
+  "    proc_ADC1Handler, // 74\n"
+  "    proc_CMP0Handler, // 75\n"
+  "    proc_CMP1Handler, // 76\n"
+  "    proc_CMP2Handler, // 77\n"
+  "    proc_FMT0Handler, // 78\n"
+  "    proc_FMT1Handler, // 79\n"
+  "    proc_FMT2Handler, // 80\n"
+  "    proc_CMTHandler, // 81\n"
+  "    proc_RTCAlarmHandler, // 82\n"
+  "    proc_RTCSecondHandler, // 83\n"
+  "    proc_PITChannel0Handler, // 84\n"
+  "    proc_PITChannel1Handler, // 85\n"
+  "    proc_PITChannel2Handler, // 86\n"
+  "    proc_PITChannel3Handler, // 87\n"
+  "    proc_PDBHandler, // 88\n"
+  "    proc_USBOTGHandler, // 89\n"
+  "    proc_USBChargerDetectHandler, // 90\n"
+  "    NULL, // 91\n"
+  "    NULL, // 92\n"
+  "    NULL, // 93\n"
+  "    NULL, // 94\n"
+  "    NULL, // 95\n"
+  "    NULL, // 96\n"
+  "    proc_DAC0Handler, // 97\n"
+  "    NULL, // 98\n"
+  "    proc_TSIHandler, // 99\n"
+  "    proc_MCGHandler, // 100\n"
+  "    proc_lowPowerTimerHandler, // 101\n"
+  "    NULL, // 102\n"
+  "    proc_pinDetectPortAHandler, // 103\n"
+  "    proc_pinDetectPortBHandler, // 104\n"
+  "    proc_pinDetectPortCHandler, // 105\n"
+  "    proc_pinDetectPortDHandler, // 106\n"
+  "    proc_pinDetectPortEHandler, // 107\n"
+  "    NULL, // 108\n"
+  "    NULL, // 109\n"
+  "    proc_softwareInterruptHandler, // 110\n"
+  "    NULL, // 111\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
+  "  },\n"
+  "//--- Flash magic values\n"
+  "  {-1, -1, -1, -2}\n"
+  "} ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_39_targetTemplates (
+  "target.c",
+  "c",
+  true, // Text file
+  6877, // Text length
+  gWrapperFileContent_39_targetTemplates
+) ;
+
+//--- All files of 'sources' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_8 [4] = {
+  & gWrapperFile_37_targetTemplates,
+  & gWrapperFile_38_targetTemplates,
+  & gWrapperFile_39_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'sources' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_8 [1] = {
+  NULL
+} ;
+
+//--- Directory 'sources'
+
+const cDirectoryWrapper gWrapperDirectory_8_targetTemplates (
+  "sources",
+  3,
+  gWrapperAllFiles_targetTemplates_8,
+  0,
+  gWrapperAllDirectories_targetTemplates_8
+) ;
+
+//--- All files of 'teensy-3-1-interrupt' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_7 [8] = {
+  & gWrapperFile_30_targetTemplates,
+  & gWrapperFile_31_targetTemplates,
+  & gWrapperFile_32_targetTemplates,
+  & gWrapperFile_33_targetTemplates,
+  & gWrapperFile_34_targetTemplates,
+  & gWrapperFile_35_targetTemplates,
+  & gWrapperFile_36_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-interrupt' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_7 [2] = {
+  & gWrapperDirectory_8_targetTemplates,
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-interrupt'
+
+const cDirectoryWrapper gWrapperDirectory_7_targetTemplates (
+  "teensy-3-1-interrupt",
+  7,
+  gWrapperAllFiles_targetTemplates_7,
+  1,
+  gWrapperAllDirectories_targetTemplates_7
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build-as.py'
+
+const char * gWrapperFileContent_40_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_40_targetTemplates (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_40_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build-verbose.py'
+
+const char * gWrapperFileContent_41_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_41_targetTemplates (
+  "build-verbose.py",
+  "py",
+  true, // Text file
+  1002, // Text length
+  gWrapperFileContent_41_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build.py'
+
+const char * gWrapperFileContent_42_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "downloadProgression = 0.0\n"
+  "\n"
+  "def downloadReportHook (a, b, fileSize) :\n"
+  "  global downloadProgression\n"
+  "  newProgression = min (100.0, float(a * b) / fileSize * 100.0)\n"
+  "  if newProgression > downloadProgression :\n"
+  "    downloadProgression = downloadProgression + 1.0\n"
+  "    sys.stdout.write(\".\")\n"
+  "    sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  global downloadProgression\n"
+  "  downloadProgression = 0.0\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  print \"URL: \"+ archiveURL\n"
+  "  print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  try:\n"
+  "    urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "    print \"\"\n"
+  "    fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "    ok = fileSize > 1000000\n"
+  "    if ok:\n"
+  "      runSingleCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "    else:\n"
+  "      print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "  except:\n"
+  "    print BOLD_RED () + \"Error: no network connection\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runSingleCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "#---\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"display-object-size\":\n"
+  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"object-dump\":\n"
+  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, \"-Sdh\", \"-Mforce-thumb\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
+
+const cRegularFileWrapper gWrapperFile_42_targetTemplates (
+  "build.py",
+  "py",
+  true, // Text file
+  44460, // Text length
+  gWrapperFileContent_42_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/clean.py'
+
+const char * gWrapperFileContent_43_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Directories to clean\n"
+  "dir1 = scriptDir + \"/objects\"\n"
+  "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_43_targetTemplates (
+  "clean.py",
+  "py",
+  true, // Text file
+  1264, // Text length
+  gWrapperFileContent_43_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/display-obj-dump.py'
+
+const char * gWrapperFileContent_44_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_44_targetTemplates (
+  "display-obj-dump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_44_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/display-obj-size.py'
+
+const char * gWrapperFileContent_45_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_45_targetTemplates (
+  "display-obj-size.py",
+  "py",
+  true, // Text file
+  1013, // Text length
+  gWrapperFileContent_45_targetTemplates
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/flash-and-run.py'
+
+const char * gWrapperFileContent_46_targetTemplates = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_46_targetTemplates (
+  "flash-and-run.py",
+  "py",
+  true, // Text file
+  997, // Text length
+  gWrapperFileContent_46_targetTemplates
+) ;
+
+//--- File 'sources/linker-script.ld'
+
+const char * gWrapperFileContent_47_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                   Memory                                   */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 256k \n"
+  "  sram_u (rwx) : ORIGIN = 0x20000000, LENGTH = 32k \n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__sram_u_end = 0x20000000 + 32k ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                ISR Vectors                                 */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Code                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "  } > flash\n"
+  "\n"
+  "  .ARM.exidx : {\n"
+  "    *(.ARM.exidx* .gnu.linkonce.armexidx.*);\n"
+  "    __code_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          Data (initialized data)                           */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > sram_u AT > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          BSS (uninitialized data)                          */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                System stack                                */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .system_stack :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_start = . ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Heap                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __sram_u_end ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_47_targetTemplates (
+  "linker-script.ld",
+  "ld",
+  true, // Text file
+  5218, // Text length
+  gWrapperFileContent_47_targetTemplates
+) ;
+
+//--- File 'sources/target-exception.c'
+
+const char * gWrapperFileContent_48_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void raise_exception (const type_Int32 inCode,\n"
+  "                             const char * inSourceFile,\n"
+  "                             const type_UInt32 inSourceLine) {\n"
+  " //--- Mask interrupt: write 1 into FAULTMASK register\n"
+  "  const uint32_t maskValue = 1 ;\n"
+  "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
+  "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_48_targetTemplates (
+  "target-exception.c",
+  "c",
+  true, // Text file
+  634, // Text length
+  gWrapperFileContent_48_targetTemplates
+) ;
+
+//--- File 'sources/target.c'
+
+const char * gWrapperFileContent_49_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void ResetISR (void) {\n"
+  "//---------1- Boot routines\n"
+  "  boot () ;\n"
+  "  // now we're in PEE mode\n"
+  "  // configure USB for 48 MHz clock\n"
+  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
+  "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
+  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
+  "\n"
+  "//---------2- Initialisation de la section .bss\n"
+  "  extern unsigned __bss_start ;\n"
+  "  extern unsigned __bss_end ;\n"
+  "  unsigned * p = & __bss_start ;\n"
+  "  while (p != & __bss_end) {\n"
+  "    * p = 0 ;\n"
+  "    p ++ ;\n"
+  "  }\n"
+  "//---------3- Copy de la section .data\n"
+  "  extern unsigned __data_start ;\n"
+  "  extern unsigned __data_end ;\n"
+  "  extern unsigned __data_load_start ;\n"
+  "  unsigned * pSrc = & __data_load_start ;\n"
+  "  unsigned * pDest = & __data_start ;\n"
+  "  while (pDest != & __data_end) {\n"
+  "    * pDest = * pSrc ;\n"
+  "    pDest ++ ;\n"
+  "    pSrc ++ ;\n"
+  "  }\n"
+  "//---------4- Init Routines\n"
+  "  init () ;\n"
+  "//---------5- User routines\n"
+  "  proc_setup () ;\n"
+  "  while (1) {\n"
+  "    proc_loop () ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   Vector table                                                                                                      *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned * mStackPointer ;\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  void (* mCoreSystemHandlerVector [15]) (void) ;\n"
+  "//--- Non-Core Vectors\n"
+  "  void (* mNonCoreHandlerVector [240]) (void) ;\n"
+  "//--- Flash magic values\n"
+  "  int mFlash [4] ;\n"
+  "} vectorStructSeq ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "extern unsigned __system_stack_end ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "const vectorStructSeq vector __attribute__ ((section (\".isr_vector\"))) = {\n"
+  "  & __system_stack_end, // 0\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  { ResetISR, // 1\n"
+  "    NULL, // 2\n"
+  "    NULL, // 3\n"
+  "    NULL, // 4\n"
+  "    NULL, // 5\n"
+  "    NULL, // 6\n"
+  "    NULL, // 7 (reserved)\n"
+  "    NULL, // 8 (reserved)\n"
+  "    NULL, // 9 (reserved)\n"
+  "    NULL, // 10 (reserved)\n"
+  "    NULL, // 11\n"
+  "    NULL, // 12\n"
+  "    NULL, // 13 (reserved)\n"
+  "    NULL, // 14\n"
+  "    proc_systickHandler // 15\n"
+  "  },\n"
+  "//--- Non-Core Vectors\n"
+  "  { NULL, // 16\n"
+  "    NULL, // 17\n"
+  "    NULL, // 18\n"
+  "    NULL, // 19\n"
+  "    NULL, // 20\n"
+  "    NULL, // 21\n"
+  "    NULL, // 22\n"
+  "    NULL, // 23\n"
+  "    NULL, // 24\n"
+  "    NULL, // 25\n"
+  "    NULL, // 26\n"
+  "    NULL, // 27\n"
+  "    NULL, // 28\n"
+  "    NULL, // 29\n"
+  "    NULL, // 30\n"
+  "    NULL, // 31\n"
+  "    NULL, // 32\n"
+  "    NULL, // 33\n"
+  "    NULL, // 34\n"
+  "    NULL, // 35\n"
+  "    NULL, // 36\n"
+  "    NULL, // 37\n"
+  "    NULL, // 38\n"
+  "    NULL, // 39\n"
+  "    NULL, // 40\n"
+  "    NULL, // 41\n"
+  "    NULL, // 42\n"
+  "    NULL, // 43\n"
+  "    NULL, // 44\n"
+  "    NULL, // 45\n"
+  "    NULL, // 46\n"
+  "    NULL, // 47\n"
+  "    NULL, // 48\n"
+  "    NULL, // 49\n"
+  "    NULL, // 50\n"
+  "    NULL, // 51\n"
+  "    NULL, // 52\n"
+  "    NULL, // 53\n"
+  "    NULL, // 54\n"
+  "    NULL, // 55\n"
+  "    NULL, // 56\n"
+  "    NULL, // 57\n"
+  "    NULL, // 58\n"
+  "    NULL, // 59\n"
+  "    NULL, // 60\n"
+  "    NULL, // 61\n"
+  "    NULL, // 62\n"
+  "    NULL, // 63\n"
+  "    NULL, // 64\n"
+  "    NULL, // 65\n"
+  "    NULL, // 66\n"
+  "    NULL, // 67\n"
+  "    NULL, // 68\n"
+  "    NULL, // 69\n"
+  "    NULL, // 70\n"
+  "    NULL, // 71\n"
+  "    NULL, // 72\n"
+  "    NULL, // 73\n"
+  "    NULL, // 74\n"
+  "    NULL, // 75\n"
+  "    NULL, // 76\n"
+  "    NULL, // 77\n"
+  "    NULL, // 78\n"
+  "    NULL, // 79\n"
+  "    NULL, // 80\n"
+  "    NULL, // 81\n"
+  "    NULL, // 82\n"
+  "    NULL, // 83\n"
+  "    NULL, // 84\n"
+  "    NULL, // 85\n"
+  "    NULL, // 86\n"
+  "    NULL, // 87\n"
+  "    NULL, // 88\n"
+  "    NULL, // 89\n"
+  "    NULL, // 90\n"
+  "    NULL, // 91\n"
+  "    NULL, // 92\n"
+  "    NULL, // 93\n"
+  "    NULL, // 94\n"
+  "    NULL, // 95\n"
+  "    NULL, // 96\n"
+  "    NULL, // 97\n"
+  "    NULL, // 98\n"
+  "    NULL, // 99\n"
+  "    NULL, // 100\n"
+  "    NULL, // 101\n"
+  "    NULL, // 102\n"
+  "    NULL, // 103\n"
+  "    NULL, // 104\n"
+  "    NULL, // 105\n"
+  "    NULL, // 106\n"
+  "    NULL, // 107\n"
+  "    NULL, // 108\n"
+  "    NULL, // 109\n"
+  "    NULL, // 110\n"
+  "    NULL, // 111\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
+  "  },\n"
+  "//--- Flash magic values\n"
+  "  {-1, -1, -1, -2}\n"
+  "} ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_49_targetTemplates (
+  "target.c",
+  "c",
+  true, // Text file
+  5256, // Text length
+  gWrapperFileContent_49_targetTemplates
+) ;
+
+//--- All files of 'sources' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_10 [4] = {
+  & gWrapperFile_47_targetTemplates,
+  & gWrapperFile_48_targetTemplates,
+  & gWrapperFile_49_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'sources' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_10 [1] = {
+  NULL
+} ;
+
+//--- Directory 'sources'
+
+const cDirectoryWrapper gWrapperDirectory_10_targetTemplates (
+  "sources",
+  3,
+  gWrapperAllFiles_targetTemplates_10,
+  0,
+  gWrapperAllDirectories_targetTemplates_10
+) ;
+
+//--- All files of 'teensy-3-1-sequential-systick' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_9 [8] = {
+  & gWrapperFile_40_targetTemplates,
+  & gWrapperFile_41_targetTemplates,
+  & gWrapperFile_42_targetTemplates,
+  & gWrapperFile_43_targetTemplates,
+  & gWrapperFile_44_targetTemplates,
+  & gWrapperFile_45_targetTemplates,
+  & gWrapperFile_46_targetTemplates,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-sequential-systick' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_9 [2] = {
+  & gWrapperDirectory_10_targetTemplates,
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-sequential-systick'
+
+const cDirectoryWrapper gWrapperDirectory_9_targetTemplates (
+  "teensy-3-1-sequential-systick",
+  7,
+  gWrapperAllFiles_targetTemplates_9,
+  1,
+  gWrapperAllDirectories_targetTemplates_9
+) ;
+
 //--- All files of '' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [2] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [4] = {
   & gWrapperFile_0_targetTemplates,
+  & gWrapperFile_1_targetTemplates,
+  & gWrapperFile_2_targetTemplates,
   NULL
 } ;
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [3] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [5] = {
   & gWrapperDirectory_1_targetTemplates,
   & gWrapperDirectory_2_targetTemplates,
+  & gWrapperDirectory_7_targetTemplates,
+  & gWrapperDirectory_9_targetTemplates,
   NULL
 } ;
 
@@ -14036,9 +17673,9 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [3] = 
 
 const cDirectoryWrapper gWrapperDirectory_0_targetTemplates (
   "",
-  1,
+  3,
   gWrapperAllFiles_targetTemplates_0,
-  2,
+  4,
   gWrapperAllDirectories_targetTemplates_0
 ) ;
 
@@ -14057,60 +17694,60 @@ void routine_generateTargets (const GALGAS_string constinArgument_inTargetDirect
   outArgument_outFilesToInclude.drop () ; // Release 'out' argument
   outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 39)) ;
   GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-  GALGAS_string var_targetPath = GALGAS_string ("/targets/").add_operation (constinArgument_inTargetName.mAttribute_string.reader_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 41)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 41)) ;
+  GALGAS_string var_targetPath = constinArgument_inTargetName.mAttribute_string.reader_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 41)) ;
   const enumGalgasBool test_0 = var_fw.reader_directoryExistsAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 42)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    cEnumerator_stringlist enumerator_1922 (var_fw.reader_textFilesAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)), kEnumeration_up) ;
-    while (enumerator_1922.hasCurrentObject ()) {
-      GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)).add_operation (enumerator_1922.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)) ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_1922.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 45)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
+    cEnumerator_stringlist enumerator_1916 (var_fw.reader_textFilesAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)), kEnumeration_up) ;
+    while (enumerator_1916.hasCurrentObject ()) {
+      GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)) ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_1916.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 45)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
       if (kBoolTrue == test_1) {
-        GALGAS_bool joker_2123 ; // Joker input parameter
-        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)).add_operation (enumerator_1922.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)), joker_2123, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)) ;
+        GALGAS_bool joker_2117 ; // Joker input parameter
+        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)), joker_2117, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)) ;
       }else if (kBoolFalse == test_1) {
-        GALGAS_bool joker_2213 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)).add_operation (enumerator_1922.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)), joker_2213, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)) ;
+        GALGAS_bool joker_2207 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)), joker_2207, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)) ;
       }
-      enumerator_1922.gotoNextObject () ;
+      enumerator_1916.gotoNextObject () ;
     }
     GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 50)) ;
-    cEnumerator_stringlist enumerator_2329 (var_fw.reader_textFilesAtPath (var_sourcePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 51)), kEnumeration_up) ;
-    while (enumerator_2329.hasCurrentObject ()) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_2329.current_mValue (HERE).objectCompare (GALGAS_string ("linker-script.ld"))).boolEnum () ;
+    cEnumerator_stringlist enumerator_2323 (var_fw.reader_textFilesAtPath (var_sourcePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 51)), kEnumeration_up) ;
+    while (enumerator_2323.hasCurrentObject ()) {
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("linker-script.ld"))).boolEnum () ;
       if (kBoolTrue == test_2) {
-        GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)) ;
-        GALGAS_bool joker_2528 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)), joker_2528, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)) ;
+        GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)) ;
+        GALGAS_bool joker_2522 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)), joker_2522, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)) ;
       }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_2329.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
         if (kBoolTrue == test_3) {
-          GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)) ;
-          GALGAS_bool joker_2721 ; // Joker input parameter
-          var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), joker_2721, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)) ;
-          outArgument_outFilesToInclude.addAssign_operation (enumerator_2329.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 58)) ;
+          GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)) ;
+          GALGAS_bool joker_2715 ; // Joker input parameter
+          var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), joker_2715, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)) ;
+          outArgument_outFilesToInclude.addAssign_operation (enumerator_2323.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 58)) ;
         }else if (kBoolFalse == test_3) {
-          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_2329.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
+          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
           if (kBoolTrue == test_4.boolEnum ()) {
             test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 59)) ;
           }
           const enumGalgasBool test_5 = test_4.boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)) ;
-            GALGAS_bool joker_3017 ; // Joker input parameter
-            var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)).add_operation (enumerator_2329.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)), joker_3017, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
-            outArgument_outFilesToInclude.addAssign_operation (enumerator_2329.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 62)) ;
+            GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)) ;
+            GALGAS_bool joker_3011 ; // Joker input parameter
+            var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)), joker_3011, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
+            outArgument_outFilesToInclude.addAssign_operation (enumerator_2323.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 62)) ;
           }
         }
       }
-      enumerator_2329.gotoNextObject () ;
+      enumerator_2323.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_s = GALGAS_string ("cannot find this target; available targets:") ;
-    cEnumerator_stringlist enumerator_3181 (var_fw.reader_directoriesAtPath (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 67)), kEnumeration_up) ;
-    while (enumerator_3181.hasCurrentObject ()) {
+    cEnumerator_stringlist enumerator_3175 (var_fw.reader_directoriesAtPath (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 67)), kEnumeration_up) ;
+    while (enumerator_3175.hasCurrentObject ()) {
       var_s.dotAssign_operation (GALGAS_string ("\n"
-        " - ").add_operation (enumerator_3181.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68))  COMMA_SOURCE_FILE ("target-generation.galgas", 68)) ;
-      enumerator_3181.gotoNextObject () ;
+        " - ").add_operation (enumerator_3175.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68))  COMMA_SOURCE_FILE ("target-generation.galgas", 68)) ;
+      enumerator_3175.gotoNextObject () ;
     }
     GALGAS_location location_6 (constinArgument_inTargetName.reader_location (HERE)) ; // Implicit use of 'location' reader
     inCompiler->emitSemanticError (location_6, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 70)) ;
@@ -14197,22 +17834,21 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_ast var_ast = GALGAS_ast::constructor_default (SOURCE_FILE ("program.galgas", 138)) ;
-  GALGAS_string var_targetFilePath = GALGAS_string ("targets/").add_operation (constinArgument_inTargetName.reader_string (SOURCE_FILE ("program.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 139)) ;
   {
-  GALGAS_lstringlist temp_0 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("program.galgas", 143)) ;
-  temp_0.addAssign_operation (GALGAS_lstring::constructor_new (var_targetFilePath, constinArgument_inTargetName.mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 143))  COMMA_SOURCE_FILE ("program.galgas", 143)) ;
-  routine_recursiveImportFiles (var_ast, constinArgument_inCurrentDirectory, temp_0, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 140)) ;
+  GALGAS_lstringlist temp_0 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("program.galgas", 142)) ;
+  temp_0.addAssign_operation (constinArgument_inTargetName  COMMA_SOURCE_FILE ("program.galgas", 142)) ;
+  routine_recursiveImportFiles (var_ast, constinArgument_inCurrentDirectory, temp_0, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 139)) ;
   }
-  ioArgument_ioAST.mAttribute_mDeclarationList = var_ast.mAttribute_mDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 146)) ;
-  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList = var_ast.mAttribute_mGlobalVarDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 147)) ;
-  ioArgument_ioAST.mAttribute_mProcedureListAST = var_ast.mAttribute_mProcedureListAST.add_operation (ioArgument_ioAST.mAttribute_mProcedureListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 148)) ;
-  ioArgument_ioAST.mAttribute_mRequiredProcList = var_ast.mAttribute_mRequiredProcList.add_operation (ioArgument_ioAST.mAttribute_mRequiredProcList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 149)) ;
-  ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 150)) ;
-  ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 151)) ;
-  ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 152)) ;
-  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 153)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 154)) ;
-  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 155)) ;
+  ioArgument_ioAST.mAttribute_mDeclarationList = var_ast.mAttribute_mDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 145)) ;
+  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList = var_ast.mAttribute_mGlobalVarDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 146)) ;
+  ioArgument_ioAST.mAttribute_mProcedureListAST = var_ast.mAttribute_mProcedureListAST.add_operation (ioArgument_ioAST.mAttribute_mProcedureListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 147)) ;
+  ioArgument_ioAST.mAttribute_mRequiredProcList = var_ast.mAttribute_mRequiredProcList.add_operation (ioArgument_ioAST.mAttribute_mRequiredProcList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 148)) ;
+  ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 149)) ;
+  ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 150)) ;
+  ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 151)) ;
+  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 152)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 153)) ;
+  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 154)) ;
 }
 
 
@@ -14228,78 +17864,78 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
                                    GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_6116 (inArgument_inImportedClauseList, kEnumeration_up) ;
-  while (enumerator_6116.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath = enumerator_6116.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 167)) ;
-    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 168)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_6034 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_6034.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath = enumerator_6034.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 166)) ;
+    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 167)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 169)).operator_not (SOURCE_FILE ("program.galgas", 169)).boolEnum () ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 168)).operator_not (SOURCE_FILE ("program.galgas", 168)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 170)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 171)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 169)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 170)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
         if (kBoolTrue == test_2) {
           GALGAS_lstringlist var_importedFileList ;
           var_importedFileList.drop () ;
-          GALGAS_location joker_6619 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6116.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 172)), ioArgument_ioAST, var_importedFileList, joker_6619  COMMA_SOURCE_FILE ("program.galgas", 172)) ;
+          GALGAS_location joker_6537 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6034.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 171)), ioArgument_ioAST, var_importedFileList, joker_6537  COMMA_SOURCE_FILE ("program.galgas", 171)) ;
           {
-          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 176)) ;
+          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 175)) ;
           }
         }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 182)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 181)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
           if (kBoolTrue == test_3) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_7086 ; // Joker input parameter
-            cGrammar_plms_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6116.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 183)), ioArgument_ioAST, var_importedFileList, joker_7086  COMMA_SOURCE_FILE ("program.galgas", 183)) ;
+            GALGAS_location joker_7004 ; // Joker input parameter
+            cGrammar_plms_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6034.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 182)), ioArgument_ioAST, var_importedFileList, joker_7004  COMMA_SOURCE_FILE ("program.galgas", 182)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 187)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 186)) ;
             }
           }else if (kBoolFalse == test_3) {
-            GALGAS_location location_4 (enumerator_6116.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 194)) ;
+            GALGAS_location location_4 (enumerator_6034.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 193)) ;
           }
         }
       }
     }else if (kBoolFalse == test_0) {
       GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_6116.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 199)).boolEnum () ;
+      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_6034.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 198)).boolEnum () ;
       if (kBoolTrue == test_5) {
-        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_6116.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 200)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 200)) ;
-        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 201)).operator_not (SOURCE_FILE ("program.galgas", 201)).boolEnum () ;
+        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_6034.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 199)) ;
+        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 200)).operator_not (SOURCE_FILE ("program.galgas", 200)).boolEnum () ;
         if (kBoolTrue == test_6) {
-          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 202)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 203)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 201)) ;
+          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 202)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
           if (kBoolTrue == test_7) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_7943 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6116.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 204)), ioArgument_ioAST, var_importedFileList, joker_7943  COMMA_SOURCE_FILE ("program.galgas", 204)) ;
+            GALGAS_location joker_7861 ; // Joker input parameter
+            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6034.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 203)), ioArgument_ioAST, var_importedFileList, joker_7861  COMMA_SOURCE_FILE ("program.galgas", 203)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 208)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 207)) ;
             }
           }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 214)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 213)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
             if (kBoolTrue == test_8) {
               GALGAS_lstringlist var_importedFileList ;
               var_importedFileList.drop () ;
-              GALGAS_location joker_8429 ; // Joker input parameter
-              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6116.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 215)), ioArgument_ioAST, var_importedFileList, joker_8429  COMMA_SOURCE_FILE ("program.galgas", 215)) ;
+              GALGAS_location joker_8347 ; // Joker input parameter
+              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6034.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 214)), ioArgument_ioAST, var_importedFileList, joker_8347  COMMA_SOURCE_FILE ("program.galgas", 214)) ;
               {
-              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 219)) ;
+              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 218)) ;
               }
             }else if (kBoolFalse == test_8) {
-              GALGAS_location location_9 (enumerator_6116.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 226)) ;
+              GALGAS_location location_9 (enumerator_6034.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 225)) ;
             }
           }
         }
       }else if (kBoolFalse == test_5) {
-        GALGAS_location location_10 (enumerator_6116.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 230)) ;
+        GALGAS_location location_10 (enumerator_6034.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 229)) ;
       }
     }
-    enumerator_6116.gotoNextObject () ;
+    enumerator_6034.gotoNextObject () ;
   }
 }
 
@@ -15930,3159 +19566,6 @@ GALGAS_registerDeclaration GALGAS_registerDeclaration::extractObject (const GALG
       result = *p ;
     }else{
       inCompiler->castError ("registerDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-
-typeComparisonResult GALGAS_abstractExpressionIR::objectCompare (const GALGAS_abstractExpressionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (void) :
-AC_GALGAS_class () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR::GALGAS_abstractExpressionIR (const cPtr_abstractExpressionIR * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractExpressionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @abstractExpressionIR class                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_abstractExpressionIR::cPtr_abstractExpressionIR (LOCATION_ARGS) :
-acPtr_class (THERE) {
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @abstractExpressionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractExpressionIR ("abstractExpressionIR",
-                                             NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_abstractExpressionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_abstractExpressionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_abstractExpressionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_abstractExpressionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractExpressionIR GALGAS_abstractExpressionIR::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_abstractExpressionIR result ;
-  const GALGAS_abstractExpressionIR * p = (const GALGAS_abstractExpressionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractExpressionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("abstractExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-
-typeComparisonResult GALGAS_abstractInstructionIR::objectCompare (const GALGAS_abstractInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractInstructionIR::GALGAS_abstractInstructionIR (void) :
-AC_GALGAS_class () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractInstructionIR::GALGAS_abstractInstructionIR (const cPtr_abstractInstructionIR * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                   Pointer class for @abstractInstructionIR class                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_abstractInstructionIR::cPtr_abstractInstructionIR (LOCATION_ARGS) :
-acPtr_class (THERE) {
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @abstractInstructionIR type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractInstructionIR ("abstractInstructionIR",
-                                              NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_abstractInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_abstractInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_abstractInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_abstractInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractInstructionIR GALGAS_abstractInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_abstractInstructionIR result ;
-  const GALGAS_abstractInstructionIR * p = (const GALGAS_abstractInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("abstractInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_assertInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mAssertInstructionLocation.objectCompare (p->mAttribute_mAssertInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mInstructionList.objectCompare (p->mAttribute_mInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mExpressionValue.objectCompare (p->mAttribute_mExpressionValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_assertInstructionIR::objectCompare (const GALGAS_assertInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assertInstructionIR::GALGAS_assertInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assertInstructionIR::GALGAS_assertInstructionIR (const cPtr_assertInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_assertInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assertInstructionIR GALGAS_assertInstructionIR::constructor_new (const GALGAS_location & inAttribute_mAssertInstructionLocation,
-                                                                        const GALGAS_instructionListIR & inAttribute_mInstructionList,
-                                                                        const GALGAS_variableKindIR & inAttribute_mExpressionValue
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionIR result ;
-  if (inAttribute_mAssertInstructionLocation.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mExpressionValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_assertInstructionIR (inAttribute_mAssertInstructionLocation, inAttribute_mInstructionList, inAttribute_mExpressionValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_assertInstructionIR::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    result = p->mAttribute_mAssertInstructionLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_assertInstructionIR::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAssertInstructionLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_assertInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    result = p->mAttribute_mInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_assertInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_assertInstructionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    result = p->mAttribute_mExpressionValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_assertInstructionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpressionValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @assertInstructionIR class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_assertInstructionIR::cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
-                                                    const GALGAS_instructionListIR & in_mInstructionList,
-                                                    const GALGAS_variableKindIR & in_mExpressionValue
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mAssertInstructionLocation (in_mAssertInstructionLocation),
-mAttribute_mInstructionList (in_mInstructionList),
-mAttribute_mExpressionValue (in_mExpressionValue) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_assertInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionIR ;
-}
-
-void cPtr_assertInstructionIR::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@assertInstructionIR:" ;
-  mAttribute_mAssertInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mExpressionValue.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_assertInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_assertInstructionIR (mAttribute_mAssertInstructionLocation, mAttribute_mInstructionList, mAttribute_mExpressionValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @assertInstructionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_assertInstructionIR ("assertInstructionIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_assertInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_assertInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assertInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assertInstructionIR GALGAS_assertInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionIR result ;
-  const GALGAS_assertInstructionIR * p = (const GALGAS_assertInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_assertInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assertInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_assignmentInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_assignmentInstructionIR * p = (const cPtr_assignmentInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_assignmentInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVariable.objectCompare (p->mAttribute_mTargetVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_assignmentInstructionIR::objectCompare (const GALGAS_assignmentInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assignmentInstructionIR::GALGAS_assignmentInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assignmentInstructionIR::GALGAS_assignmentInstructionIR (const cPtr_assignmentInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_assignmentInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assignmentInstructionIR GALGAS_assignmentInstructionIR::constructor_new (const GALGAS_variableKindIR & inAttribute_mTargetVariable,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
-                                                                                const GALGAS_variableKindIR & inAttribute_mSourceValue
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_assignmentInstructionIR result ;
-  if (inAttribute_mTargetVariable.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_assignmentInstructionIR (inAttribute_mTargetVariable, inAttribute_mTargetVarType, inAttribute_mSourceValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assignmentInstructionIR * p = (const cPtr_assignmentInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assignmentInstructionIR) ;
-    result = p->mAttribute_mTargetVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_assignmentInstructionIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assignmentInstructionIR * p = (const cPtr_assignmentInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assignmentInstructionIR) ;
-    result = p->mAttribute_mTargetVarType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_assignmentInstructionIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_assignmentInstructionIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_assignmentInstructionIR * p = (const cPtr_assignmentInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assignmentInstructionIR) ;
-    result = p->mAttribute_mSourceValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_assignmentInstructionIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @assignmentInstructionIR class                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_assignmentInstructionIR::cPtr_assignmentInstructionIR (const GALGAS_variableKindIR & in_mTargetVariable,
-                                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                                            const GALGAS_variableKindIR & in_mSourceValue
-                                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetVariable (in_mTargetVariable),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mSourceValue (in_mSourceValue) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_assignmentInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentInstructionIR ;
-}
-
-void cPtr_assignmentInstructionIR::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "[@assignmentInstructionIR:" ;
-  mAttribute_mTargetVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_assignmentInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_assignmentInstructionIR (mAttribute_mTargetVariable, mAttribute_mTargetVarType, mAttribute_mSourceValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @assignmentInstructionIR type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_assignmentInstructionIR ("assignmentInstructionIR",
-                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_assignmentInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_assignmentInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assignmentInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_assignmentInstructionIR GALGAS_assignmentInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_assignmentInstructionIR result ;
-  const GALGAS_assignmentInstructionIR * p = (const GALGAS_assignmentInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_assignmentInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_conversionInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mConvertedExpressionType.objectCompare (p->mAttribute_mConvertedExpressionType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTemporaryResultVariable.objectCompare (p->mAttribute_mTemporaryResultVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperand.objectCompare (p->mAttribute_mOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSilently.objectCompare (p->mAttribute_mSilently) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_conversionInstructionIR::objectCompare (const GALGAS_conversionInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_conversionInstructionIR::GALGAS_conversionInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_conversionInstructionIR::GALGAS_conversionInstructionIR (const cPtr_conversionInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_conversionInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_conversionInstructionIR GALGAS_conversionInstructionIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mConvertedExpressionType,
-                                                                                const GALGAS_variableKindIR & inAttribute_mTemporaryResultVariable,
-                                                                                const GALGAS_variableKindIR & inAttribute_mOperand,
-                                                                                const GALGAS_bool & inAttribute_mSilently,
-                                                                                const GALGAS_location & inAttribute_mLocation
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_conversionInstructionIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mConvertedExpressionType.isValid () && inAttribute_mTemporaryResultVariable.isValid () && inAttribute_mOperand.isValid () && inAttribute_mSilently.isValid () && inAttribute_mLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_conversionInstructionIR (inAttribute_mTargetType, inAttribute_mConvertedExpressionType, inAttribute_mTemporaryResultVariable, inAttribute_mOperand, inAttribute_mSilently, inAttribute_mLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_conversionInstructionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_conversionInstructionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_conversionInstructionIR::reader_mConvertedExpressionType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mConvertedExpressionType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_conversionInstructionIR::reader_mConvertedExpressionType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mConvertedExpressionType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_conversionInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mTemporaryResultVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_conversionInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTemporaryResultVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_conversionInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mOperand ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_conversionInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_conversionInstructionIR::reader_mSilently (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mSilently ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cPtr_conversionInstructionIR::reader_mSilently (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSilently ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_conversionInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_conversionInstructionIR * p = (const cPtr_conversionInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_conversionInstructionIR) ;
-    result = p->mAttribute_mLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_conversionInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @conversionInstructionIR class                                   *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_conversionInstructionIR::cPtr_conversionInstructionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mConvertedExpressionType,
-                                                            const GALGAS_variableKindIR & in_mTemporaryResultVariable,
-                                                            const GALGAS_variableKindIR & in_mOperand,
-                                                            const GALGAS_bool & in_mSilently,
-                                                            const GALGAS_location & in_mLocation
-                                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mConvertedExpressionType (in_mConvertedExpressionType),
-mAttribute_mTemporaryResultVariable (in_mTemporaryResultVariable),
-mAttribute_mOperand (in_mOperand),
-mAttribute_mSilently (in_mSilently),
-mAttribute_mLocation (in_mLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_conversionInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_conversionInstructionIR ;
-}
-
-void cPtr_conversionInstructionIR::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "[@conversionInstructionIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mConvertedExpressionType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTemporaryResultVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperand.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSilently.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_conversionInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_conversionInstructionIR (mAttribute_mTargetType, mAttribute_mConvertedExpressionType, mAttribute_mTemporaryResultVariable, mAttribute_mOperand, mAttribute_mSilently, mAttribute_mLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @conversionInstructionIR type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_conversionInstructionIR ("conversionInstructionIR",
-                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_conversionInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_conversionInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_conversionInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_conversionInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_conversionInstructionIR GALGAS_conversionInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_conversionInstructionIR result ;
-  const GALGAS_conversionInstructionIR * p = (const GALGAS_conversionInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_conversionInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("conversionInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_foreverInstructionGeneration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_foreverInstructionGeneration * p = (const cPtr_foreverInstructionGeneration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_foreverInstructionGeneration) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mInstructionGenerationList.objectCompare (p->mAttribute_mInstructionGenerationList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_foreverInstructionGeneration::objectCompare (const GALGAS_foreverInstructionGeneration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_foreverInstructionGeneration::GALGAS_foreverInstructionGeneration (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_foreverInstructionGeneration GALGAS_foreverInstructionGeneration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_foreverInstructionGeneration::constructor_new (GALGAS_instructionListIR::constructor_emptyList (HERE)
-                                                               COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_foreverInstructionGeneration::GALGAS_foreverInstructionGeneration (const cPtr_foreverInstructionGeneration * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_foreverInstructionGeneration) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_foreverInstructionGeneration GALGAS_foreverInstructionGeneration::constructor_new (const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_foreverInstructionGeneration result ;
-  if (inAttribute_mInstructionGenerationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_foreverInstructionGeneration (inAttribute_mInstructionGenerationList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_foreverInstructionGeneration::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_foreverInstructionGeneration * p = (const cPtr_foreverInstructionGeneration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_foreverInstructionGeneration) ;
-    result = p->mAttribute_mInstructionGenerationList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_foreverInstructionGeneration::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionGenerationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                Pointer class for @foreverInstructionGeneration class                                *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_foreverInstructionGeneration::cPtr_foreverInstructionGeneration (const GALGAS_instructionListIR & in_mInstructionGenerationList
-                                                                      COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mInstructionGenerationList (in_mInstructionGenerationList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_foreverInstructionGeneration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_foreverInstructionGeneration ;
-}
-
-void cPtr_foreverInstructionGeneration::description (C_String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString << "[@foreverInstructionGeneration:" ;
-  mAttribute_mInstructionGenerationList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_foreverInstructionGeneration::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_foreverInstructionGeneration (mAttribute_mInstructionGenerationList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @foreverInstructionGeneration type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_foreverInstructionGeneration ("foreverInstructionGeneration",
-                                                     & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_foreverInstructionGeneration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_foreverInstructionGeneration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_foreverInstructionGeneration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_foreverInstructionGeneration (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_foreverInstructionGeneration GALGAS_foreverInstructionGeneration::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_foreverInstructionGeneration result ;
-  const GALGAS_foreverInstructionGeneration * p = (const GALGAS_foreverInstructionGeneration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_foreverInstructionGeneration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("foreverInstructionGeneration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_functionCallIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_functionCallIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mFunctionName.objectCompare (p->mAttribute_mFunctionName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTempConstantTarget.objectCompare (p->mAttribute_mTempConstantTarget) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVariableList.objectCompare (p->mAttribute_mVariableList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_functionCallIR::objectCompare (const GALGAS_functionCallIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionCallIR::GALGAS_functionCallIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionCallIR::GALGAS_functionCallIR (const cPtr_functionCallIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_functionCallIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                              const GALGAS_string & inAttribute_mFunctionName,
-                                                              const GALGAS_variableKindIR & inAttribute_mTempConstantTarget,
-                                                              const GALGAS_variableListIR & inAttribute_mVariableList
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_functionCallIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mFunctionName.isValid () && inAttribute_mTempConstantTarget.isValid () && inAttribute_mVariableList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_functionCallIR (inAttribute_mTargetType, inAttribute_mFunctionName, inAttribute_mTempConstantTarget, inAttribute_mVariableList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_functionCallIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_functionCallIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_functionCallIR::reader_mFunctionName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mFunctionName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_functionCallIR::reader_mFunctionName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_functionCallIR::reader_mTempConstantTarget (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mTempConstantTarget ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_functionCallIR::reader_mTempConstantTarget (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTempConstantTarget ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableListIR GALGAS_functionCallIR::reader_mVariableList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mVariableList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableListIR cPtr_functionCallIR::reader_mVariableList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariableList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                       Pointer class for @functionCallIR class                                       *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                          const GALGAS_string & in_mFunctionName,
-                                          const GALGAS_variableKindIR & in_mTempConstantTarget,
-                                          const GALGAS_variableListIR & in_mVariableList
-                                          COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mFunctionName (in_mFunctionName),
-mAttribute_mTempConstantTarget (in_mTempConstantTarget),
-mAttribute_mVariableList (in_mVariableList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_functionCallIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionCallIR ;
-}
-
-void cPtr_functionCallIR::description (C_String & ioString,
-                                       const int32_t inIndentation) const {
-  ioString << "[@functionCallIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mFunctionName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTempConstantTarget.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVariableList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_functionCallIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_functionCallIR (mAttribute_mTargetType, mAttribute_mFunctionName, mAttribute_mTempConstantTarget, mAttribute_mVariableList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @functionCallIR type                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_functionCallIR ("functionCallIR",
-                                       & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_functionCallIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionCallIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_functionCallIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_functionCallIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionCallIR GALGAS_functionCallIR::extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_functionCallIR result ;
-  const GALGAS_functionCallIR * p = (const GALGAS_functionCallIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_functionCallIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("functionCallIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_ifInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_ifInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTestVariable.objectCompare (p->mAttribute_mTestVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mThenInstructionGenerationList.objectCompare (p->mAttribute_mThenInstructionGenerationList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mElseInstructionGenerationList.objectCompare (p->mAttribute_mElseInstructionGenerationList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_ifInstructionIR::objectCompare (const GALGAS_ifInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ifInstructionIR::GALGAS_ifInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ifInstructionIR::GALGAS_ifInstructionIR (const cPtr_ifInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_ifInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_variableKindIR & inAttribute_mTestVariable,
-                                                                const GALGAS_instructionListIR & inAttribute_mThenInstructionGenerationList,
-                                                                const GALGAS_instructionListIR & inAttribute_mElseInstructionGenerationList
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_ifInstructionIR result ;
-  if (inAttribute_mTestVariable.isValid () && inAttribute_mThenInstructionGenerationList.isValid () && inAttribute_mElseInstructionGenerationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_ifInstructionIR (inAttribute_mTestVariable, inAttribute_mThenInstructionGenerationList, inAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_ifInstructionIR) ;
-    result = p->mAttribute_mTestVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTestVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_ifInstructionIR) ;
-    result = p->mAttribute_mThenInstructionGenerationList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_ifInstructionIR::reader_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mThenInstructionGenerationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_ifInstructionIR) ;
-    result = p->mAttribute_mElseInstructionGenerationList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_ifInstructionIR::reader_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mElseInstructionGenerationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                      Pointer class for @ifInstructionIR class                                       *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_ifInstructionIR::cPtr_ifInstructionIR (const GALGAS_variableKindIR & in_mTestVariable,
-                                            const GALGAS_instructionListIR & in_mThenInstructionGenerationList,
-                                            const GALGAS_instructionListIR & in_mElseInstructionGenerationList
-                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTestVariable (in_mTestVariable),
-mAttribute_mThenInstructionGenerationList (in_mThenInstructionGenerationList),
-mAttribute_mElseInstructionGenerationList (in_mElseInstructionGenerationList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_ifInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_ifInstructionIR ;
-}
-
-void cPtr_ifInstructionIR::description (C_String & ioString,
-                                        const int32_t inIndentation) const {
-  ioString << "[@ifInstructionIR:" ;
-  mAttribute_mTestVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mThenInstructionGenerationList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mElseInstructionGenerationList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_ifInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_ifInstructionIR (mAttribute_mTestVariable, mAttribute_mThenInstructionGenerationList, mAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @ifInstructionIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ifInstructionIR ("ifInstructionIR",
-                                        & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_ifInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_ifInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_ifInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_ifInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ifInstructionIR GALGAS_ifInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_ifInstructionIR result ;
-  const GALGAS_ifInstructionIR * p = (const GALGAS_ifInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_ifInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("ifInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_incDecInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mMin.objectCompare (p->mAttribute_mMin) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mMax.objectCompare (p->mAttribute_mMax) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mKind.objectCompare (p->mAttribute_mKind) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVariable.objectCompare (p->mAttribute_mVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVariableLocation.objectCompare (p->mAttribute_mVariableLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_incDecInstructionIR::objectCompare (const GALGAS_incDecInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR::GALGAS_incDecInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR::GALGAS_incDecInstructionIR (const cPtr_incDecInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_incDecInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GALGAS_sint_36__34_ & inAttribute_mMin,
-                                                                        const GALGAS_uint_36__34_ & inAttribute_mMax,
-                                                                        const GALGAS_incDecKind & inAttribute_mKind,
-                                                                        const GALGAS_variableKindIR & inAttribute_mVariable,
-                                                                        const GALGAS_location & inAttribute_mVariableLocation
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_incDecInstructionIR result ;
-  if (inAttribute_mMin.isValid () && inAttribute_mMax.isValid () && inAttribute_mKind.isValid () && inAttribute_mVariable.isValid () && inAttribute_mVariableLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_incDecInstructionIR (inAttribute_mMin, inAttribute_mMax, inAttribute_mKind, inAttribute_mVariable, inAttribute_mVariableLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sint_36__34_ GALGAS_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
-  GALGAS_sint_36__34_ result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mMin ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sint_36__34_ cPtr_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMin ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ GALGAS_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint_36__34_ result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mMax ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ cPtr_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMax ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecKind GALGAS_incDecInstructionIR::reader_mKind (UNUSED_LOCATION_ARGS) const {
-  GALGAS_incDecKind result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mKind ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecKind cPtr_incDecInstructionIR::reader_mKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_incDecInstructionIR::reader_mVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_incDecInstructionIR::reader_mVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mVariableLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariableLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @incDecInstructionIR class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_incDecInstructionIR::cPtr_incDecInstructionIR (const GALGAS_sint_36__34_ & in_mMin,
-                                                    const GALGAS_uint_36__34_ & in_mMax,
-                                                    const GALGAS_incDecKind & in_mKind,
-                                                    const GALGAS_variableKindIR & in_mVariable,
-                                                    const GALGAS_location & in_mVariableLocation
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mMin (in_mMin),
-mAttribute_mMax (in_mMax),
-mAttribute_mKind (in_mKind),
-mAttribute_mVariable (in_mVariable),
-mAttribute_mVariableLocation (in_mVariableLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_incDecInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecInstructionIR ;
-}
-
-void cPtr_incDecInstructionIR::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@incDecInstructionIR:" ;
-  mAttribute_mMin.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mMax.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mKind.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVariableLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_incDecInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_incDecInstructionIR (mAttribute_mMin, mAttribute_mMax, mAttribute_mKind, mAttribute_mVariable, mAttribute_mVariableLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @incDecInstructionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_incDecInstructionIR ("incDecInstructionIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_incDecInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_incDecInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_incDecInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_incDecInstructionIR result ;
-  const GALGAS_incDecInstructionIR * p = (const GALGAS_incDecInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_incDecInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("incDecInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_letInstructionWithAssignmentIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_letInstructionWithAssignmentIR * p = (const cPtr_letInstructionWithAssignmentIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_letInstructionWithAssignmentIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetConstantIR.objectCompare (p->mAttribute_mTargetConstantIR) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceIR.objectCompare (p->mAttribute_mSourceIR) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_letInstructionWithAssignmentIR::objectCompare (const GALGAS_letInstructionWithAssignmentIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentIR::GALGAS_letInstructionWithAssignmentIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentIR::GALGAS_letInstructionWithAssignmentIR (const cPtr_letInstructionWithAssignmentIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_letInstructionWithAssignmentIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentIR GALGAS_letInstructionWithAssignmentIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                                                              const GALGAS_variableKindIR & inAttribute_mTargetConstantIR,
-                                                                                              const GALGAS_variableKindIR & inAttribute_mSourceIR
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionWithAssignmentIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mTargetConstantIR.isValid () && inAttribute_mSourceIR.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_letInstructionWithAssignmentIR (inAttribute_mTargetType, inAttribute_mTargetConstantIR, inAttribute_mSourceIR COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_letInstructionWithAssignmentIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentIR * p = (const cPtr_letInstructionWithAssignmentIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_letInstructionWithAssignmentIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_letInstructionWithAssignmentIR::reader_mTargetConstantIR (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentIR * p = (const cPtr_letInstructionWithAssignmentIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentIR) ;
-    result = p->mAttribute_mTargetConstantIR ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_letInstructionWithAssignmentIR::reader_mTargetConstantIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetConstantIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_letInstructionWithAssignmentIR::reader_mSourceIR (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_letInstructionWithAssignmentIR * p = (const cPtr_letInstructionWithAssignmentIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentIR) ;
-    result = p->mAttribute_mSourceIR ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_letInstructionWithAssignmentIR::reader_mSourceIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                               Pointer class for @letInstructionWithAssignmentIR class                               *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_letInstructionWithAssignmentIR::cPtr_letInstructionWithAssignmentIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                                                          const GALGAS_variableKindIR & in_mTargetConstantIR,
-                                                                          const GALGAS_variableKindIR & in_mSourceIR
-                                                                          COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mTargetConstantIR (in_mTargetConstantIR),
-mAttribute_mSourceIR (in_mSourceIR) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_letInstructionWithAssignmentIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentIR ;
-}
-
-void cPtr_letInstructionWithAssignmentIR::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "[@letInstructionWithAssignmentIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTargetConstantIR.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceIR.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_letInstructionWithAssignmentIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_letInstructionWithAssignmentIR (mAttribute_mTargetType, mAttribute_mTargetConstantIR, mAttribute_mSourceIR COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @letInstructionWithAssignmentIR type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_letInstructionWithAssignmentIR ("letInstructionWithAssignmentIR",
-                                                       & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_letInstructionWithAssignmentIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_letInstructionWithAssignmentIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_letInstructionWithAssignmentIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_letInstructionWithAssignmentIR GALGAS_letInstructionWithAssignmentIR::extractObject (const GALGAS_object & inObject,
-                                                                                            C_Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_letInstructionWithAssignmentIR result ;
-  const GALGAS_letInstructionWithAssignmentIR * p = (const GALGAS_letInstructionWithAssignmentIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_letInstructionWithAssignmentIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("letInstructionWithAssignmentIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_operatorAssignInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_operatorAssignInstructionIR * p = (const cPtr_operatorAssignInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_operatorAssignInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVariable.objectCompare (p->mAttribute_mTargetVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_operatorAssignInstructionIR::objectCompare (const GALGAS_operatorAssignInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionIR::GALGAS_operatorAssignInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionIR::GALGAS_operatorAssignInstructionIR (const cPtr_operatorAssignInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_operatorAssignInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionIR GALGAS_operatorAssignInstructionIR::constructor_new (const GALGAS_variableKindIR & inAttribute_mTargetVariable,
-                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
-                                                                                        const GALGAS_operatorAssignKind & inAttribute_mOperator,
-                                                                                        const GALGAS_variableKindIR & inAttribute_mSourceValue
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_operatorAssignInstructionIR result ;
-  if (inAttribute_mTargetVariable.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mOperator.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_operatorAssignInstructionIR (inAttribute_mTargetVariable, inAttribute_mTargetVarType, inAttribute_mOperator, inAttribute_mSourceValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_operatorAssignInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionIR * p = (const cPtr_operatorAssignInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionIR) ;
-    result = p->mAttribute_mTargetVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_operatorAssignInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_operatorAssignInstructionIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionIR * p = (const cPtr_operatorAssignInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionIR) ;
-    result = p->mAttribute_mTargetVarType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_operatorAssignInstructionIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operatorAssignKind result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionIR * p = (const cPtr_operatorAssignInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionIR) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignKind cPtr_operatorAssignInstructionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_operatorAssignInstructionIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorAssignInstructionIR * p = (const cPtr_operatorAssignInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorAssignInstructionIR) ;
-    result = p->mAttribute_mSourceValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_operatorAssignInstructionIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                Pointer class for @operatorAssignInstructionIR class                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_operatorAssignInstructionIR::cPtr_operatorAssignInstructionIR (const GALGAS_variableKindIR & in_mTargetVariable,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                                                    const GALGAS_operatorAssignKind & in_mOperator,
-                                                                    const GALGAS_variableKindIR & in_mSourceValue
-                                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetVariable (in_mTargetVariable),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mOperator (in_mOperator),
-mAttribute_mSourceValue (in_mSourceValue) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_operatorAssignInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorAssignInstructionIR ;
-}
-
-void cPtr_operatorAssignInstructionIR::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "[@operatorAssignInstructionIR:" ;
-  mAttribute_mTargetVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperator.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_operatorAssignInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_operatorAssignInstructionIR (mAttribute_mTargetVariable, mAttribute_mTargetVarType, mAttribute_mOperator, mAttribute_mSourceValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @operatorAssignInstructionIR type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_operatorAssignInstructionIR ("operatorAssignInstructionIR",
-                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_operatorAssignInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorAssignInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_operatorAssignInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_operatorAssignInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorAssignInstructionIR GALGAS_operatorAssignInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_operatorAssignInstructionIR result ;
-  const GALGAS_operatorAssignInstructionIR * p = (const GALGAS_operatorAssignInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_operatorAssignInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("operatorAssignInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_operatorInfixExpressionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mLeftOperand.objectCompare (p->mAttribute_mLeftOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRighOperand.objectCompare (p->mAttribute_mRighOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperatorLocation.objectCompare (p->mAttribute_mOperatorLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_operatorInfixExpressionIR::objectCompare (const GALGAS_operatorInfixExpressionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorInfixExpressionIR::GALGAS_operatorInfixExpressionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorInfixExpressionIR::GALGAS_operatorInfixExpressionIR (const cPtr_operatorInfixExpressionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_operatorInfixExpressionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorInfixExpressionIR GALGAS_operatorInfixExpressionIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                                                    const GALGAS_variableKindIR & inAttribute_mResult,
-                                                                                    const GALGAS_variableKindIR & inAttribute_mLeftOperand,
-                                                                                    const GALGAS_infixOperatorIR & inAttribute_mOperator,
-                                                                                    const GALGAS_variableKindIR & inAttribute_mRighOperand,
-                                                                                    const GALGAS_location & inAttribute_mOperatorLocation
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_operatorInfixExpressionIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mResult.isValid () && inAttribute_mLeftOperand.isValid () && inAttribute_mOperator.isValid () && inAttribute_mRighOperand.isValid () && inAttribute_mOperatorLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_operatorInfixExpressionIR (inAttribute_mTargetType, inAttribute_mResult, inAttribute_mLeftOperand, inAttribute_mOperator, inAttribute_mRighOperand, inAttribute_mOperatorLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_operatorInfixExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_operatorInfixExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_operatorInfixExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mResult ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_operatorInfixExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_operatorInfixExpressionIR::reader_mLeftOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mLeftOperand ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_operatorInfixExpressionIR::reader_mLeftOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_operatorInfixExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_infixOperatorIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR cPtr_operatorInfixExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_operatorInfixExpressionIR::reader_mRighOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mRighOperand ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_operatorInfixExpressionIR::reader_mRighOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRighOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_operatorInfixExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_operatorInfixExpressionIR * p = (const cPtr_operatorInfixExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_operatorInfixExpressionIR) ;
-    result = p->mAttribute_mOperatorLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_operatorInfixExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperatorLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                 Pointer class for @operatorInfixExpressionIR class                                  *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_operatorInfixExpressionIR::cPtr_operatorInfixExpressionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                                                const GALGAS_variableKindIR & in_mResult,
-                                                                const GALGAS_variableKindIR & in_mLeftOperand,
-                                                                const GALGAS_infixOperatorIR & in_mOperator,
-                                                                const GALGAS_variableKindIR & in_mRighOperand,
-                                                                const GALGAS_location & in_mOperatorLocation
-                                                                COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mResult (in_mResult),
-mAttribute_mLeftOperand (in_mLeftOperand),
-mAttribute_mOperator (in_mOperator),
-mAttribute_mRighOperand (in_mRighOperand),
-mAttribute_mOperatorLocation (in_mOperatorLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_operatorInfixExpressionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorInfixExpressionIR ;
-}
-
-void cPtr_operatorInfixExpressionIR::description (C_String & ioString,
-                                                  const int32_t inIndentation) const {
-  ioString << "[@operatorInfixExpressionIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mLeftOperand.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperator.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRighOperand.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperatorLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_operatorInfixExpressionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_operatorInfixExpressionIR (mAttribute_mTargetType, mAttribute_mResult, mAttribute_mLeftOperand, mAttribute_mOperator, mAttribute_mRighOperand, mAttribute_mOperatorLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @operatorInfixExpressionIR type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_operatorInfixExpressionIR ("operatorInfixExpressionIR",
-                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_operatorInfixExpressionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_operatorInfixExpressionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_operatorInfixExpressionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_operatorInfixExpressionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_operatorInfixExpressionIR GALGAS_operatorInfixExpressionIR::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_operatorInfixExpressionIR result ;
-  const GALGAS_operatorInfixExpressionIR * p = (const GALGAS_operatorInfixExpressionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_operatorInfixExpressionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("operatorInfixExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_prefixOperatorExpressionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperand.objectCompare (p->mAttribute_mOperand) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperatorLocation.objectCompare (p->mAttribute_mOperatorLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_prefixOperatorExpressionIR::objectCompare (const GALGAS_prefixOperatorExpressionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorExpressionIR::GALGAS_prefixOperatorExpressionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorExpressionIR::GALGAS_prefixOperatorExpressionIR (const cPtr_prefixOperatorExpressionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_prefixOperatorExpressionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorExpressionIR GALGAS_prefixOperatorExpressionIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                                                      const GALGAS_variableKindIR & inAttribute_mResult,
-                                                                                      const GALGAS_variableKindIR & inAttribute_mOperand,
-                                                                                      const GALGAS_prefixOperatorIR & inAttribute_mOperator,
-                                                                                      const GALGAS_location & inAttribute_mOperatorLocation
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_prefixOperatorExpressionIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mResult.isValid () && inAttribute_mOperand.isValid () && inAttribute_mOperator.isValid () && inAttribute_mOperatorLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_prefixOperatorExpressionIR (inAttribute_mTargetType, inAttribute_mResult, inAttribute_mOperand, inAttribute_mOperator, inAttribute_mOperatorLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_prefixOperatorExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_prefixOperatorExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-    result = p->mAttribute_mResult ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_prefixOperatorExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_prefixOperatorExpressionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-    result = p->mAttribute_mOperand ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_prefixOperatorExpressionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperand ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorIR GALGAS_prefixOperatorExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_prefixOperatorIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorIR cPtr_prefixOperatorExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_prefixOperatorExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_prefixOperatorExpressionIR) ;
-    result = p->mAttribute_mOperatorLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_prefixOperatorExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperatorLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                 Pointer class for @prefixOperatorExpressionIR class                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_prefixOperatorExpressionIR::cPtr_prefixOperatorExpressionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                                                  const GALGAS_variableKindIR & in_mResult,
-                                                                  const GALGAS_variableKindIR & in_mOperand,
-                                                                  const GALGAS_prefixOperatorIR & in_mOperator,
-                                                                  const GALGAS_location & in_mOperatorLocation
-                                                                  COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mResult (in_mResult),
-mAttribute_mOperand (in_mOperand),
-mAttribute_mOperator (in_mOperator),
-mAttribute_mOperatorLocation (in_mOperatorLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_prefixOperatorExpressionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_prefixOperatorExpressionIR ;
-}
-
-void cPtr_prefixOperatorExpressionIR::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "[@prefixOperatorExpressionIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperand.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperator.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mOperatorLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_prefixOperatorExpressionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_prefixOperatorExpressionIR (mAttribute_mTargetType, mAttribute_mResult, mAttribute_mOperand, mAttribute_mOperator, mAttribute_mOperatorLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @prefixOperatorExpressionIR type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_prefixOperatorExpressionIR ("prefixOperatorExpressionIR",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_prefixOperatorExpressionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_prefixOperatorExpressionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_prefixOperatorExpressionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_prefixOperatorExpressionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorExpressionIR GALGAS_prefixOperatorExpressionIR::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_prefixOperatorExpressionIR result ;
-  const GALGAS_prefixOperatorExpressionIR * p = (const GALGAS_prefixOperatorExpressionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_prefixOperatorExpressionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("prefixOperatorExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_procCallInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mProcName.objectCompare (p->mAttribute_mProcName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mParameters.objectCompare (p->mAttribute_mParameters) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_procCallInstructionIR::objectCompare (const GALGAS_procCallInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallInstructionIR::GALGAS_procCallInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_default (LOCATION_ARGS) {
-  return GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::constructor_default (HERE),
-                                                        GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (HERE)
-                                                        COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallInstructionIR::GALGAS_procCallInstructionIR (const cPtr_procCallInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_procCallInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (const GALGAS_string & inAttribute_mProcName,
-                                                                            const GALGAS_procCallEffectiveParameterListIR & inAttribute_mParameters
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_procCallInstructionIR result ;
-  if (inAttribute_mProcName.isValid () && inAttribute_mParameters.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_procCallInstructionIR (inAttribute_mProcName, inAttribute_mParameters COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_procCallInstructionIR::reader_mProcName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
-    result = p->mAttribute_mProcName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_procCallInstructionIR::reader_mProcName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallEffectiveParameterListIR GALGAS_procCallInstructionIR::reader_mParameters (UNUSED_LOCATION_ARGS) const {
-  GALGAS_procCallEffectiveParameterListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_procCallInstructionIR) ;
-    result = p->mAttribute_mParameters ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::reader_mParameters (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mParameters ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                   Pointer class for @procCallInstructionIR class                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_procCallInstructionIR::cPtr_procCallInstructionIR (const GALGAS_string & in_mProcName,
-                                                        const GALGAS_procCallEffectiveParameterListIR & in_mParameters
-                                                        COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mProcName (in_mProcName),
-mAttribute_mParameters (in_mParameters) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_procCallInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procCallInstructionIR ;
-}
-
-void cPtr_procCallInstructionIR::description (C_String & ioString,
-                                              const int32_t inIndentation) const {
-  ioString << "[@procCallInstructionIR:" ;
-  mAttribute_mProcName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mParameters.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_procCallInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_procCallInstructionIR (mAttribute_mProcName, mAttribute_mParameters COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @procCallInstructionIR type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procCallInstructionIR ("procCallInstructionIR",
-                                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procCallInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procCallInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procCallInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procCallInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_procCallInstructionIR result ;
-  const GALGAS_procCallInstructionIR * p = (const GALGAS_procCallInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procCallInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procCallInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_registerIntegerConstantInExpressionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mInstructionLocation.objectCompare (p->mAttribute_mInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mExpressionValue.objectCompare (p->mAttribute_mExpressionValue) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mMaxBound.objectCompare (p->mAttribute_mMaxBound) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mBitShift.objectCompare (p->mAttribute_mBitShift) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mResultVariable.objectCompare (p->mAttribute_mResultVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mNoCheck.objectCompare (p->mAttribute_mNoCheck) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_registerIntegerConstantInExpressionIR::objectCompare (const GALGAS_registerIntegerConstantInExpressionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerIntegerConstantInExpressionIR::GALGAS_registerIntegerConstantInExpressionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerIntegerConstantInExpressionIR::GALGAS_registerIntegerConstantInExpressionIR (const cPtr_registerIntegerConstantInExpressionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerIntegerConstantInExpressionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerIntegerConstantInExpressionIR GALGAS_registerIntegerConstantInExpressionIR::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                                                            const GALGAS_variableKindIR & inAttribute_mExpressionValue,
-                                                                                                            const GALGAS_uint_36__34_ & inAttribute_mMaxBound,
-                                                                                                            const GALGAS_uint & inAttribute_mBitShift,
-                                                                                                            const GALGAS_variableKindIR & inAttribute_mResultVariable,
-                                                                                                            const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                                                                            const GALGAS_bool & inAttribute_mNoCheck
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_registerIntegerConstantInExpressionIR result ;
-  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mExpressionValue.isValid () && inAttribute_mMaxBound.isValid () && inAttribute_mBitShift.isValid () && inAttribute_mResultVariable.isValid () && inAttribute_mTargetType.isValid () && inAttribute_mNoCheck.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerIntegerConstantInExpressionIR (inAttribute_mInstructionLocation, inAttribute_mExpressionValue, inAttribute_mMaxBound, inAttribute_mBitShift, inAttribute_mResultVariable, inAttribute_mTargetType, inAttribute_mNoCheck COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_registerIntegerConstantInExpressionIR::reader_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mInstructionLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_registerIntegerConstantInExpressionIR::reader_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_registerIntegerConstantInExpressionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mExpressionValue ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_registerIntegerConstantInExpressionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpressionValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ GALGAS_registerIntegerConstantInExpressionIR::reader_mMaxBound (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint_36__34_ result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mMaxBound ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ cPtr_registerIntegerConstantInExpressionIR::reader_mMaxBound (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMaxBound ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_registerIntegerConstantInExpressionIR::reader_mBitShift (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mBitShift ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint cPtr_registerIntegerConstantInExpressionIR::reader_mBitShift (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBitShift ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_registerIntegerConstantInExpressionIR::reader_mResultVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mResultVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_registerIntegerConstantInExpressionIR::reader_mResultVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerIntegerConstantInExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mTargetType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cPtr_registerIntegerConstantInExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_registerIntegerConstantInExpressionIR::reader_mNoCheck (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerIntegerConstantInExpressionIR) ;
-    result = p->mAttribute_mNoCheck ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cPtr_registerIntegerConstantInExpressionIR::reader_mNoCheck (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNoCheck ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                           Pointer class for @registerIntegerConstantInExpressionIR class                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_registerIntegerConstantInExpressionIR::cPtr_registerIntegerConstantInExpressionIR (const GALGAS_location & in_mInstructionLocation,
-                                                                                        const GALGAS_variableKindIR & in_mExpressionValue,
-                                                                                        const GALGAS_uint_36__34_ & in_mMaxBound,
-                                                                                        const GALGAS_uint & in_mBitShift,
-                                                                                        const GALGAS_variableKindIR & in_mResultVariable,
-                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                                                                        const GALGAS_bool & in_mNoCheck
-                                                                                        COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mInstructionLocation (in_mInstructionLocation),
-mAttribute_mExpressionValue (in_mExpressionValue),
-mAttribute_mMaxBound (in_mMaxBound),
-mAttribute_mBitShift (in_mBitShift),
-mAttribute_mResultVariable (in_mResultVariable),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mNoCheck (in_mNoCheck) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_registerIntegerConstantInExpressionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR ;
-}
-
-void cPtr_registerIntegerConstantInExpressionIR::description (C_String & ioString,
-                                                              const int32_t inIndentation) const {
-  ioString << "[@registerIntegerConstantInExpressionIR:" ;
-  mAttribute_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mExpressionValue.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mMaxBound.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mBitShift.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mResultVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mNoCheck.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_registerIntegerConstantInExpressionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerIntegerConstantInExpressionIR (mAttribute_mInstructionLocation, mAttribute_mExpressionValue, mAttribute_mMaxBound, mAttribute_mBitShift, mAttribute_mResultVariable, mAttribute_mTargetType, mAttribute_mNoCheck COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     @registerIntegerConstantInExpressionIR type                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR ("registerIntegerConstantInExpressionIR",
-                                                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_registerIntegerConstantInExpressionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_registerIntegerConstantInExpressionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_registerIntegerConstantInExpressionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerIntegerConstantInExpressionIR GALGAS_registerIntegerConstantInExpressionIR::extractObject (const GALGAS_object & inObject,
-                                                                                                          C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_registerIntegerConstantInExpressionIR result ;
-  const GALGAS_registerIntegerConstantInExpressionIR * p = (const GALGAS_registerIntegerConstantInExpressionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerIntegerConstantInExpressionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("registerIntegerConstantInExpressionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
