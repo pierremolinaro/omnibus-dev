@@ -6,4 +6,7 @@ option plm_options {
 
   @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
+
+  @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"
+  @string extractEmbeddedSampleFile : 'x', "extract-embedded-sample-code" -> "Extract an embedded sample file"
 }

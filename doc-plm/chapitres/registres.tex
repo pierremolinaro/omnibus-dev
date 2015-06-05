@@ -124,7 +124,7 @@ let x : Bool = ICSR.ISRPENDING.bool // false ou true
 
 Comme pour un champ booléen, l'accès à un champ entier s'effectue par la notation pointée \plm+.+. Par exemple :
 \begin{PLM}
-let x : UInt32 = ICSR.VECTPENDING // (0 a 2**9-1) << 12
+let x : UInt32 = ICSR.VECTPENDING // (0 à 2**9-1) << 12
 \end{PLM}
 
 \plm+ICSR.VECTPENDING+ applique un masquage de la valeur de \plm+ICSR+ pour ne conserver que les bits correspondants au champ \plm+VECTPENDING+. Aucun décalage n'est effectué.
