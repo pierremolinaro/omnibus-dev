@@ -25,9 +25,9 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 {\ttfamily\bfseries-{}-log-file-read} Affiche l'accès en lecture à tout fichier.
 
-{\ttfamily\bfseries-{}-max-errors=\emph{n}} Arrête la compilation si le nombre de $n$ erreurs est atteint. Par défaut, la borne est égale à $100$.
+{\ttfamily\bfseries-{}-max-errors=$n$} Arrête la compilation si le nombre de $n$ erreurs est atteint. Par défaut, la borne est égale à $100$.
 
-{\ttfamily\bfseries-{}-max-warnings=\emph{n}} Arrête la compilation si le nombre de $n$ alertes est atteint. Par défaut, la borne est égale à $100$.
+{\ttfamily\bfseries-{}-max-warnings=$n$} Arrête la compilation si le nombre de $n$ alertes est atteint. Par défaut, la borne est égale à $100$.
 
 {\ttfamily\bfseries-{}-Werror} Transforme toute alerte en erreur.
 
@@ -70,7 +70,7 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 {\ttfamily\bfseries-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant l'arbre syntaxique concret du texte source.
 
 
-{\ttfamily\bfseries-{}-mode=\emph{nom}}, où \emph{nom} peut prendre pour valeur :
+{\ttfamily\bfseries-{}-mode=$nom$}, où \emph{nom} peut prendre pour valeur :
 \begin{itemize}
   \item « \emph{vide} » : fonctionnement nominal, le compilateur effectue toutes les phases : analyse lexicale, analyse syntaxique, analyse sémantique, et génération de code ;
   \item \texttt{lexical-only} : le compilateur s'arrête après l'analyse lexicale, et affiche la séquence des symboles terminaux obtenue ;
@@ -79,3 +79,44 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 \end{itemize}
 
 Écrire l'option \texttt{-{}-mode=} est équivalent à l'absence de cette option.
+
+
+
+
+
+
+\section{Options d'accès aux fichiers d'exemple embarqués}
+
+{\ttfamily\bfseries-{}-list-embedded-samples}, {\ttfamily\bfseries-l} Affiche la liste des fichiers d'exemple embarqués dans le compilateur.
+
+{\ttfamily\bfseries-{}-extract-embedded-sample-code=$nom$}, {\ttfamily\bfseries-x=$nom$} Extrait le fichier d'exemple $nom$ et l'écrit dans le répertoire courant.
+
+Voici comment on utilise ces deux options pour obtenir un fichier d'exemple. D'abord, appeler l'option \texttt{-l} :
+
+
+\colorbox{lightgray}{\tt
+\begin{minipage}{1.0\linewidth}
+ plm -l
+\end{minipage}
+}
+
+Cette commande affiche la liste de tous les exemples embarqués dans le compilateur, triés par cible :
+
+\colorbox{lightgray}{\tt
+\begin{minipage}{1.0\linewidth}
+Embedded sample code:\\ 
+\hspace*{1.2em}/teensy-3-1-sequential-systick/blinkled.plm\\
+\hspace*{1.2em}...
+\end{minipage}
+}
+
+Pour extraire le fichier d'exemple ci-dessus, exécuter :
+
+\colorbox{lightgray}{\tt
+\begin{minipage}{1.0\linewidth}
+plm -x=/teensy-3-1-sequential-systick/blinkled.plm
+\end{minipage}
+}
+
+Ceci écrit le fichier \texttt{blinkled.plm} dans le répertoire courant.
+

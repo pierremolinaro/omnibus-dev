@@ -209,6 +209,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_compileOnly ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_noFlashing ;
@@ -226,6 +228,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGrap
 //                              String options                                                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
+
+extern C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2226,5 +2230,25 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class GALGAS_stringset & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Filewrapper 'embeddedSampleCode'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * gWrapperFileContent_0_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
+extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
 
 #endif

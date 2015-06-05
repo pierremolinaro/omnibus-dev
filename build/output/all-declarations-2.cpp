@@ -2608,6 +2608,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ("plm_o
                                          "do-not-detect-recursive-calls",
                                          "Do not detect recursive calls") ;
 
+C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ("plm_options",
+                                         "listEmbeddedSampleFiles",
+                                         108,
+                                         "list-embedded-samples",
+                                         "List embedded sample files") ;
+
 C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ("plm_options",
                                          "noExceptionGeneration",
                                          0,
@@ -2637,6 +2643,13 @@ C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile (
 //                              String options                                                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
+
+C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ("plm_options",
+                                         "extractEmbeddedSampleFile",
+                                         120,
+                                         "extract-embedded-sample-code",
+                                         "Extract an embedded sample file",
+                                         "") ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -17941,6 +17954,98 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
 
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Filewrapper 'embeddedSampleCode'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+//--- File 'teensy-3-1-sequential-systick/blinkled.plm'
+
+const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-sequential-systick.plms\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc setup $user () {\n"
+  "  PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
+  "  GPIOC_PDDR |= (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "var gDelai : UInt32 = 0 {\n"
+  "  @rw proc loop ()\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc loop $user () {\n"
+  "  gDelai ++ ;\n"
+  "  if gDelai == 1_500_000 then\n"
+  "    GPIOC_PSOR = 1 << 5 ;\n"
+  "  elsif gDelai == 3_000_000 then\n"
+  "    gDelai = 0\n"
+  "    GPIOC_PCOR = 1 << 5 ;\n"
+  "  end  \n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
+  "blinkled.plm",
+  "plm",
+  true, // Text file
+  681, // Text length
+  gWrapperFileContent_0_embeddedSampleCode
+) ;
+
+//--- All files of 'teensy-3-1-sequential-systick' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [2] = {
+  & gWrapperFile_0_embeddedSampleCode,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-sequential-systick' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1] = {
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-sequential-systick'
+
+const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
+  "teensy-3-1-sequential-systick",
+  1,
+  gWrapperAllFiles_embeddedSampleCode_1,
+  0,
+  gWrapperAllDirectories_embeddedSampleCode_1
+) ;
+
+//--- All files of '' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
+  NULL
+} ;
+
+//--- All sub-directories of '' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [2] = {
+  & gWrapperDirectory_1_embeddedSampleCode,
+  NULL
+} ;
+
+//--- Directory ''
+
+const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
+  "",
+  0,
+  gWrapperAllFiles_embeddedSampleCode_0,
+  1,
+  gWrapperAllDirectories_embeddedSampleCode_0
+) ;
+
+
+//---------------------------------------------------------------------------------------------------------------------*
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -19355,217 +19460,6 @@ GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclar
       result = *p ;
     }else{
       inCompiler->castError ("newIntegerRepresentationDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_registerDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_registerDeclaration) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterDeclarationList.objectCompare (p->mAttribute_mRegisterDeclarationList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterTypeName.objectCompare (p->mAttribute_mRegisterTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterBitSliceList.objectCompare (p->mAttribute_mRegisterBitSliceList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_registerDeclaration::objectCompare (const GALGAS_registerDeclaration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclaration::GALGAS_registerDeclaration (void) :
-GALGAS_abstractDeclaration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_default (LOCATION_ARGS) {
-  return GALGAS_registerDeclaration::constructor_new (GALGAS_registerDeclarationList::constructor_emptyList (HERE),
-                                                      GALGAS_lstring::constructor_default (HERE),
-                                                      GALGAS_registerBitSliceList::constructor_emptyList (HERE)
-                                                      COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclaration::GALGAS_registerDeclaration (const cPtr_registerDeclaration * inSourcePtr) :
-GALGAS_abstractDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_registerDeclaration) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_new (const GALGAS_registerDeclarationList & inAttribute_mRegisterDeclarationList,
-                                                                        const GALGAS_lstring & inAttribute_mRegisterTypeName,
-                                                                        const GALGAS_registerBitSliceList & inAttribute_mRegisterBitSliceList
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_registerDeclaration result ;
-  if (inAttribute_mRegisterDeclarationList.isValid () && inAttribute_mRegisterTypeName.isValid () && inAttribute_mRegisterBitSliceList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerDeclaration (inAttribute_mRegisterDeclarationList, inAttribute_mRegisterTypeName, inAttribute_mRegisterBitSliceList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclarationList GALGAS_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_registerDeclarationList result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mRegisterDeclarationList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclarationList cPtr_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterDeclarationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mRegisterTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerBitSliceList GALGAS_registerDeclaration::reader_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_registerBitSliceList result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_registerDeclaration) ;
-    result = p->mAttribute_mRegisterBitSliceList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerBitSliceList cPtr_registerDeclaration::reader_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterBitSliceList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @registerDeclaration class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_registerDeclaration::cPtr_registerDeclaration (const GALGAS_registerDeclarationList & in_mRegisterDeclarationList,
-                                                    const GALGAS_lstring & in_mRegisterTypeName,
-                                                    const GALGAS_registerBitSliceList & in_mRegisterBitSliceList
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclaration (THERE),
-mAttribute_mRegisterDeclarationList (in_mRegisterDeclarationList),
-mAttribute_mRegisterTypeName (in_mRegisterTypeName),
-mAttribute_mRegisterBitSliceList (in_mRegisterBitSliceList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_registerDeclaration::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerDeclaration ;
-}
-
-void cPtr_registerDeclaration::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@registerDeclaration:" ;
-  mAttribute_mRegisterDeclarationList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRegisterTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mRegisterBitSliceList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_registerDeclaration::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerDeclaration (mAttribute_mRegisterDeclarationList, mAttribute_mRegisterTypeName, mAttribute_mRegisterBitSliceList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @registerDeclaration type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerDeclaration ("registerDeclaration",
-                                            & kTypeDescriptor_GALGAS_abstractDeclaration) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_registerDeclaration::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerDeclaration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_registerDeclaration::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_registerDeclaration (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerDeclaration GALGAS_registerDeclaration::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_registerDeclaration result ;
-  const GALGAS_registerDeclaration * p = (const GALGAS_registerDeclaration *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerDeclaration *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("registerDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

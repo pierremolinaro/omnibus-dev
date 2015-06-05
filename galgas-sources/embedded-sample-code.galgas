@@ -1,0 +1,34 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#   EMBEDDED SAMPLE CODE                                                                                               *
+#----------------------------------------------------------------------------------------------------------------------*
+
+filewrapper embeddedSampleCode in "../embedded-sources/sample-code" {
+  "plm"
+}{
+}{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+before {
+  let @filewrapper fw = [filewrapper embeddedSampleCode]
+  if [option plm_options.listEmbeddedSampleFiles value] then
+    let files = [fw allTextFilePathes]
+    message "Embedded sample code:\n"
+    for (f) in files do
+      message "  " + f + '\n'
+    end
+  end
+  let path = [option plm_options.extractEmbeddedSampleFile value]
+  if path != "" then
+    if [fw fileExistsAtPath !path] then
+      let text = [fw textFileContentsAtPath !path]
+      let sourceName = [path lastPathComponent]
+      [text writeToFileWhenDifferentContents !sourceName ?*]
+    else
+      error ["" nowhere] : "there is no '" + path + "' embedded file"
+    end  
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
