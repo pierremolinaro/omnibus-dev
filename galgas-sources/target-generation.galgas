@@ -23,7 +23,7 @@ syntax extension plm_specific_syntax {
 #    TARGET GENERATION                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-filewrapper targetTemplates in "../embedded-sources" {
+filewrapper targetTemplates in "../embedded-sources/targets" {
   "py", "ld", "mke", "h", "c", "s", "plm", "plms"
 }{
 }{
@@ -38,7 +38,7 @@ proc generateTargets
 {
   outFilesToInclude = {}
   @filewrapper fw = [filewrapper targetTemplates]
-  let targetPath = "/targets/" + [inTargetName.string stringByDeletingPathExtension]
+  let targetPath = [inTargetName.string stringByDeletingPathExtension]
   if [fw directoryExistsAtPath !targetPath] then
     for (path) in [fw textFilesAtPath !targetPath] do
       let s = [fw textFileContentsAtPath !targetPath + "/" + path]

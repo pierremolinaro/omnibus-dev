@@ -3,7 +3,7 @@ target "teensy-3-1-sequential-systick.plms"
 //-----------------------------------------------------------------------------*
 
 proc setup $user () {
-  PORTC_PCR5 = (1 << 8)
+  PORTC_PCR5 = PORTC_PCR5::mux (1)
   GPIOC_PDDR |= (1 << 5)
 }
 
