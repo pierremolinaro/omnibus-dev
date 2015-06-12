@@ -499,47 +499,47 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\usepackage{listings}
+%\usepackage{listings}
+%
+%%-----------------------------------------------------------------------------------------------------------------------*
+%
+%\lstdefinelanguage{assembleur}{
+%  style=assembleur,
+%  comment=[l]{\%},
+%}
+%
+%\newcommand\couleurCodeASSEMBLEUR{black!5}
+%
+%\ifthenelse{\equal{\sortieEnCouleur}{true}}{
+%  \lstdefinestyle{assembleur}{
+%    basicstyle=\ttfamily\small,
+%    backgroundcolor=\color{\couleurCodeASSEMBLEUR},
+%    numberstyle=\ttfamily\small,
+%    xleftmargin=20pt
+%  }
+%}{
+%  \lstdefinestyle{assembleur}{
+%    basicstyle=\ttfamily\small,
+%    numberstyle=\ttfamily\small,
+%    xleftmargin=20pt
+%  }
+%}
+%
+%
+%\newcommand\assembleur[1]{\colorbox{\couleurCodeASSEMBLEUR}{\lstinline[language=assembleur]@#1@}}
+
 
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\lstdefinelanguage{assembleur}{
-  style=assembleur,
-  comment=[l]{\%},
-}
-
-\newcommand\couleurCodeASSEMBLEUR{black!5}
-
-\ifthenelse{\equal{\sortieEnCouleur}{true}}{
-  \lstdefinestyle{assembleur}{
-    basicstyle=\ttfamily\small,
-    backgroundcolor=\color{\couleurCodeASSEMBLEUR},
-    numberstyle=\ttfamily\small,
-    xleftmargin=20pt
-  }
-}{
-  \lstdefinestyle{assembleur}{
-    basicstyle=\ttfamily\small,
-    numberstyle=\ttfamily\small,
-    xleftmargin=20pt
-  }
-}
-
-
-\newcommand\assembleur[1]{\colorbox{\couleurCodeASSEMBLEUR}{\lstinline[language=assembleur]@#1@}}
-
-
-%-----------------------------------------------------------------------------------------------------------------------*
-
-\lstdefinelanguage{sortie}{
-  style=sortie,
-}
-
-\lstdefinestyle{sortie}{
-  basicstyle=\ttfamily\scriptsize,
-  frame=l,
-%  numberstyle=\ttfamily\small,
-}
+%\lstdefinelanguage{sortie}{
+%  style=sortie,
+%}
+%
+%\lstdefinestyle{sortie}{
+%  basicstyle=\ttfamily\scriptsize,
+%  frame=l,
+%%  numberstyle=\ttfamily\small,
+%}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %   A F F I C H A G E    D U    C O D E    P L M                                                                        *
@@ -596,7 +596,7 @@
 \makeatother
 
 %-----------------------------------------------------------------------------------------------------------------------*
-% COMMANDE \plm : affichage de code en ligne PLML                                                                       *
+% COMMANDE \plm : affichage de code en ligne PLM                                                                        *
 %-----------------------------------------------------------------------------------------------------------------------*
 
 
@@ -641,6 +641,17 @@
   \@tempa%
 }%
 \makeatother
+
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
+%   C OM M A N D E S    S H E L L                                                                                       *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+
+\newenvironment{SHELL}
+{\begin{mdframed}[backgroundcolor=lightgray!50,linewidth=0]\tt}
+{\end{mdframed}}
+
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *

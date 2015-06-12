@@ -93,30 +93,26 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 Voici comment on utilise ces deux options pour obtenir un fichier d'exemple. D'abord, appeler l'option \texttt{-l} :
 
-
-\colorbox{lightgray}{\tt
-\begin{minipage}{1.0\linewidth}
+\begin{SHELL}
  plm -l
-\end{minipage}
-}
+\end{SHELL}
+
 
 Cette commande affiche la liste de tous les exemples embarqués dans le compilateur, triés par cible :
 
-\colorbox{lightgray}{\tt
-\begin{minipage}{1.0\linewidth}
+\begin{SHELL}
 Embedded sample code:\\ 
 \hspace*{1.2em}/teensy-3-1-sequential-systick/blinkled.plm\\
 \hspace*{1.2em}...
-\end{minipage}
-}
+\end{SHELL}
+
 
 Pour extraire le fichier d'exemple ci-dessus, exécuter :
 
-\colorbox{lightgray}{\tt
-\begin{minipage}{1.0\linewidth}
+\begin{SHELL}
 plm -x=/teensy-3-1-sequential-systick/blinkled.plm
-\end{minipage}
-}
+\end{SHELL}
+
 
 Ceci écrit le fichier \texttt{blinkled.plm} dans le répertoire courant.
 
