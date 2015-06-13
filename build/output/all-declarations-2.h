@@ -2248,6 +2248,7 @@ class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const char * gWrapperFileContent_0_embeddedSampleCode ;
+extern const char * gWrapperFileContent_1_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2255,6 +2256,7 @@ extern const char * gWrapperFileContent_0_embeddedSampleCode ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -18022,49 +18022,101 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- File 'teensy-3-1-sequential-systick/blinkled.plm'
+//--- File 'teensy-3-1-sequential-systick/01-blinkled.plm'
 
 const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-sequential-systick.plms\"\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
+  "//------------------------------------------------*\n"
   "\n"
   "proc setup $user () {\n"
   "  PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
   "  GPIOC_PDDR |= (1 << 5)\n"
   "}\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
+  "//------------------------------------------------*\n"
   "\n"
   "var gDelai : UInt32 = 0 {\n"
   "  @rw proc loop ()\n"
   "}\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
+  "//------------------------------------------------*\n"
   "\n"
   "proc loop $user () {\n"
-  "  gDelai ++ ;\n"
+  "  gDelai ++\n"
   "  if gDelai == 1_500_000 then\n"
-  "    GPIOC_PSOR = 1 << 5 ;\n"
+  "    GPIOC_PSOR = 1 << 5 // Allumer la led\n"
   "  elsif gDelai == 3_000_000 then\n"
   "    gDelai = 0\n"
-  "    GPIOC_PCOR = 1 << 5 ;\n"
+  "    GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
   "  end  \n"
   "}\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n" ;
+  "//------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
-  "blinkled.plm",
+  "01-blinkled.plm",
   "plm",
   true, // Text file
-  681, // Text length
+  596, // Text length
   gWrapperFileContent_0_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/02-blinkled-systick.plm'
+
+const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-sequential-systick.plms\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc setup $user () {\n"
+  "  PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
+  "  GPIOC_PDDR |= (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "var gUpTimeMS : UInt32 = 0 {\n"
+  "  @rw proc systickHandler ()\n"
+  "  proc wait (\?ms: inDuration : UInt32)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc systickHandler $isr () {\n"
+  "  gUpTimeMS ++\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc wait $user (\?ms: inDuration : UInt32) {\n"
+  "  let deadline = gUpTimeMS + inDuration\n"
+  "  while deadline > gUpTimeMS do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc loop $user () {\n"
+  "  wait (!ms:500)\n"
+  "  GPIOC_PSOR = 1 << 5 // Allumer la led\n"
+  "  wait (!ms:500)\n"
+  "  GPIOC_PCOR = 1 << 5  // \xC3""\x89""teindre la led\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
+  "02-blinkled-systick.plm",
+  "plm",
+  true, // Text file
+  861, // Text length
+  gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [2] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [3] = {
   & gWrapperFile_0_embeddedSampleCode,
+  & gWrapperFile_1_embeddedSampleCode,
   NULL
 } ;
 
@@ -18078,7 +18130,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-sequential-systick",
-  1,
+  2,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1

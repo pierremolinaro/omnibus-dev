@@ -30,28 +30,30 @@ Pour afficher la liste des fichiers d'exemple, entrez :
 \begin{SHELL}
 {\bfseries plm -l}\\
 Embedded sample code:\\ 
-\hspace*{1.2em}/teensy-3-1-sequential-systick/blinkled.plm\\
+\hspace*{1.2em}/teensy-3-1-sequential-systick/01-blinkled.plm\\
 \hspace*{1.2em}...
 \end{SHELL}
 
-Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-sequential-systick}, et le fichier d'exemple \texttt{blinkled.plm}. Comme son nom le suggère, cet exemple fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
+Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-sequential-systick}, et le fichier d'exemple \texttt{01-blinkled.plm}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers PLM comme vous le voulez.
+
+Comme son nom le suggère, l'exemple \texttt{01-blinkled.plm} fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
 
 \subsection{Extraction d'un fichier d'exemple}
 
-Pour extraire le fichier d'exemple \texttt{blinkled.plm}, exécuter :
+Pour extraire le fichier d'exemple \texttt{01-blinkled.plm}, exécuter :
 
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-sequential-systick/blinkled.plm
+\bfseries plm -x=/teensy-3-1-sequential-systick/01-blinkled.plm
 \end{SHELL}
 
 
-Ceci écrit le fichier \texttt{blinkled.plm} dans le répertoire courant. Ce fichier est prêt à être compilé.
+Ceci écrit le fichier \texttt{01-blinkled.plm} dans le répertoire courant. Ce fichier est prêt à être compilé.
 
 \subsection{Compilation et flashage}
 
 Pour compiler et flasher la cible sur une carte \emph{Teensy 3.1}, entrer\footnote{Pour compiler sans flasher, ajouter l'option « \texttt{-f} » (\refSectionPage{optionCodeEngendre}) ; pour compiler avec des messages détaillés, ajouter l'option « \texttt{-v} » (\refSectionPage{optionsGenerales}). Les options peuvent apparaître sur la ligne de commande avant ou après le nom du fichier compilé.} :
 \begin{SHELL}
-{\bfseries plm blinkled.plm}\\
+{\bfseries plm 01-blinkled.plm}\\
 Downloading compiler tool chain\\
 ..................................................................\\
 Product directory: \emph{voir ci-dessous}\\
@@ -77,9 +79,9 @@ Success
 
 Le programme d'exemple a été flashé (« \emph{Programming} »), puis le micro-contrôleur a été redémarré (« \emph{Booting} ») : la led de la carte clignote.
 
-\subsection{Texte source de \texttt{blinkled.plm}}
+\subsection{Texte source de \texttt{01-blinkled.plm}}
 
-Maintenant, nous allons examiner le code source PLM du fichier \texttt{blinkled.plm} :
+Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blinkled.plm} :
 
 \begin{PLM}[1]
 target "teensy-3-1-sequential-systick.plms"
@@ -104,7 +106,7 @@ proc loop $user () {
 }
 \end{PLM}
 
-La première ligne \plm+target "teensy-3-1-sequential-systick.plms"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible comporte toujours l'extension « \texttt{.plms} », et définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+proc setup $user ()+ et \plm+proc loop $user ()+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
+La première ligne \plm+target "teensy-3-1-sequential-systick.plms"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible comporte toujours l'extension « \texttt{.plms} », et définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+proc setup $user ()+ et \plm+proc loop $user ()+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
 
 Comme pour l'Arduino, la routine \plm+proc setup $user ()+ est exécutée une seule fois, puis la routine \plm+proc setup $user ()+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\$} » : ici, \plm+$user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car inutile. 
 
@@ -150,5 +152,110 @@ proc loop $user () {
 }
 \end{PLM}
 
-Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée (sa valeur initiale est $0$) ; quand elle atteint $1~500~000$, la led est allumée ; quand elle atteint $3~000~000$, elle est ramenée à $0$ et la led est éteinte.
+Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée (sa valeur initiale est $0$) ; quand elle atteint $1~500~000$, la led est allumée ; quand elle atteint $3~000~000$, elle est ramenée à $0$ et la led est éteinte. Les valeurs $1~500~000$ et $3~000~000$ sont empiriques et choisies pour obtenir un clignotement visible. L'exemple suivant va montrer comment utiliser une routine d'interruption pour obtenir un délai dont l'unité sera la milliseconde.
+
+
+
+
+
+\section{Deuxième exemple : clignotement avec routine d'interruption}
+
+La cible \texttt{teensy-3-1-sequential-systick} programme le décompteur \texttt{SysTick} de façon que l'interruption correspondante se déclenche toutes les millisecondes, et appelle une routine d'interruption. Par défaut, cette routine ne comporte aucune instruction et n'a donc aucun effet. 
+
+Le programme d'exemple \texttt{02-blinkled-systick.plm} redéfinit cette routine d'interruption et l'utilise pour compter le temps.
+
+Pour extraire le programme d'exemple :
+\begin{SHELL}
+\bfseries plm -x=/teensy-3-1-sequential-systick/02-blinkled-systick.plm
+\end{SHELL}
+
+Ensuite, vous pouvez le compiler et effectuer son flashage sur la carte \emph{Teensy 3.1} :
+\begin{SHELL}
+\bfseries plm 02-blinkled-systick.plm
+\end{SHELL}
+
+La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de $1$~Hz.
+
+Voyons maintenant le contenu du fichier d'exemple \texttt{02-blinkled-systick.plm} :
+
+\begin{PLM}[1]
+target "teensy-3-1-sequential-systick.plms"
+
+proc setup $user () {
+  PORTC_PCR5 = PORTC_PCR5::mux (1)
+  GPIOC_PDDR |= (1 << 5)
+}
+
+var gUpTimeMS : UInt32 = 0 {
+  @rw proc systickHandler ()
+  proc wait (?ms: inDuration : UInt32)
+}
+
+proc systickHandler $isr () {
+  gUpTimeMS ++
+}
+
+proc wait $user (?ms: inDuration : UInt32) {
+  let deadline = gUpTimeMS + inDuration
+  while deadline > gUpTimeMS do
+  end
+}
+
+proc loop $user () {
+  wait (!ms:500)
+  GPIOC_PSOR = 1 << 5 // Allumer la led
+  wait (!ms:500)
+  GPIOC_PCOR = 1 << 5  // Éteindre la led
+}
+\end{PLM}
+
+La référence à la cible \plm+target "teensy-3-1-sequential-systick.plms"+ et la définition de la routine \plm+setup+ sont identiques à celles écrites dans le premier exemple.
+
+La définition de la variable globale \plm+gUpTimeMS+ :
+
+\begin{PLM}[8]
+var gUpTimeMS : UInt32 = 0 {
+  @rw proc systickHandler ()
+  proc wait (?ms: inDuration : UInt32)
+}
+\end{PLM}
+
+Cette variable compte le temps exprimé en millisecondes. Deux routines y accèdent, \plm+systickHandler+ en lecture / écriture, et \plm+wait+, uniquement en lecture. Remarquons que \plm+wait+ présente un argument formel en entrée, \plm+inDuration+, dont la notation sera présentée plus loin.
+
+La routine d'interruption \plm+systickHandler+ :
+
+\begin{PLM}[13]
+proc systickHandler $isr () {
+  gUpTimeMS ++
+}
+\end{PLM}
+
+Le mode associé à une routine d'interruption est toujours \plm+$isr+. L'instruction d'appel de routine (\refSectionPage{instructionAppelProc}) vérifie que les modes de la routine appelée soient un sous-ensemble des modes de la routine appelante : ainsi, par exemple, il n'est pas possible d'appeler \plm+systickHandler+ à partir de la routine \plm+loop+.
+
+La routine d'interruption \plm+systickHandler+ est appelée toutes les millisecondes, la variable globale \plm+gUpTimeMS+ contient donc le temps absolu depuis le démarrage, exprimé en millisecondes.
+
+L'attente durant un certain délai est effectué par la routine \plm+wait+ :
+\begin{PLM}[17]
+proc wait $user (?ms: inDuration : UInt32) {
+  let deadline = gUpTimeMS + inDuration
+  while deadline > gUpTimeMS do
+  end
+}
+\end{PLM}
+
+Cette routine présente un paramètre formel : \plm+inDuration+, de type \plm+UInt32+. Le \emph{sélecteur} \plm+?ms:+ indique que \plm+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
+
+Le code de cette routine est simple : après avoir calculé la constante \plm+deadline+\footnote{Une constante locale à une routine est déclarée par le mot réservé \texttt{\bfseries let} (voir \refSectionPage{declarationConstanteLocale}).}, la boucle \plm+while+ attend le délai imparti.
+
+Il reste à commenter le code ce la routine \plm+loop+ :
+\begin{PLM}[23]
+proc loop $user () {
+  wait (!ms:500)
+  GPIOC_PSOR = 1 << 5 // Allumer la led
+  wait (!ms:500)
+  GPIOC_PCOR = 1 << 5  // Éteindre la led
+}
+\end{PLM}
+
+Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un argument formel en entrée, dont le sélecteur est \plm+?ms:+. L'instruction d'appel devra donc comporter un paramètre effectif en sortie (donc son sélecteur commence par « \texttt{!} »), et de même nom : le sélecteur du paramètre effectif est donc \plm+!ms:+. En ce qui concerne les modes, la routine appelée \plm+wait+ est déclarée avec le mode \plm+$user+, comme la routine appelante \plm+loop+ : l'appel est donc valide.
 
