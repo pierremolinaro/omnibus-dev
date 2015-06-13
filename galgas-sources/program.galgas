@@ -11,7 +11,17 @@ grammar plms_grammar
 case . "plm"
 message "a source text file with the .plm extension"
 grammar plm_grammar
-?sourceFilePath:@lstring inSourceFile {
+?sourceFilePath:@lstring inSourceFile
+{
+  if ([option .mode value] == "") & not [option .outputConcreteSyntaxTree value] then
+    importFilesAndCompile (!sourceFilePath:inSourceFile)
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
+{
 #--- Parsing
   @ast ast = .default
   grammar plm_grammar in inSourceFile !?ast ?importClauseList:let importedFileList ?endOfSourceFile:let endOfSourceFile

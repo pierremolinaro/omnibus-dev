@@ -2098,6 +2098,16 @@ extern const cDirectoryWrapper gWrapperDirectory_10_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Routine 'importFilesAndCompile'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_importFilesAndCompile (const class GALGAS_lstring constinArgument0,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              Routine 'compileProject'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2110,6 +2120,19 @@ void routine_compileProject (const class GALGAS_lstring constinArgument0,
                              const class GALGAS_stringset constinArgument5,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'recursiveImportFiles'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
+                                   class GALGAS_string inArgument1,
+                                   class GALGAS_lstringlist inArgument2,
+                                   class GALGAS_stringset & ioArgument3,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2217,19 +2240,6 @@ class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'recursiveImportFiles'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
-                                   class GALGAS_string inArgument1,
-                                   class GALGAS_lstringlist inArgument2,
-                                   class GALGAS_stringset & ioArgument3,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

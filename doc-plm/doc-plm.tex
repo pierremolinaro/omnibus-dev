@@ -547,6 +547,7 @@
 
 \usepackage{mdframed}
 \usepackage{lineno}
+\renewcommand\linenumberfont{\normalfont\bfseries\footnotesize}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 % http://en.wikibooks.org/wiki/LaTeX/Colors
@@ -575,7 +576,8 @@
 \newwrite\tempfile
 
 \makeatletter
-\newenvironment{PLM}{%
+\newenvironment{PLM}[1][0]{%
+  \providecommand{\ParametrePLM}{#1}
   \begingroup
   \@bsphack
   \immediate\openout\tempfile=temp.plm%
@@ -591,7 +593,11 @@
   \@esphack
   \endgroup
   \immediate\write18{plm --mode=latex:plm temp.plm}
-  {\singlespacing\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
+  \ifthenelse{\equal{\ParametrePLM}{0}}{
+    {\singlespacing\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
+  }{
+    {\singlespacing\begin{linenumbers}\resetlinenumber[\ParametrePLM]\ttfamily\input{temp.plm.tex}\end{linenumbers}}
+  }
 }
 \makeatother
 
