@@ -1,0 +1,28 @@
+target "teensy-3-1-sequential-systick.plms"
+
+//------------------------------------------------*
+
+proc setup $user () {
+  PORTC_PCR5 = PORTC_PCR5::mux (1)
+  GPIOC_PDDR |= (1 << 5)
+}
+
+//------------------------------------------------*
+
+var gDelai : UInt32 = 0 {
+  @rw proc loop ()
+}
+
+//------------------------------------------------*
+
+proc loop $user () {
+  gDelai ++
+  if gDelai == 1_500_000 then
+    GPIOC_PSOR = 1 << 5 // Allumer la led
+  elsif gDelai == 3_000_000 then
+    gDelai = 0
+    GPIOC_PCOR = 1 << 5 // Éteindre la led
+  end  
+}
+
+//------------------------------------------------*

@@ -18,7 +18,7 @@ Le langage définit plusieurs natures de sous-programmes :
 
 Ce chapitre décrit les \emph{procédures} et les \emph{fonctions}. Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement. Elles sont présentées dans des sections particulières, citées ci-dessus.
 
-\section{Arguments formels, paramètres effectifs, sélecteurs}
+\sectionLabel{Arguments formels, paramètres effectifs, sélecteurs}{argumentFormel}
 \index{Argument formel}
 \index{Parametre effectif@Paramètre effectif}
 \index{Selecteur@Sélecteur}
@@ -49,15 +49,15 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 
 La déclaration d'une procédure est la suivante :
 \begin{PLM}
-proc nom $mode @attribut (arguments_formels) {
+proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la procédure ;
-  \item \plm=$mode= est la liste non vide de l'ensemble des modes où la procédure peut être appelée ;
-  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la procédure.
+  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes où la procédure peut être appelée ;
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
 \end{itemize}
 
 \subsection{Exemples}
