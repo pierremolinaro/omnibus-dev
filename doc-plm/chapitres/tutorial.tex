@@ -152,13 +152,13 @@ proc loop $user () {
 }
 \end{PLM}
 
-Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée (sa valeur initiale est $0$) ; quand elle atteint $1~500~000$, la led est allumée ; quand elle atteint $3~000~000$, elle est ramenée à $0$ et la led est éteinte. Les valeurs $1~500~000$ et $3~000~000$ sont empiriques et choisies pour obtenir un clignotement visible. L'exemple suivant va montrer comment utiliser une routine d'interruption pour obtenir un délai dont l'unité sera la milliseconde.
+Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée à chaque exécution (sa valeur initiale est $0$) ; quand elle atteint $1~500~000$, la led est allumée ; quand elle atteint $3~000~000$, elle est ramenée à $0$ et la led est éteinte. Les valeurs $1~500~000$ et $3~000~000$ sont empiriques et choisies pour obtenir un clignotement visible. L'exemple suivant va montrer comment utiliser une routine d'interruption pour obtenir un délai dont l'unité sera la milliseconde.
 
 
 
 
 
-\section{Deuxième exemple : clignotement avec routine d'interruption}
+\sectionLabel{Deuxième exemple : clignotement avec routine d'interruption}{deuxiemeExemple}
 
 La cible \texttt{teensy-3-1-sequential-systick} programme le décompteur \texttt{SysTick} de façon que l'interruption correspondante se déclenche toutes les millisecondes, et appelle une routine d'interruption. Par défaut, cette routine ne comporte aucune instruction et n'a donc aucun effet. 
 
