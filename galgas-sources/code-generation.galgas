@@ -183,16 +183,11 @@ proc codeGeneration
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
 #--- Perform C compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
-    let buildScript = "python " + targetDirectory + "/build.py"
-    var result = [buildScript system]
+    let script = if [option plm_options.noFlashing value] then "build" else "flash-and-run" end
+    let fullScript = "python " + targetDirectory + "/" + script + ".py"
+    @sint result = [fullScript system]
     if result != 0S then
-      error inEndOfSourceFileLocation: "error during C compilation"
-    elsif not [option plm_options.noFlashing value] then
-      let flashScript = "python " + targetDirectory + "/flash-and-run.py"
-      result = [flashScript system]
-      if result != 0S then
-        error inEndOfSourceFileLocation: "error during target flashing"
-      end
+      error inEndOfSourceFileLocation: "error during C compilation or flashing"
     end
   end
 }

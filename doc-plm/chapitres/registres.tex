@@ -56,14 +56,7 @@ let vectPending : UInt32 = (ICSR & 0x1F_F000) >> 12
 Ces écritures peuvent être rendues plus intelligibles en précisant la composition du registre \texttt{ICSR} dans sa déclaration. C'est ce qui va être réalisé dans la section suivante.
 
 
-\section{Déclaration d'un registre et de ses champs}
-
-%\noindent{\setlength\fboxsep{4pt}\fcolorbox{gray}{green!25!blue!10}{
-%\begin{minipage}{0.96\linewidth}
-%Peut être qualifiée de\, \index{Temps réel!définition|textbf}\emph{temps réel}\,
-% une application informatique qui produit des résultats dont la validité ne dépend pas que de la justesse de leurs valeurs, mais aussi de la date de leur production : un résultat juste ne sera valide que s'il est délivré dans une fenêtre temporelle spécifiée.
-%\end{minipage}}}
-
+\sectionLabel{Déclaration d'un registre et de ses champs}{declarationRegistreEtChamps}
 
 Lors de la déclaration d'un registre, il est possible de préciser la composition de ses champs entiers et booléens :
 \begin{PLM}

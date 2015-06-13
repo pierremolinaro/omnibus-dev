@@ -72,14 +72,16 @@ proc codeOptimisation
     optimizing = false
     pass ++
   #--- Display
-    var s = "Optimisation pass " + pass + "\n"
-    s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
-    s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
-    s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
-    s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
-    s += "  " + [ioIntermediateCodeStruct.mProcedureMapIR count] + " procedures\n"
-    s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
-    message s
+    if [option .verbose_output value] then
+      var s = "Optimisation pass " + pass + "\n"
+      s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
+      s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"
+      s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
+      s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
+      s += "  " + [ioIntermediateCodeStruct.mProcedureMapIR count] + " procedures\n"
+      s += "  " + [ioIntermediateCodeStruct.mFunctionMapIR count] + " functions\n"
+      message s
+    end
   #------------------------------------------- loop through sub programs
     suppressInaccessibleSubprograms (
       !?intermediateCode:ioIntermediateCodeStruct

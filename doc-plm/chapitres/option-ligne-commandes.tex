@@ -9,12 +9,14 @@
 
 Les options de la ligne de commande commencent toutes par un caractère « \texttt{-} ». La forme courte début par un simple « \texttt{-} », la forme longue par un double « \texttt{-} ». Certaines options acceptent au choix les deux formes (par exemple \texttt{-{}-verbose} ou \texttt{-v}). Une option ne commençant par un « \texttt{-} » est considérée comme un nom de fichier source. Les deux seules extensions autorisées pour les fichiers sources sont « \texttt{.plm} » (fichier source PLM) et  « \texttt{.plms} » (fichier de description d'une cible). Par exemple, pour compiler un fichier source \texttt{source.plm} avec l'option \emph{verbose} :
 
-\texttt{plm -v source.plm}
+\begin{SHELL}
+\bfseries plm -v source.plm
+\end{SHELL}
 
 Les options peuvent apparaître avant ou après le nom du fichier source, elles sont toujours examinées avant que la compilation ne commence.
 
 
-\section{Options générales}
+\sectionLabel{Options générales}{optionsGenerales}
 
 {\ttfamily\bfseries-{}-help} Affiche l'aide.
 
@@ -85,34 +87,10 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 
 
-\section{Options d'accès aux fichiers d'exemple embarqués}
+\sectionLabel{Options d'accès aux fichiers d'exemple embarqués}{optionsExemplesEmbarques}
 
 {\ttfamily\bfseries-{}-list-embedded-samples}, {\ttfamily\bfseries-l} Affiche la liste des fichiers d'exemple embarqués dans le compilateur.
 
 {\ttfamily\bfseries-{}-extract-embedded-sample-code=$nom$}, {\ttfamily\bfseries-x=$nom$} Extrait le fichier d'exemple $nom$ et l'écrit dans le répertoire courant.
 
-Voici comment on utilise ces deux options pour obtenir un fichier d'exemple. D'abord, appeler l'option \texttt{-l} :
-
-\begin{SHELL}
- plm -l
-\end{SHELL}
-
-
-Cette commande affiche la liste de tous les exemples embarqués dans le compilateur, triés par cible :
-
-\begin{SHELL}
-Embedded sample code:\\ 
-\hspace*{1.2em}/teensy-3-1-sequential-systick/blinkled.plm\\
-\hspace*{1.2em}...
-\end{SHELL}
-
-
-Pour extraire le fichier d'exemple ci-dessus, exécuter :
-
-\begin{SHELL}
-plm -x=/teensy-3-1-sequential-systick/blinkled.plm
-\end{SHELL}
-
-
-Ceci écrit le fichier \texttt{blinkled.plm} dans le répertoire courant.
-
+L'utilisation de ces deux options est illustrée à la \refSectionPage{exempleBlinkled}.

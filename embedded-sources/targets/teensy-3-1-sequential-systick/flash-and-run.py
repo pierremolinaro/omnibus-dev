@@ -25,9 +25,12 @@ os.chdir (scriptDir)
 #---
 childProcess = subprocess.Popen (["python", "build.py", "run"])
 #--- Wait for subprocess termination
-if childProcess.poll () == None :
-  childProcess.wait ()
-if childProcess.returncode != 0 :
-  sys.exit (childProcess.returncode)
+try:
+  if childProcess.poll () == None :
+    childProcess.wait ()
+  if childProcess.returncode != 0 :
+    sys.exit (childProcess.returncode)
+except :
+    sys.exit (1)
 
 #------------------------------------------------------------------------------*

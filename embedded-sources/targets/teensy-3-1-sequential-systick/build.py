@@ -523,7 +523,8 @@ class Make:
                 absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))
                 if not os.path.exists (absTargetDirectory):
                   displayLock.acquire ()
-                  runCommand (["mkdir", "-p", absTargetDirectory], "Making " + absTargetDirectory + " directory", showCommand)
+                  runHiddenCommand (["mkdir", "-p", absTargetDirectory])
+                  # runCommand (["mkdir", "-p", absTargetDirectory], "Making " + absTargetDirectory + " directory", showCommand)
                   displayLock.release ()
                 #--- Run job
                 job.run (displayLock, terminationSemaphore, showCommand)
@@ -850,18 +851,18 @@ def downloadReportHook (a, b, fileSize) :
 def downloadArchive (archiveURL, archivePath):
   global downloadProgression
   downloadProgression = 0.0
-  runSingleCommand (["rm", "-f", archivePath + ".downloading"])
-  runSingleCommand (["rm", "-f", archivePath + ".tar.bz2"])
-  runSingleCommand (["mkdir", "-p", os.path.dirname (archivePath)])
-  print "URL: "+ archiveURL
-  print "Downloading... " + archivePath + ".downloading"
+  runHiddenCommand (["rm", "-f", archivePath + ".downloading"])
+  runHiddenCommand (["rm", "-f", archivePath + ".tar.bz2"])
+  runHiddenCommand (["mkdir", "-p", os.path.dirname (archivePath)])
+  #print "URL: "+ archiveURL
+  #print "Downloading... " + archivePath + ".downloading"
   try:
     urllib.urlretrieve (archiveURL,  archivePath + ".downloading", downloadReportHook)
     print ""
     fileSize = os.path.getsize (archivePath + ".downloading")
     ok = fileSize > 1000000
     if ok:
-      runSingleCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
+      runHiddenCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
     else:
       print BOLD_RED () + "Error: cannot download file" + ENDC ()
       sys.exit (1)
@@ -894,12 +895,13 @@ if not os.path.exists (toolDirectory):
   downloadArchive (archiveURL, toolDirectory)
   installDir = os.path.normpath (toolDirectory + "/..")
   os.chdir (installDir)
-  runSingleCommand (["bunzip2", "-k", archiveName + ".tar.bz2"])
-  runSingleCommand (["rm", archiveName + ".tar.bz2"])
-  runSingleCommand (["tar", "xf", archiveName + ".tar"])
-  runSingleCommand (["rm", archiveName + ".tar"])
+  runHiddenCommand (["bunzip2", "-k", archiveName + ".tar.bz2"])
+  runHiddenCommand (["rm", archiveName + ".tar.bz2"])
+  runHiddenCommand (["tar", "xf", archiveName + ".tar"])
+  runHiddenCommand (["rm", archiveName + ".tar"])
 #---
 os.chdir (scriptDir)
+print "Product directory: " + scriptDir
 #--- Build python makefile
 makefile = Make ()
 #--- Add C files compile rule
