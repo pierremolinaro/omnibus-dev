@@ -5,7 +5,7 @@
 
 
 
-\chapter{Procédures et fonctions}\index{Procedure@Procédure}\index{Fonction}
+\chapter{Procédures}\index{Procedure@Procédure}
 
 Le langage définit plusieurs natures de sous-programmes :
 \begin{itemize}
@@ -18,14 +18,73 @@ Le langage définit plusieurs natures de sous-programmes :
 
 Ce chapitre décrit les \emph{procédures} et les \emph{fonctions}. Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement. Elles sont présentées dans des sections particulières, citées ci-dessus.
 
+
+
+
+
+
+\sectionLabel{Déclaration d'une procédure}{declarationProcedure}
+
+La déclaration d'une procédure est la suivante :
+\begin{PLM}
+proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la procédure ;
+  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
+\end{itemize}
+
+Par exemple :
+
+\begin{PLM}
+proc setup $user () {
+}
+\end{PLM}
+
+Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
+
+\begin{PLM}
+proc goto $user @noWarningIfUnused (
+  ?line:inLine : UInt32
+  ?column:inColumn : UInt8) {
+}
+\end{PLM}
+
+Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=$user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+
+
+
+
+
+
 \sectionLabel{Arguments formels, paramètres effectifs, sélecteurs}{argumentFormel}
 \index{Argument formel}
 \index{Parametre effectif@Paramètre effectif}
 \index{Selecteur@Sélecteur}
 
-Une \emph{procédure} déclare zéro, un ou plusieurs arguments formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs arguments formels en \emph{entrée}.
+Il existe trois natures d'arguments formels : \emph{entrée}, \emph{sortie} et \emph{entrée / sortie}, décrits dans le \refTableau{argumentsFormels}. Un sélecteur peut être \emph{anonyme} (par exemple \plm+?+ pour un paramètre formel en entrée), ou comporter un nom (le nom « \texttt{nom} » pour \plm+?nom:+).
 
-La syntaxe des différents arguments formels et de leur paramètre effectif est résumée dans le \refTableau{argumentsFormelsParametresEffectifs}.
+Une procédure déclare zéro, un ou plusieurs arguments formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs arguments formels en \emph{entrée}.
+
+La syntaxe des différents arguments formels et de leur paramètre effectif est résumée dans le \refTableau{argumentsFormelsParametresEffectifs}. 
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{lp{6.5cm}l}
+    \textbf{Argument formel} & \textbf{Transfert d'information} & \textbf{Sélecteur} \\
+    Entrée & Lors de l'appel, de l'appelant vers l'appelé & \plm+?+ ou \plm+?selecteur:+\\
+    Sortie & Lors du retour, de l'appelé vers l'appelant & \plm+!+ ou \plm+!selecteur:+\\
+    Entrée / sortie & Lors de l'appel, de l'appelant vers l'appelé, et lors du retour, de l'appelé vers l'appelant & \plm+?!+ ou \plm+?!selecteur:+\\
+  \end{tabular}
+  \caption{Arguments formels}
+  \labelTableau{argumentsFormels}
+  \ligne
+\end{table}
+
 
 
 \begin{table}[t]
@@ -45,51 +104,65 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 \end{table}
 
 
-\section{Déclaration d'une procédure}
-
-La déclaration d'une procédure est la suivante :
-\begin{PLM}
-proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
-  liste_instructions
-}
-\end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la procédure ;
-  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes où la procédure peut être appelée ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
-\end{itemize}
-
-\subsection{Exemples}
-
-\begin{PLM}
-proc setup $user () {
-}
-\end{PLM}
-
-Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
-
-\begin{PLM}
-proc goto $user @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
-}
-\end{PLM}
 
 
-\section{Procédures requises}
-
-\colorbox{red}{Doc à écrire.}
-
-
-\sectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
-
-\colorbox{red}{Doc à écrire.}
 
 
 \sectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
 
-\colorbox{red}{Doc à écrire.}
+L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
 
 
+
+
+
+
+
+\sectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
+
+L'attribut \plm+@weak+ signifie que la routine peut être redéfinie par une routine de même nom, avec les mêmes arguments formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
+
+Par exemple, la cible \texttt{teensy-3-1-sequential-systick} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
+
+\begin{PLM}
+proc systickHandler $isr @weak () {
+}
+\end{PLM}
+
+Par défaut, la routine d'interruption \plm+systickHandler+ est donc définie, vide. Le programme d'exemple définit cette routine :
+
+\begin{PLM}
+proc systickHandler $isr () {
+  gUpTimeMS ++
+}
+\end{PLM}
+
+Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le même mode que la routine marquée \plm+@weak+, elle est utilisée à la place de celle-ci.
+
+
+
+
+
+
+\sectionLabel{Procédures requises}{procedureRequise}
+
+La déclaration \plm+required proc+ permet de signifier au compilateur qu'une procédure doit être définie, soit par la cible, soit par le programme utilisateur.
+
+Cette déclaration est la suivante :
+\begin{PLM}
+required proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels)
+\end{PLM}
+
+Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
+
+Par exemple, la cible \texttt{teensy-3-1-sequential-systick} comporte ces deux déclarations :
+
+\begin{PLM}
+required proc setup $user ()
+required proc loop $user ()
+\end{PLM}
+
+Ceci impose au programme utilisateur de définir ces deux procédures.
 
 
 
