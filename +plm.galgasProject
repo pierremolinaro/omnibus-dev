@@ -70,7 +70,7 @@ project (0:0:1) -> "plm" {
   "galgas-sources/register-declaration.galgas"
 
 #--- Expression
-  "galgas-sources/expression.galgas"
+  "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-conversion.galgas"
 #  "galgas-sources/expression-constructor-call.galgas"
   "galgas-sources/expression-infix-operators.galgas"

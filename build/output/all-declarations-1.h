@@ -11,6 +11,229 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                @registerFieldMap map                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cMapElement_registerFieldMap ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * kSearchErrorMessage_registerFieldMap_searchKey ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_registerFieldMap : public AC_GALGAS_map {
+//--------------------------------- Default constructor
+  public : GALGAS_registerFieldMap (void) ;
+
+//--------------------------------- Handle copy
+  public : GALGAS_registerFieldMap (const GALGAS_registerFieldMap & inSource) ;
+  public : GALGAS_registerFieldMap & operator = (const GALGAS_registerFieldMap & inSource) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_registerFieldMap extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_registerFieldMap constructor_emptyMap (LOCATION_ARGS) ;
+
+  public : static GALGAS_registerFieldMap constructor_mapWithMapToOverride (const class GALGAS_registerFieldMap & inOperand0
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                      const class GALGAS_uint & inOperand1,
+                                                      const class GALGAS_uint & inOperand2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
+                                                     class GALGAS_uint constinArgument1,
+                                                     class GALGAS_uint constinArgument2,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_setMBitCountForKey (class GALGAS_uint constinArgument0,
+                                                              class GALGAS_string constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_setMBitIndexForKey (class GALGAS_uint constinArgument0,
+                                                              class GALGAS_string constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
+                                                   class GALGAS_uint & outArgument1,
+                                                   class GALGAS_uint & outArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mBitCountForKey (const class GALGAS_string & constinOperand0,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mBitIndexForKey (const class GALGAS_string & constinOperand0,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerFieldMap reader_overriddenMap (C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+  public : VIRTUAL_IN_DEBUG cMapElement_registerFieldMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                              const GALGAS_string & inKey
+                                                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
+
+  friend class cEnumerator_registerFieldMap ;
+ 
+} ; // End of GALGAS_registerFieldMap class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                    *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_registerFieldMap : public cGenericAbstractEnumerator {
+  public : cEnumerator_registerFieldMap (const GALGAS_registerFieldMap & inEnumeratedObject,
+                                         const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_uint current_mBitIndex (LOCATION_ARGS) const ;
+  public : class GALGAS_uint current_mBitCount (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_registerFieldMap_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerFieldMap ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Class for element of '@registerFieldMap' map                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cMapElement_registerFieldMap : public cMapElement {
+//--- Map attributes
+  public : GALGAS_uint mAttribute_mBitIndex ;
+  public : GALGAS_uint mAttribute_mBitCount ;
+
+//--- Constructor
+  public : cMapElement_registerFieldMap (const GALGAS_lstring & inKey,
+                                         const GALGAS_uint & in_mBitIndex,
+                                         const GALGAS_uint & in_mBitCount
+                                         COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public : virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public : virtual cMapElement * copy (void) ;
+
+//--- Description
+ public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @registerFieldMap_2D_element struct                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_registerFieldMap_2D_element : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_uint mAttribute_mBitIndex ;
+  public : GALGAS_uint mAttribute_mBitCount ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_registerFieldMap_2D_element constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_registerFieldMap_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_registerFieldMap_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_registerFieldMap_2D_element (const GALGAS_lstring & in_lkey,
+                                               const GALGAS_uint & in_mBitIndex,
+                                               const GALGAS_uint & in_mBitCount) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_registerFieldMap_2D_element extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_registerFieldMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                      const class GALGAS_uint & inOperand1,
+                                                                      const class GALGAS_uint & inOperand2
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_registerFieldMap_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mBitCount (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mBitIndex (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_registerFieldMap_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerFieldMap_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           @registerBitSliceAccessMap map                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6388,30 +6611,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionMapIR_2D_el
 
 class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                 public cParser_plm_5F_specific_5F_syntax {
-//------------------------------------- 'additive_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_additive_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_additive_5F_expression_ (GALGAS_expressionAST & outArgument0,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'comparison' non terminal
-//--- 'parse' label
-  public : virtual void nt_comparison_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_comparison_ (GALGAS_expressionAST & outArgument0,
-                                        C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'conversion' non terminal
-//--- 'parse' label
-  public : virtual void nt_conversion_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_conversion_ (GALGAS_expressionAST & outArgument0,
-                                        C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -6427,6 +6626,102 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
 //----------- '' label
   public : virtual void nt_expression_ (GALGAS_expressionAST & outArgument0,
                                         C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_1' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__31__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__31__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_10' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__31__30__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__31__30__ (GALGAS_expressionAST & outArgument0,
+                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_11' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__31__31__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__31__31__ (GALGAS_expressionAST & outArgument0,
+                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_12' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__31__32__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__31__32__ (GALGAS_expressionAST & outArgument0,
+                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_2' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__32__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__32__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_3' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__33__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__33__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_4' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__34__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__34__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_5' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__35__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__35__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_6' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__36__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__36__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_7' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__37__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__37__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_8' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__38__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__38__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_9' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F__39__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F__39__ (GALGAS_expressionAST & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'if_instruction' non terminal
 //--- 'parse' label
@@ -6451,14 +6746,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
 //----------- '' label
   public : virtual void nt_instructionList_ (GALGAS_instructionListAST & outArgument0,
                                              C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'multiplicative_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_multiplicative_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_multiplicative_5F_expression_ (GALGAS_expressionAST & outArgument0,
-                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label
@@ -6494,14 +6781,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                                  GALGAS_lstring & outArgument1,
                                                  GALGAS_lstringlist & outArgument2,
                                                  GALGAS_procFormalArgumentList & outArgument3,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'shift_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_shift_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_shift_5F_expression_ (GALGAS_expressionAST & outArgument0,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'start_symbol' non terminal
@@ -6602,229 +6881,20 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_29 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_30 (C_Lexique_plm_5F_lexique *) ;
-} ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//---------------------------------------------------------------------------------------------------------------------*
-//  GRAMMAR plms_grammar
-//---------------------------------------------------------------------------------------------------------------------*
+  public : virtual int32_t select_common_5F_syntax_31 (C_Lexique_plm_5F_lexique *) ;
 
-class cGrammar_plms_5F_grammar : public cParser_common_5F_syntax,
-                                 public cParser_plms_5F_specific_5F_syntax {
-//------------------------------------- 'additive_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_additive_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual int32_t select_common_5F_syntax_32 (C_Lexique_plm_5F_lexique *) ;
 
-//----------- '' label
-  public : virtual void nt_additive_5F_expression_ (GALGAS_expressionAST & outArgument0,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual int32_t select_common_5F_syntax_33 (C_Lexique_plm_5F_lexique *) ;
 
-//------------------------------------- 'comparison' non terminal
-//--- 'parse' label
-  public : virtual void nt_comparison_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual int32_t select_common_5F_syntax_34 (C_Lexique_plm_5F_lexique *) ;
 
-//----------- '' label
-  public : virtual void nt_comparison_ (GALGAS_expressionAST & outArgument0,
-                                        C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual int32_t select_common_5F_syntax_35 (C_Lexique_plm_5F_lexique *) ;
 
-//------------------------------------- 'conversion' non terminal
-//--- 'parse' label
-  public : virtual void nt_conversion_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual int32_t select_common_5F_syntax_36 (C_Lexique_plm_5F_lexique *) ;
 
-//----------- '' label
-  public : virtual void nt_conversion_ (GALGAS_expressionAST & outArgument0,
-                                        C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'declaration' non terminal
-//--- 'parse' label
-  public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_declaration_ (GALGAS_ast & ioArgument0,
-                                         C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_ (GALGAS_expressionAST & outArgument0,
-                                        C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'if_instruction' non terminal
-//--- 'parse' label
-  public : virtual void nt_if_5F_instruction_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_if_5F_instruction_ (GALGAS_ifInstructionAST & outArgument0,
-                                               C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instruction' non terminal
-//--- 'parse' label
-  public : virtual void nt_instruction_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_instruction_ (GALGAS_instructionListAST & ioArgument0,
-                                         C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instructionList' non terminal
-//--- 'parse' label
-  public : virtual void nt_instructionList_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_instructionList_ (GALGAS_instructionListAST & outArgument0,
-                                             C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'multiplicative_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_multiplicative_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_multiplicative_5F_expression_ (GALGAS_expressionAST & outArgument0,
-                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'primary' non terminal
-//--- 'parse' label
-  public : virtual void nt_primary_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_primary_ (GALGAS_expressionAST & outArgument0,
-                                     C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure' non terminal
-//--- 'parse' label
-  public : virtual void nt_procedure_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_procedure_ (const GALGAS_procedureKindAST inArgument0,
-                                       GALGAS_procedureDeclarationListAST & ioArgument1,
-                                       C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_formal_arguments' non terminal
-//--- 'parse' label
-  public : virtual void nt_procedure_5F_formal_5F_arguments_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_procFormalArgumentList & outArgument0,
-                                                              C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_header' non terminal
-//--- 'parse' label
-  public : virtual void nt_procedure_5F_header_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_procedure_5F_header_ (GALGAS_lstringlist & outArgument0,
-                                                 GALGAS_lstring & outArgument1,
-                                                 GALGAS_lstringlist & outArgument2,
-                                                 GALGAS_procFormalArgumentList & outArgument3,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'shift_expression' non terminal
-//--- 'parse' label
-  public : virtual void nt_shift_5F_expression_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_shift_5F_expression_ (GALGAS_expressionAST & outArgument0,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'start_symbol' non terminal
-//--- 'parse' label
-  public : virtual void nt_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_start_5F_symbol_ (GALGAS_ast & ioArgument0,
-                                             GALGAS_lstringlist & outArgument1,
-                                             GALGAS_location & outArgument2,
-                                             C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//--- Start symbol
-  public : static void _performSourceFileParsing_ (C_Compiler * inCompiler,
-                                                   GALGAS_lstring inFileName,
-                                                   GALGAS_ast & ioArgument0,
-                                                   GALGAS_lstringlist & outArgument1,
-                                                   GALGAS_location & outArgument2
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : static void _performSourceStringParsing_ (C_Compiler * inCompiler,
-                                                     GALGAS_string inSourceString,
-                                                     GALGAS_ast & ioArgument0,
-                                                     GALGAS_lstringlist & outArgument1,
-                                                     GALGAS_location & outArgument2
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--- Indexing
-  public : static void performIndexing (C_Compiler * inCompiler,
-                                        const C_String & inSourceFilePath) ;
-
-//--- Only lexical analysis
-  public : static void performOnlyLexicalAnalysis (C_Compiler * inCompiler,
-                                                   const C_String & inSourceFilePath) ;
-
-//--- Only syntax analysis
-  public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
-                                                  const C_String & inSourceFilePath) ;
-
-  public : virtual int32_t select_common_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_2 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_3 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_4 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_5 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_6 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_7 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_8 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_9 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_10 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_11 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_12 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_13 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_14 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_15 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_16 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_17 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_18 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_19 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_20 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_21 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_22 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_23 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_24 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_25 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_26 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_27 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_28 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_29 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_30 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_common_5F_syntax_37 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

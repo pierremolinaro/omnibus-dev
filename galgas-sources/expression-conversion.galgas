@@ -10,43 +10,6 @@ class @conversionExpressionAST : @expressionAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
-
-syntax extension common_syntax {
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <conversion> !@expressionAST outExpression {
-    <shift_expression> ?outExpression
-    let endOfExpression = @location.here
-    select
-    or
-      $\$
-      $identifier$ ?let typeIdentifier
-      outExpression = @conversionExpressionAST.new {
-        !outExpression
-        !typeIdentifier
-        !false
-        !endOfExpression
-      }
-    or
-      $&\$
-      $identifier$ ?let typeIdentifier
-      outExpression = @conversionExpressionAST.new {
-        !outExpression
-        !typeIdentifier
-        !true
-        !endOfExpression
-      }
-    end
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 

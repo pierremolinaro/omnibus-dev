@@ -1,0 +1,465 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract class @expressionAST {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression> !@expressionAST outExpression {
+    <expression_12> ?outExpression
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_12> !@expressionAST outExpression {
+    <expression_11> ?outExpression
+    repeat
+    while
+      $or$
+      let operatorLocation = @location.here
+      <expression_11> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.booleanOrOp
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_11> !@expressionAST outExpression {
+    <expression_10> ?outExpression
+    repeat
+    while
+      $xor$
+      let operatorLocation = @location.here
+      <expression_10> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.booleanXorOp
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_10> !@expressionAST outExpression {
+    <expression_9> ?outExpression
+    repeat
+    while
+      $and$
+      let operatorLocation = @location.here
+      <expression_9> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.booleanAnd
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_9> !@expressionAST outExpression {
+    <expression_8> ?outExpression
+    repeat
+    while
+      $|$
+      let operatorLocation = @location.here
+      <expression_8> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.orOp
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_8> !@expressionAST outExpression {
+    <expression_7> ?outExpression
+    repeat
+    while
+      $^$
+      let operatorLocation = @location.here
+      <expression_7> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.xorOp
+        !rightExpression
+      }
+    end
+   }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_7> !@expressionAST outExpression {
+    <expression_6> ?outExpression
+    repeat
+    while
+      $&$
+      let operatorLocation = @location.here
+      <expression_6> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.andOp
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_6> !@expressionAST outExpression {
+    <expression_5> ?outExpression
+    select
+    or
+      $==$
+      let operatorLocation = @location.here
+      <expression_5> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.equal
+        !rightExpression
+      }
+    or
+      $!=$
+      let operatorLocation = @location.here
+      <expression_5> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.nonEqual
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_5> !@expressionAST outExpression {
+    <expression_4> ?outExpression
+    select
+    or
+      $<=$
+      let operatorLocation = @location.here
+      <expression_4> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.infEqual
+        !rightExpression
+      }
+    or
+      $>=$
+      let operatorLocation = @location.here
+      <expression_4> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.supEqual
+        !rightExpression
+      }
+    or
+      $<$
+      let operatorLocation = @location.here
+      <expression_4> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictInf
+        !rightExpression
+      }
+    or
+      $>$
+      let operatorLocation = @location.here
+      <expression_4> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.strictSup
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_4> !@expressionAST outExpression {
+    <expression_3> ?outExpression
+    repeat
+    while
+      $<<$
+      let operatorLocation = @location.here
+      <expression_3> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.leftShiftOp
+        !rightExpression
+      }
+    while
+      $>>$
+      let operatorLocation = @location.here
+      <expression_3> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.rightShiftOp
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_3> !@expressionAST outExpression {
+    <expression_2> ?outExpression
+    repeat
+    while
+      $+$
+      let operatorLocation = @location.here
+      <expression_2> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.addOp
+        !rightExpression
+      }
+    while
+      $&+$
+      let operatorLocation = @location.here
+      <expression_2> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.addOpNoOvf
+        !rightExpression
+      }
+    while
+      $-$
+      let operatorLocation = @location.here
+      <expression_2> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.subOp
+        !rightExpression
+      }
+    while
+      $&-$
+      let operatorLocation = @location.here
+      <expression_2> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.subOpNoOvf
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_2> !@expressionAST outExpression {
+    <expression_1> ?outExpression
+    repeat
+    while
+      $*$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.mulOp
+        !rightExpression
+      }
+    while
+      $&*$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.mulOpNoOvf
+        !rightExpression
+      }
+    while
+      $%$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.modOp
+        !rightExpression
+      }
+    while
+      $&%$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.modOpNoOvf
+        !rightExpression
+      }
+    while
+      $/$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.divOp
+        !rightExpression
+      }
+    while
+      $&/$
+      let operatorLocation = @location.here
+      <expression_1> ?let rightExpression
+      outExpression = @infixOperatorExpressionAST.new {
+        !outExpression
+        !operatorLocation
+        !.divOpNoOvf
+        !rightExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <expression_1> !@expressionAST outExpression {
+    <primary> ?outExpression
+    let endOfExpression = @location.here
+    select
+    or
+      $\$
+      $identifier$ ?let typeIdentifier
+      outExpression = @conversionExpressionAST.new {
+        !outExpression
+        !typeIdentifier
+        !false
+        !endOfExpression
+      }
+    or
+      $&\$
+      $identifier$ ?let typeIdentifier
+      outExpression = @conversionExpressionAST.new {
+        !outExpression
+        !typeIdentifier
+        !true
+        !endOfExpression
+      }
+    end
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $~$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.unsignedComplement
+      !expression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $not$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.notOperator
+      !expression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $-$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.minus
+      !expression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $&-$
+    let operatorLocation = @location.here
+    <primary> ?let expression
+    outExpression = @prefixOperatorExpressionAST.new {
+      !operatorLocation
+      !.minusNoOvf
+      !expression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $($
+    <expression> ?outExpression
+    $)$
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @receiverType {
+  case noReceiver
+  case receiver (@unifiedTypeMap-proxy type @string receiverValue)
+  case mutatingReceiver (@unifiedTypeMap-proxy type @string receiverPointer)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @expressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModes
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !expressionType:@unifiedTypeMap-proxy outExpressionType
+  !result:@variableKindIR outResultValueName
+
+#----------------------------------------------------------------------------------------------------------------------*
