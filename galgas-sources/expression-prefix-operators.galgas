@@ -18,68 +18,6 @@ class @prefixOperatorExpressionAST : @expressionAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
-
-syntax extension common_syntax {
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <primary> !@expressionAST outExpression {
-    $~$
-    let operatorLocation = @location.here
-    <primary> ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
-      !operatorLocation
-      !.unsignedComplement
-      !expression
-    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <primary> !@expressionAST outExpression {
-    $not$
-    let operatorLocation = @location.here
-    <primary> ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
-      !operatorLocation
-      !.notOperator
-      !expression
-    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <primary> !@expressionAST outExpression {
-    $-$
-    let operatorLocation = @location.here
-    <primary> ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
-      !operatorLocation
-      !.minus
-      !expression
-    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <primary> !@expressionAST outExpression {
-    $&-$
-    let operatorLocation = @location.here
-    <primary> ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
-      !operatorLocation
-      !.minusNoOvf
-      !expression
-    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 

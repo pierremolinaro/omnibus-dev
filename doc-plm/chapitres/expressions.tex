@@ -7,18 +7,26 @@
 
 \chapter{Expressions}
 
+
 \begin{table}[ht]
 \centering
-\small
 \begin{tabular}{llll}
   \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire} & \textbf{Lien} \\
   \hline
-   0 (le plus prioritaire) & \plm+~+, \plm+-+, \plm+&-+, \plm+not+ & Opérateurs préfixés & \\
-   1 & \plm+&+, \plm+*+, \plm+&*+, \plm-%-, \plm-&%-, \plm+/+, \plm+&/+, \plm+and+ & Opérateurs Multiplicatifs & \\
-   2 & \plm+|+, \plm+^+, \plm-+-, \plm-&+-, \plm+-+, \plm+&-+, \plm+or+, \plm+xor+ & Opérateurs additifs & \\
-   3 & \plm+<<+, \plm+>>+ & Décalage & \\
-   4 & \plm=\=, \plm=&\= & Conversion &\\
-   5 (le moins prioritaire) & \plm+==+, \plm+!=+, \plm+<=+, \plm+<+, \plm+>=+, \plm+>+ & Comparaison & \\
+   0 (plus prioritaire) & \plm+-+, \plm+&-+ & \emph{moins} unaire & \\
+   0 & \plm+~+, \plm+not+ & \emph{non} binaire et \emph{non} logique & \\
+   1 & \plm=\=, \plm=&\= & Conversion &\\
+   2 & \plm+*+, \plm+&*+, \plm+/+, \plm+&/+, \plm-%-, \plm-&%- & Multiplication, division, modulo & \\
+   3 & \plm-+-, \plm-&+-, \plm+-+, \plm+&-+ & Addition, soustraction & \\
+   4 & \plm+<<+, \plm+>>+ & Décalage à gauche et à droite & \\
+   5 & \plm+<=+, \plm+<+, \plm+>=+, \plm+>+ & Comparaison & \\
+   6 & \plm+==+, \plm+!=+ & Test d'égalité, d'inégalité & \\
+   7 & \plm+&+ & \emph{et} binaire & \\
+   8 & \plm+^+ & \emph{ou exclusif} binaire & \\
+   9 & \plm+|+ & \emph{ou} binaire & \\
+   10 & \plm+and+ & \emph{et} logique & \\
+   11 & \plm+xor+ & \emph{ou exclusif} logique & \\
+   12 (moins prioritaire) & \plm+or+ & \emph{ou} logique & \\
 \end{tabular}
 \caption{Priorité des opérateurs}\index{Operateur@Opérateur!Priorite@Priorité}
 \labelTableau{tableauPrioriteOperateurs}
