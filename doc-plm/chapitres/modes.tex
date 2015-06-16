@@ -7,4 +7,47 @@
 
 \chapterLabel{Modes d'exécution}{chapitreModesExecution}
 
-\colorbox{red}{Doc à écrire.}
+En PLM, à toute routine est associé un ou plusieurs modes \emph{modes d'exécution}\index{Mode@Mode d'exécution}.
+
+Un \emph{mode d'exécution} est une annotation qui permet au compilateur de vérifier la cohérence des appels des routines, et qui n'ajoute aucun code supplémentaire à l'exécution.
+
+
+
+Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\$} » : par exemple, \plm+$boot+. 
+
+
+\section{Des exemples}
+
+Considérons le code suivant :
+\begin{PLM}
+proc uneRoutine $user () {
+}
+
+proc autreRoutine $user () {
+  uneRoutine ()
+}
+\end{PLM}
+
+
+\section{Modes prédéfinis}
+
+Le compilateur prédéfinit trois modes d'exécution (\refTableauPage{ModeExecutionPredefinis}).
+
+
+
+
+
+\begin{table}[h]
+\centering
+\ligne\\
+\begin{tabular}{lll}
+  \textbf{Mode} & \textbf{Commentaire} & \textbf{Lien} \\
+  \hline
+  \plm=$boot= & Routines exécutées au démarrage & \refSectionPage{bootRoutine} \\
+  \plm=$init= & Routines d'initialisation & \refSectionPage{initRoutine} \\
+  \plm=$exception= & Routines d'exception & \refSectionPage{routineException} \\
+\end{tabular}
+\caption{Modes d'exécution prédéfinis}
+\labelTableau{ModeExecutionPredefinis}
+\ligne
+\end{table}

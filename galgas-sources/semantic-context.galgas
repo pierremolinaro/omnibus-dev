@@ -191,6 +191,10 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default
+#--- Add predefined modes
+  [!?outSemanticContext.mModeMap insertKey !["boot" nowhere]]
+  [!?outSemanticContext.mModeMap insertKey !["init" nowhere]]
+  [!?outSemanticContext.mModeMap insertKey !["exception" nowhere]]
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext
