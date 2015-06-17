@@ -2,7 +2,7 @@
 %!TEX root = ../doc-plm.tex
 
 
-
+\newcommand\OPTION[1]{\colorbox{gray!15}{#1}}
 
 
 \chapter{Options de la ligne de commande}
@@ -18,22 +18,22 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 \sectionLabel{Options générales}{optionsGenerales}
 
-{\ttfamily\bfseries-{}-help} Affiche l'aide.
+\OPTION{\ttfamily\bfseries-{}-help} Affiche l'aide.
 
 
-{\ttfamily\bfseries-{}-version} Affiche la version du compilateur PLM.
+\OPTION{\ttfamily\bfseries-{}-version} Affiche la version du compilateur PLM.
 
 
 
-{\ttfamily\bfseries-{}-log-file-read} Affiche l'accès en lecture à tout fichier.
+\OPTION{\ttfamily\bfseries-{}-log-file-read} Affiche l'accès en lecture à tout fichier.
 
-{\ttfamily\bfseries-{}-max-errors=$n$} Arrête la compilation si le nombre de $n$ erreurs est atteint. Par défaut, la borne est égale à $100$.
+\OPTION{\ttfamily\bfseries-{}-max-errors=$n$} Arrête la compilation si le nombre de $n$ erreurs est atteint. Par défaut, la borne est égale à $100$.
 
-{\ttfamily\bfseries-{}-max-warnings=$n$} Arrête la compilation si le nombre de $n$ alertes est atteint. Par défaut, la borne est égale à $100$.
+\OPTION{\ttfamily\bfseries-{}-max-warnings=$n$} Arrête la compilation si le nombre de $n$ alertes est atteint. Par défaut, la borne est égale à $100$.
 
-{\ttfamily\bfseries-{}-Werror} Transforme toute alerte en erreur.
+\OPTION{\ttfamily\bfseries-{}-Werror} Transforme toute alerte en erreur.
 
-{\ttfamily\bfseries-{}-verbose}, {\ttfamily\bfseries-v} Affiche des messages indiquant la progression de la compilation.
+\OPTION{\ttfamily\bfseries-{}-verbose}, \OPTION{\ttfamily\bfseries-v} Affiche des messages indiquant la progression de la compilation.
 
 
 
@@ -44,22 +44,22 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 \sectionLabel{Options affectant le code engendré}{optionCodeEngendre}
 
-{\ttfamily\bfseries-{}-no-exception-generation} Inhibe la génération du code des exceptions.
+\OPTION{\ttfamily\bfseries-{}-no-exception-generation} Inhibe la génération du code des exceptions.
 
 
 
-{\ttfamily\bfseries-{}-no-file-generation} Inhibe l'écriture de fichiers par le compilateur.
+\OPTION{\ttfamily\bfseries-{}-no-file-generation} Inhibe l'écriture de fichiers par le compilateur.
 
 
-{\ttfamily\bfseries-{}-routine-invocation-graph}, {\ttfamily\bfseries-i} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant le graphe d'invocation des routines.
+\OPTION{\ttfamily\bfseries-{}-routine-invocation-graph}, \OPTION{\ttfamily\bfseries-i} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant le graphe d'invocation des routines.
 
-{\ttfamily\bfseries-{}-no-c-compilation}, {\ttfamily\bfseries-c} N'effectue ni la compilation du code C engendré, ni le flashage du micro-contrôleur cible.
-
-
-{\ttfamily\bfseries-{}-no-flash}, {\ttfamily\bfseries-f} N'effectue pas le flashage du micro-contrôleur cible.
+\OPTION{\ttfamily\bfseries-{}-no-c-compilation}, \OPTION{\ttfamily\bfseries-c} N'effectue ni la compilation du code C engendré, ni le flashage du micro-contrôleur cible.
 
 
-{\ttfamily\bfseries-{}-do-not-detect-recursive-calls}, {\ttfamily\bfseries-r} N'effectue pas la détection des routines récursives. Par défaut le compilateur affiche un message d'erreur si il trouve des routines récursives.\index{Routines!recursives@récursives}
+\OPTION{\ttfamily\bfseries-{}-no-flash}, \OPTION{\ttfamily\bfseries-f} N'effectue pas le flashage du micro-contrôleur cible.
+
+
+\OPTION{\ttfamily\bfseries-{}-do-not-detect-recursive-calls}, \OPTION{\ttfamily\bfseries-r} N'effectue pas la détection des routines récursives. Par défaut le compilateur affiche un message d'erreur si il trouve des routines récursives.\index{Routines!recursives@récursives}
 
 
 
@@ -69,10 +69,10 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 \section{Options de débogage du compilateur}
 
 
-{\ttfamily\bfseries-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant l'arbre syntaxique concret du texte source.
+\OPTION{\ttfamily\bfseries-{}-output-concrete-syntax-tree} Engendre un fichier au format \texttt{dot} pouvant être ouvert par \texttt{graphviz}\index{graphviz} contenant l'arbre syntaxique concret du texte source.
 
 
-{\ttfamily\bfseries-{}-mode=$nom$}, où \emph{nom} peut prendre pour valeur :
+\OPTION{\ttfamily\bfseries-{}-mode=$nom$}, où \emph{nom} peut prendre pour valeur :
 \begin{itemize}
   \item « \emph{vide} » : fonctionnement nominal, le compilateur effectue toutes les phases : analyse lexicale, analyse syntaxique, analyse sémantique, et génération de code ;
   \item \texttt{lexical-only} : le compilateur s'arrête après l'analyse lexicale, et affiche la séquence des symboles terminaux obtenue ;
@@ -89,8 +89,23 @@ Les options peuvent apparaître avant ou après le nom du fichier source, elles 
 
 \sectionLabel{Options d'accès aux fichiers d'exemple embarqués}{optionsExemplesEmbarques}
 
-{\ttfamily\bfseries-{}-list-embedded-samples}, {\ttfamily\bfseries-l} Affiche la liste des fichiers d'exemple embarqués dans le compilateur.
+\OPTION{\ttfamily\bfseries-{}-list-embedded-samples}, \OPTION{\ttfamily\bfseries-l} Affiche la liste des fichiers d'exemple embarqués dans le compilateur.
 
-{\ttfamily\bfseries-{}-extract-embedded-sample-code=$nom$}, {\ttfamily\bfseries-x=$nom$} Extrait le fichier d'exemple $nom$ et l'écrit dans le répertoire courant.
+\OPTION{\ttfamily\bfseries-{}-extract-embedded-sample-code=$nom$}, \OPTION{\ttfamily\bfseries-x=$nom$} Extrait le fichier d'exemple $nom$ et l'écrit dans le répertoire courant.
 
 L'utilisation de ces deux options est illustrée à la \refSectionPage{exempleBlinkled}.
+
+
+
+
+
+
+\sectionLabel{Options d'accès aux cibles embarquées}{optionsCiblesEmbarquees}
+
+\OPTION{\ttfamily\bfseries-{}-list-embedded-targets}, \OPTION{\ttfamily\bfseries-L} Affiche la liste des cibles embarquées dans le compilateur.
+
+\OPTION{\ttfamily\bfseries-{}-extract-embedded-targets}, \OPTION{\ttfamily\bfseries-X} Extrait les fichiers de définition des cibles embarquées dans le compilateur et les écrit dans le répertoire courant.
+
+\OPTION{\ttfamily\bfseries-{}-use-target-dir=$repertoire$}, \OPTION{\ttfamily\bfseries-T=$repertoire$} N'utilise pas les cibles embarquées, au profit des cibles définies dans le répertoire $repertoire$.
+
+L'utilisation de ces options est illustrée à la \refSectionPage{exempleDefinitionCible}.
