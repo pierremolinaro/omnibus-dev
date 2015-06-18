@@ -1,0 +1,45 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#   EMBEDDED SAMPLE CODE                                                                                               *
+#----------------------------------------------------------------------------------------------------------------------*
+
+filewrapper embeddedTargets in "../embedded-sources/targets" {
+  "plm", "plms", "py", "ld", "c", "s"
+}{
+}{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+before {
+  let @filewrapper fw = [filewrapper embeddedTargets]
+  if [option plm_options.listEmbeddedTargets value] then
+    let embeddedFiles = [fw allTextFilePathes]
+    message "Embedded targets:\n"
+    for (f) in embeddedFiles do
+      if [f pathExtension] == "plms" then
+        message "  " + [f lastPathComponent] + '\n'
+      end
+    end
+  end
+  let path = [option plm_options.extractEmbeddedTargets value]
+  if path != "" then
+    let embeddedFiles = [fw allTextFilePathes]
+    for (f) in embeddedFiles do
+      let filePath = path + f
+        message "  " + filePath + '\n'
+        let dir = [filePath stringByDeletingLastPathComponent]
+        [dir makeDirectory]
+        let text = [fw textFileContentsAtPath !f]
+        [text writeToFileWhenDifferentContents !filePath ?*]
+    end
+#    if [fw fileExistsAtPath !path] then
+#      let text = [fw textFileContentsAtPath !path]
+#      let sourceName = [path lastPathComponent]
+#      [text writeToFileWhenDifferentContents !sourceName ?*]
+#    else
+#      error ["" nowhere] : "there is no '" + path + "' embedded file"
+#    end  
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

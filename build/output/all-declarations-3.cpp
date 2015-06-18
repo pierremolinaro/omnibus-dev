@@ -290,22 +290,22 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
         const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 210)).operator_not (SOURCE_FILE ("program.galgas", 210)).boolEnum () ;
         if (kBoolTrue == test_6) {
           ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 211)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 212)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_6379.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 212)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
           if (kBoolTrue == test_7) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_8206 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 213)), ioArgument_ioAST, var_importedFileList, joker_8206  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
+            GALGAS_location joker_8198 ; // Joker input parameter
+            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 213)), ioArgument_ioAST, var_importedFileList, joker_8198  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
             {
             routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 217)) ;
             }
           }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 223)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_6379.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 223)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
             if (kBoolTrue == test_8) {
               GALGAS_lstringlist var_importedFileList ;
               var_importedFileList.drop () ;
-              GALGAS_location joker_8692 ; // Joker input parameter
-              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 224)), ioArgument_ioAST, var_importedFileList, joker_8692  COMMA_SOURCE_FILE ("program.galgas", 224)) ;
+              GALGAS_location joker_8676 ; // Joker input parameter
+              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 224)), ioArgument_ioAST, var_importedFileList, joker_8676  COMMA_SOURCE_FILE ("program.galgas", 224)) ;
               {
               routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 228)) ;
               }
@@ -466,6 +466,7954 @@ const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
   gWrapperAllFiles_embeddedSampleCode_0,
   1,
   gWrapperAllDirectories_embeddedSampleCode_0
+) ;
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Filewrapper 'embeddedTargets'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+//--- File '/makefile.py'
+
+const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil, subprocess\n"
+  "import platform, json, operator\n"
+  "import threading\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   processorCount                                                           *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                    *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                         *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runCommand                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   runInThread                                                              *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      job.mOutputLines.append (line)\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                  *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                        *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Job                                                                *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  mOutputLines = []\n"
+  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title, openSourceOnError):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "    self.mOutputLines = []\n"
+  "    self.mOpenSourceOnError = openSourceOnError\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Rule                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  mDeleteTargetOnError = False # No operation on error\n"
+  "  mCleanOperation = 0 # No operation on clean\n"
+  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    self.mDeleteTargetOnError = False # No operation on error\n"
+  "    self.mOpenSourceOnError = False # Do not try to open source file on error\n"
+  "    self.mCleanOperation = 0 # No operation on clean\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def deleteTargetFileOnClean (self):\n"
+  "    self.mCleanOperation = 1\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def deleteTargetDirectoryOnClean (self):\n"
+  "    self.mCleanOperation = 2\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):\n"
+  "    if make.mSelectedGoal != \"clean\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if not os.path.exists (filePath):\n"
+  "        self.mSecondaryMostRecentModificationDate = sys.float_info.max # Very far in future\n"
+  "      else:\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ()\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\ \", \"\\x01\") # Replace escaped spaces by \\0x01\n"
+  "        s = s.replace (\"\\\\\\n\", \"\") # Suppress \\ at the end of lines\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (make.mModificationDateDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------*\n"
+  "#   class Make                                                               *\n"
+  "#----------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "  mSelectedGoal = \"\"\n"
+  "  mLinuxTextEditor = \"\"\n"
+  "  mMacTextEditor = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, goal):\n"
+  "    self.mRuleList = []\n"
+  "    self.mJobList = []\n"
+  "    self.mErrorCount = 0\n"
+  "    self.mModificationDateDictionary = {}\n"
+  "    self.mGoals = {}\n"
+  "    self.mSelectedGoal = goal\n"
+  "    self.mLinuxTextEditor = \"gEdit\"\n"
+  "    self.mMacTextEditor = \"TextEdit\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: \\\"\" + rule.mTarget + \"\\\"\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: \\\"\" + dep + \"\\\"\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: \\\"\" + rule.mTitle + \"\\\"\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: \\\"\" + title + \"\\\"\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle, rule.mOpenSourceOnError))"
+  "\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", os.path.dirname (job.mTarget)], \"Making \\\"\" + os.path.dirname (job.mTarget) + \"\\\" directory\", showComman"
+  "d)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if not os.path.exists (os.path.abspath (job.mTarget)): # Warning: target does not exist\n"
+  "                displayLock.acquire ()\n"
+  "                print MAGENTA () + BOLD () + \"Warning: target \\\"\" + job.mTarget + \"\\\" was not created by rule execution.\" + ENDC ()\n"
+  "                displayLock.release ()\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "              if job.mOpenSourceOnError:\n"
+  "                for line in job.mOutputLines:\n"
+  "                  components = line.split (':')\n"
+  "                  if (len (components) > 1) and os.path.exists (os.path.abspath (components [0])) :\n"
+  "                    if sys.platform == \"darwin\":\n"
+  "                      os.system (\"open -a \\\"\" + self.mMacTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
+  "                    elif sys.platform == \"linux2\":\n"
+  "                      os.system (\"\\\"\" + self.mLinuxTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    if self.mGoals.has_key (goal) or (goal == \"clean\") :\n"
+  "      self.enterError (\"The '\" + goal + \"' goal is already defined\")\n"
+  "    else:\n"
+  "      self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: \\\"\" + goalKey + \"\\\"\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: \\\"\" + target + \"\\\"\"\n"
+  "      print \"  Message: \\\"\" + message + \"\\\"\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (self.mSelectedGoal) :\n"
+  "      (targetList, message) = self.mGoals [self.mSelectedGoal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "      if self.mErrorCount > 0:\n"
+  "        for rule in self.mRuleList:\n"
+  "          if rule.mDeleteTargetOnError and os.path.exists (os.path.abspath (rule.mTarget)):\n"
+  "            runCommand ([\"rm\", rule.mTarget], \"Delete \\\"\" + rule.mTarget + \"\\\" on error\", showCommand)\n"
+  "    elif self.mSelectedGoal == \"clean\" :\n"
+  "      filesToRemoveList = []\n"
+  "      directoriesToRemoveSet = set ()\n"
+  "      for rule in self.mRuleList:\n"
+  "        if rule.mCleanOperation == 1: # Delete target\n"
+  "          filesToRemoveList.append (rule.mTarget)\n"
+  "        elif rule.mCleanOperation == 2: # Delete target directories\n"
+  "          directoriesToRemoveSet.add (os.path.dirname (rule.mTarget))\n"
+  "      for dir in directoriesToRemoveSet:\n"
+  "        if os.path.exists (os.path.abspath (dir)):\n"
+  "          runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
+  "      for file in filesToRemoveList:\n"
+  "        if os.path.exists (os.path.abspath (file)):\n"
+  "          runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + self.mSelectedGoal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_0_embeddedTargets (
+  "makefile.py",
+  "py",
+  true, // Text file
+  28167, // Text length
+  gWrapperFileContent_0_embeddedTargets
+) ;
+
+//--- File '/teensy-3-1-interrupt.plms'
+
+const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+  "\n"
+  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "\n"
+  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "booleanType Bool @unsigned8\n"
+  "\n"
+  "newIntegerType UInt8  @unsigned8\n"
+  "newIntegerType UInt16 @unsigned16\n"
+  "newIntegerType UInt32 @unsigned32\n"
+  "newIntegerType UInt64 @unsigned64\n"
+  "\n"
+  "newIntegerType Int8  @signed8\n"
+  "newIntegerType Int16 @signed16\n"
+  "newIntegerType Int32 @signed32\n"
+  "newIntegerType Int64 @signed64\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception : Int32 UInt32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "mode $isr\n"
+  "mode $user\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "import \"microcontrollers/mk20dx256.plm\"\n"
+  "import \"microcontrollers/lcd.plm\"\n"
+  "import \"microcontrollers/leds.plm\"\n"
+  "import \"microcontrollers/default-isr.plm\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "boot 10 {\n"
+  "//---------1- Inhiber le chien de garde\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "  WDOG_STCTRLH = 0x0010\n"
+  "//--- Enable clocks to always-used peripherals\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
+  "  SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
+  "//--- If the RTC oscillator isn't enabled, get it started early\n"
+  "  if not RTC_CR.OSCE.bool then\n"
+  "    RTC_SR = 0\n"
+  "    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE\n"
+  "  end\n"
+  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "  if PMC_REGSC.ACKISO != 0 then\n"
+  "    PMC_REGSC |= PMC_REGSC::ACKISO\n"
+  "  end\n"
+  "// TODO: do this while the PLL is waiting to lock....\n"
+  "  VTOR = 0  // use vector table in flash\n"
+  "//  // default all interrupts to medium priority level\n"
+  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "//---------2- Initialisation de la PLL\n"
+  "// start in FEI mode\n"
+  "//--- Enable capacitors for crystal\n"
+  "  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P\n"
+  "//--- Enable osc, 8-32 MHz range, low power mode\n"
+  "  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS\n"
+  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for crystal oscillator to begin\n"
+  "  while MCG_S.OSCINIT0 == 0 do\n"
+  "  end\n"
+  "//--- Wait for FLL to use oscillator\n"
+  "  while MCG_S.IREFST != 0 do\n"
+  "  end\n"
+  "//--- Wait for MCGOUT to use oscillator\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(2) do\n"
+  "  end\n"
+  "//--- Now we're in FBE mode\n"
+  "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
+  "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
+  "//--- Config PLL for 96 MHz output\n"
+  "  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)\n"
+  "//--- Wait for PLL to start using xtal as its input\n"
+  "  while MCG_S.PLLST == 0 do\n"
+  "  end\n"
+  "//--- Wait for PLL to lock\n"
+  "  while MCG_S.LOCK0 == 0 do\n"
+  "  end\n"
+  "//--- Now we're in PBE mode\n"
+  "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1::OUTDIV1(0) | SIM_CLKDIV1::OUTDIV2(1) | SIM_CLKDIV1::OUTDIV4(3)\n"
+  "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for PLL clock to be used\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
+  "teensy-3-1-interrupt.plms",
+  "plms",
+  true, // Text file
+  3780, // Text length
+  gWrapperFileContent_1_embeddedTargets
+) ;
+
+//--- File '/teensy-3-1-sequential-systick.plms'
+
+const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+  "\n"
+  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "\n"
+  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "booleanType Bool @unsigned8\n"
+  "\n"
+  "newIntegerType UInt8  @unsigned8\n"
+  "newIntegerType UInt16 @unsigned16\n"
+  "newIntegerType UInt32 @unsigned32\n"
+  "newIntegerType UInt64 @unsigned64\n"
+  "\n"
+  "newIntegerType Int8  @signed8\n"
+  "newIntegerType Int16 @signed16\n"
+  "newIntegerType Int32 @signed32\n"
+  "newIntegerType Int64 @signed64\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception : Int32 UInt32\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "mode $isr\n"
+  "mode $user\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "import \"microcontrollers/mk20dx256.plm\"\n"
+  "import \"microcontrollers/boot-teensy-3-1.plm\"\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc systickHandler $isr ()\n"
+  "\n"
+  "proc systickHandler $isr @weak () {\n"
+  "}\n"
+  "\n"
+  "init 0 { // Configure Systick interrupt every ms\n"
+  "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "  SYST_CVR = 0\n"
+  "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
+  "teensy-3-1-sequential-systick.plms",
+  "plms",
+  true, // Text file
+  1792, // Text length
+  gWrapperFileContent_2_embeddedTargets
+) ;
+
+//--- File 'microcontrollers/boot-teensy-3-1.plm'
+
+const char * gWrapperFileContent_3_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "boot 0 {\n"
+  "//---------1- Inhiber le chien de garde\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1\n"
+  "  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2\n"
+  "  WDOG_STCTRLH = 0x0010\n"
+  "//--- Enable clocks to always-used peripherals\n"
+  "  SIM_SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2\n"
+  "  SIM_SCGC5 = 0x00043F82    // clocks active to all GPIO\n"
+  "  SIM_SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL\n"
+  "//--- If the RTC oscillator isn't enabled, get it started early\n"
+  "  if not RTC_CR.OSCE.bool then\n"
+  "    RTC_SR = 0\n"
+  "    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE\n"
+  "  end\n"
+  "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
+  "  if PMC_REGSC.ACKISO != 0 then\n"
+  "    PMC_REGSC |= PMC_REGSC::ACKISO\n"
+  "  end\n"
+  "// TODO: do this while the PLL is waiting to lock....\n"
+  "  VTOR = 0  // use vector table in flash\n"
+  "//  // default all interrupts to medium priority level\n"
+  "////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);\n"
+  "//---------2- Initialisation de la PLL\n"
+  "// start in FEI mode\n"
+  "//--- Enable capacitors for crystal\n"
+  "  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P\n"
+  "//--- Enable osc, 8-32 MHz range, low power mode\n"
+  "  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS\n"
+  "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for crystal oscillator to begin\n"
+  "  while MCG_S.OSCINIT0 == 0 do\n"
+  "  end\n"
+  "//--- Wait for FLL to use oscillator\n"
+  "  while MCG_S.IREFST != 0 do\n"
+  "  end\n"
+  "//--- Wait for MCGOUT to use oscillator\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(2) do\n"
+  "  end\n"
+  "//--- Now we're in FBE mode\n"
+  "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
+  "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
+  "//--- Config PLL for 96 MHz output\n"
+  "  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)\n"
+  "//--- Wait for PLL to start using xtal as its input\n"
+  "  while MCG_S.PLLST == 0 do\n"
+  "  end\n"
+  "//--- Wait for PLL to lock\n"
+  "  while MCG_S.LOCK0 == 0 do\n"
+  "  end\n"
+  "//--- Now we're in PBE mode\n"
+  "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
+  "  SIM_CLKDIV1 = SIM_CLKDIV1::OUTDIV1(0) | SIM_CLKDIV1::OUTDIV2(1) | SIM_CLKDIV1::OUTDIV4(3)\n"
+  "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
+  "  MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)\n"
+  "//--- Wait for PLL clock to be used\n"
+  "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_3_embeddedTargets (
+  "boot-teensy-3-1.plm",
+  "plm",
+  true, // Text file
+  2377, // Text length
+  gWrapperFileContent_3_embeddedTargets
+) ;
+
+//--- File 'microcontrollers/default-isr.plm'
+
+const char * gWrapperFileContent_4_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc NMIHandler $isr ()\n"
+  "\n"
+  "proc NMIHandler $isr @weak () {\n"
+  "  throw 2\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc HardFaultHandler $isr ()\n"
+  "\n"
+  "proc HardFaultHandler $isr @weak () {\n"
+  "  throw 3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc MemManageHandler $isr ()\n"
+  "\n"
+  "proc MemManageHandler $isr @weak () {\n"
+  "  throw 4\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc BusFaultHandler $isr ()\n"
+  "\n"
+  "proc BusFaultHandler $isr @weak () {\n"
+  "  throw 5\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UsageFaultHandler $isr ()\n"
+  "\n"
+  "proc UsageFaultHandler $isr @weak () {\n"
+  "  throw 6\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc svcHandler $isr ()\n"
+  "\n"
+  "proc svcHandler $isr @weak () {\n"
+  "  throw 11\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DebugMonitorHandler $isr ()\n"
+  "\n"
+  "proc DebugMonitorHandler $isr @weak () {\n"
+  "  throw 12\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PendSVHandler $isr ()\n"
+  "\n"
+  "proc PendSVHandler $isr @weak () {\n"
+  "  throw 14\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init 0 { // Configure Systick interrupt every ms\n"
+  "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
+  "  SYST_CVR = 0\n"
+  "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
+  "}\n"
+  "\n"
+  "var gCompteur : UInt32 = 0 {\n"
+  "  @rw proc systickHandler ()\n"
+  "  proc waitMS (\?inDuration : UInt32)\n"
+  "  proc busyWaitingDuringMS (\?inDuration : UInt32)\n"
+  "}\n"
+  "\n"
+  "required proc systickHandler $isr ()\n"
+  "\n"
+  "proc systickHandler $isr @weak () {\n"
+  "  gCompteur &++\n"
+  "  userSystickHandler ()\n"
+  "}\n"
+  "\n"
+  "proc userSystickHandler $isr @weak () {\n"
+  "}\n"
+  "\n"
+  "proc waitMS $user $init (\?inDuration : UInt32) {\n"
+  "  let deadline = gCompteur + inDuration\n"
+  "  while gCompteur < deadline do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel0TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel0TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 16\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel1TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel1TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 17\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel2TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel2TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 18\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel3TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel3TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 19\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel4TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel4TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 20\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel5TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel5TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 21\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel6TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel6TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 22\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel7TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel7TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 23\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel8TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel8TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 24\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel9TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel9TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 25\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel10TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel10TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 26\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel11TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel11TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 27\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel12TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel12TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 28\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel13TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel13TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 29\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel14TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel14TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 30\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAChannel15TranfertCompleteHandler $isr ()\n"
+  "\n"
+  "proc DMAChannel15TranfertCompleteHandler $isr @weak () {\n"
+  "  throw 31\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DMAErrorHandler $isr ()\n"
+  "\n"
+  "proc DMAErrorHandler $isr @weak () {\n"
+  "  throw 32\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc flashMemoryCommandCompleteHandler $isr ()\n"
+  "\n"
+  "proc flashMemoryCommandCompleteHandler $isr @weak () {\n"
+  "  throw 34\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc flashMemoryReadCollisionHandler $isr ()\n"
+  "\n"
+  "proc flashMemoryReadCollisionHandler $isr @weak () {\n"
+  "  throw 35\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc modeControllerHandler $isr ()\n"
+  "\n"
+  "proc modeControllerHandler $isr @weak () {\n"
+  "  throw 36\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc LLWUHandler $isr ()\n"
+  "\n"
+  "proc LLWUHandler $isr @weak () {\n"
+  "  throw 37\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc WDOGEWMHandler $isr ()\n"
+  "\n"
+  "proc WDOGEWMHandler $isr @weak () {\n"
+  "  throw 38\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc I2C0Handler $isr ()\n"
+  "\n"
+  "proc I2C0Handler $isr @weak () {\n"
+  "  throw 40\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc I2C1Handler $isr ()\n"
+  "\n"
+  "proc I2C1Handler $isr @weak () {\n"
+  "  throw 41\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc SPI0Handler $isr ()\n"
+  "\n"
+  "proc SPI0Handler $isr @weak () {\n"
+  "  throw 42\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc SPI1Handler $isr ()\n"
+  "\n"
+  "proc SPI1Handler $isr @weak () {\n"
+  "  throw 43\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0MessageBufferHandler $isr ()\n"
+  "\n"
+  "proc CAN0MessageBufferHandler $isr @weak () {\n"
+  "  throw 45\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0BusOffHandler $isr ()\n"
+  "\n"
+  "proc CAN0BusOffHandler $isr @weak () {\n"
+  "  throw 46\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0ErrorHandler $isr ()\n"
+  "\n"
+  "proc CAN0ErrorHandler $isr @weak () {\n"
+  "  throw 47\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0TransmitWarningHandler $isr ()\n"
+  "\n"
+  "proc CAN0TransmitWarningHandler $isr @weak () {\n"
+  "  throw 48\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0ReceiveWarningHandler $isr ()\n"
+  "\n"
+  "proc CAN0ReceiveWarningHandler $isr @weak () {\n"
+  "  throw 49\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CAN0WakeUpHandler $isr ()\n"
+  "\n"
+  "proc CAN0WakeUpHandler $isr @weak () {\n"
+  "  throw 50\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc I2S0TransmitHandler $isr ()\n"
+  "\n"
+  "proc I2S0TransmitHandler $isr @weak () {\n"
+  "  throw 51\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc I2S0ReceiveHandler $isr ()\n"
+  "\n"
+  "proc I2S0ReceiveHandler $isr @weak () {\n"
+  "  throw 52\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART0LONHandler $isr ()\n"
+  "\n"
+  "proc UART0LONHandler $isr @weak () {\n"
+  "  throw 60\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART0StatusHandler $isr ()\n"
+  "\n"
+  "proc UART0StatusHandler $isr @weak () {\n"
+  "  throw 61\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART0ErrorHandler $isr ()\n"
+  "\n"
+  "proc UART0ErrorHandler $isr @weak () {\n"
+  "  throw 62\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART1StatusHandler $isr ()\n"
+  "\n"
+  "proc UART1StatusHandler $isr @weak () {\n"
+  "  throw 63\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART1ErrorHandler $isr ()\n"
+  "\n"
+  "proc UART1ErrorHandler $isr @weak () {\n"
+  "  throw 64\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART2StatusHandler $isr ()\n"
+  "\n"
+  "proc UART2StatusHandler $isr @weak () {\n"
+  "  throw 64\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc UART2ErrorHandler $isr ()\n"
+  "\n"
+  "proc UART2ErrorHandler $isr @weak () {\n"
+  "  throw 65\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc ADC0Handler $isr ()\n"
+  "\n"
+  "proc ADC0Handler $isr @weak () {\n"
+  "  throw 73\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc ADC1Handler $isr ()\n"
+  "\n"
+  "proc ADC1Handler $isr @weak () {\n"
+  "  throw 74\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CMP0Handler $isr ()\n"
+  "\n"
+  "proc CMP0Handler $isr @weak () {\n"
+  "  throw 75\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CMP1Handler $isr ()\n"
+  "\n"
+  "proc CMP1Handler $isr @weak () {\n"
+  "  throw 76\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CMP2Handler $isr ()\n"
+  "\n"
+  "proc CMP2Handler $isr @weak () {\n"
+  "  throw 77\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc FMT0Handler $isr ()\n"
+  "\n"
+  "proc FMT0Handler $isr @weak () {\n"
+  "  throw 78\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc FMT1Handler $isr ()\n"
+  "\n"
+  "proc FMT1Handler $isr @weak () {\n"
+  "  throw 79\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc FMT2Handler $isr ()\n"
+  "\n"
+  "proc FMT2Handler $isr @weak () {\n"
+  "  throw 80\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc CMTHandler $isr ()\n"
+  "\n"
+  "proc CMTHandler $isr @weak () {\n"
+  "  throw 81\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc RTCAlarmHandler $isr ()\n"
+  "\n"
+  "proc RTCAlarmHandler $isr @weak () {\n"
+  "  throw 82\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc RTCSecondHandler $isr ()\n"
+  "\n"
+  "proc RTCSecondHandler $isr @weak () {\n"
+  "  throw 83\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PITChannel0Handler $isr ()\n"
+  "\n"
+  "proc PITChannel0Handler $isr @weak () {\n"
+  "  throw 84\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PITChannel1Handler $isr ()\n"
+  "\n"
+  "proc PITChannel1Handler $isr @weak () {\n"
+  "  throw 85\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PITChannel2Handler $isr ()\n"
+  "\n"
+  "proc PITChannel2Handler $isr @weak () {\n"
+  "  throw 86\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PITChannel3Handler $isr ()\n"
+  "\n"
+  "proc PITChannel3Handler $isr @weak () {\n"
+  "  throw 87\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc PDBHandler $isr ()\n"
+  "\n"
+  "proc PDBHandler $isr @weak () {\n"
+  "  throw 88\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc USBOTGHandler $isr ()\n"
+  "\n"
+  "proc USBOTGHandler $isr @weak () {\n"
+  "  throw 89\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc USBChargerDetectHandler $isr ()\n"
+  "\n"
+  "proc USBChargerDetectHandler $isr @weak () {\n"
+  "  throw 90\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc DAC0Handler $isr ()\n"
+  "\n"
+  "proc DAC0Handler $isr @weak () {\n"
+  "  throw 97\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc TSIHandler $isr ()\n"
+  "\n"
+  "proc TSIHandler $isr @weak () {\n"
+  "  throw 99\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc MCGHandler $isr ()\n"
+  "\n"
+  "proc MCGHandler $isr @weak () {\n"
+  "  throw 100\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc lowPowerTimerHandler $isr ()\n"
+  "\n"
+  "proc lowPowerTimerHandler $isr @weak () {\n"
+  "  throw 101\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc pinDetectPortAHandler $isr ()\n"
+  "\n"
+  "proc pinDetectPortAHandler $isr @weak () {\n"
+  "  throw 103\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc pinDetectPortBHandler $isr ()\n"
+  "\n"
+  "proc pinDetectPortBHandler $isr @weak () {\n"
+  "  throw 104\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc pinDetectPortCHandler $isr ()\n"
+  "\n"
+  "proc pinDetectPortCHandler $isr @weak () {\n"
+  "  throw 105\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc pinDetectPortDHandler $isr ()\n"
+  "\n"
+  "proc pinDetectPortDHandler $isr @weak () {\n"
+  "  throw 106\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc pinDetectPortEHandler $isr ()\n"
+  "\n"
+  "proc pinDetectPortEHandler $isr @weak () {\n"
+  "  throw 107\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "required proc softwareInterruptHandler $isr ()\n"
+  "\n"
+  "proc softwareInterruptHandler $isr @weak () {\n"
+  "  throw 110\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_4_embeddedTargets (
+  "default-isr.plm",
+  "plm",
+  true, // Text file
+  14840, // Text length
+  gWrapperFileContent_4_embeddedTargets
+) ;
+
+//--- File 'microcontrollers/lcd.plm'
+
+const char * gWrapperFileContent_5_embeddedTargets = "\n"
+  "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   PORT CONFIGURATION                                                        *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//   D4 : PTB0\n"
+  "//   D5 : PTC0\n"
+  "//   D6 : PTD1\n"
+  "//   D7 : PTB2\n"
+  "//   RS : PTB3\n"
+  "//   E  : PTB1\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc configurePorts $init () {\n"
+  "//--- D4 (PTB0) is a GPIO (input by default)\n"
+  "  PORTB_PCR0 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)\n"
+  "//--- D5 (PTC0) is a GPIO (input by default)\n"
+  "  PORTC_PCR0 = (1 << 8) ;\n"
+  "  GPIOC_PDDR |= (1 << 0) ; // Program D5 as output (PTC0)\n"
+  "//--- D6 (PTD1) is a GPIO (input by default)\n"
+  "  PORTD_PCR1 = (1 << 8) ;\n"
+  "  GPIOD_PDDR |= (1 << 1) ; // Program D6 as output (PTD1)\n"
+  "//--- D7 (PTB2) is a GPIO (input by default)\n"
+  "  PORTB_PCR2 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 2) ; // Program D7 as output (PTB2)\n"
+  "//--- RS (PTB3) is an output\n"
+  "  PORTB_PCR3 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 3) ;\n"
+  "//--- E (PTB1) is an output\n"
+  "  PORTB_PCR1 = (1 << 8) ;\n"
+  "  GPIOB_PDDR |= (1 << 1) ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc driveHighE $init $exception $user () {\n"
+  "  GPIOB_PSOR = 1 << 1 ; // E is PTB1\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc driveLowE $init $exception $user () {\n"
+  "  GPIOB_PCOR = 1 << 1 ; // E is PTB1\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc driveHighRS $init $exception $user () {\n"
+  "  GPIOB_PSOR = 1 << 3 ; // RS is PTB3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "proc driveLowRS $init $exception $user () {\n"
+  "  GPIOB_PCOR = 1 << 3 ; // RS is PTB3\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc setD4 $init $exception $user (\?inValue : Bool) { // PTB0\n"
+  "  if inValue then\n"
+  "    GPIOB_PSOR = 1 << 0 ;\n"
+  "  else\n"
+  "    GPIOB_PCOR = 1 << 0 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc setD5 $init $exception $user (\?inValue : Bool) { // PTC0\n"
+  "  if inValue then\n"
+  "    GPIOC_PSOR = 1 << 0 ;\n"
+  "  else\n"
+  "    GPIOC_PCOR = 1 << 0 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc setD6 $init $exception $user (\?inValue : Bool) { // PTD1\n"
+  "  if inValue then\n"
+  "    GPIOD_PSOR = 1 << 1 ;\n"
+  "  else\n"
+  "    GPIOD_PCOR = 1 << 1 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc setD7 $init $exception $user (\?inValue : Bool) { // PTB2\n"
+  "  if inValue then\n"
+  "    GPIOB_PSOR = 1 << 2 ;\n"
+  "  else\n"
+  "    GPIOB_PCOR = 1 << 2 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   UTILITY ROUTINES                                                          *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc busyWaitingDuringMS $init (\?inDuration : UInt32) {\n"
+  "  let deadline = gCompteur + inDuration\n"
+  "  while gCompteur < deadline do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc programLcd4BitDataBusOutput $init (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc write4BitCommand $init (\?inValue : UInt8) {\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput (!inValue) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc write8bitCommand $init (\?inCommand : UInt8) {\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   LCD INIT                                                                  *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init 10 {\n"
+  "  configurePorts () ;\n"
+  "//--- \xC3""\x89""tape 1 : attendre 15 ms\n"
+  "  busyWaitingDuringMS (!15) ;\n"
+  "//--- \xC3""\x89""tape 2 : \xC3""\xA9""crire la commande 0x30\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 3 : attendre 4,1 ms (en fait 5 ms)\n"
+  "  busyWaitingDuringMS (!5) ;\n"
+  "//--- \xC3""\x89""tape 4 : \xC3""\xA9""crire la commande 0x30 une 2e fois\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 5 : attendre 100 \xC2""\xB5""s\n"
+  "  busyWaitingDuringMS (!1) ;\n"
+  "//--- \xC3""\x89""tape 6 : \xC3""\xA9""crire la commande 0x30 une 3e fois\n"
+  "  write4BitCommand (!0x3) ;\n"
+  "//--- \xC3""\x89""tape 7 : \xC3""\xA9""crire la commande 0x20 pour passer en 4 bits\n"
+  "  write4BitCommand (!0x2) ;\n"
+  "//--- \xC3""\x89""tape 8 : \xC3""\xA9""crire la commande 'Set Interface Length' : 0 0 1 DL N F * *\n"
+  "//    DL : Data interface length : 0 (4 bits)\n"
+  "//    N : Number of Display lines : 1 (2 lignes)\n"
+  "//    F : Character Font : 0 (5x7)\n"
+  "  write8bitCommand (!0x28) ;\n"
+  "//--- \xC3""\x89""tape 9 : \xC3""\xA9""crire la commande 'Display Off'\n"
+  "  write8bitCommand (!0x08) ;\n"
+  "//--- \xC3""\x89""tape 10 : \xC3""\xA9""crire la commande 'Clear Display'\n"
+  "  write8bitCommand (!0x01) ;\n"
+  "//--- \xC3""\x89""tape 11 : \xC3""\xA9""crire la commande 'Set Cursor Move Direction' : 0 0 0 0 0 1 ID S\n"
+  "//    ID : Increment Cursor after Each Byte Written to Display : 1 (oui)\n"
+  "//    S : Shift Display When Byte Written : 0 (non)\n"
+  "  write8bitCommand (!0x06) ;\n"
+  "//--- \xC3""\x89""tape 12 : \xC3""\xA9""crire la commande 'Move Cursor / Shift Display' : 0 0 0 1 SC RL * *\n"
+  "//    SC : Display Shift On : 1 (oui)\n"
+  "//    RL : Direction of Shift : 1 (vers la droite)\n"
+  "  write8bitCommand (!0x1C) ;\n"
+  "//--- \xC3""\x89""tape 13 : \xC3""\xA9""crire la commande 'Return Cursor and LCD to Home Position'\n"
+  "  write8bitCommand (!0x02) ;\n"
+  "//--- \xC3""\x89""tape 14 : \xC3""\xA9""crire la commande 'Enable Display / Cursor' : 0 0 0 0 1 D C B\n"
+  "//    D : Turn Display On : 1 (oui)\n"
+  "//    C : Turn Cursor On : 0 (non)\n"
+  "//    B : Cursor Blink On : 0 (non)\n"
+  "  write8bitCommand (!0x0C) ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   PRINT ROUTINES IN USER MODE                                               *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc programLcd4BitDataBusOutput_inUserMode $user @noWarningIfUnused (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc write8bitCommand_inUserMode $user @noWarningIfUnused (\?inCommand : UInt8) {\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc writeData_inUserMode $user @noWarningIfUnused (\?inData : UInt8) {\n"
+  "  waitMS (!1) ;\n"
+  "  driveHighRS () ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  programLcd4BitDataBusOutput_inUserMode (!inData) ;\n"
+  "  driveHighE () ;\n"
+  "  waitMS (!1) ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "// Line 0 : 00 -> 19\n"
+  "// Line 1 : 64 -> 83\n"
+  "// Line 2 : 20 -> 39\n"
+  "// Line 3 : 84 -> 103\n"
+  "\n"
+  "proc goto $user @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "  if inColumn < 20 then\n"
+  "    if inLine == 0 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;\n"
+  "    elsif inLine == 1 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;\n"
+  "    elsif inLine == 2 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;\n"
+  "    elsif inLine == 3 then\n"
+  "      write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;\n"
+  "    end\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printString (const char * inString) {\n"
+  "//  if (NULL != inString) {\n"
+  "//    while ('\\0' != *inString) {\n"
+  "//      writeData (*inString) ;\n"
+  "//      inString ++ ;\n"
+  "//    }\n"
+  "//  }\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printChar (const char inChar) {\n"
+  "//  writeData (inChar) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc clearScreen $user @noWarningIfUnused () {\n"
+  "  write8bitCommand_inUserMode (!0x01)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc printSpaces $user @noWarningIfUnused (\?inCount : UInt32) {\n"
+  "  var count = inCount\n"
+  "  while (count > 0) do\n"
+  "    writeData_inUserMode (!0x20)\n"
+  "    count -- ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc printUnsigned $user @noWarningIfUnused (\?inValue : UInt32) {\n"
+  "  var divisor : UInt32 = 1_000_000_000\n"
+  "  var value = inValue\n"
+  "  var isPrinting = false\n"
+  "  while divisor > 0 do\n"
+  "    if isPrinting or (value >= divisor) then\n"
+  "      writeData_inUserMode (!0x30 + ((value / divisor) \\ UInt8))\n"
+  "      value = value % divisor\n"
+  "      isPrinting = true\n"
+  "    end\n"
+  "    divisor = divisor / 10\n"
+  "  end\n"
+  "  if not isPrinting then\n"
+  "    writeData_inUserMode (!0x30)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc printSigned $user @noWarningIfUnused (\?inValue : Int32) {\n"
+  "  if inValue >= 0 then\n"
+  "    printUnsigned (!inValue &\\ UInt32)\n"
+  "  else\n"
+  "    writeData_inUserMode (!0x2D) // Signe -\n"
+  "    printUnsigned (!(- inValue) &\\ UInt32)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printSigned (const int32_t inValue) {\n"
+  "//  if (inValue < 0) {\n"
+  "//    printChar ('-') ;\n"
+  "//    printUnsigned ((uint32_t) -inValue) ;\n"
+  "//  }else{\n"
+  "//    printUnsigned ((uint32_t) inValue) ;\n"
+  "//  }\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex1 (const uint32_t inValue) {\n"
+  "//  const uint32_t v = inValue & 0xF ;\n"
+  "//  if (v < 10) {\n"
+  "//    printChar ('0' + v) ;\n"
+  "//  }else{\n"
+  "//    printChar ('A' + v - 10) ;\n"
+  "//  }  \n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex2 (const uint32_t inValue) {\n"
+  "//  printHex1 (inValue >> 4) ;\n"
+  "//  printHex1 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex4 (const uint32_t inValue) {\n"
+  "//  printHex2 (inValue >> 8) ;\n"
+  "//  printHex2 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "\n"
+  "//void printHex8 (const uint32_t inValue) {\n"
+  "//  printHex4 (inValue >> 16) ;\n"
+  "//  printHex4 (inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "//void printHex16 (const uint64_t inValue) {\n"
+  "//  printHex8 ((uint32_t) (inValue >> 32)) ;\n"
+  "//  printHex8 ((uint32_t) inValue) ;\n"
+  "//}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "//   EXCEPTION                                                                 *\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc programLcd4BitDataBusOutput_inExceptionMode $exception @noWarningIfUnused (\?inValue : UInt8) {\n"
+  "  setD4 (!(inValue & 0x01) != 0)\n"
+  "  setD5 (!(inValue & 0x02) != 0)\n"
+  "  setD6 (!(inValue & 0x04) != 0)\n"
+  "  setD7 (!(inValue & 0x08) != 0)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc waitOneMillisecondInExceptionMode $exception @noWarningIfUnused () {\n"
+  "  while not SYST_CSR.COUNTFLAG.bool do\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc waitMSInExceptionMode $exception @noWarningIfUnused (\?duration: inDuration : UInt32) {\n"
+  "  var duration = inDuration\n"
+  "  while duration > 0 do\n"
+  "    waitOneMillisecondInExceptionMode ()\n"
+  "    duration &--\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc writeDataInExceptionMode $exception @noWarningIfUnused (\?inData : UInt8) {\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveHighRS () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inData) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc printUnsignedInExceptionMode $exception @noWarningIfUnused (\?inValue : UInt32) {\n"
+  "  var divisor : UInt32 = 1_000_000_000\n"
+  "  var value = inValue\n"
+  "  var isPrinting = false\n"
+  "  while divisor > 0 do\n"
+  "    if isPrinting or (value >= divisor) then\n"
+  "      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\\ UInt8))\n"
+  "      value = value &% divisor\n"
+  "      isPrinting = true\n"
+  "    end\n"
+  "    divisor = divisor &/ 10\n"
+  "  end\n"
+  "  if not isPrinting then\n"
+  "    writeDataInExceptionMode (!0x30)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc printSignedInExceptionMode $exception @noWarningIfUnused (\?inValue : Int32) {\n"
+  "  if inValue >= 0 then\n"
+  "    printUnsignedInExceptionMode (!inValue &\\ UInt32)\n"
+  "  else\n"
+  "    writeDataInExceptionMode (!0x2D) // Signe -\n"
+  "    printUnsignedInExceptionMode (!(&- inValue) &\\ UInt32)\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc write8bitCommand_inExceptionMode $exception @noWarningIfUnused (\?inCommand : UInt8) {\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowRS () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand) ;\n"
+  "  driveHighE () ;\n"
+  "  waitOneMillisecondInExceptionMode () ;\n"
+  "  driveLowE () ;\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc gotoInExceptionMode $exception @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "  if inColumn < 20 then\n"
+  "    if inLine == 0 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;\n"
+  "    elsif inLine == 1 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 64 &+ inColumn) ;\n"
+  "    elsif inLine == 2 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 20 &+ inColumn) ;\n"
+  "    elsif inLine == 3 then\n"
+  "      write8bitCommand_inExceptionMode (!0x80 &+ 84 &+ inColumn) ;\n"
+  "    end\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc clearScreenInExceptionMode $exception @noWarningIfUnused () {\n"
+  "  write8bitCommand_inExceptionMode (!0x01)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "exception setup 0 {\n"
+  "  clearScreenInExceptionMode ()\n"
+  "  waitMSInExceptionMode (!duration:4)\n"
+  "  gotoInExceptionMode (!line:0 !column:0)\n"
+  "  printSignedInExceptionMode (!CODE)\n"
+  "  gotoInExceptionMode (!line:1 !column:0)\n"
+  "  printUnsignedInExceptionMode (!LINE)\n"
+  "}\n"
+  "\n"
+  "exception loop 0 {\n"
+  "  waitMSInExceptionMode (!duration:50)\n"
+  "  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "  waitMSInExceptionMode (!duration:50)\n"
+  "  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_5_embeddedTargets (
+  "lcd.plm",
+  "plm",
+  true, // Text file
+  15519, // Text length
+  gWrapperFileContent_5_embeddedTargets
+) ;
+
+//--- File 'microcontrollers/leds.plm'
+
+const char * gWrapperFileContent_6_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+  "//   Led L0 : PTA12\n"
+  "//   Led L1 : PTA13\n"
+  "//   Led L2 : PTD7\n"
+  "//   Led L3 : PTD4\n"
+  "//   Led L4 : PTD2\n"
+  "//   Led sur carte Teensy : PTC5\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "init 100 {\n"
+  "//--- Led L0 : PTA12\n"
+  "  PORTA_PCR12 = (1 << 8)\n"
+  "  GPIOA_PDDR |= (1 << 12)\n"
+  "//--- Led L1 : PTA13\n"
+  "  PORTA_PCR13 = (1 << 8)\n"
+  "  GPIOA_PDDR |= (1 << 13)\n"
+  "//--- Led L2 : PTD13\n"
+  "  PORTD_PCR7 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 7)\n"
+  "//--- Led L3 : PTD4\n"
+  "  PORTD_PCR4 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 4)\n"
+  "//--- Led L4 : PTD2\n"
+  "  PORTD_PCR2 = (1 << 8)\n"
+  "  GPIOD_PDDR |= (1 << 2)\n"
+  "//--- Led Teensy\n"
+  "  PORTC_PCR5 = (1 << 8)\n"
+  "  GPIOC_PDDR |= (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "let LED_L0 : UInt32 = (1 << 0)\n"
+  "let LED_L1 : UInt32 = (1 << 1)\n"
+  "let LED_L2 : UInt32 = (1 << 2)\n"
+  "let LED_L3 : UInt32 = (1 << 3)\n"
+  "let LED_L4 : UInt32 = (1 << 4)\n"
+  "let LED_TEENSY : UInt32 = (1 << 5)\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc ledOn $user $exception $isr (\?inLeds : UInt32) {\n"
+  "//--- Led L0\n"
+  "  if ((inLeds & LED_L0) != 0) then\n"
+  "    GPIOA_PSOR = 1 << 12 ;\n"
+  "  end\n"
+  "//--- Led L1\n"
+  "  if ((inLeds & LED_L1) != 0) then\n"
+  "    GPIOA_PSOR = 1 << 13 ;\n"
+  "  end\n"
+  "//--- Led L2\n"
+  "  if ((inLeds & LED_L2) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 7 ;\n"
+  "  end\n"
+  "//--- Led L3\n"
+  "  if ((inLeds & LED_L3) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 4 ;\n"
+  "  end\n"
+  "//--- Led L4\n"
+  "  if ((inLeds & LED_L4) != 0) then\n"
+  "    GPIOD_PSOR = 1 << 2 ;\n"
+  "  end\n"
+  "//--- Led Teensy\n"
+  "  if ((inLeds & LED_TEENSY) != 0) then\n"
+  "    GPIOC_PSOR = 1 << 5 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n"
+  "\n"
+  "proc ledOff $user $exception $isr (\?inLeds : UInt32) {\n"
+  "//--- Led L0\n"
+  "  if ((inLeds & LED_L0) != 0) then\n"
+  "    GPIOA_PCOR = 1 << 12 ;\n"
+  "  end\n"
+  "//--- Led L1\n"
+  "  if ((inLeds & LED_L1) != 0) then\n"
+  "    GPIOA_PCOR = 1 << 13 ;\n"
+  "  end\n"
+  "//--- Led L2\n"
+  "  if ((inLeds & LED_L2) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 7 ;\n"
+  "  end\n"
+  "//--- Led L3\n"
+  "  if ((inLeds & LED_L3) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 4 ;\n"
+  "  end\n"
+  "//--- Led L4\n"
+  "  if ((inLeds & LED_L4) != 0) then\n"
+  "    GPIOD_PCOR = 1 << 2 ;\n"
+  "  end\n"
+  "//--- Led Teensy\n"
+  "  if ((inLeds & LED_TEENSY) != 0) then\n"
+  "    GPIOC_PCOR = 1 << 5 ;\n"
+  "  end\n"
+  "}\n"
+  "\n"
+  "//-----------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_6_embeddedTargets (
+  "leds.plm",
+  "plm",
+  true, // Text file
+  2338, // Text length
+  gWrapperFileContent_6_embeddedTargets
+) ;
+
+//--- File 'microcontrollers/mk20dx256.plm'
+
+const char * gWrapperFileContent_7_embeddedTargets = "// Teensyduino Core Library\n"
+  "// http://www.pjrc.com/teensy/\n"
+  "// Copyright (c) 2013 PJRC.COM, LLC.\n"
+  "//\n"
+  "// Permission is hereby granted, free of charge, to any person obtaining\n"
+  "// a copy of this software and associated documentation files (the\n"
+  "// \"Software\"), to deal in the Software without restriction, including\n"
+  "// without limitation the rights to use, copy, modify, merge, publish,\n"
+  "// distribute, sublicense, and/or sell copies of the Software, and to\n"
+  "// permit persons to whom the Software is furnished to do so, subject to\n"
+  "// the following conditions:\n"
+  "//\n"
+  "// 1. The above copyright notice and this permission notice shall be \n"
+  "// included in all copies or substantial portions of the Software.\n"
+  "//\n"
+  "// 2. If the Software is incorporated into a build system thallows \n"
+  "// selection among a list of target devices, then similar target\n"
+  "// devices manufactured by PJRC.COM must be included in the list of\n"
+  "// target devices and selectable in the same manner.\n"
+  "//\n"
+  "// THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\n"
+  "// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\n"
+  "// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\n"
+  "// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS\n"
+  "// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN\n"
+  "// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\n"
+  "// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
+  "// SOFTWARE.\n"
+  "\n"
+  "let f_cpu : UInt32 = 96_000_000\n"
+  "\n"
+  "let f_bus : UInt32 = 48_000_000\n"
+  "let f_mem  : UInt32= 24_000_000\n"
+  "\n"
+  "// chapter 11: Port control and interrupts (PORT)\n"
+  " // Pin Control Register n\n"
+  "register\n"
+  "  PORTA_PCR0   at 0x40049000\n"
+  "  PORTA_PCR1   at 0x40049004\n"
+  "  PORTA_PCR2   at 0x40049008\n"
+  "  PORTA_PCR3   at 0x4004900C\n"
+  "  PORTA_PCR4   at 0x40049010\n"
+  "  PORTA_PCR5   at 0x40049014\n"
+  "  PORTA_PCR6   at 0x40049018\n"
+  "  PORTA_PCR7   at 0x4004901C\n"
+  "  PORTA_PCR8   at 0x40049020\n"
+  "  PORTA_PCR9   at 0x40049024\n"
+  "  PORTA_PCR10  at 0x40049028\n"
+  "  PORTA_PCR11  at 0x4004902C\n"
+  "  PORTA_PCR12  at 0x40049030\n"
+  "  PORTA_PCR13  at 0x40049034\n"
+  "  PORTA_PCR14  at 0x40049038\n"
+  "  PORTA_PCR15  at 0x4004903C\n"
+  "  PORTA_PCR16  at 0x40049040\n"
+  "  PORTA_PCR17  at 0x40049044\n"
+  "  PORTA_PCR18  at 0x40049048\n"
+  "  PORTA_PCR19  at 0x4004904C\n"
+  "  PORTA_PCR20  at 0x40049050\n"
+  "  PORTA_PCR21  at 0x40049054\n"
+  "  PORTA_PCR22  at 0x40049058\n"
+  "  PORTA_PCR23  at 0x4004905C\n"
+  "  PORTA_PCR24  at 0x40049060\n"
+  "  PORTA_PCR25  at 0x40049064\n"
+  "  PORTA_PCR26  at 0x40049068\n"
+  "  PORTA_PCR27  at 0x4004906C\n"
+  "  PORTA_PCR28  at 0x40049070\n"
+  "  PORTA_PCR29  at 0x40049074\n"
+  "  PORTA_PCR30  at 0x40049078\n"
+  "  PORTA_PCR31  at 0x4004907C\n"
+  "  PORTB_PCR0   at 0x4004A000\n"
+  "  PORTB_PCR1   at 0x4004A004\n"
+  "  PORTB_PCR2   at 0x4004A008\n"
+  "  PORTB_PCR3   at 0x4004A00C\n"
+  "  PORTB_PCR4   at 0x4004A010\n"
+  "  PORTB_PCR5   at 0x4004A014\n"
+  "  PORTB_PCR6   at 0x4004A018\n"
+  "  PORTB_PCR7   at 0x4004A01C\n"
+  "  PORTB_PCR8   at 0x4004A020\n"
+  "  PORTB_PCR9   at 0x4004A024\n"
+  "  PORTB_PCR10  at 0x4004A028\n"
+  "  PORTB_PCR11  at 0x4004A02C\n"
+  "  PORTB_PCR12  at 0x4004A030\n"
+  "  PORTB_PCR13  at 0x4004A034\n"
+  "  PORTB_PCR14  at 0x4004A038\n"
+  "  PORTB_PCR15  at 0x4004A03C\n"
+  "  PORTB_PCR16  at 0x4004A040\n"
+  "  PORTB_PCR17  at 0x4004A044\n"
+  "  PORTB_PCR18  at 0x4004A048\n"
+  "  PORTB_PCR19  at 0x4004A04C\n"
+  "  PORTB_PCR20  at 0x4004A050\n"
+  "  PORTB_PCR21  at 0x4004A054\n"
+  "  PORTB_PCR22  at 0x4004A058\n"
+  "  PORTB_PCR23  at 0x4004A05C\n"
+  "  PORTB_PCR24  at 0x4004A060\n"
+  "  PORTB_PCR25  at 0x4004A064\n"
+  "  PORTB_PCR26  at 0x4004A068\n"
+  "  PORTB_PCR27  at 0x4004A06C\n"
+  "  PORTB_PCR28  at 0x4004A070\n"
+  "  PORTB_PCR29  at 0x4004A074\n"
+  "  PORTB_PCR30  at 0x4004A078\n"
+  "  PORTB_PCR31  at 0x4004A07C\n"
+  "  PORTC_PCR0   at 0x4004B000\n"
+  "  PORTC_PCR1   at 0x4004B004\n"
+  "  PORTC_PCR2   at 0x4004B008\n"
+  "  PORTC_PCR3   at 0x4004B00C\n"
+  "  PORTC_PCR4   at 0x4004B010\n"
+  "  PORTC_PCR5   at 0x4004B014\n"
+  "  PORTC_PCR6   at 0x4004B018\n"
+  "  PORTC_PCR7   at 0x4004B01C\n"
+  "  PORTC_PCR8   at 0x4004B020\n"
+  "  PORTC_PCR9   at 0x4004B024\n"
+  "  PORTC_PCR10  at 0x4004B028\n"
+  "  PORTC_PCR11  at 0x4004B02C\n"
+  "  PORTC_PCR12  at 0x4004B030\n"
+  "  PORTC_PCR13  at 0x4004B034\n"
+  "  PORTC_PCR14  at 0x4004B038\n"
+  "  PORTC_PCR15  at 0x4004B03C\n"
+  "  PORTC_PCR16  at 0x4004B040\n"
+  "  PORTC_PCR17  at 0x4004B044\n"
+  "  PORTC_PCR18  at 0x4004B048\n"
+  "  PORTC_PCR19  at 0x4004B04C\n"
+  "  PORTC_PCR20  at 0x4004B050\n"
+  "  PORTC_PCR21  at 0x4004B054\n"
+  "  PORTC_PCR22  at 0x4004B058\n"
+  "  PORTC_PCR23  at 0x4004B05C\n"
+  "  PORTC_PCR24  at 0x4004B060\n"
+  "  PORTC_PCR25  at 0x4004B064\n"
+  "  PORTC_PCR26  at 0x4004B068\n"
+  "  PORTC_PCR27  at 0x4004B06C\n"
+  "  PORTC_PCR28  at 0x4004B070\n"
+  "  PORTC_PCR29  at 0x4004B074\n"
+  "  PORTC_PCR30  at 0x4004B078\n"
+  "  PORTC_PCR31  at 0x4004B07C\n"
+  "  PORTD_PCR0   at 0x4004C000\n"
+  "  PORTD_PCR1   at 0x4004C004\n"
+  "  PORTD_PCR2   at 0x4004C008\n"
+  "  PORTD_PCR3   at 0x4004C00C\n"
+  "  PORTD_PCR4   at 0x4004C010\n"
+  "  PORTD_PCR5   at 0x4004C014\n"
+  "  PORTD_PCR6   at 0x4004C018\n"
+  "  PORTD_PCR7   at 0x4004C01C\n"
+  "  PORTD_PCR8   at 0x4004C020\n"
+  "  PORTD_PCR9   at 0x4004C024\n"
+  "  PORTD_PCR10  at 0x4004C028\n"
+  "  PORTD_PCR11  at 0x4004C02C\n"
+  "  PORTD_PCR12  at 0x4004C030\n"
+  "  PORTD_PCR13  at 0x4004C034\n"
+  "  PORTD_PCR14  at 0x4004C038\n"
+  "  PORTD_PCR15  at 0x4004C03C\n"
+  "  PORTD_PCR16  at 0x4004C040\n"
+  "  PORTD_PCR17  at 0x4004C044\n"
+  "  PORTD_PCR18  at 0x4004C048\n"
+  "  PORTD_PCR19  at 0x4004C04C\n"
+  "  PORTD_PCR20  at 0x4004C050\n"
+  "  PORTD_PCR21  at 0x4004C054\n"
+  "  PORTD_PCR22  at 0x4004C058\n"
+  "  PORTD_PCR23  at 0x4004C05C\n"
+  "  PORTD_PCR24  at 0x4004C060\n"
+  "  PORTD_PCR25  at 0x4004C064\n"
+  "  PORTD_PCR26  at 0x4004C068\n"
+  "  PORTD_PCR27  at 0x4004C06C\n"
+  "  PORTD_PCR28  at 0x4004C070\n"
+  "  PORTD_PCR29  at 0x4004C074\n"
+  "  PORTD_PCR30  at 0x4004C078\n"
+  "  PORTD_PCR31  at 0x4004C07C\n"
+  "  PORTE_PCR0   at 0x4004D000\n"
+  "  PORTE_PCR1   at 0x4004D004\n"
+  "  PORTE_PCR2   at 0x4004D008\n"
+  "  PORTE_PCR3   at 0x4004D00C\n"
+  "  PORTE_PCR4   at 0x4004D010\n"
+  "  PORTE_PCR5   at 0x4004D014\n"
+  "  PORTE_PCR6   at 0x4004D018\n"
+  "  PORTE_PCR7   at 0x4004D01C\n"
+  "  PORTE_PCR8   at 0x4004D020\n"
+  "  PORTE_PCR9   at 0x4004D024\n"
+  "  PORTE_PCR10  at 0x4004D028\n"
+  "  PORTE_PCR11  at 0x4004D02C\n"
+  "  PORTE_PCR12  at 0x4004D030\n"
+  "  PORTE_PCR13  at 0x4004D034\n"
+  "  PORTE_PCR14  at 0x4004D038\n"
+  "  PORTE_PCR15  at 0x4004D03C\n"
+  "  PORTE_PCR16  at 0x4004D040\n"
+  "  PORTE_PCR17  at 0x4004D044\n"
+  "  PORTE_PCR18  at 0x4004D048\n"
+  "  PORTE_PCR19  at 0x4004D04C\n"
+  "  PORTE_PCR20  at 0x4004D050\n"
+  "  PORTE_PCR21  at 0x4004D054\n"
+  "  PORTE_PCR22  at 0x4004D058\n"
+  "  PORTE_PCR23  at 0x4004D05C\n"
+  "  PORTE_PCR24  at 0x4004D060\n"
+  "  PORTE_PCR25  at 0x4004D064\n"
+  "  PORTE_PCR26  at 0x4004D068\n"
+  "  PORTE_PCR27  at 0x4004D06C\n"
+  "  PORTE_PCR28  at 0x4004D070\n"
+  "  PORTE_PCR29  at 0x4004D074\n"
+  "  PORTE_PCR30  at 0x4004D078\n"
+  "  PORTE_PCR31  at 0x4004D07C\n"
+  ": UInt32 {\n"
+  "  7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps\n"
+  "}\n"
+  "\n"
+  "let PORT_PCR_ISF  : UInt32  = 0x01000000  // Interrupt Status Flag\n"
+  "//register UInt32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration\n"
+  "let PORT_PCR_IRQC_MASK  : UInt32 = 0x000F0000\n"
+  "let PORT_PCR_LK   : UInt32 = 0x00008000  // Lock Register\n"
+  "//register UInt32 PORT_PCR_MUX(n)    (((n) & 7) << 8) // Pin Mux Control\n"
+  "let PORT_PCR_MUX_MASK : UInt32 = 0x00000700\n"
+  "let PORT_PCR_DSE      : UInt32 = 0x00000040  // Drive Strength Enable\n"
+  "let PORT_PCR_ODE      : UInt32 = 0x00000020  // Open Drain Enable\n"
+  "let PORT_PCR_PFE      : UInt32 = 0x00000010  // Passive Filter Enable\n"
+  "let PORT_PCR_SRE      : UInt32 = 0x00000004  // Slew Rate Enable\n"
+  "let PORT_PCR_PE       : UInt32 = 0x00000002  // Pull Enable\n"
+  "let PORT_PCR_PS       : UInt32 = 0x00000001  // Pull Select\n"
+  "\n"
+  "register PORTA_GPCLR  at 0x40049080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTA_GPCHR  at 0x40049084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTA_ISFR   at 0x400490A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTB_GPCLR  at 0x4004A080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTB_GPCHR  at 0x4004A084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTB_ISFR   at 0x4004A0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTC_GPCLR  at 0x4004B080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTC_GPCHR  at 0x4004B084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTC_ISFR   at 0x4004B0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTD_GPCLR  at 0x4004C080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTD_GPCHR  at 0x4004C084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTD_ISFR   at 0x4004C0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "register PORTE_GPCLR  at 0x4004D080 : UInt32 // Global Pin Control Low Register\n"
+  "register PORTE_GPCHR  at 0x4004D084 : UInt32 // Global Pin Control High Register\n"
+  "register PORTE_ISFR   at 0x4004D0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "\n"
+  "// Chapter 12: System Integration Module (SIM)\n"
+  "register SIM_SOPT1    at 0x40047000 : UInt32 // System Options Register 1\n"
+  "register SIM_SOPT1CFG at 0x40047004 : UInt32 // SOPT1 Configuration Register\n"
+  "register SIM_SOPT2    at 0x40048004 : UInt32 // System Options Register 2\n"
+  "register SIM_SOPT2_USBSRC at 0x00040000  : UInt32 // 0=USB_CLKIN, 1=FFL/PLL \n"
+  "register SIM_SOPT2_PLLFLLSEL at 0x00010000  : UInt32 // 0=FLL, 1=PLL\n"
+  "register SIM_SOPT2_TRACECLKSEL at 0x00001000  : UInt32 // 0=MCGOUTCLK, 1=CPU\n"
+  "register SIM_SOPT2_PTD7PAD at 0x00000800  : UInt32 // 0=normal, 1=double drive PTD7\n"
+  "//register UInt32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.\n"
+  "let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select\n"
+  "register SIM_SOPT4   at 0x4004800C : UInt32 // System Options Register 4\n"
+  "register SIM_SOPT5   at 0x40048010 : UInt32 // System Options Register 5\n"
+  "register SIM_SOPT7   at 0x40048018 : UInt32 // System Options Register 7\n"
+  "register SIM_SDID @ro at 0x40048024 : UInt32 // System Device Identification Register\n"
+  "register SIM_SCGC2  at 0x4004802C : UInt32 // System Clock Gating Control Register 2\n"
+  "let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control\n"
+  "register SIM_SCGC3  at 0x40048030 : UInt32 // System Clock Gating Control Register 3\n"
+  "let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control\n"
+  "let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control\n"
+  "register SIM_SCGC4 at 0x40048034 : UInt32 // System Clock Gating Control Register 4\n"
+  "let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control\n"
+  "let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control\n"
+  "let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control\n"
+  "let SIM_SCGC4_UART2  : UInt32 =  0x00001000  // UART2 Clock Gate Control\n"
+  "let SIM_SCGC4_UART1  : UInt32 =  0x00000800  // UART1 Clock Gate Control\n"
+  "let SIM_SCGC4_UART0  : UInt32 =  0x00000400  // UART0 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C1  : UInt32 =  0x00000080  // I2C1 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control\n"
+  "let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control\n"
+  "let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control\n"
+  "register SIM_SCGC5 at 0x40048038 : UInt32 // System Clock Gating Control Register 5\n"
+  "let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control\n"
+  "let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control\n"
+  "let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control\n"
+  "let SIM_SCGC5_PORTB  : UInt32 =  0x00000400  // Port B Clock Gate Control\n"
+  "let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control\n"
+  "let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
+  "let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control\n"
+  "register SIM_SCGC6 at 0x4004803C : UInt32 // System Clock Gating Control Register 6\n"
+  "let SIM_SCGC6_RTC   : UInt32 = 0x20000000  // RTC Access\n"
+  "let SIM_SCGC6_ADC0  : UInt32 =   0x08000000  // ADC0 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM1  : UInt32 =   0x02000000  // FTM1 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM0  : UInt32=   0x01000000  // FTM0 Clock Gate Control\n"
+  "let SIM_SCGC6_PIT  : UInt32 =  0x00800000  // PIT Clock Gate Control\n"
+  "let SIM_SCGC6_PDB  : UInt32 =  0x00400000  // PDB Clock Gate Control\n"
+  "let SIM_SCGC6_USBDCD  : UInt32=  0x00200000  // USB DCD Clock Gate Control\n"
+  "let SIM_SCGC6_CRC  : UInt32 =  0x00040000  // CRC Clock Gate Control\n"
+  "let SIM_SCGC6_I2S  : UInt32 =  0x00008000  // I2S Clock Gate Control\n"
+  "let SIM_SCGC6_SPI1  : UInt32=   0x00002000  // SPI1 Clock Gate Control\n"
+  "let SIM_SCGC6_SPI0  : UInt32=   0x00001000  // SPI0 Clock Gate Control\n"
+  "let SIM_SCGC6_FLEXCAN0  : UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control\n"
+  "let SIM_SCGC6_DMAMUX : UInt32 =  0x00000002  // DMA Mux Clock Gate Control\n"
+  "let SIM_SCGC6_FTFL  : UInt32 =  0x00000001  // Flash Memory Clock Gate Control\n"
+  "\n"
+  "register SIM_SCGC7 at 0x40048040 : UInt32 // System Clock Gating Control Register 7\n"
+  "let SIM_SCGC7_DMA  : UInt32 =  0x00000002  // DMA Clock Gate Control\n"
+  "\n"
+  "register SIM_CLKDIV1 at 0x4004_8044 : UInt32 {// System Clock Divider Register 1\n"
+  "  OUTDIV1[4], // Divide value for the core/system clock\n"
+  "  OUTDIV2[4], // Divide value for the peripheral clock\n"
+  "  4,\n"
+  "  OUTDIV4[4], // Divide value for the flash clock\n"
+  "  16\n"
+  "}\n"
+  "\n"
+  "register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2\n"
+  "//register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)\n"
+  "let SIM_CLKDIV2_USBFRAC  : UInt32 =  0x01\n"
+  "register SIM_FCFG1 @ro at 0x4004804C : UInt32 // Flash Configuration Register 1\n"
+  "register SIM_FCFG2 @ro at 0x40048050 : UInt32 // Flash Configuration Register 2\n"
+  "register SIM_UIDH  @ro at 0x40048054 : UInt32 // Unique Identification Register High\n"
+  "register SIM_UIDMH @ro at 0x40048058 : UInt32 // Unique Identification Register Mid-High\n"
+  "register SIM_UIDML @ro at 0x4004805C : UInt32 // Unique Identification Register Mid Low\n"
+  "register SIM_UIDL  @ro at 0x40048060 : UInt32 // Unique Identification Register Low\n"
+  "\n"
+  "// Chapter 13: Reset Control Module (RCM)\n"
+  "register RCM_SRS0 at 0x4007F000 : UInt8 // System Reset Status Register 0\n"
+  "register RCM_SRS1 at 0x4007F001 : UInt8 // System Reset Status Register 1\n"
+  "register RCM_RPFC at 0x4007F004 : UInt8 // Reset Pin Filter Control Register\n"
+  "register RCM_RPFW at 0x4007F005 : UInt8 // Reset Pin Filter Width Register\n"
+  "register RCM_MR   at 0x4007F007 : UInt8 // Mode Register\n"
+  "\n"
+  "// Chapter 14: System Mode Controller\n"
+  "register SMC_PMPROT  at 0x4007E000 : UInt8 // Power Mode Protection Register\n"
+  "let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes\n"
+  "let SMC_PMPROT_ALLS : UInt8  = 0x08   // Allow low leakage stop mode\n"
+  "let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode\n"
+  "\n"
+  "register SMC_PMCTRL  at 0x4007E001 : UInt8 // Power Mode Control Register\n"
+  "let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt\n"
+  "//register UInt8 SMC_PMCTRL_RUNM(n)  (uint8_t)(((n) & 0x03) << 5) // Run Mode Control\n"
+  "let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted\n"
+  "//register UInt8 SMC_PMCTRL_STOPM(n)  (uint8_t)((n) & 0x07)  // Stop Mode Control\n"
+  "\n"
+  "register SMC_VLLSCTRL at 0x4007E002 : UInt8 // VLLS Control Register\n"
+  "let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option\n"
+  "//let UInt8 SMC_VLLSCTRL_VLLSM(n)  (uint8_t)((n) & 0x07)  // VLLS Mode Control\n"
+  "\n"
+  "register SMC_PMST at 0x4007E003 : UInt8 // Power Mode Status Register\n"
+  "let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN\n"
+  "let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP\n"
+  "let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR\n"
+  "let SMC_PMSTAT_VLPW : UInt8 = 0x08   // Current power mode is VLPW\n"
+  "let SMC_PMSTAT_VLPS : UInt8 = 0x10   // Current power mode is VLPS\n"
+  "let SMC_PMSTAT_LLS  : UInt8 = 0x20   // Current power mode is LLS\n"
+  "let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS\n"
+  "\n"
+  "// Chapter 15: Power Management Controller\n"
+  "register PMC_LVDSC1 at 0x4007D000 : UInt8 // Low Voltage Detect Status And Control 1 register\n"
+  "let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag\n"
+  "let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge\n"
+  "let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
+  "let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable\n"
+  "//let UInt8 PMC_LVDSC1_LVDV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select\n"
+  "register PMC_LVDSC2 at 0x4007D001 : UInt8 // Low Voltage Detect Status And Control 2 register\n"
+  "let PMC_LVDSC2_LVWF : UInt8  = 0x80   // Low-Voltage Warning Flag\n"
+  "let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
+  "let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
+  "//let UInt8 PMC_LVDSC2_LVWV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select\n"
+  "\n"
+  "register PMC_REGSC at 0x4007D002 : UInt8 { // Regulator Status And Control register\n"
+  "  3, BGEN, ACKISO, REGONS, BGBE, 1\n"
+  "}\n"
+  "\n"
+  "// Chapter 16: Low-Leakage Wakeup Unit (LLWU)\n"
+  "register LLWU_PE1  at 0x4007C000 : UInt8 // LLWU Pin Enable 1 register\n"
+  "register LLWU_PE2  at 0x4007C001 : UInt8 // LLWU Pin Enable 2 register\n"
+  "register LLWU_PE3  at 0x4007C002 : UInt8 // LLWU Pin Enable 3 register\n"
+  "register LLWU_PE4  at 0x4007C003 : UInt8 // LLWU Pin Enable 4 register\n"
+  "register LLWU_ME   at 0x4007C004 : UInt8 // LLWU Module Enable register\n"
+  "register LLWU_F1   at 0x4007C005 : UInt8 // LLWU Flag 1 register\n"
+  "register LLWU_F2   at 0x4007C006 : UInt8 // LLWU Flag 2 register\n"
+  "register LLWU_F3   at 0x4007C007 : UInt8 // LLWU Flag 3 register\n"
+  "register LLWU_FILT1 at 0x4007C008 : UInt8 // LLWU Pin Filter 1 register\n"
+  "register LLWU_FILT2 at 0x4007C009 : UInt8 // LLWU Pin Filter 2 register\n"
+  "register LLWU_RST  at 0x4007C00A : UInt8 // LLWU Reset Enable register\n"
+  "\n"
+  "// Chapter 17: Miscellaneous Control Module (MCM)\n"
+  "register MCM_PLASC at 0xE0080008 : UInt16 // Crossbar Switch (AXBS) Slave Configuration\n"
+  "\n"
+  "register MCM_PLAMC at 0xE008000A : UInt16 // Crossbar Switch (AXBS) Master Configuration\n"
+  "\n"
+  "register MCM_PLACR at 0xE008000C : UInt32 // Crossbar Switch (AXBS) Control Register (MK20DX128)\n"
+  "let MCM_PLACR_ARG   : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
+  "\n"
+  "register MCM_CR at 0xE008000C : UInt32 // RAM arbitration control register (MK20DX256)\n"
+  "let MCM_CR_SRAMLWP  : UInt32 =  0x4000_0000  // SRAM_L write protect\n"
+  "//let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
+  "let MCM_CR_SRAMUWP  : UInt32 =  0x0400_0000  // SRAM_U write protect\n"
+  "//let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
+  "\n"
+  "// Crossbar Switch (AXBS) - only programmable on MK20DX256\n"
+  "register AXBS_PRS0   at 0x40004000 : UInt32 // Priority Registers Slave 0\n"
+  "register AXBS_CRS0   at 0x40004010 : UInt32 // Control Register 0\n"
+  "register AXBS_PRS1   at 0x40004100 : UInt32 // Priority Registers Slave 1\n"
+  "register AXBS_CRS1   at 0x40004110 : UInt32 // Control Register 1\n"
+  "register AXBS_PRS2   at 0x40004200 : UInt32 // Priority Registers Slave 2\n"
+  "register AXBS_CRS2   at 0x40004210 : UInt32 // Control Register 2\n"
+  "register AXBS_PRS3   at 0x40004300 : UInt32 // Priority Registers Slave 3\n"
+  "register AXBS_CRS3   at 0x40004310 : UInt32 // Control Register 3\n"
+  "register AXBS_PRS4   at 0x40004400 : UInt32 // Priority Registers Slave 4\n"
+  "register AXBS_CRS4   at 0x40004410 : UInt32 // Control Register 4\n"
+  "register AXBS_PRS5   at 0x40004500 : UInt32 // Priority Registers Slave 5\n"
+  "register AXBS_CRS5   at 0x40004510 : UInt32 // Control Register 5\n"
+  "register AXBS_PRS6   at 0x40004600 : UInt32 // Priority Registers Slave 6\n"
+  "register AXBS_CRS6   at 0x40004610 : UInt32 // Control Register 6\n"
+  "register AXBS_PRS7   at 0x40004700 : UInt32 // Priority Registers Slave 7\n"
+  "register AXBS_CRS7   at 0x40004710 : UInt32 // Control Register 7\n"
+  "register AXBS_MGPCR0 at 0x40004800 : UInt32 // Master 0 General Purpose Control Register\n"
+  "register AXBS_MGPCR1 at 0x40004900 : UInt32 // Master 1 General Purpose Control Register\n"
+  "register AXBS_MGPCR2 at 0x40004A00 : UInt32 // Master 2 General Purpose Control Register\n"
+  "register AXBS_MGPCR3 at 0x40004B00 : UInt32 // Master 3 General Purpose Control Register\n"
+  "register AXBS_MGPCR4 at 0x40004C00 : UInt32 // Master 4 General Purpose Control Register\n"
+  "register AXBS_MGPCR5 at 0x40004D00 : UInt32 // Master 5 General Purpose Control Register\n"
+  "register AXBS_MGPCR6 at 0x40004E00 : UInt32 // Master 6 General Purpose Control Register\n"
+  "register AXBS_MGPCR7 at 0x40004F00 : UInt32 // Master 7 General Purpose Control Register\n"
+  "let AXBS_CRS_READONLY  : UInt32=  0x80000000\n"
+  "let AXBS_CRS_HALTLOWPRIORITY  : UInt32 = 0x40000000\n"
+  "let AXBS_CRS_ARB_FIXED  : UInt32 = 0x00000000\n"
+  "let AXBS_CRS_ARB_ROUNDROBIN  : UInt32 = 0x00010000\n"
+  "let AXBS_CRS_PARK_FIXED  : UInt32 =  0x00000000\n"
+  "let AXBS_CRS_PARK_PREVIOUS  : UInt32 =  0x00000010\n"
+  "let AXBS_CRS_PARK_NONE  : UInt32 =  0x00000020\n"
+  "//let UInt32 AXBS_CRS_PARK(n)   (((n) & 7) << 0)\n"
+  "\n"
+  "\n"
+  "\n"
+  "// Chapter 20: Direct Memory Access Multiplexer (DMAMUX)\n"
+  "register DMAMUX0_CHCFG0  at 0x40021000 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG1  at 0x40021001 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG2  at 0x40021002 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG3  at 0x40021003 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG4  at 0x40021004 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG5  at 0x40021005 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG6  at 0x40021006 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG7  at 0x40021007 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG8  at 0x40021008 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG9  at 0x40021009 : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG10 at 0x4002100A : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG11 at 0x4002100B : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG12 at 0x4002100C : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG13 at 0x4002100D : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG14 at 0x4002100E : UInt8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG15 at 0x4002100F : UInt8 // Channel Configuration register\n"
+  "let DMAMUX_DISABLE : UInt8 =  0\n"
+  "let DMAMUX_TRIG  : UInt8 = 64\n"
+  "let DMAMUX_ENABLE : UInt8 =  128\n"
+  "let DMAMUX_SOURCE_UART0_RX : UInt8 = 2\n"
+  "let DMAMUX_SOURCE_UART0_TX : UInt8 = 3\n"
+  "let DMAMUX_SOURCE_UART1_RX : UInt8 = 4\n"
+  "let DMAMUX_SOURCE_UART1_TX : UInt8 = 5\n"
+  "let DMAMUX_SOURCE_UART2_RX : UInt8 = 6\n"
+  "let DMAMUX_SOURCE_UART2_TX : UInt8 = 7\n"
+  "let DMAMUX_SOURCE_I2S0_RX  : UInt8 =14\n"
+  "let DMAMUX_SOURCE_I2S0_TX  : UInt8 =15\n"
+  "let DMAMUX_SOURCE_SPI0_RX  : UInt8 =16\n"
+  "let DMAMUX_SOURCE_SPI0_TX  : UInt8 =17\n"
+  "let DMAMUX_SOURCE_I2C0  : UInt8 =22\n"
+  "let DMAMUX_SOURCE_I2C1  : UInt8 =23\n"
+  "let DMAMUX_SOURCE_FTM0_CH0 : UInt8 = 24\n"
+  "let DMAMUX_SOURCE_FTM0_CH1 : UInt8 = 25\n"
+  "let DMAMUX_SOURCE_FTM0_CH2 : UInt8 = 26\n"
+  "let DMAMUX_SOURCE_FTM0_CH3 : UInt8 = 27\n"
+  "let DMAMUX_SOURCE_FTM0_CH4 : UInt8 = 28\n"
+  "let DMAMUX_SOURCE_FTM0_CH5 : UInt8 = 29\n"
+  "let DMAMUX_SOURCE_FTM0_CH6 : UInt8 = 30\n"
+  "let DMAMUX_SOURCE_FTM0_CH7 : UInt8 = 31\n"
+  "let DMAMUX_SOURCE_FTM1_CH0 : UInt8 = 32\n"
+  "let DMAMUX_SOURCE_FTM1_CH1 : UInt8 = 33\n"
+  "let DMAMUX_SOURCE_FTM2_CH0 : UInt8 = 34\n"
+  "let DMAMUX_SOURCE_FTM2_CH1 : UInt8 = 35\n"
+  "let DMAMUX_SOURCE_ADC0 : UInt8 = 40\n"
+  "let DMAMUX_SOURCE_ADC1 : UInt8 = 41\n"
+  "let DMAMUX_SOURCE_CMP0 : UInt8 = 42\n"
+  "let DMAMUX_SOURCE_CMP1 : UInt8 = 43\n"
+  "let DMAMUX_SOURCE_CMP2 : UInt8 = 44\n"
+  "let DMAMUX_SOURCE_DAC0 : UInt8 = 45\n"
+  "let DMAMUX_SOURCE_CMT  : UInt8 = 47\n"
+  "let DMAMUX_SOURCE_PDB  : UInt8 = 48\n"
+  "let DMAMUX_SOURCE_PORTA : UInt8 = 49\n"
+  "let DMAMUX_SOURCE_PORTB : UInt8 = 50\n"
+  "let DMAMUX_SOURCE_PORTC : UInt8 = 51\n"
+  "let DMAMUX_SOURCE_PORTD : UInt8 = 52\n"
+  "let DMAMUX_SOURCE_PORTE : UInt8 = 53\n"
+  "let DMAMUX_SOURCE_ALWAYS0 : UInt8 = 54\n"
+  "let DMAMUX_SOURCE_ALWAYS1 : UInt8 = 55\n"
+  "let DMAMUX_SOURCE_ALWAYS2 : UInt8 = 56\n"
+  "let DMAMUX_SOURCE_ALWAYS3 : UInt8 = 57\n"
+  "let DMAMUX_SOURCE_ALWAYS4 : UInt8 = 58\n"
+  "let DMAMUX_SOURCE_ALWAYS5 : UInt8 = 59\n"
+  "let DMAMUX_SOURCE_ALWAYS6 : UInt8 = 60\n"
+  "let DMAMUX_SOURCE_ALWAYS7 : UInt8 = 61\n"
+  "let DMAMUX_SOURCE_ALWAYS8 : UInt8 = 62\n"
+  "let DMAMUX_SOURCE_ALWAYS9 : UInt8 = 63\n"
+  "\n"
+  "// Chapter 21: Direct Memory Access Controller (eDMA)\n"
+  "register DMA_CR at 0x40008000 : UInt32 // Control Register\n"
+  "let DMA_CR_CX   : UInt32  = 0x2_0000 // Cancel Transfer\n"
+  "let DMA_CR_ECX   : UInt32 = 0x1_0000 // Error Cancel Transfer\n"
+  "let DMA_CR_EMLM   : UInt32= 0x80 // Enable Minor Loop Mapping\n"
+  "let DMA_CR_CLM   : UInt32 = 0x40 // Continuous Link Mode\n"
+  "let DMA_CR_HALT  : UInt32 = 0x20 // Halt DMA Operations\n"
+  "let DMA_CR_HOE   : UInt32 = 0x10 // Halt On Error\n"
+  "let DMA_CR_ERCA  : UInt32 = 0x04 // Enable Round Robin Channel Arbitration\n"
+  "let DMA_CR_EDBG   : UInt32= 0x02 // Enable Debug\n"
+  "register DMA_ES  at 0x40008004 : UInt32 // Error Status Register\n"
+  "register DMA_ERQ at 0x4000800C : UInt32 // Enable Request Register\n"
+  "let DMA_ERQ_ERQ0   : UInt32 = 1 // Enable DMA Request 0\n"
+  "let DMA_ERQ_ERQ1   : UInt32 = 2 // Enable DMA Request 1\n"
+  "let DMA_ERQ_ERQ2   : UInt32 = 4 // Enable DMA Request 2\n"
+  "let DMA_ERQ_ERQ3   : UInt32 = 8 // Enable DMA Request 3\n"
+  "register DMA_EEI at 0x40008014 : UInt8 // Enable Error Interrupt Register\n"
+  "let DMA_EEI_EEI0   : UInt32 = 1 // Enable Error Interrupt 0\n"
+  "let DMA_EEI_EEI1   : UInt32 = 2 // Enable Error Interrupt 1\n"
+  "let DMA_EEI_EEI2   : UInt32 = 4 // Enable Error Interrupt 2\n"
+  "let DMA_EEI_EEI3   : UInt32 = 8 // Enable Error Interrupt 3\n"
+  "//register UInt8 DMA_CEEI  *(volatile uint8_t  *)0x40008018 // Clear Enable Error Interrupt Register\n"
+  "//register UInt32 DMA_CEEI_CEEI(n)  ((uint8_t)(n & 3)<<0) // Clear Enable Error Interrupt\n"
+  "//register UInt32 DMA_CEEI_CAEE   ((uint8_t)1<<6)  // Clear All Enable Error Interrupts\n"
+  "//register UInt32 DMA_CEEI_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_SEEI  *(volatile uint8_t  *)0x40008019 // Set Enable Error Interrupt Register\n"
+  "//register UInt32 DMA_SEEI_SEEI(n)  ((uint8_t)(n & 3)<<0) // Set Enable Error Interrupt\n"
+  "//register UInt32 DMA_SEEI_SAEE   ((uint8_t)1<<6)  // Set All Enable Error Interrupts\n"
+  "//register UInt32 DMA_SEEI_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_CERQ  *(volatile uint8_t  *)0x4000801A // Clear Enable Request Register\n"
+  "//register UInt32 DMA_CERQ_CERQ(n)  ((uint8_t)(n & 3)<<0) // Clear Enable Request\n"
+  "//register UInt32 DMA_CERQ_CAER   ((uint8_t)1<<6)  // Clear All Enable Requests\n"
+  "//register UInt32 DMA_CERQ_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_SERQ  *(volatile uint8_t  *)0x4000801B // Set Enable Request Register\n"
+  "//register UInt32 DMA_SERQ_SERQ(n)  ((uint8_t)(n & 3)<<0) // Set Enable Request\n"
+  "//register UInt32 DMA_SERQ_SAER   ((uint8_t)1<<6)  // Set All Enable Requests\n"
+  "//register UInt32 DMA_SERQ_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_CDNE  *(volatile uint8_t  *)0x4000801C // Clear DONE Status Bit Register\n"
+  "//register UInt32 DMA_CDNE_CDNE(n)  ((uint8_t)(n & 3)<<0) // Clear Done Bit\n"
+  "//register UInt32 DMA_CDNE_CADN   ((uint8_t)1<<6)  // Clear All Done Bits\n"
+  "//register UInt32 DMA_CDNE_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_SSRT  *(volatile uint8_t  *)0x4000801D // Set START Bit Register\n"
+  "//register UInt32 DMA_SSRT_SSRT(n)  ((uint8_t)(n & 3)<<0) // Set Start Bit\n"
+  "//register UInt32 DMA_SSRT_SAST   ((uint8_t)1<<6)  // Set All Start Bits\n"
+  "//register UInt32 DMA_SSRT_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_CERR  *(volatile uint8_t  *)0x4000801E // Clear Error Register\n"
+  "//register UInt32 DMA_CERR_CERR(n)  ((uint8_t)(n & 3)<<0) // Clear Error Indicator\n"
+  "//register UInt32 DMA_CERR_CAEI   ((uint8_t)1<<6)  // Clear All Error Indicators\n"
+  "//register UInt32 DMA_CERR_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_CINT  *(volatile uint8_t  *)0x4000801F // Clear Interrupt Request Register\n"
+  "//register UInt32 DMA_CINT_CINT(n)  ((uint8_t)(n & 3)<<0) // Clear Interrupt Request\n"
+  "//register UInt32 DMA_CINT_CAIR   ((uint8_t)1<<6)  // Clear All Interrupt Requests\n"
+  "//register UInt32 DMA_CINT_NOP   ((uint8_t)1<<7)  // NOP\n"
+  "//register UInt32 DMA_INT    0x40008024 // Interrupt Request Register\n"
+  "//register UInt32 DMA_INT_INT0   ( 1<<0) // Interrupt Request 0\n"
+  "//register UInt32 DMA_INT_INT1   ( 1<<1) // Interrupt Request 1\n"
+  "//register UInt32 DMA_INT_INT2   ( 1<<2) // Interrupt Request 2\n"
+  "//register UInt32 DMA_INT_INT3   ( 1<<3) // Interrupt Request 3\n"
+  "//register UInt32 DMA_ERR    0x4000802C // Error Register\n"
+  "//register UInt32 DMA_ERR_ERR0   ( 1<<0) // Error in Channel 0\n"
+  "//register UInt32 DMA_ERR_ERR1   ( 1<<1) // Error in Channel 1\n"
+  "//register UInt32 DMA_ERR_ERR2   ( 1<<2) // Error in Channel 2\n"
+  "//register UInt32 DMA_ERR_ERR3   ( 1<<3) // Error in Channel 3\n"
+  "//register UInt32 DMA_HRS    0x40008034 // Hardware Request Status Register\n"
+  "//register UInt32 DMA_HRS_HRS0   ( 1<<0) // Hardware Request Status Channel 0\n"
+  "//register UInt32 DMA_HRS_HRS1   ( 1<<1) // Hardware Request Status Channel 1\n"
+  "//register UInt32 DMA_HRS_HRS2   ( 1<<2) // Hardware Request Status Channel 2\n"
+  "//register UInt32 DMA_HRS_HRS3   ( 1<<3) // Hardware Request Status Channel 3\n"
+  "//register UInt32 DMA_DCHPRI3  *(volatile uint8_t  *)0x40008100 // Channel n Priority Register\n"
+  "//register UInt32 DMA_DCHPRI2  *(volatile uint8_t  *)0x40008101 // Channel n Priority Register\n"
+  "//register UInt32 DMA_DCHPRI1  *(volatile uint8_t  *)0x40008102 // Channel n Priority Register\n"
+  "//register UInt32 DMA_DCHPRI0  *(volatile uint8_t  *)0x40008103 // Channel n Priority Register\n"
+  "//register UInt32 DMA_DCHPRI_CHPRI(n)  ((uint8_t)(n & 3)<<0) // Channel Arbitration Priority\n"
+  "//register UInt32 DMA_DCHPRI_DPA   ((uint8_t)1<<6)  // Disable PreEmpt Ability\n"
+  "//register UInt32 DMA_DCHPRI_ECP   ((uint8_t)1<<7)  // Enable PreEmption\n"
+  "//\n"
+  "//\n"
+  "//register DMA_TCD_ATTR_SMOD(n)  (((n) & 0x1F) << 11)\n"
+  "//register DMA_TCD_ATTR_SSIZE(n)  (((n) & 0x7) << 8)\n"
+  "//register DMA_TCD_ATTR_DMOD(n)  (((n) & 0x1F) << 3)\n"
+  "//register DMA_TCD_ATTR_DSIZE(n)  (((n) & 0x7) << 0)\n"
+  "//register DMA_TCD_ATTR_SIZE_8BIT  0\n"
+  "//register DMA_TCD_ATTR_SIZE_16BIT  1\n"
+  "//register DMA_TCD_ATTR_SIZE_32BIT  2\n"
+  "//register DMA_TCD_ATTR_SIZE_16BYTE 4\n"
+  "//register DMA_TCD_ATTR_SIZE_32BYTE 5\n"
+  "//register DMA_TCD_CSR_BWC(n)  (((n) & 0x3) << 14)\n"
+  "//register DMA_TCD_CSR_MAJORLINKCH(n) (((n) & 0x3) << 8)\n"
+  "//register DMA_TCD_CSR_DONE  0x0080\n"
+  "//register DMA_TCD_CSR_ACTIVE  0x0040\n"
+  "//register DMA_TCD_CSR_MAJORELINK  0x0020\n"
+  "//register DMA_TCD_CSR_ESG   0x0010\n"
+  "//register DMA_TCD_CSR_DREQ  0x0008\n"
+  "//register DMA_TCD_CSR_INTHALF  0x0004\n"
+  "//register DMA_TCD_CSR_INTMAJOR  0x0002\n"
+  "//register DMA_TCD_CSR_START  0x0001\n"
+  "//register DMA_TCD_CITER_MASK      ((uint16_t)0x7FFF)    // Loop count mask\n"
+  "//register DMA_TCD_CITER_ELINK      ((uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
+  "//register DMA_TCD_BITER_MASK      ((uint16_t)0x7FFF)    // Loop count mask\n"
+  "//register DMA_TCD_BITER_ELINK      ((uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
+  "//register DMA_TCD_NBYTES_SMLOE      ( 1<<31)      // Source Minor Loop Offset Enable\n"
+  "//register DMA_TCD_NBYTES_DMLOE      ( 1<<30)      // Destination Minor Loop Offset Enable\n"
+  "//register DMA_TCD_NBYTES_MLOFFNO_NBYTES(n)    ( (n))      // NBytes transfer count when minor loop disabled\n"
+  "//register DMA_TCD_NBYTES_MLOFFYES_NBYTES(n)   ( (n & 0x1F))     // NBytes transfer count when minor loop enabled\n"
+  "//register DMA_TCD_NBYTES_MLOFFYES_MLOFF(n)    ( (n & 0xFFFFF)<<10)   // Offset \n"
+  "//\n"
+  "//register DMA_TCD0_SADDR  *(volatile const void * volatile *)0x40009000 // TCD Source Address\n"
+  "//register DMA_TCD0_SOFF  *(volatile int16_t *)0x40009004  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD0_ATTR  *(volatile uint16_t *)0x40009006 // TCD Transfer Attributes\n"
+  "//register DMA_TCD0_NBYTES_MLNO  0x40009008 // TCD Minor Byte Count (Minor Loop Disabled)\n"
+  "//register DMA_TCD0_NBYTES_MLOFFNO  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop Enabled and Offset Disabled)\n"
+  "//register DMA_TCD0_NBYTES_MLOFFYES  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop and Offset Enabled)\n"
+  "//register DMA_TCD0_SLAST  *(volatile int32_t *)0x4000900C  // TCD Last Source Address Adjustment\n"
+  "//register DMA_TCD0_DADDR  *(volatile void * volatile *)0x40009010 // TCD Destination Address\n"
+  "//register DMA_TCD0_DOFF  *(volatile int16_t *)0x40009014  // TCD Signed Destination Address Offset\n"
+  "//register DMA_TCD0_CITER_ELINKYES *(volatile uint16_t *)0x40009016 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD0_CITER_ELINKNO *(volatile uint16_t *)0x40009016 // \?\?\n"
+  "//register DMA_TCD0_DLASTSGA *(volatile int32_t *)0x40009018  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
+  "//register DMA_TCD0_CSR  *(volatile uint16_t *)0x4000901C // TCD Control and Status\n"
+  "//register DMA_TCD0_BITER_ELINKYES *(volatile uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD0_BITER_ELINKNO *(volatile uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//\n"
+  "//register DMA_TCD1_SADDR  *(volatile const void * volatile *)0x40009020 // TCD Source Address\n"
+  "//register DMA_TCD1_SOFF  *(volatile int16_t *)0x40009024  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD1_ATTR  *(volatile uint16_t *)0x40009026 // TCD Transfer Attributes\n"
+  "//register DMA_TCD1_NBYTES_MLNO  0x40009028 // TCD Minor Byte Count, Minor Loop Disabled\n"
+  "//register DMA_TCD1_NBYTES_MLOFFNO  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
+  "//register DMA_TCD1_NBYTES_MLOFFYES  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
+  "//register DMA_TCD1_SLAST  *(volatile int32_t *)0x4000902C  // TCD Last Source Address Adjustment\n"
+  "//register DMA_TCD1_DADDR  *(volatile void * volatile *)0x40009030 // TCD Destination Address\n"
+  "//register DMA_TCD1_DOFF  *(volatile int16_t *)0x40009034  // TCD Signed Destination Address Offset\n"
+  "//register DMA_TCD1_CITER_ELINKYES *(volatile uint16_t *)0x40009036 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD1_CITER_ELINKNO *(volatile uint16_t *)0x40009036 // \?\?\n"
+  "//register DMA_TCD1_DLASTSGA *(volatile int32_t *)0x40009038  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
+  "//register DMA_TCD1_CSR  *(volatile uint16_t *)0x4000903C // TCD Control and Status\n"
+  "//register DMA_TCD1_BITER_ELINKYES *(volatile uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count Channel Linking Enabled\n"
+  "//register DMA_TCD1_BITER_ELINKNO *(volatile uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//\n"
+  "//register DMA_TCD2_SADDR  *(volatile const void * volatile *)0x40009040 // TCD Source Address\n"
+  "//register DMA_TCD2_SOFF  *(volatile int16_t *)0x40009044  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD2_ATTR  *(volatile uint16_t *)0x40009046 // TCD Transfer Attributes\n"
+  "//register DMA_TCD2_NBYTES_MLNO  0x40009048 // TCD Minor Byte Count, Minor Loop Disabled\n"
+  "//register DMA_TCD2_NBYTES_MLOFFNO  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
+  "//register DMA_TCD2_NBYTES_MLOFFYES  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
+  "//register DMA_TCD2_SLAST  *(volatile int32_t *)0x4000904C  // TCD Last Source Address Adjustment\n"
+  "//register DMA_TCD2_DADDR  *(volatile void * volatile *)0x40009050 // TCD Destination Address\n"
+  "//register DMA_TCD2_DOFF  *(volatile int16_t *)0x40009054  // TCD Signed Destination Address Offset\n"
+  "//register DMA_TCD2_CITER_ELINKYES *(volatile uint16_t *)0x40009056 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD2_CITER_ELINKNO *(volatile uint16_t *)0x40009056 // \?\?\n"
+  "//register DMA_TCD2_DLASTSGA *(volatile int32_t *)0x40009058  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
+  "//register DMA_TCD2_CSR  *(volatile uint16_t *)0x4000905C // TCD Control and Status\n"
+  "//register DMA_TCD2_BITER_ELINKYES *(volatile uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD2_BITER_ELINKNO *(volatile uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//\n"
+  "//register DMA_TCD3_SADDR  *(volatile const void * volatile *)0x40009060 // TCD Source Address\n"
+  "//register DMA_TCD3_SOFF  *(volatile int16_t *)0x40009064  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD3_ATTR  *(volatile uint16_t *)0x40009066 // TCD Transfer Attributes\n"
+  "//register DMA_TCD3_NBYTES_MLNO  0x40009068 // TCD Minor Byte Count, Minor Loop Disabled\n"
+  "//register DMA_TCD3_NBYTES_MLOFFNO  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
+  "//register DMA_TCD3_NBYTES_MLOFFYES  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
+  "//register DMA_TCD3_SLAST  *(volatile int32_t *)0x4000906C  // TCD Last Source Address Adjustment\n"
+  "//register DMA_TCD3_DADDR  *(volatile void * volatile *)0x40009070 // TCD Destination Address\n"
+  "//register DMA_TCD3_DOFF  *(volatile int16_t *)0x40009074  // TCD Signed Destination Address Offset\n"
+  "//register DMA_TCD3_CITER_ELINKYES *(volatile uint16_t *)0x40009076 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD3_CITER_ELINKNO *(volatile uint16_t *)0x40009076 // \?\?\n"
+  "//register DMA_TCD3_DLASTSGA *(volatile int32_t *)0x40009078  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
+  "//register DMA_TCD3_CSR  *(volatile uint16_t *)0x4000907C // TCD Control and Status\n"
+  "//register DMA_TCD3_BITER_ELINKYES *(volatile uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Enabled\n"
+  "//register DMA_TCD3_BITER_ELINKNO *(volatile uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Disabled\n"
+  "//\n"
+  "//register DMA_TCD4_SADDR  *(volatile const void * volatile *)0x40009080 // TCD Source Addr\n"
+  "//register DMA_TCD4_SOFF  *(volatile int16_t *)0x40009084  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD4_ATTR  *(volatile uint16_t *)0x40009086 // TCD Transfer Attributes\n"
+  "//register DMA_TCD4_NBYTES_MLNO  0x40009088 // TCD Minor Byte Count\n"
+  "//register DMA_TCD4_NBYTES_MLOFFNO  0x40009088 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD4_NBYTES_MLOFFYES  0x40009088 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD4_SLAST  *(volatile int32_t *)0x4000908C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD4_DADDR  *(volatile void * volatile *)0x40009090 // TCD Destination Address\n"
+  "//register DMA_TCD4_DOFF  *(volatile int16_t *)0x40009094  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD4_CITER_ELINKYES *(volatile uint16_t *)0x40009096 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD4_CITER_ELINKNO *(volatile uint16_t *)0x40009096 // \?\?\n"
+  "//register DMA_TCD4_DLASTSGA *(volatile int32_t *)0x40009098  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD4_CSR  *(volatile uint16_t *)0x4000909C // TCD Control and Status\n"
+  "//register DMA_TCD4_BITER_ELINKYES *(volatile uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD4_BITER_ELINKNO *(volatile uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD5_SADDR  *(volatile const void * volatile *)0x400090A0 // TCD Source Addr\n"
+  "//register DMA_TCD5_SOFF  *(volatile int16_t *)0x400090A4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD5_ATTR  *(volatile uint16_t *)0x400090A6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD5_NBYTES_MLNO  0x400090A8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD5_NBYTES_MLOFFNO  0x400090A8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD5_NBYTES_MLOFFYES  0x400090A8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD5_SLAST  *(volatile int32_t *)0x400090AC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD5_DADDR  *(volatile void * volatile *)0x400090B0 // TCD Destination Address\n"
+  "//register DMA_TCD5_DOFF  *(volatile int16_t *)0x400090B4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD5_CITER_ELINKYES *(volatile uint16_t *)0x400090B6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD5_CITER_ELINKNO *(volatile uint16_t *)0x400090B6 // \?\?\n"
+  "//register DMA_TCD5_DLASTSGA *(volatile int32_t *)0x400090B8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD5_CSR  *(volatile uint16_t *)0x400090BC // TCD Control and Status\n"
+  "//register DMA_TCD5_BITER_ELINKYES *(volatile uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD5_BITER_ELINKNO *(volatile uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD6_SADDR  *(volatile const void * volatile *)0x400090C0 // TCD Source Addr\n"
+  "//register DMA_TCD6_SOFF  *(volatile int16_t *)0x400090C4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD6_ATTR  *(volatile uint16_t *)0x400090C6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD6_NBYTES_MLNO  0x400090C8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD6_NBYTES_MLOFFNO  0x400090C8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD6_NBYTES_MLOFFYES  0x400090C8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD6_SLAST  *(volatile int32_t *)0x400090CC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD6_DADDR  *(volatile void * volatile *)0x400090D0 // TCD Destination Address\n"
+  "//register DMA_TCD6_DOFF  *(volatile int16_t *)0x400090D4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD6_CITER_ELINKYES *(volatile uint16_t *)0x400090D6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD6_CITER_ELINKNO *(volatile uint16_t *)0x400090D6 // \?\?\n"
+  "//register DMA_TCD6_DLASTSGA *(volatile int32_t *)0x400090D8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD6_CSR  *(volatile uint16_t *)0x400090DC // TCD Control and Status\n"
+  "//register DMA_TCD6_BITER_ELINKYES *(volatile uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD6_BITER_ELINKNO *(volatile uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD7_SADDR  *(volatile const void * volatile *)0x400090E0 // TCD Source Addr\n"
+  "//register DMA_TCD7_SOFF  *(volatile int16_t *)0x400090E4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD7_ATTR  *(volatile uint16_t *)0x400090E6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD7_NBYTES_MLNO  0x400090E8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD7_NBYTES_MLOFFNO  0x400090E8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD7_NBYTES_MLOFFYES  0x400090E8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD7_SLAST  *(volatile int32_t *)0x400090EC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD7_DADDR  *(volatile void * volatile *)0x400090F0 // TCD Destination Address\n"
+  "//register DMA_TCD7_DOFF  *(volatile int16_t *)0x400090F4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD7_CITER_ELINKYES *(volatile uint16_t *)0x400090F6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD7_CITER_ELINKNO *(volatile uint16_t *)0x400090F6 // \?\?\n"
+  "//register DMA_TCD7_DLASTSGA *(volatile int32_t *)0x400090F8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD7_CSR  *(volatile uint16_t *)0x400090FC // TCD Control and Status\n"
+  "//register DMA_TCD7_BITER_ELINKYES *(volatile uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD7_BITER_ELINKNO *(volatile uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD8_SADDR  *(volatile const void * volatile *)0x40009100 // TCD Source Addr\n"
+  "//register DMA_TCD8_SOFF  *(volatile int16_t *)0x40009104  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD8_ATTR  *(volatile uint16_t *)0x40009106 // TCD Transfer Attributes\n"
+  "//register DMA_TCD8_NBYTES_MLNO  0x40009108 // TCD Minor Byte Count\n"
+  "//register DMA_TCD8_NBYTES_MLOFFNO  0x40009108 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD8_NBYTES_MLOFFYES  0x40009108 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD8_SLAST  *(volatile int32_t *)0x4000910C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD8_DADDR  *(volatile void * volatile *)0x40009110 // TCD Destination Address\n"
+  "//register DMA_TCD8_DOFF  *(volatile int16_t *)0x40009114  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD8_CITER_ELINKYES *(volatile uint16_t *)0x40009116 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD8_CITER_ELINKNO *(volatile uint16_t *)0x40009116 // \?\?\n"
+  "//register DMA_TCD8_DLASTSGA *(volatile int32_t *)0x40009118  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD8_CSR  *(volatile uint16_t *)0x4000911C // TCD Control and Status\n"
+  "//register DMA_TCD8_BITER_ELINKYES *(volatile uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD8_BITER_ELINKNO *(volatile uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD9_SADDR  *(volatile const void * volatile *)0x40009120 // TCD Source Addr\n"
+  "//register DMA_TCD9_SOFF  *(volatile int16_t *)0x40009124  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD9_ATTR  *(volatile uint16_t *)0x40009126 // TCD Transfer Attributes\n"
+  "//register DMA_TCD9_NBYTES_MLNO  0x40009128 // TCD Minor Byte Count\n"
+  "//register DMA_TCD9_NBYTES_MLOFFNO  0x40009128 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD9_NBYTES_MLOFFYES  0x40009128 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD9_SLAST  *(volatile int32_t *)0x4000912C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD9_DADDR  *(volatile void * volatile *)0x40009130 // TCD Destination Address\n"
+  "//register DMA_TCD9_DOFF  *(volatile int16_t *)0x40009134  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD9_CITER_ELINKYES *(volatile uint16_t *)0x40009136 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD9_CITER_ELINKNO *(volatile uint16_t *)0x40009136 // \?\?\n"
+  "//register DMA_TCD9_DLASTSGA *(volatile int32_t *)0x40009138  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD9_CSR  *(volatile uint16_t *)0x4000913C // TCD Control and Status\n"
+  "//register DMA_TCD9_BITER_ELINKYES *(volatile uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD9_BITER_ELINKNO *(volatile uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD10_SADDR  *(volatile const void * volatile *)0x40009140 // TCD Source Addr\n"
+  "//register DMA_TCD10_SOFF  *(volatile int16_t *)0x40009144  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD10_ATTR  *(volatile uint16_t *)0x40009146 // TCD Transfer Attributes\n"
+  "//register DMA_TCD10_NBYTES_MLNO  0x40009148 // TCD Minor Byte Count\n"
+  "//register DMA_TCD10_NBYTES_MLOFFNO  0x40009148 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD10_NBYTES_MLOFFYES  0x40009148 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD10_SLAST  *(volatile int32_t *)0x4000914C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD10_DADDR  *(volatile void * volatile *)0x40009150 // TCD Destination Address\n"
+  "//register DMA_TCD10_DOFF  *(volatile int16_t *)0x40009154  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD10_CITER_ELINKYES *(volatile uint16_t *)0x40009156 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD10_CITER_ELINKNO *(volatile uint16_t *)0x40009156 // \?\?\n"
+  "//register DMA_TCD10_DLASTSGA *(volatile int32_t *)0x40009158  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD10_CSR  *(volatile uint16_t *)0x4000915C // TCD Control and Status\n"
+  "//register DMA_TCD10_BITER_ELINKYES *(volatile uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD10_BITER_ELINKNO *(volatile uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD11_SADDR  *(volatile const void * volatile *)0x40009160 // TCD Source Addr\n"
+  "//register DMA_TCD11_SOFF  *(volatile int16_t *)0x40009164  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD11_ATTR  *(volatile uint16_t *)0x40009166 // TCD Transfer Attributes\n"
+  "//register DMA_TCD11_NBYTES_MLNO  0x40009168 // TCD Minor Byte Count\n"
+  "//register DMA_TCD11_NBYTES_MLOFFNO  0x40009168 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD11_NBYTES_MLOFFYES  0x40009168 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD11_SLAST  *(volatile int32_t *)0x4000916C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD11_DADDR  *(volatile void * volatile *)0x40009170 // TCD Destination Address\n"
+  "//register DMA_TCD11_DOFF  *(volatile int16_t *)0x40009174  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD11_CITER_ELINKYES *(volatile uint16_t *)0x40009176 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD11_CITER_ELINKNO *(volatile uint16_t *)0x40009176 // \?\?\n"
+  "//register DMA_TCD11_DLASTSGA *(volatile int32_t *)0x40009178  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD11_CSR  *(volatile uint16_t *)0x4000917C // TCD Control and Status\n"
+  "//register DMA_TCD11_BITER_ELINKYES *(volatile uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD11_BITER_ELINKNO *(volatile uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD12_SADDR  *(volatile const void * volatile *)0x40009180 // TCD Source Addr\n"
+  "//register DMA_TCD12_SOFF  *(volatile int16_t *)0x40009184  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD12_ATTR  *(volatile uint16_t *)0x40009186 // TCD Transfer Attributes\n"
+  "//register DMA_TCD12_NBYTES_MLNO  0x40009188 // TCD Minor Byte Count\n"
+  "//register DMA_TCD12_NBYTES_MLOFFNO  0x40009188 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD12_NBYTES_MLOFFYES  0x40009188 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD12_SLAST  *(volatile int32_t *)0x4000918C  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD12_DADDR  *(volatile void * volatile *)0x40009190 // TCD Destination Address\n"
+  "//register DMA_TCD12_DOFF  *(volatile int16_t *)0x40009194  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD12_CITER_ELINKYES *(volatile uint16_t *)0x40009196 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD12_CITER_ELINKNO *(volatile uint16_t *)0x40009196 // \?\?\n"
+  "//register DMA_TCD12_DLASTSGA *(volatile int32_t *)0x40009198  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD12_CSR  *(volatile uint16_t *)0x4000919C // TCD Control and Status\n"
+  "//register DMA_TCD12_BITER_ELINKYES *(volatile uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD12_BITER_ELINKNO *(volatile uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD13_SADDR  *(volatile const void * volatile *)0x400091A0 // TCD Source Addr\n"
+  "//register DMA_TCD13_SOFF  *(volatile int16_t *)0x400091A4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD13_ATTR  *(volatile uint16_t *)0x400091A6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD13_NBYTES_MLNO  0x400091A8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD13_NBYTES_MLOFFNO  0x400091A8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD13_NBYTES_MLOFFYES  0x400091A8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD13_SLAST  *(volatile int32_t *)0x400091AC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD13_DADDR  *(volatile void * volatile *)0x400091B0 // TCD Destination Address\n"
+  "//register DMA_TCD13_DOFF  *(volatile int16_t *)0x400091B4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD13_CITER_ELINKYES *(volatile uint16_t *)0x400091B6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD13_CITER_ELINKNO *(volatile uint16_t *)0x400091B6 // \?\?\n"
+  "//register DMA_TCD13_DLASTSGA *(volatile int32_t *)0x400091B8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD13_CSR  *(volatile uint16_t *)0x400091BC // TCD Control and Status\n"
+  "//register DMA_TCD13_BITER_ELINKYES *(volatile uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD13_BITER_ELINKNO *(volatile uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD14_SADDR  *(volatile const void * volatile *)0x400091C0 // TCD Source Addr\n"
+  "//register DMA_TCD14_SOFF  *(volatile int16_t *)0x400091C4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD14_ATTR  *(volatile uint16_t *)0x400091C6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD14_NBYTES_MLNO  0x400091C8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD14_NBYTES_MLOFFNO  0x400091C8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD14_NBYTES_MLOFFYES  0x400091C8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD14_SLAST  *(volatile int32_t *)0x400091CC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD14_DADDR  *(volatile void * volatile *)0x400091D0 // TCD Destination Address\n"
+  "//register DMA_TCD14_DOFF  *(volatile int16_t *)0x400091D4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD14_CITER_ELINKYES *(volatile uint16_t *)0x400091D6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD14_CITER_ELINKNO *(volatile uint16_t *)0x400091D6 // \?\?\n"
+  "//register DMA_TCD14_DLASTSGA *(volatile int32_t *)0x400091D8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD14_CSR  *(volatile uint16_t *)0x400091DC // TCD Control and Status\n"
+  "//register DMA_TCD14_BITER_ELINKYES *(volatile uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD14_BITER_ELINKNO *(volatile uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//register DMA_TCD15_SADDR  *(volatile const void * volatile *)0x400091E0 // TCD Source Addr\n"
+  "//register DMA_TCD15_SOFF  *(volatile int16_t *)0x400091E4  // TCD Signed Source Address Offset\n"
+  "//register DMA_TCD15_ATTR  *(volatile uint16_t *)0x400091E6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD15_NBYTES_MLNO  0x400091E8 // TCD Minor Byte Count\n"
+  "//register DMA_TCD15_NBYTES_MLOFFNO  0x400091E8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD15_NBYTES_MLOFFYES  0x400091E8 // TCD Signed Minor Loop Offset\n"
+  "//register DMA_TCD15_SLAST  *(volatile int32_t *)0x400091EC  // TCD Last Source Addr Adj.\n"
+  "//register DMA_TCD15_DADDR  *(volatile void * volatile *)0x400091F0 // TCD Destination Address\n"
+  "//register DMA_TCD15_DOFF  *(volatile int16_t *)0x400091F4  // TCD Signed Dest Address Offset\n"
+  "//register DMA_TCD15_CITER_ELINKYES *(volatile uint16_t *)0x400091F6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD15_CITER_ELINKNO *(volatile uint16_t *)0x400091F6 // \?\?\n"
+  "//register DMA_TCD15_DLASTSGA *(volatile int32_t *)0x400091F8  // TCD Last Destination Addr Adj\n"
+  "//register DMA_TCD15_CSR  *(volatile uint16_t *)0x400091FC // TCD Control and Status\n"
+  "//register DMA_TCD15_BITER_ELINKYES *(volatile uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD15_BITER_ELINKNO *(volatile uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
+  "//\n"
+  "//\n"
+  "//// Chapter 22: External Watchdog Monitor (EWM)\n"
+  "//register EWM_CTRL  *(volatile uint8_t  *)0x40061000 // Control Register\n"
+  "//register EWM_SERV  *(volatile uint8_t  *)0x40061001 // Service Register\n"
+  "//register EWM_CMPL  *(volatile uint8_t  *)0x40061002 // Compare Low Register\n"
+  "//register EWM_CMPH  *(volatile uint8_t  *)0x40061003 // Compare High Register\n"
+  "//\n"
+  "//// Chapter 23: Watchdog Timer (WDOG)\n"
+  "register WDOG_STCTRLH at 0x40052000 : UInt16 // Watchdog Status and Control Register High\n"
+  "let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
+  "//register WDOG_STCTRLH_BYTESEL(n)  (uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.\n"
+  "let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800\n"
+  "let WDOG_STCTRLH_TESTWDOG : UInt16 = 0x0400\n"
+  "let WDOG_STCTRLH_WAITEN : UInt16 = 0x0080\n"
+  "let WDOG_STCTRLH_STOPEN : UInt16 = 0x0040\n"
+  "let WDOG_STCTRLH_DBGEN  : UInt16 = 0x0020\n"
+  "let WDOG_STCTRLH_ALLOWUPDATE : UInt16 = 0x0010\n"
+  "let WDOG_STCTRLH_WINEN : UInt16 = 0x0008\n"
+  "let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004\n"
+  "let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002\n"
+  "let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001\n"
+  "register WDOG_STCTRLL  at 0x40052002 : UInt16 // Watchdog Status and Control Register Low\n"
+  "register WDOG_TOVALH   at 0x40052004 : UInt16 // Watchdog Time-out Value Register High\n"
+  "register WDOG_TOVALL   at 0x40052006 : UInt16 // Watchdog Time-out Value Register Low\n"
+  "register WDOG_WINH     at 0x40052008 : UInt16 // Watchdog Window Register High\n"
+  "register WDOG_WINL     at 0x4005200A : UInt16 // Watchdog Window Register Low\n"
+  "register WDOG_REFRESH  at 0x4005200C : UInt16 // Watchdog Refresh register\n"
+  "register WDOG_UNLOCK   at 0x4005200E : UInt16 // Watchdog Unlock register\n"
+  "let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520\n"
+  "let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928\n"
+  "register WDOG_TMROUTH  at 0x40052010 : UInt16 // Watchdog Timer Output Register High\n"
+  "register WDOG_TMROUTL  at 0x40052012 : UInt16 // Watchdog Timer Output Register Low\n"
+  "register WDOG_RSTCNT   at 0x40052014 : UInt16 // Watchdog Reset Count register\n"
+  "register WDOG_PRESC    at 0x40052016 : UInt16 // Watchdog Prescaler register\n"
+  "\n"
+  "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
+  "register MCG_C1 at 0x40064000 : UInt8 { // MCG Control 1 Register\n"
+  "  CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
+  "  FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
+  "  IREFS, // Internal Reference Select, Selects the reference clock source for the FLL\n"
+  "  IRCLKEN, // Internal Reference Clock Enable, Enables the internal reference clock for use as MCGIRCLK\n"
+  "  IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode\n"
+  "}\n"
+  "\n"
+  "register MCG_C2 at 0x4006_4001 : UInt8 { // MCG Control 2 Register\n"
+  "  LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt \n"
+  "          // or a reset request is made following a loss of OSC0\n"
+  "  1,\n"
+  "  RANGE0[2], // Frequency Range Select, Selects the frequency range\n"
+  "             // for the crystal oscillator\n"
+  "  HGO0, // High Gain Oscillator Select, Controls the crystal oscillator mode of operation  \n"
+  "  EREFS, // External Reference Select, selects the source for the external reference clock\n"
+  "  LP, // Low Power Select, Controls whether the FLL or PLL is disabled in BLPI and BLPE modes.\n"
+  "  IRCS // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.\n"
+  "}\n"
+  "\n"
+  "register MCG_C3 at 0x4006_4002 : UInt8 // MCG Control 3 Register\n"
+  "//register MCG_C3_SCTRIM(n)  (uint8_t)(n)   // Slow Internal Reference Clock Trim Setting\n"
+  "register MCG_C4 at 0x40064003 : UInt8 // MCG Control 4 Register\n"
+  "let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
+  "//register MCG_C4_FCTRIM(n)  (uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting\n"
+  "//register MCG_C4_DRST_DRS(n)  (uint8_t)(((n) & 0x03) << 5) // DCO Range Select\n"
+  "let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
+  "\n"
+  "\n"
+  "register MCG_C5 at 0x4006_4004 : UInt8 { // MCG Control 5 Register\n"
+  " 1,\n"
+  " PLLCLKEN0, // PLL Clock Enable\n"
+  " PLLSTEN0,  // PLL Stop Enable\n"
+  " PRDIV0 [5] // PLL External Reference Divider\n"
+  "}\n"
+  "\n"
+  "register MCG_C6 at 0x4006_4005 : UInt8 { // MCG Control 6 Register\n"
+  " LOLIE0, // Loss of Lock Interrrupt Enable\n"
+  " PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00\n"
+  " CME0,   // Clock Monitor Enable\n"
+  " VDIV0[5] // VCO 0 Divider\n"
+  "}\n"
+  "\n"
+  "register MCG_S @ro at 0x40064006 : UInt8 { // MCG Status Register\n"
+  " LOLS0, // Loss of Lock Status\n"
+  " LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
+  " PLLST, // PLL Select Status\n"
+  " IREFST, // Internal Reference Status\n"
+  " CLKST [2], // Clock Mode Status, 0=FLL is selected, 1= Internal ref, 2=External ref, 3=PLL\n"
+  " OSCINIT0, // OSC Initialization, resets to 0, is set to 1 after the initialization cycles of the crystal oscillator\n"
+  " IRCST   // Internal Reference Clock Status\n"
+  "}\n"
+  "\n"
+  "register MCG_SC at 0x40064008 : UInt8 // MCG Status and Control Register\n"
+  "let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
+  "//register MCG_SC_FCRDIV(n)  (uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider\n"
+  "let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable\n"
+  "let MCG_SC_ATMF : UInt8 = 0x20   // Automatic Trim Machine Fail Flag\n"
+  "let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select\n"
+  "let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable\n"
+  "\n"
+  "register MCG_ATCVH at 0x4006400A : UInt8 // MCG Auto Trim Compare Value High Register\n"
+  "register MCG_ATCVL at 0x4006400B : UInt8 // MCG Auto Trim Compare Value Low Register\n"
+  "register MCG_C7    at 0x4006400C : UInt8 // MCG Control 7 Register\n"
+  "register MCG_C8    at 0x4006400D : UInt8 // MCG Control 8 Register\n"
+  "//\n"
+  "//// Chapter 25: Oscillator (OSC)\n"
+  "register OSC_CR at 0x40065000 : UInt8 {// OSC Control Register\n"
+  "  ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)\n"
+  "  1,\n"
+  "  EREFSTEN, // External Reference Stop Enable, Controls whether or not \n"
+  "            // the external reference clock (OSCERCLK) remains enabled when\n"
+  "            // MCU enters Stop mode.\n"
+  "  1,\n"
+  "  SC2P, // Oscillator 2 pF Capacitor Load Configure\n"
+  "  SC4P, // Oscillator 4 pF Capacitor Load Configure\n"
+  "  SC8P, // Oscillator 8 pF Capacitor Load Configure\n"
+  "  SC16P // Oscillator 16 pF Capacitor Load Configure\n"
+  "}\n"
+  "let OSC_SC16P  : UInt8 = 0x01   \n"
+  "\n"
+  "//// Chapter 27: Flash Memory Controller (FMC)\n"
+  "register FMC_PFAPR     at 0x4001F000 : UInt32 // Flash Access Protection\n"
+  "register FMC_PFB0CR    at 0x4001F004 : UInt32 // Flash Control\n"
+  "register FMC_TAGVDW0S0 at 0x4001F100 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW0S1 at 0x4001F104 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S0 at 0x4001F108 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S1 at 0x4001F10C : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S0 at 0x4001F110 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S1 at 0x4001F114 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S0 at 0x4001F118 : UInt32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S1 at 0x4001F11C : UInt32 // Cache Tag Storage\n"
+  "register FMC_DATAW0S0  at 0x4001F200 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW0S1  at 0x4001F204 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW1S0  at 0x4001F208 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW1S1  at 0x4001F20C : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW2S0  at 0x4001F210 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW2S1  at 0x4001F214 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW3S0  at 0x4001F218 : UInt32 // Cache Data Storage\n"
+  "register FMC_DATAW3S1  at 0x4001F21C : UInt32 // Cache Data Storage\n"
+  "//\n"
+  "//// Chapter 28: Flash Memory Module (FTFL)\n"
+  "//register FTFL_FST *(volatile uint8_t  *)0x40020000      // Flash Status Register\n"
+  "//register FTFL_FSTAT_CCIF   (uint8_t)0x80   // Command Complete Interrupt Flag\n"
+  "//register FTFL_FSTAT_RDCOLERR  (uint8_t)0x40   // Flash Read Collision Error Flag\n"
+  "//register FTFL_FSTAT_ACCERR  (uint8_t)0x20   // Flash Access Error Flag\n"
+  "//register FTFL_FSTAT_FPVIOL  (uint8_t)0x10   // Flash Protection Violation Flag\n"
+  "//register FTFL_FSTAT_MGSTAT0  (uint8_t)0x01   // Memory Controller Command Completion Status Flag\n"
+  "//register FTFL_FCNFG  *(volatile uint8_t  *)0x40020001      // Flash Configuration Register\n"
+  "//register FTFL_FCNFG_CCIE   (uint8_t)0x80   // Command Complete Interrupt Enable\n"
+  "//register FTFL_FCNFG_RDCOLLIE  (uint8_t)0x40   // Read Collision Error Interrupt Enable\n"
+  "//register FTFL_FCNFG_ERSAREQ  (uint8_t)0x20   // Erase All Request\n"
+  "//register FTFL_FCNFG_ERSSUSP  (uint8_t)0x10   // Erase Suspend\n"
+  "//register FTFL_FCNFG_PFLSH  (uint8_t)0x04   // Flash memory configuration\n"
+  "//register FTFL_FCNFG_RAMRDY  (uint8_t)0x02   // RAM Ready\n"
+  "//register FTFL_FCNFG_EEERDY  (uint8_t)0x01   // EEPROM Ready\n"
+  "//register FTFL_FSEC  *(const    uint8_t  *)0x40020002      // Flash Security Register\n"
+  "//register FTFL_FOPT  *(const    uint8_t  *)0x40020003      // Flash Option Register\n"
+  "//register FTFL_FCCOB3  *(volatile uint8_t  *)0x40020004      // Flash Common Command Object Registers\n"
+  "//register FTFL_FCCOB2  *(volatile uint8_t  *)0x40020005\n"
+  "//register FTFL_FCCOB1  *(volatile uint8_t  *)0x40020006\n"
+  "//register FTFL_FCCOB0  *(volatile uint8_t  *)0x40020007\n"
+  "//register FTFL_FCCOB7  *(volatile uint8_t  *)0x40020008\n"
+  "//register FTFL_FCCOB6  *(volatile uint8_t  *)0x40020009\n"
+  "//register FTFL_FCCOB5  *(volatile uint8_t  *)0x4002000A\n"
+  "//register FTFL_FCCOB4  *(volatile uint8_t  *)0x4002000B\n"
+  "//register FTFL_FCCOBB  *(volatile uint8_t  *)0x4002000C\n"
+  "//register FTFL_FCCOBA  *(volatile uint8_t  *)0x4002000D\n"
+  "//register FTFL_FCCOB9  *(volatile uint8_t  *)0x4002000E\n"
+  "//register FTFL_FCCOB8  *(volatile uint8_t  *)0x4002000F\n"
+  "//register FTFL_FPROT3  *(volatile uint8_t  *)0x40020010      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT2  *(volatile uint8_t  *)0x40020011      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT1  *(volatile uint8_t  *)0x40020012      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT0  *(volatile uint8_t  *)0x40020013      // Program Flash Protection Registers\n"
+  "//register FTFL_FEPROT  *(volatile uint8_t  *)0x40020016      // EEPROM Protection Register\n"
+  "//register FTFL_FDPROT  *(volatile uint8_t  *)0x40020017      // Data Flash Protection Register\n"
+  "\n"
+  "// Chapter 30: Cyclic Redundancy Check (CRC)\n"
+  "register CRC_CRC   at 0x40032000 : UInt32 // CRC Data register\n"
+  "register CRC_GPOLY at 0x40032004 : UInt32 // CRC Polynomial register\n"
+  "register CRC_CTRL  at 0x40032008 : UInt32 // CRC Control register\n"
+  "\n"
+  "// Chapter 31: Analog-to-Digital Converter (ADC)\n"
+  "register ADC0_SC1A   at 0x4003B000 : UInt32 // ADC status and control registers 1\n"
+  "register ADC0_SC1B   at 0x4003B004 : UInt32 // ADC status and control registers 1\n"
+  "let ADC_SC1_COCO  : UInt32 = 0x80   // Conversion complete flag\n"
+  "let ADC_SC1_AIEN  : UInt32 = 0x40   // Interrupt enable\n"
+  "let ADC_SC1_DIFF  : UInt32 = 0x20   // Differential mode enable\n"
+  "//register ADC_SC1_ADCH(n)    ((n) & 0x1F)  // Input channel select\n"
+  "register ADC0_CFG1   at 0x4003B008 : UInt32 // ADC configuration register 1\n"
+  "let ADC_CFG1_ADLPC  : UInt32 = 0x80   // Low-power configuration\n"
+  "//register ADC_CFG1_ADIV(n)   (((n) & 3) << 5) // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8\n"
+  "let ADC_CFG1_ADLSMP  : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
+  "//register ADC_CFG1_MODE(n)   (((n) & 3) << 2) // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit\n"
+  "//register ADC_CFG1_ADICLK(n)   (((n) & 3) << 0) // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async\n"
+  "register ADC0_CFG2  at 0x4003B00C : UInt32 // Configuration register 2\n"
+  "let ADC_CFG2_MUXSEL  : UInt32 = 0x10   // 0=a channels, 1=b channels\n"
+  "let ADC_CFG2_ADACKEN  : UInt32 = 0x08   // async clock enable\n"
+  "let ADC_CFG2_ADHSC   : UInt32 = 0x04   // High speed configuration\n"
+  "//register ADC_CFG2_ADLSTS(n)   (((n) & 3) << 0) // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles\n"
+  "register ADC0_RA    at 0x4003B010 : UInt32 // ADC data result register\n"
+  "register ADC0_RB    at 0x4003B014 : UInt32 // ADC data result register\n"
+  "register ADC0_CV1   at 0x4003B018 : UInt32 // Compare value registers\n"
+  "register ADC0_CV2   at 0x4003B01C : UInt32 // Compare value registers\n"
+  "register ADC0_SC2   at 0x4003B020 : UInt32 // Status and control register 2\n"
+  "let ADC_SC2_ADACT  : UInt32 = 0x80   // Conversion active\n"
+  "let ADC_SC2_ADTRG  : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
+  "let ADC_SC2_ACFE   : UInt32 = 0x20   // Compare function enable\n"
+  "let ADC_SC2_ACFGT  : UInt32 = 0x10   // Compare function greater than enable\n"
+  "let ADC_SC2_ACREN  : UInt32 = 0x08   // Compare function range enable\n"
+  "let ADC_SC2_DMAEN  : UInt32= 0x04   // DMA enable\n"
+  "//register ADC_SC2_REFSEL(n)   (((n) & 3) << 0) // Voltage reference, 0=vcc/external, 1=1.2 volts\n"
+  "register ADC0_SC3   at 0x4003B024 : UInt32 // Status and control register 3\n"
+  "let ADC_SC3_CAL  : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
+  "let ADC_SC3_CALF  : UInt32= 0x40   // Calibration failed flag\n"
+  "let ADC_SC3_ADCO  : UInt32= 0x08   // Continuous conversion enable\n"
+  "let ADC_SC3_AVGE  : UInt32= 0x04   // Hardware average enable\n"
+  "//register ADC_SC3_AVGS(n)    (((n) & 3) << 0) // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples\n"
+  "register ADC0_OFS   at 0x4003B028 : UInt32 // ADC offset correction register\n"
+  "register ADC0_PG    at 0x4003B02C : UInt32 // ADC plus-side gain register\n"
+  "register ADC0_MG    at 0x4003B030 : UInt32 // ADC minus-side gain register\n"
+  "register ADC0_CLPD  at 0x4003B034 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLPS  at 0x4003B038 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP4  at 0x4003B03C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP3  at 0x4003B040 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP2  at 0x4003B044 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP1  at 0x4003B048 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP0  at 0x4003B04C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC0_PGA   at 0x4003B050 : UInt32 // ADC Programmable Gain Amplifier\n"
+  "let ADC0_PGA_PGAEN  : UInt32 = 0x00800000  // Enable\n"
+  "let ADC0_PGA_PGALPB  : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
+  "//register ADC0_PGA_PGAG(n)   (((n) & 15) << 16) // Gain, 0=1X, 1=2X, 2=4X, 3=8X, 4=16X, 5=32X, 6=64X\n"
+  "register ADC0_CLMD   at 0x4003B054 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLMS   at 0x4003B058 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM4   at 0x4003B05C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM3   at 0x4003B060 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM2   at 0x4003B064 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM1   at 0x4003B068 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM0   at 0x4003B06C : UInt32 // ADC minus-side general calibration value register\n"
+  "\n"
+  "register ADC1_SC1A   at 0x400BB000 : UInt32 // ADC status and control registers 1\n"
+  "register ADC1_SC1B   at 0x400BB004 : UInt32 // ADC status and control registers 1\n"
+  "register ADC1_CFG1   at 0x400BB008 : UInt32 // ADC configuration register 1\n"
+  "register ADC1_CFG2   at 0x400BB00C : UInt32 // Configuration register 2\n"
+  "register ADC1_RA     at 0x400BB010 : UInt32 // ADC data result register\n"
+  "register ADC1_RB     at 0x400BB014 : UInt32 // ADC data result register\n"
+  "register ADC1_CV1    at 0x400BB018 : UInt32 // Compare value registers\n"
+  "register ADC1_CV2    at 0x400BB01C : UInt32 // Compare value registers\n"
+  "register ADC1_SC2    at 0x400BB020 : UInt32 // Status and control register 2\n"
+  "register ADC1_SC3    at 0x400BB024 : UInt32 // Status and control register 3\n"
+  "register ADC1_OFS    at 0x400BB028 : UInt32 // ADC offset correction register\n"
+  "register ADC1_PG     at 0x400BB02C : UInt32 // ADC plus-side gain register\n"
+  "register ADC1_MG     at 0x400BB030 : UInt32 // ADC minus-side gain register\n"
+  "register ADC1_CLPD   at 0x400BB034 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLPS   at 0x400BB038 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP4   at 0x400BB03C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP3   at 0x400BB040 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP2   at 0x400BB044 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP1   at 0x400BB048 : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP0   at 0x400BB04C : UInt32 // ADC plus-side general calibration value register\n"
+  "register ADC1_PGA    at 0x400BB050 : UInt32 // ADC Programmable Gain Amplifier\n"
+  "register ADC1_CLMD   at 0x400BB054 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLMS   at 0x400BB058 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM4   at 0x400BB05C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM3   at 0x400BB060 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM2   at 0x400BB064 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM1   at 0x400BB068 : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM0   at 0x400BB06C : UInt32 // ADC minus-side general calibration value register\n"
+  "\n"
+  "register DAC0_DAT0L at 0x400CC000 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DATH  at 0x400CC001 : UInt8 // DAC Data High Register \n"
+  "register DAC0_DAT1L at 0x400CC002 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT2L at 0x400CC004 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT3L at 0x400CC006 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT4L at 0x400CC008 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT5L at 0x400CC00A : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT6L at 0x400CC00C : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT7L at 0x400CC00E : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT8L at 0x400CC010 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT9L at 0x400CC012 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT10L at 0x400CC014 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT11L at 0x400CC016 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT12L at 0x400CC018 : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT13L at 0x400CC01A : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT14L at 0x400CC01C : UInt8 // DAC Data Low Register \n"
+  "register DAC0_DAT15L at 0x400CC01E : UInt8 // DAC Data Low Register \n"
+  "register DAC0_SR     at 0x400CC020 : UInt8 // DAC Status Register \n"
+  "register DAC0_C0     at 0x400CC021 : UInt8 // DAC Control Register \n"
+  "let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable\n"
+  "let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select\n"
+  "let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select\n"
+  "let DAC_C0_DACSWTRG  : UInt8 = 0x10    // DAC Software Trigger\n"
+  "let DAC_C0_LPEN  : UInt8 = 0x08    // DAC Low Power Control\n"
+  "let DAC_C0_DACBWIEN  : UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable\n"
+  "let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
+  "let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
+  "\n"
+  "register DAC0_C1  at 0x400CC022 : UInt8 // DAC Control Register 1 \n"
+  "let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select\n"
+  "//register DAC_C1_DACBFWM(n)  (((n) & 3) << 3)  // DAC Buffer Watermark Select\n"
+  "//register DAC_C1_DACBFMD(n)  (((n) & 3) << 0)  // DAC Buffer Work Mode Select\n"
+  "let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable\n"
+  "//\n"
+  "register DAC0_C2  at 0x400CC023 : UInt8 // DAC Control Register 2 \n"
+  "//register DAC_C2_DACBFRP(n)  (((n) & 15) << 4)  // DAC Buffer Read Pointer\n"
+  "//register DAC_C2_DACBFUP(n)  (((n) & 15) << 0)  // DAC Buffer Upper Limit\n"
+  "//\n"
+  "//\n"
+  "////register MCG_C2_RANGE0(n)  (uint8_t)(((n) & 0x03) << 4) // Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
+  "////register MCG_C2_LOCRE0   (uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a los"
+  "s of OSC0 \n"
+  "//\n"
+  "//// Chapter 32: Comparator (CMP)\n"
+  "register CMP0_CR0   at 0x40073000 : UInt8 // CMP Control Register 0\n"
+  "register CMP0_CR1   at 0x40073001 : UInt8 // CMP Control Register 1\n"
+  "register CMP0_FPR   at 0x40073002 : UInt8 // CMP Filter Period Register\n"
+  "register CMP0_SCR   at 0x40073003 : UInt8 // CMP Status and Control Register\n"
+  "register CMP0_DACCR at 0x40073004 : UInt8 // DAC Control Register\n"
+  "register CMP0_MUXCR at 0x40073005 : UInt8 // MUX Control Register\n"
+  "register CMP1_CR0   at 0x40073008 : UInt8 // CMP Control Register 0\n"
+  "register CMP1_CR1   at 0x40073009 : UInt8 // CMP Control Register 1\n"
+  "register CMP1_FPR   at 0x4007300A : UInt8 // CMP Filter Period Register\n"
+  "register CMP1_SCR   at 0x4007300B : UInt8 // CMP Status and Control Register\n"
+  "register CMP1_DACCR at 0x4007300C : UInt8 // DAC Control Register\n"
+  "register CMP1_MUXCR at 0x4007300D : UInt8 // MUX Control Register\n"
+  "//\n"
+  "//// Chapter 33: Voltage Reference (VREFV1)\n"
+  "register VREF_TRM  at 0x40074000 : UInt8 // VREF Trim Register\n"
+  "register VREF_SC   at 0x40074001 : UInt8 // VREF Status and Control Register\n"
+  "\n"
+  "// Chapter 34: Programmable Delay Block (PDB)\n"
+  "//register PDB0_SC    0x40036000 // Status and Control Register\n"
+  "//register PDB_SC_LDMOD(n)   (((n) & 3) << 18) // Load Mode Select\n"
+  "//register PDB_SC_PDBEIE   0x00020000  // Sequence Error Interrupt Enable\n"
+  "//register PDB_SC_SWTRIG   0x00010000  // Software Trigger\n"
+  "//register PDB_SC_DMAEN   0x00008000  // DMA Enable\n"
+  "//register PDB_SC_PRESCALER(n)  (((n) & 7) << 12) // Prescaler Divider Select\n"
+  "//register PDB_SC_TRGSEL(n)  (((n) & 15) << 8) // Trigger Input Source Select\n"
+  "//register PDB_SC_PDBEN   0x00000080  // PDB Enable\n"
+  "//register PDB_SC_PDBIF   0x00000040  // PDB Interrupt Flag\n"
+  "//register PDB_SC_PDBIE   0x00000020  // PDB Interrupt Enable.\n"
+  "//register PDB_SC_MULT(n)   (((n) & 3) << 2) // Multiplication Factor\n"
+  "//register PDB_SC_CONT   0x00000002  // Continuous Mode Enable\n"
+  "//register PDB_SC_LDOK   0x00000001  // Load OK\n"
+  "//register PDB0_MOD   0x40036004 // Modulus Register\n"
+  "//register PDB0_CNT   0x40036008 // Counter Register\n"
+  "//register PDB0_IDLY   0x4003600C // Interrupt Delay Register\n"
+  "//register PDB0_CH0C1   0x40036010 // Channel n Control Register 1\n"
+  "//register PDB0_CH0S   0x40036014 // Channel n Status Register\n"
+  "//register PDB0_CH0DLY0   0x40036018 // Channel n Delay 0 Register\n"
+  "//register PDB0_CH0DLY1   0x4003601C // Channel n Delay 1 Register\n"
+  "//register PDB0_POEN   0x40036190 // Pulse-Out n Enable Register\n"
+  "//register PDB0_PO0DLY   0x40036194 // Pulse-Out n Delay Register\n"
+  "//register PDB0_PO1DLY   0x40036198 // Pulse-Out n Delay Register\n"
+  "//\n"
+  "//// Chapter 35: FlexTimer Module (FTM)\n"
+  "//register FTM0_SC    0x40038000 // Status And Control\n"
+  "//register FTM_SC_TOF   0x80    // Timer Overflow Flag\n"
+  "//register FTM_SC_TOIE   0x40    // Timer Overflow Interrupt Enable\n"
+  "//register FTM_SC_CPWMS   0x20    // Center-Aligned PWM Select\n"
+  "//register FTM_SC_CLKS(n)   (((n) & 3) << 3)  // Clock Source Selection\n"
+  "//register FTM_SC_PS(n)   (((n) & 7) << 0)  // Prescale Factor Selection\n"
+  "//register FTM0_CNT   0x40038004 // Counter\n"
+  "//register FTM0_MOD   0x40038008 // Modulo\n"
+  "//register FTM0_C0SC   0x4003800C // Channel 0 Status And Control\n"
+  "//register FTM0_C0V   0x40038010 // Channel 0 Value\n"
+  "//register FTM0_C1SC   0x40038014 // Channel 1 Status And Control\n"
+  "//register FTM0_C1V   0x40038018 // Channel 1 Value\n"
+  "//register FTM0_C2SC   0x4003801C // Channel 2 Status And Control\n"
+  "//register FTM0_C2V   0x40038020 // Channel 2 Value\n"
+  "//register FTM0_C3SC   0x40038024 // Channel 3 Status And Control\n"
+  "//register FTM0_C3V   0x40038028 // Channel 3 Value\n"
+  "//register FTM0_C4SC   0x4003802C // Channel 4 Status And Control\n"
+  "//register FTM0_C4V   0x40038030 // Channel 4 Value\n"
+  "//register FTM0_C5SC   0x40038034 // Channel 5 Status And Control\n"
+  "//register FTM0_C5V   0x40038038 // Channel 5 Value\n"
+  "//register FTM0_C6SC   0x4003803C // Channel 6 Status And Control\n"
+  "//register FTM0_C6V   0x40038040 // Channel 6 Value\n"
+  "//register FTM0_C7SC   0x40038044 // Channel 7 Status And Control\n"
+  "//register FTM0_C7V   0x40038048 // Channel 7 Value\n"
+  "//register FTM0_CNTIN   0x4003804C // Counter Initial Value\n"
+  "//register FTM0_STATUS   0x40038050 // Capture And Compare Status\n"
+  "//register FTM0_MODE   0x40038054 // Features Mode Selection\n"
+  "//register FTM_MODE_FAULTIE  0x80    // Fault Interrupt Enable\n"
+  "//register FTM_MODE_FAULTM(n)  (((n) & 3) << 5)  // Fault Control Mode\n"
+  "//register FTM_MODE_CAPTEST  0x10    // Capture Test Mode Enable\n"
+  "//register FTM_MODE_PWMSYNC  0x08    // PWM Synchronization Mode\n"
+  "//register FTM_MODE_WPDIS   0x04    // Write Protection Disable\n"
+  "//register FTM_MODE_INIT   0x02    // Initialize The Channels Output\n"
+  "//register FTM_MODE_FTMEN   0x01    // FTM Enable\n"
+  "//register FTM0_SYNC   0x40038058 // Synchronization\n"
+  "//register FTM_SYNC_SWSYNC   0x80    // \n"
+  "//register FTM_SYNC_TRIG2   0x40    // \n"
+  "//register FTM_SYNC_TRIG1   0x20    // \n"
+  "//register FTM_SYNC_TRIG0   0x10    // \n"
+  "//register FTM_SYNC_SYNCHOM  0x08    // \n"
+  "//register FTM_SYNC_REINIT   0x04    // \n"
+  "//register FTM_SYNC_CNTMAX   0x02    // \n"
+  "//register FTM_SYNC_CNTMIN   0x01    // \n"
+  "//register FTM0_OUTINIT   0x4003805C // Initial State For Channels Output\n"
+  "//register FTM0_OUTMASK   0x40038060 // Output Mask\n"
+  "//register FTM0_COMBINE   0x40038064 // Function For Linked Channels\n"
+  "//register FTM0_DEADTIME   0x40038068 // Deadtime Insertion Control\n"
+  "//register FTM0_EXTTRIG   0x4003806C // FTM External Trigger\n"
+  "//register FTM0_POL   0x40038070 // Channels Polarity\n"
+  "//register FTM0_FMS   0x40038074 // Fault Mode Status\n"
+  "//register FTM0_FILTER   0x40038078 // Input Capture Filter Control\n"
+  "//register FTM0_FLTCTRL   0x4003807C // Fault Control\n"
+  "//register FTM0_QDCTRL   0x40038080 // Quadrature Decoder Control And Status\n"
+  "//register FTM0_CONF   0x40038084 // Configuration\n"
+  "//register FTM0_FLTPOL   0x40038088 // FTM Fault Input Polarity\n"
+  "//register FTM0_SYNCONF   0x4003808C // Synchronization Configuration\n"
+  "//register FTM0_INVCTRL   0x40038090 // FTM Inverting Control\n"
+  "//register FTM0_SWOCTRL   0x40038094 // FTM Software Output Control\n"
+  "//register FTM0_PWMLOAD   0x40038098 // FTM PWM Load\n"
+  "//register FTM1_SC    0x40039000 // Status And Control\n"
+  "//register FTM1_CNT   0x40039004 // Counter\n"
+  "//register FTM1_MOD   0x40039008 // Modulo\n"
+  "//register FTM1_C0SC   0x4003900C // Channel 0 Status And Control\n"
+  "//register FTM1_C0V   0x40039010 // Channel 0 Value\n"
+  "//register FTM1_C1SC   0x40039014 // Channel 1 Status And Control\n"
+  "//register FTM1_C1V   0x40039018 // Channel 1 Value\n"
+  "//register FTM1_CNTIN   0x4003904C // Counter Initial Value\n"
+  "//register FTM1_STATUS   0x40039050 // Capture And Compare Status\n"
+  "//register FTM1_MODE   0x40039054 // Features Mode Selection\n"
+  "//register FTM1_SYNC   0x40039058 // Synchronization\n"
+  "//register FTM1_OUTINIT   0x4003905C // Initial State For Channels Output\n"
+  "//register FTM1_OUTMASK   0x40039060 // Output Mask\n"
+  "//register FTM1_COMBINE   0x40039064 // Function For Linked Channels\n"
+  "//register FTM1_DEADTIME   0x40039068 // Deadtime Insertion Control\n"
+  "//register FTM1_EXTTRIG   0x4003906C // FTM External Trigger\n"
+  "//register FTM1_POL   0x40039070 // Channels Polarity\n"
+  "//register FTM1_FMS   0x40039074 // Fault Mode Status\n"
+  "//register FTM1_FILTER   0x40039078 // Input Capture Filter Control\n"
+  "//register FTM1_FLTCTRL   0x4003907C // Fault Control\n"
+  "//register FTM1_QDCTRL   0x40039080 // Quadrature Decoder Control And Status\n"
+  "//register FTM1_CONF   0x40039084 // Configuration\n"
+  "//register FTM1_FLTPOL   0x40039088 // FTM Fault Input Polarity\n"
+  "//register FTM1_SYNCONF   0x4003908C // Synchronization Configuration\n"
+  "//register FTM1_INVCTRL   0x40039090 // FTM Inverting Control\n"
+  "//register FTM1_SWOCTRL   0x40039094 // FTM Software Output Control\n"
+  "//register FTM1_PWMLOAD   0x40039098 // FTM PWM Load\n"
+  "//register FTM2_SC    0x400B8000 // Status And Control\n"
+  "//register FTM2_CNT   0x400B8004 // Counter\n"
+  "//register FTM2_MOD   0x400B8008 // Modulo\n"
+  "//register FTM2_C0SC   0x400B800C // Channel 0 Status And Control\n"
+  "//register FTM2_C0V   0x400B8010 // Channel 0 Value\n"
+  "//register FTM2_C1SC   0x400B8014 // Channel 1 Status And Control\n"
+  "//register FTM2_C1V   0x400B8018 // Channel 1 Value\n"
+  "//register FTM2_CNTIN   0x400B804C // Counter Initial Value\n"
+  "//register FTM2_STATUS   0x400B8050 // Capture And Compare Status\n"
+  "//register FTM2_MODE   0x400B8054 // Features Mode Selection\n"
+  "//register FTM2_SYNC   0x400B8058 // Synchronization\n"
+  "//register FTM2_OUTINIT   0x400B805C // Initial State For Channels Output\n"
+  "//register FTM2_OUTMASK   0x400B8060 // Output Mask\n"
+  "//register FTM2_COMBINE   0x400B8064 // Function For Linked Channels\n"
+  "//register FTM2_DEADTIME   0x400B8068 // Deadtime Insertion Control\n"
+  "//register FTM2_EXTTRIG   0x400B806C // FTM External Trigger\n"
+  "//register FTM2_POL   0x400B8070 // Channels Polarity\n"
+  "//register FTM2_FMS   0x400B8074 // Fault Mode Status\n"
+  "//register FTM2_FILTER   0x400B8078 // Input Capture Filter Control\n"
+  "//register FTM2_FLTCTRL   0x400B807C // Fault Control\n"
+  "//register FTM2_QDCTRL   0x400B8080 // Quadrature Decoder Control And Status\n"
+  "//register FTM2_CONF   0x400B8084 // Configuration\n"
+  "//register FTM2_FLTPOL   0x400B8088 // FTM Fault Input Polarity\n"
+  "//register FTM2_SYNCONF   0x400B808C // Synchronization Configuration\n"
+  "//register FTM2_INVCTRL   0x400B8090 // FTM Inverting Control\n"
+  "//register FTM2_SWOCTRL   0x400B8094 // FTM Software Output Control\n"
+  "//register FTM2_PWMLOAD   0x400B8098 // FTM PWM Load\n"
+  "//\n"
+  "//// Chapter 36: Periodic Interrupt Timer (PIT)\n"
+  "//register PIT_MCR    0x40037000 // PIT Module Control Register\n"
+  "//register PIT_LDVAL0   0x40037100 // Timer Load Value Register\n"
+  "//register PIT_CVAL0   0x40037104 // Current Timer Value Register\n"
+  "//register PIT_TCTRL0   0x40037108 // Timer Control Register\n"
+  "//register PIT_TFLG0   0x4003710C // Timer Flag Register\n"
+  "//register PIT_LDVAL1   0x40037110 // Timer Load Value Register\n"
+  "//register PIT_CVAL1   0x40037114 // Current Timer Value Register\n"
+  "//register PIT_TCTRL1   0x40037118 // Timer Control Register\n"
+  "//register PIT_TFLG1   0x4003711C // Timer Flag Register\n"
+  "//register PIT_LDVAL2   0x40037120 // Timer Load Value Register\n"
+  "//register PIT_CVAL2   0x40037124 // Current Timer Value Register\n"
+  "//register PIT_TCTRL2   0x40037128 // Timer Control Register\n"
+  "//register PIT_TFLG2   0x4003712C // Timer Flag Register\n"
+  "//register PIT_LDVAL3   0x40037130 // Timer Load Value Register\n"
+  "//register PIT_CVAL3   0x40037134 // Current Timer Value Register\n"
+  "//register PIT_TCTRL3   0x40037138 // Timer Control Register\n"
+  "//register PIT_TFLG3   0x4003713C // Timer Flag Register\n"
+  "//\n"
+  "//// Chapter 37: Low-Power Timer (LPTMR)\n"
+  "//register LPTMR0_CSR   0x40040000 // Low Power Timer Control Status Register\n"
+  "//register LPTMR0_PSR   0x40040004 // Low Power Timer Prescale Register\n"
+  "//register LPTMR0_CMR   0x40040008 // Low Power Timer Compare Register\n"
+  "//register LPTMR0_CNR   0x4004000C // Low Power Timer Counter Register\n"
+  "//\n"
+  "//// Chapter 38: Carrier Modulator Transmitter (CMT)\n"
+  "//register CMT_CGH1  *(volatile uint8_t  *)0x40062000 // CMT Carrier Generator High Data Register 1\n"
+  "//register CMT_CGL1  *(volatile uint8_t  *)0x40062001 // CMT Carrier Generator Low Data Register 1\n"
+  "//register CMT_CGH2  *(volatile uint8_t  *)0x40062002 // CMT Carrier Generator High Data Register 2\n"
+  "//register CMT_CGL2  *(volatile uint8_t  *)0x40062003 // CMT Carrier Generator Low Data Register 2\n"
+  "//register CMT_OC   *(volatile uint8_t  *)0x40062004 // CMT Output Control Register\n"
+  "//register CMT_MSC   *(volatile uint8_t  *)0x40062005 // CMT Modulator Status and Control Register\n"
+  "//register CMT_CMD1  *(volatile uint8_t  *)0x40062006 // CMT Modulator Data Register Mark High\n"
+  "//register CMT_CMD2  *(volatile uint8_t  *)0x40062007 // CMT Modulator Data Register Mark Low\n"
+  "//register CMT_CMD3  *(volatile uint8_t  *)0x40062008 // CMT Modulator Data Register Space High\n"
+  "//register CMT_CMD4  *(volatile uint8_t  *)0x40062009 // CMT Modulator Data Register Space Low\n"
+  "//register CMT_PPS   *(volatile uint8_t  *)0x4006200A // CMT Primary Prescaler Register\n"
+  "//register CMT_DMA   *(volatile uint8_t  *)0x4006200B // CMT Direct Memory Access Register\n"
+  "//\n"
+  "//// Chapter 39: Real Time Clock (RTC)\n"
+  "register RTC_TSR at  0x4003D000 : UInt32 // RTC Time Seconds Register\n"
+  "register RTC_TPR at  0x4003D004 : UInt32 // RTC Time Prescaler Register\n"
+  "register RTC_TAR at  0x4003D008 : UInt32 // RTC Time Alarm Register\n"
+  "register RTC_TCR at  0x4003D00C : UInt32 // RTC Time Compensation Register\n"
+  "//register RTC_TCR_CIC(n)   (((n) & 255) << 24)  // Compensation Interval Counter\n"
+  "//register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value\n"
+  "//register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register\n"
+  "//register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register\n"
+  "register RTC_CR at  0x4003D010 : UInt32 {// RTC Control Register\n"
+  "  18, SC2P, SC4P, SC8P, SC16P,CKLO, OSCE, 4, UM, SUP, WPE, SWR\n"
+  "}\n"
+  " \n"
+  "register RTC_SR at  0x4003D014 : UInt32 // RTC Status Register\n"
+  "let RTC_SR_TCE : UInt32 = 0x00000010  \n"
+  "let RTC_SR_TAF : UInt32 = 0x00000004  // \n"
+  "let RTC_SR_TOF : UInt32 = 0x00000002  // \n"
+  "let RTC_SR_TIF : UInt32 = 0x00000001  // \n"
+  "\n"
+  "register RTC_LR  at 0x4003D018 : UInt32 // RTC Lock Register\n"
+  "register RTC_IER at 0x4003D01C : UInt32 // RTC Interrupt Enable Register\n"
+  "register RTC_WAR at 0x4003D800 : UInt32 // RTC Write Access Register\n"
+  "register RTC_RAR at 0x4003D804 : UInt32 // RTC Read Access Register\n"
+  "\n"
+  "//// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)\n"
+  "//register USB0_PERID  *(const    uint8_t  *)0x40072000 // Peripheral ID register\n"
+  "//register USB0_IDCOMP  *(const    uint8_t  *)0x40072004 // Peripheral ID Complement register\n"
+  "//register USB0_REV  *(const    uint8_t  *)0x40072008 // Peripheral Revision register\n"
+  "//register USB0_ADDINFO  *(volatile uint8_t  *)0x4007200C // Peripheral Additional Info register\n"
+  "//register USB0_OTGIST *(volatile uint8_t  *)0x40072010 // OTG Interrupt Status register\n"
+  "//register USB_OTGISTAT_IDCHG  (uint8_t)0x80   //\n"
+  "//register USB_OTGISTAT_ONEMSEC  (uint8_t)0x40   //\n"
+  "//register USB_OTGISTAT_LINE_STATE_CHG (uint8_t)0x20   //\n"
+  "//register USB_OTGISTAT_SESSVLDCHG  (uint8_t)0x08   //\n"
+  "//register USB_OTGISTAT_B_SESS_CHG  (uint8_t)0x04   //\n"
+  "//register USB_OTGISTAT_AVBUSCHG  (uint8_t)0x01   //\n"
+  "//register USB0_OTGICR  *(volatile uint8_t  *)0x40072014 // OTG Interrupt Control Register\n"
+  "//register USB_OTGICR_IDEN   (uint8_t)0x80   // \n"
+  "//register USB_OTGICR_ONEMSECEN  (uint8_t)0x40   // \n"
+  "//register USB_OTGICR_LINESTATEEN  (uint8_t)0x20   // \n"
+  "//register USB_OTGICR_SESSVLDEN  (uint8_t)0x08   // \n"
+  "//register USB_OTGICR_BSESSEN  (uint8_t)0x04   // \n"
+  "//register USB_OTGICR_AVBUSEN  (uint8_t)0x01   // \n"
+  "//register USB0_OTGST *(volatile uint8_t  *)0x40072018 // OTG Status register\n"
+  "//register USB_OTGSTAT_ID   (uint8_t)0x80   // \n"
+  "//register USB_OTGSTAT_ONEMSECEN  (uint8_t)0x40   // \n"
+  "//register USB_OTGSTAT_LINESTATESTABLE (uint8_t)0x20   // \n"
+  "//register USB_OTGSTAT_SESS_VLD  (uint8_t)0x08   // \n"
+  "//register USB_OTGSTAT_BSESSEND  (uint8_t)0x04   // \n"
+  "//register USB_OTGSTAT_AVBUSVLD  (uint8_t)0x01   // \n"
+  "//register USB0_OTGCTL  *(volatile uint8_t  *)0x4007201C // OTG Control Register\n"
+  "//register USB_OTGCTL_DPHIGH  (uint8_t)0x80   // \n"
+  "//register USB_OTGCTL_DPLOW  (uint8_t)0x20   // \n"
+  "//register USB_OTGCTL_DMLOW  (uint8_t)0x10   // \n"
+  "//register USB_OTGCTL_OTGEN  (uint8_t)0x04   // \n"
+  "//register USB0_IST *(volatile uint8_t  *)0x40072080 // Interrupt Status Register\n"
+  "//register USB_ISTAT_STALL   (uint8_t)0x80   // \n"
+  "//register USB_ISTAT_ATTACH  (uint8_t)0x40   // \n"
+  "//register USB_ISTAT_RESUME  (uint8_t)0x20   // \n"
+  "//register USB_ISTAT_SLEEP   (uint8_t)0x10   // \n"
+  "//register USB_ISTAT_TOKDNE  (uint8_t)0x08   // \n"
+  "//register USB_ISTAT_SOFTOK  (uint8_t)0x04   // \n"
+  "//register USB_ISTAT_ERROR   (uint8_t)0x02   // \n"
+  "//register USB_ISTAT_USBRST  (uint8_t)0x01   // \n"
+  "//register USB0_INTEN  *(volatile uint8_t  *)0x40072084 // Interrupt Enable Register\n"
+  "//register USB_INTEN_STALLEN  (uint8_t)0x80   // \n"
+  "//register USB_INTEN_ATTACHEN  (uint8_t)0x40   // \n"
+  "//register USB_INTEN_RESUMEEN  (uint8_t)0x20   // \n"
+  "//register USB_INTEN_SLEEPEN  (uint8_t)0x10   // \n"
+  "//register USB_INTEN_TOKDNEEN  (uint8_t)0x08   // \n"
+  "//register USB_INTEN_SOFTOKEN  (uint8_t)0x04   // \n"
+  "//register USB_INTEN_ERROREN  (uint8_t)0x02   // \n"
+  "//register USB_INTEN_USBRSTEN  (uint8_t)0x01   // \n"
+  "//register USB0_ERRST *(volatile uint8_t  *)0x40072088 // Error Interrupt Status Register\n"
+  "//register USB_ERRSTAT_BTSERR  (uint8_t)0x80   // \n"
+  "//register USB_ERRSTAT_DMAERR  (uint8_t)0x20   // \n"
+  "//register USB_ERRSTAT_BTOERR  (uint8_t)0x10   // \n"
+  "//register USB_ERRSTAT_DFN8  (uint8_t)0x08   // \n"
+  "//register USB_ERRSTAT_CRC16  (uint8_t)0x04   // \n"
+  "//register USB_ERRSTAT_CRC5EOF  (uint8_t)0x02   // \n"
+  "//register USB_ERRSTAT_PIDERR  (uint8_t)0x01   // \n"
+  "//register USB0_ERREN  *(volatile uint8_t  *)0x4007208C // Error Interrupt Enable Register\n"
+  "//register USB_ERREN_BTSERREN  (uint8_t)0x80   // \n"
+  "//register USB_ERREN_DMAERREN  (uint8_t)0x20   // \n"
+  "//register USB_ERREN_BTOERREN  (uint8_t)0x10   // \n"
+  "//register USB_ERREN_DFN8EN  (uint8_t)0x08   // \n"
+  "//register USB_ERREN_CRC16EN  (uint8_t)0x04   // \n"
+  "//register USB_ERREN_CRC5EOFEN  (uint8_t)0x02   // \n"
+  "//register USB_ERREN_PIDERREN  (uint8_t)0x01   // \n"
+  "//register USB0_ST *(volatile uint8_t  *)0x40072090 // Status Register\n"
+  "//register USB_STAT_TX   (uint8_t)0x08   // \n"
+  "//register USB_STAT_ODD   (uint8_t)0x04   // \n"
+  "//register USB_STAT_ENDP(n)  (uint8_t)((n) >> 4)  // \n"
+  "//register USB0_CTL  *(volatile uint8_t  *)0x40072094 // Control Register\n"
+  "//register USB_CTL_JSTATE   (uint8_t)0x80   // \n"
+  "//register USB_CTL_SE0   (uint8_t)0x40   // \n"
+  "//register USB_CTL_TXSUSPENDTOKENBUSY (uint8_t)0x20   // \n"
+  "//register USB_CTL_RESET   (uint8_t)0x10   // \n"
+  "//register USB_CTL_HOSTMODEEN  (uint8_t)0x08   // \n"
+  "//register USB_CTL_RESUME   (uint8_t)0x04   // \n"
+  "//register USB_CTL_ODDRST   (uint8_t)0x02   // \n"
+  "//register USB_CTL_USBENSOFEN  (uint8_t)0x01   // \n"
+  "//register USB0_ADDR  *(volatile uint8_t  *)0x40072098 // Address Register\n"
+  "//register USB0_BDTPAGE1  *(volatile uint8_t  *)0x4007209C // BDT Page Register 1\n"
+  "//register USB0_FRMNUML  *(volatile uint8_t  *)0x400720A0 // Frame Number Register Low\n"
+  "//register USB0_FRMNUMH  *(volatile uint8_t  *)0x400720A4 // Frame Number Register High\n"
+  "//register USB0_TOKEN  *(volatile uint8_t  *)0x400720A8 // Token Register\n"
+  "//register USB0_SOFTHLD  *(volatile uint8_t  *)0x400720AC // SOF Threshold Register\n"
+  "//register USB0_BDTPAGE2  *(volatile uint8_t  *)0x400720B0 // BDT Page Register 2\n"
+  "//register USB0_BDTPAGE3  *(volatile uint8_t  *)0x400720B4 // BDT Page Register 3\n"
+  "//register USB0_ENDPT0  *(volatile uint8_t  *)0x400720C0 // Endpoint Control Register\n"
+  "//register USB_ENDPT_HOSTWOHUB  (uint8_t)0x80   // host only, enable low speed\n"
+  "//register USB_ENDPT_RETRYDIS  (uint8_t)0x40   // host only, set to disable NAK retry\n"
+  "//register USB_ENDPT_EPCTLDIS  (uint8_t)0x10   // 0=control, 1=bulk, interrupt, isync\n"
+  "//register USB_ENDPT_EPRXEN  (uint8_t)0x08   // enables the endpoint for RX transfers.\n"
+  "//register USB_ENDPT_EPTXEN  (uint8_t)0x04   // enables the endpoint for TX transfers.\n"
+  "//register USB_ENDPT_EPSTALL  (uint8_t)0x02   // set to stall endpoint\n"
+  "//register USB_ENDPT_EPHSHK  (uint8_t)0x01   // enable handshaking during a transaction, generally set unless Isochronous\n"
+  "//register USB0_ENDPT1  *(volatile uint8_t  *)0x400720C4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT2  *(volatile uint8_t  *)0x400720C8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT3  *(volatile uint8_t  *)0x400720CC // Endpoint Control Register\n"
+  "//register USB0_ENDPT4  *(volatile uint8_t  *)0x400720D0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT5  *(volatile uint8_t  *)0x400720D4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT6  *(volatile uint8_t  *)0x400720D8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT7  *(volatile uint8_t  *)0x400720DC // Endpoint Control Register\n"
+  "//register USB0_ENDPT8  *(volatile uint8_t  *)0x400720E0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT9  *(volatile uint8_t  *)0x400720E4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT10  *(volatile uint8_t  *)0x400720E8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT11  *(volatile uint8_t  *)0x400720EC // Endpoint Control Register\n"
+  "//register USB0_ENDPT12  *(volatile uint8_t  *)0x400720F0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT13  *(volatile uint8_t  *)0x400720F4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT14  *(volatile uint8_t  *)0x400720F8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT15  *(volatile uint8_t  *)0x400720FC // Endpoint Control Register\n"
+  "//register USB0_USBCTRL  *(volatile uint8_t  *)0x40072100 // USB Control Register\n"
+  "//register USB_USBCTRL_SUSP  (uint8_t)0x80   // Places the USB transceiver into the suspend state.\n"
+  "//register USB_USBCTRL_PDE   (uint8_t)0x40   // Enables the weak pulldowns on the USB transceiver.\n"
+  "//register USB0_OBSERVE  *(volatile uint8_t  *)0x40072104 // USB OTG Observe Register\n"
+  "//register USB_OBSERVE_DPPU  (uint8_t)0x80   // \n"
+  "//register USB_OBSERVE_DPPD  (uint8_t)0x40   // \n"
+  "//register USB_OBSERVE_DMPD  (uint8_t)0x10   // \n"
+  "//register USB0_CONTROL  *(volatile uint8_t  *)0x40072108 // USB OTG Control Register\n"
+  "//register USB_CONTROL_DPPULLUPNONOTG (uint8_t)0x10   //  Provides control of the DP PULLUP in the USB OTG module, if USB is configured in non-OTG dev"
+  "ice mode.\n"
+  "//register USB0_USBTRC0  *(volatile uint8_t  *)0x4007210C // USB Transceiver Control Register 0\n"
+  "//register USB_USBTRC_USBRESET  (uint8_t)0x80   //\n"
+  "//register USB_USBTRC_USBRESMEN  (uint8_t)0x20   //\n"
+  "//register USB_USBTRC_SYNC_DET  (uint8_t)0x02   //\n"
+  "//register USB_USBTRC_USB_RESUME_INT (uint8_t)0x01   //\n"
+  "//register USB0_USBFRMADJUST *(volatile uint8_t  *)0x40072114 // Frame Adjust Register\n"
+  "//\n"
+  "//// Chapter 41: USB Device Charger Detection Module (USBDCD)\n"
+  "//register USBDCD_CONTROL   0x40035000 // Control register\n"
+  "//register USBDCD_CLOCK   0x40035004 // Clock register\n"
+  "//register USBDCD_STATUS   0x40035008 // Status register\n"
+  "//register USBDCD_TIMER0   0x40035010 // TIMER0 register\n"
+  "//register USBDCD_TIMER1   0x40035014 // TIMER1 register\n"
+  "//register USBDCD_TIMER2   0x40035018 // TIMER2 register\n"
+  "//\n"
+  "//// Chapter 43: SPI (DSPI)\n"
+  "//register SPI0_MCR   0x4002C000 // DSPI Module Configuration Register\n"
+  "//register SPI_MCR_MSTR    0x80000000  // Master/Slave Mode Select\n"
+  "//register SPI_MCR_CONT_SCKE   0x40000000  // \n"
+  "//register SPI_MCR_DCONF(n)  (((n) & 3) << 28)  // \n"
+  "//register SPI_MCR_FRZ    0x08000000  // \n"
+  "//register SPI_MCR_MTFE    0x04000000  // \n"
+  "//register SPI_MCR_ROOE    0x01000000  // \n"
+  "//register SPI_MCR_PCSIS(n)  (((n) & 0x1F) << 16)  //\n"
+  "//register SPI_MCR_DOZE    0x00008000  // \n"
+  "//register SPI_MCR_MDIS    0x00004000  // \n"
+  "//register SPI_MCR_DIS_TXF    0x00002000  // \n"
+  "//register SPI_MCR_DIS_RXF    0x00001000  // \n"
+  "//register SPI_MCR_CLR_TXF    0x00000800  // \n"
+  "//register SPI_MCR_CLR_RXF    0x00000400  // \n"
+  "//register SPI_MCR_SMPL_PT(n)  (((n) & 3) << 8)  //\n"
+  "//register SPI_MCR_HALT    0x00000001  // \n"
+  "//register SPI0_TCR   0x4002C008 // DSPI Transfer Count Register\n"
+  "//register SPI0_CTAR0   0x4002C00C // DSPI Clock and Transfer Attributes Register, In Master Mode\n"
+  "//register SPI_CTAR_DBR    0x80000000  // Double Baud Rate\n"
+  "//register SPI_CTAR_FMSZ(n)  (((n) & 15) << 27)  // Frame Size (+1)\n"
+  "//register SPI_CTAR_CPOL    0x04000000  // Clock Polarity\n"
+  "//register SPI_CTAR_CPHA    0x02000000  // Clock Phase\n"
+  "//register SPI_CTAR_LSBFE    0x01000000  // LSB First\n"
+  "//register SPI_CTAR_PCSSCK(n)  (((n) & 3) << 22)  // PCS to SCK Delay Prescaler\n"
+  "//register SPI_CTAR_PASC(n)  (((n) & 3) << 20)  // After SCK Delay Prescaler\n"
+  "//register SPI_CTAR_PDT(n)   (((n) & 3) << 18)  // Delay after Transfer Prescaler\n"
+  "//register SPI_CTAR_PBR(n)   (((n) & 3) << 16)  // Baud Rate Prescaler\n"
+  "//register SPI_CTAR_CSSCK(n)  (((n) & 15) << 12)  // PCS to SCK Delay Scaler\n"
+  "//register SPI_CTAR_ASC(n)   (((n) & 15) << 8)  // After SCK Delay Scaler\n"
+  "//register SPI_CTAR_DT(n)   (((n) & 15) << 4)  // Delay After Transfer Scaler\n"
+  "//register SPI_CTAR_BR(n)   (((n) & 15) << 0)  // Baud Rate Scaler\n"
+  "//register SPI0_CTAR0_SLAVE  0x4002C00C // DSPI Clock and Transfer Attributes Register, In Slave Mode\n"
+  "//register SPI0_CTAR1   0x4002C010 // DSPI Clock and Transfer Attributes Register, In Master Mode\n"
+  "//register SPI0_SR    0x4002C02C // DSPI Status Register\n"
+  "//register SPI_SR_TCF    0x80000000  // Transfer Complete Flag\n"
+  "//register SPI_SR_TXRXS    0x40000000  // TX and RX Status\n"
+  "//register SPI_SR_EOQF    0x10000000  // End of Queue Flag\n"
+  "//register SPI_SR_TFUF    0x08000000  // Transmit FIFO Underflow Flag\n"
+  "//register SPI_SR_TFFF    0x02000000  // Transmit FIFO Fill Flag\n"
+  "//register SPI_SR_RFOF    0x00080000  // Receive FIFO Overflow Flag\n"
+  "//register SPI_SR_RFDF    0x00020000  // Receive FIFO Drain Flag\n"
+  "//register SPI0_RSER   0x4002C030 // DSPI DMA/Interrupt Request Select and Enable Register\n"
+  "//register SPI_RSER_TCF_RE    0x80000000  // Transmission Complete Request Enable\n"
+  "//register SPI_RSER_EOQF_RE   0x10000000  // DSPI Finished Request Request Enable\n"
+  "//register SPI_RSER_TFUF_RE   0x08000000  // Transmit FIFO Underflow Request Enable\n"
+  "//register SPI_RSER_TFFF_RE   0x02000000  // Transmit FIFO Fill Request Enable\n"
+  "//register SPI_RSER_TFFF_DIRS   0x01000000  // Transmit FIFO FIll Dma or Interrupt Request Select\n"
+  "//register SPI_RSER_RFOF_RE   0x00080000  // Receive FIFO Overflow Request Enable\n"
+  "//register SPI_RSER_RFDF_RE   0x00020000  // Receive FIFO Drain Request Enable\n"
+  "//register SPI_RSER_RFDF_DIRS   0x00010000  // Receive FIFO Drain DMA or Interrupt Request Select\n"
+  "//register SPI0_PUSHR   0x4002C034 // DSPI PUSH TX FIFO Register In Master Mode\n"
+  "//register SPI_PUSHR_CONT    0x80000000  // \n"
+  "//register SPI_PUSHR_CTAS(n)  (((n) & 7) << 28)  // \n"
+  "//register SPI_PUSHR_EOQ    0x08000000  // \n"
+  "//register SPI_PUSHR_CTCNT    0x04000000  // \n"
+  "//register SPI_PUSHR_PCS(n)  (((n) & 31) << 16)  //\n"
+  "//register SPI0_PUSHR_SLAVE  0x4002C034 // DSPI PUSH TX FIFO Register In Slave Mode\n"
+  "//register SPI0_POPR   0x4002C038 // DSPI POP RX FIFO Register\n"
+  "//register SPI0_TXFR0   0x4002C03C // DSPI Transmit FIFO Registers\n"
+  "//register SPI0_TXFR1   0x4002C040 // DSPI Transmit FIFO Registers\n"
+  "//register SPI0_TXFR2   0x4002C044 // DSPI Transmit FIFO Registers\n"
+  "//register SPI0_TXFR3   0x4002C048 // DSPI Transmit FIFO Registers\n"
+  "//register SPI0_RXFR0   0x4002C07C // DSPI Receive FIFO Registers\n"
+  "//register SPI0_RXFR1   0x4002C080 // DSPI Receive FIFO Registers\n"
+  "//register SPI0_RXFR2   0x4002C084 // DSPI Receive FIFO Registers\n"
+  "//register SPI0_RXFR3   0x4002C088 // DSPI Receive FIFO Registers\n"
+  "//typedef struct {\n"
+  "// volatile uint32_t MCR; // 0\n"
+  "// volatile uint32_t unused1;// 4\n"
+  "// volatile uint32_t TCR; // 8\n"
+  "// volatile uint32_t CTAR0; // c\n"
+  "// volatile uint32_t CTAR1; // 10\n"
+  "// volatile uint32_t CTAR2; // 14\n"
+  "// volatile uint32_t CTAR3; // 18\n"
+  "// volatile uint32_t CTAR4; // 1c\n"
+  "// volatile uint32_t CTAR5; // 20\n"
+  "// volatile uint32_t CTAR6; // 24\n"
+  "// volatile uint32_t CTAR7; // 28\n"
+  "// volatile uint32_t SR; // 2c\n"
+  "// volatile uint32_t RSER; // 30\n"
+  "// volatile uint32_t PUSHR; // 34\n"
+  "// volatile uint32_t POPR; // 38\n"
+  "// volatile uint32_t TXFR[16]; // 3c\n"
+  "// volatile uint32_t RXFR[16]; // 7c\n"
+  "//} SPI_t;\n"
+  "//register SPI0  (*(SPI_t *)0x4002C000)\n"
+  "//\n"
+  "//// Chapter 44: Inter-Integrated Circuit (I2C)\n"
+  "//register I2C0_A1   *(volatile uint8_t  *)0x40066000 // I2C Address Register 1\n"
+  "//register I2C0_F   *(volatile uint8_t  *)0x40066001 // I2C Frequency Divider register\n"
+  "//register I2C0_C1   *(volatile uint8_t  *)0x40066002 // I2C Control Register 1\n"
+  "//register I2C_C1_IICEN   (uint8_t)0x80   // I2C Enable\n"
+  "//register I2C_C1_IICIE   (uint8_t)0x40   // I2C Interrupt Enable\n"
+  "//register I2C_C1_MST   (uint8_t)0x20   // Master Mode Select\n"
+  "//register I2C_C1_TX   (uint8_t)0x10   // Transmit Mode Select\n"
+  "//register I2C_C1_TXAK   (uint8_t)0x08   // Transmit Acknowledge Enable\n"
+  "//register I2C_C1_RSTA   (uint8_t)0x04   // RepeSTART\n"
+  "//register I2C_C1_WUEN   (uint8_t)0x02   // Wakeup Enable\n"
+  "//register I2C_C1_DMAEN   (uint8_t)0x01   // DMA Enable\n"
+  "//register I2C0_S   *(volatile uint8_t  *)0x40066003 // I2C Status register\n"
+  "//register I2C_S_TCF   (uint8_t)0x80   // Transfer Complete Flag\n"
+  "//register I2C_S_IAAS   (uint8_t)0x40   // Addressed As A Slave\n"
+  "//register I2C_S_BUSY   (uint8_t)0x20   // Bus Busy\n"
+  "//register I2C_S_ARBL   (uint8_t)0x10   // Arbitration Lost\n"
+  "//register I2C_S_RAM   (uint8_t)0x08   // Range Address Match\n"
+  "//register I2C_S_SRW   (uint8_t)0x04   // Slave Read/Write\n"
+  "//register I2C_S_IICIF   (uint8_t)0x02   // Interrupt Flag\n"
+  "//register I2C_S_RXAK   (uint8_t)0x01   // Receive Acknowledge\n"
+  "//register I2C0_D   *(volatile uint8_t  *)0x40066004 // I2C Data I/O register\n"
+  "//register I2C0_C2   *(volatile uint8_t  *)0x40066005 // I2C Control Register 2\n"
+  "//register I2C_C2_GCAEN   (uint8_t)0x80   // General Call Address Enable\n"
+  "//register I2C_C2_ADEXT   (uint8_t)0x40   // Address Extension\n"
+  "//register I2C_C2_HDRS   (uint8_t)0x20   // High Drive Select\n"
+  "//register I2C_C2_SBRC   (uint8_t)0x10   // Slave Baud Rate Control\n"
+  "//register I2C_C2_RMEN   (uint8_t)0x08   // Range Address Matching Enable\n"
+  "//register I2C_C2_AD(n)   ((n) & 7)   // Slave Address, upper 3 bits\n"
+  "//register I2C0_FLT  *(volatile uint8_t  *)0x40066006 // I2C Programmable Input Glitch Filter register\n"
+  "//register I2C0_RA   *(volatile uint8_t  *)0x40066007 // I2C Range Address register\n"
+  "//register I2C0_SMB  *(volatile uint8_t  *)0x40066008 // I2C SMBus Control and Status register\n"
+  "//register I2C0_A2   *(volatile uint8_t  *)0x40066009 // I2C Address Register 2\n"
+  "//register I2C0_SLTH  *(volatile uint8_t  *)0x4006600A // I2C SCL Low Timeout Register High\n"
+  "//register I2C0_SLTL  *(volatile uint8_t  *)0x4006600B // I2C SCL Low Timeout Register Low\n"
+  "//\n"
+  "//register I2C1_A1   *(volatile uint8_t  *)0x40067000 // I2C Address Register 1\n"
+  "//register I2C1_F   *(volatile uint8_t  *)0x40067001 // I2C Frequency Divider register\n"
+  "//register I2C1_C1   *(volatile uint8_t  *)0x40067002 // I2C Control Register 1\n"
+  "//register I2C1_S   *(volatile uint8_t  *)0x40067003 // I2C Status register\n"
+  "//register I2C1_D   *(volatile uint8_t  *)0x40067004 // I2C Data I/O register\n"
+  "//register I2C1_C2   *(volatile uint8_t  *)0x40067005 // I2C Control Register 2\n"
+  "//register I2C1_FLT  *(volatile uint8_t  *)0x40067006 // I2C Programmable Input Glitch Filter register\n"
+  "//register I2C1_RA   *(volatile uint8_t  *)0x40067007 // I2C Range Address register\n"
+  "//register I2C1_SMB  *(volatile uint8_t  *)0x40067008 // I2C SMBus Control and Status register\n"
+  "//register I2C1_A2   *(volatile uint8_t  *)0x40067009 // I2C Address Register 2\n"
+  "//register I2C1_SLTH  *(volatile uint8_t  *)0x4006700A // I2C SCL Low Timeout Register High\n"
+  "//register I2C1_SLTL  *(volatile uint8_t  *)0x4006700B // I2C SCL Low Timeout Register Low\n"
+  "//\n"
+  "//// Chapter 45: Universal Asynchronous Receiver/Transmitter (UART)\n"
+  "//register UART0_BDH  *(volatile uint8_t  *)0x4006A000 // UART Baud Rate Registers: High\n"
+  "//register UART0_BDL  *(volatile uint8_t  *)0x4006A001 // UART Baud Rate Registers: Low\n"
+  "//register UART0_C1  *(volatile uint8_t  *)0x4006A002 // UART Control Register 1\n"
+  "//register UART_C1_LOOPS   (uint8_t)0x80   // When LOOPS is set, the RxD pin is disconnected from the UART and the transmitter output is internally co"
+  "nnected to the receiver input\n"
+  "//register UART_C1_UARTSWAI  (uint8_t)0x40   // UART Stops in Wait Mode\n"
+  "//register UART_C1_RSRC   (uint8_t)0x20   // When LOOPS is set, the RSRC field determines the source for the receiver shift register input\n"
+  "//register UART_C1_M   (uint8_t)0x10   // 9-bit or 8-bit Mode Select\n"
+  "//register UART_C1_WAKE   (uint8_t)0x08   // Determines which condition wakes the UART\n"
+  "//register UART_C1_ILT   (uint8_t)0x04   // Idle Line Type Select\n"
+  "//register UART_C1_PE   (uint8_t)0x02   // Parity Enable\n"
+  "//register UART_C1_PT   (uint8_t)0x01   // Parity Type, 0=even, 1=odd\n"
+  "//register UART0_C2  *(volatile uint8_t  *)0x4006A003 // UART Control Register 2\n"
+  "//register UART_C2_TIE   (uint8_t)0x80   // Transmitter Interrupt or DMA Transfer Enable.\n"
+  "//register UART_C2_TCIE   (uint8_t)0x40   // Transmission Complete Interrupt Enable\n"
+  "//register UART_C2_RIE   (uint8_t)0x20   // Receiver Full Interrupt or DMA Transfer Enable\n"
+  "//register UART_C2_ILIE   (uint8_t)0x10   // Idle Line Interrupt Enable\n"
+  "//register UART_C2_TE   (uint8_t)0x08   // Transmitter Enable\n"
+  "//register UART_C2_RE   (uint8_t)0x04   // Receiver Enable\n"
+  "//register UART_C2_RWU   (uint8_t)0x02   // Receiver Wakeup Control\n"
+  "//register UART_C2_SBK   (uint8_t)0x01   // Send Break\n"
+  "//register UART0_S1  *(volatile uint8_t  *)0x4006A004 // UART Status Register 1\n"
+  "//register UART_S1_TDRE   (uint8_t)0x80   // Transmit Data Register Empty Flag\n"
+  "//register UART_S1_TC   (uint8_t)0x40   // Transmit Complete Flag\n"
+  "//register UART_S1_RDRF   (uint8_t)0x20   // Receive Data Register Full Flag\n"
+  "//register UART_S1_IDLE   (uint8_t)0x10   // Idle Line Flag\n"
+  "//register UART_S1_OR   (uint8_t)0x08   // Receiver Overrun Flag\n"
+  "//register UART_S1_NF   (uint8_t)0x04   // Noise Flag\n"
+  "//register UART_S1_FE   (uint8_t)0x02   // Framing Error Flag\n"
+  "//register UART_S1_PF   (uint8_t)0x01   // Parity Error Flag\n"
+  "//register UART0_S2  *(volatile uint8_t  *)0x4006A005 // UART Status Register 2\n"
+  "//register UART0_C3  *(volatile uint8_t  *)0x4006A006 // UART Control Register 3\n"
+  "//register UART0_D   *(volatile uint8_t  *)0x4006A007 // UART Data Register\n"
+  "//register UART0_MA1  *(volatile uint8_t  *)0x4006A008 // UART Match Address Registers 1\n"
+  "//register UART0_MA2  *(volatile uint8_t  *)0x4006A009 // UART Match Address Registers 2\n"
+  "//register UART0_C4  *(volatile uint8_t  *)0x4006A00A // UART Control Register 4\n"
+  "//register UART0_C5  *(volatile uint8_t  *)0x4006A00B // UART Control Register 5\n"
+  "//register UART0_ED  *(volatile uint8_t  *)0x4006A00C // UART Extended Data Register\n"
+  "//register UART0_MODEM  *(volatile uint8_t  *)0x4006A00D // UART Modem Register\n"
+  "//register UART0_IR  *(volatile uint8_t  *)0x4006A00E // UART Infrared Register\n"
+  "//register UART0_PFIFO  *(volatile uint8_t  *)0x4006A010 // UART FIFO Parameters\n"
+  "//register UART_PFIFO_TXFE   (uint8_t)0x80\n"
+  "//register UART_PFIFO_RXFE   (uint8_t)0x08\n"
+  "//register UART0_CFIFO  *(volatile uint8_t  *)0x4006A011 // UART FIFO Control Register\n"
+  "//register UART_CFIFO_TXFLUSH  (uint8_t)0x80   // \n"
+  "//register UART_CFIFO_RXFLUSH  (uint8_t)0x40   // \n"
+  "//register UART_CFIFO_RXOFE  (uint8_t)0x04   // \n"
+  "//register UART_CFIFO_TXOFE  (uint8_t)0x02   // \n"
+  "//register UART_CFIFO_RXUFE  (uint8_t)0x01   // \n"
+  "//register UART0_SFIFO  *(volatile uint8_t  *)0x4006A012 // UART FIFO Status Register\n"
+  "//register UART_SFIFO_TXEMPT  (uint8_t)0x80\n"
+  "//register UART_SFIFO_RXEMPT  (uint8_t)0x40\n"
+  "//register UART_SFIFO_RXOF   (uint8_t)0x04\n"
+  "//register UART_SFIFO_TXOF   (uint8_t)0x02\n"
+  "//register UART_SFIFO_RXUF   (uint8_t)0x01\n"
+  "//register UART0_TWFIFO  *(volatile uint8_t  *)0x4006A013 // UART FIFO Transmit Watermark\n"
+  "//register UART0_TCFIFO  *(volatile uint8_t  *)0x4006A014 // UART FIFO Transmit Count\n"
+  "//register UART0_RWFIFO  *(volatile uint8_t  *)0x4006A015 // UART FIFO Receive Watermark\n"
+  "//register UART0_RCFIFO  *(volatile uint8_t  *)0x4006A016 // UART FIFO Receive Count\n"
+  "//register UART0_C7816  *(volatile uint8_t  *)0x4006A018 // UART 7816 Control Register\n"
+  "//register UART0_IE7816  *(volatile uint8_t  *)0x4006A019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART0_IS7816  *(volatile uint8_t  *)0x4006A01A // UART 7816 Interrupt Status Register\n"
+  "//register UART0_WP7816T0  *(volatile uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
+  "//register UART0_WP7816T1  *(volatile uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
+  "//register UART0_WN7816  *(volatile uint8_t  *)0x4006A01C // UART 7816 Wait N Register\n"
+  "//register UART0_WF7816  *(volatile uint8_t  *)0x4006A01D // UART 7816 Wait FD Register\n"
+  "//register UART0_ET7816  *(volatile uint8_t  *)0x4006A01E // UART 7816 Error Threshold Register\n"
+  "//register UART0_TL7816  *(volatile uint8_t  *)0x4006A01F // UART 7816 Transmit Length Register\n"
+  "//register UART0_C6  *(volatile uint8_t  *)0x4006A021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART0_PCTH  *(volatile uint8_t  *)0x4006A022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART0_PCTL  *(volatile uint8_t  *)0x4006A023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART0_B1T  *(volatile uint8_t  *)0x4006A024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART0_SDTH  *(volatile uint8_t  *)0x4006A025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART0_SDTL  *(volatile uint8_t  *)0x4006A026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART0_PRE  *(volatile uint8_t  *)0x4006A027 // UART CEA709.1-B Preamble\n"
+  "//register UART0_TPL  *(volatile uint8_t  *)0x4006A028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART0_IE  *(volatile uint8_t  *)0x4006A029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART0_WB  *(volatile uint8_t  *)0x4006A02A // UART CEA709.1-B WBASE\n"
+  "//register UART0_S3  *(volatile uint8_t  *)0x4006A02B // UART CEA709.1-B Status Register\n"
+  "//register UART0_S4  *(volatile uint8_t  *)0x4006A02C // UART CEA709.1-B Status Register\n"
+  "//register UART0_RPL  *(volatile uint8_t  *)0x4006A02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART0_RPREL  *(volatile uint8_t  *)0x4006A02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART0_CPW  *(volatile uint8_t  *)0x4006A02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART0_RIDT  *(volatile uint8_t  *)0x4006A030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART0_TIDT  *(volatile uint8_t  *)0x4006A031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//register UART1_BDH  *(volatile uint8_t  *)0x4006B000 // UART Baud Rate Registers: High\n"
+  "//register UART1_BDL  *(volatile uint8_t  *)0x4006B001 // UART Baud Rate Registers: Low\n"
+  "//register UART1_C1  *(volatile uint8_t  *)0x4006B002 // UART Control Register 1\n"
+  "//register UART1_C2  *(volatile uint8_t  *)0x4006B003 // UART Control Register 2\n"
+  "//register UART1_S1  *(volatile uint8_t  *)0x4006B004 // UART Status Register 1\n"
+  "//register UART1_S2  *(volatile uint8_t  *)0x4006B005 // UART Status Register 2\n"
+  "//register UART1_C3  *(volatile uint8_t  *)0x4006B006 // UART Control Register 3\n"
+  "//register UART1_D   *(volatile uint8_t  *)0x4006B007 // UART Data Register\n"
+  "//register UART1_MA1  *(volatile uint8_t  *)0x4006B008 // UART Match Address Registers 1\n"
+  "//register UART1_MA2  *(volatile uint8_t  *)0x4006B009 // UART Match Address Registers 2\n"
+  "//register UART1_C4  *(volatile uint8_t  *)0x4006B00A // UART Control Register 4\n"
+  "//register UART1_C5  *(volatile uint8_t  *)0x4006B00B // UART Control Register 5\n"
+  "//register UART1_ED  *(volatile uint8_t  *)0x4006B00C // UART Extended Data Register\n"
+  "//register UART1_MODEM  *(volatile uint8_t  *)0x4006B00D // UART Modem Register\n"
+  "//register UART1_IR  *(volatile uint8_t  *)0x4006B00E // UART Infrared Register\n"
+  "//register UART1_PFIFO  *(volatile uint8_t  *)0x4006B010 // UART FIFO Parameters\n"
+  "//register UART1_CFIFO  *(volatile uint8_t  *)0x4006B011 // UART FIFO Control Register\n"
+  "//register UART1_SFIFO  *(volatile uint8_t  *)0x4006B012 // UART FIFO Status Register\n"
+  "//register UART1_TWFIFO  *(volatile uint8_t  *)0x4006B013 // UART FIFO Transmit Watermark\n"
+  "//register UART1_TCFIFO  *(volatile uint8_t  *)0x4006B014 // UART FIFO Transmit Count\n"
+  "//register UART1_RWFIFO  *(volatile uint8_t  *)0x4006B015 // UART FIFO Receive Watermark\n"
+  "//register UART1_RCFIFO  *(volatile uint8_t  *)0x4006B016 // UART FIFO Receive Count\n"
+  "//register UART1_C7816  *(volatile uint8_t  *)0x4006B018 // UART 7816 Control Register\n"
+  "//register UART1_IE7816  *(volatile uint8_t  *)0x4006B019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART1_IS7816  *(volatile uint8_t  *)0x4006B01A // UART 7816 Interrupt Status Register\n"
+  "//register UART1_WP7816T0  *(volatile uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
+  "//register UART1_WP7816T1  *(volatile uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
+  "//register UART1_WN7816  *(volatile uint8_t  *)0x4006B01C // UART 7816 Wait N Register\n"
+  "//register UART1_WF7816  *(volatile uint8_t  *)0x4006B01D // UART 7816 Wait FD Register\n"
+  "//register UART1_ET7816  *(volatile uint8_t  *)0x4006B01E // UART 7816 Error Threshold Register\n"
+  "//register UART1_TL7816  *(volatile uint8_t  *)0x4006B01F // UART 7816 Transmit Length Register\n"
+  "//register UART1_C6  *(volatile uint8_t  *)0x4006B021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART1_PCTH  *(volatile uint8_t  *)0x4006B022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART1_PCTL  *(volatile uint8_t  *)0x4006B023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART1_B1T  *(volatile uint8_t  *)0x4006B024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART1_SDTH  *(volatile uint8_t  *)0x4006B025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART1_SDTL  *(volatile uint8_t  *)0x4006B026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART1_PRE  *(volatile uint8_t  *)0x4006B027 // UART CEA709.1-B Preamble\n"
+  "//register UART1_TPL  *(volatile uint8_t  *)0x4006B028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART1_IE  *(volatile uint8_t  *)0x4006B029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART1_WB  *(volatile uint8_t  *)0x4006B02A // UART CEA709.1-B WBASE\n"
+  "//register UART1_S3  *(volatile uint8_t  *)0x4006B02B // UART CEA709.1-B Status Register\n"
+  "//register UART1_S4  *(volatile uint8_t  *)0x4006B02C // UART CEA709.1-B Status Register\n"
+  "//register UART1_RPL  *(volatile uint8_t  *)0x4006B02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART1_RPREL  *(volatile uint8_t  *)0x4006B02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART1_CPW  *(volatile uint8_t  *)0x4006B02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART1_RIDT  *(volatile uint8_t  *)0x4006B030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART1_TIDT  *(volatile uint8_t  *)0x4006B031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//register UART2_BDH  *(volatile uint8_t  *)0x4006C000 // UART Baud Rate Registers: High\n"
+  "//register UART2_BDL  *(volatile uint8_t  *)0x4006C001 // UART Baud Rate Registers: Low\n"
+  "//register UART2_C1  *(volatile uint8_t  *)0x4006C002 // UART Control Register 1\n"
+  "//register UART2_C2  *(volatile uint8_t  *)0x4006C003 // UART Control Register 2\n"
+  "//register UART2_S1  *(volatile uint8_t  *)0x4006C004 // UART Status Register 1\n"
+  "//register UART2_S2  *(volatile uint8_t  *)0x4006C005 // UART Status Register 2\n"
+  "//register UART2_C3  *(volatile uint8_t  *)0x4006C006 // UART Control Register 3\n"
+  "//register UART2_D   *(volatile uint8_t  *)0x4006C007 // UART Data Register\n"
+  "//register UART2_MA1  *(volatile uint8_t  *)0x4006C008 // UART Match Address Registers 1\n"
+  "//register UART2_MA2  *(volatile uint8_t  *)0x4006C009 // UART Match Address Registers 2\n"
+  "//register UART2_C4  *(volatile uint8_t  *)0x4006C00A // UART Control Register 4\n"
+  "//register UART2_C5  *(volatile uint8_t  *)0x4006C00B // UART Control Register 5\n"
+  "//register UART2_ED  *(volatile uint8_t  *)0x4006C00C // UART Extended Data Register\n"
+  "//register UART2_MODEM  *(volatile uint8_t  *)0x4006C00D // UART Modem Register\n"
+  "//register UART2_IR  *(volatile uint8_t  *)0x4006C00E // UART Infrared Register\n"
+  "//register UART2_PFIFO  *(volatile uint8_t  *)0x4006C010 // UART FIFO Parameters\n"
+  "//register UART2_CFIFO  *(volatile uint8_t  *)0x4006C011 // UART FIFO Control Register\n"
+  "//register UART2_SFIFO  *(volatile uint8_t  *)0x4006C012 // UART FIFO Status Register\n"
+  "//register UART2_TWFIFO  *(volatile uint8_t  *)0x4006C013 // UART FIFO Transmit Watermark\n"
+  "//register UART2_TCFIFO  *(volatile uint8_t  *)0x4006C014 // UART FIFO Transmit Count\n"
+  "//register UART2_RWFIFO  *(volatile uint8_t  *)0x4006C015 // UART FIFO Receive Watermark\n"
+  "//register UART2_RCFIFO  *(volatile uint8_t  *)0x4006C016 // UART FIFO Receive Count\n"
+  "//register UART2_C7816  *(volatile uint8_t  *)0x4006C018 // UART 7816 Control Register\n"
+  "//register UART2_IE7816  *(volatile uint8_t  *)0x4006C019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART2_IS7816  *(volatile uint8_t  *)0x4006C01A // UART 7816 Interrupt Status Register\n"
+  "//register UART2_WP7816T0  *(volatile uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
+  "//register UART2_WP7816T1  *(volatile uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
+  "//register UART2_WN7816  *(volatile uint8_t  *)0x4006C01C // UART 7816 Wait N Register\n"
+  "//register UART2_WF7816  *(volatile uint8_t  *)0x4006C01D // UART 7816 Wait FD Register\n"
+  "//register UART2_ET7816  *(volatile uint8_t  *)0x4006C01E // UART 7816 Error Threshold Register\n"
+  "//register UART2_TL7816  *(volatile uint8_t  *)0x4006C01F // UART 7816 Transmit Length Register\n"
+  "//register UART2_C6  *(volatile uint8_t  *)0x4006C021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART2_PCTH  *(volatile uint8_t  *)0x4006C022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART2_PCTL  *(volatile uint8_t  *)0x4006C023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART2_B1T  *(volatile uint8_t  *)0x4006C024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART2_SDTH  *(volatile uint8_t  *)0x4006C025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART2_SDTL  *(volatile uint8_t  *)0x4006C026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART2_PRE  *(volatile uint8_t  *)0x4006C027 // UART CEA709.1-B Preamble\n"
+  "//register UART2_TPL  *(volatile uint8_t  *)0x4006C028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART2_IE  *(volatile uint8_t  *)0x4006C029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART2_WB  *(volatile uint8_t  *)0x4006C02A // UART CEA709.1-B WBASE\n"
+  "//register UART2_S3  *(volatile uint8_t  *)0x4006C02B // UART CEA709.1-B Status Register\n"
+  "//register UART2_S4  *(volatile uint8_t  *)0x4006C02C // UART CEA709.1-B Status Register\n"
+  "//register UART2_RPL  *(volatile uint8_t  *)0x4006C02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART2_RPREL  *(volatile uint8_t  *)0x4006C02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART2_CPW  *(volatile uint8_t  *)0x4006C02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART2_RIDT  *(volatile uint8_t  *)0x4006C030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART2_TIDT  *(volatile uint8_t  *)0x4006C031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//\n"
+  "//// Chapter 46: Synchronous Audio Interface (SAI)\n"
+  "//register I2S0_TCSR   0x4002F000 // SAI Transmit Control Register\n"
+  "//register I2S_TCSR_TE    0x80000000 // Transmitter Enable\n"
+  "//register I2S_TCSR_STOPE    0x40000000 // Transmitter Enable in Stop mode\n"
+  "//register I2S_TCSR_DBGE    0x20000000 // Transmitter Enable in Debug mode\n"
+  "//register I2S_TCSR_BCE    0x10000000 // Bit Clock Enable\n"
+  "//register I2S_TCSR_FR    0x02000000 // FIFO Reset\n"
+  "//register I2S_TCSR_SR    0x01000000 // Software Reset\n"
+  "//register I2S_TCSR_WSF    0x00100000 // Word Start Flag\n"
+  "//register I2S_TCSR_SEF    0x00080000 // Sync Error Flag\n"
+  "//register I2S_TCSR_FEF    0x00040000 // FIFO Error Flag (underrun)\n"
+  "//register I2S_TCSR_FWF    0x00020000 // FIFO Warning Flag (empty)\n"
+  "//register I2S_TCSR_FRF    0x00010000 // FIFO Request Flag (Data Ready)\n"
+  "//register I2S_TCSR_WSIE    0x00001000 // Word Start Interrupt Enable\n"
+  "//register I2S_TCSR_SEIE    0x00000800 // Sync Error Interrupt Enable\n"
+  "//register I2S_TCSR_FEIE    0x00000400 // FIFO Error Interrupt Enable\n"
+  "//register I2S_TCSR_FWIE    0x00000200 // FIFO Warning Interrupt Enable\n"
+  "//register I2S_TCSR_FRIE    0x00000100 // FIFO Request Interrupt Enable\n"
+  "//register I2S_TCSR_FWDE    0x00000002 // FIFO Warning DMA Enable\n"
+  "//register I2S_TCSR_FRDE    0x00000001 // FIFO Request DMA Enable\n"
+  "//register I2S0_TCR1   0x4002F004 // SAI Transmit Configuration 1 Register\n"
+  "//register I2S_TCR1_TFW(n)   ( n & 0x03)       // Transmit FIFO watermark\n"
+  "//register I2S0_TCR2   0x4002F008 // SAI Transmit Configuration 2 Register\n"
+  "//register I2S_TCR2_DIV(n)   ( n & 0xff)       // Bit clock divide by (DIV+1)*2\n"
+  "//register I2S_TCR2_BCD   ( 1<<24)       // Bit clock direction\n"
+  "//register I2S_TCR2_BCP   ( 1<<25)       // Bit clock polarity\n"
+  "//register I2S_TCR2_MSEL(n)  ( (n & 3)<<26)       // MCLK select, 0=bus clock, 1=I2S0_MCLK\n"
+  "//register I2S_TCR2_BCI   ( 1<<28)       // Bit clock input\n"
+  "//register I2S_TCR2_BCS   ( 1<<29)       // Bit clock swap\n"
+  "//register I2S_TCR2_SYNC(n)  ( (n & 3)<<30)       // 0=async 1=sync with receiver\n"
+  "//register I2S0_TCR3   0x4002F00C // SAI Transmit Configuration 3 Register\n"
+  "//register I2S_TCR3_WDFL(n)  ( n & 0x0f)       // word flag configuration\n"
+  "//register I2S_TCR3_TCE   ( 0x10000)       // transmit channel enable\n"
+  "//register I2S0_TCR4   0x4002F010 // SAI Transmit Configuration 4 Register\n"
+  "//register I2S_TCR4_FSD   ( 1)        // Frame Sync Direction\n"
+  "//register I2S_TCR4_FSP   ( 2)        // Frame Sync Polarity\n"
+  "//register I2S_TCR4_FSE   ( 8)        // Frame Sync Early\n"
+  "//register I2S_TCR4_MF   ( 0x10)       // MSB First\n"
+  "//register I2S_TCR4_SYWD(n)  ( (n & 0x1f)<<8)     // Sync Width\n"
+  "//register I2S_TCR4_FRSZ(n)  ( (n & 0x0f)<<16)    // Frame Size\n"
+  "//register I2S0_TCR5   0x4002F014 // SAI Transmit Configuration 5 Register\n"
+  "//register I2S_TCR5_FBT(n)   ( (n & 0x1f)<<8)     // First Bit Shifted\n"
+  "//register I2S_TCR5_W0W(n)   ( (n & 0x1f)<<16)    // Word 0 Width\n"
+  "//register I2S_TCR5_WNW(n)   ( (n & 0x1f)<<24)    // Word N Width\n"
+  "//register I2S0_TDR0   0x4002F020 // SAI Transmit Data Register\n"
+  "//register I2S0_TDR1   0x4002F024 // SAI Transmit Data Register\n"
+  "//register I2S0_TFR0   0x4002F040 // SAI Transmit FIFO Register\n"
+  "//register I2S0_TFR1   0x4002F044 // SAI Transmit FIFO Register\n"
+  "//register I2S_TFR_RFP(n)   ( n & 7)       // read FIFO pointer\n"
+  "//register I2S_TFR_WFP(n)   ( (n & 7)<<16)       // write FIFO pointer\n"
+  "//register I2S0_TMR   0x4002F060 // SAI Transmit Mask Register\n"
+  "//register I2S_TMR_TWM(n)   ( n & 0xFFFFFFFF)\n"
+  "//register I2S0_RCSR   0x4002F080 // SAI Receive Control Register\n"
+  "//register I2S_RCSR_RE    0x80000000 // Receiver Enable\n"
+  "//register I2S_RCSR_STOPE    0x40000000 // Receiver Enable in Stop mode\n"
+  "//register I2S_RCSR_DBGE    0x20000000 // Receiver Enable in Debug mode\n"
+  "//register I2S_RCSR_BCE    0x10000000 // Bit Clock Enable\n"
+  "//register I2S_RCSR_FR    0x02000000 // FIFO Reset\n"
+  "//register I2S_RCSR_SR    0x01000000 // Software Reset\n"
+  "//register I2S_RCSR_WSF    0x00100000 // Word Start Flag\n"
+  "//register I2S_RCSR_SEF    0x00080000 // Sync Error Flag\n"
+  "//register I2S_RCSR_FEF    0x00040000 // FIFO Error Flag (underrun)\n"
+  "//register I2S_RCSR_FWF    0x00020000 // FIFO Warning Flag (empty)\n"
+  "//register I2S_RCSR_FRF    0x00010000 // FIFO Request Flag (Data Ready)\n"
+  "//register I2S_RCSR_WSIE    0x00001000 // Word Start Interrupt Enable\n"
+  "//register I2S_RCSR_SEIE    0x00000800 // Sync Error Interrupt Enable\n"
+  "//register I2S_RCSR_FEIE    0x00000400 // FIFO Error Interrupt Enable\n"
+  "//register I2S_RCSR_FWIE    0x00000200 // FIFO Warning Interrupt Enable\n"
+  "//register I2S_RCSR_FRIE    0x00000100 // FIFO Request Interrupt Enable\n"
+  "//register I2S_RCSR_FWDE    0x00000002 // FIFO Warning DMA Enable\n"
+  "//register I2S_RCSR_FRDE    0x00000001 // FIFO Request DMA Enable\n"
+  "//register I2S0_RCR1   0x4002F084 // SAI Receive Configuration 1 Register\n"
+  "//register I2S_RCR1_RFW(n)   ( n & 0x03)       // Receive FIFO watermark\n"
+  "//register I2S0_RCR2   0x4002F088 // SAI Receive Configuration 2 Register\n"
+  "//register I2S_RCR2_DIV(n)   ( n & 0xff)       // Bit clock divide by (DIV+1)*2\n"
+  "//register I2S_RCR2_BCD   ( 1<<24)       // Bit clock direction\n"
+  "//register I2S_RCR2_BCP   ( 1<<25)       // Bit clock polarity\n"
+  "//register I2S_RCR2_MSEL(n)  ( (n & 3)<<26)       // MCLK select, 0=bus clock, 1=I2S0_MCLK\n"
+  "//register I2S_RCR2_BCI   ( 1<<28)       // Bit clock input\n"
+  "//register I2S_RCR2_BCS   ( 1<<29)       // Bit clock swap\n"
+  "//register I2S_RCR2_SYNC(n)  ( (n & 3)<<30)       // 0=async 1=sync with receiver\n"
+  "//register I2S0_RCR3   0x4002F08C // SAI Receive Configuration 3 Register\n"
+  "//register I2S_RCR3_WDFL(n)  ( n & 0x0f)       // word flag configuration\n"
+  "//register I2S_RCR3_RCE   ( 0x10000)       // receive channel enable\n"
+  "//register I2S0_RCR4   0x4002F090 // SAI Receive Configuration 4 Register\n"
+  "//register I2S_RCR4_FSD   ( 1)        // Frame Sync Direction\n"
+  "//register I2S_RCR4_FSP   ( 2)        // Frame Sync Polarity\n"
+  "//register I2S_RCR4_FSE   ( 8)        // Frame Sync Early\n"
+  "//register I2S_RCR4_MF   ( 0x10)       // MSB First\n"
+  "//register I2S_RCR4_SYWD(n)  ( (n & 0x1f)<<8)     // Sync Width\n"
+  "//register I2S_RCR4_FRSZ(n)  ( (n & 0x0f)<<16)    // Frame Size\n"
+  "//register I2S0_RCR5   0x4002F094 // SAI Receive Configuration 5 Register\n"
+  "//register I2S_RCR5_FBT(n)   ( (n & 0x1f)<<8)     // First Bit Shifted\n"
+  "//register I2S_RCR5_W0W(n)   ( (n & 0x1f)<<16)    // Word 0 Width\n"
+  "//register I2S_RCR5_WNW(n)   ( (n & 0x1f)<<24)    // Word N Width\n"
+  "//register I2S0_RDR0   0x4002F0A0 // SAI Receive Data Register\n"
+  "//register I2S0_RDR1   0x4002F0A4 // SAI Receive Data Register\n"
+  "//register I2S0_RFR0   0x4002F0C0 // SAI Receive FIFO Register\n"
+  "//register I2S0_RFR1   0x4002F0C4 // SAI Receive FIFO Register\n"
+  "//register I2S_RFR_RFP(n)   ( n & 7)       // read FIFO pointer\n"
+  "//register I2S_RFR_WFP(n)   ( (n & 7)<<16)       // write FIFO pointer\n"
+  "//register I2S0_RMR   0x4002F0E0 // SAI Receive Mask Register\n"
+  "//register I2S_RMR_RWM(n)   ( n & 0xFFFFFFFF)\n"
+  "//register I2S0_MCR   0x4002F100 // SAI MCLK Control Register\n"
+  "//register I2S_MCR_DUF   ( 1<<31)       // Divider Update Flag\n"
+  "//register I2S_MCR_MOE   ( 1<<30)       // MCLK Output Enable\n"
+  "//register I2S_MCR_MICS(n)   ( (n & 3)<<24)       // MCLK Input Clock Select\n"
+  "//register I2S0_MDR   0x4002F104 // SAI MCLK Divide Register\n"
+  "//register I2S_MDR_FRACT(n)  ( (n & 0xff)<<12)    // MCLK Fraction\n"
+  "//register I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide\n"
+  "\n"
+  "// Chapter 47: General-Purpose Input/Output (GPIO)\n"
+  "register GPIOA_PDOR   at 0x400FF000 : UInt32 // Port Data Output Register\n"
+  "register GPIOA_PSOR   at 0x400FF004 : UInt32 // Port Set Output Register\n"
+  "register GPIOA_PCOR   at 0x400FF008 : UInt32 // Port Clear Output Register\n"
+  "register GPIOA_PTOR   at 0x400FF00C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOA_PDIR   at 0x400FF010 : UInt32 // Port Data Input Register\n"
+  "register GPIOA_PDDR   at 0x400FF014 : UInt32 // Port Data Direction Register\n"
+  "register GPIOB_PDOR   at 0x400FF040 : UInt32 // Port Data Output Register\n"
+  "register GPIOB_PSOR   at 0x400FF044 : UInt32 // Port Set Output Register\n"
+  "register GPIOB_PCOR   at 0x400FF048 : UInt32 // Port Clear Output Register\n"
+  "register GPIOB_PTOR   at 0x400FF04C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOB_PDIR   at 0x400FF050 : UInt32 // Port Data Input Register\n"
+  "register GPIOB_PDDR   at 0x400FF054 : UInt32 // Port Data Direction Register\n"
+  "register GPIOC_PDOR   at 0x400FF080 : UInt32 // Port Data Output Register\n"
+  "register GPIOC_PSOR   at 0x400FF084 : UInt32 // Port Set Output Register\n"
+  "register GPIOC_PCOR   at 0x400FF088 : UInt32 // Port Clear Output Register\n"
+  "register GPIOC_PTOR   at 0x400FF08C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOC_PDIR   at 0x400FF090 : UInt32 // Port Data Input Register\n"
+  "register GPIOC_PDDR   at 0x400FF094 : UInt32 // Port Data Direction Register\n"
+  "register GPIOD_PDOR   at 0x400FF0C0 : UInt32 // Port Data Output Register\n"
+  "register GPIOD_PSOR   at 0x400FF0C4 : UInt32 // Port Set Output Register\n"
+  "register GPIOD_PCOR   at 0x400FF0C8 : UInt32 // Port Clear Output Register\n"
+  "register GPIOD_PTOR   at 0x400FF0CC : UInt32 // Port Toggle Output Register\n"
+  "register GPIOD_PDIR   at 0x400FF0D0 : UInt32 // Port Data Input Register\n"
+  "register GPIOD_PDDR   at 0x400FF0D4 : UInt32 // Port Data Direction Register\n"
+  "register GPIOE_PDOR   at 0x400FF100 : UInt32 // Port Data Output Register\n"
+  "register GPIOE_PSOR   at 0x400FF104 : UInt32 // Port Set Output Register\n"
+  "register GPIOE_PCOR   at 0x400FF108 : UInt32 // Port Clear Output Register\n"
+  "register GPIOE_PTOR   at 0x400FF10C : UInt32 // Port Toggle Output Register\n"
+  "register GPIOE_PDIR   at 0x400FF110 : UInt32 // Port Data Input Register\n"
+  "register GPIOE_PDDR   at 0x400FF114 : UInt32 // Port Data Direction Register\n"
+  "//\n"
+  "//// Chapter 48: Touch sense input (TSI)\n"
+  "//register TSI0_GENCS   0x40045000 // General Control and Status Register\n"
+  "//register TSI_GENCS_LPCLKS   0x10000000  // \n"
+  "//register TSI_GENCS_LPSCNITV(n)  (((n) & 15) << 24)  // \n"
+  "//register TSI_GENCS_NSCN(n)  (((n) & 31) << 19)  // \n"
+  "//register TSI_GENCS_PS(n)   (((n) & 7) << 16)  // \n"
+  "//register TSI_GENCS_EOSF    0x00008000  // \n"
+  "//register TSI_GENCS_OUTRGF   0x00004000  // \n"
+  "//register TSI_GENCS_EXTERF   0x00002000  // \n"
+  "//register TSI_GENCS_OVRF    0x00001000  // \n"
+  "//register TSI_GENCS_SCNIP    0x00000200  // \n"
+  "//register TSI_GENCS_SWTS    0x00000100  // \n"
+  "//register TSI_GENCS_TSIEN    0x00000080  // \n"
+  "//register TSI_GENCS_TSIIE    0x00000040  // \n"
+  "//register TSI_GENCS_ERIE    0x00000020  // \n"
+  "//register TSI_GENCS_ESOR    0x00000010  // \n"
+  "//register TSI_GENCS_STM    0x00000002  // \n"
+  "//register TSI_GENCS_STPE    0x00000001  // \n"
+  "//register TSI0_SCANC   0x40045004 // SCAN Control Register\n"
+  "//register TSI_SCANC_REFCHRG(n)  (((n) & 15) << 24)  // \n"
+  "//register TSI_SCANC_EXTCHRG(n)  (((n) & 7) << 16)  // \n"
+  "//register TSI_SCANC_SMOD(n)  (((n) & 255) << 8)  // \n"
+  "//register TSI_SCANC_AMCLKS(n)  (((n) & 3) << 3)  // \n"
+  "//register TSI_SCANC_AMPSC(n)  (((n) & 7) << 0)  // \n"
+  "//register TSI0_PEN   0x40045008 // Pin Enable Register\n"
+  "//register TSI0_WUCNTR   0x4004500C // Wake-Up Channel Counter Register\n"
+  "//register TSI0_CNTR1   0x40045100 // Counter Register\n"
+  "//register TSI0_CNTR3   0x40045104 // Counter Register\n"
+  "//register TSI0_CNTR5   0x40045108 // Counter Register\n"
+  "//register TSI0_CNTR7   0x4004510C // Counter Register\n"
+  "//register TSI0_CNTR9   0x40045110 // Counter Register\n"
+  "//register TSI0_CNTR11   0x40045114 // Counter Register\n"
+  "//register TSI0_CNTR13   0x40045118 // Counter Register\n"
+  "//register TSI0_CNTR15   0x4004511C // Counter Register\n"
+  "//register TSI0_THRESHOLD   0x40045120 // Low Power Channel Threshold Register\n"
+  "//\n"
+  "//// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)\n"
+  "//register NVIC_ENABLE_IRQ(n) (*((volatile uint32_t *)0xE000E100 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_DISABLE_IRQ(n) (*((volatile uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_SET_PENDING(n) (*((volatile uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_CLEAR_PENDING(n) (*((volatile uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//\n"
+  "//register NVIC_ISER0   0xE000E100\n"
+  "//register NVIC_ISER1   0xE000E104\n"
+  "//register NVIC_ICER0   0xE000E180\n"
+  "//register NVIC_ICER1   0xE000E184\n"
+  "//\n"
+  "//// 0 = highest priority\n"
+  "//// Cortex-M4: 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224,240\n"
+  "//// Cortex-M0: 0,64,128,192\n"
+  "//register NVIC_SET_PRIORITY(irqnum, priority)  (*((volatile uint8_t *)0xE000E400 + (irqnum)) = (uint8_t)(priority))\n"
+  "//register NVIC_GET_PRIORITY(irqnum) (*((uint8_t *)0xE000E400 + (irqnum)))\n"
+  "//\n"
+  "//register IRQ_DMA_CH0  0\n"
+  "//register IRQ_DMA_CH1  1\n"
+  "//register IRQ_DMA_CH2  2\n"
+  "//register IRQ_DMA_CH3  3\n"
+  "//register IRQ_DMA_CH4  4\n"
+  "//register IRQ_DMA_CH5  5\n"
+  "//register IRQ_DMA_CH6  6\n"
+  "//register IRQ_DMA_CH7  7\n"
+  "//register IRQ_DMA_CH8  8\n"
+  "//register IRQ_DMA_CH9  9\n"
+  "//register IRQ_DMA_CH10  10\n"
+  "//register IRQ_DMA_CH11  11\n"
+  "//register IRQ_DMA_CH12  12\n"
+  "//register IRQ_DMA_CH13  13\n"
+  "//register IRQ_DMA_CH14  14\n"
+  "//register IRQ_DMA_CH15  15\n"
+  "//register IRQ_DMA_ERROR  16\n"
+  "//register IRQ_FTFL_COMPLETE 18\n"
+  "//register IRQ_FTFL_COLLISION 19\n"
+  "//register IRQ_LOW_VOLTAGE  20\n"
+  "//register IRQ_LLWU  21\n"
+  "//register IRQ_WDOG  22\n"
+  "//register IRQ_I2C0  24\n"
+  "//register IRQ_I2C1  25\n"
+  "//register IRQ_SPI0  26\n"
+  "//register IRQ_SPI1  27\n"
+  "//register IRQ_CAN_MESSAGE  29\n"
+  "//register IRQ_CAN_BUS_OFF  30\n"
+  "//register IRQ_CAN_ERROR  31\n"
+  "//register IRQ_CAN_TX_WARN  32\n"
+  "//register IRQ_CAN_RX_WARN  33\n"
+  "//register IRQ_CAN_WAKEUP  34\n"
+  "//register IRQ_I2S0_TX  35\n"
+  "//register IRQ_I2S0_RX  36\n"
+  "//register IRQ_UART0_LON  44\n"
+  "//register IRQ_UART0_STATUS 45\n"
+  "//register IRQ_UART0_ERROR  46\n"
+  "//register IRQ_UART1_STATUS 47\n"
+  "//register IRQ_UART1_ERROR  48\n"
+  "//register IRQ_UART2_STATUS 49\n"
+  "//register IRQ_UART2_ERROR  50\n"
+  "//register IRQ_ADC0  57\n"
+  "//register IRQ_ADC1  58\n"
+  "//register IRQ_CMP0  59\n"
+  "//register IRQ_CMP1  60\n"
+  "//register IRQ_CMP2  61\n"
+  "//register IRQ_FTM0  62\n"
+  "//register IRQ_FTM1  63\n"
+  "//register IRQ_FTM2  64\n"
+  "//register IRQ_CMT   65\n"
+  "//register IRQ_RTC_ALARM  66\n"
+  "//register IRQ_RTC_SECOND  67\n"
+  "//register IRQ_PIT_CH0  68\n"
+  "//register IRQ_PIT_CH1  69\n"
+  "//register IRQ_PIT_CH2  70\n"
+  "//register IRQ_PIT_CH3  71\n"
+  "//register IRQ_PDB   72\n"
+  "//register IRQ_USBOTG  73\n"
+  "//register IRQ_USBDCD  74\n"
+  "//register IRQ_DAC0  81\n"
+  "//register IRQ_TSI   83\n"
+  "//register IRQ_MCG   84\n"
+  "//register IRQ_LPTMR  85\n"
+  "//register IRQ_PORTA  87\n"
+  "//register IRQ_PORTB  88\n"
+  "//register IRQ_PORTC  89\n"
+  "//register IRQ_PORTD  90\n"
+  "//register IRQ_PORTE  91\n"
+  "//register IRQ_SOFTWARE  94\n"
+  "//register NVIC_NUM_INTERRUPTS 95\n"
+  "//\n"
+  "\n"
+  "//System Control Space (SCS), ARMv7 ref manual, B3.2, page 708\n"
+  "//register SCB_CPUID  *(const    uint32_t *)0xE000ED00 // CPUID Base Register\n"
+  "\n"
+  "register ICSR at 0xE000_ED04 : UInt32 { // Interrupt Control and State\n"
+  "  NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,\n"
+  "  ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]\n"
+  "}\n"
+  "\n"
+  "register VTOR at 0xE000ED08 : UInt32 // Vector Table Offset\n"
+  "\n"
+  "register AIRCR at 0xE000ED0C : UInt32 { // Application Interrupt and Reset Control\n"
+  "  VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
+  "  5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET \n"
+  "}\n"
+  "\n"
+  "//register SCB_SCR    0xE000ED10 // System Control Register\n"
+  "//register SCB_CCR    0xE000ED14 // Configuration and Control\n"
+  "//register SCB_SHPR1   0xE000ED18 // System Handler Priority Register 1\n"
+  "//register SCB_SHPR2   0xE000ED1C // System Handler Priority Register 2\n"
+  "//register SCB_SHPR3   0xE000ED20 // System Handler Priority Register 3\n"
+  "//register SCB_SHCSR   0xE000ED24 // System Handler Control and State\n"
+  "//register SCB_CFSR   0xE000ED28 // Configurable Fault Status Register\n"
+  "//register SCB_HFSR   0xE000ED2C // HardFault Status\n"
+  "//register SCB_DFSR   0xE000ED30 // Debug Fault Status\n"
+  "//register SCB_MMFAR   0xE000ED34 // MemManage Fault Address\n"
+  "\n"
+  "register SYST_CSR at 0xE000_E010 : UInt32 { // SysTick Control and Status\n"
+  "  15, \n"
+  "  COUNTFLAG,\n"
+  "  13,\n"
+  "  CLKSOURCE,\n"
+  "  TICKINT,\n"
+  "  ENABLE\n"
+  "}\n"
+  "\n"
+  "register SYST_RVR   at 0xE000_E014 : UInt32 // SysTick Reload Value Register\n"
+  "\n"
+  "register SYST_CVR   at 0xE000_E018 : UInt32 // SysTick Current Value Register\n"
+  "\n"
+  "register SYST_CALIB  @ro at 0xE000_E01C : UInt32 // SysTick Calibration Value\n"
+  "\n"
+  "\n"
+  "//register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control\n"
+  "//register ARM_DEMCR_TRCENA  (1 << 24)  // Enable debugging & monitoring blocks\n"
+  "//register ARM_DWT_CTRL   0xE0001000 // DWT control register\n"
+  "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
+  "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
+
+const cRegularFileWrapper gWrapperFile_7_embeddedTargets (
+  "mk20dx256.plm",
+  "plm",
+  true, // Text file
+  135418, // Text length
+  gWrapperFileContent_7_embeddedTargets
+) ;
+
+//--- All files of 'microcontrollers' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_1 [6] = {
+  & gWrapperFile_3_embeddedTargets,
+  & gWrapperFile_4_embeddedTargets,
+  & gWrapperFile_5_embeddedTargets,
+  & gWrapperFile_6_embeddedTargets,
+  & gWrapperFile_7_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of 'microcontrollers' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_1 [1] = {
+  NULL
+} ;
+
+//--- Directory 'microcontrollers'
+
+const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets (
+  "microcontrollers",
+  5,
+  gWrapperAllFiles_embeddedTargets_1,
+  0,
+  gWrapperAllDirectories_embeddedTargets_1
+) ;
+
+//--- File 'teensy-3-1-interrupt/build-as.py'
+
+const char * gWrapperFileContent_8_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_8_embeddedTargets (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_8_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/build-verbose.py'
+
+const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
+  "build-verbose.py",
+  "py",
+  true, // Text file
+  1002, // Text length
+  gWrapperFileContent_9_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/build.py'
+
+const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadReportHook (a,b,fileSize): \n"
+  "  if fileSize < (1 << 10):\n"
+  "    sizeString = str (fileSize)\n"
+  "  else:\n"
+  "    if fileSize < (1 << 20):\n"
+  "      sizeString = str (fileSize >> 10) + \"Ki\"\n"
+  "    else:\n"
+  "      sizeString = str (fileSize >> 20) + \"Mi\"\n"
+  "  # \",\" at the end of the line is important!\n"
+  "  print \"% 3.1f%% of %sB\\r\" % (min(100.0, float(a * b) / fileSize * 100.0), sizeString),\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runSingleCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  print \"URL: \"+ archiveURL\n"
+  "  print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "  print \"\"\n"
+  "  fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "  ok = fileSize > 1000000\n"
+  "  if ok:\n"
+  "    runSingleCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "  else:\n"
+  "    print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runSingleCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runSingleCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runSingleCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "#---\n"
+  "os.chdir (scriptDir)\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"display-object-size\":\n"
+  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"object-dump\":\n"
+  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, \"-Sdh\", \"-Mforce-thumb\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_embeddedTargets (
+  "build.py",
+  "py",
+  true, // Text file
+  44328, // Text length
+  gWrapperFileContent_10_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/clean.py'
+
+const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Directories to clean\n"
+  "dir1 = scriptDir + \"/objects\"\n"
+  "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
+  "clean.py",
+  "py",
+  true, // Text file
+  1264, // Text length
+  gWrapperFileContent_11_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/display-obj-dump.py'
+
+const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_12_embeddedTargets (
+  "display-obj-dump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_12_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/display-obj-size.py'
+
+const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_13_embeddedTargets (
+  "display-obj-size.py",
+  "py",
+  true, // Text file
+  1013, // Text length
+  gWrapperFileContent_13_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-interrupt/flash-and-run.py'
+
+const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
+  "flash-and-run.py",
+  "py",
+  true, // Text file
+  997, // Text length
+  gWrapperFileContent_14_embeddedTargets
+) ;
+
+//--- File 'sources/linker-script.ld'
+
+const char * gWrapperFileContent_15_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                   Memory                                   */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 256k \n"
+  "  sram_u (rwx) : ORIGIN = 0x20000000, LENGTH = 32k \n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__sram_u_end = 0x20000000 + 32k ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                ISR Vectors                                 */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Code                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "  } > flash\n"
+  "\n"
+  "  .ARM.exidx : {\n"
+  "    *(.ARM.exidx* .gnu.linkonce.armexidx.*);\n"
+  "    __code_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          Data (initialized data)                           */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > sram_u AT > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          BSS (uninitialized data)                          */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                System stack                                */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .system_stack :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_start = . ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Heap                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __sram_u_end ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
+  "linker-script.ld",
+  "ld",
+  true, // Text file
+  5218, // Text length
+  gWrapperFileContent_15_embeddedTargets
+) ;
+
+//--- File 'sources/target-exception.c'
+
+const char * gWrapperFileContent_16_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void raise_exception (const type_Int32 inCode,\n"
+  "                             const char * inSourceFile,\n"
+  "                             const type_UInt32 inSourceLine) {\n"
+  " //--- Mask interrupt: write 1 into FAULTMASK register\n"
+  "  const uint32_t maskValue = 1 ;\n"
+  "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
+  "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_16_embeddedTargets (
+  "target-exception.c",
+  "c",
+  true, // Text file
+  634, // Text length
+  gWrapperFileContent_16_embeddedTargets
+) ;
+
+//--- File 'sources/target.c'
+
+const char * gWrapperFileContent_17_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void ResetISR (void) {\n"
+  "//---------1- Boot routines\n"
+  "  boot () ;\n"
+  "  // now we're in PEE mode\n"
+  "  // configure USB for 48 MHz clock\n"
+  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
+  "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
+  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
+  "\n"
+  "//---------2- Initialisation de la section .bss\n"
+  "  extern unsigned __bss_start ;\n"
+  "  extern unsigned __bss_end ;\n"
+  "  unsigned * p = & __bss_start ;\n"
+  "  while (p != & __bss_end) {\n"
+  "    * p = 0 ;\n"
+  "    p ++ ;\n"
+  "  }\n"
+  "//---------3- Copy de la section .data\n"
+  "  extern unsigned __data_start ;\n"
+  "  extern unsigned __data_end ;\n"
+  "  extern unsigned __data_load_start ;\n"
+  "  unsigned * pSrc = & __data_load_start ;\n"
+  "  unsigned * pDest = & __data_start ;\n"
+  "  while (pDest != & __data_end) {\n"
+  "    * pDest = * pSrc ;\n"
+  "    pDest ++ ;\n"
+  "    pSrc ++ ;\n"
+  "  }\n"
+  "//---------4- Init Routines\n"
+  "  init () ;\n"
+  "//---------5- User routines\n"
+  "  proc_setup () ;\n"
+  "  while (1) {\n"
+  "    proc_loop () ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   Vector table                                                                                                      *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned * mStackPointer ;\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  void (* mCoreSystemHandlerVector [15]) (void) ;\n"
+  "//--- Non-Core Vectors\n"
+  "  void (* mNonCoreHandlerVector [240]) (void) ;\n"
+  "//--- Flash magic values\n"
+  "  int mFlash [4] ;\n"
+  "} vectorStructSeq ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "extern unsigned __system_stack_end ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "const vectorStructSeq vector __attribute__ ((section (\".isr_vector\"))) = {\n"
+  "  & __system_stack_end, // 0\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  { ResetISR, // 1\n"
+  "    proc_NMIHandler, // 2\n"
+  "    proc_HardFaultHandler, // 3\n"
+  "    proc_MemManageHandler, // 4\n"
+  "    proc_BusFaultHandler, // 5\n"
+  "    proc_UsageFaultHandler, // 6\n"
+  "    NULL, // 7 (reserved)\n"
+  "    NULL, // 8 (reserved)\n"
+  "    NULL, // 9 (reserved)\n"
+  "    NULL, // 10 (reserved)\n"
+  "    proc_svcHandler, // 11\n"
+  "    proc_DebugMonitorHandler, // 12\n"
+  "    NULL, // 13 (reserved)\n"
+  "    proc_PendSVHandler, // 14\n"
+  "    proc_systickHandler // 15\n"
+  "  },\n"
+  "//--- Non-Core Vectors\n"
+  "  { proc_DMAChannel0TranfertCompleteHandler, // 16\n"
+  "    proc_DMAChannel1TranfertCompleteHandler, // 17\n"
+  "    proc_DMAChannel2TranfertCompleteHandler, // 18\n"
+  "    proc_DMAChannel3TranfertCompleteHandler, // 19\n"
+  "    proc_DMAChannel4TranfertCompleteHandler, // 20\n"
+  "    proc_DMAChannel5TranfertCompleteHandler, // 21\n"
+  "    proc_DMAChannel6TranfertCompleteHandler, // 22\n"
+  "    proc_DMAChannel7TranfertCompleteHandler, // 23\n"
+  "    proc_DMAChannel8TranfertCompleteHandler, // 24\n"
+  "    proc_DMAChannel9TranfertCompleteHandler, // 25\n"
+  "    proc_DMAChannel10TranfertCompleteHandler, // 26\n"
+  "    proc_DMAChannel11TranfertCompleteHandler, // 27\n"
+  "    proc_DMAChannel12TranfertCompleteHandler, // 28\n"
+  "    proc_DMAChannel13TranfertCompleteHandler, // 29\n"
+  "    proc_DMAChannel14TranfertCompleteHandler, // 30\n"
+  "    proc_DMAChannel15TranfertCompleteHandler, // 31\n"
+  "    proc_DMAErrorHandler, // 32\n"
+  "    NULL, // 33\n"
+  "    proc_flashMemoryCommandCompleteHandler, // 34\n"
+  "    proc_flashMemoryReadCollisionHandler, // 35\n"
+  "    proc_modeControllerHandler, // 36\n"
+  "    proc_LLWUHandler, // 37\n"
+  "    proc_WDOGEWMHandler, // 38\n"
+  "    NULL, // 39\n"
+  "    proc_I2C0Handler, // 40\n"
+  "    proc_I2C1Handler, // 41\n"
+  "    proc_SPI0Handler, // 42\n"
+  "    proc_SPI1Handler, // 43\n"
+  "    NULL, // 44\n"
+  "    proc_CAN0MessageBufferHandler, // 45\n"
+  "    proc_CAN0BusOffHandler, // 46\n"
+  "    proc_CAN0ErrorHandler, // 47\n"
+  "    proc_CAN0TransmitWarningHandler, // 48\n"
+  "    proc_CAN0ReceiveWarningHandler, // 49\n"
+  "    proc_CAN0WakeUpHandler, // 50\n"
+  "    proc_I2S0TransmitHandler, // 51\n"
+  "    proc_I2S0ReceiveHandler, // 52\n"
+  "    NULL, // 53\n"
+  "    NULL, // 54\n"
+  "    NULL, // 55\n"
+  "    NULL, // 56\n"
+  "    NULL, // 57\n"
+  "    NULL, // 58\n"
+  "    NULL, // 59\n"
+  "    proc_UART0LONHandler, // 60\n"
+  "    proc_UART0StatusHandler, // 61\n"
+  "    proc_UART0ErrorHandler, // 62\n"
+  "    proc_UART1StatusHandler, // 63\n"
+  "    proc_UART1ErrorHandler, // 64\n"
+  "    proc_UART2StatusHandler, // 65\n"
+  "    proc_UART2ErrorHandler, // 66\n"
+  "    NULL, // 67\n"
+  "    NULL, // 68\n"
+  "    NULL, // 69\n"
+  "    NULL, // 70\n"
+  "    NULL, // 71\n"
+  "    NULL, // 72\n"
+  "    proc_ADC0Handler, // 73\n"
+  "    proc_ADC1Handler, // 74\n"
+  "    proc_CMP0Handler, // 75\n"
+  "    proc_CMP1Handler, // 76\n"
+  "    proc_CMP2Handler, // 77\n"
+  "    proc_FMT0Handler, // 78\n"
+  "    proc_FMT1Handler, // 79\n"
+  "    proc_FMT2Handler, // 80\n"
+  "    proc_CMTHandler, // 81\n"
+  "    proc_RTCAlarmHandler, // 82\n"
+  "    proc_RTCSecondHandler, // 83\n"
+  "    proc_PITChannel0Handler, // 84\n"
+  "    proc_PITChannel1Handler, // 85\n"
+  "    proc_PITChannel2Handler, // 86\n"
+  "    proc_PITChannel3Handler, // 87\n"
+  "    proc_PDBHandler, // 88\n"
+  "    proc_USBOTGHandler, // 89\n"
+  "    proc_USBChargerDetectHandler, // 90\n"
+  "    NULL, // 91\n"
+  "    NULL, // 92\n"
+  "    NULL, // 93\n"
+  "    NULL, // 94\n"
+  "    NULL, // 95\n"
+  "    NULL, // 96\n"
+  "    proc_DAC0Handler, // 97\n"
+  "    NULL, // 98\n"
+  "    proc_TSIHandler, // 99\n"
+  "    proc_MCGHandler, // 100\n"
+  "    proc_lowPowerTimerHandler, // 101\n"
+  "    NULL, // 102\n"
+  "    proc_pinDetectPortAHandler, // 103\n"
+  "    proc_pinDetectPortBHandler, // 104\n"
+  "    proc_pinDetectPortCHandler, // 105\n"
+  "    proc_pinDetectPortDHandler, // 106\n"
+  "    proc_pinDetectPortEHandler, // 107\n"
+  "    NULL, // 108\n"
+  "    NULL, // 109\n"
+  "    proc_softwareInterruptHandler, // 110\n"
+  "    NULL, // 111\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
+  "  },\n"
+  "//--- Flash magic values\n"
+  "  {-1, -1, -1, -2}\n"
+  "} ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_17_embeddedTargets (
+  "target.c",
+  "c",
+  true, // Text file
+  6877, // Text length
+  gWrapperFileContent_17_embeddedTargets
+) ;
+
+//--- All files of 'sources' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_3 [4] = {
+  & gWrapperFile_15_embeddedTargets,
+  & gWrapperFile_16_embeddedTargets,
+  & gWrapperFile_17_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of 'sources' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_3 [1] = {
+  NULL
+} ;
+
+//--- Directory 'sources'
+
+const cDirectoryWrapper gWrapperDirectory_3_embeddedTargets (
+  "sources",
+  3,
+  gWrapperAllFiles_embeddedTargets_3,
+  0,
+  gWrapperAllDirectories_embeddedTargets_3
+) ;
+
+//--- All files of 'teensy-3-1-interrupt' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [8] = {
+  & gWrapperFile_8_embeddedTargets,
+  & gWrapperFile_9_embeddedTargets,
+  & gWrapperFile_10_embeddedTargets,
+  & gWrapperFile_11_embeddedTargets,
+  & gWrapperFile_12_embeddedTargets,
+  & gWrapperFile_13_embeddedTargets,
+  & gWrapperFile_14_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-interrupt' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_2 [2] = {
+  & gWrapperDirectory_3_embeddedTargets,
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-interrupt'
+
+const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets (
+  "teensy-3-1-interrupt",
+  7,
+  gWrapperAllFiles_embeddedTargets_2,
+  1,
+  gWrapperAllDirectories_embeddedTargets_2
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build-as.py'
+
+const char * gWrapperFileContent_18_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_18_embeddedTargets (
+  "build-as.py",
+  "py",
+  true, // Text file
+  996, // Text length
+  gWrapperFileContent_18_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build-verbose.py'
+
+const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"all\", \"1\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
+  "build-verbose.py",
+  "py",
+  true, // Text file
+  1002, // Text length
+  gWrapperFileContent_19_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/build.py'
+
+const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess, sys, os, copy\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
+  "\n"
+  "if sys.version_info >= (2, 6) :\n"
+  "  import multiprocessing\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def processorCount () :\n"
+  "  if sys.version_info >= (2, 6) :\n"
+  "    coreCount = multiprocessing.cpu_count ()\n"
+  "  else:\n"
+  "    coreCount = 1\n"
+  "  return coreCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLACK () :\n"
+  "  return '\\033[90m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def RED () :\n"
+  "  return '\\033[91m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def GREEN () :\n"
+  "  return '\\033[92m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def YELLOW () :\n"
+  "  return '\\033[93m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLUE () :\n"
+  "  return '\\033[94m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def MAGENTA () :\n"
+  "  return '\\033[95m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def CYAN () :\n"
+  "  return '\\033[96m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def WHITE () :\n"
+  "  return '\\033[97m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def ENDC () :\n"
+  "  return '\\033[0m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD () :\n"
+  "  return '\\033[1m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def UNDERLINE () :\n"
+  "  return '\\033[4m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BLINK () :\n"
+  "  return '\\033[5m'\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_BLUE () :\n"
+  "  return BOLD () + BLUE ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_GREEN () :\n"
+  "  return BOLD () + GREEN ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def BOLD_RED () :\n"
+  "  return BOLD () + RED ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runHiddenCommand (cmd) :\n"
+  "  result = \"\"\n"
+  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      result += line\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      if childProcess.returncode != 0 :\n"
+  "        sys.exit (childProcess.returncode)\n"
+  "      return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runCommand (cmd, title, showCommand) :\n"
+  "  if title != \"\":\n"
+  "    print BOLD_BLUE () + title + ENDC ()\n"
+  "  if (title == \"\") or showCommand :\n"
+  "    cmdAsString = \"\"\n"
+  "    for s in cmd:\n"
+  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "        cmdAsString += '\"' + s + '\" '\n"
+  "      else:\n"
+  "        cmdAsString += s + ' '\n"
+  "    print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runInThread (job, displayLock, terminationSemaphore):\n"
+  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
+  "  while True:\n"
+  "    line = childProcess.stdout.readline ()\n"
+  "    if line != \"\":\n"
+  "      displayLock.acquire ()\n"
+  "      sys.stdout.write (line) # Print without newline\n"
+  "      displayLock.release ()\n"
+  "    else:\n"
+  "      childProcess.wait ()\n"
+  "      job.mReturnCode = childProcess.returncode\n"
+  "      terminationSemaphore.release ()\n"
+  "      break\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def modificationDateForFile (dateCacheDictionary, file):\n"
+  "  absFilePath = os.path.abspath (file)\n"
+  "  if dateCacheDictionary.has_key (absFilePath) :\n"
+  "    return dateCacheDictionary [absFilePath]\n"
+  "  elif not os.path.exists (absFilePath):\n"
+  "    date = sys.float_info.max # Very far in future\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "  else:\n"
+  "    date = os.path.getmtime (absFilePath)\n"
+  "    dateCacheDictionary [absFilePath] = date\n"
+  "    return date\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class PostCommand:\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, title = \"\"):\n"
+  "    self.mCommand = []\n"
+  "    self.mTitle = title\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Job:\n"
+  "  mTarget = \"\"\n"
+  "  mCommand = []\n"
+  "  mTitle = \"\"\n"
+  "  mRequiredFiles = []\n"
+  "  mPostCommands = []\n"
+  "  mReturnCode = None\n"
+  "  mPriority = 0\n"
+  "  mState = 0 # 0: waiting for execution\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mCommand = copy.deepcopy (command)\n"
+  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
+  "    self.mTitle = copy.deepcopy (title)\n"
+  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
+  "    self.mPriority = priority\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    displayLock.acquire ()\n"
+  "    if self.mTitle != \"\":\n"
+  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
+  "    if (self.mTitle == \"\") or showCommand :\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
+  "    postCommand = self.mPostCommands [0]\n"
+  "    self.mCommand = postCommand.mCommand\n"
+  "    displayLock.acquire ()\n"
+  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
+  "    if showCommand:\n"
+  "      cmdAsString = \"\"\n"
+  "      for s in self.mCommand:\n"
+  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "          cmdAsString += '\"' + s + '\" '\n"
+  "        else:\n"
+  "          cmdAsString += s + ' '\n"
+  "      print cmdAsString\n"
+  "    displayLock.release ()\n"
+  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
+  "    thread.start()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Rule:\n"
+  "  mTarget = \"\"\n"
+  "  mDependences = []\n"
+  "  mCommand = []\n"
+  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
+  "  mTitle = \"\"\n"
+  "  mPostCommands = []\n"
+  "  mPriority = 0\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def __init__ (self, target, title = \"\"):\n"
+  "    self.mTarget = copy.deepcopy (target)\n"
+  "    self.mDependences = []\n"
+  "    self.mCommand = []\n"
+  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
+  "    self.mPostCommands = []\n"
+  "    self.mPriority = 0\n"
+  "    if title == \"\":\n"
+  "      self.mTitle = \"Building \" + target\n"
+  "    else:\n"
+  "      self.mTitle = copy.deepcopy (title)\n"
+  "  \n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
+  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
+  "      if os.path.exists (filePath):\n"
+  "        f = open (filePath, \"r\")\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
+  "        f.close ()\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
+  "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
+  "        for s in liste:\n"
+  "          components = s.split (':')\n"
+  "          target = components [0].replace (\"\\x01\", \" \")\n"
+  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
+  "          #print \"Secondary target '\" + target + \"'\"\n"
+  "          for src in components [1].split ():\n"
+  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
+  "            #print \"  '\" + secondarySource + \"'\"\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
+  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
+  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
+  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "class Make:\n"
+  "  mRuleList = []\n"
+  "  mJobList = []\n"
+  "  mErrorCount = 0\n"
+  "  mModificationDateDictionary = {}\n"
+  "  mGoals = {}\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addRule (self, rule):\n"
+  "    self.mRuleList.append (copy.deepcopy (rule))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printRules (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
+  "      for dep in rule.mDependences:\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
+  "      s = \"  Command: \"\n"
+  "      for cmd in rule.mCommand:\n"
+  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "      print s\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
+  "      index = 0\n"
+  "      for (command, title) in rule.mPostCommands:\n"
+  "        index = index + 1\n"
+  "        s = \"  Post command \" + str (index) + \": \"\n"
+  "        for cmd in command:\n"
+  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
+  "        print s\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
+  "    s = \"digraph G {\\n\"\n"
+  "    s += \"  node [fontname=courier]\\n\"\n"
+  "    arrowSet = set ()\n"
+  "    for rule in self.mRuleList:\n"
+  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
+  "      for dep in rule.mDependences:\n"
+  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
+  "    for arrow in arrowSet:\n"
+  "      s += arrow\n"
+  "    s += \"}\\n\"\n"
+  "    f = open (dotFileName, \"w\")\n"
+  "    f.write (s)\n"
+  "    f.close ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def checkRules (self):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      ruleList = copy.deepcopy (self.mRuleList)\n"
+  "      index = 0\n"
+  "      looping = True\n"
+  "    #--- loop on rules\n"
+  "      while looping:\n"
+  "        looping = False\n"
+  "        while index < len (ruleList):\n"
+  "          aRule = ruleList [index]\n"
+  "          index = index + 1\n"
+  "        #--- Check dependance files have rule for building, or does exist\n"
+  "          depIdx = 0\n"
+  "          while depIdx < len (aRule.mDependences):\n"
+  "            dep = aRule.mDependences [depIdx]\n"
+  "            depIdx = depIdx + 1\n"
+  "            hasBuildRule = False\n"
+  "            for r in ruleList:\n"
+  "              if dep == r.mTarget:\n"
+  "                hasBuildRule = True\n"
+  "                break\n"
+  "            if not hasBuildRule:\n"
+  "              looping = True\n"
+  "              if not os.path.exists (os.path.abspath (dep)):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
+  "              depIdx = depIdx - 1\n"
+  "              aRule.mDependences.pop (depIdx)\n"
+  "        #--- Rule with no dependances\n"
+  "          if len (aRule.mDependences) == 0 :\n"
+  "            looping = True\n"
+  "            index = index - 1\n"
+  "            ruleList.pop (index)\n"
+  "            idx = 0\n"
+  "            while idx < len (ruleList):\n"
+  "              r = ruleList [idx]\n"
+  "              idx = idx + 1\n"
+  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
+  "                r.mDependences.remove (aRule.mTarget)\n"
+  "    #--- Error if rules remain\n"
+  "      if len (ruleList) > 0:\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
+  "        for aRule in ruleList: \n"
+  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
+  "          for dep in aRule.mDependences:\n"
+  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def existsJobForTarget (self, target):\n"
+  "    for job in self.mJobList:\n"
+  "      if job.mTarget == target:\n"
+  "        return True\n"
+  "    return False\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
+  "  #--- If there are errors, return immediatly\n"
+  "    if self.mErrorCount != 0:\n"
+  "      return False\n"
+  "  #--- Target already in job list \?\n"
+  "    if self.existsJobForTarget (target):\n"
+  "      return True # yes, return target will be built\n"
+  "  #--- Find a rule for making the target\n"
+  "    absTarget = os.path.abspath (target)\n"
+  "    rule = None\n"
+  "    matchCount = 0\n"
+  "    for r in self.mRuleList:\n"
+  "      if target == r.mTarget:\n"
+  "        matchCount = matchCount + 1\n"
+  "        rule = r\n"
+  "    if matchCount == 0:\n"
+  "      absTarget = os.path.abspath (target)\n"
+  "      if not os.path.exists (absTarget):\n"
+  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
+  "        self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error or target exists, and no rule for building it\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      return False # Error\n"
+  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
+  "    appendToJobList = not os.path.exists (absTarget)\n"
+  "  #--- Build primary dependences\n"
+  "    jobDependenceFiles = []\n"
+  "    for dependence in rule.mDependences:\n"
+  "      willBeBuilt = self.makeJob (dependence)\n"
+  "      if willBeBuilt:\n"
+  "        jobDependenceFiles.append (dependence)\n"
+  "        appendToJobList = True\n"
+  "  #--- Check primary file modification dates\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      for source in rule.mDependences:\n"
+  "        sourceDateModification = os.path.getmtime (source)\n"
+  "        if targetDateModification < sourceDateModification:\n"
+  "          appendToJobList = True\n"
+  "          break\n"
+  "  #--- Check for secondary dependancy files\n"
+  "    if not appendToJobList:\n"
+  "      targetDateModification = os.path.getmtime (absTarget)\n"
+  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
+  "        appendToJobList = True\n"
+  "  #--- Append to job list\n"
+  "    if appendToJobList:\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
+  "  #--- Return\n"
+  "    return appendToJobList\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "  #Job state\n"
+  "  # 0: waiting\n"
+  "  # 1:running\n"
+  "  # 2: waiting for executing post command\n"
+  "  # 3:executing for executing post command\n"
+  "  # 4: completed\n"
+  "\n"
+  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
+  "    if self.mErrorCount == 0:\n"
+  "      if len (self.mJobList) == 0:\n"
+  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
+  "      else:\n"
+  "      #--- Sort jobs following their priorities\n"
+  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
+  "      #--- Run\n"
+  "        if maxConcurrentJobs <= 0:\n"
+  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
+  "        jobCount = 0 ;\n"
+  "        terminationSemaphore = threading.Semaphore (0)\n"
+  "        displayLock = threading.Lock ()\n"
+  "        loop = True\n"
+  "        returnCode = 0\n"
+  "        while loop:\n"
+  "        #--- Launch jobs in parallel\n"
+  "          for job in self.mJobList:\n"
+  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
+  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
+  "                #--- Create target directory if does not exist\n"
+  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
+  "                if not os.path.exists (absTargetDirectory):\n"
+  "                  displayLock.acquire ()\n"
+  "                  runHiddenCommand ([\"mkdir\", \"-p\", absTargetDirectory])\n"
+  "                  # runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
+  "                  displayLock.release ()\n"
+  "                #--- Run job\n"
+  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 1 # Means is running\n"
+  "              elif job.mState == 2: # Waiting for executing post command\n"
+  "                job.mReturnCode = None # Means post command not terminated\n"
+  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
+  "                jobCount = jobCount + 1\n"
+  "                job.mState = 3 # Means post command is running\n"
+  "        #--- Wait for a job termination\n"
+  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
+  "          terminationSemaphore.acquire ()\n"
+  "        #--- Checks for terminated jobs\n"
+  "          index = 0\n"
+  "          while index < len (self.mJobList):\n"
+  "            job = self.mJobList [index]\n"
+  "            index = index + 1\n"
+  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Means Terminated\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mPostCommands.pop (0) # Remove completed post command\n"
+  "              if len (job.mPostCommands) > 0:\n"
+  "                job.mState = 2 # Ready to execute next post command\n"
+  "              else:\n"
+  "                job.mState = 4 # Completed\n"
+  "                index = index - 1 # For removing job from list\n"
+  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
+  "              jobCount = jobCount - 1\n"
+  "              job.mState = 4 # Completed\n"
+  "              index = index - 1 # For removing job from list\n"
+  "            elif job.mState == 4: # Completed: delete job\n"
+  "              index = index - 1\n"
+  "              self.mJobList.pop (index) # Remove terminated job\n"
+  "              #displayLock.acquire ()\n"
+  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
+  "              #--- Remove dependences from this job\n"
+  "              idx = 0\n"
+  "              while idx < len (self.mJobList):\n"
+  "                aJob = self.mJobList [idx]\n"
+  "                idx = idx + 1\n"
+  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
+  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
+  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
+  "              #displayLock.release ()\n"
+  "              #--- Signal error \?\n"
+  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
+  "                self.mErrorCount = self.mErrorCount + 1\n"
+  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
+  "                if (returnCode == 0) and (jobCount > 0) :\n"
+  "                  print \"Wait for job termination...\"\n"
+  "                returnCode = job.mReturnCode\n"
+  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
+  "    matchCount = 0\n"
+  "    result = \"\"\n"
+  "    for sourceDir in directoryList:\n"
+  "      sourcePath = sourceDir + \"/\" + file\n"
+  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
+  "        matchCount = matchCount + 1\n"
+  "        result = sourcePath\n"
+  "    if matchCount == 0:\n"
+  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "    elif matchCount > 1:\n"
+  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "      result = \"\"\n"
+  "    return result\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def addGoal (self, goal, targetList, message):\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
+  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printGoals (self):\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    for goalKey in self.mGoals.keys ():\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
+  "      (targetList, message) = self.mGoals [goalKey]\n"
+  "      for target in targetList:\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
+  "        \n"
+  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
+  "      for target in targetList:\n"
+  "        self.makeJob (target)\n"
+  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
+  "    else:\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
+  "      for key in self.mGoals:\n"
+  "        (targetList, message) = self.mGoals [key]\n"
+  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
+  "      print BOLD_RED () + errorMessage + ENDC ()\n"
+  "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def enterError (self, message):\n"
+  "    print BOLD_RED () + message + ENDC ()\n"
+  "    self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCountAndExitOnError (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def printErrorCount (self):\n"
+  "    if self.mErrorCount == 1:\n"
+  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
+  "    elif self.mErrorCount > 1:\n"
+  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def errorCount (self):\n"
+  "    return self.mErrorCount\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def sourceList ():\n"
+  "  return [\"plm.c\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asDir ():\n"
+  "  return \"as\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Tool dir                                                                                                           *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def toolDir ():\n"
+  "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
+  "  if SYSTEM_NAME == \"Darwin\":\n"
+  "    MACHINE = \"i386\"\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Compiler invocation                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def compiler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Display object size invocation                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def displayObjectSize ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Object Dump invocation                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def dumpObjectCode ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#    C Compiler options                                                                                                *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cCompilerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-Wall\")\n"
+  "  result.append (\"-Werror\")\n"
+  "  result.append (\"-Wreturn-type\")\n"
+  "  result.append (\"-Wformat\")\n"
+  "  result.append (\"-Wsign-compare\")\n"
+  "  result.append (\"-Wpointer-arith\")\n"
+  "  result.append (\"-Wparentheses\")\n"
+  "  result.append (\"-Wcast-align\")\n"
+  "  result.append (\"-Wcast-qual\")\n"
+  "  result.append (\"-Wwrite-strings\")\n"
+  "  result.append (\"-Wswitch\")\n"
+  "  result.append (\"-Wuninitialized\")\n"
+  "  result.append (\"-fno-builtin\")\n"
+  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
+  "  result.append (\"-ffunction-sections\")\n"
+  "  result.append (\"-fdata-sections\")\n"
+  "  result.append (\"-std=c99\")\n"
+  "  result.append (\"-Wstrict-prototypes\")\n"
+  "  result.append (\"-Wbad-function-cast\")\n"
+  "  result.append (\"-Wmissing-declarations\")\n"
+  "  result.append (\"-Wimplicit-function-declaration\")\n"
+  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
+  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
+  "  result.append (\"-Wmissing-prototypes\")\n"
+  "  result.append (\"-Os\")\n"
+  "  result.append (\"-fomit-frame-pointer\")\n"
+  "  result.append (\"-foptimize-register-move\") \n"
+  "  result.append (\"-I../build\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker invocation                                                                                                  *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linker ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Linker options                                                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-nostartfiles\")\n"
+  "  result.append (\"-Wl,--fatal-warnings\")\n"
+  "  result.append (\"-Wl,--warn-common\")\n"
+  "  result.append (\"-Wl,--no-undefined\")\n"
+  "  result.append (\"-Wl,--cref\")\n"
+  "  result.append (\"-lc\")\n"
+  "  result.append (\"-lgcc\")\n"
+  "  result.append (\"-Wl,-static\")\n"
+  "  result.append (\"-Wl,-s\")\n"
+  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   objcopy invocation                                                                                                 *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def objcopy ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objcopy\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Teensy loader                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def teensyLoader ():\n"
+  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "downloadProgression = 0.0\n"
+  "\n"
+  "def downloadReportHook (a, b, fileSize) :\n"
+  "  global downloadProgression\n"
+  "  newProgression = min (100.0, float(a * b) / fileSize * 100.0)\n"
+  "  if newProgression > downloadProgression :\n"
+  "    downloadProgression = downloadProgression + 1.0\n"
+  "    sys.stdout.write(\".\")\n"
+  "    sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  global downloadProgression\n"
+  "  downloadProgression = 0.0\n"
+  "  runHiddenCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  runHiddenCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  runHiddenCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  #print \"URL: \"+ archiveURL\n"
+  "  #print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  try:\n"
+  "    urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "    print \"\"\n"
+  "    fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "    ok = fileSize > 1000000\n"
+  "    if ok:\n"
+  "      runHiddenCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "    else:\n"
+  "      print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
+  "      sys.exit (1)\n"
+  "  except:\n"
+  "    print BOLD_RED () + \"Error: no network connection\" + ENDC ()\n"
+  "    sys.exit (1)\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   MAIN                                                                                                               *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "goal = \"all\"\n"
+  "if len (sys.argv) > 1 :\n"
+  "  goal = sys.argv [1]\n"
+  "#--- Get max parallel jobs as first argument\n"
+  "maxParallelJobs = 0 # 0 means use host processor count\n"
+  "if len (sys.argv) > 2 :\n"
+  "  maxParallelJobs = int (sys.argv [2])\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Download compiler tool if needed\n"
+  "toolDirectory = toolDir ()\n"
+  "if not os.path.exists (toolDirectory):\n"
+  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
+  "  archiveName = os.path.basename (toolDirectory)\n"
+  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
+  "  downloadArchive (archiveURL, toolDirectory)\n"
+  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "  os.chdir (installDir)\n"
+  "  runHiddenCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "  runHiddenCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "  runHiddenCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "  runHiddenCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "#---\n"
+  "os.chdir (scriptDir)\n"
+  "print \"Product directory: \" + scriptDir\n"
+  "#--- Build python makefile\n"
+  "makefile = Make ()\n"
+  "#--- Add C files compile rule\n"
+  "objectList = []\n"
+  "asObjectList = []\n"
+  "for source in sourceList ():\n"
+  "#--- Compile\n"
+  "  object = objectDir () + \"/\" + source + \".o\"\n"
+  "  rule = Rule (object, \"Compiling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", object]\n"
+  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  objectList.append (object)\n"
+  "#--- Assembling\n"
+  "  asObject = asDir () + \"/\" + source + \".s\"\n"
+  "  rule = Rule (asObject, \"Assembling \" + source)\n"
+  "  rule.mDependences.append (\"sources/\" + source)\n"
+  "  rule.mCommand += compiler ()\n"
+  "  rule.mCommand += cCompilerOptions ()\n"
+  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "  rule.mCommand += [\"-o\", asObject]\n"
+  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
+  "  makefile.addRule (rule)\n"
+  "  asObjectList.append (asObject)\n"
+  "#--- Add linker rule\n"
+  "productELF = productDir () + \"/product.elf\"\n"
+  "rule = Rule (productELF, \"Linking \" + productELF)\n"
+  "rule.mDependences += objectList\n"
+  "rule.mCommand += linker ()\n"
+  "rule.mCommand += linkerOptions ()\n"
+  "rule.mCommand += objectList\n"
+  "rule.mCommand += [\"-o\", productELF]\n"
+  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add objcopy rule\n"
+  "productHEX = productDir () + \"/product.ihex\"\n"
+  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "rule.mDependences += [productELF]\n"
+  "rule.mCommand += objcopy ()\n"
+  "rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "rule.mCommand += [productELF]\n"
+  "rule.mCommand += [productHEX]\n"
+  "makefile.addRule (rule)\n"
+  "#--- Add goals\n"
+  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
+  "#--- Build\n"
+  "#makefile.printRules ()\n"
+  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "#--- Build Ok \?\n"
+  "makefile.printErrorCountAndExitOnError ()\n"
+  "#--- Run \?\n"
+  "if goal == \"run\":\n"
+  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"display-object-size\":\n"
+  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
+  "elif goal == \"object-dump\":\n"
+  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
+  "  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, \"-Sdh\", \"-Mforce-thumb\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  else:\n"
+  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
+
+const cRegularFileWrapper gWrapperFile_20_embeddedTargets (
+  "build.py",
+  "py",
+  true, // Text file
+  44577, // Text length
+  gWrapperFileContent_20_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/clean.py'
+
+const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "#--- Directories to clean\n"
+  "dir1 = scriptDir + \"/objects\"\n"
+  "dir2 = scriptDir + \"/product\"\n"
+  "dir3 = scriptDir + \"/as\"\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"rm\", \"-fr\", dir1, dir2, dir3], cwd=scriptDir)\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
+  "clean.py",
+  "py",
+  true, // Text file
+  1264, // Text length
+  gWrapperFileContent_21_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/display-obj-dump.py'
+
+const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_22_embeddedTargets (
+  "display-obj-dump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_22_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/display-obj-size.py'
+
+const char * gWrapperFileContent_23_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_23_embeddedTargets (
+  "display-obj-size.py",
+  "py",
+  true, // Text file
+  1013, // Text length
+  gWrapperFileContent_23_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/flash-and-run.py'
+
+const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "try:\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "except :\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_24_embeddedTargets (
+  "flash-and-run.py",
+  "py",
+  true, // Text file
+  1036, // Text length
+  gWrapperFileContent_24_embeddedTargets
+) ;
+
+//--- File 'sources/linker-script.ld'
+
+const char * gWrapperFileContent_25_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                   Memory                                   */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "MEMORY {\n"
+  "  flash (rx) : ORIGIN = 0, LENGTH = 256k \n"
+  "  sram_u (rwx) : ORIGIN = 0x20000000, LENGTH = 32k \n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__sram_u_end = 0x20000000 + 32k ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                ISR Vectors                                 */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .vectors : {\n"
+  "    __vectors_start = . ;\n"
+  "    KEEP (*(.isr_vector)) ;\n"
+  "    __vectors_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Code                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .text : {\n"
+  "    FILL(0xff)\n"
+  "    __code_start = . ;\n"
+  "  /*--- Tableau des routines d'initialisation */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_start = . ;\n"
+  "    KEEP (*(init_routine_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __init_routine_array_end = . ;\n"
+  "  /*--- Initialisation des objets globaux C++ */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_start = . ;\n"
+  "    KEEP (*(.init_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __constructor_array_end = . ;\n"
+  "  /*--- Real Interrupt Service Routine Array */\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_start = . ;\n"
+  "    KEEP (*(real_time_isr_array)) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __real_time_isr_array_end = . ;\n"
+  "  /*--- Code */\n"
+  "    *(.text.*) ;\n"
+  "    *(.text) ;\n"
+  "    *(text) ;\n"
+  "    *(.gnu.linkonce.t.*) ;\n"
+  "  /*---- ROM data ----*/\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.rodata*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.gnu.linkonce.r.*);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7t);\n"
+  "    . = ALIGN(4);\n"
+  "    *(.glue_7);\n"
+  "    . = ALIGN(4);\n"
+  "  } > flash\n"
+  "\n"
+  "  .ARM.exidx : {\n"
+  "    *(.ARM.exidx* .gnu.linkonce.armexidx.*);\n"
+  "    __code_end = . ;\n"
+  "  } > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          Data (initialized data)                           */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .data : {\n"
+  "    FILL (0xFF)\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_start = . ;\n"
+  "    * (.data.*init*) ;\n"
+  "    * (.data*) ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __data_end = . ;\n"
+  "  } > sram_u AT > flash\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__data_load_start = LOADADDR (.data) ;\n"
+  "__data_load_end   = LOADADDR (.data) + SIZEOF (.data) ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                          BSS (uninitialized data)                          */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .bss : {\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_start = . ;\n"
+  "    * (.bss.*) ;\n"
+  "    * (.bss) ;\n"
+  "    * (COMMON) ;\n"
+  "    . = ALIGN(4);\n"
+  "    __bss_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                System stack                                */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .system_stack :{\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_start = . ;\n"
+  "    . += 1k ;\n"
+  "    . = ALIGN (4) ;\n"
+  "    __system_stack_end = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "/*                                                                            */\n"
+  "/*                                    Heap                                    */\n"
+  "/*                                                                            */\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "SECTIONS {\n"
+  "  .heap : {\n"
+  "    . = ALIGN (4) ;\n"
+  "    __heap_start = . ;\n"
+  "  } > sram_u\n"
+  "}\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n"
+  "\n"
+  "__heap_end = __sram_u_end ;\n"
+  "\n"
+  "/*----------------------------------------------------------------------------*/\n" ;
+
+const cRegularFileWrapper gWrapperFile_25_embeddedTargets (
+  "linker-script.ld",
+  "ld",
+  true, // Text file
+  5218, // Text length
+  gWrapperFileContent_25_embeddedTargets
+) ;
+
+//--- File 'sources/target-exception.c'
+
+const char * gWrapperFileContent_26_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void raise_exception (const type_Int32 inCode,\n"
+  "                             const char * inSourceFile,\n"
+  "                             const type_UInt32 inSourceLine) {\n"
+  " //--- Mask interrupt: write 1 into FAULTMASK register\n"
+  "  const uint32_t maskValue = 1 ;\n"
+  "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
+  "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_26_embeddedTargets (
+  "target-exception.c",
+  "c",
+  true, // Text file
+  634, // Text length
+  gWrapperFileContent_26_embeddedTargets
+) ;
+
+//--- File 'sources/target.c'
+
+const char * gWrapperFileContent_27_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "static void ResetISR (void) {\n"
+  "//---------1- Boot routines\n"
+  "  boot () ;\n"
+  "  // now we're in PEE mode\n"
+  "  // configure USB for 48 MHz clock\n"
+  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
+  "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
+  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
+  "\n"
+  "//---------2- Initialisation de la section .bss\n"
+  "  extern unsigned __bss_start ;\n"
+  "  extern unsigned __bss_end ;\n"
+  "  unsigned * p = & __bss_start ;\n"
+  "  while (p != & __bss_end) {\n"
+  "    * p = 0 ;\n"
+  "    p ++ ;\n"
+  "  }\n"
+  "//---------3- Copy de la section .data\n"
+  "  extern unsigned __data_start ;\n"
+  "  extern unsigned __data_end ;\n"
+  "  extern unsigned __data_load_start ;\n"
+  "  unsigned * pSrc = & __data_load_start ;\n"
+  "  unsigned * pDest = & __data_start ;\n"
+  "  while (pDest != & __data_end) {\n"
+  "    * pDest = * pSrc ;\n"
+  "    pDest ++ ;\n"
+  "    pSrc ++ ;\n"
+  "  }\n"
+  "//---------4- Init Routines\n"
+  "  init () ;\n"
+  "//---------5- User routines\n"
+  "  proc_setup () ;\n"
+  "  while (1) {\n"
+  "    proc_loop () ;\n"
+  "  }\n"
+  "}\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "//   Vector table                                                                                                      *\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "typedef struct {\n"
+  "  unsigned * mStackPointer ;\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  void (* mCoreSystemHandlerVector [15]) (void) ;\n"
+  "//--- Non-Core Vectors\n"
+  "  void (* mNonCoreHandlerVector [240]) (void) ;\n"
+  "//--- Flash magic values\n"
+  "  int mFlash [4] ;\n"
+  "} vectorStructSeq ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "extern unsigned __system_stack_end ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "const vectorStructSeq vector __attribute__ ((section (\".isr_vector\"))) = {\n"
+  "  & __system_stack_end, // 0\n"
+  "//--- ARM Core System Handler Vectors\n"
+  "  { ResetISR, // 1\n"
+  "    NULL, // 2\n"
+  "    NULL, // 3\n"
+  "    NULL, // 4\n"
+  "    NULL, // 5\n"
+  "    NULL, // 6\n"
+  "    NULL, // 7 (reserved)\n"
+  "    NULL, // 8 (reserved)\n"
+  "    NULL, // 9 (reserved)\n"
+  "    NULL, // 10 (reserved)\n"
+  "    NULL, // 11\n"
+  "    NULL, // 12\n"
+  "    NULL, // 13 (reserved)\n"
+  "    NULL, // 14\n"
+  "    proc_systickHandler // 15\n"
+  "  },\n"
+  "//--- Non-Core Vectors\n"
+  "  { NULL, // 16\n"
+  "    NULL, // 17\n"
+  "    NULL, // 18\n"
+  "    NULL, // 19\n"
+  "    NULL, // 20\n"
+  "    NULL, // 21\n"
+  "    NULL, // 22\n"
+  "    NULL, // 23\n"
+  "    NULL, // 24\n"
+  "    NULL, // 25\n"
+  "    NULL, // 26\n"
+  "    NULL, // 27\n"
+  "    NULL, // 28\n"
+  "    NULL, // 29\n"
+  "    NULL, // 30\n"
+  "    NULL, // 31\n"
+  "    NULL, // 32\n"
+  "    NULL, // 33\n"
+  "    NULL, // 34\n"
+  "    NULL, // 35\n"
+  "    NULL, // 36\n"
+  "    NULL, // 37\n"
+  "    NULL, // 38\n"
+  "    NULL, // 39\n"
+  "    NULL, // 40\n"
+  "    NULL, // 41\n"
+  "    NULL, // 42\n"
+  "    NULL, // 43\n"
+  "    NULL, // 44\n"
+  "    NULL, // 45\n"
+  "    NULL, // 46\n"
+  "    NULL, // 47\n"
+  "    NULL, // 48\n"
+  "    NULL, // 49\n"
+  "    NULL, // 50\n"
+  "    NULL, // 51\n"
+  "    NULL, // 52\n"
+  "    NULL, // 53\n"
+  "    NULL, // 54\n"
+  "    NULL, // 55\n"
+  "    NULL, // 56\n"
+  "    NULL, // 57\n"
+  "    NULL, // 58\n"
+  "    NULL, // 59\n"
+  "    NULL, // 60\n"
+  "    NULL, // 61\n"
+  "    NULL, // 62\n"
+  "    NULL, // 63\n"
+  "    NULL, // 64\n"
+  "    NULL, // 65\n"
+  "    NULL, // 66\n"
+  "    NULL, // 67\n"
+  "    NULL, // 68\n"
+  "    NULL, // 69\n"
+  "    NULL, // 70\n"
+  "    NULL, // 71\n"
+  "    NULL, // 72\n"
+  "    NULL, // 73\n"
+  "    NULL, // 74\n"
+  "    NULL, // 75\n"
+  "    NULL, // 76\n"
+  "    NULL, // 77\n"
+  "    NULL, // 78\n"
+  "    NULL, // 79\n"
+  "    NULL, // 80\n"
+  "    NULL, // 81\n"
+  "    NULL, // 82\n"
+  "    NULL, // 83\n"
+  "    NULL, // 84\n"
+  "    NULL, // 85\n"
+  "    NULL, // 86\n"
+  "    NULL, // 87\n"
+  "    NULL, // 88\n"
+  "    NULL, // 89\n"
+  "    NULL, // 90\n"
+  "    NULL, // 91\n"
+  "    NULL, // 92\n"
+  "    NULL, // 93\n"
+  "    NULL, // 94\n"
+  "    NULL, // 95\n"
+  "    NULL, // 96\n"
+  "    NULL, // 97\n"
+  "    NULL, // 98\n"
+  "    NULL, // 99\n"
+  "    NULL, // 100\n"
+  "    NULL, // 101\n"
+  "    NULL, // 102\n"
+  "    NULL, // 103\n"
+  "    NULL, // 104\n"
+  "    NULL, // 105\n"
+  "    NULL, // 106\n"
+  "    NULL, // 107\n"
+  "    NULL, // 108\n"
+  "    NULL, // 109\n"
+  "    NULL, // 110\n"
+  "    NULL, // 111\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
+  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
+  "  },\n"
+  "//--- Flash magic values\n"
+  "  {-1, -1, -1, -2}\n"
+  "} ;\n"
+  "\n"
+  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_27_embeddedTargets (
+  "target.c",
+  "c",
+  true, // Text file
+  5256, // Text length
+  gWrapperFileContent_27_embeddedTargets
+) ;
+
+//--- All files of 'sources' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_5 [4] = {
+  & gWrapperFile_25_embeddedTargets,
+  & gWrapperFile_26_embeddedTargets,
+  & gWrapperFile_27_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of 'sources' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_5 [1] = {
+  NULL
+} ;
+
+//--- Directory 'sources'
+
+const cDirectoryWrapper gWrapperDirectory_5_embeddedTargets (
+  "sources",
+  3,
+  gWrapperAllFiles_embeddedTargets_5,
+  0,
+  gWrapperAllDirectories_embeddedTargets_5
+) ;
+
+//--- All files of 'teensy-3-1-sequential-systick' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [8] = {
+  & gWrapperFile_18_embeddedTargets,
+  & gWrapperFile_19_embeddedTargets,
+  & gWrapperFile_20_embeddedTargets,
+  & gWrapperFile_21_embeddedTargets,
+  & gWrapperFile_22_embeddedTargets,
+  & gWrapperFile_23_embeddedTargets,
+  & gWrapperFile_24_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-sequential-systick' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [2] = {
+  & gWrapperDirectory_5_embeddedTargets,
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-sequential-systick'
+
+const cDirectoryWrapper gWrapperDirectory_4_embeddedTargets (
+  "teensy-3-1-sequential-systick",
+  7,
+  gWrapperAllFiles_embeddedTargets_4,
+  1,
+  gWrapperAllDirectories_embeddedTargets_4
+) ;
+
+//--- All files of '' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_0 [4] = {
+  & gWrapperFile_0_embeddedTargets,
+  & gWrapperFile_1_embeddedTargets,
+  & gWrapperFile_2_embeddedTargets,
+  NULL
+} ;
+
+//--- All sub-directories of '' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_0 [4] = {
+  & gWrapperDirectory_1_embeddedTargets,
+  & gWrapperDirectory_2_embeddedTargets,
+  & gWrapperDirectory_4_embeddedTargets,
+  NULL
+} ;
+
+//--- Directory ''
+
+const cDirectoryWrapper gWrapperDirectory_0_embeddedTargets (
+  "",
+  3,
+  gWrapperAllFiles_embeddedTargets_0,
+  3,
+  gWrapperAllDirectories_embeddedTargets_0
 ) ;
 
 
@@ -11561,6 +19509,38 @@ static void routine_before (C_Compiler * inCompiler
       }
     }
   }
+  {
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_embeddedTargets) ;
+    const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedTargets.reader_value ()).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 16)) ;
+      inCompiler->printMessage (GALGAS_string ("Embedded targets:\n")  COMMA_SOURCE_FILE ("embedded-targets.galgas", 17)) ;
+      cEnumerator_stringlist enumerator_824 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_824.hasCurrentObject ()) {
+        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_824.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+        if (kBoolTrue == test_5) {
+          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_824.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
+        }
+        enumerator_824.gotoNextObject () ;
+      }
+    }
+    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedTargets.reader_value ()) ;
+    const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_6) {
+      GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 26)) ;
+      cEnumerator_stringlist enumerator_1105 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_1105.hasCurrentObject ()) {
+        GALGAS_string var_filePath = var_path.add_operation (enumerator_1105.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)) ;
+        GALGAS_string var_dir = var_filePath.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 30)) ;
+        var_dir.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 31)) ;
+        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1105.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
+        GALGAS_bool joker_1377 ; // Joker input parameter
+        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1377, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
+        enumerator_1105.gotoNextObject () ;
+      }
+    }
+  }
 }
 
 
@@ -12659,7044 +20639,6 @@ GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclarati
     }else{
       result = f (inObject, inCompiler COMMA_THERE) ;
     }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Abstract category method '@abstractDeclaration enterInContext'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInContext> gCategoryMethodTable_abstractDeclaration_enterInContext ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
-                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) {
-  gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_enterInContext (void) {
-  gCategoryMethodTable_abstractDeclaration_enterInContext.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_enterInContext (NULL,
-                                                               freeCategoryMethod_abstractDeclaration_enterInContext) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObject,
-                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
-                                        GALGAS_semanticContext & io_ioContext,
-                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_enterInContext f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_enterInContext (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_enterInContext (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Abstract category method '@abstractDeclaration semanticAnalysis'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_semanticAnalysis> gCategoryMethodTable_abstractDeclaration_semanticAnalysis ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
-                                           categoryMethodSignature_abstractDeclaration_semanticAnalysis inMethod) {
-  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_semanticAnalysis (void) {
-  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
-                                                                 freeCategoryMethod_abstractDeclaration_semanticAnalysis) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
-                                          const GALGAS_semanticContext constin_inContext,
-                                          GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_semanticAnalysis f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inContext, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
-mAttribute_mTemporaryIndex (),
-mAttribute_mExceptionSetupRoutinePriorityMap (),
-mAttribute_mExceptionLoopRoutinePriorityMap (),
-mAttribute_mInitRoutinePriorityMap (),
-mAttribute_mBootRoutinePriorityMap (),
-mAttribute_mSubprogramInvocationGraph () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::~ GALGAS_semanticTemporariesStruct (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS_uint & inOperand0,
-                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
-                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                    const GALGAS_subprogramInvocationGraph & inOperand5) :
-mAttribute_mTemporaryIndex (inOperand0),
-mAttribute_mExceptionSetupRoutinePriorityMap (inOperand1),
-mAttribute_mExceptionLoopRoutinePriorityMap (inOperand2),
-mAttribute_mInitRoutinePriorityMap (inOperand3),
-mAttribute_mBootRoutinePriorityMap (inOperand4),
-mAttribute_mSubprogramInvocationGraph (inOperand5) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticTemporariesStruct (GALGAS_uint::constructor_default (HERE),
-                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_initRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_bootRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_subprogramInvocationGraph::constructor_emptyGraph (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_new (const GALGAS_uint & inOperand0,
-                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
-                                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                                    const GALGAS_subprogramInvocationGraph & inOperand5 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mTemporaryIndex.objectCompare (inOperand.mAttribute_mTemporaryIndex) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionSetupRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionLoopRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitRoutinePriorityMap.objectCompare (inOperand.mAttribute_mInitRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBootRoutinePriorityMap.objectCompare (inOperand.mAttribute_mBootRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubprogramInvocationGraph.objectCompare (inOperand.mAttribute_mSubprogramInvocationGraph) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_semanticTemporariesStruct::isValid (void) const {
-  return mAttribute_mTemporaryIndex.isValid () && mAttribute_mExceptionSetupRoutinePriorityMap.isValid () && mAttribute_mExceptionLoopRoutinePriorityMap.isValid () && mAttribute_mInitRoutinePriorityMap.isValid () && mAttribute_mBootRoutinePriorityMap.isValid () && mAttribute_mSubprogramInvocationGraph.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTemporariesStruct::drop (void) {
-  mAttribute_mTemporaryIndex.drop () ;
-  mAttribute_mExceptionSetupRoutinePriorityMap.drop () ;
-  mAttribute_mExceptionLoopRoutinePriorityMap.drop () ;
-  mAttribute_mInitRoutinePriorityMap.drop () ;
-  mAttribute_mBootRoutinePriorityMap.drop () ;
-  mAttribute_mSubprogramInvocationGraph.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @semanticTemporariesStruct:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mTemporaryIndex.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_semanticTemporariesStruct::reader_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTemporaryIndex ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionSetupRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLoopRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::reader_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubprogramInvocationGraph ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @semanticTemporariesStruct type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTemporariesStruct ("semanticTemporariesStruct",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticTemporariesStruct::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticTemporariesStruct::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticTemporariesStruct (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  const GALGAS_semanticTemporariesStruct * p = (const GALGAS_semanticTemporariesStruct *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticTemporariesStruct *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticTemporariesStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities::GALGAS_accessibleEntities (void) :
-mAttribute_mAccessibleRegisterSet (),
-mAttribute_mStaticStringSet (),
-mAttribute_mGlobalConstantSet (),
-mAttribute_mProcedureSet (),
-mAttribute_mFunctionSet (),
-mAttribute_mGlobalVariableSet () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities::~ GALGAS_accessibleEntities (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities::GALGAS_accessibleEntities (const GALGAS_stringset & inOperand0,
-                                                      const GALGAS_stringset & inOperand1,
-                                                      const GALGAS_stringset & inOperand2,
-                                                      const GALGAS_stringset & inOperand3,
-                                                      const GALGAS_stringset & inOperand4,
-                                                      const GALGAS_stringset & inOperand5) :
-mAttribute_mAccessibleRegisterSet (inOperand0),
-mAttribute_mStaticStringSet (inOperand1),
-mAttribute_mGlobalConstantSet (inOperand2),
-mAttribute_mProcedureSet (inOperand3),
-mAttribute_mFunctionSet (inOperand4),
-mAttribute_mGlobalVariableSet (inOperand5) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_accessibleEntities (GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_new (const GALGAS_stringset & inOperand0,
-                                                                      const GALGAS_stringset & inOperand1,
-                                                                      const GALGAS_stringset & inOperand2,
-                                                                      const GALGAS_stringset & inOperand3,
-                                                                      const GALGAS_stringset & inOperand4,
-                                                                      const GALGAS_stringset & inOperand5 
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_accessibleEntities result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_accessibleEntities::objectCompare (const GALGAS_accessibleEntities & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mAccessibleRegisterSet.objectCompare (inOperand.mAttribute_mAccessibleRegisterSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStaticStringSet.objectCompare (inOperand.mAttribute_mStaticStringSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantSet.objectCompare (inOperand.mAttribute_mGlobalConstantSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureSet.objectCompare (inOperand.mAttribute_mProcedureSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionSet.objectCompare (inOperand.mAttribute_mFunctionSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableSet.objectCompare (inOperand.mAttribute_mGlobalVariableSet) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_accessibleEntities::isValid (void) const {
-  return mAttribute_mAccessibleRegisterSet.isValid () && mAttribute_mStaticStringSet.isValid () && mAttribute_mGlobalConstantSet.isValid () && mAttribute_mProcedureSet.isValid () && mAttribute_mFunctionSet.isValid () && mAttribute_mGlobalVariableSet.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_accessibleEntities::drop (void) {
-  mAttribute_mAccessibleRegisterSet.drop () ;
-  mAttribute_mStaticStringSet.drop () ;
-  mAttribute_mGlobalConstantSet.drop () ;
-  mAttribute_mProcedureSet.drop () ;
-  mAttribute_mFunctionSet.drop () ;
-  mAttribute_mGlobalVariableSet.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_accessibleEntities::description (C_String & ioString,
-                                             const int32_t inIndentation) const {
-  ioString << "<struct @accessibleEntities:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mAccessibleRegisterSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStaticStringSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalVariableSet.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mAccessibleRegisterSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAccessibleRegisterSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mStaticStringSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticStringSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mGlobalConstantSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mProcedureSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mFunctionSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mGlobalVariableSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableSet ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @accessibleEntities type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_accessibleEntities ("accessibleEntities",
-                                           NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_accessibleEntities::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_accessibleEntities ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_accessibleEntities::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_accessibleEntities (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessibleEntities GALGAS_accessibleEntities::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_accessibleEntities result ;
-  const GALGAS_accessibleEntities * p = (const GALGAS_accessibleEntities *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_accessibleEntities *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("accessibleEntities", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities> gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                  categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) {
-  gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractInstructionIR_enterAccessibleEntities (void) {
-  gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (NULL,
-                                                                          freeCategoryMethod_abstractInstructionIR_enterAccessibleEntities) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                 GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-      f = gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities.count ()) {
-           f = gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractInstructionIR_enterAccessibleEntities.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, io_ioAccessibleEntities, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category method '@instructionListIR enterAccessibleEntities'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const GALGAS_instructionListIR inObject,
-                                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_2204 (temp_0, kEnumeration_up) ;
-  while (enumerator_2204.hasCurrentObject ()) {
-    callCategoryMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_2204.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 46)) ;
-    enumerator_2204.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Abstract category reader '@abstractInstructionIR instructionCode'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryReaderSignature_abstractInstructionIR_instructionCode> gCategoryReaderTable_abstractInstructionIR_instructionCode ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_instructionCode (const int32_t inClassIndex,
-                                          categoryReaderSignature_abstractInstructionIR_instructionCode inReader) {
-  gCategoryReaderTable_abstractInstructionIR_instructionCode.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryReader_abstractInstructionIR_instructionCode (void) {
-  gCategoryReaderTable_abstractInstructionIR_instructionCode.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_abstractInstructionIR_instructionCode (NULL,
-                                                                  freeCategoryReader_abstractInstructionIR_instructionCode) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string callCategoryReader_instructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-//--- Find Reader
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractInstructionIR_instructionCode f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractInstructionIR_instructionCode.count ()) {
-      f = gCategoryReaderTable_abstractInstructionIR_instructionCode (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractInstructionIR_instructionCode.count ()) {
-           f = gCategoryReaderTable_abstractInstructionIR_instructionCode (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryReaderTable_abstractInstructionIR_instructionCode.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      result = f (inObject, inCompiler COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Abstract category reader '@abstractTypeIR headerCodeGenerationForType'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryReaderSignature_abstractTypeIR_headerCodeGenerationForType> gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_headerCodeGenerationForType (const int32_t inClassIndex,
-                                                      categoryReaderSignature_abstractTypeIR_headerCodeGenerationForType inReader) {
-  gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryReader_abstractTypeIR_headerCodeGenerationForType (void) {
-  gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_abstractTypeIR_headerCodeGenerationForType (NULL,
-                                                                       freeCategoryReader_abstractTypeIR_headerCodeGenerationForType) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string callCategoryReader_headerCodeGenerationForType (const cPtr_abstractTypeIR * inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-//--- Find Reader
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractTypeIR) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractTypeIR_headerCodeGenerationForType f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType.count ()) {
-      f = gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType.count ()) {
-           f = gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryReaderTable_abstractTypeIR_headerCodeGenerationForType.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      result = f (inObject, inCompiler COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST_2D_element::GALGAS_declarationListAST_2D_element (void) :
-mAttribute_mDeclaration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST_2D_element::~ GALGAS_declarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST_2D_element::GALGAS_declarationListAST_2D_element (const GALGAS_abstractDeclaration & inOperand0) :
-mAttribute_mDeclaration (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST_2D_element GALGAS_declarationListAST_2D_element::constructor_new (const GALGAS_abstractDeclaration & inOperand0 
-                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_declarationListAST_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_declarationListAST_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_declarationListAST_2D_element::objectCompare (const GALGAS_declarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mDeclaration.objectCompare (inOperand.mAttribute_mDeclaration) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_declarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mDeclaration.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_declarationListAST_2D_element::drop (void) {
-  mAttribute_mDeclaration.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_declarationListAST_2D_element::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "<struct @declarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mDeclaration.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractDeclaration GALGAS_declarationListAST_2D_element::reader_mDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDeclaration ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @declarationListAST-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_declarationListAST_2D_element ("declarationListAST-element",
-                                                      NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_declarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_declarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_declarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_declarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST_2D_element GALGAS_declarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_declarationListAST_2D_element result ;
-  const GALGAS_declarationListAST_2D_element * p = (const GALGAS_declarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_declarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("declarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element::GALGAS_bootListIR_2D_element (void) :
-mAttribute_mInitLocation (),
-mAttribute_mInstructionListIR (),
-mAttribute_mEndOfInitLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element::~ GALGAS_bootListIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element::GALGAS_bootListIR_2D_element (const GALGAS_location & inOperand0,
-                                                            const GALGAS_instructionListIR & inOperand1,
-                                                            const GALGAS_location & inOperand2) :
-mAttribute_mInitLocation (inOperand0),
-mAttribute_mInstructionListIR (inOperand1),
-mAttribute_mEndOfInitLocation (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element GALGAS_bootListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_bootListIR_2D_element (GALGAS_location::constructor_nowhere (HERE),
-                                       GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                       GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element GALGAS_bootListIR_2D_element::constructor_new (const GALGAS_location & inOperand0,
-                                                                            const GALGAS_instructionListIR & inOperand1,
-                                                                            const GALGAS_location & inOperand2 
-                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bootListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_bootListIR_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_bootListIR_2D_element::objectCompare (const GALGAS_bootListIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitLocation.objectCompare (inOperand.mAttribute_mInitLocation) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionListIR.objectCompare (inOperand.mAttribute_mInstructionListIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfInitLocation.objectCompare (inOperand.mAttribute_mEndOfInitLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_bootListIR_2D_element::isValid (void) const {
-  return mAttribute_mInitLocation.isValid () && mAttribute_mInstructionListIR.isValid () && mAttribute_mEndOfInitLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootListIR_2D_element::drop (void) {
-  mAttribute_mInitLocation.drop () ;
-  mAttribute_mInstructionListIR.drop () ;
-  mAttribute_mEndOfInitLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootListIR_2D_element::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "<struct @bootListIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mInitLocation.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionListIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfInitLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_bootListIR_2D_element::reader_mInitLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_bootListIR_2D_element::reader_mInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionListIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_bootListIR_2D_element::reader_mEndOfInitLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfInitLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @bootListIR-element type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bootListIR_2D_element ("bootListIR-element",
-                                              NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_bootListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_bootListIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_bootListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_bootListIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR_2D_element GALGAS_bootListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_bootListIR_2D_element result ;
-  const GALGAS_bootListIR_2D_element * p = (const GALGAS_bootListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_bootListIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("bootListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element::GALGAS_initListIR_2D_element (void) :
-mAttribute_mInitLocation (),
-mAttribute_mInstructionListIR (),
-mAttribute_mEndOfInitLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element::~ GALGAS_initListIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element::GALGAS_initListIR_2D_element (const GALGAS_location & inOperand0,
-                                                            const GALGAS_instructionListIR & inOperand1,
-                                                            const GALGAS_location & inOperand2) :
-mAttribute_mInitLocation (inOperand0),
-mAttribute_mInstructionListIR (inOperand1),
-mAttribute_mEndOfInitLocation (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element GALGAS_initListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_initListIR_2D_element (GALGAS_location::constructor_nowhere (HERE),
-                                       GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                       GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element GALGAS_initListIR_2D_element::constructor_new (const GALGAS_location & inOperand0,
-                                                                            const GALGAS_instructionListIR & inOperand1,
-                                                                            const GALGAS_location & inOperand2 
-                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_initListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_initListIR_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_initListIR_2D_element::objectCompare (const GALGAS_initListIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitLocation.objectCompare (inOperand.mAttribute_mInitLocation) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionListIR.objectCompare (inOperand.mAttribute_mInstructionListIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfInitLocation.objectCompare (inOperand.mAttribute_mEndOfInitLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_initListIR_2D_element::isValid (void) const {
-  return mAttribute_mInitLocation.isValid () && mAttribute_mInstructionListIR.isValid () && mAttribute_mEndOfInitLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initListIR_2D_element::drop (void) {
-  mAttribute_mInitLocation.drop () ;
-  mAttribute_mInstructionListIR.drop () ;
-  mAttribute_mEndOfInitLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initListIR_2D_element::description (C_String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString << "<struct @initListIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mInitLocation.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionListIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfInitLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_initListIR_2D_element::reader_mInitLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_initListIR_2D_element::reader_mInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionListIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_initListIR_2D_element::reader_mEndOfInitLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfInitLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @initListIR-element type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_initListIR_2D_element ("initListIR-element",
-                                              NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_initListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_initListIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_initListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_initListIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR_2D_element GALGAS_initListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_initListIR_2D_element result ;
-  const GALGAS_initListIR_2D_element * p = (const GALGAS_initListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_initListIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("initListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::GALGAS_instructionListAST_2D_element (void) :
-mAttribute_mInstruction () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::~ GALGAS_instructionListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::GALGAS_instructionListAST_2D_element (const GALGAS_instructionAST & inOperand0) :
-mAttribute_mInstruction (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::constructor_new (const GALGAS_instructionAST & inOperand0 
-                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instructionListAST_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_instructionListAST_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_instructionListAST_2D_element::objectCompare (const GALGAS_instructionListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstruction.objectCompare (inOperand.mAttribute_mInstruction) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_instructionListAST_2D_element::isValid (void) const {
-  return mAttribute_mInstruction.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListAST_2D_element::drop (void) {
-  mAttribute_mInstruction.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListAST_2D_element::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "<struct @instructionListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mInstruction.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionAST GALGAS_instructionListAST_2D_element::reader_mInstruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstruction ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @instructionListAST-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionListAST_2D_element ("instructionListAST-element",
-                                                      NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_instructionListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_instructionListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListAST_2D_element result ;
-  const GALGAS_instructionListAST_2D_element * p = (const GALGAS_instructionListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR_2D_element::GALGAS_instructionListIR_2D_element (void) :
-mAttribute_mInstructionGeneration () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR_2D_element::~ GALGAS_instructionListIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR_2D_element::GALGAS_instructionListIR_2D_element (const GALGAS_abstractInstructionIR & inOperand0) :
-mAttribute_mInstructionGeneration (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR_2D_element GALGAS_instructionListIR_2D_element::constructor_new (const GALGAS_abstractInstructionIR & inOperand0 
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instructionListIR_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_instructionListIR_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_instructionListIR_2D_element::objectCompare (const GALGAS_instructionListIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionGeneration.objectCompare (inOperand.mAttribute_mInstructionGeneration) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_instructionListIR_2D_element::isValid (void) const {
-  return mAttribute_mInstructionGeneration.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListIR_2D_element::drop (void) {
-  mAttribute_mInstructionGeneration.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListIR_2D_element::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "<struct @instructionListIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mInstructionGeneration.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_abstractInstructionIR GALGAS_instructionListIR_2D_element::reader_mInstructionGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionGeneration ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @instructionListIR-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionListIR_2D_element ("instructionListIR-element",
-                                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_instructionListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionListIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_instructionListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionListIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR_2D_element GALGAS_instructionListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListIR_2D_element result ;
-  const GALGAS_instructionListIR_2D_element * p = (const GALGAS_instructionListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::GALGAS_ast (void) :
-mAttribute_mGlobalVarDeclarationList (),
-mAttribute_mDeclarationList (),
-mAttribute_mProcedureListAST (),
-mAttribute_mRequiredProcList (),
-mAttribute_mFunctionListAST (),
-mAttribute_mTargetList (),
-mAttribute_mBootList (),
-mAttribute_mInitList (),
-mAttribute_mExceptionClauses (),
-mAttribute_mExceptionTypes () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::~ GALGAS_ast (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast::GALGAS_ast (const GALGAS_globalVarDeclarationList & inOperand0,
-                        const GALGAS_declarationListAST & inOperand1,
-                        const GALGAS_procedureDeclarationListAST & inOperand2,
-                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
-                        const GALGAS_functionDeclarationListAST & inOperand4,
-                        const GALGAS_lstringlist & inOperand5,
-                        const GALGAS_bootList & inOperand6,
-                        const GALGAS_initList & inOperand7,
-                        const GALGAS_exceptionClauseListAST & inOperand8,
-                        const GALGAS_exceptionTypesAST & inOperand9) :
-mAttribute_mGlobalVarDeclarationList (inOperand0),
-mAttribute_mDeclarationList (inOperand1),
-mAttribute_mProcedureListAST (inOperand2),
-mAttribute_mRequiredProcList (inOperand3),
-mAttribute_mFunctionListAST (inOperand4),
-mAttribute_mTargetList (inOperand5),
-mAttribute_mBootList (inOperand6),
-mAttribute_mInitList (inOperand7),
-mAttribute_mExceptionClauses (inOperand8),
-mAttribute_mExceptionTypes (inOperand9) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_ast (GALGAS_globalVarDeclarationList::constructor_emptyList (HERE),
-                     GALGAS_declarationListAST::constructor_emptyList (HERE),
-                     GALGAS_procedureDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_requiredProcedureDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                     GALGAS_lstringlist::constructor_emptyList (HERE),
-                     GALGAS_bootList::constructor_emptySortedList (HERE),
-                     GALGAS_initList::constructor_emptySortedList (HERE),
-                     GALGAS_exceptionClauseListAST::constructor_emptySortedList (HERE),
-                     GALGAS_exceptionTypesAST::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::constructor_new (const GALGAS_globalVarDeclarationList & inOperand0,
-                                        const GALGAS_declarationListAST & inOperand1,
-                                        const GALGAS_procedureDeclarationListAST & inOperand2,
-                                        const GALGAS_requiredProcedureDeclarationListAST & inOperand3,
-                                        const GALGAS_functionDeclarationListAST & inOperand4,
-                                        const GALGAS_lstringlist & inOperand5,
-                                        const GALGAS_bootList & inOperand6,
-                                        const GALGAS_initList & inOperand7,
-                                        const GALGAS_exceptionClauseListAST & inOperand8,
-                                        const GALGAS_exceptionTypesAST & inOperand9 
-                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_ast result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid ()) {
-    result = GALGAS_ast (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_ast::objectCompare (const GALGAS_ast & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVarDeclarationList.objectCompare (inOperand.mAttribute_mGlobalVarDeclarationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDeclarationList.objectCompare (inOperand.mAttribute_mDeclarationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureListAST.objectCompare (inOperand.mAttribute_mProcedureListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRequiredProcList.objectCompare (inOperand.mAttribute_mRequiredProcList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionListAST.objectCompare (inOperand.mAttribute_mFunctionListAST) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTargetList.objectCompare (inOperand.mAttribute_mTargetList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBootList.objectCompare (inOperand.mAttribute_mBootList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitList.objectCompare (inOperand.mAttribute_mInitList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionClauses.objectCompare (inOperand.mAttribute_mExceptionClauses) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionTypes.objectCompare (inOperand.mAttribute_mExceptionTypes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_ast::isValid (void) const {
-  return mAttribute_mGlobalVarDeclarationList.isValid () && mAttribute_mDeclarationList.isValid () && mAttribute_mProcedureListAST.isValid () && mAttribute_mRequiredProcList.isValid () && mAttribute_mFunctionListAST.isValid () && mAttribute_mTargetList.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mExceptionClauses.isValid () && mAttribute_mExceptionTypes.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_ast::drop (void) {
-  mAttribute_mGlobalVarDeclarationList.drop () ;
-  mAttribute_mDeclarationList.drop () ;
-  mAttribute_mProcedureListAST.drop () ;
-  mAttribute_mRequiredProcList.drop () ;
-  mAttribute_mFunctionListAST.drop () ;
-  mAttribute_mTargetList.drop () ;
-  mAttribute_mBootList.drop () ;
-  mAttribute_mInitList.drop () ;
-  mAttribute_mExceptionClauses.drop () ;
-  mAttribute_mExceptionTypes.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_ast::description (C_String & ioString,
-                              const int32_t inIndentation) const {
-  ioString << "<struct @ast:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mGlobalVarDeclarationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDeclarationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRequiredProcList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTargetList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBootList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionClauses.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionTypes.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVarDeclarationList GALGAS_ast::reader_mGlobalVarDeclarationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVarDeclarationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_declarationListAST GALGAS_ast::reader_mDeclarationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDeclarationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST GALGAS_ast::reader_mProcedureListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_requiredProcedureDeclarationListAST GALGAS_ast::reader_mRequiredProcList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRequiredProcList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST GALGAS_ast::reader_mFunctionListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_ast::reader_mTargetList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootList GALGAS_ast::reader_mBootList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initList GALGAS_ast::reader_mInitList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST GALGAS_ast::reader_mExceptionClauses (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionClauses ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST GALGAS_ast::reader_mExceptionTypes (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionTypes ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                      @ast type                                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ast ("ast",
-                            NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_ast::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_ast ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_ast::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_ast (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_ast GALGAS_ast::extractObject (const GALGAS_object & inObject,
-                                      C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) {
-  GALGAS_ast result ;
-  const GALGAS_ast * p = (const GALGAS_ast *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_ast *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("ast", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@bootList-element bootSemanticAnalysis'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_bootSemanticAnalysis (const GALGAS_bootList_2D_element inObject,
-                                          const GALGAS_semanticContext constinArgument_inContext,
-                                          GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                          GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.reader_hasKey (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 57)) COMMA_SOURCE_FILE ("boot-declaration.galgas", 57)).operator_not (SOURCE_FILE ("boot-declaration.galgas", 57)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (inObject.mAttribute_mBootLocation, GALGAS_string ("the $").add_operation (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 58)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 58)).add_operation (GALGAS_string (" mode should be defined in order to use boot routines"), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 58))  COMMA_SOURCE_FILE ("boot-declaration.galgas", 58)) ;
-  }
-  {
-  ioArgument_ioTemporaries.mAttribute_mBootRoutinePriorityMap.modifier_insertKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("boot-declaration.galgas", 60)), inObject.mAttribute_mPriorityLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 60)) ;
-  }
-  GALGAS_lstring var_routineNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("boot ").add_operation (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("boot-declaration.galgas", 62)), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 62)), inObject.mAttribute_mPriorityLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 62)) ;
-  const enumGalgasBool test_1 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.reader_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("boot-declaration.galgas", 63)).operator_not (SOURCE_FILE ("boot-declaration.galgas", 63)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.modifier_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 64)) ;
-    }
-  }
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 70)) ;
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("boot-declaration.galgas", 76)) ;
-  GALGAS_stringset temp_2 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("boot-declaration.galgas", 81)) ;
-  temp_2.addAssign_operation (function_bootModeName (inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 81))  COMMA_SOURCE_FILE ("boot-declaration.galgas", 81)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_routineNameForInvocationGraph, GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("boot-declaration.galgas", 79)), constinArgument_inContext, temp_2, GALGAS_bool (true), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 77)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfBootLocation, inCompiler COMMA_SOURCE_FILE ("boot-declaration.galgas", 89)) ;
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList.addAssign_operation (inObject.mAttribute_mBootLocation, var_instructionGenerationList, inObject.mAttribute_mEndOfBootLocation  COMMA_SOURCE_FILE ("boot-declaration.galgas", 91)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Category method '@initList-element enterInContext'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const GALGAS_initList_2D_element inObject,
-                                    GALGAS_semanticContext & ioArgument_ioContext,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  ioArgument_ioContext.mAttribute_mInitRoutineMap.modifier_insertKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("init-declaration.galgas", 56)), inObject.mAttribute_mPriorityLocation  COMMA_SOURCE_FILE ("init-declaration.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("init-declaration.galgas", 56)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element::GALGAS_exceptionClauseListAST_2D_element (void) :
-mAttribute_mExceptionClauseName (),
-mAttribute_mExceptionInstructionList (),
-mAttribute_mEndOfExceptionInstructions (),
-mAttribute_mPriority (),
-mAttribute_mLocationPriority () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element::~ GALGAS_exceptionClauseListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element::GALGAS_exceptionClauseListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_instructionListAST & inOperand1,
-                                                                                    const GALGAS_location & inOperand2,
-                                                                                    const GALGAS_uint_36__34_ & inOperand3,
-                                                                                    const GALGAS_location & inOperand4) :
-mAttribute_mExceptionClauseName (inOperand0),
-mAttribute_mExceptionInstructionList (inOperand1),
-mAttribute_mEndOfExceptionInstructions (inOperand2),
-mAttribute_mPriority (inOperand3),
-mAttribute_mLocationPriority (inOperand4) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_exceptionClauseListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                   GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE),
-                                                   GALGAS_uint_36__34_::constructor_default (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                    const GALGAS_instructionListAST & inOperand1,
-                                                                                                    const GALGAS_location & inOperand2,
-                                                                                                    const GALGAS_uint_36__34_ & inOperand3,
-                                                                                                    const GALGAS_location & inOperand4 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_exceptionClauseListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_exceptionClauseListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_exceptionClauseListAST_2D_element::objectCompare (const GALGAS_exceptionClauseListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionClauseName.objectCompare (inOperand.mAttribute_mExceptionClauseName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionInstructionList.objectCompare (inOperand.mAttribute_mExceptionInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfExceptionInstructions.objectCompare (inOperand.mAttribute_mEndOfExceptionInstructions) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mPriority.objectCompare (inOperand.mAttribute_mPriority) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mLocationPriority.objectCompare (inOperand.mAttribute_mLocationPriority) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_exceptionClauseListAST_2D_element::isValid (void) const {
-  return mAttribute_mExceptionClauseName.isValid () && mAttribute_mExceptionInstructionList.isValid () && mAttribute_mEndOfExceptionInstructions.isValid () && mAttribute_mPriority.isValid () && mAttribute_mLocationPriority.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionClauseListAST_2D_element::drop (void) {
-  mAttribute_mExceptionClauseName.drop () ;
-  mAttribute_mExceptionInstructionList.drop () ;
-  mAttribute_mEndOfExceptionInstructions.drop () ;
-  mAttribute_mPriority.drop () ;
-  mAttribute_mLocationPriority.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionClauseListAST_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @exceptionClauseListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mExceptionClauseName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfExceptionInstructions.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mPriority.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mLocationPriority.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_exceptionClauseListAST_2D_element::reader_mExceptionClauseName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionClauseName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_exceptionClauseListAST_2D_element::reader_mExceptionInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_exceptionClauseListAST_2D_element::reader_mEndOfExceptionInstructions (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfExceptionInstructions ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ GALGAS_exceptionClauseListAST_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPriority ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_exceptionClauseListAST_2D_element::reader_mLocationPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocationPriority ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @exceptionClauseListAST-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionClauseListAST_2D_element ("exceptionClauseListAST-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_exceptionClauseListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionClauseListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_exceptionClauseListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionClauseListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST_2D_element GALGAS_exceptionClauseListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionClauseListAST_2D_element result ;
-  const GALGAS_exceptionClauseListAST_2D_element * p = (const GALGAS_exceptionClauseListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionClauseListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("exceptionClauseListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Category method '@exceptionClauseListAST-element exceptionSemanticAnalysis'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_exceptionSemanticAnalysis (const GALGAS_exceptionClauseListAST_2D_element inObject,
-                                               const GALGAS_semanticContext constinArgument_inContext,
-                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 100)) COMMA_SOURCE_FILE ("exception.galgas", 100)).operator_not (SOURCE_FILE ("exception.galgas", 100)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (inObject.mAttribute_mExceptionClauseName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("the $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 101)).add_operation (GALGAS_string (" mode should be defined in order to use an exception clause"), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 101))  COMMA_SOURCE_FILE ("exception.galgas", 101)) ;
-  }
-  GALGAS_lstring var_routineNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("exception ").add_operation (inObject.mAttribute_mExceptionClauseName.reader_string (SOURCE_FILE ("exception.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)).add_operation (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("exception.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 104)), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 103)) ;
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (var_routineNameForInvocationGraph.mAttribute_string, constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 108)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, GALGAS_string ("StaticString").reader_nowhere (SOURCE_FILE ("exception.galgas", 114)), inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 114)) ;
-  GALGAS_lstring var_codeArg = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 115)) ;
-  {
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_codeArg, constinArgument_inContext.mAttribute_mExceptionCodeType, GALGAS_bool (true), function_mangledNameForInArgument (var_codeArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 120)), GALGAS_variableKindIR::constructor_inArgument (var_codeArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 121)), constinArgument_inContext.mAttribute_mExceptionCodeType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 122)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 123)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 116)) ;
-  }
-  GALGAS_lstring var_fileArg = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 126)) ;
-  {
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_fileArg, var_StaticStringType, GALGAS_bool (true), function_mangledNameForInArgument (var_fileArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 131)), GALGAS_variableKindIR::constructor_inArgument (var_fileArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 132)), var_StaticStringType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 133)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 134)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 127)) ;
-  }
-  GALGAS_lstring var_lineArg = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mExceptionClauseName.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 137)) ;
-  {
-  var_variableMap.modifier_insertUsedConstantInputFormalArgument (var_lineArg, constinArgument_inContext.mAttribute_mExceptionLineType, GALGAS_bool (true), function_mangledNameForInArgument (var_lineArg.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 142)), GALGAS_variableKindIR::constructor_inArgument (var_lineArg.mAttribute_string  COMMA_SOURCE_FILE ("exception.galgas", 143)), constinArgument_inContext.mAttribute_mExceptionLineType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 144)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 145)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 138)) ;
-  }
-  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.reader_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("exception.galgas", 149)).operator_not (SOURCE_FILE ("exception.galgas", 149)).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.modifier_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 150)) ;
-    }
-  }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("exception.galgas", 156)) ;
-  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("exception.galgas", 161)) ;
-  temp_3.addAssign_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("exception.galgas", 161))  COMMA_SOURCE_FILE ("exception.galgas", 161)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mExceptionInstructionList, var_routineNameForInvocationGraph, GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("exception.galgas", 159)), constinArgument_inContext, temp_3, GALGAS_bool (false), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 157)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfExceptionInstructions, inCompiler COMMA_SOURCE_FILE ("exception.galgas", 169)) ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("setup"))).boolEnum () ;
-  if (kBoolTrue == test_4) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mExceptionSetupRoutinePriorityMap.modifier_insertSetupKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("exception.galgas", 172)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("exception.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 172)) ;
-    }
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 173)) ;
-  }else if (kBoolFalse == test_4) {
-    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, inObject.mAttribute_mExceptionClauseName.mAttribute_string.objectCompare (GALGAS_string ("loop"))).boolEnum () ;
-    if (kBoolTrue == test_5) {
-      {
-      ioArgument_ioTemporaries.mAttribute_mExceptionLoopRoutinePriorityMap.modifier_insertLoopKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.reader_string (SOURCE_FILE ("exception.galgas", 175)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("exception.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("exception.galgas", 175)) ;
-      }
-      ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR.dotAssign_operation (var_instructionGenerationList  COMMA_SOURCE_FILE ("exception.galgas", 176)) ;
-    }else if (kBoolFalse == test_5) {
-      GALGAS_location location_6 (inObject.mAttribute_mExceptionClauseName.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_6, GALGAS_string ("exception routine name should be \"setup\" or \"loop\"")  COMMA_SOURCE_FILE ("exception.galgas", 178)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element::GALGAS_functionDeclarationListAST_2D_element (void) :
-mAttribute_mFunctionName (),
-mAttribute_mFunctionModeList (),
-mAttribute_mFuncFormalArgumentList (),
-mAttribute_mResultTypeName (),
-mAttribute_mResultVarName (),
-mAttribute_mInstructionList (),
-mAttribute_mEndOfFuncLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element::~ GALGAS_functionDeclarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element::GALGAS_functionDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                            const GALGAS_lstringlist & inOperand1,
-                                                                                            const GALGAS_funcFormalArgumentList & inOperand2,
-                                                                                            const GALGAS_lstring & inOperand3,
-                                                                                            const GALGAS_lstring & inOperand4,
-                                                                                            const GALGAS_instructionListAST & inOperand5,
-                                                                                            const GALGAS_location & inOperand6) :
-mAttribute_mFunctionName (inOperand0),
-mAttribute_mFunctionModeList (inOperand1),
-mAttribute_mFuncFormalArgumentList (inOperand2),
-mAttribute_mResultTypeName (inOperand3),
-mAttribute_mResultVarName (inOperand4),
-mAttribute_mInstructionList (inOperand5),
-mAttribute_mEndOfFuncLocation (inOperand6) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_functionDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                       GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                       GALGAS_funcFormalArgumentList::constructor_emptyList (HERE),
-                                                       GALGAS_lstring::constructor_default (HERE),
-                                                       GALGAS_lstring::constructor_default (HERE),
-                                                       GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                       GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                            const GALGAS_lstringlist & inOperand1,
-                                                                                                            const GALGAS_funcFormalArgumentList & inOperand2,
-                                                                                                            const GALGAS_lstring & inOperand3,
-                                                                                                            const GALGAS_lstring & inOperand4,
-                                                                                                            const GALGAS_instructionListAST & inOperand5,
-                                                                                                            const GALGAS_location & inOperand6 
-                                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_functionDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_functionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_functionDeclarationListAST_2D_element::objectCompare (const GALGAS_functionDeclarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionName.objectCompare (inOperand.mAttribute_mFunctionName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionModeList.objectCompare (inOperand.mAttribute_mFunctionModeList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFuncFormalArgumentList.objectCompare (inOperand.mAttribute_mFuncFormalArgumentList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultTypeName.objectCompare (inOperand.mAttribute_mResultTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultVarName.objectCompare (inOperand.mAttribute_mResultVarName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfFuncLocation.objectCompare (inOperand.mAttribute_mEndOfFuncLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_functionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mFunctionName.isValid () && mAttribute_mFunctionModeList.isValid () && mAttribute_mFuncFormalArgumentList.isValid () && mAttribute_mResultTypeName.isValid () && mAttribute_mResultVarName.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfFuncLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mFunctionName.drop () ;
-  mAttribute_mFunctionModeList.drop () ;
-  mAttribute_mFuncFormalArgumentList.drop () ;
-  mAttribute_mResultTypeName.drop () ;
-  mAttribute_mResultVarName.drop () ;
-  mAttribute_mInstructionList.drop () ;
-  mAttribute_mEndOfFuncLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionDeclarationListAST_2D_element::description (C_String & ioString,
-                                                                const int32_t inIndentation) const {
-  ioString << "<struct @functionDeclarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mFunctionName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionModeList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFuncFormalArgumentList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultVarName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfFuncLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::reader_mFunctionName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_functionDeclarationListAST_2D_element::reader_mFunctionModeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionModeList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList GALGAS_functionDeclarationListAST_2D_element::reader_mFuncFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFuncFormalArgumentList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::reader_mResultTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::reader_mResultVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_functionDeclarationListAST_2D_element::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_functionDeclarationListAST_2D_element::reader_mEndOfFuncLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfFuncLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      @functionDeclarationListAST-element type                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_functionDeclarationListAST_2D_element ("functionDeclarationListAST-element",
-                                                              NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_functionDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionDeclarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_functionDeclarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_functionDeclarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                          C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_functionDeclarationListAST_2D_element result ;
-  const GALGAS_functionDeclarationListAST_2D_element * p = (const GALGAS_functionDeclarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_functionDeclarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("functionDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category Reader '@functionDeclarationListAST-element mangledName'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_mangledName (const GALGAS_functionDeclarationListAST_2D_element & inObject,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outMangledName ; // Returned variable
-  result_outMangledName = inObject.mAttribute_mFunctionName.mAttribute_string ;
-  cEnumerator_funcFormalArgumentList enumerator_4140 (inObject.mAttribute_mFuncFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_4140.hasCurrentObject ()) {
-    result_outMangledName.dotAssign_operation (GALGAS_string (" \?").add_operation (enumerator_4140.current_mSelector (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 113))  COMMA_SOURCE_FILE ("func-declaration.galgas", 113)) ;
-    enumerator_4140.gotoNextObject () ;
-  }
-//---
-  return result_outMangledName ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@functionDeclarationListAST-element enterInContext'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const GALGAS_functionDeclarationListAST_2D_element inObject,
-                                    GALGAS_semanticContext & ioArgument_ioContext,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_funcSignature var_signature = GALGAS_funcSignature::constructor_emptyList (SOURCE_FILE ("func-declaration.galgas", 123)) ;
-  cEnumerator_funcFormalArgumentList enumerator_4534 (inObject.mAttribute_mFuncFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_4534.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy ;
-    {
-    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_4534.current_mFormalArgumentTypeName (HERE), var_typeProxy COMMA_SOURCE_FILE ("func-declaration.galgas", 125)) ;
-    }
-    var_signature.addAssign_operation (enumerator_4534.current_mSelector (HERE), var_typeProxy  COMMA_SOURCE_FILE ("func-declaration.galgas", 126)) ;
-    enumerator_4534.gotoNextObject () ;
-  }
-  GALGAS_modeMap var_functionModeMap = GALGAS_modeMap::constructor_emptyMap (SOURCE_FILE ("func-declaration.galgas", 129)) ;
-  cEnumerator_lstringlist enumerator_4755 (inObject.mAttribute_mFunctionModeList, kEnumeration_up) ;
-  while (enumerator_4755.hasCurrentObject ()) {
-    {
-    var_functionModeMap.modifier_insertKey (enumerator_4755.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 131)) ;
-    }
-    enumerator_4755.gotoNextObject () ;
-  }
-  GALGAS_unifiedTypeMap_2D_proxy var_resultType ;
-  {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inObject.mAttribute_mResultTypeName, var_resultType COMMA_SOURCE_FILE ("func-declaration.galgas", 134)) ;
-  }
-  {
-  const GALGAS_functionDeclarationListAST_2D_element temp_0 = inObject ;
-  ioArgument_ioContext.mAttribute_mFunctionMap.modifier_insertKey (GALGAS_lstring::constructor_new (categoryReader_mangledName (temp_0, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 137)), inObject.mAttribute_mFunctionName.mAttribute_location  COMMA_SOURCE_FILE ("func-declaration.galgas", 137)), var_functionModeMap, var_signature, var_resultType, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 136)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Category method '@functionDeclarationListAST-element functionSemanticAnalysis'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_functionSemanticAnalysis (const GALGAS_functionDeclarationListAST_2D_element inObject,
-                                              const GALGAS_semanticContext constinArgument_inContext,
-                                              GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                              GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                              C_Compiler * inCompiler
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_stringset var_functionModeSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("func-declaration.galgas", 161)) ;
-  cEnumerator_lstringlist enumerator_6017 (inObject.mAttribute_mFunctionModeList, kEnumeration_up) ;
-  while (enumerator_6017.hasCurrentObject ()) {
-    constinArgument_inContext.mAttribute_mModeMap.method_searchKey (enumerator_6017.current (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 163)) ;
-    var_functionModeSet.addAssign_operation (enumerator_6017.current (HERE).mAttribute_mValue.mAttribute_string  COMMA_SOURCE_FILE ("func-declaration.galgas", 164)) ;
-    enumerator_6017.gotoNextObject () ;
-  }
-  const GALGAS_functionDeclarationListAST_2D_element temp_0 = inObject ;
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (categoryReader_mangledName (temp_0, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 168)), constinArgument_inContext, GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 167)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_resultType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, inObject.mAttribute_mResultTypeName, inCompiler  COMMA_SOURCE_FILE ("func-declaration.galgas", 173)) ;
-  {
-  var_variableMap.modifier_insertOutputFormalArgument (inObject.mAttribute_mResultVarName, var_resultType, GALGAS_bool (true), inObject.mAttribute_mResultVarName.mAttribute_string, GALGAS_variableKindIR::constructor_localVariable (inObject.mAttribute_mResultVarName.mAttribute_string  COMMA_SOURCE_FILE ("func-declaration.galgas", 179)), GALGAS_bool (true), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("func-declaration.galgas", 181)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 174)) ;
-  }
-  GALGAS_funcFormalArgumentListForGeneration var_formalArguments = GALGAS_funcFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("func-declaration.galgas", 185)) ;
-  cEnumerator_funcFormalArgumentList enumerator_6769 (inObject.mAttribute_mFuncFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_6769.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_6769.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("func-declaration.galgas", 187)) ;
-    {
-    var_variableMap.modifier_insertConstantInputFormalArgument (enumerator_6769.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), function_mangledNameForInArgument (enumerator_6769.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 192)), GALGAS_variableKindIR::constructor_inArgument (enumerator_6769.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("func-declaration.galgas", 193)), var_typeProxy.reader_copiable (inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 194)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("func-declaration.galgas", 195)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 188)) ;
-    }
-    var_formalArguments.addAssign_operation (var_typeProxy, function_mangledNameForInArgument (enumerator_6769.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 198))  COMMA_SOURCE_FILE ("func-declaration.galgas", 198)) ;
-    enumerator_6769.gotoNextObject () ;
-  }
-  const GALGAS_functionDeclarationListAST_2D_element temp_1 = inObject ;
-  GALGAS_lstring var_routineNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("func ").add_operation (categoryReader_mangledName (temp_1, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 201)), inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 201)), inObject.mAttribute_mFunctionName.mAttribute_location  COMMA_SOURCE_FILE ("func-declaration.galgas", 201)) ;
-  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.reader_isNodeDefined (var_routineNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("func-declaration.galgas", 202)).operator_not (SOURCE_FILE ("func-declaration.galgas", 202)).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.modifier_addNode (var_routineNameForInvocationGraph, var_routineNameForInvocationGraph, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 203)) ;
-    }
-  }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("func-declaration.galgas", 209)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_routineNameForInvocationGraph, GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("func-declaration.galgas", 212)), constinArgument_inContext, var_functionModeSet, var_functionModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 215)) COMMA_SOURCE_FILE ("func-declaration.galgas", 215)).operator_not (SOURCE_FILE ("func-declaration.galgas", 215)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 210)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfFuncLocation, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 222)) ;
-  {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.modifier_insertKey (inObject.mAttribute_mFunctionName, var_formalArguments, var_instructionGenerationList, var_resultType, inObject.mAttribute_mResultVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("func-declaration.galgas", 224)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element::GALGAS_functionMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mFormalArgumentListForGeneration (),
-mAttribute_mInstructionGenerationList (),
-mAttribute_mResultType (),
-mAttribute_mResultVarName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element::~ GALGAS_functionMapIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element::GALGAS_functionMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_funcFormalArgumentListForGeneration & inOperand1,
-                                                                  const GALGAS_instructionListIR & inOperand2,
-                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                  const GALGAS_string & inOperand4) :
-mAttribute_lkey (inOperand0),
-mAttribute_mFormalArgumentListForGeneration (inOperand1),
-mAttribute_mInstructionGenerationList (inOperand2),
-mAttribute_mResultType (inOperand3),
-mAttribute_mResultVarName (inOperand4) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element GALGAS_functionMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_functionMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                          GALGAS_funcFormalArgumentListForGeneration::constructor_emptyList (HERE),
-                                          GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                          GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                          GALGAS_string::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element GALGAS_functionMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_funcFormalArgumentListForGeneration & inOperand1,
-                                                                                  const GALGAS_instructionListIR & inOperand2,
-                                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                                  const GALGAS_string & inOperand4 
-                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_functionMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_functionMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_functionMapIR_2D_element::objectCompare (const GALGAS_functionMapIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentListForGeneration.objectCompare (inOperand.mAttribute_mFormalArgumentListForGeneration) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionGenerationList.objectCompare (inOperand.mAttribute_mInstructionGenerationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultType.objectCompare (inOperand.mAttribute_mResultType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultVarName.objectCompare (inOperand.mAttribute_mResultVarName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_functionMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mResultType.isValid () && mAttribute_mResultVarName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mFormalArgumentListForGeneration.drop () ;
-  mAttribute_mInstructionGenerationList.drop () ;
-  mAttribute_mResultType.drop () ;
-  mAttribute_mResultVarName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionMapIR_2D_element::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "<struct @functionMapIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionGenerationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultVarName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionMapIR_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration GALGAS_functionMapIR_2D_element::reader_mFormalArgumentListForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentListForGeneration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_functionMapIR_2D_element::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionGenerationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_functionMapIR_2D_element::reader_mResultType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_functionMapIR_2D_element::reader_mResultVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultVarName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @functionMapIR-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_functionMapIR_2D_element ("functionMapIR-element",
-                                                 NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_functionMapIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionMapIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_functionMapIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_functionMapIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR_2D_element GALGAS_functionMapIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_functionMapIR_2D_element result ;
-  const GALGAS_functionMapIR_2D_element * p = (const GALGAS_functionMapIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_functionMapIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("functionMapIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category Reader '@functionMapIR-element implementationCodeGeneration'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_implementationCodeGeneration (const GALGAS_functionMapIR_2D_element & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  result_outCode = GALGAS_string (filewrapperTemplate_functionGenerationTemplate_implementation (inCompiler, inObject.mAttribute_lkey.mAttribute_string, inObject.mAttribute_mFormalArgumentListForGeneration, inObject.mAttribute_mInstructionGenerationList, inObject.mAttribute_mResultType, inObject.mAttribute_mResultVarName COMMA_SOURCE_FILE ("func-declaration.galgas", 266))) ;
-//---
-  return result_outCode ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST_2D_element::GALGAS_procedureDeclarationListAST_2D_element (void) :
-mAttribute_mProcedureKind (),
-mAttribute_mProcedureModeList (),
-mAttribute_mProcedureName (),
-mAttribute_mProcedureAttributeList (),
-mAttribute_mProcFormalArgumentList (),
-mAttribute_mInstructionList (),
-mAttribute_mEndOfProcLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST_2D_element::~ GALGAS_procedureDeclarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST_2D_element::GALGAS_procedureDeclarationListAST_2D_element (const GALGAS_procedureKindAST & inOperand0,
-                                                                                              const GALGAS_lstringlist & inOperand1,
-                                                                                              const GALGAS_lstring & inOperand2,
-                                                                                              const GALGAS_lstringlist & inOperand3,
-                                                                                              const GALGAS_procFormalArgumentList & inOperand4,
-                                                                                              const GALGAS_instructionListAST & inOperand5,
-                                                                                              const GALGAS_location & inOperand6) :
-mAttribute_mProcedureKind (inOperand0),
-mAttribute_mProcedureModeList (inOperand1),
-mAttribute_mProcedureName (inOperand2),
-mAttribute_mProcedureAttributeList (inOperand3),
-mAttribute_mProcFormalArgumentList (inOperand4),
-mAttribute_mInstructionList (inOperand5),
-mAttribute_mEndOfProcLocation (inOperand6) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST_2D_element GALGAS_procedureDeclarationListAST_2D_element::constructor_new (const GALGAS_procedureKindAST & inOperand0,
-                                                                                                              const GALGAS_lstringlist & inOperand1,
-                                                                                                              const GALGAS_lstring & inOperand2,
-                                                                                                              const GALGAS_lstringlist & inOperand3,
-                                                                                                              const GALGAS_procFormalArgumentList & inOperand4,
-                                                                                                              const GALGAS_instructionListAST & inOperand5,
-                                                                                                              const GALGAS_location & inOperand6 
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_procedureDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_procedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_procedureDeclarationListAST_2D_element::objectCompare (const GALGAS_procedureDeclarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureKind.objectCompare (inOperand.mAttribute_mProcedureKind) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureModeList.objectCompare (inOperand.mAttribute_mProcedureModeList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureName.objectCompare (inOperand.mAttribute_mProcedureName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureAttributeList.objectCompare (inOperand.mAttribute_mProcedureAttributeList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcFormalArgumentList.objectCompare (inOperand.mAttribute_mProcFormalArgumentList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfProcLocation.objectCompare (inOperand.mAttribute_mEndOfProcLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_procedureDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mProcedureKind.isValid () && mAttribute_mProcedureModeList.isValid () && mAttribute_mProcedureName.isValid () && mAttribute_mProcedureAttributeList.isValid () && mAttribute_mProcFormalArgumentList.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfProcLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mProcedureKind.drop () ;
-  mAttribute_mProcedureModeList.drop () ;
-  mAttribute_mProcedureName.drop () ;
-  mAttribute_mProcedureAttributeList.drop () ;
-  mAttribute_mProcFormalArgumentList.drop () ;
-  mAttribute_mInstructionList.drop () ;
-  mAttribute_mEndOfProcLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureDeclarationListAST_2D_element::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "<struct @procedureDeclarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mProcedureKind.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureModeList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureAttributeList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfProcLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureKindAST GALGAS_procedureDeclarationListAST_2D_element::reader_mProcedureKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_procedureDeclarationListAST_2D_element::reader_mProcedureModeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureModeList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_procedureDeclarationListAST_2D_element::reader_mProcedureName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_procedureDeclarationListAST_2D_element::reader_mProcedureAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureAttributeList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList GALGAS_procedureDeclarationListAST_2D_element::reader_mProcFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcFormalArgumentList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_procedureDeclarationListAST_2D_element::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_procedureDeclarationListAST_2D_element::reader_mEndOfProcLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfProcLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      @procedureDeclarationListAST-element type                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procedureDeclarationListAST_2D_element ("procedureDeclarationListAST-element",
-                                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procedureDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procedureDeclarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procedureDeclarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procedureDeclarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureDeclarationListAST_2D_element GALGAS_procedureDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_procedureDeclarationListAST_2D_element result ;
-  const GALGAS_procedureDeclarationListAST_2D_element * p = (const GALGAS_procedureDeclarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procedureDeclarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procedureDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category Reader '@procedureDeclarationListAST-element mangledName'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_mangledName (const GALGAS_procedureDeclarationListAST_2D_element & inObject,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outMangledName ; // Returned variable
-  result_outMangledName = function_mangledName (inObject.mAttribute_mProcedureKind, inObject.mAttribute_mProcedureName.mAttribute_string, inObject.mAttribute_mProcFormalArgumentList, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 213)) ;
-//---
-  return result_outMangledName ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Category method '@procedureDeclarationListAST-element enterInContext'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterInContext (const GALGAS_procedureDeclarationListAST_2D_element inObject,
-                                    GALGAS_semanticContext & ioArgument_ioContext,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  switch (inObject.mAttribute_mProcedureKind.enumValue ()) {
-  case GALGAS_procedureKindAST::kNotBuilt:
-    break ;
-  case GALGAS_procedureKindAST::kEnum_standAloneProc:
-    {
-      GALGAS_procedureSignature var_signature = GALGAS_procedureSignature::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 229)) ;
-      cEnumerator_procFormalArgumentList enumerator_8003 (inObject.mAttribute_mProcFormalArgumentList, kEnumeration_up) ;
-      while (enumerator_8003.hasCurrentObject ()) {
-        GALGAS_unifiedTypeMap_2D_proxy var_typeProxy ;
-        {
-        GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_8003.current_mFormalArgumentTypeName (HERE), var_typeProxy COMMA_SOURCE_FILE ("proc-declaration.galgas", 231)) ;
-        }
-        var_signature.addAssign_operation (enumerator_8003.current_mFormalArgumentPassingMode (HERE), enumerator_8003.current_mSelector (HERE), var_typeProxy  COMMA_SOURCE_FILE ("proc-declaration.galgas", 232)) ;
-        enumerator_8003.gotoNextObject () ;
-      }
-      GALGAS_modeMap var_procedureModeMap = GALGAS_modeMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 235)) ;
-      cEnumerator_lstringlist enumerator_8265 (inObject.mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_8265.hasCurrentObject ()) {
-        {
-        var_procedureModeMap.modifier_insertKey (enumerator_8265.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 237)) ;
-        }
-        enumerator_8265.gotoNextObject () ;
-      }
-      GALGAS_bool var_weakProcedure = GALGAS_bool (false) ;
-      cEnumerator_lstringlist enumerator_8424 (inObject.mAttribute_mProcedureAttributeList, kEnumeration_up) ;
-      bool bool_0 = var_weakProcedure.operator_not (SOURCE_FILE ("proc-declaration.galgas", 241)).isValidAndTrue () ;
-      if (enumerator_8424.hasCurrentObject () && bool_0) {
-        while (enumerator_8424.hasCurrentObject () && bool_0) {
-          var_weakProcedure = GALGAS_bool (kIsEqual, enumerator_8424.current_mValue (HERE).mAttribute_string.objectCompare (function_weakAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 242)))) ;
-          enumerator_8424.gotoNextObject () ;
-          if (enumerator_8424.hasCurrentObject ()) {
-            bool_0 = var_weakProcedure.operator_not (SOURCE_FILE ("proc-declaration.galgas", 241)).isValidAndTrue () ;
-          }
-        }
-      }
-      const GALGAS_procedureDeclarationListAST_2D_element temp_1 = inObject ;
-      GALGAS_string var_mangledName = categoryReader_mangledName (temp_1, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 245)) ;
-      GALGAS_lstring var_mangledNameWithLocation = GALGAS_lstring::constructor_new (var_mangledName, inObject.mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("proc-declaration.galgas", 246)) ;
-      const enumGalgasBool test_2 = ioArgument_ioContext.mAttribute_mProcedureMap.reader_hasKey (var_mangledName COMMA_SOURCE_FILE ("proc-declaration.galgas", 247)).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        GALGAS_bool var_weak = ioArgument_ioContext.mAttribute_mProcedureMap.reader_mWeakProcedureForKey (var_mangledName, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 248)) ;
-        GALGAS_bool test_3 = var_weakProcedure ;
-        if (kBoolTrue == test_3.boolEnum ()) {
-          test_3 = var_weak.operator_not (SOURCE_FILE ("proc-declaration.galgas", 249)) ;
-        }
-        const enumGalgasBool test_4 = test_3.boolEnum () ;
-        if (kBoolTrue == test_4) {
-        }else if (kBoolFalse == test_4) {
-          GALGAS_bool test_5 = var_weakProcedure ;
-          if (kBoolTrue == test_5.boolEnum ()) {
-            test_5 = var_weak ;
-          }
-          const enumGalgasBool test_6 = test_5.boolEnum () ;
-          if (kBoolTrue == test_6) {
-            GALGAS_location location_7 (inObject.mAttribute_mProcedureName.reader_location (HERE)) ; // Implicit use of 'location' reader
-            inCompiler->emitSemanticError (location_7, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 252)) ;
-          }else if (kBoolFalse == test_6) {
-            GALGAS_bool test_8 = var_weakProcedure.operator_not (SOURCE_FILE ("proc-declaration.galgas", 253)) ;
-            if (kBoolTrue == test_8.boolEnum ()) {
-              test_8 = var_weak ;
-            }
-            const enumGalgasBool test_9 = test_8.boolEnum () ;
-            if (kBoolTrue == test_9) {
-              {
-              GALGAS_bool joker_9127_4 ; // Joker input parameter
-              GALGAS_modeMap joker_9127_3 ; // Joker input parameter
-              GALGAS_procedureSignature joker_9127_2 ; // Joker input parameter
-              GALGAS_bool joker_9127_1 ; // Joker input parameter
-              ioArgument_ioContext.mAttribute_mProcedureMap.modifier_removeKey (var_mangledNameWithLocation, joker_9127_4, joker_9127_3, joker_9127_2, joker_9127_1, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 254)) ;
-              }
-              {
-              ioArgument_ioContext.mAttribute_mProcedureMap.modifier_insertKey (var_mangledNameWithLocation, GALGAS_bool (false), var_procedureModeMap, var_signature, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 255)) ;
-              }
-            }else if (kBoolFalse == test_9) {
-              {
-              ioArgument_ioContext.mAttribute_mProcedureMap.modifier_insertKey (var_mangledNameWithLocation, GALGAS_bool (false), var_procedureModeMap, var_signature, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 263)) ;
-              }
-            }
-          }
-        }
-      }else if (kBoolFalse == test_2) {
-        {
-        ioArgument_ioContext.mAttribute_mProcedureMap.modifier_insertKey (var_mangledNameWithLocation, GALGAS_bool (false), var_procedureModeMap, var_signature, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 272)) ;
-        }
-      }
-    }
-    break ;
-  case GALGAS_procedureKindAST::kEnum_structureProc:
-    {
-    }
-    break ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Category method '@procedureDeclarationListAST-element procedureSemanticAnalysis'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_procedureSemanticAnalysis (const GALGAS_procedureDeclarationListAST_2D_element inObject,
-                                               const GALGAS_semanticContext constinArgument_inContext,
-                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                               GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_stringset var_procedureModeSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("proc-declaration.galgas", 308)) ;
-  cEnumerator_lstringlist enumerator_11123 (inObject.mAttribute_mProcedureModeList, kEnumeration_up) ;
-  while (enumerator_11123.hasCurrentObject ()) {
-    constinArgument_inContext.mAttribute_mModeMap.method_searchKey (enumerator_11123.current (HERE).mAttribute_mValue, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 310)) ;
-    var_procedureModeSet.addAssign_operation (enumerator_11123.current (HERE).mAttribute_mValue.mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 311)) ;
-    enumerator_11123.gotoNextObject () ;
-  }
-  GALGAS_bool var_warnIfUnused = GALGAS_bool (true) ;
-  GALGAS_bool var_weakProcedure = GALGAS_bool (false) ;
-  cEnumerator_lstringlist enumerator_11338 (inObject.mAttribute_mProcedureAttributeList, kEnumeration_up) ;
-  while (enumerator_11338.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_11338.current_mValue (HERE).mAttribute_string.objectCompare (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 317)))).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_warnIfUnused.operator_not (SOURCE_FILE ("proc-declaration.galgas", 318)).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        GALGAS_location location_2 (enumerator_11338.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_2, GALGAS_string ("duplicate @").add_operation (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 319)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 319)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 319))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 319)) ;
-      }
-      var_warnIfUnused = GALGAS_bool (false) ;
-    }else if (kBoolFalse == test_0) {
-      const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_11338.current_mValue (HERE).mAttribute_string.objectCompare (function_weakAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 322)))).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        const enumGalgasBool test_4 = var_weakProcedure.boolEnum () ;
-        if (kBoolTrue == test_4) {
-          GALGAS_location location_5 (enumerator_11338.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-          inCompiler->emitSemanticError (location_5, GALGAS_string ("duplicate @").add_operation (function_weakAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 324)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 324)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 324))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 324)) ;
-        }
-        var_weakProcedure = GALGAS_bool (true) ;
-      }else if (kBoolFalse == test_3) {
-        GALGAS_location location_6 (enumerator_11338.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_6, GALGAS_string ("unknown attribute; available attributes are @").add_operation (function_noWarningIfUnusedAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 329)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 328)).add_operation (GALGAS_string (", @"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 329)).add_operation (function_weakAttribute (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 330)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 330))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 328)) ;
-      }
-    }
-    enumerator_11338.gotoNextObject () ;
-  }
-  const GALGAS_procedureDeclarationListAST_2D_element temp_7 = inObject ;
-  GALGAS_variableMap var_variableMap = function_initialVariableMap (GALGAS_string ("proc ").add_operation (categoryReader_mangledName (temp_7, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 335)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 335)), constinArgument_inContext, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 334)) ;
-  GALGAS_procFormalArgumentListForGeneration var_formalArguments = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 340)) ;
-  GALGAS_receiverType var_receiverType ;
-  switch (inObject.mAttribute_mProcedureKind.enumValue ()) {
-  case GALGAS_procedureKindAST::kNotBuilt:
-    break ;
-  case GALGAS_procedureKindAST::kEnum_standAloneProc:
-    {
-      var_receiverType = GALGAS_receiverType::constructor_noReceiver (SOURCE_FILE ("proc-declaration.galgas", 344)) ;
-    }
-    break ;
-  case GALGAS_procedureKindAST::kEnum_structureProc:
-    {
-      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_14129 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (inObject.mAttribute_mProcedureKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_14129->mAssociatedValue0 ;
-      const GALGAS_bool extractedValue_mutating = extractPtr_14129->mAssociatedValue1 ;
-      GALGAS_unifiedTypeMap_2D_proxy var_type = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, extractedValue_structureTypeName, inCompiler  COMMA_SOURCE_FILE ("proc-declaration.galgas", 346)) ;
-      GALGAS_propertyList var_propertyList ;
-      switch (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 348)).enumValue ()) {
-      case GALGAS_typeKind::kNotBuilt:
-        break ;
-      case GALGAS_typeKind::kEnum_structure:
-        {
-          const cEnumAssociatedValues_typeKind_structure * extractPtr_12584 = (const cEnumAssociatedValues_typeKind_structure *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 348)).unsafePointer ()) ;
-          const GALGAS_propertyList extractedValue_propList = extractPtr_12584->mAssociatedValue0 ;
-          var_propertyList = extractedValue_propList ;
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_enumeration:
-        {
-          var_propertyList = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 350)) ;
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_integer:
-        {
-          var_propertyList = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 351)) ;
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_boolean:
-        {
-          var_propertyList = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 352)) ;
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_boolset:
-        {
-          var_propertyList = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 353)) ;
-        }
-        break ;
-      case GALGAS_typeKind::kEnum_literalString:
-        {
-          var_propertyList = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 354)) ;
-        }
-        break ;
-      }
-      const enumGalgasBool test_8 = extractedValue_mutating.boolEnum () ;
-      if (kBoolTrue == test_8) {
-        var_receiverType = GALGAS_receiverType::constructor_mutatingReceiver (var_type, function_receiverPtrName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 359))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 357)) ;
-        cEnumerator_propertyList enumerator_12988 (var_propertyList, kEnumeration_up) ;
-        while (enumerator_12988.hasCurrentObject ()) {
-          {
-          var_variableMap.modifier_insertDefinedLocalVariable (enumerator_12988.current_mPropertyName (HERE), enumerator_12988.current_mTypeProxy (HERE), GALGAS_bool (true), function_receiverPtrName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 366)).add_operation (GALGAS_string ("->"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 366)).add_operation (function_mangledNameForProperty (enumerator_12988.current_mPropertyName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 366)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 366)), GALGAS_variableKindIR::constructor_localAccess (function_receiverPtrName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 368)).add_operation (GALGAS_string ("->"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 368)).add_operation (function_mangledNameForProperty (enumerator_12988.current_mPropertyName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 368)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 368))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 367)), enumerator_12988.current_mTypeProxy (HERE).reader_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 370)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 371)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 362)) ;
-          }
-          enumerator_12988.gotoNextObject () ;
-        }
-        var_formalArguments.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_inputOutput (SOURCE_FILE ("proc-declaration.galgas", 375)), var_type, function_receiverPtrName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 375))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 375)) ;
-      }else if (kBoolFalse == test_8) {
-        var_receiverType = GALGAS_receiverType::constructor_receiver (var_type, function_receiverName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 379))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 377)) ;
-        cEnumerator_propertyList enumerator_13644 (var_propertyList, kEnumeration_up) ;
-        while (enumerator_13644.hasCurrentObject ()) {
-          {
-          var_variableMap.modifier_insertUsedLocalConstant (enumerator_13644.current_mPropertyName (HERE), enumerator_13644.current_mTypeProxy (HERE), GALGAS_bool (true), function_receiverName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 386)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 386)).add_operation (function_mangledNameForProperty (enumerator_13644.current_mPropertyName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 386)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 386)), GALGAS_variableKindIR::constructor_localAccess (function_receiverName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 388)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 388)).add_operation (function_mangledNameForProperty (enumerator_13644.current_mPropertyName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 388)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 388))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 387)), enumerator_13644.current_mTypeProxy (HERE).reader_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 390)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 391)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 382)) ;
-          }
-          enumerator_13644.gotoNextObject () ;
-        }
-        var_formalArguments.addAssign_operation (GALGAS_procFormalArgumentPassingMode::constructor_input (SOURCE_FILE ("proc-declaration.galgas", 395)), var_type, function_receiverName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 395))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 395)) ;
-      }
-    }
-    break ;
-  }
-  cEnumerator_procFormalArgumentList enumerator_14264 (inObject.mAttribute_mProcFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_14264.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, enumerator_14264.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("proc-declaration.galgas", 400)) ;
-    switch (enumerator_14264.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
-    case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_input:
-      {
-        {
-        var_variableMap.modifier_insertConstantInputFormalArgument (enumerator_14264.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), function_mangledNameForInArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 407)), GALGAS_variableKindIR::constructor_inArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 408)), var_typeProxy.reader_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 409)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 410)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 403)) ;
-        }
-        var_formalArguments.addAssign_operation (enumerator_14264.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_mangledNameForInArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 413))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 413)) ;
-      }
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
-      {
-        {
-        var_variableMap.modifier_insertInputOutputFormalArgument (enumerator_14264.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_string ("*").add_operation (function_mangledNameForInOutArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 419)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 419)), GALGAS_variableKindIR::constructor_inOutArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 420)), var_typeProxy.reader_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 421)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 422)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 415)) ;
-        }
-        var_formalArguments.addAssign_operation (enumerator_14264.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_mangledNameForInOutArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 425))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 425)) ;
-      }
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_output:
-      {
-        {
-        var_variableMap.modifier_insertOutputFormalArgument (enumerator_14264.current_mFormalArgumentName (HERE), var_typeProxy, GALGAS_bool (true), GALGAS_string ("*").add_operation (function_mangledNameForOutArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 431)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 431)), GALGAS_variableKindIR::constructor_outArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 432)), var_typeProxy.reader_copiable (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 433)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("proc-declaration.galgas", 434)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 427)) ;
-        }
-        var_formalArguments.addAssign_operation (enumerator_14264.current_mFormalArgumentPassingMode (HERE), var_typeProxy, function_mangledNameForOutArgument (enumerator_14264.current_mFormalArgumentName (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 437))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 437)) ;
-      }
-      break ;
-    }
-    enumerator_14264.gotoNextObject () ;
-  }
-  const GALGAS_procedureDeclarationListAST_2D_element temp_9 = inObject ;
-  GALGAS_lstring var_procNameForInvocationGraph = GALGAS_lstring::constructor_new (GALGAS_string ("proc ").add_operation (categoryReader_mangledName (temp_9, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 441)), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 441)), inObject.mAttribute_mProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("proc-declaration.galgas", 441)) ;
-  const enumGalgasBool test_10 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.reader_isNodeDefined (var_procNameForInvocationGraph.mAttribute_string COMMA_SOURCE_FILE ("proc-declaration.galgas", 442)).operator_not (SOURCE_FILE ("proc-declaration.galgas", 442)).boolEnum () ;
-  if (kBoolTrue == test_10) {
-    {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.modifier_addNode (var_procNameForInvocationGraph, inObject.mAttribute_mProcedureName, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 443)) ;
-    }
-  }
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("proc-declaration.galgas", 449)) ;
-  categoryMethod_analyzeRoutineInstructionList (inObject.mAttribute_mInstructionList, var_procNameForInvocationGraph, var_receiverType, constinArgument_inContext, var_procedureModeSet, var_procedureModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 455)) COMMA_SOURCE_FILE ("proc-declaration.galgas", 455)).operator_not (SOURCE_FILE ("proc-declaration.galgas", 455)), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalLiteralStringMap, var_variableMap, var_instructionGenerationList, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 450)) ;
-  var_variableMap.method_checkAutomatonStates (inObject.mAttribute_mEndOfProcLocation, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 462)) ;
-  const enumGalgasBool test_11 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("proc-declaration.galgas", 464)).boolEnum () ;
-  if (kBoolTrue == test_11) {
-    GALGAS_bool var_weak = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_mWeakForKey (inObject.mAttribute_mProcedureName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 465)) ;
-    GALGAS_bool test_12 = var_weakProcedure ;
-    if (kBoolTrue == test_12.boolEnum ()) {
-      test_12 = var_weak.operator_not (SOURCE_FILE ("proc-declaration.galgas", 466)) ;
-    }
-    const enumGalgasBool test_13 = test_12.boolEnum () ;
-    if (kBoolTrue == test_13) {
-    }else if (kBoolFalse == test_13) {
-      GALGAS_bool test_14 = var_weakProcedure ;
-      if (kBoolTrue == test_14.boolEnum ()) {
-        test_14 = var_weak ;
-      }
-      const enumGalgasBool test_15 = test_14.boolEnum () ;
-      if (kBoolTrue == test_15) {
-        GALGAS_location location_16 (inObject.mAttribute_mProcedureName.reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_16, GALGAS_string ("this weak procedure overrides a weak procedure")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 469)) ;
-      }else if (kBoolFalse == test_15) {
-        GALGAS_bool test_17 = var_weakProcedure.operator_not (SOURCE_FILE ("proc-declaration.galgas", 470)) ;
-        if (kBoolTrue == test_17.boolEnum ()) {
-          test_17 = var_weak ;
-        }
-        const enumGalgasBool test_18 = test_17.boolEnum () ;
-        if (kBoolTrue == test_18) {
-          {
-          GALGAS_procFormalArgumentListForGeneration joker_17203_5 ; // Joker input parameter
-          GALGAS_instructionListIR joker_17203_4 ; // Joker input parameter
-          GALGAS_bool joker_17203_3 ; // Joker input parameter
-          GALGAS_bool joker_17203_2 ; // Joker input parameter
-          GALGAS_bool joker_17203_1 ; // Joker input parameter
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.modifier_removeKey (inObject.mAttribute_mProcedureName, joker_17203_5, joker_17203_4, joker_17203_3, joker_17203_2, joker_17203_1, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 471)) ;
-          }
-          {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.modifier_insertKey (inObject.mAttribute_mProcedureName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.reader_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("proc-declaration.galgas", 476)), var_warnIfUnused, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 472)) ;
-          }
-        }else if (kBoolFalse == test_18) {
-          {
-          ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.modifier_insertKey (inObject.mAttribute_mProcedureName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.reader_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("proc-declaration.galgas", 485)), var_warnIfUnused, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 481)) ;
-          }
-        }
-      }
-    }
-  }else if (kBoolFalse == test_11) {
-    {
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.modifier_insertKey (inObject.mAttribute_mProcedureName, var_formalArguments, var_instructionGenerationList, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.reader_hasKey (inObject.mAttribute_mProcedureName.mAttribute_string COMMA_SOURCE_FILE ("proc-declaration.galgas", 495)), var_warnIfUnused, var_weakProcedure, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 491)) ;
-    }
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element::GALGAS_procedureMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mFormalArgumentListForGeneration (),
-mAttribute_mInstructionGenerationList (),
-mAttribute_mIsRequired (),
-mAttribute_mWarnIfUnused (),
-mAttribute_mWeak () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element::~ GALGAS_procedureMapIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element::GALGAS_procedureMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                    const GALGAS_procFormalArgumentListForGeneration & inOperand1,
-                                                                    const GALGAS_instructionListIR & inOperand2,
-                                                                    const GALGAS_bool & inOperand3,
-                                                                    const GALGAS_bool & inOperand4,
-                                                                    const GALGAS_bool & inOperand5) :
-mAttribute_lkey (inOperand0),
-mAttribute_mFormalArgumentListForGeneration (inOperand1),
-mAttribute_mInstructionGenerationList (inOperand2),
-mAttribute_mIsRequired (inOperand3),
-mAttribute_mWarnIfUnused (inOperand4),
-mAttribute_mWeak (inOperand5) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element GALGAS_procedureMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_procedureMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                           GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (HERE),
-                                           GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                           GALGAS_bool::constructor_default (HERE),
-                                           GALGAS_bool::constructor_default (HERE),
-                                           GALGAS_bool::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element GALGAS_procedureMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_procFormalArgumentListForGeneration & inOperand1,
-                                                                                    const GALGAS_instructionListIR & inOperand2,
-                                                                                    const GALGAS_bool & inOperand3,
-                                                                                    const GALGAS_bool & inOperand4,
-                                                                                    const GALGAS_bool & inOperand5 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_procedureMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_procedureMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_procedureMapIR_2D_element::objectCompare (const GALGAS_procedureMapIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentListForGeneration.objectCompare (inOperand.mAttribute_mFormalArgumentListForGeneration) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInstructionGenerationList.objectCompare (inOperand.mAttribute_mInstructionGenerationList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mIsRequired.objectCompare (inOperand.mAttribute_mIsRequired) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mWarnIfUnused.objectCompare (inOperand.mAttribute_mWarnIfUnused) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mWeak.objectCompare (inOperand.mAttribute_mWeak) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_procedureMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mFormalArgumentListForGeneration.drop () ;
-  mAttribute_mInstructionGenerationList.drop () ;
-  mAttribute_mIsRequired.drop () ;
-  mAttribute_mWarnIfUnused.drop () ;
-  mAttribute_mWeak.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMapIR_2D_element::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @procedureMapIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInstructionGenerationList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mIsRequired.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mWarnIfUnused.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mWeak.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_procedureMapIR_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentListForGeneration GALGAS_procedureMapIR_2D_element::reader_mFormalArgumentListForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentListForGeneration ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_procedureMapIR_2D_element::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionGenerationList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_procedureMapIR_2D_element::reader_mIsRequired (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsRequired ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_procedureMapIR_2D_element::reader_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWarnIfUnused ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_procedureMapIR_2D_element::reader_mWeak (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWeak ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @procedureMapIR-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procedureMapIR_2D_element ("procedureMapIR-element",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procedureMapIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procedureMapIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procedureMapIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procedureMapIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR_2D_element GALGAS_procedureMapIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_procedureMapIR_2D_element result ;
-  const GALGAS_procedureMapIR_2D_element * p = (const GALGAS_procedureMapIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procedureMapIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procedureMapIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Category Reader '@procedureMapIR-element implementationCodeGeneration'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_implementationCodeGeneration (const GALGAS_procedureMapIR_2D_element & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  result_outCode = GALGAS_string (filewrapperTemplate_procedureGenerationTemplate_implementation (inCompiler, function_mangledNameForProcedure (inObject.mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 532)), inObject.mAttribute_mFormalArgumentListForGeneration, inObject.mAttribute_mInstructionGenerationList COMMA_SOURCE_FILE ("proc-declaration.galgas", 531))) ;
-//---
-  return result_outCode ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element::GALGAS_registerMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mRegisterTypeName (),
-mAttribute_mRegisterAddress () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element::~ GALGAS_registerMapIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element::GALGAS_registerMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_string & inOperand1,
-                                                                  const GALGAS_uint_36__34_ & inOperand2) :
-mAttribute_lkey (inOperand0),
-mAttribute_mRegisterTypeName (inOperand1),
-mAttribute_mRegisterAddress (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element GALGAS_registerMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_registerMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                          GALGAS_string::constructor_default (HERE),
-                                          GALGAS_uint_36__34_::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element GALGAS_registerMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_string & inOperand1,
-                                                                                  const GALGAS_uint_36__34_ & inOperand2 
-                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_registerMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_registerMapIR_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_registerMapIR_2D_element::objectCompare (const GALGAS_registerMapIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterTypeName.objectCompare (inOperand.mAttribute_mRegisterTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterAddress.objectCompare (inOperand.mAttribute_mRegisterAddress) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_registerMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mRegisterTypeName.isValid () && mAttribute_mRegisterAddress.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_registerMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mRegisterTypeName.drop () ;
-  mAttribute_mRegisterAddress.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_registerMapIR_2D_element::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "<struct @registerMapIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_registerMapIR_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_registerMapIR_2D_element::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint_36__34_ GALGAS_registerMapIR_2D_element::reader_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @registerMapIR-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerMapIR_2D_element ("registerMapIR-element",
-                                                 NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_registerMapIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_registerMapIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_registerMapIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_registerMapIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR_2D_element GALGAS_registerMapIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_registerMapIR_2D_element result ;
-  const GALGAS_registerMapIR_2D_element * p = (const GALGAS_registerMapIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerMapIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("registerMapIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Category method '@infixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const GALGAS_infixOperatorMap inObject,
-                               const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inLeftType,
-                               const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inRightType,
-                               const GALGAS_location constinArgument_inOperatorLocation,
-                               GALGAS_unifiedTypeMap_2D_proxy & outArgument_outResultType,
-                               C_Compiler * inCompiler
-                               COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outResultType.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 63)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 63)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 63)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 63)), constinArgument_inOperatorLocation  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 63)) ;
-  const GALGAS_infixOperatorMap temp_0 = inObject ;
-  const enumGalgasBool test_1 = temp_0.reader_hasKey (var_lkey.mAttribute_string COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 64)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    const GALGAS_infixOperatorMap temp_2 = inObject ;
-    temp_2.method_searchKey (var_lkey, outArgument_outResultType, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 65)) ;
-  }else if (kBoolFalse == test_1) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("infix operation between '").add_operation (constinArgument_inLeftType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)).add_operation (GALGAS_string (" and "), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)).add_operation (constinArgument_inRightType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68)).add_operation (GALGAS_string ("' is not defined"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 68))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 67)) ;
-    outArgument_outResultType.drop () ; // Release error dropped variable
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Category method '@prefixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const GALGAS_prefixOperatorMap inObject,
-                               const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inType,
-                               const GALGAS_location constinArgument_inOperatorLocation,
-                               GALGAS_unifiedTypeMap_2D_proxy & outArgument_outResultType,
-                               C_Compiler * inCompiler
-                               COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outResultType.drop () ; // Release 'out' argument
-  GALGAS_lstring var_lkey = GALGAS_lstring::constructor_new (constinArgument_inType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)), constinArgument_inOperatorLocation  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 40)) ;
-  const GALGAS_prefixOperatorMap temp_0 = inObject ;
-  const enumGalgasBool test_1 = temp_0.reader_hasKey (var_lkey.mAttribute_string COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 41)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    const GALGAS_prefixOperatorMap temp_2 = inObject ;
-    temp_2.method_searchKey (var_lkey, outArgument_outResultType, inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 42)) ;
-  }else if (kBoolFalse == test_1) {
-    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("prefix operation is not defined for '").add_operation (constinArgument_inType.reader_key (inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45)).add_operation (GALGAS_string (" type"), inCompiler COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 45))  COMMA_SOURCE_FILE ("expression-prefix-operators.galgas", 44)) ;
-    outArgument_outResultType.drop () ; // Release error dropped variable
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                Category Reader '@procEffectiveParameterPassingModeAST passingModeForActualSelector'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_passingModeForActualSelector (const GALGAS_procEffectiveParameterPassingModeAST & inObject,
-                                                           GALGAS_lstring inArgument_inSelector,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  const GALGAS_procEffectiveParameterPassingModeAST temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_procEffectiveParameterPassingModeAST::kNotBuilt:
-    break ;
-  case GALGAS_procEffectiveParameterPassingModeAST::kEnum_input:
-    {
-      result_outResult = GALGAS_string ("\?") ;
-    }
-    break ;
-  case GALGAS_procEffectiveParameterPassingModeAST::kEnum_output:
-    {
-      result_outResult = GALGAS_string ("!") ;
-    }
-    break ;
-  case GALGAS_procEffectiveParameterPassingModeAST::kEnum_outputInput:
-    {
-      result_outResult = GALGAS_string ("!\?") ;
-    }
-    break ;
-  }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, inArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    result_outResult.dotAssign_operation (inArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 20))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 20)) ;
-  }
-//---
-  return result_outResult ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Category Reader '@variableKindIR isStatic'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool categoryReader_isStatic (const GALGAS_variableKindIR & inObject,
-                                     C_Compiler * /* inCompiler */
-                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool result_outResult ; // Returned variable
-  const GALGAS_variableKindIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_variableKindIR::kNotBuilt:
-    break ;
-  case GALGAS_variableKindIR::kEnum_register:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_globalVariable:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localVariable:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inArgument:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inOutArgument:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_outArgument:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localConstant:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_temporaryConstant:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localAccess:
-    {
-      result_outResult = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
-    {
-      result_outResult = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalSignedInteger:
-    {
-      result_outResult = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalString:
-    {
-      result_outResult = GALGAS_bool (true) ;
-    }
-    break ;
-  }
-//---
-  return result_outResult ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (void) :
-mAttribute_mTargetBaseTypeMap (),
-mAttribute_mBooleanType (),
-mAttribute_mExceptionCodeType (),
-mAttribute_mExceptionLineType (),
-mAttribute_mTypeMap (),
-mAttribute_mProcedureMap (),
-mAttribute_mFunctionMap (),
-mAttribute_mInitRoutineMap (),
-mAttribute_mExceptionSetupRoutinePriorityMap (),
-mAttribute_mExceptionLoopRoutinePriorityMap (),
-mAttribute_mRegisterMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mModeMap (),
-mAttribute_mTypeNameSetForIncDec (),
-mAttribute_mEqualOperatorMap (),
-mAttribute_mNonEqualOperatorMap (),
-mAttribute_mStrictInfOperatorMap (),
-mAttribute_mInfEqualOperatorMap (),
-mAttribute_mStrictSupOperatorMap (),
-mAttribute_mSupEqualOperatorMap (),
-mAttribute_mAndOperatorMap (),
-mAttribute_mBooleanAndOperatorMap (),
-mAttribute_mOrOperatorMap (),
-mAttribute_mBooleanOrOperatorMap (),
-mAttribute_mXorOperatorMap (),
-mAttribute_mBooleanXorOperatorMap (),
-mAttribute_mAddOperatorMap (),
-mAttribute_mAddNoOvfOperatorMap (),
-mAttribute_mSubOperatorMap (),
-mAttribute_mSubNoOvfOperatorMap (),
-mAttribute_mMulOperatorMap (),
-mAttribute_mMulNoOvfOperatorMap (),
-mAttribute_mDivOperatorMap (),
-mAttribute_mDivNoOvfOperatorMap (),
-mAttribute_mModOperatorMap (),
-mAttribute_mLeftShiftOperatorMap (),
-mAttribute_mRightShiftOperatorMap (),
-mAttribute_mUnaryMinusOperatorMap (),
-mAttribute_mNotOperatorMap (),
-mAttribute_mUnsignedComplementOperatorMap () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::~ GALGAS_semanticContext (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                const GALGAS_unifiedTypeMap & inOperand4,
-                                                const GALGAS_procedureMap & inOperand5,
-                                                const GALGAS_functionMap & inOperand6,
-                                                const GALGAS_initRoutineMap & inOperand7,
-                                                const GALGAS_exceptionRoutinePriorityMap & inOperand8,
-                                                const GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                const GALGAS_registerMap & inOperand10,
-                                                const GALGAS_globalConstantMap & inOperand11,
-                                                const GALGAS_globalVariableMap & inOperand12,
-                                                const GALGAS_modeMap & inOperand13,
-                                                const GALGAS_stringset & inOperand14,
-                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                const GALGAS_infixOperatorMap & inOperand31,
-                                                const GALGAS_infixOperatorMap & inOperand32,
-                                                const GALGAS_infixOperatorMap & inOperand33,
-                                                const GALGAS_infixOperatorMap & inOperand34,
-                                                const GALGAS_infixOperatorMap & inOperand35,
-                                                const GALGAS_infixOperatorMap & inOperand36,
-                                                const GALGAS_infixOperatorMap & inOperand37,
-                                                const GALGAS_prefixOperatorMap & inOperand38,
-                                                const GALGAS_prefixOperatorMap & inOperand39,
-                                                const GALGAS_prefixOperatorMap & inOperand40) :
-mAttribute_mTargetBaseTypeMap (inOperand0),
-mAttribute_mBooleanType (inOperand1),
-mAttribute_mExceptionCodeType (inOperand2),
-mAttribute_mExceptionLineType (inOperand3),
-mAttribute_mTypeMap (inOperand4),
-mAttribute_mProcedureMap (inOperand5),
-mAttribute_mFunctionMap (inOperand6),
-mAttribute_mInitRoutineMap (inOperand7),
-mAttribute_mExceptionSetupRoutinePriorityMap (inOperand8),
-mAttribute_mExceptionLoopRoutinePriorityMap (inOperand9),
-mAttribute_mRegisterMap (inOperand10),
-mAttribute_mGlobalConstantMap (inOperand11),
-mAttribute_mGlobalVariableMap (inOperand12),
-mAttribute_mModeMap (inOperand13),
-mAttribute_mTypeNameSetForIncDec (inOperand14),
-mAttribute_mEqualOperatorMap (inOperand15),
-mAttribute_mNonEqualOperatorMap (inOperand16),
-mAttribute_mStrictInfOperatorMap (inOperand17),
-mAttribute_mInfEqualOperatorMap (inOperand18),
-mAttribute_mStrictSupOperatorMap (inOperand19),
-mAttribute_mSupEqualOperatorMap (inOperand20),
-mAttribute_mAndOperatorMap (inOperand21),
-mAttribute_mBooleanAndOperatorMap (inOperand22),
-mAttribute_mOrOperatorMap (inOperand23),
-mAttribute_mBooleanOrOperatorMap (inOperand24),
-mAttribute_mXorOperatorMap (inOperand25),
-mAttribute_mBooleanXorOperatorMap (inOperand26),
-mAttribute_mAddOperatorMap (inOperand27),
-mAttribute_mAddNoOvfOperatorMap (inOperand28),
-mAttribute_mSubOperatorMap (inOperand29),
-mAttribute_mSubNoOvfOperatorMap (inOperand30),
-mAttribute_mMulOperatorMap (inOperand31),
-mAttribute_mMulNoOvfOperatorMap (inOperand32),
-mAttribute_mDivOperatorMap (inOperand33),
-mAttribute_mDivNoOvfOperatorMap (inOperand34),
-mAttribute_mModOperatorMap (inOperand35),
-mAttribute_mLeftShiftOperatorMap (inOperand36),
-mAttribute_mRightShiftOperatorMap (inOperand37),
-mAttribute_mUnaryMinusOperatorMap (inOperand38),
-mAttribute_mNotOperatorMap (inOperand39),
-mAttribute_mUnsignedComplementOperatorMap (inOperand40) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticContext (GALGAS_targetBaseTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                 GALGAS_unifiedTypeMap::constructor_emptyMap (HERE),
-                                 GALGAS_procedureMap::constructor_emptyMap (HERE),
-                                 GALGAS_functionMap::constructor_emptyMap (HERE),
-                                 GALGAS_initRoutineMap::constructor_emptyMap (HERE),
-                                 GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                 GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                 GALGAS_registerMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalConstantMap::constructor_emptyMap (HERE),
-                                 GALGAS_globalVariableMap::constructor_emptyMap (HERE),
-                                 GALGAS_modeMap::constructor_emptyMap (HERE),
-                                 GALGAS_stringset::constructor_emptySet (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_infixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE),
-                                 GALGAS_prefixOperatorMap::constructor_emptyMap (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_targetBaseTypeMap & inOperand0,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                const GALGAS_unifiedTypeMap & inOperand4,
-                                                                const GALGAS_procedureMap & inOperand5,
-                                                                const GALGAS_functionMap & inOperand6,
-                                                                const GALGAS_initRoutineMap & inOperand7,
-                                                                const GALGAS_exceptionRoutinePriorityMap & inOperand8,
-                                                                const GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                                const GALGAS_registerMap & inOperand10,
-                                                                const GALGAS_globalConstantMap & inOperand11,
-                                                                const GALGAS_globalVariableMap & inOperand12,
-                                                                const GALGAS_modeMap & inOperand13,
-                                                                const GALGAS_stringset & inOperand14,
-                                                                const GALGAS_infixOperatorMap & inOperand15,
-                                                                const GALGAS_infixOperatorMap & inOperand16,
-                                                                const GALGAS_infixOperatorMap & inOperand17,
-                                                                const GALGAS_infixOperatorMap & inOperand18,
-                                                                const GALGAS_infixOperatorMap & inOperand19,
-                                                                const GALGAS_infixOperatorMap & inOperand20,
-                                                                const GALGAS_infixOperatorMap & inOperand21,
-                                                                const GALGAS_infixOperatorMap & inOperand22,
-                                                                const GALGAS_infixOperatorMap & inOperand23,
-                                                                const GALGAS_infixOperatorMap & inOperand24,
-                                                                const GALGAS_infixOperatorMap & inOperand25,
-                                                                const GALGAS_infixOperatorMap & inOperand26,
-                                                                const GALGAS_infixOperatorMap & inOperand27,
-                                                                const GALGAS_infixOperatorMap & inOperand28,
-                                                                const GALGAS_infixOperatorMap & inOperand29,
-                                                                const GALGAS_infixOperatorMap & inOperand30,
-                                                                const GALGAS_infixOperatorMap & inOperand31,
-                                                                const GALGAS_infixOperatorMap & inOperand32,
-                                                                const GALGAS_infixOperatorMap & inOperand33,
-                                                                const GALGAS_infixOperatorMap & inOperand34,
-                                                                const GALGAS_infixOperatorMap & inOperand35,
-                                                                const GALGAS_infixOperatorMap & inOperand36,
-                                                                const GALGAS_infixOperatorMap & inOperand37,
-                                                                const GALGAS_prefixOperatorMap & inOperand38,
-                                                                const GALGAS_prefixOperatorMap & inOperand39,
-                                                                const GALGAS_prefixOperatorMap & inOperand40 
-                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid () && inOperand21.isValid () && inOperand22.isValid () && inOperand23.isValid () && inOperand24.isValid () && inOperand25.isValid () && inOperand26.isValid () && inOperand27.isValid () && inOperand28.isValid () && inOperand29.isValid () && inOperand30.isValid () && inOperand31.isValid () && inOperand32.isValid () && inOperand33.isValid () && inOperand34.isValid () && inOperand35.isValid () && inOperand36.isValid () && inOperand37.isValid () && inOperand38.isValid () && inOperand39.isValid () && inOperand40.isValid ()) {
-    result = GALGAS_semanticContext (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20, inOperand21, inOperand22, inOperand23, inOperand24, inOperand25, inOperand26, inOperand27, inOperand28, inOperand29, inOperand30, inOperand31, inOperand32, inOperand33, inOperand34, inOperand35, inOperand36, inOperand37, inOperand38, inOperand39, inOperand40) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mTargetBaseTypeMap.objectCompare (inOperand.mAttribute_mTargetBaseTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBooleanType.objectCompare (inOperand.mAttribute_mBooleanType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionCodeType.objectCompare (inOperand.mAttribute_mExceptionCodeType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLineType.objectCompare (inOperand.mAttribute_mExceptionLineType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureMap.objectCompare (inOperand.mAttribute_mProcedureMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionMap.objectCompare (inOperand.mAttribute_mFunctionMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitRoutineMap.objectCompare (inOperand.mAttribute_mInitRoutineMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionSetupRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionLoopRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModeMap.objectCompare (inOperand.mAttribute_mModeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeNameSetForIncDec.objectCompare (inOperand.mAttribute_mTypeNameSetForIncDec) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBooleanAndOperatorMap.objectCompare (inOperand.mAttribute_mBooleanAndOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBooleanOrOperatorMap.objectCompare (inOperand.mAttribute_mBooleanOrOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBooleanXorOperatorMap.objectCompare (inOperand.mAttribute_mBooleanXorOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mNotOperatorMap.objectCompare (inOperand.mAttribute_mNotOperatorMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mUnsignedComplementOperatorMap.objectCompare (inOperand.mAttribute_mUnsignedComplementOperatorMap) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mTargetBaseTypeMap.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mExceptionCodeType.isValid () && mAttribute_mExceptionLineType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mProcedureMap.isValid () && mAttribute_mFunctionMap.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mExceptionSetupRoutinePriorityMap.isValid () && mAttribute_mExceptionLoopRoutinePriorityMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mTypeNameSetForIncDec.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mBooleanAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mBooleanOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::drop (void) {
-  mAttribute_mTargetBaseTypeMap.drop () ;
-  mAttribute_mBooleanType.drop () ;
-  mAttribute_mExceptionCodeType.drop () ;
-  mAttribute_mExceptionLineType.drop () ;
-  mAttribute_mTypeMap.drop () ;
-  mAttribute_mProcedureMap.drop () ;
-  mAttribute_mFunctionMap.drop () ;
-  mAttribute_mInitRoutineMap.drop () ;
-  mAttribute_mExceptionSetupRoutinePriorityMap.drop () ;
-  mAttribute_mExceptionLoopRoutinePriorityMap.drop () ;
-  mAttribute_mRegisterMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mModeMap.drop () ;
-  mAttribute_mTypeNameSetForIncDec.drop () ;
-  mAttribute_mEqualOperatorMap.drop () ;
-  mAttribute_mNonEqualOperatorMap.drop () ;
-  mAttribute_mStrictInfOperatorMap.drop () ;
-  mAttribute_mInfEqualOperatorMap.drop () ;
-  mAttribute_mStrictSupOperatorMap.drop () ;
-  mAttribute_mSupEqualOperatorMap.drop () ;
-  mAttribute_mAndOperatorMap.drop () ;
-  mAttribute_mBooleanAndOperatorMap.drop () ;
-  mAttribute_mOrOperatorMap.drop () ;
-  mAttribute_mBooleanOrOperatorMap.drop () ;
-  mAttribute_mXorOperatorMap.drop () ;
-  mAttribute_mBooleanXorOperatorMap.drop () ;
-  mAttribute_mAddOperatorMap.drop () ;
-  mAttribute_mAddNoOvfOperatorMap.drop () ;
-  mAttribute_mSubOperatorMap.drop () ;
-  mAttribute_mSubNoOvfOperatorMap.drop () ;
-  mAttribute_mMulOperatorMap.drop () ;
-  mAttribute_mMulNoOvfOperatorMap.drop () ;
-  mAttribute_mDivOperatorMap.drop () ;
-  mAttribute_mDivNoOvfOperatorMap.drop () ;
-  mAttribute_mModOperatorMap.drop () ;
-  mAttribute_mLeftShiftOperatorMap.drop () ;
-  mAttribute_mRightShiftOperatorMap.drop () ;
-  mAttribute_mUnaryMinusOperatorMap.drop () ;
-  mAttribute_mNotOperatorMap.drop () ;
-  mAttribute_mUnsignedComplementOperatorMap.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticContext::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "<struct @semanticContext:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mTargetBaseTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBooleanType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionCodeType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLineType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitRoutineMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeNameSetForIncDec.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBooleanAndOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBooleanOrOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBooleanXorOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mNotOperatorMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mUnsignedComplementOperatorMap.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_targetBaseTypeMap GALGAS_semanticContext::reader_mTargetBaseTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetBaseTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::reader_mBooleanType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::reader_mExceptionCodeType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionCodeType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::reader_mExceptionLineType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLineType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap GALGAS_semanticContext::reader_mTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_semanticContext::reader_mProcedureMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap GALGAS_semanticContext::reader_mFunctionMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap GALGAS_semanticContext::reader_mInitRoutineMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRoutineMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticContext::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionSetupRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticContext::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLoopRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMap GALGAS_semanticContext::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalConstantMap GALGAS_semanticContext::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVariableMap GALGAS_semanticContext::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_semanticContext::reader_mModeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_semanticContext::reader_mTypeNameSetForIncDec (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeNameSetForIncDec ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNonEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictInfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInfEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictSupOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSupEqualOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanAndOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanAndOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanOrOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanOrOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mXorOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mBooleanXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanXorOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivNoOvfOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorMap GALGAS_semanticContext::reader_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightShiftOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnaryMinusOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mNotOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNotOperatorMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_prefixOperatorMap GALGAS_semanticContext::reader_mUnsignedComplementOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnsignedComplementOperatorMap ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @semanticContext type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticContext ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticContext::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticContext (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_semanticContext result ;
-  const GALGAS_semanticContext * p = (const GALGAS_semanticContext *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (void) :
-mAttribute_mGlobalLiteralStringMap (),
-mAttribute_mRegisterMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mTypeMapIR (),
-mAttribute_mProcedureMapIR (),
-mAttribute_mFunctionMapIR (),
-mAttribute_mRequiredProcedureSet (),
-mAttribute_mBootList (),
-mAttribute_mInitList (),
-mAttribute_mExceptionSetupInstructionListIR (),
-mAttribute_mExceptionLoopInstructionListIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct::~ GALGAS_intermediateCodeStruct (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_globalLiteralStringMap & inOperand0,
-                                                              const GALGAS_registerMapIR & inOperand1,
-                                                              const GALGAS_globalVariableMapIR & inOperand2,
-                                                              const GALGAS_globalConstantMapIR & inOperand3,
-                                                              const GALGAS_typeMapIR & inOperand4,
-                                                              const GALGAS_procedureMapIR & inOperand5,
-                                                              const GALGAS_functionMapIR & inOperand6,
-                                                              const GALGAS_stringset & inOperand7,
-                                                              const GALGAS_bootListIR & inOperand8,
-                                                              const GALGAS_initListIR & inOperand9,
-                                                              const GALGAS_instructionListIR & inOperand10,
-                                                              const GALGAS_instructionListIR & inOperand11) :
-mAttribute_mGlobalLiteralStringMap (inOperand0),
-mAttribute_mRegisterMap (inOperand1),
-mAttribute_mGlobalVariableMap (inOperand2),
-mAttribute_mGlobalConstantMap (inOperand3),
-mAttribute_mTypeMapIR (inOperand4),
-mAttribute_mProcedureMapIR (inOperand5),
-mAttribute_mFunctionMapIR (inOperand6),
-mAttribute_mRequiredProcedureSet (inOperand7),
-mAttribute_mBootList (inOperand8),
-mAttribute_mInitList (inOperand9),
-mAttribute_mExceptionSetupInstructionListIR (inOperand10),
-mAttribute_mExceptionLoopInstructionListIR (inOperand11) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_intermediateCodeStruct (GALGAS_globalLiteralStringMap::constructor_emptyMap (HERE),
-                                        GALGAS_registerMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_globalVariableMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_globalConstantMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_typeMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_procedureMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_functionMapIR::constructor_emptyMap (HERE),
-                                        GALGAS_stringset::constructor_emptySet (HERE),
-                                        GALGAS_bootListIR::constructor_emptyList (HERE),
-                                        GALGAS_initListIR::constructor_emptyList (HERE),
-                                        GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                        GALGAS_instructionListIR::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_globalLiteralStringMap & inOperand0,
-                                                                              const GALGAS_registerMapIR & inOperand1,
-                                                                              const GALGAS_globalVariableMapIR & inOperand2,
-                                                                              const GALGAS_globalConstantMapIR & inOperand3,
-                                                                              const GALGAS_typeMapIR & inOperand4,
-                                                                              const GALGAS_procedureMapIR & inOperand5,
-                                                                              const GALGAS_functionMapIR & inOperand6,
-                                                                              const GALGAS_stringset & inOperand7,
-                                                                              const GALGAS_bootListIR & inOperand8,
-                                                                              const GALGAS_initListIR & inOperand9,
-                                                                              const GALGAS_instructionListIR & inOperand10,
-                                                                              const GALGAS_instructionListIR & inOperand11 
-                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_intermediateCodeStruct & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalLiteralStringMap.objectCompare (inOperand.mAttribute_mGlobalLiteralStringMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterMap.objectCompare (inOperand.mAttribute_mRegisterMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mTypeMapIR.objectCompare (inOperand.mAttribute_mTypeMapIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcedureMapIR.objectCompare (inOperand.mAttribute_mProcedureMapIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionMapIR.objectCompare (inOperand.mAttribute_mFunctionMapIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRequiredProcedureSet.objectCompare (inOperand.mAttribute_mRequiredProcedureSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBootList.objectCompare (inOperand.mAttribute_mBootList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitList.objectCompare (inOperand.mAttribute_mInitList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionSetupInstructionListIR.objectCompare (inOperand.mAttribute_mExceptionSetupInstructionListIR) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLoopInstructionListIR.objectCompare (inOperand.mAttribute_mExceptionLoopInstructionListIR) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mAttribute_mGlobalLiteralStringMap.isValid () && mAttribute_mRegisterMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mTypeMapIR.isValid () && mAttribute_mProcedureMapIR.isValid () && mAttribute_mFunctionMapIR.isValid () && mAttribute_mRequiredProcedureSet.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mExceptionSetupInstructionListIR.isValid () && mAttribute_mExceptionLoopInstructionListIR.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_intermediateCodeStruct::drop (void) {
-  mAttribute_mGlobalLiteralStringMap.drop () ;
-  mAttribute_mRegisterMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mTypeMapIR.drop () ;
-  mAttribute_mProcedureMapIR.drop () ;
-  mAttribute_mFunctionMapIR.drop () ;
-  mAttribute_mRequiredProcedureSet.drop () ;
-  mAttribute_mBootList.drop () ;
-  mAttribute_mInitList.drop () ;
-  mAttribute_mExceptionSetupInstructionListIR.drop () ;
-  mAttribute_mExceptionLoopInstructionListIR.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_intermediateCodeStruct::description (C_String & ioString,
-                                                 const int32_t inIndentation) const {
-  ioString << "<struct @intermediateCodeStruct:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mGlobalLiteralStringMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mTypeMapIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcedureMapIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionMapIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRequiredProcedureSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBootList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionSetupInstructionListIR.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLoopInstructionListIR.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalLiteralStringMap GALGAS_intermediateCodeStruct::reader_mGlobalLiteralStringMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalLiteralStringMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_registerMapIR GALGAS_intermediateCodeStruct::reader_mRegisterMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalVariableMapIR GALGAS_intermediateCodeStruct::reader_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_globalConstantMapIR GALGAS_intermediateCodeStruct::reader_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typeMapIR GALGAS_intermediateCodeStruct::reader_mTypeMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeMapIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMapIR GALGAS_intermediateCodeStruct::reader_mProcedureMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureMapIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMapIR GALGAS_intermediateCodeStruct::reader_mFunctionMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionMapIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_intermediateCodeStruct::reader_mRequiredProcedureSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRequiredProcedureSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootListIR GALGAS_intermediateCodeStruct::reader_mBootList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initListIR GALGAS_intermediateCodeStruct::reader_mInitList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_intermediateCodeStruct::reader_mExceptionSetupInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionSetupInstructionListIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_intermediateCodeStruct::reader_mExceptionLoopInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLoopInstructionListIR ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @intermediateCodeStruct type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_intermediateCodeStruct ("intermediateCodeStruct",
-                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_intermediateCodeStruct::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_intermediateCodeStruct ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_intermediateCodeStruct::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_intermediateCodeStruct (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_intermediateCodeStruct result ;
-  const GALGAS_intermediateCodeStruct * p = (const GALGAS_intermediateCodeStruct *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_intermediateCodeStruct *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("intermediateCodeStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@variableKindIR enterAccessibleEntities'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const GALGAS_variableKindIR inObject,
-                                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                             C_Compiler * /* inCompiler */
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_variableKindIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_variableKindIR::kNotBuilt:
-    break ;
-  case GALGAS_variableKindIR::kEnum_register:
-    {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_1137 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1137->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 21)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_globalVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_1229 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1229->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 23)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_1274 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1274->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1316 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1316->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inOutArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1361 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1361->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_outArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1404 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1404->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1449 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1449->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_temporaryConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1495 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_1495->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localAccess:
-    {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1540 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_access = extractPtr_1540->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
-    {
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalSignedInteger:
-    {
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalString:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1721 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_1721->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_1721->mAssociatedValue1 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 34)) ;
-    }
-    break ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category method '@procedureMapIR-element enterAccessibleEntities'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const GALGAS_procedureMapIR_2D_element inObject,
-                                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 53)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category method '@functionMapIR-element enterAccessibleEntities'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const GALGAS_functionMapIR_2D_element inObject,
-                                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                             C_Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 59)) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Category Reader '@variableKindIR mangledName'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_mangledName (const GALGAS_variableKindIR & inObject,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  const GALGAS_variableKindIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_variableKindIR::kNotBuilt:
-    break ;
-  case GALGAS_variableKindIR::kEnum_register:
-    {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_761 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_761->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForRegister (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 10)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_globalVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_858 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_858->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForGlobalVariable (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 12)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_953 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_953->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForLocalVariable (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 14)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_1042 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1042->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForInArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 16)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inOutArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_1137 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1137->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForInOutArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 18)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_outArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_1235 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1235->mAssociatedValue0 ;
-      result_outResult = GALGAS_string ("* ").add_operation (function_mangledNameForOutArgument (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 20)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_1325 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1325->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForConstant (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 22)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_temporaryConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_1423 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_1423->mAssociatedValue0 ;
-      result_outResult = function_mangledNameForTemporaryConstant (extractedValue_idx, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 24)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localAccess:
-    {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1484 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_access = extractPtr_1484->mAssociatedValue0 ;
-      result_outResult = extractedValue_access ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_1563 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint_36__34_ extractedValue_value = extractPtr_1563->mAssociatedValue0 ;
-      result_outResult = extractedValue_value.reader_string (SOURCE_FILE ("code-generation.galgas", 28)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalSignedInteger:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalSignedInteger * extractPtr_1640 = (const cEnumAssociatedValues_variableKindIR_literalSignedInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_sint_36__34_ extractedValue_value = extractPtr_1640->mAssociatedValue0 ;
-      result_outResult = extractedValue_value.reader_string (SOURCE_FILE ("code-generation.galgas", 30)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalString:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_1701 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1701->mAssociatedValue1 ;
-      result_outResult = extractedValue_name ;
-    }
-    break ;
-  }
-//---
-  return result_outResult ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element::GALGAS_enumConstantMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mIndex () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element::~ GALGAS_enumConstantMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element::GALGAS_enumConstantMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                      const GALGAS_uint & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mIndex (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element GALGAS_enumConstantMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_enumConstantMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                            GALGAS_uint::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element GALGAS_enumConstantMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                      const GALGAS_uint & inOperand1 
-                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_enumConstantMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_enumConstantMap_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_enumConstantMap_2D_element::objectCompare (const GALGAS_enumConstantMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_enumConstantMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIndex.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mIndex.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_enumConstantMap_2D_element::description (C_String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString << "<struct @enumConstantMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mIndex.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_enumConstantMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_enumConstantMap_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @enumConstantMap-element type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_enumConstantMap_2D_element ("enumConstantMap-element",
-                                                   NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_enumConstantMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_enumConstantMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_enumConstantMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_enumConstantMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_enumConstantMap_2D_element GALGAS_enumConstantMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_enumConstantMap_2D_element result ;
-  const GALGAS_enumConstantMap_2D_element * p = (const GALGAS_enumConstantMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_enumConstantMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("enumConstantMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element::GALGAS_allowedProcList_2D_element (void) :
-mAttribute_mHasWriteAccess (),
-mAttribute_mProcName (),
-mAttribute_mProcFormalArgumentList () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element::~ GALGAS_allowedProcList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element::GALGAS_allowedProcList_2D_element (const GALGAS_bool & inOperand0,
-                                                                      const GALGAS_lstring & inOperand1,
-                                                                      const GALGAS_procFormalArgumentList & inOperand2) :
-mAttribute_mHasWriteAccess (inOperand0),
-mAttribute_mProcName (inOperand1),
-mAttribute_mProcFormalArgumentList (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element GALGAS_allowedProcList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_allowedProcList_2D_element (GALGAS_bool::constructor_default (HERE),
-                                            GALGAS_lstring::constructor_default (HERE),
-                                            GALGAS_procFormalArgumentList::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element GALGAS_allowedProcList_2D_element::constructor_new (const GALGAS_bool & inOperand0,
-                                                                                      const GALGAS_lstring & inOperand1,
-                                                                                      const GALGAS_procFormalArgumentList & inOperand2 
-                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_allowedProcList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_allowedProcList_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_allowedProcList_2D_element::objectCompare (const GALGAS_allowedProcList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mHasWriteAccess.objectCompare (inOperand.mAttribute_mHasWriteAccess) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcName.objectCompare (inOperand.mAttribute_mProcName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mProcFormalArgumentList.objectCompare (inOperand.mAttribute_mProcFormalArgumentList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_allowedProcList_2D_element::isValid (void) const {
-  return mAttribute_mHasWriteAccess.isValid () && mAttribute_mProcName.isValid () && mAttribute_mProcFormalArgumentList.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedProcList_2D_element::drop (void) {
-  mAttribute_mHasWriteAccess.drop () ;
-  mAttribute_mProcName.drop () ;
-  mAttribute_mProcFormalArgumentList.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedProcList_2D_element::description (C_String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString << "<struct @allowedProcList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mHasWriteAccess.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_allowedProcList_2D_element::reader_mHasWriteAccess (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mHasWriteAccess ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_allowedProcList_2D_element::reader_mProcName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList GALGAS_allowedProcList_2D_element::reader_mProcFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcFormalArgumentList ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @allowedProcList-element type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_allowedProcList_2D_element ("allowedProcList-element",
-                                                   NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_allowedProcList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_allowedProcList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_allowedProcList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_allowedProcList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedProcList_2D_element GALGAS_allowedProcList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_allowedProcList_2D_element result ;
-  const GALGAS_allowedProcList_2D_element * p = (const GALGAS_allowedProcList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_allowedProcList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("allowedProcList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element::GALGAS_allowedInitList_2D_element (void) :
-mAttribute_mHasWriteAccess (),
-mAttribute_mInitPriority () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element::~ GALGAS_allowedInitList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element::GALGAS_allowedInitList_2D_element (const GALGAS_bool & inOperand0,
-                                                                      const GALGAS_luint_36__34_ & inOperand1) :
-mAttribute_mHasWriteAccess (inOperand0),
-mAttribute_mInitPriority (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element GALGAS_allowedInitList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_allowedInitList_2D_element (GALGAS_bool::constructor_default (HERE),
-                                            GALGAS_luint_36__34_::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element GALGAS_allowedInitList_2D_element::constructor_new (const GALGAS_bool & inOperand0,
-                                                                                      const GALGAS_luint_36__34_ & inOperand1 
-                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_allowedInitList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_allowedInitList_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_allowedInitList_2D_element::objectCompare (const GALGAS_allowedInitList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mHasWriteAccess.objectCompare (inOperand.mAttribute_mHasWriteAccess) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitPriority.objectCompare (inOperand.mAttribute_mInitPriority) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_allowedInitList_2D_element::isValid (void) const {
-  return mAttribute_mHasWriteAccess.isValid () && mAttribute_mInitPriority.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedInitList_2D_element::drop (void) {
-  mAttribute_mHasWriteAccess.drop () ;
-  mAttribute_mInitPriority.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedInitList_2D_element::description (C_String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString << "<struct @allowedInitList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mHasWriteAccess.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitPriority.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_allowedInitList_2D_element::reader_mHasWriteAccess (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mHasWriteAccess ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_luint_36__34_ GALGAS_allowedInitList_2D_element::reader_mInitPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitPriority ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @allowedInitList-element type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_allowedInitList_2D_element ("allowedInitList-element",
-                                                   NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_allowedInitList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_allowedInitList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_allowedInitList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_allowedInitList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedInitList_2D_element GALGAS_allowedInitList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_allowedInitList_2D_element result ;
-  const GALGAS_allowedInitList_2D_element * p = (const GALGAS_allowedInitList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_allowedInitList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("allowedInitList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element::GALGAS_allowedExceptionList_2D_element (void) :
-mAttribute_mHasWriteAccess (),
-mAttribute_mExceptionName (),
-mAttribute_mExceptionPriority () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element::~ GALGAS_allowedExceptionList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element::GALGAS_allowedExceptionList_2D_element (const GALGAS_bool & inOperand0,
-                                                                                const GALGAS_lstring & inOperand1,
-                                                                                const GALGAS_luint_36__34_ & inOperand2) :
-mAttribute_mHasWriteAccess (inOperand0),
-mAttribute_mExceptionName (inOperand1),
-mAttribute_mExceptionPriority (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element GALGAS_allowedExceptionList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_allowedExceptionList_2D_element (GALGAS_bool::constructor_default (HERE),
-                                                 GALGAS_lstring::constructor_default (HERE),
-                                                 GALGAS_luint_36__34_::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element GALGAS_allowedExceptionList_2D_element::constructor_new (const GALGAS_bool & inOperand0,
-                                                                                                const GALGAS_lstring & inOperand1,
-                                                                                                const GALGAS_luint_36__34_ & inOperand2 
-                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_allowedExceptionList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_allowedExceptionList_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_allowedExceptionList_2D_element::objectCompare (const GALGAS_allowedExceptionList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mHasWriteAccess.objectCompare (inOperand.mAttribute_mHasWriteAccess) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionName.objectCompare (inOperand.mAttribute_mExceptionName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionPriority.objectCompare (inOperand.mAttribute_mExceptionPriority) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_allowedExceptionList_2D_element::isValid (void) const {
-  return mAttribute_mHasWriteAccess.isValid () && mAttribute_mExceptionName.isValid () && mAttribute_mExceptionPriority.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedExceptionList_2D_element::drop (void) {
-  mAttribute_mHasWriteAccess.drop () ;
-  mAttribute_mExceptionName.drop () ;
-  mAttribute_mExceptionPriority.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedExceptionList_2D_element::description (C_String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString << "<struct @allowedExceptionList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mHasWriteAccess.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionPriority.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_allowedExceptionList_2D_element::reader_mHasWriteAccess (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mHasWriteAccess ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_allowedExceptionList_2D_element::reader_mExceptionName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_luint_36__34_ GALGAS_allowedExceptionList_2D_element::reader_mExceptionPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionPriority ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @allowedExceptionList-element type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_allowedExceptionList_2D_element ("allowedExceptionList-element",
-                                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_allowedExceptionList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_allowedExceptionList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_allowedExceptionList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_allowedExceptionList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedExceptionList_2D_element GALGAS_allowedExceptionList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_allowedExceptionList_2D_element result ;
-  const GALGAS_allowedExceptionList_2D_element * p = (const GALGAS_allowedExceptionList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_allowedExceptionList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("allowedExceptionList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element::GALGAS_allowedRoutineMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mHasWriteAccess () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element::~ GALGAS_allowedRoutineMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element::GALGAS_allowedRoutineMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                          const GALGAS_bool & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mHasWriteAccess (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element GALGAS_allowedRoutineMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_allowedRoutineMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                              GALGAS_bool::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element GALGAS_allowedRoutineMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_bool & inOperand1 
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_allowedRoutineMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_allowedRoutineMap_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_allowedRoutineMap_2D_element::objectCompare (const GALGAS_allowedRoutineMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mHasWriteAccess.objectCompare (inOperand.mAttribute_mHasWriteAccess) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_allowedRoutineMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mHasWriteAccess.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedRoutineMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mHasWriteAccess.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_allowedRoutineMap_2D_element::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "<struct @allowedRoutineMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mHasWriteAccess.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_allowedRoutineMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_allowedRoutineMap_2D_element::reader_mHasWriteAccess (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mHasWriteAccess ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @allowedRoutineMap-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_allowedRoutineMap_2D_element ("allowedRoutineMap-element",
-                                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_allowedRoutineMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_allowedRoutineMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_allowedRoutineMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_allowedRoutineMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_allowedRoutineMap_2D_element GALGAS_allowedRoutineMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_allowedRoutineMap_2D_element result ;
-  const GALGAS_allowedRoutineMap_2D_element * p = (const GALGAS_allowedRoutineMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_allowedRoutineMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("allowedRoutineMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element::GALGAS_bootRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element::~ GALGAS_bootRoutinePriorityMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element::GALGAS_bootRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element GALGAS_bootRoutinePriorityMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_bootRoutinePriorityMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element GALGAS_bootRoutinePriorityMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bootRoutinePriorityMap_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_bootRoutinePriorityMap_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_bootRoutinePriorityMap_2D_element::objectCompare (const GALGAS_bootRoutinePriorityMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_bootRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootRoutinePriorityMap_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @bootRoutinePriorityMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_bootRoutinePriorityMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @bootRoutinePriorityMap-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bootRoutinePriorityMap_2D_element ("bootRoutinePriorityMap-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_bootRoutinePriorityMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_bootRoutinePriorityMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_bootRoutinePriorityMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_bootRoutinePriorityMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element GALGAS_bootRoutinePriorityMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_bootRoutinePriorityMap_2D_element result ;
-  const GALGAS_bootRoutinePriorityMap_2D_element * p = (const GALGAS_bootRoutinePriorityMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_bootRoutinePriorityMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("bootRoutinePriorityMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element::GALGAS_initRoutineMap_2D_element (void) :
-mAttribute_lkey () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element::~ GALGAS_initRoutineMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element::GALGAS_initRoutineMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element GALGAS_initRoutineMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_initRoutineMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element GALGAS_initRoutineMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_initRoutineMap_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_initRoutineMap_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_initRoutineMap_2D_element::objectCompare (const GALGAS_initRoutineMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_initRoutineMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initRoutineMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initRoutineMap_2D_element::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @initRoutineMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_initRoutineMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @initRoutineMap-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_initRoutineMap_2D_element ("initRoutineMap-element",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_initRoutineMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_initRoutineMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_initRoutineMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_initRoutineMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutineMap_2D_element GALGAS_initRoutineMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_initRoutineMap_2D_element result ;
-  const GALGAS_initRoutineMap_2D_element * p = (const GALGAS_initRoutineMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_initRoutineMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("initRoutineMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element::GALGAS_initRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element::~ GALGAS_initRoutinePriorityMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element::GALGAS_initRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element GALGAS_initRoutinePriorityMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_initRoutinePriorityMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element GALGAS_initRoutinePriorityMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_initRoutinePriorityMap_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_initRoutinePriorityMap_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_initRoutinePriorityMap_2D_element::objectCompare (const GALGAS_initRoutinePriorityMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_initRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_initRoutinePriorityMap_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @initRoutinePriorityMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_initRoutinePriorityMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @initRoutinePriorityMap-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_initRoutinePriorityMap_2D_element ("initRoutinePriorityMap-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_initRoutinePriorityMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_initRoutinePriorityMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_initRoutinePriorityMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_initRoutinePriorityMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap_2D_element GALGAS_initRoutinePriorityMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_initRoutinePriorityMap_2D_element result ;
-  const GALGAS_initRoutinePriorityMap_2D_element * p = (const GALGAS_initRoutinePriorityMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_initRoutinePriorityMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("initRoutinePriorityMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element::GALGAS_exceptionTypesAST_2D_element (void) :
-mAttribute_mExceptionCodeTypeName (),
-mAttribute_mExceptionLineTypeName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element::~ GALGAS_exceptionTypesAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element::GALGAS_exceptionTypesAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                          const GALGAS_lstring & inOperand1) :
-mAttribute_mExceptionCodeTypeName (inOperand0),
-mAttribute_mExceptionLineTypeName (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element GALGAS_exceptionTypesAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_exceptionTypesAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                              GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element GALGAS_exceptionTypesAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_lstring & inOperand1 
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_exceptionTypesAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_exceptionTypesAST_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_exceptionTypesAST_2D_element::objectCompare (const GALGAS_exceptionTypesAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionCodeTypeName.objectCompare (inOperand.mAttribute_mExceptionCodeTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLineTypeName.objectCompare (inOperand.mAttribute_mExceptionLineTypeName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_exceptionTypesAST_2D_element::isValid (void) const {
-  return mAttribute_mExceptionCodeTypeName.isValid () && mAttribute_mExceptionLineTypeName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionTypesAST_2D_element::drop (void) {
-  mAttribute_mExceptionCodeTypeName.drop () ;
-  mAttribute_mExceptionLineTypeName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionTypesAST_2D_element::description (C_String & ioString,
-                                                       const int32_t inIndentation) const {
-  ioString << "<struct @exceptionTypesAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mExceptionCodeTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLineTypeName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_exceptionTypesAST_2D_element::reader_mExceptionCodeTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionCodeTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_exceptionTypesAST_2D_element::reader_mExceptionLineTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLineTypeName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @exceptionTypesAST-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionTypesAST_2D_element ("exceptionTypesAST-element",
-                                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_exceptionTypesAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionTypesAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_exceptionTypesAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionTypesAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionTypesAST_2D_element GALGAS_exceptionTypesAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionTypesAST_2D_element result ;
-  const GALGAS_exceptionTypesAST_2D_element * p = (const GALGAS_exceptionTypesAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionTypesAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("exceptionTypesAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element::GALGAS_exceptionRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element::~ GALGAS_exceptionRoutinePriorityMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element::GALGAS_exceptionRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element GALGAS_exceptionRoutinePriorityMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_exceptionRoutinePriorityMap_2D_element (GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element GALGAS_exceptionRoutinePriorityMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0 
-                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_exceptionRoutinePriorityMap_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_exceptionRoutinePriorityMap_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_exceptionRoutinePriorityMap_2D_element::objectCompare (const GALGAS_exceptionRoutinePriorityMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_exceptionRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_exceptionRoutinePriorityMap_2D_element::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "<struct @exceptionRoutinePriorityMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_exceptionRoutinePriorityMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      @exceptionRoutinePriorityMap-element type                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap_2D_element ("exceptionRoutinePriorityMap-element",
-                                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_exceptionRoutinePriorityMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_exceptionRoutinePriorityMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_exceptionRoutinePriorityMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_exceptionRoutinePriorityMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap_2D_element GALGAS_exceptionRoutinePriorityMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                            C_Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_exceptionRoutinePriorityMap_2D_element result ;
-  const GALGAS_exceptionRoutinePriorityMap_2D_element * p = (const GALGAS_exceptionRoutinePriorityMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_exceptionRoutinePriorityMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("exceptionRoutinePriorityMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element::GALGAS_funcFormalArgumentList_2D_element (void) :
-mAttribute_mSelector (),
-mAttribute_mFormalArgumentTypeName (),
-mAttribute_mFormalArgumentName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element::~ GALGAS_funcFormalArgumentList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element::GALGAS_funcFormalArgumentList_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                    const GALGAS_lstring & inOperand2) :
-mAttribute_mSelector (inOperand0),
-mAttribute_mFormalArgumentTypeName (inOperand1),
-mAttribute_mFormalArgumentName (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element GALGAS_funcFormalArgumentList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_funcFormalArgumentList_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                   GALGAS_lstring::constructor_default (HERE),
-                                                   GALGAS_lstring::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element GALGAS_funcFormalArgumentList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                                    const GALGAS_lstring & inOperand2 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_funcFormalArgumentList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_funcFormalArgumentList_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_funcFormalArgumentList_2D_element::objectCompare (const GALGAS_funcFormalArgumentList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mSelector.objectCompare (inOperand.mAttribute_mSelector) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentTypeName.objectCompare (inOperand.mAttribute_mFormalArgumentTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentName.objectCompare (inOperand.mAttribute_mFormalArgumentName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_funcFormalArgumentList_2D_element::isValid (void) const {
-  return mAttribute_mSelector.isValid () && mAttribute_mFormalArgumentTypeName.isValid () && mAttribute_mFormalArgumentName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcFormalArgumentList_2D_element::drop (void) {
-  mAttribute_mSelector.drop () ;
-  mAttribute_mFormalArgumentTypeName.drop () ;
-  mAttribute_mFormalArgumentName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcFormalArgumentList_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @funcFormalArgumentList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mSelector.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_funcFormalArgumentList_2D_element::reader_mSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelector ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_funcFormalArgumentList_2D_element::reader_mFormalArgumentTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_funcFormalArgumentList_2D_element::reader_mFormalArgumentName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @funcFormalArgumentList-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_funcFormalArgumentList_2D_element ("funcFormalArgumentList-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_funcFormalArgumentList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_funcFormalArgumentList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_funcFormalArgumentList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_funcFormalArgumentList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentList_2D_element GALGAS_funcFormalArgumentList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_funcFormalArgumentList_2D_element result ;
-  const GALGAS_funcFormalArgumentList_2D_element * p = (const GALGAS_funcFormalArgumentList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_funcFormalArgumentList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("funcFormalArgumentList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element::GALGAS_funcSignature_2D_element (void) :
-mAttribute_mFormalSelector (),
-mAttribute_mArgumentType () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element::~ GALGAS_funcSignature_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element::GALGAS_funcSignature_2D_element (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand1) :
-mAttribute_mFormalSelector (inOperand0),
-mAttribute_mArgumentType (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element GALGAS_funcSignature_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_funcSignature_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                          GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element GALGAS_funcSignature_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand1 
-                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_funcSignature_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_funcSignature_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_funcSignature_2D_element::objectCompare (const GALGAS_funcSignature_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalSelector.objectCompare (inOperand.mAttribute_mFormalSelector) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mArgumentType.objectCompare (inOperand.mAttribute_mArgumentType) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_funcSignature_2D_element::isValid (void) const {
-  return mAttribute_mFormalSelector.isValid () && mAttribute_mArgumentType.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcSignature_2D_element::drop (void) {
-  mAttribute_mFormalSelector.drop () ;
-  mAttribute_mArgumentType.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcSignature_2D_element::description (C_String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString << "<struct @funcSignature-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mFormalSelector.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mArgumentType.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_funcSignature_2D_element::reader_mFormalSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalSelector ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_funcSignature_2D_element::reader_mArgumentType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mArgumentType ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @funcSignature-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_funcSignature_2D_element ("funcSignature-element",
-                                                 NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_funcSignature_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_funcSignature_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_funcSignature_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_funcSignature_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature_2D_element GALGAS_funcSignature_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_funcSignature_2D_element result ;
-  const GALGAS_funcSignature_2D_element * p = (const GALGAS_funcSignature_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_funcSignature_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("funcSignature-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element::GALGAS_functionMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mFunctionModeMap (),
-mAttribute_mSignature (),
-mAttribute_mResultType () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element::~ GALGAS_functionMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element::GALGAS_functionMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                              const GALGAS_modeMap & inOperand1,
-                                                              const GALGAS_funcSignature & inOperand2,
-                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand3) :
-mAttribute_lkey (inOperand0),
-mAttribute_mFunctionModeMap (inOperand1),
-mAttribute_mSignature (inOperand2),
-mAttribute_mResultType (inOperand3) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element GALGAS_functionMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_functionMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                        GALGAS_modeMap::constructor_emptyMap (HERE),
-                                        GALGAS_funcSignature::constructor_emptyList (HERE),
-                                        GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element GALGAS_functionMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_modeMap & inOperand1,
-                                                                              const GALGAS_funcSignature & inOperand2,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand3 
-                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_functionMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_functionMap_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_functionMap_2D_element::objectCompare (const GALGAS_functionMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFunctionModeMap.objectCompare (inOperand.mAttribute_mFunctionModeMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSignature.objectCompare (inOperand.mAttribute_mSignature) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mResultType.objectCompare (inOperand.mAttribute_mResultType) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_functionMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFunctionModeMap.isValid () && mAttribute_mSignature.isValid () && mAttribute_mResultType.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mFunctionModeMap.drop () ;
-  mAttribute_mSignature.drop () ;
-  mAttribute_mResultType.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_functionMap_2D_element::description (C_String & ioString,
-                                                 const int32_t inIndentation) const {
-  ioString << "<struct @functionMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFunctionModeMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSignature.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mResultType.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_functionMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_functionMap_2D_element::reader_mFunctionModeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcSignature GALGAS_functionMap_2D_element::reader_mSignature (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_functionMap_2D_element::reader_mResultType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultType ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @functionMap-element type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_functionMap_2D_element ("functionMap-element",
-                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_functionMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_functionMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_functionMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_functionMap_2D_element GALGAS_functionMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_functionMap_2D_element result ;
-  const GALGAS_functionMap_2D_element * p = (const GALGAS_functionMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_functionMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("functionMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element::GALGAS_funcFormalArgumentListForGeneration_2D_element (void) :
-mAttribute_mFormalArgumentType (),
-mAttribute_mFormalArgumentName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element::~ GALGAS_funcFormalArgumentListForGeneration_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element::GALGAS_funcFormalArgumentListForGeneration_2D_element (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                                                              const GALGAS_string & inOperand1) :
-mAttribute_mFormalArgumentType (inOperand0),
-mAttribute_mFormalArgumentName (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element GALGAS_funcFormalArgumentListForGeneration_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_funcFormalArgumentListForGeneration_2D_element (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                                                GALGAS_string::constructor_default (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element GALGAS_funcFormalArgumentListForGeneration_2D_element::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                                                                              const GALGAS_string & inOperand1 
-                                                                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_funcFormalArgumentListForGeneration_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_funcFormalArgumentListForGeneration_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_funcFormalArgumentListForGeneration_2D_element::objectCompare (const GALGAS_funcFormalArgumentListForGeneration_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentType.objectCompare (inOperand.mAttribute_mFormalArgumentType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentName.objectCompare (inOperand.mAttribute_mFormalArgumentName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_funcFormalArgumentListForGeneration_2D_element::isValid (void) const {
-  return mAttribute_mFormalArgumentType.isValid () && mAttribute_mFormalArgumentName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcFormalArgumentListForGeneration_2D_element::drop (void) {
-  mAttribute_mFormalArgumentType.drop () ;
-  mAttribute_mFormalArgumentName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_funcFormalArgumentListForGeneration_2D_element::description (C_String & ioString,
-                                                                         const int32_t inIndentation) const {
-  ioString << "<struct @funcFormalArgumentListForGeneration-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mFormalArgumentType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_funcFormalArgumentListForGeneration_2D_element::reader_mFormalArgumentType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_funcFormalArgumentListForGeneration_2D_element::reader_mFormalArgumentName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  @funcFormalArgumentListForGeneration-element type                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_funcFormalArgumentListForGeneration_2D_element ("funcFormalArgumentListForGeneration-element",
-                                                                       NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_funcFormalArgumentListForGeneration_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_funcFormalArgumentListForGeneration_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_funcFormalArgumentListForGeneration_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_funcFormalArgumentListForGeneration_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_funcFormalArgumentListForGeneration_2D_element GALGAS_funcFormalArgumentListForGeneration_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                                            C_Compiler * inCompiler
-                                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_funcFormalArgumentListForGeneration_2D_element result ;
-  const GALGAS_funcFormalArgumentListForGeneration_2D_element * p = (const GALGAS_funcFormalArgumentListForGeneration_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_funcFormalArgumentListForGeneration_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("funcFormalArgumentListForGeneration-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList_2D_element::GALGAS_procFormalArgumentList_2D_element (void) :
-mAttribute_mFormalArgumentPassingMode (),
-mAttribute_mSelector (),
-mAttribute_mFormalArgumentTypeName (),
-mAttribute_mFormalArgumentName () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList_2D_element::~ GALGAS_procFormalArgumentList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList_2D_element::GALGAS_procFormalArgumentList_2D_element (const GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                    const GALGAS_lstring & inOperand2,
-                                                                                    const GALGAS_lstring & inOperand3) :
-mAttribute_mFormalArgumentPassingMode (inOperand0),
-mAttribute_mSelector (inOperand1),
-mAttribute_mFormalArgumentTypeName (inOperand2),
-mAttribute_mFormalArgumentName (inOperand3) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList_2D_element GALGAS_procFormalArgumentList_2D_element::constructor_new (const GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                                    const GALGAS_lstring & inOperand2,
-                                                                                                    const GALGAS_lstring & inOperand3 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_procFormalArgumentList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_procFormalArgumentList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_procFormalArgumentList_2D_element::objectCompare (const GALGAS_procFormalArgumentList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentPassingMode.objectCompare (inOperand.mAttribute_mFormalArgumentPassingMode) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSelector.objectCompare (inOperand.mAttribute_mSelector) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentTypeName.objectCompare (inOperand.mAttribute_mFormalArgumentTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentName.objectCompare (inOperand.mAttribute_mFormalArgumentName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_procFormalArgumentList_2D_element::isValid (void) const {
-  return mAttribute_mFormalArgumentPassingMode.isValid () && mAttribute_mSelector.isValid () && mAttribute_mFormalArgumentTypeName.isValid () && mAttribute_mFormalArgumentName.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procFormalArgumentList_2D_element::drop (void) {
-  mAttribute_mFormalArgumentPassingMode.drop () ;
-  mAttribute_mSelector.drop () ;
-  mAttribute_mFormalArgumentTypeName.drop () ;
-  mAttribute_mFormalArgumentName.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procFormalArgumentList_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @procFormalArgumentList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mFormalArgumentPassingMode.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSelector.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mFormalArgumentName.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentList_2D_element::reader_mFormalArgumentPassingMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentPassingMode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::reader_mSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelector ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::reader_mFormalArgumentTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::reader_mFormalArgumentName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentName ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @procFormalArgumentList-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procFormalArgumentList_2D_element ("procFormalArgumentList-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procFormalArgumentList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procFormalArgumentList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procFormalArgumentList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procFormalArgumentList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList_2D_element GALGAS_procFormalArgumentList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_procFormalArgumentList_2D_element result ;
-  const GALGAS_procFormalArgumentList_2D_element * p = (const GALGAS_procFormalArgumentList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procFormalArgumentList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procFormalArgumentList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
   }
   return result ;
 }

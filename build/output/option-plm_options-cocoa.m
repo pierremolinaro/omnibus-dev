@@ -44,6 +44,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"listEmbeddedTargets"
+    commandChar:76
+    commandString:@"list-embedded-targets"
+    comment:@"List embedded targets"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"noExceptionGeneration"
     commandChar:0
     commandString:@"no-exception-generation"
@@ -75,6 +84,24 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:120
     commandString:@"extract-embedded-sample-code"
     comment:@"Extract an embedded sample file"
+    defaultValue:@""
+  ] ;
+  [ioStringOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"extractEmbeddedTargets"
+    commandChar:88
+    commandString:@"extract-embedded-targets"
+    comment:@"Extract embedded targets"
+    defaultValue:@""
+  ] ;
+  [ioStringOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"useDirAsTargetDir"
+    commandChar:84
+    commandString:@"use-target-dir"
+    comment:@"Use directory as target definition directory, instead of using embedded targets"
     defaultValue:@""
   ] ;
   [ioStringOptionArray addObject:option] ;
