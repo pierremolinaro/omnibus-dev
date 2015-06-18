@@ -14,6 +14,48 @@
 
 \sectionLabel{Exemple de définition de cible}{exempleDefinitionCible}
 
+Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit situé dans le système de fichiers. On va voir dans cette partie comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on va extraire de l'exécutable du compilateur les cibles qu'il embarque.
+
+À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées :
+\begin{SHELL}
+{\bfseries plm -L}\\
+Embedded targets:\\ 
+\hspace*{1.2em}teensy-3-1-interrupt.plms\\
+\hspace*{1.2em}teensy-3-1-sequential-systick.plms\\
+\hspace*{1.2em}...
+\end{SHELL}
+
+L'option \texttt{-X} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.} :
+\begin{SHELL}
+{\bfseries plm -X=cibles}\\
+\hspace*{1.2em}cibles/makef{}ile.py\\
+\hspace*{1.2em}cibles/teensy-3-1-interrupt.plms\\
+\hspace*{1.2em}cibles/teensy-3-1-sequential-systick.plms\\
+\hspace*{1.2em}cibles/microcontrollers/boot-teensy-3-1.plm\\
+\hspace*{1.2em}...
+\end{SHELL}
+
+On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-sequential-systick} :
+\begin{SHELL}
+\bfseries plm -x=/teensy-3-1-sequential-systick/01-blinkled.plm
+\end{SHELL}
+
+Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Maintenant, pour compiler ce fichier, on peut faire référence aux cibles que l'on vient d'extraire au moyen de l'option \texttt{-T} :
+\begin{SHELL}
+\bfseries plm -T=cibles 01-blinkled.plm
+\end{SHELL}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

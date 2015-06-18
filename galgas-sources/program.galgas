@@ -209,7 +209,7 @@ private proc recursiveImportFiles
         let embeddedPath = ":" + path
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet += !embeddedPath
-          if [absolutePath pathExtension] == "plm" then
+          if [path pathExtension] == "plm" then
             grammar plm_grammar on [fw textFileContentsAtPath !path.string]
               !?ioAST
               ?importClauseList:let importedFileList
@@ -220,7 +220,7 @@ private proc recursiveImportFiles
               !importClauseList:importedFileList
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
-          elsif [absolutePath pathExtension] == "plms" then
+          elsif [path pathExtension] == "plms" then
             grammar plms_grammar on [fw textFileContentsAtPath !path.string]
               !?ioAST
               ?importClauseList:let importedFileList

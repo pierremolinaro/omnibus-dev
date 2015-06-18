@@ -32,9 +32,6 @@ exception : Int32 UInt32
 
 mode $isr
 mode $user
-mode $init
-mode $exception
-mode $boot
 
 //-----------------------------------------------------------------------------*
 

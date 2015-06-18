@@ -9,4 +9,8 @@ option plm_options {
 
   @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"
   @string extractEmbeddedSampleFile : 'x', "extract-embedded-sample-code" -> "Extract an embedded sample file"
+
+  @bool listEmbeddedTargets : 'L', "list-embedded-targets" -> "List embedded targets"
+  @string extractEmbeddedTargets : 'X', "extract-embedded-targets" -> "Extract embedded targets"
+  @string useDirAsTargetDir : 'T', "use-target-dir" -> "Use directory as target definition directory, instead of using embedded targets"
 }

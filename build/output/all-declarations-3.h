@@ -178,6 +178,84 @@ extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Filewrapper 'embeddedTargets'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * gWrapperFileContent_0_embeddedTargets ;
+extern const char * gWrapperFileContent_1_embeddedTargets ;
+extern const char * gWrapperFileContent_2_embeddedTargets ;
+extern const char * gWrapperFileContent_3_embeddedTargets ;
+extern const char * gWrapperFileContent_4_embeddedTargets ;
+extern const char * gWrapperFileContent_5_embeddedTargets ;
+extern const char * gWrapperFileContent_6_embeddedTargets ;
+extern const char * gWrapperFileContent_7_embeddedTargets ;
+extern const char * gWrapperFileContent_8_embeddedTargets ;
+extern const char * gWrapperFileContent_9_embeddedTargets ;
+extern const char * gWrapperFileContent_10_embeddedTargets ;
+extern const char * gWrapperFileContent_11_embeddedTargets ;
+extern const char * gWrapperFileContent_12_embeddedTargets ;
+extern const char * gWrapperFileContent_13_embeddedTargets ;
+extern const char * gWrapperFileContent_14_embeddedTargets ;
+extern const char * gWrapperFileContent_15_embeddedTargets ;
+extern const char * gWrapperFileContent_16_embeddedTargets ;
+extern const char * gWrapperFileContent_17_embeddedTargets ;
+extern const char * gWrapperFileContent_18_embeddedTargets ;
+extern const char * gWrapperFileContent_19_embeddedTargets ;
+extern const char * gWrapperFileContent_20_embeddedTargets ;
+extern const char * gWrapperFileContent_21_embeddedTargets ;
+extern const char * gWrapperFileContent_22_embeddedTargets ;
+extern const char * gWrapperFileContent_23_embeddedTargets ;
+extern const char * gWrapperFileContent_24_embeddedTargets ;
+extern const char * gWrapperFileContent_25_embeddedTargets ;
+extern const char * gWrapperFileContent_26_embeddedTargets ;
+extern const char * gWrapperFileContent_27_embeddedTargets ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cRegularFileWrapper gWrapperFile_0_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_1_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_2_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_3_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_4_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_5_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_6_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_7_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_8_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_9_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_10_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_11_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_12_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_13_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_14_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_15_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_16_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_17_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_18_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_19_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_20_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_21_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_22_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_23_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_24_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_25_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_26_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_27_embeddedTargets ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_3_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_4_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_5_embeddedTargets ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @abstractExpressionIR class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2437,117 +2515,5 @@ void enterCategoryReader_instructionCode (const int32_t inClassIndex,
 class GALGAS_string callCategoryReader_instructionCode (const class cPtr_abstractInstructionIR * inObject,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities) (const class cPtr_abstractInstructionIR * inObject,
-                                                                                       class GALGAS_accessibleEntities & ioArgument0,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                  categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstructionIR * inObject,
-                                                 GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Category Getter '@functionDeclarationListAST-element mangledName' (as function)                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_mangledName (const class GALGAS_functionDeclarationListAST_2D_element & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Category Getter '@procedureDeclarationListAST-element mangledName' (as function)                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_mangledName (const class GALGAS_procedureDeclarationListAST_2D_element & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Category method '@infixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const class GALGAS_infixOperatorMap inObject,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inLeftType,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
-                               const class GALGAS_location constin_inOperatorLocation,
-                               class GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Category method '@prefixOperatorMap checkWith'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_checkWith (const class GALGAS_prefixOperatorMap inObject,
-                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inType,
-                               const class GALGAS_location constin_inOperatorLocation,
-                               class GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//         Category Getter '@procEffectiveParameterPassingModeAST passingModeForActualSelector' (as function)          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_passingModeForActualSelector (const class GALGAS_procEffectiveParameterPassingModeAST & inObject,
-                                                                 class GALGAS_lstring inArgument0,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category Getter '@variableKindIR isStatic' (as function)                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool categoryReader_isStatic (const class GALGAS_variableKindIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category method '@variableKindIR enterAccessibleEntities'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_variableKindIR inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category Getter '@variableKindIR mangledName' (as function)                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_mangledName (const class GALGAS_variableKindIR & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
 
 #endif
