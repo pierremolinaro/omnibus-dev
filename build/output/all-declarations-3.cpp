@@ -10,75 +10,174 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Routine 'generateTargets'                                              *
+//                                              Routine 'generateTarget'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateTargets (const GALGAS_string constinArgument_inTargetDirectory,
-                              const GALGAS_lstring constinArgument_inTargetName,
-                              GALGAS_stringlist & outArgument_outFilesToInclude,
-                              C_Compiler * inCompiler
-                              COMMA_UNUSED_LOCATION_ARGS) {
+void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirectory,
+                             const GALGAS_string constinArgument_inProductDirectory,
+                             const GALGAS_lstring constinArgument_inTargetName,
+                             GALGAS_stringlist & outArgument_outFilesToInclude,
+                             C_Compiler * inCompiler
+                             COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outFilesToInclude.drop () ; // Release 'out' argument
-  outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 39)) ;
-  GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-  GALGAS_string var_targetPath = constinArgument_inTargetName.mAttribute_string.reader_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 41)) ;
-  const enumGalgasBool test_0 = var_fw.reader_directoryExistsAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 42)).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    cEnumerator_stringlist enumerator_1916 (var_fw.reader_textFilesAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)), kEnumeration_up) ;
-    while (enumerator_1916.hasCurrentObject ()) {
-      GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 44)) ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_1916.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 45)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        GALGAS_bool joker_2117 ; // Joker input parameter
-        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)), joker_2117, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)) ;
-      }else if (kBoolFalse == test_1) {
-        GALGAS_bool joker_2207 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)).add_operation (enumerator_1916.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)), joker_2207, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 47)) ;
-      }
-      enumerator_1916.gotoNextObject () ;
+    {
+    routine_generateTargetFromEmbeddedFiles (constinArgument_inProductDirectory, constinArgument_inTargetName, outArgument_outFilesToInclude, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 38)) ;
     }
-    GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 50)) ;
-    cEnumerator_stringlist enumerator_2323 (var_fw.reader_textFilesAtPath (var_sourcePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 51)), kEnumeration_up) ;
-    while (enumerator_2323.hasCurrentObject ()) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("linker-script.ld"))).boolEnum () ;
+  }else if (kBoolFalse == test_0) {
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 44)) ;
+    {
+    routine_generateTargetFromFileSystem (var_targetDefinitionDir, constinArgument_inProductDirectory, constinArgument_inTargetName, outArgument_outFilesToInclude, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 45)) ;
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'generateTargetFromEmbeddedFiles'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateTargetFromEmbeddedFiles (const GALGAS_string constinArgument_inProductDirectory,
+                                              const GALGAS_lstring constinArgument_inTargetName,
+                                              GALGAS_stringlist & outArgument_outFilesToInclude,
+                                              C_Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outFilesToInclude.drop () ; // Release 'out' argument
+  outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 61)) ;
+  GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+  GALGAS_string var_targetPath = constinArgument_inTargetName.mAttribute_string ;
+  const enumGalgasBool test_0 = var_fw.reader_directoryExistsAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    cEnumerator_stringlist enumerator_2680 (var_fw.reader_textFilesAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 65)), kEnumeration_up) ;
+    while (enumerator_2680.hasCurrentObject ()) {
+      GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)) ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_2680.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 67)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        GALGAS_bool joker_2882 ; // Joker input parameter
+        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)), joker_2882, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)) ;
+      }else if (kBoolFalse == test_1) {
+        GALGAS_bool joker_2973 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), joker_2973, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)) ;
+      }
+      enumerator_2680.gotoNextObject () ;
+    }
+    GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 72)) ;
+    cEnumerator_stringlist enumerator_3089 (var_fw.reader_textFilesAtPath (var_sourcePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 73)), kEnumeration_up) ;
+    while (enumerator_3089.hasCurrentObject ()) {
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("linker-script.ld"))).boolEnum () ;
       if (kBoolTrue == test_2) {
-        GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)) ;
-        GALGAS_bool joker_2522 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)), joker_2522, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)) ;
+        GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)) ;
+        GALGAS_bool joker_3289 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), joker_3289, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)) ;
       }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
         if (kBoolTrue == test_3) {
-          GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)) ;
-          GALGAS_bool joker_2715 ; // Joker input parameter
-          var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), joker_2715, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)) ;
-          outArgument_outFilesToInclude.addAssign_operation (enumerator_2323.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 58)) ;
+          GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)) ;
+          GALGAS_bool joker_3483 ; // Joker input parameter
+          var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)), joker_3483, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
+          outArgument_outFilesToInclude.addAssign_operation (enumerator_3089.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 80)) ;
         }else if (kBoolFalse == test_3) {
-          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_2323.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
+          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
           if (kBoolTrue == test_4.boolEnum ()) {
-            test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 59)) ;
+            test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 81)) ;
           }
           const enumGalgasBool test_5 = test_4.boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 60)) ;
-            GALGAS_bool joker_3011 ; // Joker input parameter
-            var_s.method_writeToFileWhenDifferentContents (constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)).add_operation (enumerator_2323.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)), joker_3011, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
-            outArgument_outFilesToInclude.addAssign_operation (enumerator_2323.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 62)) ;
+            GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)) ;
+            GALGAS_bool joker_3780 ; // Joker input parameter
+            var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)), joker_3780, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)) ;
+            outArgument_outFilesToInclude.addAssign_operation (enumerator_3089.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 84)) ;
           }
         }
       }
-      enumerator_2323.gotoNextObject () ;
+      enumerator_3089.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_s = GALGAS_string ("cannot find this target; available targets:") ;
-    cEnumerator_stringlist enumerator_3175 (var_fw.reader_directoriesAtPath (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 67)), kEnumeration_up) ;
-    while (enumerator_3175.hasCurrentObject ()) {
-      var_s.dotAssign_operation (GALGAS_string ("\n"
-        " - ").add_operation (enumerator_3175.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68))  COMMA_SOURCE_FILE ("target-generation.galgas", 68)) ;
-      enumerator_3175.gotoNextObject () ;
+    cEnumerator_stringlist enumerator_3940 (var_fw.reader_textFilesAtPath (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 89)), kEnumeration_up) ;
+    while (enumerator_3940.hasCurrentObject ()) {
+      const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_3940.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 90)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+      if (kBoolTrue == test_6) {
+        var_s.dotAssign_operation (GALGAS_string ("\n"
+          " - ").add_operation (enumerator_3940.current_mValue (HERE).reader_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 91))  COMMA_SOURCE_FILE ("target-generation.galgas", 91)) ;
+      }
+      enumerator_3940.gotoNextObject () ;
     }
+    GALGAS_location location_7 (constinArgument_inTargetName.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_7, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 94)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'generateTargetFromFileSystem'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateTargetFromFileSystem (const GALGAS_string constinArgument_inTargetDefinitionDir,
+                                           const GALGAS_string constinArgument_inProductDirectory,
+                                           const GALGAS_lstring constinArgument_inTargetName,
+                                           GALGAS_stringlist & outArgument_outFilesToInclude,
+                                           C_Compiler * inCompiler
+                                           COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outFilesToInclude.drop () ; // Release 'out' argument
+  outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 106)) ;
+  GALGAS_string var_targetPath = constinArgument_inTargetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)).add_operation (constinArgument_inTargetName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)) ;
+  const enumGalgasBool test_0 = var_targetPath.reader_directoryExists (SOURCE_FILE ("target-generation.galgas", 108)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    cEnumerator_stringlist enumerator_4654 (var_targetPath.reader_regularFiles (GALGAS_bool (false) COMMA_SOURCE_FILE ("target-generation.galgas", 109)), kEnumeration_up) ;
+    while (enumerator_4654.hasCurrentObject ()) {
+      GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 110)).add_operation (enumerator_4654.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 110)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 110)) ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_4654.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 111)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        GALGAS_bool joker_4863 ; // Joker input parameter
+        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)).add_operation (enumerator_4654.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)), joker_4863, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
+      }else if (kBoolFalse == test_1) {
+        GALGAS_bool joker_4954 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)).add_operation (enumerator_4654.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)), joker_4954, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
+      }
+      enumerator_4654.gotoNextObject () ;
+    }
+    GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 116)) ;
+    cEnumerator_stringlist enumerator_5070 (var_sourcePath.reader_regularFiles (GALGAS_bool (false) COMMA_SOURCE_FILE ("target-generation.galgas", 117)), kEnumeration_up) ;
+    while (enumerator_5070.hasCurrentObject ()) {
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5070.current_mValue (HERE).objectCompare (GALGAS_string ("linker-script.ld"))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 119)) ;
+        GALGAS_bool joker_5277 ; // Joker input parameter
+        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)), joker_5277, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)) ;
+      }else if (kBoolFalse == test_2) {
+        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5070.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 122)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 122)) ;
+          GALGAS_bool joker_5478 ; // Joker input parameter
+          var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)), joker_5478, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
+          outArgument_outFilesToInclude.addAssign_operation (enumerator_5070.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 124)) ;
+        }else if (kBoolFalse == test_3) {
+          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_5070.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
+          if (kBoolTrue == test_4.boolEnum ()) {
+            test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 125)) ;
+          }
+          const enumGalgasBool test_5 = test_4.boolEnum () ;
+          if (kBoolTrue == test_5) {
+            GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
+            GALGAS_bool joker_5782 ; // Joker input parameter
+            var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)).add_operation (enumerator_5070.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)), joker_5782, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)) ;
+            outArgument_outFilesToInclude.addAssign_operation (enumerator_5070.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
+          }
+        }
+      }
+      enumerator_5070.gotoNextObject () ;
+    }
+  }else if (kBoolFalse == test_0) {
+    GALGAS_string var_s = GALGAS_string ("cannot find '").add_operation (constinArgument_inTargetName.reader_string (SOURCE_FILE ("target-generation.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (GALGAS_string ("' directory in target definition directory '"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (constinArgument_inTargetDefinitionDir, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
     GALGAS_location location_6 (constinArgument_inTargetName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_6, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 70)) ;
+    inCompiler->emitSemanticError (location_6, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 133)) ;
   }
 }
 
@@ -98,43 +197,43 @@ void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourc
   var_importedFileList.drop () ;
   var_endOfSourceFile.drop () ;
   cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, constinArgument_inSourceFile, var_ast, var_importedFileList, var_endOfSourceFile  COMMA_SOURCE_FILE ("program.galgas", 27)) ;
-  GALGAS_stringset var_importedFileAbsolutePathSet = GALGAS_stringset::constructor_setWithString (constinArgument_inSourceFile.mAttribute_string  COMMA_SOURCE_FILE ("program.galgas", 29)) ;
-  GALGAS_string var_currentDirectory = constinArgument_inSourceFile.mAttribute_string.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 30)) ;
+  GALGAS_stringset var_importedFileAbsolutePathSet = GALGAS_stringset::constructor_setWithString (constinArgument_inSourceFile.mAttribute_string  COMMA_SOURCE_FILE ("program.galgas", 32)) ;
+  GALGAS_string var_currentDirectory = constinArgument_inSourceFile.mAttribute_string.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("program.galgas", 33)) ;
   {
-  routine_recursiveImportFiles (var_ast, var_currentDirectory, var_importedFileList, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 31)) ;
+  routine_recursiveImportFiles (var_ast, var_currentDirectory, var_importedFileList, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 34)) ;
   }
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 38)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 41)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_stringset var_targetNameSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("program.galgas", 39)) ;
-    cEnumerator_lstringlist enumerator_1516 (var_ast.mAttribute_mTargetList, kEnumeration_up) ;
-    while (enumerator_1516.hasCurrentObject ()) {
-      const enumGalgasBool test_1 = var_targetNameSet.reader_hasKey (enumerator_1516.current_mValue (HERE).mAttribute_string COMMA_SOURCE_FILE ("program.galgas", 41)).boolEnum () ;
+    GALGAS_stringset var_targetNameSet = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("program.galgas", 42)) ;
+    cEnumerator_lstringlist enumerator_1557 (var_ast.mAttribute_mTargetList, kEnumeration_up) ;
+    while (enumerator_1557.hasCurrentObject ()) {
+      const enumGalgasBool test_1 = var_targetNameSet.reader_hasKey (enumerator_1557.current_mValue (HERE).mAttribute_string COMMA_SOURCE_FILE ("program.galgas", 44)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        GALGAS_location location_2 (enumerator_1516.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_2, GALGAS_string ("Duplicated target")  COMMA_SOURCE_FILE ("program.galgas", 42)) ;
+        GALGAS_location location_2 (enumerator_1557.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_2, GALGAS_string ("Duplicated target")  COMMA_SOURCE_FILE ("program.galgas", 45)) ;
       }
-      var_targetNameSet.addAssign_operation (enumerator_1516.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("program.galgas", 44)) ;
-      enumerator_1516.gotoNextObject () ;
+      var_targetNameSet.addAssign_operation (enumerator_1557.current_mValue (HERE).mAttribute_string  COMMA_SOURCE_FILE ("program.galgas", 47)) ;
+      enumerator_1557.gotoNextObject () ;
     }
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 48)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 51)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_ast.mAttribute_mTargetList.reader_length (SOURCE_FILE ("program.galgas", 49)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, var_ast.mAttribute_mTargetList.reader_length (SOURCE_FILE ("program.galgas", 52)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_4) {
-      inCompiler->emitSemanticWarning (var_endOfSourceFile, GALGAS_string ("no target: only syntax analysis has been performed")  COMMA_SOURCE_FILE ("program.galgas", 50)) ;
-    }
-    cEnumerator_lstringlist enumerator_1933 (var_ast.mAttribute_mTargetList, kEnumeration_up) ;
-    while (enumerator_1933.hasCurrentObject ()) {
-      const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_1933.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 53)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+      inCompiler->emitSemanticWarning (var_endOfSourceFile, GALGAS_string ("no target: only syntax analysis is performed")  COMMA_SOURCE_FILE ("program.galgas", 53)) ;
+    }else if (kBoolFalse == test_4) {
+      const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, var_ast.mAttribute_mTargetList.reader_length (SOURCE_FILE ("program.galgas", 54)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
       if (kBoolTrue == test_5) {
-        {
-        routine_compileProject (constinArgument_inSourceFile, var_ast, enumerator_1933.current_mValue (HERE), var_endOfSourceFile, var_currentDirectory, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 54)) ;
-        }
+        inCompiler->emitSemanticWarning (var_endOfSourceFile, var_ast.mAttribute_mTargetList.reader_length (SOURCE_FILE ("program.galgas", 55)).reader_string (SOURCE_FILE ("program.galgas", 55)).add_operation (GALGAS_string (" targets: only syntax analysis is performed"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 55))  COMMA_SOURCE_FILE ("program.galgas", 55)) ;
       }else if (kBoolFalse == test_5) {
-        GALGAS_location location_6 (enumerator_1933.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_6, GALGAS_string ("target path should have the .plms extension")  COMMA_SOURCE_FILE ("program.galgas", 63)) ;
+        cEnumerator_lstringlist enumerator_2129 (var_ast.mAttribute_mTargetList, kEnumeration_up) ;
+        while (enumerator_2129.hasCurrentObject ()) {
+          {
+          routine_compileProject (constinArgument_inSourceFile, var_ast, enumerator_2129.current_mValue (HERE), var_endOfSourceFile, var_currentDirectory, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 58)) ;
+          }
+          enumerator_2129.gotoNextObject () ;
+        }
       }
-      enumerator_1933.gotoNextObject () ;
     }
   }
 }
@@ -157,35 +256,35 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   GALGAS_ast var_ast = constinArgument_inAST ;
   GALGAS_stringset var_importedFileAbsolutePathSet = constinArgument_inImportedFileAbsolutePathSet ;
   {
-  routine_addTargetSpecificFiles (constinArgument_inTargetName, var_ast, constinArgument_inCurrentDirectory, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 82)) ;
+  routine_addTargetSpecificFiles (constinArgument_inTargetName, var_ast, constinArgument_inCurrentDirectory, var_importedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 84)) ;
   }
   {
-  routine_addPredefinedTypes (var_ast.mAttribute_mDeclarationList, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 89)) ;
+  routine_addPredefinedTypes (var_ast.mAttribute_mDeclarationList, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 91)) ;
   }
   GALGAS_declarationListAST var_orderedDeclarationListAST ;
   {
-  routine_buildOrderedDeclarationList (var_ast, constinArgument_inEndOfSourceFile, var_orderedDeclarationListAST, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 91)) ;
+  routine_buildOrderedDeclarationList (var_ast, constinArgument_inEndOfSourceFile, var_orderedDeclarationListAST, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 93)) ;
   }
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 97)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 99)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_globalLiteralStringMap var_globalLiteralStringMap = GALGAS_globalLiteralStringMap::constructor_emptyMap (SOURCE_FILE ("program.galgas", 98)) ;
+    GALGAS_globalLiteralStringMap var_globalLiteralStringMap = GALGAS_globalLiteralStringMap::constructor_emptyMap (SOURCE_FILE ("program.galgas", 100)) ;
     GALGAS_semanticContext var_semanticContext ;
     {
-    routine_buildSemanticContext (var_orderedDeclarationListAST, var_ast, var_globalLiteralStringMap, var_semanticContext, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 99)) ;
+    routine_buildSemanticContext (var_orderedDeclarationListAST, var_ast, var_globalLiteralStringMap, var_semanticContext, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 101)) ;
     }
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 106)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 108)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_1) {
       GALGAS_intermediateCodeStruct var_intermediateCodeStruct ;
       {
-      routine_semanticAnalysis (constinArgument_inSourceFile.mAttribute_string, var_ast, var_semanticContext, constinArgument_inEndOfSourceFile, var_globalLiteralStringMap, var_intermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 107)) ;
+      routine_semanticAnalysis (constinArgument_inSourceFile.mAttribute_string, var_ast, var_semanticContext, constinArgument_inEndOfSourceFile, var_globalLiteralStringMap, var_intermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 109)) ;
       }
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 116)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 118)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_2) {
         {
-        routine_codeOptimisation (var_intermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 117)) ;
+        routine_codeOptimisation (var_intermediateCodeStruct, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 119)) ;
         }
         {
-        routine_codeGeneration (constinArgument_inSourceFile.mAttribute_string, constinArgument_inEndOfSourceFile, var_intermediateCodeStruct, constinArgument_inTargetName, var_semanticContext.mAttribute_mExceptionCodeType, var_semanticContext.mAttribute_mExceptionLineType, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 118)) ;
+        routine_codeGeneration (constinArgument_inCurrentDirectory, constinArgument_inSourceFile.mAttribute_string, constinArgument_inEndOfSourceFile, var_intermediateCodeStruct, constinArgument_inTargetName, var_semanticContext.mAttribute_mExceptionCodeType, var_semanticContext.mAttribute_mExceptionLineType, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 120)) ;
         }
       }
     }
@@ -202,7 +301,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
 void routine_addPredefinedTypes (GALGAS_declarationListAST & ioArgument_ioDeclarationList,
                                  C_Compiler * inCompiler
                                  COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioDeclarationList.addAssign_operation (GALGAS_literalStringDeclaration::constructor_new (function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 137)).reader_nowhere (SOURCE_FILE ("program.galgas", 137))  COMMA_SOURCE_FILE ("program.galgas", 137))  COMMA_SOURCE_FILE ("program.galgas", 137)) ;
+  ioArgument_ioDeclarationList.addAssign_operation (GALGAS_literalStringDeclaration::constructor_new (function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("program.galgas", 140)).reader_nowhere (SOURCE_FILE ("program.galgas", 140))  COMMA_SOURCE_FILE ("program.galgas", 140))  COMMA_SOURCE_FILE ("program.galgas", 140)) ;
 }
 
 
@@ -218,22 +317,146 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
                                      GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_ast var_ast = GALGAS_ast::constructor_default (SOURCE_FILE ("program.galgas", 148)) ;
-  {
-  GALGAS_lstringlist temp_0 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("program.galgas", 152)) ;
-  temp_0.addAssign_operation (constinArgument_inTargetName  COMMA_SOURCE_FILE ("program.galgas", 152)) ;
-  routine_recursiveImportFiles (var_ast, constinArgument_inCurrentDirectory, temp_0, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 149)) ;
+  GALGAS_ast var_ast = GALGAS_ast::constructor_default (SOURCE_FILE ("program.galgas", 151)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_string var_targetDirectory = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 153)) ;
+    const enumGalgasBool test_1 = var_targetDirectory.reader_directoryExists (SOURCE_FILE ("program.galgas", 154)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      {
+      GALGAS_lstringlist temp_2 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("program.galgas", 158)) ;
+      temp_2.addAssign_operation (GALGAS_lstring::constructor_new (constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string (".plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 158)), constinArgument_inTargetName.mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 158))  COMMA_SOURCE_FILE ("program.galgas", 158)) ;
+      routine_recursiveImportFileSystemTargetFiles (var_ast, var_targetDirectory, temp_2, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 155)) ;
+      }
+    }else if (kBoolFalse == test_1) {
+      GALGAS_location location_3 (GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("program.galgas", 162)).reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_3, GALGAS_string ("the '").add_operation (GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()), inCompiler COMMA_SOURCE_FILE ("program.galgas", 162)).add_operation (GALGAS_string ("' directory does not exist"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 162))  COMMA_SOURCE_FILE ("program.galgas", 162)) ;
+    }
+  }else if (kBoolFalse == test_0) {
+    {
+    GALGAS_lstringlist temp_4 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("program.galgas", 167)) ;
+    temp_4.addAssign_operation (GALGAS_lstring::constructor_new (constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string (".plm-target"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 167)), constinArgument_inTargetName.mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 167))  COMMA_SOURCE_FILE ("program.galgas", 167)) ;
+    routine_recursiveImportEmbeddedTargetFiles (var_ast, temp_4, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 165)) ;
+    }
   }
-  ioArgument_ioAST.mAttribute_mDeclarationList = var_ast.mAttribute_mDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 155)) ;
-  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList = var_ast.mAttribute_mGlobalVarDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 156)) ;
-  ioArgument_ioAST.mAttribute_mProcedureListAST = var_ast.mAttribute_mProcedureListAST.add_operation (ioArgument_ioAST.mAttribute_mProcedureListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 157)) ;
-  ioArgument_ioAST.mAttribute_mRequiredProcList = var_ast.mAttribute_mRequiredProcList.add_operation (ioArgument_ioAST.mAttribute_mRequiredProcList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 158)) ;
-  ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 159)) ;
-  ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 160)) ;
-  ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 161)) ;
-  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 162)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 163)) ;
-  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 164)) ;
+  ioArgument_ioAST.mAttribute_mDeclarationList = var_ast.mAttribute_mDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 171)) ;
+  ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList = var_ast.mAttribute_mGlobalVarDeclarationList.add_operation (ioArgument_ioAST.mAttribute_mGlobalVarDeclarationList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 172)) ;
+  ioArgument_ioAST.mAttribute_mProcedureListAST = var_ast.mAttribute_mProcedureListAST.add_operation (ioArgument_ioAST.mAttribute_mProcedureListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 173)) ;
+  ioArgument_ioAST.mAttribute_mRequiredProcList = var_ast.mAttribute_mRequiredProcList.add_operation (ioArgument_ioAST.mAttribute_mRequiredProcList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 174)) ;
+  ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 175)) ;
+  ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 176)) ;
+  ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 177)) ;
+  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 178)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 179)) ;
+  ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 180)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Routine 'recursiveImportFileSystemTargetFiles'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportFileSystemTargetFiles (GALGAS_ast & ioArgument_ioAST,
+                                                   const GALGAS_string constinArgument_inTargetDirectory,
+                                                   GALGAS_lstringlist inArgument_inImportedClauseList,
+                                                   GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  cEnumerator_lstringlist enumerator_7167 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_7167.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath = constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 192)).add_operation (enumerator_7167.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 192)) ;
+    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 193)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 194)).operator_not (SOURCE_FILE ("program.galgas", 194)).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 195)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 196)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        if (kBoolTrue == test_2) {
+          GALGAS_lstringlist var_importedFileList ;
+          var_importedFileList.drop () ;
+          GALGAS_location joker_7627 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_7167.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 197)), ioArgument_ioAST, var_importedFileList, joker_7627  COMMA_SOURCE_FILE ("program.galgas", 197)) ;
+          {
+          routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 201)) ;
+          }
+        }else if (kBoolFalse == test_2) {
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 207)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            GALGAS_lstringlist var_importedFileList ;
+            var_importedFileList.drop () ;
+            GALGAS_location joker_8120 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_7167.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 208)), ioArgument_ioAST, var_importedFileList, joker_8120  COMMA_SOURCE_FILE ("program.galgas", 208)) ;
+            {
+            routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 212)) ;
+            }
+          }else if (kBoolFalse == test_3) {
+            GALGAS_location location_4 (enumerator_7167.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 219)) ;
+          }
+        }
+      }
+    }else if (kBoolFalse == test_0) {
+      GALGAS_location location_5 (enumerator_7167.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_5, GALGAS_string ("file does not exist in file system target definition")  COMMA_SOURCE_FILE ("program.galgas", 223)) ;
+    }
+    enumerator_7167.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportEmbeddedTargetFiles (GALGAS_ast & ioArgument_ioAST,
+                                                 GALGAS_lstringlist inArgument_inImportedClauseList,
+                                                 GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  cEnumerator_lstringlist enumerator_8921 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_8921.hasCurrentObject ()) {
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    const enumGalgasBool test_0 = var_fw.reader_fileExistsAtPath (enumerator_8921.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 237)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_8921.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 238)) ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 239)).operator_not (SOURCE_FILE ("program.galgas", 239)).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 240)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_8921.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 241)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        if (kBoolTrue == test_2) {
+          GALGAS_lstringlist var_importedFileList ;
+          var_importedFileList.drop () ;
+          GALGAS_location joker_9410 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_8921.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 242)), ioArgument_ioAST, var_importedFileList, joker_9410  COMMA_SOURCE_FILE ("program.galgas", 242)) ;
+          {
+          routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 246)) ;
+          }
+        }else if (kBoolFalse == test_2) {
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_8921.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 251)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            GALGAS_lstringlist var_importedFileList ;
+            var_importedFileList.drop () ;
+            GALGAS_location joker_9843 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_8921.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 252)), ioArgument_ioAST, var_importedFileList, joker_9843  COMMA_SOURCE_FILE ("program.galgas", 252)) ;
+            {
+            routine_recursiveImportEmbeddedTargetFiles (ioArgument_ioAST, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 256)) ;
+            }
+          }else if (kBoolFalse == test_3) {
+            GALGAS_location location_4 (enumerator_8921.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 262)) ;
+          }
+        }
+      }
+    }else if (kBoolFalse == test_0) {
+      GALGAS_location location_5 (enumerator_8921.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_5, GALGAS_string ("cannot find this file in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 266)) ;
+    }
+    enumerator_8921.gotoNextObject () ;
+  }
 }
 
 
@@ -249,78 +472,78 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
                                    GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_6379 (inArgument_inImportedClauseList, kEnumeration_up) ;
-  while (enumerator_6379.hasCurrentObject ()) {
-    GALGAS_string var_absolutePath = enumerator_6379.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 176)) ;
-    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 177)).boolEnum () ;
+  cEnumerator_lstringlist enumerator_10615 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_10615.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath = enumerator_10615.current_mValue (HERE).mAttribute_string.reader_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 280)) ;
+    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 281)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 178)).operator_not (SOURCE_FILE ("program.galgas", 178)).boolEnum () ;
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 282)).operator_not (SOURCE_FILE ("program.galgas", 282)).boolEnum () ;
       if (kBoolTrue == test_1) {
-        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 179)) ;
-        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 180)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 283)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 284)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
         if (kBoolTrue == test_2) {
           GALGAS_lstringlist var_importedFileList ;
           var_importedFileList.drop () ;
-          GALGAS_location joker_6882 ; // Joker input parameter
-          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6379.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 181)), ioArgument_ioAST, var_importedFileList, joker_6882  COMMA_SOURCE_FILE ("program.galgas", 181)) ;
+          GALGAS_location joker_11118 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_10615.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 285)), ioArgument_ioAST, var_importedFileList, joker_11118  COMMA_SOURCE_FILE ("program.galgas", 285)) ;
           {
-          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 185)) ;
+          routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 289)) ;
           }
         }else if (kBoolFalse == test_2) {
-          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 191)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 295)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
           if (kBoolTrue == test_3) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_7349 ; // Joker input parameter
-            cGrammar_plms_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_6379.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 192)), ioArgument_ioAST, var_importedFileList, joker_7349  COMMA_SOURCE_FILE ("program.galgas", 192)) ;
+            GALGAS_location joker_11597 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_10615.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 296)), ioArgument_ioAST, var_importedFileList, joker_11597  COMMA_SOURCE_FILE ("program.galgas", 296)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 196)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 300)) ;
             }
           }else if (kBoolFalse == test_3) {
-            GALGAS_location location_4 (enumerator_6379.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 203)) ;
+            GALGAS_location location_4 (enumerator_10615.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 307)) ;
           }
         }
       }
     }else if (kBoolFalse == test_0) {
       GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 208)).boolEnum () ;
+      const enumGalgasBool test_5 = var_fw.reader_fileExistsAtPath (enumerator_10615.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 312)).boolEnum () ;
       if (kBoolTrue == test_5) {
-        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_6379.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 209)) ;
-        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 210)).operator_not (SOURCE_FILE ("program.galgas", 210)).boolEnum () ;
+        GALGAS_string var_embeddedPath = GALGAS_string (":").add_operation (enumerator_10615.current_mValue (HERE).reader_string (SOURCE_FILE ("program.galgas", 313)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 313)) ;
+        const enumGalgasBool test_6 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_embeddedPath COMMA_SOURCE_FILE ("program.galgas", 314)).operator_not (SOURCE_FILE ("program.galgas", 314)).boolEnum () ;
         if (kBoolTrue == test_6) {
-          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 211)) ;
-          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_6379.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 212)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+          ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_embeddedPath  COMMA_SOURCE_FILE ("program.galgas", 315)) ;
+          const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, enumerator_10615.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 316)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
           if (kBoolTrue == test_7) {
             GALGAS_lstringlist var_importedFileList ;
             var_importedFileList.drop () ;
-            GALGAS_location joker_8198 ; // Joker input parameter
-            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 213)), ioArgument_ioAST, var_importedFileList, joker_8198  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
+            GALGAS_location joker_12452 ; // Joker input parameter
+            cGrammar_plm_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_10615.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 317)), ioArgument_ioAST, var_importedFileList, joker_12452  COMMA_SOURCE_FILE ("program.galgas", 317)) ;
             {
-            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 217)) ;
+            routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 321)) ;
             }
           }else if (kBoolFalse == test_7) {
-            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_6379.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 223)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+            const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, enumerator_10615.current_mValue (HERE).mAttribute_string.reader_pathExtension (SOURCE_FILE ("program.galgas", 327)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
             if (kBoolTrue == test_8) {
               GALGAS_lstringlist var_importedFileList ;
               var_importedFileList.drop () ;
-              GALGAS_location joker_8676 ; // Joker input parameter
-              cGrammar_plms_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_6379.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 224)), ioArgument_ioAST, var_importedFileList, joker_8676  COMMA_SOURCE_FILE ("program.galgas", 224)) ;
+              GALGAS_location joker_12942 ; // Joker input parameter
+              cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw.reader_textFileContentsAtPath (enumerator_10615.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 328)), ioArgument_ioAST, var_importedFileList, joker_12942  COMMA_SOURCE_FILE ("program.galgas", 328)) ;
               {
-              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 228)) ;
+              routine_recursiveImportFiles (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 332)) ;
               }
             }else if (kBoolFalse == test_8) {
-              GALGAS_location location_9 (enumerator_6379.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plms)")  COMMA_SOURCE_FILE ("program.galgas", 235)) ;
+              GALGAS_location location_9 (enumerator_10615.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+              inCompiler->emitSemanticError (location_9, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 339)) ;
             }
           }
         }
       }else if (kBoolFalse == test_5) {
-        GALGAS_location location_10 (enumerator_6379.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 239)) ;
+        GALGAS_location location_10 (enumerator_10615.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+        inCompiler->emitSemanticError (location_10, GALGAS_string ("cannot find this file in file system and in embedded files")  COMMA_SOURCE_FILE ("program.galgas", 343)) ;
       }
     }
-    enumerator_6379.gotoNextObject () ;
+    enumerator_10615.gotoNextObject () ;
   }
 }
 
@@ -333,7 +556,7 @@ void routine_recursiveImportFiles (GALGAS_ast & ioArgument_ioAST,
 
 //--- File 'teensy-3-1-sequential-systick/01-blinkled.plm'
 
-const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-sequential-systick.plms\"\n"
+const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-sequential-systick\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -366,13 +589,13 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  596, // Text length
+  591, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/02-blinkled-systick.plm'
 
-const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-sequential-systick.plms\"\n"
+const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-sequential-systick\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -417,7 +640,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-blinkled-systick.plm",
   "plm",
   true, // Text file
-  861, // Text length
+  856, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -1210,7 +1433,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedTargets (
   gWrapperFileContent_0_embeddedTargets
 ) ;
 
-//--- File '/teensy-3-1-interrupt.plms'
+//--- File '/teensy-3-1-interrupt.plm-target'
 
 const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
@@ -1249,10 +1472,10 @@ const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation 
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "import \"microcontrollers/mk20dx256.plm\"\n"
-  "import \"microcontrollers/lcd.plm\"\n"
-  "import \"microcontrollers/leds.plm\"\n"
-  "import \"microcontrollers/default-isr.plm\"\n"
+  "import \"files/mk20dx256.plm\"\n"
+  "import \"files/lcd.plm\"\n"
+  "import \"files/leds.plm\"\n"
+  "import \"files/default-isr.plm\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1325,14 +1548,14 @@ const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation 
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
-  "teensy-3-1-interrupt.plms",
-  "plms",
+  "teensy-3-1-interrupt.plm-target",
+  "plm-target",
   true, // Text file
-  3780, // Text length
+  3736, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
-//--- File '/teensy-3-1-sequential-systick.plms'
+//--- File '/teensy-3-1-sequential-systick.plm-target'
 
 const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
@@ -1371,8 +1594,8 @@ const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation 
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "import \"microcontrollers/mk20dx256.plm\"\n"
-  "import \"microcontrollers/boot-teensy-3-1.plm\"\n"
+  "import \"files/mk20dx256.plm\"\n"
+  "import \"files/boot-teensy-3-1.plm\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1396,14 +1619,14 @@ const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation 
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
-  "teensy-3-1-sequential-systick.plms",
-  "plms",
+  "teensy-3-1-sequential-systick.plm-target",
+  "plm-target",
   true, // Text file
-  1792, // Text length
+  1770, // Text length
   gWrapperFileContent_2_embeddedTargets
 ) ;
 
-//--- File 'microcontrollers/boot-teensy-3-1.plm'
+//--- File 'files/boot-teensy-3-1.plm'
 
 const char * gWrapperFileContent_3_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1478,7 +1701,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedTargets (
   gWrapperFileContent_3_embeddedTargets
 ) ;
 
-//--- File 'microcontrollers/default-isr.plm'
+//--- File 'files/default-isr.plm'
 
 const char * gWrapperFileContent_4_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -2136,7 +2359,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedTargets (
   gWrapperFileContent_4_embeddedTargets
 ) ;
 
-//--- File 'microcontrollers/lcd.plm'
+//--- File 'files/lcd.plm'
 
 const char * gWrapperFileContent_5_embeddedTargets = "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
@@ -2653,7 +2876,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedTargets (
   gWrapperFileContent_5_embeddedTargets
 ) ;
 
-//--- File 'microcontrollers/leds.plm'
+//--- File 'files/leds.plm'
 
 const char * gWrapperFileContent_6_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "//   Led L0 : PTA12\n"
@@ -2762,7 +2985,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedTargets (
   gWrapperFileContent_6_embeddedTargets
 ) ;
 
-//--- File 'microcontrollers/mk20dx256.plm'
+//--- File 'files/mk20dx256.plm'
 
 const char * gWrapperFileContent_7_embeddedTargets = "// Teensyduino Core Library\n"
   "// http://www.pjrc.com/teensy/\n"
@@ -4922,7 +5145,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedTargets (
   gWrapperFileContent_7_embeddedTargets
 ) ;
 
-//--- All files of 'microcontrollers' directory
+//--- All files of 'files' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_1 [6] = {
   & gWrapperFile_3_embeddedTargets,
@@ -4933,16 +5156,16 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_1 [6] = {
   NULL
 } ;
 
-//--- All sub-directories of 'microcontrollers' directory
+//--- All sub-directories of 'files' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_1 [1] = {
   NULL
 } ;
 
-//--- Directory 'microcontrollers'
+//--- Directory 'files'
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets (
-  "microcontrollers",
+  "files",
   5,
   gWrapperAllFiles_embeddedTargets_1,
   0,
@@ -19453,7 +19676,7 @@ static void print_tool_help_message (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 static const char * kSourceFileExtensions [] = {
-  "plms",
+  "plm-target",
   "plm",
   NULL
 } ;    
@@ -19461,7 +19684,7 @@ static const char * kSourceFileExtensions [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 static const char * kSourceFileHelpMessages [] = {
-  "a source text file with the .plms extension",
+  "a target definition text file with the .plm-target extension",
   "a source text file with the .plm extension",
   NULL
 } ;    
@@ -19515,29 +19738,29 @@ static void routine_before (C_Compiler * inCompiler
     if (kBoolTrue == test_4) {
       GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 16)) ;
       inCompiler->printMessage (GALGAS_string ("Embedded targets:\n")  COMMA_SOURCE_FILE ("embedded-targets.galgas", 17)) ;
-      cEnumerator_stringlist enumerator_824 (var_embeddedFiles, kEnumeration_up) ;
-      while (enumerator_824.hasCurrentObject ()) {
-        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_824.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plms"))).boolEnum () ;
+      cEnumerator_stringlist enumerator_830 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_830.hasCurrentObject ()) {
+        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_830.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
         if (kBoolTrue == test_5) {
-          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_824.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
+          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_830.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
         }
-        enumerator_824.gotoNextObject () ;
+        enumerator_830.gotoNextObject () ;
       }
     }
     GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedTargets.reader_value ()) ;
     const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_6) {
       GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 26)) ;
-      cEnumerator_stringlist enumerator_1105 (var_embeddedFiles, kEnumeration_up) ;
-      while (enumerator_1105.hasCurrentObject ()) {
-        GALGAS_string var_filePath = var_path.add_operation (enumerator_1105.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
+      cEnumerator_stringlist enumerator_1117 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_1117.hasCurrentObject ()) {
+        GALGAS_string var_filePath = var_path.add_operation (enumerator_1117.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
         inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)) ;
         GALGAS_string var_dir = var_filePath.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 30)) ;
         var_dir.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 31)) ;
-        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1105.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
-        GALGAS_bool joker_1377 ; // Joker input parameter
-        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1377, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
-        enumerator_1105.gotoNextObject () ;
+        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1117.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
+        GALGAS_bool joker_1389 ; // Joker input parameter
+        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1389, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
+        enumerator_1117.gotoNextObject () ;
       }
     }
   }
@@ -19625,22 +19848,22 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
         const GALGAS_location location = commonLexique->here () ;
         const GALGAS_lstring sourceFilePath (sfp, location) ;
         int16_t r = 0 ;
-        if (fileExtension == "plms") {
+        if (fileExtension == "plm-target") {
           switch (executionMode ()) {
           case kExecutionModeNormal :
             routine_programRule_5F__30_ (sourceFilePath, commonLexique COMMA_HERE) ;
             break ;
           case kExecutionModeLexicalAnalysisOnly :
-            cGrammar_plms_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeSyntaxAnalysisOnly :
-            cGrammar_plms_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeIndexing :
-            cGrammar_plms_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeLatex :
-            cGrammar_plms_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           }
         }else if (fileExtension == "plm") {
@@ -20290,356 +20513,4 @@ GALGAS_string categoryReader_requiredActualPassingModeForSelector (const GALGAS_
 
 
 
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Abstract category method '@expressionAST analyzeExpression'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_expressionAST_analyzeExpression> gCategoryMethodTable_expressionAST_analyzeExpression ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
-                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) {
-  gCategoryMethodTable_expressionAST_analyzeExpression.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_expressionAST_analyzeExpression (void) {
-  gCategoryMethodTable_expressionAST_analyzeExpression.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_expressionAST_analyzeExpression (NULL,
-                                                            freeCategoryMethod_expressionAST_analyzeExpression) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyzeExpression (const cPtr_expressionAST * inObject,
-                                           const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                           const GALGAS_receiverType constin_inReceiverType,
-                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_stringset constin_inModes,
-                                           const GALGAS_bool constin_inAllowExceptions,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_variableMap & io_ioVariableMap,
-                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                           GALGAS_unifiedTypeMap_2D_proxy & out_outExpressionType,
-                                           GALGAS_variableKindIR & out_outResultValueName,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-  out_outExpressionType.drop () ;
-  out_outResultValueName.drop () ;
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_expressionAST) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_expressionAST_analyzeExpression f = NULL ;
-    if (classIndex < gCategoryMethodTable_expressionAST_analyzeExpression.count ()) {
-      f = gCategoryMethodTable_expressionAST_analyzeExpression (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_expressionAST_analyzeExpression.count ()) {
-           f = gCategoryMethodTable_expressionAST_analyzeExpression (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_expressionAST_analyzeExpression.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inRoutineNameForInvocationGraph, constin_inReceiverType, constin_inTargetType, constin_inContext, constin_inModes, constin_inAllowExceptions, io_ioTemporaries, io_ioGlobalLiteralStringMap, io_ioVariableMap, io_ioInstructionGenerationList, out_outExpressionType, out_outResultValueName, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Abstract category method '@instructionAST analyze'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_instructionAST_analyze> gCategoryMethodTable_instructionAST_analyze ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_analyze (const int32_t inClassIndex,
-                                  categoryMethodSignature_instructionAST_analyze inMethod) {
-  gCategoryMethodTable_instructionAST_analyze.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_instructionAST_analyze (void) {
-  gCategoryMethodTable_instructionAST_analyze.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_instructionAST_analyze (NULL,
-                                                   freeCategoryMethod_instructionAST_analyze) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_analyze (const cPtr_instructionAST * inObject,
-                                 const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
-                                 const GALGAS_receiverType constin_inReceiverType,
-                                 const GALGAS_semanticContext constin_inContext,
-                                 const GALGAS_stringset constin_inModeSet,
-                                 const GALGAS_bool constin_inAllowExceptions,
-                                 GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                 GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
-                                 GALGAS_variableMap & io_ioVariableMap,
-                                 GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                 C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_instructionAST) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_instructionAST_analyze f = NULL ;
-    if (classIndex < gCategoryMethodTable_instructionAST_analyze.count ()) {
-      f = gCategoryMethodTable_instructionAST_analyze (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_instructionAST_analyze.count ()) {
-           f = gCategoryMethodTable_instructionAST_analyze (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_instructionAST_analyze.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, constin_inRoutineNameForInvocationGraph, constin_inReceiverType, constin_inContext, constin_inModeSet, constin_inAllowExceptions, io_ioTemporaries, io_ioGlobalLiteralStringMap, io_ioVariableMap, io_ioInstructionGenerationList, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category method '@instructionListAST analyzeBranchInstructionList'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_analyzeBranchInstructionList (const GALGAS_instructionListAST inObject,
-                                                  const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
-                                                  GALGAS_location inArgument_inEndOfInstructionList,
-                                                  const GALGAS_receiverType constinArgument_inReceiverType,
-                                                  const GALGAS_semanticContext constinArgument_inContext,
-                                                  const GALGAS_stringset constinArgument_inModeSet,
-                                                  const GALGAS_bool constinArgument_inAllowExceptions,
-                                                  GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                  GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                  GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                  GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  ioArgument_ioVariableMap.modifier_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 66)) ;
-  }
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_3110 (temp_0, kEnumeration_up) ;
-  while (enumerator_3110.hasCurrentObject ()) {
-    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_3110.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 68)) ;
-    enumerator_3110.gotoNextObject () ;
-  }
-  {
-  ioArgument_ioVariableMap.modifier_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 81)) ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_analyzeRoutineInstructionList (const GALGAS_instructionListAST inObject,
-                                                   const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
-                                                   const GALGAS_receiverType constinArgument_inReceiverType,
-                                                   const GALGAS_semanticContext constinArgument_inContext,
-                                                   const GALGAS_stringset constinArgument_inModeSet,
-                                                   const GALGAS_bool constinArgument_inAllowExceptions,
-                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                   GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                   GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4283 (temp_0, kEnumeration_up) ;
-  while (enumerator_4283.hasCurrentObject ()) {
-    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_4283.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 98)) ;
-    enumerator_4283.gotoNextObject () ;
-  }
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category Reader '@instructionListIR instructionListCode'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string categoryReader_instructionListCode (const GALGAS_instructionListIR & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  result_outCode = GALGAS_string::makeEmptyString () ;
-  {
-  result_outCode.modifier_incIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 118)) ;
-  }
-  const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_5192 (temp_0, kEnumeration_up) ;
-  while (enumerator_5192.hasCurrentObject ()) {
-    result_outCode.dotAssign_operation (callCategoryReader_instructionCode ((const cPtr_abstractInstructionIR *) enumerator_5192.current_mInstructionGeneration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 120))  COMMA_SOURCE_FILE ("instructionList.galgas", 120)) ;
-    enumerator_5192.gotoNextObject () ;
-  }
-  {
-  result_outCode.modifier_decIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 122)) ;
-  }
-//---
-  return result_outCode ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Abstract category method '@abstractDeclaration enterInPrecedenceGraph'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph> gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
-                                                 categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) {
-  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph (void) {
-  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractDeclaration_enterInPrecedenceGraph (NULL,
-                                                                       freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration * inObject,
-                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph f = NULL ;
-    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
-      f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
-           f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
-                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
-                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-//--- Find Reader
-  if (NULL != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
-    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
-    const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
-    }
-    if (NULL == f) {
-       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
-       while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
-         }
-         p = p->mSuperclassDescriptor ;
-       }
-       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
-    }
-    if (NULL == f) {
-      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
-    }else{
-      result = f (inObject, inCompiler COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
 

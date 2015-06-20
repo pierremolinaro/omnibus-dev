@@ -62,10 +62,10 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"noFlashing"
+    identifier:@"performFlashing"
     commandChar:102
-    commandString:@"no-flash"
-    comment:@"Do not flash target"
+    commandString:@"flash-target"
+    comment:@"After successful compilation, flash target"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

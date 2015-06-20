@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 filewrapper embeddedTargets in "../embedded-sources/targets" {
-  "plm", "plms", "py", "ld", "c", "s"
+  "plm", "plm-target", "py", "ld", "c", "s"
 }{
 }{
 }
@@ -16,7 +16,7 @@ before {
     let embeddedFiles = [fw allTextFilePathes]
     message "Embedded targets:\n"
     for (f) in embeddedFiles do
-      if [f pathExtension] == "plms" then
+      if [f pathExtension] == "plm-target" then
         message "  " + [f lastPathComponent] + '\n'
       end
     end
@@ -32,13 +32,6 @@ before {
         let text = [fw textFileContentsAtPath !f]
         [text writeToFileWhenDifferentContents !filePath ?*]
     end
-#    if [fw fileExistsAtPath !path] then
-#      let text = [fw textFileContentsAtPath !path]
-#      let sourceName = [path lastPathComponent]
-#      [text writeToFileWhenDifferentContents !sourceName ?*]
-#    else
-#      error ["" nowhere] : "there is no '" + path + "' embedded file"
-#    end  
   end
 }
 

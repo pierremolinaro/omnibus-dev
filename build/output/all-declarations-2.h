@@ -10,11 +10,11 @@
 #include "all-declarations-1.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
-//  GRAMMAR plms_grammar
+//  GRAMMAR plm_target_grammar
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cGrammar_plms_5F_grammar : public cParser_common_5F_syntax,
-                                 public cParser_plms_5F_specific_5F_syntax {
+class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
+                                          public cParser_plm_5F_target_5F_specific_5F_syntax {
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -508,7 +508,7 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_noFlashing ;
+extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
 
@@ -2134,11 +2134,12 @@ class GALGAS_string function_titleComment (class GALGAS_string inArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_codeGeneration (const class GALGAS_string constinArgument0,
-                             const class GALGAS_location constinArgument1,
-                             const class GALGAS_intermediateCodeStruct constinArgument2,
-                             const class GALGAS_lstring constinArgument3,
-                             const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
+                             const class GALGAS_string constinArgument1,
+                             const class GALGAS_location constinArgument2,
+                             const class GALGAS_intermediateCodeStruct constinArgument3,
+                             const class GALGAS_lstring constinArgument4,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
+                             const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -2258,15 +2259,16 @@ class GALGAS_string categoryReader_headerCodeGenerationForRegister (const class 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Routine 'generateTargets'                                              *
+//                                              Routine 'generateTarget'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateTargets (const class GALGAS_string constinArgument0,
-                              const class GALGAS_lstring constinArgument1,
-                              class GALGAS_stringlist & outArgument2,
-                              class C_Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
+void routine_generateTarget (const class GALGAS_string constinArgument0,
+                             const class GALGAS_string constinArgument1,
+                             const class GALGAS_lstring constinArgument2,
+                             class GALGAS_stringlist & outArgument3,
+                             class C_Compiler * inCompiler
+                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

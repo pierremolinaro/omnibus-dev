@@ -1,4 +1,4 @@
-target "teensy-3-1-sequential-systick.plms"
+target "teensy-3-1-sequential-systick"
 
 //------------------------------------------------*
 

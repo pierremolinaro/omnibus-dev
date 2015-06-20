@@ -10,9 +10,6 @@ syntax extension plm_specific_syntax {
     $target$
     $literal_string$ ?let targetName
     ioAST.mTargetList += !targetName
-    if [targetName.string pathExtension] != "plms" then
-      error targetName : "the pah extension should be .plms"
-    end
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -24,49 +21,115 @@ syntax extension plm_specific_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "mke", "h", "c", "s", "plm", "plms"
+  "py", "ld", "mke", "h", "c", "s", "plm", "plm-target"
 }{
 }{
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-proc generateTargets
-  ?targetDirectory:let @string inTargetDirectory
+proc generateTarget
+  ?currentDir:let @string inCurrentDirectory
+  ?productDirectory:let @string inProductDirectory
+  ?targetName:let @lstring inTargetName
+  !filesToInclude:@stringlist outFilesToInclude
+{
+  if [option plm_options.useDirAsTargetDir value] == "" then
+    generateTargetFromEmbeddedFiles (
+      !productDirectory:inProductDirectory
+      !targetName:inTargetName
+      ?filesToInclude:outFilesToInclude
+    )
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    generateTargetFromFileSystem (
+      !targetDefinitionDirectory:targetDefinitionDir
+      !productDirectory:inProductDirectory
+      !targetName:inTargetName
+      ?filesToInclude:outFilesToInclude
+    )
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc generateTargetFromEmbeddedFiles
+  ?productDirectory:let @string inProductDirectory
   ?targetName:let @lstring inTargetName
   !filesToInclude:@stringlist outFilesToInclude
 {
   outFilesToInclude = {}
   @filewrapper fw = [filewrapper targetTemplates]
-  let targetPath = [inTargetName.string stringByDeletingPathExtension]
+  let targetPath = inTargetName.string
   if [fw directoryExistsAtPath !targetPath] then
     for (path) in [fw textFilesAtPath !targetPath] do
       let s = [fw textFileContentsAtPath !targetPath + "/" + path]
       if [path pathExtension] == "py" then
-        [s writeToExecutableFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]      else
-        [s writeToFileWhenDifferentContents !inTargetDirectory + "/" + path ?*]
+        [s writeToExecutableFileWhenDifferentContents !inProductDirectory + "/" + path ?*]      else
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/" + path ?*]
       end
     end
     let sourcePath = targetPath + "/sources"
     for (file) in [fw textFilesAtPath !sourcePath] do
       if file == "linker-script.ld" then
         let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
       elsif file == "target.c" then
         let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
         outFilesToInclude += !file
       elsif (file == "target-exception.c") && not [option plm_options.noExceptionGeneration value] then
         let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inTargetDirectory + "/sources/" + file ?*]
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
         outFilesToInclude += !file
       end
     end
   else
     var s = "cannot find this target; available targets:"
-    for (dir) in [fw directoriesAtPath !""] do
-      s += "\n - " + dir
+    for (f) in [fw textFilesAtPath !""] do
+      if [f pathExtension] == "plm-target" then
+        s += "\n - " + [f stringByDeletingPathExtension]
+      end
     end
+    error inTargetName : s
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc generateTargetFromFileSystem
+  ?targetDefinitionDirectory:let @string inTargetDefinitionDir
+  ?productDirectory:let @string inProductDirectory
+  ?targetName:let @lstring inTargetName
+  !filesToInclude:@stringlist outFilesToInclude
+{
+  outFilesToInclude = {}
+  let targetPath = inTargetDefinitionDir + "/" + inTargetName.string
+  if [targetPath directoryExists] then
+    for (path) in [targetPath regularFiles !false] do
+      let s = @string.stringWithContentsOfFile {!targetPath + "/" + path}
+      if [path pathExtension] == "py" then
+        [s writeToExecutableFileWhenDifferentContents !inProductDirectory + "/" + path ?*]      else
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/" + path ?*]
+      end
+    end
+    let sourcePath = targetPath + "/sources"
+    for (file) in [sourcePath regularFiles !false] do
+      if file == "linker-script.ld" then
+        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
+      elsif file == "target.c" then
+        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
+        outFilesToInclude += !file
+      elsif (file == "target-exception.c") && not [option plm_options.noExceptionGeneration value] then
+        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
+        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
+        outFilesToInclude += !file
+      end
+    end
+  else
+    let s = "cannot find '" + inTargetName + "' directory in target definition directory '" + inTargetDefinitionDir + "'"
     error inTargetName : s
   end
 }

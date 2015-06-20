@@ -2,7 +2,7 @@ option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noExceptionGeneration: '\0', "no-exception-generation" -> "Do not generate exception code"
   @bool compileOnly: 'c', "no-c-compilation" -> "Do not compile generated C code"
-  @bool noFlashing: 'f', "no-flash" -> "Do not flash target"
+  @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 
   @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
