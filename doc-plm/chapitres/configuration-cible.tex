@@ -16,6 +16,7 @@
 
 Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit situé dans le système de fichiers. On va voir dans cette partie comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on va extraire de l'exécutable du compilateur les cibles qu'il embarque.
 
+\subsection{Liste des cibles embarquées}
 À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées :
 \begin{SHELL}
 {\bfseries plm -L}\\
@@ -25,7 +26,8 @@ Embedded targets:\\
 \hspace*{1.2em}...
 \end{SHELL}
 
-L'option \texttt{-X} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.} :
+\subsection{Extraction des cibles embarquées}
+L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.} :
 \begin{SHELL}
 {\bfseries plm -X=cibles}\\
 \hspace*{1.2em}cibles/makef{}ile.py\\
@@ -35,11 +37,13 @@ L'option \texttt{-X} permet d'extraire de l'exécutable du compilateur tous les 
 \hspace*{1.2em}...
 \end{SHELL}
 
+\subsection{Extraction d'un fichier d'exemple}
 On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-sequential-systick} :
 \begin{SHELL}
 \bfseries plm -x=/teensy-3-1-sequential-systick/01-blinkled.plm
 \end{SHELL}
 
+\subsection{Compilation du fichier exemple}
 Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Maintenant, pour compiler ce fichier, on peut faire référence aux cibles que l'on vient d'extraire au moyen de l'option \texttt{-T} :
 \begin{SHELL}
 \bfseries plm -T=cibles 01-blinkled.plm
@@ -80,7 +84,7 @@ Où :
   \item \plm=taille= est le nombre de bits de cette représentation.
 \end{itemize}
 
-Par exemple, la représentation des entiers non signés habituels peut être définie par :
+Par exemple, la représentation des entiers non signés sur 8, 16, 32 et 64 bits peut être définie par :
 \begin{PLM}
 newUnsignedRepresentation @unsigned8  "uint8_t"   8
 newUnsignedRepresentation @unsigned16 "uint16_t" 16
@@ -112,7 +116,7 @@ Où :
   \item \plm=taille= est le nombre de bits de cette représentation.
 \end{itemize}
 
-Par exemple, la représentation des entiers signés habituels peut être définie par :
+Par exemple, la représentation des entiers signés sur 8, 16, 32 et 64 bits peut être définie par :
 \begin{PLM}
 newSignedRepresentation @signed8  "int8_t"   8
 newSignedRepresentation @signed16 "int16_t" 16
@@ -173,7 +177,7 @@ Où \plm=priorite= est la priorité de la routine. C'est une constante entière 
 
 Les routines \plm=boot= s'exécutent dans le mode \plm=$boot=.\index{\$boot}
 
-Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer le mode \plm=$boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
+Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=$boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
 

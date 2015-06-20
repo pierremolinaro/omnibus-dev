@@ -50,10 +50,10 @@
   </dict>
   <dict>
    <key>CFBundleTypeIconFile</key>
-   <string>plms_icns</string>
+   <string>plm-target_icns</string>
    <key>CFBundleTypeExtensions</key>
    <array>
-    <string>plms</string>
+    <string>plm-target</string>
    </array>
    <key>CFBundleTypeName</key>
    <string>plm Source</string>

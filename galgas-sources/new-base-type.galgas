@@ -19,7 +19,7 @@ override getter @newIntegerRepresentationDeclaration location -> @location outLo
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
-syntax extension plms_specific_syntax {
+syntax extension plm_target_specific_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 

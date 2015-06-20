@@ -3,7 +3,7 @@ gui cocoa {
 
   with lexique plm_lexique {
     fileExtension: "plm"
-    fileExtension: "plms"
+    fileExtension: "plm-target"
     title: "Source"
     blockComment : "//"
   }

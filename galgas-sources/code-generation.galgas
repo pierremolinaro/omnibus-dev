@@ -85,6 +85,7 @@ func titleComment ?@string inTitle -> @string outTitle {
 #----------------------------------------------------------------------------------------------------------------------*
 
 proc codeGeneration
+  ?currentDir:let @string inCurrentDirectory
   ?outputFile:let @string inSourceFileName
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
@@ -94,12 +95,13 @@ proc codeGeneration
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
-  let targetDirectory = homeDir + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
-  let sourceDirectory = targetDirectory + "/sources"
+  let productDirectory = homeDir + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+  let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 #--- Generate target files
-  generateTargets (
-    !targetDirectory:targetDirectory
+  generateTarget (
+    !currentDir:inCurrentDirectory
+    !productDirectory:productDirectory
     !targetName:inTargetName
     ?filesToInclude:let @stringlist builtinFiles
   )
@@ -183,8 +185,8 @@ proc codeGeneration
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
 #--- Perform C compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
-    let script = if [option plm_options.noFlashing value] then "build" else "flash-and-run" end
-    let fullScript = "python " + targetDirectory + "/" + script + ".py"
+    let script = if [option plm_options.performFlashing value] then "flash-and-run" else "build" end
+    let fullScript = "python " + productDirectory + "/" + script + ".py"
     @sint result = [fullScript system]
     if result != 0S then
       error inEndOfSourceFileLocation: "error during C compilation or flashing"

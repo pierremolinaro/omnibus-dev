@@ -84,7 +84,7 @@ Le programme d'exemple a été flashé (« \emph{Programming} »), puis le micro
 Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blinkled.plm} :
 
 \begin{PLM}[1]
-target "teensy-3-1-sequential-systick.plms"
+target "teensy-3-1-sequential-systick"
 
 proc setup $user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
@@ -106,7 +106,7 @@ proc loop $user () {
 }
 \end{PLM}
 
-La première ligne \plm+target "teensy-3-1-sequential-systick.plms"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible comporte toujours l'extension « \texttt{.plms} », et définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
+La première ligne \plm+target "teensy-3-1-sequential-systick"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
 
 Comme pour l'Arduino, la routine \plm+setup+ est exécutée une seule fois, puis la routine \plm+setup+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\$} » : ici, \plm+$user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car la sûreté qu'elle apporte n'est pas exploitée. 
 
@@ -179,7 +179,7 @@ La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de $1$~Hz.
 Voyons maintenant le contenu du fichier d'exemple \texttt{02-blinkled-systick.plm} :
 
 \begin{PLM}[1]
-target "teensy-3-1-sequential-systick.plms"
+target "teensy-3-1-sequential-systick"
 
 proc setup $user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
@@ -209,7 +209,7 @@ proc loop $user () {
 }
 \end{PLM}
 
-La référence à la cible \plm+target "teensy-3-1-sequential-systick.plms"+ et la définition de la routine \plm+setup+ sont identiques à celles écrites dans le premier exemple.
+La référence à la cible \plm+target "teensy-3-1-sequential-systick"+ et la définition de la routine \plm+setup+ sont identiques à celles écrites dans le premier exemple.
 
 La définition de la variable globale \plm+gUpTimeMS+ :
 

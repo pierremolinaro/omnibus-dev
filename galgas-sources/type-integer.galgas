@@ -17,7 +17,7 @@ override getter @integerDeclaration location -> @location outLocation {
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
-syntax extension plms_specific_syntax {
+syntax extension plm_target_specific_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 

@@ -1,8 +1,8 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
-case . "plms"
-message "a source text file with the .plms extension"
-grammar plms_grammar
+case . "plm-target"
+message "a target definition text file with the .plm-target extension"
+grammar plm_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
@@ -24,7 +24,10 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
 {
 #--- Parsing
   @ast ast = .default
-  grammar plm_grammar in inSourceFile !?ast ?importClauseList:let importedFileList ?endOfSourceFile:let endOfSourceFile
+  grammar plm_grammar in inSourceFile
+    !?ast
+    ?importClauseList:let importedFileList
+    ?endOfSourceFile:let endOfSourceFile
 #--- Recursively import files
   @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
   let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
@@ -47,10 +50,11 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
 #--- Compile project for every target
   if @uint.errorCount == 0 then
     if [ast.mTargetList length] == 0 then
-      warning endOfSourceFile : "no target: only syntax analysis has been performed"
-    end
-    for (targetName) in ast.mTargetList do
-      if [targetName pathExtension] == "plms" then
+      warning endOfSourceFile : "no target: only syntax analysis is performed"
+    elsif [ast.mTargetList length] > 1 then
+      warning endOfSourceFile : [[ast.mTargetList length] string] + " targets: only syntax analysis is performed"
+    else
+      for (targetName) in ast.mTargetList do
         compileProject (
           !sourceFile:inSourceFile
           !ast:ast
@@ -59,8 +63,6 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
           !currentDirectory:currentDirectory
           !importedFilePathSet:importedFileAbsolutePathSet
         )
-      else
-        error targetName : "target path should have the .plms extension"
       end
     end
   end
@@ -116,6 +118,7 @@ private proc compileProject
       if @uint.errorCount == 0 then
         codeOptimisation (!?intermediateCode:intermediateCodeStruct)
         codeGeneration (
+          !currentDir:inCurrentDirectory
           !outputFile:inSourceFile.string
           !eof:inEndOfSourceFile
           !intermediateCode:intermediateCodeStruct
@@ -146,12 +149,25 @@ private proc addTargetSpecificFiles
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
   @ast ast = .default
-  recursiveImportFiles (
-    !?ast:ast
-    !currentDirectory:inCurrentDirectory
-    !importClauseList:{!inTargetName}
-    !?importedFilePathSet:ioImportedFileAbsolutePathSet
-  )
+  if [option plm_options.useDirAsTargetDir value] != "" then
+    let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    if [targetDirectory directoryExists] then
+      recursiveImportFileSystemTargetFiles (
+        !?ast:ast
+        !targetDirectory:targetDirectory
+        !importClauseList:{!.new {!inTargetName.string + ".plm-target" !inTargetName.location}}
+        !?importedFilePathSet:ioImportedFileAbsolutePathSet
+      )
+    else
+      error ["" nowhere]: "the '" + [option plm_options.useDirAsTargetDir value] + "' directory does not exist"
+    end
+  else
+    recursiveImportEmbeddedTargetFiles (
+      !?ast:ast
+      !importClauseList:{!.new {!inTargetName.string + ".plm-target" !inTargetName.location}}
+      !?importedFilePathSet:ioImportedFileAbsolutePathSet
+    )
+  end
   ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
   ioAST.mGlobalVarDeclarationList = ast.mGlobalVarDeclarationList + ioAST.mGlobalVarDeclarationList
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
@@ -162,6 +178,94 @@ private proc addTargetSpecificFiles
   ioAST.mBootList += ast.mBootList
   ioAST.mExceptionClauses += ast.mExceptionClauses
   ioAST.mExceptionTypes = ast.mExceptionTypes + ioAST.mExceptionTypes
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc recursiveImportFileSystemTargetFiles
+  ?!ast:@ast ioAST
+  ?targetDirectory:let @string inTargetDirectory
+  ?importClauseList:@lstringlist inImportedClauseList
+  ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
+{
+  for (path) in inImportedClauseList do
+    let absolutePath = inTargetDirectory + "/" + path.string
+    if [absolutePath fileExists] then
+      if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
+        ioImportedFileAbsolutePathSet += !absolutePath
+        if [absolutePath pathExtension] == "plm" then
+          grammar plm_grammar in @lstring.new {!absolutePath !path.location}
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportFileSystemTargetFiles (
+            !?ast:ioAST
+            !targetDirectory:inTargetDirectory
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        elsif [absolutePath pathExtension] == "plm-target" then
+          grammar plm_target_grammar in @lstring.new {!absolutePath !path.location}
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportFileSystemTargetFiles (
+            !?ast:ioAST
+            !targetDirectory:inTargetDirectory
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        else
+          error path : "invalid extension (should be .plm or .plm-target)"
+        end
+      end
+    else
+      error path : "file does not exist in file system target definition"
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc recursiveImportEmbeddedTargetFiles
+  ?!ast:@ast ioAST
+  ?importClauseList:@lstringlist inImportedClauseList
+  ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
+{
+  for (path) in inImportedClauseList do
+    let @filewrapper fw = [filewrapper targetTemplates]
+    if [fw fileExistsAtPath !path.string] then
+      let embeddedPath = ":" + path
+      if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
+        ioImportedFileAbsolutePathSet += !embeddedPath
+        if [path pathExtension] == "plm" then
+          grammar plm_grammar on [fw textFileContentsAtPath !path.string]
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportEmbeddedTargetFiles (
+            !?ast:ioAST
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        elsif [path pathExtension] == "plm-target" then
+          grammar plm_target_grammar on [fw textFileContentsAtPath !path.string]
+            !?ioAST
+            ?importClauseList:let importedFileList
+            ?endOfSourceFile:*
+          recursiveImportEmbeddedTargetFiles (
+            !?ast:ioAST
+            !importClauseList:importedFileList
+            !?importedFilePathSet:ioImportedFileAbsolutePathSet
+          )
+        else
+          error path : "invalid extension (should be .plm or .plm-target)"
+        end
+      end
+    else
+      error path : "cannot find this file in embedded files"
+    end
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -188,8 +292,8 @@ private proc recursiveImportFiles
             !importClauseList:importedFileList
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
-        elsif [absolutePath pathExtension] == "plms" then
-          grammar plms_grammar in @lstring.new {!absolutePath !path.location}
+        elsif [absolutePath pathExtension] == "plm-target" then
+          grammar plm_target_grammar in @lstring.new {!absolutePath !path.location}
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -200,7 +304,7 @@ private proc recursiveImportFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .plm or .plms)"
+          error path : "invalid extension (should be .plm or .plm-target)"
         end
       end
     else
@@ -220,8 +324,8 @@ private proc recursiveImportFiles
               !importClauseList:importedFileList
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
-          elsif [path pathExtension] == "plms" then
-            grammar plms_grammar on [fw textFileContentsAtPath !path.string]
+          elsif [path pathExtension] == "plm-target" then
+            grammar plm_target_grammar on [fw textFileContentsAtPath !path.string]
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
@@ -232,7 +336,7 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           else
-            error path : "invalid extension (should be .plm or .plms)"
+            error path : "invalid extension (should be .plm or .plm-target)"
           end
         end
       else

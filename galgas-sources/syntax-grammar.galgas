@@ -37,7 +37,7 @@ syntax plm_specific_syntax (plm_lexique) {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-syntax plms_specific_syntax (plm_lexique) {
+syntax plm_target_specific_syntax (plm_lexique) {
 
 
 }
@@ -57,9 +57,9 @@ grammar plm_grammar "SLR" {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-grammar plms_grammar "SLR" {
+grammar plm_target_grammar "SLR" {
   syntax common_syntax
-  syntax plms_specific_syntax
+  syntax plm_target_specific_syntax
   <start_symbol>
     ?!@ast outAst
     !importClauseList:@lstringlist outImportedFileList
