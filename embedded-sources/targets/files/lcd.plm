@@ -1,0 +1,506 @@
+
+// http://esd.cs.ucr.edu/labs/interface/interface.html
+
+//-----------------------------------------------------------------------------*
+//   PORT CONFIGURATION                                                        *
+//-----------------------------------------------------------------------------*
+
+//   D4 : PTB0
+//   D5 : PTC0
+//   D6 : PTD1
+//   D7 : PTB2
+//   RS : PTB3
+//   E  : PTB1
+
+//-----------------------------------------------------------------------------*
+
+proc configurePorts $init () {
+//--- D4 (PTB0) is a GPIO (input by default)
+  PORTB_PCR0 = (1 << 8) ;
+  GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)
+//--- D5 (PTC0) is a GPIO (input by default)
+  PORTC_PCR0 = (1 << 8) ;
+  GPIOC_PDDR |= (1 << 0) ; // Program D5 as output (PTC0)
+//--- D6 (PTD1) is a GPIO (input by default)
+  PORTD_PCR1 = (1 << 8) ;
+  GPIOD_PDDR |= (1 << 1) ; // Program D6 as output (PTD1)
+//--- D7 (PTB2) is a GPIO (input by default)
+  PORTB_PCR2 = (1 << 8) ;
+  GPIOB_PDDR |= (1 << 2) ; // Program D7 as output (PTB2)
+//--- RS (PTB3) is an output
+  PORTB_PCR3 = (1 << 8) ;
+  GPIOB_PDDR |= (1 << 3) ;
+//--- E (PTB1) is an output
+  PORTB_PCR1 = (1 << 8) ;
+  GPIOB_PDDR |= (1 << 1) ;
+}
+
+//-----------------------------------------------------------------------------*
+
+proc driveHighE $init $exception $user () {
+  GPIOB_PSOR = 1 << 1 ; // E is PTB1
+}
+
+//-----------------------------------------------------------------------------*
+
+
+proc driveLowE $init $exception $user () {
+  GPIOB_PCOR = 1 << 1 ; // E is PTB1
+}
+
+//-----------------------------------------------------------------------------*
+
+
+proc driveHighRS $init $exception $user () {
+  GPIOB_PSOR = 1 << 3 ; // RS is PTB3
+}
+
+//-----------------------------------------------------------------------------*
+
+
+proc driveLowRS $init $exception $user () {
+  GPIOB_PCOR = 1 << 3 ; // RS is PTB3
+}
+
+//-----------------------------------------------------------------------------*
+
+proc setD4 $init $exception $user (?inValue : Bool) { // PTB0
+  if inValue then
+    GPIOB_PSOR = 1 << 0 ;
+  else
+    GPIOB_PCOR = 1 << 0 ;
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc setD5 $init $exception $user (?inValue : Bool) { // PTC0
+  if inValue then
+    GPIOC_PSOR = 1 << 0 ;
+  else
+    GPIOC_PCOR = 1 << 0 ;
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc setD6 $init $exception $user (?inValue : Bool) { // PTD1
+  if inValue then
+    GPIOD_PSOR = 1 << 1 ;
+  else
+    GPIOD_PCOR = 1 << 1 ;
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc setD7 $init $exception $user (?inValue : Bool) { // PTB2
+  if inValue then
+    GPIOB_PSOR = 1 << 2 ;
+  else
+    GPIOB_PCOR = 1 << 2 ;
+  end
+}
+
+//-----------------------------------------------------------------------------*
+//   UTILITY ROUTINES                                                          *
+//-----------------------------------------------------------------------------*
+
+proc busyWaitingDuringMS $init (?inDuration : UInt32) {
+  let deadline = gCompteur + inDuration
+  while gCompteur < deadline do
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc programLcd4BitDataBusOutput $init (?inValue : UInt8) {
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
+}
+
+//-----------------------------------------------------------------------------*
+
+proc write4BitCommand $init (?inValue : UInt8) {
+  busyWaitingDuringMS (!1) ;
+  driveLowRS () ;
+  programLcd4BitDataBusOutput (!inValue) ;
+  driveHighE () ;
+  busyWaitingDuringMS (!1) ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+
+proc write8bitCommand $init (?inCommand : UInt8) {
+  busyWaitingDuringMS (!1) ;
+  driveLowRS () ;
+  programLcd4BitDataBusOutput (!inCommand >> 4) ;
+  driveHighE () ;
+  busyWaitingDuringMS (!1) ;
+  driveLowE () ;
+  busyWaitingDuringMS (!1) ;
+  programLcd4BitDataBusOutput (!inCommand) ;
+  driveHighE () ;
+  busyWaitingDuringMS (!1) ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+//   LCD INIT                                                                  *
+//-----------------------------------------------------------------------------*
+
+init 10 {
+  configurePorts () ;
+//--- Étape 1 : attendre 15 ms
+  busyWaitingDuringMS (!15) ;
+//--- Étape 2 : écrire la commande 0x30
+  write4BitCommand (!0x3) ;
+//--- Étape 3 : attendre 4,1 ms (en fait 5 ms)
+  busyWaitingDuringMS (!5) ;
+//--- Étape 4 : écrire la commande 0x30 une 2e fois
+  write4BitCommand (!0x3) ;
+//--- Étape 5 : attendre 100 µs
+  busyWaitingDuringMS (!1) ;
+//--- Étape 6 : écrire la commande 0x30 une 3e fois
+  write4BitCommand (!0x3) ;
+//--- Étape 7 : écrire la commande 0x20 pour passer en 4 bits
+  write4BitCommand (!0x2) ;
+//--- Étape 8 : écrire la commande 'Set Interface Length' : 0 0 1 DL N F * *
+//    DL : Data interface length : 0 (4 bits)
+//    N : Number of Display lines : 1 (2 lignes)
+//    F : Character Font : 0 (5x7)
+  write8bitCommand (!0x28) ;
+//--- Étape 9 : écrire la commande 'Display Off'
+  write8bitCommand (!0x08) ;
+//--- Étape 10 : écrire la commande 'Clear Display'
+  write8bitCommand (!0x01) ;
+//--- Étape 11 : écrire la commande 'Set Cursor Move Direction' : 0 0 0 0 0 1 ID S
+//    ID : Increment Cursor after Each Byte Written to Display : 1 (oui)
+//    S : Shift Display When Byte Written : 0 (non)
+  write8bitCommand (!0x06) ;
+//--- Étape 12 : écrire la commande 'Move Cursor / Shift Display' : 0 0 0 1 SC RL * *
+//    SC : Display Shift On : 1 (oui)
+//    RL : Direction of Shift : 1 (vers la droite)
+  write8bitCommand (!0x1C) ;
+//--- Étape 13 : écrire la commande 'Return Cursor and LCD to Home Position'
+  write8bitCommand (!0x02) ;
+//--- Étape 14 : écrire la commande 'Enable Display / Cursor' : 0 0 0 0 1 D C B
+//    D : Turn Display On : 1 (oui)
+//    C : Turn Cursor On : 0 (non)
+//    B : Cursor Blink On : 0 (non)
+  write8bitCommand (!0x0C) ;
+}
+
+//-----------------------------------------------------------------------------*
+//   PRINT ROUTINES IN USER MODE                                               *
+//-----------------------------------------------------------------------------*
+
+proc programLcd4BitDataBusOutput_inUserMode $user @noWarningIfUnused (?inValue : UInt8) {
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
+}
+
+//-----------------------------------------------------------------------------*
+
+proc write8bitCommand_inUserMode $user @noWarningIfUnused (?inCommand : UInt8) {
+  waitMS (!1) ;
+  driveLowRS () ;
+  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
+  driveHighE () ;
+  waitMS (!1) ;
+  driveLowE () ;
+  waitMS (!1) ;
+  programLcd4BitDataBusOutput_inUserMode (!inCommand) ;
+  driveHighE () ;
+  waitMS (!1) ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+
+proc writeData_inUserMode $user @noWarningIfUnused (?inData : UInt8) {
+  waitMS (!1) ;
+  driveHighRS () ;
+  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
+  driveHighE () ;
+  waitMS (!1) ;
+  driveLowE () ;
+  waitMS (!1) ;
+  programLcd4BitDataBusOutput_inUserMode (!inData) ;
+  driveHighE () ;
+  waitMS (!1) ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+
+// Line 0 : 00 -> 19
+// Line 1 : 64 -> 83
+// Line 2 : 20 -> 39
+// Line 3 : 84 -> 103
+
+proc goto $user @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+  if inColumn < 20 then
+    if inLine == 0 then
+      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
+    elsif inLine == 1 then
+      write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
+    elsif inLine == 2 then
+      write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
+    elsif inLine == 3 then
+      write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
+    end
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+//void printString (const char * inString) {
+//  if (NULL != inString) {
+//    while ('\0' != *inString) {
+//      writeData (*inString) ;
+//      inString ++ ;
+//    }
+//  }
+//}
+
+//-----------------------------------------------------------------------------*
+
+//void printChar (const char inChar) {
+//  writeData (inChar) ;
+//}
+
+//-----------------------------------------------------------------------------*
+
+proc clearScreen $user @noWarningIfUnused () {
+  write8bitCommand_inUserMode (!0x01)
+}
+
+//-----------------------------------------------------------------------------*
+
+proc printSpaces $user @noWarningIfUnused (?inCount : UInt32) {
+  var count = inCount
+  while (count > 0) do
+    writeData_inUserMode (!0x20)
+    count -- ;
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc printUnsigned $user @noWarningIfUnused (?inValue : UInt32) {
+  var divisor : UInt32 = 1_000_000_000
+  var value = inValue
+  var isPrinting = false
+  while divisor > 0 do
+    if isPrinting or (value >= divisor) then
+      writeData_inUserMode (!0x30 + ((value / divisor) \ UInt8))
+      value = value % divisor
+      isPrinting = true
+    end
+    divisor = divisor / 10
+  end
+  if not isPrinting then
+    writeData_inUserMode (!0x30)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc printSigned $user @noWarningIfUnused (?inValue : Int32) {
+  if inValue >= 0 then
+    printUnsigned (!inValue &\ UInt32)
+  else
+    writeData_inUserMode (!0x2D) // Signe -
+    printUnsigned (!(- inValue) &\ UInt32)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+//void printSigned (const int32_t inValue) {
+//  if (inValue < 0) {
+//    printChar ('-') ;
+//    printUnsigned ((uint32_t) -inValue) ;
+//  }else{
+//    printUnsigned ((uint32_t) inValue) ;
+//  }
+//}
+
+//-----------------------------------------------------------------------------*
+
+//void printHex1 (const uint32_t inValue) {
+//  const uint32_t v = inValue & 0xF ;
+//  if (v < 10) {
+//    printChar ('0' + v) ;
+//  }else{
+//    printChar ('A' + v - 10) ;
+//  }  
+//}
+
+//-----------------------------------------------------------------------------*
+
+//void printHex2 (const uint32_t inValue) {
+//  printHex1 (inValue >> 4) ;
+//  printHex1 (inValue) ;
+//}
+
+//-----------------------------------------------------------------------------*
+
+//void printHex4 (const uint32_t inValue) {
+//  printHex2 (inValue >> 8) ;
+//  printHex2 (inValue) ;
+//}
+
+//-----------------------------------------------------------------------------*
+
+
+//void printHex8 (const uint32_t inValue) {
+//  printHex4 (inValue >> 16) ;
+//  printHex4 (inValue) ;
+//}
+
+//-----------------------------------------------------------------------------*
+
+//void printHex16 (const uint64_t inValue) {
+//  printHex8 ((uint32_t) (inValue >> 32)) ;
+//  printHex8 ((uint32_t) inValue) ;
+//}
+
+//-----------------------------------------------------------------------------*
+//   EXCEPTION                                                                 *
+//-----------------------------------------------------------------------------*
+
+proc programLcd4BitDataBusOutput_inExceptionMode $exception @noWarningIfUnused (?inValue : UInt8) {
+  setD4 (!(inValue & 0x01) != 0)
+  setD5 (!(inValue & 0x02) != 0)
+  setD6 (!(inValue & 0x04) != 0)
+  setD7 (!(inValue & 0x08) != 0)
+}
+
+//-----------------------------------------------------------------------------*
+
+proc waitOneMillisecondInExceptionMode $exception @noWarningIfUnused () {
+  while not SYST_CSR.COUNTFLAG.bool do
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc waitMSInExceptionMode $exception @noWarningIfUnused (?duration: inDuration : UInt32) {
+  var duration = inDuration
+  while duration > 0 do
+    waitOneMillisecondInExceptionMode ()
+    duration &--
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc writeDataInExceptionMode $exception @noWarningIfUnused (?inData : UInt8) {
+  waitOneMillisecondInExceptionMode () ;
+  driveHighRS () ;
+  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
+  driveHighE () ;
+  waitOneMillisecondInExceptionMode () ;
+  driveLowE () ;
+  waitOneMillisecondInExceptionMode () ;
+  programLcd4BitDataBusOutput_inExceptionMode (!inData) ;
+  driveHighE () ;
+  waitOneMillisecondInExceptionMode () ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+
+proc printUnsignedInExceptionMode $exception @noWarningIfUnused (?inValue : UInt32) {
+  var divisor : UInt32 = 1_000_000_000
+  var value = inValue
+  var isPrinting = false
+  while divisor > 0 do
+    if isPrinting or (value >= divisor) then
+      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\ UInt8))
+      value = value &% divisor
+      isPrinting = true
+    end
+    divisor = divisor &/ 10
+  end
+  if not isPrinting then
+    writeDataInExceptionMode (!0x30)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc printSignedInExceptionMode $exception @noWarningIfUnused (?inValue : Int32) {
+  if inValue >= 0 then
+    printUnsignedInExceptionMode (!inValue &\ UInt32)
+  else
+    writeDataInExceptionMode (!0x2D) // Signe -
+    printUnsignedInExceptionMode (!(&- inValue) &\ UInt32)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc write8bitCommand_inExceptionMode $exception @noWarningIfUnused (?inCommand : UInt8) {
+  waitOneMillisecondInExceptionMode () ;
+  driveLowRS () ;
+  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
+  driveHighE () ;
+  waitOneMillisecondInExceptionMode () ;
+  driveLowE () ;
+  waitOneMillisecondInExceptionMode () ;
+  programLcd4BitDataBusOutput_inExceptionMode (!inCommand) ;
+  driveHighE () ;
+  waitOneMillisecondInExceptionMode () ;
+  driveLowE () ;
+}
+
+//-----------------------------------------------------------------------------*
+
+proc gotoInExceptionMode $exception @noWarningIfUnused (?line:inLine : UInt32 ?column:inColumn : UInt8) {
+  if inColumn < 20 then
+    if inLine == 0 then
+      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;
+    elsif inLine == 1 then
+      write8bitCommand_inExceptionMode (!0x80 &+ 64 &+ inColumn) ;
+    elsif inLine == 2 then
+      write8bitCommand_inExceptionMode (!0x80 &+ 20 &+ inColumn) ;
+    elsif inLine == 3 then
+      write8bitCommand_inExceptionMode (!0x80 &+ 84 &+ inColumn) ;
+    end
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+proc clearScreenInExceptionMode $exception @noWarningIfUnused () {
+  write8bitCommand_inExceptionMode (!0x01)
+}
+
+//-----------------------------------------------------------------------------*
+
+exception setup 0 {
+  clearScreenInExceptionMode ()
+  waitMSInExceptionMode (!duration:4)
+  gotoInExceptionMode (!line:0 !column:0)
+  printSignedInExceptionMode (!CODE)
+  gotoInExceptionMode (!line:1 !column:0)
+  printUnsignedInExceptionMode (!LINE)
+}
+
+exception loop 0 {
+  waitMSInExceptionMode (!duration:50)
+  ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
+  waitMSInExceptionMode (!duration:50)
+  ledOff (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
+}
+
+//-----------------------------------------------------------------------------*
+
