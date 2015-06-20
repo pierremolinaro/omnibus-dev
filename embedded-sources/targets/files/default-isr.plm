@@ -1,0 +1,647 @@
+//-----------------------------------------------------------------------------*
+
+required proc NMIHandler $isr ()
+
+proc NMIHandler $isr @weak () {
+  throw 2
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc HardFaultHandler $isr ()
+
+proc HardFaultHandler $isr @weak () {
+  throw 3
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc MemManageHandler $isr ()
+
+proc MemManageHandler $isr @weak () {
+  throw 4
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc BusFaultHandler $isr ()
+
+proc BusFaultHandler $isr @weak () {
+  throw 5
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UsageFaultHandler $isr ()
+
+proc UsageFaultHandler $isr @weak () {
+  throw 6
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc svcHandler $isr ()
+
+proc svcHandler $isr @weak () {
+  throw 11
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DebugMonitorHandler $isr ()
+
+proc DebugMonitorHandler $isr @weak () {
+  throw 12
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PendSVHandler $isr ()
+
+proc PendSVHandler $isr @weak () {
+  throw 14
+}
+
+//-----------------------------------------------------------------------------*
+
+init 0 { // Configure Systick interrupt every ms
+  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
+  SYST_CVR = 0
+  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
+}
+
+var gCompteur : UInt32 = 0 {
+  @rw proc systickHandler ()
+  proc waitMS (?inDuration : UInt32)
+  proc busyWaitingDuringMS (?inDuration : UInt32)
+}
+
+required proc systickHandler $isr ()
+
+proc systickHandler $isr @weak () {
+  gCompteur &++
+  userSystickHandler ()
+}
+
+proc userSystickHandler $isr @weak () {
+}
+
+proc waitMS $user $init (?inDuration : UInt32) {
+  let deadline = gCompteur + inDuration
+  while gCompteur < deadline do
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel0TranfertCompleteHandler $isr ()
+
+proc DMAChannel0TranfertCompleteHandler $isr @weak () {
+  throw 16
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel1TranfertCompleteHandler $isr ()
+
+proc DMAChannel1TranfertCompleteHandler $isr @weak () {
+  throw 17
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel2TranfertCompleteHandler $isr ()
+
+proc DMAChannel2TranfertCompleteHandler $isr @weak () {
+  throw 18
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel3TranfertCompleteHandler $isr ()
+
+proc DMAChannel3TranfertCompleteHandler $isr @weak () {
+  throw 19
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel4TranfertCompleteHandler $isr ()
+
+proc DMAChannel4TranfertCompleteHandler $isr @weak () {
+  throw 20
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel5TranfertCompleteHandler $isr ()
+
+proc DMAChannel5TranfertCompleteHandler $isr @weak () {
+  throw 21
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel6TranfertCompleteHandler $isr ()
+
+proc DMAChannel6TranfertCompleteHandler $isr @weak () {
+  throw 22
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel7TranfertCompleteHandler $isr ()
+
+proc DMAChannel7TranfertCompleteHandler $isr @weak () {
+  throw 23
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel8TranfertCompleteHandler $isr ()
+
+proc DMAChannel8TranfertCompleteHandler $isr @weak () {
+  throw 24
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel9TranfertCompleteHandler $isr ()
+
+proc DMAChannel9TranfertCompleteHandler $isr @weak () {
+  throw 25
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel10TranfertCompleteHandler $isr ()
+
+proc DMAChannel10TranfertCompleteHandler $isr @weak () {
+  throw 26
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel11TranfertCompleteHandler $isr ()
+
+proc DMAChannel11TranfertCompleteHandler $isr @weak () {
+  throw 27
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel12TranfertCompleteHandler $isr ()
+
+proc DMAChannel12TranfertCompleteHandler $isr @weak () {
+  throw 28
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel13TranfertCompleteHandler $isr ()
+
+proc DMAChannel13TranfertCompleteHandler $isr @weak () {
+  throw 29
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel14TranfertCompleteHandler $isr ()
+
+proc DMAChannel14TranfertCompleteHandler $isr @weak () {
+  throw 30
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAChannel15TranfertCompleteHandler $isr ()
+
+proc DMAChannel15TranfertCompleteHandler $isr @weak () {
+  throw 31
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DMAErrorHandler $isr ()
+
+proc DMAErrorHandler $isr @weak () {
+  throw 32
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc flashMemoryCommandCompleteHandler $isr ()
+
+proc flashMemoryCommandCompleteHandler $isr @weak () {
+  throw 34
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc flashMemoryReadCollisionHandler $isr ()
+
+proc flashMemoryReadCollisionHandler $isr @weak () {
+  throw 35
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc modeControllerHandler $isr ()
+
+proc modeControllerHandler $isr @weak () {
+  throw 36
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc LLWUHandler $isr ()
+
+proc LLWUHandler $isr @weak () {
+  throw 37
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc WDOGEWMHandler $isr ()
+
+proc WDOGEWMHandler $isr @weak () {
+  throw 38
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc I2C0Handler $isr ()
+
+proc I2C0Handler $isr @weak () {
+  throw 40
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc I2C1Handler $isr ()
+
+proc I2C1Handler $isr @weak () {
+  throw 41
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc SPI0Handler $isr ()
+
+proc SPI0Handler $isr @weak () {
+  throw 42
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc SPI1Handler $isr ()
+
+proc SPI1Handler $isr @weak () {
+  throw 43
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0MessageBufferHandler $isr ()
+
+proc CAN0MessageBufferHandler $isr @weak () {
+  throw 45
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0BusOffHandler $isr ()
+
+proc CAN0BusOffHandler $isr @weak () {
+  throw 46
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0ErrorHandler $isr ()
+
+proc CAN0ErrorHandler $isr @weak () {
+  throw 47
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0TransmitWarningHandler $isr ()
+
+proc CAN0TransmitWarningHandler $isr @weak () {
+  throw 48
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0ReceiveWarningHandler $isr ()
+
+proc CAN0ReceiveWarningHandler $isr @weak () {
+  throw 49
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CAN0WakeUpHandler $isr ()
+
+proc CAN0WakeUpHandler $isr @weak () {
+  throw 50
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc I2S0TransmitHandler $isr ()
+
+proc I2S0TransmitHandler $isr @weak () {
+  throw 51
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc I2S0ReceiveHandler $isr ()
+
+proc I2S0ReceiveHandler $isr @weak () {
+  throw 52
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART0LONHandler $isr ()
+
+proc UART0LONHandler $isr @weak () {
+  throw 60
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART0StatusHandler $isr ()
+
+proc UART0StatusHandler $isr @weak () {
+  throw 61
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART0ErrorHandler $isr ()
+
+proc UART0ErrorHandler $isr @weak () {
+  throw 62
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART1StatusHandler $isr ()
+
+proc UART1StatusHandler $isr @weak () {
+  throw 63
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART1ErrorHandler $isr ()
+
+proc UART1ErrorHandler $isr @weak () {
+  throw 64
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART2StatusHandler $isr ()
+
+proc UART2StatusHandler $isr @weak () {
+  throw 64
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc UART2ErrorHandler $isr ()
+
+proc UART2ErrorHandler $isr @weak () {
+  throw 65
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc ADC0Handler $isr ()
+
+proc ADC0Handler $isr @weak () {
+  throw 73
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc ADC1Handler $isr ()
+
+proc ADC1Handler $isr @weak () {
+  throw 74
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CMP0Handler $isr ()
+
+proc CMP0Handler $isr @weak () {
+  throw 75
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CMP1Handler $isr ()
+
+proc CMP1Handler $isr @weak () {
+  throw 76
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CMP2Handler $isr ()
+
+proc CMP2Handler $isr @weak () {
+  throw 77
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc FMT0Handler $isr ()
+
+proc FMT0Handler $isr @weak () {
+  throw 78
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc FMT1Handler $isr ()
+
+proc FMT1Handler $isr @weak () {
+  throw 79
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc FMT2Handler $isr ()
+
+proc FMT2Handler $isr @weak () {
+  throw 80
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc CMTHandler $isr ()
+
+proc CMTHandler $isr @weak () {
+  throw 81
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc RTCAlarmHandler $isr ()
+
+proc RTCAlarmHandler $isr @weak () {
+  throw 82
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc RTCSecondHandler $isr ()
+
+proc RTCSecondHandler $isr @weak () {
+  throw 83
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PITChannel0Handler $isr ()
+
+proc PITChannel0Handler $isr @weak () {
+  throw 84
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PITChannel1Handler $isr ()
+
+proc PITChannel1Handler $isr @weak () {
+  throw 85
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PITChannel2Handler $isr ()
+
+proc PITChannel2Handler $isr @weak () {
+  throw 86
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PITChannel3Handler $isr ()
+
+proc PITChannel3Handler $isr @weak () {
+  throw 87
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc PDBHandler $isr ()
+
+proc PDBHandler $isr @weak () {
+  throw 88
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc USBOTGHandler $isr ()
+
+proc USBOTGHandler $isr @weak () {
+  throw 89
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc USBChargerDetectHandler $isr ()
+
+proc USBChargerDetectHandler $isr @weak () {
+  throw 90
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc DAC0Handler $isr ()
+
+proc DAC0Handler $isr @weak () {
+  throw 97
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc TSIHandler $isr ()
+
+proc TSIHandler $isr @weak () {
+  throw 99
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc MCGHandler $isr ()
+
+proc MCGHandler $isr @weak () {
+  throw 100
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc lowPowerTimerHandler $isr ()
+
+proc lowPowerTimerHandler $isr @weak () {
+  throw 101
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc pinDetectPortAHandler $isr ()
+
+proc pinDetectPortAHandler $isr @weak () {
+  throw 103
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc pinDetectPortBHandler $isr ()
+
+proc pinDetectPortBHandler $isr @weak () {
+  throw 104
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc pinDetectPortCHandler $isr ()
+
+proc pinDetectPortCHandler $isr @weak () {
+  throw 105
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc pinDetectPortDHandler $isr ()
+
+proc pinDetectPortDHandler $isr @weak () {
+  throw 106
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc pinDetectPortEHandler $isr ()
+
+proc pinDetectPortEHandler $isr @weak () {
+  throw 107
+}
+
+//-----------------------------------------------------------------------------*
+
+required proc softwareInterruptHandler $isr ()
+
+proc softwareInterruptHandler $isr @weak () {
+  throw 110
+}
+
+//-----------------------------------------------------------------------------*
