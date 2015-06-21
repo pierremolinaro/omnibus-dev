@@ -1447,42 +1447,29 @@ const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "booleanType Bool @unsigned8\n"
   "\n"
   "newIntegerType UInt8  @unsigned8\n"
   "newIntegerType UInt16 @unsigned16\n"
   "newIntegerType UInt32 @unsigned32\n"
   "newIntegerType UInt64 @unsigned64\n"
-  "\n"
   "newIntegerType Int8  @signed8\n"
   "newIntegerType Int16 @signed16\n"
   "newIntegerType Int32 @signed32\n"
   "newIntegerType Int64 @signed64\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "exception : Int32 UInt32\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "mode $isr\n"
   "mode $user\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "import \"files/mk20dx256.plm\"\n"
   "import \"files/lcd.plm\"\n"
   "import \"files/leds.plm\"\n"
   "import \"files/default-isr.plm\"\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "required proc setup $user ()\n"
   "required proc loop $user ()\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 10 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -1543,15 +1530,13 @@ const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation 
   "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
   "  end\n"
   "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "teensy-3-1-interrupt.plm-target",
   "plm-target",
   true, // Text file
-  3736, // Text length
+  3161, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -1569,37 +1554,28 @@ const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "booleanType Bool @unsigned8\n"
   "\n"
   "newIntegerType UInt8  @unsigned8\n"
   "newIntegerType UInt16 @unsigned16\n"
   "newIntegerType UInt32 @unsigned32\n"
   "newIntegerType UInt64 @unsigned64\n"
-  "\n"
   "newIntegerType Int8  @signed8\n"
   "newIntegerType Int16 @signed16\n"
   "newIntegerType Int32 @signed32\n"
   "newIntegerType Int64 @signed64\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "exception : Int32 UInt32\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "mode $isr\n"
   "mode $user\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "import \"files/mk20dx256.plm\"\n"
   "import \"files/boot-teensy-3-1.plm\"\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "required proc systickHandler $isr ()\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
   "\n"
   "proc systickHandler $isr @weak () {\n"
   "}\n"
@@ -1608,21 +1584,13 @@ const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation 
   "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
   "  SYST_CVR = 0\n"
   "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required proc setup $user ()\n"
-  "required proc loop $user ()\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n" ;
+  "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
   "teensy-3-1-sequential-systick.plm-target",
   "plm-target",
   true, // Text file
-  1770, // Text length
+  1193, // Text length
   gWrapperFileContent_2_embeddedTargets
 ) ;
 
@@ -19742,7 +19710,7 @@ static void routine_before (C_Compiler * inCompiler
       while (enumerator_830.hasCurrentObject ()) {
         const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_830.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
         if (kBoolTrue == test_5) {
-          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_830.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
+          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_830.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)).reader_stringByDeletingPathExtension (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
         }
         enumerator_830.gotoNextObject () ;
       }
@@ -19751,16 +19719,16 @@ static void routine_before (C_Compiler * inCompiler
     const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_6) {
       GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 26)) ;
-      cEnumerator_stringlist enumerator_1117 (var_embeddedFiles, kEnumeration_up) ;
-      while (enumerator_1117.hasCurrentObject ()) {
-        GALGAS_string var_filePath = var_path.add_operation (enumerator_1117.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
+      cEnumerator_stringlist enumerator_1149 (var_embeddedFiles, kEnumeration_up) ;
+      while (enumerator_1149.hasCurrentObject ()) {
+        GALGAS_string var_filePath = var_path.add_operation (enumerator_1149.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
         inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)) ;
         GALGAS_string var_dir = var_filePath.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 30)) ;
         var_dir.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 31)) ;
-        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1117.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
-        GALGAS_bool joker_1389 ; // Joker input parameter
-        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1389, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
-        enumerator_1117.gotoNextObject () ;
+        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1149.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
+        GALGAS_bool joker_1421 ; // Joker input parameter
+        var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1421, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
+        enumerator_1149.gotoNextObject () ;
       }
     }
   }

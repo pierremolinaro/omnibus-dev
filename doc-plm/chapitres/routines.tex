@@ -5,56 +5,66 @@
 
 
 
-\chapter{Procédures}\index{Procedure@Procédure}
+\chapter{Routines}
 
 Le langage définit plusieurs natures de sous-programmes :
 \begin{itemize}
   \item les \emph{procédures}, dont l'appel est une instruction ;
   \item les \emph{fonctions}, dont l'appel apparaît dans une expression ;
-  \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
-  \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
+  \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales ;
+  \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales ;
   \item les \emph{routines d'exception}, exécutées lors d'une exception (\refSectionPage{routineException}).
 \end{itemize}
 
-Ce chapitre décrit les \emph{procédures} et les \emph{fonctions}. Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement. Elles sont présentées dans des sections particulières, citées ci-dessus.
+Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des \emph{fonctions} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement.
 
 
 
 
 
 
-\sectionLabel{Déclaration d'une procédure}{declarationProcedure}
 
-La déclaration d'une procédure est la suivante :
+
+
+\sectionLabel{\texttt{boot} routines}{bootRoutine}
+\index{boot@\plm=boot=!Routine}
+\index{Routine!boot@\plm=boot=}
+
+Une routine \plm=boot= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, avant que les variables globales ne soient initialisées. Elle a la syntaxe suivante :
 \begin{PLM}
-proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
+boot priorite {
   liste_instructions
 }
 \end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la procédure ;
-  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
-\end{itemize}
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
 
-Par exemple :
+Les routines \plm=boot= s'exécutent dans le mode \plm=$boot=.\index{\$boot}
 
+Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=$boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
+
+Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
+
+
+
+
+
+
+
+\sectionLabel{\texttt{init} routines}{initRoutine}
+\index{init@\plm=init=!Routine}
+\index{Routine!init@\plm=init=}
+
+Une routine \plm=init= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, après l'initialisation des variables globales. Elle a la syntaxe suivante :
 \begin{PLM}
-proc setup $user () {
+init priorite {
+  liste_instructions
 }
 \end{PLM}
+Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
-Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
+Les routines \plm=init= s'exécutent dans le mode \plm=$init=.\index{\$init}
 
-\begin{PLM}
-proc goto $user @noWarningIfUnused (
-  ?line:inLine : UInt32
-  ?column:inColumn : UInt8) {
-}
-\end{PLM}
-
-Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=$user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=$init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 
 
@@ -108,7 +118,49 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 
 
 
-\sectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
+
+\section{Procédure}
+
+
+\subsectionLabel{Déclaration d'une procédure}{declarationProcedure}\index{Procedure@Procédure}
+
+La déclaration d'une procédure est la suivante :
+\begin{PLM}
+proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la procédure ;
+  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
+\end{itemize}
+
+Par exemple :
+
+\begin{PLM}
+proc setup $user () {
+}
+\end{PLM}
+
+Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
+
+\begin{PLM}
+proc goto $user @noWarningIfUnused (
+  ?line:inLine : UInt32
+  ?column:inColumn : UInt8) {
+}
+\end{PLM}
+
+Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=$user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+
+
+
+
+
+
+\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
 
 L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
 
@@ -118,7 +170,7 @@ L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la
 
 
 
-\sectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
+\subsectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
 
 L'attribut \plm+@weak+ signifie que la routine peut être redéfinie par une routine de même nom, avec les mêmes arguments formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
 
@@ -144,7 +196,7 @@ Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le 
 
 
 
-\sectionLabel{Procédures requises}{procedureRequise}
+\subsectionLabel{Procédures requises}{procedureRequise}
 
 La déclaration \plm+required proc+ permet de signifier au compilateur qu'une procédure doit être définie, soit par la cible, soit par le programme utilisateur.
 
@@ -153,7 +205,7 @@ Cette déclaration est la suivante :
 required proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels)
 \end{PLM}
 
-Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
+Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSubsectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
 
 Par exemple, la cible \texttt{teensy-3-1-sequential-systick} comporte ces deux déclarations :
 
@@ -172,9 +224,19 @@ Ceci impose au programme utilisateur de définir ces deux procédures.
 
 
 
-\section{Procédures utiles}
+\section{Fonctions}
 
-Le compilateur élimine les procédures qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSectionPage{procedureRequise}). Les procédures inatteignables sont éliminées, avec ou sans message d'alerte (\refSectionPage{attributNoWarningIfUnused}).
+\colorbox{red}{À définir}
+
+
+
+
+
+
+
+\section{Routines utiles}
+
+Le compilateur élimine les procédures qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=exception=. Les procédures et fonctions inatteignables sont éliminées, avec ou sans message d'alerte (\refSubsectionPage{attributNoWarningIfUnused}).
 
 
 
