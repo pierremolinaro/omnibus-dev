@@ -10,37 +10,28 @@ newSignedRepresentation @signed64 "int64_t" 64
 
 newUnsignedRepresentation @size "uint32_t" 32
 
-//-----------------------------------------------------------------------------*
-
 booleanType Bool @unsigned8
 
 newIntegerType UInt8  @unsigned8
 newIntegerType UInt16 @unsigned16
 newIntegerType UInt32 @unsigned32
 newIntegerType UInt64 @unsigned64
-
 newIntegerType Int8  @signed8
 newIntegerType Int16 @signed16
 newIntegerType Int32 @signed32
 newIntegerType Int64 @signed64
 
-//-----------------------------------------------------------------------------*
-
 exception : Int32 UInt32
-
-//-----------------------------------------------------------------------------*
 
 mode $isr
 mode $user
 
-//-----------------------------------------------------------------------------*
-
 import "files/mk20dx256.plm"
 import "files/boot-teensy-3-1.plm"
 
-//-----------------------------------------------------------------------------*
-
 required proc systickHandler $isr ()
+required proc setup $user ()
+required proc loop $user ()
 
 proc systickHandler $isr @weak () {
 }
@@ -50,11 +41,3 @@ init 0 { // Configure Systick interrupt every ms
   SYST_CVR = 0
   SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
 }
-
-//-----------------------------------------------------------------------------*
-
-required proc setup $user ()
-required proc loop $user ()
-
-//-----------------------------------------------------------------------------*
-

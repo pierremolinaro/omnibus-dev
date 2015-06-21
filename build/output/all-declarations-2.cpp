@@ -16210,42 +16210,29 @@ const char * gWrapperFileContent_1_targetTemplates = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "booleanType Bool @unsigned8\n"
   "\n"
   "newIntegerType UInt8  @unsigned8\n"
   "newIntegerType UInt16 @unsigned16\n"
   "newIntegerType UInt32 @unsigned32\n"
   "newIntegerType UInt64 @unsigned64\n"
-  "\n"
   "newIntegerType Int8  @signed8\n"
   "newIntegerType Int16 @signed16\n"
   "newIntegerType Int32 @signed32\n"
   "newIntegerType Int64 @signed64\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "exception : Int32 UInt32\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "mode $isr\n"
   "mode $user\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "import \"files/mk20dx256.plm\"\n"
   "import \"files/lcd.plm\"\n"
   "import \"files/leds.plm\"\n"
   "import \"files/default-isr.plm\"\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "required proc setup $user ()\n"
   "required proc loop $user ()\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 10 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -16306,15 +16293,13 @@ const char * gWrapperFileContent_1_targetTemplates = "newUnsignedRepresentation 
   "  while MCG_S.CLKST != MCG_S::CLKST(3) do\n"
   "  end\n"
   "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "teensy-3-1-interrupt.plm-target",
   "plm-target",
   true, // Text file
-  3736, // Text length
+  3161, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -16332,37 +16317,28 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "booleanType Bool @unsigned8\n"
   "\n"
   "newIntegerType UInt8  @unsigned8\n"
   "newIntegerType UInt16 @unsigned16\n"
   "newIntegerType UInt32 @unsigned32\n"
   "newIntegerType UInt64 @unsigned64\n"
-  "\n"
   "newIntegerType Int8  @signed8\n"
   "newIntegerType Int16 @signed16\n"
   "newIntegerType Int32 @signed32\n"
   "newIntegerType Int64 @signed64\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "exception : Int32 UInt32\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
   "\n"
   "mode $isr\n"
   "mode $user\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "import \"files/mk20dx256.plm\"\n"
   "import \"files/boot-teensy-3-1.plm\"\n"
   "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
   "required proc systickHandler $isr ()\n"
+  "required proc setup $user ()\n"
+  "required proc loop $user ()\n"
   "\n"
   "proc systickHandler $isr @weak () {\n"
   "}\n"
@@ -16371,21 +16347,13 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedRepresentation 
   "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
   "  SYST_CVR = 0\n"
   "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
-  "}\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n"
-  "required proc setup $user ()\n"
-  "required proc loop $user ()\n"
-  "\n"
-  "//-----------------------------------------------------------------------------*\n"
-  "\n" ;
+  "}\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "teensy-3-1-sequential-systick.plm-target",
   "plm-target",
   true, // Text file
-  1770, // Text length
+  1193, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 

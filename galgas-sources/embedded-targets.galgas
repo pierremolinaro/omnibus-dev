@@ -17,7 +17,7 @@ before {
     message "Embedded targets:\n"
     for (f) in embeddedFiles do
       if [f pathExtension] == "plm-target" then
-        message "  " + [f lastPathComponent] + '\n'
+        message "  " + [[f lastPathComponent] stringByDeletingPathExtension] + '\n'
       end
     end
   end
