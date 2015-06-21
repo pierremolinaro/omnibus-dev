@@ -12,7 +12,7 @@
 
 
 
-\sectionLabel{Exemple de définition de cible}{exempleDefinitionCible}
+\sectionLabel{Utilisation d'une cible dans le système de fichier}{cibleDansSystemeFichiers}
 
 Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit situé dans le système de fichiers. On va voir dans cette partie comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on va extraire de l'exécutable du compilateur les cibles qu'il embarque.
 
@@ -50,16 +50,141 @@ Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Mainte
 \end{SHELL}
 
 
+\subsection{Changement du nom de la cible dans le système de fichiers}
+
+Pour se convaincre que la cible nommée dans le fichier est bien celle située dans le répertoire \texttt{cibles}, nous allons changer son nom. Pour cela, nous devons modifier :
+\begin{itemize}
+  \item la référence à la cible dans le fichier \texttt{01-blinkled.plm} ;
+  \item le nom d'un fichier et d'un répertoire dans le répertoire \texttt{cibles}. 
+\end{itemize}
+
+Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est :
+\begin{PLM}[1]
+target "teensy-3-1-sequential-systick"
+\end{PLM}
+
+Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-sequential-systick}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc :
+
+\begin{PLM}[1]
+target "myTeensy"
+\end{PLM}
+
+Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenchera : la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles} :
+\begin{SHELL}
+{\bfseries ls -1F cibles}\\
+f{}iles/\\
+makef{}ile.py\\
+...\\
+teensy-3-1-sequential-systick/\\
+teensy-3-1-sequential-systick.plm-target\\
+...
+\end{SHELL}
+
+Le répertoire \texttt{f{}iles} et le fichier \texttt{makef{}ile.py} seront présentés plus loin. Chaque cible est définie par un répertoire et un fichier, dont l'extension est \texttt{plm-target}. Nous allons donc effectuer les renommages suivants :
+\begin{itemize}
+  \item le répertoire \texttt{teensy-3-1-sequential-systick} est renommé en \texttt{myTeensy} ;
+  \item le fichier \texttt{teensy-3-1-sequential-systick.plm-target} en \texttt{myTeensy.plm-target}.
+\end{itemize}
+
+À présent, la compilation s'effectue avec succès :
+\begin{SHELL}
+\bfseries plm -T=cibles 01-blinkled.plm
+\end{SHELL}
+
+Si on essaie de compiler en utilisant les cibles embarquées dans le compilateur :
+\begin{SHELL}
+\bfseries plm 01-blinkled.plm
+\end{SHELL}
+
+Une erreur se déclenche, la cible \texttt{myTeensy} n'étant pas définie dans l'exécutable du compilateur.
 
 
 
 
 
 
+\sectionLabel{Comment est définie une cible}{exempleDefinitionCible}
+
+Nous allons décrire comment est définie une cible dans le système de fichiers. Nous prenons comme exemple la cible \texttt{myTeensy} du répertoire \texttt{cibles} (voir la \refSectionPage{cibleDansSystemeFichiers}).
+
+Pour la cible \texttt{myTeensy} :
+\begin{itemize}
+  \item le fichier \texttt{myTeensy.plm-target} permet de paramétrer l'analyse sémantique ;
+  \item le répertoire \texttt{myTeensy} permet de configurer la génération de code.
+\end{itemize}
+
+On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le répertoire \texttt{myTeensy}.
+
+\subsection{Le fichier \texttt{myTeensy.plm-target}}
+
+Voici le contenu du fichier \texttt{myTeensy.plm-target} :
+\begin{PLM}[1]
+newUnsignedRepresentation @unsigned8  "uint8_t"   8
+newUnsignedRepresentation @unsigned16 "uint16_t" 16
+newUnsignedRepresentation @unsigned32 "uint32_t" 32
+newUnsignedRepresentation @unsigned64 "uint64_t" 64
+
+newSignedRepresentation @signed8  "int8_t"   8
+newSignedRepresentation @signed16 "int16_t" 16
+newSignedRepresentation @signed32 "int32_t" 32
+newSignedRepresentation @signed64 "int64_t" 64
+
+newUnsignedRepresentation @size "uint32_t" 32
+
+booleanType Bool @unsigned8
+
+newIntegerType UInt8  @unsigned8
+newIntegerType UInt16 @unsigned16
+newIntegerType UInt32 @unsigned32
+newIntegerType UInt64 @unsigned64
+newIntegerType Int8  @signed8
+newIntegerType Int16 @signed16
+newIntegerType Int32 @signed32
+newIntegerType Int64 @signed64
+
+exception : Int32 UInt32
+
+mode $isr
+mode $user
+
+import "files/mk20dx256.plm"
+import "files/boot-teensy-3-1.plm"
+
+required proc systickHandler $isr ()
+
+proc systickHandler $isr @weak () {
+}
+
+init 0 { // Configure Systick interrupt every ms
+  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
+  SYST_CVR = 0
+  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
+}
+
+required proc setup $user ()
+required proc loop $user ()
+\end{PLM}
+%\ligne\\
+
+{\bf Lignes 1 à 4.} Les quatre déclarations \plm+newUnsignedRepresentation+ définissent des représentations relatives aux entiers non signés (\refSectionPage{DefNewUnsignedRepresentation}). Les représentations ainsi définies (\plm+@unsigned8+, \plm+@unsigned16+, ...) ne sont pas des types directement utilisables en PLM, mais des annotations qui paramètrent certaines déclarations, comme par exemple la déclaration des types entiers non signés lignes 15 à 18.
+
+{\bf Lignes 6 à 9.} De manière analogue, les quatre déclarations \plm+newSignedRepresentation+ définissent des représentations relatives aux entiers signés (\refSectionPage{DefNewSignedRepresentation}). Les représentations ainsi définies (\plm+@signed8+, \plm+@signed16+, ...) ne sont pas des types directement utilisables en PLM, mais des annotations qui paramètrent certaines déclarations, comme par exemple la déclaration des types entiers signés lignes 19 à 22.
+
+{\bf Ligne 11.} Cette ligne déclare la représentation \plm+@size+, qui est celle utilisée par défaut pour les types énumérés (\emph{référence à ajouter}). La déclaration de la représentation \plm+@size+ est obligatoire.
+
+{\bf Ligne 13.} Déclaration du type booléen : il se nomme conventionnellement \plm+Bool+, et sa représentation est \plm+@unsigned8+, c'est-à-dire un entier non signé sur 8 bits. La déclaration d'un type booléen est obligatoire.
+
+{\bf Lignes 15 à 22.} Déclaration des types entier, non signés et signés. Les noms \plm+UInt8+, ..., \plm+Int64+ sont les noms des types entiers directement utilisables en PLM.
+
+{\bf Ligne 24.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+Int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+UInt32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
+
+{\bf Lignes 26 et 27.} Déclaration de mode.
 
 
 
 
+
+\subsection{Le répertoire \texttt{myTeensy}}
 
 
 
