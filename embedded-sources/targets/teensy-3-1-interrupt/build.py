@@ -930,7 +930,7 @@ rule.mCommand += linker ()
 rule.mCommand += linkerOptions ()
 rule.mCommand += objectList
 rule.mCommand += ["-o", productELF]
-rule.mCommand += ["-Tsources/linker-script.ld"]
+rule.mCommand += ["-Tsources/linker.ld"]
 rule.mCommand += ["-Wl,-Map=" + productELF + ".map"]
 makefile.addRule (rule)
 #--- Add objcopy rule

@@ -7,14 +7,23 @@
 
 \chapterLabel{Définition d'une cible}{chapitreConfCible}
 
+Dans ce chapitre, nous allons voir comment est définie une cible, en prenant pour exemple la cible \texttt{teensy-3-1-sequential-systick}. 
 
+Si vous voulez définir votre propre cible, la lecture de ce chapitre est indispensable. 
 
+Le compilateur recherche la cible citée :
+\begin{itemize}
+  \item par défaut, parmi les fichiers qu'il embarque ;
+  \item si l'option \texttt{-T=$cibles$} est présente dans la ligne de commande, dans les fichiers du répertoire $cibles$.
+\end{itemize}
 
+Pour explorer les fichiers indispensables à la définition d'une cible, il est nécessaire de les placer dans le système de fichiers. La première section de ce chapitre (\refSectionPage{cibleDansSystemeFichiers}) va donc indiquer comment extraire de l'exécutable les fichiers de définition des cibles, et comment les exploiter.
 
+%\minitoc
 
-\sectionLabel{Utilisation d'une cible dans le système de fichier}{cibleDansSystemeFichiers}
+\sectionLabel{Utilisation d'une cible dans le système de fichiers}{cibleDansSystemeFichiers}
 
-Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit situé dans le système de fichiers. On va voir dans cette partie comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on va extraire de l'exécutable du compilateur les cibles qu'il embarque.
+Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit situé dans le système de fichiers. On va voir dans cette section comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on commence par extraire de l'exécutable du compilateur les cibles qu'il embarque.
 
 \subsection{Liste des cibles embarquées}
 À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées :
@@ -69,7 +78,7 @@ Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-sequential-systic
 target "myTeensy"
 \end{PLM}
 
-Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenchera : la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles} :
+Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenche : la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles} :
 \begin{SHELL}
 {\bfseries ls -1F cibles}\\
 f{}iles/\\
@@ -151,6 +160,37 @@ La troisième étape est l'exécution des routines \plm=init=. À partir de cett
   \end{tikzpicture}
   \caption{Organigramme d'exécution défini par la cible \texttt{teensy-3-1-sequential-systick}}
   \labelFigure{sequenceDemarrage}
+  \ligne
+\end{figure}
+
+
+
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=1cm, minimum width=2cm},
+      node distance=1.8cm
+    ]
+    \node [block] (plm) {\tt programme.plm} ;
+    \node [block] (plmc) [right=of plm] {\tt plm.c} ;
+    \node [block] (plms) [below=of plmc] {\tt plm.s} ;
+    \node [block] (plmco) [right=of plmc] {\tt plm.c.o} ;
+    \node [block] (plmso) [right=of plms] {\tt plm.s.o} ;
+    \node [block] (linker) [below=of plmso] {\tt linker.ld} ;
+    \node [block] (elf) [right=of plmso] {\tt plm.elf} ;
+
+    \draw [-stealth, thick] (plm) to node[above] {\tt plm} (plmc) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.9, 0) |- (plms.west) ;
+    \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
+    \draw [-stealth, thick] (plms) to node[above] {\tt gcc} (plmso) ;
+    \draw [-stealth, thick] (plmso) to node[above right] {\tt gcc} (elf) ;
+    \draw [thick] (plmco.east) -- +(0.9, 0) |- (elf.west) ;
+    \draw [-stealth, thick] (linker.east) -- +(0.9, 0) |- (elf.west) ;
+  \end{tikzpicture}
+  \caption{Compilation d'un programme PLM}
+  \labelFigure{compilationProgrammePLM}
   \ligne
 \end{figure}
 
