@@ -17,170 +17,152 @@
 void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirectory,
                              const GALGAS_string constinArgument_inProductDirectory,
                              const GALGAS_lstring constinArgument_inTargetName,
-                             GALGAS_stringlist & outArgument_outFilesToInclude,
                              C_Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outFilesToInclude.drop () ; // Release 'out' argument
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, GALGAS_string ("make.py"), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/make.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 40)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 37)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, GALGAS_string ("plm.py"), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/plm.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 46)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 43)) ;
+  }
+  {
+  routine_copyTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/linker.ld"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 51)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/linker.ld"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 49)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 58)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 55)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-as.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 63)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-as.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 67)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 73)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 81)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 87)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 85)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 93)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 91)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Routine 'copyExecutableFile'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDirectory,
+                                 const GALGAS_string constinArgument_inSourceFileNamePath,
+                                 const GALGAS_string constinArgument_inDestinationAbsoluteFilePath,
+                                 C_Compiler * inCompiler
+                                 COMMA_UNUSED_LOCATION_ARGS) {
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    {
-    routine_generateTargetFromEmbeddedFiles (constinArgument_inProductDirectory, constinArgument_inTargetName, outArgument_outFilesToInclude, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 38)) ;
-    }
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)) ;
+    GALGAS_bool joker_3765 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3765, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 44)) ;
-    {
-    routine_generateTargetFromFileSystem (var_targetDefinitionDir, constinArgument_inProductDirectory, constinArgument_inTargetName, outArgument_outFilesToInclude, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 45)) ;
-    }
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 110)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 111)) ;
+    GALGAS_bool joker_4072 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4072, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
   }
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Routine 'generateTargetFromEmbeddedFiles'                                      *
+//                                               Routine 'copyTextFile'                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateTargetFromEmbeddedFiles (const GALGAS_string constinArgument_inProductDirectory,
-                                              const GALGAS_lstring constinArgument_inTargetName,
-                                              GALGAS_stringlist & outArgument_outFilesToInclude,
-                                              C_Compiler * inCompiler
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outFilesToInclude.drop () ; // Release 'out' argument
-  outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 61)) ;
-  GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-  GALGAS_string var_targetPath = constinArgument_inTargetName.mAttribute_string ;
-  const enumGalgasBool test_0 = var_fw.reader_directoryExistsAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)).boolEnum () ;
+void routine_copyTextFile (const GALGAS_string constinArgument_inCurrentDirectory,
+                           const GALGAS_string constinArgument_inSourceFileNamePath,
+                           const GALGAS_string constinArgument_inDestinationAbsoluteFilePath,
+                           C_Compiler * inCompiler
+                           COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    cEnumerator_stringlist enumerator_2680 (var_fw.reader_textFilesAtPath (var_targetPath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 65)), kEnumeration_up) ;
-    while (enumerator_2680.hasCurrentObject ()) {
-      GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 66)) ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_2680.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 67)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        GALGAS_bool joker_2882 ; // Joker input parameter
-        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)), joker_2882, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 68)) ;
-      }else if (kBoolFalse == test_1) {
-        GALGAS_bool joker_2973 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)).add_operation (enumerator_2680.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), joker_2973, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)) ;
-      }
-      enumerator_2680.gotoNextObject () ;
-    }
-    GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 72)) ;
-    cEnumerator_stringlist enumerator_3089 (var_fw.reader_textFilesAtPath (var_sourcePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 73)), kEnumeration_up) ;
-    while (enumerator_3089.hasCurrentObject ()) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("linker.ld"))).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)) ;
-        GALGAS_bool joker_3282 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), joker_3282, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)) ;
-      }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
-        if (kBoolTrue == test_3) {
-          GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)) ;
-          GALGAS_bool joker_3476 ; // Joker input parameter
-          var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)), joker_3476, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
-          outArgument_outFilesToInclude.addAssign_operation (enumerator_3089.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 80)) ;
-        }else if (kBoolFalse == test_3) {
-          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_3089.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
-          if (kBoolTrue == test_4.boolEnum ()) {
-            test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 81)) ;
-          }
-          const enumGalgasBool test_5 = test_4.boolEnum () ;
-          if (kBoolTrue == test_5) {
-            GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)) ;
-            GALGAS_bool joker_3773 ; // Joker input parameter
-            var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)).add_operation (enumerator_3089.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)), joker_3773, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)) ;
-            outArgument_outFilesToInclude.addAssign_operation (enumerator_3089.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 84)) ;
-          }
-        }
-      }
-      enumerator_3089.gotoNextObject () ;
-    }
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 125)) ;
+    GALGAS_bool joker_4627 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4627, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_s = GALGAS_string ("cannot find this target; available targets:") ;
-    cEnumerator_stringlist enumerator_3933 (var_fw.reader_textFilesAtPath (GALGAS_string::makeEmptyString (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 89)), kEnumeration_up) ;
-    while (enumerator_3933.hasCurrentObject ()) {
-      const enumGalgasBool test_6 = GALGAS_bool (kIsEqual, enumerator_3933.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 90)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
-      if (kBoolTrue == test_6) {
-        var_s.dotAssign_operation (GALGAS_string ("\n"
-          " - ").add_operation (enumerator_3933.current_mValue (HERE).reader_stringByDeletingPathExtension (SOURCE_FILE ("target-generation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 91))  COMMA_SOURCE_FILE ("target-generation.galgas", 91)) ;
-      }
-      enumerator_3933.gotoNextObject () ;
-    }
-    GALGAS_location location_7 (constinArgument_inTargetName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_7, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 94)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 129)) ;
+    GALGAS_bool joker_4924 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4924, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)) ;
   }
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'generateTargetFromFileSystem'                                        *
+//                                            Function 'getTargetTextFile'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateTargetFromFileSystem (const GALGAS_string constinArgument_inTargetDefinitionDir,
-                                           const GALGAS_string constinArgument_inProductDirectory,
-                                           const GALGAS_lstring constinArgument_inTargetName,
-                                           GALGAS_stringlist & outArgument_outFilesToInclude,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  outArgument_outFilesToInclude.drop () ; // Release 'out' argument
-  outArgument_outFilesToInclude = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("target-generation.galgas", 106)) ;
-  GALGAS_string var_targetPath = constinArgument_inTargetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)).add_operation (constinArgument_inTargetName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)) ;
-  const enumGalgasBool test_0 = var_targetPath.reader_directoryExists (SOURCE_FILE ("target-generation.galgas", 108)).boolEnum () ;
+GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_inCurrentDirectory,
+                                          const GALGAS_string & constinArgument_inTargetFile,
+                                          C_Compiler * inCompiler
+                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outContents ; // Returned variable
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
-    cEnumerator_stringlist enumerator_4647 (var_targetPath.reader_regularFiles (GALGAS_bool (false) COMMA_SOURCE_FILE ("target-generation.galgas", 109)), kEnumeration_up) ;
-    while (enumerator_4647.hasCurrentObject ()) {
-      GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetPath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 110)).add_operation (enumerator_4647.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 110)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 110)) ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_4647.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("target-generation.galgas", 111)).objectCompare (GALGAS_string ("py"))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        GALGAS_bool joker_4856 ; // Joker input parameter
-        var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)).add_operation (enumerator_4647.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)), joker_4856, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
-      }else if (kBoolFalse == test_1) {
-        GALGAS_bool joker_4947 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)).add_operation (enumerator_4647.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)), joker_4947, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
-      }
-      enumerator_4647.gotoNextObject () ;
-    }
-    GALGAS_string var_sourcePath = var_targetPath.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 116)) ;
-    cEnumerator_stringlist enumerator_5063 (var_sourcePath.reader_regularFiles (GALGAS_bool (false) COMMA_SOURCE_FILE ("target-generation.galgas", 117)), kEnumeration_up) ;
-    while (enumerator_5063.hasCurrentObject ()) {
-      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, enumerator_5063.current_mValue (HERE).objectCompare (GALGAS_string ("linker.ld"))).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 119)) ;
-        GALGAS_bool joker_5263 ; // Joker input parameter
-        var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)), joker_5263, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)) ;
-      }else if (kBoolFalse == test_2) {
-        const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, enumerator_5063.current_mValue (HERE).objectCompare (GALGAS_string ("target.c"))).boolEnum () ;
-        if (kBoolTrue == test_3) {
-          GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 122)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 122)) ;
-          GALGAS_bool joker_5464 ; // Joker input parameter
-          var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)), joker_5464, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
-          outArgument_outFilesToInclude.addAssign_operation (enumerator_5063.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 124)) ;
-        }else if (kBoolFalse == test_3) {
-          GALGAS_bool test_4 = GALGAS_bool (kIsEqual, enumerator_5063.current_mValue (HERE).objectCompare (GALGAS_string ("target-exception.c"))) ;
-          if (kBoolTrue == test_4.boolEnum ()) {
-            test_4 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("target-generation.galgas", 125)) ;
-          }
-          const enumGalgasBool test_5 = test_4.boolEnum () ;
-          if (kBoolTrue == test_5) {
-            GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_sourcePath.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
-            GALGAS_bool joker_5768 ; // Joker input parameter
-            var_s.method_writeToFileWhenDifferentContents (constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)).add_operation (enumerator_5063.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)), joker_5768, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 127)) ;
-            outArgument_outFilesToInclude.addAssign_operation (enumerator_5063.current_mValue (HERE)  COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
-          }
-        }
-      }
-      enumerator_5063.gotoNextObject () ;
-    }
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    result_outContents = var_fw.reader_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 143)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_s = GALGAS_string ("cannot find '").add_operation (constinArgument_inTargetName.reader_string (SOURCE_FILE ("target-generation.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (GALGAS_string ("' directory in target definition directory '"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (constinArgument_inTargetDefinitionDir, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
-    GALGAS_location location_6 (constinArgument_inTargetName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_6, var_s  COMMA_SOURCE_FILE ("target-generation.galgas", 133)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 145)) ;
+    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 146)) ;
   }
+//---
+  return result_outContents ;
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_getTargetTextFile [3] = {
+  & kTypeDescriptor_GALGAS_string,
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_getTargetTextFile (C_Compiler * inCompiler,
+                                                                  const cObjectArray & inEffectiveParameterArray,
+                                                                  const GALGAS_location & /* §§ inErrorLocation */
+                                                                  COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  const GALGAS_string operand1 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_getTargetTextFile (operand0,
+                                     operand1,
+                                     inCompiler
+                                     COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_getTargetTextFile ("getTargetTextFile",
+                                                                   functionWithGenericHeader_getTargetTextFile,
+                                                                   & kTypeDescriptor_GALGAS_string,
+                                                                   2,
+                                                                   functionArgs_getTargetTextFile) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -698,24 +680,28 @@ const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-//--- File '/makefile.py'
+//--- File '/make.py'
 
 const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
   "\n"
   "import subprocess, sys, os, copy\n"
-  "import urllib, shutil, subprocess\n"
-  "import platform, json, operator\n"
-  "import threading\n"
+  "import urllib, shutil\n"
+  "import subprocess, re\n"
+  "from time import time\n"
+  "import platform\n"
+  "import json\n"
+  "import threading, operator\n"
   "\n"
   "if sys.version_info >= (2, 6) :\n"
   "  import multiprocessing\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   processorCount                                                           *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   processorCount                                                                                                     *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def processorCount () :\n"
   "  if sys.version_info >= (2, 6) :\n"
@@ -724,86 +710,86 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "    coreCount = 1\n"
   "  return coreCount\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   FOR PRINTING IN COLOR                                                    *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   FOR PRINTING IN COLOR                                                                                              *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BLACK () :\n"
   "  return '\\033[90m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def RED () :\n"
   "  return '\\033[91m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def GREEN () :\n"
   "  return '\\033[92m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def YELLOW () :\n"
   "  return '\\033[93m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BLUE () :\n"
   "  return '\\033[94m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def MAGENTA () :\n"
   "  return '\\033[95m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def CYAN () :\n"
   "  return '\\033[96m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def WHITE () :\n"
   "  return '\\033[97m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def ENDC () :\n"
   "  return '\\033[0m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BOLD () :\n"
   "  return '\\033[1m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def UNDERLINE () :\n"
   "  return '\\033[4m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BLINK () :\n"
   "  return '\\033[5m'\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BOLD_BLUE () :\n"
   "  return BOLD () + BLUE ()\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BOLD_GREEN () :\n"
   "  return BOLD () + GREEN ()\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def BOLD_RED () :\n"
   "  return BOLD () + RED ()\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   runHiddenCommand                                                         *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runHiddenCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runHiddenCommand (cmd) :\n"
   "  result = \"\"\n"
@@ -818,9 +804,27 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "        sys.exit (childProcess.returncode)\n"
   "      return result\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   runCommand                                                               *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runSingleCommand                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runSingleCommand (cmd) :\n"
+  "  cmdAsString = \"\"\n"
+  "  for s in cmd:\n"
+  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
+  "      cmdAsString += '\"' + s + '\" '\n"
+  "    else:\n"
+  "      cmdAsString += s + ' '\n"
+  "  print cmdAsString\n"
+  "  childProcess = subprocess.Popen (cmd)\n"
+  "  childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runCommand                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runCommand (cmd, title, showCommand) :\n"
   "  if title != \"\":\n"
@@ -837,17 +841,17 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  childProcess.wait ()\n"
   "  if childProcess.returncode != 0 :\n"
   "    sys.exit (childProcess.returncode)\n"
+  "  sys.stdout.flush()\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   runInThread                                                              *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   runInThread                                                                                                        *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runInThread (job, displayLock, terminationSemaphore):\n"
   "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
   "  while True:\n"
   "    line = childProcess.stdout.readline ()\n"
   "    if line != \"\":\n"
-  "      job.mOutputLines.append (line)\n"
   "      displayLock.acquire ()\n"
   "      sys.stdout.write (line) # Print without newline\n"
   "      displayLock.release ()\n"
@@ -857,9 +861,9 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "      terminationSemaphore.release ()\n"
   "      break\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   modificationDateForFile                                                  *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   modificationDateForFile                                                                                            *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def modificationDateForFile (dateCacheDictionary, file):\n"
   "  absFilePath = os.path.abspath (file)\n"
@@ -874,9 +878,9 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "    dateCacheDictionary [absFilePath] = date\n"
   "    return date\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   class PostCommand                                                        *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class PostCommand                                                                                                  *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "class PostCommand:\n"
   "  mCommand = []\n"
@@ -888,9 +892,9 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "    self.mCommand = []\n"
   "    self.mTitle = title\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   class Job                                                                *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Job                                                                                                          *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "class Job:\n"
   "  mTarget = \"\"\n"
@@ -901,20 +905,16 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  mReturnCode = None\n"
   "  mPriority = 0\n"
   "  mState = 0 # 0: waiting for execution\n"
-  "  mOutputLines = []\n"
-  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
   "  \n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
-  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title, openSourceOnError):\n"
+  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
   "    self.mTarget = copy.deepcopy (target)\n"
   "    self.mCommand = copy.deepcopy (command)\n"
   "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
   "    self.mTitle = copy.deepcopy (title)\n"
   "    self.mPostCommands = copy.deepcopy (postCommands)\n"
   "    self.mPriority = priority\n"
-  "    self.mOutputLines = []\n"
-  "    self.mOpenSourceOnError = openSourceOnError\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
@@ -953,9 +953,9 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
   "    thread.start()\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   class Rule                                                               *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Rule                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "class Rule:\n"
   "  mTarget = \"\"\n"
@@ -965,9 +965,6 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  mTitle = \"\"\n"
   "  mPostCommands = []\n"
   "  mPriority = 0\n"
-  "  mDeleteTargetOnError = False # No operation on error\n"
-  "  mCleanOperation = 0 # No operation on clean\n"
-  "  mOpenSourceOnError = False # Do not try to open source file on error\n"
   "  \n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
@@ -978,9 +975,6 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "    self.mSecondaryMostRecentModificationDate = 0.0\n"
   "    self.mPostCommands = []\n"
   "    self.mPriority = 0\n"
-  "    self.mDeleteTargetOnError = False # No operation on error\n"
-  "    self.mOpenSourceOnError = False # Do not try to open source file on error\n"
-  "    self.mCleanOperation = 0 # No operation on clean\n"
   "    if title == \"\":\n"
   "      self.mTitle = \"Building \" + target\n"
   "    else:\n"
@@ -988,28 +982,16 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  \n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
-  "  def deleteTargetFileOnClean (self):\n"
-  "    self.mCleanOperation = 1\n"
-  "  \n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def deleteTargetDirectoryOnClean (self):\n"
-  "    self.mCleanOperation = 2\n"
-  "  \n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):\n"
-  "    if make.mSelectedGoal != \"clean\":\n"
+  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
+  "    if secondaryDependanceFile != \"\":\n"
   "      filePath = os.path.abspath (secondaryDependanceFile)\n"
-  "      if not os.path.exists (filePath):\n"
-  "        self.mSecondaryMostRecentModificationDate = sys.float_info.max # Very far in future\n"
-  "      else:\n"
+  "      if os.path.exists (filePath):\n"
   "        f = open (filePath, \"r\")\n"
-  "        s = f.read ()\n"
+  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
   "        f.close ()\n"
-  "        s = s.replace (\"\\\\ \", \"\\x01\") # Replace escaped spaces by \\0x01\n"
-  "        s = s.replace (\"\\\\\\n\", \"\") # Suppress \\ at the end of lines\n"
+  "        s = s.replace (\"\\\\\\n\", \"\")\n"
   "        liste = s.split (\"\\n\\n\")\n"
+  "        dateCacheDictionary = {}\n"
   "        for s in liste:\n"
   "          components = s.split (':')\n"
   "          target = components [0].replace (\"\\x01\", \" \")\n"
@@ -1018,14 +1000,14 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "          for src in components [1].split ():\n"
   "            secondarySource = src.replace (\"\\x01\", \" \")\n"
   "            #print \"  '\" + secondarySource + \"'\"\n"
-  "            modifDate = modificationDateForFile (make.mModificationDateDictionary, secondarySource)\n"
+  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
   "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
   "              self.mSecondaryMostRecentModificationDate = modifDate\n"
   "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
   "    \n"
-  "#----------------------------------------------------------------------------*\n"
-  "#   class Make                                                               *\n"
-  "#----------------------------------------------------------------------------*\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   class Make                                                                                                         *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "class Make:\n"
   "  mRuleList = []\n"
@@ -1033,21 +1015,6 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  mErrorCount = 0\n"
   "  mModificationDateDictionary = {}\n"
   "  mGoals = {}\n"
-  "  mSelectedGoal = \"\"\n"
-  "  mLinuxTextEditor = \"\"\n"
-  "  mMacTextEditor = \"\"\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def __init__ (self, goal):\n"
-  "    self.mRuleList = []\n"
-  "    self.mJobList = []\n"
-  "    self.mErrorCount = 0\n"
-  "    self.mModificationDateDictionary = {}\n"
-  "    self.mGoals = {}\n"
-  "    self.mSelectedGoal = goal\n"
-  "    self.mLinuxTextEditor = \"gEdit\"\n"
-  "    self.mMacTextEditor = \"TextEdit\"\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
@@ -1057,16 +1024,16 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def printRules (self):\n"
-  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
   "    for rule in self.mRuleList:\n"
-  "      print BOLD_GREEN () + \"Target: \\\"\" + rule.mTarget + \"\\\"\" + ENDC ()\n"
+  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
   "      for dep in rule.mDependences:\n"
-  "        print \"  Dependence: \\\"\" + dep + \"\\\"\"\n"
+  "        print \"  Dependence: '\" + dep + \"'\"\n"
   "      s = \"  Command: \"\n"
   "      for cmd in rule.mCommand:\n"
   "        s += \" \\\"\" + cmd + \"\\\"\"\n"
   "      print s\n"
-  "      print \"  Title: \\\"\" + rule.mTitle + \"\\\"\"\n"
+  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
   "      index = 0\n"
   "      for (command, title) in rule.mPostCommands:\n"
   "        index = index + 1\n"
@@ -1074,7 +1041,7 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "        for cmd in command:\n"
   "          s += \" \\\"\" + cmd + \"\\\"\"\n"
   "        print s\n"
-  "        print \"  Its title: \\\"\" + title + \"\\\"\"\n"
+  "        print \"  Its title: '\" + title + \"'\"\n"
   "        \n"
   "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
   "\n"
@@ -1204,8 +1171,7 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "        appendToJobList = True\n"
   "  #--- Append to job list\n"
   "    if appendToJobList:\n"
-  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle, rule.mOpenSourceOnError))"
-  "\n"
+  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
   "  #--- Return\n"
   "    return appendToJobList\n"
   "\n"
@@ -1241,8 +1207,8 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
   "                if not os.path.exists (absTargetDirectory):\n"
   "                  displayLock.acquire ()\n"
-  "                  runCommand ([\"mkdir\", \"-p\", os.path.dirname (job.mTarget)], \"Making \\\"\" + os.path.dirname (job.mTarget) + \"\\\" directory\", showComman"
-  "d)\n"
+  "                  runHiddenCommand ([\"mkdir\", \"-p\", absTargetDirectory])\n"
+  "                  # runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
   "                  displayLock.release ()\n"
   "                #--- Run job\n"
   "                job.run (displayLock, terminationSemaphore, showCommand)\n"
@@ -1263,10 +1229,6 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "            index = index + 1\n"
   "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
   "              jobCount = jobCount - 1\n"
-  "              if not os.path.exists (os.path.abspath (job.mTarget)): # Warning: target does not exist\n"
-  "                displayLock.acquire ()\n"
-  "                print MAGENTA () + BOLD () + \"Warning: target \\\"\" + job.mTarget + \"\\\" was not created by rule execution.\" + ENDC ()\n"
-  "                displayLock.release ()\n"
   "              if len (job.mPostCommands) > 0:\n"
   "                job.mState = 2 # Ready to execute next post command\n"
   "              else:\n"
@@ -1276,14 +1238,6 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "              jobCount = jobCount - 1\n"
   "              job.mState = 4 # Means Terminated\n"
   "              index = index - 1 # For removing job from list\n"
-  "              if job.mOpenSourceOnError:\n"
-  "                for line in job.mOutputLines:\n"
-  "                  components = line.split (':')\n"
-  "                  if (len (components) > 1) and os.path.exists (os.path.abspath (components [0])) :\n"
-  "                    if sys.platform == \"darwin\":\n"
-  "                      os.system (\"open -a \\\"\" + self.mMacTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
-  "                    elif sys.platform == \"linux2\":\n"
-  "                      os.system (\"\\\"\" + self.mLinuxTextEditor + \"\\\" \\\"\" + components [0] + \"\\\"\")\n"
   "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
   "              jobCount = jobCount - 1\n"
   "              job.mPostCommands.pop (0) # Remove completed post command\n"
@@ -1341,53 +1295,32 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def addGoal (self, goal, targetList, message):\n"
-  "    if self.mGoals.has_key (goal) or (goal == \"clean\") :\n"
-  "      self.enterError (\"The '\" + goal + \"' goal is already defined\")\n"
-  "    else:\n"
-  "      self.mGoals [goal] = (targetList, message)\n"
+  "    self.mGoals [goal] = (targetList, message)\n"
   "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def printGoals (self):\n"
-  "    print BOLD_BLUE () + \"--- Print \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
+  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
   "    for goalKey in self.mGoals.keys ():\n"
-  "      print BOLD_GREEN () + \"Goal: \\\"\" + goalKey + \"\\\"\" + ENDC ()\n"
+  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
   "      (targetList, message) = self.mGoals [goalKey]\n"
   "      for target in targetList:\n"
-  "        print \"  Target: \\\"\" + target + \"\\\"\"\n"
-  "      print \"  Message: \\\"\" + message + \"\\\"\"\n"
+  "        print \"  Target: '\" + target + \"'\"\n"
+  "      print \"  Message: '\" + message + \"'\"\n"
   "        \n"
   "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
-  "  def runGoal (self, maxConcurrentJobs, showCommand):\n"
-  "    if self.mGoals.has_key (self.mSelectedGoal) :\n"
-  "      (targetList, message) = self.mGoals [self.mSelectedGoal]\n"
+  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
+  "    if self.mGoals.has_key (goal) :\n"
+  "      (targetList, message) = self.mGoals [goal]\n"
   "      for target in targetList:\n"
   "        self.makeJob (target)\n"
   "      self.runJobs (maxConcurrentJobs, showCommand)\n"
-  "      if self.mErrorCount > 0:\n"
-  "        for rule in self.mRuleList:\n"
-  "          if rule.mDeleteTargetOnError and os.path.exists (os.path.abspath (rule.mTarget)):\n"
-  "            runCommand ([\"rm\", rule.mTarget], \"Delete \\\"\" + rule.mTarget + \"\\\" on error\", showCommand)\n"
-  "    elif self.mSelectedGoal == \"clean\" :\n"
-  "      filesToRemoveList = []\n"
-  "      directoriesToRemoveSet = set ()\n"
-  "      for rule in self.mRuleList:\n"
-  "        if rule.mCleanOperation == 1: # Delete target\n"
-  "          filesToRemoveList.append (rule.mTarget)\n"
-  "        elif rule.mCleanOperation == 2: # Delete target directories\n"
-  "          directoriesToRemoveSet.add (os.path.dirname (rule.mTarget))\n"
-  "      for dir in directoriesToRemoveSet:\n"
-  "        if os.path.exists (os.path.abspath (dir)):\n"
-  "          runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
-  "      for file in filesToRemoveList:\n"
-  "        if os.path.exists (os.path.abspath (file)):\n"
-  "          runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
   "    else:\n"
-  "      errorMessage = \"The '\" + self.mSelectedGoal + \"' goal is not defined; defined goals:\"\n"
+  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
   "      for key in self.mGoals:\n"
   "        (targetList, message) = self.mGoals [key]\n"
   "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
@@ -1423,19 +1356,207 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  def errorCount (self):\n"
   "    return self.mErrorCount\n"
   "\n"
-  "#----------------------------------------------------------------------------*\n" ;
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_0_embeddedTargets (
-  "makefile.py",
+  "make.py",
   "py",
   true, // Text file
-  28167, // Text length
+  27516, // Text length
   gWrapperFileContent_0_embeddedTargets
+) ;
+
+//--- File '/plm.py'
+
+const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import sys, os, subprocess, urllib\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "import make\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "downloadProgression = 0.0\n"
+  "\n"
+  "def downloadReportHook (a, b, fileSize) :\n"
+  "  global downloadProgression\n"
+  "  newProgression = min (100.0, float(a * b) / fileSize * 100.0)\n"
+  "  if newProgression > downloadProgression :\n"
+  "    downloadProgression = downloadProgression + 1.0\n"
+  "    sys.stdout.write(\".\")\n"
+  "    sys.stdout.flush()\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def downloadArchive (archiveURL, archivePath):\n"
+  "  global downloadProgression\n"
+  "  downloadProgression = 0.0\n"
+  "  make.runHiddenCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
+  "  make.runHiddenCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
+  "  make.runHiddenCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
+  "  #print \"URL: \"+ archiveURL\n"
+  "  #print \"Downloading... \" + archivePath + \".downloading\"\n"
+  "  try:\n"
+  "    urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
+  "    print \"\"\n"
+  "    fileSize = os.path.getsize (archivePath + \".downloading\")\n"
+  "    ok = fileSize > 1000000\n"
+  "    if ok:\n"
+  "      make.runHiddenCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
+  "    else:\n"
+  "      print make.BOLD_RED () + \"Error: cannot download file\" + make.ENDC ()\n"
+  "      sys.exit (1)\n"
+  "  except:\n"
+  "    print make.BOLD_RED () + \"Error: no network connection\" + make.ENDC ()\n"
+  "    sys.exit (1)\n"
+  "    \n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runMakefile (toolDirectory, archiveBaseURL, cSourceList, \\\n"
+  "                 objectDir, compiler, cCompilerOptions, \\\n"
+  "                 productDir, linker, linkerOptions, objcopy, \\\n"
+  "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :\n"
+  "  #--- Get max parallel jobs as first argument\n"
+  "  goal = \"all\"\n"
+  "  if len (sys.argv) > 1 :\n"
+  "    goal = sys.argv [1]\n"
+  "  #--- Get max parallel jobs as first argument\n"
+  "  maxParallelJobs = 0 # 0 means use host processor count\n"
+  "  if len (sys.argv) > 2 :\n"
+  "    maxParallelJobs = int (sys.argv [2])\n"
+  "  #--- Get script absolute path\n"
+  "  scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "  #--- Download compiler tool if needed\n"
+  "  if not os.path.exists (toolDirectory):\n"
+  "    print make.BOLD_GREEN () + \"Downloading compiler tool chain\" + make.ENDC ()\n"
+  "    archiveName = os.path.basename (toolDirectory)\n"
+  "    archiveURL = archiveBaseURL + archiveName + \".tar.bz2\"\n"
+  "    downloadArchive (archiveURL, toolDirectory)\n"
+  "    installDir = os.path.normpath (toolDirectory + \"/..\")\n"
+  "    os.chdir (installDir)\n"
+  "    make.runHiddenCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
+  "    make.runHiddenCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
+  "    make.runHiddenCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
+  "    make.runHiddenCommand ([\"rm\", archiveName + \".tar\"])\n"
+  "  #---\n"
+  "  os.chdir (scriptDir)\n"
+  "  print \"Product directory: \" + scriptDir\n"
+  "  #--- Build python makefile\n"
+  "  makefile = make.Make ()\n"
+  "  #--- Add C files compile rule\n"
+  "  objectList = []\n"
+  "  asObjectList = []\n"
+  "  for source in cSourceList:\n"
+  "  #--- Compile\n"
+  "    object = objectDir + \"/\" + source + \".o\"\n"
+  "    rule = make.Rule (object, \"Compiling \" + source)\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mCommand += compiler\n"
+  "    rule.mCommand += cCompilerOptions\n"
+  "    rule.mCommand += [\"-c\", \"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", object]\n"
+  "    rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "    makefile.addRule (rule)\n"
+  "    objectList.append (object)\n"
+  "  #--- Assembling\n"
+  "    asObject = objectDir + \"/\" + source + \".s\"\n"
+  "    rule = make.Rule (asObject, \"Assembling \" + source)\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mCommand += compiler\n"
+  "    rule.mCommand += cCompilerOptions\n"
+  "    rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", asObject]\n"
+  "    rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
+  "    makefile.addRule (rule)\n"
+  "    asObjectList.append (asObject)\n"
+  "  #--- Add linker rule\n"
+  "  productELF = productDir + \"/product.elf\"\n"
+  "  rule = make.Rule (productELF, \"Linking \" + productELF)\n"
+  "  rule.mDependences += objectList\n"
+  "  rule.mCommand += linker\n"
+  "  rule.mCommand += linkerOptions\n"
+  "  rule.mCommand += objectList\n"
+  "  rule.mCommand += [\"-o\", productELF]\n"
+  "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
+  "  rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "  makefile.addRule (rule)\n"
+  "  #--- Add objcopy rule\n"
+  "  productHEX = productDir + \"/product.ihex\"\n"
+  "  rule = make.Rule (productHEX, \"Hexing \" + productHEX)\n"
+  "  rule.mDependences += [productELF]\n"
+  "  rule.mCommand += objcopy\n"
+  "  rule.mCommand += [\"-O\", \"ihex\"]\n"
+  "  rule.mCommand += [productELF]\n"
+  "  rule.mCommand += [productHEX]\n"
+  "  makefile.addRule (rule)\n"
+  "  #--- Add goals\n"
+  "  makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
+  "  makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
+  "  makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
+  "  makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
+  "  makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
+  "  #--- Build\n"
+  "  #makefile.printRules ()\n"
+  "  makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
+  "  #--- Build Ok \?\n"
+  "  makefile.printErrorCountAndExitOnError ()\n"
+  "  #--- Run \?\n"
+  "  if goal == \"run\":\n"
+  "    print make.BOLD_BLUE () + \"Loading Teensy...\" + make.ENDC ()\n"
+  "    childProcess = subprocess.Popen (runExecutableOnTarget + [productHEX])\n"
+  "  #--- Wait for subprocess termination\n"
+  "    if childProcess.poll () == None :\n"
+  "      childProcess.wait ()\n"
+  "    if childProcess.returncode != 0 :\n"
+  "      print make.BOLD_RED () + \"Error \" + str (childProcess.returncode) + make.ENDC ()\n"
+  "      sys.exit (childProcess.returncode)\n"
+  "    else:\n"
+  "      print make.BOLD_GREEN () + \"Success\" + make.ENDC ()\n"
+  "  elif goal == \"display-object-size\":\n"
+  "    print make.BOLD_BLUE () + \"Display Object Sizes\" + make.ENDC ()\n"
+  "    childProcess = subprocess.Popen (displayObjectSize + objectList)\n"
+  "  #--- Wait for subprocess termination\n"
+  "    if childProcess.poll () == None :\n"
+  "      childProcess.wait ()\n"
+  "    if childProcess.returncode != 0 :\n"
+  "      print make.BOLD_RED () + \"Error \" + str (childProcess.returncode) + make.ENDC ()\n"
+  "      sys.exit (childProcess.returncode)\n"
+  "    else:\n"
+  "      print make.BOLD_GREEN () + \"Success\" + make.ENDC ()\n"
+  "  elif goal == \"object-dump\":\n"
+  "    print make.BOLD_BLUE () + \"Dump Object Code\" + make.ENDC ()\n"
+  "    childProcess = subprocess.Popen (dumpObjectCode + [productELF])\n"
+  "  #--- Wait for subprocess termination\n"
+  "    if childProcess.poll () == None :\n"
+  "      childProcess.wait ()\n"
+  "    if childProcess.returncode != 0 :\n"
+  "      print make.BOLD_RED () + \"Error \" + str (childProcess.returncode) + make.ENDC ()\n"
+  "      sys.exit (childProcess.returncode)\n"
+  "    else:\n"
+  "      print make.BOLD_GREEN () + \"Success\" + make.ENDC ()\n"
+  "\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
+  "plm.py",
+  "py",
+  true, // Text file
+  7522, // Text length
+  gWrapperFileContent_1_embeddedTargets
 ) ;
 
 //--- File '/teensy-3-1-interrupt.plm-target'
 
-const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
@@ -1532,17 +1653,17 @@ const char * gWrapperFileContent_1_embeddedTargets = "newUnsignedRepresentation 
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
   "teensy-3-1-interrupt.plm-target",
   "plm-target",
   true, // Text file
   3161, // Text length
-  gWrapperFileContent_1_embeddedTargets
+  gWrapperFileContent_2_embeddedTargets
 ) ;
 
 //--- File '/teensy-3-1-sequential-systick.plm-target'
 
-const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
+const char * gWrapperFileContent_3_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
   "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
   "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
   "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
@@ -1586,17 +1707,17 @@ const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation 
   "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
   "}\n" ;
 
-const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_3_embeddedTargets (
   "teensy-3-1-sequential-systick.plm-target",
   "plm-target",
   true, // Text file
   1193, // Text length
-  gWrapperFileContent_2_embeddedTargets
+  gWrapperFileContent_3_embeddedTargets
 ) ;
 
 //--- File 'files/boot-teensy-3-1.plm'
 
-const char * gWrapperFileContent_3_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_4_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "boot 0 {\n"
   "//---------1- Inhiber le chien de garde\n"
@@ -1661,17 +1782,17 @@ const char * gWrapperFileContent_3_embeddedTargets = "//------------------------
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_3_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_4_embeddedTargets (
   "boot-teensy-3-1.plm",
   "plm",
   true, // Text file
   2377, // Text length
-  gWrapperFileContent_3_embeddedTargets
+  gWrapperFileContent_4_embeddedTargets
 ) ;
 
 //--- File 'files/default-isr.plm'
 
-const char * gWrapperFileContent_4_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_5_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "\n"
   "required proc NMIHandler $isr ()\n"
   "\n"
@@ -2319,17 +2440,17 @@ const char * gWrapperFileContent_4_embeddedTargets = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_4_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_5_embeddedTargets (
   "default-isr.plm",
   "plm",
   true, // Text file
   14840, // Text length
-  gWrapperFileContent_4_embeddedTargets
+  gWrapperFileContent_5_embeddedTargets
 ) ;
 
 //--- File 'files/lcd.plm'
 
-const char * gWrapperFileContent_5_embeddedTargets = "\n"
+const char * gWrapperFileContent_6_embeddedTargets = "\n"
   "// http://esd.cs.ucr.edu/labs/interface/interface.html\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -2836,17 +2957,17 @@ const char * gWrapperFileContent_5_embeddedTargets = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_5_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_6_embeddedTargets (
   "lcd.plm",
   "plm",
   true, // Text file
   15519, // Text length
-  gWrapperFileContent_5_embeddedTargets
+  gWrapperFileContent_6_embeddedTargets
 ) ;
 
 //--- File 'files/leds.plm'
 
-const char * gWrapperFileContent_6_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_7_embeddedTargets = "//-----------------------------------------------------------------------------*\n"
   "//   Led L0 : PTA12\n"
   "//   Led L1 : PTA13\n"
   "//   Led L2 : PTD7\n"
@@ -2945,17 +3066,17 @@ const char * gWrapperFileContent_6_embeddedTargets = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_6_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_7_embeddedTargets (
   "leds.plm",
   "plm",
   true, // Text file
   2338, // Text length
-  gWrapperFileContent_6_embeddedTargets
+  gWrapperFileContent_7_embeddedTargets
 ) ;
 
 //--- File 'files/mk20dx256.plm'
 
-const char * gWrapperFileContent_7_embeddedTargets = "// Teensyduino Core Library\n"
+const char * gWrapperFileContent_8_embeddedTargets = "// Teensyduino Core Library\n"
   "// http://www.pjrc.com/teensy/\n"
   "// Copyright (c) 2013 PJRC.COM, LLC.\n"
   "//\n"
@@ -5105,22 +5226,22 @@ const char * gWrapperFileContent_7_embeddedTargets = "// Teensyduino Core Librar
   "//register ARM_DWT_CTRL_CYCCNTENA  (1 << 0)  // Enable cycle count\n"
   "//register ARM_DWT_CYCCNT   0xE0001004 // Cycle count register\n" ;
 
-const cRegularFileWrapper gWrapperFile_7_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_8_embeddedTargets (
   "mk20dx256.plm",
   "plm",
   true, // Text file
   135418, // Text length
-  gWrapperFileContent_7_embeddedTargets
+  gWrapperFileContent_8_embeddedTargets
 ) ;
 
 //--- All files of 'files' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_1 [6] = {
-  & gWrapperFile_3_embeddedTargets,
   & gWrapperFile_4_embeddedTargets,
   & gWrapperFile_5_embeddedTargets,
   & gWrapperFile_6_embeddedTargets,
   & gWrapperFile_7_embeddedTargets,
+  & gWrapperFile_8_embeddedTargets,
   NULL
 } ;
 
@@ -5142,7 +5263,7 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets (
 
 //--- File 'teensy-3-1-interrupt/build-as.py'
 
-const char * gWrapperFileContent_8_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -5176,17 +5297,17 @@ const char * gWrapperFileContent_8_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_8_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_8_embeddedTargets
+  gWrapperFileContent_9_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build-verbose.py'
 
-const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -5220,17 +5341,17 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_10_embeddedTargets (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_9_embeddedTargets
+  gWrapperFileContent_10_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build.py'
 
-const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -6220,17 +6341,17 @@ const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
   44321, // Text length
-  gWrapperFileContent_10_embeddedTargets
+  gWrapperFileContent_11_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/clean.py'
 
-const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -6267,17 +6388,17 @@ const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_12_embeddedTargets (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_11_embeddedTargets
+  gWrapperFileContent_12_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-dump.py'
 
-const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6311,17 +6432,17 @@ const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_13_embeddedTargets (
   "display-obj-dump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_12_embeddedTargets
+  gWrapperFileContent_13_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-size.py'
 
-const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6355,17 +6476,17 @@ const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
   "display-obj-size.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_13_embeddedTargets
+  gWrapperFileContent_14_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/flash-and-run.py'
 
-const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_15_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6399,17 +6520,17 @@ const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
   "flash-and-run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_14_embeddedTargets
+  gWrapperFileContent_15_embeddedTargets
 ) ;
 
 //--- File 'sources/linker.ld'
 
-const char * gWrapperFileContent_15_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_16_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -6567,17 +6688,17 @@ const char * gWrapperFileContent_15_embeddedTargets = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_16_embeddedTargets (
   "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_15_embeddedTargets
+  gWrapperFileContent_16_embeddedTargets
 ) ;
 
 //--- File 'sources/target-exception.c'
 
-const char * gWrapperFileContent_16_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_17_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void raise_exception (const type_Int32 inCode,\n"
   "                             const char * inSourceFile,\n"
@@ -6590,17 +6711,17 @@ const char * gWrapperFileContent_16_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_17_embeddedTargets (
   "target-exception.c",
   "c",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_16_embeddedTargets
+  gWrapperFileContent_17_embeddedTargets
 ) ;
 
 //--- File 'sources/target.c'
 
-const char * gWrapperFileContent_17_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_18_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Boot routines\n"
@@ -6791,20 +6912,20 @@ const char * gWrapperFileContent_17_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_18_embeddedTargets (
   "target.c",
   "c",
   true, // Text file
   6877, // Text length
-  gWrapperFileContent_17_embeddedTargets
+  gWrapperFileContent_18_embeddedTargets
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_3 [4] = {
-  & gWrapperFile_15_embeddedTargets,
   & gWrapperFile_16_embeddedTargets,
   & gWrapperFile_17_embeddedTargets,
+  & gWrapperFile_18_embeddedTargets,
   NULL
 } ;
 
@@ -6827,13 +6948,13 @@ const cDirectoryWrapper gWrapperDirectory_3_embeddedTargets (
 //--- All files of 'teensy-3-1-interrupt' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [8] = {
-  & gWrapperFile_8_embeddedTargets,
   & gWrapperFile_9_embeddedTargets,
   & gWrapperFile_10_embeddedTargets,
   & gWrapperFile_11_embeddedTargets,
   & gWrapperFile_12_embeddedTargets,
   & gWrapperFile_13_embeddedTargets,
   & gWrapperFile_14_embeddedTargets,
+  & gWrapperFile_15_embeddedTargets,
   NULL
 } ;
 
@@ -6856,7 +6977,7 @@ const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets (
 
 //--- File 'teensy-3-1-sequential-systick/build-as.py'
 
-const char * gWrapperFileContent_18_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6890,17 +7011,17 @@ const char * gWrapperFileContent_18_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
   "build-as.py",
   "py",
   true, // Text file
   996, // Text length
-  gWrapperFileContent_18_embeddedTargets
+  gWrapperFileContent_19_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6934,707 +7055,27 @@ const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_20_embeddedTargets (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_19_embeddedTargets
+  gWrapperFileContent_20_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/build.py'
 
-const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
   "\n"
-  "import subprocess, sys, os, copy\n"
-  "import urllib, shutil\n"
-  "import subprocess, re\n"
-  "from time import time\n"
-  "import platform\n"
-  "import json\n"
-  "import threading, operator\n"
-  "\n"
-  "if sys.version_info >= (2, 6) :\n"
-  "  import multiprocessing\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   processorCount                                                                                                     *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def processorCount () :\n"
-  "  if sys.version_info >= (2, 6) :\n"
-  "    coreCount = multiprocessing.cpu_count ()\n"
-  "  else:\n"
-  "    coreCount = 1\n"
-  "  return coreCount\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   FOR PRINTING IN COLOR                                                                                              *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BLACK () :\n"
-  "  return '\\033[90m'\n"
+  "import sys, os\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def RED () :\n"
-  "  return '\\033[91m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def GREEN () :\n"
-  "  return '\\033[92m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def YELLOW () :\n"
-  "  return '\\033[93m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BLUE () :\n"
-  "  return '\\033[94m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def MAGENTA () :\n"
-  "  return '\\033[95m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def CYAN () :\n"
-  "  return '\\033[96m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def WHITE () :\n"
-  "  return '\\033[97m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def ENDC () :\n"
-  "  return '\\033[0m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BOLD () :\n"
-  "  return '\\033[1m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def UNDERLINE () :\n"
-  "  return '\\033[4m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BLINK () :\n"
-  "  return '\\033[5m'\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BOLD_BLUE () :\n"
-  "  return BOLD () + BLUE ()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BOLD_GREEN () :\n"
-  "  return BOLD () + GREEN ()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def BOLD_RED () :\n"
-  "  return BOLD () + RED ()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   runHiddenCommand                                                                                                   *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runHiddenCommand (cmd) :\n"
-  "  result = \"\"\n"
-  "  childProcess = subprocess.Popen (cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
-  "  while True:\n"
-  "    line = childProcess.stdout.readline ()\n"
-  "    if line != \"\":\n"
-  "      result += line\n"
-  "    else:\n"
-  "      childProcess.wait ()\n"
-  "      if childProcess.returncode != 0 :\n"
-  "        sys.exit (childProcess.returncode)\n"
-  "      return result\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   runSingleCommand                                                                                                   *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runSingleCommand (cmd) :\n"
-  "  cmdAsString = \"\"\n"
-  "  for s in cmd:\n"
-  "    if (s == \"\") or (s.find (\" \") >= 0):\n"
-  "      cmdAsString += '\"' + s + '\" '\n"
-  "    else:\n"
-  "      cmdAsString += s + ' '\n"
-  "  print cmdAsString\n"
-  "  childProcess = subprocess.Popen (cmd)\n"
-  "  childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "  sys.stdout.flush()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   runCommand                                                                                                         *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runCommand (cmd, title, showCommand) :\n"
-  "  if title != \"\":\n"
-  "    print BOLD_BLUE () + title + ENDC ()\n"
-  "  if (title == \"\") or showCommand :\n"
-  "    cmdAsString = \"\"\n"
-  "    for s in cmd:\n"
-  "      if (s == \"\") or (s.find (\" \") >= 0):\n"
-  "        cmdAsString += '\"' + s + '\" '\n"
-  "      else:\n"
-  "        cmdAsString += s + ' '\n"
-  "    print cmdAsString\n"
-  "  childProcess = subprocess.Popen (cmd)\n"
-  "  childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "  sys.stdout.flush()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   runInThread                                                                                                        *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def runInThread (job, displayLock, terminationSemaphore):\n"
-  "  childProcess = subprocess.Popen (job.mCommand, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)\n"
-  "  while True:\n"
-  "    line = childProcess.stdout.readline ()\n"
-  "    if line != \"\":\n"
-  "      displayLock.acquire ()\n"
-  "      sys.stdout.write (line) # Print without newline\n"
-  "      displayLock.release ()\n"
-  "    else:\n"
-  "      childProcess.wait ()\n"
-  "      job.mReturnCode = childProcess.returncode\n"
-  "      terminationSemaphore.release ()\n"
-  "      break\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   modificationDateForFile                                                                                            *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def modificationDateForFile (dateCacheDictionary, file):\n"
-  "  absFilePath = os.path.abspath (file)\n"
-  "  if dateCacheDictionary.has_key (absFilePath) :\n"
-  "    return dateCacheDictionary [absFilePath]\n"
-  "  elif not os.path.exists (absFilePath):\n"
-  "    date = sys.float_info.max # Very far in future\n"
-  "    dateCacheDictionary [absFilePath] = date\n"
-  "    return date\n"
-  "  else:\n"
-  "    date = os.path.getmtime (absFilePath)\n"
-  "    dateCacheDictionary [absFilePath] = date\n"
-  "    return date\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   class PostCommand                                                                                                  *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "class PostCommand:\n"
-  "  mCommand = []\n"
-  "  mTitle = \"\"\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def __init__ (self, title = \"\"):\n"
-  "    self.mCommand = []\n"
-  "    self.mTitle = title\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   class Job                                                                                                          *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "class Job:\n"
-  "  mTarget = \"\"\n"
-  "  mCommand = []\n"
-  "  mTitle = \"\"\n"
-  "  mRequiredFiles = []\n"
-  "  mPostCommands = []\n"
-  "  mReturnCode = None\n"
-  "  mPriority = 0\n"
-  "  mState = 0 # 0: waiting for execution\n"
-  "  \n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def __init__ (self, target, requiredFiles, command, postCommands, priority, title):\n"
-  "    self.mTarget = copy.deepcopy (target)\n"
-  "    self.mCommand = copy.deepcopy (command)\n"
-  "    self.mRequiredFiles = copy.deepcopy (requiredFiles)\n"
-  "    self.mTitle = copy.deepcopy (title)\n"
-  "    self.mPostCommands = copy.deepcopy (postCommands)\n"
-  "    self.mPriority = priority\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def run (self, displayLock, terminationSemaphore, showCommand):\n"
-  "    displayLock.acquire ()\n"
-  "    if self.mTitle != \"\":\n"
-  "      print BOLD_BLUE () + self.mTitle + ENDC ()\n"
-  "    if (self.mTitle == \"\") or showCommand :\n"
-  "      cmdAsString = \"\"\n"
-  "      for s in self.mCommand:\n"
-  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
-  "          cmdAsString += '\"' + s + '\" '\n"
-  "        else:\n"
-  "          cmdAsString += s + ' '\n"
-  "      print cmdAsString\n"
-  "    displayLock.release ()\n"
-  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
-  "    thread.start()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def runPostCommand (self, displayLock, terminationSemaphore, showCommand):\n"
-  "    postCommand = self.mPostCommands [0]\n"
-  "    self.mCommand = postCommand.mCommand\n"
-  "    displayLock.acquire ()\n"
-  "    print BOLD_BLUE () + postCommand.mTitle + ENDC ()\n"
-  "    if showCommand:\n"
-  "      cmdAsString = \"\"\n"
-  "      for s in self.mCommand:\n"
-  "        if (s == \"\") or (s.find (\" \") >= 0):\n"
-  "          cmdAsString += '\"' + s + '\" '\n"
-  "        else:\n"
-  "          cmdAsString += s + ' '\n"
-  "      print cmdAsString\n"
-  "    displayLock.release ()\n"
-  "    thread = threading.Thread (target=runInThread, args=(self, displayLock, terminationSemaphore))\n"
-  "    thread.start()\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   class Rule                                                                                                         *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "class Rule:\n"
-  "  mTarget = \"\"\n"
-  "  mDependences = []\n"
-  "  mCommand = []\n"
-  "  mSecondaryMostRecentModificationDate = 0.0 # Far in the past\n"
-  "  mTitle = \"\"\n"
-  "  mPostCommands = []\n"
-  "  mPriority = 0\n"
-  "  \n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def __init__ (self, target, title = \"\"):\n"
-  "    self.mTarget = copy.deepcopy (target)\n"
-  "    self.mDependences = []\n"
-  "    self.mCommand = []\n"
-  "    self.mSecondaryMostRecentModificationDate = 0.0\n"
-  "    self.mPostCommands = []\n"
-  "    self.mPriority = 0\n"
-  "    if title == \"\":\n"
-  "      self.mTitle = \"Building \" + target\n"
-  "    else:\n"
-  "      self.mTitle = copy.deepcopy (title)\n"
-  "  \n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def enterSecondaryDependanceFile (self, secondaryDependanceFile):\n"
-  "    if secondaryDependanceFile != \"\":\n"
-  "      filePath = os.path.abspath (secondaryDependanceFile)\n"
-  "      if os.path.exists (filePath):\n"
-  "        f = open (filePath, \"r\")\n"
-  "        s = f.read ().replace (\"\\\\ \", \"\\x01\") # Read and replace escaped spaces by \\0x01\n"
-  "        f.close ()\n"
-  "        s = s.replace (\"\\\\\\n\", \"\")\n"
-  "        liste = s.split (\"\\n\\n\")\n"
-  "        dateCacheDictionary = {}\n"
-  "        for s in liste:\n"
-  "          components = s.split (':')\n"
-  "          target = components [0].replace (\"\\x01\", \" \")\n"
-  "          #print \"------- Optional dependency rules for target '\" + target + \"'\"\n"
-  "          #print \"Secondary target '\" + target + \"'\"\n"
-  "          for src in components [1].split ():\n"
-  "            secondarySource = src.replace (\"\\x01\", \" \")\n"
-  "            #print \"  '\" + secondarySource + \"'\"\n"
-  "            modifDate = modificationDateForFile (dateCacheDictionary, secondarySource)\n"
-  "            if self.mSecondaryMostRecentModificationDate < modifDate :\n"
-  "              self.mSecondaryMostRecentModificationDate = modifDate\n"
-  "              #print BOLD_BLUE () + str (modifDate) + ENDC ()\n"
-  "    \n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   class Make                                                                                                         *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "class Make:\n"
-  "  mRuleList = []\n"
-  "  mJobList = []\n"
-  "  mErrorCount = 0\n"
-  "  mModificationDateDictionary = {}\n"
-  "  mGoals = {}\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def addRule (self, rule):\n"
-  "    self.mRuleList.append (copy.deepcopy (rule))\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def printRules (self):\n"
-  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mRuleList)) + \" rule\" + (\"s\" if len (self.mRuleList) > 1 else \"\") + \" ---\" + ENDC ()\n"
-  "    for rule in self.mRuleList:\n"
-  "      print BOLD_GREEN () + \"Target: '\" + rule.mTarget + \"'\" + ENDC ()\n"
-  "      for dep in rule.mDependences:\n"
-  "        print \"  Dependence: '\" + dep + \"'\"\n"
-  "      s = \"  Command: \"\n"
-  "      for cmd in rule.mCommand:\n"
-  "        s += \" \\\"\" + cmd + \"\\\"\"\n"
-  "      print s\n"
-  "      print \"  Title: '\" + rule.mTitle + \"'\"\n"
-  "      index = 0\n"
-  "      for (command, title) in rule.mPostCommands:\n"
-  "        index = index + 1\n"
-  "        s = \"  Post command \" + str (index) + \": \"\n"
-  "        for cmd in command:\n"
-  "          s += \" \\\"\" + cmd + \"\\\"\"\n"
-  "        print s\n"
-  "        print \"  Its title: '\" + title + \"'\"\n"
-  "        \n"
-  "    print BOLD_BLUE () + \"--- End of print rule ---\" + ENDC ()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def writeRuleDependancesInDotFile (self, dotFileName):\n"
-  "    s = \"digraph G {\\n\"\n"
-  "    s += \"  node [fontname=courier]\\n\"\n"
-  "    arrowSet = set ()\n"
-  "    for rule in self.mRuleList:\n"
-  "      s += '  \"' + rule.mTarget + '\" [shape=rectangle]\\n'\n"
-  "      for dep in rule.mDependences:\n"
-  "        arrowSet.add ('  \"' + rule.mTarget + '\" -> \"' + dep + '\"\\n')\n"
-  "    for arrow in arrowSet:\n"
-  "      s += arrow\n"
-  "    s += \"}\\n\"\n"
-  "    f = open (dotFileName, \"w\")\n"
-  "    f.write (s)\n"
-  "    f.close ()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def checkRules (self):\n"
-  "    if self.mErrorCount == 0:\n"
-  "      ruleList = copy.deepcopy (self.mRuleList)\n"
-  "      index = 0\n"
-  "      looping = True\n"
-  "    #--- loop on rules\n"
-  "      while looping:\n"
-  "        looping = False\n"
-  "        while index < len (ruleList):\n"
-  "          aRule = ruleList [index]\n"
-  "          index = index + 1\n"
-  "        #--- Check dependance files have rule for building, or does exist\n"
-  "          depIdx = 0\n"
-  "          while depIdx < len (aRule.mDependences):\n"
-  "            dep = aRule.mDependences [depIdx]\n"
-  "            depIdx = depIdx + 1\n"
-  "            hasBuildRule = False\n"
-  "            for r in ruleList:\n"
-  "              if dep == r.mTarget:\n"
-  "                hasBuildRule = True\n"
-  "                break\n"
-  "            if not hasBuildRule:\n"
-  "              looping = True\n"
-  "              if not os.path.exists (os.path.abspath (dep)):\n"
-  "                self.mErrorCount = self.mErrorCount + 1\n"
-  "                print BOLD_RED () + \"Check rules error: '\" + dep + \"' does not exist, and there is no rule for building it.\" + ENDC ()\n"
-  "              depIdx = depIdx - 1\n"
-  "              aRule.mDependences.pop (depIdx)\n"
-  "        #--- Rule with no dependances\n"
-  "          if len (aRule.mDependences) == 0 :\n"
-  "            looping = True\n"
-  "            index = index - 1\n"
-  "            ruleList.pop (index)\n"
-  "            idx = 0\n"
-  "            while idx < len (ruleList):\n"
-  "              r = ruleList [idx]\n"
-  "              idx = idx + 1\n"
-  "              while r.mDependences.count (aRule.mTarget) > 0 :\n"
-  "                r.mDependences.remove (aRule.mTarget)\n"
-  "    #--- Error if rules remain\n"
-  "      if len (ruleList) > 0:\n"
-  "        self.mErrorCount = self.mErrorCount + 1\n"
-  "        print BOLD_RED () + \"Check rules error; circulary dependances between:\" + ENDC ()\n"
-  "        for aRule in ruleList: \n"
-  "          print BOLD_RED () + \"  - '\" + aRule.mTarget + \"', depends from:\" + ENDC ()\n"
-  "          for dep in aRule.mDependences:\n"
-  "            print BOLD_RED () + \"      '\" + dep + \"'\" + ENDC ()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def existsJobForTarget (self, target):\n"
-  "    for job in self.mJobList:\n"
-  "      if job.mTarget == target:\n"
-  "        return True\n"
-  "    return False\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def makeJob (self, target): # Return a bool indicating wheither the target should be built\n"
-  "  #--- If there are errors, return immediatly\n"
-  "    if self.mErrorCount != 0:\n"
-  "      return False\n"
-  "  #--- Target already in job list \?\n"
-  "    if self.existsJobForTarget (target):\n"
-  "      return True # yes, return target will be built\n"
-  "  #--- Find a rule for making the target\n"
-  "    absTarget = os.path.abspath (target)\n"
-  "    rule = None\n"
-  "    matchCount = 0\n"
-  "    for r in self.mRuleList:\n"
-  "      if target == r.mTarget:\n"
-  "        matchCount = matchCount + 1\n"
-  "        rule = r\n"
-  "    if matchCount == 0:\n"
-  "      absTarget = os.path.abspath (target)\n"
-  "      if not os.path.exists (absTarget):\n"
-  "        print BOLD_RED () + \"No rule for making '\" + target + \"'\" + ENDC ()\n"
-  "        self.mErrorCount = self.mErrorCount + 1\n"
-  "      return False # Error or target exists, and no rule for building it\n"
-  "    elif matchCount > 1:\n"
-  "      print BOLD_RED () + str (matchCount) + \" rules for making '\" + target + \"'\" + ENDC ()\n"
-  "      self.mErrorCount = self.mErrorCount + 1\n"
-  "      return False # Error\n"
-  "  #--- Target file does not exist, and 'rule' variable indicates how build it\n"
-  "    appendToJobList = not os.path.exists (absTarget)\n"
-  "  #--- Build primary dependences\n"
-  "    jobDependenceFiles = []\n"
-  "    for dependence in rule.mDependences:\n"
-  "      willBeBuilt = self.makeJob (dependence)\n"
-  "      if willBeBuilt:\n"
-  "        jobDependenceFiles.append (dependence)\n"
-  "        appendToJobList = True\n"
-  "  #--- Check primary file modification dates\n"
-  "    if not appendToJobList:\n"
-  "      targetDateModification = os.path.getmtime (absTarget)\n"
-  "      for source in rule.mDependences:\n"
-  "        sourceDateModification = os.path.getmtime (source)\n"
-  "        if targetDateModification < sourceDateModification:\n"
-  "          appendToJobList = True\n"
-  "          break\n"
-  "  #--- Check for secondary dependancy files\n"
-  "    if not appendToJobList:\n"
-  "      targetDateModification = os.path.getmtime (absTarget)\n"
-  "      if targetDateModification < rule.mSecondaryMostRecentModificationDate:\n"
-  "        appendToJobList = True\n"
-  "  #--- Append to job list\n"
-  "    if appendToJobList:\n"
-  "      self.mJobList.append (Job (target, jobDependenceFiles, rule.mCommand, rule.mPostCommands, rule.mPriority, rule.mTitle))\n"
-  "  #--- Return\n"
-  "    return appendToJobList\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "  #Job state\n"
-  "  # 0: waiting\n"
-  "  # 1:running\n"
-  "  # 2: waiting for executing post command\n"
-  "  # 3:executing for executing post command\n"
-  "  # 4: completed\n"
-  "\n"
-  "  def runJobs (self, maxConcurrentJobs, showCommand):\n"
-  "    if self.mErrorCount == 0:\n"
-  "      if len (self.mJobList) == 0:\n"
-  "        print BOLD_BLUE () + \"Nothing to make.\" + ENDC ()\n"
-  "      else:\n"
-  "      #--- Sort jobs following their priorities\n"
-  "        self.mJobList = sorted (self.mJobList, key=operator.attrgetter(\"mPriority\"), reverse=True)\n"
-  "      #--- Run\n"
-  "        if maxConcurrentJobs <= 0:\n"
-  "          maxConcurrentJobs = processorCount () - maxConcurrentJobs\n"
-  "        jobCount = 0 ;\n"
-  "        terminationSemaphore = threading.Semaphore (0)\n"
-  "        displayLock = threading.Lock ()\n"
-  "        loop = True\n"
-  "        returnCode = 0\n"
-  "        while loop:\n"
-  "        #--- Launch jobs in parallel\n"
-  "          for job in self.mJobList:\n"
-  "            if (returnCode == 0) and (jobCount < maxConcurrentJobs):\n"
-  "              if (job.mState == 0) and (len (job.mRequiredFiles) == 0):\n"
-  "                #--- Create target directory if does not exist\n"
-  "                absTargetDirectory = os.path.dirname (os.path.abspath (job.mTarget))\n"
-  "                if not os.path.exists (absTargetDirectory):\n"
-  "                  displayLock.acquire ()\n"
-  "                  runHiddenCommand ([\"mkdir\", \"-p\", absTargetDirectory])\n"
-  "                  # runCommand ([\"mkdir\", \"-p\", absTargetDirectory], \"Making \" + absTargetDirectory + \" directory\", showCommand)\n"
-  "                  displayLock.release ()\n"
-  "                #--- Run job\n"
-  "                job.run (displayLock, terminationSemaphore, showCommand)\n"
-  "                jobCount = jobCount + 1\n"
-  "                job.mState = 1 # Means is running\n"
-  "              elif job.mState == 2: # Waiting for executing post command\n"
-  "                job.mReturnCode = None # Means post command not terminated\n"
-  "                job.runPostCommand (displayLock, terminationSemaphore, showCommand)\n"
-  "                jobCount = jobCount + 1\n"
-  "                job.mState = 3 # Means post command is running\n"
-  "        #--- Wait for a job termination\n"
-  "          #print \"wait \" + str (jobCount) + \" \" + str (len (self.mJobList))\n"
-  "          terminationSemaphore.acquire ()\n"
-  "        #--- Checks for terminated jobs\n"
-  "          index = 0\n"
-  "          while index < len (self.mJobList):\n"
-  "            job = self.mJobList [index]\n"
-  "            index = index + 1\n"
-  "            if (job.mState == 1) and (job.mReturnCode == 0) : # Terminated without error\n"
-  "              jobCount = jobCount - 1\n"
-  "              if len (job.mPostCommands) > 0:\n"
-  "                job.mState = 2 # Ready to execute next post command\n"
-  "              else:\n"
-  "                job.mState = 4 # Completed\n"
-  "                index = index - 1 # For removing job from list\n"
-  "            elif (job.mState == 1) and (job.mReturnCode > 0) : # terminated with error : exit\n"
-  "              jobCount = jobCount - 1\n"
-  "              job.mState = 4 # Means Terminated\n"
-  "              index = index - 1 # For removing job from list\n"
-  "            elif (job.mState == 3) and (job.mReturnCode == 0): # post command is terminated without error\n"
-  "              jobCount = jobCount - 1\n"
-  "              job.mPostCommands.pop (0) # Remove completed post command\n"
-  "              if len (job.mPostCommands) > 0:\n"
-  "                job.mState = 2 # Ready to execute next post command\n"
-  "              else:\n"
-  "                job.mState = 4 # Completed\n"
-  "                index = index - 1 # For removing job from list\n"
-  "            elif (job.mState == 3) and (job.mReturnCode > 0): # post command is terminated with error\n"
-  "              jobCount = jobCount - 1\n"
-  "              job.mState = 4 # Completed\n"
-  "              index = index - 1 # For removing job from list\n"
-  "            elif job.mState == 4: # Completed: delete job\n"
-  "              index = index - 1\n"
-  "              self.mJobList.pop (index) # Remove terminated job\n"
-  "              #displayLock.acquire ()\n"
-  "              #print \"Completed '\" + job.mTitle + \"'\"\n"
-  "              #--- Remove dependences from this job\n"
-  "              idx = 0\n"
-  "              while idx < len (self.mJobList):\n"
-  "                aJob = self.mJobList [idx]\n"
-  "                idx = idx + 1\n"
-  "                while aJob.mRequiredFiles.count (job.mTarget) > 0 :\n"
-  "                  aJob.mRequiredFiles.remove (job.mTarget)\n"
-  "                  #print \"  Removed from '\" + aJob.mTitle + \"': \" + str (len (aJob.mRequiredFiles))\n"
-  "              #displayLock.release ()\n"
-  "              #--- Signal error \?\n"
-  "              if (job.mReturnCode > 0) and (returnCode == 0):\n"
-  "                self.mErrorCount = self.mErrorCount + 1\n"
-  "                print BOLD_RED () + \"Return code: \" + str (job.mReturnCode) + ENDC ()\n"
-  "                if (returnCode == 0) and (jobCount > 0) :\n"
-  "                  print \"Wait for job termination...\"\n"
-  "                returnCode = job.mReturnCode\n"
-  "          loop = (len (self.mJobList) > 0) if (returnCode == 0) else (jobCount > 0)\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def searchFileInDirectories (self, file, directoryList): # returns \"\" if not found, register error\n"
-  "    matchCount = 0\n"
-  "    result = \"\"\n"
-  "    for sourceDir in directoryList:\n"
-  "      sourcePath = sourceDir + \"/\" + file\n"
-  "      if os.path.exists (os.path.abspath (sourcePath)):\n"
-  "        matchCount = matchCount + 1\n"
-  "        result = sourcePath\n"
-  "    if matchCount == 0:\n"
-  "      print BOLD_RED () + \"Cannot find '\" + file + \"'\" + ENDC ()\n"
-  "      self.mErrorCount = self.mErrorCount + 1\n"
-  "    elif matchCount > 1:\n"
-  "      print BOLD_RED () + str (matchCount) + \" source files for making '\" + file + \"'\" + ENDC ()\n"
-  "      self.mErrorCount = self.mErrorCount + 1\n"
-  "      result = \"\"\n"
-  "    return result\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def addGoal (self, goal, targetList, message):\n"
-  "    self.mGoals [goal] = (targetList, message)\n"
-  "    #print '%s' % ', '.join(map(str, self.mGoals))\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def printGoals (self):\n"
-  "    print BOLD_BLUE () + \"--- Print the \" + str (len (self.mGoals)) + \" goal\" + (\"s\" if len (self.mGoals) > 1 else \"\") + \" ---\" + ENDC ()\n"
-  "    for goalKey in self.mGoals.keys ():\n"
-  "      print BOLD_GREEN () + \"Goal: '\" + goalKey + \"'\" + ENDC ()\n"
-  "      (targetList, message) = self.mGoals [goalKey]\n"
-  "      for target in targetList:\n"
-  "        print \"  Target: '\" + target + \"'\"\n"
-  "      print \"  Message: '\" + message + \"'\"\n"
-  "        \n"
-  "    print BOLD_BLUE () + \"--- End of print goals ---\" + ENDC ()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def runGoal (self, goal, maxConcurrentJobs, showCommand):\n"
-  "    if self.mGoals.has_key (goal) :\n"
-  "      (targetList, message) = self.mGoals [goal]\n"
-  "      for target in targetList:\n"
-  "        self.makeJob (target)\n"
-  "      self.runJobs (maxConcurrentJobs, showCommand)\n"
-  "    else:\n"
-  "      errorMessage = \"The '\" + goal + \"' goal is not defined; defined goals:\"\n"
-  "      for key in self.mGoals:\n"
-  "        (targetList, message) = self.mGoals [key]\n"
-  "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
-  "      print BOLD_RED () + errorMessage + ENDC ()\n"
-  "      self.mErrorCount = self.mErrorCount + 1\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def enterError (self, message):\n"
-  "    print BOLD_RED () + message + ENDC ()\n"
-  "    self.mErrorCount = self.mErrorCount + 1\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def printErrorCountAndExitOnError (self):\n"
-  "    if self.mErrorCount == 1:\n"
-  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
-  "      sys.exit (1)\n"
-  "    elif self.mErrorCount > 1:\n"
-  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
-  "      sys.exit (1)\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def printErrorCount (self):\n"
-  "    if self.mErrorCount == 1:\n"
-  "      print BOLD_RED () + \"1 error.\" + ENDC ()\n"
-  "    elif self.mErrorCount > 1:\n"
-  "      print BOLD_RED () + str (self.mErrorCount) + \" errors.\" + ENDC ()\n"
-  "\n"
-  "  #--------------------------------------------------------------------------*\n"
-  "\n"
-  "  def errorCount (self):\n"
-  "    return self.mErrorCount\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Source files                                                                                                       *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def sourceList ():\n"
-  "  return [\"plm.c\"]\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   Product directory                                                                                                  *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def productDir ():\n"
-  "  return \"product\"\n"
+  "sys.path.append (os.path.dirname (os.path.abspath (sys.argv [0])) + \"/sources\")\n"
+  "import plm\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7642,17 +7083,8 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def objectDir ():\n"
-  "  return \"objects\"\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#                         Object files directories                                                                     *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def asDir ():\n"
-  "  return \"as\"\n"
+  "def archiveBaseURL ():\n"
+  "  return \"http://crossgcc.rts-software.org/downloads/plm-tools/\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7682,7 +7114,7 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def displayObjectSize ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-size\"]\n"
+  "  return [toolDir () + \"/bin/arm-eabi-size\", \"-t\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7691,7 +7123,7 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def dumpObjectCode ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-objdump\"]\n"
+  "  return [toolDir () + \"/bin/arm-eabi-objdump\", \"-Sdh\", \"-Mforce-thumb\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7728,7 +7160,6 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "  result.append (\"-Os\")\n"
   "  result.append (\"-fomit-frame-pointer\")\n"
   "  result.append (\"-foptimize-register-move\") \n"
-  "  result.append (\"-I../build\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7771,188 +7202,64 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
-  "#   Teensy loader                                                                                                      *\n"
+  "#   Source files                                                                                                       *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def teensyLoader ():\n"
-  "  return toolDir () + \"/bin/teensy-loader-cli\"\n"
+  "def cSourceList ():\n"
+  "  return [\"plm.c\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#   ARCHIVE DOWNLOAD                                                                                                   *\n"
+  "#                                                                                                                      *\n"
+  "#   Product directory                                                                                                  *\n"
+  "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "downloadProgression = 0.0\n"
-  "\n"
-  "def downloadReportHook (a, b, fileSize) :\n"
-  "  global downloadProgression\n"
-  "  newProgression = min (100.0, float(a * b) / fileSize * 100.0)\n"
-  "  if newProgression > downloadProgression :\n"
-  "    downloadProgression = downloadProgression + 1.0\n"
-  "    sys.stdout.write(\".\")\n"
-  "    sys.stdout.flush()\n"
+  "def productDir ():\n"
+  "  return \"product\"\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#                         Object files directories                                                                     *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def downloadArchive (archiveURL, archivePath):\n"
-  "  global downloadProgression\n"
-  "  downloadProgression = 0.0\n"
-  "  runHiddenCommand ([\"rm\", \"-f\", archivePath + \".downloading\"])\n"
-  "  runHiddenCommand ([\"rm\", \"-f\", archivePath + \".tar.bz2\"])\n"
-  "  runHiddenCommand ([\"mkdir\", \"-p\", os.path.dirname (archivePath)])\n"
-  "  #print \"URL: \"+ archiveURL\n"
-  "  #print \"Downloading... \" + archivePath + \".downloading\"\n"
-  "  try:\n"
-  "    urllib.urlretrieve (archiveURL,  archivePath + \".downloading\", downloadReportHook)\n"
-  "    print \"\"\n"
-  "    fileSize = os.path.getsize (archivePath + \".downloading\")\n"
-  "    ok = fileSize > 1000000\n"
-  "    if ok:\n"
-  "      runHiddenCommand ([\"mv\", archivePath + \".downloading\", archivePath + \".tar.bz2\"])\n"
-  "    else:\n"
-  "      print BOLD_RED () + \"Error: cannot download file\" + ENDC ()\n"
-  "      sys.exit (1)\n"
-  "  except:\n"
-  "    print BOLD_RED () + \"Error: no network connection\" + ENDC ()\n"
-  "    sys.exit (1)\n"
-  "    \n"
+  "def objectDir ():\n"
+  "  return \"objects\"\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   Run executable                                                                                                      *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def runExecutableOnTarget ():\n"
+  "  return [toolDir () + \"/bin/teensy-loader-cli\", \"-w\", \"-v\", \"-mmcu=mk20dx128\"]\n"
+  "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
   "#   MAIN                                                                                                               *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "#--- Get max parallel jobs as first argument\n"
-  "goal = \"all\"\n"
-  "if len (sys.argv) > 1 :\n"
-  "  goal = sys.argv [1]\n"
-  "#--- Get max parallel jobs as first argument\n"
-  "maxParallelJobs = 0 # 0 means use host processor count\n"
-  "if len (sys.argv) > 2 :\n"
-  "  maxParallelJobs = int (sys.argv [2])\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "#--- Download compiler tool if needed\n"
-  "toolDirectory = toolDir ()\n"
-  "if not os.path.exists (toolDirectory):\n"
-  "  print BOLD_GREEN () + \"Downloading compiler tool chain\" + ENDC ()\n"
-  "  archiveName = os.path.basename (toolDirectory)\n"
-  "  archiveURL = \"http://crossgcc.rts-software.org/downloads/plm-tools/\" + archiveName + \".tar.bz2\"\n"
-  "  downloadArchive (archiveURL, toolDirectory)\n"
-  "  installDir = os.path.normpath (toolDirectory + \"/..\")\n"
-  "  os.chdir (installDir)\n"
-  "  runHiddenCommand ([\"bunzip2\", \"-k\", archiveName + \".tar.bz2\"])\n"
-  "  runHiddenCommand ([\"rm\", archiveName + \".tar.bz2\"])\n"
-  "  runHiddenCommand ([\"tar\", \"xf\", archiveName + \".tar\"])\n"
-  "  runHiddenCommand ([\"rm\", archiveName + \".tar\"])\n"
-  "#---\n"
-  "os.chdir (scriptDir)\n"
-  "print \"Product directory: \" + scriptDir\n"
-  "#--- Build python makefile\n"
-  "makefile = Make ()\n"
-  "#--- Add C files compile rule\n"
-  "objectList = []\n"
-  "asObjectList = []\n"
-  "for source in sourceList ():\n"
-  "#--- Compile\n"
-  "  object = objectDir () + \"/\" + source + \".o\"\n"
-  "  rule = Rule (object, \"Compiling \" + source)\n"
-  "  rule.mDependences.append (\"sources/\" + source)\n"
-  "  rule.mCommand += compiler ()\n"
-  "  rule.mCommand += cCompilerOptions ()\n"
-  "  rule.mCommand += [\"-c\", \"sources/\" + source]\n"
-  "  rule.mCommand += [\"-o\", object]\n"
-  "  rule.enterSecondaryDependanceFile (object + \".dep\")\n"
-  "  makefile.addRule (rule)\n"
-  "  objectList.append (object)\n"
-  "#--- Assembling\n"
-  "  asObject = asDir () + \"/\" + source + \".s\"\n"
-  "  rule = Rule (asObject, \"Assembling \" + source)\n"
-  "  rule.mDependences.append (\"sources/\" + source)\n"
-  "  rule.mCommand += compiler ()\n"
-  "  rule.mCommand += cCompilerOptions ()\n"
-  "  rule.mCommand += [\"-S\", \"sources/\" + source]\n"
-  "  rule.mCommand += [\"-o\", asObject]\n"
-  "  rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
-  "  makefile.addRule (rule)\n"
-  "  asObjectList.append (asObject)\n"
-  "#--- Add linker rule\n"
-  "productELF = productDir () + \"/product.elf\"\n"
-  "rule = Rule (productELF, \"Linking \" + productELF)\n"
-  "rule.mDependences += objectList\n"
-  "rule.mCommand += linker ()\n"
-  "rule.mCommand += linkerOptions ()\n"
-  "rule.mCommand += objectList\n"
-  "rule.mCommand += [\"-o\", productELF]\n"
-  "rule.mCommand += [\"-Tsources/linker.ld\"]\n"
-  "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
-  "makefile.addRule (rule)\n"
-  "#--- Add objcopy rule\n"
-  "productHEX = productDir () + \"/product.ihex\"\n"
-  "rule = Rule (productHEX, \"Hexing \" + productHEX)\n"
-  "rule.mDependences += [productELF]\n"
-  "rule.mCommand += objcopy ()\n"
-  "rule.mCommand += [\"-O\", \"ihex\"]\n"
-  "rule.mCommand += [productELF]\n"
-  "rule.mCommand += [productHEX]\n"
-  "makefile.addRule (rule)\n"
-  "#--- Add goals\n"
-  "makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
-  "makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
-  "makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
-  "makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
-  "makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
-  "#--- Build\n"
-  "#makefile.printRules ()\n"
-  "makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)\n"
-  "#--- Build Ok \?\n"
-  "makefile.printErrorCountAndExitOnError ()\n"
-  "#--- Run \?\n"
-  "if goal == \"run\":\n"
-  "  print BOLD_BLUE () + \"Loading Teensy...\" + ENDC ()\n"
-  "  childProcess = subprocess.Popen ([teensyLoader (), \"-w\", \"-v\", \"-mmcu=mk20dx128\", productHEX])\n"
-  "#--- Wait for subprocess termination\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "  else:\n"
-  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
-  "elif goal == \"display-object-size\":\n"
-  "  print BOLD_BLUE () + \"Display Object Sizes\" + ENDC ()\n"
-  "  childProcess = subprocess.Popen (displayObjectSize () + objectList + [\"-t\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "  else:\n"
-  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n"
-  "elif goal == \"object-dump\":\n"
-  "  print BOLD_BLUE () + \"Dump Object Code\" + ENDC ()\n"
-  "  childProcess = subprocess.Popen (dumpObjectCode () + [productELF, \"-Sdh\", \"-Mforce-thumb\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    print BOLD_RED () + \"Error \" + str (childProcess.returncode) + ENDC ()\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "  else:\n"
-  "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
+  "plm.runMakefile (toolDir (), archiveBaseURL (), cSourceList (), objectDir (), \\\n"
+  "                 compiler (), cCompilerOptions (), productDir (), \\\n"
+  "                 linker (), linkerOptions (), \\\n"
+  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  44570, // Text length
-  gWrapperFileContent_20_embeddedTargets
+  11746, // Text length
+  gWrapperFileContent_21_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7989,152 +7296,17 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_22_embeddedTargets (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_21_embeddedTargets
-) ;
-
-//--- File 'teensy-3-1-sequential-systick/display-obj-dump.py'
-
-const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_22_embeddedTargets (
-  "display-obj-dump.py",
-  "py",
-  true, // Text file
-  1005, // Text length
   gWrapperFileContent_22_embeddedTargets
 ) ;
 
-//--- File 'teensy-3-1-sequential-systick/display-obj-size.py'
+//--- File 'teensy-3-1-sequential-systick/linker.ld'
 
-const char * gWrapperFileContent_23_embeddedTargets = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_23_embeddedTargets (
-  "display-obj-size.py",
-  "py",
-  true, // Text file
-  1013, // Text length
-  gWrapperFileContent_23_embeddedTargets
-) ;
-
-//--- File 'teensy-3-1-sequential-systick/flash-and-run.py'
-
-const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "try:\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.wait ()\n"
-  "  if childProcess.returncode != 0 :\n"
-  "    sys.exit (childProcess.returncode)\n"
-  "except :\n"
-  "    sys.exit (1)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_24_embeddedTargets (
-  "flash-and-run.py",
-  "py",
-  true, // Text file
-  1036, // Text length
-  gWrapperFileContent_24_embeddedTargets
-) ;
-
-//--- File 'sources/linker.ld'
-
-const char * gWrapperFileContent_25_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_23_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -8292,17 +7464,152 @@ const char * gWrapperFileContent_25_embeddedTargets = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_23_embeddedTargets (
   "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
+  gWrapperFileContent_23_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/objdump.py'
+
+const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"object-dump\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_24_embeddedTargets (
+  "objdump.py",
+  "py",
+  true, // Text file
+  1005, // Text length
+  gWrapperFileContent_24_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/objsize.py'
+
+const char * gWrapperFileContent_25_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"display-object-size\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "if childProcess.poll () == None :\n"
+  "  childProcess.wait ()\n"
+  "if childProcess.returncode != 0 :\n"
+  "  sys.exit (childProcess.returncode)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_25_embeddedTargets (
+  "objsize.py",
+  "py",
+  true, // Text file
+  1013, // Text length
   gWrapperFileContent_25_embeddedTargets
 ) ;
 
-//--- File 'sources/target-exception.c'
+//--- File 'teensy-3-1-sequential-systick/run.py'
 
-const char * gWrapperFileContent_26_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_26_embeddedTargets = "#! /usr/bin/env python\n"
+  "# -*- coding: UTF-8 -*-\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
+  "\n"
+  "import subprocess\n"
+  "import sys\n"
+  "import os\n"
+  "import atexit\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "def cleanup():\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.kill ()\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n"
+  "\n"
+  "#--- Register a function for killing subprocess\n"
+  "atexit.register (cleanup)\n"
+  "#--- Get script absolute path\n"
+  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
+  "os.chdir (scriptDir)\n"
+  "#---\n"
+  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"run\"])\n"
+  "#--- Wait for subprocess termination\n"
+  "try:\n"
+  "  if childProcess.poll () == None :\n"
+  "    childProcess.wait ()\n"
+  "  if childProcess.returncode != 0 :\n"
+  "    sys.exit (childProcess.returncode)\n"
+  "except :\n"
+  "    sys.exit (1)\n"
+  "\n"
+  "#------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_26_embeddedTargets (
+  "run.py",
+  "py",
+  true, // Text file
+  1036, // Text length
+  gWrapperFileContent_26_embeddedTargets
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/target-exception.c'
+
+const char * gWrapperFileContent_27_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void raise_exception (const type_Int32 inCode,\n"
   "                             const char * inSourceFile,\n"
@@ -8315,17 +7622,17 @@ const char * gWrapperFileContent_26_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_27_embeddedTargets (
   "target-exception.c",
   "c",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_26_embeddedTargets
+  gWrapperFileContent_27_embeddedTargets
 ) ;
 
-//--- File 'sources/target.c'
+//--- File 'teensy-3-1-sequential-systick/target.c'
 
-const char * gWrapperFileContent_27_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_28_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Boot routines\n"
@@ -8516,56 +7823,33 @@ const char * gWrapperFileContent_27_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_27_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_28_embeddedTargets (
   "target.c",
   "c",
   true, // Text file
   5256, // Text length
-  gWrapperFileContent_27_embeddedTargets
-) ;
-
-//--- All files of 'sources' directory
-
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_5 [4] = {
-  & gWrapperFile_25_embeddedTargets,
-  & gWrapperFile_26_embeddedTargets,
-  & gWrapperFile_27_embeddedTargets,
-  NULL
-} ;
-
-//--- All sub-directories of 'sources' directory
-
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_5 [1] = {
-  NULL
-} ;
-
-//--- Directory 'sources'
-
-const cDirectoryWrapper gWrapperDirectory_5_embeddedTargets (
-  "sources",
-  3,
-  gWrapperAllFiles_embeddedTargets_5,
-  0,
-  gWrapperAllDirectories_embeddedTargets_5
+  gWrapperFileContent_28_embeddedTargets
 ) ;
 
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [8] = {
-  & gWrapperFile_18_embeddedTargets,
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [11] = {
   & gWrapperFile_19_embeddedTargets,
   & gWrapperFile_20_embeddedTargets,
   & gWrapperFile_21_embeddedTargets,
   & gWrapperFile_22_embeddedTargets,
   & gWrapperFile_23_embeddedTargets,
   & gWrapperFile_24_embeddedTargets,
+  & gWrapperFile_25_embeddedTargets,
+  & gWrapperFile_26_embeddedTargets,
+  & gWrapperFile_27_embeddedTargets,
+  & gWrapperFile_28_embeddedTargets,
   NULL
 } ;
 
 //--- All sub-directories of 'teensy-3-1-sequential-systick' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [2] = {
-  & gWrapperDirectory_5_embeddedTargets,
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [1] = {
   NULL
 } ;
 
@@ -8573,18 +7857,19 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_embeddedTargets (
   "teensy-3-1-sequential-systick",
-  7,
+  10,
   gWrapperAllFiles_embeddedTargets_4,
-  1,
+  0,
   gWrapperAllDirectories_embeddedTargets_4
 ) ;
 
 //--- All files of '' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_0 [4] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_0 [5] = {
   & gWrapperFile_0_embeddedTargets,
   & gWrapperFile_1_embeddedTargets,
   & gWrapperFile_2_embeddedTargets,
+  & gWrapperFile_3_embeddedTargets,
   NULL
 } ;
 
@@ -8601,7 +7886,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_0 [4] = 
 
 const cDirectoryWrapper gWrapperDirectory_0_embeddedTargets (
   "",
-  3,
+  4,
   gWrapperAllFiles_embeddedTargets_0,
   3,
   gWrapperAllDirectories_embeddedTargets_0
@@ -20481,4 +19766,684 @@ GALGAS_string categoryReader_requiredActualPassingModeForSelector (const GALGAS_
 
 
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Abstract category method '@expressionAST analyzeExpression'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_expressionAST_analyzeExpression> gCategoryMethodTable_expressionAST_analyzeExpression ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_analyzeExpression (const int32_t inClassIndex,
+                                            categoryMethodSignature_expressionAST_analyzeExpression inMethod) {
+  gCategoryMethodTable_expressionAST_analyzeExpression.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_expressionAST_analyzeExpression (void) {
+  gCategoryMethodTable_expressionAST_analyzeExpression.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_expressionAST_analyzeExpression (NULL,
+                                                            freeCategoryMethod_expressionAST_analyzeExpression) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_analyzeExpression (const cPtr_expressionAST * inObject,
+                                           const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                           const GALGAS_receiverType constin_inReceiverType,
+                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           const GALGAS_stringset constin_inModes,
+                                           const GALGAS_bool constin_inAllowExceptions,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_variableMap & io_ioVariableMap,
+                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                           GALGAS_unifiedTypeMap_2D_proxy & out_outExpressionType,
+                                           GALGAS_variableKindIR & out_outResultValueName,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+  out_outExpressionType.drop () ;
+  out_outResultValueName.drop () ;
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_expressionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_expressionAST_analyzeExpression f = NULL ;
+    if (classIndex < gCategoryMethodTable_expressionAST_analyzeExpression.count ()) {
+      f = gCategoryMethodTable_expressionAST_analyzeExpression (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_expressionAST_analyzeExpression.count ()) {
+           f = gCategoryMethodTable_expressionAST_analyzeExpression (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_expressionAST_analyzeExpression.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inRoutineNameForInvocationGraph, constin_inReceiverType, constin_inTargetType, constin_inContext, constin_inModes, constin_inAllowExceptions, io_ioTemporaries, io_ioGlobalLiteralStringMap, io_ioVariableMap, io_ioInstructionGenerationList, out_outExpressionType, out_outResultValueName, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Abstract category method '@instructionAST analyze'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_instructionAST_analyze> gCategoryMethodTable_instructionAST_analyze ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_analyze (const int32_t inClassIndex,
+                                  categoryMethodSignature_instructionAST_analyze inMethod) {
+  gCategoryMethodTable_instructionAST_analyze.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_instructionAST_analyze (void) {
+  gCategoryMethodTable_instructionAST_analyze.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_instructionAST_analyze (NULL,
+                                                   freeCategoryMethod_instructionAST_analyze) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_analyze (const cPtr_instructionAST * inObject,
+                                 const GALGAS_lstring constin_inRoutineNameForInvocationGraph,
+                                 const GALGAS_receiverType constin_inReceiverType,
+                                 const GALGAS_semanticContext constin_inContext,
+                                 const GALGAS_stringset constin_inModeSet,
+                                 const GALGAS_bool constin_inAllowExceptions,
+                                 GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                 GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                 GALGAS_variableMap & io_ioVariableMap,
+                                 GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                 C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_instructionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_instructionAST_analyze f = NULL ;
+    if (classIndex < gCategoryMethodTable_instructionAST_analyze.count ()) {
+      f = gCategoryMethodTable_instructionAST_analyze (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_instructionAST_analyze.count ()) {
+           f = gCategoryMethodTable_instructionAST_analyze (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_instructionAST_analyze.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inRoutineNameForInvocationGraph, constin_inReceiverType, constin_inContext, constin_inModeSet, constin_inAllowExceptions, io_ioTemporaries, io_ioGlobalLiteralStringMap, io_ioVariableMap, io_ioInstructionGenerationList, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListAST analyzeBranchInstructionList'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeBranchInstructionList (const GALGAS_instructionListAST inObject,
+                                                  const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
+                                                  GALGAS_location inArgument_inEndOfInstructionList,
+                                                  const GALGAS_receiverType constinArgument_inReceiverType,
+                                                  const GALGAS_semanticContext constinArgument_inContext,
+                                                  const GALGAS_stringset constinArgument_inModeSet,
+                                                  const GALGAS_bool constinArgument_inAllowExceptions,
+                                                  GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                  GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                  GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                  GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  {
+  ioArgument_ioVariableMap.modifier_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 66)) ;
+  }
+  const GALGAS_instructionListAST temp_0 = inObject ;
+  cEnumerator_instructionListAST enumerator_3110 (temp_0, kEnumeration_up) ;
+  while (enumerator_3110.hasCurrentObject ()) {
+    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_3110.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 68)) ;
+    enumerator_3110.gotoNextObject () ;
+  }
+  {
+  ioArgument_ioVariableMap.modifier_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 81)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListAST analyzeRoutineInstructionList'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_analyzeRoutineInstructionList (const GALGAS_instructionListAST inObject,
+                                                   const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
+                                                   const GALGAS_receiverType constinArgument_inReceiverType,
+                                                   const GALGAS_semanticContext constinArgument_inContext,
+                                                   const GALGAS_stringset constinArgument_inModeSet,
+                                                   const GALGAS_bool constinArgument_inAllowExceptions,
+                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                   GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                   GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_instructionListAST temp_0 = inObject ;
+  cEnumerator_instructionListAST enumerator_4283 (temp_0, kEnumeration_up) ;
+  while (enumerator_4283.hasCurrentObject ()) {
+    callCategoryMethod_analyze ((const cPtr_instructionAST *) enumerator_4283.current_mInstruction (HERE).ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 98)) ;
+    enumerator_4283.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category Reader '@instructionListIR instructionListCode'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string categoryReader_instructionListCode (const GALGAS_instructionListIR & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outCode ; // Returned variable
+  result_outCode = GALGAS_string::makeEmptyString () ;
+  {
+  result_outCode.modifier_incIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 118)) ;
+  }
+  const GALGAS_instructionListIR temp_0 = inObject ;
+  cEnumerator_instructionListIR enumerator_5192 (temp_0, kEnumeration_up) ;
+  while (enumerator_5192.hasCurrentObject ()) {
+    result_outCode.dotAssign_operation (callCategoryReader_instructionCode ((const cPtr_abstractInstructionIR *) enumerator_5192.current_mInstructionGeneration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 120))  COMMA_SOURCE_FILE ("instructionList.galgas", 120)) ;
+    enumerator_5192.gotoNextObject () ;
+  }
+  {
+  result_outCode.modifier_decIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 122)) ;
+  }
+//---
+  return result_outCode ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Abstract category method '@abstractDeclaration enterInPrecedenceGraph'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph> gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInPrecedenceGraph (const int32_t inClassIndex,
+                                                 categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph inMethod) {
+  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph (void) {
+  gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_enterInPrecedenceGraph (NULL,
+                                                                       freeCategoryMethod_abstractDeclaration_enterInPrecedenceGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration * inObject,
+                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_enterInPrecedenceGraph f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_enterInPrecedenceGraph.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
+                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
+                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_string result ;
+//--- Find Reader
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
+    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      result = f (inObject, inCompiler COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Abstract category method '@abstractDeclaration enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInContext> gCategoryMethodTable_abstractDeclaration_enterInContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
+                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) {
+  gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_enterInContext (void) {
+  gCategoryMethodTable_abstractDeclaration_enterInContext.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_enterInContext (NULL,
+                                                               freeCategoryMethod_abstractDeclaration_enterInContext) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObject,
+                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                        GALGAS_semanticContext & io_ioContext,
+                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_enterInContext f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_enterInContext (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_enterInContext (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category method '@abstractDeclaration semanticAnalysis'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_semanticAnalysis> gCategoryMethodTable_abstractDeclaration_semanticAnalysis ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
+                                           categoryMethodSignature_abstractDeclaration_semanticAnalysis inMethod) {
+  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_semanticAnalysis (void) {
+  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
+                                                                 freeCategoryMethod_abstractDeclaration_semanticAnalysis) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
+                                          const GALGAS_semanticContext constin_inContext,
+                                          GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_semanticAnalysis f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inContext, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
+mAttribute_mTemporaryIndex (),
+mAttribute_mExceptionSetupRoutinePriorityMap (),
+mAttribute_mExceptionLoopRoutinePriorityMap (),
+mAttribute_mInitRoutinePriorityMap (),
+mAttribute_mBootRoutinePriorityMap (),
+mAttribute_mSubprogramInvocationGraph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::~ GALGAS_semanticTemporariesStruct (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS_uint & inOperand0,
+                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                    const GALGAS_subprogramInvocationGraph & inOperand5) :
+mAttribute_mTemporaryIndex (inOperand0),
+mAttribute_mExceptionSetupRoutinePriorityMap (inOperand1),
+mAttribute_mExceptionLoopRoutinePriorityMap (inOperand2),
+mAttribute_mInitRoutinePriorityMap (inOperand3),
+mAttribute_mBootRoutinePriorityMap (inOperand4),
+mAttribute_mSubprogramInvocationGraph (inOperand5) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_semanticTemporariesStruct (GALGAS_uint::constructor_default (HERE),
+                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_initRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_bootRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_subprogramInvocationGraph::constructor_emptyGraph (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_new (const GALGAS_uint & inOperand0,
+                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                                    const GALGAS_subprogramInvocationGraph & inOperand5 
+                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_semanticTemporariesStruct result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mTemporaryIndex.objectCompare (inOperand.mAttribute_mTemporaryIndex) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mExceptionSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionSetupRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mExceptionLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionLoopRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mInitRoutinePriorityMap.objectCompare (inOperand.mAttribute_mInitRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBootRoutinePriorityMap.objectCompare (inOperand.mAttribute_mBootRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubprogramInvocationGraph.objectCompare (inOperand.mAttribute_mSubprogramInvocationGraph) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_semanticTemporariesStruct::isValid (void) const {
+  return mAttribute_mTemporaryIndex.isValid () && mAttribute_mExceptionSetupRoutinePriorityMap.isValid () && mAttribute_mExceptionLoopRoutinePriorityMap.isValid () && mAttribute_mInitRoutinePriorityMap.isValid () && mAttribute_mBootRoutinePriorityMap.isValid () && mAttribute_mSubprogramInvocationGraph.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTemporariesStruct::drop (void) {
+  mAttribute_mTemporaryIndex.drop () ;
+  mAttribute_mExceptionSetupRoutinePriorityMap.drop () ;
+  mAttribute_mExceptionLoopRoutinePriorityMap.drop () ;
+  mAttribute_mInitRoutinePriorityMap.drop () ;
+  mAttribute_mBootRoutinePriorityMap.drop () ;
+  mAttribute_mSubprogramInvocationGraph.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString << "<struct @semanticTemporariesStruct:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mTemporaryIndex.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mExceptionSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mExceptionLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_semanticTemporariesStruct::reader_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTemporaryIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mExceptionSetupRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mExceptionLoopRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInitRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBootRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::reader_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubprogramInvocationGraph ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @semanticTemporariesStruct type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_semanticTemporariesStruct ("semanticTemporariesStruct",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_semanticTemporariesStruct::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_semanticTemporariesStruct::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_semanticTemporariesStruct (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_semanticTemporariesStruct result ;
+  const GALGAS_semanticTemporariesStruct * p = (const GALGAS_semanticTemporariesStruct *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_semanticTemporariesStruct *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("semanticTemporariesStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
 

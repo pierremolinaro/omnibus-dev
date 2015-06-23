@@ -2168,6 +2168,17 @@ class cPtr_abstractTypeIR : public acPtr_class {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Function 'getTargetTextFile'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_getTargetTextFile (const class GALGAS_string & constinArgument0,
+                                                const class GALGAS_string & constinArgument1,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                       Abstract category reader '@abstractTypeIR headerCodeGenerationForType'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2266,7 +2277,6 @@ class GALGAS_string categoryReader_headerCodeGenerationForRegister (const class 
 void routine_generateTarget (const class GALGAS_string constinArgument0,
                              const class GALGAS_string constinArgument1,
                              const class GALGAS_lstring constinArgument2,
-                             class GALGAS_stringlist & outArgument3,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -2304,6 +2314,7 @@ extern const char * gWrapperFileContent_24_targetTemplates ;
 extern const char * gWrapperFileContent_25_targetTemplates ;
 extern const char * gWrapperFileContent_26_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;
+extern const char * gWrapperFileContent_28_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2338,6 +2349,7 @@ extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2346,6 +2358,5 @@ extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
 
 #endif
