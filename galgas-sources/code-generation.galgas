@@ -103,7 +103,6 @@ proc codeGeneration
     !currentDir:inCurrentDirectory
     !productDirectory:productDirectory
     !targetName:inTargetName
-    ?filesToInclude:let @stringlist builtinFiles
   )
 #--- Generate C file
   var code = ""
@@ -143,11 +142,21 @@ proc codeGeneration
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure headerCodeGeneration]
   end
-  code += titleComment (!"System code")
-  for (file) in builtinFiles do
-    code += "#include \"" + file + "\"\n"
+#--- Include target specific files
+  code += titleComment (!"Target specific code")
+  let targetSpecificFileContents = getTargetTextFile (
+     !currentDir:inCurrentDirectory
+     !from:inTargetName.string + "/target.c"
+  )
+  code += targetSpecificFileContents + "\n"
+  if not [option plm_options.noExceptionGeneration value] then
+    let targetExceptionSpecificFileContents = getTargetTextFile (
+       !currentDir:inCurrentDirectory
+       !from:inTargetName.string + "/target-exception.c"
+    )
+    code += titleComment (!"Target exception specific code")
+    code += targetExceptionSpecificFileContents + "\n"
   end
-  code += "\n"
 #--- Boot
   code += titleComment (!"Boot")
   code += "static void boot (void) {\n"

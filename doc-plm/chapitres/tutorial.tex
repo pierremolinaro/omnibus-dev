@@ -324,29 +324,33 @@ Les fichiers produits par la compilation sont regroupés dans un répertoire not
   \item le chemin vers le répertoire \texttt{ws} est obtenu en préfixant par \texttt{$\sim$/plm-product/}, où $\sim$ est le répertoire \emph{home} de l'utilisateur : \colorbox{gray!25}{\tt$\sim$/plm-product/+chemin+absolu+f{}ichier}.
 \end{itemize}
 
-\begin{table}[t]
+\begin{table}[t!]
 \centering
-\begin{tabular}{lp{12cm}}
+\begin{tabular}{p{2cm}p{11cm}}
   \textbf{Nom} & \textbf{Commentaire} \\
   \texttt{build.py} & Effectue la compilation de \texttt{plm.c}, l'assemblage de \texttt{plm.s}, et l'édition de liens afin d'obtenir l'exécutable \texttt{plm.elf}, comme décrit à la \refFigure{}{compilationProgrammePLM}. \\
+  \texttt{build-as.py} & Effectue la compilation de \texttt{plm.c} jusqu'à la génération d'un fichier assembleur \texttt{plm.c.s} qui est placé dans \texttt{ws/objects}. Cette opération permet de connaître la traduction en assembleur du source C.\\
+  \texttt{build-verbose.py} & Effectue les mêmes opérations que \texttt{build.py}, mais affiche les lignes de commande.\\
   \texttt{run.py} & Construit l'exécutable \texttt{plm.elf} (comme le fait \texttt{build.py}), et lance l'exécution sur la cible. Équivalent à l'option \texttt{-f} de la ligne de commande. \\
   \texttt{clean.py} & Supprime les répertoires \texttt{ws/objects} et \texttt{ws/product}. \\
+  \texttt{objdump.py} & Effectue les mêmes opérations que \texttt{build.py}, puis affiche le code machine obtenu désassemblé. \\
+  \texttt{objsize.py} & Effectue les mêmes opérations que \texttt{build.py}, puis affiche la taille du code engendré. \\
 \end{tabular}
-\caption{Scripts Python engendrés dans le répertoire \texttt{ws} par la compilation}
+\caption{Scripts Python engendrés dans le répertoire \texttt{ws}}
 \labelTableau{scriptsPythonEngendres}
 \ligne
 \end{table}
 
 \begin{table}[t!]
 \centering
-\begin{tabular}{lp{12cm}}
+\begin{tabular}{p{2cm}p{11cm}}
   \textbf{Nom} & \textbf{Commentaire} \\
   \texttt{plm.c} & Contient tout le code C de l'application. \\
   \texttt{plm.s} & Contient tout le code assembleur de l'application. En fonction de la cible, ce fichier peut être vide.\\
   \texttt{make.py} & Makefile générique écrit en Python.\\
   \texttt{plm.py} & Configuration du makefile générique pour la compilation PLM.\\
 \end{tabular}
-\caption{Fichiers engendrés dans le répertoire \texttt{ws/sources} par la compilation}
+\caption{Fichiers engendrés dans le répertoire \texttt{ws/sources}}
 \labelTableau{fichiersSourcesEngendres}
 \ligne
 \end{table}

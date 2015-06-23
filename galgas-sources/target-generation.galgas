@@ -21,7 +21,7 @@ syntax extension plm_specific_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "mke", "h", "c", "s", "plm", "plm-target"
+  "py", "ld", "c", "s", "plm", "plm-target"
 }{
 }{
 }
@@ -32,105 +32,118 @@ proc generateTarget
   ?currentDir:let @string inCurrentDirectory
   ?productDirectory:let @string inProductDirectory
   ?targetName:let @lstring inTargetName
-  !filesToInclude:@stringlist outFilesToInclude
 {
-  if [option plm_options.useDirAsTargetDir value] == "" then
-    generateTargetFromEmbeddedFiles (
-      !productDirectory:inProductDirectory
-      !targetName:inTargetName
-      ?filesToInclude:outFilesToInclude
-    )
+#--- Copy make.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:"make.py"
+    !to:inProductDirectory + "/sources/make.py"
+  )
+#--- Copy plm.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:"plm.py"
+    !to:inProductDirectory + "/sources/plm.py"
+  )
+#--- Copy linker.ld
+  copyTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/linker.ld"
+    !to:inProductDirectory + "/sources/linker.ld"
+  )
+#--- Copy build.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/build.py"
+    !to:inProductDirectory + "/build.py"
+  )
+#--- Copy build-as.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/build-as.py"
+    !to:inProductDirectory + "/build-as.py"
+  )
+#--- Copy build-verbose.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/build-verbose.py"
+    !to:inProductDirectory + "/build-verbose.py"
+  )
+#--- Copy clean.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/clean.py"
+    !to:inProductDirectory + "/clean.py"
+  )
+#--- Copy objsize.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/objsize.py"
+    !to:inProductDirectory + "/objsize.py"
+  )
+#--- Copy objdump.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/objdump.py"
+    !to:inProductDirectory + "/objdump.py"
+  )
+#--- Copy run.py
+  copyExecutableFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/run.py"
+    !to:inProductDirectory + "/run.py"
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc copyExecutableFile
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+{
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
+    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   else
     let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    generateTargetFromFileSystem (
-      !targetDefinitionDirectory:targetDefinitionDir
-      !productDirectory:inProductDirectory
-      !targetName:inTargetName
-      ?filesToInclude:outFilesToInclude
-    )
+    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private proc generateTargetFromEmbeddedFiles
-  ?productDirectory:let @string inProductDirectory
-  ?targetName:let @lstring inTargetName
-  !filesToInclude:@stringlist outFilesToInclude
+private proc copyTextFile
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
 {
-  outFilesToInclude = {}
-  @filewrapper fw = [filewrapper targetTemplates]
-  let targetPath = inTargetName.string
-  if [fw directoryExistsAtPath !targetPath] then
-    for (path) in [fw textFilesAtPath !targetPath] do
-      let s = [fw textFileContentsAtPath !targetPath + "/" + path]
-      if [path pathExtension] == "py" then
-        [s writeToExecutableFileWhenDifferentContents !inProductDirectory + "/" + path ?*]      else
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/" + path ?*]
-      end
-    end
-    let sourcePath = targetPath + "/sources"
-    for (file) in [fw textFilesAtPath !sourcePath] do
-      if file == "linker.ld" then
-        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-      elsif file == "target.c" then
-        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-        outFilesToInclude += !file
-      elsif (file == "target-exception.c") && not [option plm_options.noExceptionGeneration value] then
-        let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-        outFilesToInclude += !file
-      end
-    end
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
+    [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   else
-    var s = "cannot find this target; available targets:"
-    for (f) in [fw textFilesAtPath !""] do
-      if [f pathExtension] == "plm-target" then
-        s += "\n - " + [f stringByDeletingPathExtension]
-      end
-    end
-    error inTargetName : s
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private proc generateTargetFromFileSystem
-  ?targetDefinitionDirectory:let @string inTargetDefinitionDir
-  ?productDirectory:let @string inProductDirectory
-  ?targetName:let @lstring inTargetName
-  !filesToInclude:@stringlist outFilesToInclude
+func getTargetTextFile
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inTargetFile
+  -> @string outContents
 {
-  outFilesToInclude = {}
-  let targetPath = inTargetDefinitionDir + "/" + inTargetName.string
-  if [targetPath directoryExists] then
-    for (path) in [targetPath regularFiles !false] do
-      let s = @string.stringWithContentsOfFile {!targetPath + "/" + path}
-      if [path pathExtension] == "py" then
-        [s writeToExecutableFileWhenDifferentContents !inProductDirectory + "/" + path ?*]      else
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/" + path ?*]
-      end
-    end
-    let sourcePath = targetPath + "/sources"
-    for (file) in [sourcePath regularFiles !false] do
-      if file == "linker.ld" then
-        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-      elsif file == "target.c" then
-        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-        outFilesToInclude += !file
-      elsif (file == "target-exception.c") && not [option plm_options.noExceptionGeneration value] then
-        let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
-        [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
-        outFilesToInclude += !file
-      end
-    end
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    outContents = [fw textFileContentsAtPath !inTargetFile]
   else
-    let s = "cannot find '" + inTargetName + "' directory in target definition directory '" + inTargetDefinitionDir + "'"
-    error inTargetName : s
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    outContents = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inTargetFile}
   end
 }
 
