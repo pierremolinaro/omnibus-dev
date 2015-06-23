@@ -258,3 +258,100 @@ proc loop $user () {
 
 Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un argument formel en entrée, dont le sélecteur est \plm+?ms:+. L'instruction d'appel devra donc comporter un paramètre effectif en sortie (donc son sélecteur commence par « \texttt{!} »), et de même nom : le sélecteur du paramètre effectif est donc \plm+!ms:+. En ce qui concerne les modes, la routine appelée \plm+wait+ est déclarée avec le mode \plm+$user+, comme la routine appelante \plm+loop+ : l'appel est donc valide.
 
+
+
+\section{Fichiers produits par la compilation}
+
+À titre d'information, on décrit l'organisation des fichiers produits par la compilation d'un fichier \texttt{f{}ichier.plm}. Cette organisation est résumée par la \refFigure{}{compilationProgrammePLM}.
+
+\begin{figure}[ht]
+  \centering
+  \footnotesize
+  \begin{tikzpicture}[
+      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.6cm, minimum width=1.4cm},
+      node distance=0.5cm and 1.4cm
+    ]
+    \node [block] (plm) {\tt f{}ichier.plm} ;
+    \node (ws) [right=of plm, minimum height=0.6cm, minimum width=1.4cm] {} ;
+    \node [block] (plmc) [right=of ws] {\tt plm.c} ;
+    \node [block] (plms) [below=of plmc] {\tt plm.s} ;
+    \node [block] (plmco) [right=of plmc] {\tt plm.c.o} ;
+    \node [block] (plmso) [right=of plms] {\tt plm.s.o} ;
+    \node [block] (link) [below=of plms] {\tt link.ld} ;
+    \node [block] (elf) [right=of plmso] {\tt plm.elf} ;
+    \node (elf2) [above=of elf, minimum height=0.6cm] {};
+    \node [block] (make) [below=of link] {\tt make.py};
+    \node [block] (makeplm) [below=of make] {\tt plm.py};
+    \node [block] (clean) [left=of link] {\tt clean.py};
+    \node [block] (build) [left=of make] {\tt build.py};
+    \node [block] (run) [left=of plms] {\tt run.py};
+
+    \draw [-stealth, thick] (plm) to node [above] {\tt plm} (plmc) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (plms.west) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (link) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (make) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (makeplm) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (build) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (run) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (clean) ;
+    \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
+    \draw [-stealth, thick] (plms) to node[above] {\tt gcc} (plmso) ;
+    \draw [-stealth, thick] (plmso) to node[above right] {\tt gcc} (elf) ;
+    \draw [thick] (plmco.east) -- +(0.7, 0) |- (elf.west) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (plmco.east) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (link.east) ;
+    
+    \begin{scope}[node distance=5mm]
+    \node (repws) [above=of ws] {\tt ws/} ;
+    \node (source) [above=of plmc] {\tt ws/sources/} ;
+    \node (objects) [above=of plmco] {\tt ws/objects/} ;
+    \node (product) [above=of elf2] {\tt ws/product/} ;
+    \node (titre) [above=of plm] {Répertoires :} ;
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Fichiers produits par la compilation d'un programme PLM}
+  \labelFigure{compilationProgrammePLM}
+  \ligne
+\end{figure}
+
+
+
+Les fichiers produits par la compilation sont regroupés dans un répertoire noté \texttt{ws} dans la \refFigure{}{compilationProgrammePLM}, et obtenu de la façon suivante :
+\begin{itemize}
+  \item on considère le chemin absolu du fichier source ; par exemple, pour {\tt f{}ichier.plm} situé dans le répertoire courant \texttt{/chemin/absolu} : \colorbox{gray!25}{\tt/chemin/absolu/f{}ichier.plm} ;
+  \item on retire l'extension du fichier source ; \colorbox{gray!25}{\tt/chemin/absolu/f{}ichier} ;
+  \item on remplace chaque « \texttt{/} » par un « \texttt{+} » : \colorbox{gray!25}{\tt+chemin+absolu+f{}ichier} ;
+  \item le chemin vers le répertoire \texttt{ws} est obtenu en préfixant par \texttt{$\sim$/plm-product/}, où $\sim$ est le répertoire \emph{home} de l'utilisateur : \colorbox{gray!25}{\tt$\sim$/plm-product/+chemin+absolu+f{}ichier}.
+\end{itemize}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lp{12cm}}
+  \textbf{Nom} & \textbf{Commentaire} \\
+  \texttt{build.py} & Effectue la compilation de \texttt{plm.c}, l'assemblage de \texttt{plm.s}, et l'édition de liens afin d'obtenir l'exécutable \texttt{plm.elf}, comme décrit à la \refFigure{}{compilationProgrammePLM}. \\
+  \texttt{run.py} & Construit l'exécutable \texttt{plm.elf} (comme le fait \texttt{build.py}), et lance l'exécution sur la cible. Équivalent à l'option \texttt{-f} de la ligne de commande. \\
+  \texttt{clean.py} & Supprime les répertoires \texttt{ws/objects} et \texttt{ws/product}. \\
+\end{tabular}
+\caption{Scripts Python engendrés dans le répertoire \texttt{ws} par la compilation}
+\labelTableau{scriptsPythonEngendres}
+\ligne
+\end{table}
+
+\begin{table}[t!]
+\centering
+\begin{tabular}{lp{12cm}}
+  \textbf{Nom} & \textbf{Commentaire} \\
+  \texttt{plm.c} & Contient tout le code C de l'application. \\
+  \texttt{plm.s} & Contient tout le code assembleur de l'application. En fonction de la cible, ce fichier peut être vide.\\
+  \texttt{make.py} & Makefile générique écrit en Python.\\
+  \texttt{plm.py} & Configuration du makefile générique pour la compilation PLM.\\
+\end{tabular}
+\caption{Fichiers engendrés dans le répertoire \texttt{ws/sources} par la compilation}
+\labelTableau{fichiersSourcesEngendres}
+\ligne
+\end{table}
+
+La compilation place dans le répertoire \texttt{ws} les scripts \emph{python} décrits par le \refTableau{scriptsPythonEngendres}. Ces scripts peuvent être appelés directement à partir de la ligne de commande.
+
+
+Le répertoire \texttt{ws/sources} contient les fichiers décrits dans le \refTableau{fichiersSourcesEngendres}, \texttt{ws/objects} contient les fichiers objets issus de la compilation et l'assemblage, et \texttt{ws/product} le fichier exécutable nommé \texttt{plm.elf}. Suivant la cible, il peut aussi contenir l'exécutable \texttt{plm.ihex} sous le format \emph{hex} d'Intel.
