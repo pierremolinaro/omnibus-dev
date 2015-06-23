@@ -168,28 +168,50 @@ La troisième étape est l'exécution des routines \plm=init=. À partir de cett
 
 \begin{figure}[t]
   \centering
-  \small
+  \footnotesize
   \begin{tikzpicture}[
-      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=1cm, minimum width=2cm},
-      node distance=1.8cm
+      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.6cm, minimum width=1.4cm},
+      node distance=0.5cm and 1.4cm
     ]
-    \node [block] (plm) {\tt programme.plm} ;
-    \node [block] (plmc) [right=of plm] {\tt plm.c} ;
+    \node [block] (plm) {\tt f{}ichier.plm} ;
+    \node (ws) [right=of plm, minimum height=0.6cm, minimum width=1.4cm] {} ;
+    \node [block] (plmc) [right=of ws] {\tt plm.c} ;
     \node [block] (plms) [below=of plmc] {\tt plm.s} ;
     \node [block] (plmco) [right=of plmc] {\tt plm.c.o} ;
     \node [block] (plmso) [right=of plms] {\tt plm.s.o} ;
-    \node [block] (linker) [below=of plmso] {\tt linker.ld} ;
+    \node [block] (link) [below=of plms] {\tt link.ld} ;
     \node [block] (elf) [right=of plmso] {\tt plm.elf} ;
+    \node (elf2) [above=of elf, minimum height=0.6cm] {};
+    \node [block] (make) [below=of link] {\tt make.py};
+    \node [block] (makeplm) [below=of make] {\tt plm.py};
+    \node [block] (clean) [left=of link] {\tt clean.py};
+    \node [block] (build) [left=of make] {\tt build.py};
+    \node [block] (run) [left=of plms] {\tt run.py};
 
-    \draw [-stealth, thick] (plm) to node[above] {\tt plm} (plmc) ;
-    \draw [-stealth, thick] (plm.east) -- +(0.9, 0) |- (plms.west) ;
+    \draw [-stealth, thick] (plm) to node [above] {\tt plm} (plmc) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (plms.west) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (link) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (make) ;
+    \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (makeplm) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (build) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (run) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (clean) ;
     \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
     \draw [-stealth, thick] (plms) to node[above] {\tt gcc} (plmso) ;
     \draw [-stealth, thick] (plmso) to node[above right] {\tt gcc} (elf) ;
-    \draw [thick] (plmco.east) -- +(0.9, 0) |- (elf.west) ;
-    \draw [-stealth, thick] (linker.east) -- +(0.9, 0) |- (elf.west) ;
+    \draw [thick] (plmco.east) -- +(0.7, 0) |- (elf.west) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (plmco.east) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (link.east) ;
+    
+    \begin{scope}[node distance=5mm]
+    \node (repws) [above=of ws] {\tt ws/} ;
+    \node (source) [above=of plmc] {\tt ws/sources/} ;
+    \node (objects) [above=of plmco] {\tt ws/objects/} ;
+    \node (product) [above=of elf2] {\tt ws/product/} ;
+    \node (titre) [above=of plm] {Répertoires :} ;
+    \end{scope}
   \end{tikzpicture}
-  \caption{Compilation d'un programme PLM}
+  \caption{Fichiers et répertoires de compilation d'un programme PLM}
   \labelFigure{compilationProgrammePLM}
   \ligne
 \end{figure}

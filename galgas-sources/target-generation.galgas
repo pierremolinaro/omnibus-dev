@@ -71,7 +71,7 @@ private proc generateTargetFromEmbeddedFiles
     end
     let sourcePath = targetPath + "/sources"
     for (file) in [fw textFilesAtPath !sourcePath] do
-      if file == "linker-script.ld" then
+      if file == "linker.ld" then
         let s = [fw textFileContentsAtPath !sourcePath + "/" + file]
         [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
       elsif file == "target.c" then
@@ -115,7 +115,7 @@ private proc generateTargetFromFileSystem
     end
     let sourcePath = targetPath + "/sources"
     for (file) in [sourcePath regularFiles !false] do
-      if file == "linker-script.ld" then
+      if file == "linker.ld" then
         let s = @string.stringWithContentsOfFile {!sourcePath + "/" + file}
         [s writeToFileWhenDifferentContents !inProductDirectory + "/sources/" + file ?*]
       elsif file == "target.c" then
