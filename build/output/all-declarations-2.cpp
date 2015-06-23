@@ -20925,7 +20925,7 @@ const char * gWrapperFileContent_10_targetTemplates = "#! /usr/bin/env python\n"
   "rule.mCommand += linkerOptions ()\n"
   "rule.mCommand += objectList\n"
   "rule.mCommand += [\"-o\", productELF]\n"
-  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
   "makefile.addRule (rule)\n"
   "#--- Add objcopy rule\n"
@@ -20987,7 +20987,7 @@ const cRegularFileWrapper gWrapperFile_10_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  44328, // Text length
+  44321, // Text length
   gWrapperFileContent_10_targetTemplates
 ) ;
 
@@ -21170,7 +21170,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   gWrapperFileContent_14_targetTemplates
 ) ;
 
-//--- File 'sources/linker-script.ld'
+//--- File 'sources/linker.ld'
 
 const char * gWrapperFileContent_15_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
@@ -21331,7 +21331,7 @@ const char * gWrapperFileContent_15_targetTemplates = "/*-----------------------
   "/*----------------------------------------------------------------------------*/\n" ;
 
 const cRegularFileWrapper gWrapperFile_15_targetTemplates (
-  "linker-script.ld",
+  "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
@@ -22647,7 +22647,7 @@ const char * gWrapperFileContent_20_targetTemplates = "#! /usr/bin/env python\n"
   "rule.mCommand += linkerOptions ()\n"
   "rule.mCommand += objectList\n"
   "rule.mCommand += [\"-o\", productELF]\n"
-  "rule.mCommand += [\"-Tsources/linker-script.ld\"]\n"
+  "rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
   "makefile.addRule (rule)\n"
   "#--- Add objcopy rule\n"
@@ -22709,7 +22709,7 @@ const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  44577, // Text length
+  44570, // Text length
   gWrapperFileContent_20_targetTemplates
 ) ;
 
@@ -22895,7 +22895,7 @@ const cRegularFileWrapper gWrapperFile_24_targetTemplates (
   gWrapperFileContent_24_targetTemplates
 ) ;
 
-//--- File 'sources/linker-script.ld'
+//--- File 'sources/linker.ld'
 
 const char * gWrapperFileContent_25_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
@@ -23056,7 +23056,7 @@ const char * gWrapperFileContent_25_targetTemplates = "/*-----------------------
   "/*----------------------------------------------------------------------------*/\n" ;
 
 const cRegularFileWrapper gWrapperFile_25_targetTemplates (
-  "linker-script.ld",
+  "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
