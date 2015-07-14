@@ -2,7 +2,6 @@
 
 
 //--- END OF USER ZONE 1
-
 //---------------------------------------------------------------------------------------------------------------------*
 
 #import "option-plm_options-cocoa.h"
@@ -122,6 +121,5 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
 
 
 //--- END OF USER ZONE 2
-
 
 

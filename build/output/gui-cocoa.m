@@ -3,7 +3,6 @@
 
 //--- END OF USER ZONE 1
 
-
 #import "OC_Token.h"
 #import "F_CocoaWrapperForGalgas.h"
 #import "lexique-plm_lexique-cocoa.m"
@@ -166,6 +165,5 @@ NSArray * tokenizers (void) {
 
 
 //--- END OF USER ZONE 2
-
 
 
