@@ -268,10 +268,11 @@ Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un ar
   \centering
   \footnotesize
   \begin{tikzpicture}[
-      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.6cm, minimum width=1.4cm},
+      block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.4cm},
+      block2/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.6cm},
       node distance=0.5cm and 1.4cm
     ]
-    \node [block] (plm) {\tt f{}ichier.plm} ;
+    \node [block] (plm) at (0, 0) {\tt f{}ichier.plm} ;
     \node (ws) [right=of plm, minimum height=0.6cm, minimum width=1.4cm] {} ;
     \node [block] (plmc) [right=of ws] {\tt plm.c} ;
     \node [block] (plms) [below=of plmc] {\tt plm.s} ;
@@ -282,21 +283,31 @@ Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un ar
     \node (elf2) [above=of elf, minimum height=0.6cm] {};
     \node [block] (make) [below=of link] {\tt make.py};
     \node [block] (makeplm) [below=of make] {\tt plm.py};
-    \node [block] (clean) [left=of link] {\tt clean.py};
-    \node [block] (build) [left=of make] {\tt build.py};
-    \node [block] (run) [left=of plms] {\tt run.py};
+    \begin{scope}[node distance=0.1cm and 1.6cm]
+      \node [block2] (build) at (3, -0.5) {\tt build.py};
+      \node [block2] (clean) [below=of build] {\tt clean.py};
+      \node [block2] (run) [below=of clean] {\tt run.py};
+      \node [block2] (buildas) [below=of run] {\tt build-as.py};
+      \node [block2] (buildverbose) [below=of buildas] {\tt build-verbose.py};
+      \node [block2] (objsize) [below=of buildverbose] {\tt objsize.py};
+      \node [block2] (objdump) [below=of objsize] {\tt objdump.py};
+    \end{scope}
 
     \draw [-stealth, thick] (plm) to node [above] {\tt plm} (plmc) ;
     \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (plms.west) ;
     \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (link) ;
     \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (make) ;
     \draw [-stealth, thick] (ws.east) -- +(0.7, 0) |- (makeplm) ;
-    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (build) ;
-    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (run) ;
-    \draw [-stealth, thick] (plm.east) -- +(0.7, 0) |- (clean) ;
-    \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (build.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (run.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (clean.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (buildas.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (buildverbose.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (objsize.west) ;
+    \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (objdump.west) ;
     \draw [-stealth, thick] (plms) to node[above] {\tt gcc} (plmso) ;
     \draw [-stealth, thick] (plmso) to node[above right] {\tt gcc} (elf) ;
+    \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
     \draw [thick] (plmco.east) -- +(0.7, 0) |- (elf.west) ;
     \draw [thick] (elf.west) -- +(-0.7, 0) |- (plmco.east) ;
     \draw [thick] (elf.west) -- +(-0.7, 0) |- (link.east) ;
@@ -349,6 +360,7 @@ Les fichiers produits par la compilation sont regroupés dans un répertoire not
   \texttt{plm.s} & Contient tout le code assembleur de l'application. En fonction de la cible, ce fichier peut être vide.\\
   \texttt{make.py} & Makefile générique écrit en Python.\\
   \texttt{plm.py} & Configuration du makefile générique pour la compilation PLM.\\
+  \texttt{link.ld} & Script de l'édition de liens.\\
 \end{tabular}
 \caption{Fichiers engendrés dans le répertoire \texttt{ws/sources}}
 \labelTableau{fichiersSourcesEngendres}

@@ -3,7 +3,6 @@
 
 //--- END OF USER ZONE 1
 
-
 #import "lexique-plm_lexique-cocoa.h"
 #import "PMDebug.h"
 
@@ -738,6 +737,5 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 
 
 //--- END OF USER ZONE 2
-
 
 
