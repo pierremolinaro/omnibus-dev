@@ -24,8 +24,8 @@ proc systickHandler $isr () {
 
 proc wait $user (?ms: inDuration : UInt32) {
   let deadline = gUpTimeMS + inDuration
-  while deadline > gUpTimeMS do
-  end
+  while@boucle deadline > gUpTimeMS do
+  end@boucle
 }
 
 //------------------------------------------------*

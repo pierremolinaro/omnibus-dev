@@ -32,7 +32,8 @@ syntax extension common_syntax {
     $identifier$ ?let exceptionClauseName
     $integer$ ?let priority
     ${$
-    <instructionList> ?let instructionList
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
     let endOfInstructionList = @location.here
     $}$
     ioAST.mExceptionClauses +=

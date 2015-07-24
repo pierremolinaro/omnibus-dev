@@ -24,7 +24,8 @@ syntax extension common_syntax {
     $boot$
     $integer$ ?let @luint64 priority
     ${$
-    <instructionList> ?let instructionList
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
     let endOfInit = @location.here
     $}$
     ioAST.mBootList +=

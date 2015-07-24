@@ -15,9 +15,9 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $forever$
-    <instructionList> ?let instructionList
+    <instructionList> ?let instructionList !?ioLabelMap
     let endOfInstruction = @location.here
     $end$
     ioInstructionList += !@foreverInstructionAST.new {

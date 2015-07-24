@@ -17,14 +17,31 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $while$
+    @lstring whileLabel
+    select
+      whileLabel = .new {!"" !.here}
+    or
+      $attribute$ ?whileLabel
+      [!?ioLabelMap insertKey !whileLabel]
+    end
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     $do$
-    <instructionList> ?let instructionList
+    <instructionList> ?let instructionList  !?ioLabelMap
     let endOfInstruction = @location.here
     $end$
+    @lstring endLabel
+    select
+      endLabel = .new {!"" !.here}
+    or
+      $attribute$ ?endLabel
+    end
+    if whileLabel.string != endLabel.string then
+      error endLabel : "'end' label does not match 'while' label, it should be "
+         + (if whileLabel.string != "" then "@" + whileLabel.string else "empty" end)
+    end 
     ioInstructionList += !@whileInstructionAST.new {
       !testExpression
       !testExpressionEndLocation

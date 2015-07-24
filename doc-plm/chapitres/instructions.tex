@@ -219,18 +219,33 @@ end
 \end{PLM}
 
 
-Une ou plusieurs branches \plm=elsif= peuvent être ajoutées :
+Une ou plusieurs branches \plm=elsif= peuvent être ajoutées, avec ou sans branche \plm=else= :
 \begin{PLM}
 if condition then
   instructions_then
 elsif condition2 then
   instructions_elsif
+elsif condition3 then
+  instructions_elsif_3
+else
+  instructions_else
 end
 \end{PLM}
 
+Des \emph{étiquettes} peuvent être ajoutées pour augmenter la lisibilité :
+\begin{PLM}
+if@xyz condition then
+  instructions_then
+elsif@xyz condition2 then
+  instructions_elsif
+elsif@xyz condition3 then
+  instructions_elsif_3
+else@xyz
+  instructions_else
+end@xyz
+\end{PLM}
 
-
-
+Une étiquette est lexicalement un attribut, c'est-à-dire un nom préfixé par un \texttt{@}. Si une étiquette est apposée à un \plm!if!, alors les \plm!elsif!, \plm!else! et \plm!end! correspondants doivent être suivis par la même étiquette. De plus, une étiquette est unique dans une routine.
 
 
 \section{Instruction \texttt{while}}
@@ -244,4 +259,13 @@ end
 \end{PLM}
 
 \plm=condition= est une expression booléenne, qui ne doit pas être statique : une erreur de compilation est émise si elle l'est.
+
+Des \emph{étiquettes} peuvent être ajoutées pour augmenter la lisibilité :
+\begin{PLM}
+while@boucle condition do
+  instructions_while
+end@boucle
+\end{PLM}
+
+Une étiquette est lexicalement un attribut, c'est-à-dire un nom préfixé par un \texttt{@}. Si une étiquette est apposée à un \plm!while!, alors le \plm!end! correspondant doit être suivi par la même étiquette. De plus, une étiquette est unique dans une routine.
 

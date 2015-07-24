@@ -20,30 +20,67 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $if$
-    <if_instruction> ?let ifInstruction
+    @lstring ifLabel
+    select
+      ifLabel = .new {!"" !.here}
+    or
+      $attribute$ ?ifLabel
+      [!?ioLabelMap insertKey !ifLabel]
+    end
+    <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
     ioInstructionList += !ifInstruction
     $end$
+    @lstring endLabel
+    select
+      endLabel = .new {!"" !.here}
+    or
+      $attribute$ ?endLabel
+    end
+    if ifLabel.string != endLabel.string then
+      error endLabel : "'end' label does not match 'if' label, it should be "
+         + (if ifLabel.string != "" then "@" + ifLabel.string else "empty" end)
+    end 
   }
   
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <if_instruction> !@ifInstructionAST outIfInstruction {
+  rule <if_instruction> !@ifInstructionAST outIfInstruction ?!@labelMap ioLabelMap ?let @lstring ifLabel {
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     $then$
-    <instructionList> ?let thenInstructionList
+    <instructionList> ?let thenInstructionList !?ioLabelMap
     let endOfThenBranch = @location.here
     @instructionListAST elseInstructionList
     select
       elseInstructionList = {}
     or
       $else$
-      <instructionList> ?elseInstructionList
+      @lstring elsifLabel
+      select
+        elsifLabel = .new {!"" !.here}
+      or
+        $attribute$ ?elsifLabel
+      end
+      if ifLabel.string != elsifLabel.string then
+        error elsifLabel : "'else' label does not match 'if' label, it should be "
+           + (if ifLabel.string != "" then "@" + ifLabel.string else "empty" end)
+      end 
+      <instructionList> ?elseInstructionList !?ioLabelMap
     or
       $elsif$
-      <if_instruction> ?let ifInstruction
+      @lstring elsifIfLabel
+      select
+        elsifIfLabel = .new {!"" !.here}
+      or
+        $attribute$ ?elsifIfLabel
+      end
+      if ifLabel.string != elsifIfLabel.string then
+        error elsifIfLabel : "'elsif' label does not match 'if' label, it should be "
+           + (if ifLabel.string != "" then "@" + ifLabel.string else "empty" end)
+      end 
+      <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
       elseInstructionList = {!ifInstruction}
     end
     let endOfElseBranch = @location.here

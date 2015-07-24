@@ -19,11 +19,11 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instructionList> !@instructionListAST outInstructionList {
+  rule <instructionList> !@instructionListAST outInstructionList ?!@labelMap ioLabelMap {
     outInstructionList = {}
     repeat
     while
-      <instruction> !?outInstructionList
+      <instruction> !?outInstructionList !?ioLabelMap
     while
       $;$
     end
