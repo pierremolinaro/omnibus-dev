@@ -24,7 +24,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
     $++$
     ioInstructionList += !@incDecInstructionAST.new {
@@ -35,7 +35,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
     $--$
     ioInstructionList += !@incDecInstructionAST.new {
@@ -46,7 +46,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
     $&++$
     ioInstructionList += !@incDecInstructionAST.new {
@@ -57,7 +57,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
     $&--$
     ioInstructionList += !@incDecInstructionAST.new {

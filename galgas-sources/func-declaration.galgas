@@ -56,7 +56,8 @@ syntax extension common_syntax {
     $:$
     $identifier$ ?let resultTypeName
     ${$
-    <instructionList> ?let instructionList
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
     $}$
     ioAST.mFunctionListAST +=
       !funcName

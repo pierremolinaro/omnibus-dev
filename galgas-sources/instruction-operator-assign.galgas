@@ -24,7 +24,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
     @operatorAssignKind operatorAssign
     select

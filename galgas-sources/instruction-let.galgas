@@ -23,7 +23,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $let$
     $identifier$ ?let varName
     @lstring optionalTypeName

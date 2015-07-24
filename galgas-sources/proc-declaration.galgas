@@ -50,6 +50,12 @@ list @procedureDeclarationListAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+map @labelMap {
+  insert insertKey error message "the '%K' label is already declared"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -67,7 +73,8 @@ syntax extension common_syntax {
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
     ${$
-    <instructionList> ?let instructionList
+    @labelMap labelMap = {}
+    <instructionList> ?let instructionList !?labelMap
     $}$
     ioProcListAST +=
       !inProcedureKind

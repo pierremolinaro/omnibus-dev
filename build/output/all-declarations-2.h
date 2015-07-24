@@ -133,6 +133,8 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
 //----------- '' label
   public : virtual void nt_if_5F_instruction_ (GALGAS_ifInstructionAST & outArgument0,
+                                               GALGAS_labelMap & ioArgument1,
+                                               const GALGAS_lstring inArgument2,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'instruction' non terminal
@@ -141,6 +143,7 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
 //----------- '' label
   public : virtual void nt_instruction_ (GALGAS_instructionListAST & ioArgument0,
+                                         GALGAS_labelMap & ioArgument1,
                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'instructionList' non terminal
@@ -149,6 +152,7 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
 //----------- '' label
   public : virtual void nt_instructionList_ (GALGAS_instructionListAST & outArgument0,
+                                             GALGAS_labelMap & ioArgument1,
                                              C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
@@ -299,6 +303,18 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_36 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_37 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_38 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_39 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_40 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_41 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_42 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_43 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
