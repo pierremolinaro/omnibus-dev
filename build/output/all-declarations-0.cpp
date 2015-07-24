@@ -266,7 +266,7 @@ static const utf32 gLexicalMessage_plm_5F_lexique_modeError [] = {
   TO_UNICODE ('e'),
   TO_UNICODE (' '),
   TO_UNICODE ('\''),
-  TO_UNICODE ('$'),
+  TO_UNICODE ('`'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('c'),
@@ -334,7 +334,7 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_modeName [] = {
   TO_UNICODE ('d'),
   TO_UNICODE ('e'),
   TO_UNICODE (' '),
-  TO_UNICODE ('$'),
+  TO_UNICODE ('`'),
   TO_UNICODE ('.'),
   TO_UNICODE ('.'),
   TO_UNICODE ('.'),
@@ -4087,7 +4087,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         }
         token.mTokenCode = kToken_attribute ;
         enterToken (token) ;
-      }else if (testForInputUTF32Char (TO_UNICODE ('$'))) {
+      }else if (testForInputUTF32Char (TO_UNICODE ('`'))) {
         if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           do {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;

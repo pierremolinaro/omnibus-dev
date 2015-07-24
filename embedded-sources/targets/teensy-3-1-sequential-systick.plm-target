@@ -23,17 +23,17 @@ newIntegerType Int64 @signed64
 
 exception : Int32 UInt32
 
-mode $isr
-mode $user
+mode `isr
+mode `user
 
 import "files/mk20dx256.plm"
 import "files/boot-teensy-3-1.plm"
 
-required proc systickHandler $isr ()
-required proc setup $user ()
-required proc loop $user ()
+required proc systickHandler `isr ()
+required proc setup `user ()
+required proc loop `user ()
 
-proc systickHandler $isr @weak () {
+proc systickHandler `isr @weak () {
 }
 
 init 0 { // Configure Systick interrupt every ms

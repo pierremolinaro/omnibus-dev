@@ -67,7 +67,7 @@ Waiting for Teensy device (press the reset button)
 
 Ensuite, la compilation s'effectue, et range tous ses fichiers de production dans un sous répertoire de \texttt{$\sim$/plm-products/}, dont le nom est le  chemin absolu du fichier source (sans son extension), dans lequel tous les « \texttt{/} » ont été remplacés par des « \texttt{+} ».
 
-Comme la compilation s'est effectuée sans erreur, et la carte \emph{Teensy 3.1} est prête à être flashée : appuyer sur le bouton \emph{reset} de la carte pour démarrer le flashage. Si vous ne voulez pas flasher la carte, entrez simplement \texttt{$ctrl$~C}. L'affichage sur le terminal devient :
+Comme la compilation s'est effectuée sans erreur, et la carte \emph{Teensy 3.1} est prête à être flashée : appuyer sur le bouton \emph{reset} de la carte pour démarrer le flashage. Si vous ne voulez pas flasher la carte, entrez simplement \texttt{`ctrl`~C}. L'affichage sur le terminal devient :
 \begin{SHELL}
 Found HalfKay Bootloader\\
 Read "product/product.ihex": 1472 bytes, 1.1\% usage\\
@@ -85,7 +85,7 @@ Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blinkl
 \begin{PLM}[1]
 target "teensy-3-1-sequential-systick"
 
-proc setup $user () {
+proc setup `user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
   GPIOC_PDDR |= (1 << 5)
 }
@@ -94,7 +94,7 @@ var gDelai : UInt32 = 0 {
   @rw proc loop ()
 }
 
-proc loop $user () {
+proc loop `user () {
   gDelai ++ ;
   if gDelai == 1_500_000 then
     GPIOC_PSOR = 1 << 5 ; // Allumer la led
@@ -107,10 +107,10 @@ proc loop $user () {
 
 La première ligne \plm+target "teensy-3-1-sequential-systick"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
 
-Comme pour l'Arduino, la routine \plm+setup+ est exécutée une seule fois, puis la routine \plm+setup+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\$} » : ici, \plm+$user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car la sûreté qu'elle apporte n'est pas exploitée. 
+Comme pour l'Arduino, la routine \plm+setup+ est exécutée une seule fois, puis la routine \plm+setup+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\`} » : ici, \plm+`user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car la sûreté qu'elle apporte n'est pas exploitée. 
 
 
-Examinons la la routine \plm+proc setup $user ()+. La cible n'effectue aucune configuration des entrées / sorties, aussi faut-il programmer le port \texttt{PC5}, qui est connecté à la led de la carte, en sortie logique. Cette programmation est faite par les lignes :
+Examinons la la routine \plm+proc setup `user ()+. La cible n'effectue aucune configuration des entrées / sorties, aussi faut-il programmer le port \texttt{PC5}, qui est connecté à la led de la carte, en sortie logique. Cette programmation est faite par les lignes :
 
 \begin{PLM}[4]
   PORTC_PCR5 = PORTC_PCR5::mux (1)
@@ -125,7 +125,7 @@ register PORTC_PCR5 at 0x4004_B014 : UInt32 {
 }
 \end{PLM}
 
-Le champ \plm+mux+ est un champ de $3$ bits, commençant au bit $8$. Le paramètre \plm+(1)+ affecte à ce champ la valeur binaire \plm+001+. La constante \plm+PORTC_PCR5::mux(1)+ a donc pour valeur \plm+0x0000_0800+.
+Le champ \plm+mux+ est un champ de `3` bits, commençant au bit `8`. Le paramètre \plm+(1)+ affecte à ce champ la valeur binaire \plm+001+. La constante \plm+PORTC_PCR5::mux(1)+ a donc pour valeur \plm+0x0000_0800+.
 
 Examinons maintenant la déclaration de \plm+gDelai+ :
 \begin{PLM}[8]
@@ -134,13 +134,13 @@ var gDelai : UInt32 = 0 {
 }
 \end{PLM}
 
-C'est une variable (la déclaration commence par \plm+var+) globale (elle est déclarée en dehors d'une routine). Son type est \plm+UInt32+ (entier non signé sur $32$ bits, défini par la cible), et sa valeur initiale est $0$.
+C'est une variable (la déclaration commence par \plm+var+) globale (elle est déclarée en dehors d'une routine). Son type est \plm+UInt32+ (entier non signé sur `32` bits, défini par la cible), et sa valeur initiale est `0`.
 
 En PLM, une variable globale doit citer les routines qui ont le droit de l'utiliser : ici la procédure \plm+loop+ a le droit de l'accéder, et en lecture et en écriture grâce à l'annotation \plm+@rw+ ; sans celle-ci, seul l'accès en lecture serait accepté.
 
 Enfin, la routine \plm+loop+ :
 \begin{PLM}[12]
-proc loop $user () {
+proc loop `user () {
   gDelai ++ ;
   if gDelai == 1_500_000 then
     GPIOC_PSOR = 1 << 5 ; // Allumer la led
@@ -151,7 +151,7 @@ proc loop $user () {
 }
 \end{PLM}
 
-Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée à chaque exécution (sa valeur initiale est $0$) ; quand elle atteint $1~500~000$, la led est allumée ; quand elle atteint $3~000~000$, elle est ramenée à $0$ et la led est éteinte. Les valeurs $1~500~000$ et $3~000~000$ sont empiriques et choisies pour obtenir un clignotement visible. L'exemple suivant va montrer comment utiliser une routine d'interruption pour obtenir un délai dont l'unité sera la milliseconde.
+Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée à chaque exécution (sa valeur initiale est `0`) ; quand elle atteint `1~500~000`, la led est allumée ; quand elle atteint `3~000~000`, elle est ramenée à `0` et la led est éteinte. Les valeurs `1~500~000` et `3~000~000` sont empiriques et choisies pour obtenir un clignotement visible. L'exemple suivant va montrer comment utiliser une routine d'interruption pour obtenir un délai dont l'unité sera la milliseconde.
 
 
 
@@ -173,14 +173,14 @@ Ensuite, vous pouvez le compiler et effectuer son flashage sur la carte \emph{Te
 \bfseries plm 02-blinkled-systick.plm
 \end{SHELL}
 
-La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de $1$~Hz.
+La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de `1`~Hz.
 
 Voyons maintenant le contenu du fichier d'exemple \texttt{02-blinkled-systick.plm} :
 
 \begin{PLM}[1]
 target "teensy-3-1-sequential-systick"
 
-proc setup $user () {
+proc setup `user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
   GPIOC_PDDR |= (1 << 5)
 }
@@ -190,17 +190,17 @@ var gUpTimeMS : UInt32 = 0 {
   proc wait (?ms: inDuration : UInt32)
 }
 
-proc systickHandler $isr () {
+proc systickHandler `isr () {
   gUpTimeMS ++
 }
 
-proc wait $user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : UInt32) {
   let deadline = gUpTimeMS + inDuration
   while deadline > gUpTimeMS do
   end
 }
 
-proc loop $user () {
+proc loop `user () {
   wait (!ms:500)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:500)
@@ -224,18 +224,18 @@ Cette variable compte le temps exprimé en millisecondes. Deux routines y accèd
 La routine d'interruption \plm+systickHandler+ :
 
 \begin{PLM}[13]
-proc systickHandler $isr () {
+proc systickHandler `isr () {
   gUpTimeMS ++
 }
 \end{PLM}
 
-Le mode associé à une routine d'interruption est toujours \plm+$isr+. L'instruction d'appel de routine (\refSectionPage{instructionAppelProc}) vérifie que les modes de la routine appelée soient un sous-ensemble des modes de la routine appelante : ainsi, par exemple, il n'est pas possible d'appeler \plm+systickHandler+ à partir de la routine \plm+loop+.
+Le mode associé à une routine d'interruption est toujours \plm+`isr+. L'instruction d'appel de routine (\refSectionPage{instructionAppelProc}) vérifie que les modes de la routine appelée soient un sous-ensemble des modes de la routine appelante : ainsi, par exemple, il n'est pas possible d'appeler \plm+systickHandler+ à partir de la routine \plm+loop+.
 
 La routine d'interruption \plm+systickHandler+ est appelée toutes les millisecondes, la variable globale \plm+gUpTimeMS+ contient donc le temps absolu depuis le démarrage, exprimé en millisecondes.
 
 L'attente durant un certain délai est effectué par la routine \plm+wait+ :
 \begin{PLM}[17]
-proc wait $user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : UInt32) {
   let deadline = gUpTimeMS + inDuration
   while deadline > gUpTimeMS do
   end
@@ -248,7 +248,7 @@ Le code de cette routine est simple : après avoir calculé la constante \plm+de
 
 Il reste à commenter le code ce la routine \plm+loop+ :
 \begin{PLM}[23]
-proc loop $user () {
+proc loop `user () {
   wait (!ms:500)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:500)
@@ -256,7 +256,7 @@ proc loop $user () {
 }
 \end{PLM}
 
-Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un argument formel en entrée, dont le sélecteur est \plm+?ms:+. L'instruction d'appel devra donc comporter un paramètre effectif en sortie (donc son sélecteur commence par « \texttt{!} »), et de même nom : le sélecteur du paramètre effectif est donc \plm+!ms:+. En ce qui concerne les modes, la routine appelée \plm+wait+ est déclarée avec le mode \plm+$user+, comme la routine appelante \plm+loop+ : l'appel est donc valide.
+Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un argument formel en entrée, dont le sélecteur est \plm+?ms:+. L'instruction d'appel devra donc comporter un paramètre effectif en sortie (donc son sélecteur commence par « \texttt{!} »), et de même nom : le sélecteur du paramètre effectif est donc \plm+!ms:+. En ce qui concerne les modes, la routine appelée \plm+wait+ est déclarée avec le mode \plm+`user+, comme la routine appelante \plm+loop+ : l'appel est donc valide.
 
 
 

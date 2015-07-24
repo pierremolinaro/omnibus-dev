@@ -201,17 +201,17 @@ newIntegerType Int64 @signed64
 
 exception : Int32 UInt32
 
-mode $isr
-mode $user
+mode `isr
+mode `user
 
 import "files/mk20dx256.plm"
 import "files/boot-teensy-3-1.plm"
 
-required proc systickHandler $isr ()
-required proc setup $user ()
-required proc loop $user ()
+required proc systickHandler `isr ()
+required proc setup `user ()
+required proc loop `user ()
 
-proc systickHandler $isr @weak () {
+proc systickHandler `isr @weak () {
 }
 
 init 0 { // Configure Systick interrupt every ms
@@ -234,7 +234,7 @@ init 0 { // Configure Systick interrupt every ms
 
 {\bf Ligne 24.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+Int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+UInt32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
 
-{\bf Lignes 26 et 27.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+$boot+, \plm+$init+ et \plm=$exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
+{\bf Lignes 26 et 27.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
 
 
 {\bf Lignes 29 et 30.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
@@ -247,7 +247,7 @@ init 0 { // Configure Systick interrupt every ms
   \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
 \end{itemize}
 
-{\bf Lignes 36 et 37.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=$isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
+{\bf Lignes 36 et 37.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
 
 {\bf Lignes 39 à 43.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
 

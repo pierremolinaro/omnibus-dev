@@ -38,9 +38,9 @@ boot priorite {
 \end{PLM}
 Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
 
-Les routines \plm=boot= s'exécutent dans le mode \plm=$boot=.\index{\$boot}
+Les routines \plm=boot= s'exécutent dans le mode \plm=`boot=.\index{\`boot}
 
-Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=$boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
+Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=`boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
 
@@ -62,9 +62,9 @@ init priorite {
 \end{PLM}
 Où \plm=priorite= est la priorité de la routine. C'est une constante entière entre $0$ et $2^{64}-1$. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
-Les routines \plm=init= s'exécutent dans le mode \plm=$init=.\index{\$init}
+Les routines \plm=init= s'exécutent dans le mode \plm=`init=.\index{\`init}
 
-Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=$init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
+Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=`init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
 
 
@@ -126,34 +126,34 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 
 La déclaration d'une procédure est la suivante :
 \begin{PLM}
-proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels) {
+proc nom `mode1 `mode2 @attribut1 @attribut2 (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la procédure ;
-  \item \plm=$mode1= \plm=$mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
+  \item \plm=`mode1= \plm=`mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
   \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
 \end{itemize}
 
 Par exemple :
 
 \begin{PLM}
-proc setup $user () {
+proc setup `user () {
 }
 \end{PLM}
 
-Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=$user=.
+Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=`user=.
 
 \begin{PLM}
-proc goto $user @noWarningIfUnused (
+proc goto `user @noWarningIfUnused (
   ?line:inLine : UInt32
   ?column:inColumn : UInt8) {
 }
 \end{PLM}
 
-Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=$user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
 
 
 
@@ -177,14 +177,14 @@ L'attribut \plm+@weak+ signifie que la routine peut être redéfinie par une rou
 Par exemple, la cible \texttt{teensy-3-1-sequential-systick} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
 
 \begin{PLM}
-proc systickHandler $isr @weak () {
+proc systickHandler `isr @weak () {
 }
 \end{PLM}
 
 Par défaut, la routine d'interruption \plm+systickHandler+ est donc définie, vide. Le programme d'exemple définit cette routine :
 
 \begin{PLM}
-proc systickHandler $isr () {
+proc systickHandler `isr () {
   gUpTimeMS ++
 }
 \end{PLM}
@@ -202,7 +202,7 @@ La déclaration \plm+required proc+ permet de signifier au compilateur qu'une pr
 
 Cette déclaration est la suivante :
 \begin{PLM}
-required proc nom $mode1 $mode2 @attribut1 @attribut2 (arguments_formels)
+required proc nom `mode1 `mode2 @attribut1 @attribut2 (arguments_formels)
 \end{PLM}
 
 Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSubsectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
@@ -210,8 +210,8 @@ Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSubsec
 Par exemple, la cible \texttt{teensy-3-1-sequential-systick} comporte ces deux déclarations :
 
 \begin{PLM}
-required proc setup $user ()
-required proc loop $user ()
+required proc setup `user ()
+required proc loop `user ()
 \end{PLM}
 
 Ceci impose au programme utilisateur de définir ces deux procédures.
