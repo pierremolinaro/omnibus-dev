@@ -57,12 +57,12 @@ override method @constructorCall analyzeExpression
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResultValueName
+  !result:@variableKindIR outResult
 {
 #--- Analyze constructor source type
   let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
@@ -78,40 +78,33 @@ override method @constructorCall analyzeExpression
 #--- Get inferred type constructor map
   let constructorMap = [outExpressionType constructorMap]
 #--- Check constructor
-  [constructorMap searchKey !mConstructorName ?let generatedCodeString]
-#--- Temporary variable
-  getNewTempVariable (!?ioTemporaries ?outResultValueName)
+  [constructorMap searchKey !mConstructorName ?let constantValue]
 #--- Generate code
-#  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
-  ioInstructionGenerationList += !@constructorCallIR.new {
-    !outExpressionType
-    !outResultValueName
-    !generatedCodeString
-  }
+  outResult = .literalUnsignedInteger {!value:constantValue}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @constructorCallIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mTargetTemporaryVariable
-  @string mCallExpression
-}
+#class @constructorCallIR : @abstractInstructionIR {
+#  @unifiedTypeMap-proxy mTargetType
+#  @variableKindIR mTargetTemporaryVariable
+#  @string mCallExpression
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @constructorCallIR instructionCode -> @string outCode {
-  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
-  outCode += [mTargetTemporaryVariable mangledName] + " = "
-  outCode += mCallExpression + " ;\n"
-}
+#override getter @constructorCallIR instructionCode -> @string outCode {
+#  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+#  outCode += [mTargetTemporaryVariable mangledName] + " = "
+#  outCode += mCallExpression + " ;\n"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @constructorCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTargetTemporaryVariable enterAccessibleEntities !?ioAccessibleEntities]
-}
+#override method @constructorCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+#  [mTargetTemporaryVariable enterAccessibleEntities !?ioAccessibleEntities]
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*

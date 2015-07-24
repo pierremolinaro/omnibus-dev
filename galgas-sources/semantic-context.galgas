@@ -16,7 +16,7 @@ enum @typeKind {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @constructorMap {
-  @string mInlineGeneratedCode
+  @uint64 mValue
   insert insertKey error message "the '%K' constructor is already declared in %L"
   search searchKey error message "there is no '%K' constructor"
 }

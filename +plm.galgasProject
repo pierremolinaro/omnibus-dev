@@ -72,7 +72,7 @@ project (1:0:0) -> "plm" {
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-conversion.galgas"
-#  "galgas-sources/expression-constructor-call.galgas"
+  "galgas-sources/expression-constructor-call.galgas"
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
