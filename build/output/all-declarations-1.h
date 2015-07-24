@@ -3625,34 +3625,34 @@ class GALGAS_constructorMap : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_string & inOperand1,
+                                                      const class GALGAS_uint_36__34_ & inOperand1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
-                                                     class GALGAS_string constinArgument1,
+                                                     class GALGAS_uint_36__34_ constinArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_setMInlineGeneratedCodeForKey (class GALGAS_string constinArgument0,
-                                                                         class GALGAS_string constinArgument1,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void modifier_setMValueForKey (class GALGAS_uint_36__34_ constinArgument0,
+                                                           class GALGAS_string constinArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_string & outArgument1,
+                                                   class GALGAS_uint_36__34_ & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mInlineGeneratedCodeForKey (const class GALGAS_string & constinOperand0,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mValueForKey (const class GALGAS_string & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap reader_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -3680,7 +3680,7 @@ class cEnumerator_constructorMap : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_string current_mInlineGeneratedCode (LOCATION_ARGS) const ;
+  public : class GALGAS_uint_36__34_ current_mValue (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_constructorMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3697,11 +3697,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap ;
 
 class cMapElement_constructorMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_string mAttribute_mInlineGeneratedCode ;
+  public : GALGAS_uint_36__34_ mAttribute_mValue ;
 
 //--- Constructor
   public : cMapElement_constructorMap (const GALGAS_lstring & inKey,
-                                       const GALGAS_string & in_mInlineGeneratedCode
+                                       const GALGAS_uint_36__34_ & in_mValue
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3726,7 +3726,7 @@ class cMapElement_constructorMap : public cMapElement {
 class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_string mAttribute_mInlineGeneratedCode ;
+  public : GALGAS_uint_36__34_ mAttribute_mValue ;
 
 
 //--------------------------------- Accessors
@@ -3744,7 +3744,7 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_constructorMap_2D_element (const GALGAS_lstring & in_lkey,
-                                             const GALGAS_string & in_mInlineGeneratedCode) ;
+                                             const GALGAS_uint_36__34_ & in_mValue) ;
 
 //-- Start of generic part --*
 
@@ -3758,7 +3758,7 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_constructorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                    const class GALGAS_string & inOperand1
+                                                                    const class GALGAS_uint_36__34_ & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -3775,7 +3775,7 @@ class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mInlineGeneratedCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -6974,6 +6974,8 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_42 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_43 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_44 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
