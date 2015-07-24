@@ -60,7 +60,7 @@ syntax extension common_syntax {
     while
     end
     $:$
-    $identifier$ ?let registerTypeName
+    $typeName$ ?let registerTypeName
     @registerBitSliceList registerBitSliceList = {}
     select
     or
@@ -157,7 +157,7 @@ override method @registerDeclaration enterInContext
 {
 #---
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
+#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["bool" nowhere] ?let BoolTypeProxy]
 #--- Build bit slice map
   @registerFieldMap registerFieldMap = {}
   @registerBitSliceAccessMap registerBitSliceMap = {}
@@ -187,7 +187,7 @@ override method @registerDeclaration enterInContext
           !.infixNoOvf {!infixOperator:"!="}
           !.literalUnsignedInteger{!value:0L}
           !{}
-          !BoolTypeProxy
+          !ioContext.mBooleanType
         ]
         let mask = ((1L << bitCount) - 1L) << shiftCount
         [!?registerBitSliceMap insertKey

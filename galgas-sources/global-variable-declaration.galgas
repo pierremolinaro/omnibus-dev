@@ -46,7 +46,7 @@ syntax extension common_syntax {
     $var$
     $identifier$ ?let varName
     $:$
-    $identifier$ ?let typeName
+    $typeName$ ?let typeName
     $=$
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}

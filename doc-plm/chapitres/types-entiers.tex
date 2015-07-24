@@ -16,8 +16,8 @@ Les types entiers ne sont pas prédéfinis dans le langage. C'est la configurati
 \ligne\\
 \begin{tabular}{lllll}
   \textbf{Nature} & \textbf{8 bits} & \textbf{16 bits} & \textbf{32 bits} & \textbf{64 bits} \\
-  Signé & \plm=Int8= & \plm=Int16= & \plm=Int32= & \plm=Int64= \\
-  Non signé & \plm=UInt8= & \plm=UInt16= & \plm=UInt32= & \plm=UInt64= \\
+  Signé & \plm=$int8= & \plm=$int16= & \plm=$int32= & \plm=$int64= \\
+  Non signé & \plm=$uint8= & \plm=$uint16= & \plm=$uint32= & \plm=$uint64= \\
 \end{tabular}
 \caption{Types entiers définis par la cible \texttt{teensy-3-1-sequential-systick}}
 \labelTableau{typesEntiersTeensy}
@@ -31,14 +31,14 @@ Les types entiers ne sont pas prédéfinis dans le langage. C'est la configurati
 Le langage accepte des constantes littérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
-var v : Int8 = 128 // Erreur de compilation :
+var v : $int8 = 128 // Erreur de compilation :
                    // 128 non représentable par un entier signé 8 bits
 \end{PLM}
 
 \colorbox{red}{C'est une erreur à corriger}
 
 \begin{PLM}
-var v : Int8 = -128 // Devrait être accepté, erreur actuellement
+var v : $int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
 
 Une constante littérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
@@ -48,7 +48,7 @@ var v = 28 // Erreur, le type ne peut pas être inféré
 
 Dans ce cas, il faut que la déclaration contienne l'annotation de type :
 \begin{PLM}
-var v : Int32 = 28 // Ok
+var v : $int32 = 28 // Ok
 \end{PLM}
 
 
@@ -61,33 +61,33 @@ var v : Int32 = 28 // Ok
 \subsection{Conversions implicites silencieuses}
 Les conversions qui sont toujours possibles sans débordement sont acceptées silencieusement. Par exemple :
 \begin{PLM}
-let v : UInt8 = ...
-let x : UInt16 = v
-let y : Int16 = v
+let v : $uint8 = ...
+let x : $uint16 = v
+let y : $int16 = v
 \end{PLM}
 
 Par contre, une conversion pouvant provoquer un débordement est rejetée à la compilation :
 \begin{PLM}
-let s : Int8 = ...
-let x : UInt16 = x // Erreur de compilation
+let s : $int8 = ...
+let x : $uint16 = x // Erreur de compilation
 \end{PLM}
 
 \subsection{L'opérateur \texttt{\textbackslash}}
 L'opérateur \plm+\+ permet de spécifier une conversion explicite.
 
 \begin{PLM}
-let s : Int8 = ...
-let x : UInt16 = x \ UInt16
+let s : $int8 = ...
+let x : $uint16 = x \ $uint16
 \end{PLM}
 
-L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+UInt16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+\+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=&\=.
+L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+\+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=&\=.
 
 L'opérateur \plm+\+ ne peut pas apparaître dans une expression statique.
 
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
-let v : UInt8 = ...
-let y : Int16 = v \ Int16 // Erreur, la conversion implicite est possible
+let v : $uint8 = ...
+let y : $int16 = v \ $int16 // Erreur, la conversion implicite est possible
 \end{PLM}
 
 \subsection{L'opérateur \texttt{\&\textbackslash}}
@@ -95,16 +95,16 @@ let y : Int16 = v \ Int16 // Erreur, la conversion implicite est possible
 L'opérateur \plm+&\+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{\&\textbackslash} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
 
 \begin{PLM}
-let s : Int8 = -10
-let x : UInt16 = x &\ UInt16
+let s : $int8 = -10
+let x : $uint16 = x &\ $uint16
 \end{PLM}
 
 L'opérateur \plm+&\+ ne peut pas apparaître dans une expression statique.
 
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+&\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
-let v : UInt8 = ...
-let y : Int16 = v &\ Int16 // Erreur, la conversion implicite est possible
+let v : $uint8 = ...
+let y : $int16 = v &\ $int16 // Erreur, la conversion implicite est possible
 \end{PLM}
 
 \section{Opérateurs infixes et conversions implicites}
@@ -156,12 +156,12 @@ Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateu
 
 \subsectionLabel{Opérateur \texttt{-}}{negationOvf}
 
-L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
+L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
 
 
 \subsectionLabel{Opérateur \texttt{\&-}}{negationNoOvf}
 
-L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+Int8+, \plm+-32768+ pour \plm+Int16+, ...) retourne cette même valeur. Cet opérateur n'engendre jamais d'exception.
+L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) retourne cette même valeur. Cet opérateur n'engendre jamais d'exception.
 
 
 
@@ -226,13 +226,13 @@ variable ++
 
 \plm=++= et \plm=--= déclenchent une exception (dont le code est donné par le \refTableauPage{tableauCodeExceptions}) en cas de débordement de capacité :
 \begin{PLM}
-var variable : UInt8 = 255
+var variable : $uint8 = 255
 variable ++ // Déclenchement d'une exception
 \end{PLM}
 
 Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :
 \begin{PLM}
-var variable : UInt8 = 255
+var variable : $uint8 = 255
 variable &++ // variable vaut 0
 \end{PLM}
 
@@ -349,14 +349,14 @@ Où :
 
 Le type entier ainsi déclaré est non signé si la représentation est non signée (c'est-à-dire déclarée avec \plm=newUnsignedRepresentation=), et signé si la représentation est signée (c'est-à-dire déclarée avec \plm=newSignedRepresentation=). Les types usuels peuvent ainsi être déclarés :
 \begin{PLM}
-newIntegerType UInt8  @unsigned8
-newIntegerType UInt16 @unsigned16
-newIntegerType UInt32 @unsigned32
-newIntegerType UInt64 @unsigned64
-newIntegerType Int8  @signed8
-newIntegerType Int16 @signed16
-newIntegerType Int32 @signed32
-newIntegerType Int64 @signed64
+newIntegerType $uint8  : @unsigned8
+newIntegerType $uint16 : @unsigned16
+newIntegerType $uint32 : @unsigned32
+newIntegerType $uint64 : @unsigned64
+newIntegerType $int8  : @signed8
+newIntegerType $int16 : @signed16
+newIntegerType $int32 : @signed32
+newIntegerType $int64 : @signed64
 \end{PLM}
 
 

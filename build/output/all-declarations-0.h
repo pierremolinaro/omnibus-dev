@@ -77,6 +77,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   public : enum {kToken_,
    kToken_identifier,
    kToken_attribute,
+   kToken_typeName,
    kToken_modeName,
    kToken_integer,
    kToken_literal_5F_string,
@@ -199,7 +200,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 94 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 95 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;

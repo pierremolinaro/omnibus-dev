@@ -49,8 +49,8 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $exception$
     $:$
-    $identifier$ ?let exceptionCodeTypeName 
-    $identifier$ ?let exceptionLineTypeName
+    $typeName$ ?let exceptionCodeTypeName 
+    $typeName$ ?let exceptionLineTypeName
     ioAST.mExceptionTypes += !exceptionCodeTypeName !exceptionLineTypeName
   }
   

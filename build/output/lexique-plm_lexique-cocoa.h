@@ -27,6 +27,7 @@
 enum {plm_lexique_1_,
   plm_lexique_1_identifier,
   plm_lexique_1_attribute,
+  plm_lexique_1_typeName,
   plm_lexique_1_modeName,
   plm_lexique_1_integer,
   plm_lexique_1_literal_5F_string,

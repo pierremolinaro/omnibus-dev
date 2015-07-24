@@ -24,7 +24,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $boolset$
-    $identifier$ ?let boolsetName
+    $typeName$ ?let boolsetName
     @lstringlist attributeList = {}
     repeat
     while
@@ -126,30 +126,29 @@ proc enterBoolsetOperators
   ?!context:@semanticContext ioContext
 {
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBoolsetTypeName ?let selfTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inBoolsetTypeName.string + "." + inBoolsetTypeName !inBoolsetTypeName.location}

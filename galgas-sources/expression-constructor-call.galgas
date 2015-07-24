@@ -18,7 +18,7 @@ syntax extension common_syntax {
     select
       optionalTypeName = .new {!"" !.here}
     or
-      $identifier$ ?optionalTypeName
+      $typeName$ ?optionalTypeName
     end
     $.$
     $identifier$ ?let constructorName

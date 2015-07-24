@@ -23,7 +23,8 @@ syntax extension plm_target_specific_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $newIntegerType$
-    $identifier$ ?let newIntegerTypeName
+    $typeName$ ?let newIntegerTypeName
+    $:$
     $attribute$ ?let @lstring baseType
     ioAST.mDeclarationList += !@integerDeclaration.new {
       !newIntegerTypeName
@@ -126,31 +127,30 @@ proc enterIntegerOperators
   ioContext.mTypeNameSetForIncDec += !inIntegerTypeName.string
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
 #--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then

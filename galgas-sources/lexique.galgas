@@ -75,7 +75,7 @@ style attributeStyle -> "Attributes"
 
 $attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
 
-message attributeError : "in an attribute name, a letter or a digit should follow the '%' character"
+message attributeError : "in an attribute name, a letter or a digit should follow the '@' character"
 
 rule '@' {
   select
@@ -88,6 +88,31 @@ rule '@' {
     error attributeError
   end
   send $attribute$ 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Type Name                                                                                                          *
+#----------------------------------------------------------------------------------------------------------------------*
+
+#! Type
+
+style typeStyle -> "Types"
+
+$typeName$ ! tokenString  style typeStyle error message "a type $..."
+
+message typeError : "in a type name, a letter or a digit should follow the '$' character"
+
+rule '$' {
+  select
+  case 'a'->'z' | 'A'->'Z' | '0'->'9' :
+    repeat
+      enterCharacterIntoString (!?tokenString !*)
+    while 'a'->'z' | 'A'->'Z'| '0'->'9' :
+    end
+  default
+    error typeError
+  end
+  send $typeName$ 
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

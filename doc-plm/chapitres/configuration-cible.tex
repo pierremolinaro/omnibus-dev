@@ -188,18 +188,18 @@ newSignedRepresentation @signed64 "int64_t" 64
 
 newUnsignedRepresentation @size "uint32_t" 32
 
-booleanType Bool @unsigned8
+booleanType $bool : @unsigned8
 
-newIntegerType UInt8  @unsigned8
-newIntegerType UInt16 @unsigned16
-newIntegerType UInt32 @unsigned32
-newIntegerType UInt64 @unsigned64
-newIntegerType Int8  @signed8
-newIntegerType Int16 @signed16
-newIntegerType Int32 @signed32
-newIntegerType Int64 @signed64
+newIntegerType $uint8  : @unsigned8
+newIntegerType $uint16 : @unsigned16
+newIntegerType $uint32 : @unsigned32
+newIntegerType $uint64 : @unsigned64
+newIntegerType $int8  : @signed8
+newIntegerType $int16 : @signed16
+newIntegerType $int32 : @signed32
+newIntegerType $int64 : @signed64
 
-exception : Int32 UInt32
+exception : $int32 $uint32
 
 mode `isr
 mode `user
@@ -228,11 +228,11 @@ init 0 { // Configure Systick interrupt every ms
 
 {\bf Ligne 11.} Cette ligne déclare la représentation \plm+@size+, qui est celle utilisée par défaut pour les types énumérés (\emph{référence à ajouter}). La déclaration de la représentation \plm+@size+ est obligatoire.
 
-{\bf Ligne 13.} Déclaration du type booléen : il se nomme conventionnellement \plm+Bool+, et sa représentation est \plm+@unsigned8+, c'est-à-dire un entier non signé sur 8 bits. La déclaration d'un type booléen est obligatoire.
+{\bf Ligne 13.} Déclaration du type booléen : il se nomme conventionnellement \plm+$bool+, et sa représentation est \plm+@unsigned8+, c'est-à-dire un entier non signé sur 8 bits. La déclaration d'un type booléen est obligatoire.
 
-{\bf Lignes 15 à 22.} Déclaration des types entier, non signés et signés. Les noms \plm+UInt8+, ..., \plm+Int64+ sont les noms des types entiers directement utilisables en PLM.
+{\bf Lignes 15 à 22.} Déclaration des types entier, non signés et signés. Les noms \plm+$uint8+, ..., \plm+$int64+ sont les noms des types entiers directement utilisables en PLM.
 
-{\bf Ligne 24.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+Int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+UInt32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
+{\bf Ligne 24.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+$int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
 
 {\bf Lignes 26 et 27.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
 

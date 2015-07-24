@@ -8,7 +8,7 @@
 \chapter{Le type booléen}
 
 
-Par défaut, aucun type booléen n'est prédéfini par le langage ; il est d'usage que ce soit la définition de la cible qui le fasse, et que ce type booléen se nomme \plm=Bool=\index{Bool!\plm=Bool=} (voir \refSectionPage{DefinitionTypeBooleen}).
+Par défaut, aucun type booléen n'est prédéfini par le langage ; il est d'usage que ce soit la définition de la cible qui le fasse, et que ce type booléen se nomme \plm=$bool=\index{bool!\plm=$bool=} (voir \refSectionPage{DefinitionTypeBooleen}).
 
 
 
@@ -36,7 +36,7 @@ L'opérateur préfixé \plm=not= est la complémentation booléenne. Noter que l
 Lors d'une conversion valeur booléenne vers valeur entière, \plm=false= est converti en la valeur entière $0$, et \plm=true= en la valeur entière $1$. Comme tous les types entiers peuvent représenter $0$ et $1$, cette conversion est toujours acceptée silencieusement. Par exemple :
 
 \begin{PLM}
-let result : UInt8 = true // result a pour valeur 1
+let result : $uint8 = true // result a pour valeur 1
 \end{PLM}
 
 
@@ -45,7 +45,7 @@ let result : UInt8 = true // result a pour valeur 1
 Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un booléen. Il suffit d'utiliser des opérateurs entre entiers comme \plm+==+ ou \plm+!=+ pour réaliser une conversion :
 
 \begin{PLM}
-let result : Bool = x != 0 // x est une expression entière
+let result : $bool = x != 0 // x est une expression entière
 \end{PLM}
 
 
@@ -54,17 +54,17 @@ let result : Bool = x != 0 // x est une expression entière
 Par défaut, aucun type booléen n'est défini par le langage. Il est d'usage que la définition de la cible le fasse, au moyen de la déclaration \plm=booleanType= :\index{booleanType@\plm=booleanType=}
 
 \begin{PLM}
-booleanType nom representation
+booleanType nomType : representation
 \end{PLM}
 
 Par exemple :
 \begin{PLM}
-booleanType Bool @unsigned8
+booleanType $bool : @unsigned8
 \end{PLM}
 
 Où :
 \begin{itemize}
-  \item \plm=Bool= est le nom donné au type booléen ;
+  \item \plm=$bool= est le nom donné au type booléen ;
   \item \plm=@unsigned8= est l'attribut précisant la représentation d'une valeur booléenne dans le code C engendré.
 \end{itemize}
 

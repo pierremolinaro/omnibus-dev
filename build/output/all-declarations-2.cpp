@@ -134,10 +134,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (22)
 , END
 // State S2 (index = 38)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (23)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (23)
 , END
 // State S3 (index = 41)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (24)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (24)
 , END
 // State S4 (index = 44)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (25)
@@ -149,8 +149,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (27)
 , END
 // State S7 (index = 53)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (28)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (29)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (28)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (29)
 , END
 // State S8 (index = 58)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (30)
@@ -177,7 +177,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (37)
 , END
 // State S16 (index = 82)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (38)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (38)
 , END
 // State S17 (index = 85)
 , C_Lexique_plm_5F_lexique::kToken_, ACCEPT
@@ -246,55 +246,38 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (63)
 , END
 // State S23 (index = 199)
-, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (43)
-, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (43)
 , END
-// State S24 (index = 236)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (45)
+// State S24 (index = 202)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (44)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (69)
 , END
-// State S25 (index = 241)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (47)
+// State S25 (index = 207)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (46)
 , END
-// State S26 (index = 244)
-, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (48)
+// State S26 (index = 210)
+, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (47)
 , END
-// State S27 (index = 247)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (49)
+// State S27 (index = 213)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (48)
 , END
-// State S28 (index = 250)
+// State S28 (index = 216)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (49)
+, END
+// State S29 (index = 219)
 , C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (50)
 , END
-// State S29 (index = 253)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (51)
+// State S30 (index = 222)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (51)
 , END
-// State S30 (index = 256)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (52)
+// State S31 (index = 225)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (52)
 , END
-// State S31 (index = 259)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (53)
-, END
-// State S32 (index = 262)
+// State S32 (index = 228)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (80)
-, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (54)
+, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (53)
 , END
-// State S33 (index = 267)
+// State S33 (index = 233)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (13)
@@ -313,17 +296,17 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (13)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (13)
 , END
-// State S34 (index = 302)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (56)
+// State S34 (index = 268)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (55)
 , C_Lexique_plm_5F_lexique::kToken_at, REDUCE (94)
 , END
-// State S35 (index = 307)
+// State S35 (index = 273)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (57)
+, END
+// State S36 (index = 276)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (58)
 , END
-// State S36 (index = 310)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (59)
-, END
-// State S37 (index = 313)
+// State S37 (index = 279)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (61)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (61)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (61)
@@ -342,38 +325,38 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (61)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (61)
 , END
-// State S38 (index = 348)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (60)
+// State S38 (index = 314)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (59)
 , END
-// State S39 (index = 351)
+// State S39 (index = 317)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (64)
 , END
-// State S40 (index = 354)
+// State S40 (index = 320)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (65)
 , END
-// State S41 (index = 357)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
+// State S41 (index = 323)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
-// State S42 (index = 386)
+// State S42 (index = 352)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (66)
 , END
-// State S43 (index = 389)
+// State S43 (index = 355)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (67)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (43)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (73)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (67)
@@ -390,7 +373,242 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (67)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (67)
 , END
-// State S44 (index = 426)
+// State S44 (index = 392)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (44)
+, C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (69)
+, END
+// State S45 (index = 397)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (76)
+, END
+// State S46 (index = 400)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (77)
+, END
+// State S47 (index = 403)
+, C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (84)
+, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (78)
+, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (84)
+, END
+// State S48 (index = 410)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
+, END
+// State S49 (index = 439)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (81)
+, END
+// State S50 (index = 442)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (82)
+, END
+// State S51 (index = 445)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (83)
+, END
+// State S52 (index = 448)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
+, END
+// State S53 (index = 477)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (80)
+, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (53)
+, END
+// State S54 (index = 482)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (86)
+, END
+// State S55 (index = 485)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (55)
+, C_Lexique_plm_5F_lexique::kToken_at, REDUCE (94)
+, END
+// State S56 (index = 490)
+, C_Lexique_plm_5F_lexique::kToken_at, SHIFT (88)
+, END
+// State S57 (index = 493)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (89)
+, END
+// State S58 (index = 496)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (90)
+, END
+// State S59 (index = 499)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (91)
+, END
+// State S60 (index = 502)
+, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (92)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (93)
+, C_Lexique_plm_5F_lexique::kToken__2B__2B_, SHIFT (94)
+, C_Lexique_plm_5F_lexique::kToken__2D__2D_, SHIFT (95)
+, C_Lexique_plm_5F_lexique::kToken__26__2B__2B_, SHIFT (96)
+, C_Lexique_plm_5F_lexique::kToken__26__2D__2D_, SHIFT (97)
+, C_Lexique_plm_5F_lexique::kToken__7C__3D_, SHIFT (98)
+, C_Lexique_plm_5F_lexique::kToken__26__3D_, SHIFT (99)
+, C_Lexique_plm_5F_lexique::kToken__5E__3D_, SHIFT (100)
+, END
+// State S61 (index = 521)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (102)
+, END
+// State S62 (index = 524)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (103)
+, END
+// State S63 (index = 527)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
+, END
+// State S64 (index = 548)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
+, END
+// State S65 (index = 577)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
+, END
+// State S66 (index = 598)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
+, END
+// State S67 (index = 619)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (131)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken__7E_, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_not, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_true, REDUCE (156)
+, C_Lexique_plm_5F_lexique::kToken_false, REDUCE (156)
+, END
+// State S68 (index = 642)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (133)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken__7E_, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken_not, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken_true, REDUCE (171)
+, C_Lexique_plm_5F_lexique::kToken_false, REDUCE (171)
+, END
+// State S69 (index = 665)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
+, END
+// State S70 (index = 694)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
+, END
+// State S71 (index = 723)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (137)
+, END
+// State S72 (index = 726)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (42)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (42)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (42)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (42)
+, END
+// State S73 (index = 735)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (73)
+, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (67)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (67)
+, END
+// State S74 (index = 772)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (1)
@@ -409,294 +627,28 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (1)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (1)
 , END
-// State S45 (index = 461)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (45)
-, C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (69)
-, END
-// State S46 (index = 466)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (76)
-, END
-// State S47 (index = 469)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (77)
-, END
-// State S48 (index = 472)
-, C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (84)
-, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (78)
-, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (84)
-, END
-// State S49 (index = 479)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S50 (index = 508)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (81)
-, END
-// State S51 (index = 511)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (82)
-, END
-// State S52 (index = 514)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (83)
-, END
-// State S53 (index = 517)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S54 (index = 546)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (80)
-, C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (54)
-, END
-// State S55 (index = 551)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (86)
-, END
-// State S56 (index = 554)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (56)
-, C_Lexique_plm_5F_lexique::kToken_at, REDUCE (94)
-, END
-// State S57 (index = 559)
-, C_Lexique_plm_5F_lexique::kToken_at, SHIFT (88)
-, END
-// State S58 (index = 562)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (89)
-, END
-// State S59 (index = 565)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (90)
-, END
-// State S60 (index = 568)
-, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (62)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (62)
-, END
-// State S61 (index = 603)
-, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (91)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (92)
-, C_Lexique_plm_5F_lexique::kToken__2B__2B_, SHIFT (93)
-, C_Lexique_plm_5F_lexique::kToken__2D__2D_, SHIFT (94)
-, C_Lexique_plm_5F_lexique::kToken__26__2B__2B_, SHIFT (95)
-, C_Lexique_plm_5F_lexique::kToken__26__2D__2D_, SHIFT (96)
-, C_Lexique_plm_5F_lexique::kToken__7C__3D_, SHIFT (97)
-, C_Lexique_plm_5F_lexique::kToken__26__3D_, SHIFT (98)
-, C_Lexique_plm_5F_lexique::kToken__5E__3D_, SHIFT (99)
-, END
-// State S62 (index = 622)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (101)
-, END
-// State S63 (index = 625)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (102)
-, END
-// State S64 (index = 628)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
-, END
-// State S65 (index = 649)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S66 (index = 678)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
-, END
-// State S67 (index = 699)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
-, END
-// State S68 (index = 720)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (130)
-, C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken__7E_, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_not, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_true, REDUCE (156)
-, C_Lexique_plm_5F_lexique::kToken_false, REDUCE (156)
-, END
-// State S69 (index = 743)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (132)
-, C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken__7E_, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken_not, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken_true, REDUCE (171)
-, C_Lexique_plm_5F_lexique::kToken_false, REDUCE (171)
-, END
-// State S70 (index = 766)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S71 (index = 795)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S72 (index = 824)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (136)
-, END
-// State S73 (index = 827)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (42)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (42)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (42)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (42)
-, END
-// State S74 (index = 836)
-, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (68)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (68)
-, END
-// State S75 (index = 871)
+// State S75 (index = 807)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (70)
 , END
-// State S76 (index = 874)
-, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (137)
+// State S76 (index = 810)
+, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (139)
 , END
-// State S77 (index = 877)
-, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (138)
+// State S77 (index = 813)
+, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (140)
 , END
-// State S78 (index = 880)
+// State S78 (index = 816)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (84)
 , C_Lexique_plm_5F_lexique::kToken_modeName, SHIFT (78)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (84)
 , END
-// State S79 (index = 887)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (140)
+// State S79 (index = 823)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (142)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (86)
 , END
-// State S80 (index = 892)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (142)
+// State S80 (index = 828)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (144)
 , END
-// State S81 (index = 895)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S82 (index = 924)
+// State S81 (index = 831)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (8)
@@ -715,25 +667,41 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (8)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (8)
 , END
-// State S83 (index = 959)
-, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (144)
+// State S82 (index = 866)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
-// State S84 (index = 962)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (145)
+// State S83 (index = 895)
+, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (146)
 , END
-// State S85 (index = 965)
+// State S84 (index = 898)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (147)
+, END
+// State S85 (index = 901)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (81)
 , END
-// State S86 (index = 968)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (146)
+// State S86 (index = 904)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (148)
 , END
-// State S87 (index = 971)
+// State S87 (index = 907)
 , C_Lexique_plm_5F_lexique::kToken_at, REDUCE (95)
 , END
-// State S88 (index = 974)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (147)
+// State S88 (index = 910)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (149)
 , END
-// State S89 (index = 977)
+// State S89 (index = 913)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (59)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (59)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (59)
@@ -752,7 +720,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (59)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (59)
 , END
-// State S90 (index = 1012)
+// State S90 (index = 948)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (60)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (60)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (60)
@@ -771,25 +739,44 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (60)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (60)
 , END
-// State S91 (index = 1047)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S91 (index = 983)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (62)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (62)
 , END
-// State S92 (index = 1068)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (149)
+// State S92 (index = 1018)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
+, END
+// State S93 (index = 1039)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (151)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (167)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (150)
-, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (151)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (152)
+, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (153)
 , END
-// State S93 (index = 1077)
+// State S94 (index = 1048)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (43)
@@ -805,7 +792,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (43)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (43)
 , END
-// State S94 (index = 1106)
+// State S95 (index = 1077)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (44)
@@ -821,7 +808,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (44)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (44)
 , END
-// State S95 (index = 1135)
+// State S96 (index = 1106)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (45)
@@ -837,7 +824,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (45)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (45)
 , END
-// State S96 (index = 1164)
+// State S97 (index = 1135)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (46)
@@ -853,7 +840,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (46)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (46)
 , END
-// State S97 (index = 1193)
+// State S98 (index = 1164)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (153)
@@ -865,7 +852,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (153)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (153)
 , END
-// State S98 (index = 1214)
+// State S99 (index = 1185)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (154)
@@ -877,7 +864,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (154)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (154)
 , END
-// State S99 (index = 1235)
+// State S100 (index = 1206)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (155)
@@ -889,32 +876,32 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (155)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (155)
 , END
-// State S100 (index = 1256)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S101 (index = 1227)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S101 (index = 1277)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (154)
+// State S102 (index = 1248)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (156)
 , C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (149)
 , END
-// State S102 (index = 1282)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (156)
+// State S103 (index = 1253)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (158)
 , C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (151)
 , END
-// State S103 (index = 1287)
+// State S104 (index = 1258)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (34)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (34)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (34)
@@ -973,12 +960,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (34)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (34)
 , END
-// State S104 (index = 1412)
+// State S105 (index = 1383)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (142)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (142)
@@ -987,7 +974,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (158)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (160)
 , C_Lexique_plm_5F_lexique::kToken__3F_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__21_, REDUCE (142)
@@ -1019,8 +1006,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2F_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__5C_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__26__5C_, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (159)
-, C_Lexique_plm_5F_lexique::kToken__3A__3A_, SHIFT (160)
+, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (161)
+, C_Lexique_plm_5F_lexique::kToken__3A__3A_, SHIFT (162)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (142)
@@ -1040,12 +1027,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (142)
 , END
-// State S105 (index = 1543)
+// State S106 (index = 1514)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (33)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (33)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (33)
@@ -1104,72 +1091,72 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (33)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (33)
 , END
-// State S106 (index = 1668)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S107 (index = 1639)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S107 (index = 1689)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S108 (index = 1660)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S108 (index = 1710)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S109 (index = 1681)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S109 (index = 1731)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S110 (index = 1702)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S110 (index = 1752)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S111 (index = 1723)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S111 (index = 1773)
+// State S112 (index = 1744)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (35)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (35)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (35)
@@ -1228,12 +1215,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (35)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (35)
 , END
-// State S112 (index = 1898)
+// State S113 (index = 1869)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (36)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (36)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (36)
@@ -1292,7 +1279,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (36)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (36)
 , END
-// State S113 (index = 2023)
+// State S114 (index = 1994)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (41)
@@ -1308,12 +1295,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (41)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (41)
 , END
-// State S114 (index = 2052)
+// State S115 (index = 2023)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (15)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (15)
@@ -1346,12 +1333,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (15)
 , END
-// State S115 (index = 2125)
+// State S116 (index = 2096)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (104)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (104)
@@ -1365,7 +1352,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__21_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (104)
-, C_Lexique_plm_5F_lexique::kToken_or, SHIFT (167)
+, C_Lexique_plm_5F_lexique::kToken_or, SHIFT (169)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (104)
@@ -1385,12 +1372,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (104)
 , END
-// State S116 (index = 2200)
+// State S117 (index = 2171)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (106)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (106)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (106)
@@ -1405,7 +1392,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (106)
-, C_Lexique_plm_5F_lexique::kToken_xor, SHIFT (169)
+, C_Lexique_plm_5F_lexique::kToken_xor, SHIFT (171)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (106)
@@ -1425,12 +1412,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (106)
 , END
-// State S117 (index = 2277)
+// State S118 (index = 2248)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (108)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (108)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (108)
@@ -1446,7 +1433,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (108)
-, C_Lexique_plm_5F_lexique::kToken_and, SHIFT (171)
+, C_Lexique_plm_5F_lexique::kToken_and, SHIFT (173)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (108)
@@ -1466,12 +1453,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (108)
 , END
-// State S118 (index = 2356)
+// State S119 (index = 2327)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (110)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (110)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (110)
@@ -1488,7 +1475,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (110)
-, C_Lexique_plm_5F_lexique::kToken__7C_, SHIFT (173)
+, C_Lexique_plm_5F_lexique::kToken__7C_, SHIFT (175)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (110)
@@ -1508,12 +1495,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (110)
 , END
-// State S119 (index = 2437)
+// State S120 (index = 2408)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (112)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (112)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (112)
@@ -1531,7 +1518,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (112)
-, C_Lexique_plm_5F_lexique::kToken__5E_, SHIFT (175)
+, C_Lexique_plm_5F_lexique::kToken__5E_, SHIFT (177)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (112)
@@ -1551,12 +1538,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (112)
 , END
-// State S120 (index = 2520)
+// State S121 (index = 2491)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (114)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (114)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
@@ -1575,7 +1562,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__5E_, REDUCE (114)
-, C_Lexique_plm_5F_lexique::kToken__26_, SHIFT (177)
+, C_Lexique_plm_5F_lexique::kToken__26_, SHIFT (179)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (114)
@@ -1595,12 +1582,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (114)
 , END
-// State S121 (index = 2605)
+// State S122 (index = 2576)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (116)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (116)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (116)
@@ -1620,8 +1607,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken__5E_, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken__26_, REDUCE (116)
-, C_Lexique_plm_5F_lexique::kToken__3D__3D_, SHIFT (179)
-, C_Lexique_plm_5F_lexique::kToken__21__3D_, SHIFT (180)
+, C_Lexique_plm_5F_lexique::kToken__3D__3D_, SHIFT (181)
+, C_Lexique_plm_5F_lexique::kToken__21__3D_, SHIFT (182)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (116)
@@ -1641,12 +1628,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (116)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (116)
 , END
-// State S122 (index = 2694)
+// State S123 (index = 2665)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (119)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (119)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (119)
@@ -1668,10 +1655,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26_, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken__3D__3D_, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken__21__3D_, REDUCE (119)
-, C_Lexique_plm_5F_lexique::kToken__3C__3D_, SHIFT (182)
-, C_Lexique_plm_5F_lexique::kToken__3E__3D_, SHIFT (183)
-, C_Lexique_plm_5F_lexique::kToken__3C_, SHIFT (184)
-, C_Lexique_plm_5F_lexique::kToken__3E_, SHIFT (185)
+, C_Lexique_plm_5F_lexique::kToken__3C__3D_, SHIFT (184)
+, C_Lexique_plm_5F_lexique::kToken__3E__3D_, SHIFT (185)
+, C_Lexique_plm_5F_lexique::kToken__3C_, SHIFT (186)
+, C_Lexique_plm_5F_lexique::kToken__3E_, SHIFT (187)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (119)
@@ -1691,12 +1678,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (119)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (119)
 , END
-// State S123 (index = 2791)
+// State S124 (index = 2762)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (124)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (124)
@@ -1722,8 +1709,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E__3D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3C_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (187)
-, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (188)
+, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (189)
+, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (190)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (124)
@@ -1743,12 +1730,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (124)
 , END
-// State S124 (index = 2892)
+// State S125 (index = 2863)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (127)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (127)
@@ -1776,10 +1763,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (190)
-, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (191)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (192)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (192)
+, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (194)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (195)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (127)
@@ -1799,12 +1786,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S125 (index = 3001)
+// State S126 (index = 2972)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -1836,12 +1823,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -1861,12 +1848,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S126 (index = 3122)
+// State S127 (index = 3093)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (139)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (139)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (139)
@@ -1904,8 +1891,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__25_, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__2F_, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__26__2F_, REDUCE (139)
-, C_Lexique_plm_5F_lexique::kToken__5C_, SHIFT (202)
-, C_Lexique_plm_5F_lexique::kToken__26__5C_, SHIFT (203)
+, C_Lexique_plm_5F_lexique::kToken__5C_, SHIFT (204)
+, C_Lexique_plm_5F_lexique::kToken__26__5C_, SHIFT (205)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (139)
@@ -1925,13 +1912,13 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (139)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (139)
 , END
-// State S127 (index = 3247)
+// State S128 (index = 3218)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (148)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (148)
 , END
-// State S128 (index = 3256)
+// State S129 (index = 3227)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (51)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (51)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (51)
@@ -1947,7 +1934,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (51)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (51)
 , END
-// State S129 (index = 3285)
+// State S130 (index = 3256)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (52)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (52)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (52)
@@ -1963,7 +1950,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (52)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (52)
 , END
-// State S130 (index = 3314)
+// State S131 (index = 3285)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (157)
@@ -1975,19 +1962,19 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (157)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (157)
 , END
-// State S131 (index = 3335)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S132 (index = 3306)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S132 (index = 3356)
+// State S133 (index = 3327)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (172)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (172)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (172)
@@ -1999,28 +1986,28 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (172)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (172)
 , END
-// State S133 (index = 3377)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S134 (index = 3348)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S134 (index = 3398)
-, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (208)
+// State S135 (index = 3369)
+, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (210)
 , END
-// State S135 (index = 3401)
+// State S136 (index = 3372)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (147)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (147)
 , END
-// State S136 (index = 3410)
+// State S137 (index = 3381)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (10)
@@ -2039,33 +2026,52 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (10)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (10)
 , END
-// State S137 (index = 3445)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (209)
+// State S138 (index = 3416)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_var, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_init, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_let, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_required, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_register, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_mode, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (68)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (68)
 , END
-// State S138 (index = 3448)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S139 (index = 3451)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (211)
 , END
-// State S139 (index = 3469)
+// State S140 (index = 3454)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
+, END
+// State S141 (index = 3475)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (85)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (85)
 , END
-// State S140 (index = 3474)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (140)
+// State S142 (index = 3480)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (142)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (86)
 , END
-// State S141 (index = 3479)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (212)
+// State S143 (index = 3485)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (214)
 , END
-// State S142 (index = 3482)
+// State S144 (index = 3488)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (6)
@@ -2084,22 +2090,22 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (6)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (6)
 , END
-// State S143 (index = 3517)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (214)
+// State S145 (index = 3523)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (216)
 , END
-// State S144 (index = 3520)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S146 (index = 3526)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S145 (index = 3541)
+// State S147 (index = 3547)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (5)
@@ -2118,15 +2124,15 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (5)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
 , END
-// State S146 (index = 3576)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (216)
+// State S148 (index = 3582)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (218)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (82)
 , END
-// State S147 (index = 3581)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (218)
+// State S149 (index = 3587)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (92)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (220)
 , END
-// State S148 (index = 3586)
+// State S150 (index = 3592)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (50)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (50)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (50)
@@ -2142,28 +2148,28 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (50)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (50)
 , END
-// State S149 (index = 3615)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (220)
-, END
-// State S150 (index = 3618)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
-, END
-// State S151 (index = 3639)
+// State S151 (index = 3621)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (222)
 , END
-// State S152 (index = 3642)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (223)
+// State S152 (index = 3624)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
 // State S153 (index = 3645)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (224)
+, END
+// State S154 (index = 3648)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (225)
+, END
+// State S155 (index = 3651)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (53)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (53)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (53)
@@ -2179,34 +2185,34 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (53)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (53)
 , END
-// State S154 (index = 3674)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (224)
-, END
-// State S155 (index = 3677)
-, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (225)
-, END
 // State S156 (index = 3680)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (226)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (226)
 , END
 // State S157 (index = 3683)
 , C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (227)
 , END
 // State S158 (index = 3686)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (228)
+, END
+// State S159 (index = 3689)
+, C_Lexique_plm_5F_lexique::kToken__3D_, SHIFT (229)
+, END
+// State S160 (index = 3692)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (144)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (228)
-, END
-// State S159 (index = 3691)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (230)
-, END
-// State S160 (index = 3694)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (231)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (230)
 , END
 // State S161 (index = 3697)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (232)
+, END
+// State S162 (index = 3700)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (233)
+, END
+// State S163 (index = 3703)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (37)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (37)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (37)
@@ -2265,15 +2271,15 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (37)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (37)
 , END
-// State S162 (index = 3822)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (232)
+// State S164 (index = 3828)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (234)
 , END
-// State S163 (index = 3825)
+// State S165 (index = 3831)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (30)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (30)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (30)
@@ -2332,12 +2338,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (30)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (30)
 , END
-// State S164 (index = 3950)
+// State S166 (index = 3956)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (31)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (31)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (31)
@@ -2396,12 +2402,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (31)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (31)
 , END
-// State S165 (index = 4075)
+// State S167 (index = 4081)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (28)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (28)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (28)
@@ -2460,12 +2466,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (28)
 , END
-// State S166 (index = 4200)
+// State S168 (index = 4206)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (29)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (29)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (29)
@@ -2524,24 +2530,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (29)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (29)
 , END
-// State S167 (index = 4325)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S169 (index = 4331)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S168 (index = 4346)
+// State S170 (index = 4352)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (16)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (16)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (16)
@@ -2574,24 +2580,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (16)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (16)
 , END
-// State S169 (index = 4419)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S171 (index = 4425)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S170 (index = 4440)
+// State S172 (index = 4446)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (17)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (17)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (17)
@@ -2625,24 +2631,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (17)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (17)
 , END
-// State S171 (index = 4515)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S173 (index = 4521)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S172 (index = 4536)
+// State S174 (index = 4542)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (18)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (18)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (18)
@@ -2677,24 +2683,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (18)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (18)
 , END
-// State S173 (index = 4613)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S175 (index = 4619)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S174 (index = 4634)
+// State S176 (index = 4640)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (19)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (19)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (19)
@@ -2730,24 +2736,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (19)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (19)
 , END
-// State S175 (index = 4713)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S177 (index = 4719)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S176 (index = 4734)
+// State S178 (index = 4740)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (20)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (20)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (20)
@@ -2784,24 +2790,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (20)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (20)
 , END
-// State S177 (index = 4815)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S179 (index = 4821)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S178 (index = 4836)
+// State S180 (index = 4842)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (21)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (21)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (21)
@@ -2839,36 +2845,36 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (21)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (21)
 , END
-// State S179 (index = 4919)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S181 (index = 4925)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S180 (index = 4940)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S182 (index = 4946)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S181 (index = 4961)
+// State S183 (index = 4967)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (22)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (22)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (22)
@@ -2907,60 +2913,60 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (22)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (22)
 , END
-// State S182 (index = 5046)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S184 (index = 5052)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S183 (index = 5067)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S185 (index = 5073)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S184 (index = 5088)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S186 (index = 5094)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S185 (index = 5109)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S187 (index = 5115)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S186 (index = 5130)
+// State S188 (index = 5136)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (23)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (23)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (23)
@@ -3001,36 +3007,36 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (23)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (23)
 , END
-// State S187 (index = 5219)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S189 (index = 5225)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S188 (index = 5240)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S190 (index = 5246)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S189 (index = 5261)
+// State S191 (index = 5267)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (24)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (24)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (24)
@@ -3075,60 +3081,60 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (24)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (24)
 , END
-// State S190 (index = 5358)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S192 (index = 5364)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S191 (index = 5379)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S193 (index = 5385)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S192 (index = 5400)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S194 (index = 5406)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S193 (index = 5421)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S195 (index = 5427)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S194 (index = 5442)
+// State S196 (index = 5448)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (25)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (25)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (25)
@@ -3175,84 +3181,84 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (25)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (25)
 , END
-// State S195 (index = 5543)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S197 (index = 5549)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S196 (index = 5564)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S198 (index = 5570)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S197 (index = 5585)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S199 (index = 5591)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S198 (index = 5606)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S200 (index = 5612)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S199 (index = 5627)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S201 (index = 5633)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S200 (index = 5648)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S202 (index = 5654)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S201 (index = 5669)
+// State S203 (index = 5675)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (26)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (26)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (26)
@@ -3303,18 +3309,18 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (26)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (26)
 , END
-// State S202 (index = 5778)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (257)
-, END
-// State S203 (index = 5781)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (258)
-, END
 // State S204 (index = 5784)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (259)
+, END
+// State S205 (index = 5787)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (260)
+, END
+// State S206 (index = 5790)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (27)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (27)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (27)
@@ -3371,16 +3377,16 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (27)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (27)
 , END
-// State S205 (index = 5905)
-, C_Lexique_plm_5F_lexique::kToken_then, SHIFT (259)
-, END
-// State S206 (index = 5908)
-, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (260)
-, END
 // State S207 (index = 5911)
-, C_Lexique_plm_5F_lexique::kToken_do, SHIFT (261)
+, C_Lexique_plm_5F_lexique::kToken_then, SHIFT (261)
 , END
 // State S208 (index = 5914)
+, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (262)
+, END
+// State S209 (index = 5917)
+, C_Lexique_plm_5F_lexique::kToken_do, SHIFT (263)
+, END
+// State S210 (index = 5920)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (58)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (58)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (58)
@@ -3396,23 +3402,23 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (58)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (58)
 , END
-// State S209 (index = 5943)
-, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (262)
+// State S211 (index = 5949)
+, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (264)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (71)
 , END
-// State S210 (index = 5948)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (264)
+// State S212 (index = 5954)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (266)
 , END
-// State S211 (index = 5951)
+// State S213 (index = 5957)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (87)
 , END
-// State S212 (index = 5954)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (265)
+// State S214 (index = 5960)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (267)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (88)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (266)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (267)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (268)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (269)
 , END
-// State S213 (index = 5963)
+// State S215 (index = 5969)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (11)
@@ -3432,7 +3438,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (11)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (11)
 , END
-// State S214 (index = 6000)
+// State S216 (index = 6006)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (7)
@@ -3451,7 +3457,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (7)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (7)
 , END
-// State S215 (index = 6035)
+// State S217 (index = 6041)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (4)
@@ -3470,38 +3476,38 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (4)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (4)
 , END
-// State S216 (index = 6070)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (269)
-, END
-// State S217 (index = 6073)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (270)
-, END
 // State S218 (index = 6076)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (56)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (271)
+, END
+// State S219 (index = 6079)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (272)
+, END
+// State S220 (index = 6082)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (55)
 , C_Lexique_plm_5F_lexique::kToken_at, REDUCE (94)
 , END
-// State S219 (index = 6081)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (272)
+// State S221 (index = 6087)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (274)
 , END
-// State S220 (index = 6084)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (149)
+// State S222 (index = 6090)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (151)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (167)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (150)
-, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (151)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (152)
+, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (153)
 , END
-// State S221 (index = 6093)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (149)
+// State S223 (index = 6099)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (151)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (167)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (150)
-, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (151)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (152)
+, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (153)
 , END
-// State S222 (index = 6102)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (149)
+// State S224 (index = 6108)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (151)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (167)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (150)
-, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (151)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (152)
+, C_Lexique_plm_5F_lexique::kToken__21__3F_, SHIFT (153)
 , END
-// State S223 (index = 6111)
+// State S225 (index = 6117)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (56)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (56)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (56)
@@ -3517,7 +3523,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (56)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (56)
 , END
-// State S224 (index = 6140)
+// State S226 (index = 6146)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (48)
@@ -3534,54 +3540,54 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (48)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (48)
 , END
-// State S225 (index = 6171)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S227 (index = 6177)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S226 (index = 6192)
+// State S228 (index = 6198)
 , C_Lexique_plm_5F_lexique::kToken__3D_, REDUCE (152)
 , END
-// State S227 (index = 6195)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S229 (index = 6201)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S228 (index = 6216)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S230 (index = 6222)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S229 (index = 6237)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (279)
+// State S231 (index = 6243)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (281)
 , END
-// State S230 (index = 6240)
+// State S232 (index = 6246)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (142)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (142)
@@ -3621,7 +3627,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2F_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__5C_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__26__5C_, REDUCE (142)
-, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (159)
+, C_Lexique_plm_5F_lexique::kToken__2E_, SHIFT (161)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (142)
@@ -3641,12 +3647,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (142)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (142)
 , END
-// State S231 (index = 6367)
+// State S233 (index = 6373)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (39)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (39)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (39)
@@ -3655,7 +3661,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_boot, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_func, REDUCE (39)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (281)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (283)
 , C_Lexique_plm_5F_lexique::kToken__3F_, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken__21_, REDUCE (39)
@@ -3706,12 +3712,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (39)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (39)
 , END
-// State S232 (index = 6494)
+// State S234 (index = 6500)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (32)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (32)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (32)
@@ -3770,12 +3776,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (32)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (32)
 , END
-// State S233 (index = 6619)
+// State S235 (index = 6625)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (104)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (104)
@@ -3789,7 +3795,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__21_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (104)
-, C_Lexique_plm_5F_lexique::kToken_or, SHIFT (167)
+, C_Lexique_plm_5F_lexique::kToken_or, SHIFT (169)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (104)
@@ -3809,12 +3815,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (104)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (104)
 , END
-// State S234 (index = 6694)
+// State S236 (index = 6700)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (106)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (106)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (106)
@@ -3829,7 +3835,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_required, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (106)
-, C_Lexique_plm_5F_lexique::kToken_xor, SHIFT (169)
+, C_Lexique_plm_5F_lexique::kToken_xor, SHIFT (171)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (106)
@@ -3849,12 +3855,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (106)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (106)
 , END
-// State S235 (index = 6771)
+// State S237 (index = 6777)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (108)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (108)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (108)
@@ -3870,7 +3876,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_register, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (108)
-, C_Lexique_plm_5F_lexique::kToken_and, SHIFT (171)
+, C_Lexique_plm_5F_lexique::kToken_and, SHIFT (173)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (108)
@@ -3890,12 +3896,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (108)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (108)
 , END
-// State S236 (index = 6850)
+// State S238 (index = 6856)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (110)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (110)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (110)
@@ -3912,7 +3918,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_or, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (110)
-, C_Lexique_plm_5F_lexique::kToken__7C_, SHIFT (173)
+, C_Lexique_plm_5F_lexique::kToken__7C_, SHIFT (175)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (110)
@@ -3932,12 +3938,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (110)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (110)
 , END
-// State S237 (index = 6931)
+// State S239 (index = 6937)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (112)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (112)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (112)
@@ -3955,7 +3961,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_xor, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (112)
-, C_Lexique_plm_5F_lexique::kToken__5E_, SHIFT (175)
+, C_Lexique_plm_5F_lexique::kToken__5E_, SHIFT (177)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (112)
@@ -3975,12 +3981,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (112)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (112)
 , END
-// State S238 (index = 7014)
+// State S240 (index = 7020)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (114)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (114)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (114)
@@ -3999,7 +4005,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_and, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__7C_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__5E_, REDUCE (114)
-, C_Lexique_plm_5F_lexique::kToken__26_, SHIFT (177)
+, C_Lexique_plm_5F_lexique::kToken__26_, SHIFT (179)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (114)
@@ -4019,12 +4025,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (114)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (114)
 , END
-// State S239 (index = 7099)
+// State S241 (index = 7105)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (117)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (117)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (117)
@@ -4063,12 +4069,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (117)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (117)
 , END
-// State S240 (index = 7184)
+// State S242 (index = 7190)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (118)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (118)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (118)
@@ -4107,12 +4113,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (118)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (118)
 , END
-// State S241 (index = 7269)
+// State S243 (index = 7275)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (120)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (120)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (120)
@@ -4153,12 +4159,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (120)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (120)
 , END
-// State S242 (index = 7358)
+// State S244 (index = 7364)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (121)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (121)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (121)
@@ -4199,12 +4205,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (121)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (121)
 , END
-// State S243 (index = 7447)
+// State S245 (index = 7453)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (122)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (122)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (122)
@@ -4245,12 +4251,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (122)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (122)
 , END
-// State S244 (index = 7536)
+// State S246 (index = 7542)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (123)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (123)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (123)
@@ -4291,12 +4297,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (123)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (123)
 , END
-// State S245 (index = 7625)
+// State S247 (index = 7631)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (124)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (124)
@@ -4322,8 +4328,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E__3D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3C_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (187)
-, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (188)
+, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (189)
+, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (190)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (124)
@@ -4343,12 +4349,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (124)
 , END
-// State S246 (index = 7726)
+// State S248 (index = 7732)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (124)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (124)
@@ -4374,8 +4380,8 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E__3D_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3C_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (124)
-, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (187)
-, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (188)
+, C_Lexique_plm_5F_lexique::kToken__3C__3C_, SHIFT (189)
+, C_Lexique_plm_5F_lexique::kToken__3E__3E_, SHIFT (190)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (124)
@@ -4395,12 +4401,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (124)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (124)
 , END
-// State S247 (index = 7827)
+// State S249 (index = 7833)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (127)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (127)
@@ -4428,10 +4434,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (190)
-, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (191)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (192)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (192)
+, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (194)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (195)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (127)
@@ -4451,12 +4457,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S248 (index = 7936)
+// State S250 (index = 7942)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (127)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (127)
@@ -4484,10 +4490,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (190)
-, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (191)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (192)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (192)
+, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (194)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (195)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (127)
@@ -4507,12 +4513,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S249 (index = 8045)
+// State S251 (index = 8051)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (127)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (127)
@@ -4540,10 +4546,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (190)
-, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (191)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (192)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (192)
+, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (194)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (195)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (127)
@@ -4563,12 +4569,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S250 (index = 8154)
+// State S252 (index = 8160)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (127)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (127)
@@ -4596,10 +4602,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__3E_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3C__3C_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3E__3E_, REDUCE (127)
-, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (190)
-, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (191)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (192)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2B_, SHIFT (192)
+, C_Lexique_plm_5F_lexique::kToken__26__2B_, SHIFT (193)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (194)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (195)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (127)
@@ -4619,12 +4625,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (127)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (127)
 , END
-// State S251 (index = 8263)
+// State S253 (index = 8269)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4656,12 +4662,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4681,12 +4687,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S252 (index = 8384)
+// State S254 (index = 8390)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4718,12 +4724,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4743,12 +4749,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S253 (index = 8505)
+// State S255 (index = 8511)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4780,12 +4786,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4805,12 +4811,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S254 (index = 8626)
+// State S256 (index = 8632)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4842,12 +4848,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4867,12 +4873,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S255 (index = 8747)
+// State S257 (index = 8753)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4904,12 +4910,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4929,12 +4935,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S256 (index = 8868)
+// State S258 (index = 8874)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (132)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (132)
@@ -4966,12 +4972,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__26__2B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__26__2D_, REDUCE (132)
-, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (195)
-, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (196)
-, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (197)
-, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (198)
-, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (199)
-, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2A_, SHIFT (197)
+, C_Lexique_plm_5F_lexique::kToken__26__2A_, SHIFT (198)
+, C_Lexique_plm_5F_lexique::kToken__25_, SHIFT (199)
+, C_Lexique_plm_5F_lexique::kToken__26__25_, SHIFT (200)
+, C_Lexique_plm_5F_lexique::kToken__2F_, SHIFT (201)
+, C_Lexique_plm_5F_lexique::kToken__26__2F_, SHIFT (202)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken__3B_, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_assert, REDUCE (132)
@@ -4991,12 +4997,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (132)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (132)
 , END
-// State S257 (index = 8989)
+// State S259 (index = 8995)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (140)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (140)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (140)
@@ -5053,12 +5059,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (140)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (140)
 , END
-// State S258 (index = 9110)
+// State S260 (index = 9116)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (141)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (141)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (141)
@@ -5115,25 +5121,25 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (141)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (141)
 , END
-// State S259 (index = 9231)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
+// State S261 (index = 9237)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
-// State S260 (index = 9260)
+// State S262 (index = 9266)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (303)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (158)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (301)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (158)
@@ -5148,68 +5154,68 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (158)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (158)
 , END
-// State S261 (index = 9291)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
+// State S263 (index = 9297)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
-, END
-// State S262 (index = 9320)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (304)
-, END
-// State S263 (index = 9323)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (305)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
 // State S264 (index = 9326)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (306)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (306)
+, END
+// State S265 (index = 9329)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (307)
+, END
+// State S266 (index = 9332)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (308)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (75)
-, END
-// State S265 (index = 9335)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (308)
-, END
-// State S266 (index = 9338)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (309)
 , END
 // State S267 (index = 9341)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (310)
 , END
 // State S268 (index = 9344)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (311)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (311)
 , END
 // State S269 (index = 9347)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (312)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (312)
 , END
 // State S270 (index = 9350)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (313)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (313)
 , END
 // State S271 (index = 9353)
-, C_Lexique_plm_5F_lexique::kToken_at, SHIFT (314)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (314)
 , END
 // State S272 (index = 9356)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (315)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (315)
 , END
 // State S273 (index = 9359)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (170)
+, C_Lexique_plm_5F_lexique::kToken_at, SHIFT (316)
 , END
 // State S274 (index = 9362)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (168)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (317)
 , END
 // State S275 (index = 9365)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (169)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (170)
 , END
 // State S276 (index = 9368)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (168)
+, END
+// State S277 (index = 9371)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (169)
+, END
+// State S278 (index = 9374)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (47)
@@ -5225,7 +5231,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (47)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (47)
 , END
-// State S277 (index = 9397)
+// State S279 (index = 9403)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (49)
@@ -5241,16 +5247,16 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (49)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (49)
 , END
-// State S278 (index = 9426)
+// State S280 (index = 9432)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (144)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (228)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (230)
 , END
-// State S279 (index = 9431)
+// State S281 (index = 9437)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (38)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (38)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (38)
@@ -5309,12 +5315,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (38)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (38)
 , END
-// State S280 (index = 9556)
+// State S282 (index = 9562)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (143)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (143)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (143)
@@ -5373,24 +5379,24 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (143)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (143)
 , END
-// State S281 (index = 9681)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S283 (index = 9687)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S282 (index = 9702)
+// State S284 (index = 9708)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (105)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (105)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (105)
@@ -5423,12 +5429,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (105)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (105)
 , END
-// State S283 (index = 9775)
+// State S285 (index = 9781)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (107)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (107)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (107)
@@ -5462,12 +5468,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (107)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (107)
 , END
-// State S284 (index = 9850)
+// State S286 (index = 9856)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (109)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (109)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (109)
@@ -5502,12 +5508,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (109)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (109)
 , END
-// State S285 (index = 9927)
+// State S287 (index = 9933)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (111)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (111)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (111)
@@ -5543,12 +5549,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (111)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (111)
 , END
-// State S286 (index = 10006)
+// State S288 (index = 10012)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (113)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (113)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (113)
@@ -5585,12 +5591,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (113)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (113)
 , END
-// State S287 (index = 10087)
+// State S289 (index = 10093)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (115)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (115)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (115)
@@ -5628,12 +5634,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (115)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (115)
 , END
-// State S288 (index = 10170)
+// State S290 (index = 10176)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (125)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (125)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (125)
@@ -5678,12 +5684,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (125)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (125)
 , END
-// State S289 (index = 10267)
+// State S291 (index = 10273)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (126)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (126)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (126)
@@ -5728,12 +5734,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (126)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (126)
 , END
-// State S290 (index = 10364)
+// State S292 (index = 10370)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (128)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (128)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (128)
@@ -5780,12 +5786,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (128)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (128)
 , END
-// State S291 (index = 10465)
+// State S293 (index = 10471)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (129)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (129)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (129)
@@ -5832,12 +5838,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (129)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (129)
 , END
-// State S292 (index = 10566)
+// State S294 (index = 10572)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (130)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (130)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (130)
@@ -5884,12 +5890,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (130)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (130)
 , END
-// State S293 (index = 10667)
+// State S295 (index = 10673)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (131)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (131)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (131)
@@ -5936,12 +5942,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (131)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (131)
 , END
-// State S294 (index = 10768)
+// State S296 (index = 10774)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (133)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (133)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (133)
@@ -5992,12 +5998,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (133)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (133)
 , END
-// State S295 (index = 10877)
+// State S297 (index = 10883)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (134)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (134)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (134)
@@ -6048,12 +6054,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (134)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (134)
 , END
-// State S296 (index = 10986)
+// State S298 (index = 10992)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (135)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (135)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (135)
@@ -6104,12 +6110,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (135)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (135)
 , END
-// State S297 (index = 11095)
+// State S299 (index = 11101)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (136)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (136)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (136)
@@ -6160,12 +6166,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (136)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (136)
 , END
-// State S298 (index = 11204)
+// State S300 (index = 11210)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (137)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (137)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (137)
@@ -6216,12 +6222,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (137)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (137)
 , END
-// State S299 (index = 11313)
+// State S301 (index = 11319)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (138)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (138)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (138)
@@ -6272,12 +6278,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (138)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (138)
 , END
-// State S300 (index = 11422)
+// State S302 (index = 11428)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (160)
-, C_Lexique_plm_5F_lexique::kToken_else, SHIFT (318)
-, C_Lexique_plm_5F_lexique::kToken_elsif, SHIFT (319)
+, C_Lexique_plm_5F_lexique::kToken_else, SHIFT (320)
+, C_Lexique_plm_5F_lexique::kToken_elsif, SHIFT (321)
 , END
-// State S301 (index = 11429)
+// State S303 (index = 11435)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (159)
@@ -6293,7 +6299,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (159)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (159)
 , END
-// State S302 (index = 11458)
+// State S304 (index = 11464)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (54)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (54)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (54)
@@ -6309,14 +6315,14 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (54)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (54)
 , END
-// State S303 (index = 11487)
-, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (321)
+// State S305 (index = 11493)
+, C_Lexique_plm_5F_lexique::kToken_end, SHIFT (323)
 , END
-// State S304 (index = 11490)
-, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (262)
+// State S306 (index = 11496)
+, C_Lexique_plm_5F_lexique::kToken_case, SHIFT (264)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (71)
 , END
-// State S305 (index = 11495)
+// State S307 (index = 11501)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (2)
@@ -6335,26 +6341,26 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (2)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (2)
 , END
-// State S306 (index = 11530)
+// State S308 (index = 11536)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (76)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (76)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (76)
 , END
-// State S307 (index = 11537)
-, C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (323)
-, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (324)
-, C_Lexique_plm_5F_lexique::kToken_exception, SHIFT (325)
-, END
-// State S308 (index = 11544)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (327)
-, END
-// State S309 (index = 11547)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (328)
+// State S309 (index = 11543)
+, C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (325)
+, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (326)
+, C_Lexique_plm_5F_lexique::kToken_exception, SHIFT (327)
 , END
 // State S310 (index = 11550)
 , C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (329)
 , END
 // State S311 (index = 11553)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (330)
+, END
+// State S312 (index = 11556)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (331)
+, END
+// State S313 (index = 11559)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (12)
@@ -6376,20 +6382,20 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (12)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (12)
 , END
-// State S312 (index = 11594)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (330)
-, END
-// State S313 (index = 11597)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (331)
-, END
 // State S314 (index = 11600)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (332)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (332)
 , END
 // State S315 (index = 11603)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (333)
+, END
+// State S316 (index = 11606)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (334)
+, END
+// State S317 (index = 11609)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (96)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (96)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (96)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (333)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (335)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (96)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (96)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (96)
@@ -6405,15 +6411,15 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (96)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (96)
 , END
-// State S316 (index = 11640)
+// State S318 (index = 11646)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (145)
 , END
-// State S317 (index = 11643)
-, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (335)
+// State S319 (index = 11649)
+, C_Lexique_plm_5F_lexique::kToken__29_, SHIFT (337)
 , END
-// State S318 (index = 11646)
+// State S320 (index = 11652)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (338)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (163)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (336)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (163)
@@ -6425,10 +6431,10 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (163)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (163)
 , END
-// State S319 (index = 11671)
+// State S321 (index = 11677)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (165)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (340)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (165)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (338)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken__28_, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken__2D_, REDUCE (165)
@@ -6438,12 +6444,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (165)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (165)
 , END
-// State S320 (index = 11694)
+// State S322 (index = 11700)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (55)
 , END
-// State S321 (index = 11697)
+// State S323 (index = 11703)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (342)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (173)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (340)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (173)
@@ -6458,50 +6464,50 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (173)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (173)
 , END
-// State S322 (index = 11728)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (72)
-, END
-// State S323 (index = 11731)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (342)
-, END
 // State S324 (index = 11734)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (343)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (72)
 , END
 // State S325 (index = 11737)
 , C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (344)
 , END
 // State S326 (index = 11740)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (306)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (345)
+, END
+// State S327 (index = 11743)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (346)
+, END
+// State S328 (index = 11746)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (308)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (73)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (75)
 , END
-// State S327 (index = 11751)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (347)
-, END
-// State S328 (index = 11754)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (348)
-, END
 // State S329 (index = 11757)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (349)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (349)
 , END
 // State S330 (index = 11760)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (216)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (350)
+, END
+// State S331 (index = 11763)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (351)
+, END
+// State S332 (index = 11766)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (218)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (82)
 , END
-// State S331 (index = 11765)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (351)
+// State S333 (index = 11771)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (353)
 , END
-// State S332 (index = 11768)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (218)
+// State S334 (index = 11774)
 , C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (92)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (220)
 , END
-// State S333 (index = 11773)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (353)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (354)
+// State S335 (index = 11779)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (355)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (356)
 , END
-// State S334 (index = 11778)
+// State S336 (index = 11784)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (14)
@@ -6520,12 +6526,12 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (14)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (14)
 , END
-// State S335 (index = 11813)
+// State S337 (index = 11819)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (40)
-, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (40)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (40)
@@ -6584,7 +6590,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (40)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (40)
 , END
-// State S336 (index = 11938)
+// State S338 (index = 11944)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_let, REDUCE (164)
@@ -6597,23 +6603,23 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (164)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (164)
 , END
-// State S337 (index = 11961)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
+// State S339 (index = 11967)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
-// State S338 (index = 11990)
+// State S340 (index = 11996)
 , C_Lexique_plm_5F_lexique::kToken_literal_5F_string, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (166)
@@ -6625,19 +6631,19 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_true, REDUCE (166)
 , C_Lexique_plm_5F_lexique::kToken_false, REDUCE (166)
 , END
-// State S339 (index = 12011)
-, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (103)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (105)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (106)
-, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (107)
-, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (108)
-, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (109)
-, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (110)
-, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (111)
-, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (112)
+// State S341 (index = 12017)
+, C_Lexique_plm_5F_lexique::kToken_literal_5F_string, SHIFT (104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (105)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (106)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (107)
+, C_Lexique_plm_5F_lexique::kToken__2D_, SHIFT (108)
+, C_Lexique_plm_5F_lexique::kToken__26__2D_, SHIFT (109)
+, C_Lexique_plm_5F_lexique::kToken__7E_, SHIFT (110)
+, C_Lexique_plm_5F_lexique::kToken_not, SHIFT (111)
+, C_Lexique_plm_5F_lexique::kToken_true, SHIFT (112)
+, C_Lexique_plm_5F_lexique::kToken_false, SHIFT (113)
 , END
-// State S340 (index = 12032)
+// State S342 (index = 12038)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (174)
@@ -6653,7 +6659,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (174)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (174)
 , END
-// State S341 (index = 12061)
+// State S343 (index = 12067)
 , C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (57)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (57)
 , C_Lexique_plm_5F_lexique::kToken_var, REDUCE (57)
@@ -6669,88 +6675,88 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_while, REDUCE (57)
 , C_Lexique_plm_5F_lexique::kToken_forever, REDUCE (57)
 , END
-// State S342 (index = 12090)
-, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (212)
+// State S344 (index = 12096)
+, C_Lexique_plm_5F_lexique::kToken__28_, SHIFT (214)
 , END
-// State S343 (index = 12093)
+// State S345 (index = 12099)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (78)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (78)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (78)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (78)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (78)
 , END
-// State S344 (index = 12104)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (359)
-, END
-// State S345 (index = 12107)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (360)
-, END
 // State S346 (index = 12110)
-, C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (323)
-, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (324)
-, C_Lexique_plm_5F_lexique::kToken_exception, SHIFT (325)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (361)
 , END
-// State S347 (index = 12117)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (265)
+// State S347 (index = 12113)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (362)
+, END
+// State S348 (index = 12116)
+, C_Lexique_plm_5F_lexique::kToken_proc, SHIFT (325)
+, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (326)
+, C_Lexique_plm_5F_lexique::kToken_exception, SHIFT (327)
+, END
+// State S349 (index = 12123)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (267)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (88)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (266)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (267)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (268)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (269)
 , END
-// State S348 (index = 12126)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (265)
+// State S350 (index = 12132)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (267)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (88)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (266)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (267)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (268)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (269)
 , END
-// State S349 (index = 12135)
-, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (265)
+// State S351 (index = 12141)
+, C_Lexique_plm_5F_lexique::kToken__3F_, SHIFT (267)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (88)
-, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (266)
-, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (267)
-, END
-// State S350 (index = 12144)
-, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (83)
-, END
-// State S351 (index = 12147)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (365)
+, C_Lexique_plm_5F_lexique::kToken__21_, SHIFT (268)
+, C_Lexique_plm_5F_lexique::kToken__3F__21_, SHIFT (269)
 , END
 // State S352 (index = 12150)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (93)
+, C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (83)
 , END
 // State S353 (index = 12153)
+, C_Lexique_plm_5F_lexique::kToken_typeName, SHIFT (367)
+, END
+// State S354 (index = 12156)
+, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (93)
+, END
+// State S355 (index = 12159)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (102)
-, C_Lexique_plm_5F_lexique::kToken__5B_, SHIFT (366)
+, C_Lexique_plm_5F_lexique::kToken__5B_, SHIFT (368)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (102)
 , END
-// State S354 (index = 12160)
+// State S356 (index = 12166)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (100)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (100)
 , END
-// State S355 (index = 12165)
+// State S357 (index = 12171)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (98)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (368)
-, END
-// State S356 (index = 12170)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (161)
-, END
-// State S357 (index = 12173)
-, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (162)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (370)
 , END
 // State S358 (index = 12176)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (161)
+, END
+// State S359 (index = 12179)
+, C_Lexique_plm_5F_lexique::kToken_end, REDUCE (162)
+, END
+// State S360 (index = 12182)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (77)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (77)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (77)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (77)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (77)
 , END
-// State S359 (index = 12187)
+// State S361 (index = 12193)
 , C_Lexique_plm_5F_lexique::kToken_attribute, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (79)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (79)
 , END
-// State S360 (index = 12198)
+// State S362 (index = 12204)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (3)
@@ -6769,66 +6775,66 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (3)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
 , END
-// State S361 (index = 12233)
-, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (306)
+// State S363 (index = 12239)
+, C_Lexique_plm_5F_lexique::kToken_attribute, SHIFT (308)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (73)
 , C_Lexique_plm_5F_lexique::kToken_proc, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_init, REDUCE (75)
 , C_Lexique_plm_5F_lexique::kToken_exception, REDUCE (75)
 , END
-// State S362 (index = 12244)
+// State S364 (index = 12250)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (91)
 , END
-// State S363 (index = 12247)
+// State S365 (index = 12253)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (89)
 , END
-// State S364 (index = 12250)
+// State S366 (index = 12256)
 , C_Lexique_plm_5F_lexique::kToken__29_, REDUCE (90)
 , END
-// State S365 (index = 12253)
-, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (371)
-, END
-// State S366 (index = 12256)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (372)
-, END
 // State S367 (index = 12259)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (373)
+, END
+// State S368 (index = 12262)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (374)
+, END
+// State S369 (index = 12265)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (101)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (101)
 , END
-// State S368 (index = 12264)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (353)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (354)
-, END
-// State S369 (index = 12269)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (374)
-, END
-// State S370 (index = 12272)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (74)
+// State S370 (index = 12270)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (355)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (356)
 , END
 // State S371 (index = 12275)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (376)
+, END
+// State S372 (index = 12278)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (74)
+, END
+// State S373 (index = 12281)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (60)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (62)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (63)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (64)
-, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (65)
-, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (66)
-, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (67)
-, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (61)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (63)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (64)
+, C_Lexique_plm_5F_lexique::kToken_assert, SHIFT (65)
+, C_Lexique_plm_5F_lexique::kToken_throw, SHIFT (66)
+, C_Lexique_plm_5F_lexique::kToken_if, SHIFT (67)
 , C_Lexique_plm_5F_lexique::kToken_end, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_else, REDUCE (146)
 , C_Lexique_plm_5F_lexique::kToken_elsif, REDUCE (146)
-, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (69)
-, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (70)
+, C_Lexique_plm_5F_lexique::kToken_while, SHIFT (68)
+, C_Lexique_plm_5F_lexique::kToken_forever, SHIFT (69)
 , END
-// State S372 (index = 12304)
-, C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (376)
+// State S374 (index = 12310)
+, C_Lexique_plm_5F_lexique::kToken__5D_, SHIFT (378)
 , END
-// State S373 (index = 12307)
+// State S375 (index = 12313)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (98)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (368)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (370)
 , END
-// State S374 (index = 12312)
+// State S376 (index = 12318)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (97)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (97)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (97)
@@ -6847,17 +6853,17 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_newIntegerType, REDUCE (97)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (97)
 , END
-// State S375 (index = 12347)
-, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (378)
+// State S377 (index = 12353)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (380)
 , END
-// State S376 (index = 12350)
+// State S378 (index = 12356)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (103)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (103)
 , END
-// State S377 (index = 12355)
+// State S379 (index = 12361)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (99)
 , END
-// State S378 (index = 12358)
+// State S380 (index = 12364)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_booleanType, REDUCE (9)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (9)
@@ -6877,7 +6883,7 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (9)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_target_grammar [379] = {
+static const uint32_t gActionTableIndex_plm_target_grammar [381] = {
   0  // S0
 , 35  // S1
 , 38  // S2
@@ -6902,249 +6908,249 @@ static const uint32_t gActionTableIndex_plm_target_grammar [379] = {
 , 161  // S21
 , 164  // S22
 , 199  // S23
-, 236  // S24
-, 241  // S25
-, 244  // S26
-, 247  // S27
-, 250  // S28
-, 253  // S29
-, 256  // S30
-, 259  // S31
-, 262  // S32
-, 267  // S33
-, 302  // S34
-, 307  // S35
-, 310  // S36
-, 313  // S37
-, 348  // S38
-, 351  // S39
-, 354  // S40
-, 357  // S41
-, 386  // S42
-, 389  // S43
-, 426  // S44
-, 461  // S45
-, 466  // S46
-, 469  // S47
-, 472  // S48
-, 479  // S49
-, 508  // S50
-, 511  // S51
-, 514  // S52
-, 517  // S53
-, 546  // S54
-, 551  // S55
-, 554  // S56
-, 559  // S57
-, 562  // S58
-, 565  // S59
-, 568  // S60
-, 603  // S61
-, 622  // S62
-, 625  // S63
-, 628  // S64
-, 649  // S65
-, 678  // S66
-, 699  // S67
-, 720  // S68
-, 743  // S69
-, 766  // S70
-, 795  // S71
-, 824  // S72
-, 827  // S73
-, 836  // S74
-, 871  // S75
-, 874  // S76
-, 877  // S77
-, 880  // S78
-, 887  // S79
-, 892  // S80
-, 895  // S81
-, 924  // S82
-, 959  // S83
-, 962  // S84
-, 965  // S85
-, 968  // S86
-, 971  // S87
-, 974  // S88
-, 977  // S89
-, 1012  // S90
-, 1047  // S91
-, 1068  // S92
-, 1077  // S93
-, 1106  // S94
-, 1135  // S95
-, 1164  // S96
-, 1193  // S97
-, 1214  // S98
-, 1235  // S99
-, 1256  // S100
-, 1277  // S101
-, 1282  // S102
-, 1287  // S103
-, 1412  // S104
-, 1543  // S105
-, 1668  // S106
-, 1689  // S107
-, 1710  // S108
-, 1731  // S109
-, 1752  // S110
-, 1773  // S111
-, 1898  // S112
-, 2023  // S113
-, 2052  // S114
-, 2125  // S115
-, 2200  // S116
-, 2277  // S117
-, 2356  // S118
-, 2437  // S119
-, 2520  // S120
-, 2605  // S121
-, 2694  // S122
-, 2791  // S123
-, 2892  // S124
-, 3001  // S125
-, 3122  // S126
-, 3247  // S127
-, 3256  // S128
-, 3285  // S129
-, 3314  // S130
-, 3335  // S131
-, 3356  // S132
-, 3377  // S133
-, 3398  // S134
-, 3401  // S135
-, 3410  // S136
-, 3445  // S137
-, 3448  // S138
-, 3469  // S139
-, 3474  // S140
-, 3479  // S141
-, 3482  // S142
-, 3517  // S143
-, 3520  // S144
-, 3541  // S145
-, 3576  // S146
-, 3581  // S147
-, 3586  // S148
-, 3615  // S149
-, 3618  // S150
-, 3639  // S151
-, 3642  // S152
+, 202  // S24
+, 207  // S25
+, 210  // S26
+, 213  // S27
+, 216  // S28
+, 219  // S29
+, 222  // S30
+, 225  // S31
+, 228  // S32
+, 233  // S33
+, 268  // S34
+, 273  // S35
+, 276  // S36
+, 279  // S37
+, 314  // S38
+, 317  // S39
+, 320  // S40
+, 323  // S41
+, 352  // S42
+, 355  // S43
+, 392  // S44
+, 397  // S45
+, 400  // S46
+, 403  // S47
+, 410  // S48
+, 439  // S49
+, 442  // S50
+, 445  // S51
+, 448  // S52
+, 477  // S53
+, 482  // S54
+, 485  // S55
+, 490  // S56
+, 493  // S57
+, 496  // S58
+, 499  // S59
+, 502  // S60
+, 521  // S61
+, 524  // S62
+, 527  // S63
+, 548  // S64
+, 577  // S65
+, 598  // S66
+, 619  // S67
+, 642  // S68
+, 665  // S69
+, 694  // S70
+, 723  // S71
+, 726  // S72
+, 735  // S73
+, 772  // S74
+, 807  // S75
+, 810  // S76
+, 813  // S77
+, 816  // S78
+, 823  // S79
+, 828  // S80
+, 831  // S81
+, 866  // S82
+, 895  // S83
+, 898  // S84
+, 901  // S85
+, 904  // S86
+, 907  // S87
+, 910  // S88
+, 913  // S89
+, 948  // S90
+, 983  // S91
+, 1018  // S92
+, 1039  // S93
+, 1048  // S94
+, 1077  // S95
+, 1106  // S96
+, 1135  // S97
+, 1164  // S98
+, 1185  // S99
+, 1206  // S100
+, 1227  // S101
+, 1248  // S102
+, 1253  // S103
+, 1258  // S104
+, 1383  // S105
+, 1514  // S106
+, 1639  // S107
+, 1660  // S108
+, 1681  // S109
+, 1702  // S110
+, 1723  // S111
+, 1744  // S112
+, 1869  // S113
+, 1994  // S114
+, 2023  // S115
+, 2096  // S116
+, 2171  // S117
+, 2248  // S118
+, 2327  // S119
+, 2408  // S120
+, 2491  // S121
+, 2576  // S122
+, 2665  // S123
+, 2762  // S124
+, 2863  // S125
+, 2972  // S126
+, 3093  // S127
+, 3218  // S128
+, 3227  // S129
+, 3256  // S130
+, 3285  // S131
+, 3306  // S132
+, 3327  // S133
+, 3348  // S134
+, 3369  // S135
+, 3372  // S136
+, 3381  // S137
+, 3416  // S138
+, 3451  // S139
+, 3454  // S140
+, 3475  // S141
+, 3480  // S142
+, 3485  // S143
+, 3488  // S144
+, 3523  // S145
+, 3526  // S146
+, 3547  // S147
+, 3582  // S148
+, 3587  // S149
+, 3592  // S150
+, 3621  // S151
+, 3624  // S152
 , 3645  // S153
-, 3674  // S154
-, 3677  // S155
+, 3648  // S154
+, 3651  // S155
 , 3680  // S156
 , 3683  // S157
 , 3686  // S158
-, 3691  // S159
-, 3694  // S160
+, 3689  // S159
+, 3692  // S160
 , 3697  // S161
-, 3822  // S162
-, 3825  // S163
-, 3950  // S164
-, 4075  // S165
-, 4200  // S166
-, 4325  // S167
-, 4346  // S168
-, 4419  // S169
-, 4440  // S170
-, 4515  // S171
-, 4536  // S172
-, 4613  // S173
-, 4634  // S174
-, 4713  // S175
-, 4734  // S176
-, 4815  // S177
-, 4836  // S178
-, 4919  // S179
-, 4940  // S180
-, 4961  // S181
-, 5046  // S182
-, 5067  // S183
-, 5088  // S184
-, 5109  // S185
-, 5130  // S186
-, 5219  // S187
-, 5240  // S188
-, 5261  // S189
-, 5358  // S190
-, 5379  // S191
-, 5400  // S192
-, 5421  // S193
-, 5442  // S194
-, 5543  // S195
-, 5564  // S196
-, 5585  // S197
-, 5606  // S198
-, 5627  // S199
-, 5648  // S200
-, 5669  // S201
-, 5778  // S202
-, 5781  // S203
+, 3700  // S162
+, 3703  // S163
+, 3828  // S164
+, 3831  // S165
+, 3956  // S166
+, 4081  // S167
+, 4206  // S168
+, 4331  // S169
+, 4352  // S170
+, 4425  // S171
+, 4446  // S172
+, 4521  // S173
+, 4542  // S174
+, 4619  // S175
+, 4640  // S176
+, 4719  // S177
+, 4740  // S178
+, 4821  // S179
+, 4842  // S180
+, 4925  // S181
+, 4946  // S182
+, 4967  // S183
+, 5052  // S184
+, 5073  // S185
+, 5094  // S186
+, 5115  // S187
+, 5136  // S188
+, 5225  // S189
+, 5246  // S190
+, 5267  // S191
+, 5364  // S192
+, 5385  // S193
+, 5406  // S194
+, 5427  // S195
+, 5448  // S196
+, 5549  // S197
+, 5570  // S198
+, 5591  // S199
+, 5612  // S200
+, 5633  // S201
+, 5654  // S202
+, 5675  // S203
 , 5784  // S204
-, 5905  // S205
-, 5908  // S206
+, 5787  // S205
+, 5790  // S206
 , 5911  // S207
 , 5914  // S208
-, 5943  // S209
-, 5948  // S210
-, 5951  // S211
+, 5917  // S209
+, 5920  // S210
+, 5949  // S211
 , 5954  // S212
-, 5963  // S213
-, 6000  // S214
-, 6035  // S215
-, 6070  // S216
-, 6073  // S217
+, 5957  // S213
+, 5960  // S214
+, 5969  // S215
+, 6006  // S216
+, 6041  // S217
 , 6076  // S218
-, 6081  // S219
-, 6084  // S220
-, 6093  // S221
-, 6102  // S222
-, 6111  // S223
-, 6140  // S224
-, 6171  // S225
-, 6192  // S226
-, 6195  // S227
-, 6216  // S228
-, 6237  // S229
-, 6240  // S230
-, 6367  // S231
-, 6494  // S232
-, 6619  // S233
-, 6694  // S234
-, 6771  // S235
-, 6850  // S236
-, 6931  // S237
-, 7014  // S238
-, 7099  // S239
-, 7184  // S240
-, 7269  // S241
-, 7358  // S242
-, 7447  // S243
-, 7536  // S244
-, 7625  // S245
-, 7726  // S246
-, 7827  // S247
-, 7936  // S248
-, 8045  // S249
-, 8154  // S250
-, 8263  // S251
-, 8384  // S252
-, 8505  // S253
-, 8626  // S254
-, 8747  // S255
-, 8868  // S256
-, 8989  // S257
-, 9110  // S258
-, 9231  // S259
-, 9260  // S260
-, 9291  // S261
-, 9320  // S262
-, 9323  // S263
+, 6079  // S219
+, 6082  // S220
+, 6087  // S221
+, 6090  // S222
+, 6099  // S223
+, 6108  // S224
+, 6117  // S225
+, 6146  // S226
+, 6177  // S227
+, 6198  // S228
+, 6201  // S229
+, 6222  // S230
+, 6243  // S231
+, 6246  // S232
+, 6373  // S233
+, 6500  // S234
+, 6625  // S235
+, 6700  // S236
+, 6777  // S237
+, 6856  // S238
+, 6937  // S239
+, 7020  // S240
+, 7105  // S241
+, 7190  // S242
+, 7275  // S243
+, 7364  // S244
+, 7453  // S245
+, 7542  // S246
+, 7631  // S247
+, 7732  // S248
+, 7833  // S249
+, 7942  // S250
+, 8051  // S251
+, 8160  // S252
+, 8269  // S253
+, 8390  // S254
+, 8511  // S255
+, 8632  // S256
+, 8753  // S257
+, 8874  // S258
+, 8995  // S259
+, 9116  // S260
+, 9237  // S261
+, 9266  // S262
+, 9297  // S263
 , 9326  // S264
-, 9335  // S265
-, 9338  // S266
+, 9329  // S265
+, 9332  // S266
 , 9341  // S267
 , 9344  // S268
 , 9347  // S269
@@ -7155,108 +7161,110 @@ static const uint32_t gActionTableIndex_plm_target_grammar [379] = {
 , 9362  // S274
 , 9365  // S275
 , 9368  // S276
-, 9397  // S277
-, 9426  // S278
-, 9431  // S279
-, 9556  // S280
-, 9681  // S281
-, 9702  // S282
-, 9775  // S283
-, 9850  // S284
-, 9927  // S285
-, 10006  // S286
-, 10087  // S287
-, 10170  // S288
-, 10267  // S289
-, 10364  // S290
-, 10465  // S291
-, 10566  // S292
-, 10667  // S293
-, 10768  // S294
-, 10877  // S295
-, 10986  // S296
-, 11095  // S297
-, 11204  // S298
-, 11313  // S299
-, 11422  // S300
-, 11429  // S301
-, 11458  // S302
-, 11487  // S303
-, 11490  // S304
-, 11495  // S305
-, 11530  // S306
-, 11537  // S307
-, 11544  // S308
-, 11547  // S309
+, 9371  // S277
+, 9374  // S278
+, 9403  // S279
+, 9432  // S280
+, 9437  // S281
+, 9562  // S282
+, 9687  // S283
+, 9708  // S284
+, 9781  // S285
+, 9856  // S286
+, 9933  // S287
+, 10012  // S288
+, 10093  // S289
+, 10176  // S290
+, 10273  // S291
+, 10370  // S292
+, 10471  // S293
+, 10572  // S294
+, 10673  // S295
+, 10774  // S296
+, 10883  // S297
+, 10992  // S298
+, 11101  // S299
+, 11210  // S300
+, 11319  // S301
+, 11428  // S302
+, 11435  // S303
+, 11464  // S304
+, 11493  // S305
+, 11496  // S306
+, 11501  // S307
+, 11536  // S308
+, 11543  // S309
 , 11550  // S310
 , 11553  // S311
-, 11594  // S312
-, 11597  // S313
+, 11556  // S312
+, 11559  // S313
 , 11600  // S314
 , 11603  // S315
-, 11640  // S316
-, 11643  // S317
+, 11606  // S316
+, 11609  // S317
 , 11646  // S318
-, 11671  // S319
-, 11694  // S320
-, 11697  // S321
-, 11728  // S322
-, 11731  // S323
+, 11649  // S319
+, 11652  // S320
+, 11677  // S321
+, 11700  // S322
+, 11703  // S323
 , 11734  // S324
 , 11737  // S325
 , 11740  // S326
-, 11751  // S327
-, 11754  // S328
+, 11743  // S327
+, 11746  // S328
 , 11757  // S329
 , 11760  // S330
-, 11765  // S331
-, 11768  // S332
-, 11773  // S333
-, 11778  // S334
-, 11813  // S335
-, 11938  // S336
-, 11961  // S337
-, 11990  // S338
-, 12011  // S339
-, 12032  // S340
-, 12061  // S341
-, 12090  // S342
-, 12093  // S343
-, 12104  // S344
-, 12107  // S345
+, 11763  // S331
+, 11766  // S332
+, 11771  // S333
+, 11774  // S334
+, 11779  // S335
+, 11784  // S336
+, 11819  // S337
+, 11944  // S338
+, 11967  // S339
+, 11996  // S340
+, 12017  // S341
+, 12038  // S342
+, 12067  // S343
+, 12096  // S344
+, 12099  // S345
 , 12110  // S346
-, 12117  // S347
-, 12126  // S348
-, 12135  // S349
-, 12144  // S350
-, 12147  // S351
+, 12113  // S347
+, 12116  // S348
+, 12123  // S349
+, 12132  // S350
+, 12141  // S351
 , 12150  // S352
 , 12153  // S353
-, 12160  // S354
-, 12165  // S355
-, 12170  // S356
-, 12173  // S357
+, 12156  // S354
+, 12159  // S355
+, 12166  // S356
+, 12171  // S357
 , 12176  // S358
-, 12187  // S359
-, 12198  // S360
-, 12233  // S361
-, 12244  // S362
-, 12247  // S363
+, 12179  // S359
+, 12182  // S360
+, 12193  // S361
+, 12204  // S362
+, 12239  // S363
 , 12250  // S364
 , 12253  // S365
 , 12256  // S366
 , 12259  // S367
-, 12264  // S368
-, 12269  // S369
-, 12272  // S370
+, 12262  // S368
+, 12265  // S369
+, 12270  // S370
 , 12275  // S371
-, 12304  // S372
-, 12307  // S373
-, 12312  // S374
-, 12347  // S375
-, 12350  // S376
-, 12355  // S377
-, 12358  // S378
+, 12278  // S372
+, 12281  // S373
+, 12310  // S374
+, 12313  // S375
+, 12318  // S376
+, 12353  // S377
+, 12356  // S378
+, 12361  // S379
+, 12364  // S380
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7291,507 +7299,503 @@ static const int16_t gSuccessorTable_plm_target_grammar_22 [9] = {1, 18,
   3, 20,
   22, 42, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_23 [3] = {23, 44, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {24, 45, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {24, 46, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_32 [3] = {29, 54, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_32 [3] = {29, 55, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_34 [3] = {35, 56, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_34 [3] = {35, 57, -1} ;
-
-static const int16_t gSuccessorTable_plm_target_grammar_41 [7] = {19, 71,
-  20, 72,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_41 [7] = {19, 70,
+  20, 71,
+  54, 72, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_43 [3] = {23, 74, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_45 [3] = {24, 75, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_44 [3] = {24, 75, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_48 [3] = {31, 79, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_47 [3] = {31, 79, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_49 [7] = {19, 71,
+static const int16_t gSuccessorTable_plm_target_grammar_48 [7] = {19, 70,
   20, 80,
-  54, 73, -1} ;
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_53 [7] = {19, 71,
+static const int16_t gSuccessorTable_plm_target_grammar_52 [7] = {19, 70,
   20, 84,
-  54, 73, -1} ;
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_54 [3] = {29, 85, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_53 [3] = {29, 85, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_56 [3] = {35, 87, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_55 [3] = {35, 87, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_61 [3] = {57, 100, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_60 [3] = {57, 101, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_64 [29] = {5, 113,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_63 [29] = {5, 114,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_65 [5] = {19, 71,
-  54, 127, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_64 [5] = {19, 70,
+  54, 128, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_66 [29] = {5, 128,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_65 [29] = {5, 129,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_67 [29] = {5, 129,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_66 [29] = {5, 130,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_68 [3] = {58, 131, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_67 [3] = {58, 132, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_69 [3] = {64, 133, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_68 [3] = {64, 134, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_70 [7] = {19, 71,
-  20, 134,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_69 [7] = {19, 70,
+  20, 135,
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_71 [5] = {19, 71,
-  54, 135, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_70 [5] = {19, 70,
+  54, 136, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_78 [3] = {31, 139, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_73 [3] = {23, 138, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_79 [3] = {32, 141, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_78 [3] = {31, 141, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_81 [7] = {19, 71,
-  20, 143,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_79 [3] = {32, 143, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_91 [29] = {5, 148,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_82 [7] = {19, 70,
+  20, 145,
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_92 [3] = {63, 152, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_92 [29] = {5, 150,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_100 [29] = {5, 153,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_93 [3] = {63, 154, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_101 [3] = {55, 155, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_101 [29] = {5, 155,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_102 [3] = {56, 157, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_102 [3] = {55, 157, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_104 [3] = {52, 161, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_103 [3] = {56, 159, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_106 [29] = {5, 162,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_105 [3] = {52, 163, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_107 [3] = {18, 163, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_107 [29] = {5, 164,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_108 [3] = {18, 164, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_108 [3] = {18, 165, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_109 [3] = {18, 165, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_109 [3] = {18, 166, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_110 [3] = {18, 166, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_110 [3] = {18, 167, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_115 [3] = {40, 168, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_111 [3] = {18, 168, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_116 [3] = {41, 170, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_116 [3] = {40, 170, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_117 [3] = {42, 172, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_117 [3] = {41, 172, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_118 [3] = {43, 174, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_118 [3] = {42, 174, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_119 [3] = {44, 176, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_119 [3] = {43, 176, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_120 [3] = {45, 178, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_120 [3] = {44, 178, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_121 [3] = {46, 181, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_121 [3] = {45, 180, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_122 [3] = {47, 186, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_122 [3] = {46, 183, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_123 [3] = {48, 189, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_123 [3] = {47, 188, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_124 [3] = {49, 194, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_124 [3] = {48, 191, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_125 [3] = {50, 201, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_125 [3] = {49, 196, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_126 [3] = {51, 204, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_126 [3] = {50, 203, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_131 [31] = {5, 205,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126,
-  21, 206, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_127 [3] = {51, 206, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_133 [29] = {5, 207,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_132 [31] = {5, 207,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127,
+  21, 208, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_138 [29] = {5, 210,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_134 [29] = {5, 209,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_140 [3] = {32, 211, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_140 [29] = {5, 212,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_141 [3] = {4, 213, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_142 [3] = {32, 213, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_144 [29] = {5, 215,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_143 [3] = {4, 215, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_146 [3] = {30, 217, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_146 [29] = {5, 217,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_147 [3] = {34, 219, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_148 [3] = {30, 219, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_150 [29] = {5, 221,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_149 [3] = {34, 221, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_158 [3] = {53, 229, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_152 [29] = {5, 223,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_167 [25] = {7, 233,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_160 [3] = {53, 231, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_169 [23] = {8, 234,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_169 [25] = {7, 235,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_171 [21] = {9, 235,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_171 [23] = {8, 236,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_173 [19] = {10, 236,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_173 [21] = {9, 237,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_175 [17] = {11, 237,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_175 [19] = {10, 238,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_177 [15] = {12, 238,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_177 [17] = {11, 239,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_179 [13] = {13, 239,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_179 [15] = {12, 240,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_180 [13] = {13, 240,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_181 [13] = {13, 241,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_182 [11] = {14, 241,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
-
-static const int16_t gSuccessorTable_plm_target_grammar_183 [11] = {14, 242,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_182 [13] = {13, 242,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_184 [11] = {14, 243,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_185 [11] = {14, 244,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_187 [9] = {15, 245,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_186 [11] = {14, 245,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_188 [9] = {15, 246,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_187 [11] = {14, 246,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_190 [7] = {16, 247,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_189 [9] = {15, 247,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_191 [7] = {16, 248,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_190 [9] = {15, 248,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_192 [7] = {16, 249,
-  17, 125,
-  18, 126, -1} ;
+  17, 126,
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_193 [7] = {16, 250,
-  17, 125,
-  18, 126, -1} ;
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_195 [5] = {17, 251,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_194 [7] = {16, 251,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_196 [5] = {17, 252,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_195 [7] = {16, 252,
+  17, 126,
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_197 [5] = {17, 253,
-  18, 126, -1} ;
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_198 [5] = {17, 254,
-  18, 126, -1} ;
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_199 [5] = {17, 255,
-  18, 126, -1} ;
+  18, 127, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_200 [5] = {17, 256,
-  18, 126, -1} ;
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_209 [3] = {25, 263, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_201 [5] = {17, 257,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_212 [3] = {33, 268, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_202 [5] = {17, 258,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_218 [3] = {35, 271, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_211 [3] = {25, 265, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_220 [3] = {63, 273, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_214 [3] = {33, 270, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_221 [3] = {63, 274, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_220 [3] = {35, 273, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_222 [3] = {63, 275, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_225 [29] = {5, 276,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_223 [3] = {63, 276, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_227 [29] = {5, 277,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_224 [3] = {63, 277, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_228 [29] = {5, 278,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_227 [29] = {5, 278,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_230 [3] = {52, 280, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_229 [29] = {5, 279,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_233 [3] = {40, 282, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_230 [29] = {5, 280,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_234 [3] = {41, 283, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_232 [3] = {52, 282, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_235 [3] = {42, 284, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_235 [3] = {40, 284, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_236 [3] = {43, 285, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_236 [3] = {41, 285, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_237 [3] = {44, 286, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_237 [3] = {42, 286, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_238 [3] = {45, 287, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_238 [3] = {43, 287, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_245 [3] = {48, 288, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_239 [3] = {44, 288, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_246 [3] = {48, 289, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_240 [3] = {45, 289, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_247 [3] = {49, 290, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_247 [3] = {48, 290, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_248 [3] = {49, 291, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_248 [3] = {48, 291, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_249 [3] = {49, 292, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_250 [3] = {49, 293, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_251 [3] = {50, 294, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_251 [3] = {49, 294, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_252 [3] = {50, 295, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_252 [3] = {49, 295, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_253 [3] = {50, 296, -1} ;
 
@@ -7801,199 +7805,204 @@ static const int16_t gSuccessorTable_plm_target_grammar_255 [3] = {50, 298, -1} 
 
 static const int16_t gSuccessorTable_plm_target_grammar_256 [3] = {50, 299, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_259 [7] = {19, 71,
-  20, 300,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_257 [3] = {50, 300, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_260 [3] = {59, 302, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_258 [3] = {50, 301, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_261 [7] = {19, 71,
-  20, 303,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_261 [7] = {19, 70,
+  20, 302,
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_264 [3] = {27, 307, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_262 [3] = {59, 304, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_278 [3] = {53, 316, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_263 [7] = {19, 70,
+  20, 305,
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_281 [29] = {5, 317,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_266 [3] = {27, 309, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_300 [3] = {60, 320, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_280 [3] = {53, 318, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_304 [3] = {25, 322, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_283 [29] = {5, 319,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_307 [3] = {28, 326, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_302 [3] = {60, 322, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_315 [3] = {36, 334, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_306 [3] = {25, 324, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_318 [3] = {61, 337, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_309 [3] = {28, 328, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_319 [3] = {62, 339, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_317 [3] = {36, 336, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_321 [3] = {65, 341, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_320 [3] = {61, 339, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_326 [5] = {26, 345,
-  27, 346, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_321 [3] = {62, 341, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_330 [3] = {30, 350, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_323 [3] = {65, 343, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_332 [3] = {34, 352, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_328 [5] = {26, 347,
+  27, 348, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_333 [3] = {38, 355, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_332 [3] = {30, 352, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_337 [7] = {19, 71,
-  20, 356,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_334 [3] = {34, 354, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_339 [31] = {5, 205,
-  6, 114,
-  7, 115,
-  8, 116,
-  9, 117,
-  10, 118,
-  11, 119,
-  12, 120,
-  13, 121,
-  14, 122,
-  15, 123,
-  16, 124,
-  17, 125,
-  18, 126,
-  21, 357, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_335 [3] = {38, 357, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_342 [3] = {4, 358, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_339 [7] = {19, 70,
+  20, 358,
+  54, 72, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_346 [3] = {28, 361, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_341 [31] = {5, 207,
+  6, 115,
+  7, 116,
+  8, 117,
+  9, 118,
+  10, 119,
+  11, 120,
+  12, 121,
+  13, 122,
+  14, 123,
+  15, 124,
+  16, 125,
+  17, 126,
+  18, 127,
+  21, 359, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_347 [3] = {33, 362, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_344 [3] = {4, 360, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_348 [3] = {33, 363, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_348 [3] = {28, 363, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_349 [3] = {33, 364, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_353 [3] = {39, 367, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_350 [3] = {33, 365, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_355 [3] = {37, 369, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_351 [3] = {33, 366, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_361 [5] = {26, 370,
-  27, 346, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_355 [3] = {39, 369, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_368 [3] = {38, 373, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_357 [3] = {37, 371, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_371 [7] = {19, 71,
-  20, 375,
-  54, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_363 [5] = {26, 372,
+  27, 348, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_373 [3] = {37, 377, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_370 [3] = {38, 375, -1} ;
 
-static const int16_t * gSuccessorTable_plm_target_grammar [379] = {
+static const int16_t gSuccessorTable_plm_target_grammar_373 [7] = {19, 70,
+  20, 377,
+  54, 72, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_375 [3] = {37, 379, -1} ;
+
+static const int16_t * gSuccessorTable_plm_target_grammar [381] = {
 gSuccessorTable_plm_target_grammar_0, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_11, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_18, gSuccessorTable_plm_target_grammar_19, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_22, gSuccessorTable_plm_target_grammar_23, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_22, NULL, 
   gSuccessorTable_plm_target_grammar_24, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   gSuccessorTable_plm_target_grammar_32, NULL, gSuccessorTable_plm_target_grammar_34, NULL, 
   NULL, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plm_target_grammar_41, NULL, gSuccessorTable_plm_target_grammar_43, 
-  NULL, gSuccessorTable_plm_target_grammar_45, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_48, gSuccessorTable_plm_target_grammar_49, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_53, gSuccessorTable_plm_target_grammar_54, NULL, 
-  gSuccessorTable_plm_target_grammar_56, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_61, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_44, NULL, NULL, gSuccessorTable_plm_target_grammar_47, 
+  gSuccessorTable_plm_target_grammar_48, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_52, gSuccessorTable_plm_target_grammar_53, NULL, gSuccessorTable_plm_target_grammar_55, 
+  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_60, NULL, NULL, gSuccessorTable_plm_target_grammar_63, 
   gSuccessorTable_plm_target_grammar_64, gSuccessorTable_plm_target_grammar_65, gSuccessorTable_plm_target_grammar_66, gSuccessorTable_plm_target_grammar_67, 
-  gSuccessorTable_plm_target_grammar_68, gSuccessorTable_plm_target_grammar_69, gSuccessorTable_plm_target_grammar_70, gSuccessorTable_plm_target_grammar_71, 
-  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_68, gSuccessorTable_plm_target_grammar_69, gSuccessorTable_plm_target_grammar_70, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_73, NULL, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_78, gSuccessorTable_plm_target_grammar_79, 
-  NULL, gSuccessorTable_plm_target_grammar_81, NULL, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_82, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_91, 
-  gSuccessorTable_plm_target_grammar_92, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_100, gSuccessorTable_plm_target_grammar_101, gSuccessorTable_plm_target_grammar_102, NULL, 
-  gSuccessorTable_plm_target_grammar_104, NULL, gSuccessorTable_plm_target_grammar_106, gSuccessorTable_plm_target_grammar_107, 
-  gSuccessorTable_plm_target_grammar_108, gSuccessorTable_plm_target_grammar_109, gSuccessorTable_plm_target_grammar_110, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_115, 
+  gSuccessorTable_plm_target_grammar_92, gSuccessorTable_plm_target_grammar_93, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_101, gSuccessorTable_plm_target_grammar_102, gSuccessorTable_plm_target_grammar_103, 
+  NULL, gSuccessorTable_plm_target_grammar_105, NULL, gSuccessorTable_plm_target_grammar_107, 
+  gSuccessorTable_plm_target_grammar_108, gSuccessorTable_plm_target_grammar_109, gSuccessorTable_plm_target_grammar_110, gSuccessorTable_plm_target_grammar_111, 
+  NULL, NULL, NULL, NULL, 
   gSuccessorTable_plm_target_grammar_116, gSuccessorTable_plm_target_grammar_117, gSuccessorTable_plm_target_grammar_118, gSuccessorTable_plm_target_grammar_119, 
   gSuccessorTable_plm_target_grammar_120, gSuccessorTable_plm_target_grammar_121, gSuccessorTable_plm_target_grammar_122, gSuccessorTable_plm_target_grammar_123, 
-  gSuccessorTable_plm_target_grammar_124, gSuccessorTable_plm_target_grammar_125, gSuccessorTable_plm_target_grammar_126, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_131, 
-  NULL, gSuccessorTable_plm_target_grammar_133, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_138, NULL, 
-  gSuccessorTable_plm_target_grammar_140, gSuccessorTable_plm_target_grammar_141, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_144, NULL, gSuccessorTable_plm_target_grammar_146, gSuccessorTable_plm_target_grammar_147, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_150, NULL, 
+  gSuccessorTable_plm_target_grammar_124, gSuccessorTable_plm_target_grammar_125, gSuccessorTable_plm_target_grammar_126, gSuccessorTable_plm_target_grammar_127, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_158, NULL, 
+  gSuccessorTable_plm_target_grammar_132, NULL, gSuccessorTable_plm_target_grammar_134, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_167, 
+  gSuccessorTable_plm_target_grammar_140, NULL, gSuccessorTable_plm_target_grammar_142, gSuccessorTable_plm_target_grammar_143, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_146, NULL, 
+  gSuccessorTable_plm_target_grammar_148, gSuccessorTable_plm_target_grammar_149, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_152, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_160, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plm_target_grammar_169, NULL, gSuccessorTable_plm_target_grammar_171, 
   NULL, gSuccessorTable_plm_target_grammar_173, NULL, gSuccessorTable_plm_target_grammar_175, 
   NULL, gSuccessorTable_plm_target_grammar_177, NULL, gSuccessorTable_plm_target_grammar_179, 
-  gSuccessorTable_plm_target_grammar_180, NULL, gSuccessorTable_plm_target_grammar_182, gSuccessorTable_plm_target_grammar_183, 
-  gSuccessorTable_plm_target_grammar_184, gSuccessorTable_plm_target_grammar_185, NULL, gSuccessorTable_plm_target_grammar_187, 
-  gSuccessorTable_plm_target_grammar_188, NULL, gSuccessorTable_plm_target_grammar_190, gSuccessorTable_plm_target_grammar_191, 
-  gSuccessorTable_plm_target_grammar_192, gSuccessorTable_plm_target_grammar_193, NULL, gSuccessorTable_plm_target_grammar_195, 
-  gSuccessorTable_plm_target_grammar_196, gSuccessorTable_plm_target_grammar_197, gSuccessorTable_plm_target_grammar_198, gSuccessorTable_plm_target_grammar_199, 
-  gSuccessorTable_plm_target_grammar_200, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_181, gSuccessorTable_plm_target_grammar_182, NULL, 
+  gSuccessorTable_plm_target_grammar_184, gSuccessorTable_plm_target_grammar_185, gSuccessorTable_plm_target_grammar_186, gSuccessorTable_plm_target_grammar_187, 
+  NULL, gSuccessorTable_plm_target_grammar_189, gSuccessorTable_plm_target_grammar_190, NULL, 
+  gSuccessorTable_plm_target_grammar_192, gSuccessorTable_plm_target_grammar_193, gSuccessorTable_plm_target_grammar_194, gSuccessorTable_plm_target_grammar_195, 
+  NULL, gSuccessorTable_plm_target_grammar_197, gSuccessorTable_plm_target_grammar_198, gSuccessorTable_plm_target_grammar_199, 
+  gSuccessorTable_plm_target_grammar_200, gSuccessorTable_plm_target_grammar_201, gSuccessorTable_plm_target_grammar_202, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_209, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_212, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_218, NULL, 
-  gSuccessorTable_plm_target_grammar_220, gSuccessorTable_plm_target_grammar_221, gSuccessorTable_plm_target_grammar_222, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_225, NULL, gSuccessorTable_plm_target_grammar_227, 
-  gSuccessorTable_plm_target_grammar_228, NULL, gSuccessorTable_plm_target_grammar_230, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_233, gSuccessorTable_plm_target_grammar_234, gSuccessorTable_plm_target_grammar_235, 
-  gSuccessorTable_plm_target_grammar_236, gSuccessorTable_plm_target_grammar_237, gSuccessorTable_plm_target_grammar_238, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_211, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_214, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_245, gSuccessorTable_plm_target_grammar_246, gSuccessorTable_plm_target_grammar_247, 
+  gSuccessorTable_plm_target_grammar_220, NULL, gSuccessorTable_plm_target_grammar_222, gSuccessorTable_plm_target_grammar_223, 
+  gSuccessorTable_plm_target_grammar_224, NULL, NULL, gSuccessorTable_plm_target_grammar_227, 
+  NULL, gSuccessorTable_plm_target_grammar_229, gSuccessorTable_plm_target_grammar_230, NULL, 
+  gSuccessorTable_plm_target_grammar_232, NULL, NULL, gSuccessorTable_plm_target_grammar_235, 
+  gSuccessorTable_plm_target_grammar_236, gSuccessorTable_plm_target_grammar_237, gSuccessorTable_plm_target_grammar_238, gSuccessorTable_plm_target_grammar_239, 
+  gSuccessorTable_plm_target_grammar_240, NULL, NULL, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_247, 
   gSuccessorTable_plm_target_grammar_248, gSuccessorTable_plm_target_grammar_249, gSuccessorTable_plm_target_grammar_250, gSuccessorTable_plm_target_grammar_251, 
   gSuccessorTable_plm_target_grammar_252, gSuccessorTable_plm_target_grammar_253, gSuccessorTable_plm_target_grammar_254, gSuccessorTable_plm_target_grammar_255, 
-  gSuccessorTable_plm_target_grammar_256, NULL, NULL, gSuccessorTable_plm_target_grammar_259, 
-  gSuccessorTable_plm_target_grammar_260, gSuccessorTable_plm_target_grammar_261, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_264, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_278, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_281, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_256, gSuccessorTable_plm_target_grammar_257, gSuccessorTable_plm_target_grammar_258, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_261, gSuccessorTable_plm_target_grammar_262, gSuccessorTable_plm_target_grammar_263, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_266, NULL, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_280, NULL, NULL, gSuccessorTable_plm_target_grammar_283, 
   NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_300, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_304, NULL, NULL, gSuccessorTable_plm_target_grammar_307, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_315, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_318, gSuccessorTable_plm_target_grammar_319, 
-  NULL, gSuccessorTable_plm_target_grammar_321, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_326, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_330, NULL, 
-  gSuccessorTable_plm_target_grammar_332, gSuccessorTable_plm_target_grammar_333, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_337, NULL, gSuccessorTable_plm_target_grammar_339, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_342, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_346, gSuccessorTable_plm_target_grammar_347, 
-  gSuccessorTable_plm_target_grammar_348, gSuccessorTable_plm_target_grammar_349, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_353, NULL, gSuccessorTable_plm_target_grammar_355, 
   NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_361, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_368, NULL, NULL, gSuccessorTable_plm_target_grammar_371, 
-  NULL, gSuccessorTable_plm_target_grammar_373, NULL, NULL, 
-  NULL, NULL, NULL} ;
+  NULL, NULL, gSuccessorTable_plm_target_grammar_302, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_306, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_309, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_317, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_320, gSuccessorTable_plm_target_grammar_321, NULL, gSuccessorTable_plm_target_grammar_323, 
+  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_328, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_332, NULL, gSuccessorTable_plm_target_grammar_334, gSuccessorTable_plm_target_grammar_335, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_339, 
+  NULL, gSuccessorTable_plm_target_grammar_341, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_344, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_348, gSuccessorTable_plm_target_grammar_349, gSuccessorTable_plm_target_grammar_350, gSuccessorTable_plm_target_grammar_351, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_355, 
+  NULL, gSuccessorTable_plm_target_grammar_357, NULL, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_363, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_370, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_373, NULL, gSuccessorTable_plm_target_grammar_375, 
+  NULL, NULL, NULL, NULL, 
+  NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -8003,7 +8012,7 @@ gSuccessorTable_plm_target_grammar_0, NULL, NULL, NULL,
 
 static const int16_t gProductionsTable_plm_target_grammar [176 * 2] = {
   0, 1,
-  1, 3,
+  1, 4,
   1, 8,
   1, 11,
   1, 6,
@@ -8064,7 +8073,7 @@ static const int16_t gProductionsTable_plm_target_grammar [176 * 2] = {
   1, 4,
   1, 4,
   1, 2,
-  1, 3,
+  1, 4,
   22, 0,
   22, 2,
   22, 2,
@@ -12365,37 +12374,37 @@ void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_unifiedTypeMap_2D_proxy var_selfTypeProxy ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inArgument_inBooleanTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("bool-type.galgas", 107)) ;
+  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, inArgument_inBooleanTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("bool-type.galgas", 108)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 109)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 108)) ;
+  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 110)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 110)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 110)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 110)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 109)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 113)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 112)) ;
+  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 114)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 114)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 114)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 113)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 117)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 116)) ;
+  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 118)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 118)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 118)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 117)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 121)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 120)) ;
+  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 122)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 122)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 122)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 121)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 125)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 125)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 124)) ;
+  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 126)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 126)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 126)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 125)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 129)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 128)) ;
+  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 130)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 130)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 130)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 129)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanAndOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 133)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 132)) ;
+  ioArgument_ioContext.mAttribute_mBooleanAndOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 134)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 134)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 134)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 133)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanOrOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 137)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 137)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 136)) ;
+  ioArgument_ioContext.mAttribute_mBooleanOrOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 138)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 138)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 138)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 137)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mBooleanXorOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 141)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 140)) ;
+  ioArgument_ioContext.mAttribute_mBooleanXorOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inBooleanTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 142)).add_operation (inArgument_inBooleanTypeName.reader_string (SOURCE_FILE ("bool-type.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 142)), inArgument_inBooleanTypeName.mAttribute_location  COMMA_SOURCE_FILE ("bool-type.galgas", 142)), var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 141)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNotOperatorMap.modifier_insertKey (inArgument_inBooleanTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 144)) ;
+  ioArgument_ioContext.mAttribute_mNotOperatorMap.modifier_insertKey (inArgument_inBooleanTypeName, var_selfTypeProxy, inCompiler COMMA_SOURCE_FILE ("bool-type.galgas", 145)) ;
   }
 }
 
@@ -12535,27 +12544,23 @@ void routine_enterEnumerationOperators (GALGAS_lstring inArgument_inEnumerationT
                                         GALGAS_semanticContext & ioArgument_ioContext,
                                         C_Compiler * inCompiler
                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy var_BoolTypeProxy ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, GALGAS_string ("Bool").reader_nowhere (SOURCE_FILE ("enumeration-declaration.galgas", 126)), var_BoolTypeProxy COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 126)) ;
+  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 127)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 127)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 127)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 126)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 128)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 128)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 128)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 127)) ;
+  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 131)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 131)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 131)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 131)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 130)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 132)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 132)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 132)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 131)) ;
+  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 135)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 135)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 135)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 134)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 136)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 136)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 136)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 135)) ;
+  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 139)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 139)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 139)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 138)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 140)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 140)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 140)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 139)) ;
+  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 143)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 143)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 143)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 142)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 144)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 144)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 144)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 143)) ;
-  }
-  {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 148)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 148)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 148)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 147)) ;
+  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (inArgument_inEnumerationTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 147)).add_operation (inArgument_inEnumerationTypeName.reader_string (SOURCE_FILE ("enumeration-declaration.galgas", 147)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 147)), inArgument_inEnumerationTypeName.mAttribute_location  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 147)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 146)) ;
   }
 }
 
@@ -12748,32 +12753,28 @@ void routine_enterIntegerOperators (const GALGAS_lstring constinArgument_inInteg
                                     GALGAS_semanticContext & ioArgument_ioContext,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioContext.mAttribute_mTypeNameSetForIncDec.addAssign_operation (constinArgument_inIntegerTypeName.mAttribute_string  COMMA_SOURCE_FILE ("type-integer.galgas", 126)) ;
+  ioArgument_ioContext.mAttribute_mTypeNameSetForIncDec.addAssign_operation (constinArgument_inIntegerTypeName.mAttribute_string  COMMA_SOURCE_FILE ("type-integer.galgas", 127)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_selfTypeProxy ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, constinArgument_inIntegerTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("type-integer.galgas", 128)) ;
-  }
-  GALGAS_unifiedTypeMap_2D_proxy var_BoolTypeProxy ;
-  {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, GALGAS_string ("Bool").reader_nowhere (SOURCE_FILE ("type-integer.galgas", 129)), var_BoolTypeProxy COMMA_SOURCE_FILE ("type-integer.galgas", 129)) ;
+  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mAttribute_mTypeMap, constinArgument_inIntegerTypeName, var_selfTypeProxy COMMA_SOURCE_FILE ("type-integer.galgas", 129)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 132)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 132)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 132)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 131)) ;
+  ioArgument_ioContext.mAttribute_mEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 132)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 132)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 132)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 131)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 136)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 136)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 136)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 135)) ;
+  ioArgument_ioContext.mAttribute_mNonEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 136)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 136)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 136)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 135)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 140)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 140)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 140)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 139)) ;
+  ioArgument_ioContext.mAttribute_mStrictInfOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 140)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 140)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 140)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 139)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 144)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 144)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 144)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 143)) ;
+  ioArgument_ioContext.mAttribute_mInfEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 144)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 144)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 144)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 143)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 148)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 148)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 148)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 147)) ;
+  ioArgument_ioContext.mAttribute_mStrictSupOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 148)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 148)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 148)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 148)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 147)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 152)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 152)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 152)), var_BoolTypeProxy, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 151)) ;
+  ioArgument_ioContext.mAttribute_mSupEqualOperatorMap.modifier_insertKey (GALGAS_lstring::constructor_new (constinArgument_inIntegerTypeName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 152)).add_operation (constinArgument_inIntegerTypeName.reader_string (SOURCE_FILE ("type-integer.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 152)), constinArgument_inIntegerTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-integer.galgas", 152)), ioArgument_ioContext.mAttribute_mBooleanType, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 151)) ;
   }
   const enumGalgasBool test_0 = constinArgument_inIsSigned.operator_not (SOURCE_FILE ("type-integer.galgas", 156)).boolEnum () ;
   if (kBoolTrue == test_0) {
@@ -13222,16 +13223,16 @@ GALGAS_string function_mangledName (const GALGAS_procedureKindAST & constinArgum
     break ;
   case GALGAS_procedureKindAST::kEnum_structureProc:
     {
-      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_7098 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (constinArgument_inProcedureKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_7098->mAssociatedValue0 ;
+      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_7092 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (constinArgument_inProcedureKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_7092->mAssociatedValue0 ;
       result_outMangledName.dotAssign_operation (extractedValue_structureTypeName.mAttribute_string.add_operation (GALGAS_string ("_"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 204))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 204)) ;
     }
     break ;
   }
   result_outMangledName.dotAssign_operation (constinArgument_inProcedureName  COMMA_SOURCE_FILE ("proc-declaration.galgas", 206)) ;
-  cEnumerator_procFormalArgumentList enumerator_7204 (inArgument_inProcFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_7204.hasCurrentObject ()) {
-    switch (enumerator_7204.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+  cEnumerator_procFormalArgumentList enumerator_7198 (inArgument_inProcFormalArgumentList, kEnumeration_up) ;
+  while (enumerator_7198.hasCurrentObject ()) {
+    switch (enumerator_7198.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
@@ -13250,8 +13251,8 @@ GALGAS_string function_mangledName (const GALGAS_procedureKindAST & constinArgum
       }
       break ;
     }
-    result_outMangledName.dotAssign_operation (enumerator_7204.current_mSelector (HERE).mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 213))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 213)) ;
-    enumerator_7204.gotoNextObject () ;
+    result_outMangledName.dotAssign_operation (enumerator_7198.current_mSelector (HERE).mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 213))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 213)) ;
+    enumerator_7198.gotoNextObject () ;
   }
 //---
   return result_outMangledName ;
@@ -16633,18 +16634,18 @@ const char * gWrapperFileContent_2_targetTemplates = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "booleanType Bool @unsigned8\n"
+  "booleanType $bool : @unsigned8\n"
   "\n"
-  "newIntegerType UInt8  @unsigned8\n"
-  "newIntegerType UInt16 @unsigned16\n"
-  "newIntegerType UInt32 @unsigned32\n"
-  "newIntegerType UInt64 @unsigned64\n"
-  "newIntegerType Int8  @signed8\n"
-  "newIntegerType Int16 @signed16\n"
-  "newIntegerType Int32 @signed32\n"
-  "newIntegerType Int64 @signed64\n"
+  "newIntegerType $uint8  : @unsigned8\n"
+  "newIntegerType $uint16 : @unsigned16\n"
+  "newIntegerType $uint32 : @unsigned32\n"
+  "newIntegerType $uint64 : @unsigned64\n"
+  "newIntegerType $int8  : @signed8\n"
+  "newIntegerType $int16 : @signed16\n"
+  "newIntegerType $int32 : @signed32\n"
+  "newIntegerType $int64 : @signed64\n"
   "\n"
-  "exception : Int32 UInt32\n"
+  "exception : $int32 $uint32\n"
   "\n"
   "mode `isr\n"
   "mode `user\n"
@@ -16722,7 +16723,7 @@ const cRegularFileWrapper gWrapperFile_2_targetTemplates (
   "teensy-3-1-interrupt.plm-target",
   "plm-target",
   true, // Text file
-  3161, // Text length
+  3190, // Text length
   gWrapperFileContent_2_targetTemplates
 ) ;
 
@@ -16740,18 +16741,18 @@ const char * gWrapperFileContent_3_targetTemplates = "newUnsignedRepresentation 
   "\n"
   "newUnsignedRepresentation @size \"uint32_t\" 32\n"
   "\n"
-  "booleanType Bool @unsigned8\n"
+  "booleanType $bool : @unsigned8\n"
   "\n"
-  "newIntegerType UInt8  @unsigned8\n"
-  "newIntegerType UInt16 @unsigned16\n"
-  "newIntegerType UInt32 @unsigned32\n"
-  "newIntegerType UInt64 @unsigned64\n"
-  "newIntegerType Int8  @signed8\n"
-  "newIntegerType Int16 @signed16\n"
-  "newIntegerType Int32 @signed32\n"
-  "newIntegerType Int64 @signed64\n"
+  "newIntegerType $uint8  : @unsigned8\n"
+  "newIntegerType $uint16 : @unsigned16\n"
+  "newIntegerType $uint32 : @unsigned32\n"
+  "newIntegerType $uint64 : @unsigned64\n"
+  "newIntegerType $int8  : @signed8\n"
+  "newIntegerType $int16 : @signed16\n"
+  "newIntegerType $int32 : @signed32\n"
+  "newIntegerType $int64 : @signed64\n"
   "\n"
-  "exception : Int32 UInt32\n"
+  "exception : $int32 $uint32\n"
   "\n"
   "mode `isr\n"
   "mode `user\n"
@@ -16776,7 +16777,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "teensy-3-1-sequential-systick.plm-target",
   "plm-target",
   true, // Text file
-  1193, // Text length
+  1222, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
@@ -16929,10 +16930,10 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE\n"
   "}\n"
   "\n"
-  "var gCompteur : UInt32 = 0 {\n"
+  "var gCompteur : $uint32 = 0 {\n"
   "  @rw proc systickHandler ()\n"
-  "  proc waitMS (\?inDuration : UInt32)\n"
-  "  proc busyWaitingDuringMS (\?inDuration : UInt32)\n"
+  "  proc waitMS (\?inDuration : $uint32)\n"
+  "  proc busyWaitingDuringMS (\?inDuration : $uint32)\n"
   "}\n"
   "\n"
   "required proc systickHandler `isr ()\n"
@@ -16945,7 +16946,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "proc userSystickHandler `isr @weak () {\n"
   "}\n"
   "\n"
-  "proc waitMS `user `init (\?inDuration : UInt32) {\n"
+  "proc waitMS `user `init (\?inDuration : $uint32) {\n"
   "  let deadline = gCompteur + inDuration\n"
   "  while gCompteur < deadline do\n"
   "  end\n"
@@ -17509,7 +17510,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "default-isr.plm",
   "plm",
   true, // Text file
-  14840, // Text length
+  14844, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -17581,7 +17582,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD4 `init `exception `user (\?inValue : Bool) { // PTB0\n"
+  "proc setD4 `init `exception `user (\?inValue : $bool) { // PTB0\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -17591,7 +17592,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD5 `init `exception `user (\?inValue : Bool) { // PTC0\n"
+  "proc setD5 `init `exception `user (\?inValue : $bool) { // PTC0\n"
   "  if inValue then\n"
   "    GPIOC_PSOR = 1 << 0 ;\n"
   "  else\n"
@@ -17601,7 +17602,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD6 `init `exception `user (\?inValue : Bool) { // PTD1\n"
+  "proc setD6 `init `exception `user (\?inValue : $bool) { // PTD1\n"
   "  if inValue then\n"
   "    GPIOD_PSOR = 1 << 1 ;\n"
   "  else\n"
@@ -17611,7 +17612,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc setD7 `init `exception `user (\?inValue : Bool) { // PTB2\n"
+  "proc setD7 `init `exception `user (\?inValue : $bool) { // PTB2\n"
   "  if inValue then\n"
   "    GPIOB_PSOR = 1 << 2 ;\n"
   "  else\n"
@@ -17623,7 +17624,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//   UTILITY ROUTINES                                                          *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc busyWaitingDuringMS `init (\?inDuration : UInt32) {\n"
+  "proc busyWaitingDuringMS `init (\?inDuration : $uint32) {\n"
   "  let deadline = gCompteur + inDuration\n"
   "  while gCompteur < deadline do\n"
   "  end\n"
@@ -17631,7 +17632,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput `init (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput `init (\?inValue : $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -17640,7 +17641,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write4BitCommand `init (\?inValue : UInt8) {\n"
+  "proc write4BitCommand `init (\?inValue : $uint8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inValue) ;\n"
@@ -17651,7 +17652,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommand `init (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand `init (\?inCommand : $uint8) {\n"
   "  busyWaitingDuringMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
@@ -17715,7 +17716,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//   PRINT ROUTINES IN USER MODE                                               *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput_inUserMode `user @noWarningIfUnused (\?inValue : $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -17724,7 +17725,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommand_inUserMode `user @noWarningIfUnused (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand_inUserMode `user @noWarningIfUnused (\?inCommand : $uint8) {\n"
   "  waitMS (!1) ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;\n"
@@ -17740,7 +17741,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc writeData_inUserMode `user @noWarningIfUnused (\?inData : UInt8) {\n"
+  "proc writeData_inUserMode `user @noWarningIfUnused (\?inData : $uint8) {\n"
   "  waitMS (!1) ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;\n"
@@ -17761,7 +17762,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "// Line 2 : 20 -> 39\n"
   "// Line 3 : 84 -> 103\n"
   "\n"
-  "proc goto `user @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "proc goto `user @noWarningIfUnused (\?line:inLine : $uint32 \?column:inColumn : $uint8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;\n"
@@ -17800,7 +17801,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printSpaces `user @noWarningIfUnused (\?inCount : UInt32) {\n"
+  "proc printSpaces `user @noWarningIfUnused (\?inCount : $uint32) {\n"
   "  var count = inCount\n"
   "  while (count > 0) do\n"
   "    writeData_inUserMode (!0x20)\n"
@@ -17810,13 +17811,13 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printUnsigned `user @noWarningIfUnused (\?inValue : UInt32) {\n"
-  "  var divisor : UInt32 = 1_000_000_000\n"
+  "proc printUnsigned `user @noWarningIfUnused (\?inValue : $uint32) {\n"
+  "  var divisor : $uint32 = 1_000_000_000\n"
   "  var value = inValue\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeData_inUserMode (!0x30 + ((value / divisor) \\ UInt8))\n"
+  "      writeData_inUserMode (!0x30 + ((value / divisor) \\ $uint8))\n"
   "      value = value % divisor\n"
   "      isPrinting = true\n"
   "    end\n"
@@ -17831,10 +17832,10 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "proc printSigned `user @noWarningIfUnused (\?inValue : Int32) {\n"
   "  if inValue >= 0 then\n"
-  "    printUnsigned (!inValue &\\ UInt32)\n"
+  "    printUnsigned (!inValue &\\ $uint32)\n"
   "  else\n"
   "    writeData_inUserMode (!0x2D) // Signe -\n"
-  "    printUnsigned (!(- inValue) &\\ UInt32)\n"
+  "    printUnsigned (!(- inValue) &\\ $uint32)\n"
   "  end\n"
   "}\n"
   "\n"
@@ -17843,16 +17844,16 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//void printSigned (const int32_t inValue) {\n"
   "//  if (inValue < 0) {\n"
   "//    printChar ('-') ;\n"
-  "//    printUnsigned ((uint32_t) -inValue) ;\n"
+  "//    printUnsigned (($uint32_t) -inValue) ;\n"
   "//  }else{\n"
-  "//    printUnsigned ((uint32_t) inValue) ;\n"
+  "//    printUnsigned (($uint32_t) inValue) ;\n"
   "//  }\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//void printHex1 (const uint32_t inValue) {\n"
-  "//  const uint32_t v = inValue & 0xF ;\n"
+  "//void printHex1 (const $uint32_t inValue) {\n"
+  "//  const $uint32_t v = inValue & 0xF ;\n"
   "//  if (v < 10) {\n"
   "//    printChar ('0' + v) ;\n"
   "//  }else{\n"
@@ -17862,14 +17863,14 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//void printHex2 (const uint32_t inValue) {\n"
+  "//void printHex2 (const $uint32_t inValue) {\n"
   "//  printHex1 (inValue >> 4) ;\n"
   "//  printHex1 (inValue) ;\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//void printHex4 (const uint32_t inValue) {\n"
+  "//void printHex4 (const $uint32_t inValue) {\n"
   "//  printHex2 (inValue >> 8) ;\n"
   "//  printHex2 (inValue) ;\n"
   "//}\n"
@@ -17877,23 +17878,23 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "\n"
-  "//void printHex8 (const uint32_t inValue) {\n"
+  "//void printHex8 (const $uint32_t inValue) {\n"
   "//  printHex4 (inValue >> 16) ;\n"
   "//  printHex4 (inValue) ;\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "//void printHex16 (const uint64_t inValue) {\n"
-  "//  printHex8 ((uint32_t) (inValue >> 32)) ;\n"
-  "//  printHex8 ((uint32_t) inValue) ;\n"
+  "//void printHex16 (const $uint64_t inValue) {\n"
+  "//  printHex8 (($uint32_t) (inValue >> 32)) ;\n"
+  "//  printHex8 (($uint32_t) inValue) ;\n"
   "//}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "//   EXCEPTION                                                                 *\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc programLcd4BitDataBusOutput_inExceptionMode `exception @noWarningIfUnused (\?inValue : UInt8) {\n"
+  "proc programLcd4BitDataBusOutput_inExceptionMode `exception @noWarningIfUnused (\?inValue : $uint8) {\n"
   "  setD4 (!(inValue & 0x01) != 0)\n"
   "  setD5 (!(inValue & 0x02) != 0)\n"
   "  setD6 (!(inValue & 0x04) != 0)\n"
@@ -17909,7 +17910,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc waitMSInExceptionMode `exception @noWarningIfUnused (\?duration: inDuration : UInt32) {\n"
+  "proc waitMSInExceptionMode `exception @noWarningIfUnused (\?duration: inDuration : $uint32) {\n"
   "  var duration = inDuration\n"
   "  while duration > 0 do\n"
   "    waitOneMillisecondInExceptionMode ()\n"
@@ -17919,7 +17920,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc writeDataInExceptionMode `exception @noWarningIfUnused (\?inData : UInt8) {\n"
+  "proc writeDataInExceptionMode `exception @noWarningIfUnused (\?inData : $uint8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveHighRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;\n"
@@ -17935,13 +17936,13 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc printUnsignedInExceptionMode `exception @noWarningIfUnused (\?inValue : UInt32) {\n"
-  "  var divisor : UInt32 = 1_000_000_000\n"
+  "proc printUnsignedInExceptionMode `exception @noWarningIfUnused (\?inValue : $uint32) {\n"
+  "  var divisor : $uint32 = 1_000_000_000\n"
   "  var value = inValue\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\\ UInt8))\n"
+  "      writeDataInExceptionMode (!0x30 &+ ((value &/ divisor) &\\ $uint8))\n"
   "      value = value &% divisor\n"
   "      isPrinting = true\n"
   "    end\n"
@@ -17956,16 +17957,16 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "proc printSignedInExceptionMode `exception @noWarningIfUnused (\?inValue : Int32) {\n"
   "  if inValue >= 0 then\n"
-  "    printUnsignedInExceptionMode (!inValue &\\ UInt32)\n"
+  "    printUnsignedInExceptionMode (!inValue &\\ $uint32)\n"
   "  else\n"
   "    writeDataInExceptionMode (!0x2D) // Signe -\n"
-  "    printUnsignedInExceptionMode (!(&- inValue) &\\ UInt32)\n"
+  "    printUnsignedInExceptionMode (!(&- inValue) &\\ $uint32)\n"
   "  end\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc write8bitCommand_inExceptionMode `exception @noWarningIfUnused (\?inCommand : UInt8) {\n"
+  "proc write8bitCommand_inExceptionMode `exception @noWarningIfUnused (\?inCommand : $uint8) {\n"
   "  waitOneMillisecondInExceptionMode () ;\n"
   "  driveLowRS () ;\n"
   "  programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;\n"
@@ -17981,7 +17982,7 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc gotoInExceptionMode `exception @noWarningIfUnused (\?line:inLine : UInt32 \?column:inColumn : UInt8) {\n"
+  "proc gotoInExceptionMode `exception @noWarningIfUnused (\?line:inLine : $uint32 \?column:inColumn : $uint8) {\n"
   "  if inColumn < 20 then\n"
   "    if inLine == 0 then\n"
   "      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;\n"
@@ -18026,7 +18027,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "lcd.plm",
   "plm",
   true, // Text file
-  15519, // Text length
+  15559, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 
@@ -18064,16 +18065,16 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "let LED_L0 : UInt32 = (1 << 0)\n"
-  "let LED_L1 : UInt32 = (1 << 1)\n"
-  "let LED_L2 : UInt32 = (1 << 2)\n"
-  "let LED_L3 : UInt32 = (1 << 3)\n"
-  "let LED_L4 : UInt32 = (1 << 4)\n"
-  "let LED_TEENSY : UInt32 = (1 << 5)\n"
+  "let LED_L0 : $uint32 = (1 << 0)\n"
+  "let LED_L1 : $uint32 = (1 << 1)\n"
+  "let LED_L2 : $uint32 = (1 << 2)\n"
+  "let LED_L3 : $uint32 = (1 << 3)\n"
+  "let LED_L4 : $uint32 = (1 << 4)\n"
+  "let LED_TEENSY : $uint32 = (1 << 5)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc ledOn `user `exception `isr (\?inLeds : UInt32) {\n"
+  "proc ledOn `user `exception `isr (\?inLeds : $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PSOR = 1 << 12 ;\n"
@@ -18102,7 +18103,7 @@ const char * gWrapperFileContent_7_targetTemplates = "//------------------------
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "proc ledOff `user `exception `isr (\?inLeds : UInt32) {\n"
+  "proc ledOff `user `exception `isr (\?inLeds : $uint32) {\n"
   "//--- Led L0\n"
   "  if ((inLeds & LED_L0) != 0) then\n"
   "    GPIOA_PCOR = 1 << 12 ;\n"
@@ -18135,7 +18136,7 @@ const cRegularFileWrapper gWrapperFile_7_targetTemplates (
   "leds.plm",
   "plm",
   true, // Text file
-  2338, // Text length
+  2346, // Text length
   gWrapperFileContent_7_targetTemplates
 ) ;
 
@@ -18170,10 +18171,10 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
   "// SOFTWARE.\n"
   "\n"
-  "let f_cpu : UInt32 = 96_000_000\n"
+  "let f_cpu : $uint32 = 96_000_000\n"
   "\n"
-  "let f_bus : UInt32 = 48_000_000\n"
-  "let f_mem  : UInt32= 24_000_000\n"
+  "let f_bus : $uint32 = 48_000_000\n"
+  "let f_mem  : $uint32= 24_000_000\n"
   "\n"
   "// chapter 11: Port control and interrupts (PORT)\n"
   " // Pin Control Register n\n"
@@ -18338,101 +18339,101 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  PORTE_PCR29  at 0x4004D074\n"
   "  PORTE_PCR30  at 0x4004D078\n"
   "  PORTE_PCR31  at 0x4004D07C\n"
-  ": UInt32 {\n"
+  ": $uint32 {\n"
   "  7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps\n"
   "}\n"
   "\n"
-  "let PORT_PCR_ISF  : UInt32  = 0x01000000  // Interrupt Status Flag\n"
-  "//register UInt32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration\n"
-  "let PORT_PCR_IRQC_MASK  : UInt32 = 0x000F0000\n"
-  "let PORT_PCR_LK   : UInt32 = 0x00008000  // Lock Register\n"
-  "//register UInt32 PORT_PCR_MUX(n)    (((n) & 7) << 8) // Pin Mux Control\n"
-  "let PORT_PCR_MUX_MASK : UInt32 = 0x00000700\n"
-  "let PORT_PCR_DSE      : UInt32 = 0x00000040  // Drive Strength Enable\n"
-  "let PORT_PCR_ODE      : UInt32 = 0x00000020  // Open Drain Enable\n"
-  "let PORT_PCR_PFE      : UInt32 = 0x00000010  // Passive Filter Enable\n"
-  "let PORT_PCR_SRE      : UInt32 = 0x00000004  // Slew Rate Enable\n"
-  "let PORT_PCR_PE       : UInt32 = 0x00000002  // Pull Enable\n"
-  "let PORT_PCR_PS       : UInt32 = 0x00000001  // Pull Select\n"
+  "let PORT_PCR_ISF  : $uint32  = 0x01000000  // Interrupt Status Flag\n"
+  "//register $uint32 PORT_PCR_IRQC(n)   (((n) & 15) << 16) // Interrupt Configuration\n"
+  "let PORT_PCR_IRQC_MASK  : $uint32 = 0x000F0000\n"
+  "let PORT_PCR_LK   : $uint32 = 0x00008000  // Lock Register\n"
+  "//register $uint32 PORT_PCR_MUX(n)    (((n) & 7) << 8) // Pin Mux Control\n"
+  "let PORT_PCR_MUX_MASK : $uint32 = 0x00000700\n"
+  "let PORT_PCR_DSE      : $uint32 = 0x00000040  // Drive Strength Enable\n"
+  "let PORT_PCR_ODE      : $uint32 = 0x00000020  // Open Drain Enable\n"
+  "let PORT_PCR_PFE      : $uint32 = 0x00000010  // Passive Filter Enable\n"
+  "let PORT_PCR_SRE      : $uint32 = 0x00000004  // Slew Rate Enable\n"
+  "let PORT_PCR_PE       : $uint32 = 0x00000002  // Pull Enable\n"
+  "let PORT_PCR_PS       : $uint32 = 0x00000001  // Pull Select\n"
   "\n"
-  "register PORTA_GPCLR  at 0x40049080 : UInt32 // Global Pin Control Low Register\n"
-  "register PORTA_GPCHR  at 0x40049084 : UInt32 // Global Pin Control High Register\n"
-  "register PORTA_ISFR   at 0x400490A0 : UInt32 // Interrupt Status Flag Register\n"
+  "register PORTA_GPCLR  at 0x40049080 : $uint32 // Global Pin Control Low Register\n"
+  "register PORTA_GPCHR  at 0x40049084 : $uint32 // Global Pin Control High Register\n"
+  "register PORTA_ISFR   at 0x400490A0 : $uint32 // Interrupt Status Flag Register\n"
   "\n"
-  "register PORTB_GPCLR  at 0x4004A080 : UInt32 // Global Pin Control Low Register\n"
-  "register PORTB_GPCHR  at 0x4004A084 : UInt32 // Global Pin Control High Register\n"
-  "register PORTB_ISFR   at 0x4004A0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "register PORTB_GPCLR  at 0x4004A080 : $uint32 // Global Pin Control Low Register\n"
+  "register PORTB_GPCHR  at 0x4004A084 : $uint32 // Global Pin Control High Register\n"
+  "register PORTB_ISFR   at 0x4004A0A0 : $uint32 // Interrupt Status Flag Register\n"
   "\n"
-  "register PORTC_GPCLR  at 0x4004B080 : UInt32 // Global Pin Control Low Register\n"
-  "register PORTC_GPCHR  at 0x4004B084 : UInt32 // Global Pin Control High Register\n"
-  "register PORTC_ISFR   at 0x4004B0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "register PORTC_GPCLR  at 0x4004B080 : $uint32 // Global Pin Control Low Register\n"
+  "register PORTC_GPCHR  at 0x4004B084 : $uint32 // Global Pin Control High Register\n"
+  "register PORTC_ISFR   at 0x4004B0A0 : $uint32 // Interrupt Status Flag Register\n"
   "\n"
-  "register PORTD_GPCLR  at 0x4004C080 : UInt32 // Global Pin Control Low Register\n"
-  "register PORTD_GPCHR  at 0x4004C084 : UInt32 // Global Pin Control High Register\n"
-  "register PORTD_ISFR   at 0x4004C0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "register PORTD_GPCLR  at 0x4004C080 : $uint32 // Global Pin Control Low Register\n"
+  "register PORTD_GPCHR  at 0x4004C084 : $uint32 // Global Pin Control High Register\n"
+  "register PORTD_ISFR   at 0x4004C0A0 : $uint32 // Interrupt Status Flag Register\n"
   "\n"
-  "register PORTE_GPCLR  at 0x4004D080 : UInt32 // Global Pin Control Low Register\n"
-  "register PORTE_GPCHR  at 0x4004D084 : UInt32 // Global Pin Control High Register\n"
-  "register PORTE_ISFR   at 0x4004D0A0 : UInt32 // Interrupt Status Flag Register\n"
+  "register PORTE_GPCLR  at 0x4004D080 : $uint32 // Global Pin Control Low Register\n"
+  "register PORTE_GPCHR  at 0x4004D084 : $uint32 // Global Pin Control High Register\n"
+  "register PORTE_ISFR   at 0x4004D0A0 : $uint32 // Interrupt Status Flag Register\n"
   "\n"
   "// Chapter 12: System Integration Module (SIM)\n"
-  "register SIM_SOPT1    at 0x40047000 : UInt32 // System Options Register 1\n"
-  "register SIM_SOPT1CFG at 0x40047004 : UInt32 // SOPT1 Configuration Register\n"
-  "register SIM_SOPT2    at 0x40048004 : UInt32 // System Options Register 2\n"
-  "register SIM_SOPT2_USBSRC at 0x00040000  : UInt32 // 0=USB_CLKIN, 1=FFL/PLL \n"
-  "register SIM_SOPT2_PLLFLLSEL at 0x00010000  : UInt32 // 0=FLL, 1=PLL\n"
-  "register SIM_SOPT2_TRACECLKSEL at 0x00001000  : UInt32 // 0=MCGOUTCLK, 1=CPU\n"
-  "register SIM_SOPT2_PTD7PAD at 0x00000800  : UInt32 // 0=normal, 1=double drive PTD7\n"
-  "//register UInt32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.\n"
-  "let SIM_SOPT2_RTCCLKOUTSEL : UInt32 = 0x00000010  // RTC clock out select\n"
-  "register SIM_SOPT4   at 0x4004800C : UInt32 // System Options Register 4\n"
-  "register SIM_SOPT5   at 0x40048010 : UInt32 // System Options Register 5\n"
-  "register SIM_SOPT7   at 0x40048018 : UInt32 // System Options Register 7\n"
-  "register SIM_SDID @ro at 0x40048024 : UInt32 // System Device Identification Register\n"
-  "register SIM_SCGC2  at 0x4004802C : UInt32 // System Clock Gating Control Register 2\n"
-  "let SIM_SCGC2_DAC0  : UInt32 =  0x00001000 // DAC0 Clock Gate Control\n"
-  "register SIM_SCGC3  at 0x40048030 : UInt32 // System Clock Gating Control Register 3\n"
-  "let SIM_SCGC3_ADC1 : UInt32 =  0x08000000 // ADC1 Clock Gate Control\n"
-  "let SIM_SCGC3_FTM2 : UInt32 =  0x01000000 // FTM2 Clock Gate Control\n"
-  "register SIM_SCGC4 at 0x40048034 : UInt32 // System Clock Gating Control Register 4\n"
-  "let SIM_SCGC4_VREF  : UInt32 =  0x00100000  // VREF Clock Gate Control\n"
-  "let SIM_SCGC4_CMP   : UInt32 = 0x00080000  // Comparator Clock Gate Control\n"
-  "let SIM_SCGC4_USBOTG  : UInt32 = 0x00040000  // USB Clock Gate Control\n"
-  "let SIM_SCGC4_UART2  : UInt32 =  0x00001000  // UART2 Clock Gate Control\n"
-  "let SIM_SCGC4_UART1  : UInt32 =  0x00000800  // UART1 Clock Gate Control\n"
-  "let SIM_SCGC4_UART0  : UInt32 =  0x00000400  // UART0 Clock Gate Control\n"
-  "let SIM_SCGC4_I2C1  : UInt32 =  0x00000080  // I2C1 Clock Gate Control\n"
-  "let SIM_SCGC4_I2C0  : UInt32 =  0x00000040  // I2C0 Clock Gate Control\n"
-  "let SIM_SCGC4_CMT  : UInt32 =  0x00000004  // CMT Clock Gate Control\n"
-  "let SIM_SCGC4_EWM  : UInt32 =  0x00000002  // EWM Clock Gate Control\n"
-  "register SIM_SCGC5 at 0x40048038 : UInt32 // System Clock Gating Control Register 5\n"
-  "let SIM_SCGC5_PORTE  : UInt32 =  0x00002000  // Port E Clock Gate Control\n"
-  "let SIM_SCGC5_PORTD  : UInt32 =  0x00001000  // Port D Clock Gate Control\n"
-  "let SIM_SCGC5_PORTC  : UInt32 =  0x00000800  // Port C Clock Gate Control\n"
-  "let SIM_SCGC5_PORTB  : UInt32 =  0x00000400  // Port B Clock Gate Control\n"
-  "let SIM_SCGC5_PORTA  : UInt32 =  0x00000200  // Port A Clock Gate Control\n"
-  "let SIM_SCGC5_TSI  : UInt32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
-  "let SIM_SCGC5_LPTIMER  : UInt32 =  0x00000001  // Low Power Timer Access Control\n"
-  "register SIM_SCGC6 at 0x4004803C : UInt32 // System Clock Gating Control Register 6\n"
-  "let SIM_SCGC6_RTC   : UInt32 = 0x20000000  // RTC Access\n"
-  "let SIM_SCGC6_ADC0  : UInt32 =   0x08000000  // ADC0 Clock Gate Control\n"
-  "let SIM_SCGC6_FTM1  : UInt32 =   0x02000000  // FTM1 Clock Gate Control\n"
-  "let SIM_SCGC6_FTM0  : UInt32=   0x01000000  // FTM0 Clock Gate Control\n"
-  "let SIM_SCGC6_PIT  : UInt32 =  0x00800000  // PIT Clock Gate Control\n"
-  "let SIM_SCGC6_PDB  : UInt32 =  0x00400000  // PDB Clock Gate Control\n"
-  "let SIM_SCGC6_USBDCD  : UInt32=  0x00200000  // USB DCD Clock Gate Control\n"
-  "let SIM_SCGC6_CRC  : UInt32 =  0x00040000  // CRC Clock Gate Control\n"
-  "let SIM_SCGC6_I2S  : UInt32 =  0x00008000  // I2S Clock Gate Control\n"
-  "let SIM_SCGC6_SPI1  : UInt32=   0x00002000  // SPI1 Clock Gate Control\n"
-  "let SIM_SCGC6_SPI0  : UInt32=   0x00001000  // SPI0 Clock Gate Control\n"
-  "let SIM_SCGC6_FLEXCAN0  : UInt32 =  0x00000010  // FlexCAN0 Clock Gate Control\n"
-  "let SIM_SCGC6_DMAMUX : UInt32 =  0x00000002  // DMA Mux Clock Gate Control\n"
-  "let SIM_SCGC6_FTFL  : UInt32 =  0x00000001  // Flash Memory Clock Gate Control\n"
+  "register SIM_SOPT1    at 0x40047000 : $uint32 // System Options Register 1\n"
+  "register SIM_SOPT1CFG at 0x40047004 : $uint32 // SOPT1 Configuration Register\n"
+  "register SIM_SOPT2    at 0x40048004 : $uint32 // System Options Register 2\n"
+  "register SIM_SOPT2_USBSRC at 0x00040000  : $uint32 // 0=USB_CLKIN, 1=FFL/PLL \n"
+  "register SIM_SOPT2_PLLFLLSEL at 0x00010000  : $uint32 // 0=FLL, 1=PLL\n"
+  "register SIM_SOPT2_TRACECLKSEL at 0x00001000  : $uint32 // 0=MCGOUTCLK, 1=CPU\n"
+  "register SIM_SOPT2_PTD7PAD at 0x00000800  : $uint32 // 0=normal, 1=double drive PTD7\n"
+  "//register $uint32 SIM_SOPT2_CLKOUTSEL(n)   (((n) & 7) << 5) // Selects the clock to output on the CLKOUT pin.\n"
+  "let SIM_SOPT2_RTCCLKOUTSEL : $uint32 = 0x00000010  // RTC clock out select\n"
+  "register SIM_SOPT4   at 0x4004800C : $uint32 // System Options Register 4\n"
+  "register SIM_SOPT5   at 0x40048010 : $uint32 // System Options Register 5\n"
+  "register SIM_SOPT7   at 0x40048018 : $uint32 // System Options Register 7\n"
+  "register SIM_SDID @ro at 0x40048024 : $uint32 // System Device Identification Register\n"
+  "register SIM_SCGC2  at 0x4004802C : $uint32 // System Clock Gating Control Register 2\n"
+  "let SIM_SCGC2_DAC0  : $uint32 =  0x00001000 // DAC0 Clock Gate Control\n"
+  "register SIM_SCGC3  at 0x40048030 : $uint32 // System Clock Gating Control Register 3\n"
+  "let SIM_SCGC3_ADC1 : $uint32 =  0x08000000 // ADC1 Clock Gate Control\n"
+  "let SIM_SCGC3_FTM2 : $uint32 =  0x01000000 // FTM2 Clock Gate Control\n"
+  "register SIM_SCGC4 at 0x40048034 : $uint32 // System Clock Gating Control Register 4\n"
+  "let SIM_SCGC4_VREF  : $uint32 =  0x00100000  // VREF Clock Gate Control\n"
+  "let SIM_SCGC4_CMP   : $uint32 = 0x00080000  // Comparator Clock Gate Control\n"
+  "let SIM_SCGC4_USBOTG  : $uint32 = 0x00040000  // USB Clock Gate Control\n"
+  "let SIM_SCGC4_UART2  : $uint32 =  0x00001000  // UART2 Clock Gate Control\n"
+  "let SIM_SCGC4_UART1  : $uint32 =  0x00000800  // UART1 Clock Gate Control\n"
+  "let SIM_SCGC4_UART0  : $uint32 =  0x00000400  // UART0 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C1  : $uint32 =  0x00000080  // I2C1 Clock Gate Control\n"
+  "let SIM_SCGC4_I2C0  : $uint32 =  0x00000040  // I2C0 Clock Gate Control\n"
+  "let SIM_SCGC4_CMT  : $uint32 =  0x00000004  // CMT Clock Gate Control\n"
+  "let SIM_SCGC4_EWM  : $uint32 =  0x00000002  // EWM Clock Gate Control\n"
+  "register SIM_SCGC5 at 0x40048038 : $uint32 // System Clock Gating Control Register 5\n"
+  "let SIM_SCGC5_PORTE  : $uint32 =  0x00002000  // Port E Clock Gate Control\n"
+  "let SIM_SCGC5_PORTD  : $uint32 =  0x00001000  // Port D Clock Gate Control\n"
+  "let SIM_SCGC5_PORTC  : $uint32 =  0x00000800  // Port C Clock Gate Control\n"
+  "let SIM_SCGC5_PORTB  : $uint32 =  0x00000400  // Port B Clock Gate Control\n"
+  "let SIM_SCGC5_PORTA  : $uint32 =  0x00000200  // Port A Clock Gate Control\n"
+  "let SIM_SCGC5_TSI  : $uint32 =  0x00000020  // Touch Sense Input TSI Clock Gate Control\n"
+  "let SIM_SCGC5_LPTIMER  : $uint32 =  0x00000001  // Low Power Timer Access Control\n"
+  "register SIM_SCGC6 at 0x4004803C : $uint32 // System Clock Gating Control Register 6\n"
+  "let SIM_SCGC6_RTC   : $uint32 = 0x20000000  // RTC Access\n"
+  "let SIM_SCGC6_ADC0  : $uint32 =   0x08000000  // ADC0 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM1  : $uint32 =   0x02000000  // FTM1 Clock Gate Control\n"
+  "let SIM_SCGC6_FTM0  : $uint32=   0x01000000  // FTM0 Clock Gate Control\n"
+  "let SIM_SCGC6_PIT  : $uint32 =  0x00800000  // PIT Clock Gate Control\n"
+  "let SIM_SCGC6_PDB  : $uint32 =  0x00400000  // PDB Clock Gate Control\n"
+  "let SIM_SCGC6_USBDCD  : $uint32=  0x00200000  // USB DCD Clock Gate Control\n"
+  "let SIM_SCGC6_CRC  : $uint32 =  0x00040000  // CRC Clock Gate Control\n"
+  "let SIM_SCGC6_I2S  : $uint32 =  0x00008000  // I2S Clock Gate Control\n"
+  "let SIM_SCGC6_SPI1  : $uint32=   0x00002000  // SPI1 Clock Gate Control\n"
+  "let SIM_SCGC6_SPI0  : $uint32=   0x00001000  // SPI0 Clock Gate Control\n"
+  "let SIM_SCGC6_FLEXCAN0  : $uint32 =  0x00000010  // FlexCAN0 Clock Gate Control\n"
+  "let SIM_SCGC6_DMAMUX : $uint32 =  0x00000002  // DMA Mux Clock Gate Control\n"
+  "let SIM_SCGC6_FTFL  : $uint32 =  0x00000001  // Flash Memory Clock Gate Control\n"
   "\n"
-  "register SIM_SCGC7 at 0x40048040 : UInt32 // System Clock Gating Control Register 7\n"
-  "let SIM_SCGC7_DMA  : UInt32 =  0x00000002  // DMA Clock Gate Control\n"
+  "register SIM_SCGC7 at 0x40048040 : $uint32 // System Clock Gating Control Register 7\n"
+  "let SIM_SCGC7_DMA  : $uint32 =  0x00000002  // DMA Clock Gate Control\n"
   "\n"
-  "register SIM_CLKDIV1 at 0x4004_8044 : UInt32 {// System Clock Divider Register 1\n"
+  "register SIM_CLKDIV1 at 0x4004_8044 : $uint32 {// System Clock Divider Register 1\n"
   "  OUTDIV1[4], // Divide value for the core/system clock\n"
   "  OUTDIV2[4], // Divide value for the peripheral clock\n"
   "  4,\n"
@@ -18440,271 +18441,271 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  16\n"
   "}\n"
   "\n"
-  "register SIM_CLKDIV2 at 0x40048048 : UInt32 // System Clock Divider Register 2\n"
-  "//register UInt32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)\n"
-  "let SIM_CLKDIV2_USBFRAC  : UInt32 =  0x01\n"
-  "register SIM_FCFG1 @ro at 0x4004804C : UInt32 // Flash Configuration Register 1\n"
-  "register SIM_FCFG2 @ro at 0x40048050 : UInt32 // Flash Configuration Register 2\n"
-  "register SIM_UIDH  @ro at 0x40048054 : UInt32 // Unique Identification Register High\n"
-  "register SIM_UIDMH @ro at 0x40048058 : UInt32 // Unique Identification Register Mid-High\n"
-  "register SIM_UIDML @ro at 0x4004805C : UInt32 // Unique Identification Register Mid Low\n"
-  "register SIM_UIDL  @ro at 0x40048060 : UInt32 // Unique Identification Register Low\n"
+  "register SIM_CLKDIV2 at 0x40048048 : $uint32 // System Clock Divider Register 2\n"
+  "//register $uint32 SIM_CLKDIV2_USBDIV(n)   (((n) & 0x07) << 1)\n"
+  "let SIM_CLKDIV2_USBFRAC  : $uint32 =  0x01\n"
+  "register SIM_FCFG1 @ro at 0x4004804C : $uint32 // Flash Configuration Register 1\n"
+  "register SIM_FCFG2 @ro at 0x40048050 : $uint32 // Flash Configuration Register 2\n"
+  "register SIM_UIDH  @ro at 0x40048054 : $uint32 // Unique Identification Register High\n"
+  "register SIM_UIDMH @ro at 0x40048058 : $uint32 // Unique Identification Register Mid-High\n"
+  "register SIM_UIDML @ro at 0x4004805C : $uint32 // Unique Identification Register Mid Low\n"
+  "register SIM_UIDL  @ro at 0x40048060 : $uint32 // Unique Identification Register Low\n"
   "\n"
   "// Chapter 13: Reset Control Module (RCM)\n"
-  "register RCM_SRS0 at 0x4007F000 : UInt8 // System Reset Status Register 0\n"
-  "register RCM_SRS1 at 0x4007F001 : UInt8 // System Reset Status Register 1\n"
-  "register RCM_RPFC at 0x4007F004 : UInt8 // Reset Pin Filter Control Register\n"
-  "register RCM_RPFW at 0x4007F005 : UInt8 // Reset Pin Filter Width Register\n"
-  "register RCM_MR   at 0x4007F007 : UInt8 // Mode Register\n"
+  "register RCM_SRS0 at 0x4007F000 : $uint8 // System Reset Status Register 0\n"
+  "register RCM_SRS1 at 0x4007F001 : $uint8 // System Reset Status Register 1\n"
+  "register RCM_RPFC at 0x4007F004 : $uint8 // Reset Pin Filter Control Register\n"
+  "register RCM_RPFW at 0x4007F005 : $uint8 // Reset Pin Filter Width Register\n"
+  "register RCM_MR   at 0x4007F007 : $uint8 // Mode Register\n"
   "\n"
   "// Chapter 14: System Mode Controller\n"
-  "register SMC_PMPROT  at 0x4007E000 : UInt8 // Power Mode Protection Register\n"
-  "let SMC_PMPROT_AVLP  : UInt8 = 0x20   // Allow very low power modes\n"
-  "let SMC_PMPROT_ALLS : UInt8  = 0x08   // Allow low leakage stop mode\n"
-  "let SMC_PMPROT_AVLLS : UInt8 = 0x02   // Allow very low leakage stop mode\n"
+  "register SMC_PMPROT  at 0x4007E000 : $uint8 // Power Mode Protection Register\n"
+  "let SMC_PMPROT_AVLP  : $uint8 = 0x20   // Allow very low power modes\n"
+  "let SMC_PMPROT_ALLS : $uint8  = 0x08   // Allow low leakage stop mode\n"
+  "let SMC_PMPROT_AVLLS : $uint8 = 0x02   // Allow very low leakage stop mode\n"
   "\n"
-  "register SMC_PMCTRL  at 0x4007E001 : UInt8 // Power Mode Control Register\n"
-  "let SMC_PMCTRL_LPWUI : UInt8  = 0x80   // Low Power Wake Up on Interrupt\n"
-  "//register UInt8 SMC_PMCTRL_RUNM(n)  (uint8_t)(((n) & 0x03) << 5) // Run Mode Control\n"
-  "let SMC_PMCTRL_STOPA : UInt8  = 0x08   // Stop Aborted\n"
-  "//register UInt8 SMC_PMCTRL_STOPM(n)  (uint8_t)((n) & 0x07)  // Stop Mode Control\n"
+  "register SMC_PMCTRL  at 0x4007E001 : $uint8 // Power Mode Control Register\n"
+  "let SMC_PMCTRL_LPWUI : $uint8  = 0x80   // Low Power Wake Up on Interrupt\n"
+  "//register $uint8 SMC_PMCTRL_RUNM(n)  ($uint8_t)(((n) & 0x03) << 5) // Run Mode Control\n"
+  "let SMC_PMCTRL_STOPA : $uint8  = 0x08   // Stop Aborted\n"
+  "//register $uint8 SMC_PMCTRL_STOPM(n)  ($uint8_t)((n) & 0x07)  // Stop Mode Control\n"
   "\n"
-  "register SMC_VLLSCTRL at 0x4007E002 : UInt8 // VLLS Control Register\n"
-  "let SMC_VLLSCTRL_PORPO : UInt8 = 0x20   // POR Power Option\n"
-  "//let UInt8 SMC_VLLSCTRL_VLLSM(n)  (uint8_t)((n) & 0x07)  // VLLS Mode Control\n"
+  "register SMC_VLLSCTRL at 0x4007E002 : $uint8 // VLLS Control Register\n"
+  "let SMC_VLLSCTRL_PORPO : $uint8 = 0x20   // POR Power Option\n"
+  "//let $uint8 SMC_VLLSCTRL_VLLSM(n)  ($uint8_t)((n) & 0x07)  // VLLS Mode Control\n"
   "\n"
-  "register SMC_PMST at 0x4007E003 : UInt8 // Power Mode Status Register\n"
-  "let SMC_PMSTAT_RUN  : UInt8 = 0x01   // Current power mode is RUN\n"
-  "let SMC_PMSTAT_STOP : UInt8 = 0x02   // Current power mode is STOP\n"
-  "let SMC_PMSTAT_VLPR : UInt8 = 0x04   // Current power mode is VLPR\n"
-  "let SMC_PMSTAT_VLPW : UInt8 = 0x08   // Current power mode is VLPW\n"
-  "let SMC_PMSTAT_VLPS : UInt8 = 0x10   // Current power mode is VLPS\n"
-  "let SMC_PMSTAT_LLS  : UInt8 = 0x20   // Current power mode is LLS\n"
-  "let SMC_PMSTAT_VLLS : UInt8 = 0x40   // Current power mode is VLLS\n"
+  "register SMC_PMST at 0x4007E003 : $uint8 // Power Mode Status Register\n"
+  "let SMC_PMSTAT_RUN  : $uint8 = 0x01   // Current power mode is RUN\n"
+  "let SMC_PMSTAT_STOP : $uint8 = 0x02   // Current power mode is STOP\n"
+  "let SMC_PMSTAT_VLPR : $uint8 = 0x04   // Current power mode is VLPR\n"
+  "let SMC_PMSTAT_VLPW : $uint8 = 0x08   // Current power mode is VLPW\n"
+  "let SMC_PMSTAT_VLPS : $uint8 = 0x10   // Current power mode is VLPS\n"
+  "let SMC_PMSTAT_LLS  : $uint8 = 0x20   // Current power mode is LLS\n"
+  "let SMC_PMSTAT_VLLS : $uint8 = 0x40   // Current power mode is VLLS\n"
   "\n"
   "// Chapter 15: Power Management Controller\n"
-  "register PMC_LVDSC1 at 0x4007D000 : UInt8 // Low Voltage Detect Status And Control 1 register\n"
-  "let PMC_LVDSC1_LVDF : UInt8 = 0x80   // Low-Voltage Detect Flag\n"
-  "let PMC_LVDSC1_LVDACK : UInt8 = 0x40   // Low-Voltage Detect Acknowledge\n"
-  "let PMC_LVDSC1_LVDIE : UInt8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
-  "let PMC_LVDSC1_LVDRE : UInt8 = 0x10   // Low-Voltage Detect Reset Enable\n"
-  "//let UInt8 PMC_LVDSC1_LVDV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select\n"
-  "register PMC_LVDSC2 at 0x4007D001 : UInt8 // Low Voltage Detect Status And Control 2 register\n"
-  "let PMC_LVDSC2_LVWF : UInt8  = 0x80   // Low-Voltage Warning Flag\n"
-  "let PMC_LVDSC2_LVWACK : UInt8 = 0x40   // Low-Voltage Warning Acknowledge\n"
-  "let PMC_LVDSC2_LVWIE : UInt8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
-  "//let UInt8 PMC_LVDSC2_LVWV(n)  (uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select\n"
+  "register PMC_LVDSC1 at 0x4007D000 : $uint8 // Low Voltage Detect Status And Control 1 register\n"
+  "let PMC_LVDSC1_LVDF : $uint8 = 0x80   // Low-Voltage Detect Flag\n"
+  "let PMC_LVDSC1_LVDACK : $uint8 = 0x40   // Low-Voltage Detect Acknowledge\n"
+  "let PMC_LVDSC1_LVDIE : $uint8 = 0x20   // Low-Voltage Detect Interrupt Enable\n"
+  "let PMC_LVDSC1_LVDRE : $uint8 = 0x10   // Low-Voltage Detect Reset Enable\n"
+  "//let $uint8 PMC_LVDSC1_LVDV(n)  ($uint8_t)((n) & 0x03)  // Low-Voltage Detect Voltage Select\n"
+  "register PMC_LVDSC2 at 0x4007D001 : $uint8 // Low Voltage Detect Status And Control 2 register\n"
+  "let PMC_LVDSC2_LVWF : $uint8  = 0x80   // Low-Voltage Warning Flag\n"
+  "let PMC_LVDSC2_LVWACK : $uint8 = 0x40   // Low-Voltage Warning Acknowledge\n"
+  "let PMC_LVDSC2_LVWIE : $uint8 = 0x20   // Low-Voltage Warning Interrupt Enable\n"
+  "//let $uint8 PMC_LVDSC2_LVWV(n)  ($uint8_t)((n) & 0x03)  // Low-Voltage Warning Voltage Select\n"
   "\n"
-  "register PMC_REGSC at 0x4007D002 : UInt8 { // Regulator Status And Control register\n"
+  "register PMC_REGSC at 0x4007D002 : $uint8 { // Regulator Status And Control register\n"
   "  3, BGEN, ACKISO, REGONS, BGBE, 1\n"
   "}\n"
   "\n"
   "// Chapter 16: Low-Leakage Wakeup Unit (LLWU)\n"
-  "register LLWU_PE1  at 0x4007C000 : UInt8 // LLWU Pin Enable 1 register\n"
-  "register LLWU_PE2  at 0x4007C001 : UInt8 // LLWU Pin Enable 2 register\n"
-  "register LLWU_PE3  at 0x4007C002 : UInt8 // LLWU Pin Enable 3 register\n"
-  "register LLWU_PE4  at 0x4007C003 : UInt8 // LLWU Pin Enable 4 register\n"
-  "register LLWU_ME   at 0x4007C004 : UInt8 // LLWU Module Enable register\n"
-  "register LLWU_F1   at 0x4007C005 : UInt8 // LLWU Flag 1 register\n"
-  "register LLWU_F2   at 0x4007C006 : UInt8 // LLWU Flag 2 register\n"
-  "register LLWU_F3   at 0x4007C007 : UInt8 // LLWU Flag 3 register\n"
-  "register LLWU_FILT1 at 0x4007C008 : UInt8 // LLWU Pin Filter 1 register\n"
-  "register LLWU_FILT2 at 0x4007C009 : UInt8 // LLWU Pin Filter 2 register\n"
-  "register LLWU_RST  at 0x4007C00A : UInt8 // LLWU Reset Enable register\n"
+  "register LLWU_PE1  at 0x4007C000 : $uint8 // LLWU Pin Enable 1 register\n"
+  "register LLWU_PE2  at 0x4007C001 : $uint8 // LLWU Pin Enable 2 register\n"
+  "register LLWU_PE3  at 0x4007C002 : $uint8 // LLWU Pin Enable 3 register\n"
+  "register LLWU_PE4  at 0x4007C003 : $uint8 // LLWU Pin Enable 4 register\n"
+  "register LLWU_ME   at 0x4007C004 : $uint8 // LLWU Module Enable register\n"
+  "register LLWU_F1   at 0x4007C005 : $uint8 // LLWU Flag 1 register\n"
+  "register LLWU_F2   at 0x4007C006 : $uint8 // LLWU Flag 2 register\n"
+  "register LLWU_F3   at 0x4007C007 : $uint8 // LLWU Flag 3 register\n"
+  "register LLWU_FILT1 at 0x4007C008 : $uint8 // LLWU Pin Filter 1 register\n"
+  "register LLWU_FILT2 at 0x4007C009 : $uint8 // LLWU Pin Filter 2 register\n"
+  "register LLWU_RST  at 0x4007C00A : $uint8 // LLWU Reset Enable register\n"
   "\n"
   "// Chapter 17: Miscellaneous Control Module (MCM)\n"
-  "register MCM_PLASC at 0xE0080008 : UInt16 // Crossbar Switch (AXBS) Slave Configuration\n"
+  "register MCM_PLASC at 0xE0080008 : $uint16 // Crossbar Switch (AXBS) Slave Configuration\n"
   "\n"
-  "register MCM_PLAMC at 0xE008000A : UInt16 // Crossbar Switch (AXBS) Master Configuration\n"
+  "register MCM_PLAMC at 0xE008000A : $uint16 // Crossbar Switch (AXBS) Master Configuration\n"
   "\n"
-  "register MCM_PLACR at 0xE008000C : UInt32 // Crossbar Switch (AXBS) Control Register (MK20DX128)\n"
-  "let MCM_PLACR_ARG   : UInt32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
+  "register MCM_PLACR at 0xE008000C : $uint32 // Crossbar Switch (AXBS) Control Register (MK20DX128)\n"
+  "let MCM_PLACR_ARG   : $uint32 = 0x00000200  // Arbitration select, 0=fixed, 1=round-robin\n"
   "\n"
-  "register MCM_CR at 0xE008000C : UInt32 // RAM arbitration control register (MK20DX256)\n"
-  "let MCM_CR_SRAMLWP  : UInt32 =  0x4000_0000  // SRAM_L write protect\n"
-  "//let UInt32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
-  "let MCM_CR_SRAMUWP  : UInt32 =  0x0400_0000  // SRAM_U write protect\n"
-  "//let UInt32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
+  "register MCM_CR at 0xE008000C : $uint32 // RAM arbitration control register (MK20DX256)\n"
+  "let MCM_CR_SRAMLWP  : $uint32 =  0x4000_0000  // SRAM_L write protect\n"
+  "//let $uint32 MCM_CR_SRAMLAP(n)   (((n) & 0x03) << 28) // SRAM_L priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
+  "let MCM_CR_SRAMUWP  : $uint32 =  0x0400_0000  // SRAM_U write protect\n"
+  "//let $uint32 MCM_CR_SRAMUAP(n)   (((n) & 0x03) << 24) // SRAM_U priority, 0=RR, 1=favor DMA, 2=CPU, 3=DMA\n"
   "\n"
   "// Crossbar Switch (AXBS) - only programmable on MK20DX256\n"
-  "register AXBS_PRS0   at 0x40004000 : UInt32 // Priority Registers Slave 0\n"
-  "register AXBS_CRS0   at 0x40004010 : UInt32 // Control Register 0\n"
-  "register AXBS_PRS1   at 0x40004100 : UInt32 // Priority Registers Slave 1\n"
-  "register AXBS_CRS1   at 0x40004110 : UInt32 // Control Register 1\n"
-  "register AXBS_PRS2   at 0x40004200 : UInt32 // Priority Registers Slave 2\n"
-  "register AXBS_CRS2   at 0x40004210 : UInt32 // Control Register 2\n"
-  "register AXBS_PRS3   at 0x40004300 : UInt32 // Priority Registers Slave 3\n"
-  "register AXBS_CRS3   at 0x40004310 : UInt32 // Control Register 3\n"
-  "register AXBS_PRS4   at 0x40004400 : UInt32 // Priority Registers Slave 4\n"
-  "register AXBS_CRS4   at 0x40004410 : UInt32 // Control Register 4\n"
-  "register AXBS_PRS5   at 0x40004500 : UInt32 // Priority Registers Slave 5\n"
-  "register AXBS_CRS5   at 0x40004510 : UInt32 // Control Register 5\n"
-  "register AXBS_PRS6   at 0x40004600 : UInt32 // Priority Registers Slave 6\n"
-  "register AXBS_CRS6   at 0x40004610 : UInt32 // Control Register 6\n"
-  "register AXBS_PRS7   at 0x40004700 : UInt32 // Priority Registers Slave 7\n"
-  "register AXBS_CRS7   at 0x40004710 : UInt32 // Control Register 7\n"
-  "register AXBS_MGPCR0 at 0x40004800 : UInt32 // Master 0 General Purpose Control Register\n"
-  "register AXBS_MGPCR1 at 0x40004900 : UInt32 // Master 1 General Purpose Control Register\n"
-  "register AXBS_MGPCR2 at 0x40004A00 : UInt32 // Master 2 General Purpose Control Register\n"
-  "register AXBS_MGPCR3 at 0x40004B00 : UInt32 // Master 3 General Purpose Control Register\n"
-  "register AXBS_MGPCR4 at 0x40004C00 : UInt32 // Master 4 General Purpose Control Register\n"
-  "register AXBS_MGPCR5 at 0x40004D00 : UInt32 // Master 5 General Purpose Control Register\n"
-  "register AXBS_MGPCR6 at 0x40004E00 : UInt32 // Master 6 General Purpose Control Register\n"
-  "register AXBS_MGPCR7 at 0x40004F00 : UInt32 // Master 7 General Purpose Control Register\n"
-  "let AXBS_CRS_READONLY  : UInt32=  0x80000000\n"
-  "let AXBS_CRS_HALTLOWPRIORITY  : UInt32 = 0x40000000\n"
-  "let AXBS_CRS_ARB_FIXED  : UInt32 = 0x00000000\n"
-  "let AXBS_CRS_ARB_ROUNDROBIN  : UInt32 = 0x00010000\n"
-  "let AXBS_CRS_PARK_FIXED  : UInt32 =  0x00000000\n"
-  "let AXBS_CRS_PARK_PREVIOUS  : UInt32 =  0x00000010\n"
-  "let AXBS_CRS_PARK_NONE  : UInt32 =  0x00000020\n"
-  "//let UInt32 AXBS_CRS_PARK(n)   (((n) & 7) << 0)\n"
+  "register AXBS_PRS0   at 0x40004000 : $uint32 // Priority Registers Slave 0\n"
+  "register AXBS_CRS0   at 0x40004010 : $uint32 // Control Register 0\n"
+  "register AXBS_PRS1   at 0x40004100 : $uint32 // Priority Registers Slave 1\n"
+  "register AXBS_CRS1   at 0x40004110 : $uint32 // Control Register 1\n"
+  "register AXBS_PRS2   at 0x40004200 : $uint32 // Priority Registers Slave 2\n"
+  "register AXBS_CRS2   at 0x40004210 : $uint32 // Control Register 2\n"
+  "register AXBS_PRS3   at 0x40004300 : $uint32 // Priority Registers Slave 3\n"
+  "register AXBS_CRS3   at 0x40004310 : $uint32 // Control Register 3\n"
+  "register AXBS_PRS4   at 0x40004400 : $uint32 // Priority Registers Slave 4\n"
+  "register AXBS_CRS4   at 0x40004410 : $uint32 // Control Register 4\n"
+  "register AXBS_PRS5   at 0x40004500 : $uint32 // Priority Registers Slave 5\n"
+  "register AXBS_CRS5   at 0x40004510 : $uint32 // Control Register 5\n"
+  "register AXBS_PRS6   at 0x40004600 : $uint32 // Priority Registers Slave 6\n"
+  "register AXBS_CRS6   at 0x40004610 : $uint32 // Control Register 6\n"
+  "register AXBS_PRS7   at 0x40004700 : $uint32 // Priority Registers Slave 7\n"
+  "register AXBS_CRS7   at 0x40004710 : $uint32 // Control Register 7\n"
+  "register AXBS_MGPCR0 at 0x40004800 : $uint32 // Master 0 General Purpose Control Register\n"
+  "register AXBS_MGPCR1 at 0x40004900 : $uint32 // Master 1 General Purpose Control Register\n"
+  "register AXBS_MGPCR2 at 0x40004A00 : $uint32 // Master 2 General Purpose Control Register\n"
+  "register AXBS_MGPCR3 at 0x40004B00 : $uint32 // Master 3 General Purpose Control Register\n"
+  "register AXBS_MGPCR4 at 0x40004C00 : $uint32 // Master 4 General Purpose Control Register\n"
+  "register AXBS_MGPCR5 at 0x40004D00 : $uint32 // Master 5 General Purpose Control Register\n"
+  "register AXBS_MGPCR6 at 0x40004E00 : $uint32 // Master 6 General Purpose Control Register\n"
+  "register AXBS_MGPCR7 at 0x40004F00 : $uint32 // Master 7 General Purpose Control Register\n"
+  "let AXBS_CRS_READONLY  : $uint32=  0x80000000\n"
+  "let AXBS_CRS_HALTLOWPRIORITY  : $uint32 = 0x40000000\n"
+  "let AXBS_CRS_ARB_FIXED  : $uint32 = 0x00000000\n"
+  "let AXBS_CRS_ARB_ROUNDROBIN  : $uint32 = 0x00010000\n"
+  "let AXBS_CRS_PARK_FIXED  : $uint32 =  0x00000000\n"
+  "let AXBS_CRS_PARK_PREVIOUS  : $uint32 =  0x00000010\n"
+  "let AXBS_CRS_PARK_NONE  : $uint32 =  0x00000020\n"
+  "//let $uint32 AXBS_CRS_PARK(n)   (((n) & 7) << 0)\n"
   "\n"
   "\n"
   "\n"
   "// Chapter 20: Direct Memory Access Multiplexer (DMAMUX)\n"
-  "register DMAMUX0_CHCFG0  at 0x40021000 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG1  at 0x40021001 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG2  at 0x40021002 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG3  at 0x40021003 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG4  at 0x40021004 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG5  at 0x40021005 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG6  at 0x40021006 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG7  at 0x40021007 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG8  at 0x40021008 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG9  at 0x40021009 : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG10 at 0x4002100A : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG11 at 0x4002100B : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG12 at 0x4002100C : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG13 at 0x4002100D : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG14 at 0x4002100E : UInt8 // Channel Configuration register\n"
-  "register DMAMUX0_CHCFG15 at 0x4002100F : UInt8 // Channel Configuration register\n"
-  "let DMAMUX_DISABLE : UInt8 =  0\n"
-  "let DMAMUX_TRIG  : UInt8 = 64\n"
-  "let DMAMUX_ENABLE : UInt8 =  128\n"
-  "let DMAMUX_SOURCE_UART0_RX : UInt8 = 2\n"
-  "let DMAMUX_SOURCE_UART0_TX : UInt8 = 3\n"
-  "let DMAMUX_SOURCE_UART1_RX : UInt8 = 4\n"
-  "let DMAMUX_SOURCE_UART1_TX : UInt8 = 5\n"
-  "let DMAMUX_SOURCE_UART2_RX : UInt8 = 6\n"
-  "let DMAMUX_SOURCE_UART2_TX : UInt8 = 7\n"
-  "let DMAMUX_SOURCE_I2S0_RX  : UInt8 =14\n"
-  "let DMAMUX_SOURCE_I2S0_TX  : UInt8 =15\n"
-  "let DMAMUX_SOURCE_SPI0_RX  : UInt8 =16\n"
-  "let DMAMUX_SOURCE_SPI0_TX  : UInt8 =17\n"
-  "let DMAMUX_SOURCE_I2C0  : UInt8 =22\n"
-  "let DMAMUX_SOURCE_I2C1  : UInt8 =23\n"
-  "let DMAMUX_SOURCE_FTM0_CH0 : UInt8 = 24\n"
-  "let DMAMUX_SOURCE_FTM0_CH1 : UInt8 = 25\n"
-  "let DMAMUX_SOURCE_FTM0_CH2 : UInt8 = 26\n"
-  "let DMAMUX_SOURCE_FTM0_CH3 : UInt8 = 27\n"
-  "let DMAMUX_SOURCE_FTM0_CH4 : UInt8 = 28\n"
-  "let DMAMUX_SOURCE_FTM0_CH5 : UInt8 = 29\n"
-  "let DMAMUX_SOURCE_FTM0_CH6 : UInt8 = 30\n"
-  "let DMAMUX_SOURCE_FTM0_CH7 : UInt8 = 31\n"
-  "let DMAMUX_SOURCE_FTM1_CH0 : UInt8 = 32\n"
-  "let DMAMUX_SOURCE_FTM1_CH1 : UInt8 = 33\n"
-  "let DMAMUX_SOURCE_FTM2_CH0 : UInt8 = 34\n"
-  "let DMAMUX_SOURCE_FTM2_CH1 : UInt8 = 35\n"
-  "let DMAMUX_SOURCE_ADC0 : UInt8 = 40\n"
-  "let DMAMUX_SOURCE_ADC1 : UInt8 = 41\n"
-  "let DMAMUX_SOURCE_CMP0 : UInt8 = 42\n"
-  "let DMAMUX_SOURCE_CMP1 : UInt8 = 43\n"
-  "let DMAMUX_SOURCE_CMP2 : UInt8 = 44\n"
-  "let DMAMUX_SOURCE_DAC0 : UInt8 = 45\n"
-  "let DMAMUX_SOURCE_CMT  : UInt8 = 47\n"
-  "let DMAMUX_SOURCE_PDB  : UInt8 = 48\n"
-  "let DMAMUX_SOURCE_PORTA : UInt8 = 49\n"
-  "let DMAMUX_SOURCE_PORTB : UInt8 = 50\n"
-  "let DMAMUX_SOURCE_PORTC : UInt8 = 51\n"
-  "let DMAMUX_SOURCE_PORTD : UInt8 = 52\n"
-  "let DMAMUX_SOURCE_PORTE : UInt8 = 53\n"
-  "let DMAMUX_SOURCE_ALWAYS0 : UInt8 = 54\n"
-  "let DMAMUX_SOURCE_ALWAYS1 : UInt8 = 55\n"
-  "let DMAMUX_SOURCE_ALWAYS2 : UInt8 = 56\n"
-  "let DMAMUX_SOURCE_ALWAYS3 : UInt8 = 57\n"
-  "let DMAMUX_SOURCE_ALWAYS4 : UInt8 = 58\n"
-  "let DMAMUX_SOURCE_ALWAYS5 : UInt8 = 59\n"
-  "let DMAMUX_SOURCE_ALWAYS6 : UInt8 = 60\n"
-  "let DMAMUX_SOURCE_ALWAYS7 : UInt8 = 61\n"
-  "let DMAMUX_SOURCE_ALWAYS8 : UInt8 = 62\n"
-  "let DMAMUX_SOURCE_ALWAYS9 : UInt8 = 63\n"
+  "register DMAMUX0_CHCFG0  at 0x40021000 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG1  at 0x40021001 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG2  at 0x40021002 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG3  at 0x40021003 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG4  at 0x40021004 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG5  at 0x40021005 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG6  at 0x40021006 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG7  at 0x40021007 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG8  at 0x40021008 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG9  at 0x40021009 : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG10 at 0x4002100A : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG11 at 0x4002100B : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG12 at 0x4002100C : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG13 at 0x4002100D : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG14 at 0x4002100E : $uint8 // Channel Configuration register\n"
+  "register DMAMUX0_CHCFG15 at 0x4002100F : $uint8 // Channel Configuration register\n"
+  "let DMAMUX_DISABLE : $uint8 =  0\n"
+  "let DMAMUX_TRIG  : $uint8 = 64\n"
+  "let DMAMUX_ENABLE : $uint8 =  128\n"
+  "let DMAMUX_SOURCE_UART0_RX : $uint8 = 2\n"
+  "let DMAMUX_SOURCE_UART0_TX : $uint8 = 3\n"
+  "let DMAMUX_SOURCE_UART1_RX : $uint8 = 4\n"
+  "let DMAMUX_SOURCE_UART1_TX : $uint8 = 5\n"
+  "let DMAMUX_SOURCE_UART2_RX : $uint8 = 6\n"
+  "let DMAMUX_SOURCE_UART2_TX : $uint8 = 7\n"
+  "let DMAMUX_SOURCE_I2S0_RX  : $uint8 =14\n"
+  "let DMAMUX_SOURCE_I2S0_TX  : $uint8 =15\n"
+  "let DMAMUX_SOURCE_SPI0_RX  : $uint8 =16\n"
+  "let DMAMUX_SOURCE_SPI0_TX  : $uint8 =17\n"
+  "let DMAMUX_SOURCE_I2C0  : $uint8 =22\n"
+  "let DMAMUX_SOURCE_I2C1  : $uint8 =23\n"
+  "let DMAMUX_SOURCE_FTM0_CH0 : $uint8 = 24\n"
+  "let DMAMUX_SOURCE_FTM0_CH1 : $uint8 = 25\n"
+  "let DMAMUX_SOURCE_FTM0_CH2 : $uint8 = 26\n"
+  "let DMAMUX_SOURCE_FTM0_CH3 : $uint8 = 27\n"
+  "let DMAMUX_SOURCE_FTM0_CH4 : $uint8 = 28\n"
+  "let DMAMUX_SOURCE_FTM0_CH5 : $uint8 = 29\n"
+  "let DMAMUX_SOURCE_FTM0_CH6 : $uint8 = 30\n"
+  "let DMAMUX_SOURCE_FTM0_CH7 : $uint8 = 31\n"
+  "let DMAMUX_SOURCE_FTM1_CH0 : $uint8 = 32\n"
+  "let DMAMUX_SOURCE_FTM1_CH1 : $uint8 = 33\n"
+  "let DMAMUX_SOURCE_FTM2_CH0 : $uint8 = 34\n"
+  "let DMAMUX_SOURCE_FTM2_CH1 : $uint8 = 35\n"
+  "let DMAMUX_SOURCE_ADC0 : $uint8 = 40\n"
+  "let DMAMUX_SOURCE_ADC1 : $uint8 = 41\n"
+  "let DMAMUX_SOURCE_CMP0 : $uint8 = 42\n"
+  "let DMAMUX_SOURCE_CMP1 : $uint8 = 43\n"
+  "let DMAMUX_SOURCE_CMP2 : $uint8 = 44\n"
+  "let DMAMUX_SOURCE_DAC0 : $uint8 = 45\n"
+  "let DMAMUX_SOURCE_CMT  : $uint8 = 47\n"
+  "let DMAMUX_SOURCE_PDB  : $uint8 = 48\n"
+  "let DMAMUX_SOURCE_PORTA : $uint8 = 49\n"
+  "let DMAMUX_SOURCE_PORTB : $uint8 = 50\n"
+  "let DMAMUX_SOURCE_PORTC : $uint8 = 51\n"
+  "let DMAMUX_SOURCE_PORTD : $uint8 = 52\n"
+  "let DMAMUX_SOURCE_PORTE : $uint8 = 53\n"
+  "let DMAMUX_SOURCE_ALWAYS0 : $uint8 = 54\n"
+  "let DMAMUX_SOURCE_ALWAYS1 : $uint8 = 55\n"
+  "let DMAMUX_SOURCE_ALWAYS2 : $uint8 = 56\n"
+  "let DMAMUX_SOURCE_ALWAYS3 : $uint8 = 57\n"
+  "let DMAMUX_SOURCE_ALWAYS4 : $uint8 = 58\n"
+  "let DMAMUX_SOURCE_ALWAYS5 : $uint8 = 59\n"
+  "let DMAMUX_SOURCE_ALWAYS6 : $uint8 = 60\n"
+  "let DMAMUX_SOURCE_ALWAYS7 : $uint8 = 61\n"
+  "let DMAMUX_SOURCE_ALWAYS8 : $uint8 = 62\n"
+  "let DMAMUX_SOURCE_ALWAYS9 : $uint8 = 63\n"
   "\n"
   "// Chapter 21: Direct Memory Access Controller (eDMA)\n"
-  "register DMA_CR at 0x40008000 : UInt32 // Control Register\n"
-  "let DMA_CR_CX   : UInt32  = 0x2_0000 // Cancel Transfer\n"
-  "let DMA_CR_ECX   : UInt32 = 0x1_0000 // Error Cancel Transfer\n"
-  "let DMA_CR_EMLM   : UInt32= 0x80 // Enable Minor Loop Mapping\n"
-  "let DMA_CR_CLM   : UInt32 = 0x40 // Continuous Link Mode\n"
-  "let DMA_CR_HALT  : UInt32 = 0x20 // Halt DMA Operations\n"
-  "let DMA_CR_HOE   : UInt32 = 0x10 // Halt On Error\n"
-  "let DMA_CR_ERCA  : UInt32 = 0x04 // Enable Round Robin Channel Arbitration\n"
-  "let DMA_CR_EDBG   : UInt32= 0x02 // Enable Debug\n"
-  "register DMA_ES  at 0x40008004 : UInt32 // Error Status Register\n"
-  "register DMA_ERQ at 0x4000800C : UInt32 // Enable Request Register\n"
-  "let DMA_ERQ_ERQ0   : UInt32 = 1 // Enable DMA Request 0\n"
-  "let DMA_ERQ_ERQ1   : UInt32 = 2 // Enable DMA Request 1\n"
-  "let DMA_ERQ_ERQ2   : UInt32 = 4 // Enable DMA Request 2\n"
-  "let DMA_ERQ_ERQ3   : UInt32 = 8 // Enable DMA Request 3\n"
-  "register DMA_EEI at 0x40008014 : UInt8 // Enable Error Interrupt Register\n"
-  "let DMA_EEI_EEI0   : UInt32 = 1 // Enable Error Interrupt 0\n"
-  "let DMA_EEI_EEI1   : UInt32 = 2 // Enable Error Interrupt 1\n"
-  "let DMA_EEI_EEI2   : UInt32 = 4 // Enable Error Interrupt 2\n"
-  "let DMA_EEI_EEI3   : UInt32 = 8 // Enable Error Interrupt 3\n"
-  "//register UInt8 DMA_CEEI  *(volatile uint8_t  *)0x40008018 // Clear Enable Error Interrupt Register\n"
-  "//register UInt32 DMA_CEEI_CEEI(n)  ((uint8_t)(n & 3)<<0) // Clear Enable Error Interrupt\n"
-  "//register UInt32 DMA_CEEI_CAEE   ((uint8_t)1<<6)  // Clear All Enable Error Interrupts\n"
-  "//register UInt32 DMA_CEEI_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_SEEI  *(volatile uint8_t  *)0x40008019 // Set Enable Error Interrupt Register\n"
-  "//register UInt32 DMA_SEEI_SEEI(n)  ((uint8_t)(n & 3)<<0) // Set Enable Error Interrupt\n"
-  "//register UInt32 DMA_SEEI_SAEE   ((uint8_t)1<<6)  // Set All Enable Error Interrupts\n"
-  "//register UInt32 DMA_SEEI_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_CERQ  *(volatile uint8_t  *)0x4000801A // Clear Enable Request Register\n"
-  "//register UInt32 DMA_CERQ_CERQ(n)  ((uint8_t)(n & 3)<<0) // Clear Enable Request\n"
-  "//register UInt32 DMA_CERQ_CAER   ((uint8_t)1<<6)  // Clear All Enable Requests\n"
-  "//register UInt32 DMA_CERQ_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_SERQ  *(volatile uint8_t  *)0x4000801B // Set Enable Request Register\n"
-  "//register UInt32 DMA_SERQ_SERQ(n)  ((uint8_t)(n & 3)<<0) // Set Enable Request\n"
-  "//register UInt32 DMA_SERQ_SAER   ((uint8_t)1<<6)  // Set All Enable Requests\n"
-  "//register UInt32 DMA_SERQ_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_CDNE  *(volatile uint8_t  *)0x4000801C // Clear DONE Status Bit Register\n"
-  "//register UInt32 DMA_CDNE_CDNE(n)  ((uint8_t)(n & 3)<<0) // Clear Done Bit\n"
-  "//register UInt32 DMA_CDNE_CADN   ((uint8_t)1<<6)  // Clear All Done Bits\n"
-  "//register UInt32 DMA_CDNE_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_SSRT  *(volatile uint8_t  *)0x4000801D // Set START Bit Register\n"
-  "//register UInt32 DMA_SSRT_SSRT(n)  ((uint8_t)(n & 3)<<0) // Set Start Bit\n"
-  "//register UInt32 DMA_SSRT_SAST   ((uint8_t)1<<6)  // Set All Start Bits\n"
-  "//register UInt32 DMA_SSRT_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_CERR  *(volatile uint8_t  *)0x4000801E // Clear Error Register\n"
-  "//register UInt32 DMA_CERR_CERR(n)  ((uint8_t)(n & 3)<<0) // Clear Error Indicator\n"
-  "//register UInt32 DMA_CERR_CAEI   ((uint8_t)1<<6)  // Clear All Error Indicators\n"
-  "//register UInt32 DMA_CERR_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_CINT  *(volatile uint8_t  *)0x4000801F // Clear Interrupt Request Register\n"
-  "//register UInt32 DMA_CINT_CINT(n)  ((uint8_t)(n & 3)<<0) // Clear Interrupt Request\n"
-  "//register UInt32 DMA_CINT_CAIR   ((uint8_t)1<<6)  // Clear All Interrupt Requests\n"
-  "//register UInt32 DMA_CINT_NOP   ((uint8_t)1<<7)  // NOP\n"
-  "//register UInt32 DMA_INT    0x40008024 // Interrupt Request Register\n"
-  "//register UInt32 DMA_INT_INT0   ( 1<<0) // Interrupt Request 0\n"
-  "//register UInt32 DMA_INT_INT1   ( 1<<1) // Interrupt Request 1\n"
-  "//register UInt32 DMA_INT_INT2   ( 1<<2) // Interrupt Request 2\n"
-  "//register UInt32 DMA_INT_INT3   ( 1<<3) // Interrupt Request 3\n"
-  "//register UInt32 DMA_ERR    0x4000802C // Error Register\n"
-  "//register UInt32 DMA_ERR_ERR0   ( 1<<0) // Error in Channel 0\n"
-  "//register UInt32 DMA_ERR_ERR1   ( 1<<1) // Error in Channel 1\n"
-  "//register UInt32 DMA_ERR_ERR2   ( 1<<2) // Error in Channel 2\n"
-  "//register UInt32 DMA_ERR_ERR3   ( 1<<3) // Error in Channel 3\n"
-  "//register UInt32 DMA_HRS    0x40008034 // Hardware Request Status Register\n"
-  "//register UInt32 DMA_HRS_HRS0   ( 1<<0) // Hardware Request Status Channel 0\n"
-  "//register UInt32 DMA_HRS_HRS1   ( 1<<1) // Hardware Request Status Channel 1\n"
-  "//register UInt32 DMA_HRS_HRS2   ( 1<<2) // Hardware Request Status Channel 2\n"
-  "//register UInt32 DMA_HRS_HRS3   ( 1<<3) // Hardware Request Status Channel 3\n"
-  "//register UInt32 DMA_DCHPRI3  *(volatile uint8_t  *)0x40008100 // Channel n Priority Register\n"
-  "//register UInt32 DMA_DCHPRI2  *(volatile uint8_t  *)0x40008101 // Channel n Priority Register\n"
-  "//register UInt32 DMA_DCHPRI1  *(volatile uint8_t  *)0x40008102 // Channel n Priority Register\n"
-  "//register UInt32 DMA_DCHPRI0  *(volatile uint8_t  *)0x40008103 // Channel n Priority Register\n"
-  "//register UInt32 DMA_DCHPRI_CHPRI(n)  ((uint8_t)(n & 3)<<0) // Channel Arbitration Priority\n"
-  "//register UInt32 DMA_DCHPRI_DPA   ((uint8_t)1<<6)  // Disable PreEmpt Ability\n"
-  "//register UInt32 DMA_DCHPRI_ECP   ((uint8_t)1<<7)  // Enable PreEmption\n"
+  "register DMA_CR at 0x40008000 : $uint32 // Control Register\n"
+  "let DMA_CR_CX   : $uint32  = 0x2_0000 // Cancel Transfer\n"
+  "let DMA_CR_ECX   : $uint32 = 0x1_0000 // Error Cancel Transfer\n"
+  "let DMA_CR_EMLM   : $uint32= 0x80 // Enable Minor Loop Mapping\n"
+  "let DMA_CR_CLM   : $uint32 = 0x40 // Continuous Link Mode\n"
+  "let DMA_CR_HALT  : $uint32 = 0x20 // Halt DMA Operations\n"
+  "let DMA_CR_HOE   : $uint32 = 0x10 // Halt On Error\n"
+  "let DMA_CR_ERCA  : $uint32 = 0x04 // Enable Round Robin Channel Arbitration\n"
+  "let DMA_CR_EDBG   : $uint32= 0x02 // Enable Debug\n"
+  "register DMA_ES  at 0x40008004 : $uint32 // Error Status Register\n"
+  "register DMA_ERQ at 0x4000800C : $uint32 // Enable Request Register\n"
+  "let DMA_ERQ_ERQ0   : $uint32 = 1 // Enable DMA Request 0\n"
+  "let DMA_ERQ_ERQ1   : $uint32 = 2 // Enable DMA Request 1\n"
+  "let DMA_ERQ_ERQ2   : $uint32 = 4 // Enable DMA Request 2\n"
+  "let DMA_ERQ_ERQ3   : $uint32 = 8 // Enable DMA Request 3\n"
+  "register DMA_EEI at 0x40008014 : $uint8 // Enable Error Interrupt Register\n"
+  "let DMA_EEI_EEI0   : $uint32 = 1 // Enable Error Interrupt 0\n"
+  "let DMA_EEI_EEI1   : $uint32 = 2 // Enable Error Interrupt 1\n"
+  "let DMA_EEI_EEI2   : $uint32 = 4 // Enable Error Interrupt 2\n"
+  "let DMA_EEI_EEI3   : $uint32 = 8 // Enable Error Interrupt 3\n"
+  "//register $uint8 DMA_CEEI  *(volatile $uint8_t  *)0x40008018 // Clear Enable Error Interrupt Register\n"
+  "//register $uint32 DMA_CEEI_CEEI(n)  (($uint8_t)(n & 3)<<0) // Clear Enable Error Interrupt\n"
+  "//register $uint32 DMA_CEEI_CAEE   (($uint8_t)1<<6)  // Clear All Enable Error Interrupts\n"
+  "//register $uint32 DMA_CEEI_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_SEEI  *(volatile $uint8_t  *)0x40008019 // Set Enable Error Interrupt Register\n"
+  "//register $uint32 DMA_SEEI_SEEI(n)  (($uint8_t)(n & 3)<<0) // Set Enable Error Interrupt\n"
+  "//register $uint32 DMA_SEEI_SAEE   (($uint8_t)1<<6)  // Set All Enable Error Interrupts\n"
+  "//register $uint32 DMA_SEEI_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_CERQ  *(volatile $uint8_t  *)0x4000801A // Clear Enable Request Register\n"
+  "//register $uint32 DMA_CERQ_CERQ(n)  (($uint8_t)(n & 3)<<0) // Clear Enable Request\n"
+  "//register $uint32 DMA_CERQ_CAER   (($uint8_t)1<<6)  // Clear All Enable Requests\n"
+  "//register $uint32 DMA_CERQ_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_SERQ  *(volatile $uint8_t  *)0x4000801B // Set Enable Request Register\n"
+  "//register $uint32 DMA_SERQ_SERQ(n)  (($uint8_t)(n & 3)<<0) // Set Enable Request\n"
+  "//register $uint32 DMA_SERQ_SAER   (($uint8_t)1<<6)  // Set All Enable Requests\n"
+  "//register $uint32 DMA_SERQ_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_CDNE  *(volatile $uint8_t  *)0x4000801C // Clear DONE Status Bit Register\n"
+  "//register $uint32 DMA_CDNE_CDNE(n)  (($uint8_t)(n & 3)<<0) // Clear Done Bit\n"
+  "//register $uint32 DMA_CDNE_CADN   (($uint8_t)1<<6)  // Clear All Done Bits\n"
+  "//register $uint32 DMA_CDNE_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_SSRT  *(volatile $uint8_t  *)0x4000801D // Set START Bit Register\n"
+  "//register $uint32 DMA_SSRT_SSRT(n)  (($uint8_t)(n & 3)<<0) // Set Start Bit\n"
+  "//register $uint32 DMA_SSRT_SAST   (($uint8_t)1<<6)  // Set All Start Bits\n"
+  "//register $uint32 DMA_SSRT_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_CERR  *(volatile $uint8_t  *)0x4000801E // Clear Error Register\n"
+  "//register $uint32 DMA_CERR_CERR(n)  (($uint8_t)(n & 3)<<0) // Clear Error Indicator\n"
+  "//register $uint32 DMA_CERR_CAEI   (($uint8_t)1<<6)  // Clear All Error Indicators\n"
+  "//register $uint32 DMA_CERR_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_CINT  *(volatile $uint8_t  *)0x4000801F // Clear Interrupt Request Register\n"
+  "//register $uint32 DMA_CINT_CINT(n)  (($uint8_t)(n & 3)<<0) // Clear Interrupt Request\n"
+  "//register $uint32 DMA_CINT_CAIR   (($uint8_t)1<<6)  // Clear All Interrupt Requests\n"
+  "//register $uint32 DMA_CINT_NOP   (($uint8_t)1<<7)  // NOP\n"
+  "//register $uint32 DMA_INT    0x40008024 // Interrupt Request Register\n"
+  "//register $uint32 DMA_INT_INT0   ( 1<<0) // Interrupt Request 0\n"
+  "//register $uint32 DMA_INT_INT1   ( 1<<1) // Interrupt Request 1\n"
+  "//register $uint32 DMA_INT_INT2   ( 1<<2) // Interrupt Request 2\n"
+  "//register $uint32 DMA_INT_INT3   ( 1<<3) // Interrupt Request 3\n"
+  "//register $uint32 DMA_ERR    0x4000802C // Error Register\n"
+  "//register $uint32 DMA_ERR_ERR0   ( 1<<0) // Error in Channel 0\n"
+  "//register $uint32 DMA_ERR_ERR1   ( 1<<1) // Error in Channel 1\n"
+  "//register $uint32 DMA_ERR_ERR2   ( 1<<2) // Error in Channel 2\n"
+  "//register $uint32 DMA_ERR_ERR3   ( 1<<3) // Error in Channel 3\n"
+  "//register $uint32 DMA_HRS    0x40008034 // Hardware Request Status Register\n"
+  "//register $uint32 DMA_HRS_HRS0   ( 1<<0) // Hardware Request Status Channel 0\n"
+  "//register $uint32 DMA_HRS_HRS1   ( 1<<1) // Hardware Request Status Channel 1\n"
+  "//register $uint32 DMA_HRS_HRS2   ( 1<<2) // Hardware Request Status Channel 2\n"
+  "//register $uint32 DMA_HRS_HRS3   ( 1<<3) // Hardware Request Status Channel 3\n"
+  "//register $uint32 DMA_DCHPRI3  *(volatile $uint8_t  *)0x40008100 // Channel n Priority Register\n"
+  "//register $uint32 DMA_DCHPRI2  *(volatile $uint8_t  *)0x40008101 // Channel n Priority Register\n"
+  "//register $uint32 DMA_DCHPRI1  *(volatile $uint8_t  *)0x40008102 // Channel n Priority Register\n"
+  "//register $uint32 DMA_DCHPRI0  *(volatile $uint8_t  *)0x40008103 // Channel n Priority Register\n"
+  "//register $uint32 DMA_DCHPRI_CHPRI(n)  (($uint8_t)(n & 3)<<0) // Channel Arbitration Priority\n"
+  "//register $uint32 DMA_DCHPRI_DPA   (($uint8_t)1<<6)  // Disable PreEmpt Ability\n"
+  "//register $uint32 DMA_DCHPRI_ECP   (($uint8_t)1<<7)  // Enable PreEmption\n"
   "//\n"
   "//\n"
   "//register DMA_TCD_ATTR_SMOD(n)  (((n) & 0x1F) << 11)\n"
@@ -18726,10 +18727,10 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register DMA_TCD_CSR_INTHALF  0x0004\n"
   "//register DMA_TCD_CSR_INTMAJOR  0x0002\n"
   "//register DMA_TCD_CSR_START  0x0001\n"
-  "//register DMA_TCD_CITER_MASK      ((uint16_t)0x7FFF)    // Loop count mask\n"
-  "//register DMA_TCD_CITER_ELINK      ((uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
-  "//register DMA_TCD_BITER_MASK      ((uint16_t)0x7FFF)    // Loop count mask\n"
-  "//register DMA_TCD_BITER_ELINK      ((uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
+  "//register DMA_TCD_CITER_MASK      (($uint16_t)0x7FFF)    // Loop count mask\n"
+  "//register DMA_TCD_CITER_ELINK      (($uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
+  "//register DMA_TCD_BITER_MASK      (($uint16_t)0x7FFF)    // Loop count mask\n"
+  "//register DMA_TCD_BITER_ELINK      (($uint16_t)1<<15)    // Enable channel linking on minor-loop complete\n"
   "//register DMA_TCD_NBYTES_SMLOE      ( 1<<31)      // Source Minor Loop Offset Enable\n"
   "//register DMA_TCD_NBYTES_DMLOE      ( 1<<30)      // Destination Minor Loop Offset Enable\n"
   "//register DMA_TCD_NBYTES_MLOFFNO_NBYTES(n)    ( (n))      // NBytes transfer count when minor loop disabled\n"
@@ -18738,297 +18739,297 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//\n"
   "//register DMA_TCD0_SADDR  *(volatile const void * volatile *)0x40009000 // TCD Source Address\n"
   "//register DMA_TCD0_SOFF  *(volatile int16_t *)0x40009004  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD0_ATTR  *(volatile uint16_t *)0x40009006 // TCD Transfer Attributes\n"
+  "//register DMA_TCD0_ATTR  *(volatile $uint16_t *)0x40009006 // TCD Transfer Attributes\n"
   "//register DMA_TCD0_NBYTES_MLNO  0x40009008 // TCD Minor Byte Count (Minor Loop Disabled)\n"
   "//register DMA_TCD0_NBYTES_MLOFFNO  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop Enabled and Offset Disabled)\n"
   "//register DMA_TCD0_NBYTES_MLOFFYES  0x40009008 // TCD Signed Minor Loop Offset (Minor Loop and Offset Enabled)\n"
   "//register DMA_TCD0_SLAST  *(volatile int32_t *)0x4000900C  // TCD Last Source Address Adjustment\n"
   "//register DMA_TCD0_DADDR  *(volatile void * volatile *)0x40009010 // TCD Destination Address\n"
   "//register DMA_TCD0_DOFF  *(volatile int16_t *)0x40009014  // TCD Signed Destination Address Offset\n"
-  "//register DMA_TCD0_CITER_ELINKYES *(volatile uint16_t *)0x40009016 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD0_CITER_ELINKNO *(volatile uint16_t *)0x40009016 // \?\?\n"
+  "//register DMA_TCD0_CITER_ELINKYES *(volatile $uint16_t *)0x40009016 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD0_CITER_ELINKNO *(volatile $uint16_t *)0x40009016 // \?\?\n"
   "//register DMA_TCD0_DLASTSGA *(volatile int32_t *)0x40009018  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
-  "//register DMA_TCD0_CSR  *(volatile uint16_t *)0x4000901C // TCD Control and Status\n"
-  "//register DMA_TCD0_BITER_ELINKYES *(volatile uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD0_BITER_ELINKNO *(volatile uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//register DMA_TCD0_CSR  *(volatile $uint16_t *)0x4000901C // TCD Control and Status\n"
+  "//register DMA_TCD0_BITER_ELINKYES *(volatile $uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD0_BITER_ELINKNO *(volatile $uint16_t *)0x4000901E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
   "//\n"
   "//register DMA_TCD1_SADDR  *(volatile const void * volatile *)0x40009020 // TCD Source Address\n"
   "//register DMA_TCD1_SOFF  *(volatile int16_t *)0x40009024  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD1_ATTR  *(volatile uint16_t *)0x40009026 // TCD Transfer Attributes\n"
+  "//register DMA_TCD1_ATTR  *(volatile $uint16_t *)0x40009026 // TCD Transfer Attributes\n"
   "//register DMA_TCD1_NBYTES_MLNO  0x40009028 // TCD Minor Byte Count, Minor Loop Disabled\n"
   "//register DMA_TCD1_NBYTES_MLOFFNO  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
   "//register DMA_TCD1_NBYTES_MLOFFYES  0x40009028 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
   "//register DMA_TCD1_SLAST  *(volatile int32_t *)0x4000902C  // TCD Last Source Address Adjustment\n"
   "//register DMA_TCD1_DADDR  *(volatile void * volatile *)0x40009030 // TCD Destination Address\n"
   "//register DMA_TCD1_DOFF  *(volatile int16_t *)0x40009034  // TCD Signed Destination Address Offset\n"
-  "//register DMA_TCD1_CITER_ELINKYES *(volatile uint16_t *)0x40009036 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD1_CITER_ELINKNO *(volatile uint16_t *)0x40009036 // \?\?\n"
+  "//register DMA_TCD1_CITER_ELINKYES *(volatile $uint16_t *)0x40009036 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD1_CITER_ELINKNO *(volatile $uint16_t *)0x40009036 // \?\?\n"
   "//register DMA_TCD1_DLASTSGA *(volatile int32_t *)0x40009038  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
-  "//register DMA_TCD1_CSR  *(volatile uint16_t *)0x4000903C // TCD Control and Status\n"
-  "//register DMA_TCD1_BITER_ELINKYES *(volatile uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count Channel Linking Enabled\n"
-  "//register DMA_TCD1_BITER_ELINKNO *(volatile uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//register DMA_TCD1_CSR  *(volatile $uint16_t *)0x4000903C // TCD Control and Status\n"
+  "//register DMA_TCD1_BITER_ELINKYES *(volatile $uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count Channel Linking Enabled\n"
+  "//register DMA_TCD1_BITER_ELINKNO *(volatile $uint16_t *)0x4000903E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
   "//\n"
   "//register DMA_TCD2_SADDR  *(volatile const void * volatile *)0x40009040 // TCD Source Address\n"
   "//register DMA_TCD2_SOFF  *(volatile int16_t *)0x40009044  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD2_ATTR  *(volatile uint16_t *)0x40009046 // TCD Transfer Attributes\n"
+  "//register DMA_TCD2_ATTR  *(volatile $uint16_t *)0x40009046 // TCD Transfer Attributes\n"
   "//register DMA_TCD2_NBYTES_MLNO  0x40009048 // TCD Minor Byte Count, Minor Loop Disabled\n"
   "//register DMA_TCD2_NBYTES_MLOFFNO  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
   "//register DMA_TCD2_NBYTES_MLOFFYES  0x40009048 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
   "//register DMA_TCD2_SLAST  *(volatile int32_t *)0x4000904C  // TCD Last Source Address Adjustment\n"
   "//register DMA_TCD2_DADDR  *(volatile void * volatile *)0x40009050 // TCD Destination Address\n"
   "//register DMA_TCD2_DOFF  *(volatile int16_t *)0x40009054  // TCD Signed Destination Address Offset\n"
-  "//register DMA_TCD2_CITER_ELINKYES *(volatile uint16_t *)0x40009056 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD2_CITER_ELINKNO *(volatile uint16_t *)0x40009056 // \?\?\n"
+  "//register DMA_TCD2_CITER_ELINKYES *(volatile $uint16_t *)0x40009056 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD2_CITER_ELINKNO *(volatile $uint16_t *)0x40009056 // \?\?\n"
   "//register DMA_TCD2_DLASTSGA *(volatile int32_t *)0x40009058  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
-  "//register DMA_TCD2_CSR  *(volatile uint16_t *)0x4000905C // TCD Control and Status\n"
-  "//register DMA_TCD2_BITER_ELINKYES *(volatile uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD2_BITER_ELINKNO *(volatile uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
+  "//register DMA_TCD2_CSR  *(volatile $uint16_t *)0x4000905C // TCD Control and Status\n"
+  "//register DMA_TCD2_BITER_ELINKYES *(volatile $uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD2_BITER_ELINKNO *(volatile $uint16_t *)0x4000905E // TCD Beginning Minor Loop Link, Major Loop Count, Channel Linking Disabled\n"
   "//\n"
   "//register DMA_TCD3_SADDR  *(volatile const void * volatile *)0x40009060 // TCD Source Address\n"
   "//register DMA_TCD3_SOFF  *(volatile int16_t *)0x40009064  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD3_ATTR  *(volatile uint16_t *)0x40009066 // TCD Transfer Attributes\n"
+  "//register DMA_TCD3_ATTR  *(volatile $uint16_t *)0x40009066 // TCD Transfer Attributes\n"
   "//register DMA_TCD3_NBYTES_MLNO  0x40009068 // TCD Minor Byte Count, Minor Loop Disabled\n"
   "//register DMA_TCD3_NBYTES_MLOFFNO  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop Enabled and Offset Disabled\n"
   "//register DMA_TCD3_NBYTES_MLOFFYES  0x40009068 // TCD Signed Minor Loop Offset, Minor Loop and Offset Enabled\n"
   "//register DMA_TCD3_SLAST  *(volatile int32_t *)0x4000906C  // TCD Last Source Address Adjustment\n"
   "//register DMA_TCD3_DADDR  *(volatile void * volatile *)0x40009070 // TCD Destination Address\n"
   "//register DMA_TCD3_DOFF  *(volatile int16_t *)0x40009074  // TCD Signed Destination Address Offset\n"
-  "//register DMA_TCD3_CITER_ELINKYES *(volatile uint16_t *)0x40009076 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
-  "//register DMA_TCD3_CITER_ELINKNO *(volatile uint16_t *)0x40009076 // \?\?\n"
+  "//register DMA_TCD3_CITER_ELINKYES *(volatile $uint16_t *)0x40009076 // TCD Current Minor Loop Link, Major Loop Count, Channel Linking Enabled\n"
+  "//register DMA_TCD3_CITER_ELINKNO *(volatile $uint16_t *)0x40009076 // \?\?\n"
   "//register DMA_TCD3_DLASTSGA *(volatile int32_t *)0x40009078  // TCD Last Destination Address Adjustment/Scatter Gather Address\n"
-  "//register DMA_TCD3_CSR  *(volatile uint16_t *)0x4000907C // TCD Control and Status\n"
-  "//register DMA_TCD3_BITER_ELINKYES *(volatile uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Enabled\n"
-  "//register DMA_TCD3_BITER_ELINKNO *(volatile uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Disabled\n"
+  "//register DMA_TCD3_CSR  *(volatile $uint16_t *)0x4000907C // TCD Control and Status\n"
+  "//register DMA_TCD3_BITER_ELINKYES *(volatile $uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Enabled\n"
+  "//register DMA_TCD3_BITER_ELINKNO *(volatile $uint16_t *)0x4000907E // TCD Beginning Minor Loop Link, Major Loop Count ,Channel Linking Disabled\n"
   "//\n"
   "//register DMA_TCD4_SADDR  *(volatile const void * volatile *)0x40009080 // TCD Source Addr\n"
   "//register DMA_TCD4_SOFF  *(volatile int16_t *)0x40009084  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD4_ATTR  *(volatile uint16_t *)0x40009086 // TCD Transfer Attributes\n"
+  "//register DMA_TCD4_ATTR  *(volatile $uint16_t *)0x40009086 // TCD Transfer Attributes\n"
   "//register DMA_TCD4_NBYTES_MLNO  0x40009088 // TCD Minor Byte Count\n"
   "//register DMA_TCD4_NBYTES_MLOFFNO  0x40009088 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD4_NBYTES_MLOFFYES  0x40009088 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD4_SLAST  *(volatile int32_t *)0x4000908C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD4_DADDR  *(volatile void * volatile *)0x40009090 // TCD Destination Address\n"
   "//register DMA_TCD4_DOFF  *(volatile int16_t *)0x40009094  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD4_CITER_ELINKYES *(volatile uint16_t *)0x40009096 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD4_CITER_ELINKNO *(volatile uint16_t *)0x40009096 // \?\?\n"
+  "//register DMA_TCD4_CITER_ELINKYES *(volatile $uint16_t *)0x40009096 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD4_CITER_ELINKNO *(volatile $uint16_t *)0x40009096 // \?\?\n"
   "//register DMA_TCD4_DLASTSGA *(volatile int32_t *)0x40009098  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD4_CSR  *(volatile uint16_t *)0x4000909C // TCD Control and Status\n"
-  "//register DMA_TCD4_BITER_ELINKYES *(volatile uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD4_BITER_ELINKNO *(volatile uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD4_CSR  *(volatile $uint16_t *)0x4000909C // TCD Control and Status\n"
+  "//register DMA_TCD4_BITER_ELINKYES *(volatile $uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD4_BITER_ELINKNO *(volatile $uint16_t *)0x4000909E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD5_SADDR  *(volatile const void * volatile *)0x400090A0 // TCD Source Addr\n"
   "//register DMA_TCD5_SOFF  *(volatile int16_t *)0x400090A4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD5_ATTR  *(volatile uint16_t *)0x400090A6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD5_ATTR  *(volatile $uint16_t *)0x400090A6 // TCD Transfer Attributes\n"
   "//register DMA_TCD5_NBYTES_MLNO  0x400090A8 // TCD Minor Byte Count\n"
   "//register DMA_TCD5_NBYTES_MLOFFNO  0x400090A8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD5_NBYTES_MLOFFYES  0x400090A8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD5_SLAST  *(volatile int32_t *)0x400090AC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD5_DADDR  *(volatile void * volatile *)0x400090B0 // TCD Destination Address\n"
   "//register DMA_TCD5_DOFF  *(volatile int16_t *)0x400090B4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD5_CITER_ELINKYES *(volatile uint16_t *)0x400090B6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD5_CITER_ELINKNO *(volatile uint16_t *)0x400090B6 // \?\?\n"
+  "//register DMA_TCD5_CITER_ELINKYES *(volatile $uint16_t *)0x400090B6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD5_CITER_ELINKNO *(volatile $uint16_t *)0x400090B6 // \?\?\n"
   "//register DMA_TCD5_DLASTSGA *(volatile int32_t *)0x400090B8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD5_CSR  *(volatile uint16_t *)0x400090BC // TCD Control and Status\n"
-  "//register DMA_TCD5_BITER_ELINKYES *(volatile uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD5_BITER_ELINKNO *(volatile uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD5_CSR  *(volatile $uint16_t *)0x400090BC // TCD Control and Status\n"
+  "//register DMA_TCD5_BITER_ELINKYES *(volatile $uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD5_BITER_ELINKNO *(volatile $uint16_t *)0x400090BE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD6_SADDR  *(volatile const void * volatile *)0x400090C0 // TCD Source Addr\n"
   "//register DMA_TCD6_SOFF  *(volatile int16_t *)0x400090C4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD6_ATTR  *(volatile uint16_t *)0x400090C6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD6_ATTR  *(volatile $uint16_t *)0x400090C6 // TCD Transfer Attributes\n"
   "//register DMA_TCD6_NBYTES_MLNO  0x400090C8 // TCD Minor Byte Count\n"
   "//register DMA_TCD6_NBYTES_MLOFFNO  0x400090C8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD6_NBYTES_MLOFFYES  0x400090C8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD6_SLAST  *(volatile int32_t *)0x400090CC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD6_DADDR  *(volatile void * volatile *)0x400090D0 // TCD Destination Address\n"
   "//register DMA_TCD6_DOFF  *(volatile int16_t *)0x400090D4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD6_CITER_ELINKYES *(volatile uint16_t *)0x400090D6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD6_CITER_ELINKNO *(volatile uint16_t *)0x400090D6 // \?\?\n"
+  "//register DMA_TCD6_CITER_ELINKYES *(volatile $uint16_t *)0x400090D6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD6_CITER_ELINKNO *(volatile $uint16_t *)0x400090D6 // \?\?\n"
   "//register DMA_TCD6_DLASTSGA *(volatile int32_t *)0x400090D8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD6_CSR  *(volatile uint16_t *)0x400090DC // TCD Control and Status\n"
-  "//register DMA_TCD6_BITER_ELINKYES *(volatile uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD6_BITER_ELINKNO *(volatile uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD6_CSR  *(volatile $uint16_t *)0x400090DC // TCD Control and Status\n"
+  "//register DMA_TCD6_BITER_ELINKYES *(volatile $uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD6_BITER_ELINKNO *(volatile $uint16_t *)0x400090DE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD7_SADDR  *(volatile const void * volatile *)0x400090E0 // TCD Source Addr\n"
   "//register DMA_TCD7_SOFF  *(volatile int16_t *)0x400090E4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD7_ATTR  *(volatile uint16_t *)0x400090E6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD7_ATTR  *(volatile $uint16_t *)0x400090E6 // TCD Transfer Attributes\n"
   "//register DMA_TCD7_NBYTES_MLNO  0x400090E8 // TCD Minor Byte Count\n"
   "//register DMA_TCD7_NBYTES_MLOFFNO  0x400090E8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD7_NBYTES_MLOFFYES  0x400090E8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD7_SLAST  *(volatile int32_t *)0x400090EC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD7_DADDR  *(volatile void * volatile *)0x400090F0 // TCD Destination Address\n"
   "//register DMA_TCD7_DOFF  *(volatile int16_t *)0x400090F4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD7_CITER_ELINKYES *(volatile uint16_t *)0x400090F6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD7_CITER_ELINKNO *(volatile uint16_t *)0x400090F6 // \?\?\n"
+  "//register DMA_TCD7_CITER_ELINKYES *(volatile $uint16_t *)0x400090F6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD7_CITER_ELINKNO *(volatile $uint16_t *)0x400090F6 // \?\?\n"
   "//register DMA_TCD7_DLASTSGA *(volatile int32_t *)0x400090F8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD7_CSR  *(volatile uint16_t *)0x400090FC // TCD Control and Status\n"
-  "//register DMA_TCD7_BITER_ELINKYES *(volatile uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD7_BITER_ELINKNO *(volatile uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD7_CSR  *(volatile $uint16_t *)0x400090FC // TCD Control and Status\n"
+  "//register DMA_TCD7_BITER_ELINKYES *(volatile $uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD7_BITER_ELINKNO *(volatile $uint16_t *)0x400090FE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD8_SADDR  *(volatile const void * volatile *)0x40009100 // TCD Source Addr\n"
   "//register DMA_TCD8_SOFF  *(volatile int16_t *)0x40009104  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD8_ATTR  *(volatile uint16_t *)0x40009106 // TCD Transfer Attributes\n"
+  "//register DMA_TCD8_ATTR  *(volatile $uint16_t *)0x40009106 // TCD Transfer Attributes\n"
   "//register DMA_TCD8_NBYTES_MLNO  0x40009108 // TCD Minor Byte Count\n"
   "//register DMA_TCD8_NBYTES_MLOFFNO  0x40009108 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD8_NBYTES_MLOFFYES  0x40009108 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD8_SLAST  *(volatile int32_t *)0x4000910C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD8_DADDR  *(volatile void * volatile *)0x40009110 // TCD Destination Address\n"
   "//register DMA_TCD8_DOFF  *(volatile int16_t *)0x40009114  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD8_CITER_ELINKYES *(volatile uint16_t *)0x40009116 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD8_CITER_ELINKNO *(volatile uint16_t *)0x40009116 // \?\?\n"
+  "//register DMA_TCD8_CITER_ELINKYES *(volatile $uint16_t *)0x40009116 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD8_CITER_ELINKNO *(volatile $uint16_t *)0x40009116 // \?\?\n"
   "//register DMA_TCD8_DLASTSGA *(volatile int32_t *)0x40009118  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD8_CSR  *(volatile uint16_t *)0x4000911C // TCD Control and Status\n"
-  "//register DMA_TCD8_BITER_ELINKYES *(volatile uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD8_BITER_ELINKNO *(volatile uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD8_CSR  *(volatile $uint16_t *)0x4000911C // TCD Control and Status\n"
+  "//register DMA_TCD8_BITER_ELINKYES *(volatile $uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD8_BITER_ELINKNO *(volatile $uint16_t *)0x4000911E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD9_SADDR  *(volatile const void * volatile *)0x40009120 // TCD Source Addr\n"
   "//register DMA_TCD9_SOFF  *(volatile int16_t *)0x40009124  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD9_ATTR  *(volatile uint16_t *)0x40009126 // TCD Transfer Attributes\n"
+  "//register DMA_TCD9_ATTR  *(volatile $uint16_t *)0x40009126 // TCD Transfer Attributes\n"
   "//register DMA_TCD9_NBYTES_MLNO  0x40009128 // TCD Minor Byte Count\n"
   "//register DMA_TCD9_NBYTES_MLOFFNO  0x40009128 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD9_NBYTES_MLOFFYES  0x40009128 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD9_SLAST  *(volatile int32_t *)0x4000912C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD9_DADDR  *(volatile void * volatile *)0x40009130 // TCD Destination Address\n"
   "//register DMA_TCD9_DOFF  *(volatile int16_t *)0x40009134  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD9_CITER_ELINKYES *(volatile uint16_t *)0x40009136 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD9_CITER_ELINKNO *(volatile uint16_t *)0x40009136 // \?\?\n"
+  "//register DMA_TCD9_CITER_ELINKYES *(volatile $uint16_t *)0x40009136 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD9_CITER_ELINKNO *(volatile $uint16_t *)0x40009136 // \?\?\n"
   "//register DMA_TCD9_DLASTSGA *(volatile int32_t *)0x40009138  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD9_CSR  *(volatile uint16_t *)0x4000913C // TCD Control and Status\n"
-  "//register DMA_TCD9_BITER_ELINKYES *(volatile uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD9_BITER_ELINKNO *(volatile uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD9_CSR  *(volatile $uint16_t *)0x4000913C // TCD Control and Status\n"
+  "//register DMA_TCD9_BITER_ELINKYES *(volatile $uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD9_BITER_ELINKNO *(volatile $uint16_t *)0x4000913E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD10_SADDR  *(volatile const void * volatile *)0x40009140 // TCD Source Addr\n"
   "//register DMA_TCD10_SOFF  *(volatile int16_t *)0x40009144  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD10_ATTR  *(volatile uint16_t *)0x40009146 // TCD Transfer Attributes\n"
+  "//register DMA_TCD10_ATTR  *(volatile $uint16_t *)0x40009146 // TCD Transfer Attributes\n"
   "//register DMA_TCD10_NBYTES_MLNO  0x40009148 // TCD Minor Byte Count\n"
   "//register DMA_TCD10_NBYTES_MLOFFNO  0x40009148 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD10_NBYTES_MLOFFYES  0x40009148 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD10_SLAST  *(volatile int32_t *)0x4000914C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD10_DADDR  *(volatile void * volatile *)0x40009150 // TCD Destination Address\n"
   "//register DMA_TCD10_DOFF  *(volatile int16_t *)0x40009154  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD10_CITER_ELINKYES *(volatile uint16_t *)0x40009156 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD10_CITER_ELINKNO *(volatile uint16_t *)0x40009156 // \?\?\n"
+  "//register DMA_TCD10_CITER_ELINKYES *(volatile $uint16_t *)0x40009156 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD10_CITER_ELINKNO *(volatile $uint16_t *)0x40009156 // \?\?\n"
   "//register DMA_TCD10_DLASTSGA *(volatile int32_t *)0x40009158  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD10_CSR  *(volatile uint16_t *)0x4000915C // TCD Control and Status\n"
-  "//register DMA_TCD10_BITER_ELINKYES *(volatile uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD10_BITER_ELINKNO *(volatile uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD10_CSR  *(volatile $uint16_t *)0x4000915C // TCD Control and Status\n"
+  "//register DMA_TCD10_BITER_ELINKYES *(volatile $uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD10_BITER_ELINKNO *(volatile $uint16_t *)0x4000915E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD11_SADDR  *(volatile const void * volatile *)0x40009160 // TCD Source Addr\n"
   "//register DMA_TCD11_SOFF  *(volatile int16_t *)0x40009164  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD11_ATTR  *(volatile uint16_t *)0x40009166 // TCD Transfer Attributes\n"
+  "//register DMA_TCD11_ATTR  *(volatile $uint16_t *)0x40009166 // TCD Transfer Attributes\n"
   "//register DMA_TCD11_NBYTES_MLNO  0x40009168 // TCD Minor Byte Count\n"
   "//register DMA_TCD11_NBYTES_MLOFFNO  0x40009168 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD11_NBYTES_MLOFFYES  0x40009168 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD11_SLAST  *(volatile int32_t *)0x4000916C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD11_DADDR  *(volatile void * volatile *)0x40009170 // TCD Destination Address\n"
   "//register DMA_TCD11_DOFF  *(volatile int16_t *)0x40009174  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD11_CITER_ELINKYES *(volatile uint16_t *)0x40009176 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD11_CITER_ELINKNO *(volatile uint16_t *)0x40009176 // \?\?\n"
+  "//register DMA_TCD11_CITER_ELINKYES *(volatile $uint16_t *)0x40009176 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD11_CITER_ELINKNO *(volatile $uint16_t *)0x40009176 // \?\?\n"
   "//register DMA_TCD11_DLASTSGA *(volatile int32_t *)0x40009178  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD11_CSR  *(volatile uint16_t *)0x4000917C // TCD Control and Status\n"
-  "//register DMA_TCD11_BITER_ELINKYES *(volatile uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD11_BITER_ELINKNO *(volatile uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD11_CSR  *(volatile $uint16_t *)0x4000917C // TCD Control and Status\n"
+  "//register DMA_TCD11_BITER_ELINKYES *(volatile $uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD11_BITER_ELINKNO *(volatile $uint16_t *)0x4000917E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD12_SADDR  *(volatile const void * volatile *)0x40009180 // TCD Source Addr\n"
   "//register DMA_TCD12_SOFF  *(volatile int16_t *)0x40009184  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD12_ATTR  *(volatile uint16_t *)0x40009186 // TCD Transfer Attributes\n"
+  "//register DMA_TCD12_ATTR  *(volatile $uint16_t *)0x40009186 // TCD Transfer Attributes\n"
   "//register DMA_TCD12_NBYTES_MLNO  0x40009188 // TCD Minor Byte Count\n"
   "//register DMA_TCD12_NBYTES_MLOFFNO  0x40009188 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD12_NBYTES_MLOFFYES  0x40009188 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD12_SLAST  *(volatile int32_t *)0x4000918C  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD12_DADDR  *(volatile void * volatile *)0x40009190 // TCD Destination Address\n"
   "//register DMA_TCD12_DOFF  *(volatile int16_t *)0x40009194  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD12_CITER_ELINKYES *(volatile uint16_t *)0x40009196 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD12_CITER_ELINKNO *(volatile uint16_t *)0x40009196 // \?\?\n"
+  "//register DMA_TCD12_CITER_ELINKYES *(volatile $uint16_t *)0x40009196 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD12_CITER_ELINKNO *(volatile $uint16_t *)0x40009196 // \?\?\n"
   "//register DMA_TCD12_DLASTSGA *(volatile int32_t *)0x40009198  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD12_CSR  *(volatile uint16_t *)0x4000919C // TCD Control and Status\n"
-  "//register DMA_TCD12_BITER_ELINKYES *(volatile uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD12_BITER_ELINKNO *(volatile uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD12_CSR  *(volatile $uint16_t *)0x4000919C // TCD Control and Status\n"
+  "//register DMA_TCD12_BITER_ELINKYES *(volatile $uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD12_BITER_ELINKNO *(volatile $uint16_t *)0x4000919E // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD13_SADDR  *(volatile const void * volatile *)0x400091A0 // TCD Source Addr\n"
   "//register DMA_TCD13_SOFF  *(volatile int16_t *)0x400091A4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD13_ATTR  *(volatile uint16_t *)0x400091A6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD13_ATTR  *(volatile $uint16_t *)0x400091A6 // TCD Transfer Attributes\n"
   "//register DMA_TCD13_NBYTES_MLNO  0x400091A8 // TCD Minor Byte Count\n"
   "//register DMA_TCD13_NBYTES_MLOFFNO  0x400091A8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD13_NBYTES_MLOFFYES  0x400091A8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD13_SLAST  *(volatile int32_t *)0x400091AC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD13_DADDR  *(volatile void * volatile *)0x400091B0 // TCD Destination Address\n"
   "//register DMA_TCD13_DOFF  *(volatile int16_t *)0x400091B4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD13_CITER_ELINKYES *(volatile uint16_t *)0x400091B6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD13_CITER_ELINKNO *(volatile uint16_t *)0x400091B6 // \?\?\n"
+  "//register DMA_TCD13_CITER_ELINKYES *(volatile $uint16_t *)0x400091B6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD13_CITER_ELINKNO *(volatile $uint16_t *)0x400091B6 // \?\?\n"
   "//register DMA_TCD13_DLASTSGA *(volatile int32_t *)0x400091B8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD13_CSR  *(volatile uint16_t *)0x400091BC // TCD Control and Status\n"
-  "//register DMA_TCD13_BITER_ELINKYES *(volatile uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD13_BITER_ELINKNO *(volatile uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD13_CSR  *(volatile $uint16_t *)0x400091BC // TCD Control and Status\n"
+  "//register DMA_TCD13_BITER_ELINKYES *(volatile $uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD13_BITER_ELINKNO *(volatile $uint16_t *)0x400091BE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD14_SADDR  *(volatile const void * volatile *)0x400091C0 // TCD Source Addr\n"
   "//register DMA_TCD14_SOFF  *(volatile int16_t *)0x400091C4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD14_ATTR  *(volatile uint16_t *)0x400091C6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD14_ATTR  *(volatile $uint16_t *)0x400091C6 // TCD Transfer Attributes\n"
   "//register DMA_TCD14_NBYTES_MLNO  0x400091C8 // TCD Minor Byte Count\n"
   "//register DMA_TCD14_NBYTES_MLOFFNO  0x400091C8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD14_NBYTES_MLOFFYES  0x400091C8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD14_SLAST  *(volatile int32_t *)0x400091CC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD14_DADDR  *(volatile void * volatile *)0x400091D0 // TCD Destination Address\n"
   "//register DMA_TCD14_DOFF  *(volatile int16_t *)0x400091D4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD14_CITER_ELINKYES *(volatile uint16_t *)0x400091D6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD14_CITER_ELINKNO *(volatile uint16_t *)0x400091D6 // \?\?\n"
+  "//register DMA_TCD14_CITER_ELINKYES *(volatile $uint16_t *)0x400091D6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD14_CITER_ELINKNO *(volatile $uint16_t *)0x400091D6 // \?\?\n"
   "//register DMA_TCD14_DLASTSGA *(volatile int32_t *)0x400091D8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD14_CSR  *(volatile uint16_t *)0x400091DC // TCD Control and Status\n"
-  "//register DMA_TCD14_BITER_ELINKYES *(volatile uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD14_BITER_ELINKNO *(volatile uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD14_CSR  *(volatile $uint16_t *)0x400091DC // TCD Control and Status\n"
+  "//register DMA_TCD14_BITER_ELINKYES *(volatile $uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD14_BITER_ELINKNO *(volatile $uint16_t *)0x400091DE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//register DMA_TCD15_SADDR  *(volatile const void * volatile *)0x400091E0 // TCD Source Addr\n"
   "//register DMA_TCD15_SOFF  *(volatile int16_t *)0x400091E4  // TCD Signed Source Address Offset\n"
-  "//register DMA_TCD15_ATTR  *(volatile uint16_t *)0x400091E6 // TCD Transfer Attributes\n"
+  "//register DMA_TCD15_ATTR  *(volatile $uint16_t *)0x400091E6 // TCD Transfer Attributes\n"
   "//register DMA_TCD15_NBYTES_MLNO  0x400091E8 // TCD Minor Byte Count\n"
   "//register DMA_TCD15_NBYTES_MLOFFNO  0x400091E8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD15_NBYTES_MLOFFYES  0x400091E8 // TCD Signed Minor Loop Offset\n"
   "//register DMA_TCD15_SLAST  *(volatile int32_t *)0x400091EC  // TCD Last Source Addr Adj.\n"
   "//register DMA_TCD15_DADDR  *(volatile void * volatile *)0x400091F0 // TCD Destination Address\n"
   "//register DMA_TCD15_DOFF  *(volatile int16_t *)0x400091F4  // TCD Signed Dest Address Offset\n"
-  "//register DMA_TCD15_CITER_ELINKYES *(volatile uint16_t *)0x400091F6 // TCD Current Minor Loop Link\n"
-  "//register DMA_TCD15_CITER_ELINKNO *(volatile uint16_t *)0x400091F6 // \?\?\n"
+  "//register DMA_TCD15_CITER_ELINKYES *(volatile $uint16_t *)0x400091F6 // TCD Current Minor Loop Link\n"
+  "//register DMA_TCD15_CITER_ELINKNO *(volatile $uint16_t *)0x400091F6 // \?\?\n"
   "//register DMA_TCD15_DLASTSGA *(volatile int32_t *)0x400091F8  // TCD Last Destination Addr Adj\n"
-  "//register DMA_TCD15_CSR  *(volatile uint16_t *)0x400091FC // TCD Control and Status\n"
-  "//register DMA_TCD15_BITER_ELINKYES *(volatile uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
-  "//register DMA_TCD15_BITER_ELINKNO *(volatile uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD15_CSR  *(volatile $uint16_t *)0x400091FC // TCD Control and Status\n"
+  "//register DMA_TCD15_BITER_ELINKYES *(volatile $uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
+  "//register DMA_TCD15_BITER_ELINKNO *(volatile $uint16_t *)0x400091FE // TCD Beginning Minor Loop Link\n"
   "//\n"
   "//\n"
   "//// Chapter 22: External Watchdog Monitor (EWM)\n"
-  "//register EWM_CTRL  *(volatile uint8_t  *)0x40061000 // Control Register\n"
-  "//register EWM_SERV  *(volatile uint8_t  *)0x40061001 // Service Register\n"
-  "//register EWM_CMPL  *(volatile uint8_t  *)0x40061002 // Compare Low Register\n"
-  "//register EWM_CMPH  *(volatile uint8_t  *)0x40061003 // Compare High Register\n"
+  "//register EWM_CTRL  *(volatile $uint8_t  *)0x40061000 // Control Register\n"
+  "//register EWM_SERV  *(volatile $uint8_t  *)0x40061001 // Service Register\n"
+  "//register EWM_CMPL  *(volatile $uint8_t  *)0x40061002 // Compare Low Register\n"
+  "//register EWM_CMPH  *(volatile $uint8_t  *)0x40061003 // Compare High Register\n"
   "//\n"
   "//// Chapter 23: Watchdog Timer (WDOG)\n"
-  "register WDOG_STCTRLH at 0x40052000 : UInt16 // Watchdog Status and Control Register High\n"
-  "let WDOG_STCTRLH_DISTESTWDOG : UInt16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
-  "//register WDOG_STCTRLH_BYTESEL(n)  (uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.\n"
-  "let WDOG_STCTRLH_TESTSEL  : UInt16 = 0x0800\n"
-  "let WDOG_STCTRLH_TESTWDOG : UInt16 = 0x0400\n"
-  "let WDOG_STCTRLH_WAITEN : UInt16 = 0x0080\n"
-  "let WDOG_STCTRLH_STOPEN : UInt16 = 0x0040\n"
-  "let WDOG_STCTRLH_DBGEN  : UInt16 = 0x0020\n"
-  "let WDOG_STCTRLH_ALLOWUPDATE : UInt16 = 0x0010\n"
-  "let WDOG_STCTRLH_WINEN : UInt16 = 0x0008\n"
-  "let WDOG_STCTRLH_IRQRSTEN : UInt16 = 0x0004\n"
-  "let WDOG_STCTRLH_CLKSRC : UInt16 = 0x0002\n"
-  "let WDOG_STCTRLH_WDOGEN : UInt16 = 0x0001\n"
-  "register WDOG_STCTRLL  at 0x40052002 : UInt16 // Watchdog Status and Control Register Low\n"
-  "register WDOG_TOVALH   at 0x40052004 : UInt16 // Watchdog Time-out Value Register High\n"
-  "register WDOG_TOVALL   at 0x40052006 : UInt16 // Watchdog Time-out Value Register Low\n"
-  "register WDOG_WINH     at 0x40052008 : UInt16 // Watchdog Window Register High\n"
-  "register WDOG_WINL     at 0x4005200A : UInt16 // Watchdog Window Register Low\n"
-  "register WDOG_REFRESH  at 0x4005200C : UInt16 // Watchdog Refresh register\n"
-  "register WDOG_UNLOCK   at 0x4005200E : UInt16 // Watchdog Unlock register\n"
-  "let WDOG_UNLOCK_SEQ1 : UInt16   = 0xC520\n"
-  "let WDOG_UNLOCK_SEQ2 : UInt16   = 0xD928\n"
-  "register WDOG_TMROUTH  at 0x40052010 : UInt16 // Watchdog Timer Output Register High\n"
-  "register WDOG_TMROUTL  at 0x40052012 : UInt16 // Watchdog Timer Output Register Low\n"
-  "register WDOG_RSTCNT   at 0x40052014 : UInt16 // Watchdog Reset Count register\n"
-  "register WDOG_PRESC    at 0x40052016 : UInt16 // Watchdog Prescaler register\n"
+  "register WDOG_STCTRLH at 0x40052000 : $uint16 // Watchdog Status and Control Register High\n"
+  "let WDOG_STCTRLH_DISTESTWDOG : $uint16 = 0x4000  // Allows the WDOG's functional test mode to be disabled permanently.\n"
+  "//register WDOG_STCTRLH_BYTESEL(n)  ($uint16_t)(((n) & 3) << 12) // selects the byte to be tested when the watchdog is in the byte test mode.\n"
+  "let WDOG_STCTRLH_TESTSEL  : $uint16 = 0x0800\n"
+  "let WDOG_STCTRLH_TESTWDOG : $uint16 = 0x0400\n"
+  "let WDOG_STCTRLH_WAITEN : $uint16 = 0x0080\n"
+  "let WDOG_STCTRLH_STOPEN : $uint16 = 0x0040\n"
+  "let WDOG_STCTRLH_DBGEN  : $uint16 = 0x0020\n"
+  "let WDOG_STCTRLH_ALLOWUPDATE : $uint16 = 0x0010\n"
+  "let WDOG_STCTRLH_WINEN : $uint16 = 0x0008\n"
+  "let WDOG_STCTRLH_IRQRSTEN : $uint16 = 0x0004\n"
+  "let WDOG_STCTRLH_CLKSRC : $uint16 = 0x0002\n"
+  "let WDOG_STCTRLH_WDOGEN : $uint16 = 0x0001\n"
+  "register WDOG_STCTRLL  at 0x40052002 : $uint16 // Watchdog Status and Control Register Low\n"
+  "register WDOG_TOVALH   at 0x40052004 : $uint16 // Watchdog Time-out Value Register High\n"
+  "register WDOG_TOVALL   at 0x40052006 : $uint16 // Watchdog Time-out Value Register Low\n"
+  "register WDOG_WINH     at 0x40052008 : $uint16 // Watchdog Window Register High\n"
+  "register WDOG_WINL     at 0x4005200A : $uint16 // Watchdog Window Register Low\n"
+  "register WDOG_REFRESH  at 0x4005200C : $uint16 // Watchdog Refresh register\n"
+  "register WDOG_UNLOCK   at 0x4005200E : $uint16 // Watchdog Unlock register\n"
+  "let WDOG_UNLOCK_SEQ1 : $uint16   = 0xC520\n"
+  "let WDOG_UNLOCK_SEQ2 : $uint16   = 0xD928\n"
+  "register WDOG_TMROUTH  at 0x40052010 : $uint16 // Watchdog Timer Output Register High\n"
+  "register WDOG_TMROUTL  at 0x40052012 : $uint16 // Watchdog Timer Output Register Low\n"
+  "register WDOG_RSTCNT   at 0x40052014 : $uint16 // Watchdog Reset Count register\n"
+  "register WDOG_PRESC    at 0x40052016 : $uint16 // Watchdog Prescaler register\n"
   "\n"
   "// Chapter 24: Multipurpose Clock Generator (MCG)\n"
-  "register MCG_C1 at 0x40064000 : UInt8 { // MCG Control 1 Register\n"
+  "register MCG_C1 at 0x40064000 : $uint8 { // MCG Control 1 Register\n"
   "  CLKS [2], // Clock Source Select, Selects the clock source for MCGOUTCLK\n"
   "  FRDIV [3], // FLL External Reference Divider, Selects the amount to divide down the external reference clock for the FLL\n"
   "  IREFS, // Internal Reference Select, Selects the reference clock source for the FLL\n"
@@ -19036,7 +19037,7 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  IREFSTEN // Internal Reference Stop Enable, Controls whether or not the internal reference clock remains enabled when the MCG enters Stop mode\n"
   "}\n"
   "\n"
-  "register MCG_C2 at 0x4006_4001 : UInt8 { // MCG Control 2 Register\n"
+  "register MCG_C2 at 0x4006_4001 : $uint8 { // MCG Control 2 Register\n"
   "  LOCRE0, // Loss of Clock Reset Enable, Determines whether an interrupt \n"
   "          // or a reset request is made following a loss of OSC0\n"
   "  1,\n"
@@ -19048,30 +19049,30 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  IRCS // Internal Reference Clock Select, Selects between the fast or slow internal reference clock source.\n"
   "}\n"
   "\n"
-  "register MCG_C3 at 0x4006_4002 : UInt8 // MCG Control 3 Register\n"
-  "//register MCG_C3_SCTRIM(n)  (uint8_t)(n)   // Slow Internal Reference Clock Trim Setting\n"
-  "register MCG_C4 at 0x40064003 : UInt8 // MCG Control 4 Register\n"
-  "let MCG_C4_SCFTRIM : UInt8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
-  "//register MCG_C4_FCTRIM(n)  (uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting\n"
-  "//register MCG_C4_DRST_DRS(n)  (uint8_t)(((n) & 0x03) << 5) // DCO Range Select\n"
-  "let MCG_C4_DMX32 : UInt8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
+  "register MCG_C3 at 0x4006_4002 : $uint8 // MCG Control 3 Register\n"
+  "//register MCG_C3_SCTRIM(n)  ($uint8_t)(n)   // Slow Internal Reference Clock Trim Setting\n"
+  "register MCG_C4 at 0x40064003 : $uint8 // MCG Control 4 Register\n"
+  "let MCG_C4_SCFTRIM : $uint8 = 0x01   // Slow Internal Reference Clock Fine Trim\n"
+  "//register MCG_C4_FCTRIM(n)  ($uint8_t)(((n) & 0x0F) << 1) // Fast Internal Reference Clock Trim Setting\n"
+  "//register MCG_C4_DRST_DRS(n)  ($uint8_t)(((n) & 0x03) << 5) // DCO Range Select\n"
+  "let MCG_C4_DMX32 : $uint8 = 0x80   // DCO Maximum Frequency with 32.768 kHz Reference, controls whether the DCO frequency range is narrowed\n"
   "\n"
   "\n"
-  "register MCG_C5 at 0x4006_4004 : UInt8 { // MCG Control 5 Register\n"
+  "register MCG_C5 at 0x4006_4004 : $uint8 { // MCG Control 5 Register\n"
   " 1,\n"
   " PLLCLKEN0, // PLL Clock Enable\n"
   " PLLSTEN0,  // PLL Stop Enable\n"
   " PRDIV0 [5] // PLL External Reference Divider\n"
   "}\n"
   "\n"
-  "register MCG_C6 at 0x4006_4005 : UInt8 { // MCG Control 6 Register\n"
+  "register MCG_C6 at 0x4006_4005 : $uint8 { // MCG Control 6 Register\n"
   " LOLIE0, // Loss of Lock Interrrupt Enable\n"
   " PLLS, // PLL Select, Controls whether the PLL or FLL output is selected as the MCG source when CLKS[1:0]=00\n"
   " CME0,   // Clock Monitor Enable\n"
   " VDIV0[5] // VCO 0 Divider\n"
   "}\n"
   "\n"
-  "register MCG_S @ro at 0x40064006 : UInt8 { // MCG Status Register\n"
+  "register MCG_S @ro at 0x40064006 : $uint8 { // MCG Status Register\n"
   " LOLS0, // Loss of Lock Status\n"
   " LOCK0, // Lock Status, 0=PLL Unlocked, 1=PLL Locked\n"
   " PLLST, // PLL Select Status\n"
@@ -19081,21 +19082,21 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   " IRCST   // Internal Reference Clock Status\n"
   "}\n"
   "\n"
-  "register MCG_SC at 0x40064008 : UInt8 // MCG Status and Control Register\n"
-  "let MCG_SC_LOCS0 : UInt8 = 0x01   // OSC0 Loss of Clock Status\n"
-  "//register MCG_SC_FCRDIV(n)  (uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider\n"
-  "let MCG_SC_FLTPRSRV : UInt8 = 0x10   // FLL Filter Preserve Enable\n"
-  "let MCG_SC_ATMF : UInt8 = 0x20   // Automatic Trim Machine Fail Flag\n"
-  "let MCG_SC_ATMS : UInt8 = 0x40   // Automatic Trim Machine Select\n"
-  "let MCG_SC_ATME : UInt8 = 0x80   // Automatic Trim Machine Enable\n"
+  "register MCG_SC at 0x40064008 : $uint8 // MCG Status and Control Register\n"
+  "let MCG_SC_LOCS0 : $uint8 = 0x01   // OSC0 Loss of Clock Status\n"
+  "//register MCG_SC_FCRDIV(n)  ($uint8_t)(((n) & 0x07) << 1) // Fast Clock Internal Reference Divider\n"
+  "let MCG_SC_FLTPRSRV : $uint8 = 0x10   // FLL Filter Preserve Enable\n"
+  "let MCG_SC_ATMF : $uint8 = 0x20   // Automatic Trim Machine Fail Flag\n"
+  "let MCG_SC_ATMS : $uint8 = 0x40   // Automatic Trim Machine Select\n"
+  "let MCG_SC_ATME : $uint8 = 0x80   // Automatic Trim Machine Enable\n"
   "\n"
-  "register MCG_ATCVH at 0x4006400A : UInt8 // MCG Auto Trim Compare Value High Register\n"
-  "register MCG_ATCVL at 0x4006400B : UInt8 // MCG Auto Trim Compare Value Low Register\n"
-  "register MCG_C7    at 0x4006400C : UInt8 // MCG Control 7 Register\n"
-  "register MCG_C8    at 0x4006400D : UInt8 // MCG Control 8 Register\n"
+  "register MCG_ATCVH at 0x4006400A : $uint8 // MCG Auto Trim Compare Value High Register\n"
+  "register MCG_ATCVL at 0x4006400B : $uint8 // MCG Auto Trim Compare Value Low Register\n"
+  "register MCG_C7    at 0x4006400C : $uint8 // MCG Control 7 Register\n"
+  "register MCG_C8    at 0x4006400D : $uint8 // MCG Control 8 Register\n"
   "//\n"
   "//// Chapter 25: Oscillator (OSC)\n"
-  "register OSC_CR at 0x40065000 : UInt8 {// OSC Control Register\n"
+  "register OSC_CR at 0x40065000 : $uint8 {// OSC Control Register\n"
   "  ERCLKEN, // External Reference Enable, Enables external reference clock (OSCERCLK)\n"
   "  1,\n"
   "  EREFSTEN, // External Reference Stop Enable, Controls whether or not \n"
@@ -19107,216 +19108,216 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  SC8P, // Oscillator 8 pF Capacitor Load Configure\n"
   "  SC16P // Oscillator 16 pF Capacitor Load Configure\n"
   "}\n"
-  "let OSC_SC16P  : UInt8 = 0x01   \n"
+  "let OSC_SC16P  : $uint8 = 0x01   \n"
   "\n"
   "//// Chapter 27: Flash Memory Controller (FMC)\n"
-  "register FMC_PFAPR     at 0x4001F000 : UInt32 // Flash Access Protection\n"
-  "register FMC_PFB0CR    at 0x4001F004 : UInt32 // Flash Control\n"
-  "register FMC_TAGVDW0S0 at 0x4001F100 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW0S1 at 0x4001F104 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW1S0 at 0x4001F108 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW1S1 at 0x4001F10C : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW2S0 at 0x4001F110 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW2S1 at 0x4001F114 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW3S0 at 0x4001F118 : UInt32 // Cache Tag Storage\n"
-  "register FMC_TAGVDW3S1 at 0x4001F11C : UInt32 // Cache Tag Storage\n"
-  "register FMC_DATAW0S0  at 0x4001F200 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW0S1  at 0x4001F204 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW1S0  at 0x4001F208 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW1S1  at 0x4001F20C : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW2S0  at 0x4001F210 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW2S1  at 0x4001F214 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW3S0  at 0x4001F218 : UInt32 // Cache Data Storage\n"
-  "register FMC_DATAW3S1  at 0x4001F21C : UInt32 // Cache Data Storage\n"
+  "register FMC_PFAPR     at 0x4001F000 : $uint32 // Flash Access Protection\n"
+  "register FMC_PFB0CR    at 0x4001F004 : $uint32 // Flash Control\n"
+  "register FMC_TAGVDW0S0 at 0x4001F100 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW0S1 at 0x4001F104 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S0 at 0x4001F108 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW1S1 at 0x4001F10C : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S0 at 0x4001F110 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW2S1 at 0x4001F114 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S0 at 0x4001F118 : $uint32 // Cache Tag Storage\n"
+  "register FMC_TAGVDW3S1 at 0x4001F11C : $uint32 // Cache Tag Storage\n"
+  "register FMC_DATAW0S0  at 0x4001F200 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW0S1  at 0x4001F204 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW1S0  at 0x4001F208 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW1S1  at 0x4001F20C : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW2S0  at 0x4001F210 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW2S1  at 0x4001F214 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW3S0  at 0x4001F218 : $uint32 // Cache Data Storage\n"
+  "register FMC_DATAW3S1  at 0x4001F21C : $uint32 // Cache Data Storage\n"
   "//\n"
   "//// Chapter 28: Flash Memory Module (FTFL)\n"
-  "//register FTFL_FST *(volatile uint8_t  *)0x40020000      // Flash Status Register\n"
-  "//register FTFL_FSTAT_CCIF   (uint8_t)0x80   // Command Complete Interrupt Flag\n"
-  "//register FTFL_FSTAT_RDCOLERR  (uint8_t)0x40   // Flash Read Collision Error Flag\n"
-  "//register FTFL_FSTAT_ACCERR  (uint8_t)0x20   // Flash Access Error Flag\n"
-  "//register FTFL_FSTAT_FPVIOL  (uint8_t)0x10   // Flash Protection Violation Flag\n"
-  "//register FTFL_FSTAT_MGSTAT0  (uint8_t)0x01   // Memory Controller Command Completion Status Flag\n"
-  "//register FTFL_FCNFG  *(volatile uint8_t  *)0x40020001      // Flash Configuration Register\n"
-  "//register FTFL_FCNFG_CCIE   (uint8_t)0x80   // Command Complete Interrupt Enable\n"
-  "//register FTFL_FCNFG_RDCOLLIE  (uint8_t)0x40   // Read Collision Error Interrupt Enable\n"
-  "//register FTFL_FCNFG_ERSAREQ  (uint8_t)0x20   // Erase All Request\n"
-  "//register FTFL_FCNFG_ERSSUSP  (uint8_t)0x10   // Erase Suspend\n"
-  "//register FTFL_FCNFG_PFLSH  (uint8_t)0x04   // Flash memory configuration\n"
-  "//register FTFL_FCNFG_RAMRDY  (uint8_t)0x02   // RAM Ready\n"
-  "//register FTFL_FCNFG_EEERDY  (uint8_t)0x01   // EEPROM Ready\n"
-  "//register FTFL_FSEC  *(const    uint8_t  *)0x40020002      // Flash Security Register\n"
-  "//register FTFL_FOPT  *(const    uint8_t  *)0x40020003      // Flash Option Register\n"
-  "//register FTFL_FCCOB3  *(volatile uint8_t  *)0x40020004      // Flash Common Command Object Registers\n"
-  "//register FTFL_FCCOB2  *(volatile uint8_t  *)0x40020005\n"
-  "//register FTFL_FCCOB1  *(volatile uint8_t  *)0x40020006\n"
-  "//register FTFL_FCCOB0  *(volatile uint8_t  *)0x40020007\n"
-  "//register FTFL_FCCOB7  *(volatile uint8_t  *)0x40020008\n"
-  "//register FTFL_FCCOB6  *(volatile uint8_t  *)0x40020009\n"
-  "//register FTFL_FCCOB5  *(volatile uint8_t  *)0x4002000A\n"
-  "//register FTFL_FCCOB4  *(volatile uint8_t  *)0x4002000B\n"
-  "//register FTFL_FCCOBB  *(volatile uint8_t  *)0x4002000C\n"
-  "//register FTFL_FCCOBA  *(volatile uint8_t  *)0x4002000D\n"
-  "//register FTFL_FCCOB9  *(volatile uint8_t  *)0x4002000E\n"
-  "//register FTFL_FCCOB8  *(volatile uint8_t  *)0x4002000F\n"
-  "//register FTFL_FPROT3  *(volatile uint8_t  *)0x40020010      // Program Flash Protection Registers\n"
-  "//register FTFL_FPROT2  *(volatile uint8_t  *)0x40020011      // Program Flash Protection Registers\n"
-  "//register FTFL_FPROT1  *(volatile uint8_t  *)0x40020012      // Program Flash Protection Registers\n"
-  "//register FTFL_FPROT0  *(volatile uint8_t  *)0x40020013      // Program Flash Protection Registers\n"
-  "//register FTFL_FEPROT  *(volatile uint8_t  *)0x40020016      // EEPROM Protection Register\n"
-  "//register FTFL_FDPROT  *(volatile uint8_t  *)0x40020017      // Data Flash Protection Register\n"
+  "//register FTFL_FST *(volatile $uint8_t  *)0x40020000      // Flash Status Register\n"
+  "//register FTFL_FSTAT_CCIF   ($uint8_t)0x80   // Command Complete Interrupt Flag\n"
+  "//register FTFL_FSTAT_RDCOLERR  ($uint8_t)0x40   // Flash Read Collision Error Flag\n"
+  "//register FTFL_FSTAT_ACCERR  ($uint8_t)0x20   // Flash Access Error Flag\n"
+  "//register FTFL_FSTAT_FPVIOL  ($uint8_t)0x10   // Flash Protection Violation Flag\n"
+  "//register FTFL_FSTAT_MGSTAT0  ($uint8_t)0x01   // Memory Controller Command Completion Status Flag\n"
+  "//register FTFL_FCNFG  *(volatile $uint8_t  *)0x40020001      // Flash Configuration Register\n"
+  "//register FTFL_FCNFG_CCIE   ($uint8_t)0x80   // Command Complete Interrupt Enable\n"
+  "//register FTFL_FCNFG_RDCOLLIE  ($uint8_t)0x40   // Read Collision Error Interrupt Enable\n"
+  "//register FTFL_FCNFG_ERSAREQ  ($uint8_t)0x20   // Erase All Request\n"
+  "//register FTFL_FCNFG_ERSSUSP  ($uint8_t)0x10   // Erase Suspend\n"
+  "//register FTFL_FCNFG_PFLSH  ($uint8_t)0x04   // Flash memory configuration\n"
+  "//register FTFL_FCNFG_RAMRDY  ($uint8_t)0x02   // RAM Ready\n"
+  "//register FTFL_FCNFG_EEERDY  ($uint8_t)0x01   // EEPROM Ready\n"
+  "//register FTFL_FSEC  *(const    $uint8_t  *)0x40020002      // Flash Security Register\n"
+  "//register FTFL_FOPT  *(const    $uint8_t  *)0x40020003      // Flash Option Register\n"
+  "//register FTFL_FCCOB3  *(volatile $uint8_t  *)0x40020004      // Flash Common Command Object Registers\n"
+  "//register FTFL_FCCOB2  *(volatile $uint8_t  *)0x40020005\n"
+  "//register FTFL_FCCOB1  *(volatile $uint8_t  *)0x40020006\n"
+  "//register FTFL_FCCOB0  *(volatile $uint8_t  *)0x40020007\n"
+  "//register FTFL_FCCOB7  *(volatile $uint8_t  *)0x40020008\n"
+  "//register FTFL_FCCOB6  *(volatile $uint8_t  *)0x40020009\n"
+  "//register FTFL_FCCOB5  *(volatile $uint8_t  *)0x4002000A\n"
+  "//register FTFL_FCCOB4  *(volatile $uint8_t  *)0x4002000B\n"
+  "//register FTFL_FCCOBB  *(volatile $uint8_t  *)0x4002000C\n"
+  "//register FTFL_FCCOBA  *(volatile $uint8_t  *)0x4002000D\n"
+  "//register FTFL_FCCOB9  *(volatile $uint8_t  *)0x4002000E\n"
+  "//register FTFL_FCCOB8  *(volatile $uint8_t  *)0x4002000F\n"
+  "//register FTFL_FPROT3  *(volatile $uint8_t  *)0x40020010      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT2  *(volatile $uint8_t  *)0x40020011      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT1  *(volatile $uint8_t  *)0x40020012      // Program Flash Protection Registers\n"
+  "//register FTFL_FPROT0  *(volatile $uint8_t  *)0x40020013      // Program Flash Protection Registers\n"
+  "//register FTFL_FEPROT  *(volatile $uint8_t  *)0x40020016      // EEPROM Protection Register\n"
+  "//register FTFL_FDPROT  *(volatile $uint8_t  *)0x40020017      // Data Flash Protection Register\n"
   "\n"
   "// Chapter 30: Cyclic Redundancy Check (CRC)\n"
-  "register CRC_CRC   at 0x40032000 : UInt32 // CRC Data register\n"
-  "register CRC_GPOLY at 0x40032004 : UInt32 // CRC Polynomial register\n"
-  "register CRC_CTRL  at 0x40032008 : UInt32 // CRC Control register\n"
+  "register CRC_CRC   at 0x40032000 : $uint32 // CRC Data register\n"
+  "register CRC_GPOLY at 0x40032004 : $uint32 // CRC Polynomial register\n"
+  "register CRC_CTRL  at 0x40032008 : $uint32 // CRC Control register\n"
   "\n"
   "// Chapter 31: Analog-to-Digital Converter (ADC)\n"
-  "register ADC0_SC1A   at 0x4003B000 : UInt32 // ADC status and control registers 1\n"
-  "register ADC0_SC1B   at 0x4003B004 : UInt32 // ADC status and control registers 1\n"
-  "let ADC_SC1_COCO  : UInt32 = 0x80   // Conversion complete flag\n"
-  "let ADC_SC1_AIEN  : UInt32 = 0x40   // Interrupt enable\n"
-  "let ADC_SC1_DIFF  : UInt32 = 0x20   // Differential mode enable\n"
+  "register ADC0_SC1A   at 0x4003B000 : $uint32 // ADC status and control registers 1\n"
+  "register ADC0_SC1B   at 0x4003B004 : $uint32 // ADC status and control registers 1\n"
+  "let ADC_SC1_COCO  : $uint32 = 0x80   // Conversion complete flag\n"
+  "let ADC_SC1_AIEN  : $uint32 = 0x40   // Interrupt enable\n"
+  "let ADC_SC1_DIFF  : $uint32 = 0x20   // Differential mode enable\n"
   "//register ADC_SC1_ADCH(n)    ((n) & 0x1F)  // Input channel select\n"
-  "register ADC0_CFG1   at 0x4003B008 : UInt32 // ADC configuration register 1\n"
-  "let ADC_CFG1_ADLPC  : UInt32 = 0x80   // Low-power configuration\n"
+  "register ADC0_CFG1   at 0x4003B008 : $uint32 // ADC configuration register 1\n"
+  "let ADC_CFG1_ADLPC  : $uint32 = 0x80   // Low-power configuration\n"
   "//register ADC_CFG1_ADIV(n)   (((n) & 3) << 5) // Clock divide select, 0=direct, 1=div2, 2=div4, 3=div8\n"
-  "let ADC_CFG1_ADLSMP  : UInt32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
+  "let ADC_CFG1_ADLSMP  : $uint32 = 0x10   // Sample time configuration, 0=Short, 1=Long\n"
   "//register ADC_CFG1_MODE(n)   (((n) & 3) << 2) // Conversion mode, 0=8 bit, 1=12 bit, 2=10 bit, 3=16 bit\n"
   "//register ADC_CFG1_ADICLK(n)   (((n) & 3) << 0) // Input clock, 0=bus, 1=bus/2, 2=OSCERCLK, 3=async\n"
-  "register ADC0_CFG2  at 0x4003B00C : UInt32 // Configuration register 2\n"
-  "let ADC_CFG2_MUXSEL  : UInt32 = 0x10   // 0=a channels, 1=b channels\n"
-  "let ADC_CFG2_ADACKEN  : UInt32 = 0x08   // async clock enable\n"
-  "let ADC_CFG2_ADHSC   : UInt32 = 0x04   // High speed configuration\n"
+  "register ADC0_CFG2  at 0x4003B00C : $uint32 // Configuration register 2\n"
+  "let ADC_CFG2_MUXSEL  : $uint32 = 0x10   // 0=a channels, 1=b channels\n"
+  "let ADC_CFG2_ADACKEN  : $uint32 = 0x08   // async clock enable\n"
+  "let ADC_CFG2_ADHSC   : $uint32 = 0x04   // High speed configuration\n"
   "//register ADC_CFG2_ADLSTS(n)   (((n) & 3) << 0) // Sample time, 0=24 cycles, 1=12 cycles, 2=6 cycles, 3=2 cycles\n"
-  "register ADC0_RA    at 0x4003B010 : UInt32 // ADC data result register\n"
-  "register ADC0_RB    at 0x4003B014 : UInt32 // ADC data result register\n"
-  "register ADC0_CV1   at 0x4003B018 : UInt32 // Compare value registers\n"
-  "register ADC0_CV2   at 0x4003B01C : UInt32 // Compare value registers\n"
-  "register ADC0_SC2   at 0x4003B020 : UInt32 // Status and control register 2\n"
-  "let ADC_SC2_ADACT  : UInt32 = 0x80   // Conversion active\n"
-  "let ADC_SC2_ADTRG  : UInt32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
-  "let ADC_SC2_ACFE   : UInt32 = 0x20   // Compare function enable\n"
-  "let ADC_SC2_ACFGT  : UInt32 = 0x10   // Compare function greater than enable\n"
-  "let ADC_SC2_ACREN  : UInt32 = 0x08   // Compare function range enable\n"
-  "let ADC_SC2_DMAEN  : UInt32= 0x04   // DMA enable\n"
+  "register ADC0_RA    at 0x4003B010 : $uint32 // ADC data result register\n"
+  "register ADC0_RB    at 0x4003B014 : $uint32 // ADC data result register\n"
+  "register ADC0_CV1   at 0x4003B018 : $uint32 // Compare value registers\n"
+  "register ADC0_CV2   at 0x4003B01C : $uint32 // Compare value registers\n"
+  "register ADC0_SC2   at 0x4003B020 : $uint32 // Status and control register 2\n"
+  "let ADC_SC2_ADACT  : $uint32 = 0x80   // Conversion active\n"
+  "let ADC_SC2_ADTRG  : $uint32 = 0x40   // Conversion trigger select, 0=software, 1=hardware\n"
+  "let ADC_SC2_ACFE   : $uint32 = 0x20   // Compare function enable\n"
+  "let ADC_SC2_ACFGT  : $uint32 = 0x10   // Compare function greater than enable\n"
+  "let ADC_SC2_ACREN  : $uint32 = 0x08   // Compare function range enable\n"
+  "let ADC_SC2_DMAEN  : $uint32= 0x04   // DMA enable\n"
   "//register ADC_SC2_REFSEL(n)   (((n) & 3) << 0) // Voltage reference, 0=vcc/external, 1=1.2 volts\n"
-  "register ADC0_SC3   at 0x4003B024 : UInt32 // Status and control register 3\n"
-  "let ADC_SC3_CAL  : UInt32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
-  "let ADC_SC3_CALF  : UInt32= 0x40   // Calibration failed flag\n"
-  "let ADC_SC3_ADCO  : UInt32= 0x08   // Continuous conversion enable\n"
-  "let ADC_SC3_AVGE  : UInt32= 0x04   // Hardware average enable\n"
+  "register ADC0_SC3   at 0x4003B024 : $uint32 // Status and control register 3\n"
+  "let ADC_SC3_CAL  : $uint32 = 0x80   // Calibration, 1=begin, stays set while cal in progress\n"
+  "let ADC_SC3_CALF  : $uint32= 0x40   // Calibration failed flag\n"
+  "let ADC_SC3_ADCO  : $uint32= 0x08   // Continuous conversion enable\n"
+  "let ADC_SC3_AVGE  : $uint32= 0x04   // Hardware average enable\n"
   "//register ADC_SC3_AVGS(n)    (((n) & 3) << 0) // avg select, 0=4 samples, 1=8 samples, 2=16 samples, 3=32 samples\n"
-  "register ADC0_OFS   at 0x4003B028 : UInt32 // ADC offset correction register\n"
-  "register ADC0_PG    at 0x4003B02C : UInt32 // ADC plus-side gain register\n"
-  "register ADC0_MG    at 0x4003B030 : UInt32 // ADC minus-side gain register\n"
-  "register ADC0_CLPD  at 0x4003B034 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLPS  at 0x4003B038 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP4  at 0x4003B03C : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP3  at 0x4003B040 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP2  at 0x4003B044 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP1  at 0x4003B048 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_CLP0  at 0x4003B04C : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC0_PGA   at 0x4003B050 : UInt32 // ADC Programmable Gain Amplifier\n"
-  "let ADC0_PGA_PGAEN  : UInt32 = 0x00800000  // Enable\n"
-  "let ADC0_PGA_PGALPB  : UInt32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
+  "register ADC0_OFS   at 0x4003B028 : $uint32 // ADC offset correction register\n"
+  "register ADC0_PG    at 0x4003B02C : $uint32 // ADC plus-side gain register\n"
+  "register ADC0_MG    at 0x4003B030 : $uint32 // ADC minus-side gain register\n"
+  "register ADC0_CLPD  at 0x4003B034 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLPS  at 0x4003B038 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP4  at 0x4003B03C : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP3  at 0x4003B040 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP2  at 0x4003B044 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP1  at 0x4003B048 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_CLP0  at 0x4003B04C : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC0_PGA   at 0x4003B050 : $uint32 // ADC Programmable Gain Amplifier\n"
+  "let ADC0_PGA_PGAEN  : $uint32 = 0x00800000  // Enable\n"
+  "let ADC0_PGA_PGALPB  : $uint32 = 0x00100000  // Low-Power Mode Control, 0=low power, 1=normal\n"
   "//register ADC0_PGA_PGAG(n)   (((n) & 15) << 16) // Gain, 0=1X, 1=2X, 2=4X, 3=8X, 4=16X, 5=32X, 6=64X\n"
-  "register ADC0_CLMD   at 0x4003B054 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLMS   at 0x4003B058 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM4   at 0x4003B05C : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM3   at 0x4003B060 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM2   at 0x4003B064 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM1   at 0x4003B068 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC0_CLM0   at 0x4003B06C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLMD   at 0x4003B054 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLMS   at 0x4003B058 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM4   at 0x4003B05C : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM3   at 0x4003B060 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM2   at 0x4003B064 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM1   at 0x4003B068 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC0_CLM0   at 0x4003B06C : $uint32 // ADC minus-side general calibration value register\n"
   "\n"
-  "register ADC1_SC1A   at 0x400BB000 : UInt32 // ADC status and control registers 1\n"
-  "register ADC1_SC1B   at 0x400BB004 : UInt32 // ADC status and control registers 1\n"
-  "register ADC1_CFG1   at 0x400BB008 : UInt32 // ADC configuration register 1\n"
-  "register ADC1_CFG2   at 0x400BB00C : UInt32 // Configuration register 2\n"
-  "register ADC1_RA     at 0x400BB010 : UInt32 // ADC data result register\n"
-  "register ADC1_RB     at 0x400BB014 : UInt32 // ADC data result register\n"
-  "register ADC1_CV1    at 0x400BB018 : UInt32 // Compare value registers\n"
-  "register ADC1_CV2    at 0x400BB01C : UInt32 // Compare value registers\n"
-  "register ADC1_SC2    at 0x400BB020 : UInt32 // Status and control register 2\n"
-  "register ADC1_SC3    at 0x400BB024 : UInt32 // Status and control register 3\n"
-  "register ADC1_OFS    at 0x400BB028 : UInt32 // ADC offset correction register\n"
-  "register ADC1_PG     at 0x400BB02C : UInt32 // ADC plus-side gain register\n"
-  "register ADC1_MG     at 0x400BB030 : UInt32 // ADC minus-side gain register\n"
-  "register ADC1_CLPD   at 0x400BB034 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLPS   at 0x400BB038 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP4   at 0x400BB03C : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP3   at 0x400BB040 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP2   at 0x400BB044 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP1   at 0x400BB048 : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_CLP0   at 0x400BB04C : UInt32 // ADC plus-side general calibration value register\n"
-  "register ADC1_PGA    at 0x400BB050 : UInt32 // ADC Programmable Gain Amplifier\n"
-  "register ADC1_CLMD   at 0x400BB054 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLMS   at 0x400BB058 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM4   at 0x400BB05C : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM3   at 0x400BB060 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM2   at 0x400BB064 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM1   at 0x400BB068 : UInt32 // ADC minus-side general calibration value register\n"
-  "register ADC1_CLM0   at 0x400BB06C : UInt32 // ADC minus-side general calibration value register\n"
+  "register ADC1_SC1A   at 0x400BB000 : $uint32 // ADC status and control registers 1\n"
+  "register ADC1_SC1B   at 0x400BB004 : $uint32 // ADC status and control registers 1\n"
+  "register ADC1_CFG1   at 0x400BB008 : $uint32 // ADC configuration register 1\n"
+  "register ADC1_CFG2   at 0x400BB00C : $uint32 // Configuration register 2\n"
+  "register ADC1_RA     at 0x400BB010 : $uint32 // ADC data result register\n"
+  "register ADC1_RB     at 0x400BB014 : $uint32 // ADC data result register\n"
+  "register ADC1_CV1    at 0x400BB018 : $uint32 // Compare value registers\n"
+  "register ADC1_CV2    at 0x400BB01C : $uint32 // Compare value registers\n"
+  "register ADC1_SC2    at 0x400BB020 : $uint32 // Status and control register 2\n"
+  "register ADC1_SC3    at 0x400BB024 : $uint32 // Status and control register 3\n"
+  "register ADC1_OFS    at 0x400BB028 : $uint32 // ADC offset correction register\n"
+  "register ADC1_PG     at 0x400BB02C : $uint32 // ADC plus-side gain register\n"
+  "register ADC1_MG     at 0x400BB030 : $uint32 // ADC minus-side gain register\n"
+  "register ADC1_CLPD   at 0x400BB034 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLPS   at 0x400BB038 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP4   at 0x400BB03C : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP3   at 0x400BB040 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP2   at 0x400BB044 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP1   at 0x400BB048 : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_CLP0   at 0x400BB04C : $uint32 // ADC plus-side general calibration value register\n"
+  "register ADC1_PGA    at 0x400BB050 : $uint32 // ADC Programmable Gain Amplifier\n"
+  "register ADC1_CLMD   at 0x400BB054 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLMS   at 0x400BB058 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM4   at 0x400BB05C : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM3   at 0x400BB060 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM2   at 0x400BB064 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM1   at 0x400BB068 : $uint32 // ADC minus-side general calibration value register\n"
+  "register ADC1_CLM0   at 0x400BB06C : $uint32 // ADC minus-side general calibration value register\n"
   "\n"
-  "register DAC0_DAT0L at 0x400CC000 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DATH  at 0x400CC001 : UInt8 // DAC Data High Register \n"
-  "register DAC0_DAT1L at 0x400CC002 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT2L at 0x400CC004 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT3L at 0x400CC006 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT4L at 0x400CC008 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT5L at 0x400CC00A : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT6L at 0x400CC00C : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT7L at 0x400CC00E : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT8L at 0x400CC010 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT9L at 0x400CC012 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT10L at 0x400CC014 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT11L at 0x400CC016 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT12L at 0x400CC018 : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT13L at 0x400CC01A : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT14L at 0x400CC01C : UInt8 // DAC Data Low Register \n"
-  "register DAC0_DAT15L at 0x400CC01E : UInt8 // DAC Data Low Register \n"
-  "register DAC0_SR     at 0x400CC020 : UInt8 // DAC Status Register \n"
-  "register DAC0_C0     at 0x400CC021 : UInt8 // DAC Control Register \n"
-  "let DAC_C0_DACEN  : UInt8 = 0x80    // DAC Enable\n"
-  "let DAC_C0_DACRFS : UInt8 = 0x40    // DAC Reference Select\n"
-  "let DAC_C0_DACTRGSEL : UInt8 = 0x20    // DAC Trigger Select\n"
-  "let DAC_C0_DACSWTRG  : UInt8 = 0x10    // DAC Software Trigger\n"
-  "let DAC_C0_LPEN  : UInt8 = 0x08    // DAC Low Power Control\n"
-  "let DAC_C0_DACBWIEN  : UInt8 = 0x04    // DAC Buffer Watermark Interrupt Enable\n"
-  "let DAC_C0_DACBTIEN : UInt8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
-  "let DAC_C0_DACBBIEN : UInt8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
+  "register DAC0_DAT0L at 0x400CC000 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DATH  at 0x400CC001 : $uint8 // DAC Data High Register \n"
+  "register DAC0_DAT1L at 0x400CC002 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT2L at 0x400CC004 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT3L at 0x400CC006 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT4L at 0x400CC008 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT5L at 0x400CC00A : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT6L at 0x400CC00C : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT7L at 0x400CC00E : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT8L at 0x400CC010 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT9L at 0x400CC012 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT10L at 0x400CC014 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT11L at 0x400CC016 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT12L at 0x400CC018 : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT13L at 0x400CC01A : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT14L at 0x400CC01C : $uint8 // DAC Data Low Register \n"
+  "register DAC0_DAT15L at 0x400CC01E : $uint8 // DAC Data Low Register \n"
+  "register DAC0_SR     at 0x400CC020 : $uint8 // DAC Status Register \n"
+  "register DAC0_C0     at 0x400CC021 : $uint8 // DAC Control Register \n"
+  "let DAC_C0_DACEN  : $uint8 = 0x80    // DAC Enable\n"
+  "let DAC_C0_DACRFS : $uint8 = 0x40    // DAC Reference Select\n"
+  "let DAC_C0_DACTRGSEL : $uint8 = 0x20    // DAC Trigger Select\n"
+  "let DAC_C0_DACSWTRG  : $uint8 = 0x10    // DAC Software Trigger\n"
+  "let DAC_C0_LPEN  : $uint8 = 0x08    // DAC Low Power Control\n"
+  "let DAC_C0_DACBWIEN  : $uint8 = 0x04    // DAC Buffer Watermark Interrupt Enable\n"
+  "let DAC_C0_DACBTIEN : $uint8 = 0x02    // DAC Buffer Read Pointer Top Flag Interrupt Enable\n"
+  "let DAC_C0_DACBBIEN : $uint8 = 0x01    // DAC Buffer Read Pointer Bottom Flag Interrupt Enable\n"
   "\n"
-  "register DAC0_C1  at 0x400CC022 : UInt8 // DAC Control Register 1 \n"
-  "let DAC_C1_DMAEN : UInt8 = 0x80    // DMA Enable Select\n"
+  "register DAC0_C1  at 0x400CC022 : $uint8 // DAC Control Register 1 \n"
+  "let DAC_C1_DMAEN : $uint8 = 0x80    // DMA Enable Select\n"
   "//register DAC_C1_DACBFWM(n)  (((n) & 3) << 3)  // DAC Buffer Watermark Select\n"
   "//register DAC_C1_DACBFMD(n)  (((n) & 3) << 0)  // DAC Buffer Work Mode Select\n"
-  "let DAC_C1_DACBFEN : UInt8 = 0x00    // DAC Buffer Enable\n"
+  "let DAC_C1_DACBFEN : $uint8 = 0x00    // DAC Buffer Enable\n"
   "//\n"
-  "register DAC0_C2  at 0x400CC023 : UInt8 // DAC Control Register 2 \n"
+  "register DAC0_C2  at 0x400CC023 : $uint8 // DAC Control Register 2 \n"
   "//register DAC_C2_DACBFRP(n)  (((n) & 15) << 4)  // DAC Buffer Read Pointer\n"
   "//register DAC_C2_DACBFUP(n)  (((n) & 15) << 0)  // DAC Buffer Upper Limit\n"
   "//\n"
   "//\n"
-  "////register MCG_C2_RANGE0(n)  (uint8_t)(((n) & 0x03) << 4) // Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
-  "////register MCG_C2_LOCRE0   (uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a los"
-  "s of OSC0 \n"
+  "////register MCG_C2_RANGE0(n)  ($uint8_t)(((n) & 0x03) << 4) // Frequency Range Select, Selects the frequency range for the crystal oscillator\n"
+  "////register MCG_C2_LOCRE0   ($uint8_t)0x80   // Loss of Clock Reset Enable, Determines whether an interrupt or a reset request is made following a lo"
+  "ss of OSC0 \n"
   "//\n"
   "//// Chapter 32: Comparator (CMP)\n"
-  "register CMP0_CR0   at 0x40073000 : UInt8 // CMP Control Register 0\n"
-  "register CMP0_CR1   at 0x40073001 : UInt8 // CMP Control Register 1\n"
-  "register CMP0_FPR   at 0x40073002 : UInt8 // CMP Filter Period Register\n"
-  "register CMP0_SCR   at 0x40073003 : UInt8 // CMP Status and Control Register\n"
-  "register CMP0_DACCR at 0x40073004 : UInt8 // DAC Control Register\n"
-  "register CMP0_MUXCR at 0x40073005 : UInt8 // MUX Control Register\n"
-  "register CMP1_CR0   at 0x40073008 : UInt8 // CMP Control Register 0\n"
-  "register CMP1_CR1   at 0x40073009 : UInt8 // CMP Control Register 1\n"
-  "register CMP1_FPR   at 0x4007300A : UInt8 // CMP Filter Period Register\n"
-  "register CMP1_SCR   at 0x4007300B : UInt8 // CMP Status and Control Register\n"
-  "register CMP1_DACCR at 0x4007300C : UInt8 // DAC Control Register\n"
-  "register CMP1_MUXCR at 0x4007300D : UInt8 // MUX Control Register\n"
+  "register CMP0_CR0   at 0x40073000 : $uint8 // CMP Control Register 0\n"
+  "register CMP0_CR1   at 0x40073001 : $uint8 // CMP Control Register 1\n"
+  "register CMP0_FPR   at 0x40073002 : $uint8 // CMP Filter Period Register\n"
+  "register CMP0_SCR   at 0x40073003 : $uint8 // CMP Status and Control Register\n"
+  "register CMP0_DACCR at 0x40073004 : $uint8 // DAC Control Register\n"
+  "register CMP0_MUXCR at 0x40073005 : $uint8 // MUX Control Register\n"
+  "register CMP1_CR0   at 0x40073008 : $uint8 // CMP Control Register 0\n"
+  "register CMP1_CR1   at 0x40073009 : $uint8 // CMP Control Register 1\n"
+  "register CMP1_FPR   at 0x4007300A : $uint8 // CMP Filter Period Register\n"
+  "register CMP1_SCR   at 0x4007300B : $uint8 // CMP Status and Control Register\n"
+  "register CMP1_DACCR at 0x4007300C : $uint8 // DAC Control Register\n"
+  "register CMP1_MUXCR at 0x4007300D : $uint8 // MUX Control Register\n"
   "//\n"
   "//// Chapter 33: Voltage Reference (VREFV1)\n"
-  "register VREF_TRM  at 0x40074000 : UInt8 // VREF Trim Register\n"
-  "register VREF_SC   at 0x40074001 : UInt8 // VREF Status and Control Register\n"
+  "register VREF_TRM  at 0x40074000 : $uint8 // VREF Trim Register\n"
+  "register VREF_SC   at 0x40074001 : $uint8 // VREF Status and Control Register\n"
   "\n"
   "// Chapter 34: Programmable Delay Block (PDB)\n"
   "//register PDB0_SC    0x40036000 // Status and Control Register\n"
@@ -19484,168 +19485,168 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register LPTMR0_CNR   0x4004000C // Low Power Timer Counter Register\n"
   "//\n"
   "//// Chapter 38: Carrier Modulator Transmitter (CMT)\n"
-  "//register CMT_CGH1  *(volatile uint8_t  *)0x40062000 // CMT Carrier Generator High Data Register 1\n"
-  "//register CMT_CGL1  *(volatile uint8_t  *)0x40062001 // CMT Carrier Generator Low Data Register 1\n"
-  "//register CMT_CGH2  *(volatile uint8_t  *)0x40062002 // CMT Carrier Generator High Data Register 2\n"
-  "//register CMT_CGL2  *(volatile uint8_t  *)0x40062003 // CMT Carrier Generator Low Data Register 2\n"
-  "//register CMT_OC   *(volatile uint8_t  *)0x40062004 // CMT Output Control Register\n"
-  "//register CMT_MSC   *(volatile uint8_t  *)0x40062005 // CMT Modulator Status and Control Register\n"
-  "//register CMT_CMD1  *(volatile uint8_t  *)0x40062006 // CMT Modulator Data Register Mark High\n"
-  "//register CMT_CMD2  *(volatile uint8_t  *)0x40062007 // CMT Modulator Data Register Mark Low\n"
-  "//register CMT_CMD3  *(volatile uint8_t  *)0x40062008 // CMT Modulator Data Register Space High\n"
-  "//register CMT_CMD4  *(volatile uint8_t  *)0x40062009 // CMT Modulator Data Register Space Low\n"
-  "//register CMT_PPS   *(volatile uint8_t  *)0x4006200A // CMT Primary Prescaler Register\n"
-  "//register CMT_DMA   *(volatile uint8_t  *)0x4006200B // CMT Direct Memory Access Register\n"
+  "//register CMT_CGH1  *(volatile $uint8_t  *)0x40062000 // CMT Carrier Generator High Data Register 1\n"
+  "//register CMT_CGL1  *(volatile $uint8_t  *)0x40062001 // CMT Carrier Generator Low Data Register 1\n"
+  "//register CMT_CGH2  *(volatile $uint8_t  *)0x40062002 // CMT Carrier Generator High Data Register 2\n"
+  "//register CMT_CGL2  *(volatile $uint8_t  *)0x40062003 // CMT Carrier Generator Low Data Register 2\n"
+  "//register CMT_OC   *(volatile $uint8_t  *)0x40062004 // CMT Output Control Register\n"
+  "//register CMT_MSC   *(volatile $uint8_t  *)0x40062005 // CMT Modulator Status and Control Register\n"
+  "//register CMT_CMD1  *(volatile $uint8_t  *)0x40062006 // CMT Modulator Data Register Mark High\n"
+  "//register CMT_CMD2  *(volatile $uint8_t  *)0x40062007 // CMT Modulator Data Register Mark Low\n"
+  "//register CMT_CMD3  *(volatile $uint8_t  *)0x40062008 // CMT Modulator Data Register Space High\n"
+  "//register CMT_CMD4  *(volatile $uint8_t  *)0x40062009 // CMT Modulator Data Register Space Low\n"
+  "//register CMT_PPS   *(volatile $uint8_t  *)0x4006200A // CMT Primary Prescaler Register\n"
+  "//register CMT_DMA   *(volatile $uint8_t  *)0x4006200B // CMT Direct Memory Access Register\n"
   "//\n"
   "//// Chapter 39: Real Time Clock (RTC)\n"
-  "register RTC_TSR at  0x4003D000 : UInt32 // RTC Time Seconds Register\n"
-  "register RTC_TPR at  0x4003D004 : UInt32 // RTC Time Prescaler Register\n"
-  "register RTC_TAR at  0x4003D008 : UInt32 // RTC Time Alarm Register\n"
-  "register RTC_TCR at  0x4003D00C : UInt32 // RTC Time Compensation Register\n"
+  "register RTC_TSR at  0x4003D000 : $uint32 // RTC Time Seconds Register\n"
+  "register RTC_TPR at  0x4003D004 : $uint32 // RTC Time Prescaler Register\n"
+  "register RTC_TAR at  0x4003D008 : $uint32 // RTC Time Alarm Register\n"
+  "register RTC_TCR at  0x4003D00C : $uint32 // RTC Time Compensation Register\n"
   "//register RTC_TCR_CIC(n)   (((n) & 255) << 24)  // Compensation Interval Counter\n"
   "//register RTC_TCR_TCV(n)   (((n) & 255) << 16)  // Time Compensation Value\n"
   "//register RTC_TCR_CIR(n)   (((n) & 255) << 8)  // Compensation Interval Register\n"
   "//register RTC_TCR_TCR(n)   (((n) & 255) << 0)  // Time Compensation Register\n"
-  "register RTC_CR at  0x4003D010 : UInt32 {// RTC Control Register\n"
+  "register RTC_CR at  0x4003D010 : $uint32 {// RTC Control Register\n"
   "  18, SC2P, SC4P, SC8P, SC16P,CKLO, OSCE, 4, UM, SUP, WPE, SWR\n"
   "}\n"
   " \n"
-  "register RTC_SR at  0x4003D014 : UInt32 // RTC Status Register\n"
-  "let RTC_SR_TCE : UInt32 = 0x00000010  \n"
-  "let RTC_SR_TAF : UInt32 = 0x00000004  // \n"
-  "let RTC_SR_TOF : UInt32 = 0x00000002  // \n"
-  "let RTC_SR_TIF : UInt32 = 0x00000001  // \n"
+  "register RTC_SR at  0x4003D014 : $uint32 // RTC Status Register\n"
+  "let RTC_SR_TCE : $uint32 = 0x00000010  \n"
+  "let RTC_SR_TAF : $uint32 = 0x00000004  // \n"
+  "let RTC_SR_TOF : $uint32 = 0x00000002  // \n"
+  "let RTC_SR_TIF : $uint32 = 0x00000001  // \n"
   "\n"
-  "register RTC_LR  at 0x4003D018 : UInt32 // RTC Lock Register\n"
-  "register RTC_IER at 0x4003D01C : UInt32 // RTC Interrupt Enable Register\n"
-  "register RTC_WAR at 0x4003D800 : UInt32 // RTC Write Access Register\n"
-  "register RTC_RAR at 0x4003D804 : UInt32 // RTC Read Access Register\n"
+  "register RTC_LR  at 0x4003D018 : $uint32 // RTC Lock Register\n"
+  "register RTC_IER at 0x4003D01C : $uint32 // RTC Interrupt Enable Register\n"
+  "register RTC_WAR at 0x4003D800 : $uint32 // RTC Write Access Register\n"
+  "register RTC_RAR at 0x4003D804 : $uint32 // RTC Read Access Register\n"
   "\n"
   "//// Chapter 40: Universal Serial Bus OTG Controller (USBOTG)\n"
-  "//register USB0_PERID  *(const    uint8_t  *)0x40072000 // Peripheral ID register\n"
-  "//register USB0_IDCOMP  *(const    uint8_t  *)0x40072004 // Peripheral ID Complement register\n"
-  "//register USB0_REV  *(const    uint8_t  *)0x40072008 // Peripheral Revision register\n"
-  "//register USB0_ADDINFO  *(volatile uint8_t  *)0x4007200C // Peripheral Additional Info register\n"
-  "//register USB0_OTGIST *(volatile uint8_t  *)0x40072010 // OTG Interrupt Status register\n"
-  "//register USB_OTGISTAT_IDCHG  (uint8_t)0x80   //\n"
-  "//register USB_OTGISTAT_ONEMSEC  (uint8_t)0x40   //\n"
-  "//register USB_OTGISTAT_LINE_STATE_CHG (uint8_t)0x20   //\n"
-  "//register USB_OTGISTAT_SESSVLDCHG  (uint8_t)0x08   //\n"
-  "//register USB_OTGISTAT_B_SESS_CHG  (uint8_t)0x04   //\n"
-  "//register USB_OTGISTAT_AVBUSCHG  (uint8_t)0x01   //\n"
-  "//register USB0_OTGICR  *(volatile uint8_t  *)0x40072014 // OTG Interrupt Control Register\n"
-  "//register USB_OTGICR_IDEN   (uint8_t)0x80   // \n"
-  "//register USB_OTGICR_ONEMSECEN  (uint8_t)0x40   // \n"
-  "//register USB_OTGICR_LINESTATEEN  (uint8_t)0x20   // \n"
-  "//register USB_OTGICR_SESSVLDEN  (uint8_t)0x08   // \n"
-  "//register USB_OTGICR_BSESSEN  (uint8_t)0x04   // \n"
-  "//register USB_OTGICR_AVBUSEN  (uint8_t)0x01   // \n"
-  "//register USB0_OTGST *(volatile uint8_t  *)0x40072018 // OTG Status register\n"
-  "//register USB_OTGSTAT_ID   (uint8_t)0x80   // \n"
-  "//register USB_OTGSTAT_ONEMSECEN  (uint8_t)0x40   // \n"
-  "//register USB_OTGSTAT_LINESTATESTABLE (uint8_t)0x20   // \n"
-  "//register USB_OTGSTAT_SESS_VLD  (uint8_t)0x08   // \n"
-  "//register USB_OTGSTAT_BSESSEND  (uint8_t)0x04   // \n"
-  "//register USB_OTGSTAT_AVBUSVLD  (uint8_t)0x01   // \n"
-  "//register USB0_OTGCTL  *(volatile uint8_t  *)0x4007201C // OTG Control Register\n"
-  "//register USB_OTGCTL_DPHIGH  (uint8_t)0x80   // \n"
-  "//register USB_OTGCTL_DPLOW  (uint8_t)0x20   // \n"
-  "//register USB_OTGCTL_DMLOW  (uint8_t)0x10   // \n"
-  "//register USB_OTGCTL_OTGEN  (uint8_t)0x04   // \n"
-  "//register USB0_IST *(volatile uint8_t  *)0x40072080 // Interrupt Status Register\n"
-  "//register USB_ISTAT_STALL   (uint8_t)0x80   // \n"
-  "//register USB_ISTAT_ATTACH  (uint8_t)0x40   // \n"
-  "//register USB_ISTAT_RESUME  (uint8_t)0x20   // \n"
-  "//register USB_ISTAT_SLEEP   (uint8_t)0x10   // \n"
-  "//register USB_ISTAT_TOKDNE  (uint8_t)0x08   // \n"
-  "//register USB_ISTAT_SOFTOK  (uint8_t)0x04   // \n"
-  "//register USB_ISTAT_ERROR   (uint8_t)0x02   // \n"
-  "//register USB_ISTAT_USBRST  (uint8_t)0x01   // \n"
-  "//register USB0_INTEN  *(volatile uint8_t  *)0x40072084 // Interrupt Enable Register\n"
-  "//register USB_INTEN_STALLEN  (uint8_t)0x80   // \n"
-  "//register USB_INTEN_ATTACHEN  (uint8_t)0x40   // \n"
-  "//register USB_INTEN_RESUMEEN  (uint8_t)0x20   // \n"
-  "//register USB_INTEN_SLEEPEN  (uint8_t)0x10   // \n"
-  "//register USB_INTEN_TOKDNEEN  (uint8_t)0x08   // \n"
-  "//register USB_INTEN_SOFTOKEN  (uint8_t)0x04   // \n"
-  "//register USB_INTEN_ERROREN  (uint8_t)0x02   // \n"
-  "//register USB_INTEN_USBRSTEN  (uint8_t)0x01   // \n"
-  "//register USB0_ERRST *(volatile uint8_t  *)0x40072088 // Error Interrupt Status Register\n"
-  "//register USB_ERRSTAT_BTSERR  (uint8_t)0x80   // \n"
-  "//register USB_ERRSTAT_DMAERR  (uint8_t)0x20   // \n"
-  "//register USB_ERRSTAT_BTOERR  (uint8_t)0x10   // \n"
-  "//register USB_ERRSTAT_DFN8  (uint8_t)0x08   // \n"
-  "//register USB_ERRSTAT_CRC16  (uint8_t)0x04   // \n"
-  "//register USB_ERRSTAT_CRC5EOF  (uint8_t)0x02   // \n"
-  "//register USB_ERRSTAT_PIDERR  (uint8_t)0x01   // \n"
-  "//register USB0_ERREN  *(volatile uint8_t  *)0x4007208C // Error Interrupt Enable Register\n"
-  "//register USB_ERREN_BTSERREN  (uint8_t)0x80   // \n"
-  "//register USB_ERREN_DMAERREN  (uint8_t)0x20   // \n"
-  "//register USB_ERREN_BTOERREN  (uint8_t)0x10   // \n"
-  "//register USB_ERREN_DFN8EN  (uint8_t)0x08   // \n"
-  "//register USB_ERREN_CRC16EN  (uint8_t)0x04   // \n"
-  "//register USB_ERREN_CRC5EOFEN  (uint8_t)0x02   // \n"
-  "//register USB_ERREN_PIDERREN  (uint8_t)0x01   // \n"
-  "//register USB0_ST *(volatile uint8_t  *)0x40072090 // Status Register\n"
-  "//register USB_STAT_TX   (uint8_t)0x08   // \n"
-  "//register USB_STAT_ODD   (uint8_t)0x04   // \n"
-  "//register USB_STAT_ENDP(n)  (uint8_t)((n) >> 4)  // \n"
-  "//register USB0_CTL  *(volatile uint8_t  *)0x40072094 // Control Register\n"
-  "//register USB_CTL_JSTATE   (uint8_t)0x80   // \n"
-  "//register USB_CTL_SE0   (uint8_t)0x40   // \n"
-  "//register USB_CTL_TXSUSPENDTOKENBUSY (uint8_t)0x20   // \n"
-  "//register USB_CTL_RESET   (uint8_t)0x10   // \n"
-  "//register USB_CTL_HOSTMODEEN  (uint8_t)0x08   // \n"
-  "//register USB_CTL_RESUME   (uint8_t)0x04   // \n"
-  "//register USB_CTL_ODDRST   (uint8_t)0x02   // \n"
-  "//register USB_CTL_USBENSOFEN  (uint8_t)0x01   // \n"
-  "//register USB0_ADDR  *(volatile uint8_t  *)0x40072098 // Address Register\n"
-  "//register USB0_BDTPAGE1  *(volatile uint8_t  *)0x4007209C // BDT Page Register 1\n"
-  "//register USB0_FRMNUML  *(volatile uint8_t  *)0x400720A0 // Frame Number Register Low\n"
-  "//register USB0_FRMNUMH  *(volatile uint8_t  *)0x400720A4 // Frame Number Register High\n"
-  "//register USB0_TOKEN  *(volatile uint8_t  *)0x400720A8 // Token Register\n"
-  "//register USB0_SOFTHLD  *(volatile uint8_t  *)0x400720AC // SOF Threshold Register\n"
-  "//register USB0_BDTPAGE2  *(volatile uint8_t  *)0x400720B0 // BDT Page Register 2\n"
-  "//register USB0_BDTPAGE3  *(volatile uint8_t  *)0x400720B4 // BDT Page Register 3\n"
-  "//register USB0_ENDPT0  *(volatile uint8_t  *)0x400720C0 // Endpoint Control Register\n"
-  "//register USB_ENDPT_HOSTWOHUB  (uint8_t)0x80   // host only, enable low speed\n"
-  "//register USB_ENDPT_RETRYDIS  (uint8_t)0x40   // host only, set to disable NAK retry\n"
-  "//register USB_ENDPT_EPCTLDIS  (uint8_t)0x10   // 0=control, 1=bulk, interrupt, isync\n"
-  "//register USB_ENDPT_EPRXEN  (uint8_t)0x08   // enables the endpoint for RX transfers.\n"
-  "//register USB_ENDPT_EPTXEN  (uint8_t)0x04   // enables the endpoint for TX transfers.\n"
-  "//register USB_ENDPT_EPSTALL  (uint8_t)0x02   // set to stall endpoint\n"
-  "//register USB_ENDPT_EPHSHK  (uint8_t)0x01   // enable handshaking during a transaction, generally set unless Isochronous\n"
-  "//register USB0_ENDPT1  *(volatile uint8_t  *)0x400720C4 // Endpoint Control Register\n"
-  "//register USB0_ENDPT2  *(volatile uint8_t  *)0x400720C8 // Endpoint Control Register\n"
-  "//register USB0_ENDPT3  *(volatile uint8_t  *)0x400720CC // Endpoint Control Register\n"
-  "//register USB0_ENDPT4  *(volatile uint8_t  *)0x400720D0 // Endpoint Control Register\n"
-  "//register USB0_ENDPT5  *(volatile uint8_t  *)0x400720D4 // Endpoint Control Register\n"
-  "//register USB0_ENDPT6  *(volatile uint8_t  *)0x400720D8 // Endpoint Control Register\n"
-  "//register USB0_ENDPT7  *(volatile uint8_t  *)0x400720DC // Endpoint Control Register\n"
-  "//register USB0_ENDPT8  *(volatile uint8_t  *)0x400720E0 // Endpoint Control Register\n"
-  "//register USB0_ENDPT9  *(volatile uint8_t  *)0x400720E4 // Endpoint Control Register\n"
-  "//register USB0_ENDPT10  *(volatile uint8_t  *)0x400720E8 // Endpoint Control Register\n"
-  "//register USB0_ENDPT11  *(volatile uint8_t  *)0x400720EC // Endpoint Control Register\n"
-  "//register USB0_ENDPT12  *(volatile uint8_t  *)0x400720F0 // Endpoint Control Register\n"
-  "//register USB0_ENDPT13  *(volatile uint8_t  *)0x400720F4 // Endpoint Control Register\n"
-  "//register USB0_ENDPT14  *(volatile uint8_t  *)0x400720F8 // Endpoint Control Register\n"
-  "//register USB0_ENDPT15  *(volatile uint8_t  *)0x400720FC // Endpoint Control Register\n"
-  "//register USB0_USBCTRL  *(volatile uint8_t  *)0x40072100 // USB Control Register\n"
-  "//register USB_USBCTRL_SUSP  (uint8_t)0x80   // Places the USB transceiver into the suspend state.\n"
-  "//register USB_USBCTRL_PDE   (uint8_t)0x40   // Enables the weak pulldowns on the USB transceiver.\n"
-  "//register USB0_OBSERVE  *(volatile uint8_t  *)0x40072104 // USB OTG Observe Register\n"
-  "//register USB_OBSERVE_DPPU  (uint8_t)0x80   // \n"
-  "//register USB_OBSERVE_DPPD  (uint8_t)0x40   // \n"
-  "//register USB_OBSERVE_DMPD  (uint8_t)0x10   // \n"
-  "//register USB0_CONTROL  *(volatile uint8_t  *)0x40072108 // USB OTG Control Register\n"
-  "//register USB_CONTROL_DPPULLUPNONOTG (uint8_t)0x10   //  Provides control of the DP PULLUP in the USB OTG module, if USB is configured in non-OTG dev"
-  "ice mode.\n"
-  "//register USB0_USBTRC0  *(volatile uint8_t  *)0x4007210C // USB Transceiver Control Register 0\n"
-  "//register USB_USBTRC_USBRESET  (uint8_t)0x80   //\n"
-  "//register USB_USBTRC_USBRESMEN  (uint8_t)0x20   //\n"
-  "//register USB_USBTRC_SYNC_DET  (uint8_t)0x02   //\n"
-  "//register USB_USBTRC_USB_RESUME_INT (uint8_t)0x01   //\n"
-  "//register USB0_USBFRMADJUST *(volatile uint8_t  *)0x40072114 // Frame Adjust Register\n"
+  "//register USB0_PERID  *(const    $uint8_t  *)0x40072000 // Peripheral ID register\n"
+  "//register USB0_IDCOMP  *(const    $uint8_t  *)0x40072004 // Peripheral ID Complement register\n"
+  "//register USB0_REV  *(const    $uint8_t  *)0x40072008 // Peripheral Revision register\n"
+  "//register USB0_ADDINFO  *(volatile $uint8_t  *)0x4007200C // Peripheral Additional Info register\n"
+  "//register USB0_OTGIST *(volatile $uint8_t  *)0x40072010 // OTG Interrupt Status register\n"
+  "//register USB_OTGISTAT_IDCHG  ($uint8_t)0x80   //\n"
+  "//register USB_OTGISTAT_ONEMSEC  ($uint8_t)0x40   //\n"
+  "//register USB_OTGISTAT_LINE_STATE_CHG ($uint8_t)0x20   //\n"
+  "//register USB_OTGISTAT_SESSVLDCHG  ($uint8_t)0x08   //\n"
+  "//register USB_OTGISTAT_B_SESS_CHG  ($uint8_t)0x04   //\n"
+  "//register USB_OTGISTAT_AVBUSCHG  ($uint8_t)0x01   //\n"
+  "//register USB0_OTGICR  *(volatile $uint8_t  *)0x40072014 // OTG Interrupt Control Register\n"
+  "//register USB_OTGICR_IDEN   ($uint8_t)0x80   // \n"
+  "//register USB_OTGICR_ONEMSECEN  ($uint8_t)0x40   // \n"
+  "//register USB_OTGICR_LINESTATEEN  ($uint8_t)0x20   // \n"
+  "//register USB_OTGICR_SESSVLDEN  ($uint8_t)0x08   // \n"
+  "//register USB_OTGICR_BSESSEN  ($uint8_t)0x04   // \n"
+  "//register USB_OTGICR_AVBUSEN  ($uint8_t)0x01   // \n"
+  "//register USB0_OTGST *(volatile $uint8_t  *)0x40072018 // OTG Status register\n"
+  "//register USB_OTGSTAT_ID   ($uint8_t)0x80   // \n"
+  "//register USB_OTGSTAT_ONEMSECEN  ($uint8_t)0x40   // \n"
+  "//register USB_OTGSTAT_LINESTATESTABLE ($uint8_t)0x20   // \n"
+  "//register USB_OTGSTAT_SESS_VLD  ($uint8_t)0x08   // \n"
+  "//register USB_OTGSTAT_BSESSEND  ($uint8_t)0x04   // \n"
+  "//register USB_OTGSTAT_AVBUSVLD  ($uint8_t)0x01   // \n"
+  "//register USB0_OTGCTL  *(volatile $uint8_t  *)0x4007201C // OTG Control Register\n"
+  "//register USB_OTGCTL_DPHIGH  ($uint8_t)0x80   // \n"
+  "//register USB_OTGCTL_DPLOW  ($uint8_t)0x20   // \n"
+  "//register USB_OTGCTL_DMLOW  ($uint8_t)0x10   // \n"
+  "//register USB_OTGCTL_OTGEN  ($uint8_t)0x04   // \n"
+  "//register USB0_IST *(volatile $uint8_t  *)0x40072080 // Interrupt Status Register\n"
+  "//register USB_ISTAT_STALL   ($uint8_t)0x80   // \n"
+  "//register USB_ISTAT_ATTACH  ($uint8_t)0x40   // \n"
+  "//register USB_ISTAT_RESUME  ($uint8_t)0x20   // \n"
+  "//register USB_ISTAT_SLEEP   ($uint8_t)0x10   // \n"
+  "//register USB_ISTAT_TOKDNE  ($uint8_t)0x08   // \n"
+  "//register USB_ISTAT_SOFTOK  ($uint8_t)0x04   // \n"
+  "//register USB_ISTAT_ERROR   ($uint8_t)0x02   // \n"
+  "//register USB_ISTAT_USBRST  ($uint8_t)0x01   // \n"
+  "//register USB0_INTEN  *(volatile $uint8_t  *)0x40072084 // Interrupt Enable Register\n"
+  "//register USB_INTEN_STALLEN  ($uint8_t)0x80   // \n"
+  "//register USB_INTEN_ATTACHEN  ($uint8_t)0x40   // \n"
+  "//register USB_INTEN_RESUMEEN  ($uint8_t)0x20   // \n"
+  "//register USB_INTEN_SLEEPEN  ($uint8_t)0x10   // \n"
+  "//register USB_INTEN_TOKDNEEN  ($uint8_t)0x08   // \n"
+  "//register USB_INTEN_SOFTOKEN  ($uint8_t)0x04   // \n"
+  "//register USB_INTEN_ERROREN  ($uint8_t)0x02   // \n"
+  "//register USB_INTEN_USBRSTEN  ($uint8_t)0x01   // \n"
+  "//register USB0_ERRST *(volatile $uint8_t  *)0x40072088 // Error Interrupt Status Register\n"
+  "//register USB_ERRSTAT_BTSERR  ($uint8_t)0x80   // \n"
+  "//register USB_ERRSTAT_DMAERR  ($uint8_t)0x20   // \n"
+  "//register USB_ERRSTAT_BTOERR  ($uint8_t)0x10   // \n"
+  "//register USB_ERRSTAT_DFN8  ($uint8_t)0x08   // \n"
+  "//register USB_ERRSTAT_CRC16  ($uint8_t)0x04   // \n"
+  "//register USB_ERRSTAT_CRC5EOF  ($uint8_t)0x02   // \n"
+  "//register USB_ERRSTAT_PIDERR  ($uint8_t)0x01   // \n"
+  "//register USB0_ERREN  *(volatile $uint8_t  *)0x4007208C // Error Interrupt Enable Register\n"
+  "//register USB_ERREN_BTSERREN  ($uint8_t)0x80   // \n"
+  "//register USB_ERREN_DMAERREN  ($uint8_t)0x20   // \n"
+  "//register USB_ERREN_BTOERREN  ($uint8_t)0x10   // \n"
+  "//register USB_ERREN_DFN8EN  ($uint8_t)0x08   // \n"
+  "//register USB_ERREN_CRC16EN  ($uint8_t)0x04   // \n"
+  "//register USB_ERREN_CRC5EOFEN  ($uint8_t)0x02   // \n"
+  "//register USB_ERREN_PIDERREN  ($uint8_t)0x01   // \n"
+  "//register USB0_ST *(volatile $uint8_t  *)0x40072090 // Status Register\n"
+  "//register USB_STAT_TX   ($uint8_t)0x08   // \n"
+  "//register USB_STAT_ODD   ($uint8_t)0x04   // \n"
+  "//register USB_STAT_ENDP(n)  ($uint8_t)((n) >> 4)  // \n"
+  "//register USB0_CTL  *(volatile $uint8_t  *)0x40072094 // Control Register\n"
+  "//register USB_CTL_JSTATE   ($uint8_t)0x80   // \n"
+  "//register USB_CTL_SE0   ($uint8_t)0x40   // \n"
+  "//register USB_CTL_TXSUSPENDTOKENBUSY ($uint8_t)0x20   // \n"
+  "//register USB_CTL_RESET   ($uint8_t)0x10   // \n"
+  "//register USB_CTL_HOSTMODEEN  ($uint8_t)0x08   // \n"
+  "//register USB_CTL_RESUME   ($uint8_t)0x04   // \n"
+  "//register USB_CTL_ODDRST   ($uint8_t)0x02   // \n"
+  "//register USB_CTL_USBENSOFEN  ($uint8_t)0x01   // \n"
+  "//register USB0_ADDR  *(volatile $uint8_t  *)0x40072098 // Address Register\n"
+  "//register USB0_BDTPAGE1  *(volatile $uint8_t  *)0x4007209C // BDT Page Register 1\n"
+  "//register USB0_FRMNUML  *(volatile $uint8_t  *)0x400720A0 // Frame Number Register Low\n"
+  "//register USB0_FRMNUMH  *(volatile $uint8_t  *)0x400720A4 // Frame Number Register High\n"
+  "//register USB0_TOKEN  *(volatile $uint8_t  *)0x400720A8 // Token Register\n"
+  "//register USB0_SOFTHLD  *(volatile $uint8_t  *)0x400720AC // SOF Threshold Register\n"
+  "//register USB0_BDTPAGE2  *(volatile $uint8_t  *)0x400720B0 // BDT Page Register 2\n"
+  "//register USB0_BDTPAGE3  *(volatile $uint8_t  *)0x400720B4 // BDT Page Register 3\n"
+  "//register USB0_ENDPT0  *(volatile $uint8_t  *)0x400720C0 // Endpoint Control Register\n"
+  "//register USB_ENDPT_HOSTWOHUB  ($uint8_t)0x80   // host only, enable low speed\n"
+  "//register USB_ENDPT_RETRYDIS  ($uint8_t)0x40   // host only, set to disable NAK retry\n"
+  "//register USB_ENDPT_EPCTLDIS  ($uint8_t)0x10   // 0=control, 1=bulk, interrupt, isync\n"
+  "//register USB_ENDPT_EPRXEN  ($uint8_t)0x08   // enables the endpoint for RX transfers.\n"
+  "//register USB_ENDPT_EPTXEN  ($uint8_t)0x04   // enables the endpoint for TX transfers.\n"
+  "//register USB_ENDPT_EPSTALL  ($uint8_t)0x02   // set to stall endpoint\n"
+  "//register USB_ENDPT_EPHSHK  ($uint8_t)0x01   // enable handshaking during a transaction, generally set unless Isochronous\n"
+  "//register USB0_ENDPT1  *(volatile $uint8_t  *)0x400720C4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT2  *(volatile $uint8_t  *)0x400720C8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT3  *(volatile $uint8_t  *)0x400720CC // Endpoint Control Register\n"
+  "//register USB0_ENDPT4  *(volatile $uint8_t  *)0x400720D0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT5  *(volatile $uint8_t  *)0x400720D4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT6  *(volatile $uint8_t  *)0x400720D8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT7  *(volatile $uint8_t  *)0x400720DC // Endpoint Control Register\n"
+  "//register USB0_ENDPT8  *(volatile $uint8_t  *)0x400720E0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT9  *(volatile $uint8_t  *)0x400720E4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT10  *(volatile $uint8_t  *)0x400720E8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT11  *(volatile $uint8_t  *)0x400720EC // Endpoint Control Register\n"
+  "//register USB0_ENDPT12  *(volatile $uint8_t  *)0x400720F0 // Endpoint Control Register\n"
+  "//register USB0_ENDPT13  *(volatile $uint8_t  *)0x400720F4 // Endpoint Control Register\n"
+  "//register USB0_ENDPT14  *(volatile $uint8_t  *)0x400720F8 // Endpoint Control Register\n"
+  "//register USB0_ENDPT15  *(volatile $uint8_t  *)0x400720FC // Endpoint Control Register\n"
+  "//register USB0_USBCTRL  *(volatile $uint8_t  *)0x40072100 // USB Control Register\n"
+  "//register USB_USBCTRL_SUSP  ($uint8_t)0x80   // Places the USB transceiver into the suspend state.\n"
+  "//register USB_USBCTRL_PDE   ($uint8_t)0x40   // Enables the weak pulldowns on the USB transceiver.\n"
+  "//register USB0_OBSERVE  *(volatile $uint8_t  *)0x40072104 // USB OTG Observe Register\n"
+  "//register USB_OBSERVE_DPPU  ($uint8_t)0x80   // \n"
+  "//register USB_OBSERVE_DPPD  ($uint8_t)0x40   // \n"
+  "//register USB_OBSERVE_DMPD  ($uint8_t)0x10   // \n"
+  "//register USB0_CONTROL  *(volatile $uint8_t  *)0x40072108 // USB OTG Control Register\n"
+  "//register USB_CONTROL_DPPULLUPNONOTG ($uint8_t)0x10   //  Provides control of the DP PULLUP in the USB OTG module, if USB is configured in non-OTG de"
+  "vice mode.\n"
+  "//register USB0_USBTRC0  *(volatile $uint8_t  *)0x4007210C // USB Transceiver Control Register 0\n"
+  "//register USB_USBTRC_USBRESET  ($uint8_t)0x80   //\n"
+  "//register USB_USBTRC_USBRESMEN  ($uint8_t)0x20   //\n"
+  "//register USB_USBTRC_SYNC_DET  ($uint8_t)0x02   //\n"
+  "//register USB_USBTRC_USB_RESUME_INT ($uint8_t)0x01   //\n"
+  "//register USB0_USBFRMADJUST *(volatile $uint8_t  *)0x40072114 // Frame Adjust Register\n"
   "//\n"
   "//// Chapter 41: USB Device Charger Detection Module (USBDCD)\n"
   "//register USBDCD_CONTROL   0x40035000 // Control register\n"
@@ -19723,257 +19724,257 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register SPI0_RXFR2   0x4002C084 // DSPI Receive FIFO Registers\n"
   "//register SPI0_RXFR3   0x4002C088 // DSPI Receive FIFO Registers\n"
   "//typedef struct {\n"
-  "// volatile uint32_t MCR; // 0\n"
-  "// volatile uint32_t unused1;// 4\n"
-  "// volatile uint32_t TCR; // 8\n"
-  "// volatile uint32_t CTAR0; // c\n"
-  "// volatile uint32_t CTAR1; // 10\n"
-  "// volatile uint32_t CTAR2; // 14\n"
-  "// volatile uint32_t CTAR3; // 18\n"
-  "// volatile uint32_t CTAR4; // 1c\n"
-  "// volatile uint32_t CTAR5; // 20\n"
-  "// volatile uint32_t CTAR6; // 24\n"
-  "// volatile uint32_t CTAR7; // 28\n"
-  "// volatile uint32_t SR; // 2c\n"
-  "// volatile uint32_t RSER; // 30\n"
-  "// volatile uint32_t PUSHR; // 34\n"
-  "// volatile uint32_t POPR; // 38\n"
-  "// volatile uint32_t TXFR[16]; // 3c\n"
-  "// volatile uint32_t RXFR[16]; // 7c\n"
+  "// volatile $uint32_t MCR; // 0\n"
+  "// volatile $uint32_t unused1;// 4\n"
+  "// volatile $uint32_t TCR; // 8\n"
+  "// volatile $uint32_t CTAR0; // c\n"
+  "// volatile $uint32_t CTAR1; // 10\n"
+  "// volatile $uint32_t CTAR2; // 14\n"
+  "// volatile $uint32_t CTAR3; // 18\n"
+  "// volatile $uint32_t CTAR4; // 1c\n"
+  "// volatile $uint32_t CTAR5; // 20\n"
+  "// volatile $uint32_t CTAR6; // 24\n"
+  "// volatile $uint32_t CTAR7; // 28\n"
+  "// volatile $uint32_t SR; // 2c\n"
+  "// volatile $uint32_t RSER; // 30\n"
+  "// volatile $uint32_t PUSHR; // 34\n"
+  "// volatile $uint32_t POPR; // 38\n"
+  "// volatile $uint32_t TXFR[16]; // 3c\n"
+  "// volatile $uint32_t RXFR[16]; // 7c\n"
   "//} SPI_t;\n"
   "//register SPI0  (*(SPI_t *)0x4002C000)\n"
   "//\n"
   "//// Chapter 44: Inter-Integrated Circuit (I2C)\n"
-  "//register I2C0_A1   *(volatile uint8_t  *)0x40066000 // I2C Address Register 1\n"
-  "//register I2C0_F   *(volatile uint8_t  *)0x40066001 // I2C Frequency Divider register\n"
-  "//register I2C0_C1   *(volatile uint8_t  *)0x40066002 // I2C Control Register 1\n"
-  "//register I2C_C1_IICEN   (uint8_t)0x80   // I2C Enable\n"
-  "//register I2C_C1_IICIE   (uint8_t)0x40   // I2C Interrupt Enable\n"
-  "//register I2C_C1_MST   (uint8_t)0x20   // Master Mode Select\n"
-  "//register I2C_C1_TX   (uint8_t)0x10   // Transmit Mode Select\n"
-  "//register I2C_C1_TXAK   (uint8_t)0x08   // Transmit Acknowledge Enable\n"
-  "//register I2C_C1_RSTA   (uint8_t)0x04   // RepeSTART\n"
-  "//register I2C_C1_WUEN   (uint8_t)0x02   // Wakeup Enable\n"
-  "//register I2C_C1_DMAEN   (uint8_t)0x01   // DMA Enable\n"
-  "//register I2C0_S   *(volatile uint8_t  *)0x40066003 // I2C Status register\n"
-  "//register I2C_S_TCF   (uint8_t)0x80   // Transfer Complete Flag\n"
-  "//register I2C_S_IAAS   (uint8_t)0x40   // Addressed As A Slave\n"
-  "//register I2C_S_BUSY   (uint8_t)0x20   // Bus Busy\n"
-  "//register I2C_S_ARBL   (uint8_t)0x10   // Arbitration Lost\n"
-  "//register I2C_S_RAM   (uint8_t)0x08   // Range Address Match\n"
-  "//register I2C_S_SRW   (uint8_t)0x04   // Slave Read/Write\n"
-  "//register I2C_S_IICIF   (uint8_t)0x02   // Interrupt Flag\n"
-  "//register I2C_S_RXAK   (uint8_t)0x01   // Receive Acknowledge\n"
-  "//register I2C0_D   *(volatile uint8_t  *)0x40066004 // I2C Data I/O register\n"
-  "//register I2C0_C2   *(volatile uint8_t  *)0x40066005 // I2C Control Register 2\n"
-  "//register I2C_C2_GCAEN   (uint8_t)0x80   // General Call Address Enable\n"
-  "//register I2C_C2_ADEXT   (uint8_t)0x40   // Address Extension\n"
-  "//register I2C_C2_HDRS   (uint8_t)0x20   // High Drive Select\n"
-  "//register I2C_C2_SBRC   (uint8_t)0x10   // Slave Baud Rate Control\n"
-  "//register I2C_C2_RMEN   (uint8_t)0x08   // Range Address Matching Enable\n"
+  "//register I2C0_A1   *(volatile $uint8_t  *)0x40066000 // I2C Address Register 1\n"
+  "//register I2C0_F   *(volatile $uint8_t  *)0x40066001 // I2C Frequency Divider register\n"
+  "//register I2C0_C1   *(volatile $uint8_t  *)0x40066002 // I2C Control Register 1\n"
+  "//register I2C_C1_IICEN   ($uint8_t)0x80   // I2C Enable\n"
+  "//register I2C_C1_IICIE   ($uint8_t)0x40   // I2C Interrupt Enable\n"
+  "//register I2C_C1_MST   ($uint8_t)0x20   // Master Mode Select\n"
+  "//register I2C_C1_TX   ($uint8_t)0x10   // Transmit Mode Select\n"
+  "//register I2C_C1_TXAK   ($uint8_t)0x08   // Transmit Acknowledge Enable\n"
+  "//register I2C_C1_RSTA   ($uint8_t)0x04   // RepeSTART\n"
+  "//register I2C_C1_WUEN   ($uint8_t)0x02   // Wakeup Enable\n"
+  "//register I2C_C1_DMAEN   ($uint8_t)0x01   // DMA Enable\n"
+  "//register I2C0_S   *(volatile $uint8_t  *)0x40066003 // I2C Status register\n"
+  "//register I2C_S_TCF   ($uint8_t)0x80   // Transfer Complete Flag\n"
+  "//register I2C_S_IAAS   ($uint8_t)0x40   // Addressed As A Slave\n"
+  "//register I2C_S_BUSY   ($uint8_t)0x20   // Bus Busy\n"
+  "//register I2C_S_ARBL   ($uint8_t)0x10   // Arbitration Lost\n"
+  "//register I2C_S_RAM   ($uint8_t)0x08   // Range Address Match\n"
+  "//register I2C_S_SRW   ($uint8_t)0x04   // Slave Read/Write\n"
+  "//register I2C_S_IICIF   ($uint8_t)0x02   // Interrupt Flag\n"
+  "//register I2C_S_RXAK   ($uint8_t)0x01   // Receive Acknowledge\n"
+  "//register I2C0_D   *(volatile $uint8_t  *)0x40066004 // I2C Data I/O register\n"
+  "//register I2C0_C2   *(volatile $uint8_t  *)0x40066005 // I2C Control Register 2\n"
+  "//register I2C_C2_GCAEN   ($uint8_t)0x80   // General Call Address Enable\n"
+  "//register I2C_C2_ADEXT   ($uint8_t)0x40   // Address Extension\n"
+  "//register I2C_C2_HDRS   ($uint8_t)0x20   // High Drive Select\n"
+  "//register I2C_C2_SBRC   ($uint8_t)0x10   // Slave Baud Rate Control\n"
+  "//register I2C_C2_RMEN   ($uint8_t)0x08   // Range Address Matching Enable\n"
   "//register I2C_C2_AD(n)   ((n) & 7)   // Slave Address, upper 3 bits\n"
-  "//register I2C0_FLT  *(volatile uint8_t  *)0x40066006 // I2C Programmable Input Glitch Filter register\n"
-  "//register I2C0_RA   *(volatile uint8_t  *)0x40066007 // I2C Range Address register\n"
-  "//register I2C0_SMB  *(volatile uint8_t  *)0x40066008 // I2C SMBus Control and Status register\n"
-  "//register I2C0_A2   *(volatile uint8_t  *)0x40066009 // I2C Address Register 2\n"
-  "//register I2C0_SLTH  *(volatile uint8_t  *)0x4006600A // I2C SCL Low Timeout Register High\n"
-  "//register I2C0_SLTL  *(volatile uint8_t  *)0x4006600B // I2C SCL Low Timeout Register Low\n"
+  "//register I2C0_FLT  *(volatile $uint8_t  *)0x40066006 // I2C Programmable Input Glitch Filter register\n"
+  "//register I2C0_RA   *(volatile $uint8_t  *)0x40066007 // I2C Range Address register\n"
+  "//register I2C0_SMB  *(volatile $uint8_t  *)0x40066008 // I2C SMBus Control and Status register\n"
+  "//register I2C0_A2   *(volatile $uint8_t  *)0x40066009 // I2C Address Register 2\n"
+  "//register I2C0_SLTH  *(volatile $uint8_t  *)0x4006600A // I2C SCL Low Timeout Register High\n"
+  "//register I2C0_SLTL  *(volatile $uint8_t  *)0x4006600B // I2C SCL Low Timeout Register Low\n"
   "//\n"
-  "//register I2C1_A1   *(volatile uint8_t  *)0x40067000 // I2C Address Register 1\n"
-  "//register I2C1_F   *(volatile uint8_t  *)0x40067001 // I2C Frequency Divider register\n"
-  "//register I2C1_C1   *(volatile uint8_t  *)0x40067002 // I2C Control Register 1\n"
-  "//register I2C1_S   *(volatile uint8_t  *)0x40067003 // I2C Status register\n"
-  "//register I2C1_D   *(volatile uint8_t  *)0x40067004 // I2C Data I/O register\n"
-  "//register I2C1_C2   *(volatile uint8_t  *)0x40067005 // I2C Control Register 2\n"
-  "//register I2C1_FLT  *(volatile uint8_t  *)0x40067006 // I2C Programmable Input Glitch Filter register\n"
-  "//register I2C1_RA   *(volatile uint8_t  *)0x40067007 // I2C Range Address register\n"
-  "//register I2C1_SMB  *(volatile uint8_t  *)0x40067008 // I2C SMBus Control and Status register\n"
-  "//register I2C1_A2   *(volatile uint8_t  *)0x40067009 // I2C Address Register 2\n"
-  "//register I2C1_SLTH  *(volatile uint8_t  *)0x4006700A // I2C SCL Low Timeout Register High\n"
-  "//register I2C1_SLTL  *(volatile uint8_t  *)0x4006700B // I2C SCL Low Timeout Register Low\n"
+  "//register I2C1_A1   *(volatile $uint8_t  *)0x40067000 // I2C Address Register 1\n"
+  "//register I2C1_F   *(volatile $uint8_t  *)0x40067001 // I2C Frequency Divider register\n"
+  "//register I2C1_C1   *(volatile $uint8_t  *)0x40067002 // I2C Control Register 1\n"
+  "//register I2C1_S   *(volatile $uint8_t  *)0x40067003 // I2C Status register\n"
+  "//register I2C1_D   *(volatile $uint8_t  *)0x40067004 // I2C Data I/O register\n"
+  "//register I2C1_C2   *(volatile $uint8_t  *)0x40067005 // I2C Control Register 2\n"
+  "//register I2C1_FLT  *(volatile $uint8_t  *)0x40067006 // I2C Programmable Input Glitch Filter register\n"
+  "//register I2C1_RA   *(volatile $uint8_t  *)0x40067007 // I2C Range Address register\n"
+  "//register I2C1_SMB  *(volatile $uint8_t  *)0x40067008 // I2C SMBus Control and Status register\n"
+  "//register I2C1_A2   *(volatile $uint8_t  *)0x40067009 // I2C Address Register 2\n"
+  "//register I2C1_SLTH  *(volatile $uint8_t  *)0x4006700A // I2C SCL Low Timeout Register High\n"
+  "//register I2C1_SLTL  *(volatile $uint8_t  *)0x4006700B // I2C SCL Low Timeout Register Low\n"
   "//\n"
   "//// Chapter 45: Universal Asynchronous Receiver/Transmitter (UART)\n"
-  "//register UART0_BDH  *(volatile uint8_t  *)0x4006A000 // UART Baud Rate Registers: High\n"
-  "//register UART0_BDL  *(volatile uint8_t  *)0x4006A001 // UART Baud Rate Registers: Low\n"
-  "//register UART0_C1  *(volatile uint8_t  *)0x4006A002 // UART Control Register 1\n"
-  "//register UART_C1_LOOPS   (uint8_t)0x80   // When LOOPS is set, the RxD pin is disconnected from the UART and the transmitter output is internally co"
-  "nnected to the receiver input\n"
-  "//register UART_C1_UARTSWAI  (uint8_t)0x40   // UART Stops in Wait Mode\n"
-  "//register UART_C1_RSRC   (uint8_t)0x20   // When LOOPS is set, the RSRC field determines the source for the receiver shift register input\n"
-  "//register UART_C1_M   (uint8_t)0x10   // 9-bit or 8-bit Mode Select\n"
-  "//register UART_C1_WAKE   (uint8_t)0x08   // Determines which condition wakes the UART\n"
-  "//register UART_C1_ILT   (uint8_t)0x04   // Idle Line Type Select\n"
-  "//register UART_C1_PE   (uint8_t)0x02   // Parity Enable\n"
-  "//register UART_C1_PT   (uint8_t)0x01   // Parity Type, 0=even, 1=odd\n"
-  "//register UART0_C2  *(volatile uint8_t  *)0x4006A003 // UART Control Register 2\n"
-  "//register UART_C2_TIE   (uint8_t)0x80   // Transmitter Interrupt or DMA Transfer Enable.\n"
-  "//register UART_C2_TCIE   (uint8_t)0x40   // Transmission Complete Interrupt Enable\n"
-  "//register UART_C2_RIE   (uint8_t)0x20   // Receiver Full Interrupt or DMA Transfer Enable\n"
-  "//register UART_C2_ILIE   (uint8_t)0x10   // Idle Line Interrupt Enable\n"
-  "//register UART_C2_TE   (uint8_t)0x08   // Transmitter Enable\n"
-  "//register UART_C2_RE   (uint8_t)0x04   // Receiver Enable\n"
-  "//register UART_C2_RWU   (uint8_t)0x02   // Receiver Wakeup Control\n"
-  "//register UART_C2_SBK   (uint8_t)0x01   // Send Break\n"
-  "//register UART0_S1  *(volatile uint8_t  *)0x4006A004 // UART Status Register 1\n"
-  "//register UART_S1_TDRE   (uint8_t)0x80   // Transmit Data Register Empty Flag\n"
-  "//register UART_S1_TC   (uint8_t)0x40   // Transmit Complete Flag\n"
-  "//register UART_S1_RDRF   (uint8_t)0x20   // Receive Data Register Full Flag\n"
-  "//register UART_S1_IDLE   (uint8_t)0x10   // Idle Line Flag\n"
-  "//register UART_S1_OR   (uint8_t)0x08   // Receiver Overrun Flag\n"
-  "//register UART_S1_NF   (uint8_t)0x04   // Noise Flag\n"
-  "//register UART_S1_FE   (uint8_t)0x02   // Framing Error Flag\n"
-  "//register UART_S1_PF   (uint8_t)0x01   // Parity Error Flag\n"
-  "//register UART0_S2  *(volatile uint8_t  *)0x4006A005 // UART Status Register 2\n"
-  "//register UART0_C3  *(volatile uint8_t  *)0x4006A006 // UART Control Register 3\n"
-  "//register UART0_D   *(volatile uint8_t  *)0x4006A007 // UART Data Register\n"
-  "//register UART0_MA1  *(volatile uint8_t  *)0x4006A008 // UART Match Address Registers 1\n"
-  "//register UART0_MA2  *(volatile uint8_t  *)0x4006A009 // UART Match Address Registers 2\n"
-  "//register UART0_C4  *(volatile uint8_t  *)0x4006A00A // UART Control Register 4\n"
-  "//register UART0_C5  *(volatile uint8_t  *)0x4006A00B // UART Control Register 5\n"
-  "//register UART0_ED  *(volatile uint8_t  *)0x4006A00C // UART Extended Data Register\n"
-  "//register UART0_MODEM  *(volatile uint8_t  *)0x4006A00D // UART Modem Register\n"
-  "//register UART0_IR  *(volatile uint8_t  *)0x4006A00E // UART Infrared Register\n"
-  "//register UART0_PFIFO  *(volatile uint8_t  *)0x4006A010 // UART FIFO Parameters\n"
-  "//register UART_PFIFO_TXFE   (uint8_t)0x80\n"
-  "//register UART_PFIFO_RXFE   (uint8_t)0x08\n"
-  "//register UART0_CFIFO  *(volatile uint8_t  *)0x4006A011 // UART FIFO Control Register\n"
-  "//register UART_CFIFO_TXFLUSH  (uint8_t)0x80   // \n"
-  "//register UART_CFIFO_RXFLUSH  (uint8_t)0x40   // \n"
-  "//register UART_CFIFO_RXOFE  (uint8_t)0x04   // \n"
-  "//register UART_CFIFO_TXOFE  (uint8_t)0x02   // \n"
-  "//register UART_CFIFO_RXUFE  (uint8_t)0x01   // \n"
-  "//register UART0_SFIFO  *(volatile uint8_t  *)0x4006A012 // UART FIFO Status Register\n"
-  "//register UART_SFIFO_TXEMPT  (uint8_t)0x80\n"
-  "//register UART_SFIFO_RXEMPT  (uint8_t)0x40\n"
-  "//register UART_SFIFO_RXOF   (uint8_t)0x04\n"
-  "//register UART_SFIFO_TXOF   (uint8_t)0x02\n"
-  "//register UART_SFIFO_RXUF   (uint8_t)0x01\n"
-  "//register UART0_TWFIFO  *(volatile uint8_t  *)0x4006A013 // UART FIFO Transmit Watermark\n"
-  "//register UART0_TCFIFO  *(volatile uint8_t  *)0x4006A014 // UART FIFO Transmit Count\n"
-  "//register UART0_RWFIFO  *(volatile uint8_t  *)0x4006A015 // UART FIFO Receive Watermark\n"
-  "//register UART0_RCFIFO  *(volatile uint8_t  *)0x4006A016 // UART FIFO Receive Count\n"
-  "//register UART0_C7816  *(volatile uint8_t  *)0x4006A018 // UART 7816 Control Register\n"
-  "//register UART0_IE7816  *(volatile uint8_t  *)0x4006A019 // UART 7816 Interrupt Enable Register\n"
-  "//register UART0_IS7816  *(volatile uint8_t  *)0x4006A01A // UART 7816 Interrupt Status Register\n"
-  "//register UART0_WP7816T0  *(volatile uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
-  "//register UART0_WP7816T1  *(volatile uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
-  "//register UART0_WN7816  *(volatile uint8_t  *)0x4006A01C // UART 7816 Wait N Register\n"
-  "//register UART0_WF7816  *(volatile uint8_t  *)0x4006A01D // UART 7816 Wait FD Register\n"
-  "//register UART0_ET7816  *(volatile uint8_t  *)0x4006A01E // UART 7816 Error Threshold Register\n"
-  "//register UART0_TL7816  *(volatile uint8_t  *)0x4006A01F // UART 7816 Transmit Length Register\n"
-  "//register UART0_C6  *(volatile uint8_t  *)0x4006A021 // UART CEA709.1-B Control Register 6\n"
-  "//register UART0_PCTH  *(volatile uint8_t  *)0x4006A022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
-  "//register UART0_PCTL  *(volatile uint8_t  *)0x4006A023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
-  "//register UART0_B1T  *(volatile uint8_t  *)0x4006A024 // UART CEA709.1-B Beta1 Timer\n"
-  "//register UART0_SDTH  *(volatile uint8_t  *)0x4006A025 // UART CEA709.1-B Secondary Delay Timer High\n"
-  "//register UART0_SDTL  *(volatile uint8_t  *)0x4006A026 // UART CEA709.1-B Secondary Delay Timer Low\n"
-  "//register UART0_PRE  *(volatile uint8_t  *)0x4006A027 // UART CEA709.1-B Preamble\n"
-  "//register UART0_TPL  *(volatile uint8_t  *)0x4006A028 // UART CEA709.1-B Transmit Packet Length\n"
-  "//register UART0_IE  *(volatile uint8_t  *)0x4006A029 // UART CEA709.1-B Interrupt Enable Register\n"
-  "//register UART0_WB  *(volatile uint8_t  *)0x4006A02A // UART CEA709.1-B WBASE\n"
-  "//register UART0_S3  *(volatile uint8_t  *)0x4006A02B // UART CEA709.1-B Status Register\n"
-  "//register UART0_S4  *(volatile uint8_t  *)0x4006A02C // UART CEA709.1-B Status Register\n"
-  "//register UART0_RPL  *(volatile uint8_t  *)0x4006A02D // UART CEA709.1-B Received Packet Length\n"
-  "//register UART0_RPREL  *(volatile uint8_t  *)0x4006A02E // UART CEA709.1-B Received Preamble Length\n"
-  "//register UART0_CPW  *(volatile uint8_t  *)0x4006A02F // UART CEA709.1-B Collision Pulse Width\n"
-  "//register UART0_RIDT  *(volatile uint8_t  *)0x4006A030 // UART CEA709.1-B Receive Indeterminate Time\n"
-  "//register UART0_TIDT  *(volatile uint8_t  *)0x4006A031 // UART CEA709.1-B Transmit Indeterminate Time\n"
-  "//register UART1_BDH  *(volatile uint8_t  *)0x4006B000 // UART Baud Rate Registers: High\n"
-  "//register UART1_BDL  *(volatile uint8_t  *)0x4006B001 // UART Baud Rate Registers: Low\n"
-  "//register UART1_C1  *(volatile uint8_t  *)0x4006B002 // UART Control Register 1\n"
-  "//register UART1_C2  *(volatile uint8_t  *)0x4006B003 // UART Control Register 2\n"
-  "//register UART1_S1  *(volatile uint8_t  *)0x4006B004 // UART Status Register 1\n"
-  "//register UART1_S2  *(volatile uint8_t  *)0x4006B005 // UART Status Register 2\n"
-  "//register UART1_C3  *(volatile uint8_t  *)0x4006B006 // UART Control Register 3\n"
-  "//register UART1_D   *(volatile uint8_t  *)0x4006B007 // UART Data Register\n"
-  "//register UART1_MA1  *(volatile uint8_t  *)0x4006B008 // UART Match Address Registers 1\n"
-  "//register UART1_MA2  *(volatile uint8_t  *)0x4006B009 // UART Match Address Registers 2\n"
-  "//register UART1_C4  *(volatile uint8_t  *)0x4006B00A // UART Control Register 4\n"
-  "//register UART1_C5  *(volatile uint8_t  *)0x4006B00B // UART Control Register 5\n"
-  "//register UART1_ED  *(volatile uint8_t  *)0x4006B00C // UART Extended Data Register\n"
-  "//register UART1_MODEM  *(volatile uint8_t  *)0x4006B00D // UART Modem Register\n"
-  "//register UART1_IR  *(volatile uint8_t  *)0x4006B00E // UART Infrared Register\n"
-  "//register UART1_PFIFO  *(volatile uint8_t  *)0x4006B010 // UART FIFO Parameters\n"
-  "//register UART1_CFIFO  *(volatile uint8_t  *)0x4006B011 // UART FIFO Control Register\n"
-  "//register UART1_SFIFO  *(volatile uint8_t  *)0x4006B012 // UART FIFO Status Register\n"
-  "//register UART1_TWFIFO  *(volatile uint8_t  *)0x4006B013 // UART FIFO Transmit Watermark\n"
-  "//register UART1_TCFIFO  *(volatile uint8_t  *)0x4006B014 // UART FIFO Transmit Count\n"
-  "//register UART1_RWFIFO  *(volatile uint8_t  *)0x4006B015 // UART FIFO Receive Watermark\n"
-  "//register UART1_RCFIFO  *(volatile uint8_t  *)0x4006B016 // UART FIFO Receive Count\n"
-  "//register UART1_C7816  *(volatile uint8_t  *)0x4006B018 // UART 7816 Control Register\n"
-  "//register UART1_IE7816  *(volatile uint8_t  *)0x4006B019 // UART 7816 Interrupt Enable Register\n"
-  "//register UART1_IS7816  *(volatile uint8_t  *)0x4006B01A // UART 7816 Interrupt Status Register\n"
-  "//register UART1_WP7816T0  *(volatile uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
-  "//register UART1_WP7816T1  *(volatile uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
-  "//register UART1_WN7816  *(volatile uint8_t  *)0x4006B01C // UART 7816 Wait N Register\n"
-  "//register UART1_WF7816  *(volatile uint8_t  *)0x4006B01D // UART 7816 Wait FD Register\n"
-  "//register UART1_ET7816  *(volatile uint8_t  *)0x4006B01E // UART 7816 Error Threshold Register\n"
-  "//register UART1_TL7816  *(volatile uint8_t  *)0x4006B01F // UART 7816 Transmit Length Register\n"
-  "//register UART1_C6  *(volatile uint8_t  *)0x4006B021 // UART CEA709.1-B Control Register 6\n"
-  "//register UART1_PCTH  *(volatile uint8_t  *)0x4006B022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
-  "//register UART1_PCTL  *(volatile uint8_t  *)0x4006B023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
-  "//register UART1_B1T  *(volatile uint8_t  *)0x4006B024 // UART CEA709.1-B Beta1 Timer\n"
-  "//register UART1_SDTH  *(volatile uint8_t  *)0x4006B025 // UART CEA709.1-B Secondary Delay Timer High\n"
-  "//register UART1_SDTL  *(volatile uint8_t  *)0x4006B026 // UART CEA709.1-B Secondary Delay Timer Low\n"
-  "//register UART1_PRE  *(volatile uint8_t  *)0x4006B027 // UART CEA709.1-B Preamble\n"
-  "//register UART1_TPL  *(volatile uint8_t  *)0x4006B028 // UART CEA709.1-B Transmit Packet Length\n"
-  "//register UART1_IE  *(volatile uint8_t  *)0x4006B029 // UART CEA709.1-B Interrupt Enable Register\n"
-  "//register UART1_WB  *(volatile uint8_t  *)0x4006B02A // UART CEA709.1-B WBASE\n"
-  "//register UART1_S3  *(volatile uint8_t  *)0x4006B02B // UART CEA709.1-B Status Register\n"
-  "//register UART1_S4  *(volatile uint8_t  *)0x4006B02C // UART CEA709.1-B Status Register\n"
-  "//register UART1_RPL  *(volatile uint8_t  *)0x4006B02D // UART CEA709.1-B Received Packet Length\n"
-  "//register UART1_RPREL  *(volatile uint8_t  *)0x4006B02E // UART CEA709.1-B Received Preamble Length\n"
-  "//register UART1_CPW  *(volatile uint8_t  *)0x4006B02F // UART CEA709.1-B Collision Pulse Width\n"
-  "//register UART1_RIDT  *(volatile uint8_t  *)0x4006B030 // UART CEA709.1-B Receive Indeterminate Time\n"
-  "//register UART1_TIDT  *(volatile uint8_t  *)0x4006B031 // UART CEA709.1-B Transmit Indeterminate Time\n"
-  "//register UART2_BDH  *(volatile uint8_t  *)0x4006C000 // UART Baud Rate Registers: High\n"
-  "//register UART2_BDL  *(volatile uint8_t  *)0x4006C001 // UART Baud Rate Registers: Low\n"
-  "//register UART2_C1  *(volatile uint8_t  *)0x4006C002 // UART Control Register 1\n"
-  "//register UART2_C2  *(volatile uint8_t  *)0x4006C003 // UART Control Register 2\n"
-  "//register UART2_S1  *(volatile uint8_t  *)0x4006C004 // UART Status Register 1\n"
-  "//register UART2_S2  *(volatile uint8_t  *)0x4006C005 // UART Status Register 2\n"
-  "//register UART2_C3  *(volatile uint8_t  *)0x4006C006 // UART Control Register 3\n"
-  "//register UART2_D   *(volatile uint8_t  *)0x4006C007 // UART Data Register\n"
-  "//register UART2_MA1  *(volatile uint8_t  *)0x4006C008 // UART Match Address Registers 1\n"
-  "//register UART2_MA2  *(volatile uint8_t  *)0x4006C009 // UART Match Address Registers 2\n"
-  "//register UART2_C4  *(volatile uint8_t  *)0x4006C00A // UART Control Register 4\n"
-  "//register UART2_C5  *(volatile uint8_t  *)0x4006C00B // UART Control Register 5\n"
-  "//register UART2_ED  *(volatile uint8_t  *)0x4006C00C // UART Extended Data Register\n"
-  "//register UART2_MODEM  *(volatile uint8_t  *)0x4006C00D // UART Modem Register\n"
-  "//register UART2_IR  *(volatile uint8_t  *)0x4006C00E // UART Infrared Register\n"
-  "//register UART2_PFIFO  *(volatile uint8_t  *)0x4006C010 // UART FIFO Parameters\n"
-  "//register UART2_CFIFO  *(volatile uint8_t  *)0x4006C011 // UART FIFO Control Register\n"
-  "//register UART2_SFIFO  *(volatile uint8_t  *)0x4006C012 // UART FIFO Status Register\n"
-  "//register UART2_TWFIFO  *(volatile uint8_t  *)0x4006C013 // UART FIFO Transmit Watermark\n"
-  "//register UART2_TCFIFO  *(volatile uint8_t  *)0x4006C014 // UART FIFO Transmit Count\n"
-  "//register UART2_RWFIFO  *(volatile uint8_t  *)0x4006C015 // UART FIFO Receive Watermark\n"
-  "//register UART2_RCFIFO  *(volatile uint8_t  *)0x4006C016 // UART FIFO Receive Count\n"
-  "//register UART2_C7816  *(volatile uint8_t  *)0x4006C018 // UART 7816 Control Register\n"
-  "//register UART2_IE7816  *(volatile uint8_t  *)0x4006C019 // UART 7816 Interrupt Enable Register\n"
-  "//register UART2_IS7816  *(volatile uint8_t  *)0x4006C01A // UART 7816 Interrupt Status Register\n"
-  "//register UART2_WP7816T0  *(volatile uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
-  "//register UART2_WP7816T1  *(volatile uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
-  "//register UART2_WN7816  *(volatile uint8_t  *)0x4006C01C // UART 7816 Wait N Register\n"
-  "//register UART2_WF7816  *(volatile uint8_t  *)0x4006C01D // UART 7816 Wait FD Register\n"
-  "//register UART2_ET7816  *(volatile uint8_t  *)0x4006C01E // UART 7816 Error Threshold Register\n"
-  "//register UART2_TL7816  *(volatile uint8_t  *)0x4006C01F // UART 7816 Transmit Length Register\n"
-  "//register UART2_C6  *(volatile uint8_t  *)0x4006C021 // UART CEA709.1-B Control Register 6\n"
-  "//register UART2_PCTH  *(volatile uint8_t  *)0x4006C022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
-  "//register UART2_PCTL  *(volatile uint8_t  *)0x4006C023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
-  "//register UART2_B1T  *(volatile uint8_t  *)0x4006C024 // UART CEA709.1-B Beta1 Timer\n"
-  "//register UART2_SDTH  *(volatile uint8_t  *)0x4006C025 // UART CEA709.1-B Secondary Delay Timer High\n"
-  "//register UART2_SDTL  *(volatile uint8_t  *)0x4006C026 // UART CEA709.1-B Secondary Delay Timer Low\n"
-  "//register UART2_PRE  *(volatile uint8_t  *)0x4006C027 // UART CEA709.1-B Preamble\n"
-  "//register UART2_TPL  *(volatile uint8_t  *)0x4006C028 // UART CEA709.1-B Transmit Packet Length\n"
-  "//register UART2_IE  *(volatile uint8_t  *)0x4006C029 // UART CEA709.1-B Interrupt Enable Register\n"
-  "//register UART2_WB  *(volatile uint8_t  *)0x4006C02A // UART CEA709.1-B WBASE\n"
-  "//register UART2_S3  *(volatile uint8_t  *)0x4006C02B // UART CEA709.1-B Status Register\n"
-  "//register UART2_S4  *(volatile uint8_t  *)0x4006C02C // UART CEA709.1-B Status Register\n"
-  "//register UART2_RPL  *(volatile uint8_t  *)0x4006C02D // UART CEA709.1-B Received Packet Length\n"
-  "//register UART2_RPREL  *(volatile uint8_t  *)0x4006C02E // UART CEA709.1-B Received Preamble Length\n"
-  "//register UART2_CPW  *(volatile uint8_t  *)0x4006C02F // UART CEA709.1-B Collision Pulse Width\n"
-  "//register UART2_RIDT  *(volatile uint8_t  *)0x4006C030 // UART CEA709.1-B Receive Indeterminate Time\n"
-  "//register UART2_TIDT  *(volatile uint8_t  *)0x4006C031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//register UART0_BDH  *(volatile $uint8_t  *)0x4006A000 // UART Baud Rate Registers: High\n"
+  "//register UART0_BDL  *(volatile $uint8_t  *)0x4006A001 // UART Baud Rate Registers: Low\n"
+  "//register UART0_C1  *(volatile $uint8_t  *)0x4006A002 // UART Control Register 1\n"
+  "//register UART_C1_LOOPS   ($uint8_t)0x80   // When LOOPS is set, the RxD pin is disconnected from the UART and the transmitter output is internally c"
+  "onnected to the receiver input\n"
+  "//register UART_C1_UARTSWAI  ($uint8_t)0x40   // UART Stops in Wait Mode\n"
+  "//register UART_C1_RSRC   ($uint8_t)0x20   // When LOOPS is set, the RSRC field determines the source for the receiver shift register input\n"
+  "//register UART_C1_M   ($uint8_t)0x10   // 9-bit or 8-bit Mode Select\n"
+  "//register UART_C1_WAKE   ($uint8_t)0x08   // Determines which condition wakes the UART\n"
+  "//register UART_C1_ILT   ($uint8_t)0x04   // Idle Line Type Select\n"
+  "//register UART_C1_PE   ($uint8_t)0x02   // Parity Enable\n"
+  "//register UART_C1_PT   ($uint8_t)0x01   // Parity Type, 0=even, 1=odd\n"
+  "//register UART0_C2  *(volatile $uint8_t  *)0x4006A003 // UART Control Register 2\n"
+  "//register UART_C2_TIE   ($uint8_t)0x80   // Transmitter Interrupt or DMA Transfer Enable.\n"
+  "//register UART_C2_TCIE   ($uint8_t)0x40   // Transmission Complete Interrupt Enable\n"
+  "//register UART_C2_RIE   ($uint8_t)0x20   // Receiver Full Interrupt or DMA Transfer Enable\n"
+  "//register UART_C2_ILIE   ($uint8_t)0x10   // Idle Line Interrupt Enable\n"
+  "//register UART_C2_TE   ($uint8_t)0x08   // Transmitter Enable\n"
+  "//register UART_C2_RE   ($uint8_t)0x04   // Receiver Enable\n"
+  "//register UART_C2_RWU   ($uint8_t)0x02   // Receiver Wakeup Control\n"
+  "//register UART_C2_SBK   ($uint8_t)0x01   // Send Break\n"
+  "//register UART0_S1  *(volatile $uint8_t  *)0x4006A004 // UART Status Register 1\n"
+  "//register UART_S1_TDRE   ($uint8_t)0x80   // Transmit Data Register Empty Flag\n"
+  "//register UART_S1_TC   ($uint8_t)0x40   // Transmit Complete Flag\n"
+  "//register UART_S1_RDRF   ($uint8_t)0x20   // Receive Data Register Full Flag\n"
+  "//register UART_S1_IDLE   ($uint8_t)0x10   // Idle Line Flag\n"
+  "//register UART_S1_OR   ($uint8_t)0x08   // Receiver Overrun Flag\n"
+  "//register UART_S1_NF   ($uint8_t)0x04   // Noise Flag\n"
+  "//register UART_S1_FE   ($uint8_t)0x02   // Framing Error Flag\n"
+  "//register UART_S1_PF   ($uint8_t)0x01   // Parity Error Flag\n"
+  "//register UART0_S2  *(volatile $uint8_t  *)0x4006A005 // UART Status Register 2\n"
+  "//register UART0_C3  *(volatile $uint8_t  *)0x4006A006 // UART Control Register 3\n"
+  "//register UART0_D   *(volatile $uint8_t  *)0x4006A007 // UART Data Register\n"
+  "//register UART0_MA1  *(volatile $uint8_t  *)0x4006A008 // UART Match Address Registers 1\n"
+  "//register UART0_MA2  *(volatile $uint8_t  *)0x4006A009 // UART Match Address Registers 2\n"
+  "//register UART0_C4  *(volatile $uint8_t  *)0x4006A00A // UART Control Register 4\n"
+  "//register UART0_C5  *(volatile $uint8_t  *)0x4006A00B // UART Control Register 5\n"
+  "//register UART0_ED  *(volatile $uint8_t  *)0x4006A00C // UART Extended Data Register\n"
+  "//register UART0_MODEM  *(volatile $uint8_t  *)0x4006A00D // UART Modem Register\n"
+  "//register UART0_IR  *(volatile $uint8_t  *)0x4006A00E // UART Infrared Register\n"
+  "//register UART0_PFIFO  *(volatile $uint8_t  *)0x4006A010 // UART FIFO Parameters\n"
+  "//register UART_PFIFO_TXFE   ($uint8_t)0x80\n"
+  "//register UART_PFIFO_RXFE   ($uint8_t)0x08\n"
+  "//register UART0_CFIFO  *(volatile $uint8_t  *)0x4006A011 // UART FIFO Control Register\n"
+  "//register UART_CFIFO_TXFLUSH  ($uint8_t)0x80   // \n"
+  "//register UART_CFIFO_RXFLUSH  ($uint8_t)0x40   // \n"
+  "//register UART_CFIFO_RXOFE  ($uint8_t)0x04   // \n"
+  "//register UART_CFIFO_TXOFE  ($uint8_t)0x02   // \n"
+  "//register UART_CFIFO_RXUFE  ($uint8_t)0x01   // \n"
+  "//register UART0_SFIFO  *(volatile $uint8_t  *)0x4006A012 // UART FIFO Status Register\n"
+  "//register UART_SFIFO_TXEMPT  ($uint8_t)0x80\n"
+  "//register UART_SFIFO_RXEMPT  ($uint8_t)0x40\n"
+  "//register UART_SFIFO_RXOF   ($uint8_t)0x04\n"
+  "//register UART_SFIFO_TXOF   ($uint8_t)0x02\n"
+  "//register UART_SFIFO_RXUF   ($uint8_t)0x01\n"
+  "//register UART0_TWFIFO  *(volatile $uint8_t  *)0x4006A013 // UART FIFO Transmit Watermark\n"
+  "//register UART0_TCFIFO  *(volatile $uint8_t  *)0x4006A014 // UART FIFO Transmit Count\n"
+  "//register UART0_RWFIFO  *(volatile $uint8_t  *)0x4006A015 // UART FIFO Receive Watermark\n"
+  "//register UART0_RCFIFO  *(volatile $uint8_t  *)0x4006A016 // UART FIFO Receive Count\n"
+  "//register UART0_C7816  *(volatile $uint8_t  *)0x4006A018 // UART 7816 Control Register\n"
+  "//register UART0_IE7816  *(volatile $uint8_t  *)0x4006A019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART0_IS7816  *(volatile $uint8_t  *)0x4006A01A // UART 7816 Interrupt Status Register\n"
+  "//register UART0_WP7816T0  *(volatile $uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
+  "//register UART0_WP7816T1  *(volatile $uint8_t  *)0x4006A01B // UART 7816 Wait Parameter Register\n"
+  "//register UART0_WN7816  *(volatile $uint8_t  *)0x4006A01C // UART 7816 Wait N Register\n"
+  "//register UART0_WF7816  *(volatile $uint8_t  *)0x4006A01D // UART 7816 Wait FD Register\n"
+  "//register UART0_ET7816  *(volatile $uint8_t  *)0x4006A01E // UART 7816 Error Threshold Register\n"
+  "//register UART0_TL7816  *(volatile $uint8_t  *)0x4006A01F // UART 7816 Transmit Length Register\n"
+  "//register UART0_C6  *(volatile $uint8_t  *)0x4006A021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART0_PCTH  *(volatile $uint8_t  *)0x4006A022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART0_PCTL  *(volatile $uint8_t  *)0x4006A023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART0_B1T  *(volatile $uint8_t  *)0x4006A024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART0_SDTH  *(volatile $uint8_t  *)0x4006A025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART0_SDTL  *(volatile $uint8_t  *)0x4006A026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART0_PRE  *(volatile $uint8_t  *)0x4006A027 // UART CEA709.1-B Preamble\n"
+  "//register UART0_TPL  *(volatile $uint8_t  *)0x4006A028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART0_IE  *(volatile $uint8_t  *)0x4006A029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART0_WB  *(volatile $uint8_t  *)0x4006A02A // UART CEA709.1-B WBASE\n"
+  "//register UART0_S3  *(volatile $uint8_t  *)0x4006A02B // UART CEA709.1-B Status Register\n"
+  "//register UART0_S4  *(volatile $uint8_t  *)0x4006A02C // UART CEA709.1-B Status Register\n"
+  "//register UART0_RPL  *(volatile $uint8_t  *)0x4006A02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART0_RPREL  *(volatile $uint8_t  *)0x4006A02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART0_CPW  *(volatile $uint8_t  *)0x4006A02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART0_RIDT  *(volatile $uint8_t  *)0x4006A030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART0_TIDT  *(volatile $uint8_t  *)0x4006A031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//register UART1_BDH  *(volatile $uint8_t  *)0x4006B000 // UART Baud Rate Registers: High\n"
+  "//register UART1_BDL  *(volatile $uint8_t  *)0x4006B001 // UART Baud Rate Registers: Low\n"
+  "//register UART1_C1  *(volatile $uint8_t  *)0x4006B002 // UART Control Register 1\n"
+  "//register UART1_C2  *(volatile $uint8_t  *)0x4006B003 // UART Control Register 2\n"
+  "//register UART1_S1  *(volatile $uint8_t  *)0x4006B004 // UART Status Register 1\n"
+  "//register UART1_S2  *(volatile $uint8_t  *)0x4006B005 // UART Status Register 2\n"
+  "//register UART1_C3  *(volatile $uint8_t  *)0x4006B006 // UART Control Register 3\n"
+  "//register UART1_D   *(volatile $uint8_t  *)0x4006B007 // UART Data Register\n"
+  "//register UART1_MA1  *(volatile $uint8_t  *)0x4006B008 // UART Match Address Registers 1\n"
+  "//register UART1_MA2  *(volatile $uint8_t  *)0x4006B009 // UART Match Address Registers 2\n"
+  "//register UART1_C4  *(volatile $uint8_t  *)0x4006B00A // UART Control Register 4\n"
+  "//register UART1_C5  *(volatile $uint8_t  *)0x4006B00B // UART Control Register 5\n"
+  "//register UART1_ED  *(volatile $uint8_t  *)0x4006B00C // UART Extended Data Register\n"
+  "//register UART1_MODEM  *(volatile $uint8_t  *)0x4006B00D // UART Modem Register\n"
+  "//register UART1_IR  *(volatile $uint8_t  *)0x4006B00E // UART Infrared Register\n"
+  "//register UART1_PFIFO  *(volatile $uint8_t  *)0x4006B010 // UART FIFO Parameters\n"
+  "//register UART1_CFIFO  *(volatile $uint8_t  *)0x4006B011 // UART FIFO Control Register\n"
+  "//register UART1_SFIFO  *(volatile $uint8_t  *)0x4006B012 // UART FIFO Status Register\n"
+  "//register UART1_TWFIFO  *(volatile $uint8_t  *)0x4006B013 // UART FIFO Transmit Watermark\n"
+  "//register UART1_TCFIFO  *(volatile $uint8_t  *)0x4006B014 // UART FIFO Transmit Count\n"
+  "//register UART1_RWFIFO  *(volatile $uint8_t  *)0x4006B015 // UART FIFO Receive Watermark\n"
+  "//register UART1_RCFIFO  *(volatile $uint8_t  *)0x4006B016 // UART FIFO Receive Count\n"
+  "//register UART1_C7816  *(volatile $uint8_t  *)0x4006B018 // UART 7816 Control Register\n"
+  "//register UART1_IE7816  *(volatile $uint8_t  *)0x4006B019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART1_IS7816  *(volatile $uint8_t  *)0x4006B01A // UART 7816 Interrupt Status Register\n"
+  "//register UART1_WP7816T0  *(volatile $uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
+  "//register UART1_WP7816T1  *(volatile $uint8_t  *)0x4006B01B // UART 7816 Wait Parameter Register\n"
+  "//register UART1_WN7816  *(volatile $uint8_t  *)0x4006B01C // UART 7816 Wait N Register\n"
+  "//register UART1_WF7816  *(volatile $uint8_t  *)0x4006B01D // UART 7816 Wait FD Register\n"
+  "//register UART1_ET7816  *(volatile $uint8_t  *)0x4006B01E // UART 7816 Error Threshold Register\n"
+  "//register UART1_TL7816  *(volatile $uint8_t  *)0x4006B01F // UART 7816 Transmit Length Register\n"
+  "//register UART1_C6  *(volatile $uint8_t  *)0x4006B021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART1_PCTH  *(volatile $uint8_t  *)0x4006B022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART1_PCTL  *(volatile $uint8_t  *)0x4006B023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART1_B1T  *(volatile $uint8_t  *)0x4006B024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART1_SDTH  *(volatile $uint8_t  *)0x4006B025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART1_SDTL  *(volatile $uint8_t  *)0x4006B026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART1_PRE  *(volatile $uint8_t  *)0x4006B027 // UART CEA709.1-B Preamble\n"
+  "//register UART1_TPL  *(volatile $uint8_t  *)0x4006B028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART1_IE  *(volatile $uint8_t  *)0x4006B029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART1_WB  *(volatile $uint8_t  *)0x4006B02A // UART CEA709.1-B WBASE\n"
+  "//register UART1_S3  *(volatile $uint8_t  *)0x4006B02B // UART CEA709.1-B Status Register\n"
+  "//register UART1_S4  *(volatile $uint8_t  *)0x4006B02C // UART CEA709.1-B Status Register\n"
+  "//register UART1_RPL  *(volatile $uint8_t  *)0x4006B02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART1_RPREL  *(volatile $uint8_t  *)0x4006B02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART1_CPW  *(volatile $uint8_t  *)0x4006B02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART1_RIDT  *(volatile $uint8_t  *)0x4006B030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART1_TIDT  *(volatile $uint8_t  *)0x4006B031 // UART CEA709.1-B Transmit Indeterminate Time\n"
+  "//register UART2_BDH  *(volatile $uint8_t  *)0x4006C000 // UART Baud Rate Registers: High\n"
+  "//register UART2_BDL  *(volatile $uint8_t  *)0x4006C001 // UART Baud Rate Registers: Low\n"
+  "//register UART2_C1  *(volatile $uint8_t  *)0x4006C002 // UART Control Register 1\n"
+  "//register UART2_C2  *(volatile $uint8_t  *)0x4006C003 // UART Control Register 2\n"
+  "//register UART2_S1  *(volatile $uint8_t  *)0x4006C004 // UART Status Register 1\n"
+  "//register UART2_S2  *(volatile $uint8_t  *)0x4006C005 // UART Status Register 2\n"
+  "//register UART2_C3  *(volatile $uint8_t  *)0x4006C006 // UART Control Register 3\n"
+  "//register UART2_D   *(volatile $uint8_t  *)0x4006C007 // UART Data Register\n"
+  "//register UART2_MA1  *(volatile $uint8_t  *)0x4006C008 // UART Match Address Registers 1\n"
+  "//register UART2_MA2  *(volatile $uint8_t  *)0x4006C009 // UART Match Address Registers 2\n"
+  "//register UART2_C4  *(volatile $uint8_t  *)0x4006C00A // UART Control Register 4\n"
+  "//register UART2_C5  *(volatile $uint8_t  *)0x4006C00B // UART Control Register 5\n"
+  "//register UART2_ED  *(volatile $uint8_t  *)0x4006C00C // UART Extended Data Register\n"
+  "//register UART2_MODEM  *(volatile $uint8_t  *)0x4006C00D // UART Modem Register\n"
+  "//register UART2_IR  *(volatile $uint8_t  *)0x4006C00E // UART Infrared Register\n"
+  "//register UART2_PFIFO  *(volatile $uint8_t  *)0x4006C010 // UART FIFO Parameters\n"
+  "//register UART2_CFIFO  *(volatile $uint8_t  *)0x4006C011 // UART FIFO Control Register\n"
+  "//register UART2_SFIFO  *(volatile $uint8_t  *)0x4006C012 // UART FIFO Status Register\n"
+  "//register UART2_TWFIFO  *(volatile $uint8_t  *)0x4006C013 // UART FIFO Transmit Watermark\n"
+  "//register UART2_TCFIFO  *(volatile $uint8_t  *)0x4006C014 // UART FIFO Transmit Count\n"
+  "//register UART2_RWFIFO  *(volatile $uint8_t  *)0x4006C015 // UART FIFO Receive Watermark\n"
+  "//register UART2_RCFIFO  *(volatile $uint8_t  *)0x4006C016 // UART FIFO Receive Count\n"
+  "//register UART2_C7816  *(volatile $uint8_t  *)0x4006C018 // UART 7816 Control Register\n"
+  "//register UART2_IE7816  *(volatile $uint8_t  *)0x4006C019 // UART 7816 Interrupt Enable Register\n"
+  "//register UART2_IS7816  *(volatile $uint8_t  *)0x4006C01A // UART 7816 Interrupt Status Register\n"
+  "//register UART2_WP7816T0  *(volatile $uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
+  "//register UART2_WP7816T1  *(volatile $uint8_t  *)0x4006C01B // UART 7816 Wait Parameter Register\n"
+  "//register UART2_WN7816  *(volatile $uint8_t  *)0x4006C01C // UART 7816 Wait N Register\n"
+  "//register UART2_WF7816  *(volatile $uint8_t  *)0x4006C01D // UART 7816 Wait FD Register\n"
+  "//register UART2_ET7816  *(volatile $uint8_t  *)0x4006C01E // UART 7816 Error Threshold Register\n"
+  "//register UART2_TL7816  *(volatile $uint8_t  *)0x4006C01F // UART 7816 Transmit Length Register\n"
+  "//register UART2_C6  *(volatile $uint8_t  *)0x4006C021 // UART CEA709.1-B Control Register 6\n"
+  "//register UART2_PCTH  *(volatile $uint8_t  *)0x4006C022 // UART CEA709.1-B Packet Cycle Time Counter High\n"
+  "//register UART2_PCTL  *(volatile $uint8_t  *)0x4006C023 // UART CEA709.1-B Packet Cycle Time Counter Low\n"
+  "//register UART2_B1T  *(volatile $uint8_t  *)0x4006C024 // UART CEA709.1-B Beta1 Timer\n"
+  "//register UART2_SDTH  *(volatile $uint8_t  *)0x4006C025 // UART CEA709.1-B Secondary Delay Timer High\n"
+  "//register UART2_SDTL  *(volatile $uint8_t  *)0x4006C026 // UART CEA709.1-B Secondary Delay Timer Low\n"
+  "//register UART2_PRE  *(volatile $uint8_t  *)0x4006C027 // UART CEA709.1-B Preamble\n"
+  "//register UART2_TPL  *(volatile $uint8_t  *)0x4006C028 // UART CEA709.1-B Transmit Packet Length\n"
+  "//register UART2_IE  *(volatile $uint8_t  *)0x4006C029 // UART CEA709.1-B Interrupt Enable Register\n"
+  "//register UART2_WB  *(volatile $uint8_t  *)0x4006C02A // UART CEA709.1-B WBASE\n"
+  "//register UART2_S3  *(volatile $uint8_t  *)0x4006C02B // UART CEA709.1-B Status Register\n"
+  "//register UART2_S4  *(volatile $uint8_t  *)0x4006C02C // UART CEA709.1-B Status Register\n"
+  "//register UART2_RPL  *(volatile $uint8_t  *)0x4006C02D // UART CEA709.1-B Received Packet Length\n"
+  "//register UART2_RPREL  *(volatile $uint8_t  *)0x4006C02E // UART CEA709.1-B Received Preamble Length\n"
+  "//register UART2_CPW  *(volatile $uint8_t  *)0x4006C02F // UART CEA709.1-B Collision Pulse Width\n"
+  "//register UART2_RIDT  *(volatile $uint8_t  *)0x4006C030 // UART CEA709.1-B Receive Indeterminate Time\n"
+  "//register UART2_TIDT  *(volatile $uint8_t  *)0x4006C031 // UART CEA709.1-B Transmit Indeterminate Time\n"
   "//\n"
   "//// Chapter 46: Synchronous Audio Interface (SAI)\n"
   "//register I2S0_TCSR   0x4002F000 // SAI Transmit Control Register\n"
@@ -20087,36 +20088,36 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide\n"
   "\n"
   "// Chapter 47: General-Purpose Input/Output (GPIO)\n"
-  "register GPIOA_PDOR   at 0x400FF000 : UInt32 // Port Data Output Register\n"
-  "register GPIOA_PSOR   at 0x400FF004 : UInt32 // Port Set Output Register\n"
-  "register GPIOA_PCOR   at 0x400FF008 : UInt32 // Port Clear Output Register\n"
-  "register GPIOA_PTOR   at 0x400FF00C : UInt32 // Port Toggle Output Register\n"
-  "register GPIOA_PDIR   at 0x400FF010 : UInt32 // Port Data Input Register\n"
-  "register GPIOA_PDDR   at 0x400FF014 : UInt32 // Port Data Direction Register\n"
-  "register GPIOB_PDOR   at 0x400FF040 : UInt32 // Port Data Output Register\n"
-  "register GPIOB_PSOR   at 0x400FF044 : UInt32 // Port Set Output Register\n"
-  "register GPIOB_PCOR   at 0x400FF048 : UInt32 // Port Clear Output Register\n"
-  "register GPIOB_PTOR   at 0x400FF04C : UInt32 // Port Toggle Output Register\n"
-  "register GPIOB_PDIR   at 0x400FF050 : UInt32 // Port Data Input Register\n"
-  "register GPIOB_PDDR   at 0x400FF054 : UInt32 // Port Data Direction Register\n"
-  "register GPIOC_PDOR   at 0x400FF080 : UInt32 // Port Data Output Register\n"
-  "register GPIOC_PSOR   at 0x400FF084 : UInt32 // Port Set Output Register\n"
-  "register GPIOC_PCOR   at 0x400FF088 : UInt32 // Port Clear Output Register\n"
-  "register GPIOC_PTOR   at 0x400FF08C : UInt32 // Port Toggle Output Register\n"
-  "register GPIOC_PDIR   at 0x400FF090 : UInt32 // Port Data Input Register\n"
-  "register GPIOC_PDDR   at 0x400FF094 : UInt32 // Port Data Direction Register\n"
-  "register GPIOD_PDOR   at 0x400FF0C0 : UInt32 // Port Data Output Register\n"
-  "register GPIOD_PSOR   at 0x400FF0C4 : UInt32 // Port Set Output Register\n"
-  "register GPIOD_PCOR   at 0x400FF0C8 : UInt32 // Port Clear Output Register\n"
-  "register GPIOD_PTOR   at 0x400FF0CC : UInt32 // Port Toggle Output Register\n"
-  "register GPIOD_PDIR   at 0x400FF0D0 : UInt32 // Port Data Input Register\n"
-  "register GPIOD_PDDR   at 0x400FF0D4 : UInt32 // Port Data Direction Register\n"
-  "register GPIOE_PDOR   at 0x400FF100 : UInt32 // Port Data Output Register\n"
-  "register GPIOE_PSOR   at 0x400FF104 : UInt32 // Port Set Output Register\n"
-  "register GPIOE_PCOR   at 0x400FF108 : UInt32 // Port Clear Output Register\n"
-  "register GPIOE_PTOR   at 0x400FF10C : UInt32 // Port Toggle Output Register\n"
-  "register GPIOE_PDIR   at 0x400FF110 : UInt32 // Port Data Input Register\n"
-  "register GPIOE_PDDR   at 0x400FF114 : UInt32 // Port Data Direction Register\n"
+  "register GPIOA_PDOR   at 0x400FF000 : $uint32 // Port Data Output Register\n"
+  "register GPIOA_PSOR   at 0x400FF004 : $uint32 // Port Set Output Register\n"
+  "register GPIOA_PCOR   at 0x400FF008 : $uint32 // Port Clear Output Register\n"
+  "register GPIOA_PTOR   at 0x400FF00C : $uint32 // Port Toggle Output Register\n"
+  "register GPIOA_PDIR   at 0x400FF010 : $uint32 // Port Data Input Register\n"
+  "register GPIOA_PDDR   at 0x400FF014 : $uint32 // Port Data Direction Register\n"
+  "register GPIOB_PDOR   at 0x400FF040 : $uint32 // Port Data Output Register\n"
+  "register GPIOB_PSOR   at 0x400FF044 : $uint32 // Port Set Output Register\n"
+  "register GPIOB_PCOR   at 0x400FF048 : $uint32 // Port Clear Output Register\n"
+  "register GPIOB_PTOR   at 0x400FF04C : $uint32 // Port Toggle Output Register\n"
+  "register GPIOB_PDIR   at 0x400FF050 : $uint32 // Port Data Input Register\n"
+  "register GPIOB_PDDR   at 0x400FF054 : $uint32 // Port Data Direction Register\n"
+  "register GPIOC_PDOR   at 0x400FF080 : $uint32 // Port Data Output Register\n"
+  "register GPIOC_PSOR   at 0x400FF084 : $uint32 // Port Set Output Register\n"
+  "register GPIOC_PCOR   at 0x400FF088 : $uint32 // Port Clear Output Register\n"
+  "register GPIOC_PTOR   at 0x400FF08C : $uint32 // Port Toggle Output Register\n"
+  "register GPIOC_PDIR   at 0x400FF090 : $uint32 // Port Data Input Register\n"
+  "register GPIOC_PDDR   at 0x400FF094 : $uint32 // Port Data Direction Register\n"
+  "register GPIOD_PDOR   at 0x400FF0C0 : $uint32 // Port Data Output Register\n"
+  "register GPIOD_PSOR   at 0x400FF0C4 : $uint32 // Port Set Output Register\n"
+  "register GPIOD_PCOR   at 0x400FF0C8 : $uint32 // Port Clear Output Register\n"
+  "register GPIOD_PTOR   at 0x400FF0CC : $uint32 // Port Toggle Output Register\n"
+  "register GPIOD_PDIR   at 0x400FF0D0 : $uint32 // Port Data Input Register\n"
+  "register GPIOD_PDDR   at 0x400FF0D4 : $uint32 // Port Data Direction Register\n"
+  "register GPIOE_PDOR   at 0x400FF100 : $uint32 // Port Data Output Register\n"
+  "register GPIOE_PSOR   at 0x400FF104 : $uint32 // Port Set Output Register\n"
+  "register GPIOE_PCOR   at 0x400FF108 : $uint32 // Port Clear Output Register\n"
+  "register GPIOE_PTOR   at 0x400FF10C : $uint32 // Port Toggle Output Register\n"
+  "register GPIOE_PDIR   at 0x400FF110 : $uint32 // Port Data Input Register\n"
+  "register GPIOE_PDDR   at 0x400FF114 : $uint32 // Port Data Direction Register\n"
   "//\n"
   "//// Chapter 48: Touch sense input (TSI)\n"
   "//register TSI0_GENCS   0x40045000 // General Control and Status Register\n"
@@ -20155,10 +20156,10 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register TSI0_THRESHOLD   0x40045120 // Low Power Channel Threshold Register\n"
   "//\n"
   "//// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)\n"
-  "//register NVIC_ENABLE_IRQ(n) (*((volatile uint32_t *)0xE000E100 + (n >> 5)) = (1 << (n & 31)))\n"
-  "//register NVIC_DISABLE_IRQ(n) (*((volatile uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
-  "//register NVIC_SET_PENDING(n) (*((volatile uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
-  "//register NVIC_CLEAR_PENDING(n) (*((volatile uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_ENABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E100 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_DISABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_SET_PENDING(n) (*((volatile $uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
+  "//register NVIC_CLEAR_PENDING(n) (*((volatile $uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
   "//\n"
   "//register NVIC_ISER0   0xE000E100\n"
   "//register NVIC_ISER1   0xE000E104\n"
@@ -20168,8 +20169,8 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//// 0 = highest priority\n"
   "//// Cortex-M4: 0,16,32,48,64,80,96,112,128,144,160,176,192,208,224,240\n"
   "//// Cortex-M0: 0,64,128,192\n"
-  "//register NVIC_SET_PRIORITY(irqnum, priority)  (*((volatile uint8_t *)0xE000E400 + (irqnum)) = (uint8_t)(priority))\n"
-  "//register NVIC_GET_PRIORITY(irqnum) (*((uint8_t *)0xE000E400 + (irqnum)))\n"
+  "//register NVIC_SET_PRIORITY(irqnum, priority)  (*((volatile $uint8_t *)0xE000E400 + (irqnum)) = ($uint8_t)(priority))\n"
+  "//register NVIC_GET_PRIORITY(irqnum) (*(($uint8_t *)0xE000E400 + (irqnum)))\n"
   "//\n"
   "//register IRQ_DMA_CH0  0\n"
   "//register IRQ_DMA_CH1  1\n"
@@ -20244,16 +20245,16 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//\n"
   "\n"
   "//System Control Space (SCS), ARMv7 ref manual, B3.2, page 708\n"
-  "//register SCB_CPUID  *(const    uint32_t *)0xE000ED00 // CPUID Base Register\n"
+  "//register SCB_CPUID  *(const    $uint32_t *)0xE000ED00 // CPUID Base Register\n"
   "\n"
-  "register ICSR at 0xE000_ED04 : UInt32 { // Interrupt Control and State\n"
+  "register ICSR at 0xE000_ED04 : $uint32 { // Interrupt Control and State\n"
   "  NMIPENDSET, 2, PENDSVSET, PENDSVCLR, PENDSTSET, PENDSTCLR, 1, ISRPREEMPT,\n"
   "  ISRPENDING, 1, VECTPENDING[9], RETTOBASE, 2, VECTACTIVE[9]\n"
   "}\n"
   "\n"
-  "register VTOR at 0xE000ED08 : UInt32 // Vector Table Offset\n"
+  "register VTOR at 0xE000ED08 : $uint32 // Vector Table Offset\n"
   "\n"
-  "register AIRCR at 0xE000ED0C : UInt32 { // Application Interrupt and Reset Control\n"
+  "register AIRCR at 0xE000ED0C : $uint32 { // Application Interrupt and Reset Control\n"
   "  VECTKEY[16], ENDIANNESS, 4, PRIGROUP[3],\n"
   "  5, SYSRESETREQ, VECTCLRACTIVE, VECTRESET \n"
   "}\n"
@@ -20269,7 +20270,7 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "//register SCB_DFSR   0xE000ED30 // Debug Fault Status\n"
   "//register SCB_MMFAR   0xE000ED34 // MemManage Fault Address\n"
   "\n"
-  "register SYST_CSR at 0xE000_E010 : UInt32 { // SysTick Control and Status\n"
+  "register SYST_CSR at 0xE000_E010 : $uint32 { // SysTick Control and Status\n"
   "  15, \n"
   "  COUNTFLAG,\n"
   "  13,\n"
@@ -20278,11 +20279,11 @@ const char * gWrapperFileContent_8_targetTemplates = "// Teensyduino Core Librar
   "  ENABLE\n"
   "}\n"
   "\n"
-  "register SYST_RVR   at 0xE000_E014 : UInt32 // SysTick Reload Value Register\n"
+  "register SYST_RVR   at 0xE000_E014 : $uint32 // SysTick Reload Value Register\n"
   "\n"
-  "register SYST_CVR   at 0xE000_E018 : UInt32 // SysTick Current Value Register\n"
+  "register SYST_CVR   at 0xE000_E018 : $uint32 // SysTick Current Value Register\n"
   "\n"
-  "register SYST_CALIB  @ro at 0xE000_E01C : UInt32 // SysTick Calibration Value\n"
+  "register SYST_CALIB  @ro at 0xE000_E01C : $uint32 // SysTick Calibration Value\n"
   "\n"
   "\n"
   "//register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control\n"
@@ -20295,7 +20296,7 @@ const cRegularFileWrapper gWrapperFile_8_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  135418, // Text length
+  136555, // Text length
   gWrapperFileContent_8_targetTemplates
 ) ;
 
@@ -21765,9 +21766,9 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
 
 const char * gWrapperFileContent_17_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void raise_exception (const type_Int32 inCode,\n"
+  "static void raise_exception (const type_int32 inCode,\n"
   "                             const char * inSourceFile,\n"
-  "                             const type_UInt32 inSourceLine) {\n"
+  "                             const type_uint32 inSourceLine) {\n"
   " //--- Mask interrupt: write 1 into FAULTMASK register\n"
   "  const uint32_t maskValue = 1 ;\n"
   "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
@@ -22676,9 +22677,9 @@ const cRegularFileWrapper gWrapperFile_26_targetTemplates (
 
 const char * gWrapperFileContent_27_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "static void raise_exception (const type_Int32 inCode,\n"
+  "static void raise_exception (const type_int32 inCode,\n"
   "                             const char * inSourceFile,\n"
-  "                             const type_UInt32 inSourceLine) {\n"
+  "                             const type_uint32 inSourceLine) {\n"
   " //--- Mask interrupt: write 1 into FAULTMASK register\n"
   "  const uint32_t maskValue = 1 ;\n"
   "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"

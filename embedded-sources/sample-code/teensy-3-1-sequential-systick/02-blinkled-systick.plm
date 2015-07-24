@@ -9,9 +9,9 @@ proc setup `user () {
 
 //------------------------------------------------*
 
-var gUpTimeMS : UInt32 = 0 {
+var gUpTimeMS : $uint32 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration : UInt32)
+  proc wait (?ms: inDuration : $uint32)
 }
 
 //------------------------------------------------*
@@ -22,7 +22,7 @@ proc systickHandler `isr () {
 
 //------------------------------------------------*
 
-proc wait `user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : $uint32) {
   let deadline = gUpTimeMS + inDuration
   while@boucle deadline > gUpTimeMS do
   end@boucle

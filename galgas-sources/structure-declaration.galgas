@@ -48,7 +48,7 @@ syntax extension common_syntax {
 #      select
 #        optionalFieldType = .new {!"" !.here}
 #      or
-        $identifier$ ?optionalFieldType
+        $typeName$ ?optionalFieldType
 #      end
       $identifier$ ?let fieldName
       $=$
