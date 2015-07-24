@@ -25,8 +25,12 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $let$
     $identifier$ ?let constantName
-    $:$
-    $typeName$ ?let typeName
+    @lstring typeName
+    select
+      typeName = ["" nowhere]
+    or
+      $typeName$ ?typeName
+    end
     $=$
     <expression> ?let @expressionAST expression
     ioAST.mDeclarationList += !@globalConstantDeclaration.new {
@@ -48,7 +52,9 @@ override method @globalConstantDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !mConstantName !self]
-  [!?ioGraph addEdge !mConstantName !mTypeName]
+  if mTypeName.string != "" then
+    [!?ioGraph addEdge !mConstantName !mTypeName]
+  end
   [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
 }
 
@@ -76,7 +82,12 @@ override method @globalConstantDeclaration enterInContext
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?let constantType]
+  @unifiedTypeMap-proxy constantType
+  if mTypeName.string == "" then
+    constantType = .null
+  else
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?constantType]
+  end
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}

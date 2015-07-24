@@ -35,10 +35,8 @@ project (1:0:0) -> "plm" {
 #--- Structure
 #  "galgas-sources/structure-declaration.galgas"
 
-#--- Global variables
+#--- Global declarations
   "galgas-sources/global-variable-declaration.galgas"
-
-#--- Global constantes
   "galgas-sources/global-constant-declaration.galgas"
 
 #--- Integer

@@ -43,7 +43,6 @@ syntax extension common_syntax {
     while
       $?$ ?let selector
       $identifier$ ?let formalArgumentName
-      $:$
       $typeName$ ?let formalArgumentTypeName
       funcFormalArgumentList +=
         !selector
@@ -53,7 +52,6 @@ syntax extension common_syntax {
     $)$
     $->$
     $identifier$ ?let resultVarName
-    $:$
     $typeName$ ?let resultTypeName
     ${$
     @labelMap labelMap = {}

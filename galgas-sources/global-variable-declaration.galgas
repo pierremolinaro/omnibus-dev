@@ -45,8 +45,12 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $var$
     $identifier$ ?let varName
-    $:$
-    $typeName$ ?let typeName
+    @lstring typeName
+    select
+      typeName = ["" nowhere]
+    or
+      $typeName$ ?typeName
+    end
     $=$
     <expression> ?let @expressionAST expression
     @allowedProcList allowedProcList = {}
@@ -114,7 +118,12 @@ method @globalVarDeclarationList-element enterInContext
 #--- Get destination type
   switch mType
   case valueType (@lstring typeName) :
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?let variableType]
+    @unifiedTypeMap-proxy variableType
+    if typeName.string == "" then
+      variableType = .null
+    else
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?variableType]
+    end
   #--- Analyze source expression
     @semanticTemporariesStruct temporaries = .default
     @instructionListIR instructionGenerationList = {}
@@ -201,7 +210,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !variableType
+      !expressionType
       !executionModes
       !allowedProcedureMap
       !resultValueName

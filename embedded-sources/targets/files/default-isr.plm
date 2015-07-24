@@ -70,10 +70,10 @@ init 0 { // Configure Systick interrupt every ms
   SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
 }
 
-var gCompteur : $uint32 = 0 {
+var gCompteur $uint32 = 0 {
   @rw proc systickHandler ()
-  proc waitMS (?inDuration : $uint32)
-  proc busyWaitingDuringMS (?inDuration : $uint32)
+  proc waitMS (?inDuration $uint32)
+  proc busyWaitingDuringMS (?inDuration $uint32)
 }
 
 required proc systickHandler `isr ()
@@ -86,7 +86,7 @@ proc systickHandler `isr @weak () {
 proc userSystickHandler `isr @weak () {
 }
 
-proc waitMS `user `init (?inDuration : $uint32) {
+proc waitMS `user `init (?inDuration $uint32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
