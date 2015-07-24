@@ -80,7 +80,7 @@ override method @constructorCall analyzeExpression
 #--- Check constructor
   [constructorMap searchKey !mConstructorName ?let generatedCodeString]
 #--- Temporary variable
-  getNewTempVariable (!?ioTemporaryIndex ?outResultValueName)
+  getNewTempVariable (!?ioTemporaries ?outResultValueName)
 #--- Generate code
 #  outGeneratedCode = @inLineExpressionGeneration.new {!generatedCodeString}
   ioInstructionGenerationList += !@constructorCallIR.new {

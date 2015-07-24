@@ -717,6 +717,29 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_boot [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$case$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_case [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('c'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$check$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_check [] = {
   TO_UNICODE ('t'),
@@ -729,52 +752,6 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_check [] = {
   TO_UNICODE ('e'),
   TO_UNICODE ('c'),
   TO_UNICODE ('k'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
-
-//--- Syntax error message for terminal '$enum$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_enum [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
-
-//--- Syntax error message for terminal '$case$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_case [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('k'),
@@ -865,6 +842,29 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_end [] = {
   TO_UNICODE ('e'),
   TO_UNICODE ('n'),
   TO_UNICODE ('d'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
+//--- Syntax error message for terminal '$enum$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_enum [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('u'),
+  TO_UNICODE ('m'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('k'),
@@ -2582,13 +2582,13 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_boolset,
     gSyntaxErrorMessage_plm_5F_lexique_booleanType,
     gSyntaxErrorMessage_plm_5F_lexique_boot,
-    gSyntaxErrorMessage_plm_5F_lexique_check,
-    gSyntaxErrorMessage_plm_5F_lexique_enum,
     gSyntaxErrorMessage_plm_5F_lexique_case,
+    gSyntaxErrorMessage_plm_5F_lexique_check,
     gSyntaxErrorMessage_plm_5F_lexique_do,
     gSyntaxErrorMessage_plm_5F_lexique_else,
     gSyntaxErrorMessage_plm_5F_lexique_elsif,
     gSyntaxErrorMessage_plm_5F_lexique_end,
+    gSyntaxErrorMessage_plm_5F_lexique_enum,
     gSyntaxErrorMessage_plm_5F_lexique_exception,
     gSyntaxErrorMessage_plm_5F_lexique_false,
     gSyntaxErrorMessage_plm_5F_lexique_forever,
@@ -3630,19 +3630,14 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("boot") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
-    case kToken_check:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("check") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken_enum:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("enum") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
     case kToken_case:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("case") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_check:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("check") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_do:
@@ -3663,6 +3658,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_end:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("end") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_enum:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("enum") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_exception:
@@ -4497,13 +4497,13 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("boolset") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("booleanType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("boot") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("check") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("enum") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("case") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("check") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("do") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("else") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("elsif") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("end") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("enum") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("exception") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("false") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("forever") COMMA_THERE) ;
@@ -4600,13 +4600,13 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_boolset */,
     1 /* plm_lexique_1_booleanType */,
     1 /* plm_lexique_1_boot */,
-    1 /* plm_lexique_1_check */,
-    1 /* plm_lexique_1_enum */,
     1 /* plm_lexique_1_case */,
+    1 /* plm_lexique_1_check */,
     1 /* plm_lexique_1_do */,
     1 /* plm_lexique_1_else */,
     1 /* plm_lexique_1_elsif */,
     1 /* plm_lexique_1_end */,
+    1 /* plm_lexique_1_enum */,
     1 /* plm_lexique_1_exception */,
     1 /* plm_lexique_1_false */,
     1 /* plm_lexique_1_forever */,
