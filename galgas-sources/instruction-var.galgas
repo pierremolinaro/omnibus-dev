@@ -31,7 +31,7 @@ syntax extension common_syntax {
       optionalTypeName = ["" nowhere]
     or
       $:$
-      $identifier$ ?optionalTypeName
+      $typeName$ ?optionalTypeName
     end
     $=$
     <expression> ?let @expressionAST expression
@@ -48,7 +48,7 @@ syntax extension common_syntax {
     $var$
     $identifier$ ?let varName
     $:$
-    $identifier$ ?let typeName
+    $typeName$ ?let typeName
     ioInstructionList += !@varInstructionAST.new {
       !varName
       !typeName

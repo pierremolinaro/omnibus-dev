@@ -42,16 +42,16 @@ L'\plm=expression_statique= peut utiliser la valeur des constantes globales : le
 Par exemple, voici comment on peut implémenter une variable globale \texttt{gCompteur}, incrémentée par la routine d'interruption \texttt{timerHandler}, et écrire un service d'attente de délai \texttt{wait} avec une boucle d'attente active :
 
 \begin{PLM}
-var gCompteur : UInt32 = 0 {
+var gCompteur : $uint32 = 0 {
   @rw proc timerHandler ()
-  proc waitMS (?inDuration : UInt32)
+  proc waitMS (?inDuration : $uint32)
 }
 
 proc timerHandler `isr () {
   gCompteur &++
 }
 
-proc wait `user (?inDuration : UInt32) {
+proc wait `user (?inDuration : $uint32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
@@ -64,7 +64,7 @@ Note : si une variable globale est accédée par des routines appartenant à plu
 Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=init=!Routine} et les routines d'exception (\refSubsectionPage{routinesException})\index{Routine!exception@\plm=exception=}
  doivent de même être déclarées pour pouvoir accéder à une variable globale (et avec l'attribut \plm=@rw= si on veut l'accès en écriture). Par exemple :
 \begin{PLM}
-var gCompteur : UInt32 = 0 {
+var gCompteur : $uint32 = 0 {
   @rw init 112
   @rw exception loop 179
 }
@@ -91,11 +91,11 @@ Une variable globale ne peut pas :
 
 Prenons un exemple ; la procédure \texttt{uneProcedure} présente un argument formel en sortie, et la variable globale \texttt{gGlobale} peut être accédée en lecture et écriture par la procédure \texttt{autreProcedure} :
 \begin{PLM}
-proc uneProcedure `user (!outValue : UInt32) {
+proc uneProcedure `user (!outValue : $uint32) {
   outValue = 5
 }
 
-var gGlobale : UInt32 {
+var gGlobale : $uint32 {
   @rw proc autreProcedure ()
 }
 \end{PLM}

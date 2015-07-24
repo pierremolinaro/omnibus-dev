@@ -353,7 +353,7 @@ syntax extension common_syntax {
     select
     or
       $\$
-      $identifier$ ?let typeIdentifier
+      $typeName$ ?let typeIdentifier
       outExpression = @conversionExpressionAST.new {
         !outExpression
         !typeIdentifier
@@ -362,7 +362,7 @@ syntax extension common_syntax {
       }
     or
       $&\$
-      $identifier$ ?let typeIdentifier
+      $typeName$ ?let typeIdentifier
       outExpression = @conversionExpressionAST.new {
         !outExpression
         !typeIdentifier

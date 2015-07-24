@@ -24,7 +24,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $enum$
-    $identifier$ ?let enumName
+    $typeName$ ?let enumName
     @lstringlist attributeList = {}
     repeat
     while
@@ -123,30 +123,29 @@ proc enterEnumerationOperators
   ?integerTypeName:@lstring inEnumerationTypeName
   ?!context:@semanticContext ioContext
 {
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["Bool" nowhere] ?let BoolTypeProxy]
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
-    !BoolTypeProxy
+    !ioContext.mBooleanType
   ]
 }
 

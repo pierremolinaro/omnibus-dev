@@ -26,7 +26,7 @@ syntax extension common_syntax {
     $let$
     $identifier$ ?let constantName
     $:$
-    $identifier$ ?let typeName
+    $typeName$ ?let typeName
     $=$
     <expression> ?let @expressionAST expression
     ioAST.mDeclarationList += !@globalConstantDeclaration.new {

@@ -90,7 +90,7 @@ proc setup `user () {
   GPIOC_PDDR |= (1 << 5)
 }
 
-var gDelai : UInt32 = 0 {
+var gDelai : $uint32 = 0 {
   @rw proc loop ()
 }
 
@@ -120,7 +120,7 @@ Examinons la la routine \plm+proc setup `user ()+. La cible n'effectue aucune co
 \plm+PORTC_PCR5+ et \plm+GPIOC_PDDR+ sont des registres de contrôle du micro-contrôleur, et sont définis par la cible. La notation \plm+PORTC_PCR5::mux(1)+ permet de définir une constante à partir de la définition des champs de bits du registre \plm+PORTC_PCR5+. La cible définit le registre \plm+PORTC_PCR5+ de la façon suivante\footnote{Voir la \refSectionPage{declarationRegistreEtChamps} pour l'explication détaillée de cette notation.} :
 
 \begin{PLM}[0]
-register PORTC_PCR5 at 0x4004_B014 : UInt32 {
+register PORTC_PCR5 at 0x4004_B014 : $uint32 {
   7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps
 }
 \end{PLM}
@@ -129,12 +129,12 @@ Le champ \plm+mux+ est un champ de `3` bits, commençant au bit `8`. Le paramèt
 
 Examinons maintenant la déclaration de \plm+gDelai+ :
 \begin{PLM}[8]
-var gDelai : UInt32 = 0 {
+var gDelai : $uint32 = 0 {
   @rw proc loop ()
 }
 \end{PLM}
 
-C'est une variable (la déclaration commence par \plm+var+) globale (elle est déclarée en dehors d'une routine). Son type est \plm+UInt32+ (entier non signé sur `32` bits, défini par la cible), et sa valeur initiale est `0`.
+C'est une variable (la déclaration commence par \plm+var+) globale (elle est déclarée en dehors d'une routine). Son type est \plm+$uint32+ (entier non signé sur `32` bits, défini par la cible), et sa valeur initiale est `0`.
 
 En PLM, une variable globale doit citer les routines qui ont le droit de l'utiliser : ici la procédure \plm+loop+ a le droit de l'accéder, et en lecture et en écriture grâce à l'annotation \plm+@rw+ ; sans celle-ci, seul l'accès en lecture serait accepté.
 
@@ -185,16 +185,16 @@ proc setup `user () {
   GPIOC_PDDR |= (1 << 5)
 }
 
-var gUpTimeMS : UInt32 = 0 {
+var gUpTimeMS : $uint32 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration : UInt32)
+  proc wait (?ms: inDuration : $uint32)
 }
 
 proc systickHandler `isr () {
   gUpTimeMS ++
 }
 
-proc wait `user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : $uint32) {
   let deadline = gUpTimeMS + inDuration
   while deadline > gUpTimeMS do
   end
@@ -213,9 +213,9 @@ La référence à la cible \plm+target "teensy-3-1-sequential-systick"+ et la d�
 La définition de la variable globale \plm+gUpTimeMS+ :
 
 \begin{PLM}[8]
-var gUpTimeMS : UInt32 = 0 {
+var gUpTimeMS : $uint32 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration : UInt32)
+  proc wait (?ms: inDuration : $uint32)
 }
 \end{PLM}
 
@@ -235,14 +235,14 @@ La routine d'interruption \plm+systickHandler+ est appelée toutes les milliseco
 
 L'attente durant un certain délai est effectué par la routine \plm+wait+ :
 \begin{PLM}[17]
-proc wait `user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : $uint32) {
   let deadline = gUpTimeMS + inDuration
   while deadline > gUpTimeMS do
   end
 }
 \end{PLM}
 
-Cette routine présente un paramètre formel : \plm+inDuration+, de type \plm+UInt32+. Le \emph{sélecteur} \plm+?ms:+ indique que \plm+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
+Cette routine présente un paramètre formel : \plm+inDuration+, de type \plm+$uint32+. Le \emph{sélecteur} \plm+?ms:+ indique que \plm+inDuration+ est un paramètre en entrée (son sélecteur commence par « \texttt{?} »), et que le nom de ce sélecteur est « \texttt{ms} »\footnote{La liste de tous les arguments formels et des paramètres effectifs correspondants est présentée à la \refSectionPage{argumentFormel}.}.
 
 Le code de cette routine est simple : après avoir calculé la constante \plm+deadline+\footnote{Une constante locale à une routine est déclarée par le mot réservé \texttt{\bfseries let} (voir \refSectionPage{declarationConstanteLocale}).}, la boucle \plm+while+ attend le délai imparti.
 

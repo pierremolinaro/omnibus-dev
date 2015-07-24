@@ -44,7 +44,7 @@ syntax extension common_syntax {
       $?$ ?let selector
       $identifier$ ?let formalArgumentName
       $:$
-      $identifier$ ?let formalArgumentTypeName
+      $typeName$ ?let formalArgumentTypeName
       funcFormalArgumentList +=
         !selector
         !formalArgumentTypeName
@@ -54,7 +54,7 @@ syntax extension common_syntax {
     $->$
     $identifier$ ?let resultVarName
     $:$
-    $identifier$ ?let resultTypeName
+    $typeName$ ?let resultTypeName
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
