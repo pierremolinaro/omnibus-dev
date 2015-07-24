@@ -9,7 +9,9 @@ proc checkAssignmentCompatibility
   ?targetType:let @unifiedTypeMap-proxy inTargetType
   ?errorLocation:let @location inErrorLocation
 {
-  if inTargetType != inSourceType then
+  if inTargetType == .null then
+    # Ok
+  elsif inTargetType != inSourceType then
     var ok = false
     if [[inSourceType kind] isBoolean] then
       ok = [[inTargetType kind] isInteger]    

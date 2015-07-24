@@ -16,9 +16,9 @@ proc setup `user () {
 
 //------------------------------------------------*
 
-var gUpTimeMS : $uint32 = 0 {
+var gUpTimeMS $uint32 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration : $uint32)
+  proc wait (?ms: inDuration $uint32)
 }
 
 //------------------------------------------------*
@@ -29,7 +29,7 @@ proc systickHandler `isr () {
 
 //------------------------------------------------*
 
-proc wait `user (?ms: inDuration : $uint32) {
+proc wait `user (?ms: inDuration $uint32) {
   let deadline = gUpTimeMS + inDuration
   while@boucle deadline > gUpTimeMS do
   end@boucle
@@ -37,10 +37,11 @@ proc wait `user (?ms: inDuration : $uint32) {
 
 //------------------------------------------------*
 
-var led : $ledState = .on {
+var led = $ledState.on {
   @rw proc loop ()
 }
 
+let ROUGE = $ledState.off
 //------------------------------------------------*
 
 proc loop `user () {

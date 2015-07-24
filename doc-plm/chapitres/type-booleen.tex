@@ -36,7 +36,7 @@ L'opérateur préfixé \plm=not= est la complémentation booléenne. Noter que l
 Lors d'une conversion valeur booléenne vers valeur entière, \plm=false= est converti en la valeur entière $0$, et \plm=true= en la valeur entière $1$. Comme tous les types entiers peuvent représenter $0$ et $1$, cette conversion est toujours acceptée silencieusement. Par exemple :
 
 \begin{PLM}
-let result : $uint8 = true // result a pour valeur 1
+let result $uint8 = true // result a pour valeur 1
 \end{PLM}
 
 
@@ -45,7 +45,7 @@ let result : $uint8 = true // result a pour valeur 1
 Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un booléen. Il suffit d'utiliser des opérateurs entre entiers comme \plm+==+ ou \plm+!=+ pour réaliser une conversion :
 
 \begin{PLM}
-let result : $bool = x != 0 // x est une expression entière
+let result $bool = x != 0 // x est une expression entière
 \end{PLM}
 
 

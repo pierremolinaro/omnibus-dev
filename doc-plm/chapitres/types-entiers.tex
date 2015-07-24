@@ -31,14 +31,14 @@ Les types entiers ne sont pas prédéfinis dans le langage. C'est la configurati
 Le langage accepte des constantes littérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
-var v : $int8 = 128 // Erreur de compilation :
+var v $int8 = 128 // Erreur de compilation :
                    // 128 non représentable par un entier signé 8 bits
 \end{PLM}
 
 \colorbox{red}{C'est une erreur à corriger}
 
 \begin{PLM}
-var v : $int8 = -128 // Devrait être accepté, erreur actuellement
+var v $int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
 
 Une constante littérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
@@ -48,7 +48,7 @@ var v = 28 // Erreur, le type ne peut pas être inféré
 
 Dans ce cas, il faut que la déclaration contienne l'annotation de type :
 \begin{PLM}
-var v : $int32 = 28 // Ok
+var v $int32 = 28 // Ok
 \end{PLM}
 
 
@@ -61,23 +61,23 @@ var v : $int32 = 28 // Ok
 \subsection{Conversions implicites silencieuses}
 Les conversions qui sont toujours possibles sans débordement sont acceptées silencieusement. Par exemple :
 \begin{PLM}
-let v : $uint8 = ...
-let x : $uint16 = v
-let y : $int16 = v
+let v $uint8 = ...
+let x $uint16 = v
+let y $int16 = v
 \end{PLM}
 
 Par contre, une conversion pouvant provoquer un débordement est rejetée à la compilation :
 \begin{PLM}
-let s : $int8 = ...
-let x : $uint16 = x // Erreur de compilation
+let s $int8 = ...
+let x $uint16 = x // Erreur de compilation
 \end{PLM}
 
 \subsection{L'opérateur \texttt{\textbackslash}}
 L'opérateur \plm+\+ permet de spécifier une conversion explicite.
 
 \begin{PLM}
-let s : $int8 = ...
-let x : $uint16 = x \ $uint16
+let s $int8 = ...
+let x $uint16 = x \ $uint16
 \end{PLM}
 
 L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+\+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=&\=.
@@ -86,8 +86,8 @@ L'opérateur \plm+\+ ne peut pas apparaître dans une expression statique.
 
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
-let v : $uint8 = ...
-let y : $int16 = v \ $int16 // Erreur, la conversion implicite est possible
+let v $uint8 = ...
+let y $int16 = v \ $int16 // Erreur, la conversion implicite est possible
 \end{PLM}
 
 \subsection{L'opérateur \texttt{\&\textbackslash}}
@@ -95,16 +95,16 @@ let y : $int16 = v \ $int16 // Erreur, la conversion implicite est possible
 L'opérateur \plm+&\+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{\&\textbackslash} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
 
 \begin{PLM}
-let s : $int8 = -10
-let x : $uint16 = x &\ $uint16
+let s $int8 = -10
+let x $uint16 = x &\ $uint16
 \end{PLM}
 
 L'opérateur \plm+&\+ ne peut pas apparaître dans une expression statique.
 
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+&\+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
-let v : $uint8 = ...
-let y : $int16 = v &\ $int16 // Erreur, la conversion implicite est possible
+let v $uint8 = ...
+let y $int16 = v &\ $int16 // Erreur, la conversion implicite est possible
 \end{PLM}
 
 \section{Opérateurs infixes et conversions implicites}
@@ -226,13 +226,13 @@ variable ++
 
 \plm=++= et \plm=--= déclenchent une exception (dont le code est donné par le \refTableauPage{tableauCodeExceptions}) en cas de débordement de capacité :
 \begin{PLM}
-var variable : $uint8 = 255
+var variable $uint8 = 255
 variable ++ // Déclenchement d'une exception
 \end{PLM}
 
 Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :
 \begin{PLM}
-var variable : $uint8 = 255
+var variable $uint8 = 255
 variable &++ // variable vaut 0
 \end{PLM}
 

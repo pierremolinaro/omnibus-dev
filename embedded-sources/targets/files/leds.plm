@@ -30,16 +30,16 @@ init 100 {
 
 //-----------------------------------------------------------------------------*
 
-let LED_L0 : $uint32 = (1 << 0)
-let LED_L1 : $uint32 = (1 << 1)
-let LED_L2 : $uint32 = (1 << 2)
-let LED_L3 : $uint32 = (1 << 3)
-let LED_L4 : $uint32 = (1 << 4)
-let LED_TEENSY : $uint32 = (1 << 5)
+let LED_L0 $uint32 = (1 << 0)
+let LED_L1 $uint32 = (1 << 1)
+let LED_L2 $uint32 = (1 << 2)
+let LED_L3 $uint32 = (1 << 3)
+let LED_L4 $uint32 = (1 << 4)
+let LED_TEENSY $uint32 = (1 << 5)
 
 //-----------------------------------------------------------------------------*
 
-proc ledOn `user `exception `isr (?inLeds : $uint32) {
+proc ledOn `user `exception `isr (?inLeds $uint32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PSOR = 1 << 12 ;
@@ -68,7 +68,7 @@ proc ledOn `user `exception `isr (?inLeds : $uint32) {
 
 //-----------------------------------------------------------------------------*
 
-proc ledOff `user `exception `isr (?inLeds : $uint32) {
+proc ledOff `user `exception `isr (?inLeds $uint32) {
 //--- Led L0
   if ((inLeds & LED_L0) != 0) then
     GPIOA_PCOR = 1 << 12 ;
