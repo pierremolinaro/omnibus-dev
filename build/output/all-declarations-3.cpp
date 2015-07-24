@@ -604,7 +604,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-seq
   "proc wait $user (\?ms: inDuration : UInt32) {\n"
   "  let deadline = gUpTimeMS + inDuration\n"
   "  while@boucle deadline > gUpTimeMS do\n"
-  "  end\n"
+  "  end@boucle\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -622,15 +622,80 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-blinkled-systick.plm",
   "plm",
   true, // Text file
-  863, // Text length
+  870, // Text length
   gWrapperFileContent_1_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-sequential-systick/03-blinkled-systick-enum.plm'
+
+const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-sequential-systick\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "enum LedState {\n"
+  "  case on\n"
+  "  case off\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc setup $user () {\n"
+  "  PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
+  "  GPIOC_PDDR |= (1 << 5)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "var gUpTimeMS : UInt32 = 0 {\n"
+  "  @rw proc systickHandler ()\n"
+  "  proc wait (\?ms: inDuration : UInt32)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc systickHandler $isr () {\n"
+  "  gUpTimeMS ++\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc wait $user (\?ms: inDuration : UInt32) {\n"
+  "  let deadline = gUpTimeMS + inDuration\n"
+  "  while@boucle deadline > gUpTimeMS do\n"
+  "  end@boucle\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "var led : LedState = LedState.on {\n"
+  "  @rw proc loop ()\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc loop $user () {\n"
+  "  wait (!ms:500)\n"
+  "  GPIOC_PSOR = 1 << 5 // Allumer la led\n"
+  "  wait (!ms:500)\n"
+  "  GPIOC_PCOR = 1 << 5  // \xC3""\x89""teindre la led\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
+  "03-blinkled-systick-enum.plm",
+  "plm",
+  true, // Text file
+  1073, // Text length
+  gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [3] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [4] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
+  & gWrapperFile_2_embeddedSampleCode,
   NULL
 } ;
 
@@ -644,7 +709,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-sequential-systick",
-  2,
+  3,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1

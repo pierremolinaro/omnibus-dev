@@ -1,0 +1,156 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+\chapter{Élements lexicaux}
+
+%--- Pour supprimer tout en-tête et pied de page sur la 1re page d'un chapitre
+\thispagestyle{empty}
+
+
+\section{Commentaires}
+
+Un commentaire commence par deux barres obliques consécutives \plm+//+, et s’étend jusqu’à la fin de la ligne courante.
+
+\section{Délimiteurs}
+
+PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{ccccccccccccccccc}
+    \hline
+    \plm!:!  & \plm!.! & \plm!,!  & \plm+!=+ & \plm!<=! & \plm!>=! & \plm!;! & \plm!==! & \plm!<! & \plm!>! & \plm![! & \plm!]! \\
+    \plm!&! & \plm!&=! & \plm!|! & \plm!|=!  & \plm!}! & \plm!}! & \plm!(!  & \plm!)!  & \plm!/!  & \plm!&/! \\
+    \plm!-! & \plm!&-! & \plm!+!  & \plm!&+! & \plm!^!  & \plm!^=! & \plm!<<! & \plm!>>! & \plm!~!\\
+    \plm!%! & \plm!&%! & \plm!=! & \plm!\\! & \plm!&\\!\\
+    \plm!->! & \plm!::! & \plm!++! & \plm!&++! & \plm!--! & \plm!&--! & \plm!*! & \plm!&*!
+  \end{tabular}
+  \caption{Délimiteurs du langage PLM}
+  \labelTableau{delimiteursLangage}
+  \ligne
+\end{table}
+
+\section{Séparateurs}
+
+Tout caractère dont le code ASCII est compris entre \texttt{0x01} et \texttt{0x20} est considéré comme un séparateur (ceci inclut donc la tabulation horizontale \texttt{HT} (\texttt{0x09}), le passage à la ligne \texttt{LF} (\texttt{0x0A}), le retour-chariot \texttt{CR} (\texttt{0x0D}), et l’espace (\texttt{0x20}).
+
+\section{Identificateurs}
+Un identificateur commence par une lettre (minuscule ou majuscule), qui est suivie par zéro, un ou plusieurs lettres (minuscules ou majuscules), chiffres décimaux, caractères \texttt{\_}.
+
+La casse est significative pour les identificateurs.
+
+\section{Mots réservés}
+\index{Mots réservés}
+
+Certains identificateurs sont réservés (\refSubsectionPage{motsReservesLangage}) .
+
+\subsectionLabel{Mots réservés correspondants aux éléments du langage}{motsReservesLangage}
+
+Les mots réservés correspondant aux éléments du langage sont listés dans le \refTableau{motReservesLangage}.
+
+\begin{table}[!t]
+  \centering
+  \begin{tabular}{llllll}
+   \plm!and! & \plm!assert! & \plm!at! & \plm!boolset! \\
+   \plm!booleanType! & \plm!boot! & \plm!case! & \plm!check! \\
+   \plm!do! & \plm!else! & \plm!elsif! & \plm!end! \\
+   \plm!enum! & \plm!exception! & \plm!false! & \plm!forever! \\
+   \plm!func! & \plm!if! & \plm!import! & \plm!init!  \\
+   \plm!let! & \plm!mutating! & \plm!mode! & \plm!newIntegerType! \\
+   \plm!newSignedRepresentation! & \plm!newUnsignedRepresentation! & \plm!not! & \plm!or!\\
+   \plm!proc! & \plm!register! & \plm!required! & \plm!self! \\
+   \plm!struct! & \plm!target! & \plm!then! & \plm!throw! \\
+   \plm!true! & \plm!var! & \plm!while! & \plm!xor! \\
+  \end{tabular}
+  \caption{Mots réservés correspondant aux éléments du langage PLM}
+  \labelTableau{motReservesLangage}
+  \ligne
+\end{table}
+
+
+
+
+
+
+
+%\section{Constante chaîne de caractères}
+%
+%Comme en C, les chaînes de caractères sont délimitées par des caractères \texttt{"}. Les séquences d’échappement suivantes sont acceptées : \texttt{\textbackslash f}, \texttt{\textbackslash n}, \texttt{\textbackslash r}, \texttt{\textbackslash v}, \texttt{\textbackslash\textbackslash}, \texttt{\textbackslash\textquotedbl}, \texttt{\textbackslash\textquotesingle}, \texttt{\textbackslash0}.
+%
+%\section{Constante caractère}
+%
+%Comme en C, les caractères sont délimités par des caractères « \texttt{\textquotesingle} ». Par exemple :\plm!'A'!, \plm!'+'!.
+
+
+%Les séquences d’échappement suivantes sont acceptées : \plm!'\f'!, \plm!'\n', !\plm!'\r'!, \plm!'\v'!, \plm!'\\'!, \plm!'\''!, \plm!'\0'!.
+
+\section{Constante entière}
+
+Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. 
+
+\textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères \texttt{\_}.
+
+\textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre \texttt{a} et \texttt{f}, écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence \texttt{0x} », et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères \texttt{\_}.
+
+\textbf{Binaire.} Une constante entière binaire commence par la séquence \texttt{0b} suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou le caractère \texttt{\_}.
+
+Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère \texttt{\_} peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
+
+Attention :
+\begin{itemize}
+  \item contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal ;
+  \item contrairement à l’assembleur PIC, le préfixe \texttt{0x} est indispensable pour écrire un nombre en hexadécimal.
+\end{itemize}
+
+\sectionLabel{Attributs}{attribut}
+
+
+Un attribut est une séquence commençant par un \texttt{@} et suivi d'un ou plusieurs chiffres, lettres. Voici quelques étiquettes valides : \plm!@toto!, \plm!@truc1!, \plm!@123!. Un attribut sert à différents usages comme par exemple (liste non exhautive) :
+\begin{itemize}
+  \item \plm!@ro! indique qu'un registre de contrôle est accessible en lecture seule (\refSectionPage{attributRo}) ;
+  \item \plm+@weak+ signifie qu'une routine peut être redéfinie par une routine de même nom (\refSubsectionPage{attributWeak}) ;
+  \item ajouter une étiquette à une instruction \plm!if! (\refSubsectionPage{etiquette-if}), pour en augmenter la lisibilité.
+\end{itemize}
+
+
+
+
+
+
+
+
+\sectionLabel{Modes}{mode}
+
+Un mode est une séquence commençant par un \texttt{\$} et suivi d'un ou plusieurs chiffres, lettres ; par exemple : \plm!$user!, \plm!$boot!, \plm!$init!. Un mode permet de caractériser le mode d'exécution logique d'une procédure, et fait l'objet du \refChapterPage{chapitreModesExecution}.
+
+
+
+
+
+
+
+
+
+\sectionLabel{Sélecteurs}{selecteur}
+
+Un sélecteur spécifie le mode de passage d'un argument formel et d'un paramètre effectif. Ils se présentent sous plusieurs formes :
+\begin{itemize}
+  \item une forme anonyme : \plm+?+, \plm+!+, \plm+?!+, \plm+!?+ ;
+  \item \plm+?selecteur:+, \plm+!selecteur:+, \plm+?!selecteur:+, \plm+!?selecteur:+, où $selecteur$ est une séquence de lettres ou de chiffres.
+\end{itemize}
+
+
+
+Les sélecteurs sont l'objet de la \refSectionPage{argumentFormel}.
+
+
+
+
+
+
+\section{Format}
+
+Le format est libre, la fin de ligne n’est pas significative (sauf pour les commentaires, qui commencent par deux barres obliques consécutives \plm!//!, et s’étendent jusqu’à la fin de la ligne courante). Le compilateur accepte de manière indifférente que les fins de ligne soient codés par un caractère LF (\texttt{0x0A}), un caractère CR (\texttt{0x0D}), ou par la séquence CRLF (\texttt{0x0D}, \texttt{0x0A}).
+
