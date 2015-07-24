@@ -98,11 +98,11 @@ rule '@' {
 
 style modeStyle -> "Modes"
 
-$modeName$ ! tokenString  style modeStyle error message "a mode $..."
+$modeName$ ! tokenString  style modeStyle error message "a mode `..."
 
-message modeError : "in a mode name, a letter or a digit should follow the '$' character"
+message modeError : "in a mode name, a letter or a digit should follow the '`' character"
 
-rule '$' {
+rule '`' {
   select
   case 'a'->'z' | 'A'->'Z' | '0'->'9' :
     repeat

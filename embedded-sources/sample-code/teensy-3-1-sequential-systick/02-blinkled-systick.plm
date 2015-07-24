@@ -2,7 +2,7 @@ target "teensy-3-1-sequential-systick"
 
 //------------------------------------------------*
 
-proc setup $user () {
+proc setup `user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
   GPIOC_PDDR |= (1 << 5)
 }
@@ -16,13 +16,13 @@ var gUpTimeMS : UInt32 = 0 {
 
 //------------------------------------------------*
 
-proc systickHandler $isr () {
+proc systickHandler `isr () {
   gUpTimeMS ++
 }
 
 //------------------------------------------------*
 
-proc wait $user (?ms: inDuration : UInt32) {
+proc wait `user (?ms: inDuration : UInt32) {
   let deadline = gUpTimeMS + inDuration
   while@boucle deadline > gUpTimeMS do
   end@boucle
@@ -30,7 +30,7 @@ proc wait $user (?ms: inDuration : UInt32) {
 
 //------------------------------------------------*
 
-proc loop $user () {
+proc loop `user () {
   wait (!ms:500)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:500)
