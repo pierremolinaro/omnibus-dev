@@ -176,17 +176,17 @@ La troisième étape est l'exécution des routines \plm=init=. À partir de cett
 
 Voici le contenu du fichier \texttt{myTeensy.plm-target} :
 \begin{PLM}[1]
-newUnsignedRepresentation @unsigned8  "uint8_t"   8
-newUnsignedRepresentation @unsigned16 "uint16_t" 16
-newUnsignedRepresentation @unsigned32 "uint32_t" 32
-newUnsignedRepresentation @unsigned64 "uint64_t" 64
+newUnsignedRepresentation @unsigned8  : "uint8_t"   8
+newUnsignedRepresentation @unsigned16 : "uint16_t" 16
+newUnsignedRepresentation @unsigned32 : "uint32_t" 32
+newUnsignedRepresentation @unsigned64 : "uint64_t" 64
 
-newSignedRepresentation @signed8  "int8_t"   8
-newSignedRepresentation @signed16 "int16_t" 16
-newSignedRepresentation @signed32 "int32_t" 32
-newSignedRepresentation @signed64 "int64_t" 64
+newSignedRepresentation @signed8  : "int8_t"   8
+newSignedRepresentation @signed16 : "int16_t" 16
+newSignedRepresentation @signed32 : "int32_t" 32
+newSignedRepresentation @signed64 : "int64_t" 64
 
-newUnsignedRepresentation @size "uint32_t" 32
+newUnsignedRepresentation @size : "uint32_t" 32
 
 booleanType $bool : @unsigned8
 
@@ -226,7 +226,7 @@ init 0 { // Configure Systick interrupt every ms
 
 {\bf Lignes 6 à 9.} De manière analogue, les quatre déclarations \plm+newSignedRepresentation+ définissent des représentations relatives aux entiers signés (\refSubsectionPage{DefNewSignedRepresentation}). Les représentations ainsi définies (\plm+@signed8+, \plm+@signed16+, ...) ne sont pas des types directement utilisables en PLM, mais des annotations qui paramètrent certaines déclarations, comme par exemple la déclaration des types entiers signés lignes 19 à 22.
 
-{\bf Ligne 11.} Cette ligne déclare la représentation \plm+@size+, qui est celle utilisée par défaut pour les types énumérés (\emph{référence à ajouter}). La déclaration de la représentation \plm+@size+ est obligatoire.
+{\bf Ligne 11.} Cette ligne déclare la représentation \plm+@size+, qui est celle utilisée par défaut pour les types énumérés (\refSectionPage{representation-type-enumere}). La déclaration de la représentation \plm+@size+ est obligatoire.
 
 {\bf Ligne 13.} Déclaration du type booléen : il se nomme conventionnellement \plm+$bool+, et sa représentation est \plm+@unsigned8+, c'est-à-dire un entier non signé sur 8 bits. La déclaration d'un type booléen est obligatoire.
 

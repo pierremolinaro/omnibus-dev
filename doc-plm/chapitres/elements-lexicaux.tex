@@ -9,40 +9,19 @@
 \thispagestyle{empty}
 
 
-\section{Commentaires}
 
-Un commentaire commence par deux barres obliques consécutives \plm+//+, et s’étend jusqu’à la fin de la ligne courante.
 
-\section{Délimiteurs}
-
-PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
-
-\begin{table}[!ht]
-  \centering
-  \begin{tabular}{ccccccccccccccccc}
-    \hline
-    \plm!:!  & \plm!.! & \plm!,!  & \plm+!=+ & \plm!<=! & \plm!>=! & \plm!;! & \plm!==! & \plm!<! & \plm!>! & \plm![! & \plm!]! \\
-    \plm!&! & \plm!&=! & \plm!|! & \plm!|=!  & \plm!}! & \plm!}! & \plm!(!  & \plm!)!  & \plm!/!  & \plm!&/! \\
-    \plm!-! & \plm!&-! & \plm!+!  & \plm!&+! & \plm!^!  & \plm!^=! & \plm!<<! & \plm!>>! & \plm!~!\\
-    \plm!%! & \plm!&%! & \plm!=! & \plm!\\! & \plm!&\\!\\
-    \plm!->! & \plm!::! & \plm!++! & \plm!&++! & \plm!--! & \plm!&--! & \plm!*! & \plm!&*!
-  \end{tabular}
-  \caption{Délimiteurs du langage PLM}
-  \labelTableau{delimiteursLangage}
-  \ligne
-\end{table}
-
-\section{Séparateurs}
-
-Tout caractère dont le code ASCII est compris entre \texttt{0x01} et \texttt{0x20} est considéré comme un séparateur (ceci inclut donc la tabulation horizontale \texttt{HT} (\texttt{0x09}), le passage à la ligne \texttt{LF} (\texttt{0x0A}), le retour-chariot \texttt{CR} (\texttt{0x0D}), et l’espace (\texttt{0x20}).
 
 \section{Identificateurs}
 Un identificateur commence par une lettre (minuscule ou majuscule), qui est suivie par zéro, un ou plusieurs lettres (minuscules ou majuscules), chiffres décimaux, caractères \texttt{\_}.
 
 La casse est significative pour les identificateurs.
 
-\section{Mots réservés}
-\index{Mots réservés}
+
+
+
+
+\section{Mots réservés}\index{Mots réservés}
 
 Certains identificateurs sont réservés (\refSubsectionPage{motsReservesLangage}) .
 
@@ -104,6 +83,33 @@ Attention :
   \item contrairement à l’assembleur PIC, le préfixe \texttt{0x} est indispensable pour écrire un nombre en hexadécimal.
 \end{itemize}
 
+\section{Délimiteurs}
+
+PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
+
+\begin{table}[!ht]
+  \centering
+  \begin{tabular}{ccccccccccccccccc}
+    \plm!:!  & \plm!.! & \plm!,!  & \plm+!=+ & \plm!<=! & \plm!>=! & \plm!;! & \plm!==! & \plm!<! & \plm!>! & \plm![! & \plm!]! \\
+    \plm!&! & \plm!&=! & \plm!|! & \plm!|=!  & \plm!}! & \plm!}! & \plm!(!  & \plm!)!  & \plm!/!  & \plm!&/! \\
+    \plm!-! & \plm!&-! & \plm!+!  & \plm!&+! & \plm!^!  & \plm!^=! & \plm!<<! & \plm!>>! & \plm!~!\\
+    \plm!%! & \plm!&%! & \plm!=! & \plm!\! & \plm!&\!\\
+    \plm!->! & \plm!::! & \plm!++! & \plm!&++! & \plm!--! & \plm!&--! & \plm!*! & \plm!&*!
+  \end{tabular}
+  \caption{Délimiteurs du langage PLM}
+  \labelTableau{delimiteursLangage}
+  \ligne
+\end{table}
+
+
+
+
+
+
+
+
+
+
 \sectionLabel{Attributs}{attribut}
 
 
@@ -145,7 +151,21 @@ Un sélecteur spécifie le mode de passage d'un argument formel et d'un paramèt
 
 Les sélecteurs sont l'objet de la \refSectionPage{argumentFormel}.
 
+\section{Séparateurs}
 
+Tout caractère dont le code ASCII est compris entre \texttt{0x01} et \texttt{0x20} est considéré comme un séparateur (ceci inclut donc la tabulation horizontale \texttt{HT} (\texttt{0x09}), le passage à la ligne \texttt{LF} (\texttt{0x0A}), le retour-chariot \texttt{CR} (\texttt{0x0D}), et l’espace (\texttt{0x20}).
+
+
+
+
+
+
+
+
+
+\section{Commentaires}
+
+Un commentaire commence par deux barres obliques consécutives \plm+//+, et s’étend jusqu’à la fin de la ligne courante.
 
 
 
