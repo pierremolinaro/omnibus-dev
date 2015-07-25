@@ -1,0 +1,88 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Les types énumérés}
+
+
+\section{Déclaration d'un type énuméré}
+
+La déclaration d'un type énuméré est introduite par le mot réservé \plm!enum! :
+
+\begin{PLM}
+enum $feu {
+  case vert
+  case orange
+  case rouge
+}
+\end{PLM}
+
+\section{Utilisation d'un type énuméré}
+
+\subsection{Constructeurs}
+La déclaration d'un type énuméré définit les constructeurs associés au type énuméré, ici \plm!$feu.vert!, \plm!$feu.orange! et \plm!$feu.rouge!.
+
+
+\subsection{Constante globale et variable globale}
+Les constructeurs d'un type énuméré sont \emph{statiques}, c'est-à-dire qu'ils permettent d'initialiser des variables globales et des constantes globales :
+
+\begin{PLM}
+let ROUGE $feu = $feu.rouge
+\end{PLM}
+
+L'annotation de type peut être omis une fois, c'est-à-dire que l'on peut aussi écrire :
+\begin{PLM}
+let ROUGE $feu = .rouge
+\end{PLM}
+
+Ou encore :
+\begin{PLM}
+let ROUGE = $feu.rouge
+\end{PLM}
+
+
+De même, on peut déclarer une variable globale appartenant à un type énuméré :
+\begin{PLM}
+var unFeu $feu = $feu.vert { ... }
+\end{PLM}
+
+L'annotation de type peut être omis une fois, c'est-à-dire que l'on peut aussi écrire :
+\begin{PLM}
+var unFeu $feu = .vert { ... }
+\end{PLM}
+
+Ou encore :
+\begin{PLM}
+var unFeu = $feu.vert { ... }
+\end{PLM}
+
+\subsection{Comparaison}
+
+Les opérateurs \plm!==!, \plm+!=+, \plm!<!, \plm!<=!, \plm!>! et \plm!>=! permettent de comparer les valeurs d'un type énuméré ; la relation d'ordre est donnée par l'ordre de déclaration des constantes, c'est-à-dire que \plm!$feu.vert < $feu.orange! et \plm!$feu.orange < $feu.rouge!.
+
+
+\sectionLabel{Représentation d'un type énuméré}{representation-type-enumere}
+
+Par défaut, un type énuméré est représenté dans le code engendré par un \plm!@size!. L'attribut \plm!@size! représente un entier non signé, et doit avoir été défini par le fichier de définition de la cible\footnote{Voir par exemple \refSubsectionPage{fichierTarget}.}.
+
+Il est possible de changer de représentation, en ajoutant une annotation dans la déclaration du type énuméré :
+\begin{PLM}
+enum $feu @representation {
+  case vert
+  case orange
+  case rouge
+}
+\end{PLM}
+
+Sont acceptables pour \plm!@representation! toutes les représentations déclarées dans la définition de la cible par \plm!newUnsignedRepresentation!. Ainsi, pour la définition de cible présentée à la \refSubsectionPage{fichierTarget}, on peut utiliser :
+\begin{itemize}
+  \item \plm!@unsigned8!, représentation sous la forme d'un octet ;
+  \item \plm!@unsigned16!, représentation sous la forme de deux octets ;
+  \item \plm!@unsigned32!, représentation sous la forme de quatre octets, identique pour cette cible à \plm!@size! ;
+  \item \plm!@unsigned64!, représentation sous la forme de huit octets.
+\end{itemize}
+
+
