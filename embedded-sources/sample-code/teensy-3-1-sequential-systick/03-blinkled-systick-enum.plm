@@ -2,7 +2,7 @@ target "teensy-3-1-sequential-systick"
 
 //------------------------------------------------*
 
-enum $ledState {
+enum $ledState @unsigned8 {
   case on
   case off
 }

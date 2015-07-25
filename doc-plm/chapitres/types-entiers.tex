@@ -274,7 +274,7 @@ La déclaration \plm=newUnsignedRepresentation= permet de définir une représen
 
 
 \begin{PLM}
-newUnsignedRepresentation @nom "type-c" taille
+newUnsignedRepresentation @nom : "type-c" taille
 \end{PLM}
 
 Où :
@@ -286,10 +286,10 @@ Où :
 
 Par exemple, la représentation des entiers non signés sur 8, 16, 32 et 64 bits peut être définie par :
 \begin{PLM}
-newUnsignedRepresentation @unsigned8  "uint8_t"   8
-newUnsignedRepresentation @unsigned16 "uint16_t" 16
-newUnsignedRepresentation @unsigned32 "uint32_t" 32
-newUnsignedRepresentation @unsigned64 "uint64_t" 64
+newUnsignedRepresentation @unsigned8  : "uint8_t"   8
+newUnsignedRepresentation @unsigned16 : "uint16_t" 16
+newUnsignedRepresentation @unsigned32 : "uint32_t" 32
+newUnsignedRepresentation @unsigned64 : "uint64_t" 64
 \end{PLM}
 
 
@@ -306,7 +306,7 @@ La déclaration \plm=newSignedRepresentation= permet de définir une représenta
 
 
 \begin{PLM}
-newSignedRepresentation @representation "type-c" taille
+newSignedRepresentation @representation : "type-c" taille
 \end{PLM}
 
 Où :
@@ -318,10 +318,10 @@ Où :
 
 Par exemple, la représentation des entiers signés sur 8, 16, 32 et 64 bits peut être définie par :
 \begin{PLM}
-newSignedRepresentation @signed8  "int8_t"   8
-newSignedRepresentation @signed16 "int16_t" 16
-newSignedRepresentation @signed32 "int32_t" 32
-newSignedRepresentation @signed64 "int64_t" 64
+newSignedRepresentation @signed8  : "int8_t"   8
+newSignedRepresentation @signed16 : "int16_t" 16
+newSignedRepresentation @signed32 : "int32_t" 32
+newSignedRepresentation @signed64 : "int64_t" 64
 \end{PLM}
 
 

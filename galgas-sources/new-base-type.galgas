@@ -26,6 +26,7 @@ syntax extension plm_target_specific_syntax {
   rule <declaration> ?!@ast ioAST {
     $newSignedRepresentation$
     $attribute$ ?let newAttributeName
+    $:$
     $literal_string$ ?let cType
     $integer$ ?let size
     ioAST.mDeclarationList += !@newIntegerRepresentationDeclaration.new {
@@ -41,6 +42,7 @@ syntax extension plm_target_specific_syntax {
   rule <declaration> ?!@ast ioAST {
     $newUnsignedRepresentation$
     $attribute$ ?let newAttributeName
+    $:$
     $literal_string$ ?let cType
     $integer$ ?let size
     ioAST.mDeclarationList += !@newIntegerRepresentationDeclaration.new {

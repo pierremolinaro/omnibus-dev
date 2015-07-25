@@ -667,7 +667,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-seq
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "var led  = $ledState.on {\n"
+  "var led = $ledState.on {\n"
   "  @rw proc loop ()\n"
   "}\n"
   "\n"
@@ -691,7 +691,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-blinkled-systick-enum.plm",
   "plm",
   true, // Text file
-  1139, // Text length
+  1138, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -1626,17 +1626,17 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
 
 //--- File '/teensy-3-1-interrupt.plm-target'
 
-const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
-  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
-  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
-  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+const char * gWrapperFileContent_2_embeddedTargets = "newUnsignedRepresentation @unsigned8  : \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 : \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 : \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 : \"uint64_t\" 64\n"
   "\n"
-  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
-  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
-  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
-  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "newSignedRepresentation @signed8  : \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 : \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 : \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 : \"int64_t\" 64\n"
   "\n"
-  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @size : \"uint32_t\" 32\n"
   "\n"
   "booleanType $bool : @unsigned8\n"
   "\n"
@@ -1727,23 +1727,23 @@ const cRegularFileWrapper gWrapperFile_2_embeddedTargets (
   "teensy-3-1-interrupt.plm-target",
   "plm-target",
   true, // Text file
-  3190, // Text length
+  3208, // Text length
   gWrapperFileContent_2_embeddedTargets
 ) ;
 
 //--- File '/teensy-3-1-sequential-systick.plm-target'
 
-const char * gWrapperFileContent_3_embeddedTargets = "newUnsignedRepresentation @unsigned8  \"uint8_t\"   8\n"
-  "newUnsignedRepresentation @unsigned16 \"uint16_t\" 16\n"
-  "newUnsignedRepresentation @unsigned32 \"uint32_t\" 32\n"
-  "newUnsignedRepresentation @unsigned64 \"uint64_t\" 64\n"
+const char * gWrapperFileContent_3_embeddedTargets = "newUnsignedRepresentation @unsigned8  : \"uint8_t\"   8\n"
+  "newUnsignedRepresentation @unsigned16 : \"uint16_t\" 16\n"
+  "newUnsignedRepresentation @unsigned32 : \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @unsigned64 : \"uint64_t\" 64\n"
   "\n"
-  "newSignedRepresentation @signed8  \"int8_t\"   8\n"
-  "newSignedRepresentation @signed16 \"int16_t\" 16\n"
-  "newSignedRepresentation @signed32 \"int32_t\" 32\n"
-  "newSignedRepresentation @signed64 \"int64_t\" 64\n"
+  "newSignedRepresentation @signed8  : \"int8_t\"   8\n"
+  "newSignedRepresentation @signed16 : \"int16_t\" 16\n"
+  "newSignedRepresentation @signed32 : \"int32_t\" 32\n"
+  "newSignedRepresentation @signed64 : \"int64_t\" 64\n"
   "\n"
-  "newUnsignedRepresentation @size \"uint32_t\" 32\n"
+  "newUnsignedRepresentation @size : \"uint32_t\" 32\n"
   "\n"
   "booleanType $bool : @unsigned8\n"
   "\n"
@@ -1781,7 +1781,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedTargets (
   "teensy-3-1-sequential-systick.plm-target",
   "plm-target",
   true, // Text file
-  1222, // Text length
+  1240, // Text length
   gWrapperFileContent_3_embeddedTargets
 ) ;
 

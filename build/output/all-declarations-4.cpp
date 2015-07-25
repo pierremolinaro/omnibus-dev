@@ -11640,7 +11640,7 @@ static void categoryMethod_newIntegerRepresentationDeclaration_enterInPrecedence
   macroValidSharedObject (object, cPtr_newIntegerRepresentationDeclaration) ;
   {
   const GALGAS_newIntegerRepresentationDeclaration temp_0 = object ;
-  ioArgument_ioGraph.modifier_addNode (GALGAS_lstring::constructor_new (GALGAS_string ("basetype ").add_operation (object->mAttribute_mBaseTypeName.reader_string (SOURCE_FILE ("new-base-type.galgas", 65)), inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 65)), object->mAttribute_mBaseTypeName.mAttribute_location  COMMA_SOURCE_FILE ("new-base-type.galgas", 65)), temp_0, inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 65)) ;
+  ioArgument_ioGraph.modifier_addNode (GALGAS_lstring::constructor_new (GALGAS_string ("basetype ").add_operation (object->mAttribute_mBaseTypeName.reader_string (SOURCE_FILE ("new-base-type.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 67)), object->mAttribute_mBaseTypeName.mAttribute_location  COMMA_SOURCE_FILE ("new-base-type.galgas", 67)), temp_0, inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 67)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11666,7 +11666,7 @@ static GALGAS_string categoryReader_newIntegerRepresentationDeclaration_keyRepre
   GALGAS_string result_outRepresentation ; // Returned variable
   const cPtr_newIntegerRepresentationDeclaration * object = (const cPtr_newIntegerRepresentationDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_newIntegerRepresentationDeclaration) ;
-  result_outRepresentation = GALGAS_string ("bool ").add_operation (object->mAttribute_mBaseTypeName.reader_string (SOURCE_FILE ("new-base-type.galgas", 71)), inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 71)) ;
+  result_outRepresentation = GALGAS_string ("bool ").add_operation (object->mAttribute_mBaseTypeName.reader_string (SOURCE_FILE ("new-base-type.galgas", 73)), inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 73)) ;
 //---
   return result_outRepresentation ;
 }
@@ -11712,10 +11712,10 @@ static void categoryMethod_newIntegerRepresentationDeclaration_enterInContext (c
   const enumGalgasBool test_3 = test_2.boolEnum () ;
   if (kBoolTrue == test_3) {
     GALGAS_location location_4 (object->mAttribute_mSize.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_4, GALGAS_string ("Only 8, 16, 32 or 64 are accepted here")  COMMA_SOURCE_FILE ("new-base-type.galgas", 85)) ;
+    inCompiler->emitSemanticError (location_4, GALGAS_string ("Only 8, 16, 32 or 64 are accepted here")  COMMA_SOURCE_FILE ("new-base-type.galgas", 87)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mTargetBaseTypeMap.modifier_insertKey (object->mAttribute_mBaseTypeName, object->mAttribute_mCType.mAttribute_string, object->mAttribute_mSize.mAttribute_uint_36__34_.reader_uint (inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 91)), object->mAttribute_mIsSigned, inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 88)) ;
+  ioArgument_ioContext.mAttribute_mTargetBaseTypeMap.modifier_insertKey (object->mAttribute_mBaseTypeName, object->mAttribute_mCType.mAttribute_string, object->mAttribute_mSize.mAttribute_uint_36__34_.reader_uint (inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 93)), object->mAttribute_mIsSigned, inCompiler COMMA_SOURCE_FILE ("new-base-type.galgas", 90)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*

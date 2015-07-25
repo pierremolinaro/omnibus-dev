@@ -11933,11 +11933,12 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 27)) ;
   GALGAS_lstring var_newAttributeName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 28)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 29)) ;
   GALGAS_lstring var_cType = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 29)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 30)) ;
   GALGAS_luint_36__34_ var_size = inCompiler->synthetizedAttribute_uint_36__34_value () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 30)) ;
-  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (true)  COMMA_SOURCE_FILE ("new-base-type.galgas", 31))  COMMA_SOURCE_FILE ("new-base-type.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 31)) ;
+  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (true)  COMMA_SOURCE_FILE ("new-base-type.galgas", 32))  COMMA_SOURCE_FILE ("new-base-type.galgas", 32)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11945,8 +11946,9 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newSignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 27)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 28)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 29)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 30)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 29)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 30)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 31)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -11954,23 +11956,25 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i1_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                             C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 42)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 43)) ;
   GALGAS_lstring var_newAttributeName = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 43)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 44)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 45)) ;
   GALGAS_lstring var_cType = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 44)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 46)) ;
   GALGAS_luint_36__34_ var_size = inCompiler->synthetizedAttribute_uint_36__34_value () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 45)) ;
-  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (false)  COMMA_SOURCE_FILE ("new-base-type.galgas", 46))  COMMA_SOURCE_FILE ("new-base-type.galgas", 46)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 47)) ;
+  ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (false)  COMMA_SOURCE_FILE ("new-base-type.galgas", 48))  COMMA_SOURCE_FILE ("new-base-type.galgas", 48)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i1_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 42)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 43)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 44)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 45)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_newUnsignedRepresentation) COMMA_SOURCE_FILE ("new-base-type.galgas", 43)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_attribute) COMMA_SOURCE_FILE ("new-base-type.galgas", 44)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 45)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 46)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 47)) ;
   inCompiler->resetTemplateString () ;
 }
 
