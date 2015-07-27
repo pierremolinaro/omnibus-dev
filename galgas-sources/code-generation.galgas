@@ -4,32 +4,54 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+getter @literalStructureList literalValue -> @string result {
+  result = "{"
+  for (ls) in self do
+    switch ls
+    case unsignedInteger (@uint64 value) :
+      result += [value string]
+    case signedInteger (@sint64 value) :
+      result += [value string]
+    case string (* @string name) :
+      result += name
+    case structure (@literalStructureList valueList) :
+      result += [valueList literalValue]
+    end
+  between result += ", "
+  end
+  result += "}"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 getter @variableKindIR mangledName -> @string outResult {
   switch self
-  case register (@string name) :
-    outResult = mangledNameForRegister (!name:name)
-  case globalVariable (@string name) :
-    outResult = mangledNameForGlobalVariable (!name:name)
-  case localVariable (@string name) :
-    outResult = mangledNameForLocalVariable (!name:name)
-  case inArgument (@string name) :
-    outResult = mangledNameForInArgument (!name:name)
-  case inOutArgument (@string name) :
-    outResult = mangledNameForInOutArgument (!name:name)
-  case outArgument (@string name) :
-    outResult = "* " + mangledNameForOutArgument (!name:name)
-  case localConstant (@string name) :
-    outResult = mangledNameForConstant (!name:name)
+  case register (@lstring name) :
+    outResult = mangledNameForRegister (!name:name.string)
+  case globalVariable (@lstring name) :
+    outResult = mangledNameForGlobalVariable (!name:name.string)
+  case localVariable (@lstring name) :
+    outResult = mangledNameForLocalVariable (!name:name.string)
+  case inArgument (@lstring name) :
+    outResult = mangledNameForInArgument (!name:name.string)
+  case inOutArgument (@lstring name) :
+    outResult = mangledNameForInOutArgument (!name:name.string)
+  case outArgument (@lstring name) :
+    outResult = "* " + mangledNameForOutArgument (!name:name.string)
+  case localConstant (@lstring name) :
+    outResult = mangledNameForConstant (!name:name.string)
   case temporaryConstant (@uint idx) :
     outResult = mangledNameForTemporaryConstant (!idx:idx)
-  case localAccess (@string access) :
-    outResult = access
+  case localAccess (@lstring access) :
+    outResult = access.string
   case literalUnsignedInteger (@uint64 value) :
     outResult = [value string]
   case literalSignedInteger (@sint64 value) :
     outResult = [value string]
   case literalString (* @string name) :
     outResult = name
+  case literalStructure (@literalStructureList s) :
+    outResult = [s literalValue]
   end
 }
 

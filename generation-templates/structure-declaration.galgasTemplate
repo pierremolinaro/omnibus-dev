@@ -9,5 +9,3 @@ for () in FIELD_LIST do
 end
 %} %!mangledNameForType (!name:STRUCTURE_NAME)% ;
 
-%!mangledNameForType (!name:STRUCTURE_NAME)% %!structureInitRoutinePrefix () ![STRUCTURE_NAME identifierRepresentation]% (void) ;
-

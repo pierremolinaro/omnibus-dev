@@ -321,6 +321,10 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_45 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_46 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_47 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_common_5F_syntax_48 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -455,64 +459,6 @@ class cEnumAssociatedValues_receiverType_mutatingReceiver : public cEnumAssociat
   public : virtual ~ cEnumAssociatedValues_receiverType_mutatingReceiver (void) {}
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @typeKind enum, associated values                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues {
-  public : const GALGAS_enumConstantMap mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_enumeration (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_propertyList mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyList & inAssociatedValue0
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_structure (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
-  public : const GALGAS_sint_36__34_ mAssociatedValue0 ;
-  public : const GALGAS_uint_36__34_ mAssociatedValue1 ;
-  public : const GALGAS_bool mAssociatedValue2 ;
-  public : const GALGAS_uint mAssociatedValue3 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_integer (const GALGAS_sint_36__34_ & inAssociatedValue0,
-                                                   const GALGAS_uint_36__34_ & inAssociatedValue1,
-                                                   const GALGAS_bool & inAssociatedValue2,
-                                                   const GALGAS_uint & inAssociatedValue3
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_integer (void) {}
-} ;
-
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -599,6 +545,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionCodeType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
   public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
+  public : GALGAS_instanciationMap mAttribute_mInstanciationMap ;
   public : GALGAS_procedureMap mAttribute_mProcedureMap ;
   public : GALGAS_functionMap mAttribute_mFunctionMap ;
   public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
@@ -656,6 +603,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionCodeType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
+                                   const GALGAS_instanciationMap & in_mInstanciationMap,
                                    const GALGAS_procedureMap & in_mProcedureMap,
                                    const GALGAS_functionMap & in_mFunctionMap,
                                    const GALGAS_initRoutineMap & in_mInitRoutineMap,
@@ -709,17 +657,17 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
                                                           const class GALGAS_unifiedTypeMap & inOperand4,
-                                                          const class GALGAS_procedureMap & inOperand5,
-                                                          const class GALGAS_functionMap & inOperand6,
-                                                          const class GALGAS_initRoutineMap & inOperand7,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand8,
+                                                          const class GALGAS_instanciationMap & inOperand5,
+                                                          const class GALGAS_procedureMap & inOperand6,
+                                                          const class GALGAS_functionMap & inOperand7,
+                                                          const class GALGAS_initRoutineMap & inOperand8,
                                                           const class GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                          const class GALGAS_registerMap & inOperand10,
-                                                          const class GALGAS_globalConstantMap & inOperand11,
-                                                          const class GALGAS_globalVariableMap & inOperand12,
-                                                          const class GALGAS_modeMap & inOperand13,
-                                                          const class GALGAS_stringset & inOperand14,
-                                                          const class GALGAS_infixOperatorMap & inOperand15,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand10,
+                                                          const class GALGAS_registerMap & inOperand11,
+                                                          const class GALGAS_globalConstantMap & inOperand12,
+                                                          const class GALGAS_globalVariableMap & inOperand13,
+                                                          const class GALGAS_modeMap & inOperand14,
+                                                          const class GALGAS_stringset & inOperand15,
                                                           const class GALGAS_infixOperatorMap & inOperand16,
                                                           const class GALGAS_infixOperatorMap & inOperand17,
                                                           const class GALGAS_infixOperatorMap & inOperand18,
@@ -742,9 +690,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand35,
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
-                                                          const class GALGAS_prefixOperatorMap & inOperand38,
+                                                          const class GALGAS_infixOperatorMap & inOperand38,
                                                           const class GALGAS_prefixOperatorMap & inOperand39,
-                                                          const class GALGAS_prefixOperatorMap & inOperand40
+                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_prefixOperatorMap & inOperand41
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -796,6 +745,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initRoutineMap reader_mInitRoutineMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instanciationMap reader_mInstanciationMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mLeftShiftOperatorMap (LOCATION_ARGS) const ;
 
@@ -937,6 +888,44 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (cla
                                                                              const class GALGAS_string & in_ENUMERATION_5F_NAME,
                                                                              const class GALGAS_string & in_ACTUAL_5F_TYPE_5F_NAME
                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Filewrapper 'structureGenerationTemplate'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_structureGenerationTemplate ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Filewrapper template 'structureGenerationTemplate declaration'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_structureGenerationTemplate_declaration (class C_Compiler * inCompiler,
+                                                                           const class GALGAS_string & in_STRUCTURE_5F_NAME,
+                                                                           const class GALGAS_structureFieldListForGeneration & in_FIELD_5F_LIST
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'mangledNameForProperty'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForProperty (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1545,6 +1534,29 @@ void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration initAnalysis'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractDeclaration_initAnalysis) (const class cPtr_abstractDeclaration * inObject,
+                                                                          class GALGAS_semanticContext & ioArgument0,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_initAnalysis (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_initAnalysis inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_initAnalysis (const class cPtr_abstractDeclaration * inObject,
+                                      GALGAS_semanticContext & io_ioContext,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Category method '@exceptionClauseListAST-element enterInContext'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1863,16 +1875,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intermediateCodeStr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'mangledNameForProperty'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForProperty (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Function 'mangledNameForInArgument'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1918,15 +1920,6 @@ class GALGAS_string function_receiverName (class C_Compiler * inCompiler
 
 class GALGAS_string function_receiverPtrName (class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'structureInitRoutinePrefix'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_structureInitRoutinePrefix (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -22,12 +22,6 @@ syntax extension common_syntax {
     end
     $.$
     $identifier$ ?let constructorName
-#    select
-#    or
-#      ${$
-#      
-#      $}$
-#    end
     outExpression = @constructorCall.new {!optionalTypeName !constructorName}
   }
 
@@ -48,6 +42,14 @@ override method @constructorCall addDependenceEdgeForStaticExpression
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @constructorMap {
+  @variableKindIR mValue
+  insert insertKey error message "the '%K' constructor is already declared in %L"
+  search searchKey error message "there is no '%K' constructor"
+}
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @constructorCall analyzeExpression
@@ -77,10 +79,8 @@ override method @constructorCall analyzeExpression
   )
 #--- Get inferred type constructor map
   let constructorMap = [outExpressionType constructorMap]
-#--- Check constructor
-  [constructorMap searchKey !mConstructorName ?let constantValue]
-#--- Generate code
-  outResult = .literalUnsignedInteger {!value:constantValue}
+#--- Check constructor and get result
+  [constructorMap searchKey !mConstructorName ?outResult]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

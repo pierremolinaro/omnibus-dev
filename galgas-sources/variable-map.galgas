@@ -5,18 +5,19 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @variableKindIR {
-  case register (@string name)
-  case globalVariable (@string name)
-  case localVariable (@string name)
-  case inArgument (@string name)
-  case inOutArgument (@string name)
-  case outArgument (@string name)
-  case localConstant (@string name)
+  case register (@lstring name)
+  case globalVariable (@lstring name)
+  case localVariable (@lstring name)
+  case inArgument (@lstring name)
+  case inOutArgument (@lstring name)
+  case outArgument (@lstring name)
+  case localConstant (@lstring name)
   case temporaryConstant (@uint idx)
-  case localAccess (@string access)
+  case localAccess (@lstring access)
   case literalUnsignedInteger (@uint64 value)
   case literalSignedInteger (@sint64 value)
   case literalString (@string value @string name)
+  case literalStructure (@literalStructureList value)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -47,6 +48,8 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = true
   case literalString (* *) :
     outResult = true
+  case literalStructure (*) :
+    outResult = true
   end
 }
 
@@ -68,7 +71,7 @@ func initialVariableMap
         !mType
         !true
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey.string}
+        !.register {!name:lkey}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
@@ -79,7 +82,7 @@ func initialVariableMap
         !mType
         !true
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey.string}
+        !.register {!name:lkey}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
@@ -112,7 +115,7 @@ func initialVariableMap
         !variableType
         !allowedAccess
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName.string}
+        !.globalVariable {!name:variableName}
         !true
         !{}
         !false # Cannot be used as input parameter
@@ -123,7 +126,7 @@ func initialVariableMap
         !variableType
         !allowedAccess
         !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName.string}
+        !.globalVariable {!name:variableName}
         !true
         !{}
         !false # Cannot be used as input parameter

@@ -44,12 +44,6 @@ func mangledNameForType ?name:@string inName -> @string outPrefix {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once structureInitRoutinePrefix -> @string outName {
-  outName = "init_"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 func %once literalStringPrefix -> @string outName {
   outName = "str_"
 }

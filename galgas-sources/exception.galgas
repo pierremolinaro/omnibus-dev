@@ -119,7 +119,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !inContext.mExceptionCodeType
     !true
     !mangledNameForInArgument (!name:codeArg.string)
-    !.inArgument {!name:codeArg.string}
+    !.inArgument {!name:codeArg}
     ![inContext.mExceptionCodeType copiable]
     !{}
     !false
@@ -130,7 +130,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !StaticStringType
     !true
     !mangledNameForInArgument (!name:fileArg.string)
-    !.inArgument {!name:fileArg.string}
+    !.inArgument {!name:fileArg}
     ![StaticStringType copiable]
     !{}
     !false
@@ -141,7 +141,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !inContext.mExceptionLineType
     !true
     !mangledNameForInArgument (!name:lineArg.string)
-    !.inArgument {!name:lineArg.string}
+    !.inArgument {!name:lineArg}
     ![inContext.mExceptionLineType copiable]
     !{}
     !false

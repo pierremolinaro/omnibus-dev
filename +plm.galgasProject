@@ -33,7 +33,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/enumeration-declaration.galgas"
 
 #--- Structure
-#  "galgas-sources/structure-declaration.galgas"
+  "galgas-sources/structure-declaration.galgas"
 
 #--- Global declarations
   "galgas-sources/global-variable-declaration.galgas"
@@ -71,6 +71,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-conversion.galgas"
   "galgas-sources/expression-constructor-call.galgas"
+  "galgas-sources/expression-instanciation.galgas"
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"

@@ -98,11 +98,10 @@ override method @integerDeclaration enterInContext
     end
   end
  #---
-  @constructorMap constructorMap = {}
   [!?ioContext.mTypeMap insertKey
     !lkey:mIntegerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not isSigned !bitCount:size}
-    !constructorMap:constructorMap
+    !constructorMap:{}
     !procedureMap:{}
     !copiable:true
     !equatable:true
@@ -228,6 +227,10 @@ proc enterIntegerOperators
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @integerDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @integerDeclaration semanticAnalysis

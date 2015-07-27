@@ -9,16 +9,8 @@ enum @typeKind {
   case boolset
   case literalString
   case enumeration (@enumConstantMap constantMap)
-  case structure (@propertyList propertyList)
+  case structure (@propertyList propertyList @propertyMap propertyMap)
   case integer (@sint64 min @uint64 max @bool unsigned @uint bitCount)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-map @constructorMap {
-  @uint64 mValue
-  insert insertKey error message "the '%K' constructor is already declared in %L"
-  search searchKey error message "there is no '%K' constructor"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -118,13 +110,6 @@ sharedmap @unifiedTypeMap %selectors {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @propertyList {
-  @unifiedTypeMap-proxy mTypeProxy
-  @lstring mPropertyName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 list @typeList {
   @unifiedTypeMap-proxy mActualType
 }
@@ -137,6 +122,7 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
+  @instanciationMap mInstanciationMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap
@@ -181,6 +167,11 @@ abstract method @abstractDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractDeclaration initAnalysis
+  ?!context:@semanticContext ioContext
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -249,12 +240,22 @@ proc buildSemanticContext
       end
     end
   end
+#--- Build instanciation map
+  if @uint.errorCount == 0 then
+    for (declaration) in inAST.mDeclarationList do
+      [declaration initAnalysis
+        !?context:outSemanticContext
+       ]
+    end
+  end
 #--- Check global var declaration
-  for globalVar in inAST.mGlobalVarDeclarationList do
-    [globalVar enterInContext
-      !?context:outSemanticContext
-      !?staticStringMap:ioGlobalLiteralStringMap
-    ]
+  if @uint.errorCount == 0 then
+    for globalVar in inAST.mGlobalVarDeclarationList do
+      [globalVar enterInContext
+        !?context:outSemanticContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+      ]
+    end
   end
 }
 
