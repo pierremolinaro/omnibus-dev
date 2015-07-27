@@ -1,0 +1,35 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Les types structurés}
+
+
+\section{Déclaration d'un type structure}
+
+La déclaration d'un type structure est introduite par le mot réservé \plm!struct! :
+
+\begin{PLM}
+struct $point {
+  var x $int32 = 0
+  var y $int32 = 0
+}
+\end{PLM}
+
+Dans la version actuelle de PLM, tous les champs doivent être initialisés.
+
+\begin{PLM}
+struct $point3D {
+  var p $point = $point ()
+  var z $int32 = 0
+}
+\end{PLM}
+
+\section{Code engendré}
+
+PLM engendre une structure C pour chaque structure PLM déclarée.
+
+
