@@ -498,8 +498,9 @@ class GALGAS_assignmentInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_assignmentInstructionIR constructor_new (const class GALGAS_variableKindIR & inOperand0,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                  const class GALGAS_variableKindIR & inOperand2
+                                                                  const class GALGAS_lstringlist & inOperand1,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                  const class GALGAS_variableKindIR & inOperand3
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -511,6 +512,8 @@ class GALGAS_assignmentInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mFieldList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
@@ -537,11 +540,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructi
 class cPtr_assignmentInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_variableKindIR mAttribute_mTargetVariable ;
+  public : GALGAS_lstringlist mAttribute_mFieldList ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
   public : GALGAS_variableKindIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_assignmentInstructionIR (const GALGAS_variableKindIR & in_mTargetVariable,
+                                         const GALGAS_lstringlist & in_mFieldList,
                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                          const GALGAS_variableKindIR & in_mSourceValue
                                          COMMA_LOCATION_ARGS) ;
@@ -551,6 +556,7 @@ class cPtr_assignmentInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mTargetVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist reader_mFieldList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mSourceValue (LOCATION_ARGS) const ;
 //--- Description

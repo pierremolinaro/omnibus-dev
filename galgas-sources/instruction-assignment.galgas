@@ -4,6 +4,7 @@
 
 class @assignmentInstructionAST : @instructionAST {
   @lstring mTargetVarName
+  @lstringlist mFieldList
   @expressionAST mSourceExpression
 }
 
@@ -17,10 +18,18 @@ syntax extension common_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $identifier$ ?let varName
+    @lstringlist fieldList = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let fieldName
+      fieldList += !fieldName
+    end
     $=$
     <expression> ?let @expressionAST expression
     ioInstructionList += !@assignmentInstructionAST.new {
       !varName
+      !fieldList
       !expression
     }
   }
@@ -47,9 +56,26 @@ override method @assignmentInstructionAST analyze
 #--- Get target type
   [!?ioVariableMap neutralAccess
     !mTargetVarName
-    ?let targetType
+    ?@unifiedTypeMap-proxy targetType
     ?6*
   ]
+#--- Analyze field list
+  for (fieldName) in mFieldList do
+    switch [targetType kind]
+    case boolean :
+      error fieldName : "a boolean does not have fields"
+    case boolset :
+      error fieldName : "a boolset does not have fields"
+    case literalString :
+      error fieldName : "a static string does not have fields"
+    case enumeration (*) :
+      error fieldName : "an enumeration does not have fields"
+    case structure (* @propertyMap propertyMap) :
+      [propertyMap searchKey !fieldName ?targetType]
+    case integer (* * * *) :  
+      error fieldName : "an integer does not have fields"
+    end
+  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -87,11 +113,27 @@ override method @assignmentInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  ioInstructionGenerationList += !@assignmentInstructionIR.new {
-   !targetVariableKind
-   !targetType
-   !sourceValueName
- }
+  if [sourceValueName isLiteralStructure] then
+    getNewTempVariable (!?ioTemporaries ?let temporaryResult)
+    ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
+      !targetType
+      !temporaryResult
+      !sourceValueName
+    }
+    ioInstructionGenerationList += !@assignmentInstructionIR.new {
+      !targetVariableKind
+      !mFieldList
+      !targetType
+      !temporaryResult
+    }
+  else
+    ioInstructionGenerationList += !@assignmentInstructionIR.new {
+      !targetVariableKind
+      !mFieldList
+      !targetType
+      !sourceValueName
+    }
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -100,6 +142,7 @@ override method @assignmentInstructionAST analyze
 
 class @assignmentInstructionIR : @abstractInstructionIR {
   @variableKindIR mTargetVariable
+  @lstringlist mFieldList
   @unifiedTypeMap-proxy mTargetVarType
   @variableKindIR mSourceValue
 }
@@ -107,7 +150,11 @@ class @assignmentInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @assignmentInstructionIR instructionCode -> @string outCode {
-  outCode = [mTargetVariable mangledName] + " = " + [mSourceValue mangledName] + " ;\n"
+  outCode = [mTargetVariable mangledName]
+  for (fieldName) in mFieldList do
+    outCode += "." + mangledNameForProperty (!name:fieldName.string)
+  end
+  outCode += " = " + [mSourceValue mangledName] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
