@@ -121,6 +121,10 @@ override method @globalConstantDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @globalConstantDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

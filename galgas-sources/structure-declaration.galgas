@@ -32,7 +32,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $struct$
-    $identifier$ ?let structureName
+    $typeName$ ?let structureName
     @lstringlist attributeList = {}
     repeat
     while
@@ -44,21 +44,25 @@ syntax extension common_syntax {
     repeat
     while
       $var$
+      $identifier$ ?let fieldName
       @lstring optionalFieldType
 #      select
 #        optionalFieldType = .new {!"" !.here}
 #      or
         $typeName$ ?optionalFieldType
 #      end
-      $identifier$ ?let fieldName
       $=$
       <expression> ?let initExpression
       fieldList += !fieldName !optionalFieldType !initExpression
     while
-      <procedure> !procedureKind:.structureProc {!structureTypeName:structureName !mutating:false} !?ioAST.mProcedureListAST
+      <procedure>
+        !procedureKind:.structureProc {!structureTypeName:structureName !mutating:false}
+        !?ioAST.mProcedureListAST
     while
       $mutating$
-      <procedure> !procedureKind:.structureProc {!structureTypeName:structureName !mutating:true} !?ioAST.mProcedureListAST
+      <procedure>
+        !procedureKind:.structureProc {!structureTypeName:structureName !mutating:true}
+        !?ioAST.mProcedureListAST
     while
       $;$
     end
@@ -114,6 +118,21 @@ getter @procedureDeclarationListAST-element getMangledName -> @string outMangled
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+list @propertyList {
+  @unifiedTypeMap-proxy mTypeProxy
+  @lstring mPropertyName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @propertyMap {
+  @unifiedTypeMap-proxy mTypeProxy
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -127,20 +146,20 @@ override method @structureDeclaration enterInContext
         error s : "duplicated attribute"
       end
       copiable = false
+    else
+      error s : "unknown attribute"
     end
   end
 #--- Properties
+  @literalStructureList structInitList = {}
   @propertyList propertyList = {}
+  @propertyMap propertyMap = {}
   for () in mStructureFieldListAST do
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
     propertyList += !fieldTypeNameProxy !mFieldName
+    [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy]
+ #   structInitList += ![fieldTypeNameProxy initStaticValue]
   end
-#--- Constructors
-  @constructorMap constructorMap = {}
-  [!?constructorMap insertKey
-    !.new {!"init" !mStructureName.location}
-    !structureInitRoutinePrefix () + [mStructureName identifierRepresentation] + " ()"
-  ]
 #--- Procedures
   @procedureMap procedureMap = {}
   for procedure in inProcedureListAST do
@@ -156,8 +175,9 @@ override method @structureDeclaration enterInContext
         [!?procedureMap insertKey
           !.new {![procedure getMangledName] !procedure.mProcedureName.location}
           !mutating
-          !procedure.mProcedureMode
+          !{}
           !signature
+          !false # not weak
         ]
       end
     end
@@ -165,13 +185,101 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!propertyList:propertyList}
-    !constructorMap:constructorMap
+    !kind:.structure {!propertyList:propertyList !propertyMap:propertyMap}
+    !constructorMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
     !equatable:false
     !comparable:false
   ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  INIT ANALYSIS                                                                                                       *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @literalStructure {
+  case unsignedInteger (@uint64 value)
+  case signedInteger (@sint64 value)
+  case string (@string value @string name)
+  case structure (@literalStructureList value)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @literalStructureList {
+  @literalStructure mStructure
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @instanciationMap {
+  @literalStructureList mInstanciation
+  insert insertKey error message "the '$%K' type instantiation is already declared in %L"
+  search searchKey error message "the '$%K' type does not implement type instanciation"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @structureDeclaration initAnalysis
+  ?!context:@semanticContext ioContext
+{
+  @literalStructureList initStructureList = {}
+  @globalLiteralStringMap globalLiteralStringMap = {} # Unused here
+  for () in mStructureFieldListAST do
+  #--- Field type
+    let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
+      then .null
+      else .searchKey {!ioContext.mTypeMap !mOptionalFieldType}
+    end
+  #--- Init expression
+    @instructionListIR initInstructionGenerationList = {}
+    @semanticTemporariesStruct temporaries = .default
+    [mInitExpression analyzeExpression
+      !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
+      !optionalReceiverType:.noReceiver
+      !optionalTargetType:fieldType
+      !context:ioContext
+      !modes:{}
+      !allowException:false
+      !?temporary:temporaries
+      !?staticStringMap:globalLiteralStringMap
+      !?variableMap:*
+      !?instructionListIR:initInstructionGenerationList
+      ?expressionType:let unused inferredType
+      ?result:@variableKindIR expressionIR
+    ]
+    switch expressionIR
+    case register (@lstring name) :
+      error name : "a register cannot be used as field initial value"
+    case globalVariable (@lstring name) :
+      error name : "a global variable cannot be used as field initial value"
+    case localVariable (@lstring name) :
+      error name : "a local variable cannot be used as field initial value"
+    case inArgument (@lstring name) :
+      error name : "an in formal argument cannot be used as field initial value"
+    case inOutArgument (@lstring name) :
+      error name : "an in/out formal argument cannot be used as field initial value"
+    case outArgument (@lstring name) :
+      error name : "an out formal argument cannot be used as field initial value"
+    case localConstant (@lstring name) :
+      error name : "a local constant cannot be used as field initial value"
+    case temporaryConstant (*) :
+      error .nowhere : "a temporary constant cannot be used as field initial value"
+    case localAccess (@lstring access) :
+      error access : "a property cannot be used as field initial value"
+    case literalUnsignedInteger (@uint64 value) :
+      initStructureList += !.unsignedInteger {!value:value}
+    case literalSignedInteger (@sint64 value) :
+      initStructureList += !.signedInteger {!value:value}
+    case literalString (@string value @string name) :
+      initStructureList += !.string {!value:value !name:name}
+    case literalStructure (@literalStructureList value) :
+      initStructureList += !.structure {!value:value}
+    end
+  end
+#---
+  [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -182,14 +290,6 @@ override method @structureDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Attributes
-  for (s) in mAttributeList do
-    if s.string == "unique" then
-      # Nothing to do handled in 'enterInContext'
-    else
-      error s : "unknown attribute"
-    end
-  end
 #--- Analyze field declaration
   @structureFieldListForGeneration structureFieldListForGeneration = {}
   @stringset fieldNameSet = {}
@@ -206,26 +306,26 @@ override method @structureDeclaration semanticAnalysis
     fieldNameSet += !mFieldName.string
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
-    @semanticTemporariesStruct ioTemporaries = 0
+    @semanticTemporariesStruct temporaries = .default
     [mInitExpression analyzeExpression
-      !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+      !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
       !optionalReceiverType:.noReceiver
       !optionalTargetType:fieldType
       !context:inContext
-      !mode:""
-      !?temporary:ioTemporaryIndex
+      !modes:{}
+      !allowException:false
+      !?temporary:temporaries
       !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
       ?expressionType:let inferredType
-      ?generatedCode:let initExpressionGeneratedCode
       ?result:@variableKindIR resultValueName
     ]
   #---
     structureFieldListForGeneration +=
       !inferredType
       !mFieldName.string
-      !initExpressionGeneratedCode
+#      !initExpressionGeneratedCode
   end
 #--- Generate code
   [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
@@ -248,7 +348,6 @@ class @structureIR : @abstractTypeIR {
 list @structureFieldListForGeneration {
   @unifiedTypeMap-proxy mFieldType
   @string mFieldName
-  @abstractExpressionGeneration mInitExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -257,10 +356,6 @@ private filewrapper structureGenerationTemplate in "../generation-templates" {
 }{
 }{
   template declaration "structure-declaration.galgasTemplate"
-    ?@string STRUCTURE_NAME
-    ?@structureFieldListForGeneration FIELD_LIST
-
-  template implementation "structure-implementation.galgasTemplate"
     ?@string STRUCTURE_NAME
     ?@structureFieldListForGeneration FIELD_LIST
 }

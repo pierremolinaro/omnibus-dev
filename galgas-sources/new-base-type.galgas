@@ -100,6 +100,10 @@ override method @newIntegerRepresentationDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @newIntegerRepresentationDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @newIntegerRepresentationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

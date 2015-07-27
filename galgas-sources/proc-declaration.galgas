@@ -350,7 +350,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !structureTypeName}
     @propertyList propertyList
     switch [type kind]
-    case structure (propList) : propertyList = propList
+    case structure (propList *) : propertyList = propList
     case enumeration (*) : propertyList = {}
     case integer (* * * *) : propertyList = {}
     case boolean : propertyList = {}
@@ -369,7 +369,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !true
           !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
-            !access:receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
+            !access:.new {!receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
           }
           ![propertyType copiable]
           !{}
@@ -389,7 +389,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !true
           !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
-            !access:receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
+            !access:.new{!receiverName () + "." + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
           }
           ![propertyType copiable]
           !{}
@@ -409,7 +409,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !true
         !mangledNameForInArgument (!name:formalArgumentName.string)
-        !.inArgument {!name:formalArgumentName.string}
+        !.inArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -421,7 +421,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !true
         !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
-        !.inOutArgument {!name:formalArgumentName.string}
+        !.inOutArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -433,7 +433,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !typeProxy
         !true
         !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
-        !.outArgument {!name:formalArgumentName.string}
+        !.outArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true

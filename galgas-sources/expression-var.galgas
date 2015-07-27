@@ -78,29 +78,76 @@ override method @varInExpressionAST analyzeExpression
   )
 #--- Field ?
   for (field) in mFieldNameList do
-    [registerBitSliceMap searchKey
-      !field
-      ?let @infixOperatorIR accessOperator
-      ?let @variableKindIR accessRightOperand
-      ?let submap
-      ?let newResultType
-     ]
-  #--- Temp var
-    getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
-    ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-      !newResultType
-      !newResultingVariable
-      !resultingVariable
-      !accessOperator
-      !accessRightOperand
-      !mSourceVarName.location
-    }
-    resultingVariable = newResultingVariable 
-    registerBitSliceMap = submap
-    outExpressionType = newResultType
+    if [registerBitSliceMap count] > 0 then # It is a register
+      [registerBitSliceMap searchKey
+        !field
+        ?let @infixOperatorIR accessOperator
+        ?let @variableKindIR accessRightOperand
+        ?let submap
+        ?let newResultType
+       ]
+    #--- Temp var
+      getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
+      ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
+        !newResultType
+        !newResultingVariable
+        !resultingVariable
+        !accessOperator
+        !accessRightOperand
+        !mSourceVarName.location
+      }
+      resultingVariable = newResultingVariable 
+      registerBitSliceMap = submap
+      outExpressionType = newResultType
+    else
+      switch [variableType kind]
+        case boolean :
+          error field : "a boolean does not handle field access"
+        case boolset :
+          error field : "a boolset does not handle field access"
+        case literalString :
+          error field : "a literal string does not handle field access"
+        case enumeration (*) :
+          error field : "an enumeration does not handle field access"
+        case structure (@propertyList unused propertyList @propertyMap propertyMap) :
+          [propertyMap searchKey !field ?outExpressionType]
+          getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
+          ioInstructionGenerationList += !@fieldAccessIR.new {
+            !outExpressionType
+            !newResultingVariable
+            !resultingVariable
+            !field
+          }
+          resultingVariable = newResultingVariable 
+        case integer (* * * *) :
+          error field : "an integer does not handle field access"
+      end    
+    end
   end
 #--- Generate code
   outResultValueName = resultingVariable
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @fieldAccessIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @variableKindIR mResult
+  @variableKindIR mSource
+  @lstring mField
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @fieldAccessIR instructionCode -> @string outCode {
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mSource mangledName] + ".property_" + mField + " ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @fieldAccessIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mSource enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -227,6 +227,10 @@ override method @registerDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @registerDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @registerDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -255,7 +259,7 @@ override method @registerDeclaration semanticAnalysis
       end
     end
   case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
-  case structure (*) : error mRegisterTypeName : "a structure type is not valid for a register"
+  case structure (* *) : error mRegisterTypeName : "a structure type is not valid for a register"
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
   end
 #--- Check address value
