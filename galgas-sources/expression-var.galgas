@@ -100,7 +100,7 @@ override method @varInExpressionAST analyzeExpression
       registerBitSliceMap = submap
       outExpressionType = newResultType
     else
-      switch [variableType kind]
+      switch [outExpressionType kind]
         case boolean :
           error field : "a boolean does not handle field access"
         case boolset :
@@ -141,7 +141,7 @@ class @fieldAccessIR : @abstractInstructionIR {
 
 override getter @fieldAccessIR instructionCode -> @string outCode {
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    outCode += " = " +  [mSource mangledName] + ".property_" + mField + " ;\n"
+    outCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

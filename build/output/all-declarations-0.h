@@ -4139,6 +4139,8 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_48 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_common_5F_syntax_49 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -4326,7 +4328,8 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_assignmentInstructionAST constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                   const class GALGAS_expressionAST & inOperand1
+                                                                   const class GALGAS_lstringlist & inOperand1,
+                                                                   const class GALGAS_expressionAST & inOperand2
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4338,6 +4341,8 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mFieldList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST reader_mSourceExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mTargetVarName (LOCATION_ARGS) const ;
@@ -4362,10 +4367,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructi
 class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mTargetVarName ;
+  public : GALGAS_lstringlist mAttribute_mFieldList ;
   public : GALGAS_expressionAST mAttribute_mSourceExpression ;
 
 //--- Constructor
   public : cPtr_assignmentInstructionAST (const GALGAS_lstring & in_mTargetVarName,
+                                          const GALGAS_lstringlist & in_mFieldList,
                                           const GALGAS_expressionAST & in_mSourceExpression
                                           COMMA_LOCATION_ARGS) ;
 
@@ -4374,6 +4381,7 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mTargetVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist reader_mFieldList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST reader_mSourceExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

@@ -2,8 +2,8 @@
 #  CODE GENERATION PREFIXES                                                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForProperty ?name:@string inName -> @string outPrefix {
-  outPrefix = "property_" + [inName nameRepresentation]
+func mangledNameForProperty ?name:@string inName -> @string outName {
+  outName = "property_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
