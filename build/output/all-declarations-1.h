@@ -4606,8 +4606,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
 
-  public : static GALGAS_typeKind constructor_structure (const class GALGAS_propertyList & inOperand0,
-                                                         const class GALGAS_propertyMap & inOperand1
+  public : static GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -4630,8 +4629,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyList & outArgument0,
-                                                   class GALGAS_propertyMap & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyMap & outArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -4684,12 +4682,10 @@ class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_propertyList mAssociatedValue0 ;
-  public : const GALGAS_propertyMap mAssociatedValue1 ;
+  public : const GALGAS_propertyMap mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyList & inAssociatedValue0,
-                                                     const GALGAS_propertyMap & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

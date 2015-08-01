@@ -9,7 +9,7 @@ enum @typeKind {
   case boolset
   case literalString
   case enumeration (@enumConstantMap constantMap)
-  case structure (@propertyList propertyList @propertyMap propertyMap)
+  case structure (@propertyMap propertyMap)
   case integer (@sint64 min @uint64 max @bool unsigned @uint bitCount)
 }
 
