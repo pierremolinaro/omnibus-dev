@@ -348,21 +348,21 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     receiverType = .noReceiver
   case structureProc (structureTypeName mutating) :
     let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !structureTypeName}
-    @propertyList propertyList
+    @propertyMap propertyMap
     switch [type kind]
-    case structure (propList *) : propertyList = propList
-    case enumeration (*) : propertyList = {}
-    case integer (* * * *) : propertyList = {}
-    case boolean : propertyList = {}
-    case boolset : propertyList = {}
-    case literalString : propertyList = {}
+    case structure (propMap) : propertyMap = propMap
+    case enumeration (*) : propertyMap = {}
+    case integer (* * * *) : propertyMap = {}
+    case boolean : propertyMap = {}
+    case boolset : propertyMap = {}
+    case literalString : propertyMap = {}
     end
     if mutating then
       receiverType = .mutatingReceiver {
         !type:type
         !receiverPointer:receiverPtrName ()
       }
-      for (propertyType propertyName) in propertyList do
+      for (propertyName propertyType) in propertyMap do
         [!?variableMap insertDefinedLocalVariable
           !propertyName
           !propertyType
@@ -382,7 +382,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !type:type
         !receiverValue:receiverName ()
       }
-      for (propertyType propertyName) in propertyList do
+      for (propertyName propertyType) in propertyMap do
         [!?variableMap insertUsedLocalConstant
           !propertyName
           !propertyType

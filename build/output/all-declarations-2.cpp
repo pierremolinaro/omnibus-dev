@@ -14776,13 +14776,13 @@ void routine_checkMode (const GALGAS_stringset constinArgument_inRequiredModes,
     }
     var_s.dotAssign_operation (temp_1  COMMA_SOURCE_FILE ("semantic-context.galgas", 87)) ;
     var_s.dotAssign_operation (GALGAS_string (": ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 88)) ;
-    cEnumerator_stringset enumerator_3733 (var_missingModes, kEnumeration_up) ;
-    while (enumerator_3733.hasCurrentObject ()) {
-      var_s.dotAssign_operation (GALGAS_string ("$").add_operation (enumerator_3733.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 90))  COMMA_SOURCE_FILE ("semantic-context.galgas", 90)) ;
-      if (enumerator_3733.hasNextObject ()) {
+    cEnumerator_stringset enumerator_3706 (var_missingModes, kEnumeration_up) ;
+    while (enumerator_3706.hasCurrentObject ()) {
+      var_s.dotAssign_operation (GALGAS_string ("$").add_operation (enumerator_3706.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 90))  COMMA_SOURCE_FILE ("semantic-context.galgas", 90)) ;
+      if (enumerator_3706.hasNextObject ()) {
         var_s.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 91)) ;
       }
-      enumerator_3733.gotoNextObject () ;
+      enumerator_3706.gotoNextObject () ;
     }
     inCompiler->emitSemanticError (constinArgument_inErrorLocation, var_s  COMMA_SOURCE_FILE ("semantic-context.galgas", 93)) ;
   }
@@ -14812,30 +14812,30 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
   {
   outArgument_outSemanticContext.mAttribute_mModeMap.modifier_insertKey (GALGAS_string ("exception").reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 188)) ;
   }
-  cEnumerator_initList enumerator_7846 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_7846.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_7846.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 191)) ;
-    enumerator_7846.gotoNextObject () ;
+  cEnumerator_initList enumerator_7819 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_7819.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_7819.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 191)) ;
+    enumerator_7819.gotoNextObject () ;
   }
-  cEnumerator_exceptionClauseListAST enumerator_8008 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
-  while (enumerator_8008.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_8008.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 197)) ;
-    enumerator_8008.gotoNextObject () ;
+  cEnumerator_exceptionClauseListAST enumerator_7981 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
+  while (enumerator_7981.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_7981.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 197)) ;
+    enumerator_7981.gotoNextObject () ;
   }
-  cEnumerator_declarationListAST enumerator_8144 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_8144.hasCurrentObject ()) {
-    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_8144.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 203)) ;
-    enumerator_8144.gotoNextObject () ;
+  cEnumerator_declarationListAST enumerator_8117 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_8117.hasCurrentObject ()) {
+    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_8117.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 203)) ;
+    enumerator_8117.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inAST.mAttribute_mExceptionTypes.reader_length (SOURCE_FILE ("semantic-context.galgas", 210)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 211)).reader_location (HERE)) ; // Implicit use of 'location' reader
     inCompiler->emitSemanticError (location_1, GALGAS_string ("exactly one exception type declaration should be provided (found:").add_operation (constinArgument_inAST.mAttribute_mExceptionTypes.reader_length (SOURCE_FILE ("semantic-context.galgas", 212)).reader_string (SOURCE_FILE ("semantic-context.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 212)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 212))  COMMA_SOURCE_FILE ("semantic-context.galgas", 211)) ;
-    cEnumerator_exceptionTypesAST enumerator_8576 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
-    while (enumerator_8576.hasCurrentObject ()) {
-      GALGAS_location location_2 (enumerator_8576.current_mExceptionCodeTypeName (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+    cEnumerator_exceptionTypesAST enumerator_8549 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
+    while (enumerator_8549.hasCurrentObject ()) {
+      GALGAS_location location_2 (enumerator_8549.current_mExceptionCodeTypeName (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
       inCompiler->emitSemanticError (location_2, GALGAS_string ("exception type declaration is here")  COMMA_SOURCE_FILE ("semantic-context.galgas", 214)) ;
-      enumerator_8576.gotoNextObject () ;
+      enumerator_8549.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_lstring var_exceptionCodeTypeName ;
@@ -14844,42 +14844,42 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
     outArgument_outSemanticContext.mAttribute_mExceptionCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 218)) ;
     outArgument_outSemanticContext.mAttribute_mExceptionLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionLineTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 222)) ;
   }
-  cEnumerator_procedureDeclarationListAST enumerator_9122 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
-  while (enumerator_9122.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9122.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 229)) ;
-    enumerator_9122.gotoNextObject () ;
+  cEnumerator_procedureDeclarationListAST enumerator_9095 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
+  while (enumerator_9095.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9095.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 229)) ;
+    enumerator_9095.gotoNextObject () ;
   }
-  cEnumerator_functionDeclarationListAST enumerator_9238 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
-  while (enumerator_9238.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9238.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 233)) ;
-    enumerator_9238.gotoNextObject () ;
+  cEnumerator_functionDeclarationListAST enumerator_9211 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
+  while (enumerator_9211.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9211.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 233)) ;
+    enumerator_9211.gotoNextObject () ;
   }
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 236)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_9418 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-    while (enumerator_9418.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_9473 (enumerator_9418.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_9473.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_9473.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 239)) ;
-        enumerator_9473.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_9391 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+    while (enumerator_9391.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_9446 (enumerator_9391.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_9446.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_9446.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 239)) ;
+        enumerator_9446.gotoNextObject () ;
       }
-      enumerator_9418.gotoNextObject () ;
+      enumerator_9391.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 244)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    cEnumerator_declarationListAST enumerator_9663 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
-    while (enumerator_9663.hasCurrentObject ()) {
-      callCategoryMethod_initAnalysis ((const cPtr_abstractDeclaration *) enumerator_9663.current_mDeclaration (HERE).ptr (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 246)) ;
-      enumerator_9663.gotoNextObject () ;
+    cEnumerator_declarationListAST enumerator_9636 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
+    while (enumerator_9636.hasCurrentObject ()) {
+      callCategoryMethod_initAnalysis ((const cPtr_abstractDeclaration *) enumerator_9636.current_mDeclaration (HERE).ptr (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 246)) ;
+      enumerator_9636.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 252)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_5) {
-    cEnumerator_globalVarDeclarationList enumerator_9877 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-    while (enumerator_9877.hasCurrentObject ()) {
-      categoryMethod_enterInContext (enumerator_9877.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 254)) ;
-      enumerator_9877.gotoNextObject () ;
+    cEnumerator_globalVarDeclarationList enumerator_9850 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+    while (enumerator_9850.hasCurrentObject ()) {
+      categoryMethod_enterInContext (enumerator_9850.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 254)) ;
+      enumerator_9850.gotoNextObject () ;
     }
   }
 }

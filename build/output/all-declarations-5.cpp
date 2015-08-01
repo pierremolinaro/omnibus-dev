@@ -415,11 +415,11 @@ static void categoryMethod_registerIntegerExpInExpressionAST_analyzeExpression (
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_8340 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 151)).unsafePointer ()) ;
-      const GALGAS_sint_36__34_ extractedValue_min = extractPtr_8340->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_max = extractPtr_8340->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_unsigned = extractPtr_8340->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_8340->mAssociatedValue3 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_8338 = (const cEnumAssociatedValues_typeKind_integer *) (var_expressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 151)).unsafePointer ()) ;
+      const GALGAS_sint_36__34_ extractedValue_min = extractPtr_8338->mAssociatedValue0 ;
+      const GALGAS_uint_36__34_ extractedValue_max = extractPtr_8338->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_unsigned = extractPtr_8338->mAssociatedValue2 ;
+      const GALGAS_uint extractedValue_expressionBitCount = extractPtr_8338->mAssociatedValue3 ;
       const enumGalgasBool test_2 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 161)).boolEnum () ;
       if (kBoolTrue == test_2) {
         inCompiler->emitSemanticError (object->mAttribute_mExpressionLocation, GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 162)) ;
@@ -670,9 +670,9 @@ static void categoryMethod_incDecInstructionAST_analyze (const cPtr_instructionA
     break ;
   case GALGAS_typeKind::kEnum_integer:
     {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_4483 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).unsafePointer ()) ;
-      const GALGAS_sint_36__34_ extractedValue_kMin = extractPtr_4483->mAssociatedValue0 ;
-      const GALGAS_uint_36__34_ extractedValue_kMax = extractPtr_4483->mAssociatedValue1 ;
+      const cEnumAssociatedValues_typeKind_integer * extractPtr_4481 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).unsafePointer ()) ;
+      const GALGAS_sint_36__34_ extractedValue_kMin = extractPtr_4481->mAssociatedValue0 ;
+      const GALGAS_uint_36__34_ extractedValue_kMax = extractPtr_4481->mAssociatedValue1 ;
       var_min = extractedValue_kMin ;
       var_max = extractedValue_kMax ;
     }
@@ -1168,8 +1168,8 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
       break ;
     case GALGAS_typeKind::kEnum_structure:
       {
-        const cEnumAssociatedValues_typeKind_structure * extractPtr_3135 = (const cEnumAssociatedValues_typeKind_structure *) (var_targetType.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 64)).unsafePointer ()) ;
-        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_3135->mAssociatedValue1 ;
+        const cEnumAssociatedValues_typeKind_structure * extractPtr_3133 = (const cEnumAssociatedValues_typeKind_structure *) (var_targetType.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 64)).unsafePointer ()) ;
+        const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_3133->mAssociatedValue0 ;
         extractedValue_propertyMap.method_searchKey (enumerator_2671.current_mValue (HERE), var_targetType, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 74)) ;
       }
       break ;
@@ -1193,10 +1193,10 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
   GALGAS_variableKindIR var_targetVariableKind ;
   GALGAS_bool var_isCopiable ;
   {
-  GALGAS_unifiedTypeMap_2D_proxy joker_4011 ; // Joker input parameter
-  GALGAS_registerBitSliceAccessMap joker_4117_2 ; // Joker input parameter
-  GALGAS_bool joker_4117_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.modifier_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_4011, var_accessIsAllowed, var_targetVar, var_targetVariableKind, var_isCopiable, joker_4117_2, joker_4117_1, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 100)) ;
+  GALGAS_unifiedTypeMap_2D_proxy joker_4009 ; // Joker input parameter
+  GALGAS_registerBitSliceAccessMap joker_4115_2 ; // Joker input parameter
+  GALGAS_bool joker_4115_1 ; // Joker input parameter
+  ioArgument_ioVariableMap.modifier_searchForWriteAccess (object->mAttribute_mTargetVarName, joker_4009, var_accessIsAllowed, var_targetVar, var_targetVariableKind, var_isCopiable, joker_4115_2, joker_4115_1, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 100)) ;
   }
   const enumGalgasBool test_5 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-assignment.galgas", 109)).boolEnum () ;
   if (kBoolTrue == test_5) {
@@ -1244,10 +1244,10 @@ static GALGAS_string categoryReader_assignmentInstructionIR_instructionCode (con
   const cPtr_assignmentInstructionIR * object = (const cPtr_assignmentInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_assignmentInstructionIR) ;
   result_outCode = categoryReader_mangledName (object->mAttribute_mTargetVariable, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 153)) ;
-  cEnumerator_lstringlist enumerator_5786 (object->mAttribute_mFieldList, kEnumeration_up) ;
-  while (enumerator_5786.hasCurrentObject ()) {
-    result_outCode.dotAssign_operation (GALGAS_string (".").add_operation (function_mangledNameForProperty (enumerator_5786.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155))  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)) ;
-    enumerator_5786.gotoNextObject () ;
+  cEnumerator_lstringlist enumerator_5784 (object->mAttribute_mFieldList, kEnumeration_up) ;
+  while (enumerator_5784.hasCurrentObject ()) {
+    result_outCode.dotAssign_operation (GALGAS_string (".").add_operation (function_mangledNameForProperty (enumerator_5784.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155))  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)) ;
+    enumerator_5784.gotoNextObject () ;
   }
   result_outCode.dotAssign_operation (GALGAS_string (" = ").add_operation (categoryReader_mangledName (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 157)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 157)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 157))  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 157)) ;
 //---

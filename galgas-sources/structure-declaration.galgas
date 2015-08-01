@@ -185,7 +185,7 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!propertyList:propertyList !propertyMap:propertyMap}
+    !kind:.structure {!propertyMap:propertyMap}
     !constructorMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
