@@ -6217,7 +6217,8 @@ const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "#  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -6494,7 +6495,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  44321, // Text length
+  44466, // Text length
   gWrapperFileContent_11_embeddedTargets
 ) ;
 
@@ -7245,7 +7246,8 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "#  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7402,7 +7404,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  11746, // Text length
+  11891, // Text length
   gWrapperFileContent_21_embeddedTargets
 ) ;
 
