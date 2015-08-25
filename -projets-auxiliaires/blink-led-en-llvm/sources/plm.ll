@@ -11,7 +11,7 @@ target triple = "thumbv7em-none--eabi"
 %vectorStructSeq = type {
   i32*,            ; unsigned * mStackPointer
   [15  x void()*], ; void (* mCoreSystemHandlerVector [15]) (void) ;
-  [240 x void()*], ; void (* mNonCoreHandlerVector [15]) (void) ;
+  [240 x void()*], ; void (* mNonCoreHandlerVector [240]) (void) ;
   [4   x i32]      ; int mFlash [4] ;
 } 
 
@@ -61,11 +61,11 @@ loop:
 
 define internal void @procSetup () nounwind {
 ;   register_PORTC_PCR5 = 256 ;
-  store volatile i32 256, i32* inttoptr (i32 1074049044 to i32*), align 8 ; 0x4004B014
+  store volatile i32 256, i32* inttoptr (i32 1074049044 to i32*) ; 0x4004B014
 ;   register_GPIOC_PDDR |= 32 ;
-  %v = load volatile i32* inttoptr (i32 1074786452 to i32*), align 8 ; 0x400F_F094
+  %v = load volatile i32* inttoptr (i32 1074786452 to i32*) ; 0x400F_F094
   %r = or i32 %v, 32
-  store volatile i32 %r, i32* inttoptr (i32 1074786452 to i32*), align 8
+  store volatile i32 %r, i32* inttoptr (i32 1074786452 to i32*)
   ret void
 }
 
@@ -79,18 +79,18 @@ define internal void @procSetup () nounwind {
 
 define internal void @wait () nounwind {
 ;   compteur = 1000000 ;
-  store volatile i32 1000000, i32* @compteur, align 8
+  store volatile i32 1000000, i32* @compteur
   br label %boucle
 
 boucle:
-  %v = load volatile i32* @compteur, align 8
+  %v = load volatile i32* @compteur
   %isZero = icmp eq i32 %v, 0
   br i1 %isZero, label %fin, label %dec
 
 dec:
-  %vv = load volatile i32* @compteur, align 8
+  %vv = load volatile i32* @compteur
   %vvv = sub i32 %vv, 1
-  store volatile i32 %vvv, i32* @compteur, align 8
+  store volatile i32 %vvv, i32* @compteur
   br label %boucle
 
 fin:
@@ -103,11 +103,14 @@ fin:
 
 define internal void @procLoop () nounwind {
 ;     register_GPIOC_PSOR = 32 ;
-  store volatile i32 32, i32* inttoptr (i32 1074786436 to i32*), align 8 ; 0x400FF084
+  store volatile i32 32, i32* inttoptr (i32 1074786436 to i32*) ; 0x400FF084
+;     wait ()
   call void @wait ()
 ;     register_GPIOC_PCOR = 32 ;
-  store volatile i32 32, i32* inttoptr (i32 1074786440 to i32*), align 8 ; 0x400FF088
+  store volatile i32 32, i32* inttoptr (i32 1074786440 to i32*) ; 0x400FF088
+;     wait ()
   call void @wait ()
+;---
   ret void
 }
 
@@ -117,17 +120,13 @@ define internal void @procLoop () nounwind {
 
 define internal void @boot () nounwind {
 ;   register_WDOG_UNLOCK = 50464 ;
-  store volatile i16 50464, i16* inttoptr (i32 1074077710 to i16*), align 8 ; 0x4005200E
+  store volatile i16 50464, i16* inttoptr (i32 1074077710 to i16*) ; 0x4005200E
 ;   register_WDOG_UNLOCK = 55592 ;
-  store volatile i16 55592, i16* inttoptr (i32 1074077710 to i16*), align 8 ; 0x4005200E
+  store volatile i16 55592, i16* inttoptr (i32 1074077710 to i16*) ; 0x4005200E
 ;   register_WDOG_STCTRLH = 16 ;
-  store volatile i16 16, i16* inttoptr (i32 1074077696 to i16*), align 8 ; 0x40052000
-;   register_SIM_SCGC3 = 150994944 ;
-  store volatile i32 150994944, i32* inttoptr (i32 1074036784 to i32*), align 8 ; 0x40048030
+  store volatile i16 16, i16* inttoptr (i32 1074077696 to i16*) ; 0x40052000
 ;   register_SIM_SCGC5 = 278402 ;
-  store volatile i32 278402, i32* inttoptr (i32 1074036792 to i32*), align 8 ; 0x40048038
-;   register_SIM_SCGC6 = 721420289 ;
-  store volatile i32 721420289, i32* inttoptr (i32 1074036796 to i32*), align 8 ; 0x4004803C
+  store volatile i32 278402, i32* inttoptr (i32 1074036792 to i32*) ; 0x40048038
 ;---
   ret void
 }
