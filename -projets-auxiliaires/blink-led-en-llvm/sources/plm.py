@@ -52,7 +52,7 @@ def downloadArchive (archiveURL, archivePath):
 
 def runMakefile (toolDirectory, archiveBaseURL, llvmSourceList, \
                  objectDir, llvmCompiler, llvmCompilerOptions, \
-                 optimizer, assembler, \
+                 optimizer, llvmOptimizerOptions, assembler, \
                  productDir, linker, linkerOptions, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget) :
   #--- Get max parallel jobs as first argument
@@ -87,12 +87,14 @@ def runMakefile (toolDirectory, archiveBaseURL, llvmSourceList, \
   asObjectList = []
   for source in llvmSourceList:
   #--- Optimize LLVM
+    sourceWithPath = "sources/" + source
     optimizedSource = objectDir + "/optimized-" + source
     rule = make.Rule (optimizedSource, "Optimizing " + source)
-    rule.mDependences.append ("sources/" + source)
+    rule.mDependences.append (sourceWithPath)
     rule.mCommand += optimizer
-    rule.mCommand += llvmCompilerOptions
-    rule.mCommand += ["sources/" + source]
+    rule.mCommand += llvmOptimizerOptions
+    rule.mCommand += ["-S"]
+    rule.mCommand += [sourceWithPath]
     rule.mCommand += ["-o", optimizedSource]
     makefile.addRule (rule)
   #--- Compile LLVM
