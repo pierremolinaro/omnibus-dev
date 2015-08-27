@@ -63,16 +63,36 @@ def displayObjectSize ():
 
 def dumpObjectCode ():
   return [toolDir () + "/bin/arm-eabi-objdump", "-Sdh", "-Mforce-thumb"]
+#  return [toolDir () + "/bin/llvm-objdump", "-disassemble", "-s", "-arch-name=thumb"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#    C Compiler options                                                                                                *
+#    LLVM Compiler options                                                                                             *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
-
+# -disable-simplify-libcalls : prevent to generate @llvm-memset
+# http://stackoverflow.com/questions/21318229/llvm-optimizes-with-library-functions
+ 
 def llvmCompilerOptions ():
   result = []
+#  result.append ("-asm-show-inst")
+  result.append ("-disable-simplify-libcalls")
   result.append ("-O2")
+  return result
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#    LLVM Optimizer options                                                                                            *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def llvmOptimizerOptions ():
+  result = []
+#  result.append ("-asm-show-inst")
+#  result.append ("-disable-opt")
+  result.append ("-disable-simplify-libcalls")
+#  result.append ("-disable-loop-unrolling")
+  result.append ("-Os")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -162,7 +182,7 @@ def runExecutableOnTarget ():
 
 plm.runMakefile (toolDir (), archiveBaseURL (), llvmSourceList (), objectDir (), \
                  llvmCompiler (), llvmCompilerOptions (), \
-                 llvmOptimizer (), assembler (), \
+                 llvmOptimizer (), llvmOptimizerOptions (), assembler (), \
                  productDir (), \
                  linker (), linkerOptions (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())
