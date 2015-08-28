@@ -58,43 +58,25 @@ target triple = "thumbv7em-none--eabi"
 ;}
 ;----------------------------------------------------------------------------------------------------------------------*
 
-;@__bss_start = external global i8
-;@__bss_end   = external global i8
+@__bss_start = external global [0 x i32]
+@__bss_end = external global [0 x i32]
 
 ;----------------------------------------------------------------------------------------------------------------------*
 
-;declare void @llvm.memset.p0i8.i32 (i8* <dest>, i8 <val>, i32 <len>, i32 <align>, i1 <isvolatile>)
-;declare void @llvm.memset.p0i8.i32 (i8*, i8, i32, i32, i1)
-
-;----------------------------------------------------------------------------------------------------------------------*
-
-;define internal void @clearBSS () nounwind {
-;  %bssStartAsInt = ptrtoint i8* @__bss_start to i32
-;  %bssEndAsInt = ptrtoint i8* @__bss_end to i32
-;  %length = sub i32 %bssEndAsInt, %bssStartAsInt
-;  call void @llvm.memset.p0i8.i32 (i8* @__bss_start, i8 0, i32 %length, i32 4, i1 false)
-;  ret void
-;}
-
-;----------------------------------------------------------------------------------------------------------------------*
-
-@__bss_start = external global i32
-@__bss_end   = external global i32
-
-;----------------------------------------------------------------------------------------------------------------------*
-
-define internal void @clearBSS () nounwind noinline optnone {
+define internal void @clearBSS () nounwind {
 entry:
+  %startPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_start, i32 0, i32 0
+  %endPtr = getelementptr  [0 x i32], [0 x i32]* @__bss_end, i32 0, i32 0
   br label %bssLoopTest
  
 bssLoopTest:
-  %p = phi i32* [@__bss_start, %entry], [%p.next, %bssLoop]
-  %completed = icmp eq i32* %p, @__bss_end
+  %p = phi i32* [%startPtr, %entry], [%p.next, %bssLoop]
+  %completed = icmp eq i32* %p, %endPtr
   br i1 %completed, label %clearCompleted, label %bssLoop
  
 bssLoop:
   store i32 0, i32* %p, align 4
-  %p.next = getelementptr inbounds i32* %p, i32 1
+  %p.next = getelementptr inbounds i32, i32* %p, i32 1
   br label %bssLoopTest
  
 clearCompleted:
@@ -118,27 +100,30 @@ clearCompleted:
 ;}
 ;----------------------------------------------------------------------------------------------------------------------*
 
-@__data_start = external global i32
-@__data_end = external global i32
-@__data_load_start = external global i32
+@__data_start = external global [0 x i32]
+@__data_end = external global [0 x i32]
+@__data_load_start = external global [0 x i32]
 
 ;----------------------------------------------------------------------------------------------------------------------*
 
-define internal void @copyData () nounwind noinline optnone {
+define internal void @copyData () nounwind {
 entry:
+  %data_start = getelementptr  [0 x i32], [0 x i32]* @__data_start, i32 0, i32 0
+  %data_end = getelementptr  [0 x i32], [0 x i32]* @__data_end, i32 0, i32 0
+  %data_load_start = getelementptr  [0 x i32], [0 x i32]* @__data_load_start, i32 0, i32 0
   br label %copyLoop.test
  
 copyLoop.test:
-  %pDest = phi i32* [@__data_start, %entry], [%pDestInct, %copyLoop]
-  %pSource = phi i32* [@__data_load_start, %entry], [%pSourceInc, %copyLoop]
-  %equal = icmp eq i32* %pDest, @__data_end
+  %pDest = phi i32* [%data_start, %entry], [%pDestInct, %copyLoop]
+  %pSource = phi i32* [%data_load_start, %entry], [%pSourceInc, %copyLoop]
+  %equal = icmp eq i32* %pDest, %data_end
   br i1 %equal, label %copyCompleted, label %copyLoop
  
 copyLoop:
-  %value = load i32* %pSource
+  %value = load i32, i32* %pSource
   store i32 %value, i32* %pDest, align 4
-  %pDestInct = getelementptr inbounds i32* %pDest, i32 1
-  %pSourceInc = getelementptr inbounds i32* %pSource, i32 1
+  %pDestInct = getelementptr inbounds i32, i32* %pDest, i32 1
+  %pSourceInc = getelementptr inbounds i32, i32* %pSource, i32 1
   br label %copyLoop.test
 
 copyCompleted:
@@ -186,7 +171,7 @@ define internal void @procSetup () nounwind {
 ;   register_PORTC_PCR5 = 256 ;
   store volatile i32 256, i32* inttoptr (i32 1074049044 to i32*) ; 0x4004B014
 ;   register_GPIOC_PDDR |= 32 ;
-  %v = load volatile i32* inttoptr (i32 1074786452 to i32*) ; 0x400F_F094
+  %v = load volatile i32, i32* inttoptr (i32 1074786452 to i32*) ; 0x400F_F094
   %r = or i32 %v, 32
   store volatile i32 %r, i32* inttoptr (i32 1074786452 to i32*)
   ret void
@@ -206,12 +191,12 @@ define internal void @wait () nounwind {
   br label %boucle
 
 boucle:
-  %v = load volatile i32* @compteur
+  %v = load volatile i32, i32* @compteur
   %isZero = icmp eq i32 %v, 0
   br i1 %isZero, label %fin, label %dec
 
 dec:
-  %vv = load volatile i32* @compteur
+  %vv = load volatile i32, i32* @compteur
   %vvv = sub i32 %vv, 1
   store volatile i32 %vvv, i32* @compteur
   br label %boucle

@@ -26,7 +26,8 @@ def archiveBaseURL ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def toolDir ():
-  return os.path.expanduser ("~/plm-tools/llvm-3.6.2-binutils-2.25-libusb-1.0.19")
+#  return os.path.expanduser ("~/plm-tools/llvm-3.6.2-binutils-2.25-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/llvm-3.7.0rc3-binutils-2.25-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
