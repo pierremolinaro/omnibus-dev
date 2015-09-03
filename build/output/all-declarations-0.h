@@ -321,7 +321,7 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_declarationListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_declarationListAST : public cGenericAbstractEnumerator {
@@ -640,7 +640,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
 } ; // End of GALGAS_globalVarDeclarationList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_globalVarDeclarationList : public cGenericAbstractEnumerator {
@@ -959,7 +959,7 @@ class GALGAS_procFormalArgumentList : public AC_GALGAS_list {
 } ; // End of GALGAS_procFormalArgumentList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_procFormalArgumentList : public cGenericAbstractEnumerator {
@@ -1148,7 +1148,7 @@ class GALGAS_allowedExceptionList : public AC_GALGAS_list {
 } ; // End of GALGAS_allowedExceptionList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_allowedExceptionList : public cGenericAbstractEnumerator {
@@ -1285,7 +1285,7 @@ class GALGAS_allowedInitList : public AC_GALGAS_list {
 } ; // End of GALGAS_allowedInitList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_allowedInitList : public cGenericAbstractEnumerator {
@@ -1434,7 +1434,7 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
 } ; // End of GALGAS_allowedProcList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_allowedProcList : public cGenericAbstractEnumerator {
@@ -1724,7 +1724,7 @@ class GALGAS_procedureDeclarationListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_procedureDeclarationListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_procedureDeclarationListAST : public cGenericAbstractEnumerator {
@@ -1953,7 +1953,7 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_instructionListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_instructionListAST : public cGenericAbstractEnumerator {
@@ -2207,7 +2207,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_requiredProcedureDeclarationListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_requiredProcedureDeclarationListAST : public cGenericAbstractEnumerator {
@@ -2491,7 +2491,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_functionDeclarationListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_functionDeclarationListAST : public cGenericAbstractEnumerator {
@@ -2645,7 +2645,7 @@ class GALGAS_funcFormalArgumentList : public AC_GALGAS_list {
 } ; // End of GALGAS_funcFormalArgumentList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_funcFormalArgumentList : public cGenericAbstractEnumerator {
@@ -2854,7 +2854,7 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
 } ; // End of GALGAS_bootList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_bootList : public cGenericAbstractEnumerator {
@@ -3055,7 +3055,7 @@ class GALGAS_initList : public AC_GALGAS_sortedlist {
 } ; // End of GALGAS_initList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_initList : public cGenericAbstractEnumerator {
@@ -3256,7 +3256,7 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
 } ; // End of GALGAS_exceptionClauseListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_exceptionClauseListAST : public cGenericAbstractEnumerator {
@@ -3481,7 +3481,7 @@ class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
 } ; // End of GALGAS_exceptionTypesAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_exceptionTypesAST : public cGenericAbstractEnumerator {
@@ -5121,7 +5121,7 @@ class GALGAS_functionCallEffectiveParameterList : public AC_GALGAS_list {
 } ; // End of GALGAS_functionCallEffectiveParameterList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_functionCallEffectiveParameterList : public cGenericAbstractEnumerator {
@@ -6761,7 +6761,7 @@ class GALGAS_procEffectiveParameterListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_procEffectiveParameterListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_procEffectiveParameterListAST : public cGenericAbstractEnumerator {
@@ -7067,7 +7067,7 @@ class GALGAS_registerBitSliceList : public AC_GALGAS_list {
 } ; // End of GALGAS_registerBitSliceList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_registerBitSliceList : public cGenericAbstractEnumerator {
@@ -7215,7 +7215,7 @@ class GALGAS_registerDeclarationList : public AC_GALGAS_list {
 } ; // End of GALGAS_registerDeclarationList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_registerDeclarationList : public cGenericAbstractEnumerator {
@@ -7560,7 +7560,7 @@ class GALGAS_structureFieldListAST : public AC_GALGAS_list {
 } ; // End of GALGAS_structureFieldListAST class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_structureFieldListAST : public cGenericAbstractEnumerator {
@@ -8481,7 +8481,7 @@ class GALGAS_labelMap : public AC_GALGAS_map {
 } ; // End of GALGAS_labelMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_labelMap : public cGenericAbstractEnumerator {
@@ -9148,7 +9148,7 @@ class GALGAS_enumConstantMap : public AC_GALGAS_map {
 } ; // End of GALGAS_enumConstantMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_enumConstantMap : public cGenericAbstractEnumerator {
@@ -9456,7 +9456,7 @@ class GALGAS_propertyList : public AC_GALGAS_list {
 } ; // End of GALGAS_propertyList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_propertyList : public cGenericAbstractEnumerator {
@@ -9705,7 +9705,7 @@ class GALGAS_propertyMap : public AC_GALGAS_map {
 } ; // End of GALGAS_propertyMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_propertyMap : public cGenericAbstractEnumerator {
@@ -9927,7 +9927,7 @@ class GALGAS_literalStructureList : public AC_GALGAS_list {
 } ; // End of GALGAS_literalStructureList class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_literalStructureList : public cGenericAbstractEnumerator {
@@ -10267,7 +10267,7 @@ class GALGAS_instanciationMap : public AC_GALGAS_map {
 } ; // End of GALGAS_instanciationMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_instanciationMap : public cGenericAbstractEnumerator {
@@ -10502,7 +10502,7 @@ class GALGAS_structureFieldListForGeneration : public AC_GALGAS_list {
 } ; // End of GALGAS_structureFieldListForGeneration class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_structureFieldListForGeneration : public cGenericAbstractEnumerator {
@@ -10900,7 +10900,7 @@ class GALGAS_allowedRoutineMap : public AC_GALGAS_map {
 } ; // End of GALGAS_allowedRoutineMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_allowedRoutineMap : public cGenericAbstractEnumerator {
@@ -11146,7 +11146,7 @@ class GALGAS_bootRoutinePriorityMap : public AC_GALGAS_map {
 } ; // End of GALGAS_bootRoutinePriorityMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_bootRoutinePriorityMap : public cGenericAbstractEnumerator {
@@ -11386,7 +11386,7 @@ class GALGAS_bootListIR : public AC_GALGAS_list {
 } ; // End of GALGAS_bootListIR class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_bootListIR : public cGenericAbstractEnumerator {
@@ -11510,7 +11510,7 @@ class GALGAS_instructionListIR : public AC_GALGAS_list {
 } ; // End of GALGAS_instructionListIR class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_instructionListIR : public cGenericAbstractEnumerator {
@@ -11809,7 +11809,7 @@ class GALGAS_initRoutineMap : public AC_GALGAS_map {
 } ; // End of GALGAS_initRoutineMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_initRoutineMap : public cGenericAbstractEnumerator {
@@ -11984,7 +11984,7 @@ class GALGAS_initRoutinePriorityMap : public AC_GALGAS_map {
 } ; // End of GALGAS_initRoutinePriorityMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_initRoutinePriorityMap : public cGenericAbstractEnumerator {
@@ -12224,7 +12224,7 @@ class GALGAS_initListIR : public AC_GALGAS_list {
 } ; // End of GALGAS_initListIR class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_initListIR : public cGenericAbstractEnumerator {
@@ -12405,7 +12405,7 @@ class GALGAS_exceptionRoutinePriorityMap : public AC_GALGAS_map {
 } ; // End of GALGAS_exceptionRoutinePriorityMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_exceptionRoutinePriorityMap : public cGenericAbstractEnumerator {
@@ -12708,7 +12708,7 @@ class GALGAS_funcSignature : public AC_GALGAS_list {
 } ; // End of GALGAS_funcSignature class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_funcSignature : public cGenericAbstractEnumerator {
@@ -12907,7 +12907,7 @@ class GALGAS_functionMap : public AC_GALGAS_map {
 } ; // End of GALGAS_functionMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_functionMap : public cGenericAbstractEnumerator {
@@ -13001,7 +13001,7 @@ class GALGAS_modeMap : public AC_GALGAS_map {
 } ; // End of GALGAS_modeMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_modeMap : public cGenericAbstractEnumerator {
@@ -13341,7 +13341,7 @@ class GALGAS_funcFormalArgumentListForGeneration : public AC_GALGAS_list {
 } ; // End of GALGAS_funcFormalArgumentListForGeneration class
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                    *
+//   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumerator_funcFormalArgumentListForGeneration : public cGenericAbstractEnumerator {

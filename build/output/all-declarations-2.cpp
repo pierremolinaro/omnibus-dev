@@ -16601,7 +16601,7 @@ void routine_codeGeneration (const GALGAS_string constinArgument_inCurrentDirect
     GALGAS_string temp_5 ;
     const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_performFlashing.reader_value ()).boolEnum () ;
     if (kBoolTrue == test_6) {
-      temp_5 = GALGAS_string ("flash-and-run") ;
+      temp_5 = GALGAS_string ("run") ;
     }else if (kBoolFalse == test_6) {
       temp_5 = GALGAS_string ("build") ;
     }
@@ -22010,8 +22010,7 @@ const char * gWrapperFileContent_11_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "#  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -22288,7 +22287,7 @@ const cRegularFileWrapper gWrapperFile_11_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  44466, // Text length
+  44330, // Text length
   gWrapperFileContent_11_targetTemplates
 ) ;
 
@@ -22427,7 +22426,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   gWrapperFileContent_14_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-interrupt/flash-and-run.py'
+//--- File 'teensy-3-1-interrupt/run.py'
 
 const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -22464,7 +22463,7 @@ const char * gWrapperFileContent_15_targetTemplates = "#! /usr/bin/env python\n"
   "#------------------------------------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_15_targetTemplates (
-  "flash-and-run.py",
+  "run.py",
   "py",
   true, // Text file
   997, // Text length
@@ -23039,8 +23038,7 @@ const char * gWrapperFileContent_21_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "#  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.1.0-newlib-2.2.0-libusb-1.0.19\")\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + MACHINE + \"-\" + SYSTEM_NAME + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -23197,7 +23195,7 @@ const cRegularFileWrapper gWrapperFile_21_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  11891, // Text length
+  11755, // Text length
   gWrapperFileContent_21_targetTemplates
 ) ;
 
