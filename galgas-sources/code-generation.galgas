@@ -216,7 +216,7 @@ proc codeGeneration
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.c" ?*]
 #--- Perform C compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
-    let script = if [option plm_options.performFlashing value] then "flash-and-run" else "build" end
+    let script = if [option plm_options.performFlashing value] then "run" else "build" end
     let fullScript = "python " + productDirectory + "/" + script + ".py"
     @sint result = [fullScript system]
     if result != 0S then
