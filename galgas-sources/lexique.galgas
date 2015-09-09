@@ -1,6 +1,31 @@
 lexique plm_lexique {
 
 @string tokenString
+@bigint bigInteger
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Big Integers                                                                                                       *
+#----------------------------------------------------------------------------------------------------------------------*
+
+$bigint$ ! bigInteger error message "a big integer"
+
+style bigintStyle -> "BigInts"
+message bigIntError : "a big int contains only hex digits"
+
+rule '°' {
+  select
+  case '0'->'9' | 'a' -> 'f' | 'A' -> 'F' :
+    enterHexDigitIntoBigInt (!* !?bigInteger error bigIntError)
+    repeat
+    while '0'->'9' | 'a' -> 'f' | 'A' -> 'F' :
+      enterHexDigitIntoBigInt (!* !?bigInteger error bigIntError)
+    while '_' :
+    end
+  default
+    error bigIntError
+  end
+  send $bigint$
+}
 
 #----------------------------------------------------------------------------------------------------------------------*
 #   Identifiers and keywords                                                                                           *

@@ -36,6 +36,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cTokenFor_plm_5F_lexique : public cToken {
+  public : C_BigInt mLexicalAttribute_bigInteger ;
   public : C_String mLexicalAttribute_tokenString ;
   public : uint64_t mLexicalAttribute_uint_36__34_value ;
 
@@ -75,6 +76,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
 
 //--- Terminal symbols enumeration
   public : enum {kToken_,
+   kToken_bigint,
    kToken_identifier,
    kToken_attribute,
    kToken_typeName,
@@ -179,11 +181,13 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   
 
 //--- Assign from attribute
+  public : GALGAS_lbigint synthetizedAttribute_bigInteger (void) const ;
   public : GALGAS_lstring synthetizedAttribute_tokenString (void) const ;
   public : GALGAS_luint_36__34_ synthetizedAttribute_uint_36__34_value (void) const ;
 
 
 //--- Attribute access
+  public : C_BigInt attributeValue_bigInteger (void) const ;
   public : C_String attributeValue_tokenString (void) const ;
   public : uint64_t attributeValue_uint_36__34_value (void) const ;
 
@@ -200,7 +204,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 95 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 96 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;

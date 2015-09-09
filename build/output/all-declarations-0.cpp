@@ -20,6 +20,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 cTokenFor_plm_5F_lexique::cTokenFor_plm_5F_lexique (void) :
+mLexicalAttribute_bigInteger (),
 mLexicalAttribute_tokenString (),
 mLexicalAttribute_uint_36__34_value () {
 }
@@ -129,6 +130,44 @@ static const utf32 gLexicalMessage_plm_5F_lexique_attributeError [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
+  TO_UNICODE (0)
+} ;
+
+static const utf32 gLexicalMessage_plm_5F_lexique_bigIntError [] = {
+  TO_UNICODE ('a'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('b'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('c'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('s'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('l'),
+  TO_UNICODE ('y'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('x'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('s'),
   TO_UNICODE (0)
 } ;
 
@@ -355,6 +394,24 @@ static const utf32 gLexicalMessage_plm_5F_lexique_typeError [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 //          Syntax error messages, for every terminal symbol                                                           *
 //---------------------------------------------------------------------------------------------------------------------*
+
+//--- Syntax error message for terminal '$bigint$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_bigint [] = {
+  TO_UNICODE ('a'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('b'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE (0)
+} ;
 
 //--- Syntax error message for terminal '$identifier$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_identifier [] = {
@@ -2652,7 +2709,8 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [96] = {kEndOfSourceLexicalErrorMessage,
+  static const utf32 * syntaxErrorMessageArray [97] = {kEndOfSourceLexicalErrorMessage,
+    gSyntaxErrorMessage_plm_5F_lexique_bigint,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -3620,6 +3678,13 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_:
       s.appendCString("$$") ;
       break ;
+    case kToken_bigint:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("bigint") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
+      break ;
     case kToken_identifier:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("identifier") ;
@@ -4147,11 +4212,29 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
   mLoop = true ;
   token.mTokenCode = -1 ;
   while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+    token.mLexicalAttribute_bigInteger.setToZero () ;
     token.mLexicalAttribute_tokenString.setLengthToZero () ;
     token.mLexicalAttribute_uint_36__34_value = 0 ;
     mTokenStartLocation = mCurrentLocation ;
     try{
-      if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z'))) {
+      if (testForInputUTF32Char (TO_UNICODE (176))) {
+        if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
+          ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_bigIntError) ;
+          do {
+            if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
+              ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_bigIntError) ;
+            }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+            }else{
+              mLoop = false ;
+            }
+          }while (mLoop) ;
+          mLoop = true ;
+        }else{
+          lexicalError (gLexicalMessage_plm_5F_lexique_bigIntError COMMA_LINE_AND_SOURCE_FILE) ;
+        }
+        token.mTokenCode = kToken_bigint ;
+        enterToken (token) ;
+      }else if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z'))) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
           if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32Char (TO_UNICODE ('_')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
@@ -4540,6 +4623,7 @@ void C_Lexique_plm_5F_lexique::enterToken (const cTokenFor_plm_5F_lexique & inTo
   ptr->mStartLocation = mTokenStartLocation ;
   ptr->mEndLocation = mTokenEndLocation ;
   ptr->mTemplateStringBeforeToken = inToken.mTemplateStringBeforeToken ;
+  ptr->mLexicalAttribute_bigInteger = inToken.mLexicalAttribute_bigInteger ;
   ptr->mLexicalAttribute_tokenString = inToken.mLexicalAttribute_tokenString ;
   ptr->mLexicalAttribute_uint_36__34_value = inToken.mLexicalAttribute_uint_36__34_value ;
   enterTokenFromPointer (ptr) ;
@@ -4547,6 +4631,13 @@ void C_Lexique_plm_5F_lexique::enterToken (const cTokenFor_plm_5F_lexique & inTo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //               A T T R I B U T E   A C C E S S                                                                       *
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_BigInt C_Lexique_plm_5F_lexique::attributeValue_bigInteger (void) const {
+  cTokenFor_plm_5F_lexique * ptr = (cTokenFor_plm_5F_lexique *) mCurrentTokenPtr ;
+  return ptr->mLexicalAttribute_bigInteger ;
+}
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::attributeValue_tokenString (void) const {
@@ -4563,6 +4654,17 @@ uint64_t C_Lexique_plm_5F_lexique::attributeValue_uint_36__34_value (void) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 //         A S S I G N    F R O M    A T T R I B U T E                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lbigint C_Lexique_plm_5F_lexique::synthetizedAttribute_bigInteger (void) const {
+  cTokenFor_plm_5F_lexique * ptr = (cTokenFor_plm_5F_lexique *) mCurrentTokenPtr ;
+  macroValidSharedObject (ptr, cTokenFor_plm_5F_lexique) ;
+  GALGAS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
+  GALGAS_bigint value (ptr->mLexicalAttribute_bigInteger) ;
+  GALGAS_lbigint result (value, currentLocation) ;
+  return result ;
+}
+
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring C_Lexique_plm_5F_lexique::synthetizedAttribute_tokenString (void) const {
@@ -4591,6 +4693,7 @@ GALGAS_luint_36__34_ C_Lexique_plm_5F_lexique::synthetizedAttribute_uint_36__34_
 
 GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   GALGAS_stringlist result = GALGAS_stringlist::constructor_emptyList (THERE) ;
+  result.addAssign_operation (GALGAS_string ("bigint") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("identifier") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("attribute") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("typeName") COMMA_THERE) ;
@@ -4694,102 +4797,103 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [96] = {0,
+  static const uint32_t kTerminalSymbolStyles [97] = {0,
+    0 /* plm_lexique_1_bigint */,
     0 /* plm_lexique_1_identifier */,
-    2 /* plm_lexique_1_attribute */,
-    3 /* plm_lexique_1_typeName */,
-    4 /* plm_lexique_1_modeName */,
-    5 /* plm_lexique_1_integer */,
-    6 /* plm_lexique_1_literal_5F_string */,
-    7 /* plm_lexique_1_comment */,
-    9 /* plm_lexique_1__3F_ */,
-    9 /* plm_lexique_1__3F__21_ */,
-    9 /* plm_lexique_1__21_ */,
-    9 /* plm_lexique_1__21__3F_ */,
-    1 /* plm_lexique_1_and */,
-    1 /* plm_lexique_1_assert */,
-    1 /* plm_lexique_1_at */,
-    1 /* plm_lexique_1_boolset */,
-    1 /* plm_lexique_1_booleanType */,
-    1 /* plm_lexique_1_boot */,
-    1 /* plm_lexique_1_case */,
-    1 /* plm_lexique_1_check */,
-    1 /* plm_lexique_1_do */,
-    1 /* plm_lexique_1_else */,
-    1 /* plm_lexique_1_elsif */,
-    1 /* plm_lexique_1_end */,
-    1 /* plm_lexique_1_enum */,
-    1 /* plm_lexique_1_exception */,
-    1 /* plm_lexique_1_false */,
-    1 /* plm_lexique_1_forever */,
-    1 /* plm_lexique_1_func */,
-    1 /* plm_lexique_1_if */,
-    1 /* plm_lexique_1_import */,
-    1 /* plm_lexique_1_init */,
-    1 /* plm_lexique_1_let */,
-    1 /* plm_lexique_1_mutating */,
-    1 /* plm_lexique_1_mode */,
-    1 /* plm_lexique_1_newIntegerType */,
-    1 /* plm_lexique_1_newSignedRepresentation */,
-    1 /* plm_lexique_1_newUnsignedRepresentation */,
-    1 /* plm_lexique_1_not */,
-    1 /* plm_lexique_1_or */,
-    1 /* plm_lexique_1_proc */,
-    1 /* plm_lexique_1_register */,
-    1 /* plm_lexique_1_required */,
-    1 /* plm_lexique_1_self */,
-    1 /* plm_lexique_1_struct */,
-    1 /* plm_lexique_1_target */,
-    1 /* plm_lexique_1_then */,
-    1 /* plm_lexique_1_throw */,
-    1 /* plm_lexique_1_true */,
-    1 /* plm_lexique_1_var */,
-    1 /* plm_lexique_1_while */,
-    1 /* plm_lexique_1_xor */,
-    8 /* plm_lexique_1__3A_ */,
-    8 /* plm_lexique_1__2E_ */,
-    8 /* plm_lexique_1__2C_ */,
-    8 /* plm_lexique_1__3B_ */,
-    8 /* plm_lexique_1__7B_ */,
-    8 /* plm_lexique_1__7D_ */,
-    8 /* plm_lexique_1__3D_ */,
-    8 /* plm_lexique_1__28_ */,
-    8 /* plm_lexique_1__29_ */,
-    8 /* plm_lexique_1__3D__3D_ */,
-    8 /* plm_lexique_1__21__3D_ */,
-    8 /* plm_lexique_1__3C_ */,
-    8 /* plm_lexique_1__3C__3D_ */,
-    8 /* plm_lexique_1__3E_ */,
-    8 /* plm_lexique_1__3E__3D_ */,
-    8 /* plm_lexique_1__5B_ */,
-    8 /* plm_lexique_1__5D_ */,
-    8 /* plm_lexique_1__3C__3C_ */,
-    8 /* plm_lexique_1__3E__3E_ */,
-    8 /* plm_lexique_1__25_ */,
-    8 /* plm_lexique_1__26__25_ */,
-    8 /* plm_lexique_1__7E_ */,
-    8 /* plm_lexique_1__5C_ */,
-    8 /* plm_lexique_1__26__5C_ */,
-    8 /* plm_lexique_1__2D__3E_ */,
-    8 /* plm_lexique_1__3A__3A_ */,
-    8 /* plm_lexique_1__2B__2B_ */,
-    8 /* plm_lexique_1__26__2B__2B_ */,
-    8 /* plm_lexique_1__2D__2D_ */,
-    8 /* plm_lexique_1__26__2D__2D_ */,
-    8 /* plm_lexique_1__7C_ */,
-    8 /* plm_lexique_1__7C__3D_ */,
-    8 /* plm_lexique_1__26_ */,
-    8 /* plm_lexique_1__26__3D_ */,
-    8 /* plm_lexique_1__5E_ */,
-    8 /* plm_lexique_1__5E__3D_ */,
-    8 /* plm_lexique_1__2B_ */,
-    8 /* plm_lexique_1__26__2B_ */,
-    8 /* plm_lexique_1__2D_ */,
-    8 /* plm_lexique_1__26__2D_ */,
-    8 /* plm_lexique_1__2A_ */,
-    8 /* plm_lexique_1__26__2A_ */,
-    8 /* plm_lexique_1__2F_ */,
-    8 /* plm_lexique_1__26__2F_ */
+    3 /* plm_lexique_1_attribute */,
+    4 /* plm_lexique_1_typeName */,
+    5 /* plm_lexique_1_modeName */,
+    6 /* plm_lexique_1_integer */,
+    7 /* plm_lexique_1_literal_5F_string */,
+    8 /* plm_lexique_1_comment */,
+    10 /* plm_lexique_1__3F_ */,
+    10 /* plm_lexique_1__3F__21_ */,
+    10 /* plm_lexique_1__21_ */,
+    10 /* plm_lexique_1__21__3F_ */,
+    2 /* plm_lexique_1_and */,
+    2 /* plm_lexique_1_assert */,
+    2 /* plm_lexique_1_at */,
+    2 /* plm_lexique_1_boolset */,
+    2 /* plm_lexique_1_booleanType */,
+    2 /* plm_lexique_1_boot */,
+    2 /* plm_lexique_1_case */,
+    2 /* plm_lexique_1_check */,
+    2 /* plm_lexique_1_do */,
+    2 /* plm_lexique_1_else */,
+    2 /* plm_lexique_1_elsif */,
+    2 /* plm_lexique_1_end */,
+    2 /* plm_lexique_1_enum */,
+    2 /* plm_lexique_1_exception */,
+    2 /* plm_lexique_1_false */,
+    2 /* plm_lexique_1_forever */,
+    2 /* plm_lexique_1_func */,
+    2 /* plm_lexique_1_if */,
+    2 /* plm_lexique_1_import */,
+    2 /* plm_lexique_1_init */,
+    2 /* plm_lexique_1_let */,
+    2 /* plm_lexique_1_mutating */,
+    2 /* plm_lexique_1_mode */,
+    2 /* plm_lexique_1_newIntegerType */,
+    2 /* plm_lexique_1_newSignedRepresentation */,
+    2 /* plm_lexique_1_newUnsignedRepresentation */,
+    2 /* plm_lexique_1_not */,
+    2 /* plm_lexique_1_or */,
+    2 /* plm_lexique_1_proc */,
+    2 /* plm_lexique_1_register */,
+    2 /* plm_lexique_1_required */,
+    2 /* plm_lexique_1_self */,
+    2 /* plm_lexique_1_struct */,
+    2 /* plm_lexique_1_target */,
+    2 /* plm_lexique_1_then */,
+    2 /* plm_lexique_1_throw */,
+    2 /* plm_lexique_1_true */,
+    2 /* plm_lexique_1_var */,
+    2 /* plm_lexique_1_while */,
+    2 /* plm_lexique_1_xor */,
+    9 /* plm_lexique_1__3A_ */,
+    9 /* plm_lexique_1__2E_ */,
+    9 /* plm_lexique_1__2C_ */,
+    9 /* plm_lexique_1__3B_ */,
+    9 /* plm_lexique_1__7B_ */,
+    9 /* plm_lexique_1__7D_ */,
+    9 /* plm_lexique_1__3D_ */,
+    9 /* plm_lexique_1__28_ */,
+    9 /* plm_lexique_1__29_ */,
+    9 /* plm_lexique_1__3D__3D_ */,
+    9 /* plm_lexique_1__21__3D_ */,
+    9 /* plm_lexique_1__3C_ */,
+    9 /* plm_lexique_1__3C__3D_ */,
+    9 /* plm_lexique_1__3E_ */,
+    9 /* plm_lexique_1__3E__3D_ */,
+    9 /* plm_lexique_1__5B_ */,
+    9 /* plm_lexique_1__5D_ */,
+    9 /* plm_lexique_1__3C__3C_ */,
+    9 /* plm_lexique_1__3E__3E_ */,
+    9 /* plm_lexique_1__25_ */,
+    9 /* plm_lexique_1__26__25_ */,
+    9 /* plm_lexique_1__7E_ */,
+    9 /* plm_lexique_1__5C_ */,
+    9 /* plm_lexique_1__26__5C_ */,
+    9 /* plm_lexique_1__2D__3E_ */,
+    9 /* plm_lexique_1__3A__3A_ */,
+    9 /* plm_lexique_1__2B__2B_ */,
+    9 /* plm_lexique_1__26__2B__2B_ */,
+    9 /* plm_lexique_1__2D__2D_ */,
+    9 /* plm_lexique_1__26__2D__2D_ */,
+    9 /* plm_lexique_1__7C_ */,
+    9 /* plm_lexique_1__7C__3D_ */,
+    9 /* plm_lexique_1__26_ */,
+    9 /* plm_lexique_1__26__3D_ */,
+    9 /* plm_lexique_1__5E_ */,
+    9 /* plm_lexique_1__5E__3D_ */,
+    9 /* plm_lexique_1__2B_ */,
+    9 /* plm_lexique_1__26__2B_ */,
+    9 /* plm_lexique_1__2D_ */,
+    9 /* plm_lexique_1__26__2D_ */,
+    9 /* plm_lexique_1__2A_ */,
+    9 /* plm_lexique_1__26__2A_ */,
+    9 /* plm_lexique_1__2F_ */,
+    9 /* plm_lexique_1__26__2F_ */
   } ;
   return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
 }
@@ -4800,9 +4904,10 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
 
 C_String C_Lexique_plm_5F_lexique::styleNameForIndex (const uint32_t inStyleIndex) const {
   C_String result ;
-  if (inStyleIndex < 10) {
-    static const char * kStyleArray [10] = {
+  if (inStyleIndex < 11) {
+    static const char * kStyleArray [11] = {
       "",
+      "bigintStyle",
       "keywordsStyle",
       "attributeStyle",
       "typeStyle",
