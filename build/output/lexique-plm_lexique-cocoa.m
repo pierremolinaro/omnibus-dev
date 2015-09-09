@@ -31,6 +31,7 @@
   self = [super init] ;
   if (self) {
     noteObjectAllocation (self) ;
+    mLexicalAttribute_bigInteger = [[NSMutableString alloc] init] ;
     mLexicalAttribute_tokenString = [[NSMutableString alloc] init] ;
     mLexicalAttribute_uint64value = 0 ;
   }
@@ -139,10 +140,27 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
   mTokenCode = 0 ;
   while ((mTokenCode == 0) && (mCurrentChar != '\0')) {
     mTokenStartLocation = mCurrentLocation ;
+    [mLexicalAttribute_bigInteger setString:@""] ;
     [mLexicalAttribute_tokenString setString:@""] ;
     mLexicalAttribute_uint64value = 0 ;
     mTokenStartLocation = mCurrentLocation ;
-    if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
+    if (scanningOk && ([self testForInputChar:176])) {
+      if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
+        scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+        do {
+          if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
+            scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
+          }else if (scanningOk && ([self testForInputChar:95])) {
+          }else{
+            mLoop = NO ;
+          }
+        }while (mLoop && scanningOk) ;
+        mLoop = YES ;
+      }else{
+        scanningOk = NO ;
+      }
+      mTokenCode = plm_lexique_1_bigint ;
+    }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90])) {
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputChar:95] || [self testForInputFromChar:48 toChar:57])) {
@@ -448,7 +466,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 95 ;
+  return 96 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -458,7 +476,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleCount {
-  return 10 ;
+  return 11 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -478,102 +496,103 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [96] = {0,
+  static const NSUInteger kTerminalSymbolStyles [97] = {0,
+    0 /* plm_lexique_1_bigint */,
     0 /* plm_lexique_1_identifier */,
-    2 /* plm_lexique_1_attribute */,
-    3 /* plm_lexique_1_typeName */,
-    4 /* plm_lexique_1_modeName */,
-    5 /* plm_lexique_1_integer */,
-    6 /* plm_lexique_1_literal_5F_string */,
-    7 /* plm_lexique_1_comment */,
-    9 /* plm_lexique_1__3F_ */,
-    9 /* plm_lexique_1__3F__21_ */,
-    9 /* plm_lexique_1__21_ */,
-    9 /* plm_lexique_1__21__3F_ */,
-    1 /* plm_lexique_1_and */,
-    1 /* plm_lexique_1_assert */,
-    1 /* plm_lexique_1_at */,
-    1 /* plm_lexique_1_boolset */,
-    1 /* plm_lexique_1_booleanType */,
-    1 /* plm_lexique_1_boot */,
-    1 /* plm_lexique_1_case */,
-    1 /* plm_lexique_1_check */,
-    1 /* plm_lexique_1_do */,
-    1 /* plm_lexique_1_else */,
-    1 /* plm_lexique_1_elsif */,
-    1 /* plm_lexique_1_end */,
-    1 /* plm_lexique_1_enum */,
-    1 /* plm_lexique_1_exception */,
-    1 /* plm_lexique_1_false */,
-    1 /* plm_lexique_1_forever */,
-    1 /* plm_lexique_1_func */,
-    1 /* plm_lexique_1_if */,
-    1 /* plm_lexique_1_import */,
-    1 /* plm_lexique_1_init */,
-    1 /* plm_lexique_1_let */,
-    1 /* plm_lexique_1_mutating */,
-    1 /* plm_lexique_1_mode */,
-    1 /* plm_lexique_1_newIntegerType */,
-    1 /* plm_lexique_1_newSignedRepresentation */,
-    1 /* plm_lexique_1_newUnsignedRepresentation */,
-    1 /* plm_lexique_1_not */,
-    1 /* plm_lexique_1_or */,
-    1 /* plm_lexique_1_proc */,
-    1 /* plm_lexique_1_register */,
-    1 /* plm_lexique_1_required */,
-    1 /* plm_lexique_1_self */,
-    1 /* plm_lexique_1_struct */,
-    1 /* plm_lexique_1_target */,
-    1 /* plm_lexique_1_then */,
-    1 /* plm_lexique_1_throw */,
-    1 /* plm_lexique_1_true */,
-    1 /* plm_lexique_1_var */,
-    1 /* plm_lexique_1_while */,
-    1 /* plm_lexique_1_xor */,
-    8 /* plm_lexique_1__3A_ */,
-    8 /* plm_lexique_1__2E_ */,
-    8 /* plm_lexique_1__2C_ */,
-    8 /* plm_lexique_1__3B_ */,
-    8 /* plm_lexique_1__7B_ */,
-    8 /* plm_lexique_1__7D_ */,
-    8 /* plm_lexique_1__3D_ */,
-    8 /* plm_lexique_1__28_ */,
-    8 /* plm_lexique_1__29_ */,
-    8 /* plm_lexique_1__3D__3D_ */,
-    8 /* plm_lexique_1__21__3D_ */,
-    8 /* plm_lexique_1__3C_ */,
-    8 /* plm_lexique_1__3C__3D_ */,
-    8 /* plm_lexique_1__3E_ */,
-    8 /* plm_lexique_1__3E__3D_ */,
-    8 /* plm_lexique_1__5B_ */,
-    8 /* plm_lexique_1__5D_ */,
-    8 /* plm_lexique_1__3C__3C_ */,
-    8 /* plm_lexique_1__3E__3E_ */,
-    8 /* plm_lexique_1__25_ */,
-    8 /* plm_lexique_1__26__25_ */,
-    8 /* plm_lexique_1__7E_ */,
-    8 /* plm_lexique_1__5C_ */,
-    8 /* plm_lexique_1__26__5C_ */,
-    8 /* plm_lexique_1__2D__3E_ */,
-    8 /* plm_lexique_1__3A__3A_ */,
-    8 /* plm_lexique_1__2B__2B_ */,
-    8 /* plm_lexique_1__26__2B__2B_ */,
-    8 /* plm_lexique_1__2D__2D_ */,
-    8 /* plm_lexique_1__26__2D__2D_ */,
-    8 /* plm_lexique_1__7C_ */,
-    8 /* plm_lexique_1__7C__3D_ */,
-    8 /* plm_lexique_1__26_ */,
-    8 /* plm_lexique_1__26__3D_ */,
-    8 /* plm_lexique_1__5E_ */,
-    8 /* plm_lexique_1__5E__3D_ */,
-    8 /* plm_lexique_1__2B_ */,
-    8 /* plm_lexique_1__26__2B_ */,
-    8 /* plm_lexique_1__2D_ */,
-    8 /* plm_lexique_1__26__2D_ */,
-    8 /* plm_lexique_1__2A_ */,
-    8 /* plm_lexique_1__26__2A_ */,
-    8 /* plm_lexique_1__2F_ */,
-    8 /* plm_lexique_1__26__2F_ */
+    3 /* plm_lexique_1_attribute */,
+    4 /* plm_lexique_1_typeName */,
+    5 /* plm_lexique_1_modeName */,
+    6 /* plm_lexique_1_integer */,
+    7 /* plm_lexique_1_literal_5F_string */,
+    8 /* plm_lexique_1_comment */,
+    10 /* plm_lexique_1__3F_ */,
+    10 /* plm_lexique_1__3F__21_ */,
+    10 /* plm_lexique_1__21_ */,
+    10 /* plm_lexique_1__21__3F_ */,
+    2 /* plm_lexique_1_and */,
+    2 /* plm_lexique_1_assert */,
+    2 /* plm_lexique_1_at */,
+    2 /* plm_lexique_1_boolset */,
+    2 /* plm_lexique_1_booleanType */,
+    2 /* plm_lexique_1_boot */,
+    2 /* plm_lexique_1_case */,
+    2 /* plm_lexique_1_check */,
+    2 /* plm_lexique_1_do */,
+    2 /* plm_lexique_1_else */,
+    2 /* plm_lexique_1_elsif */,
+    2 /* plm_lexique_1_end */,
+    2 /* plm_lexique_1_enum */,
+    2 /* plm_lexique_1_exception */,
+    2 /* plm_lexique_1_false */,
+    2 /* plm_lexique_1_forever */,
+    2 /* plm_lexique_1_func */,
+    2 /* plm_lexique_1_if */,
+    2 /* plm_lexique_1_import */,
+    2 /* plm_lexique_1_init */,
+    2 /* plm_lexique_1_let */,
+    2 /* plm_lexique_1_mutating */,
+    2 /* plm_lexique_1_mode */,
+    2 /* plm_lexique_1_newIntegerType */,
+    2 /* plm_lexique_1_newSignedRepresentation */,
+    2 /* plm_lexique_1_newUnsignedRepresentation */,
+    2 /* plm_lexique_1_not */,
+    2 /* plm_lexique_1_or */,
+    2 /* plm_lexique_1_proc */,
+    2 /* plm_lexique_1_register */,
+    2 /* plm_lexique_1_required */,
+    2 /* plm_lexique_1_self */,
+    2 /* plm_lexique_1_struct */,
+    2 /* plm_lexique_1_target */,
+    2 /* plm_lexique_1_then */,
+    2 /* plm_lexique_1_throw */,
+    2 /* plm_lexique_1_true */,
+    2 /* plm_lexique_1_var */,
+    2 /* plm_lexique_1_while */,
+    2 /* plm_lexique_1_xor */,
+    9 /* plm_lexique_1__3A_ */,
+    9 /* plm_lexique_1__2E_ */,
+    9 /* plm_lexique_1__2C_ */,
+    9 /* plm_lexique_1__3B_ */,
+    9 /* plm_lexique_1__7B_ */,
+    9 /* plm_lexique_1__7D_ */,
+    9 /* plm_lexique_1__3D_ */,
+    9 /* plm_lexique_1__28_ */,
+    9 /* plm_lexique_1__29_ */,
+    9 /* plm_lexique_1__3D__3D_ */,
+    9 /* plm_lexique_1__21__3D_ */,
+    9 /* plm_lexique_1__3C_ */,
+    9 /* plm_lexique_1__3C__3D_ */,
+    9 /* plm_lexique_1__3E_ */,
+    9 /* plm_lexique_1__3E__3D_ */,
+    9 /* plm_lexique_1__5B_ */,
+    9 /* plm_lexique_1__5D_ */,
+    9 /* plm_lexique_1__3C__3C_ */,
+    9 /* plm_lexique_1__3E__3E_ */,
+    9 /* plm_lexique_1__25_ */,
+    9 /* plm_lexique_1__26__25_ */,
+    9 /* plm_lexique_1__7E_ */,
+    9 /* plm_lexique_1__5C_ */,
+    9 /* plm_lexique_1__26__5C_ */,
+    9 /* plm_lexique_1__2D__3E_ */,
+    9 /* plm_lexique_1__3A__3A_ */,
+    9 /* plm_lexique_1__2B__2B_ */,
+    9 /* plm_lexique_1__26__2B__2B_ */,
+    9 /* plm_lexique_1__2D__2D_ */,
+    9 /* plm_lexique_1__26__2D__2D_ */,
+    9 /* plm_lexique_1__7C_ */,
+    9 /* plm_lexique_1__7C__3D_ */,
+    9 /* plm_lexique_1__26_ */,
+    9 /* plm_lexique_1__26__3D_ */,
+    9 /* plm_lexique_1__5E_ */,
+    9 /* plm_lexique_1__5E__3D_ */,
+    9 /* plm_lexique_1__2B_ */,
+    9 /* plm_lexique_1__26__2B_ */,
+    9 /* plm_lexique_1__2D_ */,
+    9 /* plm_lexique_1__26__2D_ */,
+    9 /* plm_lexique_1__2A_ */,
+    9 /* plm_lexique_1__26__2A_ */,
+    9 /* plm_lexique_1__2F_ */,
+    9 /* plm_lexique_1__26__2F_ */
   } ;
   return kTerminalSymbolStyles [inTerminal] ;
 }
@@ -585,7 +604,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [96] = {NO,
+  static const BOOL kTerminalAtomicSelection [97] = {NO,
+    YES /* plm_lexique_1_bigint */,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1_attribute */,
     YES /* plm_lexique_1_typeName */,
@@ -693,9 +713,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 
 - (NSString *) styleNameForStyleIndex: (NSInteger) inIndex {
   NSString * result = nil ;
-  if ((inIndex >= 0) && (inIndex < 10)) {
-    NSString * kStyleArray [10] = {
+  if ((inIndex >= 0) && (inIndex < 11)) {
+    NSString * kStyleArray [11] = {
       @"Default Style",
+      @"BigInts",
       @"Keywords",
       @"Attributes",
       @"Types",
@@ -719,9 +740,10 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 
 - (NSString *) styleIdentifierForStyleIndex: (NSInteger) inIndex {
   NSString * result = nil ;
-  if ((inIndex >= 0) && (inIndex < 10)) {
-    NSString * kStyleArray [10] = {
+  if ((inIndex >= 0) && (inIndex < 11)) {
+    NSString * kStyleArray [11] = {
       @"plm_lexique",
+      @"plm_lexique-bigintStyle",
       @"plm_lexique-keywordsStyle",
       @"plm_lexique-attributeStyle",
       @"plm_lexique-typeStyle",

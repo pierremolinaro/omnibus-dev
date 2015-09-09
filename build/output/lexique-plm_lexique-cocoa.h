@@ -25,6 +25,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 enum {plm_lexique_1_,
+  plm_lexique_1_bigint,
   plm_lexique_1_identifier,
   plm_lexique_1_attribute,
   plm_lexique_1_typeName,
@@ -130,6 +131,7 @@ enum {plm_lexique_1_,
 
 @interface OC_Lexique_plm_lexique : OC_Lexique {
 //--- Attributes
+  @private NSMutableString * mLexicalAttribute_bigInteger ;
   @private NSMutableString * mLexicalAttribute_tokenString ;
   @private UInt64 mLexicalAttribute_uint64value ;
 
