@@ -101,8 +101,8 @@ override method @incDecInstructionAST analyze
   if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
     error mVarName : [type key] + " type does not handle incrementation/decrementation operator"
   end
-  @sint64 min
-  @uint64 max
+  @bigint min
+  @bigint max
   switch [type kind]
   case boolean, boolset, literalString :
     error mVarName : "internal error" : min, max
@@ -137,8 +137,8 @@ override method @incDecInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @incDecInstructionIR : @abstractInstructionIR {
-  @sint64 mMin
-  @uint64 mMax
+  @bigint mMin
+  @bigint mMax
   @incDecKind mKind
   @variableKindIR mVariable
   @location mVariableLocation

@@ -1872,7 +1872,7 @@ class cCollectionElement_registerDeclarationList : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_registerDeclarationList (const GALGAS_lstring & in_mRegisterName,
                                                        const GALGAS_lstringlist & in_mAttributeList,
-                                                       const GALGAS_luint_36__34_ & in_mRegisterAddress
+                                                       const GALGAS_lbigint & in_mRegisterAddress
                                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -1892,7 +1892,7 @@ class cCollectionElement_registerDeclarationList : public cCollectionElement {
 
 cCollectionElement_registerDeclarationList::cCollectionElement_registerDeclarationList (const GALGAS_lstring & in_mRegisterName,
                                                                                         const GALGAS_lstringlist & in_mAttributeList,
-                                                                                        const GALGAS_luint_36__34_ & in_mRegisterAddress
+                                                                                        const GALGAS_lbigint & in_mRegisterAddress
                                                                                         COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mRegisterName, in_mAttributeList, in_mRegisterAddress) {
@@ -1964,7 +1964,7 @@ GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_empty
 
 GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                           const GALGAS_lstringlist & inOperand1,
-                                                                                          const GALGAS_luint_36__34_ & inOperand2
+                                                                                          const GALGAS_lbigint & inOperand2
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_registerDeclarationList result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -1981,7 +1981,7 @@ GALGAS_registerDeclarationList GALGAS_registerDeclarationList::constructor_listW
 void GALGAS_registerDeclarationList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                 const GALGAS_lstring & in_mRegisterName,
                                                                 const GALGAS_lstringlist & in_mAttributeList,
-                                                                const GALGAS_luint_36__34_ & in_mRegisterAddress
+                                                                const GALGAS_lbigint & in_mRegisterAddress
                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement_registerDeclarationList * p = NULL ;
   macroMyNew (p, cCollectionElement_registerDeclarationList (in_mRegisterName,
@@ -1995,7 +1995,7 @@ void GALGAS_registerDeclarationList::makeAttributesFromObjects (capCollectionEle
 
 void GALGAS_registerDeclarationList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
-                                                          const GALGAS_luint_36__34_ & inOperand2
+                                                          const GALGAS_lbigint & inOperand2
                                                           COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -2011,7 +2011,7 @@ void GALGAS_registerDeclarationList::addAssign_operation (const GALGAS_lstring &
 
 void GALGAS_registerDeclarationList::modifier_insertAtIndex (const GALGAS_lstring inOperand0,
                                                              const GALGAS_lstringlist inOperand1,
-                                                             const GALGAS_luint_36__34_ inOperand2,
+                                                             const GALGAS_lbigint inOperand2,
                                                              const GALGAS_uint inInsertionIndex,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
@@ -2029,7 +2029,7 @@ void GALGAS_registerDeclarationList::modifier_insertAtIndex (const GALGAS_lstrin
 
 void GALGAS_registerDeclarationList::modifier_removeAtIndex (GALGAS_lstring & outOperand0,
                                                              GALGAS_lstringlist & outOperand1,
-                                                             GALGAS_luint_36__34_ & outOperand2,
+                                                             GALGAS_lbigint & outOperand2,
                                                              const GALGAS_uint inRemoveIndex,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) {
@@ -2054,7 +2054,7 @@ void GALGAS_registerDeclarationList::modifier_removeAtIndex (GALGAS_lstring & ou
 
 void GALGAS_registerDeclarationList::modifier_popFirst (GALGAS_lstring & outOperand0,
                                                         GALGAS_lstringlist & outOperand1,
-                                                        GALGAS_luint_36__34_ & outOperand2,
+                                                        GALGAS_lbigint & outOperand2,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -2076,7 +2076,7 @@ void GALGAS_registerDeclarationList::modifier_popFirst (GALGAS_lstring & outOper
 
 void GALGAS_registerDeclarationList::modifier_popLast (GALGAS_lstring & outOperand0,
                                                        GALGAS_lstringlist & outOperand1,
-                                                       GALGAS_luint_36__34_ & outOperand2,
+                                                       GALGAS_lbigint & outOperand2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -2098,7 +2098,7 @@ void GALGAS_registerDeclarationList::modifier_popLast (GALGAS_lstring & outOpera
 
 void GALGAS_registerDeclarationList::method_first (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstringlist & outOperand1,
-                                                   GALGAS_luint_36__34_ & outOperand2,
+                                                   GALGAS_lbigint & outOperand2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -2120,7 +2120,7 @@ void GALGAS_registerDeclarationList::method_first (GALGAS_lstring & outOperand0,
 
 void GALGAS_registerDeclarationList::method_last (GALGAS_lstring & outOperand0,
                                                   GALGAS_lstringlist & outOperand1,
-                                                  GALGAS_luint_36__34_ & outOperand2,
+                                                  GALGAS_lbigint & outOperand2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -2222,12 +2222,12 @@ GALGAS_lstringlist GALGAS_registerDeclarationList::reader_mAttributeListAtIndex 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_registerDeclarationList::reader_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_registerDeclarationList::reader_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_registerDeclarationList * p = (cCollectionElement_registerDeclarationList *) attributes.ptr () ;
-  GALGAS_luint_36__34_ result ;
+  GALGAS_lbigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
     result = p->mObject.mAttribute_mRegisterAddress ;
@@ -2272,7 +2272,7 @@ GALGAS_lstringlist cEnumerator_registerDeclarationList::current_mAttributeList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cEnumerator_registerDeclarationList::current_mRegisterAddress (LOCATION_ARGS) const {
+GALGAS_lbigint cEnumerator_registerDeclarationList::current_mRegisterAddress (LOCATION_ARGS) const {
   const cCollectionElement_registerDeclarationList * p = (const cCollectionElement_registerDeclarationList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_registerDeclarationList) ;
   return p->mObject.mAttribute_mRegisterAddress ;
@@ -10367,8 +10367,8 @@ typeComparisonResult cEnumAssociatedValues_typeKind_structure::compare (const cE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_typeKind_integer::cEnumAssociatedValues_typeKind_integer (const GALGAS_sint_36__34_ & inAssociatedValue0,
-                                                                                const GALGAS_uint_36__34_ & inAssociatedValue1,
+cEnumAssociatedValues_typeKind_integer::cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                                                const GALGAS_bigint & inAssociatedValue1,
                                                                                 const GALGAS_bool & inAssociatedValue2,
                                                                                 const GALGAS_uint & inAssociatedValue3
                                                                                 COMMA_LOCATION_ARGS) :
@@ -10475,8 +10475,8 @@ GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_propertyMap
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_sint_36__34_ & inAssociatedValue0,
-                                                      const GALGAS_uint_36__34_ & inAssociatedValue1,
+GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                      const GALGAS_bigint & inAssociatedValue1,
                                                       const GALGAS_bool & inAssociatedValue2,
                                                       const GALGAS_uint & inAssociatedValue3
                                                       COMMA_LOCATION_ARGS) {
@@ -10525,8 +10525,8 @@ void GALGAS_typeKind::method_structure (GALGAS_propertyMap & outAssociatedValue0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_typeKind::method_integer (GALGAS_sint_36__34_ & outAssociatedValue0,
-                                      GALGAS_uint_36__34_ & outAssociatedValue1,
+void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
+                                      GALGAS_bigint & outAssociatedValue1,
                                       GALGAS_bool & outAssociatedValue2,
                                       GALGAS_uint & outAssociatedValue3,
                                       C_Compiler * inCompiler
@@ -12874,7 +12874,7 @@ GALGAS_typeList GALGAS_typeList::extractObject (const GALGAS_object & inObject,
 
 cMapElement_registerMapIR::cMapElement_registerMapIR (const GALGAS_lstring & inKey,
                                                       const GALGAS_string & in_mRegisterTypeName,
-                                                      const GALGAS_uint_36__34_ & in_mRegisterAddress
+                                                      const GALGAS_bigint & in_mRegisterAddress
                                                       COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mRegisterTypeName (in_mRegisterTypeName),
@@ -12971,7 +12971,7 @@ GALGAS_registerMapIR GALGAS_registerMapIR::reader_overriddenMap (C_Compiler * in
 
 void GALGAS_registerMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                 const GALGAS_string & inArgument0,
-                                                const GALGAS_uint_36__34_ & inArgument1,
+                                                const GALGAS_bigint & inArgument1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_registerMapIR * p = NULL ;
@@ -12988,7 +12988,7 @@ void GALGAS_registerMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 
 void GALGAS_registerMapIR::modifier_insertKey (GALGAS_lstring inKey,
                                                GALGAS_string inArgument0,
-                                               GALGAS_uint_36__34_ inArgument1,
+                                               GALGAS_bigint inArgument1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
   cMapElement_registerMapIR * p = NULL ;
@@ -13009,7 +13009,7 @@ const char * kSearchErrorMessage_registerMapIR_searchKey = "** internal error **
 
 void GALGAS_registerMapIR::method_searchKey (GALGAS_lstring inKey,
                                              GALGAS_string & outArgument0,
-                                             GALGAS_uint_36__34_ & outArgument1,
+                                             GALGAS_bigint & outArgument1,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) const {
   const cMapElement_registerMapIR * p = (const cMapElement_registerMapIR *) performSearch (inKey,
@@ -13043,12 +13043,12 @@ GALGAS_string GALGAS_registerMapIR::reader_mRegisterTypeNameForKey (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ GALGAS_registerMapIR::reader_mRegisterAddressForKey (const GALGAS_string & inKey,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_registerMapIR::reader_mRegisterAddressForKey (const GALGAS_string & inKey,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerMapIR * p = (const cMapElement_registerMapIR *) attributes ;
-  GALGAS_uint_36__34_ result ;
+  GALGAS_bigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerMapIR) ;
     result = p->mAttribute_mRegisterAddress ;
@@ -13072,7 +13072,7 @@ void GALGAS_registerMapIR::modifier_setMRegisterTypeNameForKey (GALGAS_string in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerMapIR::modifier_setMRegisterAddressForKey (GALGAS_uint_36__34_ inAttributeValue,
+void GALGAS_registerMapIR::modifier_setMRegisterAddressForKey (GALGAS_bigint inAttributeValue,
                                                                GALGAS_string inKey,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
@@ -13128,7 +13128,7 @@ GALGAS_string cEnumerator_registerMapIR::current_mRegisterTypeName (LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cEnumerator_registerMapIR::current_mRegisterAddress (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_registerMapIR::current_mRegisterAddress (LOCATION_ARGS) const {
   const cMapElement_registerMapIR * p = (const cMapElement_registerMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerMapIR) ;
   return p->mAttribute_mRegisterAddress ;

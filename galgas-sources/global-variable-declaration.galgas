@@ -12,7 +12,7 @@ list @allowedProcList {
 
 list @allowedInitList {
   @bool mHasWriteAccess
-  @luint64 mInitPriority
+  @lbigint mInitPriority
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -20,7 +20,7 @@ list @allowedInitList {
 list @allowedExceptionList {
   @bool mHasWriteAccess
   @lstring mExceptionName
-  @luint64 mExceptionPriority
+  @lbigint mExceptionPriority
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -75,12 +75,12 @@ syntax extension common_syntax {
         allowedProcList += !hasWriteAccess !procName !procFormalArgumentList
       or
         $init$
-        $integer$ ?let @luint64 priority
+        $integer$ ?let @lbigint priority
         allowedInitList += !hasWriteAccess !priority
       or
         $exception$
         $identifier$ ?let exceptionName
-        $integer$ ?let @luint64 priority
+        $integer$ ?let @lbigint priority
         allowedExceptionList += !hasWriteAccess !exceptionName !priority
       end
     while
@@ -155,9 +155,9 @@ method @globalVarDeclarationList-element enterInContext
     @allowedRoutineMap allowedProcedureMap = {}
   #--- Check allowed init routines are defined
     for () in mAllowedInitList do
-      [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.uint64 string] !mInitPriority.location}]
+      [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
       [!?allowedProcedureMap insertKey
-         !.new {!"init " + [mInitPriority.uint64 string] !mInitPriority.location}
+         !.new {!"init " + [mInitPriority.bigint string] !mInitPriority.location}
          !mHasWriteAccess
       ]
     end
@@ -165,19 +165,19 @@ method @globalVarDeclarationList-element enterInContext
     for () in mAllowedExceptionList do
       if mExceptionName.string == "setup" then
         [ioContext.mExceptionSetupRoutinePriorityMap searchSetupKey
-          !.new{![mExceptionPriority.uint64 string]
+          !.new{![mExceptionPriority.bigint string]
           !mExceptionPriority.location}
         ]
       elsif mExceptionName.string == "loop" then
         [ioContext.mExceptionLoopRoutinePriorityMap searchLoopKey
-          !.new{![mExceptionPriority.uint64 string]
+          !.new{![mExceptionPriority.bigint string]
           !mExceptionPriority.location}
         ]
       else
         error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
       end
       [!?allowedProcedureMap insertKey
-        !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.uint64 string] !mExceptionName.location}
+        !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.bigint string] !mExceptionName.location}
         !mHasWriteAccess
       ]
     end
@@ -262,8 +262,8 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
   var initialValueString = [mInitialValue mangledName]
   if [mInitialValue isLiteralUnsignedInteger] then
-    [mInitialValue literalUnsignedInteger ?value:let @uint64 value] ;
-    if value == 0L then
+    [mInitialValue literalUnsignedInteger ?value:let @bigint value] ;
+    if value == 0G then
       initialValueString = ""
     end
   end

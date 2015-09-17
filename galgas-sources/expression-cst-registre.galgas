@@ -95,7 +95,7 @@ override method @registerConstantInExpressionAST analyzeExpression
     ?let @uint bitCount
   ]
 #--- Generate code
-  outResultValueName = .literalUnsignedInteger {!value:((1L << bitCount) - 1L) << bitIndex}
+  outResultValueName = .literalUnsignedInteger {!value:((1G << bitCount) - 1G) << bitIndex}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -157,7 +157,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
   case literalString :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
-  case integer (@sint64 unused min @uint64 unused max @bool unsigned @uint expressionBitCount) :
+  case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
     if not unsigned then
       error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
     elsif [expressionResult isLiteralSignedInteger] then
@@ -165,8 +165,8 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     elsif [expressionResult isLiteralString] then
       error mExpressionLocation: "internal error" : outResultValueName
     elsif [expressionResult isLiteralUnsignedInteger] then
-      [expressionResult literalUnsignedInteger ?value:let @uint64 value]
-      if value < (1L << fieldBitCount) then
+      [expressionResult literalUnsignedInteger ?value:let @bigint value]
+      if value < (1G << fieldBitCount) then
         outResultValueName = .literalUnsignedInteger {!value:value << fieldBitIndex}        
       else # Overflow, detected at compile time
         error mExpressionLocation

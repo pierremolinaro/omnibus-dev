@@ -21,8 +21,7 @@
 
 cTokenFor_plm_5F_lexique::cTokenFor_plm_5F_lexique (void) :
 mLexicalAttribute_bigInteger (),
-mLexicalAttribute_tokenString (),
-mLexicalAttribute_uint_36__34_value () {
+mLexicalAttribute_tokenString () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -130,72 +129,6 @@ static const utf32 gLexicalMessage_plm_5F_lexique_attributeError [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
-
-static const utf32 gLexicalMessage_plm_5F_lexique_bigIntError [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('s'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('y'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('x'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('s'),
-  TO_UNICODE (0)
-} ;
-
-static const utf32 gLexicalMessage_plm_5F_lexique_decimalNumberTooLarge [] = {
-  TO_UNICODE ('d'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('o'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
   TO_UNICODE (0)
 } ;
 
@@ -394,24 +327,6 @@ static const utf32 gLexicalMessage_plm_5F_lexique_typeError [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 //          Syntax error messages, for every terminal symbol                                                           *
 //---------------------------------------------------------------------------------------------------------------------*
-
-//--- Syntax error message for terminal '$bigint$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_bigint [] = {
-  TO_UNICODE ('a'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('g'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE (0)
-} ;
 
 //--- Syntax error message for terminal '$identifier$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_identifier [] = {
@@ -2709,8 +2624,7 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [97] = {kEndOfSourceLexicalErrorMessage,
-    gSyntaxErrorMessage_plm_5F_lexique_bigint,
+  static const utf32 * syntaxErrorMessageArray [96] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -3678,13 +3592,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_:
       s.appendCString("$$") ;
       break ;
-    case kToken_bigint:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("bigint") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
-      break ;
     case kToken_identifier:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("identifier") ;
@@ -3718,7 +3625,7 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("integer") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendUnsigned (ptr->mLexicalAttribute_uint_36__34_value) ;
+      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
       break ;
     case kToken_literal_5F_string:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
@@ -4214,27 +4121,9 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
   while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
     token.mLexicalAttribute_bigInteger.setToZero () ;
     token.mLexicalAttribute_tokenString.setLengthToZero () ;
-    token.mLexicalAttribute_uint_36__34_value = 0 ;
     mTokenStartLocation = mCurrentLocation ;
     try{
-      if (testForInputUTF32Char (TO_UNICODE (176))) {
-        if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
-          ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_bigIntError) ;
-          do {
-            if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
-              ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_bigIntError) ;
-            }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
-            }else{
-              mLoop = false ;
-            }
-          }while (mLoop) ;
-          mLoop = true ;
-        }else{
-          lexicalError (gLexicalMessage_plm_5F_lexique_bigIntError COMMA_LINE_AND_SOURCE_FILE) ;
-        }
-        token.mTokenCode = kToken_bigint ;
-        enterToken (token) ;
-      }else if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z'))) {
+      if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z'))) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
           if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32Char (TO_UNICODE ('_')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
@@ -4309,7 +4198,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
           }
         }while (mLoop) ;
         mLoop = true ;
-        ::scanner_routine_convertHexStringIntoUInt64 (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_uint_36__34_value, gLexicalMessage_plm_5F_lexique_decimalNumberTooLarge, gLexicalMessage_plm_5F_lexique_internalError) ;
+        ::scanner_routine_convertHexStringIntoBigInt (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
         token.mTokenCode = kToken_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
@@ -4323,7 +4212,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
           }
         }while (mLoop) ;
         mLoop = true ;
-        ::scanner_routine_convertDecimalStringIntoUInt64 (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_uint_36__34_value, gLexicalMessage_plm_5F_lexique_decimalNumberTooLarge, gLexicalMessage_plm_5F_lexique_internalError) ;
+        ::scanner_routine_convertDecimalStringIntoBigInt (*this, token.mLexicalAttribute_tokenString, token.mLexicalAttribute_bigInteger, gLexicalMessage_plm_5F_lexique_internalError) ;
         token.mTokenCode = kToken_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
@@ -4625,7 +4514,6 @@ void C_Lexique_plm_5F_lexique::enterToken (const cTokenFor_plm_5F_lexique & inTo
   ptr->mTemplateStringBeforeToken = inToken.mTemplateStringBeforeToken ;
   ptr->mLexicalAttribute_bigInteger = inToken.mLexicalAttribute_bigInteger ;
   ptr->mLexicalAttribute_tokenString = inToken.mLexicalAttribute_tokenString ;
-  ptr->mLexicalAttribute_uint_36__34_value = inToken.mLexicalAttribute_uint_36__34_value ;
   enterTokenFromPointer (ptr) ;
 }
 
@@ -4643,13 +4531,6 @@ C_BigInt C_Lexique_plm_5F_lexique::attributeValue_bigInteger (void) const {
 C_String C_Lexique_plm_5F_lexique::attributeValue_tokenString (void) const {
   cTokenFor_plm_5F_lexique * ptr = (cTokenFor_plm_5F_lexique *) mCurrentTokenPtr ;
   return ptr->mLexicalAttribute_tokenString ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-uint64_t C_Lexique_plm_5F_lexique::attributeValue_uint_36__34_value (void) const {
-  cTokenFor_plm_5F_lexique * ptr = (cTokenFor_plm_5F_lexique *) mCurrentTokenPtr ;
-  return ptr->mLexicalAttribute_uint_36__34_value ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4677,23 +4558,11 @@ GALGAS_lstring C_Lexique_plm_5F_lexique::synthetizedAttribute_tokenString (void)
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_luint_36__34_ C_Lexique_plm_5F_lexique::synthetizedAttribute_uint_36__34_value (void) const {
-  cTokenFor_plm_5F_lexique * ptr = (cTokenFor_plm_5F_lexique *) mCurrentTokenPtr ;
-  macroValidSharedObject (ptr, cTokenFor_plm_5F_lexique) ;
-  GALGAS_location currentLocation (ptr->mStartLocation, ptr->mEndLocation, sourceText ()) ;
-  GALGAS_uint_36__34_ value (ptr->mLexicalAttribute_uint_36__34_value) ;
-  GALGAS_luint_36__34_ result (value, currentLocation) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                         I N T R O S P E C T I O N                                                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   GALGAS_stringlist result = GALGAS_stringlist::constructor_emptyList (THERE) ;
-  result.addAssign_operation (GALGAS_string ("bigint") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("identifier") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("attribute") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("typeName") COMMA_THERE) ;
@@ -4797,103 +4666,102 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [97] = {0,
-    0 /* plm_lexique_1_bigint */,
+  static const uint32_t kTerminalSymbolStyles [96] = {0,
     0 /* plm_lexique_1_identifier */,
-    3 /* plm_lexique_1_attribute */,
-    4 /* plm_lexique_1_typeName */,
-    5 /* plm_lexique_1_modeName */,
-    6 /* plm_lexique_1_integer */,
-    7 /* plm_lexique_1_literal_5F_string */,
-    8 /* plm_lexique_1_comment */,
-    10 /* plm_lexique_1__3F_ */,
-    10 /* plm_lexique_1__3F__21_ */,
-    10 /* plm_lexique_1__21_ */,
-    10 /* plm_lexique_1__21__3F_ */,
-    2 /* plm_lexique_1_and */,
-    2 /* plm_lexique_1_assert */,
-    2 /* plm_lexique_1_at */,
-    2 /* plm_lexique_1_boolset */,
-    2 /* plm_lexique_1_booleanType */,
-    2 /* plm_lexique_1_boot */,
-    2 /* plm_lexique_1_case */,
-    2 /* plm_lexique_1_check */,
-    2 /* plm_lexique_1_do */,
-    2 /* plm_lexique_1_else */,
-    2 /* plm_lexique_1_elsif */,
-    2 /* plm_lexique_1_end */,
-    2 /* plm_lexique_1_enum */,
-    2 /* plm_lexique_1_exception */,
-    2 /* plm_lexique_1_false */,
-    2 /* plm_lexique_1_forever */,
-    2 /* plm_lexique_1_func */,
-    2 /* plm_lexique_1_if */,
-    2 /* plm_lexique_1_import */,
-    2 /* plm_lexique_1_init */,
-    2 /* plm_lexique_1_let */,
-    2 /* plm_lexique_1_mutating */,
-    2 /* plm_lexique_1_mode */,
-    2 /* plm_lexique_1_newIntegerType */,
-    2 /* plm_lexique_1_newSignedRepresentation */,
-    2 /* plm_lexique_1_newUnsignedRepresentation */,
-    2 /* plm_lexique_1_not */,
-    2 /* plm_lexique_1_or */,
-    2 /* plm_lexique_1_proc */,
-    2 /* plm_lexique_1_register */,
-    2 /* plm_lexique_1_required */,
-    2 /* plm_lexique_1_self */,
-    2 /* plm_lexique_1_struct */,
-    2 /* plm_lexique_1_target */,
-    2 /* plm_lexique_1_then */,
-    2 /* plm_lexique_1_throw */,
-    2 /* plm_lexique_1_true */,
-    2 /* plm_lexique_1_var */,
-    2 /* plm_lexique_1_while */,
-    2 /* plm_lexique_1_xor */,
-    9 /* plm_lexique_1__3A_ */,
-    9 /* plm_lexique_1__2E_ */,
-    9 /* plm_lexique_1__2C_ */,
-    9 /* plm_lexique_1__3B_ */,
-    9 /* plm_lexique_1__7B_ */,
-    9 /* plm_lexique_1__7D_ */,
-    9 /* plm_lexique_1__3D_ */,
-    9 /* plm_lexique_1__28_ */,
-    9 /* plm_lexique_1__29_ */,
-    9 /* plm_lexique_1__3D__3D_ */,
-    9 /* plm_lexique_1__21__3D_ */,
-    9 /* plm_lexique_1__3C_ */,
-    9 /* plm_lexique_1__3C__3D_ */,
-    9 /* plm_lexique_1__3E_ */,
-    9 /* plm_lexique_1__3E__3D_ */,
-    9 /* plm_lexique_1__5B_ */,
-    9 /* plm_lexique_1__5D_ */,
-    9 /* plm_lexique_1__3C__3C_ */,
-    9 /* plm_lexique_1__3E__3E_ */,
-    9 /* plm_lexique_1__25_ */,
-    9 /* plm_lexique_1__26__25_ */,
-    9 /* plm_lexique_1__7E_ */,
-    9 /* plm_lexique_1__5C_ */,
-    9 /* plm_lexique_1__26__5C_ */,
-    9 /* plm_lexique_1__2D__3E_ */,
-    9 /* plm_lexique_1__3A__3A_ */,
-    9 /* plm_lexique_1__2B__2B_ */,
-    9 /* plm_lexique_1__26__2B__2B_ */,
-    9 /* plm_lexique_1__2D__2D_ */,
-    9 /* plm_lexique_1__26__2D__2D_ */,
-    9 /* plm_lexique_1__7C_ */,
-    9 /* plm_lexique_1__7C__3D_ */,
-    9 /* plm_lexique_1__26_ */,
-    9 /* plm_lexique_1__26__3D_ */,
-    9 /* plm_lexique_1__5E_ */,
-    9 /* plm_lexique_1__5E__3D_ */,
-    9 /* plm_lexique_1__2B_ */,
-    9 /* plm_lexique_1__26__2B_ */,
-    9 /* plm_lexique_1__2D_ */,
-    9 /* plm_lexique_1__26__2D_ */,
-    9 /* plm_lexique_1__2A_ */,
-    9 /* plm_lexique_1__26__2A_ */,
-    9 /* plm_lexique_1__2F_ */,
-    9 /* plm_lexique_1__26__2F_ */
+    2 /* plm_lexique_1_attribute */,
+    3 /* plm_lexique_1_typeName */,
+    4 /* plm_lexique_1_modeName */,
+    5 /* plm_lexique_1_integer */,
+    6 /* plm_lexique_1_literal_5F_string */,
+    7 /* plm_lexique_1_comment */,
+    9 /* plm_lexique_1__3F_ */,
+    9 /* plm_lexique_1__3F__21_ */,
+    9 /* plm_lexique_1__21_ */,
+    9 /* plm_lexique_1__21__3F_ */,
+    1 /* plm_lexique_1_and */,
+    1 /* plm_lexique_1_assert */,
+    1 /* plm_lexique_1_at */,
+    1 /* plm_lexique_1_boolset */,
+    1 /* plm_lexique_1_booleanType */,
+    1 /* plm_lexique_1_boot */,
+    1 /* plm_lexique_1_case */,
+    1 /* plm_lexique_1_check */,
+    1 /* plm_lexique_1_do */,
+    1 /* plm_lexique_1_else */,
+    1 /* plm_lexique_1_elsif */,
+    1 /* plm_lexique_1_end */,
+    1 /* plm_lexique_1_enum */,
+    1 /* plm_lexique_1_exception */,
+    1 /* plm_lexique_1_false */,
+    1 /* plm_lexique_1_forever */,
+    1 /* plm_lexique_1_func */,
+    1 /* plm_lexique_1_if */,
+    1 /* plm_lexique_1_import */,
+    1 /* plm_lexique_1_init */,
+    1 /* plm_lexique_1_let */,
+    1 /* plm_lexique_1_mutating */,
+    1 /* plm_lexique_1_mode */,
+    1 /* plm_lexique_1_newIntegerType */,
+    1 /* plm_lexique_1_newSignedRepresentation */,
+    1 /* plm_lexique_1_newUnsignedRepresentation */,
+    1 /* plm_lexique_1_not */,
+    1 /* plm_lexique_1_or */,
+    1 /* plm_lexique_1_proc */,
+    1 /* plm_lexique_1_register */,
+    1 /* plm_lexique_1_required */,
+    1 /* plm_lexique_1_self */,
+    1 /* plm_lexique_1_struct */,
+    1 /* plm_lexique_1_target */,
+    1 /* plm_lexique_1_then */,
+    1 /* plm_lexique_1_throw */,
+    1 /* plm_lexique_1_true */,
+    1 /* plm_lexique_1_var */,
+    1 /* plm_lexique_1_while */,
+    1 /* plm_lexique_1_xor */,
+    8 /* plm_lexique_1__3A_ */,
+    8 /* plm_lexique_1__2E_ */,
+    8 /* plm_lexique_1__2C_ */,
+    8 /* plm_lexique_1__3B_ */,
+    8 /* plm_lexique_1__7B_ */,
+    8 /* plm_lexique_1__7D_ */,
+    8 /* plm_lexique_1__3D_ */,
+    8 /* plm_lexique_1__28_ */,
+    8 /* plm_lexique_1__29_ */,
+    8 /* plm_lexique_1__3D__3D_ */,
+    8 /* plm_lexique_1__21__3D_ */,
+    8 /* plm_lexique_1__3C_ */,
+    8 /* plm_lexique_1__3C__3D_ */,
+    8 /* plm_lexique_1__3E_ */,
+    8 /* plm_lexique_1__3E__3D_ */,
+    8 /* plm_lexique_1__5B_ */,
+    8 /* plm_lexique_1__5D_ */,
+    8 /* plm_lexique_1__3C__3C_ */,
+    8 /* plm_lexique_1__3E__3E_ */,
+    8 /* plm_lexique_1__25_ */,
+    8 /* plm_lexique_1__26__25_ */,
+    8 /* plm_lexique_1__7E_ */,
+    8 /* plm_lexique_1__5C_ */,
+    8 /* plm_lexique_1__26__5C_ */,
+    8 /* plm_lexique_1__2D__3E_ */,
+    8 /* plm_lexique_1__3A__3A_ */,
+    8 /* plm_lexique_1__2B__2B_ */,
+    8 /* plm_lexique_1__26__2B__2B_ */,
+    8 /* plm_lexique_1__2D__2D_ */,
+    8 /* plm_lexique_1__26__2D__2D_ */,
+    8 /* plm_lexique_1__7C_ */,
+    8 /* plm_lexique_1__7C__3D_ */,
+    8 /* plm_lexique_1__26_ */,
+    8 /* plm_lexique_1__26__3D_ */,
+    8 /* plm_lexique_1__5E_ */,
+    8 /* plm_lexique_1__5E__3D_ */,
+    8 /* plm_lexique_1__2B_ */,
+    8 /* plm_lexique_1__26__2B_ */,
+    8 /* plm_lexique_1__2D_ */,
+    8 /* plm_lexique_1__26__2D_ */,
+    8 /* plm_lexique_1__2A_ */,
+    8 /* plm_lexique_1__26__2A_ */,
+    8 /* plm_lexique_1__2F_ */,
+    8 /* plm_lexique_1__26__2F_ */
   } ;
   return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
 }
@@ -4904,10 +4772,9 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
 
 C_String C_Lexique_plm_5F_lexique::styleNameForIndex (const uint32_t inStyleIndex) const {
   C_String result ;
-  if (inStyleIndex < 11) {
-    static const char * kStyleArray [11] = {
+  if (inStyleIndex < 10) {
+    static const char * kStyleArray [10] = {
       "",
-      "bigintStyle",
       "keywordsStyle",
       "attributeStyle",
       "typeStyle",
@@ -7748,7 +7615,7 @@ class cSortedListElement_bootList : public cSortedListElement {
   public : cSortedListElement_bootList (const GALGAS_location & in_mBootLocation,
                                         const GALGAS_instructionListAST & in_mInstructionList,
                                         const GALGAS_location & in_mEndOfBootLocation,
-                                        const GALGAS_uint_36__34_ & in_mPriority,
+                                        const GALGAS_bigint & in_mPriority,
                                         const GALGAS_location & in_mPriorityLocation
                                         COMMA_LOCATION_ARGS) ;
 
@@ -7773,7 +7640,7 @@ class cSortedListElement_bootList : public cSortedListElement {
 cSortedListElement_bootList::cSortedListElement_bootList (const GALGAS_location & in_mBootLocation,
                                                           const GALGAS_instructionListAST & in_mInstructionList,
                                                           const GALGAS_location & in_mEndOfBootLocation,
-                                                          const GALGAS_uint_36__34_ & in_mPriority,
+                                                          const GALGAS_bigint & in_mPriority,
                                                           const GALGAS_location & in_mPriorityLocation
                                                           COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
@@ -7858,7 +7725,7 @@ GALGAS_bootList GALGAS_bootList::constructor_emptySortedList (LOCATION_ARGS) {
 GALGAS_bootList GALGAS_bootList::constructor_sortedListWithValue (const GALGAS_location & inOperand0,
                                                                   const GALGAS_instructionListAST & inOperand1,
                                                                   const GALGAS_location & inOperand2,
-                                                                  const GALGAS_uint_36__34_ & inOperand3,
+                                                                  const GALGAS_bigint & inOperand3,
                                                                   const GALGAS_location & inOperand4
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_bootList result = constructor_emptySortedList (THERE) ;
@@ -7876,7 +7743,7 @@ GALGAS_bootList GALGAS_bootList::constructor_sortedListWithValue (const GALGAS_l
 void GALGAS_bootList::addAssign_operation (const GALGAS_location & inOperand0,
                                            const GALGAS_instructionListAST & inOperand1,
                                            const GALGAS_location & inOperand2,
-                                           const GALGAS_uint_36__34_ & inOperand3,
+                                           const GALGAS_bigint & inOperand3,
                                            const GALGAS_location & inOperand4
                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -7916,7 +7783,7 @@ GALGAS_bootList GALGAS_bootList::operator_concat (const GALGAS_bootList & inOper
 void GALGAS_bootList::modifier_popSmallest (GALGAS_location & outOperand0,
                                             GALGAS_instructionListAST & outOperand1,
                                             GALGAS_location & outOperand2,
-                                            GALGAS_uint_36__34_ & outOperand3,
+                                            GALGAS_bigint & outOperand3,
                                             GALGAS_location & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
@@ -7944,7 +7811,7 @@ void GALGAS_bootList::modifier_popSmallest (GALGAS_location & outOperand0,
 void GALGAS_bootList::modifier_popGreatest (GALGAS_location & outOperand0,
                                             GALGAS_instructionListAST & outOperand1,
                                             GALGAS_location & outOperand2,
-                                            GALGAS_uint_36__34_ & outOperand3,
+                                            GALGAS_bigint & outOperand3,
                                             GALGAS_location & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
@@ -7972,7 +7839,7 @@ void GALGAS_bootList::modifier_popGreatest (GALGAS_location & outOperand0,
 void GALGAS_bootList::method_smallest (GALGAS_location & outOperand0,
                                        GALGAS_instructionListAST & outOperand1,
                                        GALGAS_location & outOperand2,
-                                       GALGAS_uint_36__34_ & outOperand3,
+                                       GALGAS_bigint & outOperand3,
                                        GALGAS_location & outOperand4,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -8000,7 +7867,7 @@ void GALGAS_bootList::method_smallest (GALGAS_location & outOperand0,
 void GALGAS_bootList::method_greatest (GALGAS_location & outOperand0,
                                        GALGAS_instructionListAST & outOperand1,
                                        GALGAS_location & outOperand2,
-                                       GALGAS_uint_36__34_ & outOperand3,
+                                       GALGAS_bigint & outOperand3,
                                        GALGAS_location & outOperand4,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -8065,7 +7932,7 @@ GALGAS_location cEnumerator_bootList::current_mEndOfBootLocation (LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cEnumerator_bootList::current_mPriority (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_bootList::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_bootList * p = (const cSortedListElement_bootList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_bootList) ;
   return p->mObject.mAttribute_mPriority ;
@@ -8137,7 +8004,7 @@ class cSortedListElement_initList : public cSortedListElement {
   public : cSortedListElement_initList (const GALGAS_location & in_mInitLocation,
                                         const GALGAS_instructionListAST & in_mInstructionList,
                                         const GALGAS_location & in_mEndOfInitLocation,
-                                        const GALGAS_uint_36__34_ & in_mPriority,
+                                        const GALGAS_bigint & in_mPriority,
                                         const GALGAS_location & in_mPriorityLocation
                                         COMMA_LOCATION_ARGS) ;
 
@@ -8162,7 +8029,7 @@ class cSortedListElement_initList : public cSortedListElement {
 cSortedListElement_initList::cSortedListElement_initList (const GALGAS_location & in_mInitLocation,
                                                           const GALGAS_instructionListAST & in_mInstructionList,
                                                           const GALGAS_location & in_mEndOfInitLocation,
-                                                          const GALGAS_uint_36__34_ & in_mPriority,
+                                                          const GALGAS_bigint & in_mPriority,
                                                           const GALGAS_location & in_mPriorityLocation
                                                           COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
@@ -8247,7 +8114,7 @@ GALGAS_initList GALGAS_initList::constructor_emptySortedList (LOCATION_ARGS) {
 GALGAS_initList GALGAS_initList::constructor_sortedListWithValue (const GALGAS_location & inOperand0,
                                                                   const GALGAS_instructionListAST & inOperand1,
                                                                   const GALGAS_location & inOperand2,
-                                                                  const GALGAS_uint_36__34_ & inOperand3,
+                                                                  const GALGAS_bigint & inOperand3,
                                                                   const GALGAS_location & inOperand4
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_initList result = constructor_emptySortedList (THERE) ;
@@ -8265,7 +8132,7 @@ GALGAS_initList GALGAS_initList::constructor_sortedListWithValue (const GALGAS_l
 void GALGAS_initList::addAssign_operation (const GALGAS_location & inOperand0,
                                            const GALGAS_instructionListAST & inOperand1,
                                            const GALGAS_location & inOperand2,
-                                           const GALGAS_uint_36__34_ & inOperand3,
+                                           const GALGAS_bigint & inOperand3,
                                            const GALGAS_location & inOperand4
                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -8305,7 +8172,7 @@ GALGAS_initList GALGAS_initList::operator_concat (const GALGAS_initList & inOper
 void GALGAS_initList::modifier_popSmallest (GALGAS_location & outOperand0,
                                             GALGAS_instructionListAST & outOperand1,
                                             GALGAS_location & outOperand2,
-                                            GALGAS_uint_36__34_ & outOperand3,
+                                            GALGAS_bigint & outOperand3,
                                             GALGAS_location & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
@@ -8333,7 +8200,7 @@ void GALGAS_initList::modifier_popSmallest (GALGAS_location & outOperand0,
 void GALGAS_initList::modifier_popGreatest (GALGAS_location & outOperand0,
                                             GALGAS_instructionListAST & outOperand1,
                                             GALGAS_location & outOperand2,
-                                            GALGAS_uint_36__34_ & outOperand3,
+                                            GALGAS_bigint & outOperand3,
                                             GALGAS_location & outOperand4,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
@@ -8361,7 +8228,7 @@ void GALGAS_initList::modifier_popGreatest (GALGAS_location & outOperand0,
 void GALGAS_initList::method_smallest (GALGAS_location & outOperand0,
                                        GALGAS_instructionListAST & outOperand1,
                                        GALGAS_location & outOperand2,
-                                       GALGAS_uint_36__34_ & outOperand3,
+                                       GALGAS_bigint & outOperand3,
                                        GALGAS_location & outOperand4,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -8389,7 +8256,7 @@ void GALGAS_initList::method_smallest (GALGAS_location & outOperand0,
 void GALGAS_initList::method_greatest (GALGAS_location & outOperand0,
                                        GALGAS_instructionListAST & outOperand1,
                                        GALGAS_location & outOperand2,
-                                       GALGAS_uint_36__34_ & outOperand3,
+                                       GALGAS_bigint & outOperand3,
                                        GALGAS_location & outOperand4,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
@@ -8454,7 +8321,7 @@ GALGAS_location cEnumerator_initList::current_mEndOfInitLocation (LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cEnumerator_initList::current_mPriority (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_initList::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_initList * p = (const cSortedListElement_initList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_initList) ;
   return p->mObject.mAttribute_mPriority ;
@@ -8526,7 +8393,7 @@ class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
   public : cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
                                                       const GALGAS_instructionListAST & in_mExceptionInstructionList,
                                                       const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                      const GALGAS_uint_36__34_ & in_mPriority,
+                                                      const GALGAS_bigint & in_mPriority,
                                                       const GALGAS_location & in_mLocationPriority
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -8551,7 +8418,7 @@ class cSortedListElement_exceptionClauseListAST : public cSortedListElement {
 cSortedListElement_exceptionClauseListAST::cSortedListElement_exceptionClauseListAST (const GALGAS_lstring & in_mExceptionClauseName,
                                                                                       const GALGAS_instructionListAST & in_mExceptionInstructionList,
                                                                                       const GALGAS_location & in_mEndOfExceptionInstructions,
-                                                                                      const GALGAS_uint_36__34_ & in_mPriority,
+                                                                                      const GALGAS_bigint & in_mPriority,
                                                                                       const GALGAS_location & in_mLocationPriority
                                                                                       COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
@@ -8636,7 +8503,7 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_emptySo
 GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedListWithValue (const GALGAS_lstring & inOperand0,
                                                                                               const GALGAS_instructionListAST & inOperand1,
                                                                                               const GALGAS_location & inOperand2,
-                                                                                              const GALGAS_uint_36__34_ & inOperand3,
+                                                                                              const GALGAS_bigint & inOperand3,
                                                                                               const GALGAS_location & inOperand4
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_exceptionClauseListAST result = constructor_emptySortedList (THERE) ;
@@ -8654,7 +8521,7 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::constructor_sortedL
 void GALGAS_exceptionClauseListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                          const GALGAS_instructionListAST & inOperand1,
                                                          const GALGAS_location & inOperand2,
-                                                         const GALGAS_uint_36__34_ & inOperand3,
+                                                         const GALGAS_bigint & inOperand3,
                                                          const GALGAS_location & inOperand4
                                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -8694,7 +8561,7 @@ GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::operator_concat (co
 void GALGAS_exceptionClauseListAST::modifier_popSmallest (GALGAS_lstring & outOperand0,
                                                           GALGAS_instructionListAST & outOperand1,
                                                           GALGAS_location & outOperand2,
-                                                          GALGAS_uint_36__34_ & outOperand3,
+                                                          GALGAS_bigint & outOperand3,
                                                           GALGAS_location & outOperand4,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
@@ -8722,7 +8589,7 @@ void GALGAS_exceptionClauseListAST::modifier_popSmallest (GALGAS_lstring & outOp
 void GALGAS_exceptionClauseListAST::modifier_popGreatest (GALGAS_lstring & outOperand0,
                                                           GALGAS_instructionListAST & outOperand1,
                                                           GALGAS_location & outOperand2,
-                                                          GALGAS_uint_36__34_ & outOperand3,
+                                                          GALGAS_bigint & outOperand3,
                                                           GALGAS_location & outOperand4,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
@@ -8750,7 +8617,7 @@ void GALGAS_exceptionClauseListAST::modifier_popGreatest (GALGAS_lstring & outOp
 void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand0,
                                                      GALGAS_instructionListAST & outOperand1,
                                                      GALGAS_location & outOperand2,
-                                                     GALGAS_uint_36__34_ & outOperand3,
+                                                     GALGAS_bigint & outOperand3,
                                                      GALGAS_location & outOperand4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -8778,7 +8645,7 @@ void GALGAS_exceptionClauseListAST::method_smallest (GALGAS_lstring & outOperand
 void GALGAS_exceptionClauseListAST::method_greatest (GALGAS_lstring & outOperand0,
                                                      GALGAS_instructionListAST & outOperand1,
                                                      GALGAS_location & outOperand2,
-                                                     GALGAS_uint_36__34_ & outOperand3,
+                                                     GALGAS_bigint & outOperand3,
                                                      GALGAS_location & outOperand4,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -8843,7 +8710,7 @@ GALGAS_location cEnumerator_exceptionClauseListAST::current_mEndOfExceptionInstr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cEnumerator_exceptionClauseListAST::current_mPriority (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_exceptionClauseListAST::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_exceptionClauseListAST * p = (const cSortedListElement_exceptionClauseListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_exceptionClauseListAST) ;
   return p->mObject.mAttribute_mPriority ;
@@ -9659,7 +9526,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i4_ (GALGAS_ast
     } break ;
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 77)) ;
-      GALGAS_luint_36__34_ var_priority = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+      GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 78)) ;
       var_allowedInitList.addAssign_operation (var_hasWriteAccess, var_priority  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 79)) ;
     } break ;
@@ -9667,7 +9534,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i4_ (GALGAS_ast
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_exception) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 81)) ;
       GALGAS_lstring var_exceptionName = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 82)) ;
-      GALGAS_luint_36__34_ var_priority = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+      GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 83)) ;
       var_allowedExceptionList.addAssign_operation (var_hasWriteAccess, var_exceptionName, var_priority  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 84)) ;
     } break ;
@@ -9793,7 +9660,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i5_parse (C_Lex
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_ (GALGAS_ast & ioArgument_ioAST,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_boot) COMMA_SOURCE_FILE ("boot-declaration.galgas", 24)) ;
-  GALGAS_luint_36__34_ var_priority = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("boot-declaration.galgas", 25)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("boot-declaration.galgas", 26)) ;
   GALGAS_labelMap var_labelMap = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("boot-declaration.galgas", 27)) ;
@@ -9801,7 +9668,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_ (GALGAS_ast
   nt_instructionList_ (var_instructionList, var_labelMap, inCompiler) ;
   GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("boot-declaration.galgas", 29)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("boot-declaration.galgas", 30)) ;
-  ioArgument_ioAST.mAttribute_mBootList.addAssign_operation (var_priority.mAttribute_location, var_instructionList, var_endOfInit, var_priority.mAttribute_uint_36__34_, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("boot-declaration.galgas", 31)) ;
+  ioArgument_ioAST.mAttribute_mBootList.addAssign_operation (var_priority.mAttribute_location, var_instructionList, var_endOfInit, var_priority.mAttribute_bigint, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("boot-declaration.galgas", 31)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9820,7 +9687,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i6_parse (C_Lex
 void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i7_ (GALGAS_ast & ioArgument_ioAST,
                                                                       C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_init) COMMA_SOURCE_FILE ("init-declaration.galgas", 24)) ;
-  GALGAS_luint_36__34_ var_priority = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("init-declaration.galgas", 25)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("init-declaration.galgas", 26)) ;
   GALGAS_labelMap var_labelMap = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("init-declaration.galgas", 27)) ;
@@ -9828,7 +9695,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i7_ (GALGAS_ast
   nt_instructionList_ (var_instructionList, var_labelMap, inCompiler) ;
   GALGAS_location var_endOfInit = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("init-declaration.galgas", 29)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("init-declaration.galgas", 30)) ;
-  ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (var_priority.mAttribute_location, var_instructionList, var_endOfInit, var_priority.mAttribute_uint_36__34_, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("init-declaration.galgas", 31)) ;
+  ioArgument_ioAST.mAttribute_mInitList.addAssign_operation (var_priority.mAttribute_location, var_instructionList, var_endOfInit, var_priority.mAttribute_bigint, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("init-declaration.galgas", 31)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9849,7 +9716,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i8_ (GALGAS_ast
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_exception) COMMA_SOURCE_FILE ("exception.galgas", 31)) ;
   GALGAS_lstring var_exceptionClauseName = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("exception.galgas", 32)) ;
-  GALGAS_luint_36__34_ var_priority = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_priority = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("exception.galgas", 33)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("exception.galgas", 34)) ;
   GALGAS_labelMap var_labelMap = GALGAS_labelMap::constructor_emptyMap (SOURCE_FILE ("exception.galgas", 35)) ;
@@ -9857,7 +9724,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i8_ (GALGAS_ast
   nt_instructionList_ (var_instructionList, var_labelMap, inCompiler) ;
   GALGAS_location var_endOfInstructionList = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("exception.galgas", 37)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("exception.galgas", 38)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.addAssign_operation (var_exceptionClauseName, var_instructionList, var_endOfInstructionList, var_priority.mAttribute_uint_36__34_, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 39)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.addAssign_operation (var_exceptionClauseName, var_instructionList, var_endOfInstructionList, var_priority.mAttribute_bigint, var_priority.mAttribute_location  COMMA_SOURCE_FILE ("exception.galgas", 39)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10215,7 +10082,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i15_ (GALGAS_as
       }
     }
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_at) COMMA_SOURCE_FILE ("register-declaration.galgas", 57)) ;
-    GALGAS_luint_36__34_ var_registerAddress = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+    GALGAS_lbigint var_registerAddress = inCompiler->synthetizedAttribute_bigInteger () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 58)) ;
     var_registerDeclarationList.addAssign_operation (var_registerName, var_attributeList, var_registerAddress  COMMA_SOURCE_FILE ("register-declaration.galgas", 59)) ;
     switch (select_common_5F_syntax_16 (inCompiler)) {
@@ -10239,7 +10106,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i15_ (GALGAS_as
       GALGAS_registerBitSlice var_registerBitSlice ;
       switch (select_common_5F_syntax_20 (inCompiler)) {
       case 1: {
-        GALGAS_luint_36__34_ var_unusedBitCount = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+        GALGAS_lbigint var_unusedBitCount = inCompiler->synthetizedAttribute_bigInteger () ;
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 70)) ;
         var_registerBitSlice = GALGAS_registerBitSlice::constructor_unusedBits (var_unusedBitCount  COMMA_SOURCE_FILE ("register-declaration.galgas", 71)) ;
       } break ;
@@ -10248,11 +10115,11 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_declaration_i15_ (GALGAS_as
         inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("register-declaration.galgas", 73)) ;
         switch (select_common_5F_syntax_21 (inCompiler)) {
         case 1: {
-          var_registerBitSlice = GALGAS_registerBitSlice::constructor_namedBit (var_bitName, GALGAS_luint_36__34_::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 1ULL), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 75))  COMMA_SOURCE_FILE ("register-declaration.galgas", 75))  COMMA_SOURCE_FILE ("register-declaration.galgas", 75)) ;
+          var_registerBitSlice = GALGAS_registerBitSlice::constructor_namedBit (var_bitName, GALGAS_lbigint::constructor_new (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 75)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("register-declaration.galgas", 75))  COMMA_SOURCE_FILE ("register-declaration.galgas", 75))  COMMA_SOURCE_FILE ("register-declaration.galgas", 75)) ;
         } break ;
         case 2: {
           inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5B_) COMMA_SOURCE_FILE ("register-declaration.galgas", 77)) ;
-          GALGAS_luint_36__34_ var_bitCount = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+          GALGAS_lbigint var_bitCount = inCompiler->synthetizedAttribute_bigInteger () ;
           inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("register-declaration.galgas", 78)) ;
           inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__5D_) COMMA_SOURCE_FILE ("register-declaration.galgas", 79)) ;
           var_registerBitSlice = GALGAS_registerBitSlice::constructor_namedBit (var_bitName, var_bitCount  COMMA_SOURCE_FILE ("register-declaration.galgas", 80)) ;
@@ -11181,7 +11048,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i35_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i36_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_luint_36__34_ var_integerLiteral = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_integerLiteral = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 16)) ;
   outArgument_outExpression = GALGAS_literalIntegerInExpressionAST::constructor_new (var_integerLiteral  COMMA_SOURCE_FILE ("expression-literal-integer.galgas", 17)) ;
 }
@@ -11216,7 +11083,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i38_ (GALGAS_expres
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_true) COMMA_SOURCE_FILE ("expression-true-false.galgas", 16)) ;
-  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 1ULL)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 17)) ;
+  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-true-false.galgas", 17))  COMMA_SOURCE_FILE ("expression-true-false.galgas", 17)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11232,7 +11099,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i39_ (GALGAS_expres
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_false) COMMA_SOURCE_FILE ("expression-true-false.galgas", 21)) ;
-  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_uint_36__34_ ((uint64_t) 0ULL)  COMMA_SOURCE_FILE ("expression-true-false.galgas", 22)) ;
+  outArgument_outExpression = GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-true-false.galgas", 22))  COMMA_SOURCE_FILE ("expression-true-false.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12192,7 +12059,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 29)) ;
   GALGAS_lstring var_cType = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 30)) ;
-  GALGAS_luint_36__34_ var_size = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_size = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 31)) ;
   ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (true)  COMMA_SOURCE_FILE ("new-base-type.galgas", 32))  COMMA_SOURCE_FILE ("new-base-type.galgas", 32)) ;
 }
@@ -12218,7 +12085,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("new-base-type.galgas", 45)) ;
   GALGAS_lstring var_cType = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_literal_5F_string) COMMA_SOURCE_FILE ("new-base-type.galgas", 46)) ;
-  GALGAS_luint_36__34_ var_size = inCompiler->synthetizedAttribute_uint_36__34_value () ;
+  GALGAS_lbigint var_size = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("new-base-type.galgas", 47)) ;
   ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_newIntegerRepresentationDeclaration::constructor_new (var_newAttributeName, var_cType, var_size, GALGAS_bool (false)  COMMA_SOURCE_FILE ("new-base-type.galgas", 48))  COMMA_SOURCE_FILE ("new-base-type.galgas", 48)) ;
 }
@@ -15697,7 +15564,7 @@ class cCollectionElement_allowedInitList : public cCollectionElement {
 
 //--- Constructor
   public : cCollectionElement_allowedInitList (const GALGAS_bool & in_mHasWriteAccess,
-                                               const GALGAS_luint_36__34_ & in_mInitPriority
+                                               const GALGAS_lbigint & in_mInitPriority
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -15716,7 +15583,7 @@ class cCollectionElement_allowedInitList : public cCollectionElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedInitList::cCollectionElement_allowedInitList (const GALGAS_bool & in_mHasWriteAccess,
-                                                                        const GALGAS_luint_36__34_ & in_mInitPriority
+                                                                        const GALGAS_lbigint & in_mInitPriority
                                                                         COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mInitPriority) {
@@ -15783,7 +15650,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::constructor_emptyList (LOCATION_A
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::constructor_listWithValue (const GALGAS_bool & inOperand0,
-                                                                          const GALGAS_luint_36__34_ & inOperand1
+                                                                          const GALGAS_lbigint & inOperand1
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_allowedInitList result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -15799,7 +15666,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::constructor_listWithValue (const 
 
 void GALGAS_allowedInitList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                         const GALGAS_bool & in_mHasWriteAccess,
-                                                        const GALGAS_luint_36__34_ & in_mInitPriority
+                                                        const GALGAS_lbigint & in_mInitPriority
                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement_allowedInitList * p = NULL ;
   macroMyNew (p, cCollectionElement_allowedInitList (in_mHasWriteAccess,
@@ -15811,7 +15678,7 @@ void GALGAS_allowedInitList::makeAttributesFromObjects (capCollectionElement & o
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0,
-                                                  const GALGAS_luint_36__34_ & inOperand1
+                                                  const GALGAS_lbigint & inOperand1
                                                   COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -15826,7 +15693,7 @@ void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::modifier_insertAtIndex (const GALGAS_bool inOperand0,
-                                                     const GALGAS_luint_36__34_ inOperand1,
+                                                     const GALGAS_lbigint inOperand1,
                                                      const GALGAS_uint inInsertionIndex,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -15843,7 +15710,7 @@ void GALGAS_allowedInitList::modifier_insertAtIndex (const GALGAS_bool inOperand
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
-                                                     GALGAS_luint_36__34_ & outOperand1,
+                                                     GALGAS_lbigint & outOperand1,
                                                      const GALGAS_uint inRemoveIndex,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -15865,7 +15732,7 @@ void GALGAS_allowedInitList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::modifier_popFirst (GALGAS_bool & outOperand0,
-                                                GALGAS_luint_36__34_ & outOperand1,
+                                                GALGAS_lbigint & outOperand1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -15884,7 +15751,7 @@ void GALGAS_allowedInitList::modifier_popFirst (GALGAS_bool & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::modifier_popLast (GALGAS_bool & outOperand0,
-                                               GALGAS_luint_36__34_ & outOperand1,
+                                               GALGAS_lbigint & outOperand1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -15903,7 +15770,7 @@ void GALGAS_allowedInitList::modifier_popLast (GALGAS_bool & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::method_first (GALGAS_bool & outOperand0,
-                                           GALGAS_luint_36__34_ & outOperand1,
+                                           GALGAS_lbigint & outOperand1,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -15922,7 +15789,7 @@ void GALGAS_allowedInitList::method_first (GALGAS_bool & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::method_last (GALGAS_bool & outOperand0,
-                                          GALGAS_luint_36__34_ & outOperand1,
+                                          GALGAS_lbigint & outOperand1,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -16007,12 +15874,12 @@ GALGAS_bool GALGAS_allowedInitList::reader_mHasWriteAccessAtIndex (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_allowedInitList::reader_mInitPriorityAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_allowedInitList::reader_mInitPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedInitList * p = (cCollectionElement_allowedInitList *) attributes.ptr () ;
-  GALGAS_luint_36__34_ result ;
+  GALGAS_lbigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
     result = p->mObject.mAttribute_mInitPriority ;
@@ -16049,7 +15916,7 @@ GALGAS_bool cEnumerator_allowedInitList::current_mHasWriteAccess (LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cEnumerator_allowedInitList::current_mInitPriority (LOCATION_ARGS) const {
+GALGAS_lbigint cEnumerator_allowedInitList::current_mInitPriority (LOCATION_ARGS) const {
   const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_allowedInitList) ;
   return p->mObject.mAttribute_mInitPriority ;
@@ -16113,7 +15980,7 @@ class cCollectionElement_allowedExceptionList : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_allowedExceptionList (const GALGAS_bool & in_mHasWriteAccess,
                                                     const GALGAS_lstring & in_mExceptionName,
-                                                    const GALGAS_luint_36__34_ & in_mExceptionPriority
+                                                    const GALGAS_lbigint & in_mExceptionPriority
                                                     COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -16133,7 +16000,7 @@ class cCollectionElement_allowedExceptionList : public cCollectionElement {
 
 cCollectionElement_allowedExceptionList::cCollectionElement_allowedExceptionList (const GALGAS_bool & in_mHasWriteAccess,
                                                                                   const GALGAS_lstring & in_mExceptionName,
-                                                                                  const GALGAS_luint_36__34_ & in_mExceptionPriority
+                                                                                  const GALGAS_lbigint & in_mExceptionPriority
                                                                                   COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mExceptionName, in_mExceptionPriority) {
@@ -16205,7 +16072,7 @@ GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_emptyList (
 
 GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                                     const GALGAS_lstring & inOperand1,
-                                                                                    const GALGAS_luint_36__34_ & inOperand2
+                                                                                    const GALGAS_lbigint & inOperand2
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_allowedExceptionList result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -16222,7 +16089,7 @@ GALGAS_allowedExceptionList GALGAS_allowedExceptionList::constructor_listWithVal
 void GALGAS_allowedExceptionList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                              const GALGAS_bool & in_mHasWriteAccess,
                                                              const GALGAS_lstring & in_mExceptionName,
-                                                             const GALGAS_luint_36__34_ & in_mExceptionPriority
+                                                             const GALGAS_lbigint & in_mExceptionPriority
                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement_allowedExceptionList * p = NULL ;
   macroMyNew (p, cCollectionElement_allowedExceptionList (in_mHasWriteAccess,
@@ -16236,7 +16103,7 @@ void GALGAS_allowedExceptionList::makeAttributesFromObjects (capCollectionElemen
 
 void GALGAS_allowedExceptionList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                        const GALGAS_lstring & inOperand1,
-                                                       const GALGAS_luint_36__34_ & inOperand2
+                                                       const GALGAS_lbigint & inOperand2
                                                        COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -16252,7 +16119,7 @@ void GALGAS_allowedExceptionList::addAssign_operation (const GALGAS_bool & inOpe
 
 void GALGAS_allowedExceptionList::modifier_insertAtIndex (const GALGAS_bool inOperand0,
                                                           const GALGAS_lstring inOperand1,
-                                                          const GALGAS_luint_36__34_ inOperand2,
+                                                          const GALGAS_lbigint inOperand2,
                                                           const GALGAS_uint inInsertionIndex,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
@@ -16270,7 +16137,7 @@ void GALGAS_allowedExceptionList::modifier_insertAtIndex (const GALGAS_bool inOp
 
 void GALGAS_allowedExceptionList::modifier_removeAtIndex (GALGAS_bool & outOperand0,
                                                           GALGAS_lstring & outOperand1,
-                                                          GALGAS_luint_36__34_ & outOperand2,
+                                                          GALGAS_lbigint & outOperand2,
                                                           const GALGAS_uint inRemoveIndex,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
@@ -16295,7 +16162,7 @@ void GALGAS_allowedExceptionList::modifier_removeAtIndex (GALGAS_bool & outOpera
 
 void GALGAS_allowedExceptionList::modifier_popFirst (GALGAS_bool & outOperand0,
                                                      GALGAS_lstring & outOperand1,
-                                                     GALGAS_luint_36__34_ & outOperand2,
+                                                     GALGAS_lbigint & outOperand2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -16317,7 +16184,7 @@ void GALGAS_allowedExceptionList::modifier_popFirst (GALGAS_bool & outOperand0,
 
 void GALGAS_allowedExceptionList::modifier_popLast (GALGAS_bool & outOperand0,
                                                     GALGAS_lstring & outOperand1,
-                                                    GALGAS_luint_36__34_ & outOperand2,
+                                                    GALGAS_lbigint & outOperand2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -16339,7 +16206,7 @@ void GALGAS_allowedExceptionList::modifier_popLast (GALGAS_bool & outOperand0,
 
 void GALGAS_allowedExceptionList::method_first (GALGAS_bool & outOperand0,
                                                 GALGAS_lstring & outOperand1,
-                                                GALGAS_luint_36__34_ & outOperand2,
+                                                GALGAS_lbigint & outOperand2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -16361,7 +16228,7 @@ void GALGAS_allowedExceptionList::method_first (GALGAS_bool & outOperand0,
 
 void GALGAS_allowedExceptionList::method_last (GALGAS_bool & outOperand0,
                                                GALGAS_lstring & outOperand1,
-                                               GALGAS_luint_36__34_ & outOperand2,
+                                               GALGAS_lbigint & outOperand2,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -16463,12 +16330,12 @@ GALGAS_lstring GALGAS_allowedExceptionList::reader_mExceptionNameAtIndex (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_allowedExceptionList::reader_mExceptionPriorityAtIndex (const GALGAS_uint & inIndex,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_allowedExceptionList::reader_mExceptionPriorityAtIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_allowedExceptionList * p = (cCollectionElement_allowedExceptionList *) attributes.ptr () ;
-  GALGAS_luint_36__34_ result ;
+  GALGAS_lbigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
     result = p->mObject.mAttribute_mExceptionPriority ;
@@ -16513,7 +16380,7 @@ GALGAS_lstring cEnumerator_allowedExceptionList::current_mExceptionName (LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cEnumerator_allowedExceptionList::current_mExceptionPriority (LOCATION_ARGS) const {
+GALGAS_lbigint cEnumerator_allowedExceptionList::current_mExceptionPriority (LOCATION_ARGS) const {
   const cCollectionElement_allowedExceptionList * p = (const cCollectionElement_allowedExceptionList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_allowedExceptionList) ;
   return p->mObject.mAttribute_mExceptionPriority ;

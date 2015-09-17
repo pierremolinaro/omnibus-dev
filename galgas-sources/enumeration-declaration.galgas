@@ -99,7 +99,7 @@ override method @enumerationDeclaration enterInContext
   for (cst) in mCaseNameList do
     let idx = [enumConstantMap count]
     [!?enumConstantMap insertKey !cst !idx]
-    [!?constructorMap insertKey !cst !.literalUnsignedInteger {!value:[idx uint64]}]
+    [!?constructorMap insertKey !cst !.literalUnsignedInteger {!value:[idx bigint]}]
   end
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName

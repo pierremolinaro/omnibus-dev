@@ -24,7 +24,7 @@ struct @intermediateCodeStruct {
 
 map @registerMapIR {
   @string mRegisterTypeName
-  @uint64 mRegisterAddress
+  @bigint mRegisterAddress
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

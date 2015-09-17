@@ -5,7 +5,7 @@
 list @registerDeclarationList {
   @lstring mRegisterName
   @lstringlist mAttributeList
-  @luint64 mRegisterAddress
+  @lbigint mRegisterAddress
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -25,8 +25,8 @@ list @registerBitSliceList {
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @registerBitSlice {
-  case unusedBits (@luint64 count)
-  case namedBit (@lstring name @luint64 count)
+  case unusedBits (@lbigint count)
+  case namedBit (@lstring name @lbigint count)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -55,7 +55,7 @@ syntax extension common_syntax {
         attributeList += !attribute
       end 
       $at$
-      $integer$ ?let @luint64 registerAddress
+      $integer$ ?let @lbigint registerAddress
       registerDeclarationList += !registerName !attributeList !registerAddress
     while
     end
@@ -67,15 +67,15 @@ syntax extension common_syntax {
       repeat
         @registerBitSlice registerBitSlice
         select
-          $integer$ ?let @luint64 unusedBitCount
+          $integer$ ?let @lbigint unusedBitCount
           registerBitSlice = .unusedBits {!count:unusedBitCount}
         or
           $identifier$ ?let bitName
           select
-            registerBitSlice = .namedBit {!name:bitName !count:.new{!1L !.here}}
+            registerBitSlice = .namedBit {!name:bitName !count:.new{!1G !.here}}
           or
             $[$
-            $integer$ ?let @luint64 bitCount
+            $integer$ ?let @lbigint bitCount
             $]$
             registerBitSlice = .namedBit {!name:bitName !count:bitCount}
           end
@@ -164,10 +164,10 @@ override method @registerDeclaration enterInContext
     @uint shiftCount = 0
     for > () in mRegisterBitSliceList do
       switch mRegisterBitSlice
-      case unusedBits (@luint64 count) :
-        shiftCount = shiftCount + [count.uint64 uint]
-      case namedBit (@lstring name @luint64 count) :
-        let bitCount = [count.uint64 uint]
+      case unusedBits (@lbigint count) :
+        shiftCount = shiftCount + [count.bigint uint]
+      case namedBit (@lstring name @lbigint count) :
+        let bitCount = [count.bigint uint]
         [!?registerFieldMap insertKey
           !name
           !shiftCount
@@ -177,18 +177,18 @@ override method @registerDeclaration enterInContext
         [!?registerSubMap insertKey
           !.new{!"shift" !name.location}
           !.infixNoOvf {!infixOperator:">>"}
-          !.literalUnsignedInteger{!value:[shiftCount uint64]}
+          !.literalUnsignedInteger{!value:[shiftCount bigint]}
           !{}
           !registerType
         ]
         [!?registerSubMap insertKey
           !.new{!"bool" !name.location}
           !.infixNoOvf {!infixOperator:"!="}
-          !.literalUnsignedInteger{!value:0L}
+          !.literalUnsignedInteger{!value:0G}
           !{}
           !ioContext.mBooleanType
         ]
-        let mask = ((1L << bitCount) - 1L) << shiftCount
+        let mask = ((1G << bitCount) - 1G) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
           !.infixNoOvf {!infixOperator:"&"}
@@ -248,10 +248,10 @@ override method @registerDeclaration semanticAnalysis
       @uint shiftCount = 0
       for > () in mRegisterBitSliceList do
         switch mRegisterBitSlice
-        case unusedBits (@luint64 count) :
-          shiftCount = shiftCount + [count.uint64 uint]
-        case namedBit (* @luint64 count) :
-          shiftCount = shiftCount + [count.uint64 uint]
+        case unusedBits (@lbigint count) :
+          shiftCount = shiftCount + [count.bigint uint]
+        case namedBit (* @lbigint count) :
+          shiftCount = shiftCount + [count.bigint uint]
         end
       end
       if size != shiftCount then
@@ -267,27 +267,27 @@ override method @registerDeclaration semanticAnalysis
   if isSigned then
     error mRegisterTypeName : "base type 'size' should be unsigned"
   end
-  @uint64 maxAddress
+  @bigint maxAddress
   if size == 8 then
-    maxAddress = 255L
+    maxAddress = 255G
   elsif size == 16 then
-    maxAddress = 65535L
+    maxAddress = 65535G
   elsif size == 32 then
-    maxAddress = [@uint.max uint64]
+    maxAddress = [@uint.max bigint]
   elsif size == 16 then
-    maxAddress = @uint64.max
+    maxAddress = [@uint64.max bigint]
   else
     error mRegisterTypeName : "base type 'size' has an invalid size" : maxAddress
   end
   for () in mRegisterDeclarationList do
-    if mRegisterAddress.uint64 > maxAddress then
+    if mRegisterAddress.bigint > maxAddress then
       error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]
     end
   #---
     [!?ioIntermediateCodeStruct.mRegisterMap insertKey
       !mRegisterName
       !mRegisterTypeName.string
-      !mRegisterAddress.uint64
+      !mRegisterAddress.bigint
     ]
   end
 }
@@ -302,7 +302,7 @@ private filewrapper registerGenerationTemplate in "../generation-templates" {
   template declaration "register-declaration.galgasTemplate"
     ?@string REGISTER_TYPE_NAME
     ?@string REGISTER_NAME
-    ?@uint64 REGISTER_ADDRESS
+    ?@bigint REGISTER_ADDRESS
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

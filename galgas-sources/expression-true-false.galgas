@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @literalBooleanInExpressionAST : @expressionAST {
-  @uint64 mValue
+  @bigint mValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -14,12 +14,12 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $true$
-    outExpression = @literalBooleanInExpressionAST.new {!1L}
+    outExpression = @literalBooleanInExpressionAST.new {!1G}
   }
 
   rule <primary> !@expressionAST outExpression {
     $false$
-    outExpression = @literalBooleanInExpressionAST.new {!0L}
+    outExpression = @literalBooleanInExpressionAST.new {!0G}
   }
 
 }

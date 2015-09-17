@@ -199,8 +199,8 @@ override method @structureDeclaration enterInContext
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @literalStructure {
-  case unsignedInteger (@uint64 value)
-  case signedInteger (@sint64 value)
+  case unsignedInteger (@bigint value)
+  case signedInteger (@bigint value)
   case string (@string value @string name)
   case structure (@literalStructureList value)
 }
@@ -268,9 +268,9 @@ override method @structureDeclaration initAnalysis
       error .nowhere : "a temporary constant cannot be used as field initial value"
     case localAccess (@lstring access) :
       error access : "a property cannot be used as field initial value"
-    case literalUnsignedInteger (@uint64 value) :
+    case literalUnsignedInteger (@bigint value) :
       initStructureList += !.unsignedInteger {!value:value}
-    case literalSignedInteger (@sint64 value) :
+    case literalSignedInteger (@bigint value) :
       initStructureList += !.signedInteger {!value:value}
     case literalString (@string value @string name) :
       initStructureList += !.string {!value:value !name:name}

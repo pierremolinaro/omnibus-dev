@@ -1082,8 +1082,8 @@ class GALGAS_incDecInstructionIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_incDecInstructionIR constructor_new (const class GALGAS_sint_36__34_ & inOperand0,
-                                                              const class GALGAS_uint_36__34_ & inOperand1,
+  public : static GALGAS_incDecInstructionIR constructor_new (const class GALGAS_bigint & inOperand0,
+                                                              const class GALGAS_bigint & inOperand1,
                                                               const class GALGAS_incDecKind & inOperand2,
                                                               const class GALGAS_variableKindIR & inOperand3,
                                                               const class GALGAS_location & inOperand4
@@ -1100,9 +1100,9 @@ class GALGAS_incDecInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_incDecKind reader_mKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mMax (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mMax (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_sint_36__34_ reader_mMin (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mMin (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
 
@@ -1127,15 +1127,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_incDecInstructionIR
 
 class cPtr_incDecInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_sint_36__34_ mAttribute_mMin ;
-  public : GALGAS_uint_36__34_ mAttribute_mMax ;
+  public : GALGAS_bigint mAttribute_mMin ;
+  public : GALGAS_bigint mAttribute_mMax ;
   public : GALGAS_incDecKind mAttribute_mKind ;
   public : GALGAS_variableKindIR mAttribute_mVariable ;
   public : GALGAS_location mAttribute_mVariableLocation ;
 
 //--- Constructor
-  public : cPtr_incDecInstructionIR (const GALGAS_sint_36__34_ & in_mMin,
-                                     const GALGAS_uint_36__34_ & in_mMax,
+  public : cPtr_incDecInstructionIR (const GALGAS_bigint & in_mMin,
+                                     const GALGAS_bigint & in_mMax,
                                      const GALGAS_incDecKind & in_mKind,
                                      const GALGAS_variableKindIR & in_mVariable,
                                      const GALGAS_location & in_mVariableLocation
@@ -1145,8 +1145,8 @@ class cPtr_incDecInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_sint_36__34_ reader_mMin (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint_36__34_ reader_mMax (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mMin (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mMax (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_incDecKind reader_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mVariableLocation (LOCATION_ARGS) const ;

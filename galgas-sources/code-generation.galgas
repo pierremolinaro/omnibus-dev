@@ -8,9 +8,9 @@ getter @literalStructureList literalValue -> @string result {
   result = "{"
   for (ls) in self do
     switch ls
-    case unsignedInteger (@uint64 value) :
+    case unsignedInteger (@bigint value) :
       result += [value string]
-    case signedInteger (@sint64 value) :
+    case signedInteger (@bigint value) :
       result += [value string]
     case string (* @string name) :
       result += name
@@ -44,9 +44,9 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :
     outResult = access.string
-  case literalUnsignedInteger (@uint64 value) :
+  case literalUnsignedInteger (@bigint value) :
     outResult = [value string]
-  case literalSignedInteger (@sint64 value) :
+  case literalSignedInteger (@bigint value) :
     outResult = [value string]
   case literalString (* @string name) :
     outResult = name
