@@ -10602,7 +10602,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_literalStructure_unsignedInteger::cEnumAssociatedValues_literalStructure_unsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
+cEnumAssociatedValues_literalStructure_unsignedInteger::cEnumAssociatedValues_literalStructure_unsignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -10631,7 +10631,7 @@ typeComparisonResult cEnumAssociatedValues_literalStructure_unsignedInteger::com
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_literalStructure_signedInteger::cEnumAssociatedValues_literalStructure_signedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
+cEnumAssociatedValues_literalStructure_signedInteger::cEnumAssociatedValues_literalStructure_signedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                                             COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -10731,7 +10731,7 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalStructure GALGAS_literalStructure::constructor_unsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
+GALGAS_literalStructure GALGAS_literalStructure::constructor_unsignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_literalStructure result ;
   if (inAssociatedValue0.isValid ()) {
@@ -10746,7 +10746,7 @@ GALGAS_literalStructure GALGAS_literalStructure::constructor_unsignedInteger (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalStructure GALGAS_literalStructure::constructor_signedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
+GALGAS_literalStructure GALGAS_literalStructure::constructor_signedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_literalStructure result ;
   if (inAssociatedValue0.isValid ()) {
@@ -10792,7 +10792,7 @@ GALGAS_literalStructure GALGAS_literalStructure::constructor_structure (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_literalStructure::method_unsignedInteger (GALGAS_uint_36__34_ & outAssociatedValue0,
+void GALGAS_literalStructure::method_unsignedInteger (GALGAS_bigint & outAssociatedValue0,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_unsignedInteger) {
@@ -10808,7 +10808,7 @@ void GALGAS_literalStructure::method_unsignedInteger (GALGAS_uint_36__34_ & outA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_literalStructure::method_signedInteger (GALGAS_sint_36__34_ & outAssociatedValue0,
+void GALGAS_literalStructure::method_signedInteger (GALGAS_bigint & outAssociatedValue0,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_signedInteger) {
@@ -11134,7 +11134,7 @@ GALGAS_procedureKindAST GALGAS_procedureKindAST::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_registerBitSlice_unusedBits::cEnumAssociatedValues_registerBitSlice_unusedBits (const GALGAS_luint_36__34_ & inAssociatedValue0
+cEnumAssociatedValues_registerBitSlice_unusedBits::cEnumAssociatedValues_registerBitSlice_unusedBits (const GALGAS_lbigint & inAssociatedValue0
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -11164,7 +11164,7 @@ typeComparisonResult cEnumAssociatedValues_registerBitSlice_unusedBits::compare 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_registerBitSlice_namedBit::cEnumAssociatedValues_registerBitSlice_namedBit (const GALGAS_lstring & inAssociatedValue0,
-                                                                                                  const GALGAS_luint_36__34_ & inAssociatedValue1
+                                                                                                  const GALGAS_lbigint & inAssociatedValue1
                                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -11205,7 +11205,7 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_unusedBits (const GALGAS_luint_36__34_ & inAssociatedValue0
+GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_unusedBits (const GALGAS_lbigint & inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_registerBitSlice result ;
   if (inAssociatedValue0.isValid ()) {
@@ -11221,7 +11221,7 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_unusedBits (const G
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_namedBit (const GALGAS_lstring & inAssociatedValue0,
-                                                                       const GALGAS_luint_36__34_ & inAssociatedValue1
+                                                                       const GALGAS_lbigint & inAssociatedValue1
                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_registerBitSlice result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
@@ -11236,7 +11236,7 @@ GALGAS_registerBitSlice GALGAS_registerBitSlice::constructor_namedBit (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSlice::method_unusedBits (GALGAS_luint_36__34_ & outAssociatedValue0,
+void GALGAS_registerBitSlice::method_unusedBits (GALGAS_lbigint & outAssociatedValue0,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_unusedBits) {
@@ -11253,7 +11253,7 @@ void GALGAS_registerBitSlice::method_unusedBits (GALGAS_luint_36__34_ & outAssoc
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSlice::method_namedBit (GALGAS_lstring & outAssociatedValue0,
-                                               GALGAS_luint_36__34_ & outAssociatedValue1,
+                                               GALGAS_lbigint & outAssociatedValue1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_namedBit) {
@@ -11620,7 +11620,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_localAccess::compare (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_literalUnsignedInteger::cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_literalUnsignedInteger::cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                                                           COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -11649,7 +11649,7 @@ typeComparisonResult cEnumAssociatedValues_variableKindIR_literalUnsignedInteger
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_variableKindIR_literalSignedInteger::cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
+cEnumAssociatedValues_variableKindIR_literalSignedInteger::cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -11884,7 +11884,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_localAccess (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalUnsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalUnsignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -11899,7 +11899,7 @@ GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalUnsignedInteger 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalSignedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
+GALGAS_variableKindIR GALGAS_variableKindIR::constructor_literalSignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_variableKindIR result ;
   if (inAssociatedValue0.isValid ()) {
@@ -12089,7 +12089,7 @@ void GALGAS_variableKindIR::method_localAccess (GALGAS_lstring & outAssociatedVa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_uint_36__34_ & outAssociatedValue0,
+void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_bigint & outAssociatedValue0,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_literalUnsignedInteger) {
@@ -12105,7 +12105,7 @@ void GALGAS_variableKindIR::method_literalUnsignedInteger (GALGAS_uint_36__34_ &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableKindIR::method_literalSignedInteger (GALGAS_sint_36__34_ & outAssociatedValue0,
+void GALGAS_variableKindIR::method_literalSignedInteger (GALGAS_bigint & outAssociatedValue0,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_literalSignedInteger) {
@@ -14496,7 +14496,7 @@ const cDirectoryWrapper gWrapperDirectory_0_registerGenerationTemplate (
 GALGAS_string filewrapperTemplate_registerGenerationTemplate_declaration (C_Compiler * inCompiler,
                                                                           const GALGAS_string & in_REGISTER_5F_TYPE_5F_NAME,
                                                                           const GALGAS_string & in_REGISTER_5F_NAME,
-                                                                          const GALGAS_uint_36__34_ & in_REGISTER_5F_ADDRESS
+                                                                          const GALGAS_bigint & in_REGISTER_5F_ADDRESS
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
   result << "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -14982,13 +14982,13 @@ void routine_checkAssignmentCompatibility (const GALGAS_unifiedTypeMap_2D_proxy 
         }
         const enumGalgasBool test_4 = test_3.boolEnum () ;
         if (kBoolTrue == test_4) {
-          GALGAS_sint_36__34_ var_minSource ;
-          GALGAS_uint_36__34_ var_maxSource ;
+          GALGAS_bigint var_minSource ;
+          GALGAS_bigint var_maxSource ;
           GALGAS_bool joker_1152 ; // Joker input parameter
           GALGAS_uint joker_1164 ; // Joker input parameter
           constinArgument_inSourceType.reader_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)).method_integer (var_minSource, var_maxSource, joker_1152, joker_1164, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 19)) ;
-          GALGAS_sint_36__34_ var_minTarget ;
-          GALGAS_uint_36__34_ var_maxTarget ;
+          GALGAS_bigint var_minTarget ;
+          GALGAS_bigint var_maxTarget ;
           GALGAS_bool joker_1250 ; // Joker input parameter
           GALGAS_uint joker_1262 ; // Joker input parameter
           constinArgument_inTargetType.reader_kind (inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 20)).method_integer (var_minTarget, var_maxTarget, joker_1250, joker_1262, inCompiler COMMA_SOURCE_FILE ("semantic-analysis.galgas", 20)) ;

@@ -110,23 +110,22 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [result isLiteralSignedInteger] then
-    [result literalSignedInteger ?value:let @sint64 value]
-    @sint64 result
+    [result literalSignedInteger ?value:let @bigint value]
+    @bigint result
     switch mOp 
-    case minusNoOvf : result = &- value
+    case minusNoOvf : result = - value
     case unsignedComplement : error mOperatorLocation : "internal error" : result
     case minus : result = - value
-    case notOperator : result = 1LS ^ value
+    case notOperator : result = 1G ^ value
     end
     outResult = .literalSignedInteger {!value:result}
   elsif [result isLiteralUnsignedInteger] then
-    [result literalUnsignedInteger ?value:let @uint64 value]
+    [result literalUnsignedInteger ?value:let @bigint value]
     switch mOp 
     case minusNoOvf, minus :
-      let @sint64 signedValue = [value sint64]
-      outResult = .literalSignedInteger {!value:- signedValue}
+      outResult = .literalSignedInteger {!value:- value}
     case notOperator :
-      outResult = .literalUnsignedInteger {!value:1L ^ value}
+      outResult = .literalUnsignedInteger {!value:1G ^ value}
     case unsignedComplement :
       outResult = .literalUnsignedInteger {!value:~ value}
     end
@@ -173,7 +172,7 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
     outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
   case prefixMinusOvf (@uint code) :
-    @sint64 minValue
+    @bigint minValue
     switch [mTargetType kind]
     case boolean, boolset, literalString :
       error mOperatorLocation: "Internal Error" : minValue
@@ -181,7 +180,7 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
       error mOperatorLocation: "Internal Error" : minValue
     case structure (*) :
       error mOperatorLocation: "Internal Error" : minValue
-    case integer (@sint64 min * * *) :
+    case integer (@bigint min * * *) :
       minValue = min
     end
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]

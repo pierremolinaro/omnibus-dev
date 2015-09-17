@@ -65,34 +65,34 @@ override method @integerDeclaration enterInContext
 #-- Search for base type
   [ioContext.mTargetBaseTypeMap searchKey !mBaseType ?* ?let size ?let isSigned]
 #--- Get min and max
-  @sint64 min
-  @uint64 max
+  @bigint min
+  @bigint max
   if isSigned then
     if size == 8 then
-      min = -128LS
-      max = 127L
+      min = -128G
+      max = 127G
     elsif size == 16 then
-      min = -32768LS
-      max = 32767L
+      min = -32768G
+      max = 32767G
     elsif size == 32 then
-      min = [@sint.min sint64]
-      max = [@sint.max uint64]
+      min = [@sint.min bigint]
+      max = [@sint.max bigint]
     elsif size == 64 then
-      min = @sint64.min
-      max = [@sint64.max uint64]
+      min = [@sint64.min bigint]
+      max = [@sint64.max bigint]
     else
       error mIntegerTypeName : "internal error" : min, max
     end
   else # Unsigned
-    min = 0LS
+    min = 0G
     if size == 8 then
-      max = 255L
+      max = 255G
     elsif size == 16 then
-      max = 65535L
+      max = 65535G
     elsif size == 32 then
-      max = [@uint.max uint64]
+      max = [@uint.max bigint]
     elsif size == 64 then
-      max = @uint64.max
+      max = [@uint64.max bigint]
     else
       error mIntegerTypeName : "internal error" : max
     end

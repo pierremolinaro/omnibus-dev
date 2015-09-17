@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @literalIntegerInExpressionAST : @expressionAST {
-  @luint64 mLiteralInteger
+  @lbigint mLiteralInteger
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -13,7 +13,7 @@ class @literalIntegerInExpressionAST : @expressionAST {
 syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    $integer$ ?let @luint64 integerLiteral
+    $integer$ ?let @lbigint integerLiteral
     outExpression = @literalIntegerInExpressionAST.new {!integerLiteral}
   }
 
@@ -52,7 +52,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   else
     switch [inOptionalTargetType kind]
     case integer (* max * *) :
-      if mLiteralInteger.uint64 > max then
+      if mLiteralInteger.bigint > max then
         error mLiteralInteger : "literal integer is > " + [inOptionalTargetType key]
           + " max value (" + max + ")" : outExpressionType
       else
@@ -71,7 +71,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
     end
   end
 #--- Generate code
-  outResult = .literalUnsignedInteger {!value:mLiteralInteger.uint64}
+  outResult = .literalUnsignedInteger {!value:mLiteralInteger.bigint}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

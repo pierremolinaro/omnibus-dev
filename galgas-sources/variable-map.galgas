@@ -14,8 +14,8 @@ enum @variableKindIR {
   case localConstant (@lstring name)
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
-  case literalUnsignedInteger (@uint64 value)
-  case literalSignedInteger (@sint64 value)
+  case literalUnsignedInteger (@bigint value)
+  case literalSignedInteger (@bigint value)
   case literalString (@string value @string name)
   case literalStructure (@literalStructureList value)
 }

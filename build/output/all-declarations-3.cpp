@@ -9277,7 +9277,7 @@ GALGAS_abstractDeclaration () {
 GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_newIntegerRepresentationDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                                       GALGAS_lstring::constructor_default (HERE),
-                                                                      GALGAS_luint_36__34_::constructor_default (HERE),
+                                                                      GALGAS_lbigint::constructor_default (HERE),
                                                                       GALGAS_bool::constructor_default (HERE)
                                                                       COMMA_THERE) ;
 }
@@ -9293,7 +9293,7 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 
 GALGAS_newIntegerRepresentationDeclaration GALGAS_newIntegerRepresentationDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mBaseTypeName,
                                                                                                         const GALGAS_lstring & inAttribute_mCType,
-                                                                                                        const GALGAS_luint_36__34_ & inAttribute_mSize,
+                                                                                                        const GALGAS_lbigint & inAttribute_mSize,
                                                                                                         const GALGAS_bool & inAttribute_mIsSigned
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_newIntegerRepresentationDeclaration result ;
@@ -9341,8 +9341,8 @@ GALGAS_lstring cPtr_newIntegerRepresentationDeclaration::reader_mCType (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
-  GALGAS_luint_36__34_ result ;
+GALGAS_lbigint GALGAS_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lbigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_newIntegerRepresentationDeclaration * p = (const cPtr_newIntegerRepresentationDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_newIntegerRepresentationDeclaration) ;
@@ -9353,7 +9353,7 @@ GALGAS_luint_36__34_ GALGAS_newIntegerRepresentationDeclaration::reader_mSize (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cPtr_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint cPtr_newIntegerRepresentationDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSize ;
 }
 
@@ -9381,7 +9381,7 @@ GALGAS_bool cPtr_newIntegerRepresentationDeclaration::reader_mIsSigned (UNUSED_L
 
 cPtr_newIntegerRepresentationDeclaration::cPtr_newIntegerRepresentationDeclaration (const GALGAS_lstring & in_mBaseTypeName,
                                                                                     const GALGAS_lstring & in_mCType,
-                                                                                    const GALGAS_luint_36__34_ & in_mSize,
+                                                                                    const GALGAS_lbigint & in_mSize,
                                                                                     const GALGAS_bool & in_mIsSigned
                                                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
@@ -11643,8 +11643,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GALGAS_sint_36__34_ & inAttribute_mMin,
-                                                                        const GALGAS_uint_36__34_ & inAttribute_mMax,
+GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GALGAS_bigint & inAttribute_mMin,
+                                                                        const GALGAS_bigint & inAttribute_mMax,
                                                                         const GALGAS_incDecKind & inAttribute_mKind,
                                                                         const GALGAS_variableKindIR & inAttribute_mVariable,
                                                                         const GALGAS_location & inAttribute_mVariableLocation
@@ -11658,8 +11658,8 @@ GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sint_36__34_ GALGAS_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
-  GALGAS_sint_36__34_ result ;
+GALGAS_bigint GALGAS_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
@@ -11670,14 +11670,14 @@ GALGAS_sint_36__34_ GALGAS_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sint_36__34_ cPtr_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMin ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ GALGAS_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint_36__34_ result ;
+GALGAS_bigint GALGAS_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
@@ -11688,7 +11688,7 @@ GALGAS_uint_36__34_ GALGAS_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cPtr_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMax ;
 }
 
@@ -11750,8 +11750,8 @@ GALGAS_location cPtr_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCAT
 //                                    Pointer class for @incDecInstructionIR class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_incDecInstructionIR::cPtr_incDecInstructionIR (const GALGAS_sint_36__34_ & in_mMin,
-                                                    const GALGAS_uint_36__34_ & in_mMax,
+cPtr_incDecInstructionIR::cPtr_incDecInstructionIR (const GALGAS_bigint & in_mMin,
+                                                    const GALGAS_bigint & in_mMax,
                                                     const GALGAS_incDecKind & in_mKind,
                                                     const GALGAS_variableKindIR & in_mVariable,
                                                     const GALGAS_location & in_mVariableLocation
@@ -16163,7 +16163,7 @@ GALGAS_expressionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_uint_36__34_::constructor_default (HERE)
+  return GALGAS_literalBooleanInExpressionAST::constructor_new (GALGAS_bigint::constructor_zero (HERE)
                                                                 COMMA_THERE) ;
 }
 
@@ -16176,7 +16176,7 @@ GALGAS_expressionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::constructor_new (const GALGAS_uint_36__34_ & inAttribute_mValue
+GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::constructor_new (const GALGAS_bigint & inAttribute_mValue
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_literalBooleanInExpressionAST result ;
   if (inAttribute_mValue.isValid ()) {
@@ -16187,8 +16187,8 @@ GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ GALGAS_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_uint_36__34_ result ;
+GALGAS_bigint GALGAS_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalBooleanInExpressionAST * p = (const cPtr_literalBooleanInExpressionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_literalBooleanInExpressionAST) ;
@@ -16199,7 +16199,7 @@ GALGAS_uint_36__34_ GALGAS_literalBooleanInExpressionAST::reader_mValue (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cPtr_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mValue ;
 }
 
@@ -16207,7 +16207,7 @@ GALGAS_uint_36__34_ cPtr_literalBooleanInExpressionAST::reader_mValue (UNUSED_LO
 //                               Pointer class for @literalBooleanInExpressionAST class                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_literalBooleanInExpressionAST::cPtr_literalBooleanInExpressionAST (const GALGAS_uint_36__34_ & in_mValue
+cPtr_literalBooleanInExpressionAST::cPtr_literalBooleanInExpressionAST (const GALGAS_bigint & in_mValue
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mValue (in_mValue) {
@@ -16320,7 +16320,7 @@ GALGAS_expressionAST () {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_literalIntegerInExpressionAST GALGAS_literalIntegerInExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_literalIntegerInExpressionAST::constructor_new (GALGAS_luint_36__34_::constructor_default (HERE)
+  return GALGAS_literalIntegerInExpressionAST::constructor_new (GALGAS_lbigint::constructor_default (HERE)
                                                                 COMMA_THERE) ;
 }
 
@@ -16333,7 +16333,7 @@ GALGAS_expressionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalIntegerInExpressionAST GALGAS_literalIntegerInExpressionAST::constructor_new (const GALGAS_luint_36__34_ & inAttribute_mLiteralInteger
+GALGAS_literalIntegerInExpressionAST GALGAS_literalIntegerInExpressionAST::constructor_new (const GALGAS_lbigint & inAttribute_mLiteralInteger
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_literalIntegerInExpressionAST result ;
   if (inAttribute_mLiteralInteger.isValid ()) {
@@ -16344,8 +16344,8 @@ GALGAS_literalIntegerInExpressionAST GALGAS_literalIntegerInExpressionAST::const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ GALGAS_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
-  GALGAS_luint_36__34_ result ;
+GALGAS_lbigint GALGAS_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lbigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalIntegerInExpressionAST * p = (const cPtr_literalIntegerInExpressionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_literalIntegerInExpressionAST) ;
@@ -16356,7 +16356,7 @@ GALGAS_luint_36__34_ GALGAS_literalIntegerInExpressionAST::reader_mLiteralIntege
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_luint_36__34_ cPtr_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint cPtr_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLiteralInteger ;
 }
 
@@ -16364,7 +16364,7 @@ GALGAS_luint_36__34_ cPtr_literalIntegerInExpressionAST::reader_mLiteralInteger 
 //                               Pointer class for @literalIntegerInExpressionAST class                                *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_literalIntegerInExpressionAST::cPtr_literalIntegerInExpressionAST (const GALGAS_luint_36__34_ & in_mLiteralInteger
+cPtr_literalIntegerInExpressionAST::cPtr_literalIntegerInExpressionAST (const GALGAS_lbigint & in_mLiteralInteger
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mLiteralInteger (in_mLiteralInteger) {
@@ -20498,7 +20498,7 @@ GALGAS_bootList_2D_element::~ GALGAS_bootList_2D_element (void) {
 GALGAS_bootList_2D_element::GALGAS_bootList_2D_element (const GALGAS_location & inOperand0,
                                                         const GALGAS_instructionListAST & inOperand1,
                                                         const GALGAS_location & inOperand2,
-                                                        const GALGAS_uint_36__34_ & inOperand3,
+                                                        const GALGAS_bigint & inOperand3,
                                                         const GALGAS_location & inOperand4) :
 mAttribute_mBootLocation (inOperand0),
 mAttribute_mInstructionList (inOperand1),
@@ -20513,7 +20513,7 @@ GALGAS_bootList_2D_element GALGAS_bootList_2D_element::constructor_default (UNUS
   return GALGAS_bootList_2D_element (GALGAS_location::constructor_nowhere (HERE),
                                      GALGAS_instructionListAST::constructor_emptyList (HERE),
                                      GALGAS_location::constructor_nowhere (HERE),
-                                     GALGAS_uint_36__34_::constructor_default (HERE),
+                                     GALGAS_bigint::constructor_zero (HERE),
                                      GALGAS_location::constructor_nowhere (HERE)) ;
 }
 
@@ -20522,7 +20522,7 @@ GALGAS_bootList_2D_element GALGAS_bootList_2D_element::constructor_default (UNUS
 GALGAS_bootList_2D_element GALGAS_bootList_2D_element::constructor_new (const GALGAS_location & inOperand0,
                                                                         const GALGAS_instructionListAST & inOperand1,
                                                                         const GALGAS_location & inOperand2,
-                                                                        const GALGAS_uint_36__34_ & inOperand3,
+                                                                        const GALGAS_bigint & inOperand3,
                                                                         const GALGAS_location & inOperand4 
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bootList_2D_element result ;
@@ -20611,7 +20611,7 @@ GALGAS_location GALGAS_bootList_2D_element::reader_mEndOfBootLocation (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ GALGAS_bootList_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_bootList_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriority ;
 }
 

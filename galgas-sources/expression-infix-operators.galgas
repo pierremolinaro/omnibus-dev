@@ -236,29 +236,29 @@ override method @infixOperatorExpressionAST analyzeExpression
   ]
 #---
   if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
-    [leftResult literalUnsignedInteger ?value:let @uint64 leftValue]
-    [rightResult literalUnsignedInteger ?value:let @uint64 rightValue]
-    @uint64 result
+    [leftResult literalUnsignedInteger ?value:let @bigint leftValue]
+    [rightResult literalUnsignedInteger ?value:let @bigint rightValue]
+    @bigint result
     switch mOp 
-    case equal : result = [leftValue == rightValue uint64]
-    case nonEqual : result = [leftValue != rightValue uint64]
-    case strictInf : result = [leftValue < rightValue uint64]
-    case infEqual : result = [leftValue <= rightValue uint64]
-    case strictSup : result = [leftValue > rightValue uint64]
-    case supEqual : result = [leftValue >= rightValue uint64]
+    case equal : result = [leftValue == rightValue bigint]
+    case nonEqual : result = [leftValue != rightValue bigint]
+    case strictInf : result = [leftValue < rightValue bigint]
+    case infEqual : result = [leftValue <= rightValue bigint]
+    case strictSup : result = [leftValue > rightValue bigint]
+    case supEqual : result = [leftValue >= rightValue bigint]
     case andOp : result = leftValue & rightValue
-    case booleanAnd : result = [(leftValue != 0L) && (rightValue != 0L) uint64]
+    case booleanAnd : result = [(leftValue != 0G) && (rightValue != 0G) bigint]
     case orOp : result = leftValue | rightValue
-    case booleanOrOp : result = [(leftValue != 0L) || (rightValue != 0L) uint64]
+    case booleanOrOp : result = [(leftValue != 0G) || (rightValue != 0G) bigint]
     case xorOp, booleanXorOp : result = leftValue ^ rightValue
-    case addOp : result = leftValue &+ rightValue
+    case addOp : result = leftValue + rightValue
     case addOpNoOvf : result = leftValue + rightValue
     case subOp : result = leftValue - rightValue
-    case subOpNoOvf : result = leftValue &- rightValue
+    case subOpNoOvf : result = leftValue - rightValue
     case mulOp : result = leftValue * rightValue
-    case mulOpNoOvf : result = leftValue &* rightValue
+    case mulOpNoOvf : result = leftValue * rightValue
     case divOp : result = leftValue / rightValue
-    case divOpNoOvf : result = leftValue &/ rightValue
+    case divOpNoOvf : result = leftValue / rightValue
     case modOp : result = leftValue mod rightValue
     case modOpNoOvf : result = leftValue mod rightValue
     case leftShiftOp  : result = leftValue << [rightValue uint]

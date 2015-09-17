@@ -107,7 +107,7 @@ proc codeOptimisation
     )
   #--- Suppress unused registers
     @registerMapIR usedRegisterMap = {}
-    for (@lstring lkey @string registerTypeName @uint64 registerAddress) in ioIntermediateCodeStruct.mRegisterMap do
+    for (@lstring lkey @string registerTypeName @bigint registerAddress) in ioIntermediateCodeStruct.mRegisterMap do
       if [accessibleEntities.mAccessibleRegisterSet hasKey !lkey.string] then
         [!?usedRegisterMap insertKey !lkey !registerTypeName !registerAddress]
       else

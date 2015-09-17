@@ -885,7 +885,7 @@ class GALGAS_registerDeclarationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mRegisterName ;
   public : GALGAS_lstringlist mAttribute_mAttributeList ;
-  public : GALGAS_luint_36__34_ mAttribute_mRegisterAddress ;
+  public : GALGAS_lbigint mAttribute_mRegisterAddress ;
 
 
 //--------------------------------- Accessors
@@ -904,7 +904,7 @@ class GALGAS_registerDeclarationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_registerDeclarationList_2D_element (const GALGAS_lstring & in_mRegisterName,
                                                       const GALGAS_lstringlist & in_mAttributeList,
-                                                      const GALGAS_luint_36__34_ & in_mRegisterAddress) ;
+                                                      const GALGAS_lbigint & in_mRegisterAddress) ;
 
 //-- Start of generic part --*
 
@@ -919,7 +919,7 @@ class GALGAS_registerDeclarationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_registerDeclarationList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                              const class GALGAS_lstringlist & inOperand1,
-                                                                             const class GALGAS_luint_36__34_ & inOperand2
+                                                                             const class GALGAS_lbigint & inOperand2
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -936,7 +936,7 @@ class GALGAS_registerDeclarationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mAttributeList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_luint_36__34_ reader_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint reader_mRegisterAddress (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mRegisterName (LOCATION_ARGS) const ;
 
@@ -1545,7 +1545,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_sint_36__34_ & inOperand0
+  public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_bigint & inOperand0
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
@@ -1555,7 +1555,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_literalStructure (const class GALGAS_literalStructureList & inOperand0
                                                                       COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_uint_36__34_ & inOperand0
+  public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_bigint & inOperand0
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_lstring & inOperand0
@@ -1597,7 +1597,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_sint_36__34_ & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_bigint & outArgument0,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
@@ -1610,7 +1610,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_uint_36__34_ & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_bigint & outArgument0,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -3193,10 +3193,10 @@ class cEnumAssociatedValues_variableKindIR_localAccess : public cEnumAssociatedV
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_uint_36__34_ mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_uint_36__34_ & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -3209,10 +3209,10 @@ class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnum
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_variableKindIR_literalSignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_sint_36__34_ mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_sint_36__34_ & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_bigint & inAssociatedValue0
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -4598,8 +4598,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static GALGAS_typeKind constructor_enumeration (const class GALGAS_enumConstantMap & inOperand0
                                                            COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_typeKind constructor_integer (const class GALGAS_sint_36__34_ & inOperand0,
-                                                       const class GALGAS_uint_36__34_ & inOperand1,
+  public : static GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
+                                                       const class GALGAS_bigint & inOperand1,
                                                        const class GALGAS_bool & inOperand2,
                                                        const class GALGAS_uint & inOperand3
                                                        COMMA_LOCATION_ARGS) ;
@@ -4622,8 +4622,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_integer (class GALGAS_sint_36__34_ & outArgument0,
-                                                 class GALGAS_uint_36__34_ & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_integer (class GALGAS_bigint & outArgument0,
+                                                 class GALGAS_bigint & outArgument1,
                                                  class GALGAS_bool & outArgument2,
                                                  class GALGAS_uint & outArgument3,
                                                  C_Compiler * inCompiler
@@ -4698,14 +4698,14 @@ class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
-  public : const GALGAS_sint_36__34_ mAssociatedValue0 ;
-  public : const GALGAS_uint_36__34_ mAssociatedValue1 ;
+  public : const GALGAS_bigint mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_uint mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_integer (const GALGAS_sint_36__34_ & inAssociatedValue0,
-                                                   const GALGAS_uint_36__34_ & inAssociatedValue1,
+  public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                   const GALGAS_bigint & inAssociatedValue1,
                                                    const GALGAS_bool & inAssociatedValue2,
                                                    const GALGAS_uint & inAssociatedValue3
                                                    COMMA_LOCATION_ARGS) ;
@@ -6061,18 +6061,18 @@ class GALGAS_registerMapIR : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_string & inOperand1,
-                                                      const class GALGAS_uint_36__34_ & inOperand2,
+                                                      const class GALGAS_bigint & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_string constinArgument1,
-                                                     class GALGAS_uint_36__34_ constinArgument2,
+                                                     class GALGAS_bigint constinArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_setMRegisterAddressForKey (class GALGAS_uint_36__34_ constinArgument0,
+  public : VIRTUAL_IN_DEBUG void modifier_setMRegisterAddressForKey (class GALGAS_bigint constinArgument0,
                                                                      class GALGAS_string constinArgument1,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
@@ -6086,16 +6086,16 @@ class GALGAS_registerMapIR : public AC_GALGAS_map {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_string & outArgument1,
-                                                   class GALGAS_uint_36__34_ & outArgument2,
+                                                   class GALGAS_bigint & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mRegisterAddressForKey (const class GALGAS_string & constinOperand0,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mRegisterAddressForKey (const class GALGAS_string & constinOperand0,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mRegisterTypeNameForKey (const class GALGAS_string & constinOperand0,
                                                                                 C_Compiler * inCompiler
@@ -6128,7 +6128,7 @@ class cEnumerator_registerMapIR : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_string current_mRegisterTypeName (LOCATION_ARGS) const ;
-  public : class GALGAS_uint_36__34_ current_mRegisterAddress (LOCATION_ARGS) const ;
+  public : class GALGAS_bigint current_mRegisterAddress (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_registerMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -6146,12 +6146,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerMapIR ;
 class cMapElement_registerMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_string mAttribute_mRegisterTypeName ;
-  public : GALGAS_uint_36__34_ mAttribute_mRegisterAddress ;
+  public : GALGAS_bigint mAttribute_mRegisterAddress ;
 
 //--- Constructor
   public : cMapElement_registerMapIR (const GALGAS_lstring & inKey,
                                       const GALGAS_string & in_mRegisterTypeName,
-                                      const GALGAS_uint_36__34_ & in_mRegisterAddress
+                                      const GALGAS_bigint & in_mRegisterAddress
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -6177,7 +6177,7 @@ class GALGAS_registerMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_string mAttribute_mRegisterTypeName ;
-  public : GALGAS_uint_36__34_ mAttribute_mRegisterAddress ;
+  public : GALGAS_bigint mAttribute_mRegisterAddress ;
 
 
 //--------------------------------- Accessors
@@ -6196,7 +6196,7 @@ class GALGAS_registerMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_registerMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                             const GALGAS_string & in_mRegisterTypeName,
-                                            const GALGAS_uint_36__34_ & in_mRegisterAddress) ;
+                                            const GALGAS_bigint & in_mRegisterAddress) ;
 
 //-- Start of generic part --*
 
@@ -6211,7 +6211,7 @@ class GALGAS_registerMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_registerMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                    const class GALGAS_string & inOperand1,
-                                                                   const class GALGAS_uint_36__34_ & inOperand2
+                                                                   const class GALGAS_bigint & inOperand2
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -6228,7 +6228,7 @@ class GALGAS_registerMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint_36__34_ reader_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mRegisterAddress (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mRegisterTypeName (LOCATION_ARGS) const ;
 

@@ -13,7 +13,7 @@ sortedlist @exceptionClauseListAST {
   @lstring mExceptionClauseName
   @instructionListAST mExceptionInstructionList
   @location mEndOfExceptionInstructions
-  @uint64 mPriority
+  @bigint mPriority
   @location mLocationPriority
 }{
   mPriority <
@@ -40,7 +40,7 @@ syntax extension common_syntax {
       !exceptionClauseName
       !instructionList
       !endOfInstructionList
-      !priority.uint64
+      !priority.bigint
       !priority.location
   }
 

@@ -6,7 +6,7 @@ sortedlist @bootList {
   @location mBootLocation
   @instructionListAST mInstructionList
   @location mEndOfBootLocation
-  @uint64 mPriority
+  @bigint mPriority
   @location mPriorityLocation
 }{
   mPriority <
@@ -22,7 +22,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $boot$
-    $integer$ ?let @luint64 priority
+    $integer$ ?let @lbigint priority
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
@@ -32,7 +32,7 @@ syntax extension common_syntax {
       !priority.location
       !instructionList
       !endOfInit
-      !priority.uint64
+      !priority.bigint
       !priority.location
   }
 

@@ -10,7 +10,7 @@ enum @typeKind {
   case literalString
   case enumeration (@enumConstantMap constantMap)
   case structure (@propertyMap propertyMap)
-  case integer (@sint64 min @uint64 max @bool unsigned @uint bitCount)
+  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

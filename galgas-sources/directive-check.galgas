@@ -68,8 +68,8 @@ override method @checkInstructionAST analyze
   if not [expressionValueName isStatic] then
     error mCheckInstructionLocation : "expression is not static: use assert instruction"
   else
-    [expressionValueName literalUnsignedInteger ?value:@uint64 value]
-    if value != 1L then
+    [expressionValueName literalUnsignedInteger ?value:@bigint value]
+    if value != 1G then
       error mCheckInstructionLocation : "check expression value is false"
     end
   end

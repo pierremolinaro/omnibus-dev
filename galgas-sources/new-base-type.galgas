@@ -5,7 +5,7 @@
 class @newIntegerRepresentationDeclaration : @abstractDeclaration {
   @lstring mBaseTypeName
   @lstring mCType
-  @luint64 mSize
+  @lbigint mSize
   @bool mIsSigned
 }
 
@@ -83,14 +83,14 @@ override method @newIntegerRepresentationDeclaration enterInContext
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
 {
 #--- Check size
-  if (mSize.uint64 != 8L) && (mSize.uint64 != 16L) && (mSize.uint64 != 32L) && (mSize.uint64 != 64L) then
+  if (mSize.bigint != 8G) && (mSize.bigint != 16G) && (mSize.bigint != 32G) && (mSize.bigint != 64G) then
     error mSize : "Only 8, 16, 32 or 64 are accepted here"
   end
 #---
   [!?ioContext.mTargetBaseTypeMap insertKey
     !mBaseTypeName
     !mCType.string
-    ![mSize.uint64 uint]
+    ![mSize.bigint uint]
     !mIsSigned
   ]
 }

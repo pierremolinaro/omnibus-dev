@@ -1257,7 +1257,7 @@ extern const cDirectoryWrapper gWrapperDirectory_0_registerGenerationTemplate ;
 GALGAS_string filewrapperTemplate_registerGenerationTemplate_declaration (class C_Compiler * inCompiler,
                                                                           const class GALGAS_string & in_REGISTER_5F_TYPE_5F_NAME,
                                                                           const class GALGAS_string & in_REGISTER_5F_NAME,
-                                                                          const class GALGAS_uint_36__34_ & in_REGISTER_5F_ADDRESS
+                                                                          const class GALGAS_bigint & in_REGISTER_5F_ADDRESS
                                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
