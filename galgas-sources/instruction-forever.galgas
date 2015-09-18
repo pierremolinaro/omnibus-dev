@@ -85,10 +85,10 @@ override getter @foreverInstructionGeneration instructionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @foreverInstructionGeneration llvmInstructionCode !@string outCode {
-  outCode = "while (1) {\n"
-  outCode += [mInstructionGenerationList instructionListCode]
-  outCode += "}\n"
+override method @foreverInstructionGeneration llvmInstructionCode ?!@string ioCode {
+  ioCode += "while (1) {\n"
+  ioCode += [mInstructionGenerationList instructionListCode]
+  ioCode += "}\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

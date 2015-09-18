@@ -75,7 +75,7 @@ abstract getter @abstractInstructionIR instructionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract method @abstractInstructionIR llvmInstructionCode !@string outCode
+abstract method @abstractInstructionIR llvmInstructionCode ?!@string ioCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @instructionListIR
@@ -339,21 +339,21 @@ proc generateLLVMfile
 #    code += [procedure headerCodeGeneration]
 #  end
 #--- Boot
-  code += titleComment (!"Boot")
-  code += "static void boot (void) {\n"
+  code += llvmTitleComment (!"Boot")
+  code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
     code += [boot.mInstructionListIR instructionListCode]
   end
   code += "}\n\n"
 #--- Init
-  code += titleComment (!"Init")
-  code += "static void init (void) {\n"
+  code += llvmTitleComment (!"Init")
+  code += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
     code += [init.mInstructionListIR instructionListCode]
   end
   code += "}\n\n"
   if not [option plm_options.noExceptionGeneration value] then
-    code += titleComment (!"Raise Exception internal")
+    code += llvmTitleComment (!"Raise Exception internal")
     code += "static void raise_exception_internal (const int32_t in_CODE,\n"
     code += "                                      const char * in_FILE,\n"
     code += "                                      const uint32_t in_LINE) {\n"

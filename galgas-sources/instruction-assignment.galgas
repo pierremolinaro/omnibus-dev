@@ -159,12 +159,12 @@ override getter @assignmentInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @assignmentInstructionIR llvmInstructionCode !@string outCode {
-  outCode = [mTargetVariable mangledName]
+override method @assignmentInstructionIR llvmInstructionCode ?!@string ioCode {
+  ioCode += [mTargetVariable mangledName]
   for (fieldName) in mFieldList do
-    outCode += "." + mangledNameForProperty (!name:fieldName.string)
+    ioCode += "." + mangledNameForProperty (!name:fieldName.string)
   end
-  outCode += " = " + [mSourceValue mangledName] + " ;\n"
+  ioCode += " = " + [mSourceValue mangledName] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

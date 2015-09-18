@@ -146,9 +146,9 @@ override getter @fieldAccessIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @fieldAccessIR llvmInstructionCode !@string outCode {
-    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    outCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
+override method @fieldAccessIR llvmInstructionCode ?!@string ioCode {
+    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    ioCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

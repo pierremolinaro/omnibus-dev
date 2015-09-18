@@ -198,14 +198,14 @@ override getter @ifInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @ifInstructionIR llvmInstructionCode !@string outCode {
-  outCode = "if (" + [mTestVariable mangledName] + ") {\n"
-  outCode += [mThenInstructionGenerationList instructionListCode]
+override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
+  ioCode += "if (" + [mTestVariable mangledName] + ") {\n"
+  ioCode += [mThenInstructionGenerationList instructionListCode]
   if [mElseInstructionGenerationList length] > 0 then
-    outCode += "}else{\n"
-    outCode += [mElseInstructionGenerationList instructionListCode]
+    ioCode += "}else{\n"
+    ioCode += [mElseInstructionGenerationList instructionListCode]
   end
-  outCode += "}\n"
+  ioCode += "}\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

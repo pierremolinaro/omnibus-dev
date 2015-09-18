@@ -197,11 +197,11 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @prefixOperatorExpressionIR llvmInstructionCode !@string outCode {
+override method @prefixOperatorExpressionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator 
   case prefix (@string prefixOperator) :
-    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
+    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    ioCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
   case prefixMinusOvf (@uint code) :
     @bigint minValue
     switch [mTargetType kind]
@@ -215,13 +215,13 @@ override method @prefixOperatorExpressionIR llvmInstructionCode !@string outCode
       minValue = min
     end
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-    outCode  = "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
-    outCode += "if (" + ovfVar + ") {\n"
-    outCode += "  raise_exception (" + code
+    ioCode += "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
+    ioCode += "if (" + ovfVar + ") {\n"
+    ioCode += "  raise_exception (" + code
        + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
        + ", " + [mOperatorLocation line] + ") ;\n"
-    outCode += "}\n" 
-    outCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    ioCode += "}\n" 
+    ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
        + " = - " + [mOperand mangledName] + " ;\n"
   end
 }

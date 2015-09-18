@@ -262,21 +262,21 @@ override getter @procCallInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @procCallInstructionIR llvmInstructionCode !@string outCode {
-  outCode = mangledNameForProcedure (!name:mProcName) + " ("
+override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
+  ioCode += mangledNameForProcedure (!name:mProcName) + " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:
-      outCode += "&(" + [mParameter mangledName] + ")"
+      ioCode += "&(" + [mParameter mangledName] + ")"
     case output:
-      outCode += [mParameter mangledName]
+      ioCode += [mParameter mangledName]
     case outputInput:
-      outCode += "&(" + [mParameter mangledName] + ")"
+      ioCode += "&(" + [mParameter mangledName] + ")"
     end
   between
-    outCode += ", "
+    ioCode += ", "
   end
-  outCode += ") ;\n"
+  ioCode += ") ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

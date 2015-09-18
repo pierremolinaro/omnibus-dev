@@ -98,8 +98,8 @@ override getter @throwInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @throwInstructionIR llvmInstructionCode !@string outCode {
-  outCode = "raise_exception (" + [mCode mangledName]
+override method @throwInstructionIR llvmInstructionCode ?!@string ioCode {
+  ioCode += "raise_exception (" + [mCode mangledName]
      + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mThrowInstructionLocation line] + ") ;\n"
 }

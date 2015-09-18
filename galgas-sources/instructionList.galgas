@@ -123,3 +123,12 @@ getter @instructionListIR instructionListCode -> @string outCode {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+method @instructionListIR instructionListLLVMCode !@string outCode {
+  outCode = ""
+  for () in self do
+    [mInstructionGeneration llvmInstructionCode !?outCode]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

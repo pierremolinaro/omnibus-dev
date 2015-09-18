@@ -174,9 +174,9 @@ override getter @varDeclarationInstructionWithSimpleAssignmentIR instructionCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varDeclarationInstructionWithSimpleAssignmentIR llvmInstructionCode !@string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName]
-  outCode += " = " +  [mSourceVar mangledName] + " ;\n"
+override method @varDeclarationInstructionWithSimpleAssignmentIR llvmInstructionCode ?!@string ioCode {
+  ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName]
+  ioCode += " = " +  [mSourceVar mangledName] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -205,8 +205,8 @@ override getter @varDeclarationIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @varDeclarationIR llvmInstructionCode !@string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName] + " ;\n"
+override method @varDeclarationIR llvmInstructionCode ?!@string ioCode {
+  ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

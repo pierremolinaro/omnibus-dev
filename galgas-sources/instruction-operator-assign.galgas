@@ -161,14 +161,14 @@ override getter @operatorAssignInstructionIR instructionCode -> @string outCode 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @operatorAssignInstructionIR llvmInstructionCode !@string outCode {
+override method @operatorAssignInstructionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator
   case bitWiseOrAssign :
-    outCode = [mTargetVariable mangledName] + " |= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " |= " + [mSourceValue mangledName] + " ;\n"
   case bitWiseAndAssign :
-    outCode = [mTargetVariable mangledName] + " &= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " &= " + [mSourceValue mangledName] + " ;\n"
   case bitWiseXorAssign :
-    outCode = [mTargetVariable mangledName] + " ^= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " ^= " + [mSourceValue mangledName] + " ;\n"
   end
 }
 
