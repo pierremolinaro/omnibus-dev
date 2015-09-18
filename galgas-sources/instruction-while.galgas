@@ -144,16 +144,16 @@ override getter @whileInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @whileInstructionIR llvmInstructionCode !@string outCode {
-  outCode = "LABEL_" + mLabelIndex + ": {\n"
-  outCode += [mTestInstructionGenerationList instructionListCode]
-  outCode += "  if (" + [mTestExpression mangledName] + ") {\n"
-  [!?outCode incIndentation !2]
-  outCode += [mInstructionGenerationList instructionListCode]
-  [!?outCode decIndentation !2]
-  outCode += "    goto LABEL_" + mLabelIndex + " ;\n"
-  outCode += "  }\n"
-  outCode += "}\n"
+override method @whileInstructionIR llvmInstructionCode ?!@string ioCode {
+  ioCode += "LABEL_" + mLabelIndex + ": {\n"
+  ioCode += [mTestInstructionGenerationList instructionListCode]
+  ioCode += "  if (" + [mTestExpression mangledName] + ") {\n"
+  [!?ioCode incIndentation !2]
+  ioCode += [mInstructionGenerationList instructionListCode]
+  [!?ioCode decIndentation !2]
+  ioCode += "    goto LABEL_" + mLabelIndex + " ;\n"
+  ioCode += "  }\n"
+  ioCode += "}\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
