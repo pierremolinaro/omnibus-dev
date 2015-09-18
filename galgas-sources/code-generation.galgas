@@ -74,6 +74,10 @@ abstract class @abstractInstructionIR {
 abstract getter @abstractInstructionIR instructionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+abstract method @abstractInstructionIR llvmInstructionCode !@string outCode
+
+#----------------------------------------------------------------------------------------------------------------------*
 #! @instructionListIR
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -100,8 +104,23 @@ func %once separatorLine -> @string outResult {
 
 func titleComment ?@string inTitle -> @string outTitle {
   outTitle  = separatorLine ()
-  outTitle += "//   " + [inTitle stringByRightPadding  !114!' '] + "*\n"
+  outTitle += "//   " + [inTitle stringByRightPadding !114!' '] + "*\n"
   outTitle += separatorLine () + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func %once llvmSeparatorLine -> @string outResult {
+  outResult  = ";-------------------------------------------------------------------------"
+  outResult += "---------------------------------------------*\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func llvmTitleComment ?@string inTitle -> @string outTitle {
+  outTitle  = llvmSeparatorLine ()
+  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += llvmSeparatorLine () + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -127,6 +146,39 @@ proc codeGeneration
     !targetName:inTargetName
   )
 #--- Generate C file
+  generateCfile (
+    !currentDir:inCurrentDirectory
+    !productDir:productDirectory
+    !eof:inEndOfSourceFileLocation
+    !intermediateCode:inIntermediateCodeStruct
+    !target:inTargetName
+    !exceptionCodeType:inExceptionCodeType
+    !exceptionLineType:inExceptionLineType
+  )
+#--- Generate LLVM file
+  generateLLVMfile (
+    !currentDir:inCurrentDirectory
+    !productDir:productDirectory
+    !eof:inEndOfSourceFileLocation
+    !intermediateCode:inIntermediateCodeStruct
+    !target:inTargetName
+    !exceptionCodeType:inExceptionCodeType
+    !exceptionLineType:inExceptionLineType
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc generateCfile
+  ?currentDir:let @string inCurrentDirectory
+  ?productDir:let @string inProductDirectory
+  ?eof:let @location inEndOfSourceFileLocation
+  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?target:let @lstring inTargetName
+  ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
+  ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
+{
+  let sourceDirectory = inProductDirectory + "/sources"
   var code = ""
   code += "#include <stdint.h>\n"
   code += "#include <stdbool.h>\n"
@@ -217,10 +269,117 @@ proc codeGeneration
 #--- Perform C compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
-    let fullScript = "python " + productDirectory + "/" + script + ".py"
+    let fullScript = "python " + inProductDirectory + "/" + script + ".py"
     @sint result = [fullScript system]
     if result != 0S then
       error inEndOfSourceFileLocation: "error during C compilation or flashing"
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc generateLLVMfile
+  ?currentDir:let @string inCurrentDirectory
+  ?productDir:let @string inProductDirectory
+  ?eof:let @location inEndOfSourceFileLocation
+  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?target:let @lstring inTargetName
+  ?exceptionCodeType:let @unifiedTypeMap-proxy unused inExceptionCodeType
+  ?exceptionLineType:let @unifiedTypeMap-proxy unused inExceptionLineType
+{
+  let sourceDirectory = inProductDirectory + "/sources"
+  var code = ""
+#--- Include target specific files
+  code += llvmTitleComment (!"Target specific code")
+  let targetSpecificFileContents = getTargetTextFile (
+     !currentDir:inCurrentDirectory
+     !from:inTargetName.string + "/target.ll"
+  )
+  code += targetSpecificFileContents + "\n"
+#  if not [option plm_options.noExceptionGeneration value] then
+#    let targetExceptionSpecificFileContents = getTargetTextFile (
+#       !currentDir:inCurrentDirectory
+#       !from:inTargetName.string + "/target-exception.c"
+#    )
+#    code += llvmTitleComment (!"Target exception specific code")
+#    code += targetExceptionSpecificFileContents + "\n"
+#  end
+#  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
+#    code += [type.mType headerCodeGenerationForType]
+#  end
+#  code += titleComment (!"Boot")
+#  code += "static void boot (void) ;\n\n"
+#  code += titleComment (!"Init")
+#  code += "static void init (void) ;\n\n"
+#  if not [option plm_options.noExceptionGeneration value] then
+#    code += titleComment (!"Exception")
+#    code += "static void raise_exception_internal (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
+#    code += "                                      const char * inSourceFile,\n"
+#    code += "                                      const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) ;\n\n"
+#  end
+  code += llvmTitleComment (!"Static Strings")
+  for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
+    code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
+  end
+  code += "\n"
+#  for register in inIntermediateCodeStruct.mRegisterMap do
+#    code += [register headerCodeGenerationForRegister]
+#  end
+  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
+    code += [globalConstant headerCodeGeneration]
+  end
+  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
+    code += [globalVariable generateLLVM]
+  end
+#  for function in inIntermediateCodeStruct.mFunctionMapIR do
+#    code += [function headerCodeGeneration]
+#  end
+#  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+#    code += [procedure headerCodeGeneration]
+#  end
+#--- Boot
+  code += titleComment (!"Boot")
+  code += "static void boot (void) {\n"
+  for boot in inIntermediateCodeStruct.mBootList do
+    code += [boot.mInstructionListIR instructionListCode]
+  end
+  code += "}\n\n"
+#--- Init
+  code += titleComment (!"Init")
+  code += "static void init (void) {\n"
+  for init in inIntermediateCodeStruct.mInitList do
+    code += [init.mInstructionListIR instructionListCode]
+  end
+  code += "}\n\n"
+  if not [option plm_options.noExceptionGeneration value] then
+    code += titleComment (!"Raise Exception internal")
+    code += "static void raise_exception_internal (const int32_t in_CODE,\n"
+    code += "                                      const char * in_FILE,\n"
+    code += "                                      const uint32_t in_LINE) {\n"
+    code += [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListCode]
+    [!?code incIndentation !2]
+    code += "while (1) {\n"
+    code += [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListCode]
+    code += "}\n"
+    [!?code decIndentation !2]
+    code += "}\n\n"
+  end
+  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
+    code += [procedure implementationCodeGeneration]
+  end
+  for function in inIntermediateCodeStruct.mFunctionMapIR do
+    code += [function implementationCodeGeneration]
+  end
+  code += separatorLine ()
+  [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.ll" ?*]
+#--- Perform LLVM compilation
+  if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
+    let script = if [option plm_options.performFlashing value] then "run" else "build" end
+    let fullScript = "python " + inProductDirectory + "/" + script + ".py"
+    @sint result = [fullScript system]
+    if result != 0S then
+      error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
   end
 }

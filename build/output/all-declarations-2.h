@@ -961,6 +961,18 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                     Filewrapper template 'globalVariableGenerationTemplate llvmImplementation'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_llvmImplementation (class C_Compiler * inCompiler,
+                                                                                       const class GALGAS_string & in_GLOBAL_5F_VAR_5F_NAME,
+                                                                                       const class GALGAS_unifiedTypeMap_2D_proxy & in_GLOBAL_5F_VAR_5F_TYPE,
+                                                                                       const class GALGAS_string & in_INITIAL_5F_VALUE_5F_STRING
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Function 'mangledNameForGlobalVariable'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -968,6 +980,16 @@ GALGAS_string filewrapperTemplate_globalVariableGenerationTemplate_implementatio
 class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string inArgument0,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Category Getter '@unifiedTypeMap-proxy llvmName' (as function)                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_llvmName (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2146,6 +2168,25 @@ class GALGAS_string function_titleComment (class GALGAS_string inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Function 'llvmSeparatorLine'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmSeparatorLine (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'llvmTitleComment'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmTitleComment (class GALGAS_string inArgument0,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              Routine 'codeGeneration'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2157,6 +2198,50 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_lstring constinArgument4,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
+                             class C_Compiler * inCompiler
+                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               Routine 'generateCfile'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateCfile (const class GALGAS_string constinArgument0,
+                            const class GALGAS_string constinArgument1,
+                            const class GALGAS_location constinArgument2,
+                            const class GALGAS_intermediateCodeStruct constinArgument3,
+                            const class GALGAS_lstring constinArgument4,
+                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
+                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
+                            class C_Compiler * inCompiler
+                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Routine 'generateLLVMfile'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
+                               const class GALGAS_string constinArgument1,
+                               const class GALGAS_location constinArgument2,
+                               const class GALGAS_intermediateCodeStruct constinArgument3,
+                               const class GALGAS_lstring constinArgument4,
+                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
+                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Routine 'generateTarget'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_generateTarget (const class GALGAS_string constinArgument0,
+                             const class GALGAS_string constinArgument1,
+                             const class GALGAS_lstring constinArgument2,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -2287,15 +2372,13 @@ class GALGAS_string categoryReader_headerCodeGenerationForRegister (const class 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Routine 'generateTarget'                                               *
+//                      Category Getter '@globalVariableMapIR-element generateLLVM' (as function)                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_generateTarget (const class GALGAS_string constinArgument0,
-                             const class GALGAS_string constinArgument1,
-                             const class GALGAS_lstring constinArgument2,
-                             class C_Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) ;
+class GALGAS_string categoryReader_generateLLVM (const class GALGAS_globalVariableMapIR_2D_element & inObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2332,6 +2415,7 @@ extern const char * gWrapperFileContent_25_targetTemplates ;
 extern const char * gWrapperFileContent_26_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;
 extern const char * gWrapperFileContent_28_targetTemplates ;
+extern const char * gWrapperFileContent_29_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2367,6 +2451,7 @@ extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

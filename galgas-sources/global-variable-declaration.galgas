@@ -237,7 +237,7 @@ method @globalVarDeclarationList-element semanticAnalysis
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
-    ![inferredType key]
+    !inferredType
     ![executionModeSet count] > 1
     !expressionGeneratedCode
   ]
@@ -255,6 +255,10 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
     ?@string GLOBAL_TYPE_NAME
     ?@bool GENERATE_VOLATILE
     ?@string INITIAL_VALUE_STRING
+  template llvmImplementation "llvm-global-var-declaration.galgasTemplate"
+    ?@string GLOBAL_VAR_NAME
+    ?@unifiedTypeMap-proxy GLOBAL_VAR_TYPE
+    ?@string INITIAL_VALUE_STRING
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -269,8 +273,25 @@ getter @globalVariableMapIR-element implementationCodeGeneration -> @string outC
   end
   outCode = [filewrapper globalVariableGenerationTemplate.implementation
     !lkey.string # mGlobalVariableName
-    !mActualTypeName
+    ![mType key]
     !mGenerateVolatile
+    !initialValueString
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @globalVariableMapIR-element generateLLVM -> @string outCode {
+  var initialValueString = [mInitialValue mangledName]
+  if [mInitialValue isLiteralUnsignedInteger] then
+    [mInitialValue literalUnsignedInteger ?value:let @bigint value] ;
+    if [value isZero] then
+      initialValueString = ""
+    end
+  end
+  outCode = [filewrapper globalVariableGenerationTemplate.llvmImplementation
+    !lkey.string # mGlobalVariableName
+    !mType
     !initialValueString
   ]
 }

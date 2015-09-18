@@ -210,6 +210,29 @@ class GALGAS_string categoryReader_literalValue (const class GALGAS_literalStruc
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Abstract category method '@abstractInstructionIR llvmInstructionCode'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractInstructionIR_llvmInstructionCode) (const class cPtr_abstractInstructionIR * inObject,
+                                                                                   class GALGAS_string & outArgument0,
+                                                                                   class C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
+                                              categoryMethodSignature_abstractInstructionIR_llvmInstructionCode inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
+                                             GALGAS_string & out_outCode,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Category Getter '@functionDeclarationListAST-element mangledName' (as function)                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

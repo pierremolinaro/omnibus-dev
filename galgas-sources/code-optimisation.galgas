@@ -143,7 +143,7 @@ proc codeOptimisation
       if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
         [!?globalVariableMap insertKey
           !globalVariable.lkey
-          !globalVariable.mActualTypeName
+          !globalVariable.mType
           !globalVariable.mGenerateVolatile
           !globalVariable.mInitialValue
         ]

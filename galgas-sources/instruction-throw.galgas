@@ -98,6 +98,14 @@ override getter @throwInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @throwInstructionIR llvmInstructionCode !@string outCode {
+  outCode = "raise_exception (" + [mCode mangledName]
+     + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
+     + ", " + [mThrowInstructionLocation line] + ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @throwInstructionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
