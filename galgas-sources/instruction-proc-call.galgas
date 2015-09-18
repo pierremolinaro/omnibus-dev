@@ -262,6 +262,25 @@ override getter @procCallInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @procCallInstructionIR llvmInstructionCode !@string outCode {
+  outCode = mangledNameForProcedure (!name:mProcName) + " ("
+  for () in mParameters do
+    switch mEffectiveParameterPassingMode
+    case input:
+      outCode += "&(" + [mParameter mangledName] + ")"
+    case output:
+      outCode += [mParameter mangledName]
+    case outputInput:
+      outCode += "&(" + [mParameter mangledName] + ")"
+    end
+  between
+    outCode += ", "
+  end
+  outCode += ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mProcedureSet += !mProcName
   for () in mParameters do

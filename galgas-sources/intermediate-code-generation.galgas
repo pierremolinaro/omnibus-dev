@@ -32,7 +32,7 @@ map @registerMapIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @globalVariableMapIR {
-  @string mActualTypeName
+  @unifiedTypeMap-proxy mType
   @bool mGenerateVolatile
   @variableKindIR mInitialValue
   insert insertKey error message "** internal error **"

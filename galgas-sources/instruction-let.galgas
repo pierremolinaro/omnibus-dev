@@ -133,6 +133,15 @@ override getter @letInstructionWithAssignmentIR instructionCode -> @string outCo
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @letInstructionWithAssignmentIR llvmInstructionCode !@string outCode {
+  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+          + [mTargetConstantIR mangledName]
+          + " = "
+          + [mSourceIR mangledName] + " ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @letInstructionWithAssignmentIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mTargetConstantIR enterAccessibleEntities !?ioAccessibleEntities]
   [mSourceIR enterAccessibleEntities !?ioAccessibleEntities]

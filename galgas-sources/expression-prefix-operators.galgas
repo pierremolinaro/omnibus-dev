@@ -197,6 +197,37 @@ override getter @prefixOperatorExpressionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @prefixOperatorExpressionIR llvmInstructionCode !@string outCode {
+  switch mOperator 
+  case prefix (@string prefixOperator) :
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
+  case prefixMinusOvf (@uint code) :
+    @bigint minValue
+    switch [mTargetType kind]
+    case boolean, boolset, literalString :
+      error mOperatorLocation: "Internal Error" : minValue
+    case enumeration (*) :
+      error mOperatorLocation: "Internal Error" : minValue
+    case structure (*) :
+      error mOperatorLocation: "Internal Error" : minValue
+    case integer (@bigint min * * *) :
+      minValue = min
+    end
+    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
+    outCode  = "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
+    outCode += "if (" + ovfVar + ") {\n"
+    outCode += "  raise_exception (" + code
+       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n" 
+    outCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+       + " = - " + [mOperand mangledName] + " ;\n"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @prefixOperatorExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mOperand enterAccessibleEntities !?ioAccessibleEntities]
 }

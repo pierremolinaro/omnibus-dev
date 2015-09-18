@@ -344,6 +344,44 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @operatorInfixExpressionIR llvmInstructionCode !@string outCode {
+  switch mOperator 
+  case infixNoOvf (@string infixOperator) :
+    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
+  case infixOvf (@string builtinFunction @uint code) :
+    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
+    outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName] + " ;\n"
+    outCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
+      +  [mLeftOperand mangledName] + ", "
+      + [mRighOperand mangledName]
+      + ", &" + [mResult mangledName] + ") ;\n"
+    outCode += "if (" + ovfVar + ") {\n"
+    outCode += "  raise_exception (" + code
+       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n" 
+  case infixUnsignedDivide (@uint code) :
+    outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    outCode += "  raise_exception (" + code
+      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+      + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n"
+    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"
+  case infixModulo (@uint code) :
+    outCode  = "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    outCode += "  raise_exception (" + code
+      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+      + ", " + [mOperatorLocation line] + ") ;\n"
+    outCode += "}\n"
+    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    outCode += " = " +  [mLeftOperand mangledName] + " % " + [mRighOperand mangledName] + " ;\n"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
   [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]

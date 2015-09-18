@@ -161,6 +161,19 @@ override getter @functionCallIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @functionCallIR llvmInstructionCode !@string outCode {
+  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
+  outCode += [mTempConstantTarget mangledName] + " = "
+  outCode += mangledNameForFunction (!name:mFunctionName) + " ("
+  for (variable) in mVariableList
+  do outCode += [variable mangledName]
+  between outCode += ", "
+  end
+  outCode += ") ;\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @functionCallIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mFunctionSet += !mFunctionName
   [mTempConstantTarget enterAccessibleEntities !?ioAccessibleEntities]

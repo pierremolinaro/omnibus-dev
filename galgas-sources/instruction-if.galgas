@@ -198,6 +198,18 @@ override getter @ifInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @ifInstructionIR llvmInstructionCode !@string outCode {
+  outCode = "if (" + [mTestVariable mangledName] + ") {\n"
+  outCode += [mThenInstructionGenerationList instructionListCode]
+  if [mElseInstructionGenerationList length] > 0 then
+    outCode += "}else{\n"
+    outCode += [mElseInstructionGenerationList instructionListCode]
+  end
+  outCode += "}\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @ifInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mTestVariable enterAccessibleEntities !?ioAccessibleEntities]
   [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]

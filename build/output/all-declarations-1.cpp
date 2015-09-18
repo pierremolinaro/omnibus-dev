@@ -13182,12 +13182,12 @@ GALGAS_registerMapIR GALGAS_registerMapIR::extractObject (const GALGAS_object & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_globalVariableMapIR::cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
-                                                                  const GALGAS_string & in_mActualTypeName,
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                                   const GALGAS_bool & in_mGenerateVolatile,
                                                                   const GALGAS_variableKindIR & in_mInitialValue
                                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mActualTypeName (in_mActualTypeName),
+mAttribute_mType (in_mType),
 mAttribute_mGenerateVolatile (in_mGenerateVolatile),
 mAttribute_mInitialValue (in_mInitialValue) {
 }
@@ -13195,14 +13195,14 @@ mAttribute_mInitialValue (in_mInitialValue) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_globalVariableMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mActualTypeName.isValid () && mAttribute_mGenerateVolatile.isValid () && mAttribute_mInitialValue.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mGenerateVolatile.isValid () && mAttribute_mInitialValue.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_globalVariableMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_globalVariableMapIR (mAttribute_lkey, mAttribute_mActualTypeName, mAttribute_mGenerateVolatile, mAttribute_mInitialValue COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_globalVariableMapIR (mAttribute_lkey, mAttribute_mType, mAttribute_mGenerateVolatile, mAttribute_mInitialValue COMMA_HERE)) ;
   return result ;
 }
 
@@ -13211,8 +13211,8 @@ cMapElement * cMapElement_globalVariableMapIR::copy (void) {
 void cMapElement_globalVariableMapIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mActualTypeName" ":" ;
-  mAttribute_mActualTypeName.description (ioString, inIndentation) ;
+  ioString << "mType" ":" ;
+  mAttribute_mType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mGenerateVolatile" ":" ;
@@ -13229,7 +13229,7 @@ typeComparisonResult cMapElement_globalVariableMapIR::compare (const cCollection
   cMapElement_globalVariableMapIR * operand = (cMapElement_globalVariableMapIR *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mActualTypeName.objectCompare (operand->mAttribute_mActualTypeName) ;
+    result = mAttribute_mType.objectCompare (operand->mAttribute_mType) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mGenerateVolatile.objectCompare (operand->mAttribute_mGenerateVolatile) ;
@@ -13288,7 +13288,7 @@ GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::reader_overriddenMap (C_C
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalVariableMapIR::addAssign_operation (const GALGAS_lstring & inKey,
-                                                      const GALGAS_string & inArgument0,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
                                                       const GALGAS_bool & inArgument1,
                                                       const GALGAS_variableKindIR & inArgument2,
                                                       C_Compiler * inCompiler
@@ -13306,7 +13306,7 @@ void GALGAS_globalVariableMapIR::addAssign_operation (const GALGAS_lstring & inK
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalVariableMapIR::modifier_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_string inArgument0,
+                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                      GALGAS_bool inArgument1,
                                                      GALGAS_variableKindIR inArgument2,
                                                      C_Compiler * inCompiler
@@ -13328,7 +13328,7 @@ const char * kSearchErrorMessage_globalVariableMapIR_searchKey = "** internal er
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
-                                                   GALGAS_string & outArgument0,
+                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                    GALGAS_bool & outArgument1,
                                                    GALGAS_variableKindIR & outArgument2,
                                                    C_Compiler * inCompiler
@@ -13343,7 +13343,7 @@ void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument2.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-    outArgument0 = p->mAttribute_mActualTypeName ;
+    outArgument0 = p->mAttribute_mType ;
     outArgument1 = p->mAttribute_mGenerateVolatile ;
     outArgument2 = p->mAttribute_mInitialValue ;
   }
@@ -13351,15 +13351,15 @@ void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_globalVariableMapIR::reader_mActualTypeNameForKey (const GALGAS_string & inKey,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalVariableMapIR::reader_mTypeForKey (const GALGAS_string & inKey,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) attributes ;
-  GALGAS_string result ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-    result = p->mAttribute_mActualTypeName ;
+    result = p->mAttribute_mType ;
   }
   return result ;
 }
@@ -13396,15 +13396,15 @@ GALGAS_variableKindIR GALGAS_globalVariableMapIR::reader_mInitialValueForKey (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVariableMapIR::modifier_setMActualTypeNameForKey (GALGAS_string inAttributeValue,
-                                                                    GALGAS_string inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_globalVariableMapIR::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_globalVariableMapIR * p = (cMapElement_globalVariableMapIR *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-    p->mAttribute_mActualTypeName = inAttributeValue ;
+    p->mAttribute_mType = inAttributeValue ;
   }
 }
 
@@ -13459,7 +13459,7 @@ cGenericAbstractEnumerator () {
 GALGAS_globalVariableMapIR_2D_element cEnumerator_globalVariableMapIR::current (LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-  return GALGAS_globalVariableMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mActualTypeName, p->mAttribute_mGenerateVolatile, p->mAttribute_mInitialValue) ;
+  return GALGAS_globalVariableMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mGenerateVolatile, p->mAttribute_mInitialValue) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13472,10 +13472,10 @@ GALGAS_lstring cEnumerator_globalVariableMapIR::current_lkey (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cEnumerator_globalVariableMapIR::current_mActualTypeName (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_globalVariableMapIR::current_mType (LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
-  return p->mAttribute_mActualTypeName ;
+  return p->mAttribute_mType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

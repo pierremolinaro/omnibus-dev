@@ -1,4 +1,17 @@
 #----------------------------------------------------------------------------------------------------------------------*
+
+getter @unifiedTypeMap-proxy llvmName -> @string outName {
+  switch [self kind]
+  case boolean : outName = "i1"
+  case boolset : outName = "<<boolset>>"
+  case enumeration (@enumConstantMap constantMap) : outName = "i" + [[constantMap count] - 1 significantBitCount]
+  case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) : outName = "i" + bitCount
+  case literalString : outName = "<<literalString>>"
+  case structure (@propertyMap unused propertyMap) : outName = "<<structure>>"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION PREFIXES                                                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
 

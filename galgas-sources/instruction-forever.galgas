@@ -85,6 +85,14 @@ override getter @foreverInstructionGeneration instructionCode -> @string outCode
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @foreverInstructionGeneration llvmInstructionCode !@string outCode {
+  outCode = "while (1) {\n"
+  outCode += [mInstructionGenerationList instructionListCode]
+  outCode += "}\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @foreverInstructionGeneration enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }

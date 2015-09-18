@@ -104,6 +104,17 @@ override getter @assertInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @assertInstructionIR llvmInstructionCode !@string outCode {
+  outCode = [mInstructionList instructionListCode]
+  outCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
+  outCode += "  raise_exception (20"
+     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
+     + ", " + [mAssertInstructionLocation line] + ") ;\n"
+  outCode += "}\n" 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
   [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]

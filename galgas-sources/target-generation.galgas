@@ -21,7 +21,7 @@ syntax extension plm_specific_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "c", "s", "plm", "plm-target"
+  "py", "ld", "c", "s", "plm", "plm-target", "ll"
 }{
 }{
 }

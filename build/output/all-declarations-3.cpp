@@ -67,13 +67,13 @@ void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDi
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
     GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)) ;
-    GALGAS_bool joker_3765 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3765, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
+    GALGAS_bool joker_3771 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3771, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 110)) ;
     GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 111)) ;
-    GALGAS_bool joker_4072 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4072, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
+    GALGAS_bool joker_4078 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4078, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
   }
 }
 
@@ -93,13 +93,13 @@ void routine_copyTextFile (const GALGAS_string constinArgument_inCurrentDirector
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
     GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 125)) ;
-    GALGAS_bool joker_4627 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4627, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
+    GALGAS_bool joker_4633 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4633, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
   }else if (kBoolFalse == test_0) {
     GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
     GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 129)) ;
-    GALGAS_bool joker_4924 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4924, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)) ;
+    GALGAS_bool joker_4930 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4930, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)) ;
   }
 }
 

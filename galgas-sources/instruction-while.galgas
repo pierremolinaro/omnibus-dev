@@ -144,6 +144,20 @@ override getter @whileInstructionIR instructionCode -> @string outCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @whileInstructionIR llvmInstructionCode !@string outCode {
+  outCode = "LABEL_" + mLabelIndex + ": {\n"
+  outCode += [mTestInstructionGenerationList instructionListCode]
+  outCode += "  if (" + [mTestExpression mangledName] + ") {\n"
+  [!?outCode incIndentation !2]
+  outCode += [mInstructionGenerationList instructionListCode]
+  [!?outCode decIndentation !2]
+  outCode += "    goto LABEL_" + mLabelIndex + " ;\n"
+  outCode += "  }\n"
+  outCode += "}\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @whileInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
   [mTestExpression enterAccessibleEntities !?ioAccessibleEntities]
