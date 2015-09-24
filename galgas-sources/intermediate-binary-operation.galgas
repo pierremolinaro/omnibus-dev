@@ -1,0 +1,36 @@
+
+setter @instructionListIR appendBinaryOperation
+  ?let @operandIR inTargetOperand
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @operandIR inLeftOperand
+  ?let @string inOperation
+  ?let @operandIR inRightOperand
+{
+#  let comment = [inTargetOperand string] + " = " + inLeftOperand + " " + inOperation + " " + inRightOperand
+#  [!?self appendComment !comment]
+  self += !@binaryOperationIR.new {!inTargetOperand !inTargetVarType !inLeftOperand !inOperation !inRightOperand}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @binaryOperationIR : @abstractInstructionIR {
+  @operandIR mTargetOperand
+  @unifiedTypeMap-proxy mTargetVarType
+  @operandIR mLeftOperand
+  @string mOperation
+  @operandIR mRightOperand
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @binaryOperationIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @binaryOperationIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mTargetVarType llvmType]
+  ioCode += "  " + mTargetOperand + " = " + mOperation + " " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

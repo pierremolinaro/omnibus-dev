@@ -1,0 +1,34 @@
+
+setter @instructionListIR appendLoadVolatile
+  ?let @operandIR inTargetValue
+  ?let @string inRegisterName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @bigint inAddress
+{
+  self += !@loadRegisterIR.new {!inTargetValue !inRegisterName !inTargetVarType !inAddress}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @loadRegisterIR : @abstractInstructionIR {
+  @operandIR mTargetValue
+  @string mRegisterName
+  @unifiedTypeMap-proxy mRegisterType
+  @bigint mRegisterAddress
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadRegisterIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mRegisterType llvmType]
+  ioCode += "  " + mTargetValue + " = load volatile " + llvmType
+         + "* (inttoptr i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadRegisterIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

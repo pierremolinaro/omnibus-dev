@@ -59,8 +59,10 @@ override method @assignmentInstructionAST analyze
     ?@unifiedTypeMap-proxy targetType
     ?6*
   ]
+  var comment = mTargetVarName.string
 #--- Analyze field list
   for (fieldName) in mFieldList do
+    comment += "." + mangledNameForProperty (!name:fieldName.string)
     switch [targetType kind]
     case boolean :
       error fieldName : "a boolean does not have fields"
@@ -91,6 +93,7 @@ override method @assignmentInstructionAST analyze
     ?type:let expressionType
     ?result:@operandIR sourceValueName
   ]
+  comment += " = " + sourceValueName 
   checkAssignmentCompatibility (
     !sourceType:expressionType
     !targetType:targetType
@@ -113,109 +116,36 @@ override method @assignmentInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  @assignmentTargetIR target
+  [!?ioInstructionGenerationList appendComment !comment]
   switch targetVariableKind
-  case register (@lstring name @bigint address) :
-    target = .register {!name:name !address:address}
+  case register (@lstring registerName @bigint address) :
+    [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !targetType !address !sourceValueName]
   case globalVariable (@lstring name) :
-    target = .globalVariable {!name:name}
-  case localVariable (@lstring name) :
-    target = .localVariable {!name:name}
-  case inArgument (@lstring name) :
-    target = .inArgument {!name:name}
-  case inOutArgument (@lstring name) :
-    target = .inOutArgument {!name:name}
-  case outArgument (@lstring name) :
-    target = .outArgument {!name:name}
-  case localConstant (@lstring name) :
-     error name : "INTERNAL ERROR" : target
+    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !targetType !sourceValueName]
+  case localVariable (@lstring unused name) :
+
+  case inArgument (@lstring unused name) :
+
+  case inOutArgument (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case outArgument (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case localConstant (@lstring unused name) :
+     error name : "INTERNAL ERROR"
   case globalConstant (@operandIR unused value) :
-     error .nowhere : "INTERNAL ERROR" : target
+     error .nowhere : "INTERNAL ERROR"
   case temporaryConstant (@uint unused idx) :
-     error .nowhere : "INTERNAL ERROR" : target
-  case localAccess (@lstring access) :
-    target = .localAccess {!access:access}
+     error .nowhere : "INTERNAL ERROR"
+  case localAccess (@lstring unused access) :
+     error .nowhere : "INTERNAL ERROR"
   case literalUnsignedInteger (@bigint unused value) :
-     error .nowhere : "INTERNAL ERROR" : target
+     error .nowhere : "INTERNAL ERROR"
   case literalSignedInteger (@bigint unused value) :
-     error .nowhere : "INTERNAL ERROR" : target
+     error .nowhere : "INTERNAL ERROR"
   case literalString (@string unused value @string unused name) :
-     error .nowhere : "INTERNAL ERROR" : target
-  case literalStructure (@literalStructureList value) :
-    target = .literalStructure {!value:value}
-  end
-#  if [sourceValueName isLiteralStructure] then
-#    getNewTempVariable (!?ioTemporaries ?let temporaryResult)
-#    ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
-#      !targetType
-#      !temporaryResult
-#      !sourceValueName
-#    }
-#    ioInstructionGenerationList += !@assignmentInstructionIR.new {
-#      !target
-#      !mFieldList
-#      !targetType
-#      !temporaryResult
-#    }
-#  else
-#    ioInstructionGenerationList += !@assignmentInstructionIR.new {
-#      !target
-#      !mFieldList
-#      !targetType
-#      !sourceValueName
-#    }
-#  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @assignmentInstructionIR : @abstractInstructionIR {
-  @assignmentTargetIR mTargetVariable
-  @lstringlist mFieldList
-  @unifiedTypeMap-proxy mTargetVarType
-  @variableKindIR mSourceValue
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @assignmentInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTargetVariable enterAccessibleEntities !?ioAccessibleEntities]
-  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @assignmentInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += ";--- " + [mTargetVariable mangledName]
-  for (fieldName) in mFieldList do
-    ioCode += "." + mangledNameForProperty (!name:fieldName.string)
-  end
-  ioCode += " = " + [mSourceValue mangledName] + "\n"
-  let llvmType = [mTargetVarType llvmType]
-  switch mTargetVariable
-  case register (@lstring unused name @bigint address) :
-    ioCode += "  store volatile " + llvmType + " " + [mSourceValue mangledName] + ", " + llvmType
-           + "* (inttoptr i32 " + address + " to " + llvmType + "*) ; " + [address hexString] + "\n"
-  case globalVariable (@lstring name) :
-    ioCode += "%ptr = <<globalVariable>> " + name + "\n"
-  case localVariable (@lstring name)  :
-    ioCode += "%ptr = <<localVariable>> " + name + "\n"
-  case inArgument (@lstring name):
-    ioCode += "%ptr = <<inArgument>> " + name + "\n"
-  case inOutArgument (@lstring name) :
-    ioCode += "%ptr = <<inOutArgument>> " + name + "\n"
-  case outArgument (@lstring name) :
-    ioCode += "%ptr = <<outArgument>> " + name + "\n"
-  case localConstant (@lstring name) :
-    ioCode += "%ptr = <<localConstant>> " + name + "\n"
-  case temporaryConstant (@uint idx) :
-    ioCode += "%ptr = <<temporaryConstant>> " + idx + "\n"
-  case localAccess (@lstring access) :
-    ioCode += "%ptr = <<localAccess>> " + access + "\n"
+     error .nowhere : "INTERNAL ERROR"
   case literalStructure (@literalStructureList unused value) :
-    ioCode += "%ptr = <<literalStructure>> \n"
+     error .nowhere : "INTERNAL ERROR"
   end
 }
 

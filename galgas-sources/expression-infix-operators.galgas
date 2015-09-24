@@ -116,117 +116,121 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?type:let @unifiedTypeMap-proxy rightType
     ?result:let @operandIR rightOperandValue
   ]
+#  log leftOperandValue, rightOperandValue
 #--- Check left type
   @infixOperatorMap operatorMap
-  @infixOperatorIR infixOperatorIR
+  @string binaryOperator
   switch mOp 
   case equal :
     operatorMap = inContext.mEqualOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"=="}
+    binaryOperator = "=="
   case nonEqual :
     operatorMap = inContext.mNonEqualOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"!="}
+    binaryOperator = "!="
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"<"}
+    binaryOperator = "<"
   case infEqual :
     operatorMap = inContext.mInfEqualOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"<="}
+    binaryOperator = "<="
   case strictSup :
     operatorMap = inContext.mStrictSupOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:">"}
+    binaryOperator = ">"
   case supEqual :
     operatorMap = inContext.mSupEqualOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:">="}
+    binaryOperator = ">="
   case andOp :
     operatorMap = inContext.mAndOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"&"}
+    binaryOperator = "and"
   case booleanAnd :
     operatorMap = inContext.mBooleanAndOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"&&"}
+    binaryOperator = "&&"
   case orOp :
     operatorMap = inContext.mOrOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"|"}
+    binaryOperator = "or"
   case booleanOrOp :
     operatorMap = inContext.mBooleanOrOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"||"}
+    binaryOperator = "||"
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"^"}
+    binaryOperator = "xor"
   case booleanXorOp :
     operatorMap = inContext.mBooleanXorOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"^"}
+    binaryOperator = "xor"
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infixNoOvf {!infixOperator:"+"}
+      binaryOperator = "add"
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
+#      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
+      binaryOperator = "+OVF+"
     end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"+"}
+    binaryOperator = "add"
   case subOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infixNoOvf {!infixOperator:"-"}
+      binaryOperator = "sub"
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
+#      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
+      binaryOperator = "-OVF-"
     end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"-"}
+    binaryOperator = "sub"
   case mulOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infixNoOvf {!infixOperator:"*"}
+      binaryOperator = "mul"
     else
-      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_mul_overflow" !code:12}
+      binaryOperator = "*OVF*"
     end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"*"}
+      binaryOperator = "mul"
   case divOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infixNoOvf {!infixOperator:"/"}
+      binaryOperator = "/"
     else
-      infixOperatorIR = .infixUnsignedDivide{!code:13}
+      binaryOperator = "/OVF/"
     end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"/"}
+    binaryOperator = "/"
   case modOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mModOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      infixOperatorIR = .infixNoOvf {!infixOperator:"%"}
+      binaryOperator = "%"
     else
-      infixOperatorIR = .infixModulo{!code:14}
+#      infixOperatorIR = .infixModulo{!code:14}
+      binaryOperator = "%OVF%"
     end
   case modOpNoOvf :
     operatorMap = inContext.mModOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"%"}
+    binaryOperator = "%"
   case leftShiftOp :
     operatorMap = inContext.mLeftShiftOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:"<<"}
+    binaryOperator = "shl"
   case rightShiftOp :
     operatorMap = inContext.mRightShiftOperatorMap
-    infixOperatorIR = .infixNoOvf {!infixOperator:">>"}
+    binaryOperator = ">>"
   end
   [operatorMap checkWith
     !leftType:leftType
@@ -269,14 +273,13 @@ override method @infixOperatorExpressionAST analyzeExpression
   #--- Temp var
     getNewTempVariable (!?ioTemporaries ?outResultValue)
   #--- Generate code
-    ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-      !outResultType
+    [!?ioInstructionGenerationList appendBinaryOperation
       !outResultValue
+      !outResultType
       !leftOperandValue
-      !infixOperatorIR
+      !binaryOperator
       !rightOperandValue
-      !mOperatorLocation
-    }
+    ]
   end
 }
 
@@ -295,59 +298,59 @@ enum @infixOperatorIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @operatorInfixExpressionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mResultType
-  @operandIR mResult
-  @operandIR mLeftOperand
-  @infixOperatorIR mOperator
-  @operandIR mRighOperand
-  @location mOperatorLocation
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @operatorInfixExpressionIR llvmInstructionCode ?!@string ioCode {
-  switch mOperator 
-  case infixNoOvf (@string infixOperator) :
-    ioCode += ";--- const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-    ioCode += " = " +  mLeftOperand + " " + infixOperator + " " + mRighOperand + " ;\n"
-    ioCode += "  <<@operatorInfixExpressionIR llvmInstructionCode>>\n"
-  case infixOvf (@string builtinFunction @uint code) :
-    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-    ioCode += mangledNameForType (!name:[mResultType key]) + " " + mResult + " ;\n"
-    ioCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
-      +  mLeftOperand + ", "
-      + mRighOperand
-      + ", &" + mResult + ") ;\n"
-    ioCode += "if (" + ovfVar + ") {\n"
-    ioCode += "  raise_exception (" + code
-       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mOperatorLocation line] + ") ;\n"
-    ioCode += "}\n" 
-  case infixUnsignedDivide (@uint code) :
-    ioCode += "if (0 == " +  mRighOperand + ") {\n"
-    ioCode += "  raise_exception (" + code
-      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-      + ", " + [mOperatorLocation line] + ") ;\n"
-    ioCode += "}\n"
-    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-    ioCode += " = " +  mLeftOperand + " / " + mRighOperand + " ;\n"
-  case infixModulo (@uint code) :
-    ioCode += "if (0 == " +  mRighOperand + ") {\n"
-    ioCode += "  raise_exception (" + code
-      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-      + ", " + [mOperatorLocation line] + ") ;\n"
-    ioCode += "}\n"
-    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-    ioCode += " = " +  mLeftOperand + " % " + mRighOperand + " ;\n"
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
-#  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
-#  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
-}
+#class @operatorInfixExpressionIR : @abstractInstructionIR {
+#  @unifiedTypeMap-proxy mResultType
+#  @operandIR mResult
+#  @operandIR mLeftOperand
+#  @infixOperatorIR mOperator
+#  @operandIR mRighOperand
+#  @location mOperatorLocation
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override method @operatorInfixExpressionIR llvmInstructionCode ?!@string ioCode {
+#  switch mOperator 
+#  case infixNoOvf (@string infixOperator) :
+#    ioCode += ";--- const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+#    ioCode += " = " +  mLeftOperand + " " + infixOperator + " " + mRighOperand + " ;\n"
+#    ioCode += "  <<@operatorInfixExpressionIR llvmInstructionCode>>\n"
+#  case infixOvf (@string builtinFunction @uint code) :
+#    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
+#    ioCode += mangledNameForType (!name:[mResultType key]) + " " + mResult + " ;\n"
+#    ioCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
+#      +  mLeftOperand + ", "
+#      + mRighOperand
+#      + ", &" + mResult + ") ;\n"
+#    ioCode += "if (" + ovfVar + ") {\n"
+#    ioCode += "  raise_exception (" + code
+#       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+#       + ", " + [mOperatorLocation line] + ") ;\n"
+#    ioCode += "}\n" 
+#  case infixUnsignedDivide (@uint code) :
+#    ioCode += "if (0 == " +  mRighOperand + ") {\n"
+#    ioCode += "  raise_exception (" + code
+#      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+#      + ", " + [mOperatorLocation line] + ") ;\n"
+#    ioCode += "}\n"
+#    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+#    ioCode += " = " +  mLeftOperand + " / " + mRighOperand + " ;\n"
+#  case infixModulo (@uint code) :
+#    ioCode += "if (0 == " +  mRighOperand + ") {\n"
+#    ioCode += "  raise_exception (" + code
+#      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
+#      + ", " + [mOperatorLocation line] + ") ;\n"
+#    ioCode += "}\n"
+#    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+#    ioCode += " = " +  mLeftOperand + " % " + mRighOperand + " ;\n"
+#  end
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+##  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
+##  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*

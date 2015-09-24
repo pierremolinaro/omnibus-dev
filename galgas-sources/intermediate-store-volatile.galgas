@@ -1,0 +1,34 @@
+
+setter @instructionListIR appendStoreVolatile
+  ?let @string inRegisterName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @bigint inAddress
+  ?let @operandIR inSourceValue
+{
+  self += !@storeVolatileIR.new {!inRegisterName !inTargetVarType !inAddress !inSourceValue}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @storeVolatileIR : @abstractInstructionIR {
+  @string mRegisterName
+  @unifiedTypeMap-proxy mTargetVarType
+  @bigint mAddress
+  @operandIR mSourceValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeVolatileIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeVolatileIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mTargetVarType llvmType]
+  ioCode += "  store volatile " + llvmType + " " + mSourceValue + ", " + llvmType
+         + "* (inttoptr i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
