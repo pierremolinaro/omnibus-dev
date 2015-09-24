@@ -124,15 +124,6 @@ class @letInstructionWithAssignmentIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @letInstructionWithAssignmentIR instructionCode -> @string outCode {
-  outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " "
-          + [mTargetConstantIR mangledName]
-          + " = "
-          + [mSourceIR mangledName] + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @letInstructionWithAssignmentIR llvmInstructionCode ?!@string ioCode {
   ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
           + [mTargetConstantIR mangledName]

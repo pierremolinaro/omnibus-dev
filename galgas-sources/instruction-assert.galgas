@@ -93,19 +93,8 @@ class @assertInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @assertInstructionIR instructionCode -> @string outCode {
-  outCode = [mInstructionList instructionListCode]
-  outCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
-  outCode += "  raise_exception (20"
-     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
-     + ", " + [mAssertInstructionLocation line] + ") ;\n"
-  outCode += "}\n" 
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @assertInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += [mInstructionList instructionListCode]
+  [mInstructionList instructionListLLVMCode !?ioCode]
   ioCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
   ioCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]

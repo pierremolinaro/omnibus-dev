@@ -236,37 +236,24 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
 private filewrapper functionGenerationTemplate in "../generation-templates" {
 }{
 }{
-  template declaration "function-declaration.galgasTemplate"
-    ?@string FUNCTION_NAME
-    ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@unifiedTypeMap-proxy RESULT_TYPE
-
   template implementation "function-implementation.galgasTemplate"
     ?@string FUNCTION_NAME
     ?@funcFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@instructionListIR INSTRUCTION_GENERATION_LIST
+    ?@string INSTRUCTION_LLVM_CODE
     ?@unifiedTypeMap-proxy RESULT_TYPE
     ?@string RESULT_VAR_NAME
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @functionMapIR-element headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper functionGenerationTemplate.declaration
-    !lkey.string
-    !mFormalArgumentListForGeneration
-    !mResultType
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @functionMapIR-element implementationCodeGeneration -> @string outCode {
+  @string code = ""
+  [mInstructionGenerationList instructionListLLVMCode !?code]
   outCode = [filewrapper functionGenerationTemplate.implementation
     !lkey.string # mFunctionMangledName
 #    !mangledNameForFunction (!name:lkey.string) # mFunctionMangledName
     !mFormalArgumentListForGeneration
-    !mInstructionGenerationList
+    !code
     !mResultType
     !mResultVarName
   ]

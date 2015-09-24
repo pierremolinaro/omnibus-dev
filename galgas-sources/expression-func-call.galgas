@@ -148,19 +148,6 @@ class @functionCallIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @functionCallIR instructionCode -> @string outCode {
-  outCode  = "const " + mangledNameForType (!name:[mTargetType key]) + " "
-  outCode += [mTempConstantTarget mangledName] + " = "
-  outCode += mangledNameForFunction (!name:mFunctionName) + " ("
-  for (variable) in mVariableList
-  do outCode += [variable mangledName]
-  between outCode += ", "
-  end
-  outCode += ") ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @functionCallIR llvmInstructionCode ?!@string ioCode {
   ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
   ioCode += [mTempConstantTarget mangledName] + " = "

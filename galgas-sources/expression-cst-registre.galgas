@@ -211,27 +211,6 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @registerIntegerConstantInExpressionIR instructionCode -> @string outCode {
-  if mNoCheck then
-    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
-            + " = ((" + mangledNameForType (!name:[mTargetType key]) + " *) "
-            + [mExpressionValue mangledName] + ") << " + mBitShift + "\n" 
-  elsif [option plm_options.noExceptionGeneration value] then
-    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
-            + " = (" + [mExpressionValue mangledName] + " & " + mMaxBound + ") << " + mBitShift + "\n" 
-  else
-    outCode  = "if (" + [mExpressionValue mangledName] + " > " + mMaxBound + ") {\n"
-    outCode += "  raise_exception (4, "
-       + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mInstructionLocation line] + ") ;\n"
-    outCode += "}\n" 
-    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
-               + " = " + [mExpressionValue mangledName] + " << " + mBitShift + "\n" 
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @registerIntegerConstantInExpressionIR llvmInstructionCode ?!@string ioCode {
   if mNoCheck then
     ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResultVariable mangledName]
