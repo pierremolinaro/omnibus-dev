@@ -518,6 +518,11 @@ private filewrapper procedureGenerationTemplate in "../generation-templates" {
     ?@string PROCEDURE_MANGLED_NAME
     ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
     ?@instructionListIR INSTRUCTION_GENERATION_LIST
+
+  template llvmImplementation "procedure-implementation-llvm.galgasTemplate"
+    ?@string PROCEDURE_MANGLED_NAME
+    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
+    ?@string INSTRUCTION_LLVM_CODE
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -536,6 +541,18 @@ getter @procedureMapIR-element implementationCodeGeneration -> @string outCode {
     !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
     !mFormalArgumentListForGeneration
     !mInstructionGenerationList
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @procedureMapIR-element llvmCodeGeneration -> @string outCode {
+  @string code = ""
+  [mInstructionGenerationList instructionListLLVMCode !?code]
+  outCode = [filewrapper procedureGenerationTemplate.llvmImplementation
+    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
+    !mFormalArgumentListForGeneration
+    !code
   ]
 }
 

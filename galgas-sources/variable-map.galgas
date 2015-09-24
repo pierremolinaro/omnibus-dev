@@ -19,6 +19,13 @@ enum @assignmentTargetIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+enum @operandIR {
+  case literalInteger (@bigint value @uint bitSize)
+  case llvmObject (@lstring name) # @nom or %nom
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 enum @variableKindIR {
   case register (@lstring name @bigint address)
   case globalVariable (@lstring name)
