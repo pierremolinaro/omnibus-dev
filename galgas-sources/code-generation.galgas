@@ -26,7 +26,7 @@ getter @literalStructureList literalValue -> @string result {
 
 getter @variableKindIR mangledName -> @string outResult {
   switch self
-  case register (@lstring name) :
+  case register (@lstring name *) :
     outResult = mangledNameForRegister (!name:name.string)
   case globalVariable (@lstring name) :
     outResult = mangledNameForGlobalVariable (!name:name.string)
@@ -50,6 +50,33 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = [value string]
   case literalString (* @string name) :
     outResult = name
+  case literalStructure (@literalStructureList s) :
+    outResult = [s literalValue]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @assignmentTargetIR mangledName -> @string outResult {
+  switch self
+  case register (@lstring name *) :
+    outResult = mangledNameForRegister (!name:name.string)
+  case globalVariable (@lstring name) :
+    outResult = mangledNameForGlobalVariable (!name:name.string)
+  case localVariable (@lstring name) :
+    outResult = mangledNameForLocalVariable (!name:name.string)
+  case inArgument (@lstring name) :
+    outResult = mangledNameForInArgument (!name:name.string)
+  case inOutArgument (@lstring name) :
+    outResult = mangledNameForInOutArgument (!name:name.string)
+  case outArgument (@lstring name) :
+    outResult = "* " + mangledNameForOutArgument (!name:name.string)
+  case localConstant (@lstring name) :
+    outResult = mangledNameForConstant (!name:name.string)
+  case temporaryConstant (@uint idx) :
+    outResult = mangledNameForTemporaryConstant (!idx:idx)
+  case localAccess (@lstring access) :
+    outResult = access.string
   case literalStructure (@literalStructureList s) :
     outResult = [s literalValue]
   end
@@ -338,42 +365,50 @@ proc generateLLVMfile
 #  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
 #    code += [procedure headerCodeGeneration]
 #  end
-#--- Boot
+#----------------------------------------- Boot
   code += llvmTitleComment (!"Boot")
   code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    code += [boot.mInstructionListIR instructionListCode]
+    [boot.mInstructionListIR instructionListLLVMCode !?code]
   end
+  code += ";---\n"
+  code += "  ret void\n"
   code += "}\n\n"
-#--- Init
+#----------------------------------------- Init
   code += llvmTitleComment (!"Init")
   code += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
-    code += [init.mInstructionListIR instructionListCode]
+    [init.mInstructionListIR instructionListLLVMCode !?code]
   end
+  code += ";---\n"
+  code += "  ret void\n"
   code += "}\n\n"
+#----------------------------------------- Exception
   if not [option plm_options.noExceptionGeneration value] then
     code += llvmTitleComment (!"Raise Exception internal")
     code += "static void raise_exception_internal (const int32_t in_CODE,\n"
     code += "                                      const char * in_FILE,\n"
     code += "                                      const uint32_t in_LINE) {\n"
-    code += [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListCode]
+    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code]
     [!?code incIndentation !2]
     code += "while (1) {\n"
-    code += [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListCode]
+    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code]
     code += "}\n"
     [!?code decIndentation !2]
     code += "}\n\n"
   end
+#----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure implementationCodeGeneration]
   end
+#----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
     code += [function implementationCodeGeneration]
   end
+#----------------------------------------- Write LLVM file
   code += separatorLine ()
   [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.ll" ?*]
-#--- Perform LLVM compilation
+#----------------------------------------- Perform LLVM compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
     let fullScript = "python " + inProductDirectory + "/" + script + ".py"

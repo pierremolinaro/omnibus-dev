@@ -250,7 +250,7 @@ override method @structureDeclaration initAnalysis
       ?result:@variableKindIR expressionIR
     ]
     switch expressionIR
-    case register (@lstring name) :
+    case register (@lstring name *) :
       error name : "a register cannot be used as field initial value"
     case globalVariable (@lstring name) :
       error name : "a global variable cannot be used as field initial value"

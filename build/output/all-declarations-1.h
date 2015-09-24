@@ -1570,7 +1570,8 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_outArgument (const class GALGAS_lstring & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_register (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_register (const class GALGAS_lstring & inOperand0,
+                                                              const class GALGAS_bigint & inOperand1
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_temporaryConstant (const class GALGAS_uint & inOperand0
@@ -1631,6 +1632,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                      COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_bigint & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -1909,6 +1911,7 @@ class GALGAS_registerMap : public AC_GALGAS_map {
                                                       const class GALGAS_bool & inOperand2,
                                                       const class GALGAS_registerBitSliceAccessMap & inOperand3,
                                                       const class GALGAS_registerFieldMap & inOperand4,
+                                                      const class GALGAS_bigint & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1918,8 +1921,14 @@ class GALGAS_registerMap : public AC_GALGAS_map {
                                                      class GALGAS_bool constinArgument2,
                                                      class GALGAS_registerBitSliceAccessMap constinArgument3,
                                                      class GALGAS_registerFieldMap constinArgument4,
+                                                     class GALGAS_bigint constinArgument5,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_setMAddressForKey (class GALGAS_bigint constinArgument0,
+                                                             class GALGAS_string constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_setMIsReadOnlyForKey (class GALGAS_bool constinArgument0,
                                                                 class GALGAS_string constinArgument1,
@@ -1948,12 +1957,17 @@ class GALGAS_registerMap : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument2,
                                                    class GALGAS_registerBitSliceAccessMap & outArgument3,
                                                    class GALGAS_registerFieldMap & outArgument4,
+                                                   class GALGAS_bigint & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mAddressForKey (const class GALGAS_string & constinOperand0,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsReadOnlyForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
@@ -2000,6 +2014,7 @@ class cEnumerator_registerMap : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mIsReadOnly (LOCATION_ARGS) const ;
   public : class GALGAS_registerBitSliceAccessMap current_mRegisterFieldAccessMap (LOCATION_ARGS) const ;
   public : class GALGAS_registerFieldMap current_mRegisterFieldMap (LOCATION_ARGS) const ;
+  public : class GALGAS_bigint current_mAddress (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_registerMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2020,13 +2035,15 @@ class cMapElement_registerMap : public cMapElement {
   public : GALGAS_bool mAttribute_mIsReadOnly ;
   public : GALGAS_registerBitSliceAccessMap mAttribute_mRegisterFieldAccessMap ;
   public : GALGAS_registerFieldMap mAttribute_mRegisterFieldMap ;
+  public : GALGAS_bigint mAttribute_mAddress ;
 
 //--- Constructor
   public : cMapElement_registerMap (const GALGAS_lstring & inKey,
                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                     const GALGAS_bool & in_mIsReadOnly,
                                     const GALGAS_registerBitSliceAccessMap & in_mRegisterFieldAccessMap,
-                                    const GALGAS_registerFieldMap & in_mRegisterFieldMap
+                                    const GALGAS_registerFieldMap & in_mRegisterFieldMap,
+                                    const GALGAS_bigint & in_mAddress
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2055,6 +2072,7 @@ class GALGAS_registerMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mIsReadOnly ;
   public : GALGAS_registerBitSliceAccessMap mAttribute_mRegisterFieldAccessMap ;
   public : GALGAS_registerFieldMap mAttribute_mRegisterFieldMap ;
+  public : GALGAS_bigint mAttribute_mAddress ;
 
 
 //--------------------------------- Accessors
@@ -2075,7 +2093,8 @@ class GALGAS_registerMap_2D_element : public AC_GALGAS_root {
                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                           const GALGAS_bool & in_mIsReadOnly,
                                           const GALGAS_registerBitSliceAccessMap & in_mRegisterFieldAccessMap,
-                                          const GALGAS_registerFieldMap & in_mRegisterFieldMap) ;
+                                          const GALGAS_registerFieldMap & in_mRegisterFieldMap,
+                                          const GALGAS_bigint & in_mAddress) ;
 
 //-- Start of generic part --*
 
@@ -2092,7 +2111,8 @@ class GALGAS_registerMap_2D_element : public AC_GALGAS_root {
                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                  const class GALGAS_bool & inOperand2,
                                                                  const class GALGAS_registerBitSliceAccessMap & inOperand3,
-                                                                 const class GALGAS_registerFieldMap & inOperand4
+                                                                 const class GALGAS_registerFieldMap & inOperand4,
+                                                                 const class GALGAS_bigint & inOperand5
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -2108,6 +2128,8 @@ class GALGAS_registerMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mAddress (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsReadOnly (LOCATION_ARGS) const ;
 
@@ -3050,9 +3072,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_variableListIR ;
 
 class cEnumAssociatedValues_variableKindIR_register : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_register (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_register (const GALGAS_lstring & inAssociatedValue0,
+                                                          const GALGAS_bigint & inAssociatedValue1
                                                           COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

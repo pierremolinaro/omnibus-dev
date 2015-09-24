@@ -211,7 +211,9 @@ fin:
 
 define internal void @procLoop () nounwind {
 ;     register_GPIOC_PSOR = 32 ;
-  store volatile i32 32, i32* inttoptr (i32 1074786436 to i32*) ; 0x400FF084
+  %ptr = inttoptr i32 1074786436 to i32* ; 0x400FF084
+  store volatile i32 32, i32* %ptr ; 0x400FF084
+;  store volatile i32 32, i32* inttoptr (i32 1074786436 to i32*) ; 0x400FF084
 ;     wait ()
   call void @wait ()
 ;     register_GPIOC_PCOR = 32 ;
