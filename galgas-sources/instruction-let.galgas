@@ -89,8 +89,8 @@ override method @letInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let inferredType
-    ?result:let @variableKindIR resultValueName
+    ?type:let inferredType
+    ?result:let @operandIR unused resultValueName
   ]
 #--- Declare local constant
   let targetConstant = @variableKindIR.localConstant {!name:mVarName}
@@ -105,11 +105,11 @@ override method @letInstructionWithAssignmentAST analyze
     !true
   ]
 #--- Code generation
-  ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
-    !inferredType
-    !targetConstant
-    !resultValueName
-  }
+#  ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
+#    !inferredType
+#    !targetConstant
+#    !resultValueName
+#  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -118,24 +118,24 @@ override method @letInstructionWithAssignmentAST analyze
 
 class @letInstructionWithAssignmentIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mTargetConstantIR
-  @variableKindIR mSourceIR
+  @operandIR mTargetConstantIR
+  @operandIR mSourceIR
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @letInstructionWithAssignmentIR llvmInstructionCode ?!@string ioCode {
   ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
-          + [mTargetConstantIR mangledName]
+          + mTargetConstantIR
           + " = "
-          + [mSourceIR mangledName] + " ;\n"
+          + mSourceIR + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @letInstructionWithAssignmentIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTargetConstantIR enterAccessibleEntities !?ioAccessibleEntities]
-  [mSourceIR enterAccessibleEntities !?ioAccessibleEntities]
+override method @letInstructionWithAssignmentIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+#  [mTargetConstantIR enterAccessibleEntities !?ioAccessibleEntities]
+#  [mSourceIR enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

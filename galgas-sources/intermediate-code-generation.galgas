@@ -34,7 +34,7 @@ map @registerMapIR {
 map @globalVariableMapIR {
   @unifiedTypeMap-proxy mType
   @bool mGenerateVolatile
-  @variableKindIR mInitialValue
+  @operandIR mInitialValue
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -42,7 +42,7 @@ map @globalVariableMapIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @globalConstantMapIR {
-  @variableKindIR mValueExpressionGeneration
+  @operandIR mValueExpressionGeneration
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

@@ -88,8 +88,8 @@ override method @assignmentInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let expressionType
-    ?result:@variableKindIR sourceValueName
+    ?type:let expressionType
+    ?result:@operandIR sourceValueName
   ]
   checkAssignmentCompatibility (
     !sourceType:expressionType
@@ -129,6 +129,8 @@ override method @assignmentInstructionAST analyze
     target = .outArgument {!name:name}
   case localConstant (@lstring name) :
      error name : "INTERNAL ERROR" : target
+  case globalConstant (@operandIR unused value) :
+     error .nowhere : "INTERNAL ERROR" : target
   case temporaryConstant (@uint unused idx) :
      error .nowhere : "INTERNAL ERROR" : target
   case localAccess (@lstring access) :
@@ -142,27 +144,27 @@ override method @assignmentInstructionAST analyze
   case literalStructure (@literalStructureList value) :
     target = .literalStructure {!value:value}
   end
-  if [sourceValueName isLiteralStructure] then
-    getNewTempVariable (!?ioTemporaries ?let temporaryResult)
-    ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
-      !targetType
-      !temporaryResult
-      !sourceValueName
-    }
-    ioInstructionGenerationList += !@assignmentInstructionIR.new {
-      !target
-      !mFieldList
-      !targetType
-      !temporaryResult
-    }
-  else
-    ioInstructionGenerationList += !@assignmentInstructionIR.new {
-      !target
-      !mFieldList
-      !targetType
-      !sourceValueName
-    }
-  end
+#  if [sourceValueName isLiteralStructure] then
+#    getNewTempVariable (!?ioTemporaries ?let temporaryResult)
+#    ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
+#      !targetType
+#      !temporaryResult
+#      !sourceValueName
+#    }
+#    ioInstructionGenerationList += !@assignmentInstructionIR.new {
+#      !target
+#      !mFieldList
+#      !targetType
+#      !temporaryResult
+#    }
+#  else
+#    ioInstructionGenerationList += !@assignmentInstructionIR.new {
+#      !target
+#      !mFieldList
+#      !targetType
+#      !sourceValueName
+#    }
+#  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -191,15 +193,7 @@ override method @assignmentInstructionIR llvmInstructionCode ?!@string ioCode {
     ioCode += "." + mangledNameForProperty (!name:fieldName.string)
   end
   ioCode += " = " + [mSourceValue mangledName] + "\n"
-  @string llvmType
-  switch [mTargetVarType  kind]
-  case boolean : llvmType = "i1"
-  case boolset : llvmType = "<<boolset>>"
-  case enumeration (@enumConstantMap unused constantMap) : llvmType = "<<enumeration>>"
-  case structure (@propertyMap unused propertyMap) :  llvmType = "<<structure>>"
-  case integer (* * @bool unused unsigned @uint bitCount) : llvmType = "i" + bitCount
-  case literalString :  llvmType = "<<literalString>>"
-  end
+  let llvmType = [mTargetVarType llvmType]
   switch mTargetVariable
   case register (@lstring unused name @bigint address) :
     ioCode += "  store volatile " + llvmType + " " + [mSourceValue mangledName] + ", " + llvmType

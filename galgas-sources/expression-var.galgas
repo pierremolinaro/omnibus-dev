@@ -53,8 +53,8 @@ override method @varInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResultValueName
+  !type:@unifiedTypeMap-proxy outExpressionType
+  !result:@operandIR outResultValueName
 {
 #--- Search variable
   [!?ioVariableMap searchForReadAccess
@@ -62,13 +62,56 @@ override method @varInExpressionAST analyzeExpression
     ?let variableType
     ?let accessIsAllowed
     ?let unused varAccess
-    ?@variableKindIR resultingVariable
+    ?@variableKindIR variableKind
     ?*
     ?@registerBitSliceAccessMap registerBitSliceMap
     ?*
   ]
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on the this variable"
+  end
+#--- Load variable
+  @operandIR variableValueName
+  switch variableKind
+  case register (@lstring name @bigint address) :
+    getNewTempVariable (!?ioTemporaries ?variableValueName)
+    ioInstructionGenerationList += !@loadRegisterIR.new {
+      !name.string
+      !address
+      !variableType
+      !variableValueName
+    }
+  case globalVariable (@lstring name) :
+    getNewTempVariable (!?ioTemporaries ?variableValueName)
+    ioInstructionGenerationList += !@loadGlobalVariableIR.new {
+      !name.string
+      !variableType
+      !variableValueName
+    }
+  case localVariable (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : variableValueName
+  case inArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : variableValueName
+  case inOutArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : variableValueName
+  case outArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : variableValueName
+  case localConstant (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : variableValueName
+  case globalConstant (@operandIR value) :
+    variableValueName = value
+  case temporaryConstant (@uint unused idx) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
+  case localAccess (@lstring access) :
+    error access : "@varInExpressionAST analyzeExpression" : variableValueName
+  case literalUnsignedInteger (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
+  case literalSignedInteger (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
+  case literalString (**) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
+  case literalStructure (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
   end
 #--- Solve inferred type
   outExpressionType = solveInferredType (
@@ -81,22 +124,22 @@ override method @varInExpressionAST analyzeExpression
     if [registerBitSliceMap count] > 0 then # It is a register
       [registerBitSliceMap searchKey
         !field
-        ?let @infixOperatorIR accessOperator
-        ?let @variableKindIR accessRightOperand
+        ?let @infixOperatorIR unused accessOperator
+        ?let @variableKindIR unused accessRightOperand
         ?let submap
         ?let newResultType
        ]
     #--- Temp var
       getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
-      ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-        !newResultType
-        !newResultingVariable
-        !resultingVariable
-        !accessOperator
-        !accessRightOperand
-        !mSourceVarName.location
-      }
-      resultingVariable = newResultingVariable 
+#      ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
+#        !newResultType
+#        !newResultingVariable
+#        !resultingVariable
+#        !accessOperator
+#        !accessRightOperand
+#        !mSourceVarName.location
+#      }
+      variableValueName = newResultingVariable 
       registerBitSliceMap = submap
       outExpressionType = newResultType
     else
@@ -112,22 +155,72 @@ override method @varInExpressionAST analyzeExpression
         case structure (@propertyMap propertyMap) :
           [propertyMap searchKey !field ?outExpressionType]
           getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
-          ioInstructionGenerationList += !@fieldAccessIR.new {
-            !outExpressionType
-            !newResultingVariable
-            !resultingVariable
-            !field
-          }
-          resultingVariable = newResultingVariable 
+#          ioInstructionGenerationList += !@fieldAccessIR.new {
+#            !outExpressionType
+#            !newResultingVariable
+#            !resultingVariable
+#            !field
+#          }
+          variableValueName = newResultingVariable 
         case integer (* * * *) :
           error field : "an integer does not handle field access"
       end    
     end
   end
 #--- Generate code
-  outResultValueName = resultingVariable
+  outResultValueName = variableValueName
 }
 
+#----------------------------------------------------------------------------------------------------------------------*
+#! @loadRegisterIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @loadRegisterIR : @abstractInstructionIR {
+  @string mRegisterName
+  @bigint mRegisterAddress
+  @unifiedTypeMap-proxy mRegisterType
+  @operandIR mTargetName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadRegisterIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mRegisterType llvmType]
+  ioCode += "  " + mTargetName + " = load volatile " + llvmType
+         + "* (inttoptr i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadRegisterIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @loadGlobalVariableIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @loadGlobalVariableIR : @abstractInstructionIR {
+  @string mVariableName
+  @unifiedTypeMap-proxy mVariableType
+  @operandIR mTargetName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mVariableType llvmType]
+  ioCode += "  " + mTargetName + " = load " + llvmType + "* " + mVariableName + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @fieldAccessIR
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @fieldAccessIR : @abstractInstructionIR {

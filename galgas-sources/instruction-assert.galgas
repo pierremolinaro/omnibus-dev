@@ -60,8 +60,8 @@ override method @assertInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:instructionGenerationList
-    ?expressionType:let expressionType
-    ?result:@variableKindIR expressionValueName
+    ?type:let expressionType
+    ?result:@operandIR expressionValueName
   ]
 #--- Check inferred type
   if not [[expressionType kind] isBoolean] then
@@ -88,14 +88,14 @@ override method @assertInstructionAST analyze
 class @assertInstructionIR : @abstractInstructionIR {
   @location mAssertInstructionLocation
   @instructionListIR mInstructionList
-  @variableKindIR mExpressionValue
+  @operandIR mExpressionValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @assertInstructionIR llvmInstructionCode ?!@string ioCode {
   [mInstructionList instructionListLLVMCode !?ioCode]
-  ioCode += "if (!" + [mExpressionValue mangledName] + ") {\n"
+  ioCode += "if (!" + mExpressionValue + ") {\n"
   ioCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mAssertInstructionLocation line] + ") ;\n"
@@ -106,7 +106,7 @@ override method @assertInstructionIR llvmInstructionCode ?!@string ioCode {
 
 override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
-  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
+#  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

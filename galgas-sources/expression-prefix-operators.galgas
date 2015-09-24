@@ -60,8 +60,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
+  !type:@unifiedTypeMap-proxy outExpressionType
+  !result:@operandIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -75,8 +75,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let expressionType
-    ?result:@variableKindIR result
+    ?type:let expressionType
+    ?result:let @operandIR expressionValue
   ]
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap operatorMap
@@ -109,8 +109,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
     ?resultType:outExpressionType
   ]
 #---
-  if [result isLiteralSignedInteger] then
-    [result literalSignedInteger ?value:let @bigint value]
+  if [expressionValue isLiteralInteger] then
+    [expressionValue literalInteger ?value:let @bigint value]
     @bigint result
     switch mOp 
     case minusNoOvf : result = - value
@@ -118,17 +118,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case minus : result = - value
     case notOperator : result = 1G ^ value
     end
-    outResult = .literalSignedInteger {!value:result}
-  elsif [result isLiteralUnsignedInteger] then
-    [result literalUnsignedInteger ?value:let @bigint value]
-    switch mOp 
-    case minusNoOvf, minus :
-      outResult = .literalSignedInteger {!value:- value}
-    case notOperator :
-      outResult = .literalUnsignedInteger {!value:1G ^ value}
-    case unsignedComplement :
-      outResult = .literalUnsignedInteger {!value:~ value}
-    end
+    outResult = .literalInteger {!value:result}
   else
   #--- Temp var
     getNewTempVariable (!?ioTemporaries ?outResult)
@@ -136,7 +126,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     ioInstructionGenerationList += !@prefixOperatorExpressionIR.new {
       !outExpressionType
       !outResult
-      !result
+      !expressionValue
       !prefixOperatorIR
       !mOperatorLocation
     }
@@ -158,8 +148,8 @@ enum @prefixOperatorIR {
 
 class @prefixOperatorExpressionIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mResult
-  @variableKindIR mOperand
+  @operandIR mResult
+  @operandIR mOperand
   @prefixOperatorIR mOperator
   @location mOperatorLocation
 }
@@ -169,8 +159,8 @@ class @prefixOperatorExpressionIR : @abstractInstructionIR {
 override method @prefixOperatorExpressionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator 
   case prefix (@string prefixOperator) :
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    ioCode += " = " + prefixOperator + " " + [mOperand mangledName] + " ;\n"
+    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + mResult
+    ioCode += " = " + prefixOperator + " " + mOperand + " ;\n"
   case prefixMinusOvf (@uint code) :
     @bigint minValue
     switch [mTargetType kind]
@@ -184,21 +174,21 @@ override method @prefixOperatorExpressionIR llvmInstructionCode ?!@string ioCode
       minValue = min
     end
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-    ioCode += "const bool " + ovfVar + " = " + [mOperand mangledName] + " == " + minValue + " ;\n"
+    ioCode += "const bool " + ovfVar + " = " + mOperand + " == " + minValue + " ;\n"
     ioCode += "if (" + ovfVar + ") {\n"
     ioCode += "  raise_exception (" + code
        + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
        + ", " + [mOperatorLocation line] + ") ;\n"
     ioCode += "}\n" 
-    ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-       + " = - " + [mOperand mangledName] + " ;\n"
+    ioCode += mangledNameForType (!name:[mTargetType key]) + " " + mResult
+       + " = - " + mOperand + " ;\n"
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @prefixOperatorExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+override method @prefixOperatorExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+#  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

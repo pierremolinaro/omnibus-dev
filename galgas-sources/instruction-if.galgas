@@ -126,8 +126,8 @@ override method @ifInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let testExpressionType
-    ?result:@variableKindIR testResult
+    ?type:let testExpressionType
+    ?result:@operandIR testResult
   ]
 #--- Check inferred type
   if [testExpressionType kind] != .boolean then
@@ -180,7 +180,7 @@ override method @ifInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @variableKindIR mTestVariable
+  @operandIR mTestVariable
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
@@ -189,11 +189,11 @@ class @ifInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += ";--- if (" + [mTestVariable mangledName] + ") {\n"
+  ioCode += ";--- if (" + mTestVariable + ") {\n"
   let labelTrue = "%" + [mLocation locationIndex] + ".true"
   let labelFalse = "%" + [mLocation locationIndex] + ".false"
   let labelEnd = "%" + [mLocation locationIndex] + ".end"
-  ioCode += "  br i1 " + [mTestVariable mangledName] + ", label " + labelTrue + ", label " + labelFalse + "\n\n"
+  ioCode += "  br i1 " + mTestVariable + ", label " + labelTrue + ", label " + labelFalse + "\n\n"
 #--- True branch
   ioCode += labelTrue + ":\n"
   [mThenInstructionGenerationList instructionListLLVMCode !?ioCode]
@@ -211,7 +211,7 @@ override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @ifInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTestVariable enterAccessibleEntities !?ioAccessibleEntities]
+#  [mTestVariable enterAccessibleEntities !?ioAccessibleEntities]
   [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
   [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities]
 }

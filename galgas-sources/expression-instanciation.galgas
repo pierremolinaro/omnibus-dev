@@ -47,11 +47,10 @@ override method @instanciationAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
+  !result:@operandIR outResult
 {
 #--- Analyze constructor source type
-  outExpressionType = .searchKey {!inContext.mTypeMap !mTypeName}
+  let expressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Generate code
   [inContext.mInstanciationMap searchKey !mTypeName ?let @literalStructureList literalStructureList]
   outResult = .literalStructure {!value:literalStructureList}

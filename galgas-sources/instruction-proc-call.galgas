@@ -128,7 +128,7 @@ override method @procCallInstructionAST analyze
         ?let type
         ?let accessIsAllowed
         ?let unused variableAccess
-        ?let parameterAccess
+        ?let unused parameterAccess
         ?let isCopiable
         ?*
         ?let canBeUsedAsInputParameter
@@ -143,7 +143,7 @@ override method @procCallInstructionAST analyze
         error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.input !mSelector !type !parameterAccess
+#      procCallEffectiveParameterListIR += !.input !mSelector !type !parameterAccess
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -156,8 +156,8 @@ override method @procCallInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
-        ?expressionType:let expressionType
-        ?result:let @variableKindIR expressionResult
+        ?type:let expressionType
+        ?result:let @operandIR expressionResult
       ]
       checkAssignmentCompatibility (
         !sourceType:expressionType
@@ -172,7 +172,7 @@ override method @procCallInstructionAST analyze
         ?let type
         ?let accessIsAllowed
         ?let unused variableAccess
-        ?let parameterAccess
+        ?let unused parameterAccess
         ?2*
         ?let canBeUsedAsInputParameter
       ]
@@ -183,7 +183,7 @@ override method @procCallInstructionAST analyze
         error name : "routine has no access right on the this variable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
+#      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
     end
   end
 #--- Check mode
@@ -231,7 +231,7 @@ list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
-  @variableKindIR mParameter
+  @operandIR mParameter
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -245,18 +245,18 @@ class @procCallInstructionIR : @abstractInstructionIR {
 
 override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
   ioCode += mangledNameForProcedure (!name:mProcName) + " ("
-  for () in mParameters do
-    switch mEffectiveParameterPassingMode
-    case input:
-      ioCode += "&(" + [mParameter mangledName] + ")"
-    case output:
-      ioCode += [mParameter mangledName]
-    case outputInput:
-      ioCode += "&(" + [mParameter mangledName] + ")"
-    end
-  between
-    ioCode += ", "
-  end
+#  for () in mParameters do
+#    switch mEffectiveParameterPassingMode
+#    case input:
+#      ioCode += "&(" + [mParameter mangledName] + ")"
+#    case output:
+#      ioCode += [mParameter mangledName]
+#    case outputInput:
+#      ioCode += "&(" + [mParameter mangledName] + ")"
+#    end
+#  between
+#    ioCode += ", "
+#  end
   ioCode += ") ;\n"
 }
 
@@ -264,9 +264,9 @@ override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mProcedureSet += !mProcName
-  for () in mParameters do
-    [mParameter enterAccessibleEntities !?ioAccessibleEntities]
-  end
+#  for () in mParameters do
+#    [mParameter enterAccessibleEntities !?ioAccessibleEntities]
+#  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

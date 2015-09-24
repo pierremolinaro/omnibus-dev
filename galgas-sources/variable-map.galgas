@@ -20,8 +20,36 @@ enum @assignmentTargetIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @operandIR {
-  case literalInteger (@bigint value @uint bitSize)
-  case llvmObject (@lstring name) # @nom or %nom
+  case literalInteger (@bigint value)
+  case llvmLocalObject (@string name)
+  case llvmGlobalObject (@string name)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @operandIR string -> @string outResult {
+  switch self
+  case literalInteger (@bigint value) : outResult = [value string]
+  case llvmLocalObject (@string name) : outResult = "%" + name
+  case llvmGlobalObject (@string name) : outResult = "@" + name
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @operandIR isStatic -> @bool outResult {
+  switch self
+  case literalInteger (*) : outResult = true
+  case llvmLocalObject (*) : outResult = false
+  case llvmGlobalObject (*) : outResult = true
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @valueIR {
+  case literalInteger (@bigint value)
+  case llvmObject (@string name) # @nom or %nom
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -34,8 +62,10 @@ enum @variableKindIR {
   case inOutArgument (@lstring name)
   case outArgument (@lstring name)
   case localConstant (@lstring name)
+  case globalConstant (@operandIR value)
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
+
   case literalUnsignedInteger (@bigint value)
   case literalSignedInteger (@bigint value)
   case literalString (@string value @string name)
@@ -60,6 +90,8 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case localConstant (*) :
     outResult = false
+  case globalConstant (*) :
+    outResult = true
   case temporaryConstant (*) :
     outResult = false
   case localAccess (*) :
@@ -118,7 +150,7 @@ func initialVariableMap
       !constantType
       !true
       !mangledNameForConstant (!name:constantName.string)
-      !expressionCode
+      !.globalConstant{!value:expressionCode}
       !true
       !{}
       !false # Cannot be used as input parameter
@@ -171,7 +203,7 @@ func variableMapWithConstants
       !constantType
       !true
       !mangledNameForConstant (!name:constantName.string)
-      !expressionCode
+      !.globalConstant{!value:expressionCode}
       !true
       !{}
       !false
@@ -183,9 +215,9 @@ func variableMapWithConstants
 
 proc getNewTempVariable
   ?!@semanticTemporariesStruct ioTemporaries
-  !@variableKindIR outTempVariable
+  !@operandIR outTempVariable
 {
-  outTempVariable = .temporaryConstant {!idx:ioTemporaries.mTemporaryIndex}
+  outTempVariable = .llvmLocalObject {!name:"temp." + ioTemporaries.mTemporaryIndex}
   ioTemporaries.mTemporaryIndex ++
 }
 

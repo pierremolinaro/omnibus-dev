@@ -58,8 +58,8 @@ override method @throwInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:unusedInstructionListIR
-    ?expressionType:let expressionType
-    ?result:@variableKindIR result
+    ?type:let expressionType
+    ?result:@operandIR result
   ]
 #--- Expression type check
   if [expressionType key] != [inContext.mExceptionCodeType key] then
@@ -85,13 +85,13 @@ override method @throwInstructionAST analyze
 
 class @throwInstructionIR : @abstractInstructionIR {
   @location mThrowInstructionLocation
-  @variableKindIR mCode
+  @operandIR mCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @throwInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += "raise_exception (" + [mCode mangledName]
+  ioCode += "raise_exception (" + mCode
      + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mThrowInstructionLocation line] + ") ;\n"
 }

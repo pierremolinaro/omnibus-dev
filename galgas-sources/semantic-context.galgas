@@ -41,7 +41,7 @@ map @globalLiteralStringMap {
 
 map @globalConstantMap {
   @unifiedTypeMap-proxy mConstantType
-  @variableKindIR mExpressionCode
+  @operandIR mExpressionCode
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }
@@ -62,7 +62,7 @@ map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
   @allowedRoutineMap mAllowedProcedureMap
-  @variableKindIR mInitialValue
+  @operandIR mInitialValue
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
 }
@@ -106,6 +106,27 @@ sharedmap @unifiedTypeMap %selectors {
 
   insert insertKey error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @unifiedTypeMap-proxy llvmType -> @string outResult {
+  switch [self  kind]
+  case boolean : outResult = "i1"
+  case boolset : outResult = "<<boolset>>"
+  case enumeration (@enumConstantMap unused constantMap) : outResult = "<<enumeration>>"
+  case structure (@propertyMap unused propertyMap) :  outResult = "<<structure>>"
+  case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
+  case literalString :  outResult = "<<literalString>>"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @constructorMap {
+  @operandIR mValue
+  insert insertKey error message "the '%K' constructor is already declared in %L"
+  search searchKey error message "there is no '%K' constructor"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -246,37 +246,37 @@ override method @structureDeclaration initAnalysis
       !?staticStringMap:globalLiteralStringMap
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
-      ?expressionType:let unused inferredType
-      ?result:@variableKindIR expressionIR
+      ?type:@unifiedTypeMap-proxy expType
+      ?result:@operandIR expressionIR
     ]
-    switch expressionIR
-    case register (@lstring name *) :
-      error name : "a register cannot be used as field initial value"
-    case globalVariable (@lstring name) :
-      error name : "a global variable cannot be used as field initial value"
-    case localVariable (@lstring name) :
-      error name : "a local variable cannot be used as field initial value"
-    case inArgument (@lstring name) :
-      error name : "an in formal argument cannot be used as field initial value"
-    case inOutArgument (@lstring name) :
-      error name : "an in/out formal argument cannot be used as field initial value"
-    case outArgument (@lstring name) :
-      error name : "an out formal argument cannot be used as field initial value"
-    case localConstant (@lstring name) :
-      error name : "a local constant cannot be used as field initial value"
-    case temporaryConstant (*) :
-      error .nowhere : "a temporary constant cannot be used as field initial value"
-    case localAccess (@lstring access) :
-      error access : "a property cannot be used as field initial value"
-    case literalUnsignedInteger (@bigint value) :
-      initStructureList += !.unsignedInteger {!value:value}
-    case literalSignedInteger (@bigint value) :
-      initStructureList += !.signedInteger {!value:value}
-    case literalString (@string value @string name) :
-      initStructureList += !.string {!value:value !name:name}
-    case literalStructure (@literalStructureList value) :
-      initStructureList += !.structure {!value:value}
-    end
+#    switch expressionIR
+#    case register (@lstring name *) :
+#      error name : "a register cannot be used as field initial value"
+#    case globalVariable (@lstring name) :
+#      error name : "a global variable cannot be used as field initial value"
+#    case localVariable (@lstring name) :
+#      error name : "a local variable cannot be used as field initial value"
+#    case inArgument (@lstring name) :
+#      error name : "an in formal argument cannot be used as field initial value"
+#    case inOutArgument (@lstring name) :
+#      error name : "an in/out formal argument cannot be used as field initial value"
+#    case outArgument (@lstring name) :
+#      error name : "an out formal argument cannot be used as field initial value"
+#    case localConstant (@lstring name) :
+#      error name : "a local constant cannot be used as field initial value"
+#    case temporaryConstant (*) :
+#      error .nowhere : "a temporary constant cannot be used as field initial value"
+#    case localAccess (@lstring access) :
+#      error access : "a property cannot be used as field initial value"
+#    case literalUnsignedInteger (@bigint value) :
+#      initStructureList += !.unsignedInteger {!value:value}
+#    case literalSignedInteger (@bigint value) :
+#      initStructureList += !.signedInteger {!value:value}
+#    case literalString (@string value @string name) :
+#      initStructureList += !.string {!value:value !name:name}
+#    case literalStructure (@literalStructureList value) :
+#      initStructureList += !.structure {!value:value}
+#    end
   end
 #---
   [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
@@ -318,12 +318,12 @@ override method @structureDeclaration semanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
-      ?expressionType:let inferredType
-      ?result:@variableKindIR resultValueName
+      ?type:@unifiedTypeMap-proxy expType
+      ?result:@operandIR resultValue
     ]
   #---
     structureFieldListForGeneration +=
-      !inferredType
+      !expType
       !mFieldName.string
 #      !initExpressionGeneratedCode
   end

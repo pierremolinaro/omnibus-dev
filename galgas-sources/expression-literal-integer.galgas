@@ -44,34 +44,33 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
+  !type:@unifiedTypeMap-proxy outResultType
+  !result:@operandIR outResult
 {
   if inOptionalTargetType == .null then
-    error mLiteralInteger : "Cannot infer type" : outExpressionType
+    error mLiteralInteger : "Cannot infer type" : outResultType, outResult
   else
     switch [inOptionalTargetType kind]
     case integer (* max * *) :
       if mLiteralInteger.bigint > max then
         error mLiteralInteger : "literal integer is > " + [inOptionalTargetType key]
-          + " max value (" + max + ")" : outExpressionType
+          + " max value (" + max + ")" : outResultType, outResult
       else
-        outExpressionType = inOptionalTargetType
+        outResultType = inOptionalTargetType
+        outResult = .literalInteger {!value:mLiteralInteger.bigint}
       end
     case enumeration (*) :
-      error mLiteralInteger : "an enumeration cannot be assigned from a literal integer" : outExpressionType
+      error mLiteralInteger : "an enumeration cannot be assigned from a literal integer" : outResultType, outResult
     case structure (*) :
-      error mLiteralInteger : "a structure cannot be assigned from a literal integer" : outExpressionType
+      error mLiteralInteger : "a structure cannot be assigned from a literal integer" : outResultType, outResult
     case boolean :
-      error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outExpressionType
+      error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outResultType, outResult
     case boolset :
-      error mLiteralInteger : "a boolset cannot be assigned from a literal integer" : outExpressionType
+      error mLiteralInteger : "a boolset cannot be assigned from a literal integer" : outResultType, outResult
     case literalString :
-      error mLiteralInteger : "a literal string cannot be assigned from a literal integer" : outExpressionType
+      error mLiteralInteger : "a literal string cannot be assigned from a literal integer" : outResultType, outResult
     end
   end
-#--- Generate code
-  outResult = .literalUnsignedInteger {!value:mLiteralInteger.bigint}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
