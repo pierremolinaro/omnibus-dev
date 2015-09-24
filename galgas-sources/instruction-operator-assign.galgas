@@ -82,8 +82,8 @@ override method @operatorAssignInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let rightExpressionType
-    ?result:@variableKindIR sourceValueName
+    ?type:let rightExpressionType
+    ?result:@operandIR sourceValueName
   ]
 #--- Check inferred type
   if [targetType key] != [rightExpressionType key] then
@@ -143,7 +143,7 @@ class @operatorAssignInstructionIR : @abstractInstructionIR {
   @variableKindIR mTargetVariable
   @unifiedTypeMap-proxy mTargetVarType
   @operatorAssignKind mOperator
-  @variableKindIR mSourceValue
+  @operandIR mSourceValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -151,11 +151,11 @@ class @operatorAssignInstructionIR : @abstractInstructionIR {
 override method @operatorAssignInstructionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator
   case bitWiseOrAssign :
-    ioCode += [mTargetVariable mangledName] + " |= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " |= " + mSourceValue + " ;\n"
   case bitWiseAndAssign :
-    ioCode += [mTargetVariable mangledName] + " &= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " &= " + mSourceValue + " ;\n"
   case bitWiseXorAssign :
-    ioCode += [mTargetVariable mangledName] + " ^= " + [mSourceValue mangledName] + " ;\n"
+    ioCode += [mTargetVariable mangledName] + " ^= " + mSourceValue + " ;\n"
   end
 }
 
@@ -163,7 +163,7 @@ override method @operatorAssignInstructionIR llvmInstructionCode ?!@string ioCod
 
 override method @operatorAssignInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mTargetVariable enterAccessibleEntities !?ioAccessibleEntities]
-  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
+#  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

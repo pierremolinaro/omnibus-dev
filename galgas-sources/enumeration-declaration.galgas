@@ -96,11 +96,11 @@ override method @enumerationDeclaration enterInContext
   end
   @enumConstantMap enumConstantMap = {}
   @constructorMap constructorMap = {}
-  for (cst) in mCaseNameList do
-    let idx = [enumConstantMap count]
-    [!?enumConstantMap insertKey !cst !idx]
-    [!?constructorMap insertKey !cst !.literalUnsignedInteger {!value:[idx bigint]}]
-  end
+#  for (cst) in mCaseNameList do
+#    let idx = [enumConstantMap count]
+#    [!?enumConstantMap insertKey !cst !idx]
+#    [!?constructorMap insertKey !cst !.literalInteger {!value:[idx bigint]}]
+#  end
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName
     !kind:.enumeration {!constantMap:enumConstantMap}

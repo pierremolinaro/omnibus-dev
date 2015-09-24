@@ -83,8 +83,8 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
+  !type:@unifiedTypeMap-proxy outResultType
+  !result:@operandIR outResultValue
 {
 #--- Analyze left expression
   [mLeftExpression analyzeExpression
@@ -98,14 +98,14 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let leftExpressionType
-    ?result:@variableKindIR leftResult
+    ?type:let @unifiedTypeMap-proxy leftType
+    ?result:let @operandIR leftOperandValue
   ]
 #--- Analyze right expression
   [mRightExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
-    !optionalTargetType:leftExpressionType
+    !optionalTargetType:leftType
     !context:inContext
     !modes:inModeSet
     !allowException:inAllowExceptions
@@ -113,8 +113,8 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let rightExpressionType
-    ?result:@variableKindIR rightResult
+    ?type:let @unifiedTypeMap-proxy rightType
+    ?result:let @operandIR rightOperandValue
   ]
 #--- Check left type
   @infixOperatorMap operatorMap
@@ -229,15 +229,15 @@ override method @infixOperatorExpressionAST analyzeExpression
     infixOperatorIR = .infixNoOvf {!infixOperator:">>"}
   end
   [operatorMap checkWith
-    !leftType:leftExpressionType
-    !rightType:rightExpressionType
+    !leftType:leftType
+    !rightType:rightType
     !operatorLocation:mOperatorLocation
-    ?resultType:outExpressionType
+    ?resultType:outResultType
   ]
 #---
-  if [leftResult isLiteralUnsignedInteger] && [rightResult isLiteralUnsignedInteger] then
-    [leftResult literalUnsignedInteger ?value:let @bigint leftValue]
-    [rightResult literalUnsignedInteger ?value:let @bigint rightValue]
+  if [leftOperandValue isLiteralInteger] && [rightOperandValue isLiteralInteger] then
+    [leftOperandValue literalInteger ?value:let @bigint leftValue]
+    [rightOperandValue literalInteger ?value:let @bigint rightValue]
     @bigint result
     switch mOp 
     case equal : result = [leftValue == rightValue bigint]
@@ -264,17 +264,17 @@ override method @infixOperatorExpressionAST analyzeExpression
     case leftShiftOp  : result = leftValue << [rightValue uint]
     case rightShiftOp : result = leftValue >> [rightValue uint]
     end
-    outResult = .literalUnsignedInteger {!value:result}
+    outResultValue = .literalInteger {!value:result}
   else
   #--- Temp var
-    getNewTempVariable (!?ioTemporaries ?outResult)
+    getNewTempVariable (!?ioTemporaries ?outResultValue)
   #--- Generate code
     ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-      !outExpressionType
-      !outResult
-      !leftResult
+      !outResultType
+      !outResultValue
+      !leftOperandValue
       !infixOperatorIR
-      !rightResult
+      !rightOperandValue
       !mOperatorLocation
     }
   end
@@ -296,11 +296,11 @@ enum @infixOperatorIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @operatorInfixExpressionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mResult
-  @variableKindIR mLeftOperand
+  @unifiedTypeMap-proxy mResultType
+  @operandIR mResult
+  @operandIR mLeftOperand
   @infixOperatorIR mOperator
-  @variableKindIR mRighOperand
+  @operandIR mRighOperand
   @location mOperatorLocation
 }
 
@@ -309,44 +309,45 @@ class @operatorInfixExpressionIR : @abstractInstructionIR {
 override method @operatorInfixExpressionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator 
   case infixNoOvf (@string infixOperator) :
-    ioCode += ";--- const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    ioCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
+    ioCode += ";--- const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+    ioCode += " = " +  mLeftOperand + " " + infixOperator + " " + mRighOperand + " ;\n"
+    ioCode += "  <<@operatorInfixExpressionIR llvmInstructionCode>>\n"
   case infixOvf (@string builtinFunction @uint code) :
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-    ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName] + " ;\n"
+    ioCode += mangledNameForType (!name:[mResultType key]) + " " + mResult + " ;\n"
     ioCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
-      +  [mLeftOperand mangledName] + ", "
-      + [mRighOperand mangledName]
-      + ", &" + [mResult mangledName] + ") ;\n"
+      +  mLeftOperand + ", "
+      + mRighOperand
+      + ", &" + mResult + ") ;\n"
     ioCode += "if (" + ovfVar + ") {\n"
     ioCode += "  raise_exception (" + code
        + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
        + ", " + [mOperatorLocation line] + ") ;\n"
     ioCode += "}\n" 
   case infixUnsignedDivide (@uint code) :
-    ioCode += "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    ioCode += "if (0 == " +  mRighOperand + ") {\n"
     ioCode += "  raise_exception (" + code
       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
       + ", " + [mOperatorLocation line] + ") ;\n"
     ioCode += "}\n"
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    ioCode += " = " +  [mLeftOperand mangledName] + " / " + [mRighOperand mangledName] + " ;\n"
+    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+    ioCode += " = " +  mLeftOperand + " / " + mRighOperand + " ;\n"
   case infixModulo (@uint code) :
-    ioCode += "if (0 == " +  [mRighOperand mangledName] + ") {\n"
+    ioCode += "if (0 == " +  mRighOperand + ") {\n"
     ioCode += "  raise_exception (" + code
       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
       + ", " + [mOperatorLocation line] + ") ;\n"
     ioCode += "}\n"
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    ioCode += " = " +  [mLeftOperand mangledName] + " % " + [mRighOperand mangledName] + " ;\n"
+    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
+    ioCode += " = " +  mLeftOperand + " % " + mRighOperand + " ;\n"
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
-  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
+override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+#  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
+#  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

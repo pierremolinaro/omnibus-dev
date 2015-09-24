@@ -139,15 +139,15 @@ method @globalVarDeclarationList-element enterInContext
        !?staticStringMap:ioGlobalLiteralStringMap
        !?variableMap:variableMap
        !?instructionListIR:instructionGenerationList
-       ?expressionType:let @unifiedTypeMap-proxy expressionType
-       ?result:let @variableKindIR resultValueName
+       ?type:let @unifiedTypeMap-proxy resultType
+       ?result:let @operandIR resultValue
     ]
-    if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
+    if ([instructionGenerationList length] > 0) || not [resultValue isStatic] then
       error mVarName : "source expression cannot be statically computed"
     end
   #--- Check variable type and expression type
     checkAssignmentCompatibility (
-      !sourceType:expressionType
+      !sourceType:resultType
       !targetType:variableType
       !errorLocation:mVarName.location
     )
@@ -210,10 +210,10 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !expressionType
+      !resultType
       !executionModes
       !allowedProcedureMap
-      !resultValueName
+      !resultValue
     ]
   case procType (* *) :
   end
@@ -250,12 +250,7 @@ method @globalVarDeclarationList-element semanticAnalysis
 private filewrapper globalVariableGenerationTemplate in "../generation-templates" {
 }{
 }{
-  template implementation "global-var-declaration.galgasTemplate"
-    ?@string GLOBAL_VAR_NAME
-    ?@string GLOBAL_TYPE_NAME
-    ?@bool GENERATE_VOLATILE
-    ?@string INITIAL_VALUE_STRING
-  template llvmImplementation "llvm-global-var-declaration.galgasTemplate"
+  template llvmImplementation "global-var-declaration.galgasTemplate"
     ?@string GLOBAL_VAR_NAME
     ?@unifiedTypeMap-proxy GLOBAL_VAR_TYPE
     ?@string INITIAL_VALUE_STRING
@@ -263,36 +258,11 @@ private filewrapper globalVariableGenerationTemplate in "../generation-templates
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @globalVariableMapIR-element implementationCodeGeneration -> @string outCode {
-  var initialValueString = [mInitialValue mangledName]
-  if [mInitialValue isLiteralUnsignedInteger] then
-    [mInitialValue literalUnsignedInteger ?value:let @bigint value] ;
-    if value == 0G then
-      initialValueString = ""
-    end
-  end
-  outCode = [filewrapper globalVariableGenerationTemplate.implementation
-    !lkey.string # mGlobalVariableName
-    ![mType key]
-    !mGenerateVolatile
-    !initialValueString
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @globalVariableMapIR-element generateLLVM -> @string outCode {
-  var initialValueString = [mInitialValue mangledName]
-  if [mInitialValue isLiteralUnsignedInteger] then
-    [mInitialValue literalUnsignedInteger ?value:let @bigint value] ;
-    if [value isZero] then
-      initialValueString = ""
-    end
-  end
   outCode = [filewrapper globalVariableGenerationTemplate.llvmImplementation
     !lkey.string # mGlobalVariableName
     !mType
-    !initialValueString
+    ![mInitialValue string]
   ]
 }
 

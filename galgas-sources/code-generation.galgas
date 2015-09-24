@@ -40,6 +40,8 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = "* " + mangledNameForOutArgument (!name:name.string)
   case localConstant (@lstring name) :
     outResult = mangledNameForConstant (!name:name.string)
+  case globalConstant (@operandIR unused value) :
+    outResult = "<<@variableKindIR mangledName>>"
   case temporaryConstant (@uint idx) :
     outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :

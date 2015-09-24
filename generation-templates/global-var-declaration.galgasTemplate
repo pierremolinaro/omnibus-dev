@@ -1,16 +1,14 @@
-//---------------------------------------------------------------------------------------------------------------------*
-//%!["global variable " + GLOBAL_VAR_NAME stringByLeftAndRightPadding !117 !' ']%*
-//---------------------------------------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;%!["global variable " + GLOBAL_VAR_NAME stringByLeftAndRightPadding !118 !' ']%*
+;----------------------------------------------------------------------------------------------------------------------*
 
-%
-if GENERATE_VOLATILE then
-%volatile %
-end
-!mangledNameForType (!name:GLOBAL_TYPE_NAME)
+@%!mangledNameForGlobalVariable (!name:GLOBAL_VAR_NAME)% = global %
+![GLOBAL_VAR_TYPE llvmName]
 % %
-!mangledNameForGlobalVariable (!name:GLOBAL_VAR_NAME)
-if INITIAL_VALUE_STRING != "" then
-  % = %!INITIAL_VALUE_STRING
+if INITIAL_VALUE_STRING == "" then
+  %zeroinitializer%
+else
+  !INITIAL_VALUE_STRING
 end
-% ;
+%
 

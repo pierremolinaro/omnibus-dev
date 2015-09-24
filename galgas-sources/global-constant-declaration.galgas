@@ -103,17 +103,17 @@ override method @globalConstantDeclaration enterInContext
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList
-     ?expressionType:let @unifiedTypeMap-proxy expressionType
-     ?result:let @variableKindIR resultValueName
+     ?type:let @unifiedTypeMap-proxy resultType
+     ?result:let @operandIR resultValue
   ]
-  if ([instructionGenerationList length] > 0) || not [resultValueName isStatic] then
+  if ([instructionGenerationList length] > 0) || not [resultValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey
     !mConstantName
-    !expressionType
-    !resultValueName
+    !resultType
+    !resultValue
   ]
 }
 
@@ -156,10 +156,11 @@ private filewrapper globalConstantGenerationTemplate in "../generation-templates
 #----------------------------------------------------------------------------------------------------------------------*
 
 getter @globalConstantMapIR-element headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper globalConstantGenerationTemplate.declaration
-    !lkey.string
-    ![mValueExpressionGeneration mangledName]
-  ]
+  outCode = "<<@globalConstantMapIR-element headerCodeGeneration>>"
+#  outCode = [filewrapper globalConstantGenerationTemplate.declaration
+#    !lkey.string
+#    ![mValueExpressionGeneration mangledName]
+#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

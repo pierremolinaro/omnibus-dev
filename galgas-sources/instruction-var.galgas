@@ -88,8 +88,8 @@ override method @varInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let expressionType
-    ?result:@variableKindIR expressionResultValueName
+    ?type:let expressionType
+    ?result:@operandIR expressionResultValueName
   ]
 #--- Check type compatibility
   if targetType == .null then
@@ -115,7 +115,7 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@varDeclarationInstructionWithSimpleAssignmentIR.new {
     !targetType
-    !targetVar
+    !.llvmLocalObject {!name:mVarName.string}
     !expressionResultValueName
   }
 }
@@ -161,24 +161,24 @@ override method @varInstructionAST analyze
 
 class @varDeclarationInstructionWithSimpleAssignmentIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mTargetVar
-  @variableKindIR mSourceVar
+  @operandIR mTargetVar
+  @operandIR mSourceVar
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @varDeclarationInstructionWithSimpleAssignmentIR llvmInstructionCode ?!@string ioCode {
-  ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName]
-  ioCode += " = " +  [mSourceVar mangledName] + " ;\n"
+  ioCode += mangledNameForType (!name:[mTargetType key]) + " " + mTargetVar
+  ioCode += " = " +  mSourceVar + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @varDeclarationInstructionWithSimpleAssignmentIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
 {
-  [mTargetVar enterAccessibleEntities !?ioAccessibleEntities]
-  [mSourceVar enterAccessibleEntities !?ioAccessibleEntities]
+#  [mTargetVar enterAccessibleEntities !?ioAccessibleEntities]
+#  [mSourceVar enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

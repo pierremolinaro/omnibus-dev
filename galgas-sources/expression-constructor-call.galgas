@@ -44,14 +44,6 @@ override method @constructorCall addDependenceEdgeForStaticExpression
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @constructorMap {
-  @variableKindIR mValue
-  insert insertKey error message "the '%K' constructor is already declared in %L"
-  search searchKey error message "there is no '%K' constructor"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @constructorCall analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
@@ -63,8 +55,7 @@ override method @constructorCall analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResult
+  !result:@operandIR outResult
 {
 #--- Analyze constructor source type
   let @unifiedTypeMap-proxy optionalSourceType = if mOptionalTypeName.string == ""
@@ -72,13 +63,13 @@ override method @constructorCall analyzeExpression
     else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
 #--- Solve inferred type
-  outExpressionType = solveInferredType (
+  let expressionType = solveInferredType (
     !targetType:inOptionalTargetType
     !sourceType:optionalSourceType
     !errorLocation:mConstructorName.location
   )
 #--- Get inferred type constructor map
-  let constructorMap = [outExpressionType constructorMap]
+  let constructorMap = [expressionType constructorMap]
 #--- Check constructor and get result
   [constructorMap searchKey !mConstructorName ?outResult]
 }
