@@ -4,8 +4,23 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+enum @assignmentTargetIR {
+  case register (@lstring name @bigint address)
+  case globalVariable (@lstring name)
+  case localVariable (@lstring name)
+  case inArgument (@lstring name)
+  case inOutArgument (@lstring name)
+  case outArgument (@lstring name)
+  case localConstant (@lstring name)
+  case temporaryConstant (@uint idx)
+  case localAccess (@lstring access)
+  case literalStructure (@literalStructureList value)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 enum @variableKindIR {
-  case register (@lstring name)
+  case register (@lstring name @bigint address)
   case globalVariable (@lstring name)
   case localVariable (@lstring name)
   case inArgument (@lstring name)
@@ -24,7 +39,7 @@ enum @variableKindIR {
 
 getter @variableKindIR isStatic -> @bool outResult {
   switch self
-  case register (*) :
+  case register (* *) :
     outResult = false
   case globalVariable (*) :
     outResult = false
@@ -71,7 +86,7 @@ func initialVariableMap
         !mType
         !true
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey}
+        !.register {!name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
@@ -82,7 +97,7 @@ func initialVariableMap
         !mType
         !true
         !mangledNameForRegister (!name:lkey.string)
-        !.register {!name:lkey}
+        !.register {!name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter

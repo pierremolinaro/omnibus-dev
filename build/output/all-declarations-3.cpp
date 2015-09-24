@@ -10317,7 +10317,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_assignmentInstructionIR GALGAS_assignmentInstructionIR::constructor_new (const GALGAS_variableKindIR & inAttribute_mTargetVariable,
+GALGAS_assignmentInstructionIR GALGAS_assignmentInstructionIR::constructor_new (const GALGAS_assignmentTargetIR & inAttribute_mTargetVariable,
                                                                                 const GALGAS_lstringlist & inAttribute_mFieldList,
                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
                                                                                 const GALGAS_variableKindIR & inAttribute_mSourceValue
@@ -10331,8 +10331,8 @@ GALGAS_assignmentInstructionIR GALGAS_assignmentInstructionIR::constructor_new (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_assignmentTargetIR GALGAS_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_assignmentTargetIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_assignmentInstructionIR * p = (const cPtr_assignmentInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_assignmentInstructionIR) ;
@@ -10343,7 +10343,7 @@ GALGAS_variableKindIR GALGAS_assignmentInstructionIR::reader_mTargetVariable (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cPtr_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_assignmentTargetIR cPtr_assignmentInstructionIR::reader_mTargetVariable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVariable ;
 }
 
@@ -10405,7 +10405,7 @@ GALGAS_variableKindIR cPtr_assignmentInstructionIR::reader_mSourceValue (UNUSED_
 //                                  Pointer class for @assignmentInstructionIR class                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_assignmentInstructionIR::cPtr_assignmentInstructionIR (const GALGAS_variableKindIR & in_mTargetVariable,
+cPtr_assignmentInstructionIR::cPtr_assignmentInstructionIR (const GALGAS_assignmentTargetIR & in_mTargetVariable,
                                                             const GALGAS_lstringlist & in_mFieldList,
                                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                                             const GALGAS_variableKindIR & in_mSourceValue
@@ -11393,6 +11393,9 @@ typeComparisonResult cPtr_ifInstructionIR::dynamicObjectCompare (const acPtr_cla
     result = mAttribute_mTestVariable.objectCompare (p->mAttribute_mTestVariable) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mThenInstructionGenerationList.objectCompare (p->mAttribute_mThenInstructionGenerationList) ;
   }
   if (kOperandEqual == result) {
@@ -11436,12 +11439,13 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_variableKindIR & inAttribute_mTestVariable,
+                                                                const GALGAS_location & inAttribute_mLocation,
                                                                 const GALGAS_instructionListIR & inAttribute_mThenInstructionGenerationList,
                                                                 const GALGAS_instructionListIR & inAttribute_mElseInstructionGenerationList
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_ifInstructionIR result ;
-  if (inAttribute_mTestVariable.isValid () && inAttribute_mThenInstructionGenerationList.isValid () && inAttribute_mElseInstructionGenerationList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_ifInstructionIR (inAttribute_mTestVariable, inAttribute_mThenInstructionGenerationList, inAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
+  if (inAttribute_mTestVariable.isValid () && inAttribute_mLocation.isValid () && inAttribute_mThenInstructionGenerationList.isValid () && inAttribute_mElseInstructionGenerationList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_ifInstructionIR (inAttribute_mTestVariable, inAttribute_mLocation, inAttribute_mThenInstructionGenerationList, inAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -11462,6 +11466,24 @@ GALGAS_variableKindIR GALGAS_ifInstructionIR::reader_mTestVariable (UNUSED_LOCAT
 
 GALGAS_variableKindIR cPtr_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestVariable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_ifInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_ifInstructionIR) ;
+    result = p->mAttribute_mLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_ifInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11505,11 +11527,13 @@ GALGAS_instructionListIR cPtr_ifInstructionIR::reader_mElseInstructionGeneration
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_ifInstructionIR::cPtr_ifInstructionIR (const GALGAS_variableKindIR & in_mTestVariable,
+                                            const GALGAS_location & in_mLocation,
                                             const GALGAS_instructionListIR & in_mThenInstructionGenerationList,
                                             const GALGAS_instructionListIR & in_mElseInstructionGenerationList
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTestVariable (in_mTestVariable),
+mAttribute_mLocation (in_mLocation),
 mAttribute_mThenInstructionGenerationList (in_mThenInstructionGenerationList),
 mAttribute_mElseInstructionGenerationList (in_mElseInstructionGenerationList) {
 }
@@ -11525,6 +11549,8 @@ void cPtr_ifInstructionIR::description (C_String & ioString,
   ioString << "[@ifInstructionIR:" ;
   mAttribute_mTestVariable.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mThenInstructionGenerationList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mElseInstructionGenerationList.description (ioString, inIndentation+1) ;
@@ -11535,7 +11561,7 @@ void cPtr_ifInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_ifInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_ifInstructionIR (mAttribute_mTestVariable, mAttribute_mThenInstructionGenerationList, mAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_ifInstructionIR (mAttribute_mTestVariable, mAttribute_mLocation, mAttribute_mThenInstructionGenerationList, mAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -87,6 +87,7 @@ override method @registerConstantInExpressionAST analyzeExpression
     ?let unused readOnly
     ?let @registerBitSliceAccessMap unused registerBitSliceMap
     ?let @registerFieldMap registerFieldMap
+    ?let @bigint unused registerAddress
   ]
 #--- Field
   [registerFieldMap searchKey
@@ -121,6 +122,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     ?let unused readOnly
     ?let @registerBitSliceAccessMap unused registerBitSliceMap
     ?let @registerFieldMap registerFieldMap
+    ?let @bigint unused registerAddress
   ]
 #--- Field
   [registerFieldMap searchKey

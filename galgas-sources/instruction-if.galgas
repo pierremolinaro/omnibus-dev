@@ -169,6 +169,7 @@ override method @ifInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
     !testResult
+    !mTestExpressionEndLocation
     !thenInstructionGenerationList
     !elseInstructionGenerationList
  }
@@ -180,6 +181,7 @@ override method @ifInstructionAST analyze
 
 class @ifInstructionIR : @abstractInstructionIR {
   @variableKindIR mTestVariable
+  @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
 }
@@ -199,13 +201,23 @@ override getter @ifInstructionIR instructionCode -> @string outCode {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += "if (" + [mTestVariable mangledName] + ") {\n"
-  ioCode += [mThenInstructionGenerationList instructionListCode]
-  if [mElseInstructionGenerationList length] > 0 then
-    ioCode += "}else{\n"
-    ioCode += [mElseInstructionGenerationList instructionListCode]
-  end
-  ioCode += "}\n"
+  ioCode += ";--- if (" + [mTestVariable mangledName] + ") {\n"
+  let labelTrue = "%" + [mLocation locationIndex] + ".true"
+  let labelFalse = "%" + [mLocation locationIndex] + ".false"
+  let labelEnd = "%" + [mLocation locationIndex] + ".end"
+  ioCode += "  br i1 " + [mTestVariable mangledName] + ", label " + labelTrue + ", label " + labelFalse + "\n\n"
+#--- True branch
+  ioCode += labelTrue + ":\n"
+  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode]
+  ioCode += "  br label " + labelEnd + "\n\n"
+#--- false branch
+  ioCode += ";--- }else{\n"
+  ioCode += labelFalse + ":\n"
+  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode]
+  ioCode += "  br label " + labelEnd + "\n\n"
+#--- end
+  ioCode += ";--- }\n"
+  ioCode += labelEnd + ":\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

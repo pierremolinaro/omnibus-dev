@@ -3775,26 +3775,28 @@ cMapElement_registerMap::cMapElement_registerMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                   const GALGAS_bool & in_mIsReadOnly,
                                                   const GALGAS_registerBitSliceAccessMap & in_mRegisterFieldAccessMap,
-                                                  const GALGAS_registerFieldMap & in_mRegisterFieldMap
+                                                  const GALGAS_registerFieldMap & in_mRegisterFieldMap,
+                                                  const GALGAS_bigint & in_mAddress
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mType (in_mType),
 mAttribute_mIsReadOnly (in_mIsReadOnly),
 mAttribute_mRegisterFieldAccessMap (in_mRegisterFieldAccessMap),
-mAttribute_mRegisterFieldMap (in_mRegisterFieldMap) {
+mAttribute_mRegisterFieldMap (in_mRegisterFieldMap),
+mAttribute_mAddress (in_mAddress) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_registerMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () && mAttribute_mAddress.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_registerMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_registerMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mRegisterFieldAccessMap, mAttribute_mRegisterFieldMap COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_registerMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mRegisterFieldAccessMap, mAttribute_mRegisterFieldMap, mAttribute_mAddress COMMA_HERE)) ;
   return result ;
 }
 
@@ -3817,6 +3819,10 @@ void cMapElement_registerMap::description (C_String & ioString, const int32_t in
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterFieldMap" ":" ;
   mAttribute_mRegisterFieldMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mAddress" ":" ;
+  mAttribute_mAddress.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3835,6 +3841,9 @@ typeComparisonResult cMapElement_registerMap::compare (const cCollectionElement 
   }
   if (kOperandEqual == result) {
     result = mAttribute_mRegisterFieldMap.objectCompare (operand->mAttribute_mRegisterFieldMap) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mAddress.objectCompare (operand->mAttribute_mAddress) ;
   }
   return result ;
 }
@@ -3891,10 +3900,11 @@ void GALGAS_registerMap::addAssign_operation (const GALGAS_lstring & inKey,
                                               const GALGAS_bool & inArgument1,
                                               const GALGAS_registerBitSliceAccessMap & inArgument2,
                                               const GALGAS_registerFieldMap & inArgument3,
+                                              const GALGAS_bigint & inArgument4,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   cMapElement_registerMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3910,10 +3920,11 @@ void GALGAS_registerMap::modifier_insertKey (GALGAS_lstring inKey,
                                              GALGAS_bool inArgument1,
                                              GALGAS_registerBitSliceAccessMap inArgument2,
                                              GALGAS_registerFieldMap inArgument3,
+                                             GALGAS_bigint inArgument4,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
   cMapElement_registerMap * p = NULL ;
-  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_registerMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3933,6 +3944,7 @@ void GALGAS_registerMap::method_searchKey (GALGAS_lstring inKey,
                                            GALGAS_bool & outArgument1,
                                            GALGAS_registerBitSliceAccessMap & outArgument2,
                                            GALGAS_registerFieldMap & outArgument3,
+                                           GALGAS_bigint & outArgument4,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) performSearch (inKey,
@@ -3944,12 +3956,14 @@ void GALGAS_registerMap::method_searchKey (GALGAS_lstring inKey,
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
+    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_registerMap) ;
     outArgument0 = p->mAttribute_mType ;
     outArgument1 = p->mAttribute_mIsReadOnly ;
     outArgument2 = p->mAttribute_mRegisterFieldAccessMap ;
     outArgument3 = p->mAttribute_mRegisterFieldMap ;
+    outArgument4 = p->mAttribute_mAddress ;
   }
 }
 
@@ -4015,6 +4029,21 @@ GALGAS_registerFieldMap GALGAS_registerMap::reader_mRegisterFieldMapForKey (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bigint GALGAS_registerMap::reader_mAddressForKey (const GALGAS_string & inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) attributes ;
+  GALGAS_bigint result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    result = p->mAttribute_mAddress ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_registerMap::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                   GALGAS_string inKey,
                                                   C_Compiler * inCompiler
@@ -4071,6 +4100,20 @@ void GALGAS_registerMap::modifier_setMRegisterFieldMapForKey (GALGAS_registerFie
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_registerMap::modifier_setMAddressForKey (GALGAS_bigint inAttributeValue,
+                                                     GALGAS_string inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_registerMap * p = (cMapElement_registerMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_registerMap) ;
+    p->mAttribute_mAddress = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_registerMap * GALGAS_registerMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                  const GALGAS_string & inKey
                                                                                  COMMA_LOCATION_ARGS) {
@@ -4092,7 +4135,7 @@ cGenericAbstractEnumerator () {
 GALGAS_registerMap_2D_element cEnumerator_registerMap::current (LOCATION_ARGS) const {
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerMap) ;
-  return GALGAS_registerMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap) ;
+  return GALGAS_registerMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap, p->mAttribute_mAddress) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4133,6 +4176,14 @@ GALGAS_registerFieldMap cEnumerator_registerMap::current_mRegisterFieldMap (LOCA
   const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerMap) ;
   return p->mAttribute_mRegisterFieldMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cEnumerator_registerMap::current_mAddress (LOCATION_ARGS) const {
+  const cMapElement_registerMap * p = (const cMapElement_registerMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_registerMap) ;
+  return p->mAttribute_mAddress ;
 }
 
 

@@ -347,7 +347,7 @@ override getter @operatorInfixExpressionIR instructionCode -> @string outCode {
 override method @operatorInfixExpressionIR llvmInstructionCode ?!@string ioCode {
   switch mOperator 
   case infixNoOvf (@string infixOperator) :
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+    ioCode += ";--- const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
     ioCode += " = " +  [mLeftOperand mangledName] + " " + infixOperator + " " + [mRighOperand mangledName] + " ;\n"
   case infixOvf (@string builtinFunction @uint code) :
     let ovfVar = "ovf" + [mOperatorLocation locationIndex]

@@ -143,6 +143,7 @@ map @registerMap {
   @bool mIsReadOnly
   @registerBitSliceAccessMap mRegisterFieldAccessMap
   @registerFieldMap mRegisterFieldMap
+  @bigint mAddress
   insert insertKey error message "the '%K' register has been already declared in %L"
   search searchKey error message "** internal error **"
 }
@@ -156,7 +157,6 @@ override method @registerDeclaration enterInContext
 {
 #---
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRegisterTypeName ?let registerType]
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["bool" nowhere] ?let BoolTypeProxy]
 #--- Build bit slice map
   @registerFieldMap registerFieldMap = {}
   @registerBitSliceAccessMap registerBitSliceMap = {}
@@ -219,6 +219,7 @@ override method @registerDeclaration enterInContext
       !isReadOnly
       !registerBitSliceMap
       !registerFieldMap
+      !mRegisterAddress.bigint
     ]
   end
 }
