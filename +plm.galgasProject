@@ -109,6 +109,12 @@ project (1:0:0) -> "plm" {
 
 #--- Intermediate code
   "galgas-sources/intermediate-code-generation.galgas"
+  "galgas-sources/intermediate-comment.galgas"
+  "galgas-sources/intermediate-binary-operation.galgas"
+  "galgas-sources/intermediate-load-volatile.galgas"
+  "galgas-sources/intermediate-load-global-variable.galgas"
+  "galgas-sources/intermediate-store-volatile.galgas"
+  "galgas-sources/intermediate-store-global-var.galgas"
   "galgas-sources/code-optimisation.galgas"
   "galgas-sources/code-generation.galgas"
 

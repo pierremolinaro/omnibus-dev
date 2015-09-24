@@ -1,0 +1,31 @@
+
+setter @instructionListIR appendStoreGlobalVariable
+  ?let @string inGlobalVarName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @operandIR inSourceValue
+{
+  self += !@storeGlobalVariableIR.new {!inGlobalVarName !inTargetVarType !inSourceValue}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @storeGlobalVariableIR : @abstractInstructionIR {
+  @string mGlobalVarName
+  @unifiedTypeMap-proxy mTargetVarType
+  @operandIR mSourceValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeGlobalVariableIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mTargetVarType llvmType]
+  ioCode += "  store " + llvmType + " " + mSourceValue + ", " + llvmType + "* @" + mGlobalVarName + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

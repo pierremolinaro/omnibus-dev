@@ -1,0 +1,23 @@
+
+setter @instructionListIR appendComment ?let @string inComment {
+  self += !@commentIR.new {!inComment}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @commentIR : @abstractInstructionIR {
+  @string mComment
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @commentIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @commentIR llvmInstructionCode ?!@string ioCode {
+  ioCode += ";--- " + mComment + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

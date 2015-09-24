@@ -75,19 +75,21 @@ override method @varInExpressionAST analyzeExpression
   switch variableKind
   case register (@lstring name @bigint address) :
     getNewTempVariable (!?ioTemporaries ?variableValueName)
-    ioInstructionGenerationList += !@loadRegisterIR.new {
-      !name.string
-      !address
-      !variableType
+    [!?ioInstructionGenerationList appendComment ![variableValueName string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadVolatile
       !variableValueName
-    }
+      !name.string
+      !variableType
+      !address
+    ]
   case globalVariable (@lstring name) :
     getNewTempVariable (!?ioTemporaries ?variableValueName)
-    ioInstructionGenerationList += !@loadGlobalVariableIR.new {
+    [!?ioInstructionGenerationList appendComment ![variableValueName string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadGlobalVariable
+      !variableValueName
       !name.string
       !variableType
-      !variableValueName
-    }
+    ]
   case localVariable (@lstring name) :
     error name : "@varInExpressionAST analyzeExpression" : variableValueName
   case inArgument (@lstring name) :
@@ -169,54 +171,6 @@ override method @varInExpressionAST analyzeExpression
   end
 #--- Generate code
   outResultValueName = variableValueName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @loadRegisterIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @loadRegisterIR : @abstractInstructionIR {
-  @string mRegisterName
-  @bigint mRegisterAddress
-  @unifiedTypeMap-proxy mRegisterType
-  @operandIR mTargetName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @loadRegisterIR llvmInstructionCode ?!@string ioCode {
-  let llvmType = [mRegisterType llvmType]
-  ioCode += "  " + mTargetName + " = load volatile " + llvmType
-         + "* (inttoptr i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @loadRegisterIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @loadGlobalVariableIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @loadGlobalVariableIR : @abstractInstructionIR {
-  @string mVariableName
-  @unifiedTypeMap-proxy mVariableType
-  @operandIR mTargetName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
-  let llvmType = [mVariableType llvmType]
-  ioCode += "  " + mTargetName + " = load " + llvmType + "* " + mVariableName + "\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @loadGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

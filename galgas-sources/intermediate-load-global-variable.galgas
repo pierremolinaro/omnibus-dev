@@ -1,0 +1,32 @@
+
+setter @instructionListIR appendLoadGlobalVariable
+  ?let @operandIR inTargetValue
+  ?let @string inRegisterName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+{
+  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inTargetVarType}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @loadGlobalVariableIR : @abstractInstructionIR {
+  @operandIR mTargetValue
+  @string mVariableName
+  @unifiedTypeMap-proxy mVariableType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mVariableType llvmType]
+  ioCode += "  " + mTargetValue + " = load " + llvmType + "* " + mVariableName + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @loadGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*
