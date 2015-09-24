@@ -185,16 +185,6 @@ override method @assignmentInstructionIR enterAccessibleEntities ?!@accessibleEn
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @assignmentInstructionIR instructionCode -> @string outCode {
-  outCode = [mTargetVariable mangledName]
-  for (fieldName) in mFieldList do
-    outCode += "." + mangledNameForProperty (!name:fieldName.string)
-  end
-  outCode += " = " + [mSourceValue mangledName] + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @assignmentInstructionIR llvmInstructionCode ?!@string ioCode {
   ioCode += ";--- " + [mTargetVariable mangledName]
   for (fieldName) in mFieldList do

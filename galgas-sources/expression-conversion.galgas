@@ -110,37 +110,6 @@ override method @conversionInstructionIR enterAccessibleEntities ?!@accessibleEn
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @conversionInstructionIR instructionCode -> @string outCode {
-  if mSilently || [option plm_options.noExceptionGeneration value] then
-    outCode = "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    outCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-  else
-    let okVar = "ok" + [mLocation locationIndex]
-    [[mConvertedExpressionType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-    [[mTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-    outCode = "const bool " + okVar + " = "
-    if minTarget > minSource then
-      outCode += "(" + [mOperand mangledName] + " >= " + minTarget + ")"
-    end
-    if maxTarget < maxSource then
-      if minTarget > minSource then
-        outCode += " && "
-      end
-      outCode += "(" + [mOperand mangledName] + " <= " + maxTarget + ")"
-    end
-    outCode += " ;\n"
-    outCode += "if (!" + okVar + ") {\n"
-    outCode += "  raise_exception (5, "
-       + [[[mLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mLocation line] + ") ;\n"
-    outCode += "}\n" 
-    outCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    outCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @conversionInstructionIR llvmInstructionCode ?!@string ioCode {
   if mSilently || [option plm_options.noExceptionGeneration value] then
     ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]

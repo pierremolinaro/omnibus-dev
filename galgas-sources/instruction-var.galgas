@@ -167,13 +167,6 @@ class @varDeclarationInstructionWithSimpleAssignmentIR : @abstractInstructionIR 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @varDeclarationInstructionWithSimpleAssignmentIR instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName]
-  outCode += " = " +  [mSourceVar mangledName] + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @varDeclarationInstructionWithSimpleAssignmentIR llvmInstructionCode ?!@string ioCode {
   ioCode += mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName]
   ioCode += " = " +  [mSourceVar mangledName] + " ;\n"
@@ -195,12 +188,6 @@ override method @varDeclarationInstructionWithSimpleAssignmentIR enterAccessible
 class @varDeclarationIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
   @variableKindIR mTargetVar
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @varDeclarationIR instructionCode -> @string outCode {
-  outCode = mangledNameForType (!name:[mTargetType key]) + " " + [mTargetVar mangledName] + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -113,17 +113,6 @@ method @instructionListAST analyzeRoutineInstructionList
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @instructionListIR instructionListCode -> @string outCode {
-  outCode = ""
-  [!?outCode incIndentation !2]
-  for () in self do
-    outCode += [mInstructionGeneration instructionCode]
-  end
-  [!?outCode decIndentation !2]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @instructionListIR instructionListLLVMCode ?!@string ioCode {
   for () in self do
     [mInstructionGeneration llvmInstructionCode !?ioCode]

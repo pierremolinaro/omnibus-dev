@@ -510,15 +510,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 private filewrapper procedureGenerationTemplate in "../generation-templates" {
 }{
 }{
-  template declaration "procedure-declaration.galgasTemplate"
-    ?@string PROCEDURE_MANGLED_NAME
-    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-
-  template implementation "procedure-implementation.galgasTemplate"
-    ?@string PROCEDURE_MANGLED_NAME
-    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@instructionListIR INSTRUCTION_GENERATION_LIST
-
   template llvmImplementation "procedure-implementation-llvm.galgasTemplate"
     ?@string PROCEDURE_MANGLED_NAME
     ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
@@ -527,28 +518,11 @@ private filewrapper procedureGenerationTemplate in "../generation-templates" {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @procedureMapIR-element headerCodeGeneration -> @string outCode {
-  outCode = [filewrapper procedureGenerationTemplate.declaration
-    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
-    !mFormalArgumentListForGeneration
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @procedureMapIR-element implementationCodeGeneration -> @string outCode {
-  outCode = [filewrapper procedureGenerationTemplate.implementation
-    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
-    !mFormalArgumentListForGeneration
-    !mInstructionGenerationList
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @procedureMapIR-element llvmCodeGeneration -> @string outCode {
   @string code = ""
   [mInstructionGenerationList instructionListLLVMCode !?code]
+  code += ";---\n"
+  code += "  ret void\n"
   outCode = [filewrapper procedureGenerationTemplate.llvmImplementation
     !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
     !mFormalArgumentListForGeneration

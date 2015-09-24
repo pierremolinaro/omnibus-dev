@@ -77,17 +77,9 @@ class @foreverInstructionGeneration : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override getter @foreverInstructionGeneration instructionCode -> @string outCode {
-  outCode = "while (1) {\n"
-  outCode += [mInstructionGenerationList instructionListCode]
-  outCode += "}\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @foreverInstructionGeneration llvmInstructionCode ?!@string ioCode {
   ioCode += "while (1) {\n"
-  ioCode += [mInstructionGenerationList instructionListCode]
+  [mInstructionGenerationList instructionListLLVMCode !?ioCode]
   ioCode += "}\n"
 }
 
