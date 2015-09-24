@@ -399,7 +399,7 @@ proc generateLLVMfile
   end
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    code += [procedure implementationCodeGeneration]
+    code += [procedure llvmCodeGeneration]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
