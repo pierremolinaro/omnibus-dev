@@ -127,43 +127,39 @@ override method @operatorAssignInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  ioInstructionGenerationList += !@operatorAssignInstructionIR.new {
-   !targetVariableKind
-   !targetType
-   !mOperator
-   !sourceValueName
- }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @operatorAssignInstructionIR : @abstractInstructionIR {
-  @variableKindIR mTargetVariable
-  @unifiedTypeMap-proxy mTargetVarType
-  @operatorAssignKind mOperator
-  @operandIR mSourceValue
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @operatorAssignInstructionIR llvmInstructionCode ?!@string ioCode {
+  @string comment
+  @string llvmOperator
   switch mOperator
   case bitWiseOrAssign :
-    ioCode += [mTargetVariable mangledName] + " |= " + mSourceValue + " ;\n"
+    comment = [targetVariableKind mangledName] + " |= " + sourceValueName
+    llvmOperator = "or"
   case bitWiseAndAssign :
-    ioCode += [mTargetVariable mangledName] + " &= " + mSourceValue + " ;\n"
+    comment = [targetVariableKind mangledName] + " &= " + sourceValueName
+    llvmOperator = "and"
   case bitWiseXorAssign :
-    ioCode += [mTargetVariable mangledName] + " ^= " + mSourceValue + " ;\n"
+    comment = [targetVariableKind mangledName] + " ^= " + sourceValueName
+    llvmOperator = "xor"
   end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @operatorAssignInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mTargetVariable enterAccessibleEntities !?ioAccessibleEntities]
-#  [mSourceValue enterAccessibleEntities !?ioAccessibleEntities]
+  [!?ioInstructionGenerationList appendComment !comment]
+  [targetVariableKind loadFromMemory
+    !targetType
+    !?temporary:ioTemporaries
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultingValue:@operandIR variableValueName
+  ]
+  getNewTempVariable (!?ioTemporaries ?let newResultingValue)
+  [!?ioInstructionGenerationList appendBinaryOperation
+    !newResultingValue
+    !targetType
+    !variableValueName
+    !llvmOperator
+    !sourceValueName
+  ]
+  [targetVariableKind storeInMemory
+    !value:newResultingValue
+    !targetType
+    !?instructionListIR:ioInstructionGenerationList
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

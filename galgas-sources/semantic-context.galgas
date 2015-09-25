@@ -123,6 +123,98 @@ getter @unifiedTypeMap-proxy llvmType -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+method @variableKindIR loadFromMemory
+  ?let @unifiedTypeMap-proxy inVariableType
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !resultingValue:@operandIR outResultingValue
+{
+  switch self
+  case register (@lstring name @bigint address) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadVolatile
+      !outResultingValue
+      !name.string
+      !inVariableType
+      !address
+    ]
+  case globalVariable (@lstring name) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadGlobalVariable
+      !outResultingValue
+      !name.string
+      !inVariableType
+    ]
+  case localVariable (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case inArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case inOutArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case outArgument (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case localConstant (@lstring name) :
+    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case globalConstant (@operandIR value) :
+    outResultingValue = value
+  case temporaryConstant (@uint unused idx) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case localAccess (@lstring access) :
+    error access : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case literalUnsignedInteger (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case literalSignedInteger (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case literalString (**) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+  case literalStructure (*) :
+    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @variableKindIR storeInMemory
+  ?value:@operandIR inValue
+  ?let @unifiedTypeMap-proxy inVariableType
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  switch self
+  case register (@lstring registerName @bigint address) :
+    [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !inVariableType !address !inValue]
+  case globalVariable (@lstring name) :
+    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue]
+  case localVariable (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case inArgument (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case inOutArgument (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case outArgument (@lstring unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case localConstant (@lstring unused name) :
+     error name : "INTERNAL ERROR"
+  case globalConstant (@operandIR unused value) :
+     error .nowhere : "INTERNAL ERROR"
+  case temporaryConstant (@uint unused idx) :
+     error .nowhere : "INTERNAL ERROR"
+  case localAccess (@lstring unused access) :
+     error .nowhere : "INTERNAL ERROR"
+  case literalUnsignedInteger (@bigint unused value) :
+     error .nowhere : "INTERNAL ERROR"
+  case literalSignedInteger (@bigint unused value) :
+     error .nowhere : "INTERNAL ERROR"
+  case literalString (@string unused value @string unused name) :
+     error .nowhere : "INTERNAL ERROR"
+  case literalStructure (@literalStructureList unused value) :
+     error .nowhere : "INTERNAL ERROR"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 map @constructorMap {
   @operandIR mValue
   insert insertKey error message "the '%K' constructor is already declared in %L"
