@@ -10,119 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Overriding category method '@incDecInstructionAST analyze'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_incDecInstructionAST_analyze (const cPtr_instructionAST * inObject,
-                                                         const GALGAS_lstring /* constinArgument_inRoutineNameForInvocationGraph */,
-                                                         const GALGAS_receiverType /* constinArgument_inReceiverType */,
-                                                         const GALGAS_semanticContext constinArgument_inContext,
-                                                         const GALGAS_stringset constinArgument_inModeSet,
-                                                         const GALGAS_bool /* constinArgument_inAllowExceptions */,
-                                                         GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaryIndex */,
-                                                         GALGAS_globalLiteralStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                         GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                         GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_incDecInstructionAST * object = (const cPtr_incDecInstructionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_incDecInstructionAST) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_type ;
-  GALGAS_bool var_accessIsAllowed ;
-  GALGAS_string var_variableCName ;
-  GALGAS_variableKindIR var_variable ;
-  {
-  GALGAS_bool joker_3814_3 ; // Joker input parameter
-  GALGAS_registerBitSliceAccessMap joker_3814_2 ; // Joker input parameter
-  GALGAS_bool joker_3814_1 ; // Joker input parameter
-  ioArgument_ioVariableMap.modifier_searchForReadWriteAccess (object->mAttribute_mVarName, var_type, var_accessIsAllowed, var_variableCName, var_variable, joker_3814_3, joker_3814_2, joker_3814_1, inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 89)) ;
-  }
-  const enumGalgasBool test_0 = var_accessIsAllowed.operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 97)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("routine has no access right on the this variable")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 98)) ;
-  }
-  const enumGalgasBool test_2 = constinArgument_inContext.mAttribute_mTypeNameSetForIncDec.reader_hasKey (var_type.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 101)) COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 101)).operator_not (SOURCE_FILE ("instruction-inc-dec.galgas", 101)).boolEnum () ;
-  if (kBoolTrue == test_2) {
-    GALGAS_location location_3 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-    inCompiler->emitSemanticError (location_3, var_type.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 102)).add_operation (GALGAS_string (" type does not handle incrementation/decrementation operator"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 102))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 102)) ;
-  }
-  GALGAS_bigint var_min ;
-  GALGAS_bigint var_max ;
-  switch (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).enumValue ()) {
-  case GALGAS_typeKind::kNotBuilt:
-    break ;
-  case GALGAS_typeKind::kEnum_boolean:
-  case GALGAS_typeKind::kEnum_boolset:
-  case GALGAS_typeKind::kEnum_literalString:
-    {
-      GALGAS_location location_4 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_4, GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 108)) ;
-      var_min.drop () ; // Release error dropped variable
-      var_max.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_enumeration:
-    {
-      GALGAS_location location_5 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_5, GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 110)) ;
-      var_min.drop () ; // Release error dropped variable
-      var_max.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_structure:
-    {
-      GALGAS_location location_6 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_6, GALGAS_string ("internal error")  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 112)) ;
-      var_min.drop () ; // Release error dropped variable
-      var_max.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_typeKind::kEnum_integer:
-    {
-      const cEnumAssociatedValues_typeKind_integer * extractPtr_4481 = (const cEnumAssociatedValues_typeKind_integer *) (var_type.reader_kind (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 106)).unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_kMin = extractPtr_4481->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_kMax = extractPtr_4481->mAssociatedValue1 ;
-      var_min = extractedValue_kMin ;
-      var_max = extractedValue_kMax ;
-    }
-    break ;
-  }
-  switch (object->mAttribute_mKind.enumValue ()) {
-  case GALGAS_incDecKind::kNotBuilt:
-    break ;
-  case GALGAS_incDecKind::kEnum_incNoOverflowCheck:
-  case GALGAS_incDecKind::kEnum_decNoOverflowCheck:
-    {
-    }
-    break ;
-  case GALGAS_incDecKind::kEnum_incWithOverflowCheck:
-  case GALGAS_incDecKind::kEnum_decWithOverflowCheck:
-    {
-      const enumGalgasBool test_7 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 121)) COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 121)).boolEnum () ;
-      if (kBoolTrue == test_7) {
-        GALGAS_location location_8 (object->mAttribute_mVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_8, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 122)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 122))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 122)) ;
-      }
-    }
-    break ;
-  }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_incDecInstructionIR::constructor_new (var_min, var_max, object->mAttribute_mKind, var_variable, object->mAttribute_mVarName.mAttribute_location  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126))  COMMA_SOURCE_FILE ("instruction-inc-dec.galgas", 126)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_incDecInstructionAST_analyze (void) {
-  enterCategoryMethod_analyze (kTypeDescriptor_GALGAS_incDecInstructionAST.mSlotID,
-                               categoryMethod_incDecInstructionAST_analyze) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_incDecInstructionAST_analyze (defineCategoryMethod_incDecInstructionAST_analyze, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                        Overriding category method '@incDecInstructionIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -675,33 +562,19 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
       inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 140)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
     }
     break ;
-  case GALGAS_variableKindIR::kEnum_literalUnsignedInteger:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger * extractPtr_5595 = (const cEnumAssociatedValues_variableKindIR_literalUnsignedInteger *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_value = extractPtr_5595->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 142)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 142)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalSignedInteger:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalSignedInteger * extractPtr_5687 = (const cEnumAssociatedValues_variableKindIR_literalSignedInteger *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_value = extractPtr_5687->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 144)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 144)) ;
-    }
-    break ;
   case GALGAS_variableKindIR::kEnum_literalString:
     {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_5792 = (const cEnumAssociatedValues_variableKindIR_literalString *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_5792->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_5792->mAssociatedValue1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 146)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 146)) ;
+      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_5606 = (const cEnumAssociatedValues_variableKindIR_literalString *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_string extractedValue_value = extractPtr_5606->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_5606->mAssociatedValue1 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 142)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 142)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalStructure:
     {
-      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_5894 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_literalStructureList extractedValue_value = extractPtr_5894->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 148)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 148)) ;
+      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_5708 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_literalStructureList extractedValue_value = extractPtr_5708->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 144)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 144)) ;
     }
     break ;
   }
@@ -1125,9 +998,9 @@ static void categoryMethod_ifInstructionIR_llvmInstructionCode (const cPtr_abstr
   const cPtr_ifInstructionIR * object = (const cPtr_ifInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_ifInstructionIR) ;
   ioArgument_ioCode.dotAssign_operation (GALGAS_string (";--- if (").add_operation (categoryReader_string (object->mAttribute_mTestVariable, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 192)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 192)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 192))  COMMA_SOURCE_FILE ("instruction-if.galgas", 192)) ;
-  GALGAS_string var_labelTrue = GALGAS_string ("%").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)).reader_string (SOURCE_FILE ("instruction-if.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)).add_operation (GALGAS_string (".true"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)) ;
-  GALGAS_string var_labelFalse = GALGAS_string ("%").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)).reader_string (SOURCE_FILE ("instruction-if.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)).add_operation (GALGAS_string (".false"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)) ;
-  GALGAS_string var_labelEnd = GALGAS_string ("%").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)).reader_string (SOURCE_FILE ("instruction-if.galgas", 195)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)).add_operation (GALGAS_string (".end"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)) ;
+  GALGAS_string var_labelTrue = GALGAS_string ("%if.").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)).reader_string (SOURCE_FILE ("instruction-if.galgas", 193)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)).add_operation (GALGAS_string (".true"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 193)) ;
+  GALGAS_string var_labelFalse = GALGAS_string ("%if.").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)).reader_string (SOURCE_FILE ("instruction-if.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)).add_operation (GALGAS_string (".false"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 194)) ;
+  GALGAS_string var_labelEnd = GALGAS_string ("%if.").add_operation (object->mAttribute_mLocation.reader_locationIndex (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)).reader_string (SOURCE_FILE ("instruction-if.galgas", 195)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)).add_operation (GALGAS_string (".end"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 195)) ;
   ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  br i1 ").add_operation (categoryReader_string (object->mAttribute_mTestVariable, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)).add_operation (GALGAS_string (", label "), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)).add_operation (var_labelTrue, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)).add_operation (GALGAS_string (", label "), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)).add_operation (var_labelFalse, inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196)).add_operation (GALGAS_string ("\n"
     "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 196))  COMMA_SOURCE_FILE ("instruction-if.galgas", 196)) ;
   ioArgument_ioCode.dotAssign_operation (var_labelTrue.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 198))  COMMA_SOURCE_FILE ("instruction-if.galgas", 198)) ;
@@ -1472,19 +1345,21 @@ static void categoryMethod_whileInstructionIR_llvmInstructionCode (const cPtr_ab
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_whileInstructionIR * object = (const cPtr_whileInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_whileInstructionIR) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("LABEL_").add_operation (object->mAttribute_mLabelIndex.reader_string (SOURCE_FILE ("instruction-while.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 134)).add_operation (GALGAS_string (": {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 134))  COMMA_SOURCE_FILE ("instruction-while.galgas", 134)) ;
-  categoryMethod_instructionListLLVMCode (object->mAttribute_mTestInstructionGenerationList, ioArgument_ioCode, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 135)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  if (").add_operation (categoryReader_string (object->mAttribute_mTestExpression, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 136)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 136))  COMMA_SOURCE_FILE ("instruction-while.galgas", 136)) ;
-  {
-  ioArgument_ioCode.modifier_incIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 137)) ;
-  }
-  categoryMethod_instructionListLLVMCode (object->mAttribute_mInstructionGenerationList, ioArgument_ioCode, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 138)) ;
-  {
-  ioArgument_ioCode.modifier_decIndentation (GALGAS_uint ((uint32_t) 2U), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 139)) ;
-  }
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("    goto LABEL_").add_operation (object->mAttribute_mLabelIndex.reader_string (SOURCE_FILE ("instruction-while.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 140)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 140))  COMMA_SOURCE_FILE ("instruction-while.galgas", 140)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  }\n")  COMMA_SOURCE_FILE ("instruction-while.galgas", 141)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("instruction-while.galgas", 142)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string (";--- while (").add_operation (categoryReader_string (object->mAttribute_mTestExpression, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 134)).add_operation (GALGAS_string (") {\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 134))  COMMA_SOURCE_FILE ("instruction-while.galgas", 134)) ;
+  GALGAS_string var_labelTest = GALGAS_string ("%while.").add_operation (object->mAttribute_mLabelIndex.reader_string (SOURCE_FILE ("instruction-while.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 135)).add_operation (GALGAS_string (".test"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 135)) ;
+  GALGAS_string var_labelLoop = GALGAS_string ("%while.").add_operation (object->mAttribute_mLabelIndex.reader_string (SOURCE_FILE ("instruction-while.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 136)).add_operation (GALGAS_string (".loop"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 136)) ;
+  GALGAS_string var_labelEnd = GALGAS_string ("%while.").add_operation (object->mAttribute_mLabelIndex.reader_string (SOURCE_FILE ("instruction-while.galgas", 137)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 137)).add_operation (GALGAS_string (".end"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 137)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  br label ").add_operation (var_labelTest, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 138)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 138))  COMMA_SOURCE_FILE ("instruction-while.galgas", 138)) ;
+  ioArgument_ioCode.dotAssign_operation (var_labelTest.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 139))  COMMA_SOURCE_FILE ("instruction-while.galgas", 139)) ;
+  categoryMethod_instructionListLLVMCode (object->mAttribute_mTestInstructionGenerationList, ioArgument_ioCode, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 140)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  br i1 ").add_operation (categoryReader_string (object->mAttribute_mTestExpression, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)).add_operation (GALGAS_string (" label "), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)).add_operation (var_labelLoop, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)).add_operation (GALGAS_string (", label "), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)).add_operation (var_labelEnd, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 141))  COMMA_SOURCE_FILE ("instruction-while.galgas", 141)) ;
+  ioArgument_ioCode.dotAssign_operation (var_labelLoop.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 142))  COMMA_SOURCE_FILE ("instruction-while.galgas", 142)) ;
+  categoryMethod_instructionListLLVMCode (object->mAttribute_mInstructionGenerationList, ioArgument_ioCode, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 143)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  br label ").add_operation (var_labelTest, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 144)).add_operation (GALGAS_string ("\n"
+    "\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 144))  COMMA_SOURCE_FILE ("instruction-while.galgas", 144)) ;
+  ioArgument_ioCode.dotAssign_operation (var_labelEnd.add_operation (GALGAS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 145))  COMMA_SOURCE_FILE ("instruction-while.galgas", 145)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1509,8 +1384,8 @@ static void categoryMethod_whileInstructionIR_enterAccessibleEntities (const cPt
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_whileInstructionIR * object = (const cPtr_whileInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_whileInstructionIR) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mTestInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 148)) ;
-  categoryMethod_enterAccessibleEntities (object->mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 150)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mTestInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 151)) ;
+  categoryMethod_enterAccessibleEntities (object->mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("instruction-while.galgas", 153)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 

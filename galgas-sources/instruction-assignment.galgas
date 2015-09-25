@@ -138,10 +138,6 @@ override method @assignmentInstructionAST analyze
      error .nowhere : "INTERNAL ERROR"
   case localAccess (@lstring unused access) :
      error .nowhere : "INTERNAL ERROR"
-  case literalUnsignedInteger (@bigint unused value) :
-     error .nowhere : "INTERNAL ERROR"
-  case literalSignedInteger (@bigint unused value) :
-     error .nowhere : "INTERNAL ERROR"
   case literalString (@string unused value @string unused name) :
      error .nowhere : "INTERNAL ERROR"
   case literalStructure (@literalStructureList unused value) :

@@ -556,7 +556,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-seq
   "//------------------------------------------------*\n"
   "\n"
   "proc loop `user () {\n"
-  "  gDelai ++\n"
+  "  gDelai &++\n"
   "  if gDelai == 1_500_000 then\n"
   "    GPIOC_PSOR = 1 << 5 // Allumer la led\n"
   "  elsif gDelai == 3_000_000 then\n"
@@ -571,7 +571,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  590, // Text length
+  591, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 

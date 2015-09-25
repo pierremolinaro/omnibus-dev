@@ -163,10 +163,6 @@ method @variableKindIR loadFromMemory
     error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
   case localAccess (@lstring access) :
     error access : "@varInExpressionAST analyzeExpression" : outResultingValue
-  case literalUnsignedInteger (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
-  case literalSignedInteger (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
   case literalString (**) :
     error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
   case literalStructure (*) :
@@ -201,10 +197,6 @@ method @variableKindIR storeInMemory
   case temporaryConstant (@uint unused idx) :
      error .nowhere : "INTERNAL ERROR"
   case localAccess (@lstring unused access) :
-     error .nowhere : "INTERNAL ERROR"
-  case literalUnsignedInteger (@bigint unused value) :
-     error .nowhere : "INTERNAL ERROR"
-  case literalSignedInteger (@bigint unused value) :
      error .nowhere : "INTERNAL ERROR"
   case literalString (@string unused value @string unused name) :
      error .nowhere : "INTERNAL ERROR"

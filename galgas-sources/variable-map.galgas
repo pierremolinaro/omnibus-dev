@@ -66,8 +66,6 @@ enum @variableKindIR {
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
 
-  case literalUnsignedInteger (@bigint value)
-  case literalSignedInteger (@bigint value)
   case literalString (@string value @string name)
   case literalStructure (@literalStructureList value)
 }
@@ -96,10 +94,6 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case localAccess (*) :
     outResult = false
-  case literalUnsignedInteger (*) :
-    outResult = true
-  case literalSignedInteger (*) :
-    outResult = true
   case literalString (* *) :
     outResult = true
   case literalStructure (*) :

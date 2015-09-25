@@ -46,10 +46,6 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :
     outResult = access.string
-  case literalUnsignedInteger (@bigint value) :
-    outResult = [value string]
-  case literalSignedInteger (@bigint value) :
-    outResult = [value string]
   case literalString (* @string name) :
     outResult = name
   case literalStructure (@literalStructureList s) :
@@ -262,19 +258,19 @@ proc generateLLVMfile
   code += "  ret void\n"
   code += "}\n\n"
 #----------------------------------------- Exception
-  if not [option plm_options.noExceptionGeneration value] then
-    code += llvmTitleComment (!"Raise Exception internal")
-    code += "static void raise_exception_internal (const int32_t in_CODE,\n"
-    code += "                                      const char * in_FILE,\n"
-    code += "                                      const uint32_t in_LINE) {\n"
-    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code]
-    [!?code incIndentation !2]
-    code += "while (1) {\n"
-    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code]
-    code += "}\n"
-    [!?code decIndentation !2]
-    code += "}\n\n"
-  end
+#  if not [option plm_options.noExceptionGeneration value] then
+#    code += llvmTitleComment (!"Raise Exception internal")
+#    code += "static void raise_exception_internal (const int32_t in_CODE,\n"
+#    code += "                                      const char * in_FILE,\n"
+#    code += "                                      const uint32_t in_LINE) {\n"
+#    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code]
+#    [!?code incIndentation !2]
+#    code += "while (1) {\n"
+#    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code]
+#    code += "}\n"
+#    [!?code decIndentation !2]
+#    code += "}\n\n"
+#  end
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     code += [procedure llvmCodeGeneration]

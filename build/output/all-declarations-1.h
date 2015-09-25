@@ -3493,8 +3493,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
     kEnum_globalConstant,
     kEnum_temporaryConstant,
     kEnum_localAccess,
-    kEnum_literalUnsignedInteger,
-    kEnum_literalSignedInteger,
     kEnum_literalString,
     kEnum_literalStructure
   } enumeration ;
@@ -3535,18 +3533,12 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_literalSignedInteger (const class GALGAS_bigint & inOperand0
-                                                                          COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
                                                                    const class GALGAS_string & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_literalStructure (const class GALGAS_literalStructureList & inOperand0
                                                                       COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_variableKindIR constructor_literalUnsignedInteger (const class GALGAS_bigint & inOperand0
-                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_lstring & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
@@ -3592,10 +3584,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalSignedInteger (class GALGAS_bigint & outArgument0,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_string & outArgument0,
                                                        class GALGAS_string & outArgument1,
                                                        C_Compiler * inCompiler
@@ -3604,10 +3592,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_literalStructure (class GALGAS_literalStructureList & outArgument0,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_literalUnsignedInteger (class GALGAS_bigint & outArgument0,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localAccess (class GALGAS_lstring & outArgument0,
                                                      C_Compiler * inCompiler
@@ -3645,13 +3629,9 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInOutArgument (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralSignedInteger (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralUnsignedInteger (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
 
@@ -3840,38 +3820,6 @@ class cEnumAssociatedValues_variableKindIR_localAccess : public cEnumAssociatedV
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_variableKindIR_localAccess (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_literalUnsignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (const GALGAS_bigint & inAssociatedValue0
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_literalUnsignedInteger (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_literalSignedInteger : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_literalSignedInteger (const GALGAS_bigint & inAssociatedValue0
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_literalSignedInteger (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
