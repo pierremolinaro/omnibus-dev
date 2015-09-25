@@ -128,8 +128,8 @@ map @registerFieldMap {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @registerBitSliceAccessMap {
-  @infixOperatorIR mAccessOperator
-  @variableKindIR mAccessRightOperand
+  @string mAccessOperator
+  @bigint mAccessRightOperand
   @registerBitSliceAccessMap mSubMap
   @unifiedTypeMap-proxy mResultType
   insert insertKey error message "the '%K' register slice has been already declared"
@@ -176,23 +176,23 @@ override method @registerDeclaration enterInContext
         @registerBitSliceAccessMap registerSubMap = {}
         [!?registerSubMap insertKey
           !.new{!"shift" !name.location}
-          !.infixNoOvf {!infixOperator:">>"}
-          !.literalUnsignedInteger{!value:[shiftCount bigint]}
+          !"lshr"
+          ![shiftCount bigint]
           !{}
           !registerType
         ]
         [!?registerSubMap insertKey
           !.new{!"bool" !name.location}
-          !.infixNoOvf {!infixOperator:"!="}
-          !.literalUnsignedInteger{!value:0G}
+          !"icmp ne"
+          !0G
           !{}
           !ioContext.mBooleanType
         ]
         let mask = ((1G << bitCount) - 1G) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
-          !.infixNoOvf {!infixOperator:"&"}
-          !.literalUnsignedInteger{!value:mask}
+          !"and"
+          !mask
           !registerSubMap
           !registerType
         ]

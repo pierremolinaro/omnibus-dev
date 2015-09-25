@@ -2878,8 +2878,8 @@ GALGAS_registerFieldMap GALGAS_registerFieldMap::extractObject (const GALGAS_obj
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_registerBitSliceAccessMap::cMapElement_registerBitSliceAccessMap (const GALGAS_lstring & inKey,
-                                                                              const GALGAS_infixOperatorIR & in_mAccessOperator,
-                                                                              const GALGAS_variableKindIR & in_mAccessRightOperand,
+                                                                              const GALGAS_string & in_mAccessOperator,
+                                                                              const GALGAS_bigint & in_mAccessRightOperand,
                                                                               const GALGAS_registerBitSliceAccessMap & in_mSubMap,
                                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
                                                                               COMMA_LOCATION_ARGS) :
@@ -2993,8 +2993,8 @@ GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::reader_overri
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                            const GALGAS_infixOperatorIR & inArgument0,
-                                                            const GALGAS_variableKindIR & inArgument1,
+                                                            const GALGAS_string & inArgument0,
+                                                            const GALGAS_bigint & inArgument1,
                                                             const GALGAS_registerBitSliceAccessMap & inArgument2,
                                                             const GALGAS_unifiedTypeMap_2D_proxy & inArgument3,
                                                             C_Compiler * inCompiler
@@ -3012,8 +3012,8 @@ void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                           GALGAS_infixOperatorIR inArgument0,
-                                                           GALGAS_variableKindIR inArgument1,
+                                                           GALGAS_string inArgument0,
+                                                           GALGAS_bigint inArgument1,
                                                            GALGAS_registerBitSliceAccessMap inArgument2,
                                                            GALGAS_unifiedTypeMap_2D_proxy inArgument3,
                                                            C_Compiler * inCompiler
@@ -3035,8 +3035,8 @@ const char * kSearchErrorMessage_registerBitSliceAccessMap_searchKey = "the '%K'
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
-                                                         GALGAS_infixOperatorIR & outArgument0,
-                                                         GALGAS_variableKindIR & outArgument1,
+                                                         GALGAS_string & outArgument0,
+                                                         GALGAS_bigint & outArgument1,
                                                          GALGAS_registerBitSliceAccessMap & outArgument2,
                                                          GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
                                                          C_Compiler * inCompiler
@@ -3061,12 +3061,12 @@ void GALGAS_registerBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperatorIR GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_string GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
-  GALGAS_infixOperatorIR result ;
+  GALGAS_string result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mAccessOperator ;
@@ -3076,12 +3076,12 @@ GALGAS_infixOperatorIR GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorF
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_registerBitSliceAccessMap::reader_mAccessRightOperandForKey (const GALGAS_string & inKey,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_registerBitSliceAccessMap::reader_mAccessRightOperandForKey (const GALGAS_string & inKey,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
-  GALGAS_variableKindIR result ;
+  GALGAS_bigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mAccessRightOperand ;
@@ -3121,7 +3121,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerBitSliceAccessMap::reader_mResultT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_infixOperatorIR inAttributeValue,
+void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_string inAttributeValue,
                                                                           GALGAS_string inKey,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) {
@@ -3135,7 +3135,7 @@ void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMAccessRightOperandForKey (GALGAS_variableKindIR inAttributeValue,
+void GALGAS_registerBitSliceAccessMap::modifier_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
                                                                               GALGAS_string inKey,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) {
@@ -3211,7 +3211,7 @@ GALGAS_lstring cEnumerator_registerBitSliceAccessMap::current_lkey (LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperatorIR cEnumerator_registerBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
+GALGAS_string cEnumerator_registerBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mAccessOperator ;
@@ -3219,7 +3219,7 @@ GALGAS_infixOperatorIR cEnumerator_registerBitSliceAccessMap::current_mAccessOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cEnumerator_registerBitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_registerBitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mAccessRightOperand ;
@@ -3281,365 +3281,6 @@ GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("registerBitSliceAccessMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixNoOvf::cEnumAssociatedValues_infixOperatorIR_infixNoOvf (const GALGAS_string & inAssociatedValue0
-                                                                                                    COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixNoOvf::description (C_String & ioString,
-                                                                    const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixNoOvf::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixNoOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixNoOvf *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixOvf::cEnumAssociatedValues_infixOperatorIR_infixOvf (const GALGAS_string & inAssociatedValue0,
-                                                                                                const GALGAS_uint & inAssociatedValue1
-                                                                                                COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixOvf::description (C_String & ioString,
-                                                                  const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixOvf::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixOvf *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
-                                                                                                                      COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::description (C_String & ioString,
-                                                                             const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_infixOperatorIR_infixModulo::cEnumAssociatedValues_infixOperatorIR_infixModulo (const GALGAS_uint & inAssociatedValue0
-                                                                                                      COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_infixOperatorIR_infixModulo::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixModulo::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_infixOperatorIR_infixModulo * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixModulo *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR::GALGAS_infixOperatorIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixNoOvf (const GALGAS_string & inAssociatedValue0
-                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_infixNoOvf ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixNoOvf (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixOvf (const GALGAS_string & inAssociatedValue0,
-                                                                     const GALGAS_uint & inAssociatedValue1
-                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_infixOvf ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixOvf (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_infixUnsignedDivide ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixModulo (const GALGAS_uint & inAssociatedValue0
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  if (inAssociatedValue0.isValid ()) {
-    result.mEnum = kEnum_infixModulo ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixModulo (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixNoOvf (GALGAS_string & outAssociatedValue0,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixNoOvf) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixNoOvf invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixNoOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixNoOvf *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixOvf (GALGAS_string & outAssociatedValue0,
-                                              GALGAS_uint & outAssociatedValue1,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixOvf) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixOvf invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixUnsignedDivide (GALGAS_uint & outAssociatedValue0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixUnsignedDivide) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixUnsignedDivide invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::method_infixModulo (GALGAS_uint & outAssociatedValue0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_infixModulo) {
-    outAssociatedValue0.drop () ;
-    C_String s ;
-    s << "method @infixOperatorIR infixModulo invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_infixOperatorIR_infixModulo * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixModulo *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_infixOperatorIR [5] = {
-  "(not built)",
-  "infixNoOvf",
-  "infixOvf",
-  "infixUnsignedDivide",
-  "infixModulo"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixNoOvf (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixNoOvf == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixOvf (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixOvf == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixUnsignedDivide (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixUnsignedDivide == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixModulo (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixModulo == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_infixOperatorIR::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "<enum @infixOperatorIR: " << gEnumNameArrayFor_infixOperatorIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_infixOperatorIR::objectCompare (const GALGAS_infixOperatorIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @infixOperatorIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixOperatorIR ("infixOperatorIR",
-                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_infixOperatorIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixOperatorIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_infixOperatorIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_infixOperatorIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorIR GALGAS_infixOperatorIR::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorIR result ;
-  const GALGAS_infixOperatorIR * p = (const GALGAS_infixOperatorIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_infixOperatorIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("infixOperatorIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4799,6 +4440,365 @@ GALGAS_infixOperatorMap GALGAS_infixOperatorMap::extractObject (const GALGAS_obj
       result = *p ;
     }else{
       inCompiler->castError ("infixOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixNoOvf::cEnumAssociatedValues_infixOperatorIR_infixNoOvf (const GALGAS_string & inAssociatedValue0
+                                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixNoOvf::description (C_String & ioString,
+                                                                    const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixNoOvf::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixNoOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixNoOvf *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixOvf::cEnumAssociatedValues_infixOperatorIR_infixOvf (const GALGAS_string & inAssociatedValue0,
+                                                                                                const GALGAS_uint & inAssociatedValue1
+                                                                                                COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixOvf::description (C_String & ioString,
+                                                                  const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixOvf::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixOvf *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
+                                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::description (C_String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_infixOperatorIR_infixModulo::cEnumAssociatedValues_infixOperatorIR_infixModulo (const GALGAS_uint & inAssociatedValue0
+                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_infixOperatorIR_infixModulo::description (C_String & ioString,
+                                                                     const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_infixOperatorIR_infixModulo::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_infixOperatorIR_infixModulo * ptr = dynamic_cast<const cEnumAssociatedValues_infixOperatorIR_infixModulo *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR::GALGAS_infixOperatorIR (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixNoOvf (const GALGAS_string & inAssociatedValue0
+                                                                       COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_infixNoOvf ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixNoOvf (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixOvf (const GALGAS_string & inAssociatedValue0,
+                                                                     const GALGAS_uint & inAssociatedValue1
+                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_infixOvf ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixOvf (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixUnsignedDivide (const GALGAS_uint & inAssociatedValue0
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_infixUnsignedDivide ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::constructor_infixModulo (const GALGAS_uint & inAssociatedValue0
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_infixModulo ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_infixOperatorIR_infixModulo (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixNoOvf (GALGAS_string & outAssociatedValue0,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixNoOvf) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixNoOvf invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixNoOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixNoOvf *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixOvf (GALGAS_string & outAssociatedValue0,
+                                              GALGAS_uint & outAssociatedValue1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixOvf) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixOvf invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixOvf * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixOvf *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixUnsignedDivide (GALGAS_uint & outAssociatedValue0,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixUnsignedDivide) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixUnsignedDivide invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixUnsignedDivide *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::method_infixModulo (GALGAS_uint & outAssociatedValue0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_infixModulo) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @infixOperatorIR infixModulo invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_infixOperatorIR_infixModulo * ptr = (const cEnumAssociatedValues_infixOperatorIR_infixModulo *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_infixOperatorIR [5] = {
+  "(not built)",
+  "infixNoOvf",
+  "infixOvf",
+  "infixUnsignedDivide",
+  "infixModulo"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixNoOvf (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixNoOvf == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixOvf (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixOvf == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixUnsignedDivide (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixUnsignedDivide == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_infixOperatorIR::reader_isInfixModulo (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_infixModulo == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorIR::description (C_String & ioString,
+                                          const int32_t inIndentation) const {
+  ioString << "<enum @infixOperatorIR: " << gEnumNameArrayFor_infixOperatorIR [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_infixOperatorIR::objectCompare (const GALGAS_infixOperatorIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @infixOperatorIR type                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_infixOperatorIR ("infixOperatorIR",
+                                        NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_infixOperatorIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_infixOperatorIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_infixOperatorIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_infixOperatorIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorIR GALGAS_infixOperatorIR::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorIR result ;
+  const GALGAS_infixOperatorIR * p = (const GALGAS_infixOperatorIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_infixOperatorIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("infixOperatorIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
