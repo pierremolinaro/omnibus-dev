@@ -44,8 +44,6 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   case globalConstant (@operandIR unused value) :
   case temporaryConstant (@uint unused idx) :
   case localAccess (@lstring unused access) :
-  case literalUnsignedInteger (*) :
-  case literalSignedInteger (*) :
   case literalString (@string value @string unused name) :
     ioAccessibleEntities.mStaticStringSet += !value
   case literalStructure (@literalStructureList s) :
