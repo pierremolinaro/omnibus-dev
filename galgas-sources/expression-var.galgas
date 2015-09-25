@@ -126,13 +126,20 @@ override method @varInExpressionAST analyzeExpression
     if [registerBitSliceMap count] > 0 then # It is a register
       [registerBitSliceMap searchKey
         !field
-        ?let @infixOperatorIR unused accessOperator
-        ?let @variableKindIR unused accessRightOperand
+        ?let @string accessOperator
+        ?let @bigint accessRightOperand
         ?let submap
         ?let newResultType
        ]
     #--- Temp var
       getNewTempVariable (!?ioTemporaries ?let newResultingVariable)
+      [!?ioInstructionGenerationList appendBinaryOperation
+        !newResultingVariable
+        !outExpressionType
+        !variableValueName
+        !accessOperator
+        !.literalInteger {!value:accessRightOperand}
+      ]
 #      ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
 #        !newResultType
 #        !newResultingVariable
