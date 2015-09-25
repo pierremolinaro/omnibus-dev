@@ -59,7 +59,7 @@ override method @varInExpressionAST analyzeExpression
 #--- Search variable
   [!?ioVariableMap searchForReadAccess
     !mSourceVarName
-    ?let variableType
+    ?let @unifiedTypeMap-proxy variableType
     ?let accessIsAllowed
     ?let unused varAccess
     ?@variableKindIR variableKind
@@ -71,50 +71,12 @@ override method @varInExpressionAST analyzeExpression
     error mSourceVarName : "routine has no access right on the this variable"
   end
 #--- Load variable
-  @operandIR variableValueName
-  switch variableKind
-  case register (@lstring name @bigint address) :
-    getNewTempVariable (!?ioTemporaries ?variableValueName)
-    [!?ioInstructionGenerationList appendComment ![variableValueName string] + " = " + name]
-    [!?ioInstructionGenerationList appendLoadVolatile
-      !variableValueName
-      !name.string
-      !variableType
-      !address
-    ]
-  case globalVariable (@lstring name) :
-    getNewTempVariable (!?ioTemporaries ?variableValueName)
-    [!?ioInstructionGenerationList appendComment ![variableValueName string] + " = " + name]
-    [!?ioInstructionGenerationList appendLoadGlobalVariable
-      !variableValueName
-      !name.string
-      !variableType
-    ]
-  case localVariable (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : variableValueName
-  case inArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : variableValueName
-  case inOutArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : variableValueName
-  case outArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : variableValueName
-  case localConstant (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : variableValueName
-  case globalConstant (@operandIR value) :
-    variableValueName = value
-  case temporaryConstant (@uint unused idx) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
-  case localAccess (@lstring access) :
-    error access : "@varInExpressionAST analyzeExpression" : variableValueName
-  case literalUnsignedInteger (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
-  case literalSignedInteger (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
-  case literalString (**) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
-  case literalStructure (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : variableValueName
-  end
+  [variableKind loadFromMemory
+    !variableType
+    !?temporary:ioTemporaries
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultingValue:@operandIR variableValueName
+  ]
 #--- Solve inferred type
   outExpressionType = solveInferredType (
     !targetType:inOptionalTargetType
