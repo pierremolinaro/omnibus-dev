@@ -1,0 +1,31 @@
+
+setter @instructionListIR appendStoreLocalVariable
+  ?let @string inLocalVarName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+  ?let @operandIR inSourceValue
+{
+  self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @storeLocalVariableIR : @abstractInstructionIR {
+  @string mLocalVarName
+  @unifiedTypeMap-proxy mTargetVarType
+  @operandIR mSourceValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeLocalVariableIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mTargetVarType llvmType]
+  ioCode += "  store "
+  ioCode += llvmType + " " + mSourceValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeLocalVariableIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

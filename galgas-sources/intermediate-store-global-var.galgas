@@ -19,12 +19,6 @@ class @storeGlobalVariableIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @storeGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @storeGlobalVariableIR llvmInstructionCode ?!@string ioCode {
   let llvmType = [mTargetVarType llvmType]
   ioCode += "  store "
@@ -32,6 +26,12 @@ override method @storeGlobalVariableIR llvmInstructionCode ?!@string ioCode {
     ioCode += "volatile "
   end
   ioCode += llvmType + " " + mSourceValue + ", " + llvmType + "* @" + mangledNameForGlobalVariable (!mGlobalVarName) + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @storeGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

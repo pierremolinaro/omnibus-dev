@@ -119,19 +119,15 @@ override method @assignmentInstructionAST analyze
   [!?ioInstructionGenerationList appendComment !comment]
   switch targetVariableKind
   case register (@lstring registerName @bigint address) :
-    [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !targetType !address !sourceValueName]
+    [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !targetType !address !sourceValueName]
   case globalVariable (@lstring name @bool isVolatile) :
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !targetType !sourceValueName !volatile:isVolatile]
   case localVariable (@lstring unused name) :
-
-  case inArgument (@lstring unused name) :
-
+    [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !targetType !sourceValueName]
   case inOutArgument (@lstring unused name) :
      error .nowhere : "INTERNAL ERROR"
   case outArgument (@lstring unused name) :
      error .nowhere : "INTERNAL ERROR"
-  case localConstant (@lstring unused name) :
-     error name : "INTERNAL ERROR"
   case globalConstant (@operandIR unused value) :
      error .nowhere : "INTERNAL ERROR"
   case temporaryConstant (@uint unused idx) :

@@ -21,12 +21,6 @@ func mangledNameForProperty ?name:@string inName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForInArgument ?@string inName -> @string outPrefix {
-  outPrefix = "in_" + [inName nameRepresentation]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 func mangledNameForInOutArgument ?@string inName -> @string outPrefix {
   outPrefix = "inout_" + [inName nameRepresentation]
 }
@@ -91,11 +85,6 @@ func mangledNameForGlobalVariable ?@string inName -> @string outName {
   outName = "gvar_" + [inName nameRepresentation]
 }
 
-#----------------------------------------------------------------------------------------------------------------------*
-
-func mangledNameForConstant ?@string inName -> @string outName {
-  outName = "const_" + [inName nameRepresentation]
-}
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForTemporaryConstant ?idx:@uint inIndex -> @string outName {

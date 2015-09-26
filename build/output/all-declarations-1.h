@@ -3486,10 +3486,8 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localVariable,
-    kEnum_inArgument,
     kEnum_inOutArgument,
     kEnum_outArgument,
-    kEnum_localConstant,
     kEnum_globalConstant,
     kEnum_temporaryConstant,
     kEnum_localAccess,
@@ -3528,9 +3526,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                                     const class GALGAS_bool & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_inArgument (const class GALGAS_lstring & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3543,9 +3538,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_lstring & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_variableKindIR constructor_localConstant (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_localVariable (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
@@ -3578,10 +3570,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_inArgument (class GALGAS_lstring & outArgument0,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_inOutArgument (class GALGAS_lstring & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
@@ -3598,10 +3586,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_localAccess (class GALGAS_lstring & outArgument0,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_lstring & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_lstring & outArgument0,
                                                        C_Compiler * inCompiler
@@ -3627,8 +3611,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInArgument (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInOutArgument (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralString (LOCATION_ARGS) const ;
@@ -3636,8 +3618,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalVariable (LOCATION_ARGS) const ;
 
@@ -3716,22 +3696,6 @@ class cEnumAssociatedValues_variableKindIR_localVariable : public cEnumAssociate
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_variableKindIR_inArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_inArgument (const GALGAS_lstring & inAssociatedValue0
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_inArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 class cEnumAssociatedValues_variableKindIR_inOutArgument : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
 
@@ -3760,22 +3724,6 @@ class cEnumAssociatedValues_variableKindIR_outArgument : public cEnumAssociatedV
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_variableKindIR_outArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_localConstant : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_localConstant (const GALGAS_lstring & inAssociatedValue0
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_localConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

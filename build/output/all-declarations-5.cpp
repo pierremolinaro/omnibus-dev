@@ -10,28 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//             Overriding category method '@registerIntegerConstantInExpressionIR enterAccessibleEntities'             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                                          GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
-                                                                                          C_Compiler * /* inCompiler */
-                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_registerIntegerConstantInExpressionIR.mSlotID,
-                                               categoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities (defineCategoryMethod_registerIntegerConstantInExpressionIR_enterAccessibleEntities, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                              Overriding category method '@checkInstructionAST analyze'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -482,10 +460,14 @@ static void categoryMethod_letInstructionWithAssignmentAST_analyze (const cPtr_i
   GALGAS_unifiedTypeMap_2D_proxy var_inferredType ;
   GALGAS_operandIR var_resultValueName ;
   callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_targetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_inferredType, var_resultValueName, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 81)) ;
-  GALGAS_variableKindIR var_targetConstant = GALGAS_variableKindIR::constructor_localConstant (object->mAttribute_mVarName  COMMA_SOURCE_FILE ("instruction-let.galgas", 96)) ;
+  GALGAS_variableKindIR var_localConstant = GALGAS_variableKindIR::constructor_localVariable (object->mAttribute_mVarName  COMMA_SOURCE_FILE ("instruction-let.galgas", 96)) ;
   {
-  ioArgument_ioVariableMap.modifier_insertLocalConstant (object->mAttribute_mVarName, var_inferredType, GALGAS_bool (true), function_mangledNameForLocalVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 101)), var_targetConstant, var_inferredType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 103)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("instruction-let.galgas", 104)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 97)) ;
+  ioArgument_ioVariableMap.modifier_insertLocalConstant (object->mAttribute_mVarName, var_inferredType, GALGAS_bool (true), function_mangledNameForLocalVariable (object->mAttribute_mVarName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 101)), var_localConstant, var_inferredType.reader_copiable (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 103)), GALGAS_registerBitSliceAccessMap::constructor_emptyMap (SOURCE_FILE ("instruction-let.galgas", 104)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 97)) ;
   }
+  {
+  categoryModifier_appendAlloca (ioArgument_ioInstructionGenerationList, object->mAttribute_mVarName.mAttribute_string, var_inferredType, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 108)) ;
+  }
+  categoryMethod_storeInMemory (var_localConstant, var_resultValueName, var_inferredType, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 112)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -497,53 +479,6 @@ static void defineCategoryMethod_letInstructionWithAssignmentAST_analyze (void) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_letInstructionWithAssignmentAST_analyze (defineCategoryMethod_letInstructionWithAssignmentAST_analyze, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Overriding category method '@letInstructionWithAssignmentIR llvmInstructionCode'                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_letInstructionWithAssignmentIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                               GALGAS_string & ioArgument_ioCode,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_letInstructionWithAssignmentIR * object = (const cPtr_letInstructionWithAssignmentIR *) inObject ;
-  macroValidSharedObject (object, cPtr_letInstructionWithAssignmentIR) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("const ").add_operation (function_mangledNameForType (object->mAttribute_mTargetType.reader_key (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)).add_operation (categoryReader_string (object->mAttribute_mTargetConstantIR, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 128)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 129)).add_operation (categoryReader_string (object->mAttribute_mSourceIR, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 130)), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 130)).add_operation (GALGAS_string (" ;\n"), inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 131))  COMMA_SOURCE_FILE ("instruction-let.galgas", 128)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_letInstructionWithAssignmentIR_llvmInstructionCode (void) {
-  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_letInstructionWithAssignmentIR.mSlotID,
-                                           categoryMethod_letInstructionWithAssignmentIR_llvmInstructionCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_letInstructionWithAssignmentIR_llvmInstructionCode (defineCategoryMethod_letInstructionWithAssignmentIR_llvmInstructionCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                Overriding category method '@letInstructionWithAssignmentIR enterAccessibleEntities'                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_letInstructionWithAssignmentIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
-                                                                                   GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
-                                                                                   C_Compiler * /* inCompiler */
-                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_letInstructionWithAssignmentIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_letInstructionWithAssignmentIR.mSlotID,
-                                               categoryMethod_letInstructionWithAssignmentIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_letInstructionWithAssignmentIR_enterAccessibleEntities (defineCategoryMethod_letInstructionWithAssignmentIR_enterAccessibleEntities, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -657,19 +592,19 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
     break ;
   case GALGAS_variableKindIR::kEnum_register:
     {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_4758 = (const cEnumAssociatedValues_variableKindIR_register *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_registerName = extractPtr_4758->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_4758->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_register * extractPtr_4766 = (const cEnumAssociatedValues_variableKindIR_register *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_registerName = extractPtr_4766->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_4766->mAssociatedValue1 ;
       {
-      categoryModifier_appendStoreVolatile (ioArgument_ioInstructionGenerationList, extractedValue_registerName.mAttribute_string, var_targetType, extractedValue_address, var_sourceValueName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 122)) ;
+      categoryModifier_appendStoreVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_registerName.mAttribute_string, var_targetType, extractedValue_address, var_sourceValueName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 122)) ;
       }
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_4940 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_4940->mAssociatedValue0 ;
-      const GALGAS_bool extractedValue_isVolatile = extractPtr_4940->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_4948 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_4948->mAssociatedValue0 ;
+      const GALGAS_bool extractedValue_isVolatile = extractPtr_4948->mAssociatedValue1 ;
       {
       categoryModifier_appendStoreGlobalVariable (ioArgument_ioInstructionGenerationList, extractedValue_name.mAttribute_string, var_targetType, var_sourceValueName, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 124)) ;
       }
@@ -677,72 +612,61 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
     break ;
   case GALGAS_variableKindIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_4986 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_4986->mAssociatedValue0 ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inArgument * extractPtr_5030 = (const cEnumAssociatedValues_variableKindIR_inArgument *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5030->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_5097 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_5097->mAssociatedValue0 ;
+      {
+      categoryModifier_appendStoreLocalVariable (ioArgument_ioInstructionGenerationList, extractedValue_name.mAttribute_string, var_targetType, var_sourceValueName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 126)) ;
+      }
     }
     break ;
   case GALGAS_variableKindIR::kEnum_inOutArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_5116 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5116->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 130)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 130)) ;
+      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_5182 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_5182->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 128)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 128)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_outArgument:
     {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_5199 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5199->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 132)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 132)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_localConstant * extractPtr_5280 = (const cEnumAssociatedValues_variableKindIR_localConstant *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5280->mAssociatedValue0 ;
-      GALGAS_location location_9 (extractedValue_name.reader_location (HERE)) ; // Implicit use of 'location' reader
-      inCompiler->emitSemanticError (location_9, GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 134)) ;
+      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_5265 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_5265->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 130)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 130)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_5369 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_operandIR extractedValue_value = extractPtr_5369->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 136)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 136)) ;
+      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_5354 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_operandIR extractedValue_value = extractPtr_5354->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 132)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 132)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_temporaryConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_5454 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_5454->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 138)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 138)) ;
+      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_5439 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_idx = extractPtr_5439->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 134)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 134)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localAccess:
     {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_5539 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_access = extractPtr_5539->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 140)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
+      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_5524 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_access = extractPtr_5524->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 136)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 136)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalString:
     {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_5644 = (const cEnumAssociatedValues_variableKindIR_literalString *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_5644->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_5644->mAssociatedValue1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 142)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 142)) ;
+      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_5629 = (const cEnumAssociatedValues_variableKindIR_literalString *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_string extractedValue_value = extractPtr_5629->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_5629->mAssociatedValue1 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 138)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 138)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalStructure:
     {
-      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_5746 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_literalStructureList extractedValue_value = extractPtr_5746->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 144)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 144)) ;
+      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_5731 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (var_targetVariableKind.unsafePointer ()) ;
+      const GALGAS_literalStructureList extractedValue_value = extractPtr_5731->mAssociatedValue0 ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 140)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
     }
     break ;
   }
@@ -1410,7 +1334,34 @@ static void categoryMethod_procCallInstructionIR_llvmInstructionCode (const cPtr
   const cPtr_procCallInstructionIR * object = (const cPtr_procCallInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_procCallInstructionIR) ;
   ioArgument_ioCode.dotAssign_operation (GALGAS_string (";--- ").add_operation (function_mangledNameForProcedure (object->mAttribute_mProcName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 247)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 247)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 247))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 247)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  call void @").add_operation (function_mangledNameForProcedure (object->mAttribute_mProcName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)).add_operation (GALGAS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  call void @").add_operation (function_mangledNameForProcedure (object->mAttribute_mProcName, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 248)) ;
+  cEnumerator_procCallEffectiveParameterListIR enumerator_10028 (object->mAttribute_mParameters, kEnumeration_up) ;
+  while (enumerator_10028.hasCurrentObject ()) {
+    switch (enumerator_10028.current_mEffectiveParameterPassingMode (HERE).enumValue ()) {
+    case GALGAS_procEffectiveParameterPassingModeIR::kNotBuilt:
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_input:
+      {
+        ioArgument_ioCode.dotAssign_operation (categoryReader_llvmType (enumerator_10028.current_mParameterType (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 252)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 252)).add_operation (categoryReader_string (enumerator_10028.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 252)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 252))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 252)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_output:
+      {
+        ioArgument_ioCode.dotAssign_operation (categoryReader_llvmType (enumerator_10028.current_mParameterType (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 254)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 254)).add_operation (categoryReader_string (enumerator_10028.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 254)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 254))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 254)) ;
+      }
+      break ;
+    case GALGAS_procEffectiveParameterPassingModeIR::kEnum_outputInput:
+      {
+        ioArgument_ioCode.dotAssign_operation (categoryReader_llvmType (enumerator_10028.current_mParameterType (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 256)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 256)).add_operation (categoryReader_string (enumerator_10028.current_mParameter (HERE), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 256)), inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 256))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 256)) ;
+      }
+      break ;
+    }
+    if (enumerator_10028.hasNextObject ()) {
+      ioArgument_ioCode.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 259)) ;
+    }
+    enumerator_10028.gotoNextObject () ;
+  }
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string (")\n")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 261)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1435,7 +1386,7 @@ static void categoryMethod_procCallInstructionIR_enterAccessibleEntities (const 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_procCallInstructionIR * object = (const cPtr_procCallInstructionIR *) inObject ;
   macroValidSharedObject (object, cPtr_procCallInstructionIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (object->mAttribute_mProcName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 266)) ;
+  ioArgument_ioAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (object->mAttribute_mProcName  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 267)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1615,6 +1566,54 @@ C_PrologueEpilogue gMethod_commentIR_llvmInstructionCode (defineCategoryMethod_c
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Overriding category method '@allocaConstantIR llvmInstructionCode'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_allocaConstantIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                 GALGAS_string & ioArgument_ioCode,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_allocaConstantIR * object = (const cPtr_allocaConstantIR *) inObject ;
+  macroValidSharedObject (object, cPtr_allocaConstantIR) ;
+  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mVariableType, inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 19)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  %").add_operation (function_mangledNameForLocalVariable (object->mAttribute_mLocalVariableName, inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20))  COMMA_SOURCE_FILE ("intermediate-alloca.galgas", 20)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_allocaConstantIR_llvmInstructionCode (void) {
+  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_allocaConstantIR.mSlotID,
+                                           categoryMethod_allocaConstantIR_llvmInstructionCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_allocaConstantIR_llvmInstructionCode (defineCategoryMethod_allocaConstantIR_llvmInstructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Overriding category method '@allocaConstantIR enterAccessibleEntities'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_allocaConstantIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
+                                                                     GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
+                                                                     C_Compiler * /* inCompiler */
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_allocaConstantIR_enterAccessibleEntities (void) {
+  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_allocaConstantIR.mSlotID,
+                                               categoryMethod_allocaConstantIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_allocaConstantIR_enterAccessibleEntities (defineCategoryMethod_allocaConstantIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                       Overriding category method '@binaryOperationIR enterAccessibleEntities'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1673,8 +1672,8 @@ static void categoryMethod_loadRegisterIR_llvmInstructionCode (const cPtr_abstra
                                                                COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_loadRegisterIR * object = (const cPtr_loadRegisterIR *) inObject ;
   macroValidSharedObject (object, cPtr_loadRegisterIR) ;
-  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mRegisterType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 23)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  ").add_operation (categoryReader_string (object->mAttribute_mTargetValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (GALGAS_string (" = load volatile "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)).add_operation (object->mAttribute_mRegisterAddress.reader_string (SOURCE_FILE ("intermediate-load-volatile.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25)).add_operation (object->mAttribute_mRegisterAddress.reader_hexString (SOURCE_FILE ("intermediate-load-volatile.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 25))  COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 24)) ;
+  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mRegisterType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 23)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  ").add_operation (categoryReader_string (object->mAttribute_mTargetValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (GALGAS_string (" = load volatile "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)).add_operation (object->mAttribute_mRegisterAddress.reader_string (SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)).add_operation (object->mAttribute_mRegisterAddress.reader_hexString (SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 25))  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 24)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1699,7 +1698,7 @@ static void categoryMethod_loadRegisterIR_enterAccessibleEntities (const cPtr_ab
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_loadRegisterIR * object = (const cPtr_loadRegisterIR *) inObject ;
   macroValidSharedObject (object, cPtr_loadRegisterIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-load-volatile.galgas", 31)) ;
+  ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-load-volatile-register.galgas", 31)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1801,13 +1800,10 @@ C_PrologueEpilogue gMethod_loadLocalVariableIR_llvmInstructionCode (defineCatego
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void categoryMethod_loadLocalVariableIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                        GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+static void categoryMethod_loadLocalVariableIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
+                                                                        GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
                                                                         C_Compiler * /* inCompiler */
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_loadLocalVariableIR * object = (const cPtr_loadLocalVariableIR *) inObject ;
-  macroValidSharedObject (object, cPtr_loadLocalVariableIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mVariableName  COMMA_SOURCE_FILE ("intermediate-load-local-variable.galgas", 29)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1822,83 +1818,6 @@ C_PrologueEpilogue gMethod_loadLocalVariableIR_enterAccessibleEntities (defineCa
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category method '@loadInArgumentIR llvmInstructionCode'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_loadInArgumentIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                 GALGAS_string & ioArgument_ioCode,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_loadInArgumentIR * object = (const cPtr_loadInArgumentIR *) inObject ;
-  macroValidSharedObject (object, cPtr_loadInArgumentIR) ;
-  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mVariableType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 21)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  ").add_operation (categoryReader_string (object->mAttribute_mTargetValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 22)).add_operation (GALGAS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 22))  COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 22)) ;
-  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)).add_operation (function_mangledNameForInArgument (object->mAttribute_mVariableName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23))  COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 23)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_loadInArgumentIR_llvmInstructionCode (void) {
-  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_loadInArgumentIR.mSlotID,
-                                           categoryMethod_loadInArgumentIR_llvmInstructionCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_loadInArgumentIR_llvmInstructionCode (defineCategoryMethod_loadInArgumentIR_llvmInstructionCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Overriding category method '@loadInArgumentIR enterAccessibleEntities'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_loadInArgumentIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                     GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                                                     C_Compiler * /* inCompiler */
-                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_loadInArgumentIR * object = (const cPtr_loadInArgumentIR *) inObject ;
-  macroValidSharedObject (object, cPtr_loadInArgumentIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mVariableName  COMMA_SOURCE_FILE ("intermediate-load-in-argument.galgas", 29)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_loadInArgumentIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_loadInArgumentIR.mSlotID,
-                                               categoryMethod_loadInArgumentIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_loadInArgumentIR_enterAccessibleEntities (defineCategoryMethod_loadInArgumentIR_enterAccessibleEntities, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding category method '@storeVolatileIR enterAccessibleEntities'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_storeVolatileIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                    GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                                                    C_Compiler * /* inCompiler */
-                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_storeVolatileIR * object = (const cPtr_storeVolatileIR *) inObject ;
-  macroValidSharedObject (object, cPtr_storeVolatileIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 23)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_storeVolatileIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_storeVolatileIR.mSlotID,
-                                               categoryMethod_storeVolatileIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_storeVolatileIR_enterAccessibleEntities (defineCategoryMethod_storeVolatileIR_enterAccessibleEntities, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Overriding category method '@storeVolatileIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1909,8 +1828,8 @@ static void categoryMethod_storeVolatileIR_llvmInstructionCode (const cPtr_abstr
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_storeVolatileIR * object = (const cPtr_storeVolatileIR *) inObject ;
   macroValidSharedObject (object, cPtr_storeVolatileIR) ;
-  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 29)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store volatile ").add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)).add_operation (object->mAttribute_mAddress.reader_string (SOURCE_FILE ("intermediate-store-volatile.galgas", 31)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31)).add_operation (object->mAttribute_mAddress.reader_hexString (SOURCE_FILE ("intermediate-store-volatile.galgas", 31)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 31))  COMMA_SOURCE_FILE ("intermediate-store-volatile.galgas", 30)) ;
+  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 23)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store volatile ").add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (GALGAS_string ("* inttoptr (i32 "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)).add_operation (object->mAttribute_mAddress.reader_string (SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)).add_operation (GALGAS_string (" to "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)).add_operation (GALGAS_string ("*) ; "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)).add_operation (object->mAttribute_mAddress.reader_hexString (SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 25))  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 24)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1925,6 +1844,62 @@ C_PrologueEpilogue gMethod_storeVolatileIR_llvmInstructionCode (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Overriding category method '@storeVolatileIR enterAccessibleEntities'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_storeVolatileIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
+                                                                    GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
+                                                                    C_Compiler * /* inCompiler */
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_storeVolatileIR * object = (const cPtr_storeVolatileIR *) inObject ;
+  macroValidSharedObject (object, cPtr_storeVolatileIR) ;
+  ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 31)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_storeVolatileIR_enterAccessibleEntities (void) {
+  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_storeVolatileIR.mSlotID,
+                                               categoryMethod_storeVolatileIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_storeVolatileIR_enterAccessibleEntities (defineCategoryMethod_storeVolatileIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Overriding category method '@storeGlobalVariableIR llvmInstructionCode'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_storeGlobalVariableIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                      GALGAS_string & ioArgument_ioCode,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_storeGlobalVariableIR * object = (const cPtr_storeGlobalVariableIR *) inObject ;
+  macroValidSharedObject (object, cPtr_storeGlobalVariableIR) ;
+  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 23)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 24)) ;
+  const enumGalgasBool test_0 = object->mAttribute_mIsVolatile.boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioCode.dotAssign_operation (GALGAS_string ("volatile ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 26)) ;
+  }
+  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (function_mangledNameForGlobalVariable (object->mAttribute_mGlobalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28))  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode (void) {
+  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_storeGlobalVariableIR.mSlotID,
+                                           categoryMethod_storeGlobalVariableIR_llvmInstructionCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_storeGlobalVariableIR_llvmInstructionCode (defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Overriding category method '@storeGlobalVariableIR enterAccessibleEntities'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1935,7 +1910,7 @@ static void categoryMethod_storeGlobalVariableIR_enterAccessibleEntities (const 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_storeGlobalVariableIR * object = (const cPtr_storeGlobalVariableIR *) inObject ;
   macroValidSharedObject (object, cPtr_storeGlobalVariableIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mGlobalVarName  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 23)) ;
+  ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (object->mAttribute_mGlobalVarName  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1950,32 +1925,50 @@ C_PrologueEpilogue gMethod_storeGlobalVariableIR_enterAccessibleEntities (define
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Overriding category method '@storeGlobalVariableIR llvmInstructionCode'                       *
+//                       Overriding category method '@storeLocalVariableIR llvmInstructionCode'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void categoryMethod_storeGlobalVariableIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                      GALGAS_string & ioArgument_ioCode,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_storeGlobalVariableIR * object = (const cPtr_storeGlobalVariableIR *) inObject ;
-  macroValidSharedObject (object, cPtr_storeGlobalVariableIR) ;
-  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 29)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 30)) ;
-  const enumGalgasBool test_0 = object->mAttribute_mIsVolatile.boolEnum () ;
-  if (kBoolTrue == test_0) {
-    ioArgument_ioCode.dotAssign_operation (GALGAS_string ("volatile ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)) ;
-  }
-  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (function_mangledNameForGlobalVariable (object->mAttribute_mGlobalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34))  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 34)) ;
+static void categoryMethod_storeLocalVariableIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                     GALGAS_string & ioArgument_ioCode,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_storeLocalVariableIR * object = (const cPtr_storeLocalVariableIR *) inObject ;
+  macroValidSharedObject (object, cPtr_storeLocalVariableIR) ;
+  GALGAS_string var_llvmType = categoryReader_llvmType (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 21)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store ")  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 22)) ;
+  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (function_mangledNameForLocalVariable (object->mAttribute_mLocalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23))  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 23)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode (void) {
-  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_storeGlobalVariableIR.mSlotID,
-                                           categoryMethod_storeGlobalVariableIR_llvmInstructionCode) ;
+static void defineCategoryMethod_storeLocalVariableIR_llvmInstructionCode (void) {
+  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_storeLocalVariableIR.mSlotID,
+                                           categoryMethod_storeLocalVariableIR_llvmInstructionCode) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gMethod_storeGlobalVariableIR_llvmInstructionCode (defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode, NULL) ;
+C_PrologueEpilogue gMethod_storeLocalVariableIR_llvmInstructionCode (defineCategoryMethod_storeLocalVariableIR_llvmInstructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Overriding category method '@storeLocalVariableIR enterAccessibleEntities'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_storeLocalVariableIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
+                                                                         GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
+                                                                         C_Compiler * /* inCompiler */
+                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_storeLocalVariableIR_enterAccessibleEntities (void) {
+  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_storeLocalVariableIR.mSlotID,
+                                               categoryMethod_storeLocalVariableIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_storeLocalVariableIR_enterAccessibleEntities (defineCategoryMethod_storeLocalVariableIR_enterAccessibleEntities, NULL) ;
 

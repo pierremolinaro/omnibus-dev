@@ -2,5 +2,5 @@
 //%!["global constant " + GLOBAL_CONSTANT_NAME stringByLeftAndRightPadding !117 !' ']%*
 //---------------------------------------------------------------------------------------------------------------------*
 
-#define %!mangledNameForConstant (!GLOBAL_CONSTANT_NAME)% (%!CONSTANT_VALUE%)
+#define %!mangledNameForGlobalVariable (!GLOBAL_CONSTANT_NAME)% (%!CONSTANT_VALUE%)
 

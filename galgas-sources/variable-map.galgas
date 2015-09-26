@@ -11,7 +11,6 @@ enum @assignmentTargetIR {
   case inArgument (@lstring name)
   case inOutArgument (@lstring name)
   case outArgument (@lstring name)
-  case localConstant (@lstring name)
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
   case literalStructure (@literalStructureList value)
@@ -58,10 +57,8 @@ enum @variableKindIR {
   case register (@lstring name @bigint address)
   case globalVariable (@lstring name @bool isVolatile)
   case localVariable (@lstring name)
-  case inArgument (@lstring name)
   case inOutArgument (@lstring name)
   case outArgument (@lstring name)
-  case localConstant (@lstring name)
   case globalConstant (@operandIR value)
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
@@ -80,13 +77,9 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case localVariable (*) :
     outResult = false
-  case inArgument (*) :
-    outResult = false
   case inOutArgument (*) :
     outResult = false
   case outArgument (*) :
-    outResult = false
-  case localConstant (*) :
     outResult = false
   case globalConstant (*) :
     outResult = true
@@ -143,7 +136,7 @@ func initialVariableMap
       !constantName
       !constantType
       !true
-      !mangledNameForConstant (!constantName.string)
+      !mangledNameForGlobalVariable (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}
@@ -196,7 +189,7 @@ func variableMapWithConstants
       !constantName
       !constantType
       !true
-      !mangledNameForConstant (!constantName.string)
+      !mangledNameForGlobalVariable (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}
