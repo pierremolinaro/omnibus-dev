@@ -38,18 +38,7 @@ def toolDir ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def llvmOptimizerCompiler ():
-  return [toolDir () + "/bin/opt", "-disable-simplify-libcalls", "-S"]
-
-#----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
-#   LLVM optimizer options                                                                                             *
-#                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
-
-def llvmOptimizerOptions ():
-  result = []
-  result.append ("-<<OPTIMIZATION_OPTION>>")
-  return result
+  return [toolDir () + "/bin/opt", "-<<OPT_OPTIMIZATION_OPTION>>", "-disable-simplify-libcalls", "-S"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -58,7 +47,7 @@ def llvmOptimizerOptions ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def LLCcompiler ():
-  return [toolDir () + "/bin/llc"]
+  return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -167,7 +156,7 @@ def runExecutableOnTarget ():
 
 currentFile = os.path.abspath (sys.argv [0])
 plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
-                 LLCcompiler (), llvmOptimizerCompiler (), llvmOptimizerOptions (),
+                 LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
                  linker (), linkerOptions (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \

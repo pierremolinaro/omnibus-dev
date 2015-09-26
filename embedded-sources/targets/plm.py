@@ -51,7 +51,7 @@ def downloadArchive (archiveURL, archivePath):
 #----------------------------------------------------------------------------------------------------------------------*
 
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
-                 objectDir, LLCcompiler, llvmOptimizerCompiler, llvmOptimizerOptions, \
+                 objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
                  productDir, linker, linkerOptions, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
@@ -93,7 +93,6 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     rule.mDependences.append (currentFile)
     rule.mCommand += llvmOptimizerCompiler
     rule.mCommand += ["sources/" + source]
-    rule.mCommand += llvmOptimizerOptions
     rule.mCommand += ["-o", optimizedSource]
     makefile.addRule (rule)
   #--- Compile LLVM source

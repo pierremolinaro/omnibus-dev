@@ -79,15 +79,6 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"optimization3"
-    commandChar:0
-    commandString:@"O3"
-    comment:@"Optimization level 3"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
     identifier:@"optimizationS"
     commandChar:0
     commandString:@"Os"
@@ -101,6 +92,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:0
     commandString:@"Oz"
     comment:@"Like previous option but reduces code size further"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimizationZ3"
+    commandChar:0
+    commandString:@"O3"
+    comment:@"Optimization level 3"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

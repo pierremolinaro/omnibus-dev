@@ -13073,12 +13073,6 @@ C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ("plm_options",
                                          "O2",
                                          "Optimization level 2") ;
 
-C_BoolCommandLineOption gOption_plm_5F_options_optimization_33_ ("plm_options",
-                                         "optimization3",
-                                         0,
-                                         "O3",
-                                         "Optimization level 3") ;
-
 C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ("plm_options",
                                          "optimizationS",
                                          0,
@@ -13090,6 +13084,12 @@ C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ("plm_options",
                                          0,
                                          "Oz",
                                          "Like previous option but reduces code size further") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ("plm_options",
+                                         "optimizationZ3",
+                                         0,
+                                         "O3",
+                                         "Optimization level 3") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ("plm_options",
                                          "performFlashing",
@@ -17177,7 +17177,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
-  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, llvmOptimizerOptions, \\\n"
+  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerOptions, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
@@ -17219,7 +17219,6 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mDependences.append (currentFile)\n"
   "    rule.mCommand += llvmOptimizerCompiler\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
-  "    rule.mCommand += llvmOptimizerOptions\n"
   "    rule.mCommand += [\"-o\", optimizedSource]\n"
   "    makefile.addRule (rule)\n"
   "  #--- Compile LLVM source\n"
@@ -17311,7 +17310,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  7753, // Text length
+  7689, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -22777,18 +22776,7 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-disable-simplify-libcalls\", \"-S\"]\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
-  "#   LLVM optimizer options                                                                                             *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def llvmOptimizerOptions ():\n"
-  "  result = []\n"
-  "  result.append (\"-<<OPTIMIZATION_OPTION>>\")\n"
-  "  return result\n"
+  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -22797,7 +22785,7 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -22906,7 +22894,7 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "currentFile = os.path.abspath (sys.argv [0])\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
-  "                 LLCcompiler (), llvmOptimizerCompiler (), llvmOptimizerOptions (),\n"
+  "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerOptions (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
@@ -22918,7 +22906,7 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  12205, // Text length
+  11535, // Text length
   gWrapperFileContent_19_targetTemplates
 ) ;
 
