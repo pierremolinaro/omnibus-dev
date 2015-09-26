@@ -21,8 +21,8 @@ class @loadRegisterIR : @abstractInstructionIR {
 
 override method @loadRegisterIR llvmInstructionCode ?!@string ioCode {
   let llvmType = [mRegisterType llvmType]
-  ioCode += "  " + mTargetValue + " = load volatile " + llvmType
-         + "* (inttoptr i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
+  ioCode += "  " + mTargetValue + " = load volatile " + llvmType + ", " + llvmType
+         + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

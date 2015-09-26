@@ -2429,25 +2429,6 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_procedureMapIR_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Function 'separatorLine'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_separatorLine (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Function 'titleComment'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_titleComment (class GALGAS_string inArgument0,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            Function 'llvmSeparatorLine'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2605,8 +2586,6 @@ extern const char * gWrapperFileContent_24_targetTemplates ;
 extern const char * gWrapperFileContent_25_targetTemplates ;
 extern const char * gWrapperFileContent_26_targetTemplates ;
 extern const char * gWrapperFileContent_27_targetTemplates ;
-extern const char * gWrapperFileContent_28_targetTemplates ;
-extern const char * gWrapperFileContent_29_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2641,8 +2620,6 @@ extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -123,10 +123,10 @@ override method @infixOperatorExpressionAST analyzeExpression
   switch mOp 
   case equal :
     operatorMap = inContext.mEqualOperatorMap
-    binaryOperator = "=="
+    binaryOperator = "icmp eq"
   case nonEqual :
     operatorMap = inContext.mNonEqualOperatorMap
-    binaryOperator = "!="
+    binaryOperator = "icmp ne"
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
     binaryOperator = "<"
@@ -275,7 +275,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResultValue
-      !outResultType
+      !leftType
       !leftOperandValue
       !binaryOperator
       !rightOperandValue

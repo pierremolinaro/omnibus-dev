@@ -6,8 +6,6 @@ setter @instructionListIR appendBinaryOperation
   ?let @string inOperation
   ?let @operandIR inRightOperand
 {
-#  let comment = [inTargetOperand string] + " = " + inLeftOperand + " " + inOperation + " " + inRightOperand
-#  [!?self appendComment !comment]
   self += !@binaryOperationIR.new {!inTargetOperand !inTargetVarType !inLeftOperand !inOperation !inRightOperand}
 }
 

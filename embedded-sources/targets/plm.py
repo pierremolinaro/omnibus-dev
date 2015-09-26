@@ -50,8 +50,9 @@ def downloadArchive (archiveURL, archivePath):
     
 #----------------------------------------------------------------------------------------------------------------------*
 
-def runMakefile (toolDirectory, archiveBaseURL, cSourceList, \
-                 objectDir, compiler, cCompilerOptions, \
+def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
+                 objectDir, LLCcompiler, cCompilerOptions, \
+                 asAssembler, \
                  productDir, linker, linkerOptions, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget) :
   #--- Get max parallel jobs as first argument
@@ -84,39 +85,37 @@ def runMakefile (toolDirectory, archiveBaseURL, cSourceList, \
   #--- Add C files compile rule
   objectList = []
   asObjectList = []
-  for source in cSourceList:
-  #--- Compile
-    object = objectDir + "/" + source + ".o"
-    rule = make.Rule (object, "Compiling " + source)
+  for source in LLVMsourceList:
+  #--- Compile LLVL source
+    asSource = objectDir + "/" + source + ".s"
+    rule = make.Rule (asSource, "Compiling " + source)
     rule.mDependences.append ("sources/" + source)
-    rule.mCommand += compiler
-    rule.mCommand += cCompilerOptions
-    rule.mCommand += ["-c", "sources/" + source]
-    rule.mCommand += ["-o", object]
-    rule.enterSecondaryDependanceFile (object + ".dep")
+    rule.mCommand += LLCcompiler
+#    rule.mCommand += cCompilerOptions
+    rule.mCommand += ["sources/" + source]
+    rule.mCommand += ["-o", asSource]
     makefile.addRule (rule)
     objectList.append (object)
   #--- Assembling
-    asObject = objectDir + "/" + source + ".s"
-    rule = make.Rule (asObject, "Assembling " + source)
-    rule.mDependences.append ("sources/" + source)
-    rule.mCommand += compiler
-    rule.mCommand += cCompilerOptions
-    rule.mCommand += ["-S", "sources/" + source]
+    asObject = objectDir + "/" + source + ".s.o"
+    rule = make.Rule (asObject, "Assembling " + asSource)
+    rule.mDependences.append (asSource)
+    rule.mCommand += asAssembler
+#    rule.mCommand += cCompilerOptions
+    rule.mCommand += [asSource]
     rule.mCommand += ["-o", asObject]
-    rule.enterSecondaryDependanceFile (asObject + ".dep")
     makefile.addRule (rule)
     asObjectList.append (asObject)
   #--- Add linker rule
   productELF = productDir + "/product.elf"
   rule = make.Rule (productELF, "Linking " + productELF)
-  rule.mDependences += objectList
+  rule.mDependences += asObjectList
   rule.mCommand += linker
   rule.mCommand += linkerOptions
-  rule.mCommand += objectList
+  rule.mCommand += asObjectList
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
-  rule.mCommand += ["-Wl,-Map=" + productELF + ".map"]
+  rule.mCommand += ["-Map=" + productELF + ".map"]
   makefile.addRule (rule)
   #--- Add objcopy rule
   productHEX = productDir + "/product.ihex"

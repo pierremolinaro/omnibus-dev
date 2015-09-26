@@ -262,8 +262,6 @@ extern const char * gWrapperFileContent_23_embeddedTargets ;
 extern const char * gWrapperFileContent_24_embeddedTargets ;
 extern const char * gWrapperFileContent_25_embeddedTargets ;
 extern const char * gWrapperFileContent_26_embeddedTargets ;
-extern const char * gWrapperFileContent_27_embeddedTargets ;
-extern const char * gWrapperFileContent_28_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -297,8 +295,6 @@ extern const cRegularFileWrapper gWrapperFile_23_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_24_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_25_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_26_embeddedTargets ;
-extern const cRegularFileWrapper gWrapperFile_27_embeddedTargets ;
-extern const cRegularFileWrapper gWrapperFile_28_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -958,111 +954,6 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mThenInstructionGenerationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mElseInstructionGenerationList (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @incDecInstructionIR class                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_incDecInstructionIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_incDecInstructionIR (void) ;
-
-//---
-  public : inline const class cPtr_incDecInstructionIR * ptr (void) const { return (const cPtr_incDecInstructionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_incDecInstructionIR (const cPtr_incDecInstructionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_incDecInstructionIR extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_incDecInstructionIR constructor_new (const class GALGAS_bigint & inOperand0,
-                                                              const class GALGAS_bigint & inOperand1,
-                                                              const class GALGAS_incDecKind & inOperand2,
-                                                              const class GALGAS_variableKindIR & inOperand3,
-                                                              const class GALGAS_location & inOperand4
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_incDecInstructionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecKind reader_mKind (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mMax (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mMin (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mVariableLocation (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_incDecInstructionIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_incDecInstructionIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Pointer class for @incDecInstructionIR class                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_incDecInstructionIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_bigint mAttribute_mMin ;
-  public : GALGAS_bigint mAttribute_mMax ;
-  public : GALGAS_incDecKind mAttribute_mKind ;
-  public : GALGAS_variableKindIR mAttribute_mVariable ;
-  public : GALGAS_location mAttribute_mVariableLocation ;
-
-//--- Constructor
-  public : cPtr_incDecInstructionIR (const GALGAS_bigint & in_mMin,
-                                     const GALGAS_bigint & in_mMax,
-                                     const GALGAS_incDecKind & in_mKind,
-                                     const GALGAS_variableKindIR & in_mVariable,
-                                     const GALGAS_location & in_mVariableLocation
-                                     COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mMin (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mMax (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_incDecKind reader_mKind (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mVariable (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mVariableLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

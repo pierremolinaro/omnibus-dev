@@ -80,7 +80,7 @@ override method @incDecInstructionAST analyze
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -123,60 +123,114 @@ override method @incDecInstructionAST analyze
     end
   end
 #--- Code generation
-  ioInstructionGenerationList += !@incDecInstructionIR.new {
-   !min
-   !max
-   !mKind
-   !variable
-   !mVarName.location
- }
+  var comment = [variable mangledName] + " "
+  switch mKind
+  case incWithOverflowCheck :
+    comment += "++"
+   case decWithOverflowCheck :
+    comment += "--"
+  case incNoOverflowCheck :
+    comment += "&++"
+  case decNoOverflowCheck :
+    comment += "&--"
+  end
+  [!?ioInstructionGenerationList appendComment !comment]
+#--- Load variable
+  [variable loadFromMemory
+    !type
+    !?temporary:ioTemporaries
+    !?instructionListIR:ioInstructionGenerationList
+    ?resultingValue:let @operandIR variableValue
+  ]
+#--- Increment / decrement variable
+  getNewTempVariable (!?ioTemporaries ?let resultValue)
+  switch mKind
+  case incWithOverflowCheck :
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultValue
+      !type
+      !variableValue
+      !"add"
+      !.literalInteger {!value:1G}
+    ]
+  case decWithOverflowCheck :
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultValue
+      !type
+      !variableValue
+      !"sub"
+      !.literalInteger {!value:1G}
+    ]
+  case incNoOverflowCheck :
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultValue
+      !type
+      !variableValue
+      !"add"
+      !.literalInteger {!value:1G}
+    ]
+  case decNoOverflowCheck :
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultValue
+      !type
+      !variableValue
+      !"sub"
+      !.literalInteger {!value:1G}
+    ]
+  end
+#--- Store variable
+  [variable storeInMemory
+    !value:resultValue
+    !type
+    !?instructionListIR:ioInstructionGenerationList
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @incDecInstructionIR : @abstractInstructionIR {
-  @bigint mMin
-  @bigint mMax
-  @incDecKind mKind
-  @variableKindIR mVariable
-  @location mVariableLocation
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @incDecInstructionIR llvmInstructionCode ?!@string ioCode {
-  switch mKind
-  case incWithOverflowCheck :
-    if not [option plm_options.noExceptionGeneration value] then
-      ioCode += "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
-      ioCode += "  raise_exception (1, "
-        + [[[mVariableLocation file] lastPathComponent] utf8Representation] + ", "
-        + [mVariableLocation line] + ") ;\n"
-      ioCode += "}\n"
-    end
-    ioCode += [mVariable mangledName] + " ++ ;\n"
-  case decWithOverflowCheck :
-    if not [option plm_options.noExceptionGeneration value] then
-      ioCode += "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
-      ioCode += "  raise_exception (2, "
-        + [[[mVariableLocation file] lastPathComponent] utf8Representation]
-        + ", " + [mVariableLocation line] + ") ;\n"
-      ioCode += "}\n"
-    end
-    ioCode += [mVariable mangledName] + " -- ;\n"
-  case incNoOverflowCheck :
-    ioCode += [mVariable mangledName] + " ++ ;\n"
-  case decNoOverflowCheck :
-    ioCode += [mVariable mangledName] + " -- ;\n"
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @incDecInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mVariable enterAccessibleEntities !?ioAccessibleEntities]
-}
+#class @incDecInstructionIR : @abstractInstructionIR {
+#  @bigint mMin
+#  @bigint mMax
+#  @incDecKind mKind
+#  @variableKindIR mVariable
+#  @location mVariableLocation
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override method @incDecInstructionIR llvmInstructionCode ?!@string ioCode {
+#  switch mKind
+#  case incWithOverflowCheck :
+#    if not [option plm_options.noExceptionGeneration value] then
+#      ioCode += "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
+#      ioCode += "  raise_exception (1, "
+#        + [[[mVariableLocation file] lastPathComponent] utf8Representation] + ", "
+#        + [mVariableLocation line] + ") ;\n"
+#      ioCode += "}\n"
+#    end
+#    ioCode += [mVariable mangledName] + " ++ ;\n"
+#  case decWithOverflowCheck :
+#    if not [option plm_options.noExceptionGeneration value] then
+#      ioCode += "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
+#      ioCode += "  raise_exception (2, "
+#        + [[[mVariableLocation file] lastPathComponent] utf8Representation]
+#        + ", " + [mVariableLocation line] + ") ;\n"
+#      ioCode += "}\n"
+#    end
+#    ioCode += [mVariable mangledName] + " -- ;\n"
+#  case incNoOverflowCheck :
+#    ioCode += [mVariable mangledName] + " ++ ;\n"
+#  case decNoOverflowCheck :
+#    ioCode += [mVariable mangledName] + " -- ;\n"
+#  end
+#}
+#
+##----------------------------------------------------------------------------------------------------------------------*
+#
+#override method @incDecInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+#  [mVariable enterAccessibleEntities !?ioAccessibleEntities]
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
