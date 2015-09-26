@@ -260,8 +260,6 @@ extern const char * gWrapperFileContent_21_embeddedTargets ;
 extern const char * gWrapperFileContent_22_embeddedTargets ;
 extern const char * gWrapperFileContent_23_embeddedTargets ;
 extern const char * gWrapperFileContent_24_embeddedTargets ;
-extern const char * gWrapperFileContent_25_embeddedTargets ;
-extern const char * gWrapperFileContent_26_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -293,8 +291,6 @@ extern const cRegularFileWrapper gWrapperFile_21_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_22_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_23_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_24_embeddedTargets ;
-extern const cRegularFileWrapper gWrapperFile_25_embeddedTargets ;
-extern const cRegularFileWrapper gWrapperFile_26_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

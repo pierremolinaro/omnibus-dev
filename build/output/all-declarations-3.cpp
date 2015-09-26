@@ -32,22 +32,19 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
   routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 58)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 55)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-as.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 63)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-as.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 63)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 67)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 67)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 73)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 73)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 81)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 81)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 87)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 85)) ;
-  }
-  {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 93)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 91)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 87)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 85)) ;
   }
 }
 
@@ -66,14 +63,14 @@ void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDi
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 107)) ;
-    GALGAS_bool joker_3771 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3771, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 101)) ;
+    GALGAS_bool joker_3596 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3596, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 102)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 110)) ;
-    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 111)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 111)) ;
-    GALGAS_bool joker_4078 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4078, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 104)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 105)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 105)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 105)) ;
+    GALGAS_bool joker_3903 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3903, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 106)) ;
   }
 }
 
@@ -92,14 +89,14 @@ void routine_copyTextFile (const GALGAS_string constinArgument_inCurrentDirector
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 125)) ;
-    GALGAS_bool joker_4633 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4633, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)) ;
+    GALGAS_bool joker_4458 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4458, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
-    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 129)) ;
-    GALGAS_bool joker_4930 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4930, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 130)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 122)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
+    GALGAS_bool joker_4755 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4755, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 124)) ;
   }
 }
 
@@ -118,10 +115,10 @@ GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    result_outContents = var_fw.reader_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 143)) ;
+    result_outContents = var_fw.reader_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 137)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 145)) ;
-    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 146)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 146)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 139)) ;
+    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 140)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 140)) ;
   }
 //---
   return result_outContents ;
@@ -557,9 +554,9 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-seq
   "\n"
   "proc loop `user () {\n"
   "  gDelai &++\n"
-  "  if gDelai == 1_500_000 then\n"
+  "  if gDelai == 1_000_000 then\n"
   "    GPIOC_PSOR = 1 << 5 // Allumer la led\n"
-  "  elsif gDelai == 3_000_000 then\n"
+  "  elsif gDelai == 2_000_000 then\n"
   "    gDelai = 0\n"
   "    GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
   "  end  \n"
@@ -1570,7 +1567,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
-  "                 objectDir, LLCcompiler, cCompilerOptions, \\\n"
+  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerOptions, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :\n"
@@ -1605,13 +1602,21 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  objectList = []\n"
   "  asObjectList = []\n"
   "  for source in LLVMsourceList:\n"
-  "  #--- Compile LLVL source\n"
-  "    asSource = objectDir + \"/\" + source + \".s\"\n"
-  "    rule = make.Rule (asSource, \"Compiling \" + source)\n"
+  "  #--- Optimize LLVM source\n"
+  "    optimizedSource = objectDir + \"/\" + source + \"-opt.ll\"\n"
+  "    rule = make.Rule (optimizedSource, \"Optimizing \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
-  "    rule.mCommand += LLCcompiler\n"
-  "#    rule.mCommand += cCompilerOptions\n"
+  "    rule.mCommand += llvmOptimizerCompiler\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [\"-O3\"]\n"
+  "    rule.mCommand += [\"-o\", optimizedSource]\n"
+  "    makefile.addRule (rule)\n"
+  "  #--- Compile LLVM source\n"
+  "    asSource = objectDir + \"/\" + source + \".s\"\n"
+  "    rule = make.Rule (asSource, \"Compiling \" + optimizedSource)\n"
+  "    rule.mDependences.append (optimizedSource)\n"
+  "    rule.mCommand += LLCcompiler\n"
+  "    rule.mCommand += [optimizedSource]\n"
   "    rule.mCommand += [\"-o\", asSource]\n"
   "    makefile.addRule (rule)\n"
   "    objectList.append (object)\n"
@@ -1620,7 +1625,6 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    rule = make.Rule (asObject, \"Assembling \" + asSource)\n"
   "    rule.mDependences.append (asSource)\n"
   "    rule.mCommand += asAssembler\n"
-  "#    rule.mCommand += cCompilerOptions\n"
   "    rule.mCommand += [asSource]\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
   "    makefile.addRule (rule)\n"
@@ -1698,7 +1702,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  7445, // Text length
+  7762, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -5409,53 +5413,9 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets (
   gWrapperAllDirectories_embeddedTargets_1
 ) ;
 
-//--- File 'teensy-3-1-interrupt/build-as.py'
-
-const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
-  "build-as.py",
-  "py",
-  true, // Text file
-  996, // Text length
-  gWrapperFileContent_9_embeddedTargets
-) ;
-
 //--- File 'teensy-3-1-interrupt/build-verbose.py'
 
-const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -5489,17 +5449,17 @@ const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_10_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_10_embeddedTargets
+  gWrapperFileContent_9_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/build.py'
 
-const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_10_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -6489,17 +6449,17 @@ const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
   "  else:\n"
   "    print BOLD_GREEN () + \"Success\" + ENDC ()\n" ;
 
-const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_10_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
   44330, // Text length
-  gWrapperFileContent_11_embeddedTargets
+  gWrapperFileContent_10_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/clean.py'
 
-const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_11_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -6536,17 +6496,17 @@ const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_12_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_11_embeddedTargets (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_12_embeddedTargets
+  gWrapperFileContent_11_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-dump.py'
 
-const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_12_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6580,17 +6540,17 @@ const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_13_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_12_embeddedTargets (
   "display-obj-dump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_13_embeddedTargets
+  gWrapperFileContent_12_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/display-obj-size.py'
 
-const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_13_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6624,17 +6584,17 @@ const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_13_embeddedTargets (
   "display-obj-size.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_14_embeddedTargets
+  gWrapperFileContent_13_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-interrupt/run.py'
 
-const char * gWrapperFileContent_15_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_14_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -6668,17 +6628,17 @@ const char * gWrapperFileContent_15_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
   "run.py",
   "py",
   true, // Text file
   997, // Text length
-  gWrapperFileContent_15_embeddedTargets
+  gWrapperFileContent_14_embeddedTargets
 ) ;
 
 //--- File 'sources/linker.ld'
 
-const char * gWrapperFileContent_16_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_15_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -6836,17 +6796,17 @@ const char * gWrapperFileContent_16_embeddedTargets = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_16_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
   "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_16_embeddedTargets
+  gWrapperFileContent_15_embeddedTargets
 ) ;
 
 //--- File 'sources/target-exception.c'
 
-const char * gWrapperFileContent_17_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_16_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void raise_exception (const type_int32 inCode,\n"
   "                             const char * inSourceFile,\n"
@@ -6859,17 +6819,17 @@ const char * gWrapperFileContent_17_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_17_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_16_embeddedTargets (
   "target-exception.c",
   "c",
   true, // Text file
   634, // Text length
-  gWrapperFileContent_17_embeddedTargets
+  gWrapperFileContent_16_embeddedTargets
 ) ;
 
 //--- File 'sources/target.c'
 
-const char * gWrapperFileContent_18_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_17_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "static void ResetISR (void) {\n"
   "//---------1- Boot routines\n"
@@ -7060,20 +7020,20 @@ const char * gWrapperFileContent_18_embeddedTargets = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_17_embeddedTargets (
   "target.c",
   "c",
   true, // Text file
   6877, // Text length
-  gWrapperFileContent_18_embeddedTargets
+  gWrapperFileContent_17_embeddedTargets
 ) ;
 
 //--- All files of 'sources' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_3 [4] = {
+  & gWrapperFile_15_embeddedTargets,
   & gWrapperFile_16_embeddedTargets,
   & gWrapperFile_17_embeddedTargets,
-  & gWrapperFile_18_embeddedTargets,
   NULL
 } ;
 
@@ -7095,14 +7055,13 @@ const cDirectoryWrapper gWrapperDirectory_3_embeddedTargets (
 
 //--- All files of 'teensy-3-1-interrupt' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [8] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [7] = {
   & gWrapperFile_9_embeddedTargets,
   & gWrapperFile_10_embeddedTargets,
   & gWrapperFile_11_embeddedTargets,
   & gWrapperFile_12_embeddedTargets,
   & gWrapperFile_13_embeddedTargets,
   & gWrapperFile_14_embeddedTargets,
-  & gWrapperFile_15_embeddedTargets,
   NULL
 } ;
 
@@ -7117,59 +7076,15 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_2 [2] = 
 
 const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets (
   "teensy-3-1-interrupt",
-  7,
+  6,
   gWrapperAllFiles_embeddedTargets_2,
   1,
   gWrapperAllDirectories_embeddedTargets_2
 ) ;
 
-//--- File 'teensy-3-1-sequential-systick/build-as.py'
-
-const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
-  "# -*- coding: UTF-8 -*-\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "# https://docs.python.org/2/library/subprocess.html#module-subprocess\n"
-  "\n"
-  "import subprocess\n"
-  "import sys\n"
-  "import os\n"
-  "import atexit\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cleanup():\n"
-  "  if childProcess.poll () == None :\n"
-  "    childProcess.kill ()\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n"
-  "\n"
-  "#--- Register a function for killing subprocess\n"
-  "atexit.register (cleanup)\n"
-  "#--- Get script absolute path\n"
-  "scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))\n"
-  "os.chdir (scriptDir)\n"
-  "#---\n"
-  "childProcess = subprocess.Popen ([\"python\", \"build.py\", \"as\"])\n"
-  "#--- Wait for subprocess termination\n"
-  "if childProcess.poll () == None :\n"
-  "  childProcess.wait ()\n"
-  "if childProcess.returncode != 0 :\n"
-  "  sys.exit (childProcess.returncode)\n"
-  "\n"
-  "#------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
-  "build-as.py",
-  "py",
-  true, // Text file
-  996, // Text length
-  gWrapperFileContent_19_embeddedTargets
-) ;
-
 //--- File 'teensy-3-1-sequential-systick/build-verbose.py'
 
-const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_18_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7203,17 +7118,17 @@ const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_18_embeddedTargets (
   "build-verbose.py",
   "py",
   true, // Text file
   1002, // Text length
-  gWrapperFileContent_20_embeddedTargets
+  gWrapperFileContent_18_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/build.py'
 
-const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7245,6 +7160,15 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
   "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.0-binutils-2.25-libusb-1.0.19\")\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   LLVM optimizer invocation                                                                                          *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def llvmOptimizerCompiler ():\n"
+  "  return [toolDir () + \"/bin/opt\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7284,43 +7208,6 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
-  "#    C Compiler options                                                                                                *\n"
-  "#                                                                                                                      *\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "def cCompilerOptions ():\n"
-  "  result = []\n"
-  "  result.append (\"-Wall\")\n"
-  "  result.append (\"-Werror\")\n"
-  "  result.append (\"-Wreturn-type\")\n"
-  "  result.append (\"-Wformat\")\n"
-  "  result.append (\"-Wsign-compare\")\n"
-  "  result.append (\"-Wpointer-arith\")\n"
-  "  result.append (\"-Wparentheses\")\n"
-  "  result.append (\"-Wcast-align\")\n"
-  "  result.append (\"-Wcast-qual\")\n"
-  "  result.append (\"-Wwrite-strings\")\n"
-  "  result.append (\"-Wswitch\")\n"
-  "  result.append (\"-Wuninitialized\")\n"
-  "  result.append (\"-fno-builtin\")\n"
-  "  result.append (\"-Wno-aggressive-loop-optimizations\")\n"
-  "  result.append (\"-ffunction-sections\")\n"
-  "  result.append (\"-fdata-sections\")\n"
-  "  result.append (\"-std=c99\")\n"
-  "  result.append (\"-Wstrict-prototypes\")\n"
-  "  result.append (\"-Wbad-function-cast\")\n"
-  "  result.append (\"-Wmissing-declarations\")\n"
-  "  result.append (\"-Wimplicit-function-declaration\")\n"
-  "  result.append (\"-Wno-int-to-pointer-cast\")\n"
-  "  result.append (\"-Wno-pointer-to-int-cast\")\n"
-  "  result.append (\"-Wmissing-prototypes\")\n"
-  "  result.append (\"-Os\")\n"
-  "  result.append (\"-fomit-frame-pointer\")\n"
-  "  result.append (\"-foptimize-register-move\") \n"
-  "  return result\n"
-  "\n"
-  "#----------------------------------------------------------------------------------------------------------------------*\n"
-  "#                                                                                                                      *\n"
   "#   Linker invocation                                                                                                  *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7341,8 +7228,6 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "  result.append (\"--warn-common\")\n"
   "  result.append (\"--no-undefined\")\n"
   "  result.append (\"--cref\")\n"
-  "#   result.append (\"-lc\")\n"
-  "#   result.append (\"-lgcc\")\n"
   "  result.append (\"-static\")\n"
   "  result.append (\"-s\")\n"
   "  result.append (\"--gc-sections\")\n"
@@ -7400,24 +7285,24 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
-  "                 LLCcompiler (), cCompilerOptions (), \n"
+  "                 LLCcompiler (), llvmOptimizerCompiler (), \n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerOptions (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  12394, // Text length
-  gWrapperFileContent_21_embeddedTargets
+  11393, // Text length
+  gWrapperFileContent_19_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/clean.py'
 
-const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_20_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7454,17 +7339,17 @@ const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_20_embeddedTargets (
   "clean.py",
   "py",
   true, // Text file
   1264, // Text length
-  gWrapperFileContent_22_embeddedTargets
+  gWrapperFileContent_20_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/linker.ld'
 
-const char * gWrapperFileContent_23_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
+const char * gWrapperFileContent_21_embeddedTargets = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
   "/*                                   Memory                                   */\n"
   "/*                                                                            */\n"
@@ -7622,17 +7507,17 @@ const char * gWrapperFileContent_23_embeddedTargets = "/*-----------------------
   "\n"
   "/*----------------------------------------------------------------------------*/\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
   "linker.ld",
   "ld",
   true, // Text file
   5218, // Text length
-  gWrapperFileContent_23_embeddedTargets
+  gWrapperFileContent_21_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/objdump.py'
 
-const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_22_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7666,17 +7551,17 @@ const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_22_embeddedTargets (
   "objdump.py",
   "py",
   true, // Text file
   1005, // Text length
-  gWrapperFileContent_24_embeddedTargets
+  gWrapperFileContent_22_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/objsize.py'
 
-const char * gWrapperFileContent_25_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_23_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7710,17 +7595,17 @@ const char * gWrapperFileContent_25_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_25_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_23_embeddedTargets (
   "objsize.py",
   "py",
   true, // Text file
   1013, // Text length
-  gWrapperFileContent_25_embeddedTargets
+  gWrapperFileContent_23_embeddedTargets
 ) ;
 
 //--- File 'teensy-3-1-sequential-systick/run.py'
 
-const char * gWrapperFileContent_26_embeddedTargets = "#! /usr/bin/env python\n"
+const char * gWrapperFileContent_24_embeddedTargets = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
   "\n"
   "#------------------------------------------------------------------------------*\n"
@@ -7757,25 +7642,24 @@ const char * gWrapperFileContent_26_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_26_embeddedTargets (
+const cRegularFileWrapper gWrapperFile_24_embeddedTargets (
   "run.py",
   "py",
   true, // Text file
   1036, // Text length
-  gWrapperFileContent_26_embeddedTargets
+  gWrapperFileContent_24_embeddedTargets
 ) ;
 
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [9] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [8] = {
+  & gWrapperFile_18_embeddedTargets,
   & gWrapperFile_19_embeddedTargets,
   & gWrapperFile_20_embeddedTargets,
   & gWrapperFile_21_embeddedTargets,
   & gWrapperFile_22_embeddedTargets,
   & gWrapperFile_23_embeddedTargets,
   & gWrapperFile_24_embeddedTargets,
-  & gWrapperFile_25_embeddedTargets,
-  & gWrapperFile_26_embeddedTargets,
   NULL
 } ;
 
@@ -7789,7 +7673,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_embeddedTargets (
   "teensy-3-1-sequential-systick",
-  8,
+  7,
   gWrapperAllFiles_embeddedTargets_4,
   0,
   gWrapperAllDirectories_embeddedTargets_4
