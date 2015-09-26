@@ -269,7 +269,6 @@ class GALGAS_string categoryReader_llvmType (const class GALGAS_unifiedTypeMap_2
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_loadFromMemory (const class GALGAS_variableKindIR inObject,
-                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inVariableType,
                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                     class GALGAS_operandIR & out_outResultingValue,
@@ -284,7 +283,6 @@ void categoryMethod_loadFromMemory (const class GALGAS_variableKindIR inObject,
 
 void categoryMethod_storeInMemory (const class GALGAS_variableKindIR inObject,
                                    class GALGAS_operandIR in_inValue,
-                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inVariableType,
                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
@@ -318,16 +316,6 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_assignmentTarget
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_string categoryReader_mangledName (const class GALGAS_variableKindIR & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Category Getter '@assignmentTargetIR mangledName' (as function)                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_mangledName (const class GALGAS_assignmentTargetIR & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 

@@ -26,11 +26,11 @@ getter @literalStructureList literalValue -> @string result {
 
 getter @variableKindIR mangledName -> @string outResult {
   switch self
-  case register (@lstring name *) :
+  case register (* @lstring name *) :
     outResult = mangledNameForRegister (!name:name.string)
-  case globalVariable (@lstring name *) :
-    outResult = mangledNameForGlobalVariable (!name.string)
-  case localValue (@lstring name) :
+  case globalVariable (* @string name *) :
+    outResult = mangledNameForGlobalVariable (!name)
+  case localValue (* @lstring name) :
     outResult = mangledNameForLocalVariable (!name.string)
   case globalConstant (@operandIR unused value) :
     outResult = "<<@variableKindIR mangledName>>"
@@ -38,25 +38,6 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = access.string
   case literalString (* @string name) :
     outResult = name
-  case literalStructure (@literalStructureList s) :
-    outResult = [s literalValue]
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @assignmentTargetIR mangledName -> @string outResult {
-  switch self
-  case register (@lstring name *) :
-    outResult = mangledNameForRegister (!name:name.string)
-  case globalVariable (@lstring name) :
-    outResult = mangledNameForGlobalVariable (!name.string)
-  case localVariable (@lstring name) :
-    outResult = mangledNameForLocalVariable (!name.string)
-  case temporaryConstant (@uint idx) :
-    outResult = mangledNameForTemporaryConstant (!idx:idx)
-  case localAccess (@lstring access) :
-    outResult = access.string
   case literalStructure (@literalStructureList s) :
     outResult = [s literalValue]
   end

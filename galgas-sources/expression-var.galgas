@@ -71,7 +71,6 @@ override method @varInExpressionAST analyzeExpression
   end
 #--- Load variable
   [variableKind loadFromMemory
-    !variableType
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
     ?resultingValue:@operandIR variableValueName

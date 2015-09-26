@@ -406,7 +406,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -417,7 +417,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -428,7 +428,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
