@@ -3524,7 +3524,8 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_globalConstant (const class GALGAS_operandIR & inOperand0
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_globalVariable (const class GALGAS_lstring & inOperand0
+  public : static GALGAS_variableKindIR constructor_globalVariable (const class GALGAS_lstring & inOperand0,
+                                                                    const class GALGAS_bool & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_inArgument (const class GALGAS_lstring & inOperand0
@@ -3573,6 +3574,7 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_lstring & outArgument0,
+                                                        class GALGAS_bool & outArgument1,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
@@ -3682,9 +3684,11 @@ class cEnumAssociatedValues_variableKindIR_register : public cEnumAssociatedValu
 
 class cEnumAssociatedValues_variableKindIR_globalVariable : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_bool mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_lstring & inAssociatedValue0
+  public : cEnumAssociatedValues_variableKindIR_globalVariable (const GALGAS_lstring & inAssociatedValue0,
+                                                                const GALGAS_bool & inAssociatedValue1
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

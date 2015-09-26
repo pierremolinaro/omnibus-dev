@@ -1,7 +1,7 @@
 option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noExceptionGeneration: '\0', "no-exception-generation" -> "Do not generate exception code"
-  @bool compileOnly: 'c', "no-c-compilation" -> "Do not compile generated C code"
+  @bool compileOnly: 'c', "no-c-compilation" -> "Do not compile generated LLVM code"
   @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 
   @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
@@ -15,6 +15,7 @@ option plm_options {
   @string useDirAsTargetDir : 'T', "use-target-dir" -> "Use directory as target definition directory, instead of using embedded targets"
 
 #--- Optimization
+  @bool optimization_displayDeadCodeElimination : 'z', "display-deadcode-elimination" -> "Display dead code elimination"
   @bool optimization1 : '\0', "O1" -> "Optimization level 1"
   @bool optimization2 : '\0', "O2" -> "Optimization level 2"
   @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"

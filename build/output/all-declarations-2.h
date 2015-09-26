@@ -814,6 +814,8 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ_33_ ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_5F_displayDeadCodeElimination ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;

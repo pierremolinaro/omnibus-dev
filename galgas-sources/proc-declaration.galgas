@@ -408,37 +408,37 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !mangledNameForInArgument (!name:formalArgumentName.string)
+        !mangledNameForInArgument (!formalArgumentName.string)
         !.inArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!name:formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!formalArgumentName.string)
     case inputOutput :
       [!?variableMap insertInputOutputFormalArgument
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForInOutArgument (!name:formalArgumentName.string)
+        !"*" + mangledNameForInOutArgument (!formalArgumentName.string)
         !.inOutArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!name:formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!formalArgumentName.string)
     case output :
       [!?variableMap insertOutputFormalArgument
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForOutArgument (!name:formalArgumentName.string)
+        !"*" + mangledNameForOutArgument (!formalArgumentName.string)
         !.outArgument {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!name:formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!formalArgumentName.string)
     end
   end
 #--- Enter subprogram invocation graph
@@ -521,10 +521,10 @@ private filewrapper procedureGenerationTemplate in "../generation-templates" {
 getter @procedureMapIR-element llvmCodeGeneration -> @string outCode {
   @string code = ""
   [mInstructionGenerationList instructionListLLVMCode !?code]
-  code += ";---\n"
+  code += ";--- return\n"
   code += "  ret void\n"
   outCode = [filewrapper procedureGenerationTemplate.llvmImplementation
-    !mangledNameForProcedure (!name:lkey.string) # mProcedureMangledName
+    !mangledNameForProcedure (!lkey.string) # mProcedureMangledName
     !mFormalArgumentListForGeneration
     !code
   ]

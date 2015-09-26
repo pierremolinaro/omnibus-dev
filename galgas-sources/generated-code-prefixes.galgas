@@ -21,19 +21,19 @@ func mangledNameForProperty ?name:@string inName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForInArgument ?name:@string inName -> @string outPrefix {
+func mangledNameForInArgument ?@string inName -> @string outPrefix {
   outPrefix = "in_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForInOutArgument ?name:@string inName -> @string outPrefix {
+func mangledNameForInOutArgument ?@string inName -> @string outPrefix {
   outPrefix = "inout_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForOutArgument ?name:@string inName -> @string outPrefix {
+func mangledNameForOutArgument ?@string inName -> @string outPrefix {
   outPrefix = "out_" + [inName nameRepresentation]
 }
 
@@ -75,25 +75,25 @@ func mangledNameForFunction ?name:@string inName -> @string outName {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForProcedure ?name:@string inName -> @string outName {
+func mangledNameForProcedure ?@string inName -> @string outName {
   outName = "proc_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForLocalVariable ?name:@string inName -> @string outName {
+func mangledNameForLocalVariable ?@string inName -> @string outName {
   outName = "var_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForGlobalVariable ?name:@string inName -> @string outName {
+func mangledNameForGlobalVariable ?@string inName -> @string outName {
   outName = "gvar_" + [inName nameRepresentation]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledNameForConstant ?name:@string inName -> @string outName {
+func mangledNameForConstant ?@string inName -> @string outName {
   outName = "const_" + [inName nameRepresentation]
 }
 #----------------------------------------------------------------------------------------------------------------------*

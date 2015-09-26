@@ -56,7 +56,7 @@ enum @valueIR {
 
 enum @variableKindIR {
   case register (@lstring name @bigint address)
-  case globalVariable (@lstring name)
+  case globalVariable (@lstring name @bool isVolatile)
   case localVariable (@lstring name)
   case inArgument (@lstring name)
   case inOutArgument (@lstring name)
@@ -76,7 +76,7 @@ getter @variableKindIR isStatic -> @bool outResult {
   switch self
   case register (* *) :
     outResult = false
-  case globalVariable (*) :
+  case globalVariable (* *) :
     outResult = false
   case localVariable (*) :
     outResult = false
@@ -143,7 +143,7 @@ func initialVariableMap
       !constantName
       !constantType
       !true
-      !mangledNameForConstant (!name:constantName.string)
+      !mangledNameForConstant (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}
@@ -162,8 +162,8 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName}
+        !mangledNameForGlobalVariable (!variableName.string)
+        !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
         !true
         !{}
         !false # Cannot be used as input parameter
@@ -173,8 +173,8 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !mangledNameForGlobalVariable (!name:variableName.string)
-        !.globalVariable {!name:variableName}
+        !mangledNameForGlobalVariable (!variableName.string)
+        !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
         !true
         !{}
         !false # Cannot be used as input parameter
@@ -196,7 +196,7 @@ func variableMapWithConstants
       !constantName
       !constantType
       !true
-      !mangledNameForConstant (!name:constantName.string)
+      !mangledNameForConstant (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}

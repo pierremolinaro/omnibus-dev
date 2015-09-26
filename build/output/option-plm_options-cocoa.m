@@ -19,7 +19,7 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     identifier:@"compileOnly"
     commandChar:99
     commandString:@"no-c-compilation"
-    comment:@"Do not compile generated C code"
+    comment:@"Do not compile generated LLVM code"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -101,6 +101,15 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:0
     commandString:@"O3"
     comment:@"Optimization level 3"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimization_displayDeadCodeElimination"
+    commandChar:122
+    commandString:@"display-deadcode-elimination"
+    comment:@"Display dead code elimination"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

@@ -53,7 +53,7 @@ def downloadArchive (archiveURL, archivePath):
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
                  objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
-                 productDir, linker, linkerOptions, objcopy, \
+                 productDir, linker, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
                  currentFile) :
   #--- Get max parallel jobs as first argument
@@ -117,7 +117,6 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   rule = make.Rule (productELF, "Linking " + productELF)
   rule.mDependences += objectList
   rule.mCommand += linker
-  rule.mCommand += linkerOptions
   rule.mCommand += objectList
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]

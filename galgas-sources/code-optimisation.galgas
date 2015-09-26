@@ -34,7 +34,7 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
   switch self
   case register (@lstring name *) :
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
-  case globalVariable (@lstring name) :
+  case globalVariable (@lstring name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name.string
   case localVariable (@lstring unused name) :
   case inArgument (@lstring unused name) :
@@ -108,7 +108,7 @@ proc codeOptimisation
     optimizing = false
     pass ++
   #--- Display
-    if [option .verbose_output value] then
+    if [option plm_options.optimization_displayDeadCodeElimination value] then
       var s = "Optimisation pass " + pass + "\n"
       s += "  " + [ioIntermediateCodeStruct.mRegisterMap count] + " registers\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalLiteralStringMap count] + " static strings\n"

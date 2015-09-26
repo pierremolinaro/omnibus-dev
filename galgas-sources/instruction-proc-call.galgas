@@ -244,7 +244,8 @@ class @procCallInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
-  ioCode += mangledNameForProcedure (!name:mProcName) + " ("
+  ioCode += ";--- " + mangledNameForProcedure (!mProcName) + " ()\n"
+  ioCode += "  call void @" + mangledNameForProcedure (!mProcName) + " ()\n"
 #  for () in mParameters do
 #    switch mEffectiveParameterPassingMode
 #    case input:
@@ -257,7 +258,6 @@ override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
 #  between
 #    ioCode += ", "
 #  end
-  ioCode += ") ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

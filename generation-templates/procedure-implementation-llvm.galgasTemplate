@@ -3,17 +3,17 @@
 ;----------------------------------------------------------------------------------------------------------------------*
 
 define internal void @%!PROCEDURE_MANGLED_NAME% (%?^
-  for () in FORMAL_ARGUMENT_LIST
-  do
-    !mangledNameForType (!name:[mFormalArgumentType key])
-    switch mFormalArgumentKind
-    case input :
-    case output, inputOutput : % *%
-    end
-    % %!mFormalArgumentName
-  between
-    %,\n%!^
-  end
+#  for () in FORMAL_ARGUMENT_LIST
+#  do
+#    !mangledNameForType (!name:[mFormalArgumentType key])
+#    switch mFormalArgumentKind
+#    case input :
+#    case output, inputOutput : % *%
+#    end
+#    % %!mFormalArgumentName
+#  between
+#    %,\n%!^
+#  end
 %) nounwind {
 %
 !INSTRUCTION_LLVM_CODE

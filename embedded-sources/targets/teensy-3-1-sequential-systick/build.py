@@ -83,16 +83,7 @@ def dumpObjectCode ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def linker ():
-  return [toolDir () + "/bin/arm-eabi-ld"]
-
-#----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
-#   Linker options                                                                                                     *
-#                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
-
-def linkerOptions ():
-  result = []
+  result = [toolDir () + "/bin/arm-eabi-ld"]
   result.append ("-nostartfiles")
   result.append ("--fatal-warnings")
   result.append ("--warn-common")
@@ -158,7 +149,7 @@ currentFile = os.path.abspath (sys.argv [0])
 plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
                  LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
-                 linker (), linkerOptions (), \
+                 linker (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
                  currentFile)
 
