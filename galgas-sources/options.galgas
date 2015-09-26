@@ -19,5 +19,5 @@ option plm_options {
   @bool optimization2 : '\0', "O2" -> "Optimization level 2"
   @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"
   @bool optimizationZ : '\0', "Oz" -> "Like previous option but reduces code size further"
-  @bool optimization3 : '\0', "O3" -> "Optimization level 3"
+  @bool optimizationZ3 : '\0', "O3" -> "Optimization level 3"
 }

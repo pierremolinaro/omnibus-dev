@@ -52,37 +52,42 @@ proc generateTarget
     !to:inProductDirectory + "/sources/linker.ld"
   )
 #--- Copy build.py
-  var optimizationOption = "disable-opt"
+  var opt_optimizationOption = "disable-opt"
+  var llc_optimizationOption = "O0"
   var optimizationOptionCount = 0
   if [option plm_options.optimization1 value] then
-    optimizationOption = "O1"
+    opt_optimizationOption = "O1"
+    llc_optimizationOption = "O1"
     optimizationOptionCount ++
   end
   if [option plm_options.optimization2 value] then
-    optimizationOption = "O2"
-    optimizationOptionCount ++
-  end
-  if [option plm_options.optimization3 value] then
-    optimizationOption = "O3"
+    opt_optimizationOption = "O2"
+    llc_optimizationOption = "O2"
     optimizationOptionCount ++
   end
   if [option plm_options.optimizationS value] then
-    optimizationOption = "Os"
+    opt_optimizationOption = "Os"
+    llc_optimizationOption = "O2"
     optimizationOptionCount ++
   end
   if [option plm_options.optimizationZ value] then
-    optimizationOption = "Oz"
+    opt_optimizationOption = "Oz"
+    llc_optimizationOption = "O2"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationZ3 value] then
+    opt_optimizationOption = "O3"
+    llc_optimizationOption = "O3"
     optimizationOptionCount ++
   end
   if optimizationOptionCount > 1 then
-    warning .nowhere : "several optimization options: --" + optimizationOption + " is used"
+    warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"
   end 
-  copyExecutableFileWithSubstitution (
+  copyExecutableFileWithSubstitutions (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/build.py"
     !to:inProductDirectory + "/build.py"
-    !substitute:"<<OPTIMIZATION_OPTION>>"
-    !with:optimizationOption
+    !{!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption}
   )
 #--- Copy build-verbose.py
   copyExecutableFile (
@@ -136,24 +141,24 @@ private proc copyExecutableFile
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private proc copyExecutableFileWithSubstitution
+private proc copyExecutableFileWithSubstitutions
   ?currentDir:let @string inCurrentDirectory
   ?from:let @string inSourceFileNamePath
   ?to:let @string inDestinationAbsoluteFilePath
-  ?substitute:let @string inSubstitutionString
-  ?with:let @string inReplacementString
+  ?let @2stringlist inSubstitutions
 {
+  @string s
   if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
-    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
-    let s2 = [s stringByReplacingStringByString !inSubstitutionString !inReplacementString]
-    [s2 writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+    s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
     let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-    let s2 = [s stringByReplacingStringByString !inSubstitutionString !inReplacementString]
-    [s2 writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
   end
+  for (templateString replacementString) in inSubstitutions do
+    s = [s stringByReplacingStringByString !templateString !replacementString]
+  end
+  [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
