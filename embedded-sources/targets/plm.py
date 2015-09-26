@@ -51,10 +51,11 @@ def downloadArchive (archiveURL, archivePath):
 #----------------------------------------------------------------------------------------------------------------------*
 
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
-                 objectDir, LLCcompiler, llvmOptimizerCompiler, \
+                 objectDir, LLCcompiler, llvmOptimizerCompiler, llvmOptimizerOptions, \
                  asAssembler, \
                  productDir, linker, linkerOptions, objcopy, \
-                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :
+                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
+                 currentFile) :
   #--- Get max parallel jobs as first argument
   goal = "all"
   if len (sys.argv) > 1 :
@@ -84,15 +85,15 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   makefile = make.Make ()
   #--- Add C files compile rule
   objectList = []
-  asObjectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
     optimizedSource = objectDir + "/" + source + "-opt.ll"
     rule = make.Rule (optimizedSource, "Optimizing " + source)
     rule.mDependences.append ("sources/" + source)
+    rule.mDependences.append (currentFile)
     rule.mCommand += llvmOptimizerCompiler
     rule.mCommand += ["sources/" + source]
-    rule.mCommand += ["-O3"]
+    rule.mCommand += llvmOptimizerOptions
     rule.mCommand += ["-o", optimizedSource]
     makefile.addRule (rule)
   #--- Compile LLVM source
@@ -103,7 +104,6 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     rule.mCommand += [optimizedSource]
     rule.mCommand += ["-o", asSource]
     makefile.addRule (rule)
-    objectList.append (object)
   #--- Assembling
     asObject = objectDir + "/" + source + ".s.o"
     rule = make.Rule (asObject, "Assembling " + asSource)
@@ -112,14 +112,14 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     rule.mCommand += [asSource]
     rule.mCommand += ["-o", asObject]
     makefile.addRule (rule)
-    asObjectList.append (asObject)
+    objectList.append (asObject)
   #--- Add linker rule
   productELF = productDir + "/product.elf"
   rule = make.Rule (productELF, "Linking " + productELF)
-  rule.mDependences += asObjectList
+  rule.mDependences += objectList
   rule.mCommand += linker
   rule.mCommand += linkerOptions
-  rule.mCommand += asObjectList
+  rule.mCommand += objectList
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
   rule.mCommand += ["-Map=" + productELF + ".map"]
@@ -136,7 +136,6 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   #--- Add goals
   makefile.addGoal ("run", [productHEX], "Building all and run")
   makefile.addGoal ("all", [productHEX], "Building all")
-  makefile.addGoal ("as", asObjectList, "Assembling C files")
   makefile.addGoal ("display-object-size", [productHEX], "Display Object Size")
   makefile.addGoal ("object-dump", [productHEX], "Dump Object Code")
   #--- Build

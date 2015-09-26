@@ -42,6 +42,17 @@ def llvmOptimizerCompiler ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   LLVM optimizer options                                                                                             *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def llvmOptimizerOptions ():
+  result = []
+  result.append ("-<<OPTIMIZATION_OPTION>>")
+  return result
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   LLC Compiler invocation                                                                                            *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -154,10 +165,12 @@ def runExecutableOnTarget ():
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
+currentFile = os.path.abspath (sys.argv [0])
 plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
-                 LLCcompiler (), llvmOptimizerCompiler (), 
+                 LLCcompiler (), llvmOptimizerCompiler (), llvmOptimizerOptions (),
                  asAssembler (), productDir (), \
                  linker (), linkerOptions (), \
-                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())
+                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
+                 currentFile)
 
 #----------------------------------------------------------------------------------------------------------------------*
