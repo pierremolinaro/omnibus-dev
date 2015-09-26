@@ -33,6 +33,15 @@ def toolDir ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   LLVM optimizer invocation                                                                                          *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def llvmOptimizerCompiler ():
+  return [toolDir () + "/bin/opt", "-disable-simplify-libcalls", "-S"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   LLC Compiler invocation                                                                                            *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -69,43 +78,6 @@ def dumpObjectCode ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#    C Compiler options                                                                                                *
-#                                                                                                                      *
-#----------------------------------------------------------------------------------------------------------------------*
-
-def cCompilerOptions ():
-  result = []
-  result.append ("-Wall")
-  result.append ("-Werror")
-  result.append ("-Wreturn-type")
-  result.append ("-Wformat")
-  result.append ("-Wsign-compare")
-  result.append ("-Wpointer-arith")
-  result.append ("-Wparentheses")
-  result.append ("-Wcast-align")
-  result.append ("-Wcast-qual")
-  result.append ("-Wwrite-strings")
-  result.append ("-Wswitch")
-  result.append ("-Wuninitialized")
-  result.append ("-fno-builtin")
-  result.append ("-Wno-aggressive-loop-optimizations")
-  result.append ("-ffunction-sections")
-  result.append ("-fdata-sections")
-  result.append ("-std=c99")
-  result.append ("-Wstrict-prototypes")
-  result.append ("-Wbad-function-cast")
-  result.append ("-Wmissing-declarations")
-  result.append ("-Wimplicit-function-declaration")
-  result.append ("-Wno-int-to-pointer-cast")
-  result.append ("-Wno-pointer-to-int-cast")
-  result.append ("-Wmissing-prototypes")
-  result.append ("-Os")
-  result.append ("-fomit-frame-pointer")
-  result.append ("-foptimize-register-move") 
-  return result
-
-#----------------------------------------------------------------------------------------------------------------------*
-#                                                                                                                      *
 #   Linker invocation                                                                                                  *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -126,8 +98,6 @@ def linkerOptions ():
   result.append ("--warn-common")
   result.append ("--no-undefined")
   result.append ("--cref")
-#   result.append ("-lc")
-#   result.append ("-lgcc")
   result.append ("-static")
   result.append ("-s")
   result.append ("--gc-sections")
@@ -185,7 +155,7 @@ def runExecutableOnTarget ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
-                 LLCcompiler (), cCompilerOptions (), 
+                 LLCcompiler (), llvmOptimizerCompiler (), 
                  asAssembler (), productDir (), \
                  linker (), linkerOptions (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())

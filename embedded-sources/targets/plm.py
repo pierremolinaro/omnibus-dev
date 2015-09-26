@@ -51,7 +51,7 @@ def downloadArchive (archiveURL, archivePath):
 #----------------------------------------------------------------------------------------------------------------------*
 
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
-                 objectDir, LLCcompiler, cCompilerOptions, \
+                 objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
                  productDir, linker, linkerOptions, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget) :
@@ -86,13 +86,21 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   objectList = []
   asObjectList = []
   for source in LLVMsourceList:
-  #--- Compile LLVL source
-    asSource = objectDir + "/" + source + ".s"
-    rule = make.Rule (asSource, "Compiling " + source)
+  #--- Optimize LLVM source
+    optimizedSource = objectDir + "/" + source + "-opt.ll"
+    rule = make.Rule (optimizedSource, "Optimizing " + source)
     rule.mDependences.append ("sources/" + source)
-    rule.mCommand += LLCcompiler
-#    rule.mCommand += cCompilerOptions
+    rule.mCommand += llvmOptimizerCompiler
     rule.mCommand += ["sources/" + source]
+    rule.mCommand += ["-O3"]
+    rule.mCommand += ["-o", optimizedSource]
+    makefile.addRule (rule)
+  #--- Compile LLVM source
+    asSource = objectDir + "/" + source + ".s"
+    rule = make.Rule (asSource, "Compiling " + optimizedSource)
+    rule.mDependences.append (optimizedSource)
+    rule.mCommand += LLCcompiler
+    rule.mCommand += [optimizedSource]
     rule.mCommand += ["-o", asSource]
     makefile.addRule (rule)
     objectList.append (object)
@@ -101,7 +109,6 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     rule = make.Rule (asObject, "Assembling " + asSource)
     rule.mDependences.append (asSource)
     rule.mCommand += asAssembler
-#    rule.mCommand += cCompilerOptions
     rule.mCommand += [asSource]
     rule.mCommand += ["-o", asObject]
     makefile.addRule (rule)

@@ -57,12 +57,6 @@ proc generateTarget
     !from:inTargetName.string + "/build.py"
     !to:inProductDirectory + "/build.py"
   )
-#--- Copy build-as.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/build-as.py"
-    !to:inProductDirectory + "/build-as.py"
-  )
 #--- Copy build-verbose.py
   copyExecutableFile (
     !currentDir:inCurrentDirectory
