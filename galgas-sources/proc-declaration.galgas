@@ -420,8 +420,8 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForInOutArgument (!formalArgumentName.string)
-        !.inOutArgument {!name:formalArgumentName}
+        !"*" + mangledNameForLocalVariable (!formalArgumentName.string)
+        !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -432,8 +432,8 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForOutArgument (!formalArgumentName.string)
-        !.outArgument {!name:formalArgumentName}
+        !"*" + mangledNameForLocalVariable (!formalArgumentName.string)
+        !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true

@@ -10,57 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Overriding category method '@checkInstructionAST analyze'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_checkInstructionAST_analyze (const cPtr_instructionAST * inObject,
-                                                        const GALGAS_lstring constinArgument_inRoutineNameForInvocationGraph,
-                                                        const GALGAS_receiverType constinArgument_inReceiverType,
-                                                        const GALGAS_semanticContext constinArgument_inContext,
-                                                        const GALGAS_stringset constinArgument_inModeSet,
-                                                        const GALGAS_bool constinArgument_inAllowExceptions,
-                                                        GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                        GALGAS_globalLiteralStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                        GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                        GALGAS_instructionListIR & /* ioArgument_ioInstructionGenerationList */,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_checkInstructionAST * object = (const cPtr_checkInstructionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_checkInstructionAST) ;
-  GALGAS_instructionListIR var_instructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("directive-check.galgas", 48)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_expressionType ;
-  GALGAS_operandIR var_expressionValueName ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("directive-check.galgas", 52)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_instructionGenerationList, var_expressionType, var_expressionValueName, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 49)) ;
-  const enumGalgasBool test_0 = var_expressionType.reader_kind (inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 64)).reader_isBoolean (SOURCE_FILE ("directive-check.galgas", 64)).operator_not (SOURCE_FILE ("directive-check.galgas", 64)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("expression is not boolean")  COMMA_SOURCE_FILE ("directive-check.galgas", 65)) ;
-  }
-  const enumGalgasBool test_1 = categoryReader_isStatic (var_expressionValueName, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 68)).operator_not (SOURCE_FILE ("directive-check.galgas", 68)).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("expression is not static: use assert instruction")  COMMA_SOURCE_FILE ("directive-check.galgas", 69)) ;
-  }else if (kBoolFalse == test_1) {
-    GALGAS_bigint var_value ;
-    var_expressionValueName.method_literalInteger (var_value, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 71)) ;
-    const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_value.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("directive-check.galgas", 72)))).boolEnum () ;
-    if (kBoolTrue == test_2) {
-      inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("check expression value is false")  COMMA_SOURCE_FILE ("directive-check.galgas", 73)) ;
-    }
-  }
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_checkInstructionAST_analyze (void) {
-  enterCategoryMethod_analyze (kTypeDescriptor_GALGAS_checkInstructionAST.mSlotID,
-                               categoryMethod_checkInstructionAST_analyze) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_checkInstructionAST_analyze (defineCategoryMethod_checkInstructionAST_analyze, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Overriding category method '@incDecInstructionAST analyze'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -587,89 +536,7 @@ static void categoryMethod_assignmentInstructionAST_analyze (const cPtr_instruct
   {
   categoryModifier_appendComment (ioArgument_ioInstructionGenerationList, var_comment, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 119)) ;
   }
-  switch (var_targetVariableKind.enumValue ()) {
-  case GALGAS_variableKindIR::kNotBuilt:
-    break ;
-  case GALGAS_variableKindIR::kEnum_register:
-    {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_4766 = (const cEnumAssociatedValues_variableKindIR_register *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_registerName = extractPtr_4766->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_4766->mAssociatedValue1 ;
-      {
-      categoryModifier_appendStoreVolatileRegister (ioArgument_ioInstructionGenerationList, extractedValue_registerName.mAttribute_string, var_targetType, extractedValue_address, var_sourceValueName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 122)) ;
-      }
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_globalVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_4948 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_4948->mAssociatedValue0 ;
-      const GALGAS_bool extractedValue_isVolatile = extractPtr_4948->mAssociatedValue1 ;
-      {
-      categoryModifier_appendStoreGlobalVariable (ioArgument_ioInstructionGenerationList, extractedValue_name.mAttribute_string, var_targetType, var_sourceValueName, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 124)) ;
-      }
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localVariable:
-    {
-      const cEnumAssociatedValues_variableKindIR_localVariable * extractPtr_5097 = (const cEnumAssociatedValues_variableKindIR_localVariable *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5097->mAssociatedValue0 ;
-      {
-      categoryModifier_appendStoreLocalVariable (ioArgument_ioInstructionGenerationList, extractedValue_name.mAttribute_string, var_targetType, var_sourceValueName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 126)) ;
-      }
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_inOutArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_inOutArgument * extractPtr_5182 = (const cEnumAssociatedValues_variableKindIR_inOutArgument *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5182->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 128)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 128)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_outArgument:
-    {
-      const cEnumAssociatedValues_variableKindIR_outArgument * extractPtr_5265 = (const cEnumAssociatedValues_variableKindIR_outArgument *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_5265->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 130)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 130)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_globalConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_5354 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_operandIR extractedValue_value = extractPtr_5354->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 132)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 132)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_temporaryConstant:
-    {
-      const cEnumAssociatedValues_variableKindIR_temporaryConstant * extractPtr_5439 = (const cEnumAssociatedValues_variableKindIR_temporaryConstant *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_5439->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 134)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 134)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_localAccess:
-    {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_5524 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_access = extractPtr_5524->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 136)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 136)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalString:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_5629 = (const cEnumAssociatedValues_variableKindIR_literalString *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_5629->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_5629->mAssociatedValue1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 138)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 138)) ;
-    }
-    break ;
-  case GALGAS_variableKindIR::kEnum_literalStructure:
-    {
-      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_5731 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (var_targetVariableKind.unsafePointer ()) ;
-      const GALGAS_literalStructureList extractedValue_value = extractPtr_5731->mAssociatedValue0 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 140)), GALGAS_string ("INTERNAL ERROR")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 140)) ;
-    }
-    break ;
-  }
+  categoryMethod_storeInMemory (var_targetVariableKind, var_sourceValueName, var_targetType, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 120)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 

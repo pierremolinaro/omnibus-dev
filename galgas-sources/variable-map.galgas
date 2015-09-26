@@ -57,8 +57,7 @@ enum @variableKindIR {
   case register (@lstring name @bigint address)
   case globalVariable (@lstring name @bool isVolatile)
   case localVariable (@lstring name)
-  case inOutArgument (@lstring name)
-  case outArgument (@lstring name)
+
   case globalConstant (@operandIR value)
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
@@ -76,10 +75,6 @@ getter @variableKindIR isStatic -> @bool outResult {
   case globalVariable (* *) :
     outResult = false
   case localVariable (*) :
-    outResult = false
-  case inOutArgument (*) :
-    outResult = false
-  case outArgument (*) :
     outResult = false
   case globalConstant (*) :
     outResult = true

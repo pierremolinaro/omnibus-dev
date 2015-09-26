@@ -156,10 +156,6 @@ method @variableKindIR loadFromMemory
       !name.string
       !inVariableType
     ]
-  case inOutArgument (@lstring name) :
-    error name : "@variableKindIR loadFromMemory:inOutArgument" : outResultingValue
-  case outArgument (@lstring name) :
-    error name : "@variableKindIR loadFromMemory:outArgument" : outResultingValue
   case globalConstant (@operandIR value) :
     outResultingValue = value
   case temporaryConstant (@uint unused idx) :
@@ -187,20 +183,16 @@ method @variableKindIR storeInMemory
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue !volatile:isVolatile]
   case localVariable (@lstring unused name) :
     [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !inVariableType !inValue]
-  case inOutArgument (@lstring unused name) :
-     error .nowhere : "INTERNAL ERROR"
-  case outArgument (@lstring unused name) :
-     error .nowhere : "INTERNAL ERROR"
   case globalConstant (@operandIR unused value) :
-     error .nowhere : "INTERNAL ERROR"
+     error .nowhere : "<<@variableKindIR storeInMemory globalConstant>>"
   case temporaryConstant (@uint unused idx) :
-     error .nowhere : "INTERNAL ERROR"
+     error .nowhere : "<<@variableKindIR storeInMemory temporaryConstant>>"
   case localAccess (@lstring unused access) :
-     error .nowhere : "INTERNAL ERROR"
+     error .nowhere : "<<@variableKindIR storeInMemory localAccess>>"
   case literalString (@string unused value @string unused name) :
-     error .nowhere : "INTERNAL ERROR"
+     error .nowhere : "<<@variableKindIR storeInMemory literalString>>"
   case literalStructure (@literalStructureList unused value) :
-     error .nowhere : "INTERNAL ERROR"
+     error .nowhere : "<<@variableKindIR storeInMemory literalStructure>>"
   end
 }
 
