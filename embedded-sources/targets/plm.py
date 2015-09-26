@@ -11,6 +11,40 @@ import sys, os, subprocess, urllib
 import make
 
 #----------------------------------------------------------------------------------------------------------------------*
+#   Run process and wait for termination                                                                               *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def runProcess (command) :
+  childProcess = subprocess.Popen (command)
+#--- Wait for subprocess termination
+  if childProcess.poll () == None :
+    childProcess.wait ()
+  if childProcess.returncode != 0 :
+    print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
+    sys.exit (childProcess.returncode)
+
+#----------------------------------------------------------------------------------------------------------------------*
+#   Run process, get output and wait for termination                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def runProcessAndGetOutput (command) :
+  result = ""
+  childProcess = subprocess.Popen (command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  while True:
+    out = childProcess.stdout.read(1)
+    if out == '' and childProcess.poll() != None:
+      break
+    if out != '':
+      result += out
+#--- Wait for subprocess termination
+  if childProcess.poll () == None :
+    childProcess.wait ()
+  if childProcess.returncode != 0 :
+    print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
+    sys.exit (childProcess.returncode)
+  return result
+
+#----------------------------------------------------------------------------------------------------------------------*
 #   ARCHIVE DOWNLOAD                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -141,40 +175,27 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)
   #--- Build Ok ?
   makefile.printErrorCountAndExitOnError ()
+  #--- Run or all ? Display size
+  if (goal == "run") or (goal == "all") :
+    s = runProcessAndGetOutput (displayObjectSize + objectList)
+    secondLine = s.split('\n')[1]
+    numbers = [int(s) for s in secondLine.split() if s.isdigit()]
+    print "Code:   " + str (numbers [0]) + " bytes"
+    print "Data:   " + str (numbers [1]) + " bytes"
+    print "Global: " + str (numbers [2]) + " bytes"
   #--- Run ?
   if goal == "run":
     print make.BOLD_BLUE () + "Loading Teensy..." + make.ENDC ()
-    childProcess = subprocess.Popen (runExecutableOnTarget + [productHEX])
-  #--- Wait for subprocess termination
-    if childProcess.poll () == None :
-      childProcess.wait ()
-    if childProcess.returncode != 0 :
-      print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
-      sys.exit (childProcess.returncode)
-    else:
-      print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    runProcess (runExecutableOnTarget + [productHEX])
+    print make.BOLD_GREEN () + "Success" + make.ENDC ()
   elif goal == "display-object-size":
     print make.BOLD_BLUE () + "Display Object Sizes" + make.ENDC ()
-    childProcess = subprocess.Popen (displayObjectSize + objectList)
-  #--- Wait for subprocess termination
-    if childProcess.poll () == None :
-      childProcess.wait ()
-    if childProcess.returncode != 0 :
-      print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
-      sys.exit (childProcess.returncode)
-    else:
-      print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    runProcess (displayObjectSize + objectList)
+    print make.BOLD_GREEN () + "Success" + make.ENDC ()
   elif goal == "object-dump":
     print make.BOLD_BLUE () + "Dump Object Code" + make.ENDC ()
-    childProcess = subprocess.Popen (dumpObjectCode + [productELF])
-  #--- Wait for subprocess termination
-    if childProcess.poll () == None :
-      childProcess.wait ()
-    if childProcess.returncode != 0 :
-      print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
-      sys.exit (childProcess.returncode)
-    else:
-      print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    runProcess (dumpObjectCode + [productELF])
+    print make.BOLD_GREEN () + "Success" + make.ENDC ()
 
 
 #----------------------------------------------------------------------------------------------------------------------*
