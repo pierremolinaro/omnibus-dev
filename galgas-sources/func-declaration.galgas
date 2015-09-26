@@ -174,7 +174,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !mResultVarName
     !resultType
     !true
-    !mResultVarName.string
     !.localVariable {!name:mResultVarName}
     !true
     !{}
@@ -188,7 +187,6 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !formalArgumentName
       !typeProxy
       !true
-      !mangledNameForLocalVariable (!formalArgumentName.string)
       !.localVariable {!name:formalArgumentName}
       ![typeProxy copiable]
       !{}

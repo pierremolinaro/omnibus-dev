@@ -127,7 +127,6 @@ override method @procCallInstructionAST analyze
         !name
         ?let type
         ?let accessIsAllowed
-        ?let unused variableAccess
         ?let unused parameterAccess
         ?let isCopiable
         ?*
@@ -171,7 +170,6 @@ override method @procCallInstructionAST analyze
         !name
         ?let type
         ?let accessIsAllowed
-        ?let unused variableAccess
         ?let unused parameterAccess
         ?2*
         ?let canBeUsedAsInputParameter

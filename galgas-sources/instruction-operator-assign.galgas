@@ -68,7 +68,7 @@ override method @operatorAssignInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?let targetType
-    ?6*
+    ?5*
   ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -95,7 +95,6 @@ override method @operatorAssignInstructionAST analyze
     !mTargetVarName
     ?*
     ?let accessIsAllowed
-    ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
     ?2*

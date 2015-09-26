@@ -57,7 +57,7 @@ override method @assignmentInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?@unifiedTypeMap-proxy targetType
-    ?6*
+    ?5*
   ]
   var comment = mTargetVarName.string
 #--- Analyze field list
@@ -104,7 +104,6 @@ override method @assignmentInstructionAST analyze
     !mTargetVarName
     ?*
     ?let accessIsAllowed
-    ?let unused targetVar
     ?let targetVariableKind
     ?let isCopiable
     ?2*

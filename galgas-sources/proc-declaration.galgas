@@ -367,7 +367,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !true
-          !receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:.new {!receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
           }
@@ -387,7 +386,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !true
-          !receiverName () + "." + mangledNameForProperty (!name:propertyName.string)
           !.localAccess {
             !access:.new{!receiverName () + "." + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
           }
@@ -408,7 +406,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !mangledNameForLocalVariable (!formalArgumentName.string)
         !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
@@ -420,7 +417,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForLocalVariable (!formalArgumentName.string)
         !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
@@ -432,7 +428,6 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !"*" + mangledNameForLocalVariable (!formalArgumentName.string)
         !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}

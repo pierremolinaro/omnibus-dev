@@ -118,7 +118,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !codeArg
     !inContext.mExceptionCodeType
     !true
-    !mangledNameForLocalVariable (!codeArg.string)
     !.localVariable {!name:codeArg}
     ![inContext.mExceptionCodeType copiable]
     !{}
@@ -129,7 +128,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !fileArg
     !StaticStringType
     !true
-    !mangledNameForLocalVariable (!fileArg.string)
     !.localVariable {!name:fileArg}
     ![StaticStringType copiable]
     !{}
@@ -140,7 +138,6 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !lineArg
     !inContext.mExceptionLineType
     !true
-    !mangledNameForLocalVariable (!lineArg.string)
     !.localVariable {!name:lineArg}
     ![inContext.mExceptionLineType copiable]
     !{}

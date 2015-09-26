@@ -90,7 +90,6 @@ override method @incDecInstructionAST analyze
     !mVarName
     ?let type
     ?let accessIsAllowed
-    ?let @string unused variableCName
     ?let @variableKindIR variable
     ?3*
   ]
