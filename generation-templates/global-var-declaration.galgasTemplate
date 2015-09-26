@@ -2,7 +2,7 @@
 ;%!["global variable " + GLOBAL_VAR_NAME stringByLeftAndRightPadding !118 !' ']%*
 ;----------------------------------------------------------------------------------------------------------------------*
 
-@%!mangledNameForGlobalVariable (!name:GLOBAL_VAR_NAME)% = global %
+@%!mangledNameForGlobalVariable (!GLOBAL_VAR_NAME)% = global %
 ![GLOBAL_VAR_TYPE llvmName]
 % %
 if INITIAL_VALUE_STRING == "" then

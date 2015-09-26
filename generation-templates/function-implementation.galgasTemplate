@@ -15,8 +15,8 @@ else
   end
 end
 %) {
-  %!mangledNameForType (!name:[RESULT_TYPE key])% %!mangledNameForLocalVariable (!name:RESULT_VAR_NAME)% ;
+  %!mangledNameForType (!name:[RESULT_TYPE key])% %!mangledNameForLocalVariable (!RESULT_VAR_NAME)% ;
 %!INSTRUCTION_LLVM_CODE
-%  return %!mangledNameForLocalVariable (!name:RESULT_VAR_NAME)% ;
+%  return %!mangledNameForLocalVariable (!RESULT_VAR_NAME)% ;
 }
 

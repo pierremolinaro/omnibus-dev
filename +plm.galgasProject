@@ -105,14 +105,16 @@ project (1:0:0) -> "plm" {
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/semantic-context.galgas"
   "galgas-sources/semantic-analysis.galgas"
-  "galgas-sources/generated-code-prefixes.galgas"
 
 #--- Intermediate code
+  "galgas-sources/generated-code-prefixes.galgas"
   "galgas-sources/intermediate-code-generation.galgas"
   "galgas-sources/intermediate-comment.galgas"
   "galgas-sources/intermediate-binary-operation.galgas"
   "galgas-sources/intermediate-load-volatile.galgas"
   "galgas-sources/intermediate-load-global-variable.galgas"
+  "galgas-sources/intermediate-load-local-variable.galgas"
+  "galgas-sources/intermediate-load-in-argument.galgas"
   "galgas-sources/intermediate-store-volatile.galgas"
   "galgas-sources/intermediate-store-global-var.galgas"
   "galgas-sources/code-optimisation.galgas"

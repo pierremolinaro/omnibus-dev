@@ -129,16 +129,16 @@ override method @infixOperatorExpressionAST analyzeExpression
     binaryOperator = "icmp ne"
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
-    binaryOperator = "<"
+    binaryOperator = "icmp ult"
   case infEqual :
     operatorMap = inContext.mInfEqualOperatorMap
-    binaryOperator = "<="
+    binaryOperator = "icmp ule"
   case strictSup :
     operatorMap = inContext.mStrictSupOperatorMap
-    binaryOperator = ">"
+    binaryOperator = "icmp ugt"
   case supEqual :
     operatorMap = inContext.mSupEqualOperatorMap
-    binaryOperator = ">="
+    binaryOperator = "icmp uge"
   case andOp :
     operatorMap = inContext.mAndOperatorMap
     binaryOperator = "and"

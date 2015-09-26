@@ -120,8 +120,8 @@ override method @assignmentInstructionAST analyze
   switch targetVariableKind
   case register (@lstring registerName @bigint address) :
     [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !targetType !address !sourceValueName]
-  case globalVariable (@lstring name) :
-    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !targetType !sourceValueName]
+  case globalVariable (@lstring name @bool isVolatile) :
+    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !targetType !sourceValueName !volatile:isVolatile]
   case localVariable (@lstring unused name) :
 
   case inArgument (@lstring unused name) :

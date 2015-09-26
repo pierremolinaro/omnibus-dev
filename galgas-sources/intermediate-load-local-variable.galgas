@@ -1,36 +1,31 @@
 
-setter @instructionListIR appendLoadGlobalVariable
+setter @instructionListIR appendLoadLocalVariable
   ?let @operandIR inTargetValue
   ?let @string inRegisterName
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?volatile:@bool inIsVolatile
 {
-  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inTargetVarType !inIsVolatile}
+  self += !@loadLocalVariableIR.new {!inTargetValue !inRegisterName !inTargetVarType}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @loadGlobalVariableIR : @abstractInstructionIR {
+class @loadLocalVariableIR : @abstractInstructionIR {
   @operandIR mTargetValue
   @string mVariableName
   @unifiedTypeMap-proxy mVariableType
-  @bool mIsVolatile
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
+override method @loadLocalVariableIR llvmInstructionCode ?!@string ioCode {
   let llvmType = [mVariableType llvmType]
   ioCode += "  " + mTargetValue + " = load "
-  if mIsVolatile then
-    ioCode += "volatile "
-  end
-  ioCode += llvmType + ", " + llvmType + "* @" + mangledNameForGlobalVariable (!mVariableName) + "\n"
+  ioCode += llvmType + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mVariableName) + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadGlobalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @loadLocalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mGlobalVariableSet += !mVariableName
 }
 

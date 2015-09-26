@@ -139,34 +139,47 @@ method @variableKindIR loadFromMemory
       !inVariableType
       !address
     ]
-  case globalVariable (@lstring name) :
+  case globalVariable (@lstring name @bool isVolatile) :
     getNewTempVariable (!?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
       !name.string
       !inVariableType
+      !volatile:isVolatile
     ]
   case localVariable (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadLocalVariable
+      !outResultingValue
+      !name.string
+      !inVariableType
+    ]
   case inArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadInArgument
+      !outResultingValue
+      !name.string
+      !inVariableType
+    ]
   case inOutArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error name : "@variableKindIR loadFromMemory:inOutArgument" : outResultingValue
   case outArgument (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error name : "@variableKindIR loadFromMemory:outArgument" : outResultingValue
   case localConstant (@lstring name) :
-    error name : "@varInExpressionAST analyzeExpression" : outResultingValue
+    outResultingValue = .llvmLocalObject {!name:mangledNameForConstant (!name.string)}
   case globalConstant (@operandIR value) :
     outResultingValue = value
   case temporaryConstant (@uint unused idx) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error .nowhere : "@variableKindIR loadFromMemory:temporaryConstant" : outResultingValue
   case localAccess (@lstring access) :
-    error access : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error access : "@variableKindIR loadFromMemory:access" : outResultingValue
   case literalString (**) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error .nowhere : "@variableKindIR loadFromMemory:literalString" : outResultingValue
   case literalStructure (*) :
-    error .nowhere : "@varInExpressionAST analyzeExpression" : outResultingValue
+    error .nowhere : "@variableKindIR loadFromMemory:literalStructure" : outResultingValue
   end
 }
 
@@ -180,8 +193,8 @@ method @variableKindIR storeInMemory
   switch self
   case register (@lstring registerName @bigint address) :
     [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !inVariableType !address !inValue]
-  case globalVariable (@lstring name) :
-    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue]
+  case globalVariable (@lstring name @bool isVolatile) :
+    [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue !volatile:isVolatile]
   case localVariable (@lstring unused name) :
      error .nowhere : "INTERNAL ERROR"
   case inArgument (@lstring unused name) :

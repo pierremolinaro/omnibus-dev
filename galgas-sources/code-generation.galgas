@@ -28,18 +28,18 @@ getter @variableKindIR mangledName -> @string outResult {
   switch self
   case register (@lstring name *) :
     outResult = mangledNameForRegister (!name:name.string)
-  case globalVariable (@lstring name) :
-    outResult = mangledNameForGlobalVariable (!name:name.string)
+  case globalVariable (@lstring name *) :
+    outResult = mangledNameForGlobalVariable (!name.string)
   case localVariable (@lstring name) :
-    outResult = mangledNameForLocalVariable (!name:name.string)
+    outResult = mangledNameForLocalVariable (!name.string)
   case inArgument (@lstring name) :
-    outResult = mangledNameForInArgument (!name:name.string)
+    outResult = mangledNameForInArgument (!name.string)
   case inOutArgument (@lstring name) :
-    outResult = mangledNameForInOutArgument (!name:name.string)
+    outResult = mangledNameForInOutArgument (!name.string)
   case outArgument (@lstring name) :
-    outResult = "* " + mangledNameForOutArgument (!name:name.string)
+    outResult = "* " + mangledNameForOutArgument (!name.string)
   case localConstant (@lstring name) :
-    outResult = mangledNameForConstant (!name:name.string)
+    outResult = mangledNameForConstant (!name.string)
   case globalConstant (@operandIR unused value) :
     outResult = "<<@variableKindIR mangledName>>"
   case temporaryConstant (@uint idx) :
@@ -60,17 +60,17 @@ getter @assignmentTargetIR mangledName -> @string outResult {
   case register (@lstring name *) :
     outResult = mangledNameForRegister (!name:name.string)
   case globalVariable (@lstring name) :
-    outResult = mangledNameForGlobalVariable (!name:name.string)
+    outResult = mangledNameForGlobalVariable (!name.string)
   case localVariable (@lstring name) :
-    outResult = mangledNameForLocalVariable (!name:name.string)
+    outResult = mangledNameForLocalVariable (!name.string)
   case inArgument (@lstring name) :
-    outResult = mangledNameForInArgument (!name:name.string)
+    outResult = mangledNameForInArgument (!name.string)
   case inOutArgument (@lstring name) :
-    outResult = mangledNameForInOutArgument (!name:name.string)
+    outResult = mangledNameForInOutArgument (!name.string)
   case outArgument (@lstring name) :
-    outResult = "* " + mangledNameForOutArgument (!name:name.string)
+    outResult = "* " + mangledNameForOutArgument (!name.string)
   case localConstant (@lstring name) :
-    outResult = mangledNameForConstant (!name:name.string)
+    outResult = mangledNameForConstant (!name.string)
   case temporaryConstant (@uint idx) :
     outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :
