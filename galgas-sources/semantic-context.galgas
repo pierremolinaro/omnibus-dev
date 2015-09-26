@@ -148,7 +148,7 @@ method @variableKindIR loadFromMemory
       !inVariableType
       !volatile:isVolatile
     ]
-  case localVariable (@lstring name) :
+  case localValue (@lstring name) :
     getNewTempVariable (!?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadLocalVariable
@@ -158,8 +158,6 @@ method @variableKindIR loadFromMemory
     ]
   case globalConstant (@operandIR value) :
     outResultingValue = value
-  case temporaryConstant (@uint unused idx) :
-    error .nowhere : "@variableKindIR loadFromMemory:temporaryConstant" : outResultingValue
   case localAccess (@lstring access) :
     error access : "@variableKindIR loadFromMemory:access" : outResultingValue
   case literalString (**) :
@@ -181,12 +179,10 @@ method @variableKindIR storeInMemory
     [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !inVariableType !address !inValue]
   case globalVariable (@lstring name @bool isVolatile) :
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue !volatile:isVolatile]
-  case localVariable (@lstring unused name) :
+  case localValue (@lstring unused name) :
     [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !inVariableType !inValue]
   case globalConstant (@operandIR unused value) :
      error .nowhere : "<<@variableKindIR storeInMemory globalConstant>>"
-  case temporaryConstant (@uint unused idx) :
-     error .nowhere : "<<@variableKindIR storeInMemory temporaryConstant>>"
   case localAccess (@lstring unused access) :
      error .nowhere : "<<@variableKindIR storeInMemory localAccess>>"
   case literalString (@string unused value @string unused name) :

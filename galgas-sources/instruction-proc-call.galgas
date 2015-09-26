@@ -142,7 +142,7 @@ override method @procCallInstructionAST analyze
         error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-#      procCallEffectiveParameterListIR += !.input !mSelector !type !parameterAccess
+      procCallEffectiveParameterListIR += !.input !mSelector !type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -181,7 +181,7 @@ override method @procCallInstructionAST analyze
         error name : "routine has no access right on the this variable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-#      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !parameterAccess
+      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}
     end
   end
 #--- Check mode
@@ -247,11 +247,11 @@ override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:
-      ioCode += [mParameterType llvmType] + " " + [mParameter string]
+      ioCode += [mParameterType llvmType] + "* " + [mParameter string]
     case output:
       ioCode += [mParameterType llvmType] + " " + [mParameter string]
     case outputInput:
-      ioCode += [mParameterType llvmType] + " " + [mParameter string]
+      ioCode += [mParameterType llvmType] + "* " + [mParameter string]
     end
   between
     ioCode += ", "
@@ -263,9 +263,6 @@ override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
 
 override method @procCallInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   ioAccessibleEntities.mProcedureSet += !mProcName
-#  for () in mParameters do
-#    [mParameter enterAccessibleEntities !?ioAccessibleEntities]
-#  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

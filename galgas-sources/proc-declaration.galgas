@@ -406,7 +406,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localVariable {!name:formalArgumentName}
+        !.localValue {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
@@ -417,23 +417,23 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localVariable {!name:formalArgumentName}
+        !.localValue {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForInOutArgument (!formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
     case output :
       [!?variableMap insertOutputFormalArgument
         !formalArgumentName
         !typeProxy
         !true
-        !.localVariable {!name:formalArgumentName}
+        !.localValue {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForOutArgument (!formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
     end
   end
 #--- Enter subprogram invocation graph
@@ -512,9 +512,9 @@ getter @procedureMapIR-element llvmCodeGeneration -> @string outCode {
     case input :
       outCode += [mFormalArgumentType llvmType] + " %in." + mFormalArgumentName
     case output :
-       outCode += "<<out arg>>"
+      outCode += [mFormalArgumentType llvmType] + "* %" + mFormalArgumentName
    case inputOutput :
-      outCode += "<<io arg>>"
+      outCode += [mFormalArgumentType llvmType] + "* %" + mFormalArgumentName
     end
   between
     outCode += ", "

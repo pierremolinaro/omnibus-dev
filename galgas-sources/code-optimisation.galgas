@@ -36,9 +36,8 @@ method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibl
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
   case globalVariable (@lstring name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name.string
-  case localVariable (@lstring unused name) :
+  case localValue (@lstring unused name) :
   case globalConstant (@operandIR unused value) :
-  case temporaryConstant (@uint unused idx) :
   case localAccess (@lstring unused access) :
   case literalString (@string value @string unused name) :
     ioAccessibleEntities.mStaticStringSet += !value
@@ -56,9 +55,6 @@ method @assignmentTargetIR enterAccessibleEntities ?!@accessibleEntities ioAcces
   case globalVariable (@lstring name) :
     ioAccessibleEntities.mGlobalVariableSet += !name.string
   case localVariable (@lstring unused name) :
-  case inArgument (@lstring unused name) :
-  case inOutArgument (@lstring unused name) :
-  case outArgument (@lstring unused name) :
   case temporaryConstant (@uint unused idx) :
   case localAccess (@lstring unused access) :
   case literalStructure (@literalStructureList s) :
