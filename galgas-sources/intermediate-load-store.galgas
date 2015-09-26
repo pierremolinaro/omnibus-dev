@@ -1,0 +1,70 @@
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @variableKindIR loadFromMemory
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !resultingValue:@operandIR outResultingValue
+{
+  switch self
+  case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadVolatileRegister
+      !outResultingValue
+      !name.string
+      !type
+      !address
+    ]
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadGlobalVariable
+      !outResultingValue
+      !name
+      !type
+      !volatile:isVolatile
+    ]
+  case localValue (@unifiedTypeMap-proxy type @lstring name) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadLocalVariable
+      !outResultingValue
+      !name.string
+      !type
+    ]
+  case globalConstant (@operandIR value) :
+    outResultingValue = value
+  case localAccess (@lstring access) :
+    error access : "@variableKindIR loadFromMemory:access" : outResultingValue
+  case literalString (**) :
+    error .nowhere : "@variableKindIR loadFromMemory:literalString" : outResultingValue
+  case literalStructure (*) :
+    error .nowhere : "@variableKindIR loadFromMemory:literalStructure" : outResultingValue
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+method @variableKindIR storeInMemory
+  ?value:@operandIR inValue
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  switch self
+  case register (@unifiedTypeMap-proxy type @lstring registerName @bigint address) :
+    [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !type !address !inValue]
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
+    [!?ioInstructionGenerationList appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
+  case localValue (@unifiedTypeMap-proxy type @lstring unused name) :
+    [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !type !inValue]
+  case globalConstant (@operandIR unused value) :
+     error .nowhere : "<<@variableKindIR storeInMemory globalConstant>>"
+  case localAccess (@lstring unused access) :
+     error .nowhere : "<<@variableKindIR storeInMemory localAccess>>"
+  case literalString (@string unused value @string unused name) :
+     error .nowhere : "<<@variableKindIR storeInMemory literalString>>"
+  case literalStructure (@literalStructureList unused value) :
+     error .nowhere : "<<@variableKindIR storeInMemory literalStructure>>"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
