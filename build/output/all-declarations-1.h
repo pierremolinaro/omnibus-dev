@@ -3486,8 +3486,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localVariable,
-    kEnum_inOutArgument,
-    kEnum_outArgument,
     kEnum_globalConstant,
     kEnum_temporaryConstant,
     kEnum_localAccess,
@@ -3526,9 +3524,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                                     const class GALGAS_bool & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_variableKindIR constructor_literalString (const class GALGAS_string & inOperand0,
                                                                    const class GALGAS_string & inOperand1
                                                                    COMMA_LOCATION_ARGS) ;
@@ -3541,9 +3536,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : static GALGAS_variableKindIR constructor_localVariable (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_variableKindIR constructor_outArgument (const class GALGAS_lstring & inOperand0
-                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_register (const class GALGAS_lstring & inOperand0,
                                                               const class GALGAS_bigint & inOperand1
@@ -3570,10 +3562,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_inOutArgument (class GALGAS_lstring & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_string & outArgument0,
                                                        class GALGAS_string & outArgument1,
                                                        C_Compiler * inCompiler
@@ -3591,10 +3579,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_outArgument (class GALGAS_lstring & outArgument0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_bigint & outArgument1,
                                                   C_Compiler * inCompiler
@@ -3611,8 +3595,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInOutArgument (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
@@ -3620,8 +3602,6 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isOutArgument (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRegister (LOCATION_ARGS) const ;
 
@@ -3692,38 +3672,6 @@ class cEnumAssociatedValues_variableKindIR_localVariable : public cEnumAssociate
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_variableKindIR_localVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_inOutArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_inOutArgument (const GALGAS_lstring & inAssociatedValue0
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_inOutArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_outArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_outArgument (const GALGAS_lstring & inAssociatedValue0
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_outArgument (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
