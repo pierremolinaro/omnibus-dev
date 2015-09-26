@@ -28,23 +28,54 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
   {
   routine_copyTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/linker.ld"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 51)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources/linker.ld"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 52)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 49)) ;
   }
-  {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 57)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 58)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 55)) ;
+  GALGAS_string var_optimizationOption = GALGAS_string ("disable-opt") ;
+  GALGAS_uint var_optimizationOptionCount = GALGAS_uint ((uint32_t) 0U) ;
+  const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_optimization_31_.reader_value ()).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    var_optimizationOption = GALGAS_string ("O1") ;
+    var_optimizationOptionCount.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 59)) ;
+  }
+  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_optimization_32_.reader_value ()).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    var_optimizationOption = GALGAS_string ("O2") ;
+    var_optimizationOptionCount.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 63)) ;
+  }
+  const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_optimization_33_.reader_value ()).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    var_optimizationOption = GALGAS_string ("O3") ;
+    var_optimizationOptionCount.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 67)) ;
+  }
+  const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_optimizationS.reader_value ()).boolEnum () ;
+  if (kBoolTrue == test_3) {
+    var_optimizationOption = GALGAS_string ("Os") ;
+    var_optimizationOptionCount.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 71)) ;
+  }
+  const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_optimizationZ.reader_value ()).boolEnum () ;
+  if (kBoolTrue == test_4) {
+    var_optimizationOption = GALGAS_string ("Oz") ;
+    var_optimizationOptionCount.increment_operation (inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 75)) ;
+  }
+  const enumGalgasBool test_5 = GALGAS_bool (kIsStrictSup, var_optimizationOptionCount.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+  if (kBoolTrue == test_5) {
+    inCompiler->emitSemanticWarning (GALGAS_location::constructor_nowhere (SOURCE_FILE ("target-generation.galgas", 78)), GALGAS_string ("several optimization options: --").add_operation (var_optimizationOption, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78)).add_operation (GALGAS_string (" is used"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 78))  COMMA_SOURCE_FILE ("target-generation.galgas", 78)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 63)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 61)) ;
+  routine_copyExecutableFileWithSubstitution (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 83)), GALGAS_string ("<<OPTIMIZATION_OPTION>>"), var_optimizationOption, inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 80)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 69)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 67)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 90)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/build-verbose.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 91)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 88)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 75)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 76)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 73)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 96)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/clean.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 94)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 81)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 82)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 79)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 102)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objsize.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 103)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 100)) ;
   }
   {
-  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 87)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 85)) ;
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 108)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/objdump.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 106)) ;
+  }
+  {
+  routine_copyExecutableFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 114)), constinArgument_inProductDirectory.add_operation (GALGAS_string ("/run.py"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 115)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 112)) ;
   }
 }
 
@@ -63,14 +94,44 @@ void routine_copyExecutableFile (const GALGAS_string constinArgument_inCurrentDi
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 101)) ;
-    GALGAS_bool joker_3596 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3596, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 102)) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 128)) ;
+    GALGAS_bool joker_4485 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4485, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 129)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 104)) ;
-    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 105)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 105)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 105)) ;
-    GALGAS_bool joker_3903 ; // Joker input parameter
-    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_3903, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 106)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 131)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 132)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 132)) ;
+    GALGAS_bool joker_4792 ; // Joker input parameter
+    var_s.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4792, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 133)) ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Routine 'copyExecutableFileWithSubstitution'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_copyExecutableFileWithSubstitution (const GALGAS_string constinArgument_inCurrentDirectory,
+                                                 const GALGAS_string constinArgument_inSourceFileNamePath,
+                                                 const GALGAS_string constinArgument_inDestinationAbsoluteFilePath,
+                                                 const GALGAS_string constinArgument_inSubstitutionString,
+                                                 const GALGAS_string constinArgument_inReplacementString,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 148)) ;
+    GALGAS_string var_s_32_ = var_s.reader_stringByReplacingStringByString (constinArgument_inSubstitutionString, constinArgument_inReplacementString, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 149)) ;
+    GALGAS_bool joker_5559 ; // Joker input parameter
+    var_s_32_.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_5559, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 150)) ;
+  }else if (kBoolFalse == test_0) {
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 152)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 153)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 153)) ;
+    GALGAS_string var_s_32_ = var_s.reader_stringByReplacingStringByString (constinArgument_inSubstitutionString, constinArgument_inReplacementString, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 154)) ;
+    GALGAS_bool joker_5959 ; // Joker input parameter
+    var_s_32_.method_writeToExecutableFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_5959, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 155)) ;
   }
 }
 
@@ -89,14 +150,14 @@ void routine_copyTextFile (const GALGAS_string constinArgument_inCurrentDirector
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 119)) ;
-    GALGAS_bool joker_4458 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4458, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 120)) ;
+    GALGAS_string var_s = var_fw.reader_textFileContentsAtPath (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)) ;
+    GALGAS_bool joker_6514 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6514, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 169)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 122)) ;
-    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
-    GALGAS_bool joker_4755 ; // Joker input parameter
-    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_4755, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 124)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 171)) ;
+    GALGAS_string var_s = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 172)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 172)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 172)) ;
+    GALGAS_bool joker_6811 ; // Joker input parameter
+    var_s.method_writeToFileWhenDifferentContents (constinArgument_inDestinationAbsoluteFilePath, joker_6811, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 173)) ;
   }
 }
 
@@ -115,10 +176,10 @@ GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_
   const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
-    result_outContents = var_fw.reader_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 137)) ;
+    result_outContents = var_fw.reader_textFileContentsAtPath (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 186)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 139)) ;
-    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 140)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 140)) ;
+    GALGAS_string var_targetDefinitionDir = GALGAS_string (gOption_plm_5F_options_useDirAsTargetDir.reader_value ()).reader_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 188)) ;
+    result_outContents = GALGAS_string::constructor_stringWithContentsOfFile (var_targetDefinitionDir.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 189)).add_operation (constinArgument_inTargetFile, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 189)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 189)) ;
   }
 //---
   return result_outContents ;
@@ -1567,10 +1628,11 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
-  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
+  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, llvmOptimizerOptions, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerOptions, objcopy, \\\n"
-  "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :\n"
+  "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
+  "                 currentFile) :\n"
   "  #--- Get max parallel jobs as first argument\n"
   "  goal = \"all\"\n"
   "  if len (sys.argv) > 1 :\n"
@@ -1600,15 +1662,15 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  makefile = make.Make ()\n"
   "  #--- Add C files compile rule\n"
   "  objectList = []\n"
-  "  asObjectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
   "    optimizedSource = objectDir + \"/\" + source + \"-opt.ll\"\n"
   "    rule = make.Rule (optimizedSource, \"Optimizing \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mDependences.append (currentFile)\n"
   "    rule.mCommand += llvmOptimizerCompiler\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
-  "    rule.mCommand += [\"-O3\"]\n"
+  "    rule.mCommand += llvmOptimizerOptions\n"
   "    rule.mCommand += [\"-o\", optimizedSource]\n"
   "    makefile.addRule (rule)\n"
   "  #--- Compile LLVM source\n"
@@ -1619,7 +1681,6 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    rule.mCommand += [optimizedSource]\n"
   "    rule.mCommand += [\"-o\", asSource]\n"
   "    makefile.addRule (rule)\n"
-  "    objectList.append (object)\n"
   "  #--- Assembling\n"
   "    asObject = objectDir + \"/\" + source + \".s.o\"\n"
   "    rule = make.Rule (asObject, \"Assembling \" + asSource)\n"
@@ -1628,14 +1689,14 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    rule.mCommand += [asSource]\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
   "    makefile.addRule (rule)\n"
-  "    asObjectList.append (asObject)\n"
+  "    objectList.append (asObject)\n"
   "  #--- Add linker rule\n"
   "  productELF = productDir + \"/product.elf\"\n"
   "  rule = make.Rule (productELF, \"Linking \" + productELF)\n"
-  "  rule.mDependences += asObjectList\n"
+  "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += linkerOptions\n"
-  "  rule.mCommand += asObjectList\n"
+  "  rule.mCommand += objectList\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -1652,7 +1713,6 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--- Add goals\n"
   "  makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
   "  makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
-  "  makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
   "  makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
   "  makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
   "  #--- Build\n"
@@ -1702,7 +1762,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  7762, // Text length
+  7753, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -7172,6 +7232,17 @@ const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   LLVM optimizer options                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def llvmOptimizerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-<<OPTIMIZATION_OPTION>>\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   LLC Compiler invocation                                                                                            *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7284,11 +7355,13 @@ const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "currentFile = os.path.abspath (sys.argv [0])\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
-  "                 LLCcompiler (), llvmOptimizerCompiler (), \n"
+  "                 LLCcompiler (), llvmOptimizerCompiler (), llvmOptimizerOptions (),\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerOptions (), \\\n"
-  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())\n"
+  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
+  "                 currentFile)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -7296,7 +7369,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  11393, // Text length
+  12205, // Text length
   gWrapperFileContent_19_embeddedTargets
 ) ;
 

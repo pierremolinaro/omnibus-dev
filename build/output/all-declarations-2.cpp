@@ -13061,6 +13061,36 @@ C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ("plm_optio
                                          "no-exception-generation",
                                          "Do not generate exception code") ;
 
+C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ("plm_options",
+                                         "optimization1",
+                                         0,
+                                         "O1",
+                                         "Optimization level 1") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ("plm_options",
+                                         "optimization2",
+                                         0,
+                                         "O2",
+                                         "Optimization level 2") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_optimization_33_ ("plm_options",
+                                         "optimization3",
+                                         0,
+                                         "O3",
+                                         "Optimization level 3") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ("plm_options",
+                                         "optimizationS",
+                                         0,
+                                         "Os",
+                                         "Like previous option with extra optimizations for size") ;
+
+C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ("plm_options",
+                                         "optimizationZ",
+                                         0,
+                                         "Oz",
+                                         "Like previous option but reduces code size further") ;
+
 C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ("plm_options",
                                          "performFlashing",
                                          102,
@@ -17147,10 +17177,11 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
-  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
+  "                 objectDir, LLCcompiler, llvmOptimizerCompiler, llvmOptimizerOptions, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerOptions, objcopy, \\\n"
-  "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :\n"
+  "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
+  "                 currentFile) :\n"
   "  #--- Get max parallel jobs as first argument\n"
   "  goal = \"all\"\n"
   "  if len (sys.argv) > 1 :\n"
@@ -17180,15 +17211,15 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  makefile = make.Make ()\n"
   "  #--- Add C files compile rule\n"
   "  objectList = []\n"
-  "  asObjectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
   "    optimizedSource = objectDir + \"/\" + source + \"-opt.ll\"\n"
   "    rule = make.Rule (optimizedSource, \"Optimizing \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mDependences.append (currentFile)\n"
   "    rule.mCommand += llvmOptimizerCompiler\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
-  "    rule.mCommand += [\"-O3\"]\n"
+  "    rule.mCommand += llvmOptimizerOptions\n"
   "    rule.mCommand += [\"-o\", optimizedSource]\n"
   "    makefile.addRule (rule)\n"
   "  #--- Compile LLVM source\n"
@@ -17199,7 +17230,6 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [optimizedSource]\n"
   "    rule.mCommand += [\"-o\", asSource]\n"
   "    makefile.addRule (rule)\n"
-  "    objectList.append (object)\n"
   "  #--- Assembling\n"
   "    asObject = objectDir + \"/\" + source + \".s.o\"\n"
   "    rule = make.Rule (asObject, \"Assembling \" + asSource)\n"
@@ -17208,14 +17238,14 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [asSource]\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
   "    makefile.addRule (rule)\n"
-  "    asObjectList.append (asObject)\n"
+  "    objectList.append (asObject)\n"
   "  #--- Add linker rule\n"
   "  productELF = productDir + \"/product.elf\"\n"
   "  rule = make.Rule (productELF, \"Linking \" + productELF)\n"
-  "  rule.mDependences += asObjectList\n"
+  "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += linkerOptions\n"
-  "  rule.mCommand += asObjectList\n"
+  "  rule.mCommand += objectList\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -17232,7 +17262,6 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  #--- Add goals\n"
   "  makefile.addGoal (\"run\", [productHEX], \"Building all and run\")\n"
   "  makefile.addGoal (\"all\", [productHEX], \"Building all\")\n"
-  "  makefile.addGoal (\"as\", asObjectList, \"Assembling C files\")\n"
   "  makefile.addGoal (\"display-object-size\", [productHEX], \"Display Object Size\")\n"
   "  makefile.addGoal (\"object-dump\", [productHEX], \"Dump Object Code\")\n"
   "  #--- Build\n"
@@ -17282,7 +17311,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  7762, // Text length
+  7753, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -22752,6 +22781,17 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   LLVM optimizer options                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def llvmOptimizerOptions ():\n"
+  "  result = []\n"
+  "  result.append (\"-<<OPTIMIZATION_OPTION>>\")\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   LLC Compiler invocation                                                                                            *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -22864,11 +22904,13 @@ const char * gWrapperFileContent_19_targetTemplates = "#! /usr/bin/env python\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
+  "currentFile = os.path.abspath (sys.argv [0])\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
-  "                 LLCcompiler (), llvmOptimizerCompiler (), \n"
+  "                 LLCcompiler (), llvmOptimizerCompiler (), llvmOptimizerOptions (),\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerOptions (), \\\n"
-  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())\n"
+  "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
+  "                 currentFile)\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -22876,7 +22918,7 @@ const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  11393, // Text length
+  12205, // Text length
   gWrapperFileContent_19_targetTemplates
 ) ;
 

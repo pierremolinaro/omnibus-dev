@@ -13,4 +13,11 @@ option plm_options {
   @bool listEmbeddedTargets : 'L', "list-embedded-targets" -> "List embedded targets"
   @string extractEmbeddedTargets : 'X', "extract-embedded-targets" -> "Extract embedded targets"
   @string useDirAsTargetDir : 'T', "use-target-dir" -> "Use directory as target definition directory, instead of using embedded targets"
+
+#--- Optimization
+  @bool optimization1 : '\0', "O1" -> "Optimization level 1"
+  @bool optimization2 : '\0', "O2" -> "Optimization level 2"
+  @bool optimizationS : '\0', "Os" -> "Like previous option with extra optimizations for size"
+  @bool optimizationZ : '\0', "Oz" -> "Like previous option but reduces code size further"
+  @bool optimization3 : '\0', "O3" -> "Optimization level 3"
 }

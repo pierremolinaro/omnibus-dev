@@ -52,10 +52,37 @@ proc generateTarget
     !to:inProductDirectory + "/sources/linker.ld"
   )
 #--- Copy build.py
-  copyExecutableFile (
+  var optimizationOption = "disable-opt"
+  var optimizationOptionCount = 0
+  if [option plm_options.optimization1 value] then
+    optimizationOption = "O1"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimization2 value] then
+    optimizationOption = "O2"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimization3 value] then
+    optimizationOption = "O3"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationS value] then
+    optimizationOption = "Os"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationZ value] then
+    optimizationOption = "Oz"
+    optimizationOptionCount ++
+  end
+  if optimizationOptionCount > 1 then
+    warning .nowhere : "several optimization options: --" + optimizationOption + " is used"
+  end 
+  copyExecutableFileWithSubstitution (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/build.py"
     !to:inProductDirectory + "/build.py"
+    !substitute:"<<OPTIMIZATION_OPTION>>"
+    !with:optimizationOption
   )
 #--- Copy build-verbose.py
   copyExecutableFile (
@@ -104,6 +131,28 @@ private proc copyExecutableFile
     let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
     [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc copyExecutableFileWithSubstitution
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+  ?substitute:let @string inSubstitutionString
+  ?with:let @string inReplacementString
+{
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
+    let s2 = [s stringByReplacingStringByString !inSubstitutionString !inReplacementString]
+    [s2 writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    let s2 = [s stringByReplacingStringByString !inSubstitutionString !inReplacementString]
+    [s2 writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
   end
 }
 

@@ -804,6 +804,16 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_32_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_33_ ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationS ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_optimizationZ ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;

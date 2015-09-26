@@ -61,6 +61,51 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"optimization1"
+    commandChar:0
+    commandString:@"O1"
+    comment:@"Optimization level 1"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimization2"
+    commandChar:0
+    commandString:@"O2"
+    comment:@"Optimization level 2"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimization3"
+    commandChar:0
+    commandString:@"O3"
+    comment:@"Optimization level 3"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimizationS"
+    commandChar:0
+    commandString:@"Os"
+    comment:@"Like previous option with extra optimizations for size"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"optimizationZ"
+    commandChar:0
+    commandString:@"Oz"
+    comment:@"Like previous option but reduces code size further"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"performFlashing"
     commandChar:102
     commandString:@"flash-target"
