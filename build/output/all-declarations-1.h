@@ -3485,9 +3485,8 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_register,
     kEnum_globalVariable,
-    kEnum_localVariable,
+    kEnum_localValue,
     kEnum_globalConstant,
-    kEnum_temporaryConstant,
     kEnum_localAccess,
     kEnum_literalString,
     kEnum_literalStructure
@@ -3534,15 +3533,12 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
   public : static GALGAS_variableKindIR constructor_localAccess (const class GALGAS_lstring & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_variableKindIR constructor_localVariable (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_variableKindIR constructor_localValue (const class GALGAS_lstring & inOperand0
+                                                                COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_variableKindIR constructor_register (const class GALGAS_lstring & inOperand0,
                                                               const class GALGAS_bigint & inOperand1
                                                               COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_variableKindIR constructor_temporaryConstant (const class GALGAS_uint & inOperand0
-                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -3575,18 +3571,14 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_lstring & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_localValue (class GALGAS_lstring & outArgument0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_bigint & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_temporaryConstant (class GALGAS_uint & outArgument0,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
@@ -3601,11 +3593,9 @@ class GALGAS_variableKindIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRegister (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isTemporaryConstant (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3660,18 +3650,18 @@ class cEnumAssociatedValues_variableKindIR_globalVariable : public cEnumAssociat
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_variableKindIR_localVariable : public cEnumAssociatedValues {
+class cEnumAssociatedValues_variableKindIR_localValue : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_localVariable (const GALGAS_lstring & inAssociatedValue0
-                                                               COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_variableKindIR_localValue (const GALGAS_lstring & inAssociatedValue0
+                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_localVariable (void) {}
+  public : virtual ~ cEnumAssociatedValues_variableKindIR_localValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3688,22 +3678,6 @@ class cEnumAssociatedValues_variableKindIR_globalConstant : public cEnumAssociat
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_variableKindIR_globalConstant (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_variableKindIR_temporaryConstant : public cEnumAssociatedValues {
-  public : const GALGAS_uint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_variableKindIR_temporaryConstant (const GALGAS_uint & inAssociatedValue0
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_variableKindIR_temporaryConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

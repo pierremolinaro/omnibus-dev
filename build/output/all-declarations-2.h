@@ -473,9 +473,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localVariable,
-    kEnum_inArgument,
-    kEnum_inOutArgument,
-    kEnum_outArgument,
     kEnum_temporaryConstant,
     kEnum_localAccess,
     kEnum_literalStructure
@@ -508,12 +505,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
   public : static GALGAS_assignmentTargetIR constructor_globalVariable (const class GALGAS_lstring & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_assignmentTargetIR constructor_inArgument (const class GALGAS_lstring & inOperand0
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_assignmentTargetIR constructor_inOutArgument (const class GALGAS_lstring & inOperand0
-                                                                       COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_assignmentTargetIR constructor_literalStructure (const class GALGAS_literalStructureList & inOperand0
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -522,9 +513,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
 
   public : static GALGAS_assignmentTargetIR constructor_localVariable (const class GALGAS_lstring & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_assignmentTargetIR constructor_outArgument (const class GALGAS_lstring & inOperand0
-                                                                     COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_assignmentTargetIR constructor_register (const class GALGAS_lstring & inOperand0,
                                                                   const class GALGAS_bigint & inOperand1
@@ -546,14 +534,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_inArgument (class GALGAS_lstring & outArgument0,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_inOutArgument (class GALGAS_lstring & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_literalStructure (class GALGAS_literalStructureList & outArgument0,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
@@ -565,10 +545,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_lstring & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_outArgument (class GALGAS_lstring & outArgument0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_bigint & outArgument1,
@@ -584,17 +560,11 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInArgument (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInOutArgument (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isOutArgument (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRegister (LOCATION_ARGS) const ;
 
@@ -663,54 +633,6 @@ class cEnumAssociatedValues_assignmentTargetIR_localVariable : public cEnumAssoc
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_localVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_assignmentTargetIR_inArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_assignmentTargetIR_inArgument (const GALGAS_lstring & inAssociatedValue0
-                                                                COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_inArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_assignmentTargetIR_inOutArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_assignmentTargetIR_inOutArgument (const GALGAS_lstring & inAssociatedValue0
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_inOutArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_assignmentTargetIR_outArgument : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_assignmentTargetIR_outArgument (const GALGAS_lstring & inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_outArgument (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2123,26 +2045,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intermediateCodeStruct ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'mangledNameForInOutArgument'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForInOutArgument (class GALGAS_string inArgument0,
-                                                          class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'mangledNameForOutArgument'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForOutArgument (class GALGAS_string inArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -8,9 +8,7 @@ enum @assignmentTargetIR {
   case register (@lstring name @bigint address)
   case globalVariable (@lstring name)
   case localVariable (@lstring name)
-  case inArgument (@lstring name)
-  case inOutArgument (@lstring name)
-  case outArgument (@lstring name)
+
   case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
   case literalStructure (@literalStructureList value)
@@ -56,10 +54,9 @@ enum @valueIR {
 enum @variableKindIR {
   case register (@lstring name @bigint address)
   case globalVariable (@lstring name @bool isVolatile)
-  case localVariable (@lstring name)
+  case localValue (@lstring name)
 
   case globalConstant (@operandIR value)
-  case temporaryConstant (@uint idx)
   case localAccess (@lstring access)
 
   case literalString (@string value @string name)
@@ -74,12 +71,10 @@ getter @variableKindIR isStatic -> @bool outResult {
     outResult = false
   case globalVariable (* *) :
     outResult = false
-  case localVariable (*) :
+  case localValue (*) :
     outResult = false
   case globalConstant (*) :
     outResult = true
-  case temporaryConstant (*) :
-    outResult = false
   case localAccess (*) :
     outResult = false
   case literalString (* *) :

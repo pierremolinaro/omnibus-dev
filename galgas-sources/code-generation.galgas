@@ -30,12 +30,10 @@ getter @variableKindIR mangledName -> @string outResult {
     outResult = mangledNameForRegister (!name:name.string)
   case globalVariable (@lstring name *) :
     outResult = mangledNameForGlobalVariable (!name.string)
-  case localVariable (@lstring name) :
+  case localValue (@lstring name) :
     outResult = mangledNameForLocalVariable (!name.string)
   case globalConstant (@operandIR unused value) :
     outResult = "<<@variableKindIR mangledName>>"
-  case temporaryConstant (@uint idx) :
-    outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :
     outResult = access.string
   case literalString (* @string name) :
@@ -55,12 +53,6 @@ getter @assignmentTargetIR mangledName -> @string outResult {
     outResult = mangledNameForGlobalVariable (!name.string)
   case localVariable (@lstring name) :
     outResult = mangledNameForLocalVariable (!name.string)
-  case inArgument (@lstring name) :
-    outResult = mangledNameForLocalVariable (!name.string)
-  case inOutArgument (@lstring name) :
-    outResult = mangledNameForInOutArgument (!name.string)
-  case outArgument (@lstring name) :
-    outResult = "* " + mangledNameForOutArgument (!name.string)
   case temporaryConstant (@uint idx) :
     outResult = mangledNameForTemporaryConstant (!idx:idx)
   case localAccess (@lstring access) :
