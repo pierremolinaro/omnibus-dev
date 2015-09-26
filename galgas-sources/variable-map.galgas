@@ -106,7 +106,6 @@ func initialVariableMap
         !lkey
         !mType
         !true
-        !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
@@ -117,7 +116,6 @@ func initialVariableMap
         !lkey
         !mType
         !true
-        !mangledNameForRegister (!name:lkey.string)
         !.register {!name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
@@ -131,7 +129,6 @@ func initialVariableMap
       !constantName
       !constantType
       !true
-      !mangledNameForGlobalVariable (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}
@@ -150,7 +147,6 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !mangledNameForGlobalVariable (!variableName.string)
         !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
         !true
         !{}
@@ -161,7 +157,6 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !mangledNameForGlobalVariable (!variableName.string)
         !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
         !true
         !{}
@@ -184,7 +179,6 @@ func variableMapWithConstants
       !constantName
       !constantType
       !true
-      !mangledNameForGlobalVariable (!constantName.string)
       !.globalConstant{!value:expressionCode}
       !true
       !{}
@@ -214,7 +208,6 @@ list @variableListIR {
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
   @bool mAccessAllowed
-  @string mCppName
   @variableKindIR mVariableKind
   @bool copiable
   @registerBitSliceAccessMap fieldMap

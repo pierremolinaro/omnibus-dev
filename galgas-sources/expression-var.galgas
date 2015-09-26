@@ -61,7 +61,6 @@ override method @varInExpressionAST analyzeExpression
     !mSourceVarName
     ?let @unifiedTypeMap-proxy variableType
     ?let accessIsAllowed
-    ?let unused varAccess
     ?@variableKindIR variableKind
     ?*
     ?@registerBitSliceAccessMap registerBitSliceMap
