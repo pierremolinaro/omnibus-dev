@@ -408,13 +408,13 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !mangledNameForInArgument (!formalArgumentName.string)
-        !.inArgument {!name:formalArgumentName}
+        !mangledNameForLocalVariable (!formalArgumentName.string)
+        !.localVariable {!name:formalArgumentName}
         ![typeProxy copiable]
         !{}
         !true
       ]
-      formalArguments += !argumentKind !typeProxy !mangledNameForInArgument (!formalArgumentName.string)
+      formalArguments += !argumentKind !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
     case inputOutput :
       [!?variableMap insertInputOutputFormalArgument
         !formalArgumentName
@@ -507,27 +507,41 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-private filewrapper procedureGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template llvmImplementation "procedure-implementation-llvm.galgasTemplate"
-    ?@string PROCEDURE_MANGLED_NAME
-    ?@procFormalArgumentListForGeneration FORMAL_ARGUMENT_LIST
-    ?@string INSTRUCTION_LLVM_CODE
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @procedureMapIR-element llvmCodeGeneration -> @string outCode {
-  @string code = ""
-  [mInstructionGenerationList instructionListLLVMCode !?code]
-  code += ";--- return\n"
-  code += "  ret void\n"
-  outCode = [filewrapper procedureGenerationTemplate.llvmImplementation
-    !mangledNameForProcedure (!lkey.string) # mProcedureMangledName
-    !mFormalArgumentListForGeneration
-    !code
-  ]
+  let procName = mangledNameForProcedure (!lkey.string)
+  outCode = llvmTitleComment (!"proc " + procName)
+  outCode += "define internal void @" + procName + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      outCode += [mFormalArgumentType llvmType] + " %in." + mFormalArgumentName
+    case output :
+       outCode += "<<out arg>>"
+   case inputOutput :
+      outCode += "<<io arg>>"
+    end
+  between
+    outCode += ", "
+  end
+  outCode += ") nounwind {\n"
+#--- Store input arguments in memory
+  for () in mFormalArgumentListForGeneration do
+    switch mFormalArgumentKind
+    case input :
+      let llvmType = [mFormalArgumentType llvmType]
+      outCode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmType] + "\n"
+      outCode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+    case output, inputOutput :
+    end
+  end
+ 
+#--- Instruction list
+  [mInstructionGenerationList instructionListLLVMCode !?outCode]
+#--- Epilog
+  outCode += ";--- return\n"
+  outCode += "  ret void\n"
+  outCode += "}\n\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

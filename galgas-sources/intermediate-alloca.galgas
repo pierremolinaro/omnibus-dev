@@ -1,0 +1,29 @@
+
+setter @instructionListIR appendAlloca
+  ?let @string inLocalVariableName
+  ?let @unifiedTypeMap-proxy inTargetVarType
+{
+  self += !@allocaConstantIR.new {!inLocalVariableName !inTargetVarType}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @allocaConstantIR : @abstractInstructionIR {
+  @string mLocalVariableName
+  @unifiedTypeMap-proxy mVariableType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @allocaConstantIR llvmInstructionCode ?!@string ioCode {
+  let llvmType = [mVariableType llvmType]
+  ioCode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @allocaConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*

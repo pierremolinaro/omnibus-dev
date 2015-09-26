@@ -25,8 +25,7 @@ override method @loadLocalVariableIR llvmInstructionCode ?!@string ioCode {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadLocalVariableIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
+override method @loadLocalVariableIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 

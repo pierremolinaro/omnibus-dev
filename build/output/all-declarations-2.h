@@ -476,7 +476,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
     kEnum_inArgument,
     kEnum_inOutArgument,
     kEnum_outArgument,
-    kEnum_localConstant,
     kEnum_temporaryConstant,
     kEnum_localAccess,
     kEnum_literalStructure
@@ -521,9 +520,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
   public : static GALGAS_assignmentTargetIR constructor_localAccess (const class GALGAS_lstring & inOperand0
                                                                      COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_assignmentTargetIR constructor_localConstant (const class GALGAS_lstring & inOperand0
-                                                                       COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_assignmentTargetIR constructor_localVariable (const class GALGAS_lstring & inOperand0
                                                                        COMMA_LOCATION_ARGS) ;
 
@@ -566,10 +562,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_lstring & outArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_lstring & outArgument0,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
@@ -599,8 +591,6 @@ class GALGAS_assignmentTargetIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalVariable (LOCATION_ARGS) const ;
 
@@ -721,22 +711,6 @@ class cEnumAssociatedValues_assignmentTargetIR_outArgument : public cEnumAssocia
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_outArgument (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_assignmentTargetIR_localConstant : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_assignmentTargetIR_localConstant (const GALGAS_lstring & inAssociatedValue0
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_assignmentTargetIR_localConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1346,16 +1320,6 @@ GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'mangledNameForConstant'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForConstant (class GALGAS_string inArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Routine 'enterIntegerOperators'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1503,35 +1467,6 @@ class GALGAS_string function_mangledName (const class GALGAS_procedureKindAST & 
                                           class GALGAS_procFormalArgumentList inArgument2,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Filewrapper 'procedureGenerationTemplate'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_procedureGenerationTemplate ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Filewrapper template 'procedureGenerationTemplate llvmImplementation'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_procedureGenerationTemplate_llvmImplementation (class C_Compiler * inCompiler,
-                                                                                  const class GALGAS_string & in_PROCEDURE_5F_MANGLED_5F_NAME,
-                                                                                  const class GALGAS_procFormalArgumentListForGeneration & in_FORMAL_5F_ARGUMENT_5F_LIST,
-                                                                                  const class GALGAS_string & in_INSTRUCTION_5F_LLVM_5F_CODE
-                                                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2188,16 +2123,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intermediateCodeStruct ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'mangledNameForInArgument'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForInArgument (class GALGAS_string inArgument0,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

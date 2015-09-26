@@ -133,7 +133,7 @@ method @variableKindIR loadFromMemory
   case register (@lstring name @bigint address) :
     getNewTempVariable (!?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
-    [!?ioInstructionGenerationList appendLoadVolatile
+    [!?ioInstructionGenerationList appendLoadVolatileRegister
       !outResultingValue
       !name.string
       !inVariableType
@@ -156,20 +156,10 @@ method @variableKindIR loadFromMemory
       !name.string
       !inVariableType
     ]
-  case inArgument (@lstring name) :
-    getNewTempVariable (!?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
-    [!?ioInstructionGenerationList appendLoadInArgument
-      !outResultingValue
-      !name.string
-      !inVariableType
-    ]
   case inOutArgument (@lstring name) :
     error name : "@variableKindIR loadFromMemory:inOutArgument" : outResultingValue
   case outArgument (@lstring name) :
     error name : "@variableKindIR loadFromMemory:outArgument" : outResultingValue
-  case localConstant (@lstring name) :
-    outResultingValue = .llvmLocalObject {!name:mangledNameForConstant (!name.string)}
   case globalConstant (@operandIR value) :
     outResultingValue = value
   case temporaryConstant (@uint unused idx) :
@@ -192,19 +182,15 @@ method @variableKindIR storeInMemory
 {
   switch self
   case register (@lstring registerName @bigint address) :
-    [!?ioInstructionGenerationList appendStoreVolatile !registerName.string !inVariableType !address !inValue]
+    [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !inVariableType !address !inValue]
   case globalVariable (@lstring name @bool isVolatile) :
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name.string !inVariableType !inValue !volatile:isVolatile]
   case localVariable (@lstring unused name) :
-     error .nowhere : "INTERNAL ERROR"
-  case inArgument (@lstring unused name) :
-     error .nowhere : "INTERNAL ERROR"
+    [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !inVariableType !inValue]
   case inOutArgument (@lstring unused name) :
      error .nowhere : "INTERNAL ERROR"
   case outArgument (@lstring unused name) :
      error .nowhere : "INTERNAL ERROR"
-  case localConstant (@lstring unused name) :
-     error name : "INTERNAL ERROR"
   case globalConstant (@operandIR unused value) :
      error .nowhere : "INTERNAL ERROR"
   case temporaryConstant (@uint unused idx) :

@@ -36,7 +36,7 @@ target triple = "thumbv7em-none--eabi"
     void()* null, ; 12
     void()* null, ; 13
     void()* null, ; 14
-    void()* null  ; 15
+    void()* @proc_systickHandler  ; 15
   ],
 ;--- Non-Core Vectors
   [240 x void()*] zeroinitializer,
@@ -138,6 +138,7 @@ define internal void @ResetISR () nounwind noreturn naked {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
+  call void @init ()
   call void @proc_setup ()
   br label %loop
 loop:

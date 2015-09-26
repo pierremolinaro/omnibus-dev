@@ -1,5 +1,5 @@
 
-setter @instructionListIR appendLoadVolatile
+setter @instructionListIR appendLoadVolatileRegister
   ?let @operandIR inTargetValue
   ?let @string inRegisterName
   ?let @unifiedTypeMap-proxy inTargetVarType

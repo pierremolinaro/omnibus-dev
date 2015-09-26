@@ -90,52 +90,30 @@ override method @letInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let inferredType
-    ?result:let @operandIR unused resultValueName
+    ?result:let @operandIR resultValueName
   ]
 #--- Declare local constant
-  let targetConstant = @variableKindIR.localConstant {!name:mVarName}
+  let localConstant = @variableKindIR.localVariable {!name:mVarName}
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !inferredType
     !true
     !mangledNameForLocalVariable (!mVarName.string)
-    !targetConstant
+    !localConstant
     ![inferredType copiable]
     !{}
     !true
   ]
-#--- Code generation
-#  ioInstructionGenerationList += !@letInstructionWithAssignmentIR.new {
-#    !inferredType
-#    !targetConstant
-#    !resultValueName
-#  }
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @letInstructionWithAssignmentIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @operandIR mTargetConstantIR
-  @operandIR mSourceIR
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @letInstructionWithAssignmentIR llvmInstructionCode ?!@string ioCode {
-  ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
-          + mTargetConstantIR
-          + " = "
-          + mSourceIR + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @letInstructionWithAssignmentIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
-#  [mTargetConstantIR enterAccessibleEntities !?ioAccessibleEntities]
-#  [mSourceIR enterAccessibleEntities !?ioAccessibleEntities]
+#--- Generate code
+  [!?ioInstructionGenerationList appendAlloca
+    !mVarName.string
+    !inferredType
+  ]
+  [localConstant storeInMemory
+    !value:resultValueName
+    !inferredType
+    !?instructionListIR:ioInstructionGenerationList
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

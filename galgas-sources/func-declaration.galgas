@@ -188,13 +188,13 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !formalArgumentName
       !typeProxy
       !true
-      !mangledNameForInArgument (!formalArgumentName.string)
-      !.inArgument {!name:formalArgumentName}
+      !mangledNameForLocalVariable (!formalArgumentName.string)
+      !.localVariable {!name:formalArgumentName}
       ![typeProxy copiable]
       !{}
       !false
     ]
-    formalArguments += !typeProxy !mangledNameForInArgument (!formalArgumentName.string)
+    formalArguments += !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
   end
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"func " + [self mangledName] !mFunctionName.location}
