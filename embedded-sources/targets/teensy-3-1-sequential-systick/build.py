@@ -29,16 +29,25 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.0-binutils-2.25-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#   Compiler invocation                                                                                                *
+#   LLC Compiler invocation                                                                                            *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-def compiler ():
-  return [toolDir () + "/bin/arm-eabi-gcc", "-mthumb", "-mcpu=cortex-m4"]
+def LLCcompiler ():
+  return [toolDir () + "/bin/llc"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
+#   AS assembler invocation                                                                                            *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def asAssembler ():
+  return [toolDir () + "/bin/arm-eabi-as", "-mthumb", "-mcpu=cortex-m4"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -102,7 +111,7 @@ def cCompilerOptions ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def linker ():
-  return [toolDir () + "/bin/arm-eabi-gcc", "-mthumb", "-mcpu=cortex-m4"]
+  return [toolDir () + "/bin/arm-eabi-ld"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -113,15 +122,15 @@ def linker ():
 def linkerOptions ():
   result = []
   result.append ("-nostartfiles")
-  result.append ("-Wl,--fatal-warnings")
-  result.append ("-Wl,--warn-common")
-  result.append ("-Wl,--no-undefined")
-  result.append ("-Wl,--cref")
-  result.append ("-lc")
-  result.append ("-lgcc")
-  result.append ("-Wl,-static")
-  result.append ("-Wl,-s")
-  result.append ("-Wl,--gc-sections")
+  result.append ("--fatal-warnings")
+  result.append ("--warn-common")
+  result.append ("--no-undefined")
+  result.append ("--cref")
+#   result.append ("-lc")
+#   result.append ("-lgcc")
+  result.append ("-static")
+  result.append ("-s")
+  result.append ("--gc-sections")
   return result
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -135,12 +144,12 @@ def objcopy ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
-#   Source files                                                                                                       *
+#   LLVM Source files                                                                                                  *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-def cSourceList ():
-  return ["plm.c"]
+def LLVMsourceList ():
+  return ["source-plm.ll"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -175,8 +184,9 @@ def runExecutableOnTarget ():
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-plm.runMakefile (toolDir (), archiveBaseURL (), cSourceList (), objectDir (), \
-                 compiler (), cCompilerOptions (), productDir (), \
+plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
+                 LLCcompiler (), cCompilerOptions (), 
+                 asAssembler (), productDir (), \
                  linker (), linkerOptions (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())
 

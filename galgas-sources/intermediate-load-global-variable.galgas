@@ -19,7 +19,7 @@ class @loadGlobalVariableIR : @abstractInstructionIR {
 
 override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
   let llvmType = [mVariableType llvmType]
-  ioCode += "  " + mTargetValue + " = load " + llvmType + "* " + mVariableName + "\n"
+  ioCode += "  " + mTargetValue + " = load " + llvmType + ", " + llvmType + "* @gvar_" + mVariableName + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

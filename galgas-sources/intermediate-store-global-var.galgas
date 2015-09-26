@@ -25,7 +25,7 @@ override method @storeGlobalVariableIR enterAccessibleEntities ?!@accessibleEnti
 
 override method @storeGlobalVariableIR llvmInstructionCode ?!@string ioCode {
   let llvmType = [mTargetVarType llvmType]
-  ioCode += "  store " + llvmType + " " + mSourceValue + ", " + llvmType + "* @" + mGlobalVarName + "\n"
+  ioCode += "  store " + llvmType + " " + mSourceValue + ", " + llvmType + "* @gvar_" + mGlobalVarName + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

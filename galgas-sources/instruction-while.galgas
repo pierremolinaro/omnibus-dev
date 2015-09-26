@@ -132,16 +132,16 @@ class @whileInstructionIR : @abstractInstructionIR {
 
 override method @whileInstructionIR llvmInstructionCode ?!@string ioCode {
   ioCode += ";--- while (" + mTestExpression + ") {\n"
-  let labelTest = "%while." + mLabelIndex + ".test"
-  let labelLoop = "%while." + mLabelIndex + ".loop"
-  let labelEnd  = "%while." + mLabelIndex + ".end"
-  ioCode += "  br label " + labelTest + "\n\n"
+  let labelTest = "while." + mLabelIndex + ".test"
+  let labelLoop = "while." + mLabelIndex + ".loop"
+  let labelEnd  = "while." + mLabelIndex + ".end"
+  ioCode += "  br label %" + labelTest + "\n\n"
   ioCode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioCode]
-  ioCode += "  br i1 " + mTestExpression + " label " + labelLoop + ", label " + labelEnd + "\n\n"
+  ioCode += "  br i1 " + mTestExpression + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioCode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioCode]
-  ioCode += "  br label " + labelTest + "\n\n"
+  ioCode += "  br label %" + labelTest + "\n\n"
   ioCode += labelEnd + ":\n"
 }
 

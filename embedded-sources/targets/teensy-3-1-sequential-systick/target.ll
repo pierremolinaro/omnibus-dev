@@ -138,9 +138,9 @@ define internal void @ResetISR () nounwind noreturn naked {
   call void @boot ()
   call void @clearBSS ()
   call void @copyData ()
-  call void @procSetup ()
+  call void @proc_setup ()
   br label %loop
 loop:
-  call void @procLoop ()
+  call void @proc_loop ()
   br label %loop
 }

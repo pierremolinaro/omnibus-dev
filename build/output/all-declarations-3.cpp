@@ -1569,8 +1569,9 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    \n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def runMakefile (toolDirectory, archiveBaseURL, cSourceList, \\\n"
-  "                 objectDir, compiler, cCompilerOptions, \\\n"
+  "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
+  "                 objectDir, LLCcompiler, cCompilerOptions, \\\n"
+  "                 asAssembler, \\\n"
   "                 productDir, linker, linkerOptions, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget) :\n"
   "  #--- Get max parallel jobs as first argument\n"
@@ -1603,39 +1604,37 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--- Add C files compile rule\n"
   "  objectList = []\n"
   "  asObjectList = []\n"
-  "  for source in cSourceList:\n"
-  "  #--- Compile\n"
-  "    object = objectDir + \"/\" + source + \".o\"\n"
-  "    rule = make.Rule (object, \"Compiling \" + source)\n"
+  "  for source in LLVMsourceList:\n"
+  "  #--- Compile LLVL source\n"
+  "    asSource = objectDir + \"/\" + source + \".s\"\n"
+  "    rule = make.Rule (asSource, \"Compiling \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
-  "    rule.mCommand += compiler\n"
-  "    rule.mCommand += cCompilerOptions\n"
-  "    rule.mCommand += [\"-c\", \"sources/\" + source]\n"
-  "    rule.mCommand += [\"-o\", object]\n"
-  "    rule.enterSecondaryDependanceFile (object + \".dep\")\n"
+  "    rule.mCommand += LLCcompiler\n"
+  "#    rule.mCommand += cCompilerOptions\n"
+  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", asSource]\n"
   "    makefile.addRule (rule)\n"
   "    objectList.append (object)\n"
   "  #--- Assembling\n"
-  "    asObject = objectDir + \"/\" + source + \".s\"\n"
-  "    rule = make.Rule (asObject, \"Assembling \" + source)\n"
-  "    rule.mDependences.append (\"sources/\" + source)\n"
-  "    rule.mCommand += compiler\n"
-  "    rule.mCommand += cCompilerOptions\n"
-  "    rule.mCommand += [\"-S\", \"sources/\" + source]\n"
+  "    asObject = objectDir + \"/\" + source + \".s.o\"\n"
+  "    rule = make.Rule (asObject, \"Assembling \" + asSource)\n"
+  "    rule.mDependences.append (asSource)\n"
+  "    rule.mCommand += asAssembler\n"
+  "#    rule.mCommand += cCompilerOptions\n"
+  "    rule.mCommand += [asSource]\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
-  "    rule.enterSecondaryDependanceFile (asObject + \".dep\")\n"
   "    makefile.addRule (rule)\n"
   "    asObjectList.append (asObject)\n"
   "  #--- Add linker rule\n"
   "  productELF = productDir + \"/product.elf\"\n"
   "  rule = make.Rule (productELF, \"Linking \" + productELF)\n"
-  "  rule.mDependences += objectList\n"
+  "  rule.mDependences += asObjectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += linkerOptions\n"
-  "  rule.mCommand += objectList\n"
+  "  rule.mCommand += asObjectList\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
-  "  rule.mCommand += [\"-Wl,-Map=\" + productELF + \".map\"]\n"
+  "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
   "  makefile.addRule (rule)\n"
   "  #--- Add objcopy rule\n"
   "  productHEX = productDir + \"/product.ihex\"\n"
@@ -1699,7 +1698,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  7522, // Text length
+  7445, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -7245,16 +7244,25 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-binutils-2.25-gcc-5.2.0-newlib-2.2.0.20150623-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.0-binutils-2.25-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
-  "#   Compiler invocation                                                                                                *\n"
+  "#   LLC Compiler invocation                                                                                            *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def compiler ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "def LLCcompiler ():\n"
+  "  return [toolDir () + \"/bin/llc\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
+  "#   AS assembler invocation                                                                                            *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def asAssembler ():\n"
+  "  return [toolDir () + \"/bin/arm-eabi-as\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7318,7 +7326,7 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def linker ():\n"
-  "  return [toolDir () + \"/bin/arm-eabi-gcc\", \"-mthumb\", \"-mcpu=cortex-m4\"]\n"
+  "  return [toolDir () + \"/bin/arm-eabi-ld\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7329,15 +7337,15 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "def linkerOptions ():\n"
   "  result = []\n"
   "  result.append (\"-nostartfiles\")\n"
-  "  result.append (\"-Wl,--fatal-warnings\")\n"
-  "  result.append (\"-Wl,--warn-common\")\n"
-  "  result.append (\"-Wl,--no-undefined\")\n"
-  "  result.append (\"-Wl,--cref\")\n"
-  "  result.append (\"-lc\")\n"
-  "  result.append (\"-lgcc\")\n"
-  "  result.append (\"-Wl,-static\")\n"
-  "  result.append (\"-Wl,-s\")\n"
-  "  result.append (\"-Wl,--gc-sections\")\n"
+  "  result.append (\"--fatal-warnings\")\n"
+  "  result.append (\"--warn-common\")\n"
+  "  result.append (\"--no-undefined\")\n"
+  "  result.append (\"--cref\")\n"
+  "#   result.append (\"-lc\")\n"
+  "#   result.append (\"-lgcc\")\n"
+  "  result.append (\"-static\")\n"
+  "  result.append (\"-s\")\n"
+  "  result.append (\"--gc-sections\")\n"
   "  return result\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -7351,12 +7359,12 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
-  "#   Source files                                                                                                       *\n"
+  "#   LLVM Source files                                                                                                  *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def cSourceList ():\n"
-  "  return [\"plm.c\"]\n"
+  "def LLVMsourceList ():\n"
+  "  return [\"source-plm.ll\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7391,8 +7399,9 @@ const char * gWrapperFileContent_21_embeddedTargets = "#! /usr/bin/env python\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "plm.runMakefile (toolDir (), archiveBaseURL (), cSourceList (), objectDir (), \\\n"
-  "                 compiler (), cCompilerOptions (), productDir (), \\\n"
+  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
+  "                 LLCcompiler (), cCompilerOptions (), \n"
+  "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerOptions (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget ())\n"
   "\n"
@@ -7402,7 +7411,7 @@ const cRegularFileWrapper gWrapperFile_21_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  11755, // Text length
+  12394, // Text length
   gWrapperFileContent_21_embeddedTargets
 ) ;
 
@@ -7756,233 +7765,9 @@ const cRegularFileWrapper gWrapperFile_26_embeddedTargets (
   gWrapperFileContent_26_embeddedTargets
 ) ;
 
-//--- File 'teensy-3-1-sequential-systick/target-exception.c'
-
-const char * gWrapperFileContent_27_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "static void raise_exception (const type_int32 inCode,\n"
-  "                             const char * inSourceFile,\n"
-  "                             const type_uint32 inSourceLine) {\n"
-  " //--- Mask interrupt: write 1 into FAULTMASK register\n"
-  "  const uint32_t maskValue = 1 ;\n"
-  "  __asm__ (\"msr FAULTMASK, %[reg]\" : : [reg]\"r\"(maskValue));\n"
-  "  raise_exception_internal (inCode, inSourceFile, inSourceLine) ;\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_27_embeddedTargets (
-  "target-exception.c",
-  "c",
-  true, // Text file
-  634, // Text length
-  gWrapperFileContent_27_embeddedTargets
-) ;
-
-//--- File 'teensy-3-1-sequential-systick/target.c'
-
-const char * gWrapperFileContent_28_embeddedTargets = "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "static void ResetISR (void) {\n"
-  "//---------1- Boot routines\n"
-  "  boot () ;\n"
-  "  // now we're in PEE mode\n"
-  "  // configure USB for 48 MHz clock\n"
-  "//  SIM_CLKDIV2 = SIM_CLKDIV2_USBDIV(1); // USB = 96 MHz PLL / 2\n"
-  "  // USB uses PLL clock, trace is CPU clock, CLKOUT=OSCERCLK0\n"
-  "//  SIM_SOPT2 = SIM_SOPT2_USBSRC | SIM_SOPT2_PLLFLLSEL | SIM_SOPT2_TRACECLKSEL | SIM_SOPT2_CLKOUTSEL(6);\n"
-  "\n"
-  "//---------2- Initialisation de la section .bss\n"
-  "  extern unsigned __bss_start ;\n"
-  "  extern unsigned __bss_end ;\n"
-  "  unsigned * p = & __bss_start ;\n"
-  "  while (p != & __bss_end) {\n"
-  "    * p = 0 ;\n"
-  "    p ++ ;\n"
-  "  }\n"
-  "//---------3- Copy de la section .data\n"
-  "  extern unsigned __data_start ;\n"
-  "  extern unsigned __data_end ;\n"
-  "  extern unsigned __data_load_start ;\n"
-  "  unsigned * pSrc = & __data_load_start ;\n"
-  "  unsigned * pDest = & __data_start ;\n"
-  "  while (pDest != & __data_end) {\n"
-  "    * pDest = * pSrc ;\n"
-  "    pDest ++ ;\n"
-  "    pSrc ++ ;\n"
-  "  }\n"
-  "//---------4- Init Routines\n"
-  "  init () ;\n"
-  "//---------5- User routines\n"
-  "  proc_setup () ;\n"
-  "  while (1) {\n"
-  "    proc_loop () ;\n"
-  "  }\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "//   Vector table                                                                                                      *\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "typedef struct {\n"
-  "  unsigned * mStackPointer ;\n"
-  "//--- ARM Core System Handler Vectors\n"
-  "  void (* mCoreSystemHandlerVector [15]) (void) ;\n"
-  "//--- Non-Core Vectors\n"
-  "  void (* mNonCoreHandlerVector [240]) (void) ;\n"
-  "//--- Flash magic values\n"
-  "  int mFlash [4] ;\n"
-  "} vectorStructSeq ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "extern unsigned __system_stack_end ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "const vectorStructSeq vector __attribute__ ((section (\".isr_vector\"))) = {\n"
-  "  & __system_stack_end, // 0\n"
-  "//--- ARM Core System Handler Vectors\n"
-  "  { ResetISR, // 1\n"
-  "    NULL, // 2\n"
-  "    NULL, // 3\n"
-  "    NULL, // 4\n"
-  "    NULL, // 5\n"
-  "    NULL, // 6\n"
-  "    NULL, // 7 (reserved)\n"
-  "    NULL, // 8 (reserved)\n"
-  "    NULL, // 9 (reserved)\n"
-  "    NULL, // 10 (reserved)\n"
-  "    NULL, // 11\n"
-  "    NULL, // 12\n"
-  "    NULL, // 13 (reserved)\n"
-  "    NULL, // 14\n"
-  "    proc_systickHandler // 15\n"
-  "  },\n"
-  "//--- Non-Core Vectors\n"
-  "  { NULL, // 16\n"
-  "    NULL, // 17\n"
-  "    NULL, // 18\n"
-  "    NULL, // 19\n"
-  "    NULL, // 20\n"
-  "    NULL, // 21\n"
-  "    NULL, // 22\n"
-  "    NULL, // 23\n"
-  "    NULL, // 24\n"
-  "    NULL, // 25\n"
-  "    NULL, // 26\n"
-  "    NULL, // 27\n"
-  "    NULL, // 28\n"
-  "    NULL, // 29\n"
-  "    NULL, // 30\n"
-  "    NULL, // 31\n"
-  "    NULL, // 32\n"
-  "    NULL, // 33\n"
-  "    NULL, // 34\n"
-  "    NULL, // 35\n"
-  "    NULL, // 36\n"
-  "    NULL, // 37\n"
-  "    NULL, // 38\n"
-  "    NULL, // 39\n"
-  "    NULL, // 40\n"
-  "    NULL, // 41\n"
-  "    NULL, // 42\n"
-  "    NULL, // 43\n"
-  "    NULL, // 44\n"
-  "    NULL, // 45\n"
-  "    NULL, // 46\n"
-  "    NULL, // 47\n"
-  "    NULL, // 48\n"
-  "    NULL, // 49\n"
-  "    NULL, // 50\n"
-  "    NULL, // 51\n"
-  "    NULL, // 52\n"
-  "    NULL, // 53\n"
-  "    NULL, // 54\n"
-  "    NULL, // 55\n"
-  "    NULL, // 56\n"
-  "    NULL, // 57\n"
-  "    NULL, // 58\n"
-  "    NULL, // 59\n"
-  "    NULL, // 60\n"
-  "    NULL, // 61\n"
-  "    NULL, // 62\n"
-  "    NULL, // 63\n"
-  "    NULL, // 64\n"
-  "    NULL, // 65\n"
-  "    NULL, // 66\n"
-  "    NULL, // 67\n"
-  "    NULL, // 68\n"
-  "    NULL, // 69\n"
-  "    NULL, // 70\n"
-  "    NULL, // 71\n"
-  "    NULL, // 72\n"
-  "    NULL, // 73\n"
-  "    NULL, // 74\n"
-  "    NULL, // 75\n"
-  "    NULL, // 76\n"
-  "    NULL, // 77\n"
-  "    NULL, // 78\n"
-  "    NULL, // 79\n"
-  "    NULL, // 80\n"
-  "    NULL, // 81\n"
-  "    NULL, // 82\n"
-  "    NULL, // 83\n"
-  "    NULL, // 84\n"
-  "    NULL, // 85\n"
-  "    NULL, // 86\n"
-  "    NULL, // 87\n"
-  "    NULL, // 88\n"
-  "    NULL, // 89\n"
-  "    NULL, // 90\n"
-  "    NULL, // 91\n"
-  "    NULL, // 92\n"
-  "    NULL, // 93\n"
-  "    NULL, // 94\n"
-  "    NULL, // 95\n"
-  "    NULL, // 96\n"
-  "    NULL, // 97\n"
-  "    NULL, // 98\n"
-  "    NULL, // 99\n"
-  "    NULL, // 100\n"
-  "    NULL, // 101\n"
-  "    NULL, // 102\n"
-  "    NULL, // 103\n"
-  "    NULL, // 104\n"
-  "    NULL, // 105\n"
-  "    NULL, // 106\n"
-  "    NULL, // 107\n"
-  "    NULL, // 108\n"
-  "    NULL, // 109\n"
-  "    NULL, // 110\n"
-  "    NULL, // 111\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 112 \xC3""\xA0"" 127\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 128 \xC3""\xA0"" 143\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 143 \xC3""\xA0"" 159\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 160 \xC3""\xA0"" 175\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 176 \xC3""\xA0"" 191\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 192 \xC3""\xA0"" 207\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 208 \xC3""\xA0"" 223\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, // 224 \xC3""\xA0"" 239\n"
-  "    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL  // 240 \xC3""\xA0"" 255\n"
-  "  },\n"
-  "//--- Flash magic values\n"
-  "  {-1, -1, -1, -2}\n"
-  "} ;\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n" ;
-
-const cRegularFileWrapper gWrapperFile_28_embeddedTargets (
-  "target.c",
-  "c",
-  true, // Text file
-  5256, // Text length
-  gWrapperFileContent_28_embeddedTargets
-) ;
-
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [11] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [9] = {
   & gWrapperFile_19_embeddedTargets,
   & gWrapperFile_20_embeddedTargets,
   & gWrapperFile_21_embeddedTargets,
@@ -7991,8 +7776,6 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_4 [11] = {
   & gWrapperFile_24_embeddedTargets,
   & gWrapperFile_25_embeddedTargets,
   & gWrapperFile_26_embeddedTargets,
-  & gWrapperFile_27_embeddedTargets,
-  & gWrapperFile_28_embeddedTargets,
   NULL
 } ;
 
@@ -8006,7 +7789,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_4 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_4_embeddedTargets (
   "teensy-3-1-sequential-systick",
-  10,
+  8,
   gWrapperAllFiles_embeddedTargets_4,
   0,
   gWrapperAllDirectories_embeddedTargets_4
@@ -11402,260 +11185,6 @@ GALGAS_ifInstructionIR GALGAS_ifInstructionIR::extractObject (const GALGAS_objec
       result = *p ;
     }else{
       inCompiler->castError ("ifInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_incDecInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mMin.objectCompare (p->mAttribute_mMin) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mMax.objectCompare (p->mAttribute_mMax) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mKind.objectCompare (p->mAttribute_mKind) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVariable.objectCompare (p->mAttribute_mVariable) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVariableLocation.objectCompare (p->mAttribute_mVariableLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_incDecInstructionIR::objectCompare (const GALGAS_incDecInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR::GALGAS_incDecInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR::GALGAS_incDecInstructionIR (const cPtr_incDecInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_incDecInstructionIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::constructor_new (const GALGAS_bigint & inAttribute_mMin,
-                                                                        const GALGAS_bigint & inAttribute_mMax,
-                                                                        const GALGAS_incDecKind & inAttribute_mKind,
-                                                                        const GALGAS_variableKindIR & inAttribute_mVariable,
-                                                                        const GALGAS_location & inAttribute_mVariableLocation
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_incDecInstructionIR result ;
-  if (inAttribute_mMin.isValid () && inAttribute_mMax.isValid () && inAttribute_mKind.isValid () && inAttribute_mVariable.isValid () && inAttribute_mVariableLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_incDecInstructionIR (inAttribute_mMin, inAttribute_mMax, inAttribute_mKind, inAttribute_mVariable, inAttribute_mVariableLocation COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint GALGAS_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mMin ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint cPtr_incDecInstructionIR::reader_mMin (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMin ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint GALGAS_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bigint result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mMax ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint cPtr_incDecInstructionIR::reader_mMax (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMax ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecKind GALGAS_incDecInstructionIR::reader_mKind (UNUSED_LOCATION_ARGS) const {
-  GALGAS_incDecKind result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mKind ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecKind cPtr_incDecInstructionIR::reader_mKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR GALGAS_incDecInstructionIR::reader_mVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mVariable ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_variableKindIR cPtr_incDecInstructionIR::reader_mVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariable ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_incDecInstructionIR * p = (const cPtr_incDecInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_incDecInstructionIR) ;
-    result = p->mAttribute_mVariableLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_incDecInstructionIR::reader_mVariableLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariableLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @incDecInstructionIR class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_incDecInstructionIR::cPtr_incDecInstructionIR (const GALGAS_bigint & in_mMin,
-                                                    const GALGAS_bigint & in_mMax,
-                                                    const GALGAS_incDecKind & in_mKind,
-                                                    const GALGAS_variableKindIR & in_mVariable,
-                                                    const GALGAS_location & in_mVariableLocation
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mAttribute_mMin (in_mMin),
-mAttribute_mMax (in_mMax),
-mAttribute_mKind (in_mKind),
-mAttribute_mVariable (in_mVariable),
-mAttribute_mVariableLocation (in_mVariableLocation) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_incDecInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecInstructionIR ;
-}
-
-void cPtr_incDecInstructionIR::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "[@incDecInstructionIR:" ;
-  mAttribute_mMin.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mMax.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mKind.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVariable.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVariableLocation.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_incDecInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_incDecInstructionIR (mAttribute_mMin, mAttribute_mMax, mAttribute_mKind, mAttribute_mVariable, mAttribute_mVariableLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @incDecInstructionIR type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_incDecInstructionIR ("incDecInstructionIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_incDecInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_incDecInstructionIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_incDecInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_incDecInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_incDecInstructionIR GALGAS_incDecInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_incDecInstructionIR result ;
-  const GALGAS_incDecInstructionIR * p = (const GALGAS_incDecInstructionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_incDecInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("incDecInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -20601,5 +20130,453 @@ void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration *
       f (inObject, io_ioGraph, inCompiler COMMA_THERE) ;
     }
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
+                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
+  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
+                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_string result ;
+//--- Find Reader
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
+    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
+           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      result = f (inObject, inCompiler COMMA_THERE) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Abstract category method '@abstractDeclaration enterInContext'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_enterInContext> gCategoryMethodTable_abstractDeclaration_enterInContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
+                                         categoryMethodSignature_abstractDeclaration_enterInContext inMethod) {
+  gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_enterInContext (void) {
+  gCategoryMethodTable_abstractDeclaration_enterInContext.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_enterInContext (NULL,
+                                                               freeCategoryMethod_abstractDeclaration_enterInContext) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterInContext (const cPtr_abstractDeclaration * inObject,
+                                        const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
+                                        GALGAS_semanticContext & io_ioContext,
+                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_enterInContext f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_enterInContext (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_enterInContext.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_enterInContext (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_enterInContext.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inProcedureListAST, io_ioContext, io_ioGlobalLiteralStringMap, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Abstract category method '@abstractDeclaration initAnalysis'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_initAnalysis> gCategoryMethodTable_abstractDeclaration_initAnalysis ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_initAnalysis (const int32_t inClassIndex,
+                                       categoryMethodSignature_abstractDeclaration_initAnalysis inMethod) {
+  gCategoryMethodTable_abstractDeclaration_initAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_initAnalysis (void) {
+  gCategoryMethodTable_abstractDeclaration_initAnalysis.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_initAnalysis (NULL,
+                                                             freeCategoryMethod_abstractDeclaration_initAnalysis) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_initAnalysis (const cPtr_abstractDeclaration * inObject,
+                                      GALGAS_semanticContext & io_ioContext,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_initAnalysis f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_initAnalysis.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_initAnalysis (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_initAnalysis.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_initAnalysis (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_initAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, io_ioContext, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract category method '@abstractDeclaration semanticAnalysis'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <categoryMethodSignature_abstractDeclaration_semanticAnalysis> gCategoryMethodTable_abstractDeclaration_semanticAnalysis ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_semanticAnalysis (const int32_t inClassIndex,
+                                           categoryMethodSignature_abstractDeclaration_semanticAnalysis inMethod) {
+  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeCategoryMethod_abstractDeclaration_semanticAnalysis (void) {
+  gCategoryMethodTable_abstractDeclaration_semanticAnalysis.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
+                                                                 freeCategoryMethod_abstractDeclaration_semanticAnalysis) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
+                                          const GALGAS_semanticContext constin_inContext,
+                                          GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    categoryMethodSignature_abstractDeclaration_semanticAnalysis f = NULL ;
+    if (classIndex < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+      f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gCategoryMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+           f = gCategoryMethodTable_abstractDeclaration_semanticAnalysis (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gCategoryMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inContext, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
+mAttribute_mTemporaryIndex (),
+mAttribute_mExceptionSetupRoutinePriorityMap (),
+mAttribute_mExceptionLoopRoutinePriorityMap (),
+mAttribute_mInitRoutinePriorityMap (),
+mAttribute_mBootRoutinePriorityMap (),
+mAttribute_mSubprogramInvocationGraph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::~ GALGAS_semanticTemporariesStruct (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS_uint & inOperand0,
+                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                    const GALGAS_subprogramInvocationGraph & inOperand5) :
+mAttribute_mTemporaryIndex (inOperand0),
+mAttribute_mExceptionSetupRoutinePriorityMap (inOperand1),
+mAttribute_mExceptionLoopRoutinePriorityMap (inOperand2),
+mAttribute_mInitRoutinePriorityMap (inOperand3),
+mAttribute_mBootRoutinePriorityMap (inOperand4),
+mAttribute_mSubprogramInvocationGraph (inOperand5) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_semanticTemporariesStruct (GALGAS_uint::constructor_default (HERE),
+                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_initRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_bootRoutinePriorityMap::constructor_emptyMap (HERE),
+                                           GALGAS_subprogramInvocationGraph::constructor_emptyGraph (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_new (const GALGAS_uint & inOperand0,
+                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
+                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
+                                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
+                                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
+                                                                                    const GALGAS_subprogramInvocationGraph & inOperand5 
+                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_semanticTemporariesStruct result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mTemporaryIndex.objectCompare (inOperand.mAttribute_mTemporaryIndex) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mExceptionSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionSetupRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mExceptionLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionLoopRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mInitRoutinePriorityMap.objectCompare (inOperand.mAttribute_mInitRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mBootRoutinePriorityMap.objectCompare (inOperand.mAttribute_mBootRoutinePriorityMap) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSubprogramInvocationGraph.objectCompare (inOperand.mAttribute_mSubprogramInvocationGraph) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_semanticTemporariesStruct::isValid (void) const {
+  return mAttribute_mTemporaryIndex.isValid () && mAttribute_mExceptionSetupRoutinePriorityMap.isValid () && mAttribute_mExceptionLoopRoutinePriorityMap.isValid () && mAttribute_mInitRoutinePriorityMap.isValid () && mAttribute_mBootRoutinePriorityMap.isValid () && mAttribute_mSubprogramInvocationGraph.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTemporariesStruct::drop (void) {
+  mAttribute_mTemporaryIndex.drop () ;
+  mAttribute_mExceptionSetupRoutinePriorityMap.drop () ;
+  mAttribute_mExceptionLoopRoutinePriorityMap.drop () ;
+  mAttribute_mInitRoutinePriorityMap.drop () ;
+  mAttribute_mBootRoutinePriorityMap.drop () ;
+  mAttribute_mSubprogramInvocationGraph.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString << "<struct @semanticTemporariesStruct:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mTemporaryIndex.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mExceptionSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mExceptionLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_semanticTemporariesStruct::reader_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTemporaryIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mExceptionSetupRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mExceptionLoopRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInitRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mBootRoutinePriorityMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::reader_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSubprogramInvocationGraph ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @semanticTemporariesStruct type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_semanticTemporariesStruct ("semanticTemporariesStruct",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_semanticTemporariesStruct::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_semanticTemporariesStruct::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_semanticTemporariesStruct (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_semanticTemporariesStruct result ;
+  const GALGAS_semanticTemporariesStruct * p = (const GALGAS_semanticTemporariesStruct *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_semanticTemporariesStruct *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("semanticTemporariesStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
 }
 

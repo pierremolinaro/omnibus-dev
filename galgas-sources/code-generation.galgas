@@ -116,21 +116,6 @@ abstract getter @abstractTypeIR headerCodeGenerationForType -> @string outCode
 #! codeGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once separatorLine -> @string outResult {
-  outResult  = "//------------------------------------------------------------------------"
-  outResult += "---------------------------------------------*\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-func titleComment ?@string inTitle -> @string outTitle {
-  outTitle  = separatorLine ()
-  outTitle += "//   " + [inTitle stringByRightPadding !114!' '] + "*\n"
-  outTitle += separatorLine () + "\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 func %once llvmSeparatorLine -> @string outResult {
   outResult  = ";-------------------------------------------------------------------------"
   outResult += "---------------------------------------------*\n"
@@ -280,8 +265,8 @@ proc generateLLVMfile
     code += [function implementationCodeGeneration]
   end
 #----------------------------------------- Write LLVM file
-  code += separatorLine ()
-  [code writeToFileWhenDifferentContents !sourceDirectory + "/plm.ll" ?*]
+  code += llvmSeparatorLine ()
+  [code writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.ll" ?*]
 #----------------------------------------- Perform LLVM compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
