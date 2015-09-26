@@ -118,7 +118,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !codeArg
     !inContext.mExceptionCodeType
     !true
-    !.localValue {!name:codeArg}
+    !.localValue {!type:inContext.mExceptionCodeType !name:codeArg}
     ![inContext.mExceptionCodeType copiable]
     !{}
     !false
@@ -128,7 +128,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !fileArg
     !StaticStringType
     !true
-    !.localValue {!name:fileArg}
+    !.localValue {!type:StaticStringType !name:fileArg}
     ![StaticStringType copiable]
     !{}
     !false
@@ -138,7 +138,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !lineArg
     !inContext.mExceptionLineType
     !true
-    !.localValue {!name:lineArg}
+    !.localValue {!type:inContext.mExceptionLineType !name:lineArg}
     ![inContext.mExceptionLineType copiable]
     !{}
     !false

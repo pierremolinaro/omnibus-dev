@@ -136,7 +136,6 @@ override method @incDecInstructionAST analyze
   [!?ioInstructionGenerationList appendComment !comment]
 #--- Load variable
   [variable loadFromMemory
-    !type
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
     ?resultingValue:let @operandIR variableValue
@@ -180,7 +179,6 @@ override method @incDecInstructionAST analyze
 #--- Store variable
   [variable storeInMemory
     !value:resultValue
-    !type
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

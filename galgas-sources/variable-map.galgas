@@ -52,9 +52,9 @@ enum @valueIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @variableKindIR {
-  case register (@lstring name @bigint address)
-  case globalVariable (@lstring name @bool isVolatile)
-  case localValue (@lstring name)
+  case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
+  case localValue (@unifiedTypeMap-proxy type @lstring name)
 
   case globalConstant (@operandIR value)
   case localAccess (@lstring access)
@@ -67,11 +67,11 @@ enum @variableKindIR {
 
 getter @variableKindIR isStatic -> @bool outResult {
   switch self
-  case register (* *) :
+  case register (* * *) :
     outResult = false
-  case globalVariable (* *) :
+  case globalVariable (* * *) :
     outResult = false
-  case localValue (*) :
+  case localValue (* *) :
     outResult = false
   case globalConstant (*) :
     outResult = true
@@ -101,7 +101,7 @@ func initialVariableMap
         !lkey
         !mType
         !true
-        !.register {!name:lkey !address:mAddress}
+        !.register {!type:mType !name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
@@ -111,7 +111,7 @@ func initialVariableMap
         !lkey
         !mType
         !true
-        !.register {!name:lkey !address:mAddress}
+        !.register {!type:mType !name:lkey !address:mAddress}
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
@@ -142,7 +142,7 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
+        !.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
         !true
         !{}
         !false # Cannot be used as input parameter
@@ -152,7 +152,7 @@ func initialVariableMap
         !variableName
         !variableType
         !allowedAccess
-        !.globalVariable {!name:variableName !isVolatile:[modeSet count] > 1}
+        !.globalVariable {!type:variableType !name:variableName.string !isVolatile:[modeSet count] > 1}
         !true
         !{}
         !false # Cannot be used as input parameter

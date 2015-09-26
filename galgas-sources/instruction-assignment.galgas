@@ -118,7 +118,6 @@ override method @assignmentInstructionAST analyze
   [!?ioInstructionGenerationList appendComment !comment]
   [targetVariableKind storeInMemory
     !value:sourceValueName
-    !targetType
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

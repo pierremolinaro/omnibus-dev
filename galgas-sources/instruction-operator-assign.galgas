@@ -141,7 +141,6 @@ override method @operatorAssignInstructionAST analyze
   end
   [!?ioInstructionGenerationList appendComment !comment]
   [targetVariableKind loadFromMemory
-    !targetType
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
     ?resultingValue:@operandIR variableValueName
@@ -156,7 +155,6 @@ override method @operatorAssignInstructionAST analyze
   ]
   [targetVariableKind storeInMemory
     !value:newResultingValue
-    !targetType
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

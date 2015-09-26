@@ -118,6 +118,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-store-volatile-register.galgas"
   "galgas-sources/intermediate-store-global-var.galgas"
   "galgas-sources/intermediate-store-local-variable.galgas"
+  "galgas-sources/intermediate-load-store.galgas"
   "galgas-sources/code-optimisation.galgas"
   "galgas-sources/code-generation.galgas"
 
