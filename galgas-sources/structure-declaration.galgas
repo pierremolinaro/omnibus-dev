@@ -328,10 +328,10 @@ override method @structureDeclaration semanticAnalysis
 #      !initExpressionGeneratedCode
   end
 #--- Generate code
-  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-    !mStructureName
-    !@structureIR.new {!mStructureName.string !structureFieldListForGeneration}
-  ]
+#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+#    !mStructureName
+#    !@structureIR.new {!mStructureName.string !structureFieldListForGeneration}
+#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

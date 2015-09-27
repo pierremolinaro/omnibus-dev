@@ -10,7 +10,6 @@ struct @intermediateCodeStruct {
   @registerMapIR mRegisterMap
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
-  @typeMapIR mTypeMapIR
   @procedureMapIR mProcedureMapIR
   @functionMapIR mFunctionMapIR
   @stringset mRequiredProcedureSet

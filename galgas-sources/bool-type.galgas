@@ -181,10 +181,10 @@ override method @booleanDeclaration semanticAnalysis
     end
   end
 #---
-  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-    !mBooleanTypeName
-    !@booleanIR.new {!mBooleanTypeName.string !cType}
-  ]
+#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+#    !mBooleanTypeName
+#    !@booleanIR.new {!mBooleanTypeName.string !cType}
+#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

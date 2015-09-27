@@ -3,14 +3,20 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @integerDeclaration : @abstractDeclaration {
-  @lstring mIntegerTypeName
-  @lstring mBaseType
+  @bool mIsSigned
+  @uint mSize
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @integerDeclaration location -> @location outLocation {
-  outLocation = mIntegerTypeName.location
+  outLocation = .nowhere
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @integerDeclaration typeName -> @string outName {
+  outName = if mIsSigned then "int" else "uint" end + mSize
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -26,10 +32,10 @@ syntax extension plm_target_specific_syntax {
     $typeName$ ?let newIntegerTypeName
     $:$
     $attribute$ ?let @lstring baseType
-    ioAST.mDeclarationList += !@integerDeclaration.new {
-      !newIntegerTypeName
-      !baseType
-    }
+#    ioAST.mDeclarationList += !@integerDeclaration.new {
+#      !newIntegerTypeName
+#      !baseType
+#    }
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -43,14 +49,14 @@ syntax extension plm_target_specific_syntax {
 override method @integerDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mIntegerTypeName !self]
-  [!?ioGraph addEdge !mIntegerTypeName !.new {!"basetype " + mBaseType !mBaseType.location}]
+  let integerTypeName = [[self typeName] nowhere]
+  [!?ioGraph addNode !integerTypeName !self]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override getter @integerDeclaration keyRepresentation -> @string outRepresentation {
-  outRepresentation = "integer " + mIntegerTypeName 
+  outRepresentation = "integer " + [self typeName] 
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -62,22 +68,21 @@ override method @integerDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
 {
-#-- Search for base type
-  [ioContext.mTargetBaseTypeMap searchKey !mBaseType ?* ?let size ?let isSigned]
+  let integerTypeName = [[self typeName] nowhere]
 #--- Get min and max
   @bigint min
   @bigint max
-  if isSigned then
-    min = - (1G << (size -1))
-    max = (1G << (size -1)) - 1G
+  if mIsSigned then
+    min = - (1G << (mSize - 1))
+    max = (1G << (mSize - 1)) - 1G
   else # Unsigned
     min = 0G
-    max = (1G << size) - 1G
+    max = (1G << mSize) - 1G
   end
  #---
   [!?ioContext.mTypeMap insertKey
-    !lkey:mIntegerTypeName
-    !kind:.integer {!min:min !max:max !unsigned:not isSigned !bitCount:size}
+    !lkey:integerTypeName
+    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !constructorMap:{}
     !procedureMap:{}
     !copiable:true
@@ -86,15 +91,53 @@ override method @integerDeclaration enterInContext
   ]
 #--- Enter integer operators
   enterIntegerOperators (
-    !integerTypeName:mIntegerTypeName
-    !signed:isSigned
+    !integerTypeName:integerTypeName
+    !signed:mIsSigned
     !?context:ioContext
   )
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-proc enterIntegerOperators
+#proc enterIntegerType
+#  ?signed:let @bool inIsSigned
+#  ?size:let @uint inSize
+#  ?!context:@semanticContext ioContext
+#{
+#  let typeName = [if inIsSigned then "int" else "uint" end + inSize nowhere]
+##  [!?ioGraph addNode !typeName !self]
+##  [!?ioGraph addEdge !mIntegerTypeName !.new {!"basetype " + mBaseType !mBaseType.location}]
+##--- Get min and max
+#  @bigint min
+#  @bigint max
+#  if inIsSigned then
+#    min = - (1G << (inSize - 1))
+#    max = (1G << (inSize - 1)) - 1G
+#  else # Unsigned
+#    min = 0G
+#    max = (1G << inSize) - 1G
+#  end
+# #---
+#  [!?ioContext.mTypeMap insertKey
+#    !lkey:typeName
+#    !kind:.integer {!min:min !max:max !unsigned:not inIsSigned !bitCount:inSize}
+#    !constructorMap:{}
+#    !procedureMap:{}
+#    !copiable:true
+#    !equatable:true
+#    !comparable:true
+#  ]
+##--- Enter integer operators
+#  enterIntegerOperators (
+#    !integerTypeName:typeName
+#    !signed:inIsSigned
+#    !?context:ioContext
+#  )
+#}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc enterIntegerOperators
   ?integerTypeName:let @lstring inIntegerTypeName
   ?signed:let @bool inIsSigned
   ?!context:@semanticContext ioContext
@@ -170,7 +213,7 @@ proc enterIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !if inIsSigned then .uaddOVF else .saddOVF end
+    !if inIsSigned then .saddOVF else .uaddOVF end
   ]
   [!?ioContext.mAddNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
@@ -238,12 +281,12 @@ override method @integerDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #-- Search for base type
-  [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
+#  [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
 #---
-  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-    !mIntegerTypeName
-    !@integerIR.new { !mIntegerTypeName.string !cType}
-  ]
+#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+#    !mIntegerTypeName
+#    !@integerIR.new { !mIntegerTypeName.string !cType}
+#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
