@@ -44,11 +44,13 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "register",
   "required",
   "self",
+  "signedIntegerType",
   "struct",
   "target",
   "then",
   "throw",
   "true",
+  "unsignedIntegerType",
   "var",
   "while",
   "xor"

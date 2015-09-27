@@ -139,10 +139,10 @@ private proc addPredefinedTypes
 #--- Add boolean type
   ioDeclarationList += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
 #--- Add integer types
-  for i in 1 ... 128 do
-    ioDeclarationList += !@integerDeclaration.new {!true !i}
-    ioDeclarationList += !@integerDeclaration.new {!false !i}
-  end
+#  for i in 1 ... 128 do
+#    ioDeclarationList += !@integerDeclaration.new {!true !i}
+#    ioDeclarationList += !@integerDeclaration.new {!false !i}
+#  end
 #--- Add String type
   ioDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
 }

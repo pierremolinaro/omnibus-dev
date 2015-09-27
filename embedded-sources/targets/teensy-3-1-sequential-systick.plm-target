@@ -1,4 +1,7 @@
 
+signedIntegerType 1 -> 128
+unsignedIntegerType 1 -> 128
+
 exception : $int32 $uint32
 
 mode `isr

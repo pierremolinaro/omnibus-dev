@@ -1291,6 +1291,42 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_self [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$signedIntegerType$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_signedIntegerType [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('I'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('T'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('p'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$struct$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_struct [] = {
   TO_UNICODE ('t'),
@@ -1398,6 +1434,44 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_true [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('r'),
   TO_UNICODE ('u'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
+//--- Syntax error message for terminal '$unsignedIntegerType$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_unsignedIntegerType [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('u'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('I'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('T'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('p'),
   TO_UNICODE ('e'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
@@ -2475,7 +2549,7 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique__26__2F_ [] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTerminalIndex) const {
-  static const utf32 * syntaxErrorMessageArray [92] = {kEndOfSourceLexicalErrorMessage,
+  static const utf32 * syntaxErrorMessageArray [94] = {kEndOfSourceLexicalErrorMessage,
     gSyntaxErrorMessage_plm_5F_lexique_identifier,
     gSyntaxErrorMessage_plm_5F_lexique_attribute,
     gSyntaxErrorMessage_plm_5F_lexique_typeName,
@@ -2515,11 +2589,13 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_register,
     gSyntaxErrorMessage_plm_5F_lexique_required,
     gSyntaxErrorMessage_plm_5F_lexique_self,
+    gSyntaxErrorMessage_plm_5F_lexique_signedIntegerType,
     gSyntaxErrorMessage_plm_5F_lexique_struct,
     gSyntaxErrorMessage_plm_5F_lexique_target,
     gSyntaxErrorMessage_plm_5F_lexique_then,
     gSyntaxErrorMessage_plm_5F_lexique_throw,
     gSyntaxErrorMessage_plm_5F_lexique_true,
+    gSyntaxErrorMessage_plm_5F_lexique_unsignedIntegerType,
     gSyntaxErrorMessage_plm_5F_lexique_var,
     gSyntaxErrorMessage_plm_5F_lexique_while,
     gSyntaxErrorMessage_plm_5F_lexique_xor,
@@ -3114,6 +3190,28 @@ static const utf32 kUnicodeString_plm_5F_lexique_self [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$signedIntegerType$'
+static const utf32 kUnicodeString_plm_5F_lexique_signedIntegerType [] = {
+  TO_UNICODE ('s'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('I'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('T'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('p'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$struct$'
 static const utf32 kUnicodeString_plm_5F_lexique_struct [] = {
   TO_UNICODE ('s'),
@@ -3160,6 +3258,30 @@ static const utf32 kUnicodeString_plm_5F_lexique_true [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('r'),
   TO_UNICODE ('u'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (0)
+} ;
+
+//--- Unicode string for '$unsignedIntegerType$'
+static const utf32 kUnicodeString_plm_5F_lexique_unsignedIntegerType [] = {
+  TO_UNICODE ('u'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('s'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('I'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('t'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('g'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('T'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('p'),
   TO_UNICODE ('e'),
   TO_UNICODE (0)
 } ;
@@ -3282,7 +3404,7 @@ int16_t C_Lexique_plm_5F_lexique::search_into_delimitorsList (const C_String & i
 //             Key words table 'keyWordList'                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int32_t ktable_size_plm_5F_lexique_keyWordList = 36 ;
+static const int32_t ktable_size_plm_5F_lexique_keyWordList = 38 ;
 
 static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [ktable_size_plm_5F_lexique_keyWordList] = {
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_at, 2, C_Lexique_plm_5F_lexique::kToken_at),
@@ -3320,7 +3442,9 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_mutating, 8, C_Lexique_plm_5F_lexique::kToken_mutating),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_register, 8, C_Lexique_plm_5F_lexique::kToken_register),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_required, 8, C_Lexique_plm_5F_lexique::kToken_required),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_exception, 9, C_Lexique_plm_5F_lexique::kToken_exception)
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_exception, 9, C_Lexique_plm_5F_lexique::kToken_exception),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_signedIntegerType, 17, C_Lexique_plm_5F_lexique::kToken_signedIntegerType),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_unsignedIntegerType, 19, C_Lexique_plm_5F_lexique::kToken_unsignedIntegerType)
 } ;
 
 int16_t C_Lexique_plm_5F_lexique::search_into_keyWordList (const C_String & inSearchedString) {
@@ -3557,6 +3681,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("self") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_signedIntegerType:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("signedIntegerType") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_struct:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("struct") ;
@@ -3580,6 +3709,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_true:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("true") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
+    case kToken_unsignedIntegerType:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("unsignedIntegerType") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_var:
@@ -4332,11 +4466,13 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("register") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("required") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("self") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("signedIntegerType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("struct") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("then") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("throw") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("unsignedIntegerType") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("var") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("while") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("xor") COMMA_THERE) ;
@@ -4392,7 +4528,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
-  static const uint32_t kTerminalSymbolStyles [92] = {0,
+  static const uint32_t kTerminalSymbolStyles [94] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -4432,11 +4568,13 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
     1 /* plm_lexique_1_self */,
+    1 /* plm_lexique_1_signedIntegerType */,
     1 /* plm_lexique_1_struct */,
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_then */,
     1 /* plm_lexique_1_throw */,
     1 /* plm_lexique_1_true */,
+    1 /* plm_lexique_1_unsignedIntegerType */,
     1 /* plm_lexique_1_var */,
     1 /* plm_lexique_1_while */,
     1 /* plm_lexique_1_xor */,
@@ -11592,6 +11730,84 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_mode) COMMA_SOURCE_FILE ("mode-declaration.galgas", 24)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_modeName) COMMA_SOURCE_FILE ("mode-declaration.galgas", 25)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i1_ (GALGAS_ast & ioArgument_ioAST,
+                                                                                                            C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_signedIntegerType) COMMA_SOURCE_FILE ("type-integer.galgas", 31)) ;
+  GALGAS_lbigint var_lowerBound = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 32)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("type-integer.galgas", 33)) ;
+  GALGAS_lbigint var_upperBound = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 34)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsStrictSup, var_lowerBound.mAttribute_bigint.objectCompare (var_upperBound.mAttribute_bigint)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (var_upperBound.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("upper bound is lower than lower bound")  COMMA_SOURCE_FILE ("type-integer.galgas", 36)) ;
+  }else if (kBoolFalse == test_0) {
+    const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_upperBound.mAttribute_bigint.objectCompare (GALGAS_bigint ("1024", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 37)))).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      GALGAS_location location_3 (var_upperBound.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_3, GALGAS_string ("upper bound is too large (should be <= 1024)")  COMMA_SOURCE_FILE ("type-integer.galgas", 38)) ;
+    }else if (kBoolFalse == test_2) {
+      cEnumerator_range enumerator_1899 (GALGAS_range (var_lowerBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 40)), var_upperBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 40)).substract_operation (var_lowerBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 40)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 40)).add_operation (GALGAS_uint (1), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 40))), kEnumeration_up) ;
+      while (enumerator_1899.hasCurrentObject ()) {
+        ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_integerDeclaration::constructor_new (GALGAS_bool (true), enumerator_1899.current (HERE)  COMMA_SOURCE_FILE ("type-integer.galgas", 41))  COMMA_SOURCE_FILE ("type-integer.galgas", 41)) ;
+        enumerator_1899.gotoNextObject () ;
+      }
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i1_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_signedIntegerType) COMMA_SOURCE_FILE ("type-integer.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 32)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("type-integer.galgas", 33)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 34)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i2_ (GALGAS_ast & ioArgument_ioAST,
+                                                                                                            C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_unsignedIntegerType) COMMA_SOURCE_FILE ("type-integer.galgas", 49)) ;
+  GALGAS_lbigint var_lowerBound = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 50)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("type-integer.galgas", 51)) ;
+  GALGAS_lbigint var_upperBound = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 52)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsStrictSup, var_lowerBound.mAttribute_bigint.objectCompare (var_upperBound.mAttribute_bigint)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_location location_1 (var_upperBound.reader_location (HERE)) ; // Implicit use of 'location' reader
+    inCompiler->emitSemanticError (location_1, GALGAS_string ("upper bound is lower than lower bound")  COMMA_SOURCE_FILE ("type-integer.galgas", 54)) ;
+  }else if (kBoolFalse == test_0) {
+    const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, var_upperBound.mAttribute_bigint.objectCompare (GALGAS_bigint ("1024", inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 55)))).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      GALGAS_location location_3 (var_upperBound.reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_3, GALGAS_string ("upper bound is too large (should be <= 1024)")  COMMA_SOURCE_FILE ("type-integer.galgas", 56)) ;
+    }else if (kBoolFalse == test_2) {
+      cEnumerator_range enumerator_2573 (GALGAS_range (var_lowerBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 58)), var_upperBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 58)).substract_operation (var_lowerBound.mAttribute_bigint.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 58)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 58)).add_operation (GALGAS_uint (1), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 58))), kEnumeration_up) ;
+      while (enumerator_2573.hasCurrentObject ()) {
+        ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_integerDeclaration::constructor_new (GALGAS_bool (false), enumerator_2573.current (HERE)  COMMA_SOURCE_FILE ("type-integer.galgas", 59))  COMMA_SOURCE_FILE ("type-integer.galgas", 59)) ;
+        enumerator_2573.gotoNextObject () ;
+      }
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i2_parse (C_Lexique_plm_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_unsignedIntegerType) COMMA_SOURCE_FILE ("type-integer.galgas", 49)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 50)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2D__3E_) COMMA_SOURCE_FILE ("type-integer.galgas", 51)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_integer) COMMA_SOURCE_FILE ("type-integer.galgas", 52)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -20795,439 +21011,6 @@ GALGAS_labelMap GALGAS_labelMap::extractObject (const GALGAS_object & inObject,
       result = *p ;
     }else{
       inCompiler->castError ("labelMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_procedureMap::cMapElement_procedureMap (const GALGAS_lstring & inKey,
-                                                    const GALGAS_bool & in_mMutating,
-                                                    const GALGAS_modeMap & in_mProcedureModeMap,
-                                                    const GALGAS_procedureSignature & in_mSignature,
-                                                    const GALGAS_bool & in_mWeakProcedure
-                                                    COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_mMutating (in_mMutating),
-mAttribute_mProcedureModeMap (in_mProcedureModeMap),
-mAttribute_mSignature (in_mSignature),
-mAttribute_mWeakProcedure (in_mWeakProcedure) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_procedureMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mMutating.isValid () && mAttribute_mProcedureModeMap.isValid () && mAttribute_mSignature.isValid () && mAttribute_mWeakProcedure.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_procedureMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_procedureMap (mAttribute_lkey, mAttribute_mMutating, mAttribute_mProcedureModeMap, mAttribute_mSignature, mAttribute_mWeakProcedure COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_procedureMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mMutating" ":" ;
-  mAttribute_mMutating.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mProcedureModeMap" ":" ;
-  mAttribute_mProcedureModeMap.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mSignature" ":" ;
-  mAttribute_mSignature.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mWeakProcedure" ":" ;
-  mAttribute_mWeakProcedure.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_procedureMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_procedureMap * operand = (cMapElement_procedureMap *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mMutating.objectCompare (operand->mAttribute_mMutating) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mProcedureModeMap.objectCompare (operand->mAttribute_mProcedureModeMap) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSignature.objectCompare (operand->mAttribute_mSignature) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mWeakProcedure.objectCompare (operand->mAttribute_mWeakProcedure) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap::GALGAS_procedureMap (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap::GALGAS_procedureMap (const GALGAS_procedureMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap & GALGAS_procedureMap::operator = (const GALGAS_procedureMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_procedureMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_procedureMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_procedureMap::constructor_mapWithMapToOverride (const GALGAS_procedureMap & inMapToOverride
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_procedureMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_procedureMap::reader_overriddenMap (C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_procedureMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                               const GALGAS_bool & inArgument0,
-                                               const GALGAS_modeMap & inArgument1,
-                                               const GALGAS_procedureSignature & inArgument2,
-                                               const GALGAS_bool & inArgument3,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  cMapElement_procedureMap * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@procedureMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_bool inArgument0,
-                                              GALGAS_modeMap inArgument1,
-                                              GALGAS_procedureSignature inArgument2,
-                                              GALGAS_bool inArgument3,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_procedureMap * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' proc is already declared in %L" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_procedureMap_searchKey = "there is no '%K' proc" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::method_searchKey (GALGAS_lstring inKey,
-                                            GALGAS_bool & outArgument0,
-                                            GALGAS_modeMap & outArgument1,
-                                            GALGAS_procedureSignature & outArgument2,
-                                            GALGAS_bool & outArgument3,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) performSearch (inKey,
-                                                                                           inCompiler,
-                                                                                           kSearchErrorMessage_procedureMap_searchKey
-                                                                                           COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    outArgument0 = p->mAttribute_mMutating ;
-    outArgument1 = p->mAttribute_mProcedureModeMap ;
-    outArgument2 = p->mAttribute_mSignature ;
-    outArgument3 = p->mAttribute_mWeakProcedure ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_removeKey (GALGAS_lstring inKey,
-                                              GALGAS_bool & outArgument0,
-                                              GALGAS_modeMap & outArgument1,
-                                              GALGAS_procedureSignature & outArgument2,
-                                              GALGAS_bool & outArgument3,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  const char * kRemoveErrorMessage = "there is no '%K' proc" ;
-  capCollectionElement attributes ;
-  performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
-  cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes.ptr () ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    outArgument0 = p->mAttribute_mMutating ;
-    outArgument1 = p->mAttribute_mProcedureModeMap ;
-    outArgument2 = p->mAttribute_mSignature ;
-    outArgument3 = p->mAttribute_mWeakProcedure ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_procedureMap::reader_mMutatingForKey (const GALGAS_string & inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    result = p->mAttribute_mMutating ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_procedureMap::reader_mProcedureModeMapForKey (const GALGAS_string & inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) attributes ;
-  GALGAS_modeMap result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    result = p->mAttribute_mProcedureModeMap ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureMap::reader_mSignatureForKey (const GALGAS_string & inKey,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) attributes ;
-  GALGAS_procedureSignature result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    result = p->mAttribute_mSignature ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_procedureMap::reader_mWeakProcedureForKey (const GALGAS_string & inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    result = p->mAttribute_mWeakProcedure ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_setMMutatingForKey (GALGAS_bool inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    p->mAttribute_mMutating = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_setMProcedureModeMapForKey (GALGAS_modeMap inAttributeValue,
-                                                               GALGAS_string inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    p->mAttribute_mProcedureModeMap = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_setMSignatureForKey (GALGAS_procedureSignature inAttributeValue,
-                                                        GALGAS_string inKey,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    p->mAttribute_mSignature = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureMap::modifier_setMWeakProcedureForKey (GALGAS_bool inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_procedureMap * p = (cMapElement_procedureMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_procedureMap) ;
-    p->mAttribute_mWeakProcedure = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_procedureMap * GALGAS_procedureMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                   const GALGAS_string & inKey
-                                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_procedureMap * result = (cMapElement_procedureMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_procedureMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_procedureMap::cEnumerator_procedureMap (const GALGAS_procedureMap & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap_2D_element cEnumerator_procedureMap::current (LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_procedureMap) ;
-  return GALGAS_procedureMap_2D_element (p->mAttribute_lkey, p->mAttribute_mMutating, p->mAttribute_mProcedureModeMap, p->mAttribute_mSignature, p->mAttribute_mWeakProcedure) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_procedureMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_procedureMap::current_mMutating (LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_procedureMap) ;
-  return p->mAttribute_mMutating ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap cEnumerator_procedureMap::current_mProcedureModeMap (LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_procedureMap) ;
-  return p->mAttribute_mProcedureModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature cEnumerator_procedureMap::current_mSignature (LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_procedureMap) ;
-  return p->mAttribute_mSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_procedureMap::current_mWeakProcedure (LOCATION_ARGS) const {
-  const cMapElement_procedureMap * p = (const cMapElement_procedureMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_procedureMap) ;
-  return p->mAttribute_mWeakProcedure ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                 @procedureMap type                                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procedureMap ("procedureMap",
-                                     NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procedureMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procedureMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procedureMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procedureMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureMap GALGAS_procedureMap::extractObject (const GALGAS_object & inObject,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_procedureMap result ;
-  const GALGAS_procedureMap * p = (const GALGAS_procedureMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procedureMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procedureMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
