@@ -7,3 +7,4 @@ define internal void @raise_exception (i32 %inCode, i32 %inSourceLine) nounwind 
   call void @raise_exception_internal (i32 %inCode, i32 %inSourceLine)
   unreachable
 }
+

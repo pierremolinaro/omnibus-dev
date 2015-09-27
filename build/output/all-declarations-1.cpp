@@ -3382,9 +3382,17 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulOVF (UNUSED_LOCATION_ARGS) {
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_umulOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
-  result.mEnum = kEnum_mulOVF ;
+  result.mEnum = kEnum_umulOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_smulOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_smulOVF ;
   return result ;
 }
 
@@ -3550,7 +3558,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_llvmBinaryOperation [33] = {
+static const char * gEnumNameArrayFor_llvmBinaryOperation [34] = {
   "(not built)",
   "addNoOVF",
   "subNoOVF",
@@ -3563,7 +3571,8 @@ static const char * gEnumNameArrayFor_llvmBinaryOperation [33] = {
   "saddOVF",
   "usubOVF",
   "ssubOVF",
-  "mulOVF",
+  "umulOVF",
+  "smulOVF",
   "udivOVF",
   "sdivOVF",
   "uremOVF",
@@ -3654,8 +3663,14 @@ GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSsubOVF (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_llvmBinaryOperation::reader_isMulOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulOVF == mEnum) ;
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_umulOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_smulOVF == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

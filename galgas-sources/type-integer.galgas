@@ -190,7 +190,7 @@ proc enterIntegerOperators
   [!?ioContext.mMulOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
-    !.mulOVF
+    !if inIsSigned then .smulOVF else .umulOVF end
   ]
   [!?ioContext.mMulNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}

@@ -12,7 +12,8 @@ enum @llvmBinaryOperation {
   case saddOVF
   case usubOVF
   case ssubOVF
-  case mulOVF
+  case umulOVF
+  case smulOVF
   case udivOVF
   case sdivOVF
   case uremOVF
@@ -68,6 +69,32 @@ override method @binaryOperationIR enterAccessibleEntities ?!@accessibleEntities
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+method @binaryOperationIR enterCodeForOverflowOperation 
+  ?let @string inOperation
+  ?let @uint inCode
+  ?!@string ioCode
+  ?let @generationContext inGenerationContext
+  ?!@stringset ioIntrinsicsDeclarationSet
+{
+  let llvmType = [mTargetVarType llvmType]
+  ioCode += "  " + mTargetOperand + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
+  ioCode += " (" + llvmType + " " + mLeftOperand + ", " + llvmType + " " + mRightOperand + ")\n"
+  ioCode += "  " + mTargetOperand + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 1\n"
+  let labelName = [mTargetOperand name]
+  ioCode += "  br i1 " + mTargetOperand + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
+  ioCode += labelName + ".ovf:\n"
+  ioCode += "  call void @raise_exception ("
+  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
+  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioCode += "  unreachable\n\n"
+  ioCode += labelName + ".noovf:\n"
+  ioCode += "  " + mTargetOperand + " = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 0\n"
+  ioIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
+     + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
@@ -90,37 +117,85 @@ override method @binaryOperationIR llvmInstructionCode
   case sremNoOVF :
     ioCode += "  " + mTargetOperand + " = srem " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
   case uaddOVF :
-    ioCode += "  " + mTargetOperand + ".r = call {" + llvmType + ", i1} @llvm.uadd.with.overflow." + llvmType
-           + " (" + llvmType + " " + mLeftOperand + ", " + llvmType + " " + mRightOperand + ")\n"
-    ioCode += "  " + mTargetOperand + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 1\n"
-    let labelName = [mTargetOperand name]
-    ioCode += "  br i1 " + mTargetOperand + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
-    ioCode += labelName + ".ovf:\n"
-    ioCode += "  call void @raise_exception ("
-    ioCode += inGenerationContext.mExceptionCodeLLVMType + " 13, "
-    ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
-    ioCode += "  unreachable\n\n"
-    ioCode += labelName + ".noovf:\n"
-    ioCode += "  " + mTargetOperand + " = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 0\n"
-    ioIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm.uadd.with.overflow."
-       + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
+    [self enterCodeForOverflowOperation
+      !"uadd"
+      !10
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case saddOVF :
-    ioCode += "  " + mTargetOperand + ".r = call {" + llvmType + ", i1} @llvm.sadd.with.overflow." + llvmType
-           + " (" + llvmType + " " + mLeftOperand + ", " + llvmType + " " + mRightOperand + ")\n"
+    [self enterCodeForOverflowOperation
+      !"sadd"
+      !10
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case usubOVF :
-    ioCode += "  " + mTargetOperand + " = sub " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"usub"
+      !11
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case ssubOVF :
-    ioCode += "  " + mTargetOperand + " = sub " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
-  case mulOVF :
-    ioCode += "  " + mTargetOperand + " = mul " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"ssub"
+      !11
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
+  case umulOVF :
+    [self enterCodeForOverflowOperation
+      !"umul"
+      !12
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
+  case smulOVF :
+    [self enterCodeForOverflowOperation
+      !"smul"
+      !12
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case udivOVF :
-    ioCode += "  " + mTargetOperand + " = udiv " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"udiv"
+      !13
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case sdivOVF :
-    ioCode += "  " + mTargetOperand + " = sdiv " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"sdiv"
+      !13
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case uremOVF :
-    ioCode += "  " + mTargetOperand + " = urem " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"urem"
+      !14
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case sremOVF :
-    ioCode += "  " + mTargetOperand + " = srem " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
+    [self enterCodeForOverflowOperation
+      !"srem"
+      !14
+      !?ioCode
+      !inGenerationContext
+      !?ioIntrinsicsDeclarationSet
+    ]
   case and :
     ioCode += "  " + mTargetOperand + " = and " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"
   case ior :

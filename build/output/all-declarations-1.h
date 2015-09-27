@@ -1404,7 +1404,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
     kEnum_saddOVF,
     kEnum_usubOVF,
     kEnum_ssubOVF,
-    kEnum_mulOVF,
+    kEnum_umulOVF,
+    kEnum_smulOVF,
     kEnum_udivOVF,
     kEnum_sdivOVF,
     kEnum_uremOVF,
@@ -1478,8 +1479,6 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
 
   public : static GALGAS_llvmBinaryOperation constructor_mulNoOVF (LOCATION_ARGS) ;
 
-  public : static GALGAS_llvmBinaryOperation constructor_mulOVF (LOCATION_ARGS) ;
-
   public : static GALGAS_llvmBinaryOperation constructor_saddOVF (LOCATION_ARGS) ;
 
   public : static GALGAS_llvmBinaryOperation constructor_sdivNoOVF (LOCATION_ARGS) ;
@@ -1487,6 +1486,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : static GALGAS_llvmBinaryOperation constructor_sdivOVF (LOCATION_ARGS) ;
 
   public : static GALGAS_llvmBinaryOperation constructor_shl (LOCATION_ARGS) ;
+
+  public : static GALGAS_llvmBinaryOperation constructor_smulOVF (LOCATION_ARGS) ;
 
   public : static GALGAS_llvmBinaryOperation constructor_sremNoOVF (LOCATION_ARGS) ;
 
@@ -1501,6 +1502,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : static GALGAS_llvmBinaryOperation constructor_udivNoOVF (LOCATION_ARGS) ;
 
   public : static GALGAS_llvmBinaryOperation constructor_udivOVF (LOCATION_ARGS) ;
+
+  public : static GALGAS_llvmBinaryOperation constructor_umulOVF (LOCATION_ARGS) ;
 
   public : static GALGAS_llvmBinaryOperation constructor_uremNoOVF (LOCATION_ARGS) ;
 
@@ -1554,8 +1557,6 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMulNoOVF (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMulOVF (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSaddOVF (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSdivNoOVF (LOCATION_ARGS) const ;
@@ -1563,6 +1564,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSdivOVF (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isShl (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSmulOVF (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSremNoOVF (LOCATION_ARGS) const ;
 
@@ -1577,6 +1580,8 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isUdivNoOVF (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isUdivOVF (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isUmulOVF (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isUremNoOVF (LOCATION_ARGS) const ;
 
