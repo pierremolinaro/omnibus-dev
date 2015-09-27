@@ -192,10 +192,10 @@ override method @enumerationDeclaration semanticAnalysis
     [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
   end
 #---
-  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-    !mEnumerationName
-    !@enumerationIR.new {!mEnumerationName.string !cType}
-  ]
+#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
+#    !mEnumerationName
+#    !@enumerationIR.new {!mEnumerationName.string !cType}
+#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

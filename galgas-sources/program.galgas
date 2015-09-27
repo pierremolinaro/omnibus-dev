@@ -138,6 +138,11 @@ private proc addPredefinedTypes
 {
 #--- Add String type
   ioDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
+#--- Add integer types
+  for i in 1 ... 128 do
+    ioDeclarationList += !@integerDeclaration.new {!true !i}
+    ioDeclarationList += !@integerDeclaration.new {!false !i}
+  end
 }
  
 #----------------------------------------------------------------------------------------------------------------------*
