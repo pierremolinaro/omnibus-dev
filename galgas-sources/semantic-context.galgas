@@ -137,6 +137,7 @@ list @typeList {
 #----------------------------------------------------------------------------------------------------------------------*
 
 struct @semanticContext {
+  @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
@@ -176,6 +177,7 @@ struct @semanticContext {
   @infixOperatorMap mDivOperatorMap             # /
   @infixOperatorMap mDivNoOvfOperatorMap        # &/
   @infixOperatorMap mModOperatorMap             # %
+  @infixOperatorMap mModNoOvfOperatorMap        # &%
   @infixOperatorMap mLeftShiftOperatorMap       # <<
   @infixOperatorMap mRightShiftOperatorMap      # >>
   @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-

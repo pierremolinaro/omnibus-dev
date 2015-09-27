@@ -264,7 +264,7 @@ override method @registerDeclaration semanticAnalysis
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
   end
 #--- Check address value
-  let @bigint maxAddress = [@uint.max bigint] # TODO
+  let @bigint maxAddress = (1G << inContext.mPointerSize) - 1G
   for () in mRegisterDeclarationList do
     if mRegisterAddress.bigint > maxAddress then
       error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]

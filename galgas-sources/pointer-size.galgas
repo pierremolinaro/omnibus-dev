@@ -1,0 +1,76 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @pointerSizeDeclaration : @abstractDeclaration {
+  @lbigint mSize
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @pointerSizeDeclaration location -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension plm_target_specific_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <declaration> ?!@ast ioAST {
+    $pointerSize$
+    $integer$ ?let @lbigint size
+    ioAST.mDeclarationList += !@pointerSizeDeclaration.new {!size}
+  }
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @pointerSizeDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let name = ["pointer size " + mSize.bigint nowhere]
+  [!?ioGraph addNode !name !self]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @pointerSizeDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = "pointer size " + mSize.bigint
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @pointerSizeDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+  ioContext.mPointerSize = [mSize.bigint uint]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @pointerSizeDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @pointerSizeDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
