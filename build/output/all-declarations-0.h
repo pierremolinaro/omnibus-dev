@@ -4357,6 +4357,99 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 @booleanShortCircuitAndOperatorExpressionAST class                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_expressionAST {
+//--- Constructor
+  public : GALGAS_booleanShortCircuitAndOperatorExpressionAST (void) ;
+
+//---
+  public : inline const class cPtr_booleanShortCircuitAndOperatorExpressionAST * ptr (void) const { return (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_booleanShortCircuitAndOperatorExpressionAST (const cPtr_booleanShortCircuitAndOperatorExpressionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_booleanShortCircuitAndOperatorExpressionAST extractObject (const GALGAS_object & inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_booleanShortCircuitAndOperatorExpressionAST constructor_new (const class GALGAS_expressionAST & inOperand0,
+                                                                                      const class GALGAS_location & inOperand1,
+                                                                                      const class GALGAS_expressionAST & inOperand2
+                                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST reader_mLeftExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST reader_mRightExpression (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_booleanShortCircuitAndOperatorExpressionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanShortCircuitAndOperatorExpressionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Pointer class for @booleanShortCircuitAndOperatorExpressionAST class                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionAST {
+//--- Attributes
+  public : GALGAS_expressionAST mAttribute_mLeftExpression ;
+  public : GALGAS_location mAttribute_mOperatorLocation ;
+  public : GALGAS_expressionAST mAttribute_mRightExpression ;
+
+//--- Constructor
+  public : cPtr_booleanShortCircuitAndOperatorExpressionAST (const GALGAS_expressionAST & in_mLeftExpression,
+                                                             const GALGAS_location & in_mOperatorLocation,
+                                                             const GALGAS_expressionAST & in_mRightExpression
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST reader_mLeftExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST reader_mRightExpression (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @checkInstructionAST class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5092,9 +5185,7 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
     kEnum_infEqual,
     kEnum_supEqual,
     kEnum_andOp,
-    kEnum_booleanAnd,
     kEnum_orOp,
-    kEnum_booleanOrOp,
     kEnum_xorOp,
     kEnum_booleanXorOp,
     kEnum_addOp,
@@ -5135,10 +5226,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : static GALGAS_infixOperator constructor_addOpNoOvf (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_andOp (LOCATION_ARGS) ;
-
-  public : static GALGAS_infixOperator constructor_booleanAnd (LOCATION_ARGS) ;
-
-  public : static GALGAS_infixOperator constructor_booleanOrOp (LOCATION_ARGS) ;
 
   public : static GALGAS_infixOperator constructor_booleanXorOp (LOCATION_ARGS) ;
 
@@ -5195,10 +5282,6 @@ class GALGAS_infixOperator : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAddOpNoOvf (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAndOp (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanAnd (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanOrOp (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isBooleanXorOp (LOCATION_ARGS) const ;
 

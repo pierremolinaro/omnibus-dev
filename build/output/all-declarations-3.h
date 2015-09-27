@@ -1764,6 +1764,117 @@ class cPtr_registerIntegerConstantInExpressionIR : public cPtr_abstractInstructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @shortCircuitAndOperationIR class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_shortCircuitAndOperationIR (void) ;
+
+//---
+  public : inline const class cPtr_shortCircuitAndOperationIR * ptr (void) const { return (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_shortCircuitAndOperationIR (const cPtr_shortCircuitAndOperationIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_shortCircuitAndOperationIR extractObject (const GALGAS_object & inObject,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                     const class GALGAS_operandIR & inOperand1,
+                                                                     const class GALGAS_instructionListIR & inOperand2,
+                                                                     const class GALGAS_operandIR & inOperand3,
+                                                                     const class GALGAS_instructionListIR & inOperand4,
+                                                                     const class GALGAS_location & inOperand5
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mLeftInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mRightInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_shortCircuitAndOperationIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Pointer class for @shortCircuitAndOperationIR class                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_operandIR mAttribute_mTargetOperand ;
+  public : GALGAS_operandIR mAttribute_mLeftOperand ;
+  public : GALGAS_instructionListIR mAttribute_mLeftInstructionList ;
+  public : GALGAS_operandIR mAttribute_mRightOperand ;
+  public : GALGAS_instructionListIR mAttribute_mRightInstructionList ;
+  public : GALGAS_location mAttribute_mLocation ;
+
+//--- Constructor
+  public : cPtr_shortCircuitAndOperationIR (const GALGAS_operandIR & in_mTargetOperand,
+                                            const GALGAS_operandIR & in_mLeftOperand,
+                                            const GALGAS_instructionListIR & in_mLeftInstructionList,
+                                            const GALGAS_operandIR & in_mRightOperand,
+                                            const GALGAS_instructionListIR & in_mRightInstructionList,
+                                            const GALGAS_location & in_mLocation
+                                            COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mLeftInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mRightInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            @storeGlobalVariableIR class                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2842,15 +2953,5 @@ class GALGAS_string categoryReader_string (const class GALGAS_operandIR & inObje
 class GALGAS_string categoryReader_name (const class GALGAS_operandIR & inObject,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Category Getter '@operandIR isStatic' (as function)                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool categoryReader_isStatic (const class GALGAS_operandIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 #endif

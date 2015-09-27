@@ -800,9 +800,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_infixOperatorMap mAttribute_mStrictSupOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mSupEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mAndOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mBooleanAndOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mOrOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mBooleanOrOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mXorOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mBooleanXorOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mAddOperatorMap ;
@@ -862,9 +860,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_infixOperatorMap & in_mStrictSupOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mSupEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mAndOperatorMap,
-                                   const GALGAS_infixOperatorMap & in_mBooleanAndOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mOrOperatorMap,
-                                   const GALGAS_infixOperatorMap & in_mBooleanOrOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mXorOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mBooleanXorOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mAddOperatorMap,
@@ -935,11 +931,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand38,
                                                           const class GALGAS_infixOperatorMap & inOperand39,
                                                           const class GALGAS_infixOperatorMap & inOperand40,
-                                                          const class GALGAS_infixOperatorMap & inOperand41,
-                                                          const class GALGAS_infixOperatorMap & inOperand42,
-                                                          const class GALGAS_prefixOperatorMap & inOperand43,
-                                                          const class GALGAS_prefixOperatorMap & inOperand44,
-                                                          const class GALGAS_prefixOperatorMap & inOperand45
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_prefixOperatorMap & inOperand42,
+                                                          const class GALGAS_prefixOperatorMap & inOperand43
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -959,10 +953,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mAddOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mAndOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mBooleanAndOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mBooleanOrOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mBooleanType (LOCATION_ARGS) const ;
 
