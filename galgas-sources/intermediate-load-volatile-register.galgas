@@ -21,6 +21,7 @@ class @loadRegisterIR : @abstractInstructionIR {
 
 override method @loadRegisterIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   let llvmType = [mRegisterType llvmType]

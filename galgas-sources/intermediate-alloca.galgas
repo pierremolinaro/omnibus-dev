@@ -17,6 +17,7 @@ class @allocaConstantIR : @abstractInstructionIR {
 
 override method @allocaConstantIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   let llvmType = [mVariableType llvmType]

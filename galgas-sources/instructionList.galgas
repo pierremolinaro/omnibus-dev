@@ -115,10 +115,11 @@ method @instructionListAST analyzeRoutineInstructionList
 
 method @instructionListIR instructionListLLVMCode
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   for () in self do
-    [mInstructionGeneration llvmInstructionCode !?ioCode !?ioIntrinsicsDeclarationSet]
+    [mInstructionGeneration llvmInstructionCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
   end
 }
 

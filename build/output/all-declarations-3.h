@@ -2783,7 +2783,8 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
 
 typedef void (*categoryMethodSignature_abstractInstructionIR_llvmInstructionCode) (const class cPtr_abstractInstructionIR * inObject,
                                                                                    class GALGAS_string & ioArgument0,
-                                                                                   class GALGAS_stringset & ioArgument1,
+                                                                                   const class GALGAS_generationContext constinArgument1,
+                                                                                   class GALGAS_stringset & ioArgument2,
                                                                                    class C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2796,6 +2797,7 @@ void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
 
 void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
                                              GALGAS_string & io_ioCode,
+                                             const GALGAS_generationContext constin_inGenerationContext,
                                              GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;

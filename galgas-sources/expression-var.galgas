@@ -148,6 +148,7 @@ class @fieldAccessIR : @abstractInstructionIR {
 
 override method @fieldAccessIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]

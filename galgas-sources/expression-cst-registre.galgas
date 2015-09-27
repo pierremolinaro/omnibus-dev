@@ -209,6 +209,7 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
 
 override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   if mNoCheck then

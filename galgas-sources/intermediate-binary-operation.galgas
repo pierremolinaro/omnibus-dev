@@ -70,6 +70,7 @@ override method @binaryOperationIR enterAccessibleEntities ?!@accessibleEntities
 
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   let llvmType = [mTargetVarType llvmType]
@@ -95,7 +96,9 @@ override method @binaryOperationIR llvmInstructionCode
     let labelName = [mTargetOperand name]
     ioCode += "  br i1 " + mTargetOperand + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
     ioCode += labelName + ".ovf:\n"
-    ioCode += "  call void @raise_exception (i32 13, i32 " + [mLocation locationIndex] + ")\n"
+    ioCode += "  call void @raise_exception ("
+    ioCode += inGenerationContext.mExceptionCodeLLVMType + " 13, "
+    ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
     ioCode += "  unreachable\n\n"
     ioCode += labelName + ".noovf:\n"
     ioCode += "  " + mTargetOperand + " = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 0\n"

@@ -190,6 +190,7 @@ class @ifInstructionIR : @abstractInstructionIR {
 
 override method @ifInstructionIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   ioCode += ";--- if (" + mTestVariable + ") {\n"
@@ -199,11 +200,11 @@ override method @ifInstructionIR llvmInstructionCode
   ioCode += "  br i1 " + mTestVariable + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioCode += labelTrue + ":\n"
-  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
+  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelEnd + "\n\n"
 #--- false branch
   ioCode += labelFalse + ":\n"
-  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
+  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelEnd + "\n\n"
 #--- end
   ioCode += labelEnd + ":\n"
