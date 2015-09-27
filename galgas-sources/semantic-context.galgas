@@ -163,9 +163,7 @@ struct @semanticContext {
   @infixOperatorMap mStrictSupOperatorMap       # >
   @infixOperatorMap mSupEqualOperatorMap        # >=
   @infixOperatorMap mAndOperatorMap             # &
-  @infixOperatorMap mBooleanAndOperatorMap      # and
   @infixOperatorMap mOrOperatorMap              # |
-  @infixOperatorMap mBooleanOrOperatorMap       # or
   @infixOperatorMap mXorOperatorMap             # ^
   @infixOperatorMap mBooleanXorOperatorMap      # xor
   @infixOperatorMap mAddOperatorMap             # +

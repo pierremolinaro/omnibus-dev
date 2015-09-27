@@ -10,9 +10,7 @@ enum @infixOperator {
   case infEqual
   case supEqual
   case andOp
-  case booleanAnd
   case orOp
-  case booleanOrOp
   case xorOp
   case booleanXorOp
   case addOp
@@ -39,10 +37,28 @@ class @infixOperatorExpressionAST : @expressionAST {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
+  @expressionAST mLeftExpression
+  @location mOperatorLocation
+  @expressionAST mRightExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @infixOperatorExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -134,12 +150,8 @@ override method @infixOperatorExpressionAST analyzeExpression
     operatorMap = inContext.mSupEqualOperatorMap
   case andOp :
     operatorMap = inContext.mAndOperatorMap
-  case booleanAnd :
-    operatorMap = inContext.mBooleanAndOperatorMap
   case orOp :
     operatorMap = inContext.mOrOperatorMap
-  case booleanOrOp :
-    operatorMap = inContext.mBooleanOrOperatorMap
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
   case booleanXorOp :
@@ -224,9 +236,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     case strictSup : result = [leftValue > rightValue bigint]
     case supEqual : result = [leftValue >= rightValue bigint]
     case andOp : result = leftValue & rightValue
-    case booleanAnd : result = [(leftValue != 0G) && (rightValue != 0G) bigint]
     case orOp : result = leftValue | rightValue
-    case booleanOrOp : result = [(leftValue != 0G) || (rightValue != 0G) bigint]
     case xorOp, booleanXorOp : result = leftValue ^ rightValue
     case addOp : result = leftValue + rightValue
     case addOpNoOvf : result = leftValue + rightValue
@@ -258,6 +268,77 @@ override method @infixOperatorExpressionAST analyzeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !type:@unifiedTypeMap-proxy outResultType
+  !result:@operandIR outResultValue
+{
+#--- Analyze left expression
+  @instructionListIR leftInstructionGenerationList = {}
+  [mLeftExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:leftInstructionGenerationList
+    ?type:let @unifiedTypeMap-proxy leftType
+    ?result:let @operandIR leftOperandValue
+  ]
+#--- Analyze right expression
+  @instructionListIR rightInstructionGenerationList = {}
+  [mRightExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:leftType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:rightInstructionGenerationList
+    ?type:let @unifiedTypeMap-proxy rightType
+    ?result:let @operandIR rightOperandValue
+  ]
+#--- Check left type is boolean
+  if [leftType kind] != .boolean then
+    error mOperatorLocation : "left operand should be boolean"
+  end
+#--- Check right type is boolean
+  if [rightType kind] != .boolean then
+    error mOperatorLocation : "left operand should be boolean"
+  end
+#--- Temp var
+  getNewTempVariable (!?ioTemporaries ?outResultValue)
+#--- Generate code
+  [!?ioInstructionGenerationList appendShortCircuitAndOperation
+    !outResultValue
+    !leftOperandValue
+    !leftInstructionGenerationList
+    !rightOperandValue
+    !rightInstructionGenerationList
+    !mOperatorLocation
+  ]
+#--- Result type : bool 
+  outResultType = inContext.mBooleanType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 #! @operatorInfixExpressionIR
@@ -269,62 +350,5 @@ enum @infixOperatorIR {
   case infixUnsignedDivide (@uint code)
   case infixModulo (@uint code)
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#class @operatorInfixExpressionIR : @abstractInstructionIR {
-#  @unifiedTypeMap-proxy mResultType
-#  @operandIR mResult
-#  @operandIR mLeftOperand
-#  @infixOperatorIR mOperator
-#  @operandIR mRighOperand
-#  @location mOperatorLocation
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#override method @operatorInfixExpressionIR llvmInstructionCode ?!@string ioCode {
-#  switch mOperator 
-#  case infixNoOvf (@string infixOperator) :
-#    ioCode += ";--- const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-#    ioCode += " = " +  mLeftOperand + " " + infixOperator + " " + mRighOperand + " ;\n"
-#    ioCode += "  <<@operatorInfixExpressionIR llvmInstructionCode>>\n"
-#  case infixOvf (@string builtinFunction @uint code) :
-#    let ovfVar = "ovf" + [mOperatorLocation locationIndex]
-#    ioCode += mangledNameForType (!name:[mResultType key]) + " " + mResult + " ;\n"
-#    ioCode += "const bool " + ovfVar + " = " + builtinFunction + " ("
-#      +  mLeftOperand + ", "
-#      + mRighOperand
-#      + ", &" + mResult + ") ;\n"
-#    ioCode += "if (" + ovfVar + ") {\n"
-#    ioCode += "  raise_exception (" + code
-#       + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-#       + ", " + [mOperatorLocation line] + ") ;\n"
-#    ioCode += "}\n" 
-#  case infixUnsignedDivide (@uint code) :
-#    ioCode += "if (0 == " +  mRighOperand + ") {\n"
-#    ioCode += "  raise_exception (" + code
-#      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-#      + ", " + [mOperatorLocation line] + ") ;\n"
-#    ioCode += "}\n"
-#    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-#    ioCode += " = " +  mLeftOperand + " / " + mRighOperand + " ;\n"
-#  case infixModulo (@uint code) :
-#    ioCode += "if (0 == " +  mRighOperand + ") {\n"
-#    ioCode += "  raise_exception (" + code
-#      + ", " + [[[mOperatorLocation file] lastPathComponent] utf8Representation]
-#      + ", " + [mOperatorLocation line] + ") ;\n"
-#    ioCode += "}\n"
-#    ioCode += "const " + mangledNameForType (!name:[mResultType key]) + " " + mResult
-#    ioCode += " = " +  mLeftOperand + " % " + mRighOperand + " ;\n"
-#  end
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#override method @operatorInfixExpressionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
-##  [mLeftOperand enterAccessibleEntities !?ioAccessibleEntities]
-##  [mRighOperand enterAccessibleEntities !?ioAccessibleEntities]
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*

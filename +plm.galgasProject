@@ -112,6 +112,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-comment.galgas"
   "galgas-sources/intermediate-alloca.galgas"
   "galgas-sources/intermediate-binary-operation.galgas"
+  "galgas-sources/intermediate-short-circuit-and.galgas"
   "galgas-sources/intermediate-load-volatile-register.galgas"
   "galgas-sources/intermediate-load-global-variable.galgas"
   "galgas-sources/intermediate-load-local-variable.galgas"

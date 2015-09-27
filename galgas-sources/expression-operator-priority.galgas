@@ -26,11 +26,16 @@ syntax extension common_syntax {
       $or$
       let operatorLocation = @location.here
       <expression_11> ?let rightExpression
-      outExpression = @infixOperatorExpressionAST.new {
-        !outExpression
+    #--- x or y equivalent to not (not x and not y)
+      let andExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
+        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOperator !outExpression}
         !operatorLocation
-        !.booleanOrOp
-        !rightExpression
+        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOperator !rightExpression}
+      }
+      outExpression = @prefixOperatorExpressionAST.new {
+        !operatorLocation
+        !.notOperator
+        !andExpression
       }
     end
   }
@@ -62,10 +67,9 @@ syntax extension common_syntax {
       $and$
       let operatorLocation = @location.here
       <expression_9> ?let rightExpression
-      outExpression = @infixOperatorExpressionAST.new {
+      outExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
         !outExpression
         !operatorLocation
-        !.booleanAnd
         !rightExpression
       }
     end

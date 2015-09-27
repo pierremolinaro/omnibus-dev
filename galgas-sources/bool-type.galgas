@@ -108,16 +108,6 @@ private proc enterBooleanOperators
     !selfTypeProxy
     !.icmp_uge
   ]
-  [!?ioContext.mBooleanAndOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !.and
-  ]
-  [!?ioContext.mBooleanOrOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
-    !selfTypeProxy
-    !.ior
-  ]
   [!?ioContext.mBooleanXorOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy

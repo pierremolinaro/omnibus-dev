@@ -4386,25 +4386,9 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_andOp (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperator GALGAS_infixOperator::constructor_booleanAnd (UNUSED_LOCATION_ARGS) {
-  GALGAS_infixOperator result ;
-  result.mEnum = kEnum_booleanAnd ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_infixOperator GALGAS_infixOperator::constructor_orOp (UNUSED_LOCATION_ARGS) {
   GALGAS_infixOperator result ;
   result.mEnum = kEnum_orOp ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperator GALGAS_infixOperator::constructor_booleanOrOp (UNUSED_LOCATION_ARGS) {
-  GALGAS_infixOperator result ;
-  result.mEnum = kEnum_booleanOrOp ;
   return result ;
 }
 
@@ -4522,7 +4506,7 @@ GALGAS_infixOperator GALGAS_infixOperator::constructor_rightShiftOp (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_infixOperator [25] = {
+static const char * gEnumNameArrayFor_infixOperator [23] = {
   "(not built)",
   "equal",
   "nonEqual",
@@ -4531,9 +4515,7 @@ static const char * gEnumNameArrayFor_infixOperator [25] = {
   "infEqual",
   "supEqual",
   "andOp",
-  "booleanAnd",
   "orOp",
-  "booleanOrOp",
   "xorOp",
   "booleanXorOp",
   "addOp",
@@ -4594,20 +4576,8 @@ GALGAS_bool GALGAS_infixOperator::reader_isAndOp (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_infixOperator::reader_isBooleanAnd (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanAnd == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_bool GALGAS_infixOperator::reader_isOrOp (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_orOp == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_infixOperator::reader_isBooleanOrOp (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanOrOp == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

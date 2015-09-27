@@ -11,6 +11,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Category Getter '@operandIR isStatic' (as function)                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool categoryReader_isStatic (const class GALGAS_operandIR & inObject,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Category setter '@instructionListIR appendComment'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -47,6 +57,22 @@ void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & io
                                              const class GALGAS_location constin_inLocation,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category setter '@instructionListIR appendShortCircuitAndOperation'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
+                                                      const class GALGAS_operandIR constin_inTargetOperand,
+                                                      const class GALGAS_operandIR constin_inLeftOperand,
+                                                      const class GALGAS_instructionListIR constin_inLeftInstructionList,
+                                                      const class GALGAS_operandIR constin_inRightOperand,
+                                                      const class GALGAS_instructionListIR constin_inRightInstructionList,
+                                                      const class GALGAS_location constin_inLocation,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

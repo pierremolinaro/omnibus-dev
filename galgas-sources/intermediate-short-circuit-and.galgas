@@ -1,0 +1,61 @@
+#----------------------------------------------------------------------------------------------------------------------*
+
+setter @instructionListIR appendShortCircuitAndOperation
+  ?let @operandIR inTargetOperand
+  ?let @operandIR inLeftOperand
+  ?let @instructionListIR inLeftInstructionList
+  ?let @operandIR inRightOperand
+  ?let @instructionListIR inRightInstructionList
+  ?let @location inLocation
+{
+  self += !@shortCircuitAndOperationIR.new {
+    !inTargetOperand
+    !inLeftOperand
+    !inLeftInstructionList
+    !inRightOperand
+    !inRightInstructionList
+    !inLocation
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @shortCircuitAndOperationIR : @abstractInstructionIR {
+  @operandIR mTargetOperand
+  @operandIR mLeftOperand
+  @instructionListIR mLeftInstructionList
+  @operandIR mRightOperand
+  @instructionListIR mRightInstructionList
+  @location mLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @shortCircuitAndOperationIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mLeftInstructionList  enterAccessibleEntities !?ioAccessibleEntities]
+  [mRightInstructionList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @shortCircuitAndOperationIR llvmInstructionCode
+  ?!@string ioCode
+  ?let @generationContext inGenerationContext
+  ?!@stringset ioIntrinsicsDeclarationSet
+{
+  let startLabel  = "and." + [mLocation locationIndex] + ".start"
+  let trueLabel  = "and." + [mLocation locationIndex] + ".true"
+  let falseLabel = "and." + [mLocation locationIndex] + ".false"
+  ioCode += "  br label %" + startLabel + "\n\n"
+  ioCode += ";--- left operand of short circuit and\n"
+  ioCode += startLabel + ":\n"
+  [mLeftInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
+  ioCode += "  br i1 " + mLeftOperand + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioCode += trueLabel + ":\n"
+  [mRightInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
+  ioCode += "  br label %" + falseLabel + "\n\n"
+  ioCode += falseLabel + ":\n"
+  ioCode += "  " + mTargetOperand + " = phi i1 [" + mRightOperand + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
