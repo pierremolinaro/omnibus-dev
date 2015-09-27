@@ -112,6 +112,7 @@ override method @conversionInstructionIR enterAccessibleEntities ?!@accessibleEn
 
 override method @conversionInstructionIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   if mSilently || [option plm_options.noExceptionGeneration value] then

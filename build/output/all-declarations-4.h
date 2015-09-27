@@ -256,16 +256,6 @@ class GALGAS_bool categoryReader_isStatic (const class GALGAS_variableKindIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Category Getter '@unifiedTypeMap-proxy llvmType' (as function)                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_llvmType (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                  Category method '@variableKindIR loadFromMemory'                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

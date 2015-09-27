@@ -504,6 +504,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 
 method @procedureMapIR-element llvmCodeGeneration 
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   let procName = mangledNameForProcedure (!lkey.string)
@@ -535,7 +536,7 @@ method @procedureMapIR-element llvmCodeGeneration
   end
  
 #--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
+  [mInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
 #--- Epilog
   ioCode += ";--- return\n"
   ioCode += "  ret void\n"

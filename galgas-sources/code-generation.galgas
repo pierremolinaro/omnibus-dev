@@ -61,6 +61,7 @@ abstract class @abstractInstructionIR {
 
 abstract method @abstractInstructionIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -130,15 +131,26 @@ proc codeGeneration
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+struct @generationContext {
+  @string mExceptionCodeLLVMType
+  @string mExceptionLineLLVMType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 proc generateLLVMfile
   ?currentDir:let @string inCurrentDirectory
   ?productDir:let @string inProductDirectory
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
   ?target:let @lstring inTargetName
-  ?exceptionCodeType:let @unifiedTypeMap-proxy unused inExceptionCodeType
-  ?exceptionLineType:let @unifiedTypeMap-proxy unused inExceptionLineType
+  ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
+  ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
 {
+  let @generationContext generationContext = .new {
+    ![inExceptionCodeType llvmType]
+    ![inExceptionLineType llvmType]
+  }
   let sourceDirectory = inProductDirectory + "/sources"
   var code = ""
 #----------------------------------------- Include target specific file
@@ -166,7 +178,7 @@ proc generateLLVMfile
   code += llvmTitleComment (!"Boot")
   code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    [boot.mInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
   end
   code += ";---\n"
   code += "  ret void\n"
@@ -175,18 +187,18 @@ proc generateLLVMfile
   code += llvmTitleComment (!"Init")
   code += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    [init.mInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
   end
   code += ";---\n"
   code += "  ret void\n"
   code += "}\n\n"
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    [procedure llvmCodeGeneration !?code !?intrinsicsDeclarationSet]
+    [procedure llvmCodeGeneration !?code !generationContext !?intrinsicsDeclarationSet]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
-    [function implementationCodeGeneration !?code !?intrinsicsDeclarationSet]
+    [function implementationCodeGeneration !?code !generationContext !?intrinsicsDeclarationSet]
   end
 #----------------------------------------- Exception
   if not [option plm_options.noExceptionGeneration value] then
@@ -195,11 +207,17 @@ proc generateLLVMfile
        !from:inTargetName.string + "/target-exception.ll"
     )
     code += llvmTitleComment (!"Raise Exception internal")
-    code += "define internal void @raise_exception_internal (i32 %in_CODE, i32 %in_LINE) nounwind noreturn {\n"
-    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    code += "define internal void @raise_exception_internal ("
+    code += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    code += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
+    code += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
+    code += "  store " + generationContext.mExceptionCodeLLVMType + "%in.CODE, " + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
+    code += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
+    code += "  store " + generationContext.mExceptionLineLLVMType + "%in.LINE, " + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
     code += "  br label %exception.loop\n\n"
     code += "exception.loop:\n"
-    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
     code += "  br label %exception.loop\n"
     code += "}\n\n"
   end

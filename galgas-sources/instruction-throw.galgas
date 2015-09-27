@@ -92,6 +92,7 @@ class @throwInstructionIR : @abstractInstructionIR {
 
 override method @throwInstructionIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   ioCode += "raise_exception (" + mCode

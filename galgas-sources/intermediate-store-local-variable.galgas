@@ -19,6 +19,7 @@ class @storeLocalVariableIR : @abstractInstructionIR {
 
 override method @storeLocalVariableIR llvmInstructionCode
   ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   let llvmType = [mTargetVarType llvmType]

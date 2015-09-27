@@ -246,10 +246,11 @@ private filewrapper functionGenerationTemplate in "../generation-templates" {
 
 method @functionMapIR-element implementationCodeGeneration
   ?!@string ioCode
+  ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   var code = ""
-  [mInstructionGenerationList instructionListLLVMCode !?code !?ioIntrinsicsDeclarationSet]
+  [mInstructionGenerationList instructionListLLVMCode !?code !inGenerationContext !?ioIntrinsicsDeclarationSet]
   ioCode += [filewrapper functionGenerationTemplate.implementation
     !lkey.string # mFunctionMangledName
 #    !mangledNameForFunction (!name:lkey.string) # mFunctionMangledName

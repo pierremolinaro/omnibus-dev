@@ -2348,12 +2348,23 @@ class GALGAS_string categoryReader_generateLLVM (const class GALGAS_globalVariab
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                           Category Getter '@unifiedTypeMap-proxy llvmType' (as function)                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_llvmType (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                        Category method '@functionMapIR-element implementationCodeGeneration'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element inObject,
                                                   class GALGAS_string & io_ioCode,
+                                                  const class GALGAS_generationContext constin_inGenerationContext,
                                                   class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
@@ -2366,6 +2377,7 @@ void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMap
 
 void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
                                              class GALGAS_string & io_ioCode,
+                                             const class GALGAS_generationContext constin_inGenerationContext,
                                              class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
@@ -2378,9 +2390,81 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 
 void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
                                         class GALGAS_string & io_ioCode,
+                                        const class GALGAS_generationContext constin_inGenerationContext,
                                         class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @generationContext struct                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_generationContext : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_string mAttribute_mExceptionCodeLLVMType ;
+  public : GALGAS_string mAttribute_mExceptionLineLLVMType ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_generationContext constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_generationContext (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_generationContext (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_generationContext (const GALGAS_string & in_mExceptionCodeLLVMType,
+                                     const GALGAS_string & in_mExceptionLineLLVMType) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_generationContext extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
+                                                            const class GALGAS_string & inOperand1
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_generationContext & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mExceptionCodeLLVMType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mExceptionLineLLVMType (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_generationContext class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
