@@ -112,7 +112,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !globalsAreConstant:false
   )
 #--- Insert predefined input arguments
-  let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["StaticString" nowhere]}
+  let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
   let codeArg = @lstring.new {!"CODE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !codeArg

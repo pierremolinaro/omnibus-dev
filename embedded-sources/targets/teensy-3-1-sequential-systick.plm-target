@@ -10,17 +10,6 @@ newSignedRepresentation @signed64 : "int64_t" 64
 
 newUnsignedRepresentation @size : "uint32_t" 32
 
-booleanType $bool : @unsigned8
-
-newIntegerType $uint8  : @unsigned8
-newIntegerType $uint16 : @unsigned16
-newIntegerType $uint32 : @unsigned32
-newIntegerType $uint64 : @unsigned64
-newIntegerType $int8  : @signed8
-newIntegerType $int16 : @signed16
-newIntegerType $int32 : @signed32
-newIntegerType $int64 : @signed64
-
 exception : $int32 $uint32
 
 mode `isr

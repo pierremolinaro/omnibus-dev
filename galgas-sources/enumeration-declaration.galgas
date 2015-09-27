@@ -165,7 +165,7 @@ override method @enumerationDeclaration initAnalysis ?!context:@semanticContext 
 
 override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 #--- Get C type
   var cType = ""
@@ -191,11 +191,6 @@ override method @enumerationDeclaration semanticAnalysis
   if cType == "" then
     [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
   end
-#---
-#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-#    !mEnumerationName
-#    !@enumerationIR.new {!mEnumerationName.string !cType}
-#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

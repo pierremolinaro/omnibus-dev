@@ -14,34 +14,6 @@ override getter @booleanDeclaration location -> @location outLocation {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
-
-syntax extension common_syntax {
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <declaration> ?!@ast ioAST {
-    $booleanType$
-    $typeName$ ?let newBoolTypeName
-    $:$
-    @lstringlist attributeList = {}
-    repeat
-    while
-      $attribute$ ?let attribute
-      attributeList += !attribute
-    end 
-    ioAST.mDeclarationList += !@booleanDeclaration.new {
-      !newBoolTypeName
-      !attributeList
-    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -166,53 +138,9 @@ override method @booleanDeclaration initAnalysis ?!context:@semanticContext unus
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @booleanDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?context:let @semanticContext unused inContext
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
-#--- Get C type
-  var cType = "" # C type undefined
-  for (s) in mAttributeList do
-    if s.string == "unique" then
-      # Nothing to do: handled in 'enterInContext'
-    elsif cType != "" then
-      error s : "base type already defined as '" + cType + "'"
-    else
-      [inContext.mTargetBaseTypeMap searchKey !s ?cType ?* ?*]
-    end
-  end
-#---
-#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-#    !mBooleanTypeName
-#    !@booleanIR.new {!mBooleanTypeName.string !cType}
-#  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @booleanIR : @abstractTypeIR {
-  @string mBooleanTypeName
-  @string mActualTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-private filewrapper booleanGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "boolean-declaration.galgasTemplate"
-    ?@string ENUMERATION_NAME
-    ?@string ACTUAL_TYPE_NAME
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @booleanIR headerCodeGenerationForType -> @string outCode {
-  outCode = [filewrapper booleanGenerationTemplate.declaration
-    !mBooleanTypeName
-    !mActualTypeName
-  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

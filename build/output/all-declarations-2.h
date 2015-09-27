@@ -321,8 +321,6 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_45 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_46 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_47 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1056,44 +1054,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Filewrapper 'booleanGenerationTemplate'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_booleanGenerationTemplate ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Filewrapper template 'booleanGenerationTemplate declaration'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_booleanGenerationTemplate_declaration (class C_Compiler * inCompiler,
-                                                                         const class GALGAS_string & in_ENUMERATION_5F_NAME,
-                                                                         const class GALGAS_string & in_ACTUAL_5F_TYPE_5F_NAME
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'mangledNameForType'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                               Function 'bootModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1139,6 +1099,16 @@ GALGAS_string filewrapperTemplate_enumerationGenerationTemplate_declaration (cla
                                                                              const class GALGAS_string & in_ENUMERATION_5F_NAME,
                                                                              const class GALGAS_string & in_ACTUAL_5F_TYPE_5F_NAME
                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Function 'mangledNameForType'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2052,6 +2022,15 @@ class GALGAS_string function_literalStringPrefix (class C_Compiler * inCompiler
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               Function 'boolTypeName'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

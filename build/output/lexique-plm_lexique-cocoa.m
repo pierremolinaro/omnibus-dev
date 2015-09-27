@@ -79,7 +79,7 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [40] = {
+static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [38] = {
   {"at", plm_lexique_1_at},
   {"do", plm_lexique_1_do},
   {"if", plm_lexique_1_if},
@@ -116,14 +116,12 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"register", plm_lexique_1_register},
   {"required", plm_lexique_1_required},
   {"exception", plm_lexique_1_exception},
-  {"booleanType", plm_lexique_1_booleanType},
-  {"newIntegerType", plm_lexique_1_newIntegerType},
   {"newSignedRepresentation", plm_lexique_1_newSignedRepresentation},
   {"newUnsignedRepresentation", plm_lexique_1_newUnsignedRepresentation}
 } ;
 
 static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedString) {
-  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 40) ;
+  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 38) ;
 }
 
 
@@ -448,7 +446,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) terminalVocabularyCount {
-  return 95 ;
+  return 93 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -478,7 +476,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
-  static const NSUInteger kTerminalSymbolStyles [96] = {0,
+  static const NSUInteger kTerminalSymbolStyles [94] = {0,
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1_attribute */,
     3 /* plm_lexique_1_typeName */,
@@ -494,7 +492,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_at */,
     1 /* plm_lexique_1_boolset */,
-    1 /* plm_lexique_1_booleanType */,
     1 /* plm_lexique_1_boot */,
     1 /* plm_lexique_1_case */,
     1 /* plm_lexique_1_check */,
@@ -513,7 +510,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_let */,
     1 /* plm_lexique_1_mutating */,
     1 /* plm_lexique_1_mode */,
-    1 /* plm_lexique_1_newIntegerType */,
     1 /* plm_lexique_1_newSignedRepresentation */,
     1 /* plm_lexique_1_newUnsignedRepresentation */,
     1 /* plm_lexique_1_not */,
@@ -585,7 +581,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
-  static const BOOL kTerminalAtomicSelection [96] = {NO,
+  static const BOOL kTerminalAtomicSelection [94] = {NO,
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1_attribute */,
     YES /* plm_lexique_1_typeName */,
@@ -601,7 +597,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_assert */,
     YES /* plm_lexique_1_at */,
     YES /* plm_lexique_1_boolset */,
-    YES /* plm_lexique_1_booleanType */,
     YES /* plm_lexique_1_boot */,
     YES /* plm_lexique_1_case */,
     YES /* plm_lexique_1_check */,
@@ -620,7 +615,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_let */,
     YES /* plm_lexique_1_mutating */,
     YES /* plm_lexique_1_mode */,
-    YES /* plm_lexique_1_newIntegerType */,
     YES /* plm_lexique_1_newSignedRepresentation */,
     YES /* plm_lexique_1_newUnsignedRepresentation */,
     YES /* plm_lexique_1_not */,
