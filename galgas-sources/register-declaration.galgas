@@ -264,22 +264,7 @@ override method @registerDeclaration semanticAnalysis
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
   end
 #--- Check address value
-  [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?* ?let size ?let isSigned]
-  if isSigned then
-    error mRegisterTypeName : "base type 'size' should be unsigned"
-  end
-  @bigint maxAddress
-  if size == 8 then
-    maxAddress = 255G
-  elsif size == 16 then
-    maxAddress = 65535G
-  elsif size == 32 then
-    maxAddress = [@uint.max bigint]
-  elsif size == 16 then
-    maxAddress = [@uint64.max bigint]
-  else
-    error mRegisterTypeName : "base type 'size' has an invalid size" : maxAddress
-  end
+  let @bigint maxAddress = [@uint.max bigint] # TODO
   for () in mRegisterDeclarationList do
     if mRegisterAddress.bigint > maxAddress then
       error mRegisterAddress : "register address should be lower or equal to " + [maxAddress hexString]

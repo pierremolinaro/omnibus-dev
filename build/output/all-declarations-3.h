@@ -2943,4 +2943,27 @@ class GALGAS_bool categoryReader_isStatic (const class GALGAS_operandIR & inObje
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Category setter '@instructionListIR appendComment'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendComment (class GALGAS_instructionListIR & ioObject,
+                                     const class GALGAS_string constin_inComment,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category setter '@instructionListIR appendAlloca'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
+                                    const class GALGAS_string constin_inLocalVariableName,
+                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
 #endif

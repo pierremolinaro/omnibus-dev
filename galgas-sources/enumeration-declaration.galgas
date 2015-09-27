@@ -164,33 +164,33 @@ override method @enumerationDeclaration initAnalysis ?!context:@semanticContext 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @enumerationDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 #--- Get C type
-  var cType = ""
-  for (attribute) in mAttributeList do
-    if attribute.string == "unique" then
-      # Nothing to do: handled in 'enterInContext'
-    elsif cType != "" then
-      error attribute : "duplicated attribute"
-    else
-      [inContext.mTargetBaseTypeMap searchKey !attribute ?cType ?* ?let isSigned]
-      if isSigned then
-        var s = "an unsigned base type should be used here; possible values:"
-        for (baseTypeName * * baseTypeIsSigned) in inContext.mTargetBaseTypeMap do
-          if not baseTypeIsSigned then
-            s += "\n- %" + baseTypeName
-          end
-        end
-        error attribute : s
-      end
-    end
-  end
-#--- No explicit type attribute ? use "size"
-  if cType == "" then
-    [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
-  end
+#  var cType = ""
+#  for (attribute) in mAttributeList do
+#    if attribute.string == "unique" then
+#      # Nothing to do: handled in 'enterInContext'
+#    elsif cType != "" then
+#      error attribute : "duplicated attribute"
+#    else
+#      [inContext.mTargetBaseTypeMap searchKey !attribute ?cType ?* ?let isSigned]
+#      if isSigned then
+#        var s = "an unsigned base type should be used here; possible values:"
+#        for (baseTypeName * * baseTypeIsSigned) in inContext.mTargetBaseTypeMap do
+#          if not baseTypeIsSigned then
+#            s += "\n- %" + baseTypeName
+#          end
+#        end
+#        error attribute : s
+#      end
+#    end
+#  end
+##--- No explicit type attribute ? use "size"
+#  if cType == "" then
+#    [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
+#  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

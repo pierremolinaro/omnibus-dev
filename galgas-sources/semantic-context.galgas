@@ -57,16 +57,6 @@ map @globalConstantMap {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @targetBaseTypeMap {
-  @string mCType
-  @uint mSize # 8, 16, 32, 64
-  @bool mIsSigned
-  insert insertKey error message "the '%K' base type is already declared in %L"
-  search searchKey error message "there is no '%K' base type"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
@@ -147,7 +137,6 @@ list @typeList {
 #----------------------------------------------------------------------------------------------------------------------*
 
 struct @semanticContext {
-  @targetBaseTypeMap mTargetBaseTypeMap
   @unifiedTypeMap-proxy mBooleanType
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
