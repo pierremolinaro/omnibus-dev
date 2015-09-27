@@ -128,7 +128,7 @@ map @registerFieldMap {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @registerBitSliceAccessMap {
-  @string mAccessOperator
+  @llvmBinaryOperation mAccessOperator
   @bigint mAccessRightOperand
   @registerBitSliceAccessMap mSubMap
   @unifiedTypeMap-proxy mResultType
@@ -176,14 +176,14 @@ override method @registerDeclaration enterInContext
         @registerBitSliceAccessMap registerSubMap = {}
         [!?registerSubMap insertKey
           !.new{!"shift" !name.location}
-          !"lshr"
+          !.lshr
           ![shiftCount bigint]
           !{}
           !registerType
         ]
         [!?registerSubMap insertKey
           !.new{!"bool" !name.location}
-          !"icmp ne"
+          !.icmp_ne
           !0G
           !{}
           !ioContext.mBooleanType
@@ -191,7 +191,7 @@ override method @registerDeclaration enterInContext
         let mask = ((1G << bitCount) - 1G) << shiftCount
         [!?registerBitSliceMap insertKey
           !name
-          !"and"
+          !.and
           !mask
           !registerSubMap
           !registerType

@@ -241,7 +241,10 @@ class @procCallInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @procCallInstructionIR llvmInstructionCode ?!@string ioCode {
+override method @procCallInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   ioCode += ";--- call " + mangledNameForProcedure (!mProcName) + " ()\n"
   ioCode += "  call void @" + mangledNameForProcedure (!mProcName) + " ("
   for () in mParameters do

@@ -68,34 +68,11 @@ override method @integerDeclaration enterInContext
   @bigint min
   @bigint max
   if isSigned then
-    if size == 8 then
-      min = -128G
-      max = 127G
-    elsif size == 16 then
-      min = -32768G
-      max = 32767G
-    elsif size == 32 then
-      min = [@sint.min bigint]
-      max = [@sint.max bigint]
-    elsif size == 64 then
-      min = [@sint64.min bigint]
-      max = [@sint64.max bigint]
-    else
-      error mIntegerTypeName : "internal error" : min, max
-    end
+    min = - (1G << (size -1))
+    max = (1G << (size -1)) - 1G
   else # Unsigned
     min = 0G
-    if size == 8 then
-      max = 255G
-    elsif size == 16 then
-      max = 65535G
-    elsif size == 32 then
-      max = [@uint.max bigint]
-    elsif size == 64 then
-      max = [@uint64.max bigint]
-    else
-      error mIntegerTypeName : "internal error" : max
-    end
+    max = (1G << size) - 1G
   end
  #---
   [!?ioContext.mTypeMap insertKey
@@ -123,47 +100,59 @@ proc enterIntegerOperators
   ?!context:@semanticContext ioContext
 {
 #--- ++ and -- operators
-  ioContext.mTypeNameSetForIncDec += !inIntegerTypeName.string
+  [!?ioContext.mIncNoOVFOperatorMap insertKey !inIntegerTypeName !.addNoOVF]
+  [!?ioContext.mDecNoOVFOperatorMap insertKey !inIntegerTypeName !.subNoOVF]
+  [!?ioContext.mIncOVFOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .saddOVF else .uaddOVF end]
+  [!?ioContext.mDecOVFOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .ssubOVF else .usubOVF end]
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
 #--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !.icmp_eq
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !.icmp_ne
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !if inIsSigned then .icmp_slt else .icmp_ult end
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !if inIsSigned then .icmp_sle else .icmp_ule end
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !if inIsSigned then .icmp_sgt else .icmp_ugt end
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !ioContext.mBooleanType
+    !if inIsSigned then .icmp_sge else .icmp_uge end
   ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then
     [!?ioContext.mAndOperatorMap insertKey
       !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
       !selfTypeProxy
+      !.and
     ]
     [!?ioContext.mOrOperatorMap insertKey
       !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
       !selfTypeProxy
+      !.ior
     ]
     [!?ioContext.mXorOperatorMap insertKey
       !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
       !selfTypeProxy
+      !.xor
     ]
     [!?ioContext.mUnsignedComplementOperatorMap insertKey
       !inIntegerTypeName
@@ -181,47 +170,58 @@ proc enterIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .uaddOVF else .saddOVF end
   ]
   [!?ioContext.mAddNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !.addNoOVF
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .ssubOVF else .usubOVF end
   ]
   [!?ioContext.mSubNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !.subNoOVF
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !.mulOVF
   ]
   [!?ioContext.mMulNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !.mulNoOVF
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .sdivOVF else .udivOVF end
   ]
   [!?ioContext.mDivNoOvfOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .sdivNoOVF else .udivNoOVF end
   ]
   [!?ioContext.mModOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .sremOVF else .uremOVF end
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !.shl
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
     !selfTypeProxy
+    !if inIsSigned then .ashr else .lshr end
   ]
 }
 

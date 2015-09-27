@@ -104,42 +104,30 @@ override method @operatorAssignInstructionAST analyze
   end
 #--- Check operator is available for type
   @infixOperatorMap operatorMap
-  @string generatedOperator
+  @string commentOperator
   switch mOperator
   case bitWiseAndAssign :
     operatorMap = inContext.mAndOperatorMap
-    generatedOperator = "&="
+    commentOperator = "&="
   case bitWiseOrAssign :
     operatorMap = inContext.mOrOperatorMap
-    generatedOperator = "|="
+    commentOperator = "|="
   case bitWiseXorAssign :
     operatorMap = inContext.mXorOperatorMap
-    generatedOperator = "^="
+    commentOperator = "^="
   end
   [operatorMap checkWith
     !leftType:targetType
     !rightType:rightExpressionType
     !operatorLocation:mTargetVarName.location
     ?resultType:*
+    ?op:let @llvmBinaryOperation llvmOperator
   ]
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  @string comment
-  @string llvmOperator
-  switch mOperator
-  case bitWiseOrAssign :
-    comment = [targetVariableKind mangledName] + " |= " + sourceValueName
-    llvmOperator = "or"
-  case bitWiseAndAssign :
-    comment = [targetVariableKind mangledName] + " &= " + sourceValueName
-    llvmOperator = "and"
-  case bitWiseXorAssign :
-    comment = [targetVariableKind mangledName] + " ^= " + sourceValueName
-    llvmOperator = "xor"
-  end
-  [!?ioInstructionGenerationList appendComment !comment]
+  [!?ioInstructionGenerationList appendComment ![targetVariableKind mangledName] + " " + commentOperator + " " + sourceValueName]
   [targetVariableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
@@ -152,6 +140,7 @@ override method @operatorAssignInstructionAST analyze
     !variableValueName
     !llvmOperator
     !sourceValueName
+    !mTargetVarName.location
   ]
   [targetVariableKind storeInMemory
     !value:newResultingValue

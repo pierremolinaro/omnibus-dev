@@ -110,7 +110,10 @@ override method @conversionInstructionIR enterAccessibleEntities ?!@accessibleEn
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @conversionInstructionIR llvmInstructionCode ?!@string ioCode {
+override method @conversionInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   if mSilently || [option plm_options.noExceptionGeneration value] then
     ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
     ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"

@@ -17,7 +17,10 @@ class @storeLocalVariableIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @storeLocalVariableIR llvmInstructionCode ?!@string ioCode {
+override method @storeLocalVariableIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   let llvmType = [mTargetVarType llvmType]
   ioCode += "  store "
   ioCode += llvmType + " " + mSourceValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"

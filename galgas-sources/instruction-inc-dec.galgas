@@ -96,43 +96,46 @@ override method @incDecInstructionAST analyze
   if not accessIsAllowed then
     error mVarName : "routine has no access right on the this variable"
   end
-#--- Check type inc / dec operator
-  if not [inContext.mTypeNameSetForIncDec hasKey ![type key]] then
-    error mVarName : [type key] + " type does not handle incrementation/decrementation operator"
-  end
-  @bigint min
-  @bigint max
-  switch [type kind]
-  case boolean, boolset, literalString :
-    error mVarName : "internal error" : min, max
-  case enumeration (*) :
-    error mVarName : "internal error" : min, max
-  case structure (*) :
-    error mVarName : "internal error" : min, max
-  case integer (kMin kMax * *) :
-    min = kMin
-    max = kMax
-  end
-#--- Exception allowed ?
+#--- Check type inc / dec operator, exception allowed ?
+  var comment = [variable mangledName] + " "
+  @llvmBinaryOperation llvmOperator
   switch mKind
-  case incNoOverflowCheck, decNoOverflowCheck :
-  case incWithOverflowCheck, decWithOverflowCheck :
+  case incNoOverflowCheck :
+    comment += "&++"
+    if [inContext.mIncNoOVFOperatorMap hasKey ![type key]] then
+      [inContext.mIncNoOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    else
+      error mVarName: "type $" + [type key] + " does not support the &++ operator" : llvmOperator
+    end
+  case  decNoOverflowCheck :
+    comment += "&--"
+    if [inContext.mDecNoOVFOperatorMap hasKey ![type key]] then
+      [inContext.mDecNoOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    else
+      error mVarName: "type $" + [type key] + " does not support the &-- operator" : llvmOperator
+    end
+  case incWithOverflowCheck :
+    comment += "++"
+    if [inContext.mIncOVFOperatorMap hasKey ![type key]] then
+      [inContext.mIncOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    else
+      error mVarName: "type $" + [type key] + " does not support the ++ operator" : llvmOperator
+    end
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
+  case decWithOverflowCheck :
+    comment += "--"
+    if [inContext.mDecOVFOperatorMap hasKey ![type key]] then
+      [inContext.mDecOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    else
+      error mVarName: "type $" + [type key] + " does not support the -- operator" : llvmOperator
+    end
     if [inModeSet hasKey !exceptionModeName ()] then
       error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
   end
-#--- Code generation
-  var comment = [variable mangledName] + " "
-  switch mKind
-  case incWithOverflowCheck :
-    comment += "++"
-   case decWithOverflowCheck :
-    comment += "--"
-  case incNoOverflowCheck :
-    comment += "&++"
-  case decNoOverflowCheck :
-    comment += "&--"
-  end
+#--- Generate comment
   [!?ioInstructionGenerationList appendComment !comment]
 #--- Load variable
   [variable loadFromMemory
@@ -142,92 +145,19 @@ override method @incDecInstructionAST analyze
   ]
 #--- Increment / decrement variable
   getNewTempVariable (!?ioTemporaries ?let resultValue)
-  switch mKind
-  case incWithOverflowCheck :
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultValue
-      !type
-      !variableValue
-      !"add"
-      !.literalInteger {!value:1G}
-    ]
-  case decWithOverflowCheck :
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultValue
-      !type
-      !variableValue
-      !"sub"
-      !.literalInteger {!value:1G}
-    ]
-  case incNoOverflowCheck :
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultValue
-      !type
-      !variableValue
-      !"add"
-      !.literalInteger {!value:1G}
-    ]
-  case decNoOverflowCheck :
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultValue
-      !type
-      !variableValue
-      !"sub"
-      !.literalInteger {!value:1G}
-    ]
-  end
+  [!?ioInstructionGenerationList appendBinaryOperation
+    !resultValue
+    !type
+    !variableValue
+    !llvmOperator
+    !.literalInteger {!value:1G}
+    !mVarName.location
+  ]
 #--- Store variable
   [variable storeInMemory
     !value:resultValue
     !?instructionListIR:ioInstructionGenerationList
   ]
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-#class @incDecInstructionIR : @abstractInstructionIR {
-#  @bigint mMin
-#  @bigint mMax
-#  @incDecKind mKind
-#  @variableKindIR mVariable
-#  @location mVariableLocation
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#override method @incDecInstructionIR llvmInstructionCode ?!@string ioCode {
-#  switch mKind
-#  case incWithOverflowCheck :
-#    if not [option plm_options.noExceptionGeneration value] then
-#      ioCode += "if (" + [mVariable mangledName] + " == " + mMax + ") {\n"
-#      ioCode += "  raise_exception (1, "
-#        + [[[mVariableLocation file] lastPathComponent] utf8Representation] + ", "
-#        + [mVariableLocation line] + ") ;\n"
-#      ioCode += "}\n"
-#    end
-#    ioCode += [mVariable mangledName] + " ++ ;\n"
-#  case decWithOverflowCheck :
-#    if not [option plm_options.noExceptionGeneration value] then
-#      ioCode += "if (" + [mVariable mangledName] + " == " + mMin + ") {\n"
-#      ioCode += "  raise_exception (2, "
-#        + [[[mVariableLocation file] lastPathComponent] utf8Representation]
-#        + ", " + [mVariableLocation line] + ") ;\n"
-#      ioCode += "}\n"
-#    end
-#    ioCode += [mVariable mangledName] + " -- ;\n"
-#  case incNoOverflowCheck :
-#    ioCode += [mVariable mangledName] + " ++ ;\n"
-#  case decNoOverflowCheck :
-#    ioCode += [mVariable mangledName] + " -- ;\n"
-#  end
-#}
-#
-##----------------------------------------------------------------------------------------------------------------------*
-#
-#override method @incDecInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-#  [mVariable enterAccessibleEntities !?ioAccessibleEntities]
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*

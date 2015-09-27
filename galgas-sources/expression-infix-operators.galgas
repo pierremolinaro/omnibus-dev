@@ -59,14 +59,15 @@ method @infixOperatorMap checkWith
   ?rightType:let @unifiedTypeMap-proxy inRightType
   ?operatorLocation:let @location inOperatorLocation
   !resultType: @unifiedTypeMap-proxy outResultType
+  !op:@llvmBinaryOperation outOperation
 {
   let lkey = @lstring.new {![inLeftType key] + "." + [inRightType key] !inOperatorLocation}
   if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType]
+    [self searchKey !lkey ?outResultType ?outOperation]
   else
     error inOperatorLocation
       : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"
-      : outResultType
+      : outResultType, outOperation
   end
 }
 
@@ -119,124 +120,124 @@ override method @infixOperatorExpressionAST analyzeExpression
 #  log leftOperandValue, rightOperandValue
 #--- Check left type
   @infixOperatorMap operatorMap
-  @string binaryOperator
   switch mOp 
   case equal :
     operatorMap = inContext.mEqualOperatorMap
-    binaryOperator = "icmp eq"
+#    binaryOperator = .icmp_eq
   case nonEqual :
     operatorMap = inContext.mNonEqualOperatorMap
-    binaryOperator = "icmp ne"
+#    binaryOperator = .icmp_ne
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
-    binaryOperator = "icmp ult"
+#    binaryOperator = .icmp_ult
   case infEqual :
     operatorMap = inContext.mInfEqualOperatorMap
-    binaryOperator = "icmp ule"
+#    binaryOperator = .icmp_ule
   case strictSup :
     operatorMap = inContext.mStrictSupOperatorMap
-    binaryOperator = "icmp ugt"
+#    binaryOperator = .icmp_ugt
   case supEqual :
     operatorMap = inContext.mSupEqualOperatorMap
-    binaryOperator = "icmp uge"
+#    binaryOperator = .icmp_uge
   case andOp :
     operatorMap = inContext.mAndOperatorMap
-    binaryOperator = "and"
+#    binaryOperator = .and
   case booleanAnd :
     operatorMap = inContext.mBooleanAndOperatorMap
-    binaryOperator = "&&"
+#    binaryOperator = .and # TODO "&&"
   case orOp :
     operatorMap = inContext.mOrOperatorMap
-    binaryOperator = "or"
+#    binaryOperator = .ior
   case booleanOrOp :
     operatorMap = inContext.mBooleanOrOperatorMap
-    binaryOperator = "||"
+#    binaryOperator = .ior # TODO "||"
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
-    binaryOperator = "xor"
+#    binaryOperator = .xor
   case booleanXorOp :
     operatorMap = inContext.mBooleanXorOperatorMap
-    binaryOperator = "xor"
+#    binaryOperator = .xor
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mAddOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      binaryOperator = "add"
+#      binaryOperator = .add
     else
 #      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
-      binaryOperator = "+OVF+"
+#      binaryOperator = .add # TODO "+OVF+"
     end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
-    binaryOperator = "add"
+#    binaryOperator = .add
   case subOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mSubNoOvfOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      binaryOperator = "sub"
+#      binaryOperator = .sub
     else
 #      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
-      binaryOperator = "-OVF-"
+#      binaryOperator = .sub # TODO "-OVF-"
     end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
-    binaryOperator = "sub"
+#    binaryOperator = .sub
   case mulOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mMulOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      binaryOperator = "mul"
+#      binaryOperator = .mul
     else
-      binaryOperator = "*OVF*"
+#      binaryOperator = .mul # TODO "*OVF*"
     end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
-      binaryOperator = "mul"
+#      binaryOperator = .mul
   case divOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mDivOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      binaryOperator = "/"
+#      binaryOperator = .udiv # TODO sdiv
     else
-      binaryOperator = "/OVF/"
+#      binaryOperator =  .udiv # TODO sdiv "/OVF/"
     end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
-    binaryOperator = "/"
+#    binaryOperator =  .udiv # TODO sdiv
   case modOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
     operatorMap = inContext.mModOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-      binaryOperator = "%"
+#      binaryOperator = .urem # TODO srem
     else
 #      infixOperatorIR = .infixModulo{!code:14}
-      binaryOperator = "%OVF%"
+#      binaryOperator = .urem # TODO srem "%OVF%"
     end
   case modOpNoOvf :
     operatorMap = inContext.mModOperatorMap
-    binaryOperator = "%"
+#    binaryOperator = .urem # TODO srem
   case leftShiftOp :
     operatorMap = inContext.mLeftShiftOperatorMap
-    binaryOperator = "shl"
+#    binaryOperator = .shl
   case rightShiftOp :
     operatorMap = inContext.mRightShiftOperatorMap
-    binaryOperator = ">>"
+#    binaryOperator = .lshr # TO .ashr
   end
   [operatorMap checkWith
     !leftType:leftType
     !rightType:rightType
     !operatorLocation:mOperatorLocation
     ?resultType:outResultType
+    ?op:let @llvmBinaryOperation binaryOperator
   ]
 #---
   if [leftOperandValue isLiteralInteger] && [rightOperandValue isLiteralInteger] then
@@ -279,6 +280,7 @@ override method @infixOperatorExpressionAST analyzeExpression
       !leftOperandValue
       !binaryOperator
       !rightOperandValue
+      !mOperatorLocation
     ]
   end
 }

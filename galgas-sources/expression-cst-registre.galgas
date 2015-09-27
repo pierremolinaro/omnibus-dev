@@ -207,7 +207,10 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @registerIntegerConstantInExpressionIR llvmInstructionCode ?!@string ioCode {
+override method @registerIntegerConstantInExpressionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   if mNoCheck then
     ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + mResultVariable
             + " = ((" + mangledNameForType (!name:[mTargetType key]) + " *) "

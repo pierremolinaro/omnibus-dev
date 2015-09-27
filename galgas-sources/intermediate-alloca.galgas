@@ -15,7 +15,10 @@ class @allocaConstantIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @allocaConstantIR llvmInstructionCode ?!@string ioCode {
+override method @allocaConstantIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   let llvmType = [mVariableType llvmType]
   ioCode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
 }

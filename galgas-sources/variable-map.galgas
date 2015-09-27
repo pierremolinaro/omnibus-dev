@@ -34,6 +34,16 @@ getter @operandIR string -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+getter @operandIR name -> @string outResult {
+  switch self
+  case literalInteger (@bigint value) : outResult = [value string]
+  case llvmLocalObject (@string name) : outResult = name
+  case llvmGlobalObject (@string name) : outResult = name
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 getter @operandIR isStatic -> @bool outResult {
   switch self
   case literalInteger (*) : outResult = true

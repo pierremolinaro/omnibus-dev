@@ -90,7 +90,10 @@ class @throwInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @throwInstructionIR llvmInstructionCode ?!@string ioCode {
+override method @throwInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   ioCode += "raise_exception (" + mCode
      + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mThrowInstructionLocation line] + ") ;\n"

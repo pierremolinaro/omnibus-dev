@@ -17,6 +17,15 @@ enum @typeKind {
 
 map @infixOperatorMap {
   @unifiedTypeMap-proxy mResultType
+  @llvmBinaryOperation mOperation
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @incDecOperatorMap {
+  @llvmBinaryOperation mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -153,7 +162,10 @@ struct @semanticContext {
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
   @modeMap mModeMap
-  @stringset mTypeNameSetForIncDec              # ++ and --
+  @incDecOperatorMap mIncNoOVFOperatorMap       # &++
+  @incDecOperatorMap mDecNoOVFOperatorMap       # &--
+  @incDecOperatorMap mIncOVFOperatorMap         # ++
+  @incDecOperatorMap mDecOVFOperatorMap         # --
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <

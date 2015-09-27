@@ -109,38 +109,47 @@ private proc enterBooleanOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_eq
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_ne
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_ult
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_ule
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_ugt
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.icmp_uge
   ]
   [!?ioContext.mBooleanAndOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.and
   ]
   [!?ioContext.mBooleanOrOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.ior
   ]
   [!?ioContext.mBooleanXorOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
+    !.xor
   ]
   [!?ioContext.mNotOperatorMap insertKey
     !inBooleanTypeName
