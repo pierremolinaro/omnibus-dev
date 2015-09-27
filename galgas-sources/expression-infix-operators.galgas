@@ -117,120 +117,92 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?type:let @unifiedTypeMap-proxy rightType
     ?result:let @operandIR rightOperandValue
   ]
-#  log leftOperandValue, rightOperandValue
 #--- Check left type
   @infixOperatorMap operatorMap
   switch mOp 
   case equal :
     operatorMap = inContext.mEqualOperatorMap
-#    binaryOperator = .icmp_eq
   case nonEqual :
     operatorMap = inContext.mNonEqualOperatorMap
-#    binaryOperator = .icmp_ne
   case strictInf :
     operatorMap = inContext.mStrictInfOperatorMap
-#    binaryOperator = .icmp_ult
   case infEqual :
     operatorMap = inContext.mInfEqualOperatorMap
-#    binaryOperator = .icmp_ule
   case strictSup :
     operatorMap = inContext.mStrictSupOperatorMap
-#    binaryOperator = .icmp_ugt
   case supEqual :
     operatorMap = inContext.mSupEqualOperatorMap
-#    binaryOperator = .icmp_uge
   case andOp :
     operatorMap = inContext.mAndOperatorMap
-#    binaryOperator = .and
   case booleanAnd :
     operatorMap = inContext.mBooleanAndOperatorMap
-#    binaryOperator = .and # TODO "&&"
   case orOp :
     operatorMap = inContext.mOrOperatorMap
-#    binaryOperator = .ior
   case booleanOrOp :
     operatorMap = inContext.mBooleanOrOperatorMap
-#    binaryOperator = .ior # TODO "||"
   case xorOp :
     operatorMap = inContext.mXorOperatorMap
-#    binaryOperator = .xor
   case booleanXorOp :
     operatorMap = inContext.mBooleanXorOperatorMap
-#    binaryOperator = .xor
   case addOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    operatorMap = inContext.mAddOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-#      binaryOperator = .add
+      operatorMap = inContext.mAddNoOvfOperatorMap
     else
-#      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_add_overflow" !code:10}
-#      binaryOperator = .add # TODO "+OVF+"
+      operatorMap = inContext.mAddOperatorMap
     end
   case addOpNoOvf :
     operatorMap = inContext.mAddNoOvfOperatorMap
-#    binaryOperator = .add
   case subOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    operatorMap = inContext.mSubNoOvfOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-#      binaryOperator = .sub
+      operatorMap = inContext.mSubNoOvfOperatorMap
     else
-#      infixOperatorIR = .infixOvf {!builtinFunction:"__builtin_sub_overflow" !code:11}
-#      binaryOperator = .sub # TODO "-OVF-"
+      operatorMap = inContext.mSubOperatorMap
     end
   case subOpNoOvf :
     operatorMap = inContext.mSubOperatorMap
-#    binaryOperator = .sub
   case mulOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    operatorMap = inContext.mMulOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-#      binaryOperator = .mul
+      operatorMap = inContext.mMulNoOvfOperatorMap
     else
-#      binaryOperator = .mul # TODO "*OVF*"
+      operatorMap = inContext.mMulOperatorMap
     end
   case mulOpNoOvf :
     operatorMap = inContext.mMulNoOvfOperatorMap
-#      binaryOperator = .mul
   case divOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    operatorMap = inContext.mDivOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-#      binaryOperator = .udiv # TODO sdiv
+      operatorMap = inContext.mDivNoOvfOperatorMap
     else
-#      binaryOperator =  .udiv # TODO sdiv "/OVF/"
+      operatorMap = inContext.mDivOperatorMap
     end
   case divOpNoOvf :
     operatorMap = inContext.mDivNoOvfOperatorMap
-#    binaryOperator =  .udiv # TODO sdiv
   case modOp :
     if [inModeSet hasKey !exceptionModeName ()] then
       error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    operatorMap = inContext.mModOperatorMap
     if [option plm_options.noExceptionGeneration value] then
-#      binaryOperator = .urem # TODO srem
+      operatorMap = inContext.mModNoOvfOperatorMap
     else
-#      infixOperatorIR = .infixModulo{!code:14}
-#      binaryOperator = .urem # TODO srem "%OVF%"
+      operatorMap = inContext.mModOperatorMap
     end
   case modOpNoOvf :
-    operatorMap = inContext.mModOperatorMap
-#    binaryOperator = .urem # TODO srem
+    operatorMap = inContext.mModNoOvfOperatorMap
   case leftShiftOp :
     operatorMap = inContext.mLeftShiftOperatorMap
-#    binaryOperator = .shl
   case rightShiftOp :
     operatorMap = inContext.mRightShiftOperatorMap
-#    binaryOperator = .lshr # TO .ashr
   end
   [operatorMap checkWith
     !leftType:leftType

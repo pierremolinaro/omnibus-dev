@@ -20,6 +20,9 @@ project (1:0:0) -> "plm" {
 #--- Bool
   "galgas-sources/bool-type.galgas"
 
+#--- Pointer
+  "galgas-sources/pointer-size.galgas"
+
 #--- Boolset
 #  "galgas-sources/boolset-type.galgas"
 

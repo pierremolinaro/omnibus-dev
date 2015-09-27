@@ -774,6 +774,7 @@ void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
 
 class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
+  public : GALGAS_uint mAttribute_mPointerSize ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionCodeType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mExceptionLineType ;
@@ -813,6 +814,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_infixOperatorMap mAttribute_mDivOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mDivNoOvfOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mModOperatorMap ;
+  public : GALGAS_infixOperatorMap mAttribute_mModNoOvfOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mLeftShiftOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mRightShiftOperatorMap ;
   public : GALGAS_prefixOperatorMap mAttribute_mUnaryMinusOperatorMap ;
@@ -834,7 +836,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_semanticContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_semanticContext (const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
+  public : GALGAS_semanticContext (const GALGAS_uint & in_mPointerSize,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mBooleanType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionCodeType,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mExceptionLineType,
                                    const GALGAS_unifiedTypeMap & in_mTypeMap,
@@ -873,6 +876,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_infixOperatorMap & in_mDivOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mDivNoOvfOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mModOperatorMap,
+                                   const GALGAS_infixOperatorMap & in_mModNoOvfOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mLeftShiftOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mRightShiftOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnaryMinusOperatorMap,
@@ -890,25 +894,25 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_semanticContext constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+  public : static GALGAS_semanticContext constructor_new (const class GALGAS_uint & inOperand0,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                          const class GALGAS_unifiedTypeMap & inOperand3,
-                                                          const class GALGAS_instanciationMap & inOperand4,
-                                                          const class GALGAS_procedureMap & inOperand5,
-                                                          const class GALGAS_functionMap & inOperand6,
-                                                          const class GALGAS_initRoutineMap & inOperand7,
-                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand8,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                          const class GALGAS_unifiedTypeMap & inOperand4,
+                                                          const class GALGAS_instanciationMap & inOperand5,
+                                                          const class GALGAS_procedureMap & inOperand6,
+                                                          const class GALGAS_functionMap & inOperand7,
+                                                          const class GALGAS_initRoutineMap & inOperand8,
                                                           const class GALGAS_exceptionRoutinePriorityMap & inOperand9,
-                                                          const class GALGAS_registerMap & inOperand10,
-                                                          const class GALGAS_globalConstantMap & inOperand11,
-                                                          const class GALGAS_globalVariableMap & inOperand12,
-                                                          const class GALGAS_modeMap & inOperand13,
-                                                          const class GALGAS_incDecOperatorMap & inOperand14,
+                                                          const class GALGAS_exceptionRoutinePriorityMap & inOperand10,
+                                                          const class GALGAS_registerMap & inOperand11,
+                                                          const class GALGAS_globalConstantMap & inOperand12,
+                                                          const class GALGAS_globalVariableMap & inOperand13,
+                                                          const class GALGAS_modeMap & inOperand14,
                                                           const class GALGAS_incDecOperatorMap & inOperand15,
                                                           const class GALGAS_incDecOperatorMap & inOperand16,
                                                           const class GALGAS_incDecOperatorMap & inOperand17,
-                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_incDecOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
                                                           const class GALGAS_infixOperatorMap & inOperand21,
@@ -931,9 +935,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand38,
                                                           const class GALGAS_infixOperatorMap & inOperand39,
                                                           const class GALGAS_infixOperatorMap & inOperand40,
-                                                          const class GALGAS_prefixOperatorMap & inOperand41,
-                                                          const class GALGAS_prefixOperatorMap & inOperand42,
-                                                          const class GALGAS_prefixOperatorMap & inOperand43
+                                                          const class GALGAS_infixOperatorMap & inOperand41,
+                                                          const class GALGAS_infixOperatorMap & inOperand42,
+                                                          const class GALGAS_prefixOperatorMap & inOperand43,
+                                                          const class GALGAS_prefixOperatorMap & inOperand44,
+                                                          const class GALGAS_prefixOperatorMap & inOperand45
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -998,6 +1004,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mLeftShiftOperatorMap (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mModNoOvfOperatorMap (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mModOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_modeMap reader_mModeMap (LOCATION_ARGS) const ;
@@ -1011,6 +1019,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap reader_mNotOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mOrOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mPointerSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMap reader_mProcedureMap (LOCATION_ARGS) const ;
 

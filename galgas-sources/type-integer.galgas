@@ -241,6 +241,11 @@ private proc enterIntegerOperators
     !selfTypeProxy
     !if inIsSigned then .sremOVF else .uremOVF end
   ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
+    !selfTypeProxy
+    !if inIsSigned then .sremNoOVF else .uremNoOVF end
+  ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !.new {!inIntegerTypeName.string + "." + inIntegerTypeName !inIntegerTypeName.location}
