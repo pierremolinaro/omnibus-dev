@@ -20,29 +20,6 @@ getter @integerDeclaration typeName -> @string outName {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  SYNTAX                                                                                                              *
-#----------------------------------------------------------------------------------------------------------------------*
-
-syntax extension plm_target_specific_syntax {
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-  rule <declaration> ?!@ast ioAST {
-    $newIntegerType$
-    $typeName$ ?let newIntegerTypeName
-    $:$
-    $attribute$ ?let @lstring baseType
-#    ioAST.mDeclarationList += !@integerDeclaration.new {
-#      !newIntegerTypeName
-#      !baseType
-#    }
-  }
-
-  #--------------------------------------------------------------------------------------------------------------------*
-
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #  PRECEDENCE GRAPH                                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -51,6 +28,7 @@ override method @integerDeclaration enterInPrecedenceGraph
 {
   let integerTypeName = [[self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
+  [!?ioGraph addEdge !integerTypeName ![boolTypeName () nowhere]]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -96,44 +74,6 @@ override method @integerDeclaration enterInContext
     !?context:ioContext
   )
 }
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#proc enterIntegerType
-#  ?signed:let @bool inIsSigned
-#  ?size:let @uint inSize
-#  ?!context:@semanticContext ioContext
-#{
-#  let typeName = [if inIsSigned then "int" else "uint" end + inSize nowhere]
-##  [!?ioGraph addNode !typeName !self]
-##  [!?ioGraph addEdge !mIntegerTypeName !.new {!"basetype " + mBaseType !mBaseType.location}]
-##--- Get min and max
-#  @bigint min
-#  @bigint max
-#  if inIsSigned then
-#    min = - (1G << (inSize - 1))
-#    max = (1G << (inSize - 1)) - 1G
-#  else # Unsigned
-#    min = 0G
-#    max = (1G << inSize) - 1G
-#  end
-# #---
-#  [!?ioContext.mTypeMap insertKey
-#    !lkey:typeName
-#    !kind:.integer {!min:min !max:max !unsigned:not inIsSigned !bitCount:inSize}
-#    !constructorMap:{}
-#    !procedureMap:{}
-#    !copiable:true
-#    !equatable:true
-#    !comparable:true
-#  ]
-##--- Enter integer operators
-#  enterIntegerOperators (
-#    !integerTypeName:typeName
-#    !signed:inIsSigned
-#    !?context:ioContext
-#  )
-#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -277,16 +217,9 @@ override method @integerDeclaration initAnalysis ?!context:@semanticContext unus
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @integerDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?context:let @semanticContext unused inContext
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
-#-- Search for base type
-#  [inContext.mTargetBaseTypeMap searchKey !mBaseType ?let cType ?* ?*]
-#---
-#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-#    !mIntegerTypeName
-#    !@integerIR.new { !mIntegerTypeName.string !cType}
-#  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

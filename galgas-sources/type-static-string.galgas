@@ -103,7 +103,7 @@ override method @literalStringDeclaration initAnalysis ?!context:@semanticContex
 
 override method @literalStringDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
 
