@@ -344,16 +344,6 @@ class GALGAS_string categoryReader_mangledName (const class GALGAS_procedureDecl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Category Getter '@registerMapIR-element headerCodeGenerationForRegister' (as function)                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_headerCodeGenerationForRegister (const class GALGAS_registerMapIR_2D_element & inObject,
-                                                                    class C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                 Category Getter '@procedureDeclarationListAST-element getMangledName' (as function)                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

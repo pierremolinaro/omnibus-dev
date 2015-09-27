@@ -294,29 +294,6 @@ override method @registerDeclaration semanticAnalysis
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-private filewrapper registerGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "register-declaration.galgasTemplate"
-    ?@string REGISTER_TYPE_NAME
-    ?@string REGISTER_NAME
-    ?@bigint REGISTER_ADDRESS
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @registerMapIR-element headerCodeGenerationForRegister -> @string outCode {
-  outCode = [filewrapper registerGenerationTemplate.declaration
-    !mRegisterTypeName
-    !lkey.string
-    !mRegisterAddress
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 
 
 

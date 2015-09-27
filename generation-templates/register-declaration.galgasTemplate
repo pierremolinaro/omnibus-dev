@@ -1,6 +1,0 @@
-//---------------------------------------------------------------------------------------------------------------------*
-//%!["register " + REGISTER_NAME stringByLeftAndRightPadding !117 !' ']%*
-//---------------------------------------------------------------------------------------------------------------------*
-
-#define %!mangledNameForRegister (!name:REGISTER_NAME)% (* ((volatile %!mangledNameForType (!name:REGISTER_TYPE_NAME)% *) %![REGISTER_ADDRESS hexString]%))
-

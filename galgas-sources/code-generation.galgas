@@ -141,54 +141,26 @@ proc generateLLVMfile
 {
   let sourceDirectory = inProductDirectory + "/sources"
   var code = ""
-#--- Include target specific files
+#----------------------------------------- Include target specific file
   code += llvmTitleComment (!"Target specific code")
   let targetSpecificFileContents = getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.ll"
   )
-  code += targetSpecificFileContents + "\n"
-#  if not [option plm_options.noExceptionGeneration value] then
-#    let targetExceptionSpecificFileContents = getTargetTextFile (
-#       !currentDir:inCurrentDirectory
-#       !from:inTargetName.string + "/target-exception.c"
-#    )
-#    code += llvmTitleComment (!"Target exception specific code")
-#    code += targetExceptionSpecificFileContents + "\n"
-#  end
-#  for @typeMapIR-element type in inIntermediateCodeStruct.mTypeMapIR do
-#    code += [type.mType headerCodeGenerationForType]
-#  end
-#  code += titleComment (!"Boot")
-#  code += "static void boot (void) ;\n\n"
-#  code += titleComment (!"Init")
-#  code += "static void init (void) ;\n\n"
-#  if not [option plm_options.noExceptionGeneration value] then
-#    code += titleComment (!"Exception")
-#    code += "static void raise_exception_internal (const " + mangledNameForType (!name:[inExceptionCodeType key]) + " inCode,\n"
-#    code += "                                      const char * inSourceFile,\n"
-#    code += "                                      const " + mangledNameForType (!name:[inExceptionLineType key]) + " inSourceLine) ;\n\n"
-#  end
+  code += targetSpecificFileContents
   code += llvmTitleComment (!"Static Strings")
   for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
     code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
   end
   code += "\n"
-#  for register in inIntermediateCodeStruct.mRegisterMap do
-#    code += [register headerCodeGenerationForRegister]
-#  end
+#----------------------------------------- Global constants
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
     code += [globalConstant headerCodeGeneration]
   end
+#----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
     code += [globalVariable generateLLVM]
   end
-#  for function in inIntermediateCodeStruct.mFunctionMapIR do
-#    code += [function headerCodeGeneration]
-#  end
-#  for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-#    code += [procedure headerCodeGeneration]
-#  end
 #----------------------------------------- Boot
   @stringset intrinsicsDeclarationSet = {}
   code += llvmTitleComment (!"Boot")
