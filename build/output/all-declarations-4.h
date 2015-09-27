@@ -256,6 +256,37 @@ class GALGAS_bool categoryReader_isStatic (const class GALGAS_variableKindIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                         Category method '@binaryOperationIR enterCodeForOverflowOperation'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_binaryOperationIR_enterCodeForOverflowOperation) (const class cPtr_binaryOperationIR * inObject,
+                                                                                         const class GALGAS_string constinArgument0,
+                                                                                         const class GALGAS_uint constinArgument1,
+                                                                                         class GALGAS_string & ioArgument2,
+                                                                                         const class GALGAS_generationContext constinArgument3,
+                                                                                         class GALGAS_stringset & ioArgument4,
+                                                                                         class C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterCodeForOverflowOperation (const int32_t inClassIndex,
+                                                        categoryMethodSignature_binaryOperationIR_enterCodeForOverflowOperation inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOperationIR * inObject,
+                                                       const GALGAS_string constin_inOperation,
+                                                       const GALGAS_uint constin_inCode,
+                                                       GALGAS_string & io_ioCode,
+                                                       const GALGAS_generationContext constin_inGenerationContext,
+                                                       GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Category method '@variableKindIR loadFromMemory'                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
