@@ -93,8 +93,11 @@ class @assertInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @assertInstructionIR llvmInstructionCode ?!@string ioCode {
-  [mInstructionList instructionListLLVMCode !?ioCode]
+override method @assertInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset ioIntrinsicsDeclarationSet
+{
+  [mInstructionList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
   ioCode += "if (!" + mExpressionValue + ") {\n"
   ioCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]

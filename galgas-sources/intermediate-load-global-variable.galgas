@@ -19,7 +19,10 @@ class @loadGlobalVariableIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadGlobalVariableIR llvmInstructionCode ?!@string ioCode {
+override method @loadGlobalVariableIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   let llvmType = [mVariableType llvmType]
   ioCode += "  " + mTargetValue + " = load "
   if mIsVolatile then

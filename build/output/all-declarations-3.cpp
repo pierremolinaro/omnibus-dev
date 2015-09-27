@@ -10216,6 +10216,9 @@ typeComparisonResult cPtr_binaryOperationIR::dynamicObjectCompare (const acPtr_c
   if (kOperandEqual == result) {
     result = mAttribute_mRightOperand.objectCompare (p->mAttribute_mRightOperand) ;
   }
+  if (kOperandEqual == result) {
+    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+  }
   return result ;
 }
 
@@ -10256,12 +10259,13 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 GALGAS_binaryOperationIR GALGAS_binaryOperationIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetOperand,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
                                                                     const GALGAS_operandIR & inAttribute_mLeftOperand,
-                                                                    const GALGAS_string & inAttribute_mOperation,
-                                                                    const GALGAS_operandIR & inAttribute_mRightOperand
+                                                                    const GALGAS_llvmBinaryOperation & inAttribute_mOperation,
+                                                                    const GALGAS_operandIR & inAttribute_mRightOperand,
+                                                                    const GALGAS_location & inAttribute_mLocation
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_binaryOperationIR result ;
-  if (inAttribute_mTargetOperand.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mLeftOperand.isValid () && inAttribute_mOperation.isValid () && inAttribute_mRightOperand.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_binaryOperationIR (inAttribute_mTargetOperand, inAttribute_mTargetVarType, inAttribute_mLeftOperand, inAttribute_mOperation, inAttribute_mRightOperand COMMA_THERE)) ;
+  if (inAttribute_mTargetOperand.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mLeftOperand.isValid () && inAttribute_mOperation.isValid () && inAttribute_mRightOperand.isValid () && inAttribute_mLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_binaryOperationIR (inAttribute_mTargetOperand, inAttribute_mTargetVarType, inAttribute_mLeftOperand, inAttribute_mOperation, inAttribute_mRightOperand, inAttribute_mLocation COMMA_THERE)) ;
   }
   return result ;
 }
@@ -10322,8 +10326,8 @@ GALGAS_operandIR cPtr_binaryOperationIR::reader_mLeftOperand (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
+GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
@@ -10334,7 +10338,7 @@ GALGAS_string GALGAS_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperation ;
 }
 
@@ -10357,21 +10361,41 @@ GALGAS_operandIR cPtr_binaryOperationIR::reader_mRightOperand (UNUSED_LOCATION_A
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+  GALGAS_location result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_binaryOperationIR) ;
+    result = p->mAttribute_mLocation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cPtr_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLocation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                     Pointer class for @binaryOperationIR class                                      *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_binaryOperationIR::cPtr_binaryOperationIR (const GALGAS_operandIR & in_mTargetOperand,
                                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                                 const GALGAS_operandIR & in_mLeftOperand,
-                                                const GALGAS_string & in_mOperation,
-                                                const GALGAS_operandIR & in_mRightOperand
+                                                const GALGAS_llvmBinaryOperation & in_mOperation,
+                                                const GALGAS_operandIR & in_mRightOperand,
+                                                const GALGAS_location & in_mLocation
                                                 COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetOperand (in_mTargetOperand),
 mAttribute_mTargetVarType (in_mTargetVarType),
 mAttribute_mLeftOperand (in_mLeftOperand),
 mAttribute_mOperation (in_mOperation),
-mAttribute_mRightOperand (in_mRightOperand) {
+mAttribute_mRightOperand (in_mRightOperand),
+mAttribute_mLocation (in_mLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10392,6 +10416,8 @@ void cPtr_binaryOperationIR::description (C_String & ioString,
   mAttribute_mOperation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mRightOperand.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -10399,7 +10425,7 @@ void cPtr_binaryOperationIR::description (C_String & ioString,
 
 acPtr_class * cPtr_binaryOperationIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_binaryOperationIR (mAttribute_mTargetOperand, mAttribute_mTargetVarType, mAttribute_mLeftOperand, mAttribute_mOperation, mAttribute_mRightOperand COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_binaryOperationIR (mAttribute_mTargetOperand, mAttribute_mTargetVarType, mAttribute_mLeftOperand, mAttribute_mOperation, mAttribute_mRightOperand, mAttribute_mLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -20007,13 +20033,14 @@ void categoryMethod_analyzeRoutineInstructionList (const GALGAS_instructionListA
 
 void categoryMethod_instructionListLLVMCode (const GALGAS_instructionListIR inObject,
                                              GALGAS_string & ioArgument_ioCode,
+                                             GALGAS_stringset & ioArgument_ioIntrinsicsDeclarationSet,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_5183 (temp_0, kEnumeration_up) ;
-  while (enumerator_5183.hasCurrentObject ()) {
-    callCategoryMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_5183.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioCode, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 118)) ;
-    enumerator_5183.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_5227 (temp_0, kEnumeration_up) ;
+  while (enumerator_5227.hasCurrentObject ()) {
+    callCategoryMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_5227.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioCode, ioArgument_ioIntrinsicsDeclarationSet, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 121)) ;
+    enumerator_5227.gotoNextObject () ;
   }
 }
 
@@ -20051,6 +20078,49 @@ GALGAS_string categoryReader_string (const GALGAS_operandIR & inObject,
       const cEnumAssociatedValues_operandIR_llvmGlobalObject * extractPtr_1522 = (const cEnumAssociatedValues_operandIR_llvmGlobalObject *) (temp_0.unsafePointer ()) ;
       const GALGAS_string extractedValue_name = extractPtr_1522->mAssociatedValue0 ;
       result_outResult = GALGAS_string ("@").add_operation (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 31)) ;
+    }
+    break ;
+  }
+//---
+  return result_outResult ;
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Category Reader '@operandIR name'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string categoryReader_name (const GALGAS_operandIR & inObject,
+                                   C_Compiler * /* inCompiler */
+                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  const GALGAS_operandIR temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_operandIR::kNotBuilt:
+    break ;
+  case GALGAS_operandIR::kEnum_literalInteger:
+    {
+      const cEnumAssociatedValues_operandIR_literalInteger * extractPtr_1780 = (const cEnumAssociatedValues_operandIR_literalInteger *) (temp_0.unsafePointer ()) ;
+      const GALGAS_bigint extractedValue_value = extractPtr_1780->mAssociatedValue0 ;
+      result_outResult = extractedValue_value.reader_string (SOURCE_FILE ("variable-map.galgas", 39)) ;
+    }
+    break ;
+  case GALGAS_operandIR::kEnum_llvmLocalObject:
+    {
+      const cEnumAssociatedValues_operandIR_llvmLocalObject * extractPtr_1837 = (const cEnumAssociatedValues_operandIR_llvmLocalObject *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1837->mAssociatedValue0 ;
+      result_outResult = extractedValue_name ;
+    }
+    break ;
+  case GALGAS_operandIR::kEnum_llvmGlobalObject:
+    {
+      const cEnumAssociatedValues_operandIR_llvmGlobalObject * extractPtr_1895 = (const cEnumAssociatedValues_operandIR_llvmGlobalObject *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1895->mAssociatedValue0 ;
+      result_outResult = extractedValue_name ;
     }
     break ;
   }
@@ -20399,210 +20469,5 @@ void callCategoryMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObj
       f (inObject, constin_inContext, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
     }
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
-mAttribute_mTemporaryIndex (),
-mAttribute_mExceptionSetupRoutinePriorityMap (),
-mAttribute_mExceptionLoopRoutinePriorityMap (),
-mAttribute_mInitRoutinePriorityMap (),
-mAttribute_mBootRoutinePriorityMap (),
-mAttribute_mSubprogramInvocationGraph () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::~ GALGAS_semanticTemporariesStruct (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS_uint & inOperand0,
-                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
-                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                    const GALGAS_subprogramInvocationGraph & inOperand5) :
-mAttribute_mTemporaryIndex (inOperand0),
-mAttribute_mExceptionSetupRoutinePriorityMap (inOperand1),
-mAttribute_mExceptionLoopRoutinePriorityMap (inOperand2),
-mAttribute_mInitRoutinePriorityMap (inOperand3),
-mAttribute_mBootRoutinePriorityMap (inOperand4),
-mAttribute_mSubprogramInvocationGraph (inOperand5) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_semanticTemporariesStruct (GALGAS_uint::constructor_default (HERE),
-                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_exceptionRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_initRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_bootRoutinePriorityMap::constructor_emptyMap (HERE),
-                                           GALGAS_subprogramInvocationGraph::constructor_emptyGraph (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_new (const GALGAS_uint & inOperand0,
-                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand1,
-                                                                                    const GALGAS_exceptionRoutinePriorityMap & inOperand2,
-                                                                                    const GALGAS_initRoutinePriorityMap & inOperand3,
-                                                                                    const GALGAS_bootRoutinePriorityMap & inOperand4,
-                                                                                    const GALGAS_subprogramInvocationGraph & inOperand5 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_semanticTemporariesStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mTemporaryIndex.objectCompare (inOperand.mAttribute_mTemporaryIndex) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionSetupRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mExceptionLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mExceptionLoopRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mInitRoutinePriorityMap.objectCompare (inOperand.mAttribute_mInitRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mBootRoutinePriorityMap.objectCompare (inOperand.mAttribute_mBootRoutinePriorityMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSubprogramInvocationGraph.objectCompare (inOperand.mAttribute_mSubprogramInvocationGraph) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_semanticTemporariesStruct::isValid (void) const {
-  return mAttribute_mTemporaryIndex.isValid () && mAttribute_mExceptionSetupRoutinePriorityMap.isValid () && mAttribute_mExceptionLoopRoutinePriorityMap.isValid () && mAttribute_mInitRoutinePriorityMap.isValid () && mAttribute_mBootRoutinePriorityMap.isValid () && mAttribute_mSubprogramInvocationGraph.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTemporariesStruct::drop (void) {
-  mAttribute_mTemporaryIndex.drop () ;
-  mAttribute_mExceptionSetupRoutinePriorityMap.drop () ;
-  mAttribute_mExceptionLoopRoutinePriorityMap.drop () ;
-  mAttribute_mInitRoutinePriorityMap.drop () ;
-  mAttribute_mBootRoutinePriorityMap.drop () ;
-  mAttribute_mSubprogramInvocationGraph.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @semanticTemporariesStruct:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mTemporaryIndex.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mExceptionLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uint GALGAS_semanticTemporariesStruct::reader_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTemporaryIndex ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionSetupRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExceptionLoopRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::reader_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubprogramInvocationGraph ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @semanticTemporariesStruct type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTemporariesStruct ("semanticTemporariesStruct",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticTemporariesStruct::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticTemporariesStruct::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticTemporariesStruct (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_semanticTemporariesStruct result ;
-  const GALGAS_semanticTemporariesStruct * p = (const GALGAS_semanticTemporariesStruct *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticTemporariesStruct *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticTemporariesStruct", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
 }
 

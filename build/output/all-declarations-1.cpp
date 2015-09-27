@@ -2878,7 +2878,7 @@ GALGAS_registerFieldMap GALGAS_registerFieldMap::extractObject (const GALGAS_obj
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_registerBitSliceAccessMap::cMapElement_registerBitSliceAccessMap (const GALGAS_lstring & inKey,
-                                                                              const GALGAS_string & in_mAccessOperator,
+                                                                              const GALGAS_llvmBinaryOperation & in_mAccessOperator,
                                                                               const GALGAS_bigint & in_mAccessRightOperand,
                                                                               const GALGAS_registerBitSliceAccessMap & in_mSubMap,
                                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
@@ -2993,7 +2993,7 @@ GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::reader_overri
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                            const GALGAS_string & inArgument0,
+                                                            const GALGAS_llvmBinaryOperation & inArgument0,
                                                             const GALGAS_bigint & inArgument1,
                                                             const GALGAS_registerBitSliceAccessMap & inArgument2,
                                                             const GALGAS_unifiedTypeMap_2D_proxy & inArgument3,
@@ -3012,7 +3012,7 @@ void GALGAS_registerBitSliceAccessMap::addAssign_operation (const GALGAS_lstring
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::modifier_insertKey (GALGAS_lstring inKey,
-                                                           GALGAS_string inArgument0,
+                                                           GALGAS_llvmBinaryOperation inArgument0,
                                                            GALGAS_bigint inArgument1,
                                                            GALGAS_registerBitSliceAccessMap inArgument2,
                                                            GALGAS_unifiedTypeMap_2D_proxy inArgument3,
@@ -3035,7 +3035,7 @@ const char * kSearchErrorMessage_registerBitSliceAccessMap_searchKey = "the '%K'
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_registerBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
-                                                         GALGAS_string & outArgument0,
+                                                         GALGAS_llvmBinaryOperation & outArgument0,
                                                          GALGAS_bigint & outArgument1,
                                                          GALGAS_registerBitSliceAccessMap & outArgument2,
                                                          GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
@@ -3061,12 +3061,12 @@ void GALGAS_registerBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_registerBitSliceAccessMap::reader_mAccessOperatorForKey (const GALGAS_string & inKey,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) attributes ;
-  GALGAS_string result ;
+  GALGAS_llvmBinaryOperation result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
     result = p->mAttribute_mAccessOperator ;
@@ -3121,7 +3121,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_registerBitSliceAccessMap::reader_mResultT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_string inAttributeValue,
+void GALGAS_registerBitSliceAccessMap::modifier_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
                                                                           GALGAS_string inKey,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) {
@@ -3211,7 +3211,7 @@ GALGAS_lstring cEnumerator_registerBitSliceAccessMap::current_lkey (LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cEnumerator_registerBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cEnumerator_registerBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
   const cMapElement_registerBitSliceAccessMap * p = (const cMapElement_registerBitSliceAccessMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_registerBitSliceAccessMap) ;
   return p->mAttribute_mAccessOperator ;
@@ -3281,6 +3281,565 @@ GALGAS_registerBitSliceAccessMap GALGAS_registerBitSliceAccessMap::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("registerBitSliceAccessMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation::GALGAS_llvmBinaryOperation (void) :
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_addNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_addNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_subNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_subNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_mulNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_udivNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sdivNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uremNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremNoOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sremNoOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uaddOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uaddOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_saddOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_saddOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_usubOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_usubOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ssubOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_mulOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_udivOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sdivOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_uremOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremOVF (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_sremOVF ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_and (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_and ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ior (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ior ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_xor (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_xor ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_shl (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_shl ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ashr (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_ashr ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_lshr (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_lshr ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_eq ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ne ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ult (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ult ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ule (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ule ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ugt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_ugt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_uge (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_uge ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_slt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sle ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sgt ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  result.mEnum = kEnum_icmp_5F_sge ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_llvmBinaryOperation [33] = {
+  "(not built)",
+  "addNoOVF",
+  "subNoOVF",
+  "mulNoOVF",
+  "udivNoOVF",
+  "sdivNoOVF",
+  "uremNoOVF",
+  "sremNoOVF",
+  "uaddOVF",
+  "saddOVF",
+  "usubOVF",
+  "ssubOVF",
+  "mulOVF",
+  "udivOVF",
+  "sdivOVF",
+  "uremOVF",
+  "sremOVF",
+  "and",
+  "ior",
+  "xor",
+  "shl",
+  "ashr",
+  "lshr",
+  "icmp_eq",
+  "icmp_ne",
+  "icmp_ult",
+  "icmp_ule",
+  "icmp_ugt",
+  "icmp_uge",
+  "icmp_slt",
+  "icmp_sle",
+  "icmp_sgt",
+  "icmp_sge"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isAddNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_addNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSubNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_subNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isMulNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremNoOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uaddOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_saddOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_usubOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ssubOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isMulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isUremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isSremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremOVF == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isAnd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isXor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isShl (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_shl == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isAshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_ashr == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isLshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_lshr == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_eq (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_eq == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_ne (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ne == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_ult (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ult == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_ule (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ule == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_ugt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ugt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_uge (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_uge == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_slt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_slt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_sle (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sle == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_sgt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sgt == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmBinaryOperation::reader_isIcmp_5F_sge (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sge == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_llvmBinaryOperation::description (C_String & ioString,
+                                              const int32_t /* inIndentation */) const {
+  ioString << "<enum @llvmBinaryOperation: " << gEnumNameArrayFor_llvmBinaryOperation [mEnum] ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llvmBinaryOperation & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @llvmBinaryOperation type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_llvmBinaryOperation ("llvmBinaryOperation",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_llvmBinaryOperation::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_llvmBinaryOperation ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_llvmBinaryOperation (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_llvmBinaryOperation result ;
+  const GALGAS_llvmBinaryOperation * p = (const GALGAS_llvmBinaryOperation *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_llvmBinaryOperation *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("llvmBinaryOperation", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4190,23 +4749,25 @@ GALGAS_infixOperator GALGAS_infixOperator::extractObject (const GALGAS_object & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_infixOperatorMap::cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
-                                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
+                                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
+                                                            const GALGAS_llvmBinaryOperation & in_mOperation
                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mResultType (in_mResultType) {
+mAttribute_mResultType (in_mResultType),
+mAttribute_mOperation (in_mOperation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_infixOperatorMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mResultType.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mResultType.isValid () && mAttribute_mOperation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_infixOperatorMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_infixOperatorMap (mAttribute_lkey, mAttribute_mResultType COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_infixOperatorMap (mAttribute_lkey, mAttribute_mResultType, mAttribute_mOperation COMMA_HERE)) ;
   return result ;
 }
 
@@ -4217,6 +4778,10 @@ void cMapElement_infixOperatorMap::description (C_String & ioString, const int32
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mResultType" ":" ;
   mAttribute_mResultType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mOperation" ":" ;
+  mAttribute_mOperation.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4226,6 +4791,9 @@ typeComparisonResult cMapElement_infixOperatorMap::compare (const cCollectionEle
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
     result = mAttribute_mResultType.objectCompare (operand->mAttribute_mResultType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperation.objectCompare (operand->mAttribute_mOperation) ;
   }
   return result ;
 }
@@ -4279,10 +4847,11 @@ GALGAS_infixOperatorMap GALGAS_infixOperatorMap::reader_overriddenMap (C_Compile
 
 void GALGAS_infixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                    const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                   const GALGAS_llvmBinaryOperation & inArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap * p = NULL ;
-  macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4295,10 +4864,11 @@ void GALGAS_infixOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 void GALGAS_infixOperatorMap::modifier_insertKey (GALGAS_lstring inKey,
                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                  GALGAS_llvmBinaryOperation inArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   cMapElement_infixOperatorMap * p = NULL ;
-  macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -4315,6 +4885,7 @@ const char * kSearchErrorMessage_infixOperatorMap_searchKey = "** internal error
 
 void GALGAS_infixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                 GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                GALGAS_llvmBinaryOperation & outArgument1,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) performSearch (inKey,
@@ -4323,9 +4894,11 @@ void GALGAS_infixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                                                                    COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
+    outArgument1.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
     outArgument0 = p->mAttribute_mResultType ;
+    outArgument1 = p->mAttribute_mOperation ;
   }
 }
 
@@ -4346,6 +4919,21 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_infixOperatorMap::reader_mResultTypeForKey
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_llvmBinaryOperation GALGAS_infixOperatorMap::reader_mOperationForKey (const GALGAS_string & inKey,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) attributes ;
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
+    result = p->mAttribute_mOperation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_infixOperatorMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                              GALGAS_string inKey,
                                                              C_Compiler * inCompiler
@@ -4355,6 +4943,20 @@ void GALGAS_infixOperatorMap::modifier_setMResultTypeForKey (GALGAS_unifiedTypeM
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
     p->mAttribute_mResultType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorMap::modifier_setMOperationForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_infixOperatorMap * p = (cMapElement_infixOperatorMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
+    p->mAttribute_mOperation = inAttributeValue ;
   }
 }
 
@@ -4381,7 +4983,7 @@ cGenericAbstractEnumerator () {
 GALGAS_infixOperatorMap_2D_element cEnumerator_infixOperatorMap::current (LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
-  return GALGAS_infixOperatorMap_2D_element (p->mAttribute_lkey, p->mAttribute_mResultType) ;
+  return GALGAS_infixOperatorMap_2D_element (p->mAttribute_lkey, p->mAttribute_mResultType, p->mAttribute_mOperation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4398,6 +5000,14 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_infixOperatorMap::current_mResultType
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
   return p->mAttribute_mResultType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cEnumerator_infixOperatorMap::current_mOperation (LOCATION_ARGS) const {
+  const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_infixOperatorMap) ;
+  return p->mAttribute_mOperation ;
 }
 
 
@@ -10320,6 +10930,264 @@ GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
       result = *p ;
     }else{
       inCompiler->castError ("typeKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_incDecOperatorMap::cMapElement_incDecOperatorMap (const GALGAS_lstring & inKey,
+                                                              const GALGAS_llvmBinaryOperation & in_mOperation
+                                                              COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_mOperation (in_mOperation) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_incDecOperatorMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mOperation.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_incDecOperatorMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_incDecOperatorMap (mAttribute_lkey, mAttribute_mOperation COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_incDecOperatorMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mOperation" ":" ;
+  mAttribute_mOperation.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_incDecOperatorMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_incDecOperatorMap * operand = (cMapElement_incDecOperatorMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperation.objectCompare (operand->mAttribute_mOperation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap::GALGAS_incDecOperatorMap (const GALGAS_incDecOperatorMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap & GALGAS_incDecOperatorMap::operator = (const GALGAS_incDecOperatorMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::constructor_mapWithMapToOverride (const GALGAS_incDecOperatorMap & inMapToOverride
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::reader_overriddenMap (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_incDecOperatorMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                    const GALGAS_llvmBinaryOperation & inArgument0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@incDecOperatorMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::modifier_insertKey (GALGAS_lstring inKey,
+                                                   GALGAS_llvmBinaryOperation inArgument0,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * p = NULL ;
+  macroMyNew (p, cMapElement_incDecOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "** internal error **" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_incDecOperatorMap_searchKey = "** internal error **" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::method_searchKey (GALGAS_lstring inKey,
+                                                 GALGAS_llvmBinaryOperation & outArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) performSearch (inKey,
+                                                                                                     inCompiler,
+                                                                                                     kSearchErrorMessage_incDecOperatorMap_searchKey
+                                                                                                     COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    outArgument0 = p->mAttribute_mOperation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_incDecOperatorMap::reader_mOperationForKey (const GALGAS_string & inKey,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) attributes ;
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    result = p->mAttribute_mOperation ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_incDecOperatorMap::modifier_setMOperationForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                             GALGAS_string inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_incDecOperatorMap * p = (cMapElement_incDecOperatorMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+    p->mAttribute_mOperation = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_incDecOperatorMap * GALGAS_incDecOperatorMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                             const GALGAS_string & inKey
+                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_incDecOperatorMap * result = (cMapElement_incDecOperatorMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_incDecOperatorMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_incDecOperatorMap::cEnumerator_incDecOperatorMap (const GALGAS_incDecOperatorMap & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap_2D_element cEnumerator_incDecOperatorMap::current (LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+  return GALGAS_incDecOperatorMap_2D_element (p->mAttribute_lkey, p->mAttribute_mOperation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_incDecOperatorMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cEnumerator_incDecOperatorMap::current_mOperation (LOCATION_ARGS) const {
+  const cMapElement_incDecOperatorMap * p = (const cMapElement_incDecOperatorMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_incDecOperatorMap) ;
+  return p->mAttribute_mOperation ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @incDecOperatorMap type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_incDecOperatorMap ("incDecOperatorMap",
+                                          NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_incDecOperatorMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_incDecOperatorMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_incDecOperatorMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_incDecOperatorMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_incDecOperatorMap GALGAS_incDecOperatorMap::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_incDecOperatorMap result ;
+  const GALGAS_incDecOperatorMap * p = (const GALGAS_incDecOperatorMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_incDecOperatorMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("incDecOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

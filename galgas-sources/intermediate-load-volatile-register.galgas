@@ -19,7 +19,10 @@ class @loadRegisterIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadRegisterIR llvmInstructionCode ?!@string ioCode {
+override method @loadRegisterIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   let llvmType = [mRegisterType llvmType]
   ioCode += "  " + mTargetValue + " = load volatile " + llvmType + ", " + llvmType
          + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"

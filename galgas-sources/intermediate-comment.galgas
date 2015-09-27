@@ -16,7 +16,10 @@ override method @commentIR enterAccessibleEntities ?!@accessibleEntities unused 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @commentIR llvmInstructionCode ?!@string ioCode {
+override method @commentIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   ioCode += ";--- " + mComment + "\n"
 }
 

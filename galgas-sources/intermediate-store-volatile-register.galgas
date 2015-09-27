@@ -19,7 +19,10 @@ class @storeVolatileIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @storeVolatileIR llvmInstructionCode ?!@string ioCode {
+override method @storeVolatileIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
   let llvmType = [mTargetVarType llvmType]
   ioCode += "  store volatile " + llvmType + " " + mSourceValue + ", " + llvmType
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"

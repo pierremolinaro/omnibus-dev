@@ -59,7 +59,9 @@ abstract class @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract method @abstractInstructionIR llvmInstructionCode ?!@string ioCode
+abstract method @abstractInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset ioIntrinsicsDeclarationSet
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @instructionListIR
@@ -188,10 +190,11 @@ proc generateLLVMfile
 #    code += [procedure headerCodeGeneration]
 #  end
 #----------------------------------------- Boot
+  @stringset intrinsicsDeclarationSet = {}
   code += llvmTitleComment (!"Boot")
   code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR instructionListLLVMCode !?code]
+    [boot.mInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
   end
   code += ";---\n"
   code += "  ret void\n"
@@ -200,32 +203,41 @@ proc generateLLVMfile
   code += llvmTitleComment (!"Init")
   code += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR instructionListLLVMCode !?code]
+    [init.mInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
   end
   code += ";---\n"
   code += "  ret void\n"
   code += "}\n\n"
-#----------------------------------------- Exception
-#  if not [option plm_options.noExceptionGeneration value] then
-#    code += llvmTitleComment (!"Raise Exception internal")
-#    code += "static void raise_exception_internal (const int32_t in_CODE,\n"
-#    code += "                                      const char * in_FILE,\n"
-#    code += "                                      const uint32_t in_LINE) {\n"
-#    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code]
-#    [!?code incIndentation !2]
-#    code += "while (1) {\n"
-#    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code]
-#    code += "}\n"
-#    [!?code decIndentation !2]
-#    code += "}\n\n"
-#  end
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    code += [procedure llvmCodeGeneration]
+    [procedure llvmCodeGeneration !?code !?intrinsicsDeclarationSet]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
-    code += [function implementationCodeGeneration]
+    [function implementationCodeGeneration !?code !?intrinsicsDeclarationSet]
+  end
+#----------------------------------------- Exception
+  if not [option plm_options.noExceptionGeneration value] then
+    code += getTargetTextFile (
+       !currentDir:inCurrentDirectory
+       !from:inTargetName.string + "/target-exception.ll"
+    )
+    code += llvmTitleComment (!"Raise Exception internal")
+    code += "define internal void @raise_exception_internal (i32 %in_CODE, i32 %in_LINE) nounwind noreturn {\n"
+    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    code += "  br label %exception.loop\n\n"
+    code += "exception.loop:\n"
+    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code !?intrinsicsDeclarationSet]
+    code += "  br label %exception.loop\n"
+    code += "}\n\n"
+  end
+#----------------------------------------- Intrinsics
+  if [intrinsicsDeclarationSet count] > 0 then
+    code += llvmTitleComment (!"LLVM intrinsics")
+    for (s) in intrinsicsDeclarationSet do
+      code += s + "\n"
+    end
+    code += "\n"
   end
 #----------------------------------------- Write LLVM file
   code += llvmSeparatorLine ()

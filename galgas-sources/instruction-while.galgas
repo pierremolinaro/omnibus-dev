@@ -130,17 +130,20 @@ class @whileInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @whileInstructionIR llvmInstructionCode ?!@string ioCode {
+override method @whileInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset ioIntrinsicsDeclarationSet
+{
   ioCode += ";--- while (" + mTestExpression + ") {\n"
   let labelTest = "while." + mLabelIndex + ".test"
   let labelLoop = "while." + mLabelIndex + ".loop"
   let labelEnd  = "while." + mLabelIndex + ".end"
   ioCode += "  br label %" + labelTest + "\n\n"
   ioCode += labelTest + ":\n"
-  [mTestInstructionGenerationList instructionListLLVMCode !?ioCode]
+  [mTestInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
   ioCode += "  br i1 " + mTestExpression + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioCode += labelLoop + ":\n"
-  [mInstructionGenerationList instructionListLLVMCode !?ioCode]
+  [mInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelTest + "\n\n"
   ioCode += labelEnd + ":\n"
 }

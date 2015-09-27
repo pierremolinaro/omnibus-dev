@@ -86,7 +86,7 @@ override method @varInExpressionAST analyzeExpression
     if [registerBitSliceMap count] > 0 then # It is a register
       [registerBitSliceMap searchKey
         !field
-        ?let @string accessOperator
+        ?let @llvmBinaryOperation accessOperator
         ?let @bigint accessRightOperand
         ?let submap
         ?let newResultType
@@ -99,15 +99,8 @@ override method @varInExpressionAST analyzeExpression
         !variableValueName
         !accessOperator
         !.literalInteger {!value:accessRightOperand}
+        !mSourceVarName.location
       ]
-#      ioInstructionGenerationList += !@operatorInfixExpressionIR.new {
-#        !newResultType
-#        !newResultingVariable
-#        !resultingVariable
-#        !accessOperator
-#        !accessRightOperand
-#        !mSourceVarName.location
-#      }
       variableValueName = newResultingVariable 
       registerBitSliceMap = submap
       outExpressionType = newResultType
@@ -153,9 +146,12 @@ class @fieldAccessIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @fieldAccessIR llvmInstructionCode ?!@string ioCode {
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-    ioCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
+override method @fieldAccessIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
+  ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
+  ioCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -188,7 +188,10 @@ class @ifInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
+override method @ifInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?!@stringset ioIntrinsicsDeclarationSet
+{
   ioCode += ";--- if (" + mTestVariable + ") {\n"
   let labelTrue = "if." + [mLocation locationIndex] + ".true"
   let labelFalse = "if." + [mLocation locationIndex] + ".false"
@@ -196,11 +199,11 @@ override method @ifInstructionIR llvmInstructionCode ?!@string ioCode {
   ioCode += "  br i1 " + mTestVariable + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioCode += labelTrue + ":\n"
-  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode]
+  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelEnd + "\n\n"
 #--- false branch
   ioCode += labelFalse + ":\n"
-  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode]
+  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelEnd + "\n\n"
 #--- end
   ioCode += labelEnd + ":\n"

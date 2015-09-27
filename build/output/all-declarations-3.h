@@ -595,8 +595,9 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
   public : static GALGAS_binaryOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
                                                             const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                             const class GALGAS_operandIR & inOperand2,
-                                                            const class GALGAS_string & inOperand3,
-                                                            const class GALGAS_operandIR & inOperand4
+                                                            const class GALGAS_llvmBinaryOperation & inOperand3,
+                                                            const class GALGAS_operandIR & inOperand4,
+                                                            const class GALGAS_location & inOperand5
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -610,7 +611,9 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mOperation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
 
@@ -640,15 +643,17 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
   public : GALGAS_operandIR mAttribute_mTargetOperand ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
   public : GALGAS_operandIR mAttribute_mLeftOperand ;
-  public : GALGAS_string mAttribute_mOperation ;
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
   public : GALGAS_operandIR mAttribute_mRightOperand ;
+  public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
   public : cPtr_binaryOperationIR (const GALGAS_operandIR & in_mTargetOperand,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                    const GALGAS_operandIR & in_mLeftOperand,
-                                   const GALGAS_string & in_mOperation,
-                                   const GALGAS_operandIR & in_mRightOperand
+                                   const GALGAS_llvmBinaryOperation & in_mOperation,
+                                   const GALGAS_operandIR & in_mRightOperand,
+                                   const GALGAS_location & in_mLocation
                                    COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -658,8 +663,9 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mOperation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation reader_mOperation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2777,6 +2783,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
 
 typedef void (*categoryMethodSignature_abstractInstructionIR_llvmInstructionCode) (const class cPtr_abstractInstructionIR * inObject,
                                                                                    class GALGAS_string & ioArgument0,
+                                                                                   class GALGAS_stringset & ioArgument1,
                                                                                    class C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2789,6 +2796,7 @@ void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
 
 void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
                                              GALGAS_string & io_ioCode,
+                                             GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2801,6 +2809,16 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
 class GALGAS_string categoryReader_string (const class GALGAS_operandIR & inObject,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Category Getter '@operandIR name' (as function)                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_name (const class GALGAS_operandIR & inObject,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

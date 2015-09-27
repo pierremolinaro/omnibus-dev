@@ -791,7 +791,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
-  public : GALGAS_stringset mAttribute_mTypeNameSetForIncDec ;
+  public : GALGAS_incDecOperatorMap mAttribute_mIncNoOVFOperatorMap ;
+  public : GALGAS_incDecOperatorMap mAttribute_mDecNoOVFOperatorMap ;
+  public : GALGAS_incDecOperatorMap mAttribute_mIncOVFOperatorMap ;
+  public : GALGAS_incDecOperatorMap mAttribute_mDecOVFOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mNonEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mStrictInfOperatorMap ;
@@ -849,7 +852,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
                                    const GALGAS_modeMap & in_mModeMap,
-                                   const GALGAS_stringset & in_mTypeNameSetForIncDec,
+                                   const GALGAS_incDecOperatorMap & in_mIncNoOVFOperatorMap,
+                                   const GALGAS_incDecOperatorMap & in_mDecNoOVFOperatorMap,
+                                   const GALGAS_incDecOperatorMap & in_mIncOVFOperatorMap,
+                                   const GALGAS_incDecOperatorMap & in_mDecOVFOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mNonEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mStrictInfOperatorMap,
@@ -903,10 +909,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_globalConstantMap & inOperand12,
                                                           const class GALGAS_globalVariableMap & inOperand13,
                                                           const class GALGAS_modeMap & inOperand14,
-                                                          const class GALGAS_stringset & inOperand15,
-                                                          const class GALGAS_infixOperatorMap & inOperand16,
-                                                          const class GALGAS_infixOperatorMap & inOperand17,
-                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_incDecOperatorMap & inOperand15,
+                                                          const class GALGAS_incDecOperatorMap & inOperand16,
+                                                          const class GALGAS_incDecOperatorMap & inOperand17,
+                                                          const class GALGAS_incDecOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
                                                           const class GALGAS_infixOperatorMap & inOperand21,
@@ -927,9 +933,12 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
                                                           const class GALGAS_infixOperatorMap & inOperand38,
-                                                          const class GALGAS_prefixOperatorMap & inOperand39,
-                                                          const class GALGAS_prefixOperatorMap & inOperand40,
-                                                          const class GALGAS_prefixOperatorMap & inOperand41
+                                                          const class GALGAS_infixOperatorMap & inOperand39,
+                                                          const class GALGAS_infixOperatorMap & inOperand40,
+                                                          const class GALGAS_infixOperatorMap & inOperand41,
+                                                          const class GALGAS_prefixOperatorMap & inOperand42,
+                                                          const class GALGAS_prefixOperatorMap & inOperand43,
+                                                          const class GALGAS_prefixOperatorMap & inOperand44
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -958,6 +967,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mBooleanXorOperatorMap (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecNoOVFOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecOVFOperatorMap (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mDivNoOvfOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mDivOperatorMap (LOCATION_ARGS) const ;
@@ -977,6 +990,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMap reader_mGlobalConstantMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap reader_mGlobalVariableMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mIncNoOVFOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mIncOVFOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 
@@ -1019,8 +1036,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_targetBaseTypeMap reader_mTargetBaseTypeMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap reader_mTypeMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mTypeNameSetForIncDec (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorMap reader_mUnaryMinusOperatorMap (LOCATION_ARGS) const ;
 
@@ -2342,16 +2357,6 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                 Category Getter '@functionMapIR-element implementationCodeGeneration' (as function)                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element & inObject,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                  Category Getter '@globalConstantMapIR-element headerCodeGeneration' (as function)                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2372,13 +2377,15 @@ class GALGAS_string categoryReader_generateLLVM (const class GALGAS_globalVariab
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Category Getter '@procedureMapIR-element llvmCodeGeneration' (as function)                      *
+//                        Category method '@functionMapIR-element implementationCodeGeneration'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string categoryReader_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element & inObject,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element inObject,
+                                                  class GALGAS_string & io_ioCode,
+                                                  class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2388,8 +2395,21 @@ class GALGAS_string categoryReader_llvmCodeGeneration (const class GALGAS_proced
 
 void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
                                              class GALGAS_string & io_ioCode,
+                                             class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Category method '@procedureMapIR-element llvmCodeGeneration'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
+                                        class GALGAS_string & io_ioCode,
+                                        class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2423,6 +2443,7 @@ extern const char * gWrapperFileContent_22_targetTemplates ;
 extern const char * gWrapperFileContent_23_targetTemplates ;
 extern const char * gWrapperFileContent_24_targetTemplates ;
 extern const char * gWrapperFileContent_25_targetTemplates ;
+extern const char * gWrapperFileContent_26_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2455,6 +2476,7 @@ extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_23_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

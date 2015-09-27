@@ -42,8 +42,9 @@ void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & io
                                              const class GALGAS_operandIR constin_inTargetOperand,
                                              const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                              const class GALGAS_operandIR constin_inLeftOperand,
-                                             const class GALGAS_string constin_inOperation,
+                                             const class GALGAS_llvmBinaryOperation constin_inOperation,
                                              const class GALGAS_operandIR constin_inRightOperand,
+                                             const class GALGAS_location constin_inLocation,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -215,6 +216,7 @@ void categoryMethod_checkWith (const class GALGAS_infixOperatorMap inObject,
                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
                                const class GALGAS_location constin_inOperatorLocation,
                                class GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
+                               class GALGAS_llvmBinaryOperation & out_outOperation,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
