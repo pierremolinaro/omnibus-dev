@@ -17,9 +17,6 @@ project (1:0:0) -> "plm" {
 
   "galgas-sources/generalized-type.galgas"
 
-#--- Signed and unsigned base type
-  "galgas-sources/new-base-type.galgas"
-
 #--- Bool
   "galgas-sources/bool-type.galgas"
 
