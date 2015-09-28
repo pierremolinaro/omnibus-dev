@@ -93,11 +93,12 @@ override method @assignmentInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let expressionType
-    ?result:@operandIR sourceValueName
+    ?result:@operandIR sourceValue
   ]
-  comment += " = " + sourceValueName 
+  comment += " = " + sourceValue 
   checkAssignmentCompatibility (
     !sourceType:expressionType
+    !sourceValue:sourceValue
     !targetType:targetType
     !errorLocation:mTargetVarName.location
   )
@@ -119,7 +120,7 @@ override method @assignmentInstructionAST analyze
 #--- Code generation
   [!?ioInstructionGenerationList appendComment !comment]
   [targetVariableKind storeInMemory
-    !value:sourceValueName
+    !value:sourceValue
     !?instructionListIR:ioInstructionGenerationList
   ]
 }

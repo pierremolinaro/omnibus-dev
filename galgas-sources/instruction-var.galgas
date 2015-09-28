@@ -97,6 +97,7 @@ override method @varInstructionWithAssignmentAST analyze
   end
   checkAssignmentCompatibility (
     !sourceType:expressionType
+    !sourceValue:expressionResultValueName
     !targetType:targetType
     !errorLocation:mVarName.location
   )

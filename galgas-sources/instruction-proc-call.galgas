@@ -160,6 +160,7 @@ override method @procCallInstructionAST analyze
       ]
       checkAssignmentCompatibility (
         !sourceType:expressionType
+        !sourceValue:expressionResult
         !targetType:formal_mType
         !errorLocation:endOfExp
       )

@@ -148,6 +148,7 @@ method @globalVarDeclarationList-element enterInContext
   #--- Check variable type and expression type
     checkAssignmentCompatibility (
       !sourceType:resultType
+      !sourceValue:resultValue
       !targetType:variableType
       !errorLocation:mVarName.location
     )

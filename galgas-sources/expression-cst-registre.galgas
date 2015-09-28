@@ -160,19 +160,17 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   case literalString :
     error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
   case literalInteger :
-    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    [expressionResult literalInteger ?value:let @bigint value]
+    if value < 0G then
+      error mExpressionLocation: "this integer expression should be positive" : outResultValueName
+    elsif value < (1G << fieldBitCount) then
+      outResultValueName = .literalInteger {!value:value << fieldBitIndex}        
+    else
+      error mExpressionLocation: "expression too large (should be < " + (1G << fieldBitCount) : outResultValueName
+    end
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
     if not unsigned then
       error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
-    elsif [expressionResult isLiteralInteger] then
-      [expressionResult literalInteger ?value:let @bigint value]
-      if value < (1G << fieldBitCount) then
-        outResultValueName = .literalInteger {!value:value << fieldBitIndex}        
-      else # Overflow, detected at compile time
-        error mExpressionLocation
-        : "static unsigned integer expression overflow: maximum value is " + ((1L << fieldBitCount) - 1L)
-        : outResultValueName
-      end
     else
       let assertGenerated = expressionBitCount > fieldBitCount
       if assertGenerated && [inModeSet hasKey !exceptionModeName ()] then
