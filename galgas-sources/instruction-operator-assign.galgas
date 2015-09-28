@@ -85,11 +85,6 @@ override method @operatorAssignInstructionAST analyze
     ?type:let rightExpressionType
     ?result:@operandIR sourceValueName
   ]
-#--- Check inferred type
-  if [targetType key] != [rightExpressionType key] then
-    error mTargetVarName : "source expression type is '" + [rightExpressionType key]
-      + "', and is not compatible with target type '" + [targetType key] + "'"
-  end
 #--- Write local variable
   [!?ioVariableMap searchForReadWriteAccess
     !mTargetVarName

@@ -114,7 +114,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     make.runHiddenCommand (["rm", archiveName + ".tar"])
   #---
   os.chdir (scriptDir)
-  print "Product directory: " + scriptDir
+  #print "Product directory: " + scriptDir
   #--- Build python makefile
   makefile = make.Make ()
   #--- Add C files compile rule

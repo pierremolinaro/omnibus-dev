@@ -1703,7 +1703,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    make.runHiddenCommand ([\"rm\", archiveName + \".tar\"])\n"
   "  #---\n"
   "  os.chdir (scriptDir)\n"
-  "  print \"Product directory: \" + scriptDir\n"
+  "  #print \"Product directory: \" + scriptDir\n"
   "  #--- Build python makefile\n"
   "  makefile = make.Make ()\n"
   "  #--- Add C files compile rule\n"
@@ -1793,7 +1793,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  8757, // Text length
+  8758, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
