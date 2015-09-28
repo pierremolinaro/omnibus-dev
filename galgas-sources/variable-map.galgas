@@ -54,13 +54,6 @@ getter @operandIR isStatic -> @bool outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @valueIR {
-  case literalInteger (@bigint value)
-  case llvmObject (@string name) # @nom or %nom
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 enum @variableKindIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
@@ -71,27 +64,6 @@ enum @variableKindIR {
 
   case literalString (@string value @string name)
   case literalStructure (@literalStructureList value)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @variableKindIR isStatic -> @bool outResult {
-  switch self
-  case register (* * *) :
-    outResult = false
-  case globalVariable (* * *) :
-    outResult = false
-  case localValue (* *) :
-    outResult = false
-  case globalConstant (*) :
-    outResult = true
-  case localAccess (*) :
-    outResult = false
-  case literalString (* *) :
-    outResult = true
-  case literalStructure (*) :
-    outResult = true
-  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

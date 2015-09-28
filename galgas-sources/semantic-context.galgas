@@ -17,7 +17,8 @@ enum @typeKind {
 
 map @infixOperatorMap {
   @unifiedTypeMap-proxy mResultType
-  @llvmBinaryOperation mOperation
+  @llvmBinaryOperation mOperationEx
+  @infixOperatorDescription mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -298,6 +299,12 @@ func solveInferredType
   else
     outType = inSourceType
   end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring outResult {
+  outResult = ["{" + inLeftTypeName + ", " + inRightTypeName + "}" nowhere]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -77,9 +77,9 @@ method @infixOperatorMap checkWith
   !resultType: @unifiedTypeMap-proxy outResultType
   !op:@llvmBinaryOperation outOperation
 {
-  let lkey = @lstring.new {![inLeftType key] + "." + [inRightType key] !inOperatorLocation}
+  let lkey = combineTypeNamesForInfixOperator (![inLeftType key] ![inRightType key])
   if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType ?outOperation]
+    [self searchKey !lkey ?outResultType ?outOperation ?*]
   else
     error inOperatorLocation
       : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"
@@ -339,7 +339,18 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
+
+abstract class @infixOperatorDescription {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
+  @llvmBinaryOperation mOperator
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ***EX*** CODE GENERATION                                                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
 #! @operatorInfixExpressionIR
 #----------------------------------------------------------------------------------------------------------------------*
