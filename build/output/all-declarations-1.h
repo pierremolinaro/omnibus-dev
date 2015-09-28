@@ -4796,23 +4796,16 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                      const class GALGAS_llvmBinaryOperation & inOperand2,
-                                                      const class GALGAS_infixOperatorDescription & inOperand3,
+                                                      const class GALGAS_infixOperatorDescription & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
-                                                     class GALGAS_llvmBinaryOperation constinArgument2,
-                                                     class GALGAS_infixOperatorDescription constinArgument3,
+                                                     class GALGAS_infixOperatorDescription constinArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void modifier_setMOperationExForKey (class GALGAS_llvmBinaryOperation constinArgument0,
-                                                                 class GALGAS_string constinArgument1,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_setMOperationForKey (class GALGAS_infixOperatorDescription constinArgument0,
                                                                class GALGAS_string constinArgument1,
@@ -4828,18 +4821,13 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
-                                                   class GALGAS_llvmBinaryOperation & outArgument2,
-                                                   class GALGAS_infixOperatorDescription & outArgument3,
+                                                   class GALGAS_infixOperatorDescription & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationExForKey (const class GALGAS_string & constinOperand0,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorDescription reader_mOperationForKey (const class GALGAS_string & constinOperand0,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) const ;
@@ -4875,7 +4863,6 @@ class cEnumerator_infixOperatorMap : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mResultType (LOCATION_ARGS) const ;
-  public : class GALGAS_llvmBinaryOperation current_mOperationEx (LOCATION_ARGS) const ;
   public : class GALGAS_infixOperatorDescription current_mOperation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_infixOperatorMap_2D_element current (LOCATION_ARGS) const ;
@@ -4940,13 +4927,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorDescri
 class cMapElement_infixOperatorMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperationEx ;
   public : GALGAS_infixOperatorDescription mAttribute_mOperation ;
 
 //--- Constructor
   public : cMapElement_infixOperatorMap (const GALGAS_lstring & inKey,
                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
-                                         const GALGAS_llvmBinaryOperation & in_mOperationEx,
                                          const GALGAS_infixOperatorDescription & in_mOperation
                                          COMMA_LOCATION_ARGS) ;
 
@@ -4973,7 +4958,6 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperationEx ;
   public : GALGAS_infixOperatorDescription mAttribute_mOperation ;
 
 
@@ -4990,7 +4974,6 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_infixOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
                                                const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
-                                               const GALGAS_llvmBinaryOperation & in_mOperationEx,
                                                const GALGAS_infixOperatorDescription & in_mOperation) ;
 
 //-- Start of generic part --*
@@ -5006,8 +4989,7 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_infixOperatorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                      const class GALGAS_llvmBinaryOperation & inOperand2,
-                                                                      const class GALGAS_infixOperatorDescription & inOperand3
+                                                                      const class GALGAS_infixOperatorDescription & inOperand2
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -5025,8 +5007,6 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorDescription reader_mOperation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationEx (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mResultType (LOCATION_ARGS) const ;
 

@@ -75,6 +75,7 @@ override method @integerDeclaration enterInPrecedenceGraph
   let integerTypeName = [[self typeName] nowhere]
   [!?ioGraph addNode !integerTypeName !self]
   [!?ioGraph addEdge !integerTypeName ![boolTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName ![literalIntegerTypeName () nowhere]]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -114,7 +115,7 @@ override method @integerDeclaration enterInContext
     !comparable:true
   ]
 #--- Enter integer operators
-  enterIntegerOperators (
+  enterIntegerIntegerOperators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
@@ -123,7 +124,7 @@ override method @integerDeclaration enterInContext
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private proc enterIntegerOperators
+private proc enterIntegerIntegerOperators
   ?integerTypeName:let @lstring inIntegerTypeName
   ?signed:let @bool inIsSigned
   ?!context:@semanticContext ioContext
@@ -140,37 +141,31 @@ private proc enterIntegerOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_eq
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_ne
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !if inIsSigned then .icmp_slt else .icmp_ult end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !if inIsSigned then .icmp_sle else .icmp_ule end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !if inIsSigned then .icmp_sgt else .icmp_ugt end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !if inIsSigned then .icmp_sge else .icmp_uge end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
@@ -178,19 +173,16 @@ private proc enterIntegerOperators
     [!?ioContext.mAndOperatorMap insertKey
       !intIntOp
       !selfTypeProxy
-      !.and
       !@infixObjectObjectOperatorDescription.new {!.and}
     ]
     [!?ioContext.mOrOperatorMap insertKey
       !intIntOp
       !selfTypeProxy
-      !.ior
       !@infixObjectObjectOperatorDescription.new {!.ior}
     ]
     [!?ioContext.mXorOperatorMap insertKey
       !intIntOp
       !selfTypeProxy
-      !.xor
       !@infixObjectObjectOperatorDescription.new {!.xor}
     ]
     [!?ioContext.mUnsignedComplementOperatorMap insertKey
@@ -209,74 +201,62 @@ private proc enterIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .saddOVF else .uaddOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
   ]
   [!?ioContext.mAddNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.addNoOVF
     !@infixObjectObjectOperatorDescription.new {!.addNoOVF}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .ssubOVF else .usubOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
   ]
   [!?ioContext.mSubNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.subNoOVF
     !@infixObjectObjectOperatorDescription.new {!.subNoOVF}
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .smulOVF else .umulOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
   ]
   [!?ioContext.mMulNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.mulNoOVF
     !@infixObjectObjectOperatorDescription.new {!.mulNoOVF}
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .sdivOVF else .udivOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
   ]
   [!?ioContext.mDivNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .sdivNoOVF else .udivNoOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
   ]
   [!?ioContext.mModOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .sremOVF else .uremOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
   ]
   [!?ioContext.mModNoOvfOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .sremNoOVF else .uremNoOVF end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.shl
     !@infixObjectObjectOperatorDescription.new {!.shl}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !if inIsSigned then .ashr else .lshr end
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
   ]
 }
@@ -327,6 +307,34 @@ override method @infixObjectObjectOperatorDescription generateCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                            *
+#----------------------------------------------------------------------------------------------------------------------*
 
+class @infixObjectLiteralIntegerOperatorDescription : @infixOperatorDescription {
+  @llvmBinaryOperation mOperator
+}
 
+#----------------------------------------------------------------------------------------------------------------------*
 
+override method @infixObjectLiteralIntegerOperatorDescription generateCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @operandIR inLeftOperand
+  ?let @unifiedTypeMap-proxy inLeftType
+  ?let @operandIR inRightOperand
+  ?let @location inOperatorLocation
+  !@operandIR outResultValue
+{
+  getNewTempVariable (!?ioTemporaries ?outResultValue)
+#--- Generate code
+  [!?ioInstructionGenerationList appendBinaryOperation
+    !outResultValue
+    !inLeftType
+    !inLeftOperand
+    !mOperator
+    !inRightOperand
+    !inOperatorLocation
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

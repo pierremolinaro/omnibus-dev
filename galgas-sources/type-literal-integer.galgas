@@ -70,56 +70,47 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_eq
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.equal}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_ne
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.nonEqual}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_ult
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictInf}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_ule
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.infEqual}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_ugt
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictSup}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !.icmp_uge
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.supEqual}
   ]
 #--- Bit Wise operators (for unsigned integers)
   [!?ioContext.mAndOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.and
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.and}
   ]
   [!?ioContext.mOrOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.ior
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.ior}
   ]
   [!?ioContext.mXorOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.xor
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.xor}
   ]
   [!?ioContext.mUnsignedComplementOperatorMap insertKey
@@ -135,44 +126,37 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.uaddOVF
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.add}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.usubOVF
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.sub}
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.umulOVF
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.mul}
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.udivOVF
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.div}
   ]
   [!?ioContext.mModOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.uremOVF
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.rem}
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.shl
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.leftShift}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !.lshr
     !@infixLiteralIntLiteralIntOperatorDescription.new {!.rightShift}
   ]
 }

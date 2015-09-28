@@ -79,7 +79,7 @@ method @infixOperatorMap checkWith
 {
   let lkey = combineTypeNamesForInfixOperator (![inLeftType key] ![inRightType key])
   if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType ?* ?outOperation]
+    [self searchKey !lkey ?outResultType ?outOperation]
   else
     error inOperatorLocation
       : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"

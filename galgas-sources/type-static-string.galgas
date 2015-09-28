@@ -64,39 +64,33 @@ proc enterStaticStringOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_eq # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_ne # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_ult # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_ule # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_ugt # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
-    !.icmp_uge # TODO
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-  ]
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq} # TODO
+  ] 
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

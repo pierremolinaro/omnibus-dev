@@ -18,7 +18,6 @@ enum @typeKind {
 
 map @infixOperatorMap {
   @unifiedTypeMap-proxy mResultType
-  @llvmBinaryOperation mOperationEx
   @infixOperatorDescription mOperation
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
