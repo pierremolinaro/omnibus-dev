@@ -121,7 +121,7 @@ override method @operatorAssignInstructionAST analyze
     !rightType:rightExpressionType
     !operatorLocation:mTargetVarName.location
     ?resultType:*
-    ?op:let @llvmBinaryOperation llvmOperator
+    ?op:let @infixOperatorDescription binaryOperator
   ]
   if not isCopiable then
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
@@ -133,14 +133,14 @@ override method @operatorAssignInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?resultingValue:@operandIR variableValueName
   ]
-  getNewTempVariable (!?ioTemporaries ?let newResultingValue)
-  [!?ioInstructionGenerationList appendBinaryOperation
-    !newResultingValue
-    !targetType
+  [binaryOperator generateCode
+    !?ioTemporaries
+    !?ioInstructionGenerationList
     !variableValueName
-    !llvmOperator
+    !targetType
     !sourceValueName
     !mTargetVarName.location
+    ?let newResultingValue
   ]
   [targetVariableKind storeInMemory
     !value:newResultingValue

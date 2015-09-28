@@ -211,7 +211,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !resultType
+      !variableType
       !executionModes
       !allowedProcedureMap
       !resultValue

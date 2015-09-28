@@ -75,11 +75,11 @@ method @infixOperatorMap checkWith
   ?rightType:let @unifiedTypeMap-proxy inRightType
   ?operatorLocation:let @location inOperatorLocation
   !resultType: @unifiedTypeMap-proxy outResultType
-  !op:@llvmBinaryOperation outOperation
+  !op:@infixOperatorDescription outOperation
 {
   let lkey = combineTypeNamesForInfixOperator (![inLeftType key] ![inRightType key])
   if [self hasKey !lkey.string] then
-    [self searchKey !lkey ?outResultType ?outOperation ?*]
+    [self searchKey !lkey ?outResultType ?* ?outOperation]
   else
     error inOperatorLocation
       : "infix operation between '" + [inLeftType key] + " and " + [inRightType key] + "' is not defined"
@@ -103,7 +103,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   !type:@unifiedTypeMap-proxy outResultType
   !result:@operandIR outResultValue
 {
-#--- Analyze left expression
+#------------------- Analyze left expression
   [mLeftExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
@@ -118,7 +118,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?type:let @unifiedTypeMap-proxy leftType
     ?result:let @operandIR leftOperandValue
   ]
-#--- Analyze right expression
+#------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
     !optionalReceiverType:inReceiverType
@@ -133,137 +133,117 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?type:let @unifiedTypeMap-proxy rightType
     ?result:let @operandIR rightOperandValue
   ]
-#--- Check left type
-  @infixOperatorMap operatorMap
-  switch mOp 
-  case equal :
-    operatorMap = inContext.mEqualOperatorMap
-  case nonEqual :
-    operatorMap = inContext.mNonEqualOperatorMap
-  case strictInf :
-    operatorMap = inContext.mStrictInfOperatorMap
-  case infEqual :
-    operatorMap = inContext.mInfEqualOperatorMap
-  case strictSup :
-    operatorMap = inContext.mStrictSupOperatorMap
-  case supEqual :
-    operatorMap = inContext.mSupEqualOperatorMap
-  case andOp :
-    operatorMap = inContext.mAndOperatorMap
-  case orOp :
-    operatorMap = inContext.mOrOperatorMap
-  case xorOp :
-    operatorMap = inContext.mXorOperatorMap
-  case booleanXorOp :
-    operatorMap = inContext.mBooleanXorOperatorMap
-  case addOp :
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-    end
-    if [option plm_options.noExceptionGeneration value] then
-      operatorMap = inContext.mAddNoOvfOperatorMap
-    else
-      operatorMap = inContext.mAddOperatorMap
-    end
-  case addOpNoOvf :
-    operatorMap = inContext.mAddNoOvfOperatorMap
-  case subOp :
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-    end
-    if [option plm_options.noExceptionGeneration value] then
-      operatorMap = inContext.mSubNoOvfOperatorMap
-    else
-      operatorMap = inContext.mSubOperatorMap
-    end
-  case subOpNoOvf :
-    operatorMap = inContext.mSubOperatorMap
-  case mulOp :
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-    end
-    if [option plm_options.noExceptionGeneration value] then
-      operatorMap = inContext.mMulNoOvfOperatorMap
-    else
-      operatorMap = inContext.mMulOperatorMap
-    end
-  case mulOpNoOvf :
-    operatorMap = inContext.mMulNoOvfOperatorMap
-  case divOp :
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-    end
-    if [option plm_options.noExceptionGeneration value] then
-      operatorMap = inContext.mDivNoOvfOperatorMap
-    else
-      operatorMap = inContext.mDivOperatorMap
-    end
-  case divOpNoOvf :
-    operatorMap = inContext.mDivNoOvfOperatorMap
-  case modOp :
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-    end
-    if [option plm_options.noExceptionGeneration value] then
-      operatorMap = inContext.mModNoOvfOperatorMap
-    else
-      operatorMap = inContext.mModOperatorMap
-    end
-  case modOpNoOvf :
-    operatorMap = inContext.mModNoOvfOperatorMap
-  case leftShiftOp :
-    operatorMap = inContext.mLeftShiftOperatorMap
-  case rightShiftOp :
-    operatorMap = inContext.mRightShiftOperatorMap
-  end
+#------------------- Get operator map
+  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
+#------------------- Check operand types
   [operatorMap checkWith
     !leftType:leftType
     !rightType:rightType
     !operatorLocation:mOperatorLocation
     ?resultType:outResultType
-    ?op:let @llvmBinaryOperation binaryOperator
+    ?op:let @infixOperatorDescription binaryOperator
   ]
-#---
-  if [leftOperandValue isLiteralInteger] && [rightOperandValue isLiteralInteger] then
-    [leftOperandValue literalInteger ?value:let @bigint leftValue]
-    [rightOperandValue literalInteger ?value:let @bigint rightValue]
-    @bigint result
-    switch mOp 
-    case equal : result = [leftValue == rightValue bigint]
-    case nonEqual : result = [leftValue != rightValue bigint]
-    case strictInf : result = [leftValue < rightValue bigint]
-    case infEqual : result = [leftValue <= rightValue bigint]
-    case strictSup : result = [leftValue > rightValue bigint]
-    case supEqual : result = [leftValue >= rightValue bigint]
-    case andOp : result = leftValue & rightValue
-    case orOp : result = leftValue | rightValue
-    case xorOp, booleanXorOp : result = leftValue ^ rightValue
-    case addOp : result = leftValue + rightValue
-    case addOpNoOvf : result = leftValue + rightValue
-    case subOp : result = leftValue - rightValue
-    case subOpNoOvf : result = leftValue - rightValue
-    case mulOp : result = leftValue * rightValue
-    case mulOpNoOvf : result = leftValue * rightValue
-    case divOp : result = leftValue / rightValue
-    case divOpNoOvf : result = leftValue / rightValue
-    case modOp : result = leftValue mod rightValue
-    case modOpNoOvf : result = leftValue mod rightValue
-    case leftShiftOp  : result = leftValue << [rightValue uint]
-    case rightShiftOp : result = leftValue >> [rightValue uint]
+#------------------- Generate code
+  [binaryOperator generateCode
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    !leftOperandValue
+    !leftType
+    !rightOperandValue
+    !mOperatorLocation
+    ?outResultValue
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private func getInfixOperatorMap
+  ?let @infixOperator inOp
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?let @location inOperatorLocation
+  -> @infixOperatorMap outOperatorMap
+{
+  switch inOp 
+  case equal :
+    outOperatorMap = inContext.mEqualOperatorMap
+  case nonEqual :
+    outOperatorMap = inContext.mNonEqualOperatorMap
+  case strictInf :
+    outOperatorMap = inContext.mStrictInfOperatorMap
+  case infEqual :
+    outOperatorMap = inContext.mInfEqualOperatorMap
+  case strictSup :
+    outOperatorMap = inContext.mStrictSupOperatorMap
+  case supEqual :
+    outOperatorMap = inContext.mSupEqualOperatorMap
+  case andOp :
+    outOperatorMap = inContext.mAndOperatorMap
+  case orOp :
+    outOperatorMap = inContext.mOrOperatorMap
+  case xorOp :
+    outOperatorMap = inContext.mXorOperatorMap
+  case booleanXorOp :
+    outOperatorMap = inContext.mBooleanXorOperatorMap
+  case addOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error inOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
-    outResultValue = .literalInteger {!value:result}
-  else
-  #--- Temp var
-    getNewTempVariable (!?ioTemporaries ?outResultValue)
-  #--- Generate code
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !outResultValue
-      !leftType
-      !leftOperandValue
-      !binaryOperator
-      !rightOperandValue
-      !mOperatorLocation
-    ]
+    if [option plm_options.noExceptionGeneration value] then
+      outOperatorMap = inContext.mAddNoOvfOperatorMap
+    else
+      outOperatorMap = inContext.mAddOperatorMap
+    end
+  case addOpNoOvf :
+    outOperatorMap = inContext.mAddNoOvfOperatorMap
+  case subOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error inOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
+    if [option plm_options.noExceptionGeneration value] then
+      outOperatorMap = inContext.mSubNoOvfOperatorMap
+    else
+      outOperatorMap = inContext.mSubOperatorMap
+    end
+  case subOpNoOvf :
+    outOperatorMap = inContext.mSubOperatorMap
+  case mulOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error inOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
+    if [option plm_options.noExceptionGeneration value] then
+      outOperatorMap = inContext.mMulNoOvfOperatorMap
+    else
+      outOperatorMap = inContext.mMulOperatorMap
+    end
+  case mulOpNoOvf :
+    outOperatorMap = inContext.mMulNoOvfOperatorMap
+  case divOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error inOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
+    if [option plm_options.noExceptionGeneration value] then
+      outOperatorMap = inContext.mDivNoOvfOperatorMap
+    else
+      outOperatorMap = inContext.mDivOperatorMap
+    end
+  case divOpNoOvf :
+    outOperatorMap = inContext.mDivNoOvfOperatorMap
+  case modOp :
+    if [inModeSet hasKey !exceptionModeName ()] then
+      error inOperatorLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    end
+    if [option plm_options.noExceptionGeneration value] then
+      outOperatorMap = inContext.mModNoOvfOperatorMap
+    else
+      outOperatorMap = inContext.mModOperatorMap
+    end
+  case modOpNoOvf :
+    outOperatorMap = inContext.mModNoOvfOperatorMap
+  case leftShiftOp :
+    outOperatorMap = inContext.mLeftShiftOperatorMap
+  case rightShiftOp :
+    outOperatorMap = inContext.mRightShiftOperatorMap
   end
 }
 
@@ -345,8 +325,13 @@ abstract class @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
-  @llvmBinaryOperation mOperator
-}
+abstract method @infixOperatorDescription generateCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @operandIR inLeftOperand
+  ?let @unifiedTypeMap-proxy inLeftType
+  ?let @operandIR inRightOperand
+  ?let @location inOperatorLocation
+  !@operandIR outResultValue
 
 #----------------------------------------------------------------------------------------------------------------------*
