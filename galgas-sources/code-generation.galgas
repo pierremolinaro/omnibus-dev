@@ -170,8 +170,10 @@ proc generateLLVMfile
     code += [globalConstant headerCodeGeneration]
   end
 #----------------------------------------- Global variables
-  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap do
-    code += [globalVariable generateLLVM]
+  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
+    before code += llvmTitleComment (!"Global variables")
+    do [globalVariable generateLLVM !?code]
+    after code += "\n"
   end
 #----------------------------------------- Boot
   @stringset intrinsicsDeclarationSet = {}
@@ -211,13 +213,23 @@ proc generateLLVMfile
     code += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
     code += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
     code += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionCodeLLVMType + "%in.CODE, " + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
+    code += "  store " + generationContext.mExceptionCodeLLVMType + "%in.CODE, "
+         + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
     code += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionLineLLVMType + "%in.LINE, " + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
-    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
+    code += "  store " + generationContext.mExceptionLineLLVMType + "%in.LINE, "
+         + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+    [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
+      !?code
+      !generationContext
+      !?intrinsicsDeclarationSet
+    ]
     code += "  br label %exception.loop\n\n"
     code += "exception.loop:\n"
-    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
+    [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode
+      !?code
+      !generationContext
+      !?intrinsicsDeclarationSet
+    ]
     code += "  br label %exception.loop\n"
     code += "}\n\n"
   end
