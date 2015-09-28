@@ -132,6 +132,41 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Abstract category method '@infixOperatorDescription generateCode'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_infixOperatorDescription_generateCode) (const class cPtr_infixOperatorDescription * inObject,
+                                                                               class GALGAS_semanticTemporariesStruct & ioArgument0,
+                                                                               class GALGAS_instructionListIR & ioArgument1,
+                                                                               const class GALGAS_operandIR constinArgument2,
+                                                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
+                                                                               const class GALGAS_operandIR constinArgument4,
+                                                                               const class GALGAS_location constinArgument5,
+                                                                               class GALGAS_operandIR & outArgument6,
+                                                                               class C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_generateCode (const int32_t inClassIndex,
+                                       categoryMethodSignature_infixOperatorDescription_generateCode inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_generateCode (const class cPtr_infixOperatorDescription * inObject,
+                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                      const GALGAS_operandIR constin_inLeftOperand,
+                                      const GALGAS_unifiedTypeMap_2D_proxy constin_inLeftType,
+                                      const GALGAS_operandIR constin_inRightOperand,
+                                      const GALGAS_location constin_inOperatorLocation,
+                                      GALGAS_operandIR & out_outResultValue,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Abstract category method '@instructionAST analyze'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -469,7 +504,7 @@ void categoryMethod_checkWith (const class GALGAS_infixOperatorMap inObject,
                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
                                const class GALGAS_location constin_inOperatorLocation,
                                class GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
-                               class GALGAS_llvmBinaryOperation & out_outOperation,
+                               class GALGAS_infixOperatorDescription & out_outOperation,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

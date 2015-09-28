@@ -221,3 +221,38 @@ class @infixLiteralIntLiteralIntOperatorDescription : @infixOperatorDescription 
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+override method @infixLiteralIntLiteralIntOperatorDescription generateCode
+  ?!@semanticTemporariesStruct unused ioTemporaries
+  ?!@instructionListIR unused ioInstructionGenerationList
+  ?let @operandIR inLeftOperand
+  ?let @unifiedTypeMap-proxy unused inLeftType
+  ?let @operandIR inRightOperand
+  ?let @location unused inOperatorLocation
+  !@operandIR outResultValue
+{
+  [inLeftOperand literalInteger ?value:let @bigint leftValue]
+  [inRightOperand literalInteger ?value:let @bigint rightValue]
+  @bigint result
+  switch mOperator 
+  case equal : result = [leftValue == rightValue bigint]
+  case nonEqual : result = [leftValue != rightValue bigint]
+  case strictInf : result = [leftValue < rightValue bigint]
+  case infEqual : result = [leftValue <= rightValue bigint]
+  case strictSup : result = [leftValue > rightValue bigint]
+  case supEqual : result = [leftValue >= rightValue bigint]
+  case and : result = leftValue & rightValue
+  case ior : result = leftValue | rightValue
+  case xor : result = leftValue ^ rightValue
+  case add : result = leftValue + rightValue
+  case sub : result = leftValue - rightValue
+  case mul : result = leftValue * rightValue
+  case div : result = leftValue / rightValue
+  case rem : result = leftValue mod rightValue
+  case leftShift  : result = leftValue << [rightValue uint]
+  case rightShift : result = leftValue >> [rightValue uint]
+  end
+  outResultValue = .literalInteger {!value:result}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

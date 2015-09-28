@@ -4269,8 +4269,8 @@ void categoryMethod_enterInContext (const GALGAS_globalVarDeclarationList_2D_ele
     break ;
   case GALGAS_generalizedTypeEnumAST::kEnum_valueType:
     {
-      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_7964 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (inObject.mAttribute_mType.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_typeName = extractPtr_7964->mAssociatedValue0 ;
+      const cEnumAssociatedValues_generalizedTypeEnumAST_valueType * extractPtr_7966 = (const cEnumAssociatedValues_generalizedTypeEnumAST_valueType *) (inObject.mAttribute_mType.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_typeName = extractPtr_7966->mAssociatedValue0 ;
       GALGAS_unifiedTypeMap_2D_proxy var_variableType ;
       const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, extractedValue_typeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_0) {
@@ -4371,7 +4371,7 @@ void categoryMethod_enterInContext (const GALGAS_globalVarDeclarationList_2D_ele
         enumerator_6912.gotoNextObject () ;
       }
       {
-      ioArgument_ioContext.mAttribute_mGlobalVariableMap.modifier_insertKey (inObject.mAttribute_mVarName, var_resultType, var_executionModes, var_allowedProcedureMap, var_resultValue, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 212)) ;
+      ioArgument_ioContext.mAttribute_mGlobalVariableMap.modifier_insertKey (inObject.mAttribute_mVarName, var_variableType, var_executionModes, var_allowedProcedureMap, var_resultValue, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 212)) ;
       }
     }
     break ;
@@ -5796,32 +5796,39 @@ C_PrologueEpilogue gMethod_integerDeclaration_semanticAnalysis (defineCategoryMe
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Overriding category reader '@integerIR headerCodeGenerationForType'                         *
+//                   Overriding category method '@infixObjectObjectOperatorDescription generateCode'                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string categoryReader_integerIR_headerCodeGenerationForType (const cPtr_abstractTypeIR * inObject,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  const cPtr_integerIR * object = (const cPtr_integerIR *) inObject ;
-  macroValidSharedObject (object, cPtr_integerIR) ;
-  result_outCode = GALGAS_string (filewrapperTemplate_integerGenerationTemplate_declaration (inCompiler, object->mAttribute_mIntegerTypeName, object->mAttribute_mActualTypeName COMMA_SOURCE_FILE ("type-integer.galgas", 320))) ;
-//---
-  return result_outCode ;
+static void categoryMethod_infixObjectObjectOperatorDescription_generateCode (const cPtr_infixOperatorDescription * inObject,
+                                                                              GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                              GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                              const GALGAS_operandIR constinArgument_inLeftOperand,
+                                                                              const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inLeftType,
+                                                                              const GALGAS_operandIR constinArgument_inRightOperand,
+                                                                              const GALGAS_location constinArgument_inOperatorLocation,
+                                                                              GALGAS_operandIR & outArgument_outResultValue,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_infixObjectObjectOperatorDescription * object = (const cPtr_infixObjectObjectOperatorDescription *) inObject ;
+  macroValidSharedObject (object, cPtr_infixObjectObjectOperatorDescription) ;
+  {
+  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 317)) ;
+  }
+  {
+  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 319)) ;
+  }
 }
+//---------------------------------------------------------------------------------------------------------------------*
 
+static void defineCategoryMethod_infixObjectObjectOperatorDescription_generateCode (void) {
+  enterCategoryMethod_generateCode (kTypeDescriptor_GALGAS_infixObjectObjectOperatorDescription.mSlotID,
+                                    categoryMethod_infixObjectObjectOperatorDescription_generateCode) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineCategoryReader_integerIR_headerCodeGenerationForType (void) {
-  enterCategoryReader_headerCodeGenerationForType (kTypeDescriptor_GALGAS_integerIR.mSlotID,
-                                                   categoryReader_integerIR_headerCodeGenerationForType) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_integerIR_headerCodeGenerationForType (defineCategoryReader_integerIR_headerCodeGenerationForType, NULL) ;
+C_PrologueEpilogue gMethod_infixObjectObjectOperatorDescription_generateCode (defineCategoryMethod_infixObjectObjectOperatorDescription_generateCode, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5984,6 +5991,126 @@ static void defineCategoryMethod_literalIntegerDeclaration_semanticAnalysis (voi
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_literalIntegerDeclaration_semanticAnalysis (defineCategoryMethod_literalIntegerDeclaration_semanticAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Overriding category method '@infixLiteralIntLiteralIntOperatorDescription generateCode'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_infixLiteralIntLiteralIntOperatorDescription_generateCode (const cPtr_infixOperatorDescription * inObject,
+                                                                                      GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
+                                                                                      GALGAS_instructionListIR & /* ioArgument_ioInstructionGenerationList */,
+                                                                                      const GALGAS_operandIR constinArgument_inLeftOperand,
+                                                                                      const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inLeftType */,
+                                                                                      const GALGAS_operandIR constinArgument_inRightOperand,
+                                                                                      const GALGAS_location /* constinArgument_inOperatorLocation */,
+                                                                                      GALGAS_operandIR & outArgument_outResultValue,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_infixLiteralIntLiteralIntOperatorDescription * object = (const cPtr_infixLiteralIntLiteralIntOperatorDescription *) inObject ;
+  macroValidSharedObject (object, cPtr_infixLiteralIntLiteralIntOperatorDescription) ;
+  GALGAS_bigint var_leftValue ;
+  constinArgument_inLeftOperand.method_literalInteger (var_leftValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 233)) ;
+  GALGAS_bigint var_rightValue ;
+  constinArgument_inRightOperand.method_literalInteger (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 234)) ;
+  GALGAS_bigint var_result ;
+  switch (object->mAttribute_mOperator.enumValue ()) {
+  case GALGAS_literalIntegerInfixOperator::kNotBuilt:
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_equal:
+    {
+      var_result = GALGAS_bool (kIsEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 237)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_nonEqual:
+    {
+      var_result = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 238)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_strictInf:
+    {
+      var_result = GALGAS_bool (kIsStrictInf, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 239)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_infEqual:
+    {
+      var_result = GALGAS_bool (kIsInfOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 240)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_strictSup:
+    {
+      var_result = GALGAS_bool (kIsStrictSup, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 241)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_supEqual:
+    {
+      var_result = GALGAS_bool (kIsSupOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("type-literal-integer.galgas", 242)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_and:
+    {
+      var_result = var_leftValue.operator_and (var_rightValue COMMA_SOURCE_FILE ("type-literal-integer.galgas", 243)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_ior:
+    {
+      var_result = var_leftValue.operator_or (var_rightValue COMMA_SOURCE_FILE ("type-literal-integer.galgas", 244)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_xor:
+    {
+      var_result = var_leftValue.operator_xor (var_rightValue COMMA_SOURCE_FILE ("type-literal-integer.galgas", 245)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_add:
+    {
+      var_result = var_leftValue.add_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 246)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_sub:
+    {
+      var_result = var_leftValue.substract_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 247)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_mul:
+    {
+      var_result = var_leftValue.multiply_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 248)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_div:
+    {
+      var_result = var_leftValue.divide_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 249)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_rem:
+    {
+      var_result = var_leftValue.modulo_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 250)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_leftShift:
+    {
+      var_result = var_leftValue.left_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 251)) COMMA_SOURCE_FILE ("type-literal-integer.galgas", 251)) ;
+    }
+    break ;
+  case GALGAS_literalIntegerInfixOperator::kEnum_rightShift:
+    {
+      var_result = var_leftValue.right_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("type-literal-integer.galgas", 252)) COMMA_SOURCE_FILE ("type-literal-integer.galgas", 252)) ;
+    }
+    break ;
+  }
+  outArgument_outResultValue = GALGAS_operandIR::constructor_literalInteger (var_result  COMMA_SOURCE_FILE ("type-literal-integer.galgas", 254)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_infixLiteralIntLiteralIntOperatorDescription_generateCode (void) {
+  enterCategoryMethod_generateCode (kTypeDescriptor_GALGAS_infixLiteralIntLiteralIntOperatorDescription.mSlotID,
+                                    categoryMethod_infixLiteralIntLiteralIntOperatorDescription_generateCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_infixLiteralIntLiteralIntOperatorDescription_generateCode (defineCategoryMethod_infixLiteralIntLiteralIntOperatorDescription_generateCode, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -6791,298 +6918,10 @@ static void categoryMethod_infixOperatorExpressionAST_analyzeExpression (const c
   GALGAS_unifiedTypeMap_2D_proxy var_rightType ;
   GALGAS_operandIR var_rightOperandValue ;
   callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_leftType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioInstructionGenerationList, var_rightType, var_rightOperandValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 122)) ;
-  GALGAS_infixOperatorMap var_operatorMap ;
-  switch (object->mAttribute_mOp.enumValue ()) {
-  case GALGAS_infixOperator::kNotBuilt:
-    break ;
-  case GALGAS_infixOperator::kEnum_equal:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_nonEqual:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mNonEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_strictInf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mStrictInfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_infEqual:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mInfEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_strictSup:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mStrictSupOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_supEqual:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mSupEqualOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_andOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mAndOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_orOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mOrOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_xorOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mXorOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_booleanXorOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mBooleanXorOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_addOp:
-    {
-      const enumGalgasBool test_0 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 160)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 160)).boolEnum () ;
-      if (kBoolTrue == test_0) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 161)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 161)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 161))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 161)) ;
-      }
-      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_1) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mAddOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_addOpNoOvf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_subOp:
-    {
-      const enumGalgasBool test_2 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 171)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 171)).boolEnum () ;
-      if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 172)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 172)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 172))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 172)) ;
-      }
-      const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
-      if (kBoolTrue == test_3) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mSubNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_3) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mSubOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_subOpNoOvf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mSubOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_mulOp:
-    {
-      const enumGalgasBool test_4 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 182)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 182)).boolEnum () ;
-      if (kBoolTrue == test_4) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 183)) ;
-      }
-      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
-      if (kBoolTrue == test_5) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_5) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mMulOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_mulOpNoOvf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_divOp:
-    {
-      const enumGalgasBool test_6 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 193)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 193)).boolEnum () ;
-      if (kBoolTrue == test_6) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 194)) ;
-      }
-      const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
-      if (kBoolTrue == test_7) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_7) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mDivOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_divOpNoOvf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_modOp:
-    {
-      const enumGalgasBool test_8 = constinArgument_inModeSet.reader_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 204)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 204)).boolEnum () ;
-      if (kBoolTrue == test_8) {
-        inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 205)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 205)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 205))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 205)) ;
-      }
-      const enumGalgasBool test_9 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).boolEnum () ;
-      if (kBoolTrue == test_9) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
-      }else if (kBoolFalse == test_9) {
-        var_operatorMap = constinArgument_inContext.mAttribute_mModOperatorMap ;
-      }
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_modOpNoOvf:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_leftShiftOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mLeftShiftOperatorMap ;
-    }
-    break ;
-  case GALGAS_infixOperator::kEnum_rightShiftOp:
-    {
-      var_operatorMap = constinArgument_inContext.mAttribute_mRightShiftOperatorMap ;
-    }
-    break ;
-  }
-  GALGAS_llvmBinaryOperation var_binaryOperator ;
-  categoryMethod_checkWith (var_operatorMap, var_leftType, var_rightType, object->mAttribute_mOperatorLocation, outArgument_outResultType, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 219)) ;
-  GALGAS_bool test_10 = var_leftOperandValue.reader_isLiteralInteger (SOURCE_FILE ("expression-infix-operators.galgas", 227)) ;
-  if (kBoolTrue == test_10.boolEnum ()) {
-    test_10 = var_rightOperandValue.reader_isLiteralInteger (SOURCE_FILE ("expression-infix-operators.galgas", 227)) ;
-  }
-  const enumGalgasBool test_11 = test_10.boolEnum () ;
-  if (kBoolTrue == test_11) {
-    GALGAS_bigint var_leftValue ;
-    var_leftOperandValue.method_literalInteger (var_leftValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 228)) ;
-    GALGAS_bigint var_rightValue ;
-    var_rightOperandValue.method_literalInteger (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 229)) ;
-    GALGAS_bigint var_result ;
-    switch (object->mAttribute_mOp.enumValue ()) {
-    case GALGAS_infixOperator::kNotBuilt:
-      break ;
-    case GALGAS_infixOperator::kEnum_equal:
-      {
-        var_result = GALGAS_bool (kIsEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_nonEqual:
-      {
-        var_result = GALGAS_bool (kIsNotEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 233)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_strictInf:
-      {
-        var_result = GALGAS_bool (kIsStrictInf, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 234)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_infEqual:
-      {
-        var_result = GALGAS_bool (kIsInfOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 235)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_strictSup:
-      {
-        var_result = GALGAS_bool (kIsStrictSup, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 236)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_supEqual:
-      {
-        var_result = GALGAS_bool (kIsSupOrEqual, var_leftValue.objectCompare (var_rightValue)).reader_bigint (SOURCE_FILE ("expression-infix-operators.galgas", 237)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_andOp:
-      {
-        var_result = var_leftValue.operator_and (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 238)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_orOp:
-      {
-        var_result = var_leftValue.operator_or (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 239)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_xorOp:
-    case GALGAS_infixOperator::kEnum_booleanXorOp:
-      {
-        var_result = var_leftValue.operator_xor (var_rightValue COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 240)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_addOp:
-      {
-        var_result = var_leftValue.add_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 241)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_addOpNoOvf:
-      {
-        var_result = var_leftValue.add_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 242)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_subOp:
-      {
-        var_result = var_leftValue.substract_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 243)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_subOpNoOvf:
-      {
-        var_result = var_leftValue.substract_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 244)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_mulOp:
-      {
-        var_result = var_leftValue.multiply_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 245)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_mulOpNoOvf:
-      {
-        var_result = var_leftValue.multiply_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 246)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_divOp:
-      {
-        var_result = var_leftValue.divide_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 247)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_divOpNoOvf:
-      {
-        var_result = var_leftValue.divide_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 248)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_modOp:
-      {
-        var_result = var_leftValue.modulo_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 249)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_modOpNoOvf:
-      {
-        var_result = var_leftValue.modulo_operation (var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 250)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_leftShiftOp:
-      {
-        var_result = var_leftValue.left_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 251)) ;
-      }
-      break ;
-    case GALGAS_infixOperator::kEnum_rightShiftOp:
-      {
-        var_result = var_leftValue.right_shift_operation (var_rightValue.reader_uint (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 252)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 252)) ;
-      }
-      break ;
-    }
-    outArgument_outResultValue = GALGAS_operandIR::constructor_literalInteger (var_result  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 254)) ;
-  }else if (kBoolFalse == test_11) {
-    {
-    routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 257)) ;
-    }
-    {
-    categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, var_leftType, var_leftOperandValue, var_binaryOperator, var_rightOperandValue, object->mAttribute_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 259)) ;
-    }
-  }
+  GALGAS_infixOperatorMap var_operatorMap = function_getInfixOperatorMap (object->mAttribute_mOp, constinArgument_inContext, constinArgument_inModeSet, object->mAttribute_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 137)) ;
+  GALGAS_infixOperatorDescription var_binaryOperator ;
+  categoryMethod_checkWith (var_operatorMap, var_leftType, var_rightType, object->mAttribute_mOperatorLocation, outArgument_outResultType, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 139)) ;
+  callCategoryMethod_generateCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_leftOperandValue, var_leftType, var_rightOperandValue, object->mAttribute_mOperatorLocation, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 147)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -7118,27 +6957,27 @@ static void categoryMethod_booleanShortCircuitAndOperatorExpressionAST_analyzeEx
                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_booleanShortCircuitAndOperatorExpressionAST * object = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_booleanShortCircuitAndOperatorExpressionAST) ;
-  GALGAS_instructionListIR var_leftInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-infix-operators.galgas", 287)) ;
+  GALGAS_instructionListIR var_leftInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-infix-operators.galgas", 267)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_leftType ;
   GALGAS_operandIR var_leftValue ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_leftInstructionGenerationList, var_leftType, var_leftValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 288)) ;
-  GALGAS_instructionListIR var_rightInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-infix-operators.galgas", 303)) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mLeftExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_leftInstructionGenerationList, var_leftType, var_leftValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 268)) ;
+  GALGAS_instructionListIR var_rightInstructionGenerationList = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-infix-operators.galgas", 283)) ;
   GALGAS_unifiedTypeMap_2D_proxy var_rightType ;
   GALGAS_operandIR var_rightValue ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_leftType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_rightInstructionGenerationList, var_rightType, var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 304)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_leftType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 319)).objectCompare (GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("expression-infix-operators.galgas", 319)))).boolEnum () ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mRightExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, var_leftType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_rightInstructionGenerationList, var_rightType, var_rightValue, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 284)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_leftType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 299)).objectCompare (GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("expression-infix-operators.galgas", 299)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("left operand should be boolean")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 320)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("left operand should be boolean")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 300)) ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_rightType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 323)).objectCompare (GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("expression-infix-operators.galgas", 323)))).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_rightType.reader_kind (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 303)).objectCompare (GALGAS_typeKind::constructor_boolean (SOURCE_FILE ("expression-infix-operators.galgas", 303)))).boolEnum () ;
   if (kBoolTrue == test_1) {
-    inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("left operand should be boolean")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 324)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mOperatorLocation, GALGAS_string ("left operand should be boolean")  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 304)) ;
   }
   {
-  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 327)) ;
+  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 307)) ;
   }
   {
-  categoryModifier_appendShortCircuitAndOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, var_leftValue, var_leftInstructionGenerationList, var_rightValue, var_rightInstructionGenerationList, object->mAttribute_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 329)) ;
+  categoryModifier_appendShortCircuitAndOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, var_leftValue, var_leftInstructionGenerationList, var_rightValue, var_rightInstructionGenerationList, object->mAttribute_mOperatorLocation, inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 309)) ;
   }
   outArgument_outResultType = constinArgument_inContext.mAttribute_mBooleanType ;
 }
@@ -8831,9 +8670,9 @@ static void categoryMethod_operatorAssignInstructionAST_analyze (const cPtr_inst
     }
     break ;
   }
-  GALGAS_llvmBinaryOperation var_llvmOperator ;
+  GALGAS_infixOperatorDescription var_binaryOperator ;
   GALGAS_unifiedTypeMap_2D_proxy joker_4569 ; // Joker input parameter
-  categoryMethod_checkWith (var_operatorMap, var_targetType, var_rightExpressionType, object->mAttribute_mTargetVarName.mAttribute_location, joker_4569, var_llvmOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 119)) ;
+  categoryMethod_checkWith (var_operatorMap, var_targetType, var_rightExpressionType, object->mAttribute_mTargetVarName.mAttribute_location, joker_4569, var_binaryOperator, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 119)) ;
   const enumGalgasBool test_4 = var_isCopiable.operator_not (SOURCE_FILE ("instruction-operator-assign.galgas", 126)).boolEnum () ;
   if (kBoolTrue == test_4) {
     GALGAS_location location_5 (object->mAttribute_mTargetVarName.reader_location (HERE)) ; // Implicit use of 'location' reader
@@ -8845,12 +8684,7 @@ static void categoryMethod_operatorAssignInstructionAST_analyze (const cPtr_inst
   GALGAS_operandIR var_variableValueName ;
   categoryMethod_loadFromMemory (var_targetVariableKind, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValueName, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 131)) ;
   GALGAS_operandIR var_newResultingValue ;
-  {
-  routine_getNewTempVariable (ioArgument_ioTemporaries, var_newResultingValue, inCompiler  COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 136)) ;
-  }
-  {
-  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, var_newResultingValue, var_targetType, var_variableValueName, var_llvmOperator, var_sourceValueName, object->mAttribute_mTargetVarName.mAttribute_location, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 137)) ;
-  }
+  callCategoryMethod_generateCode ((const cPtr_infixOperatorDescription *) var_binaryOperator.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValueName, var_targetType, var_sourceValueName, object->mAttribute_mTargetVarName.mAttribute_location, var_newResultingValue, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 136)) ;
   categoryMethod_storeInMemory (var_targetVariableKind, var_newResultingValue, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 145)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10031,4 +9865,55 @@ static void defineCategoryMethod_storeGlobalVariableIR_enterAccessibleEntities (
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_storeGlobalVariableIR_enterAccessibleEntities (defineCategoryMethod_storeGlobalVariableIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Overriding category method '@storeLocalVariableIR llvmInstructionCode'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_storeLocalVariableIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
+                                                                     GALGAS_string & ioArgument_ioCode,
+                                                                     const GALGAS_generationContext /* constinArgument_inGenerationContext */,
+                                                                     GALGAS_stringset & /* ioArgument_ioIntrinsicsDeclarationSet */,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_storeLocalVariableIR * object = (const cPtr_storeLocalVariableIR *) inObject ;
+  macroValidSharedObject (object, cPtr_storeLocalVariableIR) ;
+  GALGAS_string var_llvmType = categoryReader_llvmTypeName (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 25)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store ")  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 26)) ;
+  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (function_mangledNameForLocalVariable (object->mAttribute_mLocalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27))  COMMA_SOURCE_FILE ("intermediate-store-local-variable.galgas", 27)) ;
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_storeLocalVariableIR_llvmInstructionCode (void) {
+  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_storeLocalVariableIR.mSlotID,
+                                           categoryMethod_storeLocalVariableIR_llvmInstructionCode) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_storeLocalVariableIR_llvmInstructionCode (defineCategoryMethod_storeLocalVariableIR_llvmInstructionCode, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Overriding category method '@storeLocalVariableIR enterAccessibleEntities'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void categoryMethod_storeLocalVariableIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * /* inObject */,
+                                                                         GALGAS_accessibleEntities & /* ioArgument_ioAccessibleEntities */,
+                                                                         C_Compiler * /* inCompiler */
+                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+}
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineCategoryMethod_storeLocalVariableIR_enterAccessibleEntities (void) {
+  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_storeLocalVariableIR.mSlotID,
+                                               categoryMethod_storeLocalVariableIR_enterAccessibleEntities) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_storeLocalVariableIR_enterAccessibleEntities (defineCategoryMethod_storeLocalVariableIR_enterAccessibleEntities, NULL) ;
 

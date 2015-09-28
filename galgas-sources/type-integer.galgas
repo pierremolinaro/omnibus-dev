@@ -296,30 +296,33 @@ override method @integerDeclaration semanticAnalysis
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
+#  INFIX OPERATION BETWEEN INTEGERS                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @integerIR : @abstractTypeIR {
-  @string mIntegerTypeName
-  @string mActualTypeName
+class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
+  @llvmBinaryOperation mOperator
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-private filewrapper integerGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "integer-declaration.galgasTemplate"
-    ?@string INTEGER_TYPE_NAME
-    ?@string ACTUAL_TYPE_NAME
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @integerIR headerCodeGenerationForType -> @string outCode {
-  outCode = [filewrapper integerGenerationTemplate.declaration
-    !mIntegerTypeName
-    !mActualTypeName
+override method @infixObjectObjectOperatorDescription generateCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @operandIR inLeftOperand
+  ?let @unifiedTypeMap-proxy inLeftType
+  ?let @operandIR inRightOperand
+  ?let @location inOperatorLocation
+  !@operandIR outResultValue
+{
+  getNewTempVariable (!?ioTemporaries ?outResultValue)
+#--- Generate code
+  [!?ioInstructionGenerationList appendBinaryOperation
+    !outResultValue
+    !inLeftType
+    !inLeftOperand
+    !mOperator
+    !inRightOperand
+    !inOperatorLocation
   ]
 }
 
