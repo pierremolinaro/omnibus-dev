@@ -8,7 +8,7 @@
 \chapter{Le type booléen}
 
 
-Par défaut, aucun type booléen n'est prédéfini par le langage ; il est d'usage que ce soit la définition de la cible qui le fasse, et que ce type booléen se nomme \plm=$bool=\index{bool!\plm=$bool=} (voir \refSectionPage{DefinitionTypeBooleen}).
+Le type booléen \plm=$bool=\index{bool!\plm=$bool=} est prédéfini par le langage.
 
 
 
@@ -48,25 +48,4 @@ Il n'y a pas d'opérateur dédié à la conversion d'une valeur entière vers un
 let result $bool = x != 0 // x est une expression entière
 \end{PLM}
 
-
-\sectionLabel{Définition du type booléen}{DefinitionTypeBooleen}\index{Type Booleen@Type booléen!definition@Définition}
-
-Par défaut, aucun type booléen n'est défini par le langage. Il est d'usage que la définition de la cible le fasse, au moyen de la déclaration \plm=booleanType= :\index{booleanType@\plm=booleanType=}
-
-\begin{PLM}
-booleanType nomType : representation
-\end{PLM}
-
-Par exemple :
-\begin{PLM}
-booleanType $bool : @unsigned8
-\end{PLM}
-
-Où :
-\begin{itemize}
-  \item \plm=$bool= est le nom donné au type booléen ;
-  \item \plm=@unsigned8= est l'attribut précisant la représentation d'une valeur booléenne dans le code C engendré.
-\end{itemize}
-
-L'attribut \plm=@unsigned8= n'est pas prédéfini dans le langage, mais doit être déclaré dans une déclaration \plm=newUnsignedRepresentation=\index{newUnsignedRepresentation@\plm=newUnsignedRepresentation=} (voir \refSubsectionPage{DefNewUnsignedRepresentation}), qui figure normalement dans la définition de la cible. Si l'auteur de cette définition est logique, \plm=@unsigned8= représente dans le code C engendré les booléens comme des entiers non signés de 8 bits.
 

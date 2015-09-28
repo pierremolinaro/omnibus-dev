@@ -176,28 +176,10 @@ La troisième étape est l'exécution des routines \plm=init=. À partir de cett
 
 Voici le contenu du fichier \texttt{myTeensy.plm-target} :
 \begin{PLM}[1]
-newUnsignedRepresentation @unsigned8  : "uint8_t"   8
-newUnsignedRepresentation @unsigned16 : "uint16_t" 16
-newUnsignedRepresentation @unsigned32 : "uint32_t" 32
-newUnsignedRepresentation @unsigned64 : "uint64_t" 64
+signedIntegerType 1 -> 128
+unsignedIntegerType 1 -> 128
 
-newSignedRepresentation @signed8  : "int8_t"   8
-newSignedRepresentation @signed16 : "int16_t" 16
-newSignedRepresentation @signed32 : "int32_t" 32
-newSignedRepresentation @signed64 : "int64_t" 64
-
-newUnsignedRepresentation @size : "uint32_t" 32
-
-booleanType $bool : @unsigned8
-
-newIntegerType $uint8  : @unsigned8
-newIntegerType $uint16 : @unsigned16
-newIntegerType $uint32 : @unsigned32
-newIntegerType $uint64 : @unsigned64
-newIntegerType $int8  : @signed8
-newIntegerType $int16 : @signed16
-newIntegerType $int32 : @signed32
-newIntegerType $int64 : @signed64
+pointerSize 32
 
 exception : $int32 $uint32
 
@@ -222,34 +204,33 @@ init 0 { // Configure Systick interrupt every ms
 \end{PLM}
 %\ligne\\
 
-{\bf Lignes 1 à 4.} Les quatre déclarations \plm+newUnsignedRepresentation+ définissent des représentations relatives aux entiers non signés (\refSubsectionPage{DefNewUnsignedRepresentation}). Les représentations ainsi définies (\plm+@unsigned8+, \plm+@unsigned16+, ...) ne sont pas des types directement utilisables en PLM, mais des annotations qui paramètrent certaines déclarations, comme par exemple la déclaration des types entiers non signés lignes 15 à 18.
-
-{\bf Lignes 6 à 9.} De manière analogue, les quatre déclarations \plm+newSignedRepresentation+ définissent des représentations relatives aux entiers signés (\refSubsectionPage{DefNewSignedRepresentation}). Les représentations ainsi définies (\plm+@signed8+, \plm+@signed16+, ...) ne sont pas des types directement utilisables en PLM, mais des annotations qui paramètrent certaines déclarations, comme par exemple la déclaration des types entiers signés lignes 19 à 22.
-
-{\bf Ligne 11.} Cette ligne déclare la représentation \plm+@size+, qui est celle utilisée par défaut pour les types énumérés (\refSectionPage{representation-type-enumere}). La déclaration de la représentation \plm+@size+ est obligatoire.
-
-{\bf Ligne 13.} Déclaration du type booléen : il se nomme conventionnellement \plm+$bool+, et sa représentation est \plm+@unsigned8+, c'est-à-dire un entier non signé sur 8 bits. La déclaration d'un type booléen est obligatoire.
-
-{\bf Lignes 15 à 22.} Déclaration des types entier, non signés et signés. Les noms \plm+$uint8+, ..., \plm+$int64+ sont les noms des types entiers directement utilisables en PLM.
-
-{\bf Ligne 24.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+$int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
-
-{\bf Lignes 26 et 27.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
+{\bf Ligne 1.} Cette déclaration définit les type entiers signés de \plm!$int1! à \plm!$int128!.
 
 
-{\bf Lignes 29 et 30.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
+{\bf Ligne 2.} Cette déclaration définit les type entiers non signés de \plm!$uint1! à \plm!$uint128!.
+
+
+{\bf Ligne 4.} Définition de la taille d'un pointeur, en nombre de bits.
+
+
+{\bf Ligne 6.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+$int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
+
+{\bf Lignes 8 et 9.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
+
+
+{\bf Lignes 11 et 12.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
 
 
 
-{\bf Lignes 32 à 34.} Déclaration des procédures requises (\refSubsectionPage{procedureRequise}). Ces déclarations ont une double signification :
+{\bf Lignes 14 à 16.} Déclaration des procédures requises (\refSubsectionPage{procedureRequise}). Ces déclarations ont une double signification :
 \begin{itemize}
   \item d'abord, que les procédures citées doivent être définies soit dans la cible (c'est le cas de \texttt{systickHandler}), soit dans le code utilisateur (ici \texttt{01-blinkled.plm}) : c'est le cas des procédures \texttt{setup} et \texttt{loop} ;
   \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
 \end{itemize}
 
-{\bf Lignes 36 et 37.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
+{\bf Lignes 18 et 19.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
 
-{\bf Lignes 39 à 43.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
+{\bf Lignes 21 à 25.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
 
 
 
@@ -258,7 +239,7 @@ init 0 { // Configure Systick interrupt every ms
 
 \subsection{Le répertoire \texttt{myTeensy}}
 
-
+Texte à définir…
 
 
 

@@ -7,28 +7,19 @@
 
 \chapter{Les types entiers}
 
-Les types entiers ne sont pas prédéfinis dans le langage. C'est la configuration de la cible qui définit les types entiers disponibles (voir \refChapterPage{chapitreConfCible}).
+Les types entiers sont pas définis par la configuration de la cible (voir \refChapterPage{chapitreConfCible}).
 
-À titre d'exemple, le \refTableau{typesEntiersTeensy} liste les types entiers définis par la cible \texttt{teensy3-1-sequential-systick}.
-
-\begin{table}[h]
-\centering
-\ligne\\
-\begin{tabular}{lllll}
-  \textbf{Nature} & \textbf{8 bits} & \textbf{16 bits} & \textbf{32 bits} & \textbf{64 bits} \\
-  Signé & \plm=$int8= & \plm=$int16= & \plm=$int32= & \plm=$int64= \\
-  Non signé & \plm=$uint8= & \plm=$uint16= & \plm=$uint32= & \plm=$uint64= \\
-\end{tabular}
-\caption{Types entiers définis par la cible \texttt{teensy-3-1-sequential-systick}}
-\labelTableau{typesEntiersTeensy}
-\ligne
-\end{table}
+À titre d'exemple, la cible \texttt{teensy3-1-sequential-systick} définit les types :
+\begin{itemize}
+  \item les types entiers non signés de 1 à 128 bits (\plm!$uint1! à \plm!$uint128!) ;
+  \item les types entiers signés de 1 à 128 bits (\plm!$int1! à \plm!$int128!).
+\end{itemize}
 
 
 
 \section{Constante littérale entière}
 
-Le langage accepte des constantes littérales non signés de 64 bits. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
+Le langage accepte des constantes littérales entières d'une taille quelconque. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
 var v $int8 = 128 // Erreur de compilation :
@@ -41,7 +32,7 @@ var v $int8 = 128 // Erreur de compilation :
 var v $int8 = -128 // Devrait être accepté, erreur actuellement
 \end{PLM}
 
-Une constante littérale entière n'a pas de type défini, aussi seul l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
+Une constante littérale entière n'a pas de type défini, aussi seule l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
 \begin{PLM}
 var v = 28 // Erreur, le type ne peut pas être inféré
 \end{PLM}
@@ -255,108 +246,4 @@ Les trois opérateurs \plm!&=!, \plm!|=! et \plm!^=! sont définis pour les enti
 \plm!a ^= b! est équivalent à \plm!a = a ^ b!.
 
 Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sont décrits à la \refSectionPage{operateurBitABitEntier}.
-
-
-\section{Définition des types entier par une cible}
-
-Les trois constructions suivantes ne peuvent apparaître que dans un fichier de définition de cible, dont l'extension est \texttt{.plm-target}. Un exemple d'utilisation est présenté à la \refSubsectionPage{fichierTarget}. Ces constructions sont :
-\begin{itemize}
-  \item déclaration d'une représentation entière non signée ;
-  \item déclaration d'une représentation entière signée ;
-  \item déclaration d'un type entier.
-\end{itemize}
-
-
-\subsectionLabel{Déclaration \texttt{newUnsignedRepresentation}}{DefNewUnsignedRepresentation}
-\index{newUnsignedRepresentation@\plm=newUnsignedRepresentation=!Definition@Définition}
-
-La déclaration \plm=newUnsignedRepresentation= permet de définir une représentation entière non signée. Sa syntaxe est la suivante :
-
-
-\begin{PLM}
-newUnsignedRepresentation @nom : "type-c" taille
-\end{PLM}
-
-Où :
-\begin{itemize}
-  \item \plm=@nom= est le nom donné à la représentation ;
-  \item \plm="type-c"= est le nom du type C qui sera utilisé lors de la génération de code ;
-  \item \plm=taille= est le nombre de bits de cette représentation.
-\end{itemize}
-
-Par exemple, la représentation des entiers non signés sur 8, 16, 32 et 64 bits peut être définie par :
-\begin{PLM}
-newUnsignedRepresentation @unsigned8  : "uint8_t"   8
-newUnsignedRepresentation @unsigned16 : "uint16_t" 16
-newUnsignedRepresentation @unsigned32 : "uint32_t" 32
-newUnsignedRepresentation @unsigned64 : "uint64_t" 64
-\end{PLM}
-
-
-
-
-
-
-
-
-\subsectionLabel{Déclaration \texttt{newSignedRepresentation}}{DefNewSignedRepresentation}
-\index{newSignedRepresentation@\plm=newSignedRepresentation=!Definition@Définition}
-
-La déclaration \plm=newSignedRepresentation= permet de définir une représentation entière signée. Sa syntaxe est la suivante :
-
-
-\begin{PLM}
-newSignedRepresentation @representation : "type-c" taille
-\end{PLM}
-
-Où :
-\begin{itemize}
-  \item \plm=@representation= est le nom donné à la représentation ;
-  \item \plm="type-c"= est le nom du type C qui sera utilisé lors de la génération de code ;
-  \item \plm=taille= est le nombre de bits de cette représentation.
-\end{itemize}
-
-Par exemple, la représentation des entiers signés sur 8, 16, 32 et 64 bits peut être définie par :
-\begin{PLM}
-newSignedRepresentation @signed8  : "int8_t"   8
-newSignedRepresentation @signed16 : "int16_t" 16
-newSignedRepresentation @signed32 : "int32_t" 32
-newSignedRepresentation @signed64 : "int64_t" 64
-\end{PLM}
-
-
-
-
-
-
-
-
-
-
-
-\subsectionLabel{Déclaration \texttt{newIntegerType}}{DefNewIntegerType}
-\index{newIntegerType@\plm=newIntegerType=!Definition@Définition}
-
-La déclaration \plm=newIntegerType= permet de définir un nouveau type entier signé ou non signé. Elle a la syntaxe suivante :
-\begin{PLM}
-newIntegerType NomDeType @representation
-\end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=NomDeType= est le nom donné au type entier.
-  \item \plm=@representation= est le nom de la représentation, qui doit avoir été défini soit par une déclaration \plm=newUnsignedRepresentation= (\refSubsectionPage{DefNewUnsignedRepresentation})\index{newUnsignedRepresentation@\plm=newUnsignedRepresentation=}, soit par une déclaration \plm=newSignedRepresentation= (\refSubsectionPage{DefNewSignedRepresentation}\index{newSignedRepresentation@\plm=newSignedRepresentation=}).
-\end{itemize}
-
-Le type entier ainsi déclaré est non signé si la représentation est non signée (c'est-à-dire déclarée avec \plm=newUnsignedRepresentation=), et signé si la représentation est signée (c'est-à-dire déclarée avec \plm=newSignedRepresentation=). Les types usuels peuvent ainsi être déclarés :
-\begin{PLM}
-newIntegerType $uint8  : @unsigned8
-newIntegerType $uint16 : @unsigned16
-newIntegerType $uint32 : @unsigned32
-newIntegerType $uint64 : @unsigned64
-newIntegerType $int8  : @signed8
-newIntegerType $int16 : @signed16
-newIntegerType $int32 : @signed32
-newIntegerType $int64 : @signed64
-\end{PLM}
-
 
