@@ -1426,15 +1426,15 @@ GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Routine 'enterIntegerOperators'                                           *
+//                                       Routine 'enterIntegerIntegerOperators'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterIntegerOperators (const class GALGAS_lstring constinArgument0,
-                                    const class GALGAS_bool constinArgument1,
-                                    class GALGAS_semanticContext & ioArgument2,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void routine_enterIntegerIntegerOperators (const class GALGAS_lstring constinArgument0,
+                                           const class GALGAS_bool constinArgument1,
+                                           class GALGAS_semanticContext & ioArgument2,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
