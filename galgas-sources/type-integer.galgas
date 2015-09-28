@@ -114,8 +114,14 @@ override method @integerDeclaration enterInContext
     !equatable:true
     !comparable:true
   ]
-#--- Enter integer operators
+#--- Enter integer integer infix operators
   enterIntegerIntegerOperators (
+    !integerTypeName:integerTypeName
+    !signed:mIsSigned
+    !?context:ioContext
+  )
+#--- Enter integer literal infix operators
+  enterIntegerLiteralOperators (
     !integerTypeName:integerTypeName
     !signed:mIsSigned
     !?context:ioContext
@@ -256,6 +262,129 @@ private proc enterIntegerIntegerOperators
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intIntOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc enterIntegerLiteralOperators
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?signed:let @bool inIsSigned
+  ?!context:@semanticContext ioContext
+{
+#--- Infix operators
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+#--- Comparison infix operator
+  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !literalIntegerTypeName ())
+  [!?ioContext.mEqualOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !intLiteralOp
+    !ioContext.mBooleanType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
+  ]
+#--- Bit Wise operators (for unsigned integers)
+  if not inIsSigned then
+    [!?ioContext.mAndOperatorMap insertKey
+      !intLiteralOp
+      !selfTypeProxy
+      !@infixObjectObjectOperatorDescription.new {!.and}
+    ]
+    [!?ioContext.mOrOperatorMap insertKey
+      !intLiteralOp
+      !selfTypeProxy
+      !@infixObjectObjectOperatorDescription.new {!.ior}
+    ]
+    [!?ioContext.mXorOperatorMap insertKey
+      !intLiteralOp
+      !selfTypeProxy
+      !@infixObjectObjectOperatorDescription.new {!.xor}
+    ]
+  end
+#--- Arithmetic operators
+  [!?ioContext.mAddOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.addNoOVF}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.subNoOVF}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.mulNoOVF}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
+  ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+  ]
+#--- Shift operators
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !intLiteralOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.shl}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !intLiteralOp
     !selfTypeProxy
     !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
   ]

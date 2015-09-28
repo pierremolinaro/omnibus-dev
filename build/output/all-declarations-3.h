@@ -1438,6 +1438,27 @@ void routine_enterIntegerIntegerOperators (const class GALGAS_lstring constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Routine 'enterIntegerLiteralOperators'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterIntegerLiteralOperators (const class GALGAS_lstring constinArgument0,
+                                           const class GALGAS_bool constinArgument1,
+                                           class GALGAS_semanticContext & ioArgument2,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'literalIntegerTypeName'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_literalIntegerTypeName (class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Routine 'enterLiteralIntegerOperators'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2308,15 +2329,6 @@ class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
 
 class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'literalIntegerTypeName'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_literalIntegerTypeName (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

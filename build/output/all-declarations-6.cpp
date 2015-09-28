@@ -5870,6 +5870,9 @@ static void categoryMethod_integerDeclaration_enterInContext (const cPtr_abstrac
   {
   routine_enterIntegerIntegerOperators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 118)) ;
   }
+  {
+  routine_enterIntegerLiteralOperators (var_integerTypeName, object->mAttribute_mIsSigned, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 124)) ;
+  }
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -5946,10 +5949,10 @@ static void categoryMethod_infixObjectObjectOperatorDescription_generateCode (co
   const cPtr_infixObjectObjectOperatorDescription * object = (const cPtr_infixObjectObjectOperatorDescription *) inObject ;
   macroValidSharedObject (object, cPtr_infixObjectObjectOperatorDescription) ;
   {
-  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 297)) ;
+  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 426)) ;
   }
   {
-  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 299)) ;
+  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 428)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5982,10 +5985,10 @@ static void categoryMethod_infixObjectLiteralIntegerOperatorDescription_generate
   const cPtr_infixObjectLiteralIntegerOperatorDescription * object = (const cPtr_infixObjectLiteralIntegerOperatorDescription *) inObject ;
   macroValidSharedObject (object, cPtr_infixObjectLiteralIntegerOperatorDescription) ;
   {
-  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 328)) ;
+  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 457)) ;
   }
   {
-  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 330)) ;
+  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 459)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
