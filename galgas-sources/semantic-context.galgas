@@ -142,6 +142,7 @@ list @typeList {
 struct @semanticContext {
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
+  @unifiedTypeMap-proxy mLiteralIntegerType
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap

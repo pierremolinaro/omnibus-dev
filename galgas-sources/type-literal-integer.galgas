@@ -65,6 +65,7 @@ private proc enterLiteralIntegerOperators
 #--- Infix operators
   let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+  ioContext.mLiteralIntegerType = selfTypeProxy
 #--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp

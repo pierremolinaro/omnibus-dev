@@ -297,7 +297,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:leftInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy leftType
-    ?result:let @operandIR leftOperandValue
+    ?result:let @operandIR leftValue
   ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
@@ -313,7 +313,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:rightInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy rightType
-    ?result:let @operandIR rightOperandValue
+    ?result:let @operandIR rightValue
   ]
 #--- Check left type is boolean
   if [leftType kind] != .boolean then
@@ -328,9 +328,9 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 #--- Generate code
   [!?ioInstructionGenerationList appendShortCircuitAndOperation
     !outResultValue
-    !leftOperandValue
+    !leftValue
     !leftInstructionGenerationList
-    !rightOperandValue
+    !rightValue
     !rightInstructionGenerationList
     !mOperatorLocation
   ]
@@ -347,19 +347,6 @@ abstract class @infixOperatorDescription {
 
 class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
   @llvmBinaryOperation mOperator
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  ***EX*** CODE GENERATION                                                                                            *
-#----------------------------------------------------------------------------------------------------------------------*
-#! @operatorInfixExpressionIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-enum @infixOperatorIR {
-  case infixNoOvf (@string infixOperator)
-  case infixOvf (@string builtinFunction @uint code)
-  case infixUnsignedDivide (@uint code)
-  case infixModulo (@uint code)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

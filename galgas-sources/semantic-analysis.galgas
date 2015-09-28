@@ -6,6 +6,7 @@
 
 proc checkAssignmentCompatibility
   ?sourceType:let @unifiedTypeMap-proxy inSourceType
+  ?sourceValue:let @operandIR inSourceValue
   ?targetType:let @unifiedTypeMap-proxy inTargetType
   ?errorLocation:let @location inErrorLocation
 {
@@ -19,6 +20,10 @@ proc checkAssignmentCompatibility
       [[inSourceType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
       [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
       ok = (minTarget <= minSource) && (maxTarget >= maxSource)
+    elsif [[inSourceType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
+      [inSourceValue literalInteger ?value:let value]
+      [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+      ok = (minTarget <= value) && (maxTarget >= value)
     end
     if not ok then
       error inErrorLocation
