@@ -76,6 +76,8 @@ override method @assignmentInstructionAST analyze
       [propertyMap searchKey !fieldName ?targetType]
     case integer (* * * *) :  
       error fieldName : "an integer does not have fields"
+    case literalInteger :  
+      error fieldName : "an integer does not have fields"
     end
   end
 #--- Analyze source expression

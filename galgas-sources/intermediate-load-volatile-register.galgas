@@ -24,7 +24,7 @@ override method @loadRegisterIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mRegisterType llvmType]
+  let llvmType = [mRegisterType llvmTypeName]
   ioCode += "  " + mTargetValue + " = load volatile " + llvmType + ", " + llvmType
          + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }

@@ -1,0 +1,222 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @literalIntegerDeclaration : @abstractDeclaration {
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalIntegerDeclaration location -> @location outLocation {
+  outLocation = .nowhere
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerDeclaration enterInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  let literalIntegerTypeName = [literalIntegerTypeName () nowhere]
+  [!?ioGraph addNode !literalIntegerTypeName !self]
+  [!?ioGraph addEdge !literalIntegerTypeName ![boolTypeName () nowhere]]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override getter @literalIntegerDeclaration keyRepresentation -> @string outRepresentation {
+  outRepresentation = literalIntegerTypeName () 
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  ENTER IN CONTEXT                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerDeclaration enterInContext
+  ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+{
+  let integerTypeName = [literalIntegerTypeName () nowhere]
+ #---
+  [!?ioContext.mTypeMap insertKey
+    !lkey:integerTypeName
+    !kind:.literalInteger
+    !constructorMap:{}
+    !procedureMap:{}
+    !copiable:true
+    !equatable:true
+    !comparable:true
+  ]
+#--- Enter integer operators
+  enterLiteralIntegerOperators (
+    !integerTypeName:integerTypeName
+    !?context:ioContext
+  )
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+private proc enterLiteralIntegerOperators
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?!context:@semanticContext ioContext
+{
+#--- Infix operators
+  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
+#--- Comparison infix operator
+  [!?ioContext.mEqualOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_eq
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.equal}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_ne
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.nonEqual}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_ult
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictInf}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_ule
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.infEqual}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_ugt
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictSup}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !intIntOp
+    !ioContext.mBooleanType
+    !.icmp_uge
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.supEqual}
+  ]
+#--- Bit Wise operators (for unsigned integers)
+  [!?ioContext.mAndOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.and
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.and}
+  ]
+  [!?ioContext.mOrOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.ior
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.ior}
+  ]
+  [!?ioContext.mXorOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.xor
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.xor}
+  ]
+  [!?ioContext.mUnsignedComplementOperatorMap insertKey
+    !inIntegerTypeName
+    !selfTypeProxy
+  ]
+#--- Negate operator
+  [!?ioContext.mUnaryMinusOperatorMap insertKey
+    !inIntegerTypeName
+    !selfTypeProxy
+  ]
+#--- Arithmetic operators
+  [!?ioContext.mAddOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.uaddOVF
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.add}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.usubOVF
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.sub}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.umulOVF
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.mul}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.udivOVF
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.div}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.uremOVF
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.rem}
+  ]
+#--- Shift operators
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.shl
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.leftShift}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !.lshr
+    !@infixLiteralIntLiteralIntOperatorDescription.new {!.rightShift}
+  ]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTIC ANALYSIS                                                                                                   *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerDeclaration initAnalysis ?!context:@semanticContext unused ioContext { }
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @literalIntegerDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  INFIX OPERATIONS                                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @literalIntegerInfixOperator {
+  case equal
+  case nonEqual
+  case strictInf
+  case strictSup
+  case infEqual
+  case supEqual
+  case and
+  case ior
+  case xor
+  case add
+  case sub
+  case mul
+  case div
+  case rem
+  case leftShift
+  case rightShift
+}
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @infixLiteralIntLiteralIntOperatorDescription : @infixOperatorDescription {
+  @literalIntegerInfixOperator mOperator
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+

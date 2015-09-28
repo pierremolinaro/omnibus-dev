@@ -24,7 +24,7 @@ override method @loadGlobalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mVariableType llvmType]
+  let llvmType = [mVariableType llvmTypeName]
   ioCode += "  " + mTargetValue + " = load "
   if mIsVolatile then
     ioCode += "volatile "

@@ -41,7 +41,7 @@ project (1:0:0) -> "plm" {
 
 #--- Integer
   "galgas-sources/type-integer.galgas"
-#  "galgas-sources/type-literal-integer.galgas"
+  "galgas-sources/type-literal-integer.galgas"
 
 #--- Static string
   "galgas-sources/type-static-string.galgas"

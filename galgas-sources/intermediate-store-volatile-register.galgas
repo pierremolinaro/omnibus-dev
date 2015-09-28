@@ -24,7 +24,7 @@ override method @storeVolatileIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTargetVarType llvmType]
+  let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  store volatile " + llvmType + " " + mSourceValue + ", " + llvmType
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }

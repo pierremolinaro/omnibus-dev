@@ -76,7 +76,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTargetVarType llvmType]
+  let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  " + mTargetOperand + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioCode += " (" + llvmType + " " + mLeftOperand + ", " + llvmType + " " + mRightOperand + ")\n"
   ioCode += "  " + mTargetOperand + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTargetOperand + ".r, 1\n"
@@ -100,7 +100,7 @@ override method @binaryOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTargetVarType llvmType]
+  let llvmType = [mTargetVarType llvmTypeName]
   switch mOperation
   case addNoOVF :
     ioCode += "  " + mTargetOperand + " = add " + llvmType + " " + mLeftOperand + ", " + mRightOperand + "\n"

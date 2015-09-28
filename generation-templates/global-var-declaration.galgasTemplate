@@ -3,7 +3,7 @@
 ;----------------------------------------------------------------------------------------------------------------------*
 
 @%!mangledNameForGlobalVariable (!GLOBAL_VAR_NAME)% = global %
-![GLOBAL_VAR_TYPE llvmName]
+![GLOBAL_VAR_TYPE llvmTypeName]
 % %
 if INITIAL_VALUE_STRING == "" then
   %zeroinitializer%

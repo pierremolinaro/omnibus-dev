@@ -108,6 +108,8 @@ override method @varInExpressionAST analyzeExpression
       switch [outExpressionType kind]
         case boolean :
           error field : "a boolean does not handle field access"
+        case literalInteger :
+          error field : "an integer does not handle field access"
         case boolset :
           error field : "a boolset does not handle field access"
         case literalString :
