@@ -248,23 +248,16 @@ method @globalVarDeclarationList-element semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-private filewrapper globalVariableGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template llvmImplementation "global-var-declaration.galgasTemplate"
-    ?@string GLOBAL_VAR_NAME
-    ?@unifiedTypeMap-proxy GLOBAL_VAR_TYPE
-    ?@string INITIAL_VALUE_STRING
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @globalVariableMapIR-element generateLLVM -> @string outCode {
-  outCode = [filewrapper globalVariableGenerationTemplate.llvmImplementation
-    !lkey.string # mGlobalVariableName
-    !mType
-    ![mInitialValue string]
-  ]
+method @globalVariableMapIR-element generateLLVM ?!@string ioCode {
+  ioCode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal global "
+  ioCode += [mType llvmTypeName] + " "
+  let initialString = [mInitialValue string]
+  if initialString == "" then
+    ioCode += "zeroinitializer"
+  else
+    ioCode += initialString
+  end
+  ioCode += "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -3784,20 +3784,25 @@ void categoryMethod_semanticAnalysis (const GALGAS_globalVarDeclarationList_2D_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category Reader '@globalVariableMapIR-element generateLLVM'                             *
+//                             Category method '@globalVariableMapIR-element generateLLVM'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string categoryReader_generateLLVM (const GALGAS_globalVariableMapIR_2D_element & inObject,
-                                           C_Compiler * inCompiler
-                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outCode ; // Returned variable
-  result_outCode = GALGAS_string (filewrapperTemplate_globalVariableGenerationTemplate_llvmImplementation (inCompiler, inObject.mAttribute_lkey.mAttribute_string, inObject.mAttribute_mType, categoryReader_string (inObject.mAttribute_mInitialValue, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 266)) COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 263))) ;
-//---
-  return result_outCode ;
+void categoryMethod_generateLLVM (const GALGAS_globalVariableMapIR_2D_element inObject,
+                                  GALGAS_string & ioArgument_ioCode,
+                                  C_Compiler * inCompiler
+                                  COMMA_UNUSED_LOCATION_ARGS) {
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("@").add_operation (function_mangledNameForGlobalVariable (inObject.mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 252)), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 252)).add_operation (GALGAS_string (" = internal global "), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 252))  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 252)) ;
+  ioArgument_ioCode.dotAssign_operation (categoryReader_llvmTypeName (inObject.mAttribute_mType, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 253)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 253))  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 253)) ;
+  GALGAS_string var_initialString = categoryReader_string (inObject.mAttribute_mInitialValue, inCompiler COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 254)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_initialString.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    ioArgument_ioCode.dotAssign_operation (GALGAS_string ("zeroinitializer")  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 256)) ;
+  }else if (kBoolFalse == test_0) {
+    ioArgument_ioCode.dotAssign_operation (var_initialString  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 258)) ;
+  }
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 260)) ;
 }
-
-
 
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9974,37 +9979,4 @@ static void defineCategoryMethod_storeVolatileIR_enterAccessibleEntities (void) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_storeVolatileIR_enterAccessibleEntities (defineCategoryMethod_storeVolatileIR_enterAccessibleEntities, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Overriding category method '@storeGlobalVariableIR llvmInstructionCode'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_storeGlobalVariableIR_llvmInstructionCode (const cPtr_abstractInstructionIR * inObject,
-                                                                      GALGAS_string & ioArgument_ioCode,
-                                                                      const GALGAS_generationContext /* constinArgument_inGenerationContext */,
-                                                                      GALGAS_stringset & /* ioArgument_ioIntrinsicsDeclarationSet */,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_storeGlobalVariableIR * object = (const cPtr_storeGlobalVariableIR *) inObject ;
-  macroValidSharedObject (object, cPtr_storeGlobalVariableIR) ;
-  GALGAS_string var_llvmType = categoryReader_llvmTypeName (object->mAttribute_mTargetVarType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 27)) ;
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("  store ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 28)) ;
-  const enumGalgasBool test_0 = object->mAttribute_mIsVolatile.boolEnum () ;
-  if (kBoolTrue == test_0) {
-    ioArgument_ioCode.dotAssign_operation (GALGAS_string ("volatile ")  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 30)) ;
-  }
-  ioArgument_ioCode.dotAssign_operation (var_llvmType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (categoryReader_string (object->mAttribute_mSourceValue, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (var_llvmType, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (GALGAS_string ("* @"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (function_mangledNameForGlobalVariable (object->mAttribute_mGlobalVarName, inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32))  COMMA_SOURCE_FILE ("intermediate-store-global-var.galgas", 32)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode (void) {
-  enterCategoryMethod_llvmInstructionCode (kTypeDescriptor_GALGAS_storeGlobalVariableIR.mSlotID,
-                                           categoryMethod_storeGlobalVariableIR_llvmInstructionCode) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_storeGlobalVariableIR_llvmInstructionCode (defineCategoryMethod_storeGlobalVariableIR_llvmInstructionCode, NULL) ;
 
