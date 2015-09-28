@@ -499,11 +499,22 @@ class GALGAS_string categoryReader_passingModeForActualSelector (const class GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category Getter '@variableKindIR isStatic' (as function)                               *
+//                                 Category Getter '@valueIR typeOrNull' (as function)                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_bool categoryReader_isStatic (const class GALGAS_variableKindIR & inObject,
+class GALGAS_unifiedTypeMap_2D_proxy categoryReader_typeOrNull (const class GALGAS_valueIR & inObject,
+                                                                const class GALGAS_semanticContext & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Category Getter '@valueIR string' (as function)                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_string (const class GALGAS_valueIR & inObject,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 

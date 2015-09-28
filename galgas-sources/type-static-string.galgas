@@ -65,31 +65,37 @@ proc enterStaticStringOperators
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_eq # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_ne # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_ult # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_ule # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_ugt # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
     !selfTypeProxy
     !.icmp_uge # TODO
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
 }
 

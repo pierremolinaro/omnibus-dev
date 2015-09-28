@@ -80,8 +80,8 @@ def runCommand (command) :
 #----------------------------------------------------------------------------------------------------------------------*
 
 def compileSource (source) :
-  print MAGENTA() + BOLD () + "*** Compile " + source + ENDC ()
-  command = ["../makefile-macosx/plm", "-v", "--Oz", source]
+  print MAGENTA() + BOLD () + "********** Compile " + source + ENDC ()
+  command = ["../makefile-macosx/plm-debug", "-v", "--Oz", source]
   childProcess = subprocess.Popen (command)
   childProcess.wait ()
   if childProcess.returncode != 0 :
@@ -93,8 +93,8 @@ def compileSource (source) :
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile PLM
-print MAGENTA() + BOLD () + "*** Compile PLM" + ENDC ()
-runCommand (["python", "../makefile-macosx/build+release.py"])
+print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
+runCommand (["python", "../makefile-macosx/build+debug.py"])
 #--- Compile PLM
 compileSource ("01-blinkled.plm")
 compileSource ("02-blinkled-systick.plm")

@@ -78,40 +78,48 @@ private proc enterBooleanOperators
   ?!context:@semanticContext ioContext
 {
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inBooleanTypeName ?let selfTypeProxy]
+  let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName.string !inBooleanTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_eq
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_ne
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_ult
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_ule
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_ugt
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.icmp_uge
+    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
   ]
   [!?ioContext.mBooleanXorOperatorMap insertKey
-    !.new {!inBooleanTypeName.string + "." + inBooleanTypeName !inBooleanTypeName.location}
+    !boolBoolOp
     !selfTypeProxy
     !.xor
+    !@infixObjectObjectOperatorDescription.new {!.xor}
   ]
   [!?ioContext.mNotOperatorMap insertKey
     !inBooleanTypeName
