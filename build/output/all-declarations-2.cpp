@@ -582,6 +582,14 @@ GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAs
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_typeKind GALGAS_typeKind::constructor_literalInteger (UNUSED_LOCATION_ARGS) {
+  GALGAS_typeKind result ;
+  result.mEnum = kEnum_literalInteger ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_typeKind::method_enumeration (GALGAS_enumConstantMap & outAssociatedValue0,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) const {
@@ -639,14 +647,15 @@ void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_typeKind [7] = {
+static const char * gEnumNameArrayFor_typeKind [8] = {
   "(not built)",
   "boolean",
   "boolset",
   "literalString",
   "enumeration",
   "structure",
-  "integer"
+  "integer",
+  "literalInteger"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -683,6 +692,12 @@ GALGAS_bool GALGAS_typeKind::reader_isStructure (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_typeKind::reader_isInteger (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_integer == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_typeKind::reader_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

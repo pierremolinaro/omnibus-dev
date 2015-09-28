@@ -65,6 +65,8 @@ override method @literalIntegerInExpressionAST analyzeExpression
       error mLiteralInteger : "a structure cannot be assigned from a literal integer" : outResultType, outResult
     case boolean :
       error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outResultType, outResult
+    case literalInteger :
+      error mLiteralInteger : "a boolean cannot be assigned from a literal integer" : outResultType, outResult
     case boolset :
       error mLiteralInteger : "a boolset cannot be assigned from a literal integer" : outResultType, outResult
     case literalString :

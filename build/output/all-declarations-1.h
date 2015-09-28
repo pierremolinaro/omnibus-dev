@@ -214,6 +214,143 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedRoutineMap_2
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @literalIntegerInfixOperator enum                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literalIntegerInfixOperator : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_literalIntegerInfixOperator (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_equal,
+    kEnum_nonEqual,
+    kEnum_strictInf,
+    kEnum_strictSup,
+    kEnum_infEqual,
+    kEnum_supEqual,
+    kEnum_and,
+    kEnum_ior,
+    kEnum_xor,
+    kEnum_add,
+    kEnum_sub,
+    kEnum_mul,
+    kEnum_div,
+    kEnum_rem,
+    kEnum_leftShift,
+    kEnum_rightShift
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literalIntegerInfixOperator extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literalIntegerInfixOperator constructor_add (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_and (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_div (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_equal (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_infEqual (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_ior (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_leftShift (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_mul (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_nonEqual (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_rem (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_rightShift (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_strictInf (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_strictSup (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_sub (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_supEqual (LOCATION_ARGS) ;
+
+  public : static GALGAS_literalIntegerInfixOperator constructor_xor (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literalIntegerInfixOperator & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAdd (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isAnd (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isDiv (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isEqual (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isInfEqual (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isIor (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLeftShift (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isMul (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isNonEqual (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRem (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isRightShift (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isStrictInf (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isStrictSup (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSub (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isSupEqual (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isXor (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literalIntegerInfixOperator class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerInfixOperator ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        @instructionListAST_2D_element struct                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

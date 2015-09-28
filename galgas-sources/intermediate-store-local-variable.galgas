@@ -22,7 +22,7 @@ override method @storeLocalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTargetVarType llvmType]
+  let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  store "
   ioCode += llvmType + " " + mSourceValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
 }

@@ -20,7 +20,7 @@ override method @allocaConstantIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mVariableType llvmType]
+  let llvmType = [mVariableType llvmTypeName]
   ioCode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
 }
 

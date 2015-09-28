@@ -353,6 +353,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     case structure (propMap) : propertyMap = propMap
     case enumeration (*) : propertyMap = {}
     case integer (* * * *) : propertyMap = {}
+    case literalInteger : propertyMap = {}
     case boolean : propertyMap = {}
     case boolset : propertyMap = {}
     case literalString : propertyMap = {}
@@ -514,11 +515,11 @@ method @procedureMapIR-element llvmCodeGeneration
   do
     switch mFormalArgumentKind
     case input :
-      ioCode += [mFormalArgumentType llvmType] + " %in." + mFormalArgumentName
+      ioCode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioCode += [mFormalArgumentType llvmType] + "* %" + mFormalArgumentName
+      ioCode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
    case inputOutput :
-      ioCode += [mFormalArgumentType llvmType] + "* %" + mFormalArgumentName
+      ioCode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
     end
   between
     ioCode += ", "
@@ -528,8 +529,8 @@ method @procedureMapIR-element llvmCodeGeneration
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmType]
-      ioCode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmType] + "\n"
+      let llvmType = [mFormalArgumentType llvmTypeName]
+      ioCode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
       ioCode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
     case output, inputOutput :
     end

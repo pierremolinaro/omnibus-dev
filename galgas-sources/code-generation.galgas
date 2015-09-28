@@ -148,8 +148,8 @@ proc generateLLVMfile
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
 {
   let @generationContext generationContext = .new {
-    ![inExceptionCodeType llvmType]
-    ![inExceptionLineType llvmType]
+    ![inExceptionCodeType llvmTypeName]
+    ![inExceptionLineType llvmTypeName]
   }
   let sourceDirectory = inProductDirectory + "/sources"
   var code = ""

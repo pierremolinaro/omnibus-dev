@@ -11,6 +11,7 @@ enum @typeKind {
   case enumeration (@enumConstantMap constantMap)
   case structure (@propertyMap propertyMap)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
+  case literalInteger
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -110,14 +111,15 @@ sharedmap @unifiedTypeMap %selectors {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @unifiedTypeMap-proxy llvmType -> @string outResult {
+getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
   switch [self  kind]
   case boolean : outResult = "i1"
   case boolset : outResult = "<<boolset>>"
-  case enumeration (@enumConstantMap unused constantMap) : outResult = "<<enumeration>>"
+  case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
   case structure (@propertyMap unused propertyMap) :  outResult = "<<structure>>"
   case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
   case literalString :  outResult = "<<literalString>>"
+  case literalInteger : outResult = "<<literalInteger>>"
   end
 }
 
