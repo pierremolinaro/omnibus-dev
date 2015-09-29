@@ -174,7 +174,6 @@ override method @globalConstantDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Code generation
   [inContext.mGlobalConstantMap searchKey
     !mConstantName
     ?let type

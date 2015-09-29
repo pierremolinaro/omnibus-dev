@@ -625,7 +625,7 @@ override method @literal_integerObject_infixOperator generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @operandIR inLeftOperand
-  ?let @unifiedTypeMap-proxy inLeftType
+  ?let @unifiedTypeMap-proxy unused inLeftType
   ?let @operandIR inRightOperand
   ?let @unifiedTypeMap-proxy inRightType
   ?let @location inOperatorLocation
@@ -643,7 +643,7 @@ override method @literal_integerObject_infixOperator generateCode
     #--- Generate code
       [!?ioInstructionGenerationList appendBinaryOperation
         !outResultValue
-        !inLeftType
+        !inRightType
         !inLeftOperand
         !mOperator
         !inRightOperand

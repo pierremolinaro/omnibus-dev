@@ -3831,8 +3831,8 @@ void categoryMethod_generateLLVM (const GALGAS_globalConstantMapIR_2D_element in
                                   GALGAS_string & ioArgument_ioCode,
                                   C_Compiler * inCompiler
                                   COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("@").add_operation (function_mangledNameForGlobalVariable (inObject.mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)).add_operation (GALGAS_string (" = internal constant "), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)) ;
-  ioArgument_ioCode.dotAssign_operation (categoryReader_llvmTypeName (inObject.mAttribute_mType, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196)).add_operation (categoryReader_string (inObject.mAttribute_mSourceExpression, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 196)) ;
+  ioArgument_ioCode.dotAssign_operation (GALGAS_string ("@").add_operation (function_mangledNameForGlobalVariable (inObject.mAttribute_lkey.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 194)).add_operation (GALGAS_string (" = internal constant "), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 194))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 194)) ;
+  ioArgument_ioCode.dotAssign_operation (categoryReader_llvmTypeName (inObject.mAttribute_mType, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)).add_operation (categoryReader_string (inObject.mAttribute_mSourceExpression, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195))  COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 195)) ;
 }
 
 
@@ -5750,9 +5750,9 @@ static void categoryMethod_globalConstantDeclaration_semanticAnalysis (const cPt
   macroValidSharedObject (object, cPtr_globalConstantDeclaration) ;
   GALGAS_unifiedTypeMap_2D_proxy var_type ;
   GALGAS_operandIR var_expressionGeneratedCode ;
-  constinArgument_inContext.mAttribute_mGlobalConstantMap.method_searchKey (object->mAttribute_mConstantName, var_type, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 178)) ;
+  constinArgument_inContext.mAttribute_mGlobalConstantMap.method_searchKey (object->mAttribute_mConstantName, var_type, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 177)) ;
   {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.modifier_insertKey (object->mAttribute_mConstantName, var_type, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 183)) ;
+  ioArgument_ioIntermediateCodeStruct.mAttribute_mGlobalConstantMap.modifier_insertKey (object->mAttribute_mConstantName, var_type, var_expressionGeneratedCode, inCompiler COMMA_SOURCE_FILE ("global-constant-declaration.galgas", 182)) ;
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6057,7 +6057,7 @@ static void categoryMethod_literal_5F_integerObject_5F_infixOperator_generateCod
                                                                                    GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                                                    GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
                                                                                    const GALGAS_operandIR constinArgument_inLeftOperand,
-                                                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inLeftType,
+                                                                                   const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inLeftType */,
                                                                                    const GALGAS_operandIR constinArgument_inRightOperand,
                                                                                    const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inRightType,
                                                                                    const GALGAS_location constinArgument_inOperatorLocation,
@@ -6070,9 +6070,9 @@ static void categoryMethod_literal_5F_integerObject_5F_infixOperator_generateCod
   constinArgument_inLeftOperand.method_literalInteger (var_literalValue, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 635)) ;
   GALGAS_bigint var_min ;
   GALGAS_bigint var_max ;
-  GALGAS_bool joker_23964 ; // Joker input parameter
-  GALGAS_uint joker_23976 ; // Joker input parameter
-  constinArgument_inRightType.reader_kind (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 636)).method_integer (var_min, var_max, joker_23964, joker_23976, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 636)) ;
+  GALGAS_bool joker_23971 ; // Joker input parameter
+  GALGAS_uint joker_23983 ; // Joker input parameter
+  constinArgument_inRightType.reader_kind (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 636)).method_integer (var_min, var_max, joker_23971, joker_23983, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 636)) ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsStrictInf, var_literalValue.objectCompare (var_min)).boolEnum () ;
   if (kBoolTrue == test_0) {
     inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("literal left integer expression too small (should be >= ").add_operation (var_min.reader_string (SOURCE_FILE ("type-integer.galgas", 638)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 638)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 638))  COMMA_SOURCE_FILE ("type-integer.galgas", 638)) ;
@@ -6087,7 +6087,7 @@ static void categoryMethod_literal_5F_integerObject_5F_infixOperator_generateCod
       routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 642)) ;
       }
       {
-      categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 644)) ;
+      categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inRightType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 644)) ;
       }
     }
   }

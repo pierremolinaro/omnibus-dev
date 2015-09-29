@@ -6347,7 +6347,6 @@ void categoryModifier_appendStoreLocalVariable (GALGAS_instructionListIR & ioObj
 GALGAS_accessibleEntities::GALGAS_accessibleEntities (void) :
 mAttribute_mAccessibleRegisterSet (),
 mAttribute_mStaticStringSet (),
-mAttribute_mGlobalConstantSet (),
 mAttribute_mProcedureSet (),
 mAttribute_mFunctionSet (),
 mAttribute_mGlobalVariableSet () {
@@ -6364,21 +6363,18 @@ GALGAS_accessibleEntities::GALGAS_accessibleEntities (const GALGAS_stringset & i
                                                       const GALGAS_stringset & inOperand1,
                                                       const GALGAS_stringset & inOperand2,
                                                       const GALGAS_stringset & inOperand3,
-                                                      const GALGAS_stringset & inOperand4,
-                                                      const GALGAS_stringset & inOperand5) :
+                                                      const GALGAS_stringset & inOperand4) :
 mAttribute_mAccessibleRegisterSet (inOperand0),
 mAttribute_mStaticStringSet (inOperand1),
-mAttribute_mGlobalConstantSet (inOperand2),
-mAttribute_mProcedureSet (inOperand3),
-mAttribute_mFunctionSet (inOperand4),
-mAttribute_mGlobalVariableSet (inOperand5) {
+mAttribute_mProcedureSet (inOperand2),
+mAttribute_mFunctionSet (inOperand3),
+mAttribute_mGlobalVariableSet (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_accessibleEntities (GALGAS_stringset::constructor_emptySet (HERE),
-                                    GALGAS_stringset::constructor_emptySet (HERE),
                                     GALGAS_stringset::constructor_emptySet (HERE),
                                     GALGAS_stringset::constructor_emptySet (HERE),
                                     GALGAS_stringset::constructor_emptySet (HERE),
@@ -6391,12 +6387,11 @@ GALGAS_accessibleEntities GALGAS_accessibleEntities::constructor_new (const GALG
                                                                       const GALGAS_stringset & inOperand1,
                                                                       const GALGAS_stringset & inOperand2,
                                                                       const GALGAS_stringset & inOperand3,
-                                                                      const GALGAS_stringset & inOperand4,
-                                                                      const GALGAS_stringset & inOperand5 
+                                                                      const GALGAS_stringset & inOperand4 
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_accessibleEntities result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
-    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_accessibleEntities (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -6410,9 +6405,6 @@ typeComparisonResult GALGAS_accessibleEntities::objectCompare (const GALGAS_acce
   }
   if (result == kOperandEqual) {
     result = mAttribute_mStaticStringSet.objectCompare (inOperand.mAttribute_mStaticStringSet) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantSet.objectCompare (inOperand.mAttribute_mGlobalConstantSet) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mProcedureSet.objectCompare (inOperand.mAttribute_mProcedureSet) ;
@@ -6429,7 +6421,7 @@ typeComparisonResult GALGAS_accessibleEntities::objectCompare (const GALGAS_acce
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_accessibleEntities::isValid (void) const {
-  return mAttribute_mAccessibleRegisterSet.isValid () && mAttribute_mStaticStringSet.isValid () && mAttribute_mGlobalConstantSet.isValid () && mAttribute_mProcedureSet.isValid () && mAttribute_mFunctionSet.isValid () && mAttribute_mGlobalVariableSet.isValid () ;
+  return mAttribute_mAccessibleRegisterSet.isValid () && mAttribute_mStaticStringSet.isValid () && mAttribute_mProcedureSet.isValid () && mAttribute_mFunctionSet.isValid () && mAttribute_mGlobalVariableSet.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6437,7 +6429,6 @@ bool GALGAS_accessibleEntities::isValid (void) const {
 void GALGAS_accessibleEntities::drop (void) {
   mAttribute_mAccessibleRegisterSet.drop () ;
   mAttribute_mStaticStringSet.drop () ;
-  mAttribute_mGlobalConstantSet.drop () ;
   mAttribute_mProcedureSet.drop () ;
   mAttribute_mFunctionSet.drop () ;
   mAttribute_mGlobalVariableSet.drop () ;
@@ -6454,8 +6445,6 @@ void GALGAS_accessibleEntities::description (C_String & ioString,
     mAttribute_mAccessibleRegisterSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mStaticStringSet.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mGlobalConstantSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mProcedureSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -6476,12 +6465,6 @@ GALGAS_stringset GALGAS_accessibleEntities::reader_mAccessibleRegisterSet (UNUSE
 
 GALGAS_stringset GALGAS_accessibleEntities::reader_mStaticStringSet (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStaticStringSet ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_stringset GALGAS_accessibleEntities::reader_mGlobalConstantSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantSet ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6558,9 +6541,9 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_literalStructureList i
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_literalStructureList temp_0 = inObject ;
-  cEnumerator_literalStructureList enumerator_1058 (temp_0, kEnumeration_up) ;
-  while (enumerator_1058.hasCurrentObject ()) {
-    switch (enumerator_1058.current_mStructure (HERE).enumValue ()) {
+  cEnumerator_literalStructureList enumerator_1026 (temp_0, kEnumeration_up) ;
+  while (enumerator_1026.hasCurrentObject ()) {
+    switch (enumerator_1026.current_mStructure (HERE).enumValue ()) {
     case GALGAS_literalStructure::kNotBuilt:
       break ;
     case GALGAS_literalStructure::kEnum_unsignedInteger:
@@ -6573,21 +6556,21 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_literalStructureList i
       break ;
     case GALGAS_literalStructure::kEnum_string:
       {
-        const cEnumAssociatedValues_literalStructure_string * extractPtr_1243 = (const cEnumAssociatedValues_literalStructure_string *) (enumerator_1058.current_mStructure (HERE).unsafePointer ()) ;
-        const GALGAS_string extractedValue_value = extractPtr_1243->mAssociatedValue0 ;
-        const GALGAS_string extractedValue_name = extractPtr_1243->mAssociatedValue1 ;
-        ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 24)) ;
+        const cEnumAssociatedValues_literalStructure_string * extractPtr_1211 = (const cEnumAssociatedValues_literalStructure_string *) (enumerator_1026.current_mStructure (HERE).unsafePointer ()) ;
+        const GALGAS_string extractedValue_value = extractPtr_1211->mAssociatedValue0 ;
+        const GALGAS_string extractedValue_name = extractPtr_1211->mAssociatedValue1 ;
+        ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 23)) ;
       }
       break ;
     case GALGAS_literalStructure::kEnum_structure:
       {
-        const cEnumAssociatedValues_literalStructure_structure * extractPtr_1363 = (const cEnumAssociatedValues_literalStructure_structure *) (enumerator_1058.current_mStructure (HERE).unsafePointer ()) ;
-        const GALGAS_literalStructureList extractedValue_valueList = extractPtr_1363->mAssociatedValue0 ;
-        categoryMethod_enterAccessibleEntities (extractedValue_valueList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 26)) ;
+        const cEnumAssociatedValues_literalStructure_structure * extractPtr_1331 = (const cEnumAssociatedValues_literalStructure_structure *) (enumerator_1026.current_mStructure (HERE).unsafePointer ()) ;
+        const GALGAS_literalStructureList extractedValue_valueList = extractPtr_1331->mAssociatedValue0 ;
+        categoryMethod_enterAccessibleEntities (extractedValue_valueList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 25)) ;
       }
       break ;
     }
-    enumerator_1058.gotoNextObject () ;
+    enumerator_1026.gotoNextObject () ;
   }
 }
 
@@ -6663,10 +6646,10 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_instructionListIR inOb
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_3334 (temp_0, kEnumeration_up) ;
-  while (enumerator_3334.hasCurrentObject ()) {
-    callCategoryMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_3334.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 73)) ;
-    enumerator_3334.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_3302 (temp_0, kEnumeration_up) ;
+  while (enumerator_3302.hasCurrentObject ()) {
+    callCategoryMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_3302.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 72)) ;
+    enumerator_3302.gotoNextObject () ;
   }
 }
 
@@ -11083,49 +11066,49 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_variableKindIR inObjec
     break ;
   case GALGAS_variableKindIR::kEnum_register:
     {
-      const cEnumAssociatedValues_variableKindIR_register * extractPtr_1710 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_1710->mAssociatedValue1 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 36)) ;
+      const cEnumAssociatedValues_variableKindIR_register * extractPtr_1678 = (const cEnumAssociatedValues_variableKindIR_register *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_1678->mAssociatedValue1 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 35)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_1806 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_name = extractPtr_1806->mAssociatedValue1 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 38)) ;
+      const cEnumAssociatedValues_variableKindIR_globalVariable * extractPtr_1774 = (const cEnumAssociatedValues_variableKindIR_globalVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_name = extractPtr_1774->mAssociatedValue1 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (extractedValue_name  COMMA_SOURCE_FILE ("code-optimisation.galgas", 37)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localValue:
     {
-      const cEnumAssociatedValues_variableKindIR_localValue * extractPtr_1851 = (const cEnumAssociatedValues_variableKindIR_localValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_1851->mAssociatedValue1 ;
+      const cEnumAssociatedValues_variableKindIR_localValue * extractPtr_1819 = (const cEnumAssociatedValues_variableKindIR_localValue *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_1819->mAssociatedValue1 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_globalConstant:
     {
-      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_1901 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_operandIR extractedValue_value = extractPtr_1901->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_globalConstant * extractPtr_1869 = (const cEnumAssociatedValues_variableKindIR_globalConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_operandIR extractedValue_value = extractPtr_1869->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_localAccess:
     {
-      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1947 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_access = extractPtr_1947->mAssociatedValue0 ;
+      const cEnumAssociatedValues_variableKindIR_localAccess * extractPtr_1915 = (const cEnumAssociatedValues_variableKindIR_localAccess *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_access = extractPtr_1915->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalString:
     {
-      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_2058 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_value = extractPtr_2058->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_2058->mAssociatedValue1 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 43)) ;
+      const cEnumAssociatedValues_variableKindIR_literalString * extractPtr_2026 = (const cEnumAssociatedValues_variableKindIR_literalString *) (temp_0.unsafePointer ()) ;
+      const GALGAS_string extractedValue_value = extractPtr_2026->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_2026->mAssociatedValue1 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mStaticStringSet.addAssign_operation (extractedValue_value  COMMA_SOURCE_FILE ("code-optimisation.galgas", 42)) ;
     }
     break ;
   case GALGAS_variableKindIR::kEnum_literalStructure:
     {
-      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_2165 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (temp_0.unsafePointer ()) ;
-      const GALGAS_literalStructureList extractedValue_s = extractPtr_2165->mAssociatedValue0 ;
-      categoryMethod_enterAccessibleEntities (extractedValue_s, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 45)) ;
+      const cEnumAssociatedValues_variableKindIR_literalStructure * extractPtr_2133 = (const cEnumAssociatedValues_variableKindIR_literalStructure *) (temp_0.unsafePointer ()) ;
+      const GALGAS_literalStructureList extractedValue_s = extractPtr_2133->mAssociatedValue0 ;
+      categoryMethod_enterAccessibleEntities (extractedValue_s, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 44)) ;
     }
     break ;
   }
@@ -11148,41 +11131,41 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_assignmentTargetIR inO
     break ;
   case GALGAS_assignmentTargetIR::kEnum_register:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_register * extractPtr_2506 = (const cEnumAssociatedValues_assignmentTargetIR_register *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_2506->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 54)) ;
+      const cEnumAssociatedValues_assignmentTargetIR_register * extractPtr_2474 = (const cEnumAssociatedValues_assignmentTargetIR_register *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_2474->mAssociatedValue0 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 53)) ;
     }
     break ;
   case GALGAS_assignmentTargetIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_globalVariable * extractPtr_2606 = (const cEnumAssociatedValues_assignmentTargetIR_globalVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_2606->mAssociatedValue0 ;
-      ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 56)) ;
+      const cEnumAssociatedValues_assignmentTargetIR_globalVariable * extractPtr_2574 = (const cEnumAssociatedValues_assignmentTargetIR_globalVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_2574->mAssociatedValue0 ;
+      ioArgument_ioAccessibleEntities.mAttribute_mGlobalVariableSet.addAssign_operation (extractedValue_name.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 55)) ;
     }
     break ;
   case GALGAS_assignmentTargetIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_localVariable * extractPtr_2652 = (const cEnumAssociatedValues_assignmentTargetIR_localVariable *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_name = extractPtr_2652->mAssociatedValue0 ;
+      const cEnumAssociatedValues_assignmentTargetIR_localVariable * extractPtr_2620 = (const cEnumAssociatedValues_assignmentTargetIR_localVariable *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_name = extractPtr_2620->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_assignmentTargetIR::kEnum_temporaryConstant:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_temporaryConstant * extractPtr_2698 = (const cEnumAssociatedValues_assignmentTargetIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_idx = extractPtr_2698->mAssociatedValue0 ;
+      const cEnumAssociatedValues_assignmentTargetIR_temporaryConstant * extractPtr_2666 = (const cEnumAssociatedValues_assignmentTargetIR_temporaryConstant *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_idx = extractPtr_2666->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_assignmentTargetIR::kEnum_localAccess:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_localAccess * extractPtr_2744 = (const cEnumAssociatedValues_assignmentTargetIR_localAccess *) (temp_0.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_access = extractPtr_2744->mAssociatedValue0 ;
+      const cEnumAssociatedValues_assignmentTargetIR_localAccess * extractPtr_2712 = (const cEnumAssociatedValues_assignmentTargetIR_localAccess *) (temp_0.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_access = extractPtr_2712->mAssociatedValue0 ;
     }
     break ;
   case GALGAS_assignmentTargetIR::kEnum_literalStructure:
     {
-      const cEnumAssociatedValues_assignmentTargetIR_literalStructure * extractPtr_2851 = (const cEnumAssociatedValues_assignmentTargetIR_literalStructure *) (temp_0.unsafePointer ()) ;
-      const GALGAS_literalStructureList extractedValue_s = extractPtr_2851->mAssociatedValue0 ;
-      categoryMethod_enterAccessibleEntities (extractedValue_s, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 61)) ;
+      const cEnumAssociatedValues_assignmentTargetIR_literalStructure * extractPtr_2819 = (const cEnumAssociatedValues_assignmentTargetIR_literalStructure *) (temp_0.unsafePointer ()) ;
+      const GALGAS_literalStructureList extractedValue_s = extractPtr_2819->mAssociatedValue0 ;
+      categoryMethod_enterAccessibleEntities (extractedValue_s, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 60)) ;
     }
     break ;
   }
@@ -11199,7 +11182,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_procedureMapIR_2D_elem
                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 80)) ;
+  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 79)) ;
 }
 
 
@@ -11213,7 +11196,7 @@ void categoryMethod_enterAccessibleEntities (const GALGAS_functionMapIR_2D_eleme
                                              GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
-  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 86)) ;
+  categoryMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 85)) ;
 }
 
 
