@@ -213,10 +213,10 @@ proc generateLLVMfile
     code += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
     code += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
     code += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionCodeLLVMType + "%in.CODE, "
+    code += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
          + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
     code += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionLineLLVMType + "%in.LINE, "
+    code += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
          + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
       !?code

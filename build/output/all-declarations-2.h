@@ -403,33 +403,45 @@ class GALGAS_incDecOperatorMap : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_llvmBinaryOperation & inOperand1,
+                                                      const class GALGAS_llvmBinaryOperation & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_insertKey (class GALGAS_lstring constinArgument0,
                                                      class GALGAS_llvmBinaryOperation constinArgument1,
+                                                     class GALGAS_llvmBinaryOperation constinArgument2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_setMOperationForKey (class GALGAS_llvmBinaryOperation constinArgument0,
-                                                               class GALGAS_string constinArgument1,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void modifier_setMOperationNoOvfForKey (class GALGAS_llvmBinaryOperation constinArgument0,
+                                                                    class GALGAS_string constinArgument1,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_setMOperationOvfCheckForKey (class GALGAS_llvmBinaryOperation constinArgument0,
+                                                                       class GALGAS_string constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_llvmBinaryOperation & outArgument1,
+                                                   class GALGAS_llvmBinaryOperation & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationForKey (const class GALGAS_string & constinOperand0,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationNoOvfForKey (const class GALGAS_string & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationOvfCheckForKey (const class GALGAS_string & constinOperand0,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_overriddenMap (C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const ;
@@ -457,7 +469,8 @@ class cEnumerator_incDecOperatorMap : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_llvmBinaryOperation current_mOperation (LOCATION_ARGS) const ;
+  public : class GALGAS_llvmBinaryOperation current_mOperationOvfCheck (LOCATION_ARGS) const ;
+  public : class GALGAS_llvmBinaryOperation current_mOperationNoOvf (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_incDecOperatorMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -474,11 +487,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_incDecOperatorMap ;
 
 class cMapElement_incDecOperatorMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperationOvfCheck ;
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperationNoOvf ;
 
 //--- Constructor
   public : cMapElement_incDecOperatorMap (const GALGAS_lstring & inKey,
-                                          const GALGAS_llvmBinaryOperation & in_mOperation
+                                          const GALGAS_llvmBinaryOperation & in_mOperationOvfCheck,
+                                          const GALGAS_llvmBinaryOperation & in_mOperationNoOvf
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -503,7 +518,8 @@ class cMapElement_incDecOperatorMap : public cMapElement {
 class GALGAS_incDecOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperationOvfCheck ;
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperationNoOvf ;
 
 
 //--------------------------------- Accessors
@@ -518,7 +534,8 @@ class GALGAS_incDecOperatorMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_incDecOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
-                                                const GALGAS_llvmBinaryOperation & in_mOperation) ;
+                                                const GALGAS_llvmBinaryOperation & in_mOperationOvfCheck,
+                                                const GALGAS_llvmBinaryOperation & in_mOperationNoOvf) ;
 
 //-- Start of generic part --*
 
@@ -532,7 +549,8 @@ class GALGAS_incDecOperatorMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_incDecOperatorMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                       const class GALGAS_llvmBinaryOperation & inOperand1
+                                                                       const class GALGAS_llvmBinaryOperation & inOperand1,
+                                                                       const class GALGAS_llvmBinaryOperation & inOperand2
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -549,7 +567,9 @@ class GALGAS_incDecOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationNoOvf (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperationOvfCheck (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

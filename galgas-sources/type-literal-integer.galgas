@@ -70,48 +70,48 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.equal}
+    !@literal_literal_integerInfixOperation.new {!.equal}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.nonEqual}
+    !@literal_literal_integerInfixOperation.new {!.nonEqual}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictInf}
+    !@literal_literal_integerInfixOperation.new {!.strictInf}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.infEqual}
+    !@literal_literal_integerInfixOperation.new {!.infEqual}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.strictSup}
+    !@literal_literal_integerInfixOperation.new {!.strictSup}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intIntOp
     !ioContext.mBooleanType
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.supEqual}
+    !@literal_literal_integerInfixOperation.new {!.supEqual}
   ]
 #--- Bit Wise operators (for unsigned integers)
   [!?ioContext.mAndOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.and}
+    !@literal_literal_integerInfixOperation.new {!.and}
   ]
   [!?ioContext.mOrOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.ior}
+    !@literal_literal_integerInfixOperation.new {!.ior}
   ]
   [!?ioContext.mXorOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.xor}
+    !@literal_literal_integerInfixOperation.new {!.xor}
   ]
   [!?ioContext.mUnsignedComplementOperatorMap insertKey
     !inIntegerTypeName
@@ -126,38 +126,63 @@ private proc enterLiteralIntegerOperators
   [!?ioContext.mAddOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.add}
+    !@literal_literal_integerInfixOperation.new {!.add}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !@literal_literal_integerInfixOperation.new {!.add}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.sub}
+    !@literal_literal_integerInfixOperation.new {!.sub}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !@literal_literal_integerInfixOperation.new {!.sub}
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.mul}
+    !@literal_literal_integerInfixOperation.new {!.mul}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !@literal_literal_integerInfixOperation.new {!.mul}
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.div}
+    !@literal_literal_integerInfixOperation.new {!.div}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !@literal_literal_integerInfixOperation.new {!.div}
   ]
   [!?ioContext.mModOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.rem}
+    !@literal_literal_integerInfixOperation.new {!.rem}
+  ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfTypeProxy
+    !@literal_literal_integerInfixOperation.new {!.rem}
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.leftShift}
+    !@literal_literal_integerInfixOperation.new {!.leftShift}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intIntOp
     !selfTypeProxy
-    !@infixLiteralIntLiteralIntOperatorDescription.new {!.rightShift}
+    !@literal_literal_integerInfixOperation.new {!.rightShift}
   ]
 }
 
@@ -199,13 +224,13 @@ enum @literalIntegerInfixOperator {
 }
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @infixLiteralIntLiteralIntOperatorDescription : @infixOperatorDescription {
+class @literal_literal_integerInfixOperation : @infixOperatorDescription {
   @literalIntegerInfixOperator mOperator
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @infixLiteralIntLiteralIntOperatorDescription generateCode
+override method @literal_literal_integerInfixOperation generateCode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
   ?let @operandIR inLeftOperand
