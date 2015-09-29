@@ -5989,11 +5989,30 @@ static void categoryMethod_infixObjectLiteralIntegerOperatorDescription_generate
                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_infixObjectLiteralIntegerOperatorDescription * object = (const cPtr_infixObjectLiteralIntegerOperatorDescription *) inObject ;
   macroValidSharedObject (object, cPtr_infixObjectLiteralIntegerOperatorDescription) ;
-  {
-  routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 457)) ;
-  }
-  {
-  categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 459)) ;
+  GALGAS_bigint var_literalValue ;
+  constinArgument_inRightOperand.method_literalInteger (var_literalValue, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 458)) ;
+  GALGAS_bigint var_min ;
+  GALGAS_bigint var_max ;
+  GALGAS_bool joker_17538 ; // Joker input parameter
+  GALGAS_uint joker_17550 ; // Joker input parameter
+  constinArgument_inLeftType.reader_kind (inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 459)).method_integer (var_min, var_max, joker_17538, joker_17550, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 459)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsStrictInf, var_literalValue.objectCompare (var_min)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("literal right integer expression too small (should be >= ").add_operation (var_min.reader_string (SOURCE_FILE ("type-integer.galgas", 461)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 461)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 461))  COMMA_SOURCE_FILE ("type-integer.galgas", 461)) ;
+    outArgument_outResultValue.drop () ; // Release error dropped variable
+  }else if (kBoolFalse == test_0) {
+    const enumGalgasBool test_1 = GALGAS_bool (kIsStrictSup, var_literalValue.objectCompare (var_max)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("literal right integer expression too large (should be <= ").add_operation (var_max.reader_string (SOURCE_FILE ("type-integer.galgas", 463)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 463)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 463))  COMMA_SOURCE_FILE ("type-integer.galgas", 463)) ;
+      outArgument_outResultValue.drop () ; // Release error dropped variable
+    }else if (kBoolFalse == test_1) {
+      {
+      routine_getNewTempVariable (ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 465)) ;
+      }
+      {
+      categoryModifier_appendBinaryOperation (ioArgument_ioInstructionGenerationList, outArgument_outResultValue, constinArgument_inLeftType, constinArgument_inLeftOperand, object->mAttribute_mOperator, constinArgument_inRightOperand, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 467)) ;
+      }
+    }
   }
 }
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9954,29 +9973,4 @@ static void defineCategoryMethod_storeVolatileIR_llvmInstructionCode (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_storeVolatileIR_llvmInstructionCode (defineCategoryMethod_storeVolatileIR_llvmInstructionCode, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding category method '@storeVolatileIR enterAccessibleEntities'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_storeVolatileIR_enterAccessibleEntities (const cPtr_abstractInstructionIR * inObject,
-                                                                    GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
-                                                                    C_Compiler * /* inCompiler */
-                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_storeVolatileIR * object = (const cPtr_storeVolatileIR *) inObject ;
-  macroValidSharedObject (object, cPtr_storeVolatileIR) ;
-  ioArgument_ioAccessibleEntities.mAttribute_mAccessibleRegisterSet.addAssign_operation (object->mAttribute_mRegisterName  COMMA_SOURCE_FILE ("intermediate-store-volatile-register.galgas", 35)) ;
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_storeVolatileIR_enterAccessibleEntities (void) {
-  enterCategoryMethod_enterAccessibleEntities (kTypeDescriptor_GALGAS_storeVolatileIR.mSlotID,
-                                               categoryMethod_storeVolatileIR_enterAccessibleEntities) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_storeVolatileIR_enterAccessibleEntities (defineCategoryMethod_storeVolatileIR_enterAccessibleEntities, NULL) ;
 

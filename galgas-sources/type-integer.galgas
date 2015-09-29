@@ -281,112 +281,112 @@ private proc enterIntegerLiteralOperators
   [!?ioContext.mEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
     !intLiteralOp
     !ioContext.mBooleanType
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
   ]
 #--- Bit Wise operators (for unsigned integers)
   if not inIsSigned then
     [!?ioContext.mAndOperatorMap insertKey
       !intLiteralOp
       !selfTypeProxy
-      !@infixObjectObjectOperatorDescription.new {!.and}
+      !@infixObjectLiteralIntegerOperatorDescription.new {!.and}
     ]
     [!?ioContext.mOrOperatorMap insertKey
       !intLiteralOp
       !selfTypeProxy
-      !@infixObjectObjectOperatorDescription.new {!.ior}
+      !@infixObjectLiteralIntegerOperatorDescription.new {!.ior}
     ]
     [!?ioContext.mXorOperatorMap insertKey
       !intLiteralOp
       !selfTypeProxy
-      !@infixObjectObjectOperatorDescription.new {!.xor}
+      !@infixObjectLiteralIntegerOperatorDescription.new {!.xor}
     ]
   end
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
   ]
   [!?ioContext.mAddNoOvfOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.addNoOVF}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.addNoOVF}
   ]
   [!?ioContext.mSubOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
   ]
   [!?ioContext.mSubNoOvfOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.subNoOVF}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.subNoOVF}
   ]
   [!?ioContext.mMulOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
   ]
   [!?ioContext.mMulNoOvfOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.mulNoOVF}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.mulNoOVF}
   ]
   [!?ioContext.mDivOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
   ]
   [!?ioContext.mDivNoOvfOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
   ]
   [!?ioContext.mModOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
   ]
   [!?ioContext.mModNoOvfOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
   ]
 #--- Shift operators
   [!?ioContext.mLeftShiftOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.shl}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!.shl}
   ]
   [!?ioContext.mRightShiftOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
+    !@infixObjectLiteralIntegerOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
   ]
 }
 
@@ -454,16 +454,25 @@ override method @infixObjectLiteralIntegerOperatorDescription generateCode
   ?let @location inOperatorLocation
   !@operandIR outResultValue
 {
-  getNewTempVariable (!?ioTemporaries ?outResultValue)
-#--- Generate code
-  [!?ioInstructionGenerationList appendBinaryOperation
-    !outResultValue
-    !inLeftType
-    !inLeftOperand
-    !mOperator
-    !inRightOperand
-    !inOperatorLocation
-  ]
+#--- Check right literal integer can be extented to left integer type
+  [inRightOperand literalInteger ?value:let @bigint literalValue]
+  [[inLeftType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  if literalValue < min then
+    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResultValue
+  elsif literalValue > max then
+    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResultValue
+  else
+    getNewTempVariable (!?ioTemporaries ?outResultValue)
+    #--- Generate code
+      [!?ioInstructionGenerationList appendBinaryOperation
+        !outResultValue
+        !inLeftType
+        !inLeftOperand
+        !mOperator
+        !inRightOperand
+        !inOperatorLocation
+      ]
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
