@@ -211,7 +211,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !variableType
+      !if variableType == .null then resultType else variableType end
       !executionModes
       !allowedProcedureMap
       !resultValue
