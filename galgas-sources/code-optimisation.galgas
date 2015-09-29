@@ -7,7 +7,6 @@
 struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
   @stringset mStaticStringSet
-  @stringset mGlobalConstantSet
   @stringset mProcedureSet
   @stringset mFunctionSet
   @stringset mGlobalVariableSet
@@ -128,7 +127,7 @@ proc codeOptimisation
   #--- Suppress global constant
     @globalConstantMapIR globalConstantMap = {}
     for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
-      if [accessibleEntities.mGlobalConstantSet hasKey !constant.lkey.string] then
+      if [accessibleEntities.mGlobalVariableSet hasKey !constant.lkey.string] then
         [!?globalConstantMap insertKey !constant.lkey !constant.mType !constant.mSourceExpression]
       else
         optimizing = true

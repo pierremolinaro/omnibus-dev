@@ -2613,7 +2613,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_stringset mAttribute_mAccessibleRegisterSet ;
   public : GALGAS_stringset mAttribute_mStaticStringSet ;
-  public : GALGAS_stringset mAttribute_mGlobalConstantSet ;
   public : GALGAS_stringset mAttribute_mProcedureSet ;
   public : GALGAS_stringset mAttribute_mFunctionSet ;
   public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
@@ -2635,7 +2634,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mAccessibleRegisterSet,
                                       const GALGAS_stringset & in_mStaticStringSet,
-                                      const GALGAS_stringset & in_mGlobalConstantSet,
                                       const GALGAS_stringset & in_mProcedureSet,
                                       const GALGAS_stringset & in_mFunctionSet,
                                       const GALGAS_stringset & in_mGlobalVariableSet) ;
@@ -2655,8 +2653,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                                              const class GALGAS_stringset & inOperand1,
                                                              const class GALGAS_stringset & inOperand2,
                                                              const class GALGAS_stringset & inOperand3,
-                                                             const class GALGAS_stringset & inOperand4,
-                                                             const class GALGAS_stringset & inOperand5
+                                                             const class GALGAS_stringset & inOperand4
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -2674,8 +2671,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mAccessibleRegisterSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mFunctionSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mGlobalConstantSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mGlobalVariableSet (LOCATION_ARGS) const ;
 

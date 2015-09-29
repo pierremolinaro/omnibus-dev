@@ -31,7 +31,7 @@ proc wait `user (?ms: inDuration $uint32) {
 //------------------------------------------------*
 
 proc loop `user () {
-  wait (!ms:250 + a)
+  wait (!ms:250)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:250)
   GPIOC_PCOR = 1 << 5  // Éteindre la led
@@ -43,7 +43,6 @@ proc loop `user () {
 
 //------------------------------------------------*
 
-let a $uint32 = 63
 //var ga $int4 = 0 {
 //  @rw proc loop ()
 //}
