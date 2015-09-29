@@ -1411,6 +1411,87 @@ void routine_enterIntegerLiteralOperators (const class GALGAS_lstring constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 @infixObjectLiteralIntegerOperatorDescription class                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_infixObjectLiteralIntegerOperatorDescription : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_infixObjectLiteralIntegerOperatorDescription (void) ;
+
+//---
+  public : inline const class cPtr_infixObjectLiteralIntegerOperatorDescription * ptr (void) const { return (const cPtr_infixObjectLiteralIntegerOperatorDescription *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_infixObjectLiteralIntegerOperatorDescription (const cPtr_infixObjectLiteralIntegerOperatorDescription * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_infixObjectLiteralIntegerOperatorDescription extractObject (const GALGAS_object & inObject,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_infixObjectLiteralIntegerOperatorDescription constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_infixObjectLiteralIntegerOperatorDescription & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperator (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_infixObjectLiteralIntegerOperatorDescription class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixObjectLiteralIntegerOperatorDescription ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Pointer class for @infixObjectLiteralIntegerOperatorDescription class                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_infixObjectLiteralIntegerOperatorDescription : public cPtr_infixOperatorDescription {
+//--- Attributes
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperator ;
+
+//--- Constructor
+  public : cPtr_infixObjectLiteralIntegerOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation reader_mOperator (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'literalIntegerTypeName'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
