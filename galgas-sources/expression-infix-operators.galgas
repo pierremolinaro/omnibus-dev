@@ -150,6 +150,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !leftOperandValue
     !leftType
     !rightOperandValue
+    !rightType
     !mOperatorLocation
     ?outResultValue
   ]
@@ -331,6 +332,7 @@ abstract method @infixOperatorDescription generateCode
   ?let @operandIR inLeftOperand
   ?let @unifiedTypeMap-proxy inLeftType
   ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inRightType
   ?let @location inOperatorLocation
   !@operandIR outResultValue
 

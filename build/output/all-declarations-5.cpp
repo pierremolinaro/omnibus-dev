@@ -1361,156 +1361,6 @@ GALGAS_infixLiteralIntLiteralIntOperatorDescription GALGAS_infixLiteralIntLitera
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_infixObjectLiteralIntegerOperatorDescription::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_infixObjectLiteralIntegerOperatorDescription * p = (const cPtr_infixObjectLiteralIntegerOperatorDescription *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_infixObjectLiteralIntegerOperatorDescription) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_infixObjectLiteralIntegerOperatorDescription::objectCompare (const GALGAS_infixObjectLiteralIntegerOperatorDescription & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixObjectLiteralIntegerOperatorDescription::GALGAS_infixObjectLiteralIntegerOperatorDescription (void) :
-GALGAS_infixOperatorDescription () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixObjectLiteralIntegerOperatorDescription::GALGAS_infixObjectLiteralIntegerOperatorDescription (const cPtr_infixObjectLiteralIntegerOperatorDescription * inSourcePtr) :
-GALGAS_infixOperatorDescription (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_infixObjectLiteralIntegerOperatorDescription) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixObjectLiteralIntegerOperatorDescription GALGAS_infixObjectLiteralIntegerOperatorDescription::constructor_new (const GALGAS_llvmBinaryOperation & inAttribute_mOperator
-                                                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_infixObjectLiteralIntegerOperatorDescription result ;
-  if (inAttribute_mOperator.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_infixObjectLiteralIntegerOperatorDescription (inAttribute_mOperator COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_infixObjectLiteralIntegerOperatorDescription::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_llvmBinaryOperation result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_infixObjectLiteralIntegerOperatorDescription * p = (const cPtr_infixObjectLiteralIntegerOperatorDescription *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_infixObjectLiteralIntegerOperatorDescription) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation cPtr_infixObjectLiteralIntegerOperatorDescription::reader_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                        Pointer class for @infixObjectLiteralIntegerOperatorDescription class                        *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_infixObjectLiteralIntegerOperatorDescription::cPtr_infixObjectLiteralIntegerOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
-                                                                                                      COMMA_LOCATION_ARGS) :
-cPtr_infixOperatorDescription (THERE),
-mAttribute_mOperator (in_mOperator) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_infixObjectLiteralIntegerOperatorDescription::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixObjectLiteralIntegerOperatorDescription ;
-}
-
-void cPtr_infixObjectLiteralIntegerOperatorDescription::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
-  ioString << "[@infixObjectLiteralIntegerOperatorDescription:" ;
-  mAttribute_mOperator.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_infixObjectLiteralIntegerOperatorDescription::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_infixObjectLiteralIntegerOperatorDescription (mAttribute_mOperator COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 @infixObjectLiteralIntegerOperatorDescription type                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixObjectLiteralIntegerOperatorDescription ("infixObjectLiteralIntegerOperatorDescription",
-                                                                     & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_infixObjectLiteralIntegerOperatorDescription::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixObjectLiteralIntegerOperatorDescription ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_infixObjectLiteralIntegerOperatorDescription::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_infixObjectLiteralIntegerOperatorDescription (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixObjectLiteralIntegerOperatorDescription GALGAS_infixObjectLiteralIntegerOperatorDescription::extractObject (const GALGAS_object & inObject,
-                                                                                                                        C_Compiler * inCompiler
-                                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_infixObjectLiteralIntegerOperatorDescription result ;
-  const GALGAS_infixObjectLiteralIntegerOperatorDescription * p = (const GALGAS_infixObjectLiteralIntegerOperatorDescription *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_infixObjectLiteralIntegerOperatorDescription *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("infixObjectLiteralIntegerOperatorDescription", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
 typeComparisonResult cPtr_infixObjectObjectOperatorDescription::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_infixObjectObjectOperatorDescription * p = (const cPtr_infixObjectObjectOperatorDescription *) inOperandPtr ;
@@ -1652,6 +1502,306 @@ GALGAS_infixObjectObjectOperatorDescription GALGAS_infixObjectObjectOperatorDesc
       result = *p ;
     }else{
       inCompiler->castError ("infixObjectObjectOperatorDescription", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_integerObject_5F_literal_5F_infixOperator::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_integerObject_5F_literal_5F_infixOperator * p = (const cPtr_integerObject_5F_literal_5F_infixOperator *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_integerObject_5F_literal_5F_infixOperator) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_integerObject_5F_literal_5F_infixOperator::objectCompare (const GALGAS_integerObject_5F_literal_5F_infixOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerObject_5F_literal_5F_infixOperator::GALGAS_integerObject_5F_literal_5F_infixOperator (void) :
+GALGAS_infixOperatorDescription () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerObject_5F_literal_5F_infixOperator::GALGAS_integerObject_5F_literal_5F_infixOperator (const cPtr_integerObject_5F_literal_5F_infixOperator * inSourcePtr) :
+GALGAS_infixOperatorDescription (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_integerObject_5F_literal_5F_infixOperator) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerObject_5F_literal_5F_infixOperator GALGAS_integerObject_5F_literal_5F_infixOperator::constructor_new (const GALGAS_llvmBinaryOperation & inAttribute_mOperator
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_integerObject_5F_literal_5F_infixOperator result ;
+  if (inAttribute_mOperator.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_integerObject_5F_literal_5F_infixOperator (inAttribute_mOperator COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_integerObject_5F_literal_5F_infixOperator * p = (const cPtr_integerObject_5F_literal_5F_infixOperator *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_integerObject_5F_literal_5F_infixOperator) ;
+    result = p->mAttribute_mOperator ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cPtr_integerObject_5F_literal_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                            Pointer class for @integerObject_literal_infixOperator class                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_integerObject_5F_literal_5F_infixOperator::cPtr_integerObject_5F_literal_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                                                                COMMA_LOCATION_ARGS) :
+cPtr_infixOperatorDescription (THERE),
+mAttribute_mOperator (in_mOperator) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_integerObject_5F_literal_5F_infixOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ;
+}
+
+void cPtr_integerObject_5F_literal_5F_infixOperator::description (C_String & ioString,
+                                                                  const int32_t inIndentation) const {
+  ioString << "[@integerObject_literal_infixOperator:" ;
+  mAttribute_mOperator.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_integerObject_5F_literal_5F_infixOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_integerObject_5F_literal_5F_infixOperator (mAttribute_mOperator COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @integerObject_literal_infixOperator type                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ("integerObject_literal_infixOperator",
+                                                                  & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_integerObject_5F_literal_5F_infixOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_integerObject_5F_literal_5F_infixOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_integerObject_5F_literal_5F_infixOperator (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_integerObject_5F_literal_5F_infixOperator GALGAS_integerObject_5F_literal_5F_infixOperator::extractObject (const GALGAS_object & inObject,
+                                                                                                                  C_Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_integerObject_5F_literal_5F_infixOperator result ;
+  const GALGAS_integerObject_5F_literal_5F_infixOperator * p = (const GALGAS_integerObject_5F_literal_5F_infixOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_integerObject_5F_literal_5F_infixOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("integerObject_literal_infixOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_literal_5F_integerObject_5F_infixOperator::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_literal_5F_integerObject_5F_infixOperator * p = (const cPtr_literal_5F_integerObject_5F_infixOperator *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_literal_5F_integerObject_5F_infixOperator) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mOperator.objectCompare (p->mAttribute_mOperator) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_literal_5F_integerObject_5F_infixOperator::objectCompare (const GALGAS_literal_5F_integerObject_5F_infixOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literal_5F_integerObject_5F_infixOperator::GALGAS_literal_5F_integerObject_5F_infixOperator (void) :
+GALGAS_infixOperatorDescription () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literal_5F_integerObject_5F_infixOperator::GALGAS_literal_5F_integerObject_5F_infixOperator (const cPtr_literal_5F_integerObject_5F_infixOperator * inSourcePtr) :
+GALGAS_infixOperatorDescription (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_literal_5F_integerObject_5F_infixOperator) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literal_5F_integerObject_5F_infixOperator GALGAS_literal_5F_integerObject_5F_infixOperator::constructor_new (const GALGAS_llvmBinaryOperation & inAttribute_mOperator
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_literal_5F_integerObject_5F_infixOperator result ;
+  if (inAttribute_mOperator.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_literal_5F_integerObject_5F_infixOperator (inAttribute_mOperator COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation GALGAS_literal_5F_integerObject_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  GALGAS_llvmBinaryOperation result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_literal_5F_integerObject_5F_infixOperator * p = (const cPtr_literal_5F_integerObject_5F_infixOperator *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_literal_5F_integerObject_5F_infixOperator) ;
+    result = p->mAttribute_mOperator ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_llvmBinaryOperation cPtr_literal_5F_integerObject_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                            Pointer class for @literal_integerObject_infixOperator class                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_literal_5F_integerObject_5F_infixOperator::cPtr_literal_5F_integerObject_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                                                                COMMA_LOCATION_ARGS) :
+cPtr_infixOperatorDescription (THERE),
+mAttribute_mOperator (in_mOperator) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_literal_5F_integerObject_5F_infixOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ;
+}
+
+void cPtr_literal_5F_integerObject_5F_infixOperator::description (C_String & ioString,
+                                                                  const int32_t inIndentation) const {
+  ioString << "[@literal_integerObject_infixOperator:" ;
+  mAttribute_mOperator.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_literal_5F_integerObject_5F_infixOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_literal_5F_integerObject_5F_infixOperator (mAttribute_mOperator COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @literal_integerObject_infixOperator type                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ("literal_integerObject_infixOperator",
+                                                                  & kTypeDescriptor_GALGAS_infixOperatorDescription) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_literal_5F_integerObject_5F_infixOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_literal_5F_integerObject_5F_infixOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_literal_5F_integerObject_5F_infixOperator (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_literal_5F_integerObject_5F_infixOperator GALGAS_literal_5F_integerObject_5F_infixOperator::extractObject (const GALGAS_object & inObject,
+                                                                                                                  C_Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_literal_5F_integerObject_5F_infixOperator result ;
+  const GALGAS_literal_5F_integerObject_5F_infixOperator * p = (const GALGAS_literal_5F_integerObject_5F_infixOperator *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_literal_5F_integerObject_5F_infixOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("literal_integerObject_infixOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -5210,6 +5360,7 @@ void callCategoryMethod_generateCode (const cPtr_infixOperatorDescription * inOb
                                       const GALGAS_operandIR constin_inLeftOperand,
                                       const GALGAS_unifiedTypeMap_2D_proxy constin_inLeftType,
                                       const GALGAS_operandIR constin_inRightOperand,
+                                      const GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
                                       const GALGAS_location constin_inOperatorLocation,
                                       GALGAS_operandIR & out_outResultValue,
                                       C_Compiler * inCompiler
@@ -5238,7 +5389,7 @@ void callCategoryMethod_generateCode (const cPtr_infixOperatorDescription * inOb
     if (NULL == f) {
       fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
     }else{
-      f (inObject, io_ioTemporaries, io_ioInstructionGenerationList, constin_inLeftOperand, constin_inLeftType, constin_inRightOperand, constin_inOperatorLocation, out_outResultValue, inCompiler COMMA_THERE) ;
+      f (inObject, io_ioTemporaries, io_ioInstructionGenerationList, constin_inLeftOperand, constin_inLeftType, constin_inRightOperand, constin_inRightType, constin_inOperatorLocation, out_outResultValue, inCompiler COMMA_THERE) ;
     }
   }
 }

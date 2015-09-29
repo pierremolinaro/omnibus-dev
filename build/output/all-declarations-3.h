@@ -1387,43 +1387,43 @@ class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'enterIntegerIntegerOperators'                                        *
+//                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterIntegerIntegerOperators (const class GALGAS_lstring constinArgument0,
-                                           const class GALGAS_bool constinArgument1,
-                                           class GALGAS_semanticContext & ioArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void routine_enter_5F_integer_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'enterIntegerLiteralOperators'                                        *
+//                                      Routine 'enter_integer_literal_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_enterIntegerLiteralOperators (const class GALGAS_lstring constinArgument0,
-                                           const class GALGAS_bool constinArgument1,
-                                           class GALGAS_semanticContext & ioArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void routine_enter_5F_integer_5F_literal_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 @infixObjectLiteralIntegerOperatorDescription class                                 *
+//                                  @integerObject_5F_literal_5F_infixOperator class                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_infixObjectLiteralIntegerOperatorDescription : public GALGAS_infixOperatorDescription {
+class GALGAS_integerObject_5F_literal_5F_infixOperator : public GALGAS_infixOperatorDescription {
 //--- Constructor
-  public : GALGAS_infixObjectLiteralIntegerOperatorDescription (void) ;
+  public : GALGAS_integerObject_5F_literal_5F_infixOperator (void) ;
 
 //---
-  public : inline const class cPtr_infixObjectLiteralIntegerOperatorDescription * ptr (void) const { return (const cPtr_infixObjectLiteralIntegerOperatorDescription *) mObjectPtr ; }
+  public : inline const class cPtr_integerObject_5F_literal_5F_infixOperator * ptr (void) const { return (const cPtr_integerObject_5F_literal_5F_infixOperator *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_infixObjectLiteralIntegerOperatorDescription (const cPtr_infixObjectLiteralIntegerOperatorDescription * inSourcePtr) ;
+  public : GALGAS_integerObject_5F_literal_5F_infixOperator (const cPtr_integerObject_5F_literal_5F_infixOperator * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -1431,16 +1431,16 @@ class GALGAS_infixObjectLiteralIntegerOperatorDescription : public GALGAS_infixO
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixObjectLiteralIntegerOperatorDescription extractObject (const GALGAS_object & inObject,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_integerObject_5F_literal_5F_infixOperator extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_infixObjectLiteralIntegerOperatorDescription constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
-                                                                                       COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_integerObject_5F_literal_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixObjectLiteralIntegerOperatorDescription & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_integerObject_5F_literal_5F_infixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1454,26 +1454,26 @@ class GALGAS_infixObjectLiteralIntegerOperatorDescription : public GALGAS_infixO
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixObjectLiteralIntegerOperatorDescription class
+} ; // End of GALGAS_integerObject_5F_literal_5F_infixOperator class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixObjectLiteralIntegerOperatorDescription ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerObject_5F_literal_5F_infixOperator ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Pointer class for @infixObjectLiteralIntegerOperatorDescription class                        *
+//                            Pointer class for @integerObject_literal_infixOperator class                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_infixObjectLiteralIntegerOperatorDescription : public cPtr_infixOperatorDescription {
+class cPtr_integerObject_5F_literal_5F_infixOperator : public cPtr_infixOperatorDescription {
 //--- Attributes
   public : GALGAS_llvmBinaryOperation mAttribute_mOperator ;
 
 //--- Constructor
-  public : cPtr_infixObjectLiteralIntegerOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
-                                                              COMMA_LOCATION_ARGS) ;
+  public : cPtr_integerObject_5F_literal_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
@@ -1498,6 +1498,99 @@ class cPtr_infixObjectLiteralIntegerOperatorDescription : public cPtr_infixOpera
 
 class GALGAS_string function_literalIntegerTypeName (class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Routine 'enter_literal_integer_operators'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstring constinArgument0,
+                                                       const class GALGAS_bool constinArgument1,
+                                                       class GALGAS_semanticContext & ioArgument2,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  @literal_5F_integerObject_5F_infixOperator class                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literal_5F_integerObject_5F_infixOperator : public GALGAS_infixOperatorDescription {
+//--- Constructor
+  public : GALGAS_literal_5F_integerObject_5F_infixOperator (void) ;
+
+//---
+  public : inline const class cPtr_literal_5F_integerObject_5F_infixOperator * ptr (void) const { return (const cPtr_literal_5F_integerObject_5F_infixOperator *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literal_5F_integerObject_5F_infixOperator (const cPtr_literal_5F_integerObject_5F_infixOperator * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literal_5F_integerObject_5F_infixOperator extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literal_5F_integerObject_5F_infixOperator constructor_new (const class GALGAS_llvmBinaryOperation & inOperand0
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literal_5F_integerObject_5F_infixOperator & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperator (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literal_5F_integerObject_5F_infixOperator class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_integerObject_5F_infixOperator ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                            Pointer class for @literal_integerObject_infixOperator class                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literal_5F_integerObject_5F_infixOperator : public cPtr_infixOperatorDescription {
+//--- Attributes
+  public : GALGAS_llvmBinaryOperation mAttribute_mOperator ;
+
+//--- Constructor
+  public : cPtr_literal_5F_integerObject_5F_infixOperator (const GALGAS_llvmBinaryOperation & in_mOperator
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation reader_mOperator (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
