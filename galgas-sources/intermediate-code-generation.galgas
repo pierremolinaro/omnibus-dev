@@ -41,7 +41,8 @@ map @globalVariableMapIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @globalConstantMapIR {
-  @operandIR mValueExpressionGeneration
+  @unifiedTypeMap-proxy mType
+  @operandIR mSourceExpression
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

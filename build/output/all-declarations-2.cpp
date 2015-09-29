@@ -3853,23 +3853,25 @@ GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::extractObject (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_globalConstantMapIR::cMapElement_globalConstantMapIR (const GALGAS_lstring & inKey,
-                                                                  const GALGAS_operandIR & in_mValueExpressionGeneration
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
+                                                                  const GALGAS_operandIR & in_mSourceExpression
                                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mValueExpressionGeneration (in_mValueExpressionGeneration) {
+mAttribute_mType (in_mType),
+mAttribute_mSourceExpression (in_mSourceExpression) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_globalConstantMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mValueExpressionGeneration.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mSourceExpression.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_globalConstantMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_globalConstantMapIR (mAttribute_lkey, mAttribute_mValueExpressionGeneration COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_globalConstantMapIR (mAttribute_lkey, mAttribute_mType, mAttribute_mSourceExpression COMMA_HERE)) ;
   return result ;
 }
 
@@ -3878,8 +3880,12 @@ cMapElement * cMapElement_globalConstantMapIR::copy (void) {
 void cMapElement_globalConstantMapIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mValueExpressionGeneration" ":" ;
-  mAttribute_mValueExpressionGeneration.description (ioString, inIndentation) ;
+  ioString << "mType" ":" ;
+  mAttribute_mType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mSourceExpression" ":" ;
+  mAttribute_mSourceExpression.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3888,7 +3894,10 @@ typeComparisonResult cMapElement_globalConstantMapIR::compare (const cCollection
   cMapElement_globalConstantMapIR * operand = (cMapElement_globalConstantMapIR *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mValueExpressionGeneration.objectCompare (operand->mAttribute_mValueExpressionGeneration) ;
+    result = mAttribute_mType.objectCompare (operand->mAttribute_mType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceExpression.objectCompare (operand->mAttribute_mSourceExpression) ;
   }
   return result ;
 }
@@ -3941,11 +3950,12 @@ GALGAS_globalConstantMapIR GALGAS_globalConstantMapIR::reader_overriddenMap (C_C
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMapIR::addAssign_operation (const GALGAS_lstring & inKey,
-                                                      const GALGAS_operandIR & inArgument0,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                      const GALGAS_operandIR & inArgument1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   cMapElement_globalConstantMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3957,11 +3967,12 @@ void GALGAS_globalConstantMapIR::addAssign_operation (const GALGAS_lstring & inK
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMapIR::modifier_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_operandIR inArgument0,
+                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                     GALGAS_operandIR inArgument1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   cMapElement_globalConstantMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3977,7 +3988,8 @@ const char * kSearchErrorMessage_globalConstantMapIR_searchKey = "** internal er
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMapIR::method_searchKey (GALGAS_lstring inKey,
-                                                   GALGAS_operandIR & outArgument0,
+                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                   GALGAS_operandIR & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) performSearch (inKey,
@@ -3986,38 +3998,69 @@ void GALGAS_globalConstantMapIR::method_searchKey (GALGAS_lstring inKey,
                                                                                                          COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
+    outArgument1.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
-    outArgument0 = p->mAttribute_mValueExpressionGeneration ;
+    outArgument0 = p->mAttribute_mType ;
+    outArgument1 = p->mAttribute_mSourceExpression ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_globalConstantMapIR::reader_mValueExpressionGenerationForKey (const GALGAS_string & inKey,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalConstantMapIR::reader_mTypeForKey (const GALGAS_string & inKey,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) attributes ;
-  GALGAS_operandIR result ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
-    result = p->mAttribute_mValueExpressionGeneration ;
+    result = p->mAttribute_mType ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalConstantMapIR::modifier_setMValueExpressionGenerationForKey (GALGAS_operandIR inAttributeValue,
-                                                                               GALGAS_string inKey,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_operandIR GALGAS_globalConstantMapIR::reader_mSourceExpressionForKey (const GALGAS_string & inKey,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) attributes ;
+  GALGAS_operandIR result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    result = p->mAttribute_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::modifier_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_globalConstantMapIR * p = (cMapElement_globalConstantMapIR *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
-    p->mAttribute_mValueExpressionGeneration = inAttributeValue ;
+    p->mAttribute_mType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::modifier_setMSourceExpressionForKey (GALGAS_operandIR inAttributeValue,
+                                                                      GALGAS_string inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_globalConstantMapIR * p = (cMapElement_globalConstantMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    p->mAttribute_mSourceExpression = inAttributeValue ;
   }
 }
 
@@ -4044,7 +4087,7 @@ cGenericAbstractEnumerator () {
 GALGAS_globalConstantMapIR_2D_element cEnumerator_globalConstantMapIR::current (LOCATION_ARGS) const {
   const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
-  return GALGAS_globalConstantMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mValueExpressionGeneration) ;
+  return GALGAS_globalConstantMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mSourceExpression) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4057,10 +4100,18 @@ GALGAS_lstring cEnumerator_globalConstantMapIR::current_lkey (LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_globalConstantMapIR::current_mValueExpressionGeneration (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_globalConstantMapIR::current_mType (LOCATION_ARGS) const {
   const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
-  return p->mAttribute_mValueExpressionGeneration ;
+  return p->mAttribute_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR cEnumerator_globalConstantMapIR::current_mSourceExpression (LOCATION_ARGS) const {
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+  return p->mAttribute_mSourceExpression ;
 }
 
 

@@ -103,17 +103,62 @@ override method @globalConstantDeclaration enterInContext
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList
-     ?type:let @unifiedTypeMap-proxy resultType
-     ?result:let @operandIR resultValue
+     ?type:let @unifiedTypeMap-proxy expressionType
+     ?result:let @operandIR expressionValue
   ]
-  if ([instructionGenerationList length] > 0) || not [resultValue isStatic] then
+#--- Check assignment compatibility
+  checkAssignmentCompatibility (
+    !sourceType:expressionType
+    !sourceValue:expressionValue
+    !targetType:constantType
+    !errorLocation:mConstantName.location
+  )
+#--- Check source expression is statically comtuted
+  if ([instructionGenerationList length] > 0) || not [expressionValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
+##--- Check constant value
+#  switch [constantType kind]
+#  case boolean :
+#    switch resultValue
+#    case literalInteger (@bigint value) :
+#      if (value < 0G) || (value > 1G) then
+#        error mConstantName : "boolean constant internal error"
+#      end
+#    case llvmGlobalObject (*) :
+#      error mConstantName : "source expression cannot be statically computed"
+#    case llvmLocalObject (*) :
+#      error mConstantName : "source expression cannot be statically computed"
+#    end
+#  case boolset :
+#    error mConstantName : "boolset constant not handled yet"
+#  case enumeration (unused valueMap) :
+#    error mConstantName : "enumeration constant not handled yet"
+#  case integer (@bigint min @bigint max * *) :
+#    switch resultValue
+#    case literalInteger (@bigint value) :
+#      if value < min then
+#        error mConstantName : "source expression too small (should be >= " + min + ")"
+#      elsif value > max then
+#        error mConstantName : "source expression too large (should be <= " + max + ")"
+#      end
+#    case llvmGlobalObject (*) :
+#      error mConstantName : "source expression cannot be statically computed"
+#    case llvmLocalObject (*) :
+#      error mConstantName : "source expression cannot be statically computed"
+#    end
+#  case literalInteger :
+#    error mConstantName : "internal error"
+#  case literalString :
+#    error mConstantName : "internal error"
+#  case structure (*) :
+#    error mConstantName : "structure constant not handled yet"
+#  end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey
     !mConstantName
-    !resultType
-    !resultValue
+    !expressionType
+    !expressionValue
   ]
 }
 
@@ -132,11 +177,12 @@ override method @globalConstantDeclaration semanticAnalysis
 #--- Code generation
   [inContext.mGlobalConstantMap searchKey
     !mConstantName
-    ?*
+    ?let type
     ?let expressionGeneratedCode
   ]
   [!?ioIntermediateCodeStruct.mGlobalConstantMap insertKey
     !mConstantName
+    !type
     !expressionGeneratedCode
   ]
 }
@@ -145,22 +191,9 @@ override method @globalConstantDeclaration semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-private filewrapper globalConstantGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "global-constant-declaration.galgasTemplate"
-    ?@string GLOBAL_CONSTANT_NAME
-    ?@string CONSTANT_VALUE
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @globalConstantMapIR-element headerCodeGeneration -> @string outCode {
-  outCode = "<<@globalConstantMapIR-element headerCodeGeneration>>"
-#  outCode = [filewrapper globalConstantGenerationTemplate.declaration
-#    !lkey.string
-#    ![mValueExpressionGeneration mangledName]
-#  ]
+method @globalConstantMapIR-element generateLLVM ?!@string ioCode {
+  ioCode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal constant "
+  ioCode += [mType llvmTypeName] + " " +  mSourceExpression + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

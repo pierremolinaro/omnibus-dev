@@ -31,34 +31,35 @@ proc wait `user (?ms: inDuration $uint32) {
 //------------------------------------------------*
 
 proc loop `user () {
-  wait (!ms:250)
+  wait (!ms:250 + a)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:250)
   GPIOC_PCOR = 1 << 5  // Éteindre la led
-  var c $int4
-  ga ++
-  zzzz (!ga !gb ?c)
-  gc = c
+//  var c $int4
+//  ga ++
+//  zzzz (!ga !gb ?c)
+//  gc = c
 }
 
 //------------------------------------------------*
 
-var ga $int4 = 0 {
-  @rw proc loop ()
-}
-
-var gb $int4 = 0 {
-  @rw proc loop ()
-}
-
-var gc $int4 = 0 {
-  @rw proc loop ()
-}
-
-
-proc zzzz `user (?a $int4 ?b $int4 !c $int4) {
-  c = a + b
-}
+let a $uint32 = 63
+//var ga $int4 = 0 {
+//  @rw proc loop ()
+//}
+//
+//var gb $int4 = 0 {
+//  @rw proc loop ()
+//}
+//
+//var gc $int4 = 0 {
+//  @rw proc loop ()
+//}
+//
+//
+//proc zzzz `user (?a $int4 ?b $int4 !c $int4) {
+//  c = a + b
+//}
 
 //------------------------------------------------*
 

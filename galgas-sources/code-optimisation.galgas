@@ -129,7 +129,7 @@ proc codeOptimisation
     @globalConstantMapIR globalConstantMap = {}
     for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
       if [accessibleEntities.mGlobalConstantSet hasKey !constant.lkey.string] then
-        [!?globalConstantMap insertKey !constant.lkey !constant.mValueExpressionGeneration]
+        [!?globalConstantMap insertKey !constant.lkey !constant.mType !constant.mSourceExpression]
       else
         optimizing = true
       end
