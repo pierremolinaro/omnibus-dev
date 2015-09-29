@@ -134,6 +134,7 @@ override method @operatorAssignInstructionAST analyze
     !variableValueName
     !targetType
     !sourceValueName
+    !targetType
     !mTargetVarName.location
     ?let newResultingValue
   ]

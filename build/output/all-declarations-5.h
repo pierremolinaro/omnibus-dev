@@ -142,8 +142,9 @@ typedef void (*categoryMethodSignature_infixOperatorDescription_generateCode) (c
                                                                                const class GALGAS_operandIR constinArgument2,
                                                                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                                                                const class GALGAS_operandIR constinArgument4,
-                                                                               const class GALGAS_location constinArgument5,
-                                                                               class GALGAS_operandIR & outArgument6,
+                                                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
+                                                                               const class GALGAS_location constinArgument6,
+                                                                               class GALGAS_operandIR & outArgument7,
                                                                                class C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -160,6 +161,7 @@ void callCategoryMethod_generateCode (const class cPtr_infixOperatorDescription 
                                       const GALGAS_operandIR constin_inLeftOperand,
                                       const GALGAS_unifiedTypeMap_2D_proxy constin_inLeftType,
                                       const GALGAS_operandIR constin_inRightOperand,
+                                      const GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
                                       const GALGAS_location constin_inOperatorLocation,
                                       GALGAS_operandIR & out_outResultValue,
                                       C_Compiler * inCompiler

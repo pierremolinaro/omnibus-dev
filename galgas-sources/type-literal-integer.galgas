@@ -211,6 +211,7 @@ override method @infixLiteralIntLiteralIntOperatorDescription generateCode
   ?let @operandIR inLeftOperand
   ?let @unifiedTypeMap-proxy unused inLeftType
   ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy unused inRightType
   ?let @location unused inOperatorLocation
   !@operandIR outResultValue
 {
