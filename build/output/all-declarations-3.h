@@ -1339,44 +1339,6 @@ class GALGAS_string function_mangledNameForProperty (class GALGAS_string inArgum
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Filewrapper 'globalConstantGenerationTemplate'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const cDirectoryWrapper gWrapperDirectory_0_globalConstantGenerationTemplate ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Filewrapper template 'globalConstantGenerationTemplate declaration'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string filewrapperTemplate_globalConstantGenerationTemplate_declaration (class C_Compiler * inCompiler,
-                                                                                const class GALGAS_string & in_GLOBAL_5F_CONSTANT_5F_NAME,
-                                                                                const class GALGAS_string & in_CONSTANT_5F_VALUE
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'mangledNameForGlobalVariable'                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string inArgument0,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2467,6 +2429,16 @@ class GALGAS_string function_mangledNameForProcedure (class GALGAS_string inArgu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Function 'mangledNameForGlobalVariable'                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_mangledNameForGlobalVariable (class GALGAS_string inArgument0,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     Function 'mangledNameForTemporaryConstant'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2831,16 +2803,6 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                  Category Getter '@globalConstantMapIR-element headerCodeGeneration' (as function)                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_headerCodeGeneration (const class GALGAS_globalConstantMapIR_2D_element & inObject,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Category Getter '@unifiedTypeMap-proxy llvmTypeName' (as function)                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2861,6 +2823,17 @@ void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMap
                                                   class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Category method '@globalConstantMapIR-element generateLLVM'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_generateLLVM (const class GALGAS_globalConstantMapIR_2D_element inObject,
+                                  class GALGAS_string & io_ioCode,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

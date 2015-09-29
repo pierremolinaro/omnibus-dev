@@ -166,8 +166,10 @@ proc generateLLVMfile
   end
   code += "\n"
 #----------------------------------------- Global constants
-  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap do
-    code += [globalConstant headerCodeGeneration]
+  for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
+    before code += llvmTitleComment (!"Global constants")
+    do [globalConstant generateLLVM !?code]
+    after code += "\n"
   end
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap

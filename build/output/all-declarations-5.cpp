@@ -8078,7 +8078,8 @@ GALGAS_globalVariableMapIR_2D_element GALGAS_globalVariableMapIR_2D_element::ext
 
 GALGAS_globalConstantMapIR_2D_element::GALGAS_globalConstantMapIR_2D_element (void) :
 mAttribute_lkey (),
-mAttribute_mValueExpressionGeneration () {
+mAttribute_mType (),
+mAttribute_mSourceExpression () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8089,19 +8090,22 @@ GALGAS_globalConstantMapIR_2D_element::~ GALGAS_globalConstantMapIR_2D_element (
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalConstantMapIR_2D_element::GALGAS_globalConstantMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_operandIR & inOperand1) :
+                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                              const GALGAS_operandIR & inOperand2) :
 mAttribute_lkey (inOperand0),
-mAttribute_mValueExpressionGeneration (inOperand1) {
+mAttribute_mType (inOperand1),
+mAttribute_mSourceExpression (inOperand2) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalConstantMapIR_2D_element GALGAS_globalConstantMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                              const GALGAS_operandIR & inOperand1 
+                                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                                              const GALGAS_operandIR & inOperand2 
                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_globalConstantMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_globalConstantMapIR_2D_element (inOperand0, inOperand1) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_globalConstantMapIR_2D_element (inOperand0, inOperand1, inOperand2) ;
   }
   return result ;
 }
@@ -8114,7 +8118,10 @@ typeComparisonResult GALGAS_globalConstantMapIR_2D_element::objectCompare (const
     result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mValueExpressionGeneration.objectCompare (inOperand.mAttribute_mValueExpressionGeneration) ;
+    result = mAttribute_mType.objectCompare (inOperand.mAttribute_mType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSourceExpression.objectCompare (inOperand.mAttribute_mSourceExpression) ;
   }
   return result ;
 }
@@ -8122,14 +8129,15 @@ typeComparisonResult GALGAS_globalConstantMapIR_2D_element::objectCompare (const
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_globalConstantMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mValueExpressionGeneration.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mSourceExpression.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMapIR_2D_element::drop (void) {
   mAttribute_lkey.drop () ;
-  mAttribute_mValueExpressionGeneration.drop () ;
+  mAttribute_mType.drop () ;
+  mAttribute_mSourceExpression.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8142,7 +8150,9 @@ void GALGAS_globalConstantMapIR_2D_element::description (C_String & ioString,
   }else{
     mAttribute_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mValueExpressionGeneration.description (ioString, inIndentation+1) ;
+    mAttribute_mType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -8155,8 +8165,14 @@ GALGAS_lstring GALGAS_globalConstantMapIR_2D_element::reader_lkey (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_globalConstantMapIR_2D_element::reader_mValueExpressionGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mValueExpressionGeneration ;
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalConstantMapIR_2D_element::reader_mType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR GALGAS_globalConstantMapIR_2D_element::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceExpression ;
 }
 
 
