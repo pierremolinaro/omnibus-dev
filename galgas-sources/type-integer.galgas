@@ -161,10 +161,8 @@ private proc enter_integer_integer_operators
   ?!context:@semanticContext ioContext
 {
 #--- ++ and -- operators
-  [!?ioContext.mIncNoOVFOperatorMap insertKey !inIntegerTypeName !.addNoOVF]
-  [!?ioContext.mDecNoOVFOperatorMap insertKey !inIntegerTypeName !.subNoOVF]
-  [!?ioContext.mIncOVFOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .saddOVF else .uaddOVF end]
-  [!?ioContext.mDecOVFOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .ssubOVF else .usubOVF end]
+  [!?ioContext.mIncOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .saddOVF else .uaddOVF end !.addNoOVF]
+  [!?ioContext.mDecOperatorMap insertKey !inIntegerTypeName !if inIsSigned then .ssubOVF else .usubOVF end !.subNoOVF]
 #--- Infix operators
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !inIntegerTypeName ?let selfTypeProxy]
 #--- Comparison infix operator

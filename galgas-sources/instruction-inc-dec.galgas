@@ -102,32 +102,42 @@ override method @incDecInstructionAST analyze
   switch mKind
   case incNoOverflowCheck :
     comment += "&++"
-    if [inContext.mIncNoOVFOperatorMap hasKey ![type key]] then
-      [inContext.mIncNoOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    if [inContext.mIncOperatorMap hasKey ![type key]] then
+      [inContext.mIncOperatorMap searchKey ![[type key] nowhere] ?* ?llvmOperator]
     else
       error mVarName: "type $" + [type key] + " does not support the &++ operator" : llvmOperator
     end
-  case  decNoOverflowCheck :
-    comment += "&--"
-    if [inContext.mDecNoOVFOperatorMap hasKey ![type key]] then
-      [inContext.mDecNoOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
-    else
-      error mVarName: "type $" + [type key] + " does not support the &-- operator" : llvmOperator
-    end
   case incWithOverflowCheck :
     comment += "++"
-    if [inContext.mIncOVFOperatorMap hasKey ![type key]] then
-      [inContext.mIncOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    if [inContext.mIncOperatorMap hasKey ![type key]] then
+      [inContext.mIncOperatorMap searchKey ![[type key] nowhere] ?let ovfOp ?let noOvfOp]
+      if [option plm_options.noExceptionGeneration value] then
+        llvmOperator = noOvfOp
+      else
+        llvmOperator = ovfOp
+      end
     else
       error mVarName: "type $" + [type key] + " does not support the ++ operator" : llvmOperator
     end
     if [inModeSet hasKey !exceptionModeName ()] then
       error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
     end
+  case  decNoOverflowCheck :
+    comment += "&--"
+    if [inContext.mDecOperatorMap hasKey ![type key]] then
+      [inContext.mDecOperatorMap searchKey ![[type key] nowhere] ?* ?llvmOperator]
+    else
+      error mVarName: "type $" + [type key] + " does not support the &-- operator" : llvmOperator
+    end
   case decWithOverflowCheck :
     comment += "--"
-    if [inContext.mDecOVFOperatorMap hasKey ![type key]] then
-      [inContext.mDecOVFOperatorMap searchKey ![[type key] nowhere] ?llvmOperator]
+    if [inContext.mDecOperatorMap hasKey ![type key]] then
+      [inContext.mDecOperatorMap searchKey ![[type key] nowhere] ?let ovfOp ?let noOvfOp]
+      if [option plm_options.noExceptionGeneration value] then
+        llvmOperator = noOvfOp
+      else
+        llvmOperator = ovfOp
+      end
     else
       error mVarName: "type $" + [type key] + " does not support the -- operator" : llvmOperator
     end

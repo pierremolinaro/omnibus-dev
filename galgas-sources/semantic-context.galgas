@@ -26,7 +26,8 @@ map @infixOperatorMap {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @incDecOperatorMap {
-  @llvmBinaryOperation mOperation
+  @llvmBinaryOperation mOperationOvfCheck
+  @llvmBinaryOperation mOperationNoOvf
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -155,10 +156,8 @@ struct @semanticContext {
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
   @modeMap mModeMap
-  @incDecOperatorMap mIncNoOVFOperatorMap       # &++
-  @incDecOperatorMap mDecNoOVFOperatorMap       # &--
-  @incDecOperatorMap mIncOVFOperatorMap         # ++
-  @incDecOperatorMap mDecOVFOperatorMap         # --
+  @incDecOperatorMap mIncOperatorMap            # ++, &++
+  @incDecOperatorMap mDecOperatorMap            # --, &--
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <

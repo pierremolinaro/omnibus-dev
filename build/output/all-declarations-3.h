@@ -989,10 +989,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mIncNoOVFOperatorMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mDecNoOVFOperatorMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mIncOVFOperatorMap ;
-  public : GALGAS_incDecOperatorMap mAttribute_mDecOVFOperatorMap ;
+  public : GALGAS_incDecOperatorMap mAttribute_mIncOperatorMap ;
+  public : GALGAS_incDecOperatorMap mAttribute_mDecOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mNonEqualOperatorMap ;
   public : GALGAS_infixOperatorMap mAttribute_mStrictInfOperatorMap ;
@@ -1050,10 +1048,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
                                    const GALGAS_modeMap & in_mModeMap,
-                                   const GALGAS_incDecOperatorMap & in_mIncNoOVFOperatorMap,
-                                   const GALGAS_incDecOperatorMap & in_mDecNoOVFOperatorMap,
-                                   const GALGAS_incDecOperatorMap & in_mIncOVFOperatorMap,
-                                   const GALGAS_incDecOperatorMap & in_mDecOVFOperatorMap,
+                                   const GALGAS_incDecOperatorMap & in_mIncOperatorMap,
+                                   const GALGAS_incDecOperatorMap & in_mDecOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mNonEqualOperatorMap,
                                    const GALGAS_infixOperatorMap & in_mStrictInfOperatorMap,
@@ -1109,8 +1105,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_modeMap & inOperand15,
                                                           const class GALGAS_incDecOperatorMap & inOperand16,
                                                           const class GALGAS_incDecOperatorMap & inOperand17,
-                                                          const class GALGAS_incDecOperatorMap & inOperand18,
-                                                          const class GALGAS_incDecOperatorMap & inOperand19,
+                                                          const class GALGAS_infixOperatorMap & inOperand18,
+                                                          const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
                                                           const class GALGAS_infixOperatorMap & inOperand21,
                                                           const class GALGAS_infixOperatorMap & inOperand22,
@@ -1131,11 +1127,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand37,
                                                           const class GALGAS_infixOperatorMap & inOperand38,
                                                           const class GALGAS_infixOperatorMap & inOperand39,
-                                                          const class GALGAS_infixOperatorMap & inOperand40,
-                                                          const class GALGAS_infixOperatorMap & inOperand41,
-                                                          const class GALGAS_prefixOperatorMap & inOperand42,
-                                                          const class GALGAS_prefixOperatorMap & inOperand43,
-                                                          const class GALGAS_prefixOperatorMap & inOperand44
+                                                          const class GALGAS_prefixOperatorMap & inOperand40,
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_prefixOperatorMap & inOperand42
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1160,9 +1154,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mBooleanXorOperatorMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecNoOVFOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecOVFOperatorMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mDivNoOvfOperatorMap (LOCATION_ARGS) const ;
 
@@ -1184,9 +1176,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMap reader_mGlobalVariableMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mIncNoOVFOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mIncOVFOperatorMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mIncOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mInfEqualOperatorMap (LOCATION_ARGS) const ;
 
@@ -1605,19 +1595,19 @@ void routine_enterLiteralIntegerOperators (const class GALGAS_lstring constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 @infixLiteralIntLiteralIntOperatorDescription class                                 *
+//                                 @literal_5F_literal_5F_integerInfixOperation class                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_infixLiteralIntLiteralIntOperatorDescription : public GALGAS_infixOperatorDescription {
+class GALGAS_literal_5F_literal_5F_integerInfixOperation : public GALGAS_infixOperatorDescription {
 //--- Constructor
-  public : GALGAS_infixLiteralIntLiteralIntOperatorDescription (void) ;
+  public : GALGAS_literal_5F_literal_5F_integerInfixOperation (void) ;
 
 //---
-  public : inline const class cPtr_infixLiteralIntLiteralIntOperatorDescription * ptr (void) const { return (const cPtr_infixLiteralIntLiteralIntOperatorDescription *) mObjectPtr ; }
+  public : inline const class cPtr_literal_5F_literal_5F_integerInfixOperation * ptr (void) const { return (const cPtr_literal_5F_literal_5F_integerInfixOperation *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_infixLiteralIntLiteralIntOperatorDescription (const cPtr_infixLiteralIntLiteralIntOperatorDescription * inSourcePtr) ;
+  public : GALGAS_literal_5F_literal_5F_integerInfixOperation (const cPtr_literal_5F_literal_5F_integerInfixOperation * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -1625,16 +1615,16 @@ class GALGAS_infixLiteralIntLiteralIntOperatorDescription : public GALGAS_infixO
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_infixLiteralIntLiteralIntOperatorDescription extractObject (const GALGAS_object & inObject,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_literal_5F_literal_5F_integerInfixOperation extractObject (const GALGAS_object & inObject,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_infixLiteralIntLiteralIntOperatorDescription constructor_new (const class GALGAS_literalIntegerInfixOperator & inOperand0
-                                                                                       COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_literal_5F_literal_5F_integerInfixOperation constructor_new (const class GALGAS_literalIntegerInfixOperator & inOperand0
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_infixLiteralIntLiteralIntOperatorDescription & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_literal_5F_literal_5F_integerInfixOperation & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1648,26 +1638,26 @@ class GALGAS_infixLiteralIntLiteralIntOperatorDescription : public GALGAS_infixO
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_infixLiteralIntLiteralIntOperatorDescription class
+} ; // End of GALGAS_literal_5F_literal_5F_integerInfixOperation class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixLiteralIntLiteralIntOperatorDescription ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literal_5F_literal_5F_integerInfixOperation ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                        Pointer class for @infixLiteralIntLiteralIntOperatorDescription class                        *
+//                           Pointer class for @literal_literal_integerInfixOperation class                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_infixLiteralIntLiteralIntOperatorDescription : public cPtr_infixOperatorDescription {
+class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_infixOperatorDescription {
 //--- Attributes
   public : GALGAS_literalIntegerInfixOperator mAttribute_mOperator ;
 
 //--- Constructor
-  public : cPtr_infixLiteralIntLiteralIntOperatorDescription (const GALGAS_literalIntegerInfixOperator & in_mOperator
-                                                              COMMA_LOCATION_ARGS) ;
+  public : cPtr_literal_5F_literal_5F_integerInfixOperation (const GALGAS_literalIntegerInfixOperator & in_mOperator
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
