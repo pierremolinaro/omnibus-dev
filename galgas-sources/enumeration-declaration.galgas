@@ -96,11 +96,11 @@ override method @enumerationDeclaration enterInContext
   end
   @enumConstantMap enumConstantMap = {}
   @constructorMap constructorMap = {}
-#  for (cst) in mCaseNameList do
-#    let idx = [enumConstantMap count]
-#    [!?enumConstantMap insertKey !cst !idx]
-#    [!?constructorMap insertKey !cst !.literalInteger {!value:[idx bigint]}]
-#  end
+  for (cst) in mCaseNameList do
+    let idx = [enumConstantMap count]
+    [!?enumConstantMap insertKey !cst !idx]
+    [!?constructorMap insertKey !cst !.literalInteger {!value:[idx bigint]}]
+  end
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName
     !kind:.enumeration {!constantMap:enumConstantMap}
@@ -123,33 +123,34 @@ proc enterEnumerationOperators
   ?integerTypeName:@lstring inEnumerationTypeName
   ?!context:@semanticContext ioContext
 {
+  let key = combineTypeNamesForInfixOperator (!inEnumerationTypeName.string !inEnumerationTypeName.string)
   [!?ioContext.mEqualOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
   ]
   [!?ioContext.mNonEqualOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
   ]
   [!?ioContext.mStrictInfOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
   ]
   [!?ioContext.mInfEqualOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
   ]
   [!?ioContext.mStrictSupOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
   ]
   [!?ioContext.mSupEqualOperatorMap insertKey
-    !.new {!inEnumerationTypeName.string + "." + inEnumerationTypeName !inEnumerationTypeName.location}
+    !key
     !ioContext.mBooleanType
     !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
   ]
