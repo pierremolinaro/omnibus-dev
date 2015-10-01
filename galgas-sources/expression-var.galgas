@@ -61,10 +61,10 @@ override method @varInExpressionAST analyzeExpression
     !mSourceVarName
     ?let @unifiedTypeMap-proxy variableType
     ?let accessIsAllowed
-    ?@variableKindIR variableKind
+    ?@objectInMemoryIR variableKind
     ?*
     ?@registerBitSliceAccessMap registerBitSliceMap
-    ?*
+    ?2*
   ]
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on the this variable"
@@ -141,8 +141,8 @@ override method @varInExpressionAST analyzeExpression
 
 class @fieldAccessIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @variableKindIR mResult
-  @variableKindIR mSource
+  @objectInMemoryIR mResult
+  @objectInMemoryIR mSource
   @lstring mField
 }
 

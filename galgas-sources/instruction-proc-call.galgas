@@ -131,6 +131,7 @@ override method @procCallInstructionAST analyze
         ?let isCopiable
         ?*
         ?let canBeUsedAsInputParameter
+        ?*
       ]
       if not accessIsAllowed then
         error name : "routine has no access right on the this variable"
@@ -174,6 +175,7 @@ override method @procCallInstructionAST analyze
         ?let unused parameterAccess
         ?2*
         ?let canBeUsedAsInputParameter
+        ?*
       ]
       if not canBeUsedAsInputParameter then
         error name : "this variable cannot be used as output/input parameter"

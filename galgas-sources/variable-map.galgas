@@ -54,12 +54,12 @@ getter @operandIR isStatic -> @bool outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @variableKindIR {
+enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
   case localValue (@unifiedTypeMap-proxy type @lstring name)
+  case globalConstant (@unifiedTypeMap-proxy type  @string name)
 
-  case globalConstant (@operandIR value)
   case localAccess (@lstring access)
 
   case literalString (@string value @string name)
@@ -87,6 +87,7 @@ func initialVariableMap
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
+        !true # Is constant
       ]
     else
       [!?outVariableMap insertDefinedLocalVariable
@@ -97,6 +98,7 @@ func initialVariableMap
         !true
         !mRegisterFieldAccessMap
         !false # Cannot be used as input parameter
+        !false # Is not constant
       ]
     end
   end
@@ -106,14 +108,15 @@ func initialVariableMap
       !constantName
       !constantType
       !true
-      !.globalConstant{!value:expressionCode}
+      !.globalConstant{!type:constantType !name:constantName.string}
       !true
       !{}
       !false # Cannot be used as input parameter
+      !true # Is constant
     ]
   end
 #--- Add global variables
-  for (variableName variableType modeSet allowedProcedureMap *) in inContext.mGlobalVariableMap do
+  for (variableName variableType modeSet allowedProcedureMap * isConstant) in inContext.mGlobalVariableMap do
     let allowedAccess = [allowedProcedureMap hasKey !inMangledName]
     var writeAccess = false
     if allowedAccess then
@@ -128,6 +131,7 @@ func initialVariableMap
         !true
         !{}
         !false # Cannot be used as input parameter
+        !true # Is constant
       ]
     else
       [!?outVariableMap insertGlobalVariable
@@ -138,6 +142,7 @@ func initialVariableMap
         !true
         !{}
         !false # Cannot be used as input parameter
+        !isConstant
       ]
     end
   end
@@ -156,10 +161,11 @@ func variableMapWithConstants
       !constantName
       !constantType
       !true
-      !.globalConstant{!value:expressionCode}
+      !.globalConstant{!type:constantType !name:constantName.string}
       !true
       !{}
       !false
+      !true # Is constant
     ]
   end
 }
@@ -176,19 +182,14 @@ proc getNewTempVariable
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @variableListIR {
-  @variableKindIR mVar
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
-  @bool mAccessAllowed
-  @variableKindIR mVariableKind
+  @bool mReadAccessAllowed
+  @objectInMemoryIR mVariableKind
   @bool copiable
   @registerBitSliceAccessMap fieldMap
   @bool mCanBeUsedAsInputParameter
+  @bool mIsConstant
 
 #--- Used global variable
   state globalVariable {

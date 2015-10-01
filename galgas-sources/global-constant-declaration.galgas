@@ -117,47 +117,10 @@ override method @globalConstantDeclaration enterInContext
   if ([instructionGenerationList length] > 0) || not [expressionValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
-##--- Check constant value
-#  switch [constantType kind]
-#  case boolean :
-#    switch resultValue
-#    case literalInteger (@bigint value) :
-#      if (value < 0G) || (value > 1G) then
-#        error mConstantName : "boolean constant internal error"
-#      end
-#    case llvmGlobalObject (*) :
-#      error mConstantName : "source expression cannot be statically computed"
-#    case llvmLocalObject (*) :
-#      error mConstantName : "source expression cannot be statically computed"
-#    end
-#  case boolset :
-#    error mConstantName : "boolset constant not handled yet"
-#  case enumeration (unused valueMap) :
-#    error mConstantName : "enumeration constant not handled yet"
-#  case integer (@bigint min @bigint max * *) :
-#    switch resultValue
-#    case literalInteger (@bigint value) :
-#      if value < min then
-#        error mConstantName : "source expression too small (should be >= " + min + ")"
-#      elsif value > max then
-#        error mConstantName : "source expression too large (should be <= " + max + ")"
-#      end
-#    case llvmGlobalObject (*) :
-#      error mConstantName : "source expression cannot be statically computed"
-#    case llvmLocalObject (*) :
-#      error mConstantName : "source expression cannot be statically computed"
-#    end
-#  case literalInteger :
-#    error mConstantName : "internal error"
-#  case literalString :
-#    error mConstantName : "internal error"
-#  case structure (*) :
-#    error mConstantName : "structure constant not handled yet"
-#  end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey
     !mConstantName
-    !expressionType
+    !if constantType == .null then expressionType else constantType end
     !expressionValue
   ]
 }

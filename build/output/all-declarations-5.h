@@ -602,11 +602,11 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category method '@variableKindIR loadFromMemory'                                   *
+//                                 Category method '@objectInMemoryIR loadFromMemory'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_loadFromMemory (const class GALGAS_variableKindIR inObject,
+void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                     class GALGAS_operandIR & out_outResultingValue,
@@ -615,11 +615,11 @@ void categoryMethod_loadFromMemory (const class GALGAS_variableKindIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category method '@variableKindIR storeInMemory'                                   *
+//                                  Category method '@objectInMemoryIR storeInMemory'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_storeInMemory (const class GALGAS_variableKindIR inObject,
+void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
                                    class GALGAS_operandIR in_inValue,
                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                    class C_Compiler * inCompiler
@@ -627,11 +627,11 @@ void categoryMethod_storeInMemory (const class GALGAS_variableKindIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Category method '@variableKindIR enterAccessibleEntities'                              *
+//                             Category method '@objectInMemoryIR enterAccessibleEntities'                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void categoryMethod_enterAccessibleEntities (const class GALGAS_variableKindIR inObject,
+void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
@@ -649,11 +649,11 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_assignmentTarget
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Category Getter '@variableKindIR mangledName' (as function)                             *
+//                            Category Getter '@objectInMemoryIR mangledName' (as function)                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string categoryReader_mangledName (const class GALGAS_variableKindIR & inObject,
+class GALGAS_string categoryReader_mangledName (const class GALGAS_objectInMemoryIR & inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 

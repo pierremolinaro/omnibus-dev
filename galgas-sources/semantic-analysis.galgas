@@ -13,19 +13,13 @@ proc checkAssignmentCompatibility
   if inTargetType == .null then
     # Ok
   elsif inTargetType != inSourceType then
-    var ok = false
-    if [[inSourceType kind] isBoolean] then
-      ok = [[inTargetType kind] isInteger]    
-    elsif [[inSourceType kind] isInteger] && [[inTargetType kind] isInteger] then
-      [[inSourceType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-      [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-      ok = (minTarget <= minSource) && (maxTarget >= maxSource)
-    elsif [[inSourceType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
+    if [[inSourceType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
       [inSourceValue literalInteger ?value:let value]
       [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-      ok = (minTarget <= value) && (maxTarget >= value)
-    end
-    if not ok then
+      if (minTarget > value) || (maxTarget < value) then
+        error inErrorLocation : "literal integer too large"
+      end
+    else
       error inErrorLocation
       : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceType key]
     end

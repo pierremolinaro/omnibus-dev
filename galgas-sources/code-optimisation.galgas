@@ -29,14 +29,15 @@ method @literalStructureList enterAccessibleEntities ?!@accessibleEntities ioAcc
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @variableKindIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
   case register (* @lstring name *) :
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   case localValue (* @lstring unused name) :
-  case globalConstant (@operandIR unused value) :
+  case globalConstant (* @string name) :
+    ioAccessibleEntities.mGlobalVariableSet += !name
   case localAccess (@lstring unused access) :
   case literalString (@string value @string unused name) :
     ioAccessibleEntities.mStaticStringSet += !value

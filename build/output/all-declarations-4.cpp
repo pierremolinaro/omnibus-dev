@@ -10952,8 +10952,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_extendInstructionIR GALGAS_extendInstructionIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mConvertedExpressionType,
-                                                                        const GALGAS_variableKindIR & inAttribute_mTemporaryResultVariable,
-                                                                        const GALGAS_variableKindIR & inAttribute_mOperand,
+                                                                        const GALGAS_objectInMemoryIR & inAttribute_mTemporaryResultVariable,
+                                                                        const GALGAS_objectInMemoryIR & inAttribute_mOperand,
                                                                         const GALGAS_bool & inAttribute_mSilently,
                                                                         const GALGAS_location & inAttribute_mLocation
                                                                         COMMA_LOCATION_ARGS) {
@@ -11002,8 +11002,8 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_extendInstructionIR::reader_mConvertedExpres
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_extendInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_objectInMemoryIR GALGAS_extendInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendInstructionIR * p = (const cPtr_extendInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendInstructionIR) ;
@@ -11014,14 +11014,14 @@ GALGAS_variableKindIR GALGAS_extendInstructionIR::reader_mTemporaryResultVariabl
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cPtr_extendInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_extendInstructionIR::reader_mTemporaryResultVariable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTemporaryResultVariable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_extendInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_objectInMemoryIR GALGAS_extendInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendInstructionIR * p = (const cPtr_extendInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendInstructionIR) ;
@@ -11032,7 +11032,7 @@ GALGAS_variableKindIR GALGAS_extendInstructionIR::reader_mOperand (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cPtr_extendInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_extendInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
@@ -11078,8 +11078,8 @@ GALGAS_location cPtr_extendInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS
 
 cPtr_extendInstructionIR::cPtr_extendInstructionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mConvertedExpressionType,
-                                                    const GALGAS_variableKindIR & in_mTemporaryResultVariable,
-                                                    const GALGAS_variableKindIR & in_mOperand,
+                                                    const GALGAS_objectInMemoryIR & in_mTemporaryResultVariable,
+                                                    const GALGAS_objectInMemoryIR & in_mOperand,
                                                     const GALGAS_bool & in_mSilently,
                                                     const GALGAS_location & in_mLocation
                                                     COMMA_LOCATION_ARGS) :
@@ -11225,8 +11225,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_fieldAccessIR GALGAS_fieldAccessIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                            const GALGAS_variableKindIR & inAttribute_mResult,
-                                                            const GALGAS_variableKindIR & inAttribute_mSource,
+                                                            const GALGAS_objectInMemoryIR & inAttribute_mResult,
+                                                            const GALGAS_objectInMemoryIR & inAttribute_mSource,
                                                             const GALGAS_lstring & inAttribute_mField
                                                             COMMA_LOCATION_ARGS) {
   GALGAS_fieldAccessIR result ;
@@ -11256,8 +11256,8 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_fieldAccessIR::reader_mTargetType (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_objectInMemoryIR GALGAS_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_fieldAccessIR) ;
@@ -11268,14 +11268,14 @@ GALGAS_variableKindIR GALGAS_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cPtr_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_objectInMemoryIR GALGAS_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_fieldAccessIR) ;
@@ -11286,7 +11286,7 @@ GALGAS_variableKindIR GALGAS_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR cPtr_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -11313,8 +11313,8 @@ GALGAS_lstring cPtr_fieldAccessIR::reader_mField (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_fieldAccessIR::cPtr_fieldAccessIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                        const GALGAS_variableKindIR & in_mResult,
-                                        const GALGAS_variableKindIR & in_mSource,
+                                        const GALGAS_objectInMemoryIR & in_mResult,
+                                        const GALGAS_objectInMemoryIR & in_mSource,
                                         const GALGAS_lstring & in_mField
                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),

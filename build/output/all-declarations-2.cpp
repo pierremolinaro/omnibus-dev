@@ -55,22 +55,22 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_variableMap_2D_proxy::reader_mType (C_Comp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_variableMap_2D_proxy::reader_mAccessAllowed (C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_variableMap_2D_proxy::reader_mReadAccessAllowed (C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
   GALGAS_bool result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mAccessAllowed" COMMA_THERE) ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mReadAccessAllowed" COMMA_THERE) ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_mAccessAllowed;
+    result = p->mAttribute_mReadAccessAllowed;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_variableKindIR GALGAS_variableMap_2D_proxy::reader_mVariableKind (C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_variableKindIR result ;
+GALGAS_objectInMemoryIR GALGAS_variableMap_2D_proxy::reader_mVariableKind (C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mVariableKind" COMMA_THERE) ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
@@ -114,6 +114,19 @@ GALGAS_bool GALGAS_variableMap_2D_proxy::reader_mCanBeUsedAsInputParameter (C_Co
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
     result = p->mAttribute_mCanBeUsedAsInputParameter;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_variableMap_2D_proxy::reader_mIsConstant (C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "mIsConstant" COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_variableMap) ;
+    result = p->mAttribute_mIsConstant;
   }
   return result ;
 }
@@ -1650,26 +1663,28 @@ cMapElement_globalVariableMap::cMapElement_globalVariableMap (const GALGAS_lstri
                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType,
                                                               const GALGAS_stringset & in_mExecutionModeSet,
                                                               const GALGAS_allowedRoutineMap & in_mAllowedProcedureMap,
-                                                              const GALGAS_operandIR & in_mInitialValue
+                                                              const GALGAS_operandIR & in_mInitialValue,
+                                                              const GALGAS_bool & in_mIsConstant
                                                               COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mVariableType (in_mVariableType),
 mAttribute_mExecutionModeSet (in_mExecutionModeSet),
 mAttribute_mAllowedProcedureMap (in_mAllowedProcedureMap),
-mAttribute_mInitialValue (in_mInitialValue) {
+mAttribute_mInitialValue (in_mInitialValue),
+mAttribute_mIsConstant (in_mIsConstant) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_globalVariableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mVariableType.isValid () && mAttribute_mExecutionModeSet.isValid () && mAttribute_mAllowedProcedureMap.isValid () && mAttribute_mInitialValue.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mVariableType.isValid () && mAttribute_mExecutionModeSet.isValid () && mAttribute_mAllowedProcedureMap.isValid () && mAttribute_mInitialValue.isValid () && mAttribute_mIsConstant.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_globalVariableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_globalVariableMap (mAttribute_lkey, mAttribute_mVariableType, mAttribute_mExecutionModeSet, mAttribute_mAllowedProcedureMap, mAttribute_mInitialValue COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_globalVariableMap (mAttribute_lkey, mAttribute_mVariableType, mAttribute_mExecutionModeSet, mAttribute_mAllowedProcedureMap, mAttribute_mInitialValue, mAttribute_mIsConstant COMMA_HERE)) ;
   return result ;
 }
 
@@ -1692,6 +1707,10 @@ void cMapElement_globalVariableMap::description (C_String & ioString, const int3
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mInitialValue" ":" ;
   mAttribute_mInitialValue.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsConstant" ":" ;
+  mAttribute_mIsConstant.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1710,6 +1729,9 @@ typeComparisonResult cMapElement_globalVariableMap::compare (const cCollectionEl
   }
   if (kOperandEqual == result) {
     result = mAttribute_mInitialValue.objectCompare (operand->mAttribute_mInitialValue) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mIsConstant.objectCompare (operand->mAttribute_mIsConstant) ;
   }
   return result ;
 }
@@ -1766,10 +1788,11 @@ void GALGAS_globalVariableMap::addAssign_operation (const GALGAS_lstring & inKey
                                                     const GALGAS_stringset & inArgument1,
                                                     const GALGAS_allowedRoutineMap & inArgument2,
                                                     const GALGAS_operandIR & inArgument3,
+                                                    const GALGAS_bool & inArgument4,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMap * p = NULL ;
-  macroMyNew (p, cMapElement_globalVariableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_globalVariableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -1785,10 +1808,11 @@ void GALGAS_globalVariableMap::modifier_insertKey (GALGAS_lstring inKey,
                                                    GALGAS_stringset inArgument1,
                                                    GALGAS_allowedRoutineMap inArgument2,
                                                    GALGAS_operandIR inArgument3,
+                                                   GALGAS_bool inArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_globalVariableMap * p = NULL ;
-  macroMyNew (p, cMapElement_globalVariableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_globalVariableMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -1808,6 +1832,7 @@ void GALGAS_globalVariableMap::method_searchKey (GALGAS_lstring inKey,
                                                  GALGAS_stringset & outArgument1,
                                                  GALGAS_allowedRoutineMap & outArgument2,
                                                  GALGAS_operandIR & outArgument3,
+                                                 GALGAS_bool & outArgument4,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) performSearch (inKey,
@@ -1819,12 +1844,14 @@ void GALGAS_globalVariableMap::method_searchKey (GALGAS_lstring inKey,
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
+    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_globalVariableMap) ;
     outArgument0 = p->mAttribute_mVariableType ;
     outArgument1 = p->mAttribute_mExecutionModeSet ;
     outArgument2 = p->mAttribute_mAllowedProcedureMap ;
     outArgument3 = p->mAttribute_mInitialValue ;
+    outArgument4 = p->mAttribute_mIsConstant ;
   }
 }
 
@@ -1890,6 +1917,21 @@ GALGAS_operandIR GALGAS_globalVariableMap::reader_mInitialValueForKey (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_globalVariableMap::reader_mIsConstantForKey (const GALGAS_string & inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMap) ;
+    result = p->mAttribute_mIsConstant ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_globalVariableMap::modifier_setMVariableTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                                 GALGAS_string inKey,
                                                                 C_Compiler * inCompiler
@@ -1946,6 +1988,20 @@ void GALGAS_globalVariableMap::modifier_setMInitialValueForKey (GALGAS_operandIR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_globalVariableMap::modifier_setMIsConstantForKey (GALGAS_bool inAttributeValue,
+                                                              GALGAS_string inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_globalVariableMap * p = (cMapElement_globalVariableMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMap) ;
+    p->mAttribute_mIsConstant = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_globalVariableMap * GALGAS_globalVariableMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                              const GALGAS_string & inKey
                                                                                              COMMA_LOCATION_ARGS) {
@@ -1967,7 +2023,7 @@ cGenericAbstractEnumerator () {
 GALGAS_globalVariableMap_2D_element cEnumerator_globalVariableMap::current (LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMap) ;
-  return GALGAS_globalVariableMap_2D_element (p->mAttribute_lkey, p->mAttribute_mVariableType, p->mAttribute_mExecutionModeSet, p->mAttribute_mAllowedProcedureMap, p->mAttribute_mInitialValue) ;
+  return GALGAS_globalVariableMap_2D_element (p->mAttribute_lkey, p->mAttribute_mVariableType, p->mAttribute_mExecutionModeSet, p->mAttribute_mAllowedProcedureMap, p->mAttribute_mInitialValue, p->mAttribute_mIsConstant) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2008,6 +2064,14 @@ GALGAS_operandIR cEnumerator_globalVariableMap::current_mInitialValue (LOCATION_
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalVariableMap) ;
   return p->mAttribute_mInitialValue ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_globalVariableMap::current_mIsConstant (LOCATION_ARGS) const {
+  const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalVariableMap) ;
+  return p->mAttribute_mIsConstant ;
 }
 
 

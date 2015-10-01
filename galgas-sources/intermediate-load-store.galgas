@@ -1,6 +1,6 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @variableKindIR loadFromMemory
+method @objectInMemoryIR loadFromMemory
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !resultingValue:@operandIR outResultingValue
@@ -32,20 +32,27 @@ method @variableKindIR loadFromMemory
       !name.string
       !type
     ]
-  case globalConstant (@operandIR value) :
-    outResultingValue = value
+  case globalConstant (@unifiedTypeMap-proxy type @string name) :
+    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendLoadGlobalVariable
+      !outResultingValue
+      !name
+      !type
+      !volatile:false
+    ]
   case localAccess (@lstring access) :
-    error access : "@variableKindIR loadFromMemory:access" : outResultingValue
+    error access : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
   case literalString (**) :
-    error .nowhere : "@variableKindIR loadFromMemory:literalString" : outResultingValue
+    error .nowhere : "@objectInMemoryIR loadFromMemory:literalString" : outResultingValue
   case literalStructure (*) :
-    error .nowhere : "@variableKindIR loadFromMemory:literalStructure" : outResultingValue
+    error .nowhere : "@objectInMemoryIR loadFromMemory:literalStructure" : outResultingValue
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @variableKindIR storeInMemory
+method @objectInMemoryIR storeInMemory
   ?value:@operandIR inValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -56,14 +63,14 @@ method @variableKindIR storeInMemory
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
   case localValue (@unifiedTypeMap-proxy type @lstring unused name) :
     [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !type !inValue]
-  case globalConstant (@operandIR unused value) :
-     error .nowhere : "<<@variableKindIR storeInMemory globalConstant>>"
+  case globalConstant (* *) :
+     error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   case localAccess (@lstring unused access) :
-     error .nowhere : "<<@variableKindIR storeInMemory localAccess>>"
+     error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
   case literalString (@string unused value @string unused name) :
-     error .nowhere : "<<@variableKindIR storeInMemory literalString>>"
+     error .nowhere : "<<@objectInMemoryIR storeInMemory literalString>>"
   case literalStructure (@literalStructureList unused value) :
-     error .nowhere : "<<@variableKindIR storeInMemory literalStructure>>"
+     error .nowhere : "<<@objectInMemoryIR storeInMemory literalStructure>>"
   end
 }
 

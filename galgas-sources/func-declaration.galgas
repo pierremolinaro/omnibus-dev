@@ -178,6 +178,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !true
     !{}
     !true
+    !false # Is not constant
   ]
 #--- Analyse formal arguments
   @funcFormalArgumentListForGeneration formalArguments = {}
@@ -191,6 +192,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       ![typeProxy copiable]
       !{}
       !false
+      !true # Is constant
     ]
     formalArguments += !typeProxy !mangledNameForLocalVariable (!formalArgumentName.string)
   end

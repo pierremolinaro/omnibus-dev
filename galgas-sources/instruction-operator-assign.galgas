@@ -69,7 +69,11 @@ override method @operatorAssignInstructionAST analyze
     !mTargetVarName
     ?let targetType
     ?5*
+    ?let isConstant
   ]
+  if isConstant then
+    error mTargetVarName : "a constant cannot be modified"
+  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -92,7 +96,7 @@ override method @operatorAssignInstructionAST analyze
     ?let accessIsAllowed
     ?let targetVariableKind
     ?let isCopiable
-    ?2*
+    ?3*
   ]
   if not accessIsAllowed then
     error mTargetVarName : "routine has no access right on the this variable"

@@ -96,8 +96,8 @@ override method @conversionExpressionAST analyzeExpression
 class @extendInstructionIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
   @unifiedTypeMap-proxy mConvertedExpressionType
-  @variableKindIR mTemporaryResultVariable
-  @variableKindIR mOperand
+  @objectInMemoryIR mTemporaryResultVariable
+  @objectInMemoryIR mOperand
   @bool mSilently
   @location mLocation
 }

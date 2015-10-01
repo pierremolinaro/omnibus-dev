@@ -58,7 +58,11 @@ override method @assignmentInstructionAST analyze
     !mTargetVarName
     ?@unifiedTypeMap-proxy targetType
     ?5*
+    ?let isConstant
   ]
+  if isConstant then
+    error mTargetVarName : "a constant cannot be modified"
+  end
   var comment = mTargetVarName.string
 #--- Analyze field list
   for (fieldName) in mFieldList do
@@ -92,12 +96,12 @@ override method @assignmentInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let expressionType
+    ?type:let sourceType
     ?result:@operandIR sourceValue
   ]
   comment += " = " + sourceValue 
   checkAssignmentCompatibility (
-    !sourceType:expressionType
+    !sourceType:sourceType
     !sourceValue:sourceValue
     !targetType:targetType
     !errorLocation:mTargetVarName.location
@@ -109,7 +113,7 @@ override method @assignmentInstructionAST analyze
     ?let accessIsAllowed
     ?let targetVariableKind
     ?let isCopiable
-    ?2*
+    ?3*
   ]
   if not accessIsAllowed then
     error mTargetVarName : "routine has no access right on the this variable"
