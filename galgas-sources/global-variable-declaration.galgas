@@ -215,6 +215,7 @@ method @globalVarDeclarationList-element enterInContext
       !executionModes
       !allowedProcedureMap
       !resultValue
+      !false # Is not constant
     ]
   case procType (* *) :
   end
@@ -235,12 +236,14 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?let executionModeSet
     ?let unused allowedProcedureMap
     ?let expressionGeneratedCode
+    ?let isConstant
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
     !inferredType
     ![executionModeSet count] > 1
     !expressionGeneratedCode
+#    !isConstant
   ]
 }
 

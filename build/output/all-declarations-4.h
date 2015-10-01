@@ -1056,8 +1056,8 @@ class GALGAS_extendInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_extendInstructionIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                              const class GALGAS_variableKindIR & inOperand2,
-                                                              const class GALGAS_variableKindIR & inOperand3,
+                                                              const class GALGAS_objectInMemoryIR & inOperand2,
+                                                              const class GALGAS_objectInMemoryIR & inOperand3,
                                                               const class GALGAS_bool & inOperand4,
                                                               const class GALGAS_location & inOperand5
                                                               COMMA_LOCATION_ARGS) ;
@@ -1075,13 +1075,13 @@ class GALGAS_extendInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR reader_mOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mSilently (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mTemporaryResultVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR reader_mTemporaryResultVariable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1104,16 +1104,16 @@ class cPtr_extendInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mConvertedExpressionType ;
-  public : GALGAS_variableKindIR mAttribute_mTemporaryResultVariable ;
-  public : GALGAS_variableKindIR mAttribute_mOperand ;
+  public : GALGAS_objectInMemoryIR mAttribute_mTemporaryResultVariable ;
+  public : GALGAS_objectInMemoryIR mAttribute_mOperand ;
   public : GALGAS_bool mAttribute_mSilently ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
   public : cPtr_extendInstructionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_mConvertedExpressionType,
-                                     const GALGAS_variableKindIR & in_mTemporaryResultVariable,
-                                     const GALGAS_variableKindIR & in_mOperand,
+                                     const GALGAS_objectInMemoryIR & in_mTemporaryResultVariable,
+                                     const GALGAS_objectInMemoryIR & in_mOperand,
                                      const GALGAS_bool & in_mSilently,
                                      const GALGAS_location & in_mLocation
                                      COMMA_LOCATION_ARGS) ;
@@ -1124,8 +1124,8 @@ class cPtr_extendInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mConvertedExpressionType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mTemporaryResultVariable (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR reader_mTemporaryResultVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR reader_mOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool reader_mSilently (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 //--- Description
@@ -1166,8 +1166,8 @@ class GALGAS_fieldAccessIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_fieldAccessIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                        const class GALGAS_variableKindIR & inOperand1,
-                                                        const class GALGAS_variableKindIR & inOperand2,
+                                                        const class GALGAS_objectInMemoryIR & inOperand1,
+                                                        const class GALGAS_objectInMemoryIR & inOperand2,
                                                         const class GALGAS_lstring & inOperand3
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -1182,9 +1182,9 @@ class GALGAS_fieldAccessIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mField (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR reader_mResult (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_variableKindIR reader_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR reader_mSource (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
 
@@ -1208,14 +1208,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fieldAccessIR ;
 class cPtr_fieldAccessIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
-  public : GALGAS_variableKindIR mAttribute_mResult ;
-  public : GALGAS_variableKindIR mAttribute_mSource ;
+  public : GALGAS_objectInMemoryIR mAttribute_mResult ;
+  public : GALGAS_objectInMemoryIR mAttribute_mSource ;
   public : GALGAS_lstring mAttribute_mField ;
 
 //--- Constructor
   public : cPtr_fieldAccessIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                               const GALGAS_variableKindIR & in_mResult,
-                               const GALGAS_variableKindIR & in_mSource,
+                               const GALGAS_objectInMemoryIR & in_mResult,
+                               const GALGAS_objectInMemoryIR & in_mSource,
                                const GALGAS_lstring & in_mField
                                COMMA_LOCATION_ARGS) ;
 
@@ -1224,8 +1224,8 @@ class cPtr_fieldAccessIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_variableKindIR reader_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR reader_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR reader_mSource (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mField (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

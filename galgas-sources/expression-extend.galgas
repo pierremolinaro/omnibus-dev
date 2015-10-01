@@ -68,7 +68,7 @@ override method @extendExpressionAST analyzeExpression
       if sourceSize > targetSize then
         error mTypeName: "cannot extend, use convert or trunc"
       elsif sourceSize == targetSize then
-        error mTypeName: "same size: useless extension"
+        error mTypeName: "same size: useless extend operation"
       end
     elsif sourceIsUnsigned && not targetIsUnsigned then # unsigned -> signed
       if sourceSize >= targetSize then
@@ -80,7 +80,7 @@ override method @extendExpressionAST analyzeExpression
       if sourceSize > targetSize then
         error mTypeName: "cannot extend, use convert or trunc"
       elsif sourceSize == targetSize then
-        error mTypeName: "samesize: useless extension"
+        error mTypeName: "same size: useless extend operation"
       end
     end
     getNewTempVariable (!?ioTemporaries ?outResultValue)

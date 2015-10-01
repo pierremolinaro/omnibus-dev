@@ -90,9 +90,13 @@ override method @incDecInstructionAST analyze
     !mVarName
     ?let type
     ?let accessIsAllowed
-    ?let @variableKindIR variable
+    ?let @objectInMemoryIR variable
     ?3*
+    ?let isConstant
   ]
+  if isConstant then
+    error mVarName : "a constant cannot be modified"
+  end
   if not accessIsAllowed then
     error mVarName : "routine has no access right on the this variable"
   end

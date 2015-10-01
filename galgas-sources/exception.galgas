@@ -122,6 +122,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     ![inContext.mExceptionCodeType copiable]
     !{}
     !false
+    !false
   ]
   let fileArg = @lstring.new {!"FILE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -132,6 +133,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     ![StaticStringType copiable]
     !{}
     !false
+    !false
   ]
   let lineArg = @lstring.new {!"LINE" !mExceptionClauseName.location}
   [!?variableMap insertUsedConstantInputFormalArgument
@@ -141,6 +143,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !.localValue {!type:inContext.mExceptionLineType !name:lineArg}
     ![inContext.mExceptionLineType copiable]
     !{}
+    !false
     !false
   ]
 #---
