@@ -1,0 +1,39 @@
+
+setter @instructionListIR appendExtend
+  ?let @operandIR inResultValue
+  ?let @unifiedTypeMap-proxy inResultType
+  ?let @operandIR inSourceValue
+  ?let @unifiedTypeMap-proxy inSourceType
+{
+  self += !@extendIR.new {!inResultValue !inResultType !inSourceValue !inSourceType}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @extendIR : @abstractInstructionIR {
+  @operandIR mResultValue
+  @unifiedTypeMap-proxy mResultType
+  @operandIR mSourceValue
+  @unifiedTypeMap-proxy mSourceType
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendIR llvmInstructionCode
+  ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
+  ioCode += "  " + mResultValue + " = "
+  [[mSourceType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
+  ioCode += if sourceIsUnsigned then "zext" else "sext" end
+  ioCode += " " + [mSourceType  llvmTypeName] + " " + mSourceValue + " to " + [mResultType llvmTypeName] + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*

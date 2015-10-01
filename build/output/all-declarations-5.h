@@ -308,6 +308,20 @@ void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  Category setter '@instructionListIR appendExtend'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
+                                    const class GALGAS_operandIR constin_inResultValue,
+                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                    const class GALGAS_operandIR constin_inSourceValue,
+                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inSourceType,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                             Category setter '@instructionListIR appendBinaryOperation'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

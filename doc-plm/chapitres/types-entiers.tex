@@ -22,14 +22,9 @@ Les types entiers sont pas définis par la configuration de la cible (voir \refC
 Le langage accepte des constantes littérales entières d'une taille quelconque. Une constante est convertie dans le type entier requis par le contexte sémantique, et une erreur est déclenchée à la compilation en cas d'impossibilité. Par exemple :
 
 \begin{PLM}
-var v $int8 = 128 // Erreur de compilation :
+var v $int8 = 128  // Erreur de compilation :
                    // 128 non représentable par un entier signé 8 bits
-\end{PLM}
-
-\colorbox{red}{C'est une erreur à corriger}
-
-\begin{PLM}
-var v $int8 = -128 // Devrait être accepté, erreur actuellement
+var v $int8 = -128 // Ok
 \end{PLM}
 
 Une constante littérale entière n'a pas de type défini, aussi seule l'inférence de type peut lui affecter un type. Par exemple, si on écrit :
@@ -98,15 +93,11 @@ let v $uint8 = ...
 let y $int16 = v &\ $int16 // Erreur, la conversion implicite est possible
 \end{PLM}
 
-\section{Opérateurs infixes et conversions implicites}
-
-\colorbox{red}{À définir.}
-
 \section{Opérateurs infix de comparaison}
 
 Les valeurs entières sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés.
 
-La comparaison ne peut s'effectuer qu'entre valeurs de même type entier.
+La comparaison ne peut s'effectuer qu'entre objets du même type entier, ou entre un objet de type entier et une constante littérale entière.
 
 
 
@@ -118,7 +109,9 @@ La comparaison ne peut s'effectuer qu'entre valeurs de même type entier.
 
 \sectionLabel{Opérateurs infixes arithmétiques}{operateursInfixArithmétiques}
 
-Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateursInfixesArithmetiques} avec leur signification.
+
+Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateursInfixesArithmetiques} avec leur signification. Ils ne peuvent opérer qu'entre objets du même type entier, ou entre un objet de type entier et une constante littérale entière.
+
 
 \begin{table}[h]
 \centering

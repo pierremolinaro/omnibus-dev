@@ -77,7 +77,7 @@ override method @conversionExpressionAST analyzeExpression
 #--- Temp var
   getNewTempVariable (!?ioTemporaries ?outResultValue)
 #--- Generate code
-#  ioInstructionGenerationList += !@conversionInstructionIR.new {
+#  ioInstructionGenerationList += !@extendInstructionIR.new {
 #    !outExpressionType
 #    !convertedExpressionType
 #    !outResult
@@ -90,10 +90,10 @@ override method @conversionExpressionAST analyzeExpression
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
-#! @conversionInstructionIR
+#! @extendInstructionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @conversionInstructionIR : @abstractInstructionIR {
+class @extendInstructionIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
   @unifiedTypeMap-proxy mConvertedExpressionType
   @variableKindIR mTemporaryResultVariable
@@ -104,13 +104,13 @@ class @conversionInstructionIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @conversionInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+override method @extendInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mOperand enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @conversionInstructionIR llvmInstructionCode
+override method @extendInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
