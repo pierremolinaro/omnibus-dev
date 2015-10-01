@@ -46,8 +46,6 @@ let ROUGE = $ledState.off
 //------------------------------------------------*
 
 proc loop `user () {
-  let x $uint4 = 7
-  let y $uint5 = extend x : $uint5
   wait (!ms:250)
   if led == .off then
     GPIOC_PSOR = 1 << 5 // Allumer la led

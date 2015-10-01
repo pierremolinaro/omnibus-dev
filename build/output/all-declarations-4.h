@@ -11,43 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Routine 'copyExecutableFile'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_copyExecutableFile (const class GALGAS_string constinArgument0,
-                                 const class GALGAS_string constinArgument1,
-                                 const class GALGAS_string constinArgument2,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Routine 'copyExecutableFileWithSubstitutions'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_copyExecutableFileWithSubstitutions (const class GALGAS_string constinArgument0,
-                                                  const class GALGAS_string constinArgument1,
-                                                  const class GALGAS_string constinArgument2,
-                                                  const class GALGAS__32_stringlist constinArgument3,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               Routine 'copyTextFile'                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_copyTextFile (const class GALGAS_string constinArgument0,
-                           const class GALGAS_string constinArgument1,
-                           const class GALGAS_string constinArgument2,
-                           class C_Compiler * inCompiler
-                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Routine 'importFilesAndCompile'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -669,7 +632,7 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_assertInstructionIR constructor_new (const class GALGAS_location & inOperand0,
                                                               const class GALGAS_instructionListIR & inOperand1,
-                                                              const class GALGAS_operandIR & inOperand2
+                                                              const class GALGAS_valueIR & inOperand2
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -683,7 +646,7 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mAssertInstructionLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mExpressionValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mInstructionList (LOCATION_ARGS) const ;
 
@@ -708,12 +671,12 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mAssertInstructionLocation ;
   public : GALGAS_instructionListIR mAttribute_mInstructionList ;
-  public : GALGAS_operandIR mAttribute_mExpressionValue ;
+  public : GALGAS_valueIR mAttribute_mExpressionValue ;
 
 //--- Constructor
   public : cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
                                      const GALGAS_instructionListIR & in_mInstructionList,
-                                     const GALGAS_operandIR & in_mExpressionValue
+                                     const GALGAS_valueIR & in_mExpressionValue
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -722,7 +685,7 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mAssertInstructionLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mExpressionValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -760,11 +723,11 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_binaryOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_binaryOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                             const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                            const class GALGAS_operandIR & inOperand2,
+                                                            const class GALGAS_valueIR & inOperand2,
                                                             const class GALGAS_llvmBinaryOperation & inOperand3,
-                                                            const class GALGAS_operandIR & inOperand4,
+                                                            const class GALGAS_valueIR & inOperand4,
                                                             const class GALGAS_location & inOperand5
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -777,15 +740,15 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mLeftOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation reader_mOperation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mRightOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTargetOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -808,19 +771,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
 
 class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTargetOperand ;
+  public : GALGAS_valueIR mAttribute_mTargetOperand ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_operandIR mAttribute_mLeftOperand ;
+  public : GALGAS_valueIR mAttribute_mLeftOperand ;
   public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
-  public : GALGAS_operandIR mAttribute_mRightOperand ;
+  public : GALGAS_valueIR mAttribute_mRightOperand ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_binaryOperationIR (const GALGAS_operandIR & in_mTargetOperand,
+  public : cPtr_binaryOperationIR (const GALGAS_valueIR & in_mTargetOperand,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                   const GALGAS_operandIR & in_mLeftOperand,
+                                   const GALGAS_valueIR & in_mLeftOperand,
                                    const GALGAS_llvmBinaryOperation & in_mOperation,
-                                   const GALGAS_operandIR & in_mRightOperand,
+                                   const GALGAS_valueIR & in_mRightOperand,
                                    const GALGAS_location & in_mLocation
                                    COMMA_LOCATION_ARGS) ;
 
@@ -828,11 +791,11 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTargetOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mLeftOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation reader_mOperation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mRightOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -955,9 +918,9 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_extendIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_extendIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                   const class GALGAS_operandIR & inOperand2,
+                                                   const class GALGAS_valueIR & inOperand2,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -972,11 +935,11 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mResultType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mResultValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mResultValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mSourceType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -997,15 +960,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
 
 class cPtr_extendIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mResultValue ;
+  public : GALGAS_valueIR mAttribute_mResultValue ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
-  public : GALGAS_operandIR mAttribute_mSourceValue ;
+  public : GALGAS_valueIR mAttribute_mSourceValue ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSourceType ;
 
 //--- Constructor
-  public : cPtr_extendIR (const GALGAS_operandIR & in_mResultValue,
+  public : cPtr_extendIR (const GALGAS_valueIR & in_mResultValue,
                           const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
-                          const GALGAS_operandIR & in_mSourceValue,
+                          const GALGAS_valueIR & in_mSourceValue,
                           const GALGAS_unifiedTypeMap_2D_proxy & in_mSourceType
                           COMMA_LOCATION_ARGS) ;
 
@@ -1013,9 +976,9 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mResultValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mResultValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mResultType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mSourceType (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1264,7 +1227,7 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_ifInstructionIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_ifInstructionIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                           const class GALGAS_location & inOperand1,
                                                           const class GALGAS_instructionListIR & inOperand2,
                                                           const class GALGAS_instructionListIR & inOperand3
@@ -1283,7 +1246,7 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTestVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTestVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mThenInstructionGenerationList (LOCATION_ARGS) const ;
 
@@ -1306,13 +1269,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR ;
 
 class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTestVariable ;
+  public : GALGAS_valueIR mAttribute_mTestVariable ;
   public : GALGAS_location mAttribute_mLocation ;
   public : GALGAS_instructionListIR mAttribute_mThenInstructionGenerationList ;
   public : GALGAS_instructionListIR mAttribute_mElseInstructionGenerationList ;
 
 //--- Constructor
-  public : cPtr_ifInstructionIR (const GALGAS_operandIR & in_mTestVariable,
+  public : cPtr_ifInstructionIR (const GALGAS_valueIR & in_mTestVariable,
                                  const GALGAS_location & in_mLocation,
                                  const GALGAS_instructionListIR & in_mThenInstructionGenerationList,
                                  const GALGAS_instructionListIR & in_mElseInstructionGenerationList
@@ -1322,7 +1285,7 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTestVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTestVariable (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mThenInstructionGenerationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mElseInstructionGenerationList (LOCATION_ARGS) const ;
@@ -1363,7 +1326,7 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                                const class GALGAS_string & inOperand1,
                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                                const class GALGAS_bool & inOperand3
@@ -1380,7 +1343,7 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsVolatile (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mVariableName (LOCATION_ARGS) const ;
 
@@ -1405,13 +1368,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadGlobalVariableI
 
 class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTargetValue ;
+  public : GALGAS_valueIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mVariableName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mVariableType ;
   public : GALGAS_bool mAttribute_mIsVolatile ;
 
 //--- Constructor
-  public : cPtr_loadGlobalVariableIR (const GALGAS_operandIR & in_mTargetValue,
+  public : cPtr_loadGlobalVariableIR (const GALGAS_valueIR & in_mTargetValue,
                                       const GALGAS_string & in_mVariableName,
                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType,
                                       const GALGAS_bool & in_mIsVolatile
@@ -1421,7 +1384,7 @@ class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mVariableType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool reader_mIsVolatile (LOCATION_ARGS) const ;
@@ -1462,7 +1425,7 @@ class GALGAS_loadLocalVariableIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                               const class GALGAS_string & inOperand1,
                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                               COMMA_LOCATION_ARGS) ;
@@ -1476,7 +1439,7 @@ class GALGAS_loadLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mVariableName (LOCATION_ARGS) const ;
 
@@ -1501,12 +1464,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadLocalVariableIR
 
 class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTargetValue ;
+  public : GALGAS_valueIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mVariableName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mVariableType ;
 
 //--- Constructor
-  public : cPtr_loadLocalVariableIR (const GALGAS_operandIR & in_mTargetValue,
+  public : cPtr_loadLocalVariableIR (const GALGAS_valueIR & in_mTargetValue,
                                      const GALGAS_string & in_mVariableName,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_mVariableType
                                      COMMA_LOCATION_ARGS) ;
@@ -1515,7 +1478,7 @@ class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mVariableType (LOCATION_ARGS) const ;
 //--- Description
@@ -1555,7 +1518,7 @@ class GALGAS_loadRegisterIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_loadRegisterIR constructor_new (const class GALGAS_operandIR & inOperand0,
+  public : static GALGAS_loadRegisterIR constructor_new (const class GALGAS_valueIR & inOperand0,
                                                          const class GALGAS_string & inOperand1,
                                                          const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
                                                          const class GALGAS_bigint & inOperand3
@@ -1576,7 +1539,7 @@ class GALGAS_loadRegisterIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mRegisterType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1597,13 +1560,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterIR ;
 
 class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTargetValue ;
+  public : GALGAS_valueIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mRegisterName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mRegisterType ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
 
 //--- Constructor
-  public : cPtr_loadRegisterIR (const GALGAS_operandIR & in_mTargetValue,
+  public : cPtr_loadRegisterIR (const GALGAS_valueIR & in_mTargetValue,
                                 const GALGAS_string & in_mRegisterName,
                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mRegisterType,
                                 const GALGAS_bigint & in_mRegisterAddress
@@ -1613,7 +1576,7 @@ class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mRegisterType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mRegisterAddress (LOCATION_ARGS) const ;
@@ -1655,8 +1618,8 @@ class GALGAS_prefixOperatorExpressionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_prefixOperatorExpressionIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                     const class GALGAS_operandIR & inOperand1,
-                                                                     const class GALGAS_operandIR & inOperand2,
+                                                                     const class GALGAS_valueIR & inOperand1,
+                                                                     const class GALGAS_valueIR & inOperand2,
                                                                      const class GALGAS_prefixOperatorIR & inOperand3,
                                                                      const class GALGAS_location & inOperand4
                                                                      COMMA_LOCATION_ARGS) ;
@@ -1670,13 +1633,13 @@ class GALGAS_prefixOperatorExpressionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_prefixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
 
@@ -1700,15 +1663,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorExpre
 class cPtr_prefixOperatorExpressionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
-  public : GALGAS_operandIR mAttribute_mResult ;
-  public : GALGAS_operandIR mAttribute_mOperand ;
+  public : GALGAS_valueIR mAttribute_mResult ;
+  public : GALGAS_valueIR mAttribute_mOperand ;
   public : GALGAS_prefixOperatorIR mAttribute_mOperator ;
   public : GALGAS_location mAttribute_mOperatorLocation ;
 
 //--- Constructor
   public : cPtr_prefixOperatorExpressionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                            const GALGAS_operandIR & in_mResult,
-                                            const GALGAS_operandIR & in_mOperand,
+                                            const GALGAS_valueIR & in_mResult,
+                                            const GALGAS_valueIR & in_mOperand,
                                             const GALGAS_prefixOperatorIR & in_mOperator,
                                             const GALGAS_location & in_mOperatorLocation
                                             COMMA_LOCATION_ARGS) ;
@@ -1718,8 +1681,8 @@ class cPtr_prefixOperatorExpressionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_prefixOperatorIR reader_mOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mOperatorLocation (LOCATION_ARGS) const ;
 //--- Description
@@ -1850,10 +1813,10 @@ class GALGAS_registerIntegerConstantInExpressionIR : public GALGAS_abstractInstr
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_registerIntegerConstantInExpressionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                                                const class GALGAS_operandIR & inOperand1,
+                                                                                const class GALGAS_valueIR & inOperand1,
                                                                                 const class GALGAS_uint_36__34_ & inOperand2,
                                                                                 const class GALGAS_uint & inOperand3,
-                                                                                const class GALGAS_operandIR & inOperand4,
+                                                                                const class GALGAS_valueIR & inOperand4,
                                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
                                                                                 const class GALGAS_bool & inOperand6
                                                                                 COMMA_LOCATION_ARGS) ;
@@ -1869,7 +1832,7 @@ class GALGAS_registerIntegerConstantInExpressionIR : public GALGAS_abstractInstr
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mBitShift (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mExpressionValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mInstructionLocation (LOCATION_ARGS) const ;
 
@@ -1877,7 +1840,7 @@ class GALGAS_registerIntegerConstantInExpressionIR : public GALGAS_abstractInstr
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mNoCheck (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mResultVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mResultVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
 
@@ -1901,19 +1864,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerCons
 class cPtr_registerIntegerConstantInExpressionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mInstructionLocation ;
-  public : GALGAS_operandIR mAttribute_mExpressionValue ;
+  public : GALGAS_valueIR mAttribute_mExpressionValue ;
   public : GALGAS_uint_36__34_ mAttribute_mMaxBound ;
   public : GALGAS_uint mAttribute_mBitShift ;
-  public : GALGAS_operandIR mAttribute_mResultVariable ;
+  public : GALGAS_valueIR mAttribute_mResultVariable ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
   public : GALGAS_bool mAttribute_mNoCheck ;
 
 //--- Constructor
   public : cPtr_registerIntegerConstantInExpressionIR (const GALGAS_location & in_mInstructionLocation,
-                                                       const GALGAS_operandIR & in_mExpressionValue,
+                                                       const GALGAS_valueIR & in_mExpressionValue,
                                                        const GALGAS_uint_36__34_ & in_mMaxBound,
                                                        const GALGAS_uint & in_mBitShift,
-                                                       const GALGAS_operandIR & in_mResultVariable,
+                                                       const GALGAS_valueIR & in_mResultVariable,
                                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
                                                        const GALGAS_bool & in_mNoCheck
                                                        COMMA_LOCATION_ARGS) ;
@@ -1923,10 +1886,10 @@ class cPtr_registerIntegerConstantInExpressionIR : public cPtr_abstractInstructi
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mInstructionLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mExpressionValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint_36__34_ reader_mMaxBound (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint reader_mBitShift (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mResultVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mResultVariable (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool reader_mNoCheck (LOCATION_ARGS) const ;
 //--- Description
@@ -1966,10 +1929,10 @@ class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                                     const class GALGAS_operandIR & inOperand1,
+  public : static GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
+                                                                     const class GALGAS_valueIR & inOperand1,
                                                                      const class GALGAS_instructionListIR & inOperand2,
-                                                                     const class GALGAS_operandIR & inOperand3,
+                                                                     const class GALGAS_valueIR & inOperand3,
                                                                      const class GALGAS_instructionListIR & inOperand4,
                                                                      const class GALGAS_location & inOperand5
                                                                      COMMA_LOCATION_ARGS) ;
@@ -1985,15 +1948,15 @@ class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mLeftInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mLeftOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mRightInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mRightOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTargetOperand (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2014,18 +1977,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOper
 
 class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_operandIR mAttribute_mTargetOperand ;
-  public : GALGAS_operandIR mAttribute_mLeftOperand ;
+  public : GALGAS_valueIR mAttribute_mTargetOperand ;
+  public : GALGAS_valueIR mAttribute_mLeftOperand ;
   public : GALGAS_instructionListIR mAttribute_mLeftInstructionList ;
-  public : GALGAS_operandIR mAttribute_mRightOperand ;
+  public : GALGAS_valueIR mAttribute_mRightOperand ;
   public : GALGAS_instructionListIR mAttribute_mRightInstructionList ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_shortCircuitAndOperationIR (const GALGAS_operandIR & in_mTargetOperand,
-                                            const GALGAS_operandIR & in_mLeftOperand,
+  public : cPtr_shortCircuitAndOperationIR (const GALGAS_valueIR & in_mTargetOperand,
+                                            const GALGAS_valueIR & in_mLeftOperand,
                                             const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                            const GALGAS_operandIR & in_mRightOperand,
+                                            const GALGAS_valueIR & in_mRightOperand,
                                             const GALGAS_instructionListIR & in_mRightInstructionList,
                                             const GALGAS_location & in_mLocation
                                             COMMA_LOCATION_ARGS) ;
@@ -2034,10 +1997,10 @@ class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTargetOperand (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mLeftOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mLeftInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mRightOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mRightInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
 //--- Description
@@ -2079,7 +2042,7 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_storeGlobalVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                const class GALGAS_operandIR & inOperand2,
+                                                                const class GALGAS_valueIR & inOperand2,
                                                                 const class GALGAS_bool & inOperand3
                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -2096,7 +2059,7 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsVolatile (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -2121,13 +2084,13 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mGlobalVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_operandIR mAttribute_mSourceValue ;
+  public : GALGAS_valueIR mAttribute_mSourceValue ;
   public : GALGAS_bool mAttribute_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_storeGlobalVariableIR (const GALGAS_string & in_mGlobalVarName,
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                       const GALGAS_operandIR & in_mSourceValue,
+                                       const GALGAS_valueIR & in_mSourceValue,
                                        const GALGAS_bool & in_mIsVolatile
                                        COMMA_LOCATION_ARGS) ;
 
@@ -2137,7 +2100,7 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mGlobalVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool reader_mIsVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2178,7 +2141,7 @@ class GALGAS_storeLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_storeLocalVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                               const class GALGAS_operandIR & inOperand2
+                                                               const class GALGAS_valueIR & inOperand2
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2192,7 +2155,7 @@ class GALGAS_storeLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mLocalVarName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -2217,12 +2180,12 @@ class cPtr_storeLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mLocalVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_operandIR mAttribute_mSourceValue ;
+  public : GALGAS_valueIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeLocalVariableIR (const GALGAS_string & in_mLocalVarName,
                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                      const GALGAS_operandIR & in_mSourceValue
+                                      const GALGAS_valueIR & in_mSourceValue
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2231,7 +2194,7 @@ class cPtr_storeLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mLocalVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2272,7 +2235,7 @@ class GALGAS_storeVolatileIR : public GALGAS_abstractInstructionIR {
   public : static GALGAS_storeVolatileIR constructor_new (const class GALGAS_string & inOperand0,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                           const class GALGAS_bigint & inOperand2,
-                                                          const class GALGAS_operandIR & inOperand3
+                                                          const class GALGAS_valueIR & inOperand3
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2288,7 +2251,7 @@ class GALGAS_storeVolatileIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mRegisterName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -2314,13 +2277,13 @@ class cPtr_storeVolatileIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mAttribute_mRegisterName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
   public : GALGAS_bigint mAttribute_mAddress ;
-  public : GALGAS_operandIR mAttribute_mSourceValue ;
+  public : GALGAS_valueIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeVolatileIR (const GALGAS_string & in_mRegisterName,
                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                  const GALGAS_bigint & in_mAddress,
-                                 const GALGAS_operandIR & in_mSourceValue
+                                 const GALGAS_valueIR & in_mSourceValue
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2330,7 +2293,7 @@ class cPtr_storeVolatileIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string reader_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mAddress (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2369,7 +2332,7 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_throwInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                             const class GALGAS_operandIR & inOperand1
+                                                             const class GALGAS_valueIR & inOperand1
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2381,7 +2344,7 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mCode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
 
@@ -2405,11 +2368,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_throwInstructionIR 
 class cPtr_throwInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mThrowInstructionLocation ;
-  public : GALGAS_operandIR mAttribute_mCode ;
+  public : GALGAS_valueIR mAttribute_mCode ;
 
 //--- Constructor
   public : cPtr_throwInstructionIR (const GALGAS_location & in_mThrowInstructionLocation,
-                                    const GALGAS_operandIR & in_mCode
+                                    const GALGAS_valueIR & in_mCode
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -2417,7 +2380,7 @@ class cPtr_throwInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mCode (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2457,7 +2420,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
                                                              const class GALGAS_instructionListIR & inOperand1,
-                                                             const class GALGAS_operandIR & inOperand2,
+                                                             const class GALGAS_valueIR & inOperand2,
                                                              const class GALGAS_instructionListIR & inOperand3
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -2474,7 +2437,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint reader_mLabelIndex (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mTestExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mTestInstructionGenerationList (LOCATION_ARGS) const ;
 
@@ -2499,13 +2462,13 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_uint mAttribute_mLabelIndex ;
   public : GALGAS_instructionListIR mAttribute_mTestInstructionGenerationList ;
-  public : GALGAS_operandIR mAttribute_mTestExpression ;
+  public : GALGAS_valueIR mAttribute_mTestExpression ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
 
 //--- Constructor
   public : cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
                                     const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
-                                    const GALGAS_operandIR & in_mTestExpression,
+                                    const GALGAS_valueIR & in_mTestExpression,
                                     const GALGAS_instructionListIR & in_mInstructionGenerationList
                                     COMMA_LOCATION_ARGS) ;
 
@@ -2515,7 +2478,7 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_uint reader_mLabelIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mTestInstructionGenerationList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_valueIR reader_mTestExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mInstructionGenerationList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

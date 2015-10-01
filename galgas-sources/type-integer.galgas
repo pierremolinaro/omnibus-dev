@@ -301,14 +301,14 @@ class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
 override method @infixObjectObjectOperatorDescription generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @unifiedTypeMap-proxy inLeftType
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy unused inRightType
   ?let @location inOperatorLocation
-  !@operandIR outResultValue
+  !@valueIR outResultValue
 {
-  getNewTempVariable (!?ioTemporaries ?outResultValue)
+  getNewTempVariable (!inLeftType !?ioTemporaries ?outResultValue)
 #--- Generate code
   [!?ioInstructionGenerationList appendBinaryOperation
     !outResultValue
@@ -458,12 +458,12 @@ class @integerObject_literal_infixOperator : @infixOperatorDescription {
 override method @integerObject_literal_infixOperator generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @unifiedTypeMap-proxy inLeftType
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy unused inRightType
   ?let @location inOperatorLocation
-  !@operandIR outResultValue
+  !@valueIR outResultValue
 {
 #--- Check right literal integer can be extented to left integer type
   [inRightOperand literalInteger ?value:let @bigint literalValue]
@@ -473,7 +473,7 @@ override method @integerObject_literal_infixOperator generateCode
   elsif literalValue > max then
     error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResultValue
   else
-    getNewTempVariable (!?ioTemporaries ?outResultValue)
+    getNewTempVariable (!inLeftType !?ioTemporaries ?outResultValue)
     #--- Generate code
       [!?ioInstructionGenerationList appendBinaryOperation
         !outResultValue
@@ -624,12 +624,12 @@ class @literal_integerObject_infixOperator : @infixOperatorDescription {
 override method @literal_integerObject_infixOperator generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @unifiedTypeMap-proxy unused inLeftType
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inRightType
   ?let @location inOperatorLocation
-  !@operandIR outResultValue
+  !@valueIR outResultValue
 {
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?value:let @bigint literalValue]
@@ -639,7 +639,7 @@ override method @literal_integerObject_infixOperator generateCode
   elsif literalValue > max then
     error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResultValue
   else
-    getNewTempVariable (!?ioTemporaries ?outResultValue)
+    getNewTempVariable (!inRightType !?ioTemporaries ?outResultValue)
     #--- Generate code
       [!?ioInstructionGenerationList appendBinaryOperation
         !outResultValue

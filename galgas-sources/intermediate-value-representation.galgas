@@ -1,100 +1,52 @@
 #----------------------------------------------------------------------------------------------------------------------*
-
-struct @objectIR {
-  @unifiedTypeMap-proxy mType
-  @string mName
-  @bool mIsLocal
-}
-
+#! @valueIR
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @valueIR {
-  case localObject (@unifiedTypeMap-proxy type @string name)
-  case globalObject (@unifiedTypeMap-proxy type @string name)
-  case boolean (@bool value)
-  case integer (@bigint value)
-#  case string
-#  case structure
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-func makeValueFromLiteralInteger ?let @bigint inValue -> @valueIR outValueIR {
-  outValueIR = .integer {!value:inValue}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-func makeValueFromLiteralBoolean ?let @bool inValue -> @valueIR outValueIR {
-  outValueIR = .boolean {!value:inValue}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-func makeValueFromObject ?let @objectIR inValue -> @valueIR outValueIR {
-  if inValue.mIsLocal then
-    outValueIR = .localObject {!type:inValue.mType !name:inValue.mName}
-  else
-    outValueIR = .globalObject {!type:inValue.mType !name:inValue.mName}
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @valueIR typeOrNull ?let @semanticContext inContext -> @unifiedTypeMap-proxy outType {
-  switch self
-  case localObject (@unifiedTypeMap-proxy type *) :
-    outType = type
-  case globalObject (@unifiedTypeMap-proxy type *) :
-    outType = type
-  case boolean (*) :
-    outType = inContext.mBooleanType
-  case integer (*) :
-    outType = .null
-  end
+#  case literalBoolean (@bool value)
+  case literalInteger  (@bigint value)
+  case llvmLocalObject (@unifiedTypeMap-proxy type @string name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 getter @valueIR string -> @string outResult {
   switch self
-  case localObject (* @string name) :
-    outResult = "%" + name
-  case globalObject (* @string name) :
-    outResult = "@" + name
-  case boolean (@bool value) :
-    outResult = [value cString]
-  case integer (@bigint value) :
-    outResult = [value string]
+  case literalInteger (@bigint value) : outResult = [value string]
+  case llvmLocalObject (* @string name) : outResult = "%" + name
   end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @valueCombinationEnum {
-  case literal_literal_ofDifferentTypes
-  case literal_literal_integer (@bigint left @bigint right)
-  case literal_literal_boolean (@bool left @bool right)
-  case literal_object (@valueIR left @unifiedTypeMap-proxy rightType)
-  case object_literal (@unifiedTypeMap-proxy leftType @valueIR right)
-  case object_object  (@unifiedTypeMap-proxy leftType @unifiedTypeMap-proxy rightType)
+getter @valueIR name -> @string outResult {
+  switch self
+  case literalInteger (@bigint value) : outResult = [value string]
+  case llvmLocalObject (* @string name) : outResult = name
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-#func combineValues ?let @valueIR inLeft ?let @valueIR inRight -> @valueCombinationEnum outResult {
-#  switch inLeft
-#  case literal (@literalValueIR leftLiteral) :
-#    switch inRight
-#    case literal (@literalValueIR rightLiteral) :
-#    case object (@objectIR rightObject) :
-#    end
-#  case object (@objectIR leftObject) :
-#    switch inRight
-#    case literal (@literalValueIR rightLiteral) :
-#    case object (@objectIR rightObject) :
-#    end
-#  end
-#}
+getter @valueIR isStatic -> @bool outResult {
+  switch self
+  case literalInteger (*) : outResult = true
+  case llvmLocalObject (**) : outResult = false
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @objectInMemoryIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+enum @objectInMemoryIR {
+  case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
+  case localValue (@unifiedTypeMap-proxy type @lstring name)
+  case globalConstant (@unifiedTypeMap-proxy type  @string name)
+
+  case localAccess (@lstring access)
+  case literalStructure (@literalStructureList value)
+}
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -104,7 +104,7 @@ override method @globalConstantDeclaration enterInContext
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList
      ?type:let @unifiedTypeMap-proxy expressionType
-     ?result:let @operandIR expressionValue
+     ?result:let @valueIR expressionValue
   ]
 #--- Check assignment compatibility
   checkAssignmentCompatibility (

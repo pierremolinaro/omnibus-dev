@@ -37,7 +37,7 @@ override method @extendExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outResultType
-  !result:@operandIR outResultValue
+  !result:@valueIR outResultValue
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -52,7 +52,7 @@ override method @extendExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:@operandIR expressionValue
+    ?result:@valueIR expressionValue
   ]
 #--- Analyze type
   outResultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
@@ -83,7 +83,7 @@ override method @extendExpressionAST analyzeExpression
         error mTypeName: "same size: useless extend operation"
       end
     end
-    getNewTempVariable (!?ioTemporaries ?outResultValue)
+    getNewTempVariable (!outResultType !?ioTemporaries ?outResultValue)
     [!?ioInstructionGenerationList appendExtend
       !outResultValue
       !outResultType

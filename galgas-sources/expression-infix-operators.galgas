@@ -101,7 +101,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outResultType
-  !result:@operandIR outResultValue
+  !result:@valueIR outResultValue
 {
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
@@ -116,7 +116,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy leftType
-    ?result:let @operandIR leftOperandValue
+    ?result:let @valueIR leftOperandValue
   ]
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
@@ -131,7 +131,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy rightType
-    ?result:let @operandIR rightOperandValue
+    ?result:let @valueIR rightOperandValue
   ]
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
@@ -262,7 +262,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outResultType
-  !result:@operandIR outResultValue
+  !result:@valueIR outResultValue
 {
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
@@ -278,7 +278,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:leftInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy leftType
-    ?result:let @operandIR leftValue
+    ?result:let @valueIR leftValue
   ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
@@ -294,7 +294,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:rightInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy rightType
-    ?result:let @operandIR rightValue
+    ?result:let @valueIR rightValue
   ]
 #--- Check left type is boolean
   if [leftType kind] != .boolean then
@@ -304,8 +304,10 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   if [rightType kind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
+#--- Result type : bool 
+  outResultType = inContext.mBooleanType
 #--- Temp var
-  getNewTempVariable (!?ioTemporaries ?outResultValue)
+  getNewTempVariable (!outResultType !?ioTemporaries ?outResultValue)
 #--- Generate code
   [!?ioInstructionGenerationList appendShortCircuitAndOperation
     !outResultValue
@@ -315,8 +317,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !rightInstructionGenerationList
     !mOperatorLocation
   ]
-#--- Result type : bool 
-  outResultType = inContext.mBooleanType
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -329,11 +329,11 @@ abstract class @infixOperatorDescription {
 abstract method @infixOperatorDescription generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @unifiedTypeMap-proxy inLeftType
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inRightType
   ?let @location inOperatorLocation
-  !@operandIR outResultValue
+  !@valueIR outResultValue
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -479,6 +479,6 @@ abstract method @expressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outResultType
-  !result:@operandIR outResultValue
+  !result:@valueIR outResultValue
 
 #----------------------------------------------------------------------------------------------------------------------*

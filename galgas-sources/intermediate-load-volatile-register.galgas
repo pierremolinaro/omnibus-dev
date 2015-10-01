@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadVolatileRegister
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inRegisterName
   ?let @unifiedTypeMap-proxy inTargetVarType
   ?let @bigint inAddress
@@ -11,7 +11,7 @@ setter @instructionListIR appendLoadVolatileRegister
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @loadRegisterIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mRegisterName
   @unifiedTypeMap-proxy mRegisterType
   @bigint mRegisterAddress

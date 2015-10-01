@@ -97,7 +97,7 @@ override method @assignmentInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let sourceType
-    ?result:@operandIR sourceValue
+    ?result:@valueIR sourceValue
   ]
   comment += " = " + sourceValue 
   checkAssignmentCompatibility (

@@ -3,11 +3,11 @@
 method @objectInMemoryIR loadFromMemory
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !resultingValue:@operandIR outResultingValue
+  !resultingValue:@valueIR outResultingValue
 {
   switch self
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
-    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadVolatileRegister
       !outResultingValue
@@ -16,7 +16,7 @@ method @objectInMemoryIR loadFromMemory
       !address
     ]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
-    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
@@ -25,7 +25,7 @@ method @objectInMemoryIR loadFromMemory
       !volatile:isVolatile
     ]
   case localValue (@unifiedTypeMap-proxy type @lstring name) :
-    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadLocalVariable
       !outResultingValue
@@ -33,7 +33,7 @@ method @objectInMemoryIR loadFromMemory
       !type
     ]
   case globalConstant (@unifiedTypeMap-proxy type @string name) :
-    getNewTempVariable (!?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
@@ -43,8 +43,6 @@ method @objectInMemoryIR loadFromMemory
     ]
   case localAccess (@lstring access) :
     error access : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
-  case literalString (**) :
-    error .nowhere : "@objectInMemoryIR loadFromMemory:literalString" : outResultingValue
   case literalStructure (*) :
     error .nowhere : "@objectInMemoryIR loadFromMemory:literalStructure" : outResultingValue
   end
@@ -53,7 +51,7 @@ method @objectInMemoryIR loadFromMemory
 #----------------------------------------------------------------------------------------------------------------------*
 
 method @objectInMemoryIR storeInMemory
-  ?value:@operandIR inValue
+  ?value:@valueIR inValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   switch self
@@ -67,8 +65,6 @@ method @objectInMemoryIR storeInMemory
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   case localAccess (@lstring unused access) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
-  case literalString (@string unused value @string unused name) :
-     error .nowhere : "<<@objectInMemoryIR storeInMemory literalString>>"
   case literalStructure (@literalStructureList unused value) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory literalStructure>>"
   end

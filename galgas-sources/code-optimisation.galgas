@@ -6,7 +6,6 @@
 
 struct @accessibleEntities {
   @stringset mAccessibleRegisterSet
-  @stringset mStaticStringSet
   @stringset mProcedureSet
   @stringset mFunctionSet
   @stringset mGlobalVariableSet
@@ -19,8 +18,7 @@ method @literalStructureList enterAccessibleEntities ?!@accessibleEntities ioAcc
     switch ls
     case unsignedInteger (*) :
     case signedInteger (*) :
-    case string (@string value @string unused name) :
-      ioAccessibleEntities.mStaticStringSet += !value
+    case string (@string unused value @string unused name) :
     case structure (@literalStructureList valueList) :
       [valueList enterAccessibleEntities !?ioAccessibleEntities]
     end
@@ -38,24 +36,6 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
   case localValue (* @lstring unused name) :
   case globalConstant (* @string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
-  case localAccess (@lstring unused access) :
-  case literalString (@string value @string unused name) :
-    ioAccessibleEntities.mStaticStringSet += !value
-  case literalStructure (@literalStructureList s) :
-    [s enterAccessibleEntities !?ioAccessibleEntities]
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-method @assignmentTargetIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  switch self
-  case register (@lstring name *) :
-    ioAccessibleEntities.mAccessibleRegisterSet += !name.string
-  case globalVariable (@lstring name) :
-    ioAccessibleEntities.mGlobalVariableSet += !name.string
-  case localVariable (@lstring unused name) :
-  case temporaryConstant (@uint unused idx) :
   case localAccess (@lstring unused access) :
   case literalStructure (@literalStructureList s) :
     [s enterAccessibleEntities !?ioAccessibleEntities]
@@ -136,17 +116,17 @@ proc codeOptimisation
     end
     ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
   #--- Suppress static strings
-    @globalLiteralStringMap staticStringMap = {}
-    for (@lstring lkey
-         @string literalStringCname)
-    in ioIntermediateCodeStruct.mGlobalLiteralStringMap do
-      if [accessibleEntities.mStaticStringSet hasKey !lkey.string] then
-        [!?staticStringMap insertKey !lkey !literalStringCname]
-      else
-        optimizing = true
-      end
-    end
-    ioIntermediateCodeStruct.mGlobalLiteralStringMap = staticStringMap
+#    @globalLiteralStringMap staticStringMap = {}
+#    for (@lstring lkey
+#         @string literalStringCname)
+#    in ioIntermediateCodeStruct.mGlobalLiteralStringMap do
+#      if [accessibleEntities.mStaticStringSet hasKey !lkey.string] then
+#        [!?staticStringMap insertKey !lkey !literalStringCname]
+#      else
+#        optimizing = true
+#      end
+#    end
+#    ioIntermediateCodeStruct.mGlobalLiteralStringMap = staticStringMap
   #--- Suppress unused global variables
     @globalVariableMapIR globalVariableMap = {}
     for globalVariable in ioIntermediateCodeStruct.mGlobalVariableMap do

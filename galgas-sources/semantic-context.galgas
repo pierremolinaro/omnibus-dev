@@ -52,7 +52,7 @@ map @globalLiteralStringMap {
 
 map @globalConstantMap {
   @unifiedTypeMap-proxy mConstantType
-  @operandIR mExpressionCode
+  @valueIR mExpressionCode
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }
@@ -63,7 +63,7 @@ map @globalVariableMap {
   @unifiedTypeMap-proxy mVariableType
   @stringset mExecutionModeSet
   @allowedRoutineMap mAllowedProcedureMap
-  @operandIR mInitialValue
+  @valueIR mInitialValue
   @bool mIsConstant
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
@@ -127,7 +127,7 @@ getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
 #----------------------------------------------------------------------------------------------------------------------*
 
 map @constructorMap {
-  @operandIR mValue
+  @valueIR mValue
   insert insertKey error message "the '%K' constructor is already declared in %L"
   search searchKey error message "there is no '%K' constructor"
 }

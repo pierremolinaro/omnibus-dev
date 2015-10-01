@@ -58,7 +58,7 @@ override method @checkInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:instructionGenerationList
     ?type:let expressionType
-    ?result:@operandIR expressionValueName
+    ?result:@valueIR expressionValueName
   ]
 #--- Check inferred type
   if not [[expressionType kind] isBoolean] then

@@ -78,7 +78,7 @@ override method @registerConstantInExpressionAST analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@operandIR outResultValueName
+  !result:@valueIR outResultValueName
 {
 #--- Search variable
   [inContext.mRegisterMap searchKey
@@ -113,7 +113,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@operandIR outResultValueName
+  !result:@valueIR outResultValueName
 {
 #--- Search variable
   [inContext.mRegisterMap searchKey
@@ -147,7 +147,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
 #--- Check expression type
   switch [expressionType kind]
@@ -177,7 +177,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
         error mExpressionLocation
           : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
       end
-      getNewTempVariable (!?ioTemporaries ?outResultValueName)
+      getNewTempVariable (!outExpressionType !?ioTemporaries ?outResultValueName)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
         !mExpressionLocation
         !expressionResult
@@ -197,10 +197,10 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
 
 class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
   @location mInstructionLocation
-  @operandIR mExpressionValue
+  @valueIR mExpressionValue
   @uint64 mMaxBound
   @uint mBitShift
-  @operandIR mResultVariable
+  @valueIR mResultVariable
   @unifiedTypeMap-proxy mTargetType
   @bool mNoCheck
 }

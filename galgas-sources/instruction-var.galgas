@@ -89,7 +89,7 @@ override method @varInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let expressionType
-    ?result:@operandIR expressionResultValueName
+    ?result:@valueIR expressionResultValueName
   ]
 #--- Check type compatibility
   if targetType == .null then

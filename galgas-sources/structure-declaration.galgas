@@ -247,7 +247,7 @@ override method @structureDeclaration initAnalysis
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
       ?type:@unifiedTypeMap-proxy expType
-      ?result:@operandIR expressionIR
+      ?result:@valueIR expressionIR
     ]
 #    switch expressionIR
 #    case register (@lstring name *) :
@@ -319,7 +319,7 @@ override method @structureDeclaration semanticAnalysis
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
       ?type:@unifiedTypeMap-proxy expType
-      ?result:@operandIR resultValue
+      ?result:@valueIR resultValue
     ]
   #---
     structureFieldListForGeneration +=

@@ -59,7 +59,7 @@ override method @throwInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:unusedInstructionListIR
     ?type:let expressionType
-    ?result:@operandIR result
+    ?result:@valueIR result
   ]
 #--- Expression type check
   if [expressionType key] != [inContext.mExceptionCodeType key] then
@@ -85,7 +85,7 @@ override method @throwInstructionAST analyze
 
 class @throwInstructionIR : @abstractInstructionIR {
   @location mThrowInstructionLocation
-  @operandIR mCode
+  @valueIR mCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -1,8 +1,8 @@
 
 setter @instructionListIR appendExtend
-  ?let @operandIR inResultValue
+  ?let @valueIR inResultValue
   ?let @unifiedTypeMap-proxy inResultType
-  ?let @operandIR inSourceValue
+  ?let @valueIR inSourceValue
   ?let @unifiedTypeMap-proxy inSourceType
 {
   self += !@extendIR.new {!inResultValue !inResultType !inSourceValue !inSourceType}
@@ -11,9 +11,9 @@ setter @instructionListIR appendExtend
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @extendIR : @abstractInstructionIR {
-  @operandIR mResultValue
+  @valueIR mResultValue
   @unifiedTypeMap-proxy mResultType
-  @operandIR mSourceValue
+  @valueIR mSourceValue
   @unifiedTypeMap-proxy mSourceType
 }
 

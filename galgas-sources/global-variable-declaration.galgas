@@ -140,7 +140,7 @@ method @globalVarDeclarationList-element enterInContext
        !?variableMap:variableMap
        !?instructionListIR:instructionGenerationList
        ?type:let @unifiedTypeMap-proxy resultType
-       ?result:let @operandIR resultValue
+       ?result:let @valueIR resultValue
     ]
     if ([instructionGenerationList length] > 0) || not [resultValue isStatic] then
       error mVarName : "source expression cannot be statically computed"
@@ -236,7 +236,7 @@ method @globalVarDeclarationList-element semanticAnalysis
     ?let executionModeSet
     ?let unused allowedProcedureMap
     ?let expressionGeneratedCode
-    ?let isConstant
+    ?let unused isConstant
   ]
   [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
     !mVarName
