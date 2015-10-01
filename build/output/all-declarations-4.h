@@ -930,19 +930,19 @@ class cPtr_commentIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           @conversionInstructionIR class                                            *
+//                                                   @extendIR class                                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_conversionInstructionIR : public GALGAS_abstractInstructionIR {
+class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_conversionInstructionIR (void) ;
+  public : GALGAS_extendIR (void) ;
 
 //---
-  public : inline const class cPtr_conversionInstructionIR * ptr (void) const { return (const cPtr_conversionInstructionIR *) mObjectPtr ; }
+  public : inline const class cPtr_extendIR * ptr (void) const { return (const cPtr_extendIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_conversionInstructionIR (const cPtr_conversionInstructionIR * inSourcePtr) ;
+  public : GALGAS_extendIR (const cPtr_extendIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
@@ -950,21 +950,120 @@ class GALGAS_conversionInstructionIR : public GALGAS_abstractInstructionIR {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_conversionInstructionIR extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_extendIR extractObject (const GALGAS_object & inObject,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_conversionInstructionIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                  const class GALGAS_variableKindIR & inOperand2,
-                                                                  const class GALGAS_variableKindIR & inOperand3,
-                                                                  const class GALGAS_bool & inOperand4,
-                                                                  const class GALGAS_location & inOperand5
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_extendIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                   const class GALGAS_operandIR & inOperand2,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3
+                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_conversionInstructionIR & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_extendIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mResultType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mResultValue (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mSourceType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_extendIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Pointer class for @extendIR class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_extendIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_operandIR mAttribute_mResultValue ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
+  public : GALGAS_operandIR mAttribute_mSourceValue ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSourceType ;
+
+//--- Constructor
+  public : cPtr_extendIR (const GALGAS_operandIR & in_mResultValue,
+                          const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType,
+                          const GALGAS_operandIR & in_mSourceValue,
+                          const GALGAS_unifiedTypeMap_2D_proxy & in_mSourceType
+                          COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mResultValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mResultType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mSourceType (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @extendInstructionIR class                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_extendInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_extendInstructionIR (void) ;
+
+//---
+  public : inline const class cPtr_extendInstructionIR * ptr (void) const { return (const cPtr_extendInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_extendInstructionIR (const cPtr_extendInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_extendInstructionIR extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_extendInstructionIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                              const class GALGAS_variableKindIR & inOperand2,
+                                                              const class GALGAS_variableKindIR & inOperand3,
+                                                              const class GALGAS_bool & inOperand4,
+                                                              const class GALGAS_location & inOperand5
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_extendInstructionIR & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -988,20 +1087,20 @@ class GALGAS_conversionInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_conversionInstructionIR class
+} ; // End of GALGAS_extendInstructionIR class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_conversionInstructionIR ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendInstructionIR ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Pointer class for @conversionInstructionIR class                                   *
+//                                    Pointer class for @extendInstructionIR class                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cPtr_conversionInstructionIR : public cPtr_abstractInstructionIR {
+class cPtr_extendInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetType ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mConvertedExpressionType ;
@@ -1011,13 +1110,13 @@ class cPtr_conversionInstructionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_conversionInstructionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mConvertedExpressionType,
-                                         const GALGAS_variableKindIR & in_mTemporaryResultVariable,
-                                         const GALGAS_variableKindIR & in_mOperand,
-                                         const GALGAS_bool & in_mSilently,
-                                         const GALGAS_location & in_mLocation
-                                         COMMA_LOCATION_ARGS) ;
+  public : cPtr_extendInstructionIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
+                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mConvertedExpressionType,
+                                     const GALGAS_variableKindIR & in_mTemporaryResultVariable,
+                                     const GALGAS_variableKindIR & in_mOperand,
+                                     const GALGAS_bool & in_mSilently,
+                                     const GALGAS_location & in_mLocation
+                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;

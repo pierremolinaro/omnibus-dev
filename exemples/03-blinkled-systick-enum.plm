@@ -16,9 +16,9 @@ proc setup `user () {
 
 //------------------------------------------------*
 
-var gUpTimeMS $uint32 = 0 {
+var gUpTimeMS $uint31 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration $uint32)
+  proc wait (?ms: inDuration $uint31)
 }
 
 //------------------------------------------------*
@@ -29,7 +29,7 @@ proc systickHandler `isr () {
 
 //------------------------------------------------*
 
-proc wait `user (?ms: inDuration $uint32) {
+proc wait `user (?ms: inDuration $uint31) {
   let deadline = gUpTimeMS + inDuration
   while@boucle deadline > gUpTimeMS do
   end@boucle
@@ -46,6 +46,7 @@ let ROUGE = $ledState.off
 //------------------------------------------------*
 
 proc loop `user () {
+  let x $uint4 = 16
   wait (!ms:250)
   if led == .off then
     GPIOC_PSOR = 1 << 5 // Allumer la led

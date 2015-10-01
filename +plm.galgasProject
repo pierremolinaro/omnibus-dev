@@ -5,6 +5,7 @@ project (1:0:0) -> "plm" {
   %makefile-x86linux32-on-macosx
   %makefile-x86linux64-on-macosx
   %makefile-win32-on-macosx
+  %codeblocks-mac
   %ElCapitanYosemite
   %applicationBundleBase : "fr.irccyn.ec-nantes"
 
@@ -71,6 +72,7 @@ project (1:0:0) -> "plm" {
 #--- Expression
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-conversion.galgas"
+  "galgas-sources/expression-extend.galgas"
   "galgas-sources/expression-constructor-call.galgas"
 #  "galgas-sources/expression-instanciation.galgas"
   "galgas-sources/expression-infix-operators.galgas"
@@ -113,6 +115,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-code-generation.galgas"
   "galgas-sources/intermediate-comment.galgas"
   "galgas-sources/intermediate-alloca.galgas"
+  "galgas-sources/intermediate-extend.galgas"
   "galgas-sources/intermediate-binary-operation.galgas"
   "galgas-sources/intermediate-short-circuit-and.galgas"
   "galgas-sources/intermediate-load-volatile-register.galgas"

@@ -1,0 +1,96 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @extendExpressionAST : @expressionAST {
+  @expressionAST mExpression
+  @lstring mTypeName
+  @location mEndOfExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @extendExpressionAST
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !type:@unifiedTypeMap-proxy outResultType
+  !result:@operandIR outResultValue
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?type:let @unifiedTypeMap-proxy expressionType
+    ?result:@operandIR expressionValue
+  ]
+#--- Analyze type
+  outResultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#--- Check types
+  if not [[outResultType kind] isInteger] then
+    error mTypeName : "this type is not an integer type" : outResultValue
+  elsif not [[expressionType kind] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type" : outResultValue
+  else
+    [[expressionType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
+    [[outResultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
+    if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
+      if sourceSize > targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      elsif sourceSize == targetSize then
+        error mTypeName: "same size: useless extension"
+      end
+    elsif sourceIsUnsigned && not targetIsUnsigned then # unsigned -> signed
+      if sourceSize >= targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      end
+    elsif not sourceIsUnsigned && targetIsUnsigned then # signed -> unsigned
+      error mTypeName: "cannot extend, use convert or trunc"
+    else # signed -> signed
+      if sourceSize > targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      elsif sourceSize == targetSize then
+        error mTypeName: "samesize: useless extension"
+      end
+    end
+    getNewTempVariable (!?ioTemporaries ?outResultValue)
+    [!?ioInstructionGenerationList appendExtend
+      !outResultValue
+      !outResultType
+      !expressionValue
+      !expressionType
+    ]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*

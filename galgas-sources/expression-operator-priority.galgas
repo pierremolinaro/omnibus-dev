@@ -431,6 +431,21 @@ syntax extension common_syntax {
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
 
   rule <primary> !@expressionAST outExpression {
+    $extend$
+    <expression> ?outExpression
+    let endOfExpression = @location.here
+    $:$
+    $typeName$ ?let typeIdentifier
+    outExpression = @extendExpressionAST.new {
+      !outExpression
+      !typeIdentifier
+      !endOfExpression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
     $($
     <expression> ?outExpression
     $)$
