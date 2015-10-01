@@ -61,7 +61,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -76,13 +76,13 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:let @operandIR expressionValue
+    ?result:let @valueIR expressionValue
   ]
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap operatorMap
   @llvmBinaryOperation binaryOperator
   @string commentOperator
-  @operandIR leftOperand
+  @valueIR leftOperand
   switch mOp 
   case unsignedComplement :
     operatorMap = inContext.mUnsignedComplementOperatorMap
@@ -118,7 +118,6 @@ override method @prefixOperatorExpressionAST analyzeExpression
       leftOperand = .literalInteger {!value:0G}
       commentOperator = "-"
     else
-#      prefixOperatorIR = .prefixMinusOvf {!code:3}
       binaryOperator = .ssubOVF
       leftOperand = .literalInteger {!value:0G}
       commentOperator = "-OVF "
@@ -142,7 +141,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     outResult = .literalInteger {!value:result}
   else
   #--- Temp var
-    getNewTempVariable (!?ioTemporaries ?outResult)
+    getNewTempVariable (!outExpressionType !?ioTemporaries ?outResult)
   #--- Comment
     var comment = [outResult string] + " = " + commentOperator + expressionValue
     [!?ioInstructionGenerationList appendComment !comment]
@@ -173,8 +172,8 @@ enum @prefixOperatorIR {
 
 class @prefixOperatorExpressionIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetType
-  @operandIR mResult
-  @operandIR mOperand
+  @valueIR mResult
+  @valueIR mOperand
   @prefixOperatorIR mOperator
   @location mOperatorLocation
 }

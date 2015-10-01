@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadLocalVariable
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inRegisterName
   ?let @unifiedTypeMap-proxy inTargetVarType
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadLocalVariable
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @loadLocalVariableIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mVariableName
   @unifiedTypeMap-proxy mVariableType
 }

@@ -6,7 +6,7 @@
 
 proc checkAssignmentCompatibility
   ?sourceType:let @unifiedTypeMap-proxy inSourceType
-  ?sourceValue:let @operandIR inSourceValue
+  ?sourceValue:let @valueIR inSourceValue
   ?targetType:let @unifiedTypeMap-proxy inTargetType
   ?errorLocation:let @location inErrorLocation
 {

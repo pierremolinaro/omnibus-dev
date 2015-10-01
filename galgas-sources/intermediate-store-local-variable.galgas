@@ -2,7 +2,7 @@
 setter @instructionListIR appendStoreLocalVariable
   ?let @string inLocalVarName
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @operandIR inSourceValue
+  ?let @valueIR inSourceValue
 {
   self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
 }
@@ -12,7 +12,7 @@ setter @instructionListIR appendStoreLocalVariable
 class @storeLocalVariableIR : @abstractInstructionIR {
   @string mLocalVarName
   @unifiedTypeMap-proxy mTargetVarType
-  @operandIR mSourceValue
+  @valueIR mSourceValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

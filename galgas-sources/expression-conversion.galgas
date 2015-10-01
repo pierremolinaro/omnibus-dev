@@ -38,7 +38,7 @@ override method @conversionExpressionAST analyzeExpression
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outResultType
-  !result:@operandIR outResultValue
+  !result:@valueIR outResultValue
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -53,7 +53,7 @@ override method @conversionExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:@operandIR expressionValue
+    ?result:@valueIR expressionValue
   ]
 #--- 
   if (not inAllowExceptions) && (not mSilently) then
@@ -75,7 +75,7 @@ override method @conversionExpressionAST analyzeExpression
       end
   end
 #--- Temp var
-  getNewTempVariable (!?ioTemporaries ?outResultValue)
+  getNewTempVariable (!outResultType !?ioTemporaries ?outResultValue)
 #--- Generate code
 #  ioInstructionGenerationList += !@extendInstructionIR.new {
 #    !outExpressionType

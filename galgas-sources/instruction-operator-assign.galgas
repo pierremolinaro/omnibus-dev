@@ -87,7 +87,7 @@ override method @operatorAssignInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let rightExpressionType
-    ?result:@operandIR sourceValueName
+    ?result:@valueIR sourceValueName
   ]
 #--- Write local variable
   [!?ioVariableMap searchForReadWriteAccess
@@ -130,7 +130,7 @@ override method @operatorAssignInstructionAST analyze
   [targetVariableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:@operandIR variableValueName
+    ?resultingValue:@valueIR variableValueName
   ]
   [binaryOperator generateCode
     !?ioTemporaries

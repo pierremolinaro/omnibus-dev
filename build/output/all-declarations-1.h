@@ -5420,150 +5420,6 @@ class cEnumAssociatedValues_prefixOperatorIR_prefixMinusOvf : public cEnumAssoci
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                   @operandIR enum                                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_operandIR : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_operandIR (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_literalInteger,
-    kEnum_llvmLocalObject,
-    kEnum_llvmGlobalObject
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_operandIR extractObject (const GALGAS_object & inObject,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_operandIR constructor_literalInteger (const class GALGAS_bigint & inOperand0
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_operandIR constructor_llvmGlobalObject (const class GALGAS_string & inOperand0
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_operandIR constructor_llvmLocalObject (const class GALGAS_string & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of reader 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_operandIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_literalInteger (class GALGAS_bigint & outArgument0,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_llvmGlobalObject (class GALGAS_string & outArgument0,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_string & outArgument0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralInteger (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLlvmGlobalObject (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLlvmLocalObject (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_operandIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_operandIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @operandIR enum, associated values                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_operandIR_literalInteger : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_operandIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_operandIR_literalInteger (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_operandIR_llvmLocalObject : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_operandIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_operandIR_llvmLocalObject (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_operandIR_llvmGlobalObject : public cEnumAssociatedValues {
-  public : const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_operandIR_llvmGlobalObject (const GALGAS_string & inAssociatedValue0
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_operandIR_llvmGlobalObject (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                  @procEffectiveParameterListAST_2D_element struct                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5943,7 +5799,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
                                                   const class GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                   const class GALGAS_lstring & in_mSelector,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy & in_mParameterType,
-                                                  const class GALGAS_operandIR & in_mParameter
+                                                  const class GALGAS_valueIR & in_mParameter
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -5962,7 +5818,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : static GALGAS_procCallEffectiveParameterListIR constructor_listWithValue (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
                                                                                      const class GALGAS_lstring & inOperand1,
                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                                     const class GALGAS_operandIR & inOperand3
+                                                                                     const class GALGAS_valueIR & inOperand3
                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -5973,7 +5829,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                      const class GALGAS_operandIR & inOperand3
+                                                      const class GALGAS_valueIR & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- . (concat) operator
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR operator_concat (const GALGAS_procCallEffectiveParameterListIR & inOperand
@@ -5989,7 +5845,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void modifier_insertAtIndex (class GALGAS_procEffectiveParameterPassingModeIR constinArgument0,
                                                          class GALGAS_lstring constinArgument1,
                                                          class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                                         class GALGAS_operandIR constinArgument3,
+                                                         class GALGAS_valueIR constinArgument3,
                                                          class GALGAS_uint constinArgument4,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
@@ -5997,21 +5853,21 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void modifier_popFirst (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
                                                     class GALGAS_lstring & outArgument1,
                                                     class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                                    class GALGAS_operandIR & outArgument3,
+                                                    class GALGAS_valueIR & outArgument3,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_popLast (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                                   class GALGAS_operandIR & outArgument3,
+                                                   class GALGAS_valueIR & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_removeAtIndex (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
                                                          class GALGAS_lstring & outArgument1,
                                                          class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                                         class GALGAS_operandIR & outArgument3,
+                                                         class GALGAS_valueIR & outArgument3,
                                                          class GALGAS_uint constinArgument4,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
@@ -6021,14 +5877,14 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
                                                class GALGAS_lstring & outArgument1,
                                                class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                               class GALGAS_operandIR & outArgument3,
+                                               class GALGAS_valueIR & outArgument3,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
                                               class GALGAS_lstring & outArgument1,
                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
-                                              class GALGAS_operandIR & outArgument3,
+                                              class GALGAS_valueIR & outArgument3,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -6039,9 +5895,9 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
                                                                                                                            C_Compiler * inCompiler
                                                                                                                            COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mParameterAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mParameterAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mParameterTypeAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                C_Compiler * inCompiler
@@ -6080,7 +5936,7 @@ class cEnumerator_procCallEffectiveParameterListIR : public cGenericAbstractEnum
   public : class GALGAS_procEffectiveParameterPassingModeIR current_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mParameterType (LOCATION_ARGS) const ;
-  public : class GALGAS_operandIR current_mParameter (LOCATION_ARGS) const ;
+  public : class GALGAS_valueIR current_mParameter (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procCallEffectiveParameterListIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -6088,6 +5944,128 @@ class cEnumerator_procCallEffectiveParameterListIR : public cGenericAbstractEnum
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procCallEffectiveParameterListIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                    @valueIR enum                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_valueIR : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_valueIR (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_literalInteger,
+    kEnum_llvmLocalObject
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_valueIR extractObject (const GALGAS_object & inObject,
+                                                C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_valueIR constructor_literalInteger (const class GALGAS_bigint & inOperand0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : static GALGAS_valueIR constructor_llvmLocalObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                              const class GALGAS_string & inOperand1
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_valueIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_literalInteger (class GALGAS_bigint & outArgument0,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                         class GALGAS_string & outArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralInteger (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLlvmLocalObject (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_valueIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valueIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @valueIR enum, associated values                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_literalInteger : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_literalInteger (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_llvmLocalObject : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                          const GALGAS_string & inAssociatedValue1
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_llvmLocalObject (void) {}
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -6100,7 +6078,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
   public : GALGAS_procEffectiveParameterPassingModeIR mAttribute_mEffectiveParameterPassingMode ;
   public : GALGAS_lstring mAttribute_mSelector ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mParameterType ;
-  public : GALGAS_operandIR mAttribute_mParameter ;
+  public : GALGAS_valueIR mAttribute_mParameter ;
 
 
 //--------------------------------- Accessors
@@ -6117,7 +6095,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
   public : GALGAS_procCallEffectiveParameterListIR_2D_element (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                                const GALGAS_lstring & in_mSelector,
                                                                const GALGAS_unifiedTypeMap_2D_proxy & in_mParameterType,
-                                                               const GALGAS_operandIR & in_mParameter) ;
+                                                               const GALGAS_valueIR & in_mParameter) ;
 
 //-- Start of generic part --*
 
@@ -6133,7 +6111,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
   public : static GALGAS_procCallEffectiveParameterListIR_2D_element constructor_new (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
                                                                                       const class GALGAS_lstring & inOperand1,
                                                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                                      const class GALGAS_operandIR & inOperand3
+                                                                                      const class GALGAS_valueIR & inOperand3
                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -6150,7 +6128,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_procEffectiveParameterPassingModeIR reader_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mParameter (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR reader_mParameter (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mParameterType (LOCATION_ARGS) const ;
 
@@ -6185,7 +6163,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
     kEnum_localValue,
     kEnum_globalConstant,
     kEnum_localAccess,
-    kEnum_literalString,
     kEnum_literalStructure
   } enumeration ;
   
@@ -6222,10 +6199,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                       const class GALGAS_bool & inOperand2
                                                                       COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_objectInMemoryIR constructor_literalString (const class GALGAS_string & inOperand0,
-                                                                     const class GALGAS_string & inOperand1
-                                                                     COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_objectInMemoryIR constructor_literalStructure (const class GALGAS_literalStructureList & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -6261,11 +6234,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_string & outArgument0,
-                                                       class GALGAS_string & outArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_literalStructure (class GALGAS_literalStructureList & outArgument0,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
@@ -6291,8 +6259,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLiteralStructure (LOCATION_ARGS) const ;
 

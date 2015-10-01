@@ -103,7 +103,7 @@ typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const c
                                                                          class GALGAS_variableMap & ioArgument8,
                                                                          class GALGAS_instructionListIR & ioArgument9,
                                                                          class GALGAS_unifiedTypeMap_2D_proxy & outArgument10,
-                                                                         class GALGAS_operandIR & outArgument11,
+                                                                         class GALGAS_valueIR & outArgument11,
                                                                          class C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -126,7 +126,7 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
                                            GALGAS_variableMap & io_ioVariableMap,
                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                            GALGAS_unifiedTypeMap_2D_proxy & out_outResultType,
-                                           GALGAS_operandIR & out_outResultValue,
+                                           GALGAS_valueIR & out_outResultValue,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -139,12 +139,12 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
 typedef void (*categoryMethodSignature_infixOperatorDescription_generateCode) (const class cPtr_infixOperatorDescription * inObject,
                                                                                class GALGAS_semanticTemporariesStruct & ioArgument0,
                                                                                class GALGAS_instructionListIR & ioArgument1,
-                                                                               const class GALGAS_operandIR constinArgument2,
+                                                                               const class GALGAS_valueIR constinArgument2,
                                                                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
-                                                                               const class GALGAS_operandIR constinArgument4,
+                                                                               const class GALGAS_valueIR constinArgument4,
                                                                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
                                                                                const class GALGAS_location constinArgument6,
-                                                                               class GALGAS_operandIR & outArgument7,
+                                                                               class GALGAS_valueIR & outArgument7,
                                                                                class C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -158,12 +158,12 @@ void enterCategoryMethod_generateCode (const int32_t inClassIndex,
 void callCategoryMethod_generateCode (const class cPtr_infixOperatorDescription * inObject,
                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                       GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                      const GALGAS_operandIR constin_inLeftOperand,
+                                      const GALGAS_valueIR constin_inLeftOperand,
                                       const GALGAS_unifiedTypeMap_2D_proxy constin_inLeftType,
-                                      const GALGAS_operandIR constin_inRightOperand,
+                                      const GALGAS_valueIR constin_inRightOperand,
                                       const GALGAS_unifiedTypeMap_2D_proxy constin_inRightType,
                                       const GALGAS_location constin_inOperatorLocation,
-                                      GALGAS_operandIR & out_outResultValue,
+                                      GALGAS_valueIR & out_outResultValue,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
@@ -255,36 +255,6 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Category Getter '@operandIR string' (as function)                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_string (const class GALGAS_operandIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Category Getter '@operandIR name' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_name (const class GALGAS_operandIR & inObject,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Category Getter '@operandIR isStatic' (as function)                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bool categoryReader_isStatic (const class GALGAS_operandIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                 Category setter '@instructionListIR appendComment'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -313,9 +283,9 @@ void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_operandIR constin_inResultValue,
+                                    const class GALGAS_valueIR constin_inResultValue,
                                     const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                    const class GALGAS_operandIR constin_inSourceValue,
+                                    const class GALGAS_valueIR constin_inSourceValue,
                                     const class GALGAS_unifiedTypeMap_2D_proxy constin_inSourceType,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
@@ -327,11 +297,11 @@ void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
-                                             const class GALGAS_operandIR constin_inTargetOperand,
+                                             const class GALGAS_valueIR constin_inTargetOperand,
                                              const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                             const class GALGAS_operandIR constin_inLeftOperand,
+                                             const class GALGAS_valueIR constin_inLeftOperand,
                                              const class GALGAS_llvmBinaryOperation constin_inOperation,
-                                             const class GALGAS_operandIR constin_inRightOperand,
+                                             const class GALGAS_valueIR constin_inRightOperand,
                                              const class GALGAS_location constin_inLocation,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
@@ -343,10 +313,10 @@ void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & io
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
-                                                      const class GALGAS_operandIR constin_inTargetOperand,
-                                                      const class GALGAS_operandIR constin_inLeftOperand,
+                                                      const class GALGAS_valueIR constin_inTargetOperand,
+                                                      const class GALGAS_valueIR constin_inLeftOperand,
                                                       const class GALGAS_instructionListIR constin_inLeftInstructionList,
-                                                      const class GALGAS_operandIR constin_inRightOperand,
+                                                      const class GALGAS_valueIR constin_inRightOperand,
                                                       const class GALGAS_instructionListIR constin_inRightInstructionList,
                                                       const class GALGAS_location constin_inLocation,
                                                       class C_Compiler * inCompiler
@@ -359,7 +329,7 @@ void categoryModifier_appendShortCircuitAndOperation (class GALGAS_instructionLi
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendLoadVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_operandIR constin_inTargetValue,
+                                                  const class GALGAS_valueIR constin_inTargetValue,
                                                   const class GALGAS_string constin_inRegisterName,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                   const class GALGAS_bigint constin_inAddress,
@@ -373,7 +343,7 @@ void categoryModifier_appendLoadVolatileRegister (class GALGAS_instructionListIR
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendLoadGlobalVariable (class GALGAS_instructionListIR & ioObject,
-                                                const class GALGAS_operandIR constin_inTargetValue,
+                                                const class GALGAS_valueIR constin_inTargetValue,
                                                 const class GALGAS_string constin_inRegisterName,
                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                 class GALGAS_bool in_inIsVolatile,
@@ -387,7 +357,7 @@ void categoryModifier_appendLoadGlobalVariable (class GALGAS_instructionListIR &
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryModifier_appendLoadLocalVariable (class GALGAS_instructionListIR & ioObject,
-                                               const class GALGAS_operandIR constin_inTargetValue,
+                                               const class GALGAS_valueIR constin_inTargetValue,
                                                const class GALGAS_string constin_inRegisterName,
                                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                class C_Compiler * inCompiler
@@ -403,7 +373,7 @@ void categoryModifier_appendStoreVolatileRegister (class GALGAS_instructionListI
                                                    const class GALGAS_string constin_inRegisterName,
                                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                    const class GALGAS_bigint constin_inAddress,
-                                                   const class GALGAS_operandIR constin_inSourceValue,
+                                                   const class GALGAS_valueIR constin_inSourceValue,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -416,7 +386,7 @@ void categoryModifier_appendStoreVolatileRegister (class GALGAS_instructionListI
 void categoryModifier_appendStoreGlobalVariable (class GALGAS_instructionListIR & ioObject,
                                                  const class GALGAS_string constin_inGlobalVarName,
                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                 const class GALGAS_operandIR constin_inSourceValue,
+                                                 const class GALGAS_valueIR constin_inSourceValue,
                                                  const class GALGAS_bool constin_inIsVolatile,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
@@ -430,7 +400,7 @@ void categoryModifier_appendStoreGlobalVariable (class GALGAS_instructionListIR 
 void categoryModifier_appendStoreLocalVariable (class GALGAS_instructionListIR & ioObject,
                                                 const class GALGAS_string constin_inLocalVarName,
                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                const class GALGAS_operandIR constin_inSourceValue,
+                                                const class GALGAS_valueIR constin_inSourceValue,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
@@ -550,22 +520,31 @@ class GALGAS_string categoryReader_passingModeForActualSelector (const class GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category Getter '@valueIR typeOrNull' (as function)                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy categoryReader_typeOrNull (const class GALGAS_valueIR & inObject,
-                                                                const class GALGAS_semanticContext & constinArgument0,
-                                                                class C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                   Category Getter '@valueIR string' (as function)                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_string categoryReader_string (const class GALGAS_valueIR & inObject,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Category Getter '@valueIR name' (as function)                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_name (const class GALGAS_valueIR & inObject,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Category Getter '@valueIR isStatic' (as function)                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool categoryReader_isStatic (const class GALGAS_valueIR & inObject,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -609,7 +588,7 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
 void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject,
                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                    class GALGAS_operandIR & out_outResultingValue,
+                                    class GALGAS_valueIR & out_outResultingValue,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -620,7 +599,7 @@ void categoryMethod_loadFromMemory (const class GALGAS_objectInMemoryIR inObject
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
-                                   class GALGAS_operandIR in_inValue,
+                                   class GALGAS_valueIR in_inValue,
                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
@@ -632,17 +611,6 @@ void categoryMethod_storeInMemory (const class GALGAS_objectInMemoryIR inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category method '@assignmentTargetIR enterAccessibleEntities'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_assignmentTargetIR inObject,
                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;

@@ -143,7 +143,7 @@ override method @procCallInstructionAST analyze
         error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.input !mSelector !type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}
+      procCallEffectiveParameterListIR += !.input !mSelector !type !.llvmLocalObject {!type:type !name:mangledNameForLocalVariable (!name.string)}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -157,7 +157,7 @@ override method @procCallInstructionAST analyze
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
         ?type:let expressionType
-        ?result:let @operandIR expressionResult
+        ?result:let @valueIR expressionResult
       ]
       checkAssignmentCompatibility (
         !sourceType:expressionType
@@ -184,7 +184,7 @@ override method @procCallInstructionAST analyze
         error name : "routine has no access right on the this variable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}
+      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !.llvmLocalObject {!type:type !name:mangledNameForLocalVariable (!name.string)}
     end
   end
 #--- Check mode
@@ -232,7 +232,7 @@ list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
-  @operandIR mParameter
+  @valueIR mParameter
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

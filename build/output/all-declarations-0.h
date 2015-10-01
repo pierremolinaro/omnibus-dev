@@ -5689,7 +5689,7 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_literalBooleanInExpressionAST constructor_new (const class GALGAS_bigint & inOperand0
+  public : static GALGAS_literalBooleanInExpressionAST constructor_new (const class GALGAS_bool & inOperand0
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -5701,7 +5701,7 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -5722,17 +5722,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalBooleanInExp
 
 class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
 //--- Attributes
-  public : GALGAS_bigint mAttribute_mValue ;
+  public : GALGAS_bool mAttribute_mValue ;
 
 //--- Constructor
-  public : cPtr_literalBooleanInExpressionAST (const GALGAS_bigint & in_mValue
+  public : cPtr_literalBooleanInExpressionAST (const GALGAS_bool & in_mValue
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool reader_mValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

@@ -4,70 +4,6 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @assignmentTargetIR {
-  case register (@lstring name @bigint address)
-  case globalVariable (@lstring name)
-  case localVariable (@lstring name)
-
-  case temporaryConstant (@uint idx)
-  case localAccess (@lstring access)
-  case literalStructure (@literalStructureList value)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-enum @operandIR {
-  case literalInteger (@bigint value)
-  case llvmLocalObject (@string name)
-  case llvmGlobalObject (@string name)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @operandIR string -> @string outResult {
-  switch self
-  case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (@string name) : outResult = "%" + name
-  case llvmGlobalObject (@string name) : outResult = "@" + name
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @operandIR name -> @string outResult {
-  switch self
-  case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (@string name) : outResult = name
-  case llvmGlobalObject (@string name) : outResult = name
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @operandIR isStatic -> @bool outResult {
-  switch self
-  case literalInteger (*) : outResult = true
-  case llvmLocalObject (*) : outResult = false
-  case llvmGlobalObject (*) : outResult = true
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-enum @objectInMemoryIR {
-  case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
-  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
-  case localValue (@unifiedTypeMap-proxy type @lstring name)
-  case globalConstant (@unifiedTypeMap-proxy type  @string name)
-
-  case localAccess (@lstring access)
-
-  case literalString (@string value @string name)
-  case literalStructure (@literalStructureList value)
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 func initialVariableMap
   ?routineMangledName:let @string inMangledName
   ?context:let @semanticContext inContext
@@ -173,10 +109,11 @@ func variableMapWithConstants
 #----------------------------------------------------------------------------------------------------------------------*
 
 proc getNewTempVariable
+  ?let @unifiedTypeMap-proxy inType
   ?!@semanticTemporariesStruct ioTemporaries
-  !@operandIR outTempVariable
+  !@valueIR outTempVariable
 {
-  outTempVariable = .llvmLocalObject {!name:"temp." + ioTemporaries.mTemporaryIndex}
+  outTempVariable = .llvmLocalObject {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex}
   ioTemporaries.mTemporaryIndex ++
 }
 

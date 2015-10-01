@@ -56,7 +56,7 @@ override method @constructorCall analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outType
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze constructor source type
   if mOptionalTypeName.string == "" then

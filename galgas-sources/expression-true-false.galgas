@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @literalBooleanInExpressionAST : @expressionAST {
-  @bigint mValue
+  @bool mValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -14,12 +14,12 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $true$
-    outExpression = @literalBooleanInExpressionAST.new {!1G}
+    outExpression = @literalBooleanInExpressionAST.new {!true}
   }
 
   rule <primary> !@expressionAST outExpression {
     $false$
-    outExpression = @literalBooleanInExpressionAST.new {!0G}
+    outExpression = @literalBooleanInExpressionAST.new {!false}
   }
 
 }
@@ -50,12 +50,12 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@operandIR outResultValueName
+  !result:@valueIR outResultValueName
 {
 #--- Result type
   outExpressionType = inContext.mBooleanType
 #--- Result value
-  outResultValueName = .literalInteger {!value:mValue}
+  outResultValueName = .literalInteger {!value:if mValue then 1G else 0G end}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

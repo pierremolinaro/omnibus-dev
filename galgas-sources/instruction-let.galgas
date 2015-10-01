@@ -90,7 +90,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let expressionType
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
 #--- Declare local constant
   checkAssignmentCompatibility (

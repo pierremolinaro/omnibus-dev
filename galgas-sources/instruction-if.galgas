@@ -127,7 +127,7 @@ override method @ifInstructionAST analyze
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
     ?type:let testExpressionType
-    ?result:let @operandIR testResult
+    ?result:let @valueIR testResult
   ]
 #--- Check inferred type
   if [testExpressionType kind] != .boolean then
@@ -180,7 +180,7 @@ override method @ifInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @operandIR mTestVariable
+  @valueIR mTestVariable
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
