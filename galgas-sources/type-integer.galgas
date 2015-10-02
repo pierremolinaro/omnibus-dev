@@ -298,7 +298,7 @@ class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @infixObjectObjectOperatorDescription generateCode
+override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @operandIR inLeftOperand
@@ -310,11 +310,12 @@ override method @infixObjectObjectOperatorDescription generateCode
   getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
 #--- Generate code
   [!?ioInstructionGenerationList appendBinaryOperation
-    !outResult
+    !outResult.mValue
+    !inLeftOperand.mType
     !inOperatorLocation
-    !inLeftOperand
+    !inLeftOperand.mValue
     !mOperator
-    !inRightOperand
+    !inRightOperand.mValue
   ]
 }
 
@@ -453,7 +454,7 @@ class @integerObject_literal_infixOperator : @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @integerObject_literal_infixOperator generateCode
+override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @operandIR inLeftOperand
@@ -471,14 +472,14 @@ override method @integerObject_literal_infixOperator generateCode
     error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
-    #--- Generate code
-      [!?ioInstructionGenerationList appendBinaryOperation
-        !outResult
-        !inOperatorLocation
-        !inLeftOperand
-        !mOperator
-        !inRightOperand
-      ]
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult.mValue
+      !inLeftOperand.mType
+      !inOperatorLocation
+      !inLeftOperand.mValue
+      !mOperator
+      !inRightOperand.mValue
+    ]
   end
 }
 
@@ -617,7 +618,7 @@ class @literal_integerObject_infixOperator : @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @literal_integerObject_infixOperator generateCode
+override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @operandIR inLeftOperand
@@ -635,14 +636,14 @@ override method @literal_integerObject_infixOperator generateCode
     error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
-    #--- Generate code
-      [!?ioInstructionGenerationList appendBinaryOperation
-        !outResult
-        !inOperatorLocation
-        !inLeftOperand
-        !mOperator
-        !inRightOperand
-      ]
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult.mValue
+      !inRightOperand.mType
+      !inOperatorLocation
+      !inLeftOperand.mValue
+      !mOperator
+      !inRightOperand.mValue
+    ]
   end
 }
 

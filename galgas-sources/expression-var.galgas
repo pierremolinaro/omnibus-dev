@@ -46,7 +46,7 @@ override method @varInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -72,7 +72,7 @@ override method @varInExpressionAST analyzeExpression
   [variableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:@operandIR result
+    ?resultingValue:outResult
   ]
 #--- Solve inferred type
   var expressionType = solveInferredType (
@@ -93,16 +93,17 @@ override method @varInExpressionAST analyzeExpression
     #--- Temp var
       getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
       [!?ioInstructionGenerationList appendBinaryOperation
-        !newResultingVariable
+        !newResultingVariable.mValue
+        !outResult.mType
         !mSourceVarName.location
-        !result
+        !outResult.mValue
         !accessOperator
-        !.new {!inContext.mLiteralIntegerType !.literalInteger {!value:accessRightOperand}}
+        !.literalInteger {!value:accessRightOperand}
       ]
-      result = newResultingVariable 
+      outResult = newResultingVariable 
       registerBitSliceMap = submap
     else
-      switch [result.mType kind]
+      switch [outResult.mType kind]
         case boolean :
           error field : "a boolean does not handle field access"
         case literalInteger :
@@ -122,14 +123,12 @@ override method @varInExpressionAST analyzeExpression
 #            !resultingVariable
 #            !field
 #          }
-          result = newResultingVariable 
+          outResult = newResultingVariable 
         case integer (* * * *) :
           error field : "an integer does not handle field access"
       end    
     end
   end
-#---
-  outResult = result
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

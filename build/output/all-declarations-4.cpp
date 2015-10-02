@@ -9900,6 +9900,9 @@ typeComparisonResult cPtr_binaryOperationIR::dynamicObjectCompare (const acPtr_c
     result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mOperandType.objectCompare (p->mAttribute_mOperandType) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mLeft.objectCompare (p->mAttribute_mLeft) ;
   }
   if (kOperandEqual == result) {
@@ -9948,23 +9951,24 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_binaryOperationIR GALGAS_binaryOperationIR::constructor_new (const GALGAS_operandIR & inAttribute_mTarget,
-                                                                    const GALGAS_operandIR & inAttribute_mLeft,
+GALGAS_binaryOperationIR GALGAS_binaryOperationIR::constructor_new (const GALGAS_valueIR & inAttribute_mTarget,
+                                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mOperandType,
+                                                                    const GALGAS_valueIR & inAttribute_mLeft,
                                                                     const GALGAS_llvmBinaryOperation & inAttribute_mOperation,
-                                                                    const GALGAS_operandIR & inAttribute_mRight,
+                                                                    const GALGAS_valueIR & inAttribute_mRight,
                                                                     const GALGAS_location & inAttribute_mLocation
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_binaryOperationIR result ;
-  if (inAttribute_mTarget.isValid () && inAttribute_mLeft.isValid () && inAttribute_mOperation.isValid () && inAttribute_mRight.isValid () && inAttribute_mLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_binaryOperationIR (inAttribute_mTarget, inAttribute_mLeft, inAttribute_mOperation, inAttribute_mRight, inAttribute_mLocation COMMA_THERE)) ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mOperandType.isValid () && inAttribute_mLeft.isValid () && inAttribute_mOperation.isValid () && inAttribute_mRight.isValid () && inAttribute_mLocation.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_binaryOperationIR (inAttribute_mTarget, inAttribute_mOperandType, inAttribute_mLeft, inAttribute_mOperation, inAttribute_mRight, inAttribute_mLocation COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
@@ -9975,14 +9979,32 @@ GALGAS_operandIR GALGAS_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::reader_mOperandType (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_binaryOperationIR) ;
+    result = p->mAttribute_mOperandType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cPtr_binaryOperationIR::reader_mOperandType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperandType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
@@ -9993,7 +10015,7 @@ GALGAS_operandIR GALGAS_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeft ;
 }
 
@@ -10017,8 +10039,8 @@ GALGAS_llvmBinaryOperation cPtr_binaryOperationIR::reader_mOperation (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
@@ -10029,7 +10051,7 @@ GALGAS_operandIR GALGAS_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRight ;
 }
 
@@ -10055,14 +10077,16 @@ GALGAS_location cPtr_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) 
 //                                     Pointer class for @binaryOperationIR class                                      *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_binaryOperationIR::cPtr_binaryOperationIR (const GALGAS_operandIR & in_mTarget,
-                                                const GALGAS_operandIR & in_mLeft,
+cPtr_binaryOperationIR::cPtr_binaryOperationIR (const GALGAS_valueIR & in_mTarget,
+                                                const GALGAS_unifiedTypeMap_2D_proxy & in_mOperandType,
+                                                const GALGAS_valueIR & in_mLeft,
                                                 const GALGAS_llvmBinaryOperation & in_mOperation,
-                                                const GALGAS_operandIR & in_mRight,
+                                                const GALGAS_valueIR & in_mRight,
                                                 const GALGAS_location & in_mLocation
                                                 COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTarget (in_mTarget),
+mAttribute_mOperandType (in_mOperandType),
 mAttribute_mLeft (in_mLeft),
 mAttribute_mOperation (in_mOperation),
 mAttribute_mRight (in_mRight),
@@ -10080,6 +10104,8 @@ void cPtr_binaryOperationIR::description (C_String & ioString,
   ioString << "[@binaryOperationIR:" ;
   mAttribute_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mOperandType.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mLeft.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mOperation.description (ioString, inIndentation+1) ;
@@ -10094,7 +10120,7 @@ void cPtr_binaryOperationIR::description (C_String & ioString,
 
 acPtr_class * cPtr_binaryOperationIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_binaryOperationIR (mAttribute_mTarget, mAttribute_mLeft, mAttribute_mOperation, mAttribute_mRight, mAttribute_mLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_binaryOperationIR (mAttribute_mTarget, mAttribute_mOperandType, mAttribute_mLeft, mAttribute_mOperation, mAttribute_mRight, mAttribute_mLocation COMMA_THERE)) ;
   return ptr ;
 }
 

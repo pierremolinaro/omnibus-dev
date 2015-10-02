@@ -114,7 +114,7 @@ override method @operatorAssignInstructionAST analyze
     operatorMap = inContext.mXorOperatorMap
     commentOperator = "^="
   end
-  [operatorMap checkWith
+  [operatorMap checkBinaryOperationWith
     !leftType:targetType
     !rightType:sourceValue.mType
     !operatorLocation:mTargetVarName.location
@@ -133,7 +133,7 @@ override method @operatorAssignInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?resultingValue:@operandIR variableValue
   ]
-  [binaryOperator generateCode
+  [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
     !variableValue # .new {!targetType !variableValueName}
