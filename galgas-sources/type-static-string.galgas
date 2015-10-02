@@ -41,7 +41,7 @@ override method @literalStringDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:mLiteralStringTypeName
     !kind:.literalString
-    !constructorMap:{}
+    !typedConstantMap:{}
     !procedureMap:{}
     !copiable:true
     !equatable:true

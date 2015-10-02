@@ -108,7 +108,7 @@ override method @integerDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !constructorMap:{}
+    !typedConstantMap:{}
     !procedureMap:{}
     !copiable:true
     !equatable:true

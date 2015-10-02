@@ -52,7 +52,7 @@ override method @booleanDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:mBooleanTypeName
     !kind:.boolean
-    !constructorMap:{}
+    !typedConstantMap:{}
     !procedureMap:{} # Procedure map
     !copiable:copiable
     !equatable:true

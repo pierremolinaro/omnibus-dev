@@ -251,16 +251,6 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category Getter '@valueIR string' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_string (const class GALGAS_valueIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                    Category Getter '@valueIR name' (as function)                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -380,7 +370,7 @@ void categoryModifier_appendLoadGlobalVariable (class GALGAS_instructionListIR &
 
 void categoryModifier_appendLoadLocalVariable (class GALGAS_instructionListIR & ioObject,
                                                const class GALGAS_operandIR constin_inTargetValue,
-                                               const class GALGAS_string constin_inRegisterName,
+                                               const class GALGAS_string constin_inVariableName,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
@@ -424,6 +414,18 @@ void categoryModifier_appendStoreLocalVariable (class GALGAS_instructionListIR &
                                                 const class GALGAS_operandIR constin_inSourceValue,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Category setter '@instructionListIR appendLoadStructureConstant'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendLoadStructureConstant (class GALGAS_instructionListIR & ioObject,
+                                                   const class GALGAS_operandIR constin_inTargetValue,
+                                                   const class GALGAS_string constin_inTypeName,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

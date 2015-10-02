@@ -260,7 +260,7 @@ override method @registerDeclaration semanticAnalysis
       end
     end
   case literalString : error mRegisterTypeName : "a literal string type is not valid for a register"
-  case structure (**) : error mRegisterTypeName : "a structure type is not valid for a register"
+  case structure (* * *) : error mRegisterTypeName : "a structure type is not valid for a register"
   case enumeration (*) : error mRegisterTypeName : "an enumeration type is not valid for a register"
   case literalInteger : error mRegisterTypeName : "a literal integer type is not valid for a register"
   end
