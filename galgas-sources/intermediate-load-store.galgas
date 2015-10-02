@@ -22,12 +22,12 @@ method @objectInMemoryIR loadFromMemory
       !name
       !volatile:isVolatile
     ]
-  case localValue (@unifiedTypeMap-proxy type @lstring name) :
+  case localValue (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadLocalVariable
       !outResultingValue
-      !name.string
+      !name
     ]
   case globalConstant (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
@@ -39,8 +39,6 @@ method @objectInMemoryIR loadFromMemory
     ]
   case localAccess (@lstring access) :
     error access : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
-#  case literalStructure (*) :
-#    error .nowhere : "@objectInMemoryIR loadFromMemory:literalStructure" : outResultingValue
   end
 }
 
@@ -55,14 +53,12 @@ method @objectInMemoryIR storeInMemory
     [!?ioInstructionGenerationList appendStoreVolatileRegister !registerName.string !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     [!?ioInstructionGenerationList appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
-  case localValue (@unifiedTypeMap-proxy type @lstring unused name) :
-    [!?ioInstructionGenerationList appendStoreLocalVariable !name.string !type !inValue]
+  case localValue (@unifiedTypeMap-proxy type @string name) :
+    [!?ioInstructionGenerationList appendStoreLocalVariable !name !type !inValue]
   case globalConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   case localAccess (@lstring unused access) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
-#  case literalStructure (@literalStructureList unused value) :
-#     error .nowhere : "<<@objectInMemoryIR storeInMemory literalStructure>>"
   end
 }
 

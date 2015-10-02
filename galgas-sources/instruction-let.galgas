@@ -99,7 +99,7 @@ override method @letInstructionWithAssignmentAST analyze
   )
 #--- Declare local constant
   let constantType = if targetType == .null then expressionResult.mType else targetType end
-  let localConstant = @objectInMemoryIR.localValue {!type:constantType !name:mVarName}
+  let localConstant = @objectInMemoryIR.localValue {!type:constantType !name:mVarName.string}
   [!?ioVariableMap insertLocalConstant
     !mVarName
     !constantType

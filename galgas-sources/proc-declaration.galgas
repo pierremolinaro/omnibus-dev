@@ -409,7 +409,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!type:typeProxy !name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
         !true
@@ -421,7 +421,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!type:typeProxy !name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
         !true
@@ -433,7 +433,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !formalArgumentName
         !typeProxy
         !true
-        !.localValue {!type:typeProxy !name:formalArgumentName}
+        !.localValue {!type:typeProxy !name:formalArgumentName.string}
         ![typeProxy copiable]
         !{}
         !true

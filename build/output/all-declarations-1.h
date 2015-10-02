@@ -5720,7 +5720,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                    COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_objectInMemoryIR constructor_localValue (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                  const class GALGAS_lstring & inOperand1
+                                                                  const class GALGAS_string & inOperand1
                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_objectInMemoryIR constructor_register (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
@@ -5753,7 +5753,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                      COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localValue (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                    class GALGAS_lstring & outArgument1,
+                                                    class GALGAS_string & outArgument1,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 

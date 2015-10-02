@@ -60,10 +60,44 @@ getter @valueIR isStatic -> @bool outResult {
 enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
-  case localValue (@unifiedTypeMap-proxy type @lstring name)
+  case localValue (@unifiedTypeMap-proxy type @string name)
   case globalConstant (@unifiedTypeMap-proxy type  @string name)
 
   case localAccess (@lstring access)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @objectInMemoryIR name -> @string outName {
+  switch self
+  case register (* @lstring name *) :
+    error name : "@objectInMemoryIR name" : outName
+  case globalVariable (* @string name *) :
+    outName = "@" + mangledNameForGlobalVariable (!name)
+  case localValue (* @string name) :
+    outName = "%" + mangledNameForLocalVariable (!name)
+  case globalConstant (*  @string name) :
+    outName = "%" + name
+  case localAccess (@lstring access) :
+    error access : "@objectInMemoryIR name" : outName
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
+  switch self
+  case register (@unifiedTypeMap-proxy type * *) :
+    outType = type
+  case globalVariable (@unifiedTypeMap-proxy type * *) :
+    outType = type
+  case localValue (@unifiedTypeMap-proxy type *) :
+    outType = type
+  case globalConstant (@unifiedTypeMap-proxy type *) :
+    outType = type
+  case localAccess (@lstring access) :
+    error access : "@objectInMemoryIR name" : outType
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

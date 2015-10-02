@@ -4,40 +4,18 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-#getter @literalStructureList literalValue -> @string result {
-#  result = "{"
-#  for (ls) in self do
-#    switch ls
-#    case unsignedInteger (@bigint value) :
-#      result += [value string]
-#    case signedInteger (@bigint value) :
-#      result += [value string]
-#    case string (* @string name) :
-#      result += name
-#    case structure (@literalStructureList valueList) :
-#      result += [valueList literalValue]
-#    end
-#  between result += ", "
-#  end
-#  result += "}"
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 getter @objectInMemoryIR mangledName -> @string outResult {
   switch self
   case register (* @lstring name *) :
     outResult = mangledNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = mangledNameForGlobalVariable (!name)
-  case localValue (* @lstring name) :
-    outResult = mangledNameForLocalVariable (!name.string)
+  case localValue (* @string name) :
+    outResult = mangledNameForLocalVariable (!name)
   case globalConstant (* @string name) :
     outResult = mangledNameForGlobalVariable (!name)
   case localAccess (@lstring access) :
     outResult = access.string
-#  case literalStructure (@literalStructureList s) :
-#    outResult = [s literalValue]
   end
 }
 

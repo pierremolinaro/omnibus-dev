@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForProperty ?name:@string inName -> @string outName {
-  outName = "property_" + [inName nameRepresentation]
+  outName = "property_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -21,7 +21,7 @@ func %once receiverPtrName -> @string outName {
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForType ?name:@string inName -> @string outPrefix {
-  outPrefix = "type_" + [inName nameRepresentation]
+  outPrefix = "type_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -51,31 +51,31 @@ func %once literalIntegerTypeName -> @string outName {
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForFunction ?name:@string inName -> @string outName {
-  outName = "func_" + [inName nameRepresentation]
+  outName = "func_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForProcedure ?@string inName -> @string outName {
-  outName = "proc_" + [inName nameRepresentation]
+  outName = "proc_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForLocalVariable ?@string inName -> @string outName {
-  outName = "var_" + [inName nameRepresentation]
+  outName = "var_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForGlobalVariable ?@string inName -> @string outName {
-  outName = "gvar_" + [inName nameRepresentation]
+  outName = "gvar_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 func mangledNameForRegister ?name:@string inName -> @string outName {
-  outName = "register_" + [inName nameRepresentation]
+  outName = "register_" + inName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
