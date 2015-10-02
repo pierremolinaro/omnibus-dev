@@ -5642,6 +5642,22 @@ void categoryModifier_appendAlloca (GALGAS_instructionListIR & ioObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Category method '@instructionListIR appendExtractValue'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendExtractValue (GALGAS_instructionListIR & ioObject,
+                                          const GALGAS_operandIR constinArgument_inTarget,
+                                          const GALGAS_operandIR constinArgument_inSource,
+                                          const GALGAS_uint constinArgument_inIndex,
+                                          C_Compiler * /* inCompiler */
+                                          COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_extractValueIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inIndex  COMMA_SOURCE_FILE ("intermediate-extract-value.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-extract-value.galgas", 7)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Category method '@instructionListIR appendExtend'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10752,7 +10768,8 @@ GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::extractObject (co
 
 GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (void) :
 mAttribute_lkey (),
-mAttribute_mTypeProxy () {
+mAttribute_mTypeProxy (),
+mAttribute_mIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10763,26 +10780,30 @@ GALGAS_propertyMap_2D_element::~ GALGAS_propertyMap_2D_element (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1) :
+                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                              const GALGAS_uint & inOperand2) :
 mAttribute_lkey (inOperand0),
-mAttribute_mTypeProxy (inOperand1) {
+mAttribute_mTypeProxy (inOperand1),
+mAttribute_mIndex (inOperand2) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_propertyMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                        GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
+                                        GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
+                                        GALGAS_uint::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1 
+                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                              const GALGAS_uint & inOperand2 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_propertyMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_propertyMap_2D_element (inOperand0, inOperand1) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_propertyMap_2D_element (inOperand0, inOperand1, inOperand2) ;
   }
   return result ;
 }
@@ -10797,13 +10818,16 @@ typeComparisonResult GALGAS_propertyMap_2D_element::objectCompare (const GALGAS_
   if (result == kOperandEqual) {
     result = mAttribute_mTypeProxy.objectCompare (inOperand.mAttribute_mTypeProxy) ;
   }
+  if (result == kOperandEqual) {
+    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_propertyMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mTypeProxy.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mTypeProxy.isValid () && mAttribute_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10811,6 +10835,7 @@ bool GALGAS_propertyMap_2D_element::isValid (void) const {
 void GALGAS_propertyMap_2D_element::drop (void) {
   mAttribute_lkey.drop () ;
   mAttribute_mTypeProxy.drop () ;
+  mAttribute_mIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10824,6 +10849,8 @@ void GALGAS_propertyMap_2D_element::description (C_String & ioString,
     mAttribute_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mTypeProxy.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10838,6 +10865,12 @@ GALGAS_lstring GALGAS_propertyMap_2D_element::reader_lkey (UNUSED_LOCATION_ARGS)
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyMap_2D_element::reader_mTypeProxy (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeProxy ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_uint GALGAS_propertyMap_2D_element::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIndex ;
 }
 
 

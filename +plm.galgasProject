@@ -117,6 +117,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/intermediate-code-generation.galgas"
   "galgas-sources/intermediate-comment.galgas"
   "galgas-sources/intermediate-alloca.galgas"
+  "galgas-sources/intermediate-extract-value.galgas"
   "galgas-sources/intermediate-extend.galgas"
   "galgas-sources/intermediate-binary-operation.galgas"
   "galgas-sources/intermediate-short-circuit-and.galgas"

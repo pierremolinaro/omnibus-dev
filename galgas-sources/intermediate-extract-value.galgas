@@ -1,0 +1,35 @@
+
+setter @instructionListIR appendExtractValue
+  ?let @operandIR inTarget
+  ?let @operandIR inSource
+  ?let @uint inIndex
+{
+  self += !@extractValueIR.new {!inTarget !inSource !inIndex}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @extractValueIR : @abstractInstructionIR {
+  @operandIR mTarget
+  @operandIR mSource
+  @uint mIndex
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extractValueIR llvmInstructionCode
+  ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
+  let llvmType = [mSource.mType llvmTypeName]
+  ioCode += "  " + mTarget.mValue + " = extractvalue " + llvmType + " " + mSource.mValue + ", " + mIndex + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extractValueIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*

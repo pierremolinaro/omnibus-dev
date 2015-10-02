@@ -294,6 +294,19 @@ void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Category setter '@instructionListIR appendExtractValue'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendExtractValue (class GALGAS_instructionListIR & ioObject,
+                                          const class GALGAS_operandIR constin_inTarget,
+                                          const class GALGAS_operandIR constin_inSource,
+                                          const class GALGAS_uint constin_inIndex,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                  Category setter '@instructionListIR appendExtend'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

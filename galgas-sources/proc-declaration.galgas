@@ -363,7 +363,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !type:type
         !receiverPointer:receiverPtrName ()
       }
-      for (propertyName propertyType) in propertyMap do
+      for (propertyName propertyType idx) in propertyMap do
         [!?variableMap insertDefinedLocalVariable
           !propertyName
           !propertyType
@@ -383,7 +383,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         !type:type
         !receiverValue:receiverName ()
       }
-      for (propertyName propertyType) in propertyMap do
+      for (propertyName propertyType idx) in propertyMap do
         [!?variableMap insertUsedLocalConstant
           !propertyName
           !propertyType
