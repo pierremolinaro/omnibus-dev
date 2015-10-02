@@ -301,22 +301,20 @@ class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
 override method @infixObjectObjectOperatorDescription generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
-  ?let @unifiedTypeMap-proxy inLeftType
-  ?let @valueIR inRightOperand
-  ?let @unifiedTypeMap-proxy unused inRightType
+  ?let @operandIR inLeftOperand
   ?let @location inOperatorLocation
-  !@valueIR outResultValue
+  ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inResultType
+  !@operandIR outResult
 {
-  getNewTempVariable (!inLeftType !?ioTemporaries ?outResultValue)
+  getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
 #--- Generate code
   [!?ioInstructionGenerationList appendBinaryOperation
-    !outResultValue
-    !inLeftType
+    !outResult
+    !inOperatorLocation
     !inLeftOperand
     !mOperator
     !inRightOperand
-    !inOperatorLocation
   ]
 }
 
@@ -458,30 +456,28 @@ class @integerObject_literal_infixOperator : @infixOperatorDescription {
 override method @integerObject_literal_infixOperator generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
-  ?let @unifiedTypeMap-proxy inLeftType
-  ?let @valueIR inRightOperand
-  ?let @unifiedTypeMap-proxy unused inRightType
+  ?let @operandIR inLeftOperand
   ?let @location inOperatorLocation
-  !@valueIR outResultValue
+  ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inResultType
+  !@operandIR outResult
 {
 #--- Check right literal integer can be extented to left integer type
-  [inRightOperand literalInteger ?value:let @bigint literalValue]
-  [[inLeftType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [inRightOperand.mValue literalInteger ?value:let @bigint literalValue]
+  [[inLeftOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
-    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResultValue
+    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
-    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResultValue
+    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inLeftType !?ioTemporaries ?outResultValue)
+    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
     #--- Generate code
       [!?ioInstructionGenerationList appendBinaryOperation
-        !outResultValue
-        !inLeftType
+        !outResult
+        !inOperatorLocation
         !inLeftOperand
         !mOperator
         !inRightOperand
-        !inOperatorLocation
       ]
   end
 }
@@ -624,30 +620,28 @@ class @literal_integerObject_infixOperator : @infixOperatorDescription {
 override method @literal_integerObject_infixOperator generateCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
-  ?let @unifiedTypeMap-proxy unused inLeftType
-  ?let @valueIR inRightOperand
-  ?let @unifiedTypeMap-proxy inRightType
+  ?let @operandIR inLeftOperand
   ?let @location inOperatorLocation
-  !@valueIR outResultValue
+  ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inResultType
+  !@operandIR outResult
 {
 #--- Check left literal integer can be extented to right integer type
-  [inLeftOperand literalInteger ?value:let @bigint literalValue]
-  [[inRightType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [inLeftOperand.mValue literalInteger ?value:let @bigint literalValue]
+  [[inRightOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
-    error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResultValue
+    error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
-    error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResultValue
+    error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inRightType !?ioTemporaries ?outResultValue)
+    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
     #--- Generate code
       [!?ioInstructionGenerationList appendBinaryOperation
-        !outResultValue
-        !inRightType
+        !outResult
+        !inOperatorLocation
         !inLeftOperand
         !mOperator
         !inRightOperand
-        !inOperatorLocation
       ]
   end
 }

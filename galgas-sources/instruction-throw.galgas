@@ -58,16 +58,15 @@ override method @throwInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:unusedInstructionListIR
-    ?type:let expressionType
-    ?result:@valueIR result
+    ?result:@operandIR result
   ]
 #--- Expression type check
-  if [expressionType key] != [inContext.mExceptionCodeType key] then
+  if [result.mType key] != [inContext.mExceptionCodeType key] then
     error mThrowLocation
-    : "throw expression type is " + [expressionType key] + ", required type is " + [inContext.mExceptionCodeType key]
+    : "throw expression type is " + [result.mType key] + ", required type is " + [inContext.mExceptionCodeType key]
   end
 #--- Expression is static ?
-  if ([unusedInstructionListIR length] > 0) || not [result isStatic] then
+  if ([unusedInstructionListIR length] > 0) || not [result.mValue isStatic] then
     error mThrowLocation : "throw expression cannot be statically computed"
   end
 #--- Code generation
@@ -85,7 +84,7 @@ override method @throwInstructionAST analyze
 
 class @throwInstructionIR : @abstractInstructionIR {
   @location mThrowInstructionLocation
-  @valueIR mCode
+  @operandIR mCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -95,7 +94,7 @@ override method @throwInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  ioCode += "raise_exception (" + mCode
+  ioCode += "raise_exception (" + mCode.mValue
      + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mThrowInstructionLocation line] + ") ;\n"
 }

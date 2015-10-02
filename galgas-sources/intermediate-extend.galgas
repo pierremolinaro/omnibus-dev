@@ -1,20 +1,16 @@
 
 setter @instructionListIR appendExtend
-  ?let @valueIR inResultValue
-  ?let @unifiedTypeMap-proxy inResultType
-  ?let @valueIR inSourceValue
-  ?let @unifiedTypeMap-proxy inSourceType
+  ?let @operandIR inResult
+  ?let @operandIR inSource
 {
-  self += !@extendIR.new {!inResultValue !inResultType !inSourceValue !inSourceType}
+  self += !@extendIR.new {!inResult !inSource}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @extendIR : @abstractInstructionIR {
-  @valueIR mResultValue
-  @unifiedTypeMap-proxy mResultType
-  @valueIR mSourceValue
-  @unifiedTypeMap-proxy mSourceType
+  @operandIR mResult
+  @operandIR mSource
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -24,10 +20,10 @@ override method @extendIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  ioCode += "  " + mResultValue + " = "
-  [[mSourceType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
+  ioCode += "  " + mResult.mValue + " = "
+  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
   ioCode += if sourceIsUnsigned then "zext" else "sext" end
-  ioCode += " " + [mSourceType  llvmTypeName] + " " + mSourceValue + " to " + [mResultType llvmTypeName] + "\n"
+  ioCode += " " + [mSource.mType  llvmTypeName] + " " + mSource.mValue + " to " + [mResult.mType llvmTypeName] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

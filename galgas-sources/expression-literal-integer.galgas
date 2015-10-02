@@ -44,11 +44,9 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outResultType
-  !result:@valueIR outResult
+  !result:@operandIR outResult
 {
-  outResultType = inContext.mLiteralIntegerType
-  outResult = .literalInteger {!value:mLiteralInteger.bigint}
+  outResult = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:mLiteralInteger.bigint}}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

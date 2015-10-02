@@ -1,19 +1,17 @@
 
 setter @instructionListIR appendLoadGlobalVariable
-  ?let @valueIR inTargetValue
+  ?let @operandIR inTargetValue
   ?let @string inRegisterName
-  ?let @unifiedTypeMap-proxy inTargetVarType
   ?volatile:@bool inIsVolatile
 {
-  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inTargetVarType !inIsVolatile}
+  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @loadGlobalVariableIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @operandIR mTargetValue
   @string mVariableName
-  @unifiedTypeMap-proxy mVariableType
   @bool mIsVolatile
 }
 
@@ -24,8 +22,8 @@ override method @loadGlobalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mVariableType llvmTypeName]
-  ioCode += "  " + mTargetValue + " = load "
+  let llvmType = [mTargetValue.mType llvmTypeName]
+  ioCode += "  " + mTargetValue.mValue + " = load "
   if mIsVolatile then
     ioCode += "volatile "
   end

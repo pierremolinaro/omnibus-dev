@@ -37,8 +37,7 @@ override method @conversionExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outResultType
-  !result:@valueIR outResultValue
+  !result:@operandIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -52,30 +51,29 @@ override method @conversionExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:@valueIR expressionValue
+    ?result:@operandIR expressionResult
   ]
 #--- 
   if (not inAllowExceptions) && (not mSilently) then
     error mTypeName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
   end
 #--- Analyze type
-  outResultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types
-  if not [[outResultType kind] isInteger] then
+  if not [[resultType kind] isInteger] then
     error mTypeName : "this type is not an integer type"
-  elsif not [[expressionType kind] isInteger] then
+  elsif not [[expressionResult.mType kind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type"
   else
-      [[expressionType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-      [[outResultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+      [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+      [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
       let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
       if alwaysPossible then
         error mTypeName:"useless explicit conversion"
       end
   end
 #--- Temp var
-  getNewTempVariable (!outResultType !?ioTemporaries ?outResultValue)
+  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
 #--- Generate code
 #  ioInstructionGenerationList += !@extendInstructionIR.new {
 #    !outExpressionType

@@ -233,15 +233,14 @@ class @literal_literal_integerInfixOperation : @infixOperatorDescription {
 override method @literal_literal_integerInfixOperation generateCode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
-  ?let @unifiedTypeMap-proxy unused inLeftType
-  ?let @valueIR inRightOperand
-  ?let @unifiedTypeMap-proxy unused inRightType
+  ?let @operandIR inLeftOperand
   ?let @location unused inOperatorLocation
-  !@valueIR outResultValue
+  ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inResultType
+  !@operandIR outResult
 {
-  [inLeftOperand  literalInteger ?value:let @bigint leftValue]
-  [inRightOperand literalInteger ?value:let @bigint rightValue]
+  [inLeftOperand.mValue  literalInteger ?value:let @bigint leftValue]
+  [inRightOperand.mValue literalInteger ?value:let @bigint rightValue]
   @bigint result
   switch mOperator 
   case equal : result = [leftValue == rightValue bigint]
@@ -261,7 +260,7 @@ override method @literal_literal_integerInfixOperation generateCode
   case leftShift  : result = leftValue << [rightValue uint]
   case rightShift : result = leftValue >> [rightValue uint]
   end
-  outResultValue = .literalInteger {!value:result}
+  outResult = .new {!inResultType !.literalInteger {!value:result}}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

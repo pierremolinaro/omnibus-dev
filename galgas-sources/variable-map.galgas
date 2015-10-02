@@ -111,9 +111,9 @@ func variableMapWithConstants
 proc getNewTempVariable
   ?let @unifiedTypeMap-proxy inType
   ?!@semanticTemporariesStruct ioTemporaries
-  !@valueIR outTempVariable
+  !@operandIR outTempVariable
 {
-  outTempVariable = .llvmLocalObject {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex}
+  outTempVariable = .new {!inType !.llvmLocalObject {!name:"temp." + ioTemporaries.mTemporaryIndex}}
   ioTemporaries.mTemporaryIndex ++
 }
 

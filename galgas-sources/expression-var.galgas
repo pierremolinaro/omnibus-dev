@@ -46,15 +46,14 @@ override method @varInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext unused inContext
+  ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@valueIR outResultValueName
+  !result:@operandIR outResult
 {
 #--- Search variable
   [!?ioVariableMap searchForReadAccess
@@ -73,10 +72,10 @@ override method @varInExpressionAST analyzeExpression
   [variableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:@valueIR variableValueName
+    ?resultingValue:@operandIR result
   ]
 #--- Solve inferred type
-  outExpressionType = solveInferredType (
+  var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
     !sourceType:variableType
     !errorLocation:mSourceVarName.location
@@ -92,20 +91,18 @@ override method @varInExpressionAST analyzeExpression
         ?let newResultType
        ]
     #--- Temp var
-      getNewTempVariable (!outExpressionType !?ioTemporaries ?let newResultingVariable)
+      getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
       [!?ioInstructionGenerationList appendBinaryOperation
         !newResultingVariable
-        !outExpressionType
-        !variableValueName
-        !accessOperator
-        !.literalInteger {!value:accessRightOperand}
         !mSourceVarName.location
+        !result
+        !accessOperator
+        !.new {!inContext.mLiteralIntegerType !.literalInteger {!value:accessRightOperand}}
       ]
-      variableValueName = newResultingVariable 
+      result = newResultingVariable 
       registerBitSliceMap = submap
-      outExpressionType = newResultType
     else
-      switch [outExpressionType kind]
+      switch [result.mType kind]
         case boolean :
           error field : "a boolean does not handle field access"
         case literalInteger :
@@ -117,22 +114,22 @@ override method @varInExpressionAST analyzeExpression
         case enumeration (*) :
           error field : "an enumeration does not handle field access"
         case structure (@propertyMap propertyMap) :
-          [propertyMap searchKey !field ?outExpressionType]
-          getNewTempVariable (!outExpressionType !?ioTemporaries ?let newResultingVariable)
+          [propertyMap searchKey !field ?let type]
+          getNewTempVariable (!type !?ioTemporaries ?let newResultingVariable)
 #          ioInstructionGenerationList += !@fieldAccessIR.new {
 #            !outExpressionType
 #            !newResultingVariable
 #            !resultingVariable
 #            !field
 #          }
-          variableValueName = newResultingVariable 
+          result = newResultingVariable 
         case integer (* * * *) :
           error field : "an integer does not handle field access"
       end    
     end
   end
-#--- Generate code
-  outResultValueName = variableValueName
+#---
+  outResult = result
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

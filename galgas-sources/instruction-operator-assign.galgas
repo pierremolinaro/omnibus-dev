@@ -86,8 +86,7 @@ override method @operatorAssignInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let rightExpressionType
-    ?result:@valueIR sourceValueName
+    ?result:@operandIR sourceValue
   ]
 #--- Write local variable
   [!?ioVariableMap searchForReadWriteAccess
@@ -117,7 +116,7 @@ override method @operatorAssignInstructionAST analyze
   end
   [operatorMap checkWith
     !leftType:targetType
-    !rightType:rightExpressionType
+    !rightType:sourceValue.mType
     !operatorLocation:mTargetVarName.location
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
@@ -126,20 +125,21 @@ override method @operatorAssignInstructionAST analyze
     error mTargetVarName : "the '" + mTargetVarName + "' variable is not copiable"
   end
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment ![targetVariableKind mangledName] + " " + commentOperator + " " + sourceValueName]
+  [!?ioInstructionGenerationList appendComment
+    ![targetVariableKind mangledName] + " " + commentOperator + " " + sourceValue.mValue
+  ]
   [targetVariableKind loadFromMemory
     !?temporary:ioTemporaries
     !?instructionListIR:ioInstructionGenerationList
-    ?resultingValue:@valueIR variableValueName
+    ?resultingValue:@operandIR variableValue
   ]
   [binaryOperator generateCode
     !?ioTemporaries
     !?ioInstructionGenerationList
-    !variableValueName
-    !targetType
-    !sourceValueName
-    !targetType
+    !variableValue # .new {!targetType !variableValueName}
     !mTargetVarName.location
+    !sourceValue
+    !targetType
     ?let newResultingValue
   ]
   [targetVariableKind storeInMemory

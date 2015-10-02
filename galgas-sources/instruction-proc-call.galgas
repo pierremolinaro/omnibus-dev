@@ -143,7 +143,10 @@ override method @procCallInstructionAST analyze
         error name : "the '" + name + "' variable is not copiable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.input !mSelector !type !.llvmLocalObject {!type:type !name:mangledNameForLocalVariable (!name.string)}
+      procCallEffectiveParameterListIR +=
+        !.input
+        !mSelector
+        !.new{!type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
@@ -156,17 +159,18 @@ override method @procCallInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?instructionListIR:ioInstructionGenerationList
-        ?type:let expressionType
-        ?result:let @valueIR expressionResult
+        ?result:let @operandIR expressionResult
       ]
       checkAssignmentCompatibility (
-        !sourceType:expressionType
-        !sourceValue:expressionResult
+        !source:expressionResult
         !targetType:formal_mType
         !errorLocation:endOfExp
       )
       parameterList += !mEffectiveParameterKind !mSelector !formal_mType
-      procCallEffectiveParameterListIR += !.output !mSelector !formal_mType !expressionResult
+      procCallEffectiveParameterListIR += 
+        !.output
+        !mSelector
+        !.new {!formal_mType !expressionResult.mValue}
     case outputInput (@lstring name) :
       [!?ioVariableMap searchForReadWriteAccess
         !name
@@ -184,7 +188,10 @@ override method @procCallInstructionAST analyze
         error name : "routine has no access right on the this variable"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type
-      procCallEffectiveParameterListIR += !.outputInput !mSelector !type !.llvmLocalObject {!type:type !name:mangledNameForLocalVariable (!name.string)}
+      procCallEffectiveParameterListIR +=
+        !.outputInput
+        !mSelector
+        !.new {!type !.llvmLocalObject {!name:mangledNameForLocalVariable (!name.string)}}
     end
   end
 #--- Check mode
@@ -231,8 +238,7 @@ enum @procEffectiveParameterPassingModeIR {
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   @lstring mSelector
-  @unifiedTypeMap-proxy mParameterType
-  @valueIR mParameter
+  @operandIR mParameter
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -254,11 +260,11 @@ override method @procCallInstructionIR llvmInstructionCode
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:
-      ioCode += [mParameterType llvmTypeName] + "* " + [mParameter string]
+      ioCode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
     case output:
-      ioCode += [mParameterType llvmTypeName] + " " + [mParameter string]
+      ioCode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue string]
     case outputInput:
-      ioCode += [mParameterType llvmTypeName] + "* " + [mParameter string]
+      ioCode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
     end
   between
     ioCode += ", "

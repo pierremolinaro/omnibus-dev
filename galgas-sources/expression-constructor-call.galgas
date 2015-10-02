@@ -55,22 +55,21 @@ override method @constructorCall analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outType
-  !result:@valueIR outResult
+  !result:@operandIR outResult
 {
 #--- Analyze constructor source type
+  @unifiedTypeMap-proxy resultType
   if mOptionalTypeName.string == "" then
-    outType = inOptionalTargetType
+    resultType = inOptionalTargetType
   else
-    outType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
+    resultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
-  if outType == .null then
-    error mConstructorName : "cannot infer type" : outType, outResult
+  if resultType == .null then
+    error mConstructorName : "cannot infer type" : outResult
   else
-  #--- Get inferred type constructor map
-    let constructorMap = [outType constructorMap]
-  #--- Check constructor and get result
-    [constructorMap searchKey !mConstructorName ?outResult]
+    let constructorMap = [resultType constructorMap]
+    [constructorMap searchKey !mConstructorName ?let resultValue]
+    outResult = .new {!resultType !resultValue}
   end
 }
 

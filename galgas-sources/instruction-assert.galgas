@@ -60,15 +60,14 @@ override method @assertInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:instructionGenerationList
-    ?type:let expressionType
-    ?result:@valueIR expressionValueName
+    ?result:@operandIR expressionValue
   ]
 #--- Check inferred type
-  if not [[expressionType kind] isBoolean] then
+  if not [[expressionValue.mType kind] isBoolean] then
     error mAssertInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is not static
-  if [expressionValueName isStatic] then
+  if [expressionValue.mValue isStatic] then
     error mAssertInstructionLocation : "expression is static: use check directive"
   end
 #--- Code generation
@@ -76,7 +75,7 @@ override method @assertInstructionAST analyze
     ioInstructionGenerationList += !@assertInstructionIR.new {
       !mAssertInstructionLocation
       !instructionGenerationList
-      !expressionValueName
+      !expressionValue
     }
   end
 }
@@ -88,7 +87,7 @@ override method @assertInstructionAST analyze
 class @assertInstructionIR : @abstractInstructionIR {
   @location mAssertInstructionLocation
   @instructionListIR mInstructionList
-  @valueIR mExpressionValue
+  @operandIR mExpressionValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -99,7 +98,7 @@ override method @assertInstructionIR llvmInstructionCode
   ?!@stringset ioIntrinsicsDeclarationSet
 {
   [mInstructionList instructionListLLVMCode !?ioCode !inGenerationContext!?ioIntrinsicsDeclarationSet]
-  ioCode += "if (!" + mExpressionValue + ") {\n"
+  ioCode += "if (!" + mExpressionValue.mValue + ") {\n"
   ioCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mAssertInstructionLocation line] + ") ;\n"
@@ -110,7 +109,6 @@ override method @assertInstructionIR llvmInstructionCode
 
 override method @assertInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
-#  [mExpressionValue enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
