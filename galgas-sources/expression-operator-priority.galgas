@@ -353,27 +353,6 @@ syntax extension common_syntax {
 
   rule <expression_1> !@expressionAST outExpression {
     <primary> ?outExpression
-    let endOfExpression = @location.here
-    select
-    or
-      $\$
-      $typeName$ ?let typeIdentifier
-      outExpression = @conversionExpressionAST.new {
-        !outExpression
-        !typeIdentifier
-        !false
-        !endOfExpression
-      }
-    or
-      $&\$
-      $typeName$ ?let typeIdentifier
-      outExpression = @conversionExpressionAST.new {
-        !outExpression
-        !typeIdentifier
-        !true
-        !endOfExpression
-      }
-    end
   }
 
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
@@ -442,6 +421,36 @@ syntax extension common_syntax {
       !endOfExpression
     }
   }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+  rule <primary> !@expressionAST outExpression {
+    $convert$
+    <expression> ?outExpression
+    let endOfExpression = @location.here
+    $:$
+    $typeName$ ?let typeIdentifier
+    outExpression = @convertExpressionAST.new {
+      !outExpression
+      !typeIdentifier
+      !endOfExpression
+    }
+  }
+
+  #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
+
+#  rule <primary> !@expressionAST outExpression {
+#    $truncate$
+#    <expression> ?outExpression
+#    let endOfExpression = @location.here
+#    $:$
+#    $typeName$ ?let typeIdentifier
+#    outExpression = @truncateExpressionAST.new {
+#      !outExpression
+#      !typeIdentifier
+#      !endOfExpression
+#    }
+#  }
 
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
 

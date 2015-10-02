@@ -1,0 +1,144 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @convertExpressionAST : @expressionAST {
+  @expressionAST mExpression
+  @lstring mTypeName
+  @bool mSilently
+  @location mEndOfExpression
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @convertExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @convertExpressionAST
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @convertExpressionAST analyzeExpression
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@operandIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@operandIR expressionResult
+  ]
+#--- 
+  if (not inAllowExceptions) && (not mSilently) then
+    error mTypeName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+  end
+#--- Analyze type
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#--- Check types
+  if not [[resultType kind] isInteger] then
+    error mTypeName : "this type is not an integer type"
+  elsif not [[expressionResult.mType kind] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type"
+  else
+      [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+      [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+      let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
+      if alwaysPossible then
+        error mTypeName:"useless explicit conversion"
+      end
+  end
+#--- Temp var
+  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+#--- Generate code
+#  ioInstructionGenerationList += !@extendInstructionIR.new {
+#    !outExpressionType
+#    !convertedExpressionType
+#    !outResult
+#    !expressionResult
+#    !mSilently
+#    !mTypeName.location
+#  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+#! @extendInstructionIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @extendInstructionIR : @abstractInstructionIR {
+  @unifiedTypeMap-proxy mTargetType
+  @unifiedTypeMap-proxy mConvertedExpressionType
+  @objectInMemoryIR mTemporaryResultVariable
+  @objectInMemoryIR mOperand
+  @bool mSilently
+  @location mLocation
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @extendInstructionIR llvmInstructionCode
+  ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
+  if mSilently || [option plm_options.noExceptionGeneration value] then
+    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
+    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
+  else
+    let okVar = "ok" + [mLocation locationIndex]
+    [[mConvertedExpressionType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+    [[mTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+    ioCode += "const bool " + okVar + " = "
+    if minTarget > minSource then
+      ioCode += "(" + [mOperand mangledName] + " >= " + minTarget + ")"
+    end
+    if maxTarget < maxSource then
+      if minTarget > minSource then
+        ioCode += " && "
+      end
+      ioCode += "(" + [mOperand mangledName] + " <= " + maxTarget + ")"
+    end
+    ioCode += " ;\n"
+    ioCode += "if (!" + okVar + ") {\n"
+    ioCode += "  raise_exception (5, "
+       + [[[mLocation file] lastPathComponent] utf8Representation]
+       + ", " + [mLocation line] + ") ;\n"
+    ioCode += "}\n" 
+    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
+    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
