@@ -73,6 +73,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-operator-priority.galgas"
   "galgas-sources/expression-convert.galgas"
   "galgas-sources/expression-extend.galgas"
+  "galgas-sources/expression-truncate.galgas"
   "galgas-sources/expression-constructor-call.galgas"
 #  "galgas-sources/expression-instanciation.galgas"
   "galgas-sources/expression-infix-operators.galgas"
