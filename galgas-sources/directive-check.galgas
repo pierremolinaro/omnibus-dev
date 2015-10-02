@@ -57,18 +57,17 @@ override method @checkInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:instructionGenerationList
-    ?type:let expressionType
-    ?result:@valueIR expressionValueName
+    ?result:@operandIR expressionResult
   ]
 #--- Check inferred type
-  if not [[expressionType kind] isBoolean] then
+  if not [[expressionResult.mType kind] isBoolean] then
     error mCheckInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is static, and true
-  if not [expressionValueName isStatic] then
+  if not [expressionResult.mValue isStatic] then
     error mCheckInstructionLocation : "expression is not static: use assert instruction"
   else
-    [expressionValueName literalInteger ?value:@bigint value]
+    [expressionResult.mValue literalInteger ?value:@bigint value]
     if value != 1G then
       error mCheckInstructionLocation : "check expression value is false"
     end

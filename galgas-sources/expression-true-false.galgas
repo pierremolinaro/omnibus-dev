@@ -49,13 +49,9 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@valueIR outResultValueName
+  !result:@operandIR outResult
 {
-#--- Result type
-  outExpressionType = inContext.mBooleanType
-#--- Result value
-  outResultValueName = .literalInteger {!value:if mValue then 1G else 0G end}
+  outResult = .new {!inContext.mBooleanType !.literalInteger {!value:if mValue then 1G else 0G end}}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

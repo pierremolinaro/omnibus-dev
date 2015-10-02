@@ -1,10 +1,10 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 setter @instructionListIR appendShortCircuitAndOperation
-  ?let @valueIR inTargetOperand
-  ?let @valueIR inLeftOperand
+  ?let @operandIR inTargetOperand
+  ?let @operandIR inLeftOperand
   ?let @instructionListIR inLeftInstructionList
-  ?let @valueIR inRightOperand
+  ?let @operandIR inRightOperand
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
@@ -21,10 +21,10 @@ setter @instructionListIR appendShortCircuitAndOperation
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
-  @valueIR mTargetOperand
-  @valueIR mLeftOperand
+  @operandIR mTargetOperand
+  @operandIR mLeftOperand
   @instructionListIR mLeftInstructionList
-  @valueIR mRightOperand
+  @operandIR mRightOperand
   @instructionListIR mRightInstructionList
   @location mLocation
 }
@@ -50,12 +50,12 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioCode += ";--- left operand of short circuit and\n"
   ioCode += startLabel + ":\n"
   [mLeftInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
-  ioCode += "  br i1 " + mLeftOperand + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioCode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioCode += trueLabel + ":\n"
   [mRightInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + falseLabel + "\n\n"
   ioCode += falseLabel + ":\n"
-  ioCode += "  " + mTargetOperand + " = phi i1 [" + mRightOperand + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioCode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

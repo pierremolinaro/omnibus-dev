@@ -126,14 +126,13 @@ override method @ifInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let testExpressionType
-    ?result:let @valueIR testResult
+    ?result:let @operandIR testResult
   ]
 #--- Check inferred type
-  if [testExpressionType kind] != .boolean then
-    error mTestExpressionEndLocation : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
+  if [testResult.mType kind] != .boolean then
+    error mTestExpressionEndLocation : "test expression type is '" + [testResult.mType key] + "', it should be boolean"
   end
-  if [testResult isStatic] then
+  if [testResult.mValue isStatic] then
     error mTestExpressionEndLocation : "test expression type should not be static"
   end
   [!?ioVariableMap openOverrideForSelectBlock]
@@ -180,7 +179,7 @@ override method @ifInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @valueIR mTestVariable
+  @operandIR mTestVariable
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
@@ -193,11 +192,11 @@ override method @ifInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  ioCode += ";--- if (" + mTestVariable + ") {\n"
+  ioCode += ";--- if (" + mTestVariable.mValue + ") {\n"
   let labelTrue = "if." + [mLocation locationIndex] + ".true"
   let labelFalse = "if." + [mLocation locationIndex] + ".false"
   let labelEnd = "if." + [mLocation locationIndex] + ".end"
-  ioCode += "  br i1 " + mTestVariable + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+  ioCode += "  br i1 " + mTestVariable.mValue + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioCode += labelTrue + ":\n"
   [mThenInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]

@@ -3,7 +3,7 @@ setter @instructionListIR appendStoreVolatileRegister
   ?let @string inRegisterName
   ?let @unifiedTypeMap-proxy inTargetVarType
   ?let @bigint inAddress
-  ?let @valueIR inSourceValue
+  ?let @operandIR inSourceValue
 {
   self += !@storeVolatileIR.new {!inRegisterName !inTargetVarType !inAddress !inSourceValue}
 }
@@ -14,7 +14,7 @@ class @storeVolatileIR : @abstractInstructionIR {
   @string mRegisterName
   @unifiedTypeMap-proxy mTargetVarType
   @bigint mAddress
-  @valueIR mSourceValue
+  @operandIR mSourceValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -25,7 +25,7 @@ override method @storeVolatileIR llvmInstructionCode
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioCode += "  store volatile " + llvmType + " " + mSourceValue + ", " + llvmType
+  ioCode += "  store volatile " + llvmType + " " + mSourceValue.mValue + ", " + llvmType
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }
 

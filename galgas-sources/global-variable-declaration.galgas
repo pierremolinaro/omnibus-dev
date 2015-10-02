@@ -139,16 +139,14 @@ method @globalVarDeclarationList-element enterInContext
        !?staticStringMap:ioGlobalLiteralStringMap
        !?variableMap:variableMap
        !?instructionListIR:instructionGenerationList
-       ?type:let @unifiedTypeMap-proxy resultType
-       ?result:let @valueIR resultValue
+       ?result:let @operandIR expressionResult
     ]
-    if ([instructionGenerationList length] > 0) || not [resultValue isStatic] then
+    if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
       error mVarName : "source expression cannot be statically computed"
     end
   #--- Check variable type and expression type
     checkAssignmentCompatibility (
-      !sourceType:resultType
-      !sourceValue:resultValue
+      !source:expressionResult
       !targetType:variableType
       !errorLocation:mVarName.location
     )
@@ -211,10 +209,10 @@ method @globalVarDeclarationList-element enterInContext
     end
     [!?ioContext.mGlobalVariableMap insertKey
       !mVarName
-      !if variableType == .null then resultType else variableType end
+      !if variableType == .null then expressionResult.mType else variableType end
       !executionModes
       !allowedProcedureMap
-      !resultValue
+      !expressionResult.mValue
       !false # Is not constant
     ]
   case procType (* *) :

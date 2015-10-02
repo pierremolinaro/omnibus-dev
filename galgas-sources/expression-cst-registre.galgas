@@ -77,13 +77,12 @@ override method @registerConstantInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@valueIR outResultValueName
+  !result:@operandIR outResult
 {
 #--- Search variable
   [inContext.mRegisterMap searchKey
     !mRegisterName
-    ?outExpressionType
+    ?let type
     ?let unused readOnly
     ?let @registerBitSliceAccessMap unused registerBitSliceMap
     ?let @registerFieldMap registerFieldMap
@@ -96,7 +95,7 @@ override method @registerConstantInExpressionAST analyzeExpression
     ?let @uint bitCount
   ]
 #--- Generate code
-  outResultValueName = .literalInteger {!value:((1G << bitCount) - 1G) << bitIndex}
+  outResult = .new {!type !.literalInteger {!value:((1G << bitCount) - 1G) << bitIndex}}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -112,13 +111,12 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@valueIR outResultValueName
+  !result:@operandIR outResult
 {
 #--- Search variable
   [inContext.mRegisterMap searchKey
     !mRegisterName
-    ?outExpressionType
+    ?let type
     ?let unused readOnly
     ?let @registerBitSliceAccessMap unused registerBitSliceMap
     ?let @registerFieldMap registerFieldMap
@@ -146,45 +144,43 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:let @valueIR expressionResult
+    ?result:let @operandIR expressionResult
   ]
 #--- Check expression type
-  switch [expressionType kind]
+  switch [expressionResult.mType kind]
   case enumeration (*) :
-    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case structure (*) :
-    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case boolset, boolean :
-    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case literalString :
-    error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
   case literalInteger :
-    [expressionResult literalInteger ?value:let @bigint value]
+    [expressionResult.mValue literalInteger ?value:let @bigint value]
     if value < 0G then
-      error mExpressionLocation: "this integer expression should be positive" : outResultValueName
+      error mExpressionLocation: "this integer expression should be positive" : outResult
     elsif value < (1G << fieldBitCount) then
-      outResultValueName = .literalInteger {!value:value << fieldBitIndex}        
+      outResult = .new {!type !.literalInteger {!value:value << fieldBitIndex}}      
     else
-      error mExpressionLocation: "expression too large (should be < " + (1G << fieldBitCount) : outResultValueName
+      error mExpressionLocation: "expression too large (should be < " + (1G << fieldBitCount) : outResult
     end
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
     if not unsigned then
-      error mExpressionLocation: "an unsigned integer expression is required here" : outResultValueName
+      error mExpressionLocation: "an unsigned integer expression is required here" : outResult
     else
       let assertGenerated = expressionBitCount > fieldBitCount
       if assertGenerated && [inModeSet hasKey !exceptionModeName ()] then
         error mExpressionLocation
           : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
       end
-      getNewTempVariable (!outExpressionType !?ioTemporaries ?outResultValueName)
+      getNewTempVariable (!type !?ioTemporaries ?outResult)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
         !mExpressionLocation
         !expressionResult
         !(1L << fieldBitCount) - 1L
         !fieldBitIndex
-        !outResultValueName
-        !outExpressionType
+        !outResult
         !not assertGenerated
       }
     end
@@ -197,11 +193,10 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
 
 class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
   @location mInstructionLocation
-  @valueIR mExpressionValue
+  @operandIR mExpressionValue
   @uint64 mMaxBound
   @uint mBitShift
-  @valueIR mResultVariable
-  @unifiedTypeMap-proxy mTargetType
+  @operandIR mResult
   @bool mNoCheck
 }
 
@@ -213,20 +208,20 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   if mNoCheck then
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + mResultVariable
-            + " = ((" + mangledNameForType (!name:[mTargetType key]) + " *) "
-            + mExpressionValue + ") << " + mBitShift + "\n" 
+    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+            + " = ((" + mangledNameForType (!name:[mResult.mType key]) + " *) "
+            + mExpressionValue.mValue + ") << " + mBitShift + "\n" 
   elsif [option plm_options.noExceptionGeneration value] then
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + mResultVariable
-            + " = (" + mExpressionValue + " & " + mMaxBound + ") << " + mBitShift + "\n" 
+    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+            + " = (" + mExpressionValue.mValue + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
-    ioCode += "if (" + mExpressionValue + " > " + mMaxBound + ") {\n"
+    ioCode += "if (" + mExpressionValue.mValue + " > " + mMaxBound + ") {\n"
     ioCode += "  raise_exception (4, "
        + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
        + ", " + [mInstructionLocation line] + ") ;\n"
     ioCode += "}\n" 
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + mResultVariable
-               + " = " + mExpressionValue + " << " + mBitShift + "\n" 
+    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+               + " = " + mExpressionValue.mValue + " << " + mBitShift + "\n" 
   end
 }
 

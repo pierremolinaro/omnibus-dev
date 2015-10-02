@@ -89,18 +89,16 @@ override method @letInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let expressionType
-    ?result:let @valueIR expressionResult
+    ?result:let @operandIR expressionResult
   ]
 #--- Declare local constant
   checkAssignmentCompatibility (
-    !sourceType:expressionType
-    !sourceValue:expressionResult
+    !source:expressionResult
     !targetType:targetType
     !errorLocation:mVarName.location
   )
 #--- Declare local constant
-  let constantType = if targetType == .null then expressionType else targetType end
+  let constantType = if targetType == .null then expressionResult.mType else targetType end
   let localConstant = @objectInMemoryIR.localValue {!type:constantType !name:mVarName}
   [!?ioVariableMap insertLocalConstant
     !mVarName

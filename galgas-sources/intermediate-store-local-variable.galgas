@@ -2,7 +2,7 @@
 setter @instructionListIR appendStoreLocalVariable
   ?let @string inLocalVarName
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @valueIR inSourceValue
+  ?let @operandIR inSourceValue
 {
   self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
 }
@@ -12,7 +12,7 @@ setter @instructionListIR appendStoreLocalVariable
 class @storeLocalVariableIR : @abstractInstructionIR {
   @string mLocalVarName
   @unifiedTypeMap-proxy mTargetVarType
-  @valueIR mSourceValue
+  @operandIR mSourceValue
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -24,7 +24,7 @@ override method @storeLocalVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  store "
-  ioCode += llvmType + " " + mSourceValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
+  ioCode += llvmType + " " + mSourceValue.mValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

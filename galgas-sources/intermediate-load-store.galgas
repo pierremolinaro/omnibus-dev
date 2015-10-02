@@ -3,42 +3,38 @@
 method @objectInMemoryIR loadFromMemory
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !resultingValue:@valueIR outResultingValue
+  !resultingValue:@operandIR outResultingValue
 {
   switch self
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadVolatileRegister
       !outResultingValue
       !name.string
-      !type
       !address
     ]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
       !name
-      !type
       !volatile:isVolatile
     ]
   case localValue (@unifiedTypeMap-proxy type @lstring name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadLocalVariable
       !outResultingValue
       !name.string
-      !type
     ]
   case globalConstant (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?ioInstructionGenerationList appendComment ![outResultingValue string] + " = " + name]
+    [!?ioInstructionGenerationList appendComment ![outResultingValue.mValue string] + " = " + name]
     [!?ioInstructionGenerationList appendLoadGlobalVariable
       !outResultingValue
       !name
-      !type
       !volatile:false
     ]
   case localAccess (@lstring access) :
@@ -51,7 +47,7 @@ method @objectInMemoryIR loadFromMemory
 #----------------------------------------------------------------------------------------------------------------------*
 
 method @objectInMemoryIR storeInMemory
-  ?value:@valueIR inValue
+  ?value:@operandIR inValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   switch self

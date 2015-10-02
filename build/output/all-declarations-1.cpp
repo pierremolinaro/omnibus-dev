@@ -11164,6 +11164,221 @@ GALGAS_prefixOperatorIR GALGAS_prefixOperatorIR::extractObject (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+cEnumAssociatedValues_valueIR_literalInteger::cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                                                            COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_literalInteger::description (C_String & ioString,
+                                                                const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_literalInteger::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_literalInteger * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_literalInteger *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumAssociatedValues_valueIR_llvmLocalObject::cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
+                                                                                              COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_valueIR_llvmLocalObject::description (C_String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_valueIR_llvmLocalObject::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = dynamic_cast<const cEnumAssociatedValues_valueIR_llvmLocalObject *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR::GALGAS_valueIR (void) :
+mAssociatedValues (),
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                           COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_literalInteger ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_literalInteger (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::constructor_llvmLocalObject (const GALGAS_string & inAssociatedValue0
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  if (inAssociatedValue0.isValid ()) {
+    result.mEnum = kEnum_llvmLocalObject ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_valueIR_llvmLocalObject (inAssociatedValue0 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_literalInteger (GALGAS_bigint & outAssociatedValue0,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_literalInteger) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @valueIR literalInteger invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_literalInteger * ptr = (const cEnumAssociatedValues_valueIR_literalInteger *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::method_llvmLocalObject (GALGAS_string & outAssociatedValue0,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_llvmLocalObject) {
+    outAssociatedValue0.drop () ;
+    C_String s ;
+    s << "method @valueIR llvmLocalObject invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_valueIR_llvmLocalObject * ptr = (const cEnumAssociatedValues_valueIR_llvmLocalObject *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_valueIR [3] = {
+  "(not built)",
+  "literalInteger",
+  "llvmLocalObject"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::reader_isLiteralInteger (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalInteger == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_valueIR::reader_isLlvmLocalObject (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_llvmLocalObject == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_valueIR::description (C_String & ioString,
+                                  const int32_t inIndentation) const {
+  ioString << "<enum @valueIR: " << gEnumNameArrayFor_valueIR [mEnum] ;
+  mAssociatedValues.description (ioString, inIndentation) ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_valueIR::objectCompare (const GALGAS_valueIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                    @valueIR type                                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_valueIR ("valueIR",
+                                NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_valueIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_valueIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_valueIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_valueIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valueIR GALGAS_valueIR::extractObject (const GALGAS_object & inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GALGAS_valueIR result ;
+  const GALGAS_valueIR * p = (const GALGAS_valueIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_valueIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("valueIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_incDecKind::GALGAS_incDecKind (void) :
 mEnum (kNotBuilt) {
 }
@@ -12440,8 +12655,7 @@ class cCollectionElement_procCallEffectiveParameterListIR : public cCollectionEl
 //--- Constructor
   public : cCollectionElement_procCallEffectiveParameterListIR (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                                 const GALGAS_lstring & in_mSelector,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & in_mParameterType,
-                                                                const GALGAS_valueIR & in_mParameter
+                                                                const GALGAS_operandIR & in_mParameter
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -12461,11 +12675,10 @@ class cCollectionElement_procCallEffectiveParameterListIR : public cCollectionEl
 
 cCollectionElement_procCallEffectiveParameterListIR::cCollectionElement_procCallEffectiveParameterListIR (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                                                                           const GALGAS_lstring & in_mSelector,
-                                                                                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mParameterType,
-                                                                                                          const GALGAS_valueIR & in_mParameter
+                                                                                                          const GALGAS_operandIR & in_mParameter
                                                                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mEffectiveParameterPassingMode, in_mSelector, in_mParameterType, in_mParameter) {
+mObject (in_mEffectiveParameterPassingMode, in_mSelector, in_mParameter) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12478,7 +12691,7 @@ bool cCollectionElement_procCallEffectiveParameterListIR::isValid (void) const {
 
 cCollectionElement * cCollectionElement_procCallEffectiveParameterListIR::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_procCallEffectiveParameterListIR (mObject.mAttribute_mEffectiveParameterPassingMode, mObject.mAttribute_mSelector, mObject.mAttribute_mParameterType, mObject.mAttribute_mParameter COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_procCallEffectiveParameterListIR (mObject.mAttribute_mEffectiveParameterPassingMode, mObject.mAttribute_mSelector, mObject.mAttribute_mParameter COMMA_HERE)) ;
   return result ;
 }
 
@@ -12493,10 +12706,6 @@ void cCollectionElement_procCallEffectiveParameterListIR::description (C_String 
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mSelector" ":" ;
   mObject.mAttribute_mSelector.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mParameterType" ":" ;
-  mObject.mAttribute_mParameterType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mParameter" ":" ;
@@ -12538,14 +12747,13 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 
 GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::constructor_listWithValue (const GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
                                                                                                             const GALGAS_lstring & inOperand1,
-                                                                                                            const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                                                            const GALGAS_valueIR & inOperand3
+                                                                                                            const GALGAS_operandIR & inOperand2
                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_procCallEffectiveParameterListIR result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_procCallEffectiveParameterListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    GALGAS_procCallEffectiveParameterListIR::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -12556,13 +12764,11 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 void GALGAS_procCallEffectiveParameterListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                          const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                                          const GALGAS_lstring & in_mSelector,
-                                                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mParameterType,
-                                                                         const GALGAS_valueIR & in_mParameter
+                                                                         const GALGAS_operandIR & in_mParameter
                                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement_procCallEffectiveParameterListIR * p = NULL ;
   macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (in_mEffectiveParameterPassingMode,
                                                                       in_mSelector,
-                                                                      in_mParameterType,
                                                                       in_mParameter COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -12572,12 +12778,11 @@ void GALGAS_procCallEffectiveParameterListIR::makeAttributesFromObjects (capColl
 
 void GALGAS_procCallEffectiveParameterListIR::addAssign_operation (const GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
                                                                    const GALGAS_lstring & inOperand1,
-                                                                   const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                   const GALGAS_valueIR & inOperand3
+                                                                   const GALGAS_operandIR & inOperand2
                                                                    COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12589,14 +12794,13 @@ void GALGAS_procCallEffectiveParameterListIR::addAssign_operation (const GALGAS_
 
 void GALGAS_procCallEffectiveParameterListIR::modifier_insertAtIndex (const GALGAS_procEffectiveParameterPassingModeIR inOperand0,
                                                                       const GALGAS_lstring inOperand1,
-                                                                      const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
-                                                                      const GALGAS_valueIR inOperand3,
+                                                                      const GALGAS_operandIR inOperand2,
                                                                       const GALGAS_uint inInsertionIndex,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_procCallEffectiveParameterListIR (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -12608,8 +12812,7 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_insertAtIndex (const GALG
 
 void GALGAS_procCallEffectiveParameterListIR::modifier_removeAtIndex (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
                                                                       GALGAS_lstring & outOperand1,
-                                                                      GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                                      GALGAS_valueIR & outOperand3,
+                                                                      GALGAS_operandIR & outOperand2,
                                                                       const GALGAS_uint inRemoveIndex,
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
@@ -12621,13 +12824,11 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_removeAtIndex (GALGAS_pro
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
-      outOperand3.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
       outOperand0 = p->mObject.mAttribute_mEffectiveParameterPassingMode ;
       outOperand1 = p->mObject.mAttribute_mSelector ;
-      outOperand2 = p->mObject.mAttribute_mParameterType ;
-      outOperand3 = p->mObject.mAttribute_mParameter ;
+      outOperand2 = p->mObject.mAttribute_mParameter ;
     }
   }
 }
@@ -12636,8 +12837,7 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_removeAtIndex (GALGAS_pro
 
 void GALGAS_procCallEffectiveParameterListIR::modifier_popFirst (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
                                                                  GALGAS_lstring & outOperand1,
-                                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                                 GALGAS_valueIR & outOperand3,
+                                                                 GALGAS_operandIR & outOperand2,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12647,13 +12847,11 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_popFirst (GALGAS_procEffe
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
     outOperand0 = p->mObject.mAttribute_mEffectiveParameterPassingMode ;
     outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mParameterType ;
-    outOperand3 = p->mObject.mAttribute_mParameter ;
+    outOperand2 = p->mObject.mAttribute_mParameter ;
   }
 }
 
@@ -12661,8 +12859,7 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_popFirst (GALGAS_procEffe
 
 void GALGAS_procCallEffectiveParameterListIR::modifier_popLast (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
                                                                 GALGAS_lstring & outOperand1,
-                                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                                GALGAS_valueIR & outOperand3,
+                                                                GALGAS_operandIR & outOperand2,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -12672,13 +12869,11 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_popLast (GALGAS_procEffec
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
     outOperand0 = p->mObject.mAttribute_mEffectiveParameterPassingMode ;
     outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mParameterType ;
-    outOperand3 = p->mObject.mAttribute_mParameter ;
+    outOperand2 = p->mObject.mAttribute_mParameter ;
   }
 }
 
@@ -12686,8 +12881,7 @@ void GALGAS_procCallEffectiveParameterListIR::modifier_popLast (GALGAS_procEffec
 
 void GALGAS_procCallEffectiveParameterListIR::method_first (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
                                                             GALGAS_lstring & outOperand1,
-                                                            GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                            GALGAS_valueIR & outOperand3,
+                                                            GALGAS_operandIR & outOperand2,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12697,13 +12891,11 @@ void GALGAS_procCallEffectiveParameterListIR::method_first (GALGAS_procEffective
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
     outOperand0 = p->mObject.mAttribute_mEffectiveParameterPassingMode ;
     outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mParameterType ;
-    outOperand3 = p->mObject.mAttribute_mParameter ;
+    outOperand2 = p->mObject.mAttribute_mParameter ;
   }
 }
 
@@ -12711,8 +12903,7 @@ void GALGAS_procCallEffectiveParameterListIR::method_first (GALGAS_procEffective
 
 void GALGAS_procCallEffectiveParameterListIR::method_last (GALGAS_procEffectiveParameterPassingModeIR & outOperand0,
                                                            GALGAS_lstring & outOperand1,
-                                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                           GALGAS_valueIR & outOperand3,
+                                                           GALGAS_operandIR & outOperand2,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -12722,13 +12913,11 @@ void GALGAS_procCallEffectiveParameterListIR::method_last (GALGAS_procEffectiveP
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
-    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
     outOperand0 = p->mObject.mAttribute_mEffectiveParameterPassingMode ;
     outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mParameterType ;
-    outOperand3 = p->mObject.mAttribute_mParameter ;
+    outOperand2 = p->mObject.mAttribute_mParameter ;
   }
 }
 
@@ -12816,27 +13005,12 @@ GALGAS_lstring GALGAS_procCallEffectiveParameterListIR::reader_mSelectorAtIndex 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_procCallEffectiveParameterListIR::reader_mParameterTypeAtIndex (const GALGAS_uint & inIndex,
-                                                                                                      C_Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_procCallEffectiveParameterListIR::reader_mParameterAtIndex (const GALGAS_uint & inIndex,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_procCallEffectiveParameterListIR * p = (cCollectionElement_procCallEffectiveParameterListIR *) attributes.ptr () ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
-    result = p->mObject.mAttribute_mParameterType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR GALGAS_procCallEffectiveParameterListIR::reader_mParameterAtIndex (const GALGAS_uint & inIndex,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_procCallEffectiveParameterListIR * p = (cCollectionElement_procCallEffectiveParameterListIR *) attributes.ptr () ;
-  GALGAS_valueIR result ;
+  GALGAS_operandIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
     result = p->mObject.mAttribute_mParameter ;
@@ -12881,15 +13055,7 @@ GALGAS_lstring cEnumerator_procCallEffectiveParameterListIR::current_mSelector (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_procCallEffectiveParameterListIR::current_mParameterType (LOCATION_ARGS) const {
-  const cCollectionElement_procCallEffectiveParameterListIR * p = (const cCollectionElement_procCallEffectiveParameterListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
-  return p->mObject.mAttribute_mParameterType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valueIR cEnumerator_procCallEffectiveParameterListIR::current_mParameter (LOCATION_ARGS) const {
+GALGAS_operandIR cEnumerator_procCallEffectiveParameterListIR::current_mParameter (LOCATION_ARGS) const {
   const cCollectionElement_procCallEffectiveParameterListIR * p = (const cCollectionElement_procCallEffectiveParameterListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_procCallEffectiveParameterListIR) ;
   return p->mObject.mAttribute_mParameter ;

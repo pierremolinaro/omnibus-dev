@@ -5,23 +5,22 @@
 #----------------------------------------------------------------------------------------------------------------------*
 
 proc checkAssignmentCompatibility
-  ?sourceType:let @unifiedTypeMap-proxy inSourceType
-  ?sourceValue:let @valueIR inSourceValue
+  ?source:let @operandIR inSourceValue
   ?targetType:let @unifiedTypeMap-proxy inTargetType
   ?errorLocation:let @location inErrorLocation
 {
   if inTargetType == .null then
     # Ok
-  elsif inTargetType != inSourceType then
-    if [[inSourceType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
-      [inSourceValue literalInteger ?value:let value]
+  elsif inTargetType != inSourceValue.mType then
+    if [[inSourceValue.mType kind] isLiteralInteger] && [[inTargetType kind] isInteger] then
+      [inSourceValue.mValue literalInteger ?value:let value]
       [[inTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
       if (minTarget > value) || (maxTarget < value) then
         error inErrorLocation : "literal integer too large"
       end
     else
       error inErrorLocation
-      : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceType key]
+      : "object of type " + [inTargetType key] + " cannot be assigned from expression of type " + [inSourceValue.mType key]
     end
   end
 }

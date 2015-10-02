@@ -36,8 +36,7 @@ override method @extendExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outResultType
-  !result:@valueIR outResultValue
+  !result:@operandIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -51,19 +50,18 @@ override method @extendExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:@valueIR expressionValue
+    ?result:@operandIR expressionResult
   ]
 #--- Analyze type
-  outResultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types
-  if not [[outResultType kind] isInteger] then
-    error mTypeName : "this type is not an integer type" : outResultValue
-  elsif not [[expressionType kind] isInteger] then
-    error mEndOfExpression : "expression type is not an integer type" : outResultValue
+  if not [[resultType kind] isInteger] then
+    error mTypeName : "this type is not an integer type" : outResult
+  elsif not [[expressionResult.mType kind] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
-    [[outResultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
+    [[expressionResult.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
+    [[resultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
     if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
       if sourceSize > targetSize then
         error mTypeName: "cannot extend, use convert or trunc"
@@ -83,12 +81,10 @@ override method @extendExpressionAST analyzeExpression
         error mTypeName: "same size: useless extend operation"
       end
     end
-    getNewTempVariable (!outResultType !?ioTemporaries ?outResultValue)
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendExtend
-      !outResultValue
-      !outResultType
-      !expressionValue
-      !expressionType
+      !outResult
+      !expressionResult
     ]
   end
 }

@@ -1,18 +1,16 @@
 
 setter @instructionListIR appendLoadLocalVariable
-  ?let @valueIR inTargetValue
+  ?let @operandIR inTargetValue
   ?let @string inRegisterName
-  ?let @unifiedTypeMap-proxy inTargetVarType
 {
-  self += !@loadLocalVariableIR.new {!inTargetValue !inRegisterName !inTargetVarType}
+  self += !@loadLocalVariableIR.new {!inTargetValue !inRegisterName}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @loadLocalVariableIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @operandIR mTargetValue
   @string mVariableName
-  @unifiedTypeMap-proxy mVariableType
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -22,8 +20,8 @@ override method @loadLocalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mVariableType llvmTypeName]
-  ioCode += "  " + mTargetValue + " = load "
+  let llvmType = [mTargetValue.mType llvmTypeName]
+  ioCode += "  " + mTargetValue.mValue + " = load "
   ioCode += llvmType + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mVariableName) + "\n"
 }
 

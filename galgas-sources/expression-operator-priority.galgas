@@ -478,7 +478,6 @@ abstract method @expressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outResultType
-  !result:@valueIR outResultValue
+  !result:@operandIR outResult
 
 #----------------------------------------------------------------------------------------------------------------------*

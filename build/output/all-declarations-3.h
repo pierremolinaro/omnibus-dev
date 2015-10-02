@@ -1288,7 +1288,7 @@ class GALGAS_variableMap function_variableMapWithConstants (const class GALGAS_s
 
 void routine_getNewTempVariable (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                 class GALGAS_valueIR & outArgument2,
+                                 class GALGAS_operandIR & outArgument2,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -1620,10 +1620,9 @@ class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GAL
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_checkAssignmentCompatibility (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_valueIR constinArgument1,
-                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                           const class GALGAS_location constinArgument3,
+void routine_checkAssignmentCompatibility (const class GALGAS_operandIR constinArgument0,
+                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                           const class GALGAS_location constinArgument2,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -2416,5 +2415,66 @@ void routine_copyTextFile (const class GALGAS_string constinArgument0,
                            const class GALGAS_string constinArgument2,
                            class C_Compiler * inCompiler
                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'importFilesAndCompile'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_importFilesAndCompile (const class GALGAS_lstring constinArgument0,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Routine 'compileProject'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_compileProject (const class GALGAS_lstring constinArgument0,
+                             const class GALGAS_ast constinArgument1,
+                             const class GALGAS_lstring constinArgument2,
+                             const class GALGAS_location constinArgument3,
+                             const class GALGAS_string constinArgument4,
+                             const class GALGAS_stringset constinArgument5,
+                             class C_Compiler * inCompiler
+                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Routine 'recursiveImportFiles'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
+                                   class GALGAS_string inArgument1,
+                                   class GALGAS_lstringlist inArgument2,
+                                   class GALGAS_stringset & ioArgument3,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Routine 'addPredefinedTypes'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addPredefinedTypes (class GALGAS_declarationListAST & ioArgument0,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'addTargetSpecificFiles'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
+                                     class GALGAS_ast & ioArgument1,
+                                     const class GALGAS_string constinArgument2,
+                                     class GALGAS_stringset & ioArgument3,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 #endif

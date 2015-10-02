@@ -82,14 +82,13 @@ override method @whileInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:testInstructionGenerationList
-    ?type:let testExpressionType
-    ?result:@valueIR testValueName
+    ?result:@operandIR testValue
   ]
 #--- Check inferred type
-  if [testExpressionType kind] != .boolean then
-    error mEndOf_test_expression : "test expression type is '" + [testExpressionType key] + "', it should be boolean"
+  if [testValue.mType kind] != .boolean then
+    error mEndOf_test_expression : "test expression type is '" + [testValue.mType key] + "', it should be boolean"
   end
-  if [testValueName isStatic] then
+  if [testValue.mValue isStatic] then
     error mEndOf_test_expression : "test expression type should not be static"
   end
 #--- Analyze instruction list
@@ -112,7 +111,7 @@ override method @whileInstructionAST analyze
   ioInstructionGenerationList += !@whileInstructionIR.new {
     ![mEndOf_test_expression locationIndex]
     !testInstructionGenerationList
-    !testValueName
+    !testValue
     !instructionGenerationList
  }
 }
@@ -124,7 +123,7 @@ override method @whileInstructionAST analyze
 class @whileInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mTestInstructionGenerationList
-  @valueIR mTestExpression
+  @operandIR mTestExpression
   @instructionListIR mInstructionGenerationList
 }
 
@@ -135,14 +134,14 @@ override method @whileInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  ioCode += ";--- while (" + mTestExpression + ") {\n"
+  ioCode += ";--- while (" + mTestExpression.mValue + ") {\n"
   let labelTest = "while." + mLabelIndex + ".test"
   let labelLoop = "while." + mLabelIndex + ".loop"
   let labelEnd  = "while." + mLabelIndex + ".end"
   ioCode += "  br label %" + labelTest + "\n\n"
   ioCode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
-  ioCode += "  br i1 " + mTestExpression + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioCode += "  br i1 " + mTestExpression.mValue + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioCode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
   ioCode += "  br label %" + labelTest + "\n\n"

@@ -1,11 +1,19 @@
 #----------------------------------------------------------------------------------------------------------------------*
+#! @operandIR
+#----------------------------------------------------------------------------------------------------------------------*
+
+struct @operandIR {
+  @unifiedTypeMap-proxy mType
+  @valueIR mValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #! @valueIR
 #----------------------------------------------------------------------------------------------------------------------*
 
 enum @valueIR {
-#  case literalBoolean (@bool value)
   case literalInteger  (@bigint value)
-  case llvmLocalObject (@unifiedTypeMap-proxy type @string name)
+  case llvmLocalObject (@string name)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -13,7 +21,7 @@ enum @valueIR {
 getter @valueIR string -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (* @string name) : outResult = "%" + name
+  case llvmLocalObject (@string name) : outResult = "%" + name
   end
 }
 
@@ -22,7 +30,7 @@ getter @valueIR string -> @string outResult {
 getter @valueIR name -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (* @string name) : outResult = name
+  case llvmLocalObject (@string name) : outResult = name
   end
 }
 
@@ -31,7 +39,7 @@ getter @valueIR name -> @string outResult {
 getter @valueIR isStatic -> @bool outResult {
   switch self
   case literalInteger (*) : outResult = true
-  case llvmLocalObject (**) : outResult = false
+  case llvmLocalObject (*) : outResult = false
   end
 }
 

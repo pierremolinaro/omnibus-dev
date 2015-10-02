@@ -103,25 +103,23 @@ override method @globalConstantDeclaration enterInContext
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?instructionListIR:instructionGenerationList
-     ?type:let @unifiedTypeMap-proxy expressionType
-     ?result:let @valueIR expressionValue
+     ?result:let @operandIR expressionResult
   ]
 #--- Check assignment compatibility
   checkAssignmentCompatibility (
-    !sourceType:expressionType
-    !sourceValue:expressionValue
+    !source:expressionResult
     !targetType:constantType
     !errorLocation:mConstantName.location
   )
 #--- Check source expression is statically comtuted
-  if ([instructionGenerationList length] > 0) || not [expressionValue isStatic] then
+  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey
     !mConstantName
-    !if constantType == .null then expressionType else constantType end
-    !expressionValue
+    !if constantType == .null then expressionResult.mType else constantType end
+    !expressionResult.mValue
   ]
 }
 

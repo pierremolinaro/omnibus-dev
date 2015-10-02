@@ -1,19 +1,17 @@
 
 setter @instructionListIR appendLoadVolatileRegister
-  ?let @valueIR inTargetValue
+  ?let @operandIR inTargetValue
   ?let @string inRegisterName
-  ?let @unifiedTypeMap-proxy inTargetVarType
   ?let @bigint inAddress
 {
-  self += !@loadRegisterIR.new {!inTargetValue !inRegisterName !inTargetVarType !inAddress}
+  self += !@loadRegisterIR.new {!inTargetValue !inRegisterName !inAddress}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @loadRegisterIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @operandIR mTargetValue
   @string mRegisterName
-  @unifiedTypeMap-proxy mRegisterType
   @bigint mRegisterAddress
 }
 
@@ -24,8 +22,8 @@ override method @loadRegisterIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mRegisterType llvmTypeName]
-  ioCode += "  " + mTargetValue + " = load volatile " + llvmType + ", " + llvmType
+  let llvmType = [mTargetValue.mType llvmTypeName]
+  ioCode += "  " + mTargetValue.mValue + " = load volatile " + llvmType + ", " + llvmType
          + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }
 

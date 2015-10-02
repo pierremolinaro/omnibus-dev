@@ -88,16 +88,14 @@ override method @varInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let expressionType
-    ?result:@valueIR expressionResultValueName
+    ?result:@operandIR expressionResult
   ]
 #--- Check type compatibility
   if targetType == .null then
-    targetType = expressionType
+    targetType = expressionResult.mType
   end
   checkAssignmentCompatibility (
-    !sourceType:expressionType
-    !sourceValue:expressionResultValueName
+    !source:expressionResult
     !targetType:targetType
     !errorLocation:mVarName.location
   )
@@ -114,7 +112,7 @@ override method @varInstructionWithAssignmentAST analyze
     !false # Is not constant
   ]
 #--- Code generation
-  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string + " = " + expressionResultValueName]
+  [!?ioInstructionGenerationList appendComment !"var " + mVarName.string + " = " + expressionResult.mValue]
   [!?ioInstructionGenerationList appendAlloca
     !mVarName.string
     !targetType
@@ -122,7 +120,7 @@ override method @varInstructionWithAssignmentAST analyze
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !mVarName.string
     !targetType
-    !expressionResultValueName
+    !expressionResult
   ]
 }
 

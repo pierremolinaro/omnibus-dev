@@ -60,8 +60,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !type:@unifiedTypeMap-proxy outExpressionType
-  !result:@valueIR outResult
+  !result:@operandIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -75,38 +74,38 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?instructionListIR:ioInstructionGenerationList
-    ?type:let @unifiedTypeMap-proxy expressionType
-    ?result:let @valueIR expressionValue
+    ?result:let @operandIR expressionResult
   ]
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap operatorMap
   @llvmBinaryOperation binaryOperator
   @string commentOperator
-  @valueIR leftOperand
+  @operandIR leftOperand
   switch mOp 
   case unsignedComplement :
     operatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     commentOperator = "~"
-    switch [expressionType kind]
+    switch [expressionResult.mType kind]
     case boolean : error .nowhere : "internal error" : leftOperand
     case boolset : error .nowhere : "internal error" : leftOperand
     case literalString : error .nowhere : "internal error" : leftOperand
     case enumeration (*) :  error .nowhere : "internal error" : leftOperand
     case structure (*) :  error .nowhere : "internal error" : leftOperand
     case literalInteger :  error .nowhere : "internal error" : leftOperand
-    case integer (* * * @uint bitCount) : leftOperand = .literalInteger {!value:(1G << bitCount) - 1G}
+    case integer (* * * @uint bitCount) :
+      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:(1G << bitCount) - 1G}}
     end
   case notOperator :
     operatorMap = inContext.mNotOperatorMap
     binaryOperator = .xor
     commentOperator = "!"
-    leftOperand = .literalInteger {!value:1G}
+    leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:1G}}
   case minusNoOvf :
     operatorMap = inContext.mUnaryMinusOperatorMap
     binaryOperator = .subNoOVF
     commentOperator = "-"
-    leftOperand = .literalInteger {!value:0G}
+    leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
   case minus :
     operatorMap = inContext.mUnaryMinusOperatorMap
     if [inModeSet hasKey !exceptionModeName ()] then
@@ -115,22 +114,22 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
     if [option plm_options.noExceptionGeneration value] then
       binaryOperator = .subNoOVF
-      leftOperand = .literalInteger {!value:0G}
+      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
       commentOperator = "-"
     else
       binaryOperator = .ssubOVF
-      leftOperand = .literalInteger {!value:0G}
+      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
       commentOperator = "-OVF "
     end
   end
   [operatorMap checkWith
-    !type:expressionType
+    !type:expressionResult.mType
     !operatorLocation:mOperatorLocation
-    ?resultType:outExpressionType
+    ?resultType:let resultType
   ]
 #---
-  if [expressionValue isLiteralInteger] then
-    [expressionValue literalInteger ?value:let @bigint value]
+  if [expressionResult.mValue isLiteralInteger] then
+    [expressionResult.mValue literalInteger ?value:let @bigint value]
     @bigint result
     switch mOp 
     case minusNoOvf : result = - value
@@ -138,21 +137,20 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case minus : result = - value
     case notOperator : result = 1G ^ value
     end
-    outResult = .literalInteger {!value:result}
+    outResult = .new {!resultType !.literalInteger {!value:result}}
   else
   #--- Temp var
-    getNewTempVariable (!outExpressionType !?ioTemporaries ?outResult)
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
   #--- Comment
-    var comment = [outResult string] + " = " + commentOperator + expressionValue
+    var comment = [outResult.mValue string] + " = " + commentOperator + expressionResult.mValue
     [!?ioInstructionGenerationList appendComment !comment]
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
-      !outExpressionType
+      !mOperatorLocation
       !leftOperand
       !binaryOperator
-      !expressionValue
-      !mOperatorLocation
+      !expressionResult
     ]      
   end
 }
