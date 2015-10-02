@@ -23,6 +23,8 @@ proc loop `user () {
     gDelai = 0
     GPIOC_PCOR = 1 << 5 // Éteindre la led
   end  
+  let x $uint8 = 123
+  let y $uint5 = convert x : $uint5
 }
 
 //------------------------------------------------*

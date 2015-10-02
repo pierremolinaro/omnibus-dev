@@ -2,10 +2,9 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @conversionExpressionAST : @expressionAST {
+class @convertExpressionAST : @expressionAST {
   @expressionAST mExpression
   @lstring mTypeName
-  @bool mSilently
   @location mEndOfExpression
 }
 
@@ -13,7 +12,7 @@ class @conversionExpressionAST : @expressionAST {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @conversionExpressionAST addDependenceEdgeForStaticExpression
+override method @convertExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -23,10 +22,10 @@ override method @conversionExpressionAST addDependenceEdgeForStaticExpression
 #----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
-#! @conversionExpressionAST
+#! @convertExpressionAST
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @conversionExpressionAST analyzeExpression
+override method @convertExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -54,91 +53,83 @@ override method @conversionExpressionAST analyzeExpression
     ?result:@operandIR expressionResult
   ]
 #--- 
-  if (not inAllowExceptions) && (not mSilently) then
+  if not inAllowExceptions then
     error mTypeName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
   end
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types
   if not [[resultType kind] isInteger] then
-    error mTypeName : "this type is not an integer type"
+    error mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult.mType kind] isInteger] then
-    error mEndOfExpression : "expression type is not an integer type"
+    error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-      [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-      [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-      let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
-      if alwaysPossible then
-        error mTypeName:"useless explicit conversion"
-      end
+    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+    let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
+    if alwaysPossible then
+      error mTypeName:"useless explicit conversion"
+    end
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@convertInstructionIR.new {
+      !outResult
+      !expressionResult
+      !mTypeName.location
+    }
   end
-#--- Temp var
-  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-#--- Generate code
-#  ioInstructionGenerationList += !@extendInstructionIR.new {
-#    !outExpressionType
-#    !convertedExpressionType
-#    !outResult
-#    !expressionResult
-#    !mSilently
-#    !mTypeName.location
-#  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
-#! @extendInstructionIR
+#! @convertInstructionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @extendInstructionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @unifiedTypeMap-proxy mConvertedExpressionType
-  @objectInMemoryIR mTemporaryResultVariable
-  @objectInMemoryIR mOperand
-  @bool mSilently
+class @convertInstructionIR : @abstractInstructionIR {
+  @operandIR mTarget
+  @operandIR mOperand
   @location mLocation
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @extendInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+override method @convertInstructionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @extendInstructionIR llvmInstructionCode
+override method @convertInstructionIR llvmInstructionCode
   ?!@string ioCode
-  ?let @generationContext unused inGenerationContext
+  ?let @generationContext inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  if mSilently || [option plm_options.noExceptionGeneration value] then
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-  else
-    let okVar = "ok" + [mLocation locationIndex]
-    [[mConvertedExpressionType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-    [[mTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-    ioCode += "const bool " + okVar + " = "
-    if minTarget > minSource then
-      ioCode += "(" + [mOperand mangledName] + " >= " + minTarget + ")"
-    end
-    if maxTarget < maxSource then
-      if minTarget > minSource then
-        ioCode += " && "
-      end
-      ioCode += "(" + [mOperand mangledName] + " <= " + maxTarget + ")"
-    end
-    ioCode += " ;\n"
-    ioCode += "if (!" + okVar + ") {\n"
-    ioCode += "  raise_exception (5, "
-       + [[[mLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mLocation line] + ") ;\n"
-    ioCode += "}\n" 
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
+  let lbl = [[mLocation locationIndex] string]
+  let convertMinOkLabel = "min." + lbl + ".ok"
+  let convertMaxOkLabel = "max." + lbl + ".ok"
+  let convertFailLabel  = "fail." + lbl
+  let compareMinVar     = "cmp." + lbl + ".min"
+  let compareMaxVar     = "cmp." + lbl + ".max"
+  [[mTarget.mType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+  [[mOperand.mType kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?bitCount:*]
+  let operandType = [mOperand.mType llvmTypeName]
+  if minTarget != minSource then
+    ioCode += "  %" + compareMinVar + " = icmp "
+    ioCode += if operandIsUnsigned then "uge" else "sge" end
+    ioCode += " " + operandType + " " + mOperand.mValue + ", " + minTarget + "\n"
+    ioCode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
+    ioCode += convertMinOkLabel + ":\n"
   end
+  ioCode += "  %" + compareMaxVar + " = icmp "
+  ioCode += if operandIsUnsigned then "ule" else "sle" end
+  ioCode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
+  ioCode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
+  ioCode += convertFailLabel + ":\n"
+  ioCode += "  call void @raise_exception ("
+  ioCode += inGenerationContext.mExceptionCodeLLVMType + " 5, "
+  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
+  ioCode += "  unreachable\n\n"
+  ioCode += convertMaxOkLabel + ":\n"
+  ioCode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
