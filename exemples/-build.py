@@ -99,5 +99,6 @@ runCommand (["python", "../makefile-macosx/build+release.py"])
 compileSource ("01-blinkled.plm")
 compileSource ("02-blinkled-systick.plm")
 compileSource ("03-blinkled-systick-enum.plm")
+compileSource ("04-blinkled-systick-struct.plm")
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -350,7 +350,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !structureTypeName}
     @propertyMap propertyMap
     switch [type kind]
-    case structure (propMap) : propertyMap = propMap
+    case structure (propMap *) : propertyMap = propMap
     case enumeration (*) : propertyMap = {}
     case integer (* * * *) : propertyMap = {}
     case literalInteger : propertyMap = {}

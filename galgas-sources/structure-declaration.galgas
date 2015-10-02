@@ -119,8 +119,8 @@ getter @procedureDeclarationListAST-element getMangledName -> @string outMangled
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @propertyList {
-  @unifiedTypeMap-proxy mTypeProxy
-  @lstring mPropertyName
+  @string mPropertyName
+  @unifiedTypeMap-proxy mType
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -151,12 +151,12 @@ override method @structureDeclaration enterInContext
     end
   end
 #--- Properties
-  @literalStructureList structInitList = {}
+#  @literalStructureList structInitList = {}
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   for () in mStructureFieldListAST do
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
-    propertyList += !fieldTypeNameProxy !mFieldName
+    propertyList += !mFieldName.string !fieldTypeNameProxy
     [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy]
  #   structInitList += ![fieldTypeNameProxy initStaticValue]
   end
@@ -185,7 +185,7 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!propertyMap:propertyMap}
+    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !constructorMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
@@ -198,33 +198,33 @@ override method @structureDeclaration enterInContext
 #  INIT ANALYSIS                                                                                                       *
 #----------------------------------------------------------------------------------------------------------------------*
 
-enum @literalStructure {
-  case unsignedInteger (@bigint value)
-  case signedInteger (@bigint value)
-  case string (@string value @string name)
-  case structure (@literalStructureList value)
-}
+#enum @literalStructure {
+#  case unsignedInteger (@bigint value)
+#  case signedInteger (@bigint value)
+#  case string (@string value @string name)
+#  case structure (@literalStructureList value)
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-list @literalStructureList {
-  @literalStructure mStructure
-}
+#list @literalStructureList {
+#  @literalStructure mStructure
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @instanciationMap {
-  @literalStructureList mInstanciation
-  insert insertKey error message "the '$%K' type instantiation is already declared in %L"
-  search searchKey error message "the '$%K' type does not implement type instanciation"
-}
+#map @instanciationMap {
+#  @literalStructureList mInstanciation
+#  insert insertKey error message "the '$%K' type instantiation is already declared in %L"
+#  search searchKey error message "the '$%K' type does not implement type instanciation"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @structureDeclaration initAnalysis
   ?!context:@semanticContext ioContext
 {
-  @literalStructureList initStructureList = {}
+#  @literalStructureList initStructureList = {}
   @globalLiteralStringMap globalLiteralStringMap = {} # Unused here
   for () in mStructureFieldListAST do
   #--- Field type
@@ -278,7 +278,7 @@ override method @structureDeclaration initAnalysis
 #    end
   end
 #---
-  [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
+#  [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -290,7 +290,7 @@ override method @structureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Analyze field declaration
-  @structureFieldListForGeneration structureFieldListForGeneration = {}
+#  @structureFieldListForGeneration structureFieldListForGeneration = {}
   @stringset fieldNameSet = {}
   for () in mStructureFieldListAST do
   #--- Field type
@@ -320,10 +320,10 @@ override method @structureDeclaration semanticAnalysis
       ?result:@operandIR resultValue
     ]
   #---
-    structureFieldListForGeneration +=
-      !resultValue.mType
-      !mFieldName.string
-#      !initExpressionGeneratedCode
+#    structureFieldListForGeneration +=
+#      !resultValue.mType
+#      !mFieldName.string
+##      !initExpressionGeneratedCode
   end
 #--- Generate code
 #  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
@@ -336,35 +336,18 @@ override method @structureDeclaration semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @structureIR : @abstractTypeIR {
-  @string mStructureName
-  @structureFieldListForGeneration mStructureFieldListForGeneration
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @structureFieldListForGeneration {
-  @unifiedTypeMap-proxy mFieldType
-  @string mFieldName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-private filewrapper structureGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "structure-declaration.galgasTemplate"
-    ?@string STRUCTURE_NAME
-    ?@structureFieldListForGeneration FIELD_LIST
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @structureIR headerCodeGenerationForType -> @string outCode {
-  outCode = [filewrapper structureGenerationTemplate.declaration
-    !mStructureName
-    !mStructureFieldListForGeneration
-  ]
+proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioCode {
+  for () in inTypeMap do
+    if [kind isStructure] then
+      [kind structure ?propertyMap:* ?propertyList:let propertyList]
+      ioCode += "%" + lkey + " = type {"
+      for () in propertyList
+        do ioCode += [mType llvmTypeName]
+        between ioCode += ", "
+      end
+      ioCode += "}\n"
+    end
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

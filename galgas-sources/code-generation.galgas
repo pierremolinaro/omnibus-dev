@@ -4,23 +4,23 @@
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @literalStructureList literalValue -> @string result {
-  result = "{"
-  for (ls) in self do
-    switch ls
-    case unsignedInteger (@bigint value) :
-      result += [value string]
-    case signedInteger (@bigint value) :
-      result += [value string]
-    case string (* @string name) :
-      result += name
-    case structure (@literalStructureList valueList) :
-      result += [valueList literalValue]
-    end
-  between result += ", "
-  end
-  result += "}"
-}
+#getter @literalStructureList literalValue -> @string result {
+#  result = "{"
+#  for (ls) in self do
+#    switch ls
+#    case unsignedInteger (@bigint value) :
+#      result += [value string]
+#    case signedInteger (@bigint value) :
+#      result += [value string]
+#    case string (* @string name) :
+#      result += name
+#    case structure (@literalStructureList valueList) :
+#      result += [valueList literalValue]
+#    end
+#  between result += ", "
+#  end
+#  result += "}"
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -36,8 +36,8 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = mangledNameForGlobalVariable (!name)
   case localAccess (@lstring access) :
     outResult = access.string
-  case literalStructure (@literalStructureList s) :
-    outResult = [s literalValue]
+#  case literalStructure (@literalStructureList s) :
+#    outResult = [s literalValue]
   end
 }
 
@@ -71,12 +71,6 @@ list @instructionListIR {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @abstractTypeIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-abstract getter @abstractTypeIR headerCodeGenerationForType -> @string outCode
-
-#----------------------------------------------------------------------------------------------------------------------*
 #! codeGeneration
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -100,6 +94,7 @@ proc codeGeneration
   ?outputFile:let @string inSourceFileName
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?typeMap:let @unifiedTypeMap inTypeMap
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
@@ -121,6 +116,7 @@ proc codeGeneration
     !productDir:productDirectory
     !eof:inEndOfSourceFileLocation
     !intermediateCode:inIntermediateCodeStruct
+    !typeMap:inTypeMap
     !target:inTargetName
     !exceptionCodeType:inExceptionCodeType
     !exceptionLineType:inExceptionLineType
@@ -141,6 +137,7 @@ proc generateLLVMfile
   ?productDir:let @string inProductDirectory
   ?eof:let @location inEndOfSourceFileLocation
   ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?typeMap:let @unifiedTypeMap inTypeMap
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
@@ -162,6 +159,10 @@ proc generateLLVMfile
   for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
     code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
   end
+  code += "\n"
+#----------------------------------------- Structure types
+  code += llvmTitleComment (!"Structure types")
+  declareLLVMstructures (!inTypeMap !?code)
   code += "\n"
 #----------------------------------------- Global constants
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
