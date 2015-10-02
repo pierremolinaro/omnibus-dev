@@ -1,0 +1,36 @@
+
+setter @instructionListIR appendGetElementPtr
+  ?let @objectInMemoryIR inTarget
+  ?let @objectInMemoryIR inSource
+  ?let @uint inIndex
+{
+  self += !@getElementPtrIR.new {!inTarget !inSource !inIndex}
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @getElementPtrIR : @abstractInstructionIR {
+  @objectInMemoryIR mTarget
+  @objectInMemoryIR mSource
+  @uint mIndex
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @getElementPtrIR llvmInstructionCode
+  ?!@string ioCode
+  ?let @generationContext unused inGenerationContext
+  ?!@stringset unused ioIntrinsicsDeclarationSet
+{
+  let llvmType = [[mSource type] llvmTypeName]
+  ioCode += "  " + [mTarget name] + " = getelementptr inbounds "
+  ioCode += llvmType + ", " + llvmType + "* " + [mSource name] + ", i32 0, i32 " + mIndex + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @getElementPtrIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+}
+
+
+#----------------------------------------------------------------------------------------------------------------------*
