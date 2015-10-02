@@ -115,48 +115,19 @@ override method @varInExpressionAST analyzeExpression
         case enumeration (*) :
           error field : "an enumeration does not handle field access"
         case structure (* @propertyMap propertyMap *) :
-          [propertyMap searchKey !field ?let type]
+          [propertyMap searchKey !field ?let type ?let idx]
           getNewTempVariable (!type !?ioTemporaries ?let newResultingVariable)
-#          ioInstructionGenerationList += !@fieldAccessIR.new {
-#            !outExpressionType
-#            !newResultingVariable
-#            !resultingVariable
-#            !field
-#          }
-          outResult = newResultingVariable 
+          [!?ioInstructionGenerationList appendExtractValue
+            !newResultingVariable
+            !outResult
+            !idx
+           ]
+           outResult = newResultingVariable 
         case integer (* * * *) :
           error field : "an integer does not handle field access"
       end    
     end
   end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#! @fieldAccessIR
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @fieldAccessIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @objectInMemoryIR mResult
-  @objectInMemoryIR mSource
-  @lstring mField
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @fieldAccessIR llvmInstructionCode
-  ?!@string ioCode
-  ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
-{
-  ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mResult mangledName]
-  ioCode += " = " +  [mSource mangledName] + "." + mangledNameForProperty (!name:mField.string) + " ;\n"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override method @fieldAccessIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mSource enterAccessibleEntities !?ioAccessibleEntities]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

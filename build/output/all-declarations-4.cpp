@@ -10449,21 +10449,18 @@ GALGAS_extendIR GALGAS_extendIR::extractObject (const GALGAS_object & inObject,
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cPtr_fieldAccessIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+typeComparisonResult cPtr_extractValueIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
-  const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_fieldAccessIR) ;
+  const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_extractValueIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetType.objectCompare (p->mAttribute_mTargetType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
+    result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mField.objectCompare (p->mAttribute_mField) ;
+    result = mAttribute_mIndex.objectCompare (p->mAttribute_mIndex) ;
   }
   return result ;
 }
@@ -10471,7 +10468,7 @@ typeComparisonResult cPtr_fieldAccessIR::dynamicObjectCompare (const acPtr_class
 //---------------------------------------------------------------------------------------------------------------------*
 
 
-typeComparisonResult GALGAS_fieldAccessIR::objectCompare (const GALGAS_fieldAccessIR & inOperand) const {
+typeComparisonResult GALGAS_extractValueIR::objectCompare (const GALGAS_extractValueIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
@@ -10489,74 +10486,55 @@ typeComparisonResult GALGAS_fieldAccessIR::objectCompare (const GALGAS_fieldAcce
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_fieldAccessIR::GALGAS_fieldAccessIR (void) :
+GALGAS_extractValueIR::GALGAS_extractValueIR (void) :
 GALGAS_abstractInstructionIR () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_fieldAccessIR::GALGAS_fieldAccessIR (const cPtr_fieldAccessIR * inSourcePtr) :
+GALGAS_extractValueIR::GALGAS_extractValueIR (const cPtr_extractValueIR * inSourcePtr) :
 GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_fieldAccessIR) ;
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_extractValueIR) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_fieldAccessIR GALGAS_fieldAccessIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetType,
-                                                            const GALGAS_objectInMemoryIR & inAttribute_mResult,
-                                                            const GALGAS_objectInMemoryIR & inAttribute_mSource,
-                                                            const GALGAS_lstring & inAttribute_mField
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_fieldAccessIR result ;
-  if (inAttribute_mTargetType.isValid () && inAttribute_mResult.isValid () && inAttribute_mSource.isValid () && inAttribute_mField.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_fieldAccessIR (inAttribute_mTargetType, inAttribute_mResult, inAttribute_mSource, inAttribute_mField COMMA_THERE)) ;
+GALGAS_extractValueIR GALGAS_extractValueIR::constructor_new (const GALGAS_operandIR & inAttribute_mTarget,
+                                                              const GALGAS_operandIR & inAttribute_mSource,
+                                                              const GALGAS_uint & inAttribute_mIndex
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_extractValueIR result ;
+  if (inAttribute_mTarget.isValid () && inAttribute_mSource.isValid () && inAttribute_mIndex.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_extractValueIR (inAttribute_mTarget, inAttribute_mSource, inAttribute_mIndex COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_fieldAccessIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+GALGAS_operandIR GALGAS_extractValueIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
-    const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_fieldAccessIR) ;
-    result = p->mAttribute_mTargetType ;
+    const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_extractValueIR) ;
+    result = p->mAttribute_mTarget ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_fieldAccessIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetType ;
+GALGAS_operandIR cPtr_extractValueIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectInMemoryIR result ;
+GALGAS_operandIR GALGAS_extractValueIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
-    const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_fieldAccessIR) ;
-    result = p->mAttribute_mResult ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR cPtr_fieldAccessIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectInMemoryIR GALGAS_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectInMemoryIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_fieldAccessIR) ;
+    const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_extractValueIR) ;
     result = p->mAttribute_mSource ;
   }
   return result ;
@@ -10564,110 +10542,106 @@ GALGAS_objectInMemoryIR GALGAS_fieldAccessIR::reader_mSource (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR cPtr_fieldAccessIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_extractValueIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_fieldAccessIR::reader_mField (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
+GALGAS_uint GALGAS_extractValueIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+  GALGAS_uint result ;
   if (NULL != mObjectPtr) {
-    const cPtr_fieldAccessIR * p = (const cPtr_fieldAccessIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_fieldAccessIR) ;
-    result = p->mAttribute_mField ;
+    const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_extractValueIR) ;
+    result = p->mAttribute_mIndex ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_fieldAccessIR::reader_mField (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mField ;
+GALGAS_uint cPtr_extractValueIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                       Pointer class for @fieldAccessIR class                                        *
+//                                       Pointer class for @extractValueIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_fieldAccessIR::cPtr_fieldAccessIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetType,
-                                        const GALGAS_objectInMemoryIR & in_mResult,
-                                        const GALGAS_objectInMemoryIR & in_mSource,
-                                        const GALGAS_lstring & in_mField
-                                        COMMA_LOCATION_ARGS) :
+cPtr_extractValueIR::cPtr_extractValueIR (const GALGAS_operandIR & in_mTarget,
+                                          const GALGAS_operandIR & in_mSource,
+                                          const GALGAS_uint & in_mIndex
+                                          COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetType (in_mTargetType),
-mAttribute_mResult (in_mResult),
+mAttribute_mTarget (in_mTarget),
 mAttribute_mSource (in_mSource),
-mAttribute_mField (in_mField) {
+mAttribute_mIndex (in_mIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * cPtr_fieldAccessIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_fieldAccessIR ;
+const C_galgas_type_descriptor * cPtr_extractValueIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_extractValueIR ;
 }
 
-void cPtr_fieldAccessIR::description (C_String & ioString,
-                                      const int32_t inIndentation) const {
-  ioString << "[@fieldAccessIR:" ;
-  mAttribute_mTargetType.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
+void cPtr_extractValueIR::description (C_String & ioString,
+                                       const int32_t inIndentation) const {
+  ioString << "[@extractValueIR:" ;
+  mAttribute_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mField.description (ioString, inIndentation+1) ;
+  mAttribute_mIndex.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-acPtr_class * cPtr_fieldAccessIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_extractValueIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_fieldAccessIR (mAttribute_mTargetType, mAttribute_mResult, mAttribute_mSource, mAttribute_mField COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_extractValueIR (mAttribute_mTarget, mAttribute_mSource, mAttribute_mIndex COMMA_THERE)) ;
   return ptr ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                 @fieldAccessIR type                                                 *
+//                                                @extractValueIR type                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_fieldAccessIR ("fieldAccessIR",
-                                      & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+kTypeDescriptor_GALGAS_extractValueIR ("extractValueIR",
+                                       & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_fieldAccessIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_fieldAccessIR ;
+const C_galgas_type_descriptor * GALGAS_extractValueIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_extractValueIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_fieldAccessIR::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_extractValueIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_fieldAccessIR (*this)) ;
+    macroMyNew (result, GALGAS_extractValueIR (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_fieldAccessIR GALGAS_fieldAccessIR::extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_fieldAccessIR result ;
-  const GALGAS_fieldAccessIR * p = (const GALGAS_fieldAccessIR *) inObject.embeddedObject () ;
+GALGAS_extractValueIR GALGAS_extractValueIR::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_extractValueIR result ;
+  const GALGAS_extractValueIR * p = (const GALGAS_extractValueIR *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_fieldAccessIR *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_extractValueIR *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("fieldAccessIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("extractValueIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

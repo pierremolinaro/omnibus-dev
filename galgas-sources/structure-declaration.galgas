@@ -127,6 +127,7 @@ list @propertyList {
 
 map @propertyMap {
   @unifiedTypeMap-proxy mTypeProxy
+  @uint mIndex
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
 }
@@ -156,7 +157,7 @@ override method @structureDeclaration enterInContext
   for () in mStructureFieldListAST do
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
     propertyList += !mFieldName.string !fieldTypeNameProxy
-    [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy]
+    [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy ![propertyMap count]]
   end
 #--- Procedures
   @procedureMap procedureMap = {}

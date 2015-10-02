@@ -3,8 +3,8 @@ target "teensy-3-1-sequential-systick"
 //------------------------------------------------*
 
 struct $point {
-  var x $uint32 = 1
-  var y $int32 = 2
+  var x $uint32 = 200
+  var y $uint32 = 500
 }
 
 //struct $point3 {
@@ -55,13 +55,13 @@ proc wait `user (?ms: inDuration $uint32) {
 //------------------------------------------------*
 
 proc loop `user () {
-  wait (!ms:250)
   var p = $point ()
+  wait (!ms:p.x)
 //  zz = zzz.p.x
 //  zzz.p.x = zz
 //  zzz = $point3 ()
   GPIOC_PSOR = 1 << 5 // Allumer la led
-  wait (!ms:250)
+  wait (!ms:p.y)
   GPIOC_PCOR = 1 << 5  // Éteindre la led
 }
 
