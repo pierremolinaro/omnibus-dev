@@ -230,7 +230,7 @@ class @literal_literal_integerInfixOperation : @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @literal_literal_integerInfixOperation generateCode
+override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
   ?let @operandIR inLeftOperand

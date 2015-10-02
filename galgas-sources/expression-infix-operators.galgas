@@ -70,7 +70,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @infixOperatorMap checkWith
+method @infixOperatorMap checkBinaryOperationWith
   ?leftType:let @unifiedTypeMap-proxy inLeftType
   ?rightType:let @unifiedTypeMap-proxy inRightType
   ?operatorLocation:let @location inOperatorLocation
@@ -133,7 +133,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
 #------------------- Check operand types
-  [operatorMap checkWith
+  [operatorMap checkBinaryOperationWith
     !leftType:leftOperand.mType
     !rightType:rightOperand.mType
     !operatorLocation:mOperatorLocation
@@ -141,7 +141,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?op:let @infixOperatorDescription binaryOperator
   ]
 #------------------- Generate code
-  [binaryOperator generateCode
+  [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
     !leftOperand
@@ -150,6 +150,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !resultType
     ?outResult
   ]
+
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -317,7 +318,7 @@ abstract class @infixOperatorDescription {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-abstract method @infixOperatorDescription generateCode
+abstract method @infixOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   ?let @operandIR inLeftOperand

@@ -41,22 +41,24 @@ enum @llvmBinaryOperation {
 #----------------------------------------------------------------------------------------------------------------------*
 
 setter @instructionListIR appendBinaryOperation
-  ?let @operandIR inTargetOperand
+  ?let @valueIR inTarget
+  ?let @unifiedTypeMap-proxy inOperandType
   ?let @location inLocation
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeft
   ?let @llvmBinaryOperation inOperation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRight
 {
-  self += !@binaryOperationIR.new {!inTargetOperand !inLeftOperand !inOperation !inRightOperand !inLocation}
+  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @binaryOperationIR : @abstractInstructionIR {
-  @operandIR mTarget
-  @operandIR mLeft
+  @valueIR mTarget
+  @unifiedTypeMap-proxy mOperandType
+  @valueIR mLeft
   @llvmBinaryOperation mOperation
-  @operandIR mRight
+  @valueIR mRight
   @location mLocation
 }
 
@@ -74,19 +76,19 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTarget.mType llvmTypeName]
-  ioCode += "  " + mTarget.mValue + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
-  ioCode += " (" + llvmType + " " + mLeft.mValue + ", " + llvmType + " " + mRight.mValue + ")\n"
-  ioCode += "  " + mTarget.mValue + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTarget.mValue + ".r, 1\n"
-  let labelName = [mTarget.mValue name]
-  ioCode += "  br i1 " + mTarget.mValue + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
+  let llvmType = [mOperandType llvmTypeName]
+  ioCode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
+  ioCode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
+  ioCode += "  " + mTarget + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 1\n"
+  let labelName = [mTarget name]
+  ioCode += "  br i1 " + mTarget + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioCode += labelName + ".ovf:\n"
   ioCode += "  call void @raise_exception ("
   ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
   ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
   ioCode += "  unreachable\n\n"
   ioCode += labelName + ".noovf:\n"
-  ioCode += "  " + mTarget.mValue + " = extractvalue {" + llvmType + ", i1} " + mTarget.mValue + ".r, 0\n"
+  ioCode += "  " + mTarget + " = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 0\n"
   ioIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
@@ -98,22 +100,22 @@ override method @binaryOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@stringset ioIntrinsicsDeclarationSet
 {
-  let llvmType = [mTarget.mType llvmTypeName]
+  let llvmType = [mOperandType llvmTypeName]
   switch mOperation
   case addNoOVF :
-    ioCode += "  " + mTarget.mValue + " = add " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = add " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case subNoOVF :
-    ioCode += "  " + mTarget.mValue + " = sub " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = sub " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case mulNoOVF :
-    ioCode += "  " + mTarget.mValue + " = mul " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = mul " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case udivNoOVF :
-    ioCode += "  " + mTarget.mValue + " = udiv " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = udiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case sdivNoOVF :
-    ioCode += "  " + mTarget.mValue + " = sdiv " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = sdiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case uremNoOVF :
-    ioCode += "  " + mTarget.mValue + " = urem " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = urem " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case sremNoOVF :
-    ioCode += "  " + mTarget.mValue + " = srem " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = srem " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case uaddOVF :
     [self enterCodeForOverflowOperation
       !"uadd"
@@ -195,37 +197,37 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioIntrinsicsDeclarationSet
     ]
   case and :
-    ioCode += "  " + mTarget.mValue + " = and " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = and " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case ior :
-    ioCode += "  " + mTarget.mValue + " = or " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = or " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case xor :
-    ioCode += "  " + mTarget.mValue + " = xor " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = xor " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case shl :
-    ioCode += "  " + mTarget.mValue + " = shl " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = shl " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case ashr :
-    ioCode += "  " + mTarget.mValue + " = ashr " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = ashr " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case lshr :
-    ioCode += "  " + mTarget.mValue + " = lshr " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = lshr " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_eq :
-    ioCode += "  " + mTarget.mValue + " = icmp eq " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp eq " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ne :
-    ioCode += "  " + mTarget.mValue + " = icmp ne " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp ne " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ult :
-    ioCode += "  " + mTarget.mValue + " = icmp ult " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp ult " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ule :
-    ioCode += "  " + mTarget.mValue + " = icmp ule " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp ule " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ugt :
-    ioCode += "  " + mTarget.mValue + " = icmp ugt " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp ugt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_uge :
-    ioCode += "  " + mTarget.mValue + " = icmp uge " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp uge " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_slt :
-    ioCode += "  " + mTarget.mValue + " = icmp slt " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp slt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sle :
-    ioCode += "  " + mTarget.mValue + " = icmp sle " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp sle " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sgt :
-    ioCode += "  " + mTarget.mValue + " = icmp sgt " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp sgt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sge :
-    ioCode += "  " + mTarget.mValue + " = icmp sge " + llvmType + " " + mLeft.mValue + ", " + mRight.mValue + "\n"
+    ioCode += "  " + mTarget + " = icmp sge " + llvmType + " " + mLeft + ", " + mRight + "\n"
   end
 }
 

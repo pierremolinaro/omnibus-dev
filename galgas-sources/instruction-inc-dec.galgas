@@ -160,11 +160,12 @@ override method @incDecInstructionAST analyze
 #--- Increment / decrement variable
   getNewTempVariable (!type!?ioTemporaries ?let resultValue)
   [!?ioInstructionGenerationList appendBinaryOperation
-    !resultValue
+    !resultValue.mValue
+    !resultValue.mType
     !mVarName.location
-    !variableValue
+    !variableValue.mValue
     !llvmOperator
-    !.new {!inContext.mLiteralIntegerType !.literalInteger {!value:1G}}
+    !.literalInteger {!value:1G}
   ]
 #--- Store variable
   [variable storeInMemory

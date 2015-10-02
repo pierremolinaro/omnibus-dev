@@ -146,11 +146,12 @@ override method @prefixOperatorExpressionAST analyzeExpression
     [!?ioInstructionGenerationList appendComment !comment]
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult
+      !outResult.mValue
+      !outResult.mType
       !mOperatorLocation
-      !leftOperand
+      !leftOperand.mValue
       !binaryOperator
-      !expressionResult
+      !expressionResult.mValue
     ]      
   end
 }
