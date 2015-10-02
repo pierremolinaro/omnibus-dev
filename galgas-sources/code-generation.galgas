@@ -164,8 +164,6 @@ proc generateLLVMfile
   code += llvmTitleComment (!"Structure types")
   declareLLVMstructures (!inTypeMap !?code)
   code += "\n"
-#----------------------------------------- Structure constants
-  declareStructureInitializationConstants (!inIntermediateCodeStruct.mInitializedStructConstantList !?code)
 #----------------------------------------- Global constants
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
     before code += llvmTitleComment (!"Global constants")

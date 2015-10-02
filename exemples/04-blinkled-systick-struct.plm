@@ -7,10 +7,10 @@ struct $point {
   var y $uint32 = 500
 }
 
-//struct $point3 {
-//  var p $point = $point ()
-//  var z $int32 = 3
-//}
+struct $point3 {
+  var p $point = $point ()
+  var z $int32 = 3
+}
 
 //------------------------------------------------*
 
@@ -55,13 +55,13 @@ proc wait `user (?ms: inDuration $uint32) {
 //------------------------------------------------*
 
 proc loop `user () {
-  var p = $point ()
-  wait (!ms:p.x)
+  var p = $point3 ()
+  wait (!ms:p.p.x)
 //  zz = zzz.p.x
 //  zzz.p.x = zz
 //  zzz = $point3 ()
   GPIOC_PSOR = 1 << 5 // Allumer la led
-  wait (!ms:p.y)
+  wait (!ms:p.p.y)
   GPIOC_PCOR = 1 << 5  // Éteindre la led
 }
 

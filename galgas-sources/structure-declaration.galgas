@@ -201,6 +201,7 @@ override method @structureDeclaration initAnalysis
   ?!context:@semanticContext ioContext
 {
   @globalLiteralStringMap globalLiteralStringMap = {} # Unused here
+  @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
   #--- Field type
     let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
@@ -226,9 +227,15 @@ override method @structureDeclaration initAnalysis
     if not [expressionIR.mValue isStatic] then
       error mFieldName : "initialization expression cannot be computed statically"
     end
+    @unifiedTypeMap-proxy type
+    if fieldType != .null then
+      type = fieldType
+    else
+      type = expressionIR.mType
+    end
+    operandIRList += !.new {!type !expressionIR.mValue}
   end
-#---
-#  [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
+  [!?ioContext.mConstructorMap insertKey !mStructureName !operandIRList]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -236,63 +243,9 @@ override method @structureDeclaration initAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @structureDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  ?context:let @semanticContext unused inContext
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
-#--- Analyze field declaration
-  @stringset fieldNameSet = {}
-  @operandIRList operandIRList = {}
-  for () in mStructureFieldListAST do
-  #--- Field type
-    let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
-      then .null
-      else .searchKey {!inContext.mTypeMap !mOptionalFieldType}
-    end
-  #--- Field name
-    if [fieldNameSet hasKey !mFieldName.string] then
-      error mFieldName : "the '" + mFieldName + "' field is already declared"
-    end
-    fieldNameSet += !mFieldName.string
-  #--- Init expression
-    @instructionListIR initInstructionGenerationList = {}
-    @semanticTemporariesStruct temporaries = .default
-    [mInitExpression analyzeExpression
-      !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-      !optionalReceiverType:.noReceiver
-      !optionalTargetType:fieldType
-      !context:inContext
-      !modes:{}
-      !allowException:false
-      !?temporary:temporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
-      !?variableMap:*
-      !?instructionListIR:initInstructionGenerationList
-      ?result:let @operandIR resultValue
-    ]
-    @unifiedTypeMap-proxy type
-    if fieldType != .null then
-      type = fieldType
-    else
-      type = resultValue.mType
-    end
-    operandIRList += !.new {!type !resultValue.mValue}
-  end
-  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
-  ioIntermediateCodeStruct.mInitializedStructConstantList += !mStructureName.string !structureType !operandIRList
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @initializedStructConstantList {
-  @string mStructureName
-  @unifiedTypeMap-proxy mStructureType
-  @operandIRList mInitValue
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-list @operandIRList {
-  @operandIR mOperand
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -310,22 +263,6 @@ proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioCode {
       end
       ioCode += "}\n"
     end
-  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-proc declareStructureInitializationConstants ?let @initializedStructConstantList inList ?!@string ioCode {
-  for () in inList
-  before ioCode+= llvmTitleComment (!"Structure constants")
-  do
-    ioCode += "@" + mStructureName + ".init = internal constant " + [mStructureType llvmTypeName] + " {"
-    for () in mInitValue
-      do ioCode += [mOperand.mType llvmTypeName] + " " + mOperand.mValue
-      between ioCode += ", "
-    end
-    ioCode += "}\n"
-  after ioCode += "\n"
   end
 }
 

@@ -142,6 +142,58 @@ class cEnumAssociatedValues_receiverType_mutatingReceiver : public cEnumAssociat
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @valueIR enum, associated values                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_literalInteger : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_literalInteger (const GALGAS_bigint & inAssociatedValue0
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_literalInteger (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_llvmLocalObject : public cEnumAssociatedValues {
+  public : const GALGAS_string mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_string & inAssociatedValue0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_llvmLocalObject (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_llvmStructureConstant : public cEnumAssociatedValues {
+  public : const GALGAS_operandIRList mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_llvmStructureConstant (const GALGAS_operandIRList & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_llvmStructureConstant (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -458,6 +510,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_registerMap mAttribute_mRegisterMap ;
   public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
+  public : GALGAS_constructorMap mAttribute_mConstructorMap ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_incDecOperatorMap mAttribute_mIncOperatorMap ;
   public : GALGAS_incDecOperatorMap mAttribute_mDecOperatorMap ;
@@ -516,6 +569,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_registerMap & in_mRegisterMap,
                                    const GALGAS_globalConstantMap & in_mGlobalConstantMap,
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
+                                   const GALGAS_constructorMap & in_mConstructorMap,
                                    const GALGAS_modeMap & in_mModeMap,
                                    const GALGAS_incDecOperatorMap & in_mIncOperatorMap,
                                    const GALGAS_incDecOperatorMap & in_mDecOperatorMap,
@@ -570,10 +624,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_registerMap & inOperand11,
                                                           const class GALGAS_globalConstantMap & inOperand12,
                                                           const class GALGAS_globalVariableMap & inOperand13,
-                                                          const class GALGAS_modeMap & inOperand14,
-                                                          const class GALGAS_incDecOperatorMap & inOperand15,
+                                                          const class GALGAS_constructorMap & inOperand14,
+                                                          const class GALGAS_modeMap & inOperand15,
                                                           const class GALGAS_incDecOperatorMap & inOperand16,
-                                                          const class GALGAS_infixOperatorMap & inOperand17,
+                                                          const class GALGAS_incDecOperatorMap & inOperand17,
                                                           const class GALGAS_infixOperatorMap & inOperand18,
                                                           const class GALGAS_infixOperatorMap & inOperand19,
                                                           const class GALGAS_infixOperatorMap & inOperand20,
@@ -595,9 +649,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                           const class GALGAS_infixOperatorMap & inOperand36,
                                                           const class GALGAS_infixOperatorMap & inOperand37,
                                                           const class GALGAS_infixOperatorMap & inOperand38,
-                                                          const class GALGAS_prefixOperatorMap & inOperand39,
+                                                          const class GALGAS_infixOperatorMap & inOperand39,
                                                           const class GALGAS_prefixOperatorMap & inOperand40,
-                                                          const class GALGAS_prefixOperatorMap & inOperand41
+                                                          const class GALGAS_prefixOperatorMap & inOperand41,
+                                                          const class GALGAS_prefixOperatorMap & inOperand42
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -621,6 +676,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mBooleanType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap reader_mBooleanXorOperatorMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_constructorMap reader_mConstructorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_incDecOperatorMap reader_mDecOperatorMap (LOCATION_ARGS) const ;
 
@@ -747,37 +804,6 @@ void routine_declareLLVMstructures (const class GALGAS_unifiedTypeMap constinArg
 class GALGAS_string categoryReader_llvmTypeName (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Routine 'declareStructureInitializationConstants'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_declareStructureInitializationConstants (const class GALGAS_initializedStructConstantList constinArgument0,
-                                                      class GALGAS_string & ioArgument1,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'llvmTitleComment'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmTitleComment (class GALGAS_string inArgument0,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Category Getter '@valueIR string' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_string (const class GALGAS_valueIR & inObject,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1689,7 +1715,6 @@ void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDecla
 
 class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_initializedStructConstantList mAttribute_mInitializedStructConstantList ;
   public : GALGAS_globalLiteralStringMap mAttribute_mGlobalLiteralStringMap ;
   public : GALGAS_registerMapIR mAttribute_mRegisterMap ;
   public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
@@ -1717,8 +1742,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_intermediateCodeStruct (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_intermediateCodeStruct (const GALGAS_initializedStructConstantList & in_mInitializedStructConstantList,
-                                          const GALGAS_globalLiteralStringMap & in_mGlobalLiteralStringMap,
+  public : GALGAS_intermediateCodeStruct (const GALGAS_globalLiteralStringMap & in_mGlobalLiteralStringMap,
                                           const GALGAS_registerMapIR & in_mRegisterMap,
                                           const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
@@ -1741,18 +1765,17 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_initializedStructConstantList & inOperand0,
-                                                                 const class GALGAS_globalLiteralStringMap & inOperand1,
-                                                                 const class GALGAS_registerMapIR & inOperand2,
-                                                                 const class GALGAS_globalVariableMapIR & inOperand3,
-                                                                 const class GALGAS_globalConstantMapIR & inOperand4,
-                                                                 const class GALGAS_procedureMapIR & inOperand5,
-                                                                 const class GALGAS_functionMapIR & inOperand6,
-                                                                 const class GALGAS_stringset & inOperand7,
-                                                                 const class GALGAS_bootListIR & inOperand8,
-                                                                 const class GALGAS_initListIR & inOperand9,
-                                                                 const class GALGAS_instructionListIR & inOperand10,
-                                                                 const class GALGAS_instructionListIR & inOperand11
+  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_globalLiteralStringMap & inOperand0,
+                                                                 const class GALGAS_registerMapIR & inOperand1,
+                                                                 const class GALGAS_globalVariableMapIR & inOperand2,
+                                                                 const class GALGAS_globalConstantMapIR & inOperand3,
+                                                                 const class GALGAS_procedureMapIR & inOperand4,
+                                                                 const class GALGAS_functionMapIR & inOperand5,
+                                                                 const class GALGAS_stringset & inOperand6,
+                                                                 const class GALGAS_bootListIR & inOperand7,
+                                                                 const class GALGAS_initListIR & inOperand8,
+                                                                 const class GALGAS_instructionListIR & inOperand9,
+                                                                 const class GALGAS_instructionListIR & inOperand10
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -1782,8 +1805,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMapIR reader_mGlobalVariableMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initListIR reader_mInitList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_initializedStructConstantList reader_mInitializedStructConstantList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procedureMapIR reader_mProcedureMapIR (LOCATION_ARGS) const ;
 
@@ -2049,6 +2070,16 @@ void categoryMethod_enterAccessibleEntities (const class GALGAS_procedureMapIR_2
 
 class GALGAS_string function_llvmSeparatorLine (class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'llvmTitleComment'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmTitleComment (class GALGAS_string inArgument0,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

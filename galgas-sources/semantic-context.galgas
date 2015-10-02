@@ -140,6 +140,20 @@ list @typeList {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+list @operandIRList {
+  @operandIR mOperand
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @constructorMap {
+  @operandIRList mInitValues
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 struct @semanticContext {
   @uint mPointerSize # in bit count
   @unifiedTypeMap-proxy mBooleanType
@@ -155,6 +169,7 @@ struct @semanticContext {
   @registerMap mRegisterMap
   @globalConstantMap mGlobalConstantMap
   @globalVariableMap mGlobalVariableMap
+  @constructorMap mConstructorMap
   @modeMap mModeMap
   @incDecOperatorMap mIncOperatorMap            # ++, &++
   @incDecOperatorMap mDecOperatorMap            # --, &--
