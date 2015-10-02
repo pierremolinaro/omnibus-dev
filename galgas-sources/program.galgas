@@ -122,6 +122,7 @@ private proc compileProject
           !outputFile:inSourceFile.string
           !eof:inEndOfSourceFile
           !intermediateCode:intermediateCodeStruct
+          !typeMap:semanticContext.mTypeMap
           !target:inTargetName
           !exceptionCodeType:semanticContext.mExceptionCodeType
           !exceptionLineType:semanticContext.mExceptionLineType

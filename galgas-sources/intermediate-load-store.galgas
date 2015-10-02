@@ -39,8 +39,8 @@ method @objectInMemoryIR loadFromMemory
     ]
   case localAccess (@lstring access) :
     error access : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
-  case literalStructure (*) :
-    error .nowhere : "@objectInMemoryIR loadFromMemory:literalStructure" : outResultingValue
+#  case literalStructure (*) :
+#    error .nowhere : "@objectInMemoryIR loadFromMemory:literalStructure" : outResultingValue
   end
 }
 
@@ -61,8 +61,8 @@ method @objectInMemoryIR storeInMemory
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   case localAccess (@lstring unused access) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
-  case literalStructure (@literalStructureList unused value) :
-     error .nowhere : "<<@objectInMemoryIR storeInMemory literalStructure>>"
+#  case literalStructure (@literalStructureList unused value) :
+#     error .nowhere : "<<@objectInMemoryIR storeInMemory literalStructure>>"
   end
 }
 

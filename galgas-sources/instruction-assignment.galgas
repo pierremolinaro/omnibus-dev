@@ -76,7 +76,7 @@ override method @assignmentInstructionAST analyze
       error fieldName : "a static string does not have fields"
     case enumeration (*) :
       error fieldName : "an enumeration does not have fields"
-    case structure (@propertyMap propertyMap) :
+    case structure (@propertyMap propertyMap *) :
       [propertyMap searchKey !fieldName ?targetType]
     case integer (* * * *) :  
       error fieldName : "an integer does not have fields"

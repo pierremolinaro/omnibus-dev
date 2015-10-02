@@ -427,17 +427,6 @@ void categoryModifier_appendStoreLocalVariable (class GALGAS_instructionListIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Category method '@literalStructureList enterAccessibleEntities'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryMethod_enterAccessibleEntities (const class GALGAS_literalStructureList inObject,
-                                             class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -458,37 +447,6 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category Getter '@literalStructureList literalValue' (as function)                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string categoryReader_literalValue (const class GALGAS_literalStructureList & inObject,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                       Abstract category reader '@abstractTypeIR headerCodeGenerationForType'                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef class GALGAS_string (*categoryReaderSignature_abstractTypeIR_headerCodeGenerationForType) (const class cPtr_abstractTypeIR * inObject,
-                                                                                                   class C_Compiler * inCompiler
-                                                                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterCategoryReader_headerCodeGenerationForType (const int32_t inClassIndex,
-                                                      categoryReaderSignature_abstractTypeIR_headerCodeGenerationForType inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string callCategoryReader_headerCodeGenerationForType (const class cPtr_abstractTypeIR * inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

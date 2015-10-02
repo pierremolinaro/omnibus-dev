@@ -114,7 +114,7 @@ override method @varInExpressionAST analyzeExpression
           error field : "a literal string does not handle field access"
         case enumeration (*) :
           error field : "an enumeration does not handle field access"
-        case structure (@propertyMap propertyMap) :
+        case structure (@propertyMap propertyMap *) :
           [propertyMap searchKey !field ?let type]
           getNewTempVariable (!type !?ioTemporaries ?let newResultingVariable)
 #          ioInstructionGenerationList += !@fieldAccessIR.new {

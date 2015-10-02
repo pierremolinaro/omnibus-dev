@@ -116,20 +116,3 @@ class @literalStringTypeIR : @abstractTypeIR {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-
-private filewrapper literalStringGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "literal-string-declaration.galgasTemplate"
-    ?@string STATIC_STRING_NAME
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @literalStringTypeIR headerCodeGenerationForType -> @string outCode {
-  outCode = [filewrapper literalStringGenerationTemplate.declaration
-    !mLiteralStringTypeName
-  ]
-}
-
-#----------------------------------------------------------------------------------------------------------------------*

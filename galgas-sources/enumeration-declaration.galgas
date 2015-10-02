@@ -168,58 +168,6 @@ override method @enumerationDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
-#--- Get C type
-#  var cType = ""
-#  for (attribute) in mAttributeList do
-#    if attribute.string == "unique" then
-#      # Nothing to do: handled in 'enterInContext'
-#    elsif cType != "" then
-#      error attribute : "duplicated attribute"
-#    else
-#      [inContext.mTargetBaseTypeMap searchKey !attribute ?cType ?* ?let isSigned]
-#      if isSigned then
-#        var s = "an unsigned base type should be used here; possible values:"
-#        for (baseTypeName * * baseTypeIsSigned) in inContext.mTargetBaseTypeMap do
-#          if not baseTypeIsSigned then
-#            s += "\n- %" + baseTypeName
-#          end
-#        end
-#        error attribute : s
-#      end
-#    end
-#  end
-##--- No explicit type attribute ? use "size"
-#  if cType == "" then
-#    [inContext.mTargetBaseTypeMap searchKey !["size" nowhere] ?cType ?* ?*]
-#  end
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-#  CODE GENERATION                                                                                                     *
-#----------------------------------------------------------------------------------------------------------------------*
-
-class @enumerationIR : @abstractTypeIR {
-  @string mEnumerationName
-  @string mActualTypeName
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-private filewrapper enumerationGenerationTemplate in "../generation-templates" {
-}{
-}{
-  template declaration "enumeration-declaration.galgasTemplate"
-    ?@string ENUMERATION_NAME
-    ?@string ACTUAL_TYPE_NAME
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-override getter @enumerationIR headerCodeGenerationForType -> @string outCode {
-  outCode = [filewrapper enumerationGenerationTemplate.declaration
-    !mEnumerationName
-    !mActualTypeName
-  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
