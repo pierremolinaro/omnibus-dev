@@ -14,6 +14,7 @@ struct @operandIR {
 enum @valueIR {
   case literalInteger  (@bigint value)
   case llvmLocalObject (@string name)
+  case llvmStructureConstant (@operandIRList values)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -22,6 +23,13 @@ getter @valueIR string -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = "%" + name
+  case llvmStructureConstant (@operandIRList inValues) :
+    outResult = "{"
+    for () in inValues
+      do outResult += [mOperand.mType llvmTypeName] + " " + mOperand.mValue
+      between outResult += ", "
+    end
+    outResult += "}"
   end
 }
 
@@ -31,6 +39,7 @@ getter @valueIR name -> @string outResult {
   switch self
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = name
+  case llvmStructureConstant (*) : outResult = "{...}"
   end
 }
 
@@ -40,6 +49,7 @@ getter @valueIR isStatic -> @bool outResult {
   switch self
   case literalInteger (*) : outResult = true
   case llvmLocalObject (*) : outResult = false
+  case llvmStructureConstant (*) : outResult = true
   end
 }
 
@@ -54,7 +64,6 @@ enum @objectInMemoryIR {
   case globalConstant (@unifiedTypeMap-proxy type  @string name)
 
   case localAccess (@lstring access)
-#  case literalStructure (@literalStructureList value)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
