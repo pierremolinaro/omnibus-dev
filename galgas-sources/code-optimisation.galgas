@@ -13,32 +13,16 @@ struct @accessibleEntities {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-#method @literalStructureList enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-#  for (ls) in self do
-#    switch ls
-#    case unsignedInteger (*) :
-#    case signedInteger (*) :
-#    case string (@string unused value @string unused name) :
-#    case structure (@literalStructureList valueList) :
-#      [valueList enterAccessibleEntities !?ioAccessibleEntities]
-#    end
-#  end
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
   case register (* @lstring name *) :
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name
-  case localValue (* @lstring unused name) :
+  case localValue (* @string unused name) :
   case globalConstant (* @string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   case localAccess (@lstring unused access) :
-#  case literalStructure (@literalStructureList s) :
-#    [s enterAccessibleEntities !?ioAccessibleEntities]
   end
 }
 

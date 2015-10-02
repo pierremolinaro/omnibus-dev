@@ -57,7 +57,9 @@ override method @assignmentInstructionAST analyze
   [!?ioVariableMap neutralAccess
     !mTargetVarName
     ?@unifiedTypeMap-proxy targetType
-    ?5*
+    ?*
+    ?@objectInMemoryIR target
+    ?3*
     ?let isConstant
   ]
   if isConstant then
@@ -77,7 +79,15 @@ override method @assignmentInstructionAST analyze
     case enumeration (*) :
       error fieldName : "an enumeration does not have fields"
     case structure (* @propertyMap propertyMap *) :
-      [propertyMap searchKey !fieldName ?targetType ?*]
+      comment += "." + fieldName
+      [propertyMap searchKey !fieldName ?targetType ?let idx]
+      getNewTempObjectInMemory (!targetType !?ioTemporaries ?let result)
+      [!?ioInstructionGenerationList appendGetElementPtr
+        !result
+        !target
+        !idx
+      ]
+      target = result
     case integer (* * * *) :  
       error fieldName : "an integer does not have fields"
     case literalInteger :  
@@ -109,7 +119,7 @@ override method @assignmentInstructionAST analyze
     !mTargetVarName
     ?*
     ?let accessIsAllowed
-    ?let targetVariableKind
+    ?*
     ?let isCopiable
     ?3*
   ]
@@ -121,7 +131,7 @@ override method @assignmentInstructionAST analyze
   end
 #--- Code generation
   [!?ioInstructionGenerationList appendComment !comment]
-  [targetVariableKind storeInMemory
+  [target storeInMemory
     !value:sourceOperand
     !?instructionListIR:ioInstructionGenerationList
   ]

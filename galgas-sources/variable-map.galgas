@@ -119,6 +119,17 @@ proc getNewTempVariable
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+proc getNewTempObjectInMemory
+  ?let @unifiedTypeMap-proxy inType
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@objectInMemoryIR outTempVariable
+{
+  outTempVariable = .localValue {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex}
+  ioTemporaries.mTemporaryIndex ++
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 sharedmap @variableMap {
   @unifiedTypeMap-proxy mType
   @bool mReadAccessAllowed

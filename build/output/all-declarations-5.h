@@ -422,6 +422,19 @@ void categoryModifier_appendLoadStructureConstant (class GALGAS_instructionListI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Category setter '@instructionListIR appendGetElementPtr'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
+                                           const class GALGAS_objectInMemoryIR constin_inTarget,
+                                           const class GALGAS_objectInMemoryIR constin_inSource,
+                                           const class GALGAS_uint constin_inIndex,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -521,6 +534,26 @@ class GALGAS_string categoryReader_name (const class GALGAS_valueIR & inObject,
 class GALGAS_bool categoryReader_isStatic (const class GALGAS_valueIR & inObject,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category Getter '@objectInMemoryIR name' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string categoryReader_name (const class GALGAS_objectInMemoryIR & inObject,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Category Getter '@objectInMemoryIR type' (as function)                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_unifiedTypeMap_2D_proxy categoryReader_type (const class GALGAS_objectInMemoryIR & inObject,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

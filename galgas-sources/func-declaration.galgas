@@ -174,7 +174,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !mResultVarName
     !resultType
     !true
-    !.localValue {!type:resultType !name:mResultVarName}
+    !.localValue {!type:resultType !name:mResultVarName.string}
     !true
     !{}
     !true
@@ -188,7 +188,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
       !formalArgumentName
       !typeProxy
       !true
-      !.localValue {!type:typeProxy !name:formalArgumentName}
+      !.localValue {!type:typeProxy !name:formalArgumentName.string}
       ![typeProxy copiable]
       !{}
       !false

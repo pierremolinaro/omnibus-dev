@@ -240,11 +240,11 @@ class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssoci
 
 class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                              const GALGAS_lstring & inAssociatedValue1
+                                                              const GALGAS_string & inAssociatedValue1
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -1346,6 +1346,18 @@ class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporariesStruct ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Routine 'getNewTempObjectInMemory'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_getNewTempObjectInMemory (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                       class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                       class GALGAS_objectInMemoryIR & outArgument2,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
