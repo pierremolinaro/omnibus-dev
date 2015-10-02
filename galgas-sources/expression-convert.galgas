@@ -71,11 +71,18 @@ override method @convertExpressionAST analyzeExpression
       error mTypeName:"useless explicit conversion"
     end
     getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@convertInstructionIR.new {
-      !outResult
-      !expressionResult
-      !mTypeName.location
-    }
+    if [option plm_options.noExceptionGeneration value] then
+      ioInstructionGenerationList += !@truncateInstructionIR.new {
+        !outResult
+        !expressionResult
+      }
+    else
+      ioInstructionGenerationList += !@convertInstructionIR.new {
+        !outResult
+        !expressionResult
+        !mTypeName.location
+      }
+    end
   end
 }
 

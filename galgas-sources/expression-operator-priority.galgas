@@ -439,18 +439,18 @@ syntax extension common_syntax {
 
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
 
-#  rule <primary> !@expressionAST outExpression {
-#    $truncate$
-#    <expression> ?outExpression
-#    let endOfExpression = @location.here
-#    $:$
-#    $typeName$ ?let typeIdentifier
-#    outExpression = @truncateExpressionAST.new {
-#      !outExpression
-#      !typeIdentifier
-#      !endOfExpression
-#    }
-#  }
+  rule <primary> !@expressionAST outExpression {
+    $truncate$
+    <expression> ?outExpression
+    let endOfExpression = @location.here
+    $:$
+    $typeName$ ?let typeIdentifier
+    outExpression = @truncateExpressionAST.new {
+      !outExpression
+      !typeIdentifier
+      !endOfExpression
+    }
+  }
 
   #••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••*
 

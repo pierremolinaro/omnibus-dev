@@ -2,10 +2,9 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @convertExpressionAST : @expressionAST {
+class @truncateExpressionAST : @expressionAST {
   @expressionAST mExpression
   @lstring mTypeName
-  @bool mSilently
   @location mEndOfExpression
 }
 
@@ -13,7 +12,7 @@ class @convertExpressionAST : @expressionAST {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @convertExpressionAST addDependenceEdgeForStaticExpression
+override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -23,10 +22,10 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 #----------------------------------------------------------------------------------------------------------------------*
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
-#! @convertExpressionAST
+#! @truncateExpressionAST
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @convertExpressionAST analyzeExpression
+override method @truncateExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -53,92 +52,53 @@ override method @convertExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR expressionResult
   ]
-#--- 
-  if (not inAllowExceptions) && (not mSilently) then
-    error mTypeName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
-  end
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types
   if not [[resultType kind] isInteger] then
-    error mTypeName : "this type is not an integer type"
+    error mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult.mType kind] isInteger] then
-    error mEndOfExpression : "expression type is not an integer type"
+    error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-      [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-      [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-      let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
-      if alwaysPossible then
-        error mTypeName:"useless explicit conversion"
-      end
+    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+    let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
+    if alwaysPossible then
+      error mTypeName:"useless explicit conversion"
+    end
+    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    ioInstructionGenerationList += !@truncateInstructionIR.new {
+      !outResult
+      !expressionResult
+    }
   end
-#--- Temp var
-  getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-#--- Generate code
-#  ioInstructionGenerationList += !@extendInstructionIR.new {
-#    !outExpressionType
-#    !convertedExpressionType
-#    !outResult
-#    !expressionResult
-#    !mSilently
-#    !mTypeName.location
-#  }
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
-#! @extendInstructionIR
+#! @truncateInstructionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @extendInstructionIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetType
-  @unifiedTypeMap-proxy mConvertedExpressionType
-  @objectInMemoryIR mTemporaryResultVariable
-  @objectInMemoryIR mOperand
-  @bool mSilently
-  @location mLocation
+class @truncateInstructionIR : @abstractInstructionIR {
+  @operandIR mTarget
+  @operandIR mOperand
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @extendInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  [mOperand enterAccessibleEntities !?ioAccessibleEntities]
+override method @truncateInstructionIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @extendInstructionIR llvmInstructionCode
+override method @truncateInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
-  if mSilently || [option plm_options.noExceptionGeneration value] then
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-  else
-    let okVar = "ok" + [mLocation locationIndex]
-    [[mConvertedExpressionType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-    [[mTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-    ioCode += "const bool " + okVar + " = "
-    if minTarget > minSource then
-      ioCode += "(" + [mOperand mangledName] + " >= " + minTarget + ")"
-    end
-    if maxTarget < maxSource then
-      if minTarget > minSource then
-        ioCode += " && "
-      end
-      ioCode += "(" + [mOperand mangledName] + " <= " + maxTarget + ")"
-    end
-    ioCode += " ;\n"
-    ioCode += "if (!" + okVar + ") {\n"
-    ioCode += "  raise_exception (5, "
-       + [[[mLocation file] lastPathComponent] utf8Representation]
-       + ", " + [mLocation line] + ") ;\n"
-    ioCode += "}\n" 
-    ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " " + [mTemporaryResultVariable mangledName]
-    ioCode += " = ((" + mangledNameForType (!name:[mTargetType key]) + ") " + [mOperand mangledName] + ") ;\n"
-  end
+  let operandType = [mOperand.mType llvmTypeName]
+  ioCode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
