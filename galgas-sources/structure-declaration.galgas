@@ -151,14 +151,12 @@ override method @structureDeclaration enterInContext
     end
   end
 #--- Properties
-#  @literalStructureList structInitList = {}
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   for () in mStructureFieldListAST do
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
     propertyList += !mFieldName.string !fieldTypeNameProxy
     [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy]
- #   structInitList += ![fieldTypeNameProxy initStaticValue]
   end
 #--- Procedures
   @procedureMap procedureMap = {}
@@ -185,8 +183,8 @@ override method @structureDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mStructureName
-    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-    !constructorMap:{}
+    !kind:.structure {!name:mStructureName.string !propertyMap:propertyMap !propertyList:propertyList}
+    !typedConstantMap:{}
     !procedureMap:procedureMap
     !copiable:copiable
     !equatable:false
@@ -198,33 +196,9 @@ override method @structureDeclaration enterInContext
 #  INIT ANALYSIS                                                                                                       *
 #----------------------------------------------------------------------------------------------------------------------*
 
-#enum @literalStructure {
-#  case unsignedInteger (@bigint value)
-#  case signedInteger (@bigint value)
-#  case string (@string value @string name)
-#  case structure (@literalStructureList value)
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#list @literalStructureList {
-#  @literalStructure mStructure
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-#map @instanciationMap {
-#  @literalStructureList mInstanciation
-#  insert insertKey error message "the '$%K' type instantiation is already declared in %L"
-#  search searchKey error message "the '$%K' type does not implement type instanciation"
-#}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 override method @structureDeclaration initAnalysis
   ?!context:@semanticContext ioContext
 {
-#  @literalStructureList initStructureList = {}
   @globalLiteralStringMap globalLiteralStringMap = {} # Unused here
   for () in mStructureFieldListAST do
   #--- Field type
@@ -248,34 +222,9 @@ override method @structureDeclaration initAnalysis
       !?instructionListIR:initInstructionGenerationList
       ?result:@operandIR expressionIR
     ]
-#    switch expressionIR
-#    case register (@lstring name *) :
-#      error name : "a register cannot be used as field initial value"
-#    case globalVariable (@lstring name) :
-#      error name : "a global variable cannot be used as field initial value"
-#    case localVariable (@lstring name) :
-#      error name : "a local variable cannot be used as field initial value"
-#    case inArgument (@lstring name) :
-#      error name : "an in formal argument cannot be used as field initial value"
-#    case inOutArgument (@lstring name) :
-#      error name : "an in/out formal argument cannot be used as field initial value"
-#    case outArgument (@lstring name) :
-#      error name : "an out formal argument cannot be used as field initial value"
-#    case localConstant (@lstring name) :
-#      error name : "a local constant cannot be used as field initial value"
-#    case temporaryConstant (*) :
-#      error .nowhere : "a temporary constant cannot be used as field initial value"
-#    case localAccess (@lstring access) :
-#      error access : "a property cannot be used as field initial value"
-#    case literalUnsignedInteger (@bigint value) :
-#      initStructureList += !.unsignedInteger {!value:value}
-#    case literalSignedInteger (@bigint value) :
-#      initStructureList += !.signedInteger {!value:value}
-#    case literalString (@string value @string name) :
-#      initStructureList += !.string {!value:value !name:name}
-#    case literalStructure (@literalStructureList value) :
-#      initStructureList += !.structure {!value:value}
-#    end
+    if not [expressionIR.mValue isStatic] then
+      error mFieldName : "initialization expression cannot be computed statically"
+    end
   end
 #---
 #  [!?ioContext.mInstanciationMap insertKey !mStructureName !initStructureList]
@@ -290,8 +239,8 @@ override method @structureDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Analyze field declaration
-#  @structureFieldListForGeneration structureFieldListForGeneration = {}
   @stringset fieldNameSet = {}
+  @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
   #--- Field type
     let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
@@ -317,19 +266,32 @@ override method @structureDeclaration semanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
       !?variableMap:*
       !?instructionListIR:initInstructionGenerationList
-      ?result:@operandIR resultValue
+      ?result:let @operandIR resultValue
     ]
-  #---
-#    structureFieldListForGeneration +=
-#      !resultValue.mType
-#      !mFieldName.string
-##      !initExpressionGeneratedCode
+    @unifiedTypeMap-proxy type
+    if fieldType != .null then
+      type = fieldType
+    else
+      type = resultValue.mType
+    end
+    operandIRList += !.new {!type !resultValue.mValue}
   end
-#--- Generate code
-#  [!?ioIntermediateCodeStruct.mTypeMapIR insertKey
-#    !mStructureName
-#    !@structureIR.new {!mStructureName.string !structureFieldListForGeneration}
-#  ]
+  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
+  ioIntermediateCodeStruct.mInitializedStructConstantList += !mStructureName.string !structureType !operandIRList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @initializedStructConstantList {
+  @string mStructureName
+  @unifiedTypeMap-proxy mStructureType
+  @operandIRList mInitValue
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @operandIRList {
+  @operandIR mOperand
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -339,14 +301,30 @@ override method @structureDeclaration semanticAnalysis
 proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioCode {
   for () in inTypeMap do
     if [kind isStructure] then
-      [kind structure ?propertyMap:* ?propertyList:let propertyList]
-      ioCode += "%" + lkey + " = type {"
+      [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList]
+      ioCode += "%" + name + " = type {"
       for () in propertyList
         do ioCode += [mType llvmTypeName]
         between ioCode += ", "
       end
       ioCode += "}\n"
     end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+proc declareStructureInitializationConstants ?let @initializedStructConstantList inList ?!@string ioCode {
+  for () in inList
+  before ioCode+= llvmTitleComment (!"Structure constants")
+  do
+    ioCode += "@" + mStructureName + ".init = internal constant " + [mStructureType llvmTypeName] + " {"
+    for () in mInitValue
+      do ioCode += [mOperand.mType llvmTypeName] + " " + mOperand.mValue
+      between ioCode += ", "
+    end
+    ioCode += "}\n"
+  after ioCode += "\n"
   end
 }
 

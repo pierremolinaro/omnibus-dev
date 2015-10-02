@@ -95,7 +95,7 @@ override method @enumerationDeclaration enterInContext
     end
   end
   @enumConstantMap enumConstantMap = {}
-  @constructorMap constructorMap = {}
+  @typedConstantMap constructorMap = {}
   for (cst) in mCaseNameList do
     let idx = [enumConstantMap count]
     [!?enumConstantMap insertKey !cst !idx]
@@ -104,7 +104,7 @@ override method @enumerationDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:mEnumerationName
     !kind:.enumeration {!constantMap:enumConstantMap}
-    !constructorMap:constructorMap
+    !typedConstantMap:constructorMap
     !procedureMap:{} # Procedure map
     !copiable:copiable
     !equatable:true

@@ -1,33 +1,33 @@
 
-setter @instructionListIR appendLoadLocalVariable
+setter @instructionListIR appendLoadStructureConstant
   ?let @operandIR inTargetValue
-  ?let @string inVariableName
+  ?let @string inTypeName
 {
-  self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName}
+  self += !@loadStructureConstantIR.new {!inTargetValue !inTypeName}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @loadLocalVariableIR : @abstractInstructionIR {
+class @loadStructureConstantIR : @abstractInstructionIR {
   @operandIR mTargetValue
-  @string mVariableName
+  @string mTypeName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadLocalVariableIR llvmInstructionCode
+override method @loadStructureConstantIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
   ?!@stringset unused ioIntrinsicsDeclarationSet
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
   ioCode += "  " + mTargetValue.mValue + " = load "
-  ioCode += llvmType + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mVariableName) + "\n"
+  ioCode += llvmType + ", " + llvmType + "* @" + mTypeName + ".init\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @loadLocalVariableIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
+override method @loadStructureConstantIR enterAccessibleEntities ?!@accessibleEntities unused ioAccessibleEntities {
 }
 
 

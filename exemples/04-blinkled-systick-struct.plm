@@ -56,7 +56,7 @@ proc wait `user (?ms: inDuration $uint32) {
 
 proc loop `user () {
   wait (!ms:250)
-//  var p = $point ()
+  var p = $point ()
 //  zz = zzz.p.x
 //  zzz.p.x = zz
 //  zzz = $point3 ()

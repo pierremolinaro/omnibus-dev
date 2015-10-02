@@ -2,9 +2,9 @@
 #  AST                                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
-class @constructorCall : @expressionAST {
+class @typedConstantCall : @expressionAST {
   @lstring mOptionalTypeName
-  @location mErrorLocation
+  @lstring mConstructorName
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -15,15 +15,14 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     @lstring optionalTypeName
-#    select
-#      optionalTypeName = .new {!"" !.here}
-#    or
+    select
+      optionalTypeName = .new {!"" !.here}
+    or
       $typeName$ ?optionalTypeName
-#    end
-    let errorLocation = @location.here
-    $($
-    $)$
-    outExpression = @constructorCall.new {!optionalTypeName !errorLocation}
+    end
+    $.$
+    $identifier$ ?let constructorName
+    outExpression = @typedConstantCall.new {!optionalTypeName !constructorName}
   }
 
 }
@@ -32,7 +31,7 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @constructorCall addDependenceEdgeForStaticExpression
+override method @typedConstantCall addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -45,17 +44,17 @@ override method @constructorCall addDependenceEdgeForStaticExpression
 #  SEMANTICS                                                                                                           *
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @constructorCall analyzeExpression
+override method @typedConstantCall analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType unused inReceiverType
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@operandIR outResult
 {
 #--- Analyze constructor source type
@@ -66,13 +65,11 @@ override method @constructorCall analyzeExpression
     resultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
   if resultType == .null then
-    error mErrorLocation : "cannot infer type" : outResult
+    error mConstructorName : "cannot infer type" : outResult
   else
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-    [!?ioInstructionGenerationList appendLoadStructureConstant
-      !outResult
-      ![resultType key]
-    ]
+    let constructorMap = [resultType typedConstantMap]
+    [constructorMap searchKey !mConstructorName ?let resultValue]
+    outResult = .new {!resultType !resultValue}
   end
 }
 

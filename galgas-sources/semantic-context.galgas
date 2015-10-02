@@ -9,7 +9,7 @@ enum @typeKind {
   case boolset
   case literalString
   case enumeration (@enumConstantMap constantMap)
-  case structure (@propertyMap propertyMap @propertyList propertyList)
+  case structure (@string name @propertyMap propertyMap @propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case literalInteger
 }
@@ -100,7 +100,7 @@ proc checkMode
 
 sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
-  @constructorMap constructorMap
+  @typedConstantMap typedConstantMap
   @procedureMap procedureMap
   @bool copiable
   @bool equatable
@@ -117,7 +117,7 @@ getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
   case boolean : outResult = "i1"
   case boolset : outResult = "<<boolset>>"
   case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
-  case structure (@propertyMap unused propertyMap *) :  outResult = "<<structure>>"
+  case structure (@string name @propertyMap unused propertyMap *) :  outResult = "%" + name
   case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
   case literalString :  outResult = "<<literalString>>"
   case literalInteger : outResult = "<<literalInteger>>"
@@ -126,7 +126,7 @@ getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-map @constructorMap {
+map @typedConstantMap {
   @valueIR mValue
   insert insertKey error message "the '%K' constructor is already declared in %L"
   search searchKey error message "there is no '%K' constructor"
@@ -147,7 +147,6 @@ struct @semanticContext {
   @unifiedTypeMap-proxy mExceptionCodeType
   @unifiedTypeMap-proxy mExceptionLineType
   @unifiedTypeMap mTypeMap
-#  @instanciationMap mInstanciationMap
   @procedureMap mProcedureMap
   @functionMap mFunctionMap
   @initRoutineMap mInitRoutineMap

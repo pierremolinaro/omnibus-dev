@@ -43,7 +43,7 @@ override method @literalIntegerDeclaration enterInContext
   [!?ioContext.mTypeMap insertKey
     !lkey:integerTypeName
     !kind:.literalInteger
-    !constructorMap:{}
+    !typedConstantMap:{}
     !procedureMap:{}
     !copiable:true
     !equatable:true
