@@ -8,7 +8,7 @@ import sys, os, subprocess, urllib
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-import make
+import makefile
 
 #----------------------------------------------------------------------------------------------------------------------*
 #   Run process and wait for termination                                                                               *
@@ -20,7 +20,7 @@ def runProcess (command) :
   if childProcess.poll () == None :
     childProcess.wait ()
   if childProcess.returncode != 0 :
-    print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
+    print makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ()
     sys.exit (childProcess.returncode)
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -40,7 +40,7 @@ def runProcessAndGetOutput (command) :
   if childProcess.poll () == None :
     childProcess.wait ()
   if childProcess.returncode != 0 :
-    print make.BOLD_RED () + "Error " + str (childProcess.returncode) + make.ENDC ()
+    print makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ()
     sys.exit (childProcess.returncode)
   return result
 
@@ -63,9 +63,9 @@ def downloadReportHook (a, b, fileSize) :
 def downloadArchive (archiveURL, archivePath):
   global downloadProgression
   downloadProgression = 0.0
-  make.runHiddenCommand (["rm", "-f", archivePath + ".downloading"])
-  make.runHiddenCommand (["rm", "-f", archivePath + ".tar.bz2"])
-  make.runHiddenCommand (["mkdir", "-p", os.path.dirname (archivePath)])
+  makefile.runHiddenCommand (["rm", "-f", archivePath + ".downloading"])
+  makefile.runHiddenCommand (["rm", "-f", archivePath + ".tar.bz2"])
+  makefile.runHiddenCommand (["mkdir", "-p", os.path.dirname (archivePath)])
   #print "URL: "+ archiveURL
   #print "Downloading... " + archivePath + ".downloading"
   try:
@@ -74,12 +74,12 @@ def downloadArchive (archiveURL, archivePath):
     fileSize = os.path.getsize (archivePath + ".downloading")
     ok = fileSize > 1000000
     if ok:
-      make.runHiddenCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
+      makefile.runHiddenCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
     else:
-      print make.BOLD_RED () + "Error: cannot download file" + make.ENDC ()
+      print makefile.BOLD_RED () + "Error: cannot download file" + makefile.ENDC ()
       sys.exit (1)
   except:
-    print make.BOLD_RED () + "Error: no network connection" + make.ENDC ()
+    print makefile.BOLD_RED () + "Error: no network connection" + makefile.ENDC ()
     sys.exit (1)
     
 #----------------------------------------------------------------------------------------------------------------------*
@@ -102,79 +102,79 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
   #--- Download compiler tool if needed
   if not os.path.exists (toolDirectory):
-    print make.BOLD_GREEN () + "Downloading compiler tool chain" + make.ENDC ()
+    print makefile.BOLD_GREEN () + "Downloading compiler tool chain" + makefile.ENDC ()
     archiveName = os.path.basename (toolDirectory)
     archiveURL = archiveBaseURL + archiveName + ".tar.bz2"
     downloadArchive (archiveURL, toolDirectory)
     installDir = os.path.normpath (toolDirectory + "/..")
     os.chdir (installDir)
-    make.runHiddenCommand (["bunzip2", "-k", archiveName + ".tar.bz2"])
-    make.runHiddenCommand (["rm", archiveName + ".tar.bz2"])
-    make.runHiddenCommand (["tar", "xf", archiveName + ".tar"])
-    make.runHiddenCommand (["rm", archiveName + ".tar"])
+    makefile.runHiddenCommand (["bunzip2", "-k", archiveName + ".tar.bz2"])
+    makefile.runHiddenCommand (["rm", archiveName + ".tar.bz2"])
+    makefile.runHiddenCommand (["tar", "xf", archiveName + ".tar"])
+    makefile.runHiddenCommand (["rm", archiveName + ".tar"])
   #---
   os.chdir (scriptDir)
   #print "Product directory: " + scriptDir
   #--- Build python makefile
-  makefile = make.Make ()
+  make = makefile.Make (goal)
   #--- Add C files compile rule
   objectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
     optimizedSource = objectDir + "/" + source + "-opt.ll"
-    rule = make.Rule (optimizedSource, "Optimizing " + source)
+    rule = makefile.Rule ([optimizedSource], "Optimizing " + source)
     rule.mDependences.append ("sources/" + source)
     rule.mDependences.append (currentFile)
     rule.mCommand += llvmOptimizerCompiler
     rule.mCommand += ["sources/" + source]
     rule.mCommand += ["-o", optimizedSource]
-    makefile.addRule (rule)
+    make.addRule (rule)
   #--- Compile LLVM source
     asSource = objectDir + "/" + source + ".s"
-    rule = make.Rule (asSource, "Compiling " + optimizedSource)
+    rule = makefile.Rule ([asSource], "Compiling " + optimizedSource)
     rule.mDependences.append (optimizedSource)
     rule.mCommand += LLCcompiler
     rule.mCommand += [optimizedSource]
     rule.mCommand += ["-o", asSource]
-    makefile.addRule (rule)
+    make.addRule (rule)
   #--- Assembling
     asObject = objectDir + "/" + source + ".s.o"
-    rule = make.Rule (asObject, "Assembling " + asSource)
+    rule = makefile.Rule ([asObject], "Assembling " + asSource)
     rule.mDependences.append (asSource)
     rule.mCommand += asAssembler
     rule.mCommand += [asSource]
     rule.mCommand += ["-o", asObject]
-    makefile.addRule (rule)
+    make.addRule (rule)
     objectList.append (asObject)
   #--- Add linker rule
   productELF = productDir + "/product.elf"
-  rule = make.Rule (productELF, "Linking " + productELF)
+  rule = makefile.Rule ([productELF], "Linking " + productELF)
   rule.mDependences += objectList
   rule.mCommand += linker
   rule.mCommand += objectList
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
   rule.mCommand += ["-Map=" + productELF + ".map"]
-  makefile.addRule (rule)
+  make.addRule (rule)
   #--- Add objcopy rule
   productHEX = productDir + "/product.ihex"
-  rule = make.Rule (productHEX, "Hexing " + productHEX)
+  rule = makefile.Rule ([productHEX], "Hexing " + productHEX)
   rule.mDependences += [productELF]
   rule.mCommand += objcopy
   rule.mCommand += ["-O", "ihex"]
   rule.mCommand += [productELF]
   rule.mCommand += [productHEX]
-  makefile.addRule (rule)
+  make.addRule (rule)
   #--- Add goals
-  makefile.addGoal ("run", [productHEX], "Building all and run")
-  makefile.addGoal ("all", [productHEX], "Building all")
-  makefile.addGoal ("display-object-size", [productHEX], "Display Object Size")
-  makefile.addGoal ("object-dump", [productHEX], "Dump Object Code")
+  make.addGoal ("run", [productHEX], "Building all and run")
+  make.addGoal ("all", [productHEX], "Building all")
+  make.addGoal ("display-object-size", [productHEX], "Display Object Size")
+  make.addGoal ("object-dump", [productHEX], "Dump Object Code")
   #--- Build
-  #makefile.printRules ()
-  makefile.runGoal (goal, maxParallelJobs, maxParallelJobs == 1)
+  #make.printRules ()
+  make.runGoal (maxParallelJobs, maxParallelJobs == 1)
   #--- Build Ok ?
-  makefile.printErrorCountAndExitOnError ()
+  make.printErrorCountAndExitOnError ()
   #--- Run or all ? Display size
   if (goal == "run") or (goal == "all") :
     s = runProcessAndGetOutput (displayObjectSize + objectList)
@@ -185,17 +185,17 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     print "Global: " + str (numbers [2]) + " bytes"
   #--- Run ?
   if goal == "run":
-    print make.BOLD_BLUE () + "Loading Teensy..." + make.ENDC ()
+    print makefile.BOLD_BLUE () + "Loading Teensy..." + makefile.ENDC ()
     runProcess (runExecutableOnTarget + [productHEX])
-    print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
   elif goal == "display-object-size":
-    print make.BOLD_BLUE () + "Display Object Sizes" + make.ENDC ()
+    print makefile.BOLD_BLUE () + "Display Object Sizes" + makefile.ENDC ()
     runProcess (displayObjectSize + objectList)
-    print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
   elif goal == "object-dump":
-    print make.BOLD_BLUE () + "Dump Object Code" + make.ENDC ()
+    print makefile.BOLD_BLUE () + "Dump Object Code" + makefile.ENDC ()
     runProcess (dumpObjectCode + [productELF])
-    print make.BOLD_GREEN () + "Success" + make.ENDC ()
+    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
 
 
 #----------------------------------------------------------------------------------------------------------------------*
