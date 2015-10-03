@@ -81,7 +81,7 @@ override method @incDecInstructionAST analyze
   ?modes:let @stringset inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {

@@ -15,6 +15,7 @@ enum @valueIR {
   case literalInteger  (@bigint value)
   case llvmLocalObject (@string name)
   case llvmStructureConstant (@operandIRList values)
+  case literalString  (@uint size @uint index)
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -30,6 +31,10 @@ getter @valueIR string -> @string outResult {
       between outResult += ", "
     end
     outResult += "}"
+  case literalString  (@uint size @uint index) :
+    let sizeStr = [size string]
+    outResult = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
+    outResult += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   end
 }
 
@@ -40,6 +45,7 @@ getter @valueIR name -> @string outResult {
   case literalInteger (@bigint value) : outResult = [value string]
   case llvmLocalObject (@string name) : outResult = name
   case llvmStructureConstant (*) : outResult = "{...}"
+  case literalString  (* @uint index) : outResult = literalStringName (!index)
   end
 }
 
@@ -50,6 +56,7 @@ getter @valueIR isStatic -> @bool outResult {
   case literalInteger (*) : outResult = true
   case llvmLocalObject (*) : outResult = false
   case llvmStructureConstant (*) : outResult = true
+  case literalString  (* *) : outResult = true
   end
 }
 

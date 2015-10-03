@@ -44,7 +44,7 @@ abstract method @instructionAST analyze
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
@@ -58,7 +58,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -90,7 +90,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {

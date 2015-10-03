@@ -193,6 +193,24 @@ class cEnumAssociatedValues_valueIR_llvmStructureConstant : public cEnumAssociat
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_valueIR_literalString : public cEnumAssociatedValues {
+  public : const GALGAS_uint mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_valueIR_literalString (const GALGAS_uint & inAssociatedValue0,
+                                                        const GALGAS_uint & inAssociatedValue1
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_valueIR_literalString (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      @objectInMemoryIR enum, associated values                                      *
 //                                                                                                                     *
@@ -1467,7 +1485,7 @@ void routine_checkMode (const class GALGAS_stringset constinArgument0,
 
 void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
                                    const class GALGAS_ast constinArgument1,
-                                   class GALGAS_globalLiteralStringMap & ioArgument2,
+                                   class GALGAS_staticStringMap & ioArgument2,
                                    class GALGAS_semanticContext & outArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
@@ -1481,7 +1499,7 @@ void routine_buildSemanticContext (const class GALGAS_declarationListAST constin
 typedef void (*categoryMethodSignature_abstractDeclaration_enterInContext) (const class cPtr_abstractDeclaration * inObject,
                                                                             const class GALGAS_procedureDeclarationListAST constinArgument0,
                                                                             class GALGAS_semanticContext & ioArgument1,
-                                                                            class GALGAS_globalLiteralStringMap & ioArgument2,
+                                                                            class GALGAS_staticStringMap & ioArgument2,
                                                                             class C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -1495,7 +1513,7 @@ void enterCategoryMethod_enterInContext (const int32_t inClassIndex,
 void callCategoryMethod_enterInContext (const class cPtr_abstractDeclaration * inObject,
                                         const GALGAS_procedureDeclarationListAST constin_inProcedureListAST,
                                         GALGAS_semanticContext & io_ioContext,
-                                        GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                        GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -1552,7 +1570,7 @@ void categoryMethod_enterInContext (const class GALGAS_functionDeclarationListAS
 
 void categoryMethod_enterInContext (const class GALGAS_globalVarDeclarationList_2D_element inObject,
                                     class GALGAS_semanticContext & io_ioContext,
-                                    class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -1612,7 +1630,7 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                const class GALGAS_ast constinArgument1,
                                const class GALGAS_semanticContext constinArgument2,
                                const class GALGAS_location constinArgument3,
-                               const class GALGAS_globalLiteralStringMap constinArgument4,
+                               const class GALGAS_staticStringMap constinArgument4,
                                class GALGAS_intermediateCodeStruct & outArgument5,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
@@ -1727,7 +1745,7 @@ void categoryMethod_procedureSemanticAnalysis (const class GALGAS_procedureDecla
 
 class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_globalLiteralStringMap mAttribute_mGlobalLiteralStringMap ;
+  public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
   public : GALGAS_registerMapIR mAttribute_mRegisterMap ;
   public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
   public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
@@ -1754,7 +1772,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_intermediateCodeStruct (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_intermediateCodeStruct (const GALGAS_globalLiteralStringMap & in_mGlobalLiteralStringMap,
+  public : GALGAS_intermediateCodeStruct (const GALGAS_staticStringMap & in_mStaticStringMap,
                                           const GALGAS_registerMapIR & in_mRegisterMap,
                                           const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
@@ -1777,7 +1795,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_globalLiteralStringMap & inOperand0,
+  public : static GALGAS_intermediateCodeStruct constructor_new (const class GALGAS_staticStringMap & inOperand0,
                                                                  const class GALGAS_registerMapIR & inOperand1,
                                                                  const class GALGAS_globalVariableMapIR & inOperand2,
                                                                  const class GALGAS_globalConstantMapIR & inOperand3,
@@ -1812,8 +1830,6 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalConstantMapIR reader_mGlobalConstantMap (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_globalLiteralStringMap reader_mGlobalLiteralStringMap (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_globalVariableMapIR reader_mGlobalVariableMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_initListIR reader_mInitList (LOCATION_ARGS) const ;
@@ -1823,6 +1839,8 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_registerMapIR reader_mRegisterMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mRequiredProcedureSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap reader_mStaticStringMap (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1865,12 +1883,23 @@ class GALGAS_string function_receiverPtrName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'literalStringPrefix'                                            *
+//                                            Function 'literalStringName'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_literalStringPrefix (class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_literalStringName (const class GALGAS_uint & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'literalCharacterArrayName'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint & constinArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

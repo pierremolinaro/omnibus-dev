@@ -137,7 +137,7 @@ map @propertyMap {
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Attribute "unique"
   var copiable = true
@@ -200,7 +200,7 @@ override method @structureDeclaration enterInContext
 override method @structureDeclaration initAnalysis
   ?!context:@semanticContext ioContext
 {
-  @globalLiteralStringMap globalLiteralStringMap = {} # Unused here
+  @staticStringMap globalLiteralStringMap = {} # Unused here
   @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
   #--- Field type

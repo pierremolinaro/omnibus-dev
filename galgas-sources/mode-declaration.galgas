@@ -62,7 +62,7 @@ override getter @modeDeclaration keyRepresentation -> @string outRepresentation 
 override method @modeDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   [!?ioContext.mModeMap insertKey !mModeName] ;
 }

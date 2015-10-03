@@ -459,7 +459,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !modes:procedureModeSet
     !allowException:not [procedureModeSet hasKey !exceptionModeName ()]
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]

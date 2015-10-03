@@ -113,7 +113,7 @@ map @allowedRoutineMap {
 
 method @globalVarDeclarationList-element enterInContext
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
   switch mType

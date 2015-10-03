@@ -74,7 +74,7 @@ override method @registerConstantInExpressionAST analyzeExpression
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@operandIR outResult
@@ -108,7 +108,7 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult

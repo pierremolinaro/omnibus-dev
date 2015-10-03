@@ -41,22 +41,14 @@ override method @literalStringInExpressionAST analyzeExpression
   ?modes:let @stringset unused inModeSet
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !expressionType:@unifiedTypeMap-proxy outExpressionType
-  !result:@variableKindIR outResultValueName
+  !result:@operandIR outResult
 {
-  @string literalStringName
-  if [ioGlobalLiteralStringMap hasKey !mLiteralString.string] then
-    [ioGlobalLiteralStringMap searchKey !mLiteralString ?literalStringName]
-  else
-    literalStringName = literalStringPrefix () + [ioGlobalLiteralStringMap count]
-    [!?ioGlobalLiteralStringMap insertKey !mLiteralString !literalStringName]
-  end
-#--- Generate code
-  outExpressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
-  outResultValueName = .literalString {!value:mLiteralString.string !name:literalStringName}
+  let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
+  [!?ioGlobalLiteralStringMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
+  outResult = .new {!type !.literalString {!size:[mLiteralString.string length] + 1 !index:staticStringIndex}}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

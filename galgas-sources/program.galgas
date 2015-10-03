@@ -97,7 +97,7 @@ private proc compileProject
   )
 #--- Semantic context
   if @uint.errorCount == 0 then
-    @globalLiteralStringMap globalLiteralStringMap = {}
+    @staticStringMap globalLiteralStringMap = {}
     buildSemanticContext (
       !orderedDeclarationList:orderedDeclarationListAST
       !ast:ast

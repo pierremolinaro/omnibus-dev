@@ -41,11 +41,24 @@ map @prefixOperatorMap {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#! @staticStringMap
+#----------------------------------------------------------------------------------------------------------------------*
 
-map @globalLiteralStringMap {
-  @string mLiteralStringCname
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
+map @staticStringMap {
+  @uint mIndex
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex {
+  if [self hasKey !inString]  then
+    [self searchKey ![inString nowhere] ?outIndex]
+  else
+    outIndex = [self count]
+    [!?self insertKey ![inString nowhere] !outIndex]
+  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -119,7 +132,7 @@ getter @unifiedTypeMap-proxy llvmTypeName -> @string outResult {
   case enumeration (@enumConstantMap constantMap) : outResult = "i" + [[constantMap count] - 1 significantBitCount]
   case structure (@string name @propertyMap unused propertyMap *) :  outResult = "%" + name
   case integer (* * @bool unused unsigned @uint bitCount) : outResult = "i" + bitCount
-  case literalString :  outResult = "<<literalString>>"
+  case literalString :  outResult = "i8*"
   case literalInteger : outResult = "<<literalInteger>>"
   end
 }
@@ -205,7 +218,7 @@ struct @semanticContext {
 abstract method @abstractDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -217,7 +230,7 @@ abstract method @abstractDeclaration initAnalysis
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?ast:let @ast inAST
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default

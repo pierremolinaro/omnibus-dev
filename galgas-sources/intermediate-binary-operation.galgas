@@ -76,7 +76,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
   let llvmType = [mOperandType llvmTypeName]
   ioCode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioCode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
@@ -84,7 +84,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   let labelName = [mTarget name]
   ioCode += "  br i1 " + mTarget + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioCode += labelName + ".ovf:\n"
-  ioCode += "  %" + labelName + ".str = load i8*, i8** @string." + staticStringIndex + "\n"
+  ioCode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
   ioCode += "  call void @raise_exception ("
   ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
   ioCode += "i8* %" + labelName + ".str, "

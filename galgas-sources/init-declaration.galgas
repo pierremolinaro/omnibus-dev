@@ -99,7 +99,7 @@ method @initList-element initSemanticAnalysis
     !modes:{!"init"}
     !allowException:true
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]

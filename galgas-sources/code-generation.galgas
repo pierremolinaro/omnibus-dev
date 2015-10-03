@@ -27,32 +27,12 @@ abstract class @abstractExpressionIR {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
-#! @staticStringMap
-#----------------------------------------------------------------------------------------------------------------------*
-
-map @staticStringMap {
-  @uint mIndex
-  insert insertKey error message "-- internal error --"
-  search searchKey error message "-- internal error --"
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
 #! @generationAdds
 #----------------------------------------------------------------------------------------------------------------------*
 
 struct @generationAdds {
   @stringset mIntrinsicsDeclarationSet
   @staticStringMap mStaticStringMap
-}
-#----------------------------------------------------------------------------------------------------------------------*
-
-setter @generationAdds findOrAddStaticString ?@string inString !@uint outIndex {
-  if [mStaticStringMap hasKey !inString]  then
-    [mStaticStringMap searchKey ![inString nowhere] ?outIndex]
-  else
-    outIndex = [self.mStaticStringMap count]
-    [!?mStaticStringMap insertKey ![inString nowhere] !outIndex]
-  end
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -162,10 +142,6 @@ proc generateLLVMfile
      !from:inTargetName.string + "/target.ll"
   )
   code += targetSpecificFileContents
-  code += llvmTitleComment (!"Static Strings")
-  for () in inIntermediateCodeStruct.mGlobalLiteralStringMap do
-    code += "static const char * " + mLiteralStringCname + " = " + [lkey.string utf8Representation] + " ;\n"
-  end
   code += "\n"
 #----------------------------------------- Structure types
   code += llvmTitleComment (!"Structure types")
@@ -185,6 +161,7 @@ proc generateLLVMfile
   end
 #----------------------------------------- Boot
   @generationAdds generationAdds = .default
+  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   code += llvmTitleComment (!"Boot")
   code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
@@ -255,14 +232,14 @@ proc generateLLVMfile
     code += llvmTitleComment (!"Static strings")
     for () in generationAdds.mStaticStringMap do
       let lgStr = [[lkey.string length] + 1 string]
-      code += "@str." + mIndex + " = private unnamed_addr constant ["
+      code += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
       code += lgStr + " x i8] c\""
       code += [lkey.string utf8RepresentationWithoutDelimiters]
       code += "\\00\", align 1\n"
-      code += "@string." + mIndex + " = private constant i8* getelementptr inbounds (["
-      code += lgStr + " x i8], [" + lgStr + " x i8]* @str." + mIndex + ", i32 0, i32 0), align 4\n"
+      code += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
+      code += lgStr + " x i8], [" + lgStr + " x i8]* "
+      code += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
     end
-    code += "\n"
   end
 #----------------------------------------- Write LLVM file
   code += llvmSeparatorLine ()

@@ -39,6 +39,7 @@ proc wait `user (?ms: inDuration $uint32) {
 //------------------------------------------------*
 
 proc loop `user () {
+  var ss = s
   wait (!ms:250)
   GPIOC_PSOR = 1 << 5 // Allumer la led
   wait (!ms:250)

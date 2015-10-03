@@ -162,7 +162,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !modes:{!exceptionModeName ()}
     !allowException:false
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]
