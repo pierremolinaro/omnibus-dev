@@ -186,7 +186,7 @@ method @globalVarDeclarationList-element enterInContext
       for () in mProcFormalArgumentList do
         switch mFormalArgumentPassingMode
         case input : allowedProcMangledName += "?"
-        case output : allowedProcMangledName += "?"
+        case output : allowedProcMangledName += "!"
         case inputOutput : allowedProcMangledName += "?!"
         end
         allowedProcMangledName += mSelector.string + ":"
