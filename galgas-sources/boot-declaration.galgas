@@ -82,7 +82,7 @@ method @bootList-element bootSemanticAnalysis
     !modes:{!bootModeName ()}
     !allowException:true
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]

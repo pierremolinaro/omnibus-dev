@@ -484,7 +484,7 @@ abstract method @expressionAST analyzeExpression
   ?modes:let @stringset inModes
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult

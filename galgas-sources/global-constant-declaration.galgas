@@ -79,7 +79,7 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 override method @globalConstantDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
   @unifiedTypeMap-proxy constantType

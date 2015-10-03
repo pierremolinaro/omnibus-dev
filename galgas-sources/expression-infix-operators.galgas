@@ -97,7 +97,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
@@ -255,7 +255,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult

@@ -68,7 +68,7 @@ void categoryMethod_analyzeRoutineInstructionList (const class GALGAS_instructio
                                                    const class GALGAS_stringset constin_inModeSet,
                                                    const class GALGAS_bool constin_inAllowExceptions,
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                   class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                                   class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                    class GALGAS_variableMap & io_ioVariableMap,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
@@ -99,7 +99,7 @@ typedef void (*categoryMethodSignature_expressionAST_analyzeExpression) (const c
                                                                          const class GALGAS_stringset constinArgument4,
                                                                          const class GALGAS_bool constinArgument5,
                                                                          class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                         class GALGAS_globalLiteralStringMap & ioArgument7,
+                                                                         class GALGAS_staticStringMap & ioArgument7,
                                                                          class GALGAS_variableMap & ioArgument8,
                                                                          class GALGAS_instructionListIR & ioArgument9,
                                                                          class GALGAS_operandIR & outArgument10,
@@ -121,7 +121,7 @@ void callCategoryMethod_analyzeExpression (const class cPtr_expressionAST * inOb
                                            const GALGAS_stringset constin_inModes,
                                            const GALGAS_bool constin_inAllowExceptions,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                            GALGAS_operandIR & out_outResult,
@@ -176,7 +176,7 @@ typedef void (*categoryMethodSignature_instructionAST_analyze) (const class cPtr
                                                                 const class GALGAS_stringset constinArgument3,
                                                                 const class GALGAS_bool constinArgument4,
                                                                 class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                class GALGAS_globalLiteralStringMap & ioArgument6,
+                                                                class GALGAS_staticStringMap & ioArgument6,
                                                                 class GALGAS_variableMap & ioArgument7,
                                                                 class GALGAS_instructionListIR & ioArgument8,
                                                                 class C_Compiler * inCompiler
@@ -196,7 +196,7 @@ void callCategoryMethod_analyze (const class cPtr_instructionAST * inObject,
                                  const GALGAS_stringset constin_inModeSet,
                                  const GALGAS_bool constin_inAllowExceptions,
                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                 GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                 GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                  GALGAS_variableMap & io_ioVariableMap,
                                  GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                  C_Compiler * inCompiler
@@ -216,7 +216,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
                                                   const class GALGAS_stringset constin_inModeSet,
                                                   const class GALGAS_bool constin_inAllowExceptions,
                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                  class GALGAS_globalLiteralStringMap & io_ioGlobalLiteralStringMap,
+                                                  class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                   class GALGAS_variableMap & io_ioVariableMap,
                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                   class C_Compiler * inCompiler
@@ -247,6 +247,18 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
                                              const GALGAS_generationContext constin_inGenerationContext,
                                              GALGAS_generationAdds & io_ioGenerationAdds,
                                              C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category setter '@staticStringMap findOrAddStaticString'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
+                                             class GALGAS_string in_inString,
+                                             class GALGAS_uint & out_outIndex,
+                                             class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -455,18 +467,6 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
                                                  GALGAS_accessibleEntities & io_ioAccessibleEntities,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Category setter '@generationAdds findOrAddStaticString'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_findOrAddStaticString (class GALGAS_generationAdds & ioObject,
-                                             class GALGAS_string in_inString,
-                                             class GALGAS_uint & out_outIndex,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

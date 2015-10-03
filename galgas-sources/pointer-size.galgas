@@ -54,7 +54,7 @@ override getter @pointerSizeDeclaration keyRepresentation -> @string outRepresen
 override method @pointerSizeDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   ioContext.mPointerSize = [mSize.bigint uint]
 }

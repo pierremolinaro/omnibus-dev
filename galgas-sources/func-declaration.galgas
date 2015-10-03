@@ -213,7 +213,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !modes:functionModeSet
     !allowException:not [functionModeSet hasKey !exceptionModeName ()]
     !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mGlobalLiteralStringMap
+    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?generatedCode:instructionGenerationList
   ]

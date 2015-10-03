@@ -82,7 +82,7 @@ map @enumConstantMap {
 override method @enumerationDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
   var copiable = true

@@ -91,7 +91,7 @@ override getter @integerDeclaration keyRepresentation -> @string outRepresentati
 override method @integerDeclaration enterInContext
   ?procedureDeclarationList:let @procedureDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [[self typeName] nowhere]
 #--- Get min and max

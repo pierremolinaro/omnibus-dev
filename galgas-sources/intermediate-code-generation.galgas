@@ -6,7 +6,7 @@
 #! @intermediateCodeStruct
 
 struct @intermediateCodeStruct {
-  @globalLiteralStringMap mGlobalLiteralStringMap
+  @staticStringMap mStaticStringMap
   @registerMapIR mRegisterMap
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap

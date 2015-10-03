@@ -33,7 +33,7 @@ override method @convertExpressionAST analyzeExpression
   ?modes:let @stringset inModeSet
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
@@ -110,7 +110,7 @@ override method @convertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
   let lbl = [[mLocation locationIndex] string]
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"
@@ -132,7 +132,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioCode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
   ioCode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioCode += convertFailLabel + ":\n"
-  ioCode += "  %str." + lbl + " = load i8*, i8** @string." + staticStringIndex + "\n"
+  ioCode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
   ioCode += "  call void @raise_exception ("
   ioCode += inGenerationContext.mExceptionCodeLLVMType + " 5, "
   ioCode += "i8* %str." + lbl + ", "

@@ -26,8 +26,14 @@ func mangledNameForType ?name:@string inName -> @string outPrefix {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once literalStringPrefix -> @string outName {
-  outName = "str_"
+func literalStringName ?let @uint inIndex -> @string outName {
+  outName = "@string." + inIndex
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func literalCharacterArrayName ?let @uint inIndex -> @string outName {
+  outName = "@str.array." + inIndex
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

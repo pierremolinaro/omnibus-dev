@@ -68,7 +68,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?modes:let @stringset inModes
   ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -133,7 +133,7 @@ override method @varInstructionAST analyze
   ?modes:let @stringset unused inModes
   ?allowException:let @bool unused inAllowExceptions
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
