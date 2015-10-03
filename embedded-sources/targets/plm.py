@@ -152,7 +152,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   rule.mDependences += objectList
   rule.mCommand += linker
   rule.mCommand += objectList
-  rule.mCommand += [toolDirectory + "/lib/libgcc.a"]
+#  rule.mCommand += [toolDirectory + "/lib/libgcc.a"]
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
   rule.mCommand += ["-Map=" + productELF + ".map"]
