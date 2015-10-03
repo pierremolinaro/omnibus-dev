@@ -33,11 +33,11 @@ proc generateTarget
   ?productDirectory:let @string inProductDirectory
   ?targetName:let @lstring inTargetName
 {
-#--- Copy make.py
+#--- Copy makefile.py
   copyExecutableFile (
     !currentDir:inCurrentDirectory
-    !from:"make.py"
-    !to:inProductDirectory + "/sources/make.py"
+    !from:"makefile.py"
+    !to:inProductDirectory + "/sources/makefile.py"
   )
 #--- Copy plm.py
   copyExecutableFile (
