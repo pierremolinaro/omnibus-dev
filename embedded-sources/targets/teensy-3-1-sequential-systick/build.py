@@ -29,7 +29,7 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.0-binutils-2.25-libusb-1.0.19")
+  return os.path.expanduser ("~/plm-tools/plm-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-3.7.0-binutils-2.25.1-libusb-1.0.19")
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
