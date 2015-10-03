@@ -291,8 +291,10 @@ proc printUnsigned `user @noWarningIfUnused (?inValue $uint32) {
   var isPrinting = false
   while divisor > 0 do
     if isPrinting or (value >= divisor) then
-      writeData_inUserMode (!0x30 + truncate (value / divisor) : $uint8)
-      value = value % divisor
+      let quotient = value / divisor
+      let remainder = value - quotient * divisor
+      writeData_inUserMode (!0x30 + convert quotient : $uint8)
+      value = remainder
       isPrinting = true
     end
     divisor = divisor / 10
@@ -416,8 +418,10 @@ proc printUnsignedInExceptionMode `exception @noWarningIfUnused (?inValue $uint3
   var isPrinting = false
   while divisor > 0 do
     if isPrinting or (value >= divisor) then
-      writeDataInExceptionMode (!0x30 &+ truncate value &/ divisor : $uint8)
-      value = value &% divisor
+      let quotient = value &/ divisor
+      let remainder = value &- quotient &* divisor
+      writeDataInExceptionMode (!0x30 &+ truncate quotient : $uint8)
+      value = remainder
       isPrinting = true
     end
     divisor = divisor &/ 10

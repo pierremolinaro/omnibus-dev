@@ -6790,7 +6790,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += objectList\n"
-  "  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
+  "#  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -6843,7 +6843,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  8915, // Text length
+  8916, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -10071,8 +10071,10 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeData_inUserMode (!0x30 + truncate (value / divisor) : $uint8)\n"
-  "      value = value % divisor\n"
+  "      let quotient = value / divisor\n"
+  "      let remainder = value - quotient * divisor\n"
+  "      writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
+  "      value = remainder\n"
   "      isPrinting = true\n"
   "    end\n"
   "    divisor = divisor / 10\n"
@@ -10196,8 +10198,10 @@ const char * gWrapperFileContent_6_targetTemplates = "\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeDataInExceptionMode (!0x30 &+ truncate value &/ divisor : $uint8)\n"
-  "      value = value &% divisor\n"
+  "      let quotient = value &/ divisor\n"
+  "      let remainder = value &- quotient &* divisor\n"
+  "      writeDataInExceptionMode (!0x30 &+ truncate quotient : $uint8)\n"
+  "      value = remainder\n"
   "      isPrinting = true\n"
   "    end\n"
   "    divisor = divisor &/ 10\n"
@@ -10281,7 +10285,7 @@ const cRegularFileWrapper gWrapperFile_6_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  15539, // Text length
+  15683, // Text length
   gWrapperFileContent_6_targetTemplates
 ) ;
 
@@ -13161,7 +13165,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += objectList\n"
-  "  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
+  "#  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -13214,7 +13218,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  8915, // Text length
+  8916, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -16442,8 +16446,10 @@ const char * gWrapperFileContent_6_embeddedTargets = "\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeData_inUserMode (!0x30 + truncate (value / divisor) : $uint8)\n"
-  "      value = value % divisor\n"
+  "      let quotient = value / divisor\n"
+  "      let remainder = value - quotient * divisor\n"
+  "      writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
+  "      value = remainder\n"
   "      isPrinting = true\n"
   "    end\n"
   "    divisor = divisor / 10\n"
@@ -16567,8 +16573,10 @@ const char * gWrapperFileContent_6_embeddedTargets = "\n"
   "  var isPrinting = false\n"
   "  while divisor > 0 do\n"
   "    if isPrinting or (value >= divisor) then\n"
-  "      writeDataInExceptionMode (!0x30 &+ truncate value &/ divisor : $uint8)\n"
-  "      value = value &% divisor\n"
+  "      let quotient = value &/ divisor\n"
+  "      let remainder = value &- quotient &* divisor\n"
+  "      writeDataInExceptionMode (!0x30 &+ truncate quotient : $uint8)\n"
+  "      value = remainder\n"
   "      isPrinting = true\n"
   "    end\n"
   "    divisor = divisor &/ 10\n"
@@ -16652,7 +16660,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedTargets (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  15539, // Text length
+  15683, // Text length
   gWrapperFileContent_6_embeddedTargets
 ) ;
 
