@@ -76,6 +76,12 @@ var gCompteur $uint32 = 0 {
   proc busyWaitingDuringMS (?inDuration $uint32)
 }
 
+proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
+  let deadline = gCompteur + inDuration
+  while gCompteur < deadline do
+  end
+}
+
 required proc systickHandler `isr ()
 
 proc systickHandler `isr @weak () {
@@ -83,10 +89,10 @@ proc systickHandler `isr @weak () {
   userSystickHandler ()
 }
 
-proc userSystickHandler `isr @weak () {
+proc userSystickHandler `isr @weak @noWarningIfUnused () {
 }
 
-proc waitMS `user `init (?inDuration $uint32) {
+proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end

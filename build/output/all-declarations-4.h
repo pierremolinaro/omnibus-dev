@@ -11,6 +11,29 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            Routine 'addPredefinedTypes'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addPredefinedTypes (class GALGAS_declarationListAST & ioArgument0,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'addTargetSpecificFiles'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
+                                     class GALGAS_ast & ioArgument1,
+                                     const class GALGAS_string constinArgument2,
+                                     class GALGAS_stringset & ioArgument3,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              @booleanDeclaration class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2373,6 +2396,9 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
   public : GALGAS_throwInstructionIR (void) ;
 
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_throwInstructionIR constructor_default (LOCATION_ARGS) ;
+
 //---
   public : inline const class cPtr_throwInstructionIR * ptr (void) const { return (const cPtr_throwInstructionIR *) mObjectPtr ; }
 
@@ -2391,7 +2417,7 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_throwInstructionIR constructor_new (const class GALGAS_location & inOperand0,
-                                                             const class GALGAS_operandIR & inOperand1
+                                                             const class GALGAS_bigint & inOperand1
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2403,9 +2429,9 @@ class GALGAS_throwInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint reader_mCode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mThrowLocation (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2426,20 +2452,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_throwInstructionIR 
 
 class cPtr_throwInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_location mAttribute_mThrowInstructionLocation ;
-  public : GALGAS_operandIR mAttribute_mCode ;
+  public : GALGAS_location mAttribute_mThrowLocation ;
+  public : GALGAS_bigint mAttribute_mCode ;
 
 //--- Constructor
-  public : cPtr_throwInstructionIR (const GALGAS_location & in_mThrowInstructionLocation,
-                                    const GALGAS_operandIR & in_mCode
+  public : cPtr_throwInstructionIR (const GALGAS_location & in_mThrowLocation,
+                                    const GALGAS_bigint & in_mCode
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mThrowInstructionLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mCode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mThrowLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint reader_mCode (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
