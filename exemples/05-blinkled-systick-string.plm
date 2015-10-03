@@ -19,7 +19,7 @@ proc setup `user () {
 
 var gUpTimeMS $uint32 = 0 {
   @rw proc systickHandler ()
-  proc wait (?ms: inDuration $uint32)
+  proc wait (?ms: inDuration $uint32 ?s $staticString !x $staticString)
 }
 
 //------------------------------------------------*
@@ -30,7 +30,8 @@ proc systickHandler `isr () {
 
 //------------------------------------------------*
 
-proc wait `user (?ms: inDuration $uint32) {
+proc wait `user (?ms: inDuration $uint32 ?inS $staticString !outS $staticString) {
+  outS = inS
   let deadline = gUpTimeMS + inDuration
   while@boucle deadline > gUpTimeMS do
   end@boucle
@@ -40,9 +41,11 @@ proc wait `user (?ms: inDuration $uint32) {
 
 proc loop `user () {
   var ss = s
-  wait (!ms:250)
+  var r $staticString
+  wait (!ms:250 !"toto" ?r)
   GPIOC_PSOR = 1 << 5 // Allumer la led
-  wait (!ms:250)
+  var rr $staticString
+  wait (!ms:250 !"tata" ?rr)
   GPIOC_PCOR = 1 << 5  // Éteindre la led
 }
 

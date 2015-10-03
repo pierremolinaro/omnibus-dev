@@ -4564,7 +4564,7 @@ void categoryMethod_enterInContext (const GALGAS_globalVarDeclarationList_2D_ele
             break ;
           case GALGAS_procFormalArgumentPassingMode::kEnum_output:
             {
-              var_allowedProcMangledName.dotAssign_operation (GALGAS_string ("\?")  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 189)) ;
+              var_allowedProcMangledName.dotAssign_operation (GALGAS_string ("!")  COMMA_SOURCE_FILE ("global-variable-declaration.galgas", 189)) ;
             }
             break ;
           case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
