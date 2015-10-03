@@ -3,76 +3,15 @@ target "teensy-3-1-sequential-systick"
 //------------------------------------------------*
 
 proc setup `user () {
-  PORTC_PCR5 = PORTC_PCR5::mux (1)
-  GPIOC_PDDR |= (1 << 5)
-}
-
-//------------------------------------------------*
-
-var gUpTimeMS $uint32 = 0 {
-  @rw proc systickHandler ()
-  proc wait (?ms: inDuration $uint32)
-}
-
-//------------------------------------------------*
-
-proc systickHandler `isr () {
-  gUpTimeMS &++
-}
-
-//------------------------------------------------*
-
-proc wait `user (?ms: inDuration $uint32) {
-  let deadline = gUpTimeMS + inDuration
-  while@boucle deadline > gUpTimeMS do
-  end@boucle
 }
 
 //------------------------------------------------*
 
 proc loop `user () {
-  wait (!ms:250)
-  GPIOC_PSOR = 1 << 5 // Allumer la led
-  wait (!ms:250)
-  GPIOC_PCOR = 1 << 5  // Éteindre la led
-//  var c $int4
-//  ga ++
-//  zzzz (!ga !gb ?c)
-//  gc = c
+  waitMS (!250)
+  ledOn (!LED_TEENSY) // Allumer la led
+  waitMS (!250)
+  ledOff (!LED_TEENSY)  // Éteindre la led
 }
-
-//------------------------------------------------*
-
-//var ga $int4 = 0 {
-//  @rw proc loop ()
-//}
-//
-//var gb $int4 = 0 {
-//  @rw proc loop ()
-//}
-//
-//var gc $int4 = 0 {
-//  @rw proc loop ()
-//}
-//
-//
-//proc zzzz `user (?a $int4 ?b $int4 !c $int4) {
-//  c = a + b
-//}
-
-//------------------------------------------------*
-
-//var gDelai $uint32 = 0 {
-//  @rw exception loop 0
-//}
-//
-//exception loop 0 {
-//  gDelai = 1_000_000
-//  while gDelai > 0 do gDelai &-- end
-//  GPIOC_PSOR = 1 << 5 // Allumer la led
-//  gDelai = 1_000_000
-//  while gDelai > 0 do gDelai &-- end
-//  GPIOC_PCOR = 1 << 5  // Éteindre la led
-//}
 
 //------------------------------------------------*

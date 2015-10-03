@@ -2405,16 +2405,6 @@ extern const char * gWrapperFileContent_13_targetTemplates ;
 extern const char * gWrapperFileContent_14_targetTemplates ;
 extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
-extern const char * gWrapperFileContent_17_targetTemplates ;
-extern const char * gWrapperFileContent_18_targetTemplates ;
-extern const char * gWrapperFileContent_19_targetTemplates ;
-extern const char * gWrapperFileContent_20_targetTemplates ;
-extern const char * gWrapperFileContent_21_targetTemplates ;
-extern const char * gWrapperFileContent_22_targetTemplates ;
-extern const char * gWrapperFileContent_23_targetTemplates ;
-extern const char * gWrapperFileContent_24_targetTemplates ;
-extern const char * gWrapperFileContent_25_targetTemplates ;
-extern const char * gWrapperFileContent_26_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2438,24 +2428,12 @@ extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_23_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const cDirectoryWrapper gWrapperDirectory_0_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2531,5 +2509,380 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class GALGAS_stringset & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Routine 'addPredefinedTypes'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addPredefinedTypes (class GALGAS_declarationListAST & ioArgument0,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Routine 'addTargetSpecificFiles'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
+                                     class GALGAS_ast & ioArgument1,
+                                     const class GALGAS_string constinArgument2,
+                                     class GALGAS_stringset & ioArgument3,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @booleanDeclaration class                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_booleanDeclaration : public GALGAS_abstractDeclaration {
+//--- Constructor
+  public : GALGAS_booleanDeclaration (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_booleanDeclaration constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_booleanDeclaration * ptr (void) const { return (const cPtr_booleanDeclaration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_booleanDeclaration (const cPtr_booleanDeclaration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_booleanDeclaration extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_booleanDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
+                                                             const class GALGAS_lstringlist & inOperand1
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_booleanDeclaration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mAttributeList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mBooleanTypeName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_booleanDeclaration class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanDeclaration ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Pointer class for @booleanDeclaration class                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_booleanDeclaration : public cPtr_abstractDeclaration {
+//--- Attributes
+  public : GALGAS_lstring mAttribute_mBooleanTypeName ;
+  public : GALGAS_lstringlist mAttribute_mAttributeList ;
+
+//--- Constructor
+  public : cPtr_booleanDeclaration (const GALGAS_lstring & in_mBooleanTypeName,
+                                    const GALGAS_lstringlist & in_mAttributeList
+                                    COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mBooleanTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist reader_mAttributeList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @literalIntegerDeclaration class                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literalIntegerDeclaration : public GALGAS_abstractDeclaration {
+//--- Constructor
+  public : GALGAS_literalIntegerDeclaration (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_literalIntegerDeclaration constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_literalIntegerDeclaration * ptr (void) const { return (const cPtr_literalIntegerDeclaration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literalIntegerDeclaration (const cPtr_literalIntegerDeclaration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literalIntegerDeclaration extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literalIntegerDeclaration constructor_new (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literalIntegerDeclaration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literalIntegerDeclaration class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerDeclaration ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Pointer class for @literalIntegerDeclaration class                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literalIntegerDeclaration : public cPtr_abstractDeclaration {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_literalIntegerDeclaration (LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @literalStringDeclaration class                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_literalStringDeclaration : public GALGAS_abstractDeclaration {
+//--- Constructor
+  public : GALGAS_literalStringDeclaration (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_literalStringDeclaration constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_literalStringDeclaration * ptr (void) const { return (const cPtr_literalStringDeclaration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_literalStringDeclaration (const cPtr_literalStringDeclaration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_literalStringDeclaration extractObject (const GALGAS_object & inObject,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_literalStringDeclaration constructor_new (const class GALGAS_lstring & inOperand0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_literalStringDeclaration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mLiteralStringTypeName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_literalStringDeclaration class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringDeclaration ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Pointer class for @literalStringDeclaration class                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
+//--- Attributes
+  public : GALGAS_lstring mAttribute_mLiteralStringTypeName ;
+
+//--- Constructor
+  public : cPtr_literalStringDeclaration (const GALGAS_lstring & in_mLiteralStringTypeName
+                                          COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mLiteralStringTypeName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportEmbeddedTargetFiles (class GALGAS_ast & ioArgument0,
+                                                 class GALGAS_lstringlist inArgument1,
+                                                 class GALGAS_stringset & ioArgument2,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Routine 'recursiveImportFileSystemTargetFiles'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportFileSystemTargetFiles (class GALGAS_ast & ioArgument0,
+                                                   const class GALGAS_string constinArgument1,
+                                                   class GALGAS_lstringlist inArgument2,
+                                                   class GALGAS_stringset & ioArgument3,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Filewrapper 'embeddedSampleCode'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * gWrapperFileContent_0_embeddedSampleCode ;
+extern const char * gWrapperFileContent_1_embeddedSampleCode ;
+extern const char * gWrapperFileContent_2_embeddedSampleCode ;
+extern const char * gWrapperFileContent_3_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode ;
+extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Filewrapper 'embeddedTargets'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const char * gWrapperFileContent_0_embeddedTargets ;
+extern const char * gWrapperFileContent_1_embeddedTargets ;
+extern const char * gWrapperFileContent_2_embeddedTargets ;
+extern const char * gWrapperFileContent_3_embeddedTargets ;
+extern const char * gWrapperFileContent_4_embeddedTargets ;
+extern const char * gWrapperFileContent_5_embeddedTargets ;
+extern const char * gWrapperFileContent_6_embeddedTargets ;
+extern const char * gWrapperFileContent_7_embeddedTargets ;
+extern const char * gWrapperFileContent_8_embeddedTargets ;
+extern const char * gWrapperFileContent_9_embeddedTargets ;
+extern const char * gWrapperFileContent_10_embeddedTargets ;
+extern const char * gWrapperFileContent_11_embeddedTargets ;
+extern const char * gWrapperFileContent_12_embeddedTargets ;
+extern const char * gWrapperFileContent_13_embeddedTargets ;
+extern const char * gWrapperFileContent_14_embeddedTargets ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cRegularFileWrapper gWrapperFile_0_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_1_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_2_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_3_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_4_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_5_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_6_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_7_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_8_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_9_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_10_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_11_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_12_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_13_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_14_embeddedTargets ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const cDirectoryWrapper gWrapperDirectory_0_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_1_embeddedTargets ;
+extern const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets ;
 
 #endif
