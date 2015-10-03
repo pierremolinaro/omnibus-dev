@@ -231,7 +231,7 @@ void categoryMethod_analyzeBranchInstructionList (const class GALGAS_instruction
 typedef void (*categoryMethodSignature_abstractInstructionIR_llvmInstructionCode) (const class cPtr_abstractInstructionIR * inObject,
                                                                                    class GALGAS_string & ioArgument0,
                                                                                    const class GALGAS_generationContext constinArgument1,
-                                                                                   class GALGAS_stringset & ioArgument2,
+                                                                                   class GALGAS_generationAdds & ioArgument2,
                                                                                    class C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -245,7 +245,7 @@ void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
 void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
                                              GALGAS_string & io_ioCode,
                                              const GALGAS_generationContext constin_inGenerationContext,
-                                             GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                             GALGAS_generationAdds & io_ioGenerationAdds,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -458,6 +458,18 @@ void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstru
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Category setter '@generationAdds findOrAddStaticString'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_findOrAddStaticString (class GALGAS_generationAdds & ioObject,
+                                             class GALGAS_string in_inString,
+                                             class GALGAS_uint & out_outIndex,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Category Getter '@functionDeclarationListAST-element mangledName' (as function)                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -566,7 +578,7 @@ typedef void (*categoryMethodSignature_binaryOperationIR_enterCodeForOverflowOpe
                                                                                          const class GALGAS_uint constinArgument1,
                                                                                          class GALGAS_string & ioArgument2,
                                                                                          const class GALGAS_generationContext constinArgument3,
-                                                                                         class GALGAS_stringset & ioArgument4,
+                                                                                         class GALGAS_generationAdds & ioArgument4,
                                                                                          class C_Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -582,7 +594,7 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
                                                        const GALGAS_uint constin_inCode,
                                                        GALGAS_string & io_ioCode,
                                                        const GALGAS_generationContext constin_inGenerationContext,
-                                                       GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                                       GALGAS_generationAdds & io_ioGenerationAdds,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 

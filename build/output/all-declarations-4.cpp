@@ -10,6 +10,60 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                   Routine 'recursiveImportFileSystemTargetFiles'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_recursiveImportFileSystemTargetFiles (GALGAS_ast & ioArgument_ioAST,
+                                                   const GALGAS_string constinArgument_inTargetDirectory,
+                                                   GALGAS_lstringlist inArgument_inImportedClauseList,
+                                                   GALGAS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  cEnumerator_lstringlist enumerator_7395 (inArgument_inImportedClauseList, kEnumeration_up) ;
+  while (enumerator_7395.hasCurrentObject ()) {
+    GALGAS_string var_absolutePath = constinArgument_inTargetDirectory.add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 197)).add_operation (enumerator_7395.current_mValue (HERE).mAttribute_string, inCompiler COMMA_SOURCE_FILE ("program.galgas", 197)) ;
+    const enumGalgasBool test_0 = var_absolutePath.reader_fileExists (SOURCE_FILE ("program.galgas", 198)).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      const enumGalgasBool test_1 = ioArgument_ioImportedFileAbsolutePathSet.reader_hasKey (var_absolutePath COMMA_SOURCE_FILE ("program.galgas", 199)).operator_not (SOURCE_FILE ("program.galgas", 199)).boolEnum () ;
+      if (kBoolTrue == test_1) {
+        ioArgument_ioImportedFileAbsolutePathSet.addAssign_operation (var_absolutePath  COMMA_SOURCE_FILE ("program.galgas", 200)) ;
+        const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 201)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+        if (kBoolTrue == test_2) {
+          GALGAS_lstringlist var_importedFileList ;
+          var_importedFileList.drop () ;
+          GALGAS_location joker_7855 ; // Joker input parameter
+          cGrammar_plm_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_7395.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 202)), ioArgument_ioAST, var_importedFileList, joker_7855  COMMA_SOURCE_FILE ("program.galgas", 202)) ;
+          {
+          routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 206)) ;
+          }
+        }else if (kBoolFalse == test_2) {
+          const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, var_absolutePath.reader_pathExtension (SOURCE_FILE ("program.galgas", 212)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+          if (kBoolTrue == test_3) {
+            GALGAS_lstringlist var_importedFileList ;
+            var_importedFileList.drop () ;
+            GALGAS_location joker_8348 ; // Joker input parameter
+            cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GALGAS_lstring::constructor_new (var_absolutePath, enumerator_7395.current_mValue (HERE).mAttribute_location  COMMA_SOURCE_FILE ("program.galgas", 213)), ioArgument_ioAST, var_importedFileList, joker_8348  COMMA_SOURCE_FILE ("program.galgas", 213)) ;
+            {
+            routine_recursiveImportFileSystemTargetFiles (ioArgument_ioAST, constinArgument_inTargetDirectory, var_importedFileList, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 217)) ;
+            }
+          }else if (kBoolFalse == test_3) {
+            GALGAS_location location_4 (enumerator_7395.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+            inCompiler->emitSemanticError (location_4, GALGAS_string ("invalid extension (should be .plm or .plm-target)")  COMMA_SOURCE_FILE ("program.galgas", 224)) ;
+          }
+        }
+      }
+    }else if (kBoolFalse == test_0) {
+      GALGAS_location location_5 (enumerator_7395.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
+      inCompiler->emitSemanticError (location_5, GALGAS_string ("file does not exist in file system target definition")  COMMA_SOURCE_FILE ("program.galgas", 228)) ;
+    }
+    enumerator_7395.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    Routine 'recursiveImportEmbeddedTargetFiles'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

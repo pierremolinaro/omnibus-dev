@@ -20,7 +20,7 @@ class @extractValueIR : @abstractInstructionIR {
 override method @extractValueIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mSource.mType llvmTypeName]
   ioCode += "  " + mTarget.mValue + " = extractvalue " + llvmType + " " + mSource.mValue + ", " + mIndex + "\n"

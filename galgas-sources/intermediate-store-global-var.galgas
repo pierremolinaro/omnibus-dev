@@ -22,7 +22,7 @@ class @storeGlobalVariableIR : @abstractInstructionIR {
 override method @storeGlobalVariableIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  store "

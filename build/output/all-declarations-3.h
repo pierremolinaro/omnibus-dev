@@ -2159,7 +2159,7 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element inObject,
                                                   class GALGAS_string & io_ioCode,
                                                   const class GALGAS_generationContext constin_inGenerationContext,
-                                                  class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                                  class GALGAS_generationAdds & io_ioGenerationAdds,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -2194,7 +2194,7 @@ void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_elem
 void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
                                              class GALGAS_string & io_ioCode,
                                              const class GALGAS_generationContext constin_inGenerationContext,
-                                             class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                             class GALGAS_generationAdds & io_ioGenerationAdds,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2207,9 +2207,80 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
                                         class GALGAS_string & io_ioCode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
-                                        class GALGAS_stringset & io_ioIntrinsicsDeclarationSet,
+                                        class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @generationAdds struct                                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_generationAdds : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_stringset mAttribute_mIntrinsicsDeclarationSet ;
+  public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_generationAdds constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_generationAdds (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_generationAdds (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_generationAdds (const GALGAS_stringset & in_mIntrinsicsDeclarationSet,
+                                  const GALGAS_staticStringMap & in_mStaticStringMap) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_generationAdds extractObject (const GALGAS_object & inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_generationAdds constructor_new (const class GALGAS_stringset & inOperand0,
+                                                         const class GALGAS_staticStringMap & inOperand1
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_generationAdds & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_stringset reader_mIntrinsicsDeclarationSet (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_staticStringMap reader_mStaticStringMap (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_generationAdds class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationAdds ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

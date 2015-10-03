@@ -95,7 +95,7 @@ override method @truncateInstructionIR enterAccessibleEntities ?!@accessibleEnti
 override method @truncateInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let operandType = [mOperand.mType llvmTypeName]
   ioCode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"

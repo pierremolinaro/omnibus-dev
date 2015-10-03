@@ -95,9 +95,9 @@ class @assertInstructionIR : @abstractInstructionIR {
 override method @assertInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
-  ?!@stringset ioIntrinsicsDeclarationSet
+  ?!@generationAdds ioGenerationAdds
 {
-  [mInstructionList instructionListLLVMCode !?ioCode !inGenerationContext!?ioIntrinsicsDeclarationSet]
+  [mInstructionList instructionListLLVMCode !?ioCode !inGenerationContext!?ioGenerationAdds]
   ioCode += "if (!" + mExpressionValue.mValue + ") {\n"
   ioCode += "  raise_exception (20"
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]

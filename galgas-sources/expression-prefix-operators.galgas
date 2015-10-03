@@ -182,7 +182,7 @@ class @prefixOperatorExpressionIR : @abstractInstructionIR {
 override method @prefixOperatorExpressionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   switch mOperator 
   case prefix (@string prefixOperator) :

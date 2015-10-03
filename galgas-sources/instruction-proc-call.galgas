@@ -253,7 +253,7 @@ class @procCallInstructionIR : @abstractInstructionIR {
 override method @procCallInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   ioCode += ";--- call " + mangledNameForProcedure (!mProcName) + " ()\n"
   ioCode += "  call void @" + mangledNameForProcedure (!mProcName) + " ("
