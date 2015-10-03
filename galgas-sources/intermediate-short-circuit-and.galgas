@@ -41,7 +41,7 @@ override method @shortCircuitAndOperationIR enterAccessibleEntities ?!@accessibl
 override method @shortCircuitAndOperationIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
-  ?!@stringset ioIntrinsicsDeclarationSet
+  ?!@generationAdds ioGenerationAdds
 {
   let startLabel  = "and." + [mLocation locationIndex] + ".start"
   let trueLabel  = "and." + [mLocation locationIndex] + ".true"
@@ -49,10 +49,10 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioCode += "  br label %" + startLabel + "\n\n"
   ioCode += ";--- left operand of short circuit and\n"
   ioCode += startLabel + ":\n"
-  [mLeftInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
+  [mLeftInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
   ioCode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioCode += trueLabel + ":\n"
-  [mRightInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioIntrinsicsDeclarationSet]
+  [mRightInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
   ioCode += "  br label %" + falseLabel + "\n\n"
   ioCode += falseLabel + ":\n"
   ioCode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"

@@ -22,7 +22,7 @@ class @storeVolatileIR : @abstractInstructionIR {
 override method @storeVolatileIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioCode += "  store volatile " + llvmType + " " + mSourceValue.mValue + ", " + llvmType

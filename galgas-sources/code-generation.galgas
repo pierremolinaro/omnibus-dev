@@ -27,6 +27,35 @@ abstract class @abstractExpressionIR {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#! @staticStringMap
+#----------------------------------------------------------------------------------------------------------------------*
+
+map @staticStringMap {
+  @uint mIndex
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#! @generationAdds
+#----------------------------------------------------------------------------------------------------------------------*
+
+struct @generationAdds {
+  @stringset mIntrinsicsDeclarationSet
+  @staticStringMap mStaticStringMap
+}
+#----------------------------------------------------------------------------------------------------------------------*
+
+setter @generationAdds findOrAddStaticString ?@string inString !@uint outIndex {
+  if [mStaticStringMap hasKey !inString]  then
+    [mStaticStringMap searchKey ![inString nowhere] ?outIndex]
+  else
+    outIndex = [self.mStaticStringMap count]
+    [!?mStaticStringMap insertKey ![inString nowhere] !outIndex]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #! @abstractInstructionIR
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -38,7 +67,7 @@ abstract class @abstractInstructionIR {
 abstract method @abstractInstructionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
-  ?!@stringset ioIntrinsicsDeclarationSet
+  ?!@generationAdds ioGenerationAdds
 
 #----------------------------------------------------------------------------------------------------------------------*
 #! @instructionListIR
@@ -155,11 +184,11 @@ proc generateLLVMfile
     after code += "\n"
   end
 #----------------------------------------- Boot
-  @stringset intrinsicsDeclarationSet = {}
+  @generationAdds generationAdds = .default
   code += llvmTitleComment (!"Boot")
   code += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
+    [boot.mInstructionListIR instructionListLLVMCode !?code !generationContext !?generationAdds]
   end
   code += ";---\n"
   code += "  ret void\n"
@@ -168,18 +197,18 @@ proc generateLLVMfile
   code += llvmTitleComment (!"Init")
   code += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR instructionListLLVMCode !?code !generationContext !?intrinsicsDeclarationSet]
+    [init.mInstructionListIR instructionListLLVMCode !?code !generationContext !?generationAdds]
   end
   code += ";---\n"
   code += "  ret void\n"
   code += "}\n\n"
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    [procedure llvmCodeGeneration !?code !generationContext !?intrinsicsDeclarationSet]
+    [procedure llvmCodeGeneration !?code !generationContext !?generationAdds]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
-    [function implementationCodeGeneration !?code !generationContext !?intrinsicsDeclarationSet]
+    [function implementationCodeGeneration !?code !generationContext !?generationAdds]
   end
 #----------------------------------------- Exception
   if not [option plm_options.noExceptionGeneration value] then
@@ -190,6 +219,7 @@ proc generateLLVMfile
     code += llvmTitleComment (!"Raise Exception internal")
     code += "define internal void @raise_exception_internal ("
     code += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    code += "i8* %in.FILE, "
     code += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
     code += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
     code += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
@@ -200,23 +230,37 @@ proc generateLLVMfile
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
       !?code
       !generationContext
-      !?intrinsicsDeclarationSet
+      !?generationAdds
     ]
     code += "  br label %exception.loop\n\n"
     code += "exception.loop:\n"
     [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode
       !?code
       !generationContext
-      !?intrinsicsDeclarationSet
+      !?generationAdds
     ]
     code += "  br label %exception.loop\n"
     code += "}\n\n"
   end
 #----------------------------------------- Intrinsics
-  if [intrinsicsDeclarationSet count] > 0 then
+  if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then
     code += llvmTitleComment (!"LLVM intrinsics")
-    for (s) in intrinsicsDeclarationSet do
+    for (s) in generationAdds.mIntrinsicsDeclarationSet do
       code += s + "\n"
+    end
+    code += "\n"
+  end
+#----------------------------------------- Static Strings
+  if [generationAdds.mStaticStringMap count] > 0 then
+    code += llvmTitleComment (!"Static strings")
+    for () in generationAdds.mStaticStringMap do
+      let lgStr = [[lkey.string length] + 1 string]
+      code += "@str." + mIndex + " = private unnamed_addr constant ["
+      code += lgStr + " x i8] c\""
+      code += [lkey.string utf8RepresentationWithoutDelimiters]
+      code += "\\00\", align 1\n"
+      code += "@string." + mIndex + " = private constant i8* getelementptr inbounds (["
+      code += lgStr + " x i8], [" + lgStr + " x i8]* @str." + mIndex + ", i32 0, i32 0), align 4\n"
     end
     code += "\n"
   end

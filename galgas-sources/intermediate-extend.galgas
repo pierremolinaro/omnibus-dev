@@ -18,7 +18,7 @@ class @extendIR : @abstractInstructionIR {
 override method @extendIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   ioCode += "  " + mResult.mValue + " = "
   [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]

@@ -1,0 +1,48 @@
+target "teensy-3-1-sequential-systick"
+
+let s $staticString = "azerty"
+
+//------------------------------------------------*
+
+var zz $int32 = 0 {
+  @rw proc loop ()
+}
+
+//------------------------------------------------*
+
+proc setup `user () {
+  PORTC_PCR5 = PORTC_PCR5::mux (1)
+  GPIOC_PDDR |= (1 << 5)
+}
+
+//------------------------------------------------*
+
+var gUpTimeMS $uint32 = 0 {
+  @rw proc systickHandler ()
+  proc wait (?ms: inDuration $uint32)
+}
+
+//------------------------------------------------*
+
+proc systickHandler `isr () {
+  gUpTimeMS ++
+}
+
+//------------------------------------------------*
+
+proc wait `user (?ms: inDuration $uint32) {
+  let deadline = gUpTimeMS + inDuration
+  while@boucle deadline > gUpTimeMS do
+  end@boucle
+}
+
+//------------------------------------------------*
+
+proc loop `user () {
+  wait (!ms:250)
+  GPIOC_PSOR = 1 << 5 // Allumer la led
+  wait (!ms:250)
+  GPIOC_PCOR = 1 << 5  // Éteindre la led
+}
+
+//------------------------------------------------*

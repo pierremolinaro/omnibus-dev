@@ -18,7 +18,7 @@ class @loadLocalVariableIR : @abstractInstructionIR {
 override method @loadLocalVariableIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
   ioCode += "  " + mTargetValue.mValue + " = load "

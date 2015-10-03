@@ -20,7 +20,7 @@ class @getElementPtrIR : @abstractInstructionIR {
 override method @getElementPtrIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [[mSource type] llvmTypeName]
   ioCode += "  " + [mTarget name] + " = getelementptr inbounds "

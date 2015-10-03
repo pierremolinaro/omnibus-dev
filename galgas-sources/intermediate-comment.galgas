@@ -19,7 +19,7 @@ override method @commentIR enterAccessibleEntities ?!@accessibleEntities unused 
 override method @commentIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   ioCode += ";--- " + mComment + "\n"
 }

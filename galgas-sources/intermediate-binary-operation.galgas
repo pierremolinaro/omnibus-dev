@@ -74,8 +74,9 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @uint inCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
-  ?!@stringset ioIntrinsicsDeclarationSet
+  ?!@generationAdds ioGenerationAdds
 {
+  [!?ioGenerationAdds findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
   let llvmType = [mOperandType llvmTypeName]
   ioCode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioCode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
@@ -83,13 +84,15 @@ method @binaryOperationIR enterCodeForOverflowOperation
   let labelName = [mTarget name]
   ioCode += "  br i1 " + mTarget + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioCode += labelName + ".ovf:\n"
+  ioCode += "  %" + labelName + ".str = load i8*, i8** @string." + staticStringIndex + "\n"
   ioCode += "  call void @raise_exception ("
   ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
+  ioCode += "i8* %" + labelName + ".str, "
   ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
   ioCode += "  unreachable\n\n"
   ioCode += labelName + ".noovf:\n"
   ioCode += "  " + mTarget + " = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 0\n"
-  ioIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
+  ioGenerationAdds.mIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 
@@ -98,7 +101,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
-  ?!@stringset ioIntrinsicsDeclarationSet
+  ?!@generationAdds ioGenerationAdds
 {
   let llvmType = [mOperandType llvmTypeName]
   switch mOperation
@@ -122,7 +125,7 @@ override method @binaryOperationIR llvmInstructionCode
       !10
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case saddOVF :
     [self enterCodeForOverflowOperation
@@ -130,7 +133,7 @@ override method @binaryOperationIR llvmInstructionCode
       !10
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case usubOVF :
     [self enterCodeForOverflowOperation
@@ -138,7 +141,7 @@ override method @binaryOperationIR llvmInstructionCode
       !11
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case ssubOVF :
     [self enterCodeForOverflowOperation
@@ -146,7 +149,7 @@ override method @binaryOperationIR llvmInstructionCode
       !11
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case umulOVF :
     [self enterCodeForOverflowOperation
@@ -154,7 +157,7 @@ override method @binaryOperationIR llvmInstructionCode
       !12
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case smulOVF :
     [self enterCodeForOverflowOperation
@@ -162,7 +165,7 @@ override method @binaryOperationIR llvmInstructionCode
       !12
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case udivOVF :
     [self enterCodeForOverflowOperation
@@ -170,7 +173,7 @@ override method @binaryOperationIR llvmInstructionCode
       !13
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case sdivOVF :
     [self enterCodeForOverflowOperation
@@ -178,7 +181,7 @@ override method @binaryOperationIR llvmInstructionCode
       !13
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case uremOVF :
     [self enterCodeForOverflowOperation
@@ -186,7 +189,7 @@ override method @binaryOperationIR llvmInstructionCode
       !14
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case sremOVF :
     [self enterCodeForOverflowOperation
@@ -194,7 +197,7 @@ override method @binaryOperationIR llvmInstructionCode
       !14
       !?ioCode
       !inGenerationContext
-      !?ioIntrinsicsDeclarationSet
+      !?ioGenerationAdds
     ]
   case and :
     ioCode += "  " + mTarget + " = and " + llvmType + " " + mLeft + ", " + mRight + "\n"

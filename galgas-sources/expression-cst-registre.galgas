@@ -205,7 +205,7 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
 override method @registerIntegerConstantInExpressionIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext unused inGenerationContext
-  ?!@stringset unused ioIntrinsicsDeclarationSet
+  ?!@generationAdds unused ioGenerationAdds
 {
   if mNoCheck then
     ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
