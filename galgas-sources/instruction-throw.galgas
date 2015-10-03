@@ -61,20 +61,22 @@ override method @throwInstructionAST analyze
     ?result:@operandIR result
   ]
 #--- Expression type check
-  if [result.mType key] != [inContext.mExceptionCodeType key] then
-    error mThrowLocation
-    : "throw expression type is " + [result.mType key] + ", required type is " + [inContext.mExceptionCodeType key]
-  end
 #--- Expression is static ?
-  if ([unusedInstructionListIR length] > 0) || not [result.mValue isStatic] then
-    error mThrowLocation : "throw expression cannot be statically computed"
-  end
-#--- Code generation
-  if not [option plm_options.noExceptionGeneration value] then
-    ioInstructionGenerationList += !@throwInstructionIR.new {
-      !mThrowLocation
-      !result
-    }
+  if ([unusedInstructionListIR length] > 0)
+     || not [result.mValue isLiteralInteger]
+     || ([result.mType key] != literalIntegerTypeName ()) then
+    error mThrowLocation : "throw expression should be a literal integer"
+  else
+    [[inContext.mExceptionCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]
+    [result.mValue literalInteger ?value:let throwValue]
+    if (throwValue < min) || (throwValue > max) then
+      error mThrowLocation : "throw expression cannot be represented by an $" +[inContext.mExceptionCodeType key]
+    elsif not [option plm_options.noExceptionGeneration value] then
+      ioInstructionGenerationList += !@throwInstructionIR.new {
+        !mThrowLocation
+        !throwValue
+      }
+    end
   end
 }
 
@@ -83,20 +85,27 @@ override method @throwInstructionAST analyze
 #----------------------------------------------------------------------------------------------------------------------*
 
 class @throwInstructionIR : @abstractInstructionIR {
-  @location mThrowInstructionLocation
-  @operandIR mCode
+  @location mThrowLocation
+  @bigint mCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @throwInstructionIR llvmInstructionCode
   ?!@string ioCode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
 {
-  ioCode += "raise_exception (" + mCode.mValue
-     + ", " + [[[mThrowInstructionLocation file] lastPathComponent] utf8Representation]
-     + ", " + [mThrowInstructionLocation line] + ") ;\n"
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+    ![[mThrowLocation file] lastPathComponent]
+    ?let staticStringIndex
+  ]
+  let lbl = [mThrowLocation locationIndex]
+  ioCode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioCode += "  call void @raise_exception ("
+  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ", "
+  ioCode += "i8* %str." + lbl + ", "
+  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ")\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

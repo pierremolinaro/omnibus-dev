@@ -2532,27 +2532,4 @@ void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Routine 'addPredefinedTypes'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_addPredefinedTypes (class GALGAS_declarationListAST & ioArgument0,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Routine 'addTargetSpecificFiles'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
-                                     class GALGAS_ast & ioArgument1,
-                                     const class GALGAS_string constinArgument2,
-                                     class GALGAS_stringset & ioArgument3,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
 #endif

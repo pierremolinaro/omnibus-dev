@@ -60,17 +60,21 @@ override method @truncateExpressionAST analyzeExpression
   elsif not [[expressionResult.mType kind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
-    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize]
+    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"
     end
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@truncateInstructionIR.new {
-      !outResult
-      !expressionResult
-    }
+    if resultSize < expSize then
+      getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+      ioInstructionGenerationList += !@truncateInstructionIR.new {
+        !outResult
+        !expressionResult
+      }
+    else
+      outResult = .new {!resultType !expressionResult.mValue}
+    end
   end
 }
 
