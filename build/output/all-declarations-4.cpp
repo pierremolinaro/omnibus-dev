@@ -6992,7 +6992,7 @@ const char * gWrapperFileContent_19_embeddedTargets = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.0-binutils-2.25-libusb-1.0.19\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.7.0-binutils-2.25.1-libusb-1.0.19\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -7122,7 +7122,7 @@ const cRegularFileWrapper gWrapperFile_19_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  10876, // Text length
+  10878, // Text length
   gWrapperFileContent_19_embeddedTargets
 ) ;
 
