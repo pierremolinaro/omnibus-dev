@@ -40,7 +40,7 @@ proc printUnsignedUsingMod `user @noWarningIfUnused (?inValue $uint32) {
     if isPrinting or (value >= divisor) then
       let quotient = value / divisor
       writeData_inUserMode (!0x30 + convert quotient : $uint8)
-//      value = value - quotient * divisor
+    //  value = value - quotient * divisor
       value = value % divisor
       isPrinting = true
     end

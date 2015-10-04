@@ -87,7 +87,7 @@ def downloadArchive (archiveURL, archivePath):
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
                  objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
-                 productDir, linker, objcopy, \
+                 productDir, linker, linkerLibraries, objcopy, \
                  dumpObjectCode, displayObjectSize, runExecutableOnTarget, \
                  currentFile) :
   #--- Get max parallel jobs as first argument
@@ -152,7 +152,8 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   rule.mDependences += objectList
   rule.mCommand += linker
   rule.mCommand += objectList
-#  rule.mCommand += [toolDirectory + "/lib/libgcc.a"]
+  for library in linkerLibraries:
+    rule.mCommand += [toolDirectory + "/lib/" + library]
   rule.mCommand += ["-o", productELF]
   rule.mCommand += ["-Tsources/linker.ld"]
   rule.mCommand += ["-Map=" + productELF + ".map"]
