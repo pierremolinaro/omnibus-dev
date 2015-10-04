@@ -1,0 +1,54 @@
+target "teensy-3-1-sequential-systick"
+
+//------------------------------------------------*
+
+proc setup `user () {
+}
+
+//------------------------------------------------*
+
+var toggle = true {
+  @rw proc loop ()
+}
+
+var gCount $uint32 = 0 {
+  @rw proc loop ()
+}
+
+//------------------------------------------------*
+
+proc loop `user () {
+  waitMS (!250)
+  ledOn (!LED_TEENSY) // Allumer la led
+  waitMS (!250)
+  ledOff (!LED_TEENSY)  // Éteindre la led
+  toggle = not toggle
+  if toggle then
+    gCount ++
+    goto (!line:1 !column:0)
+    printUnsigned (!gCount)
+    goto (!line:2 !column:0)
+    printUnsignedUsingMod (!gCount)
+  end
+}
+
+proc printUnsignedUsingMod `user @noWarningIfUnused (?inValue $uint32) {
+  var divisor $uint32 = 1_000_000_000
+  var value = inValue
+  var isPrinting = false
+  while divisor > 0 do
+    if isPrinting or (value >= divisor) then
+      let quotient = value / divisor
+      writeData_inUserMode (!0x30 + convert quotient : $uint8)
+//      value = value - quotient * divisor
+      value = value % divisor
+      isPrinting = true
+    end
+    divisor = divisor / 10
+  end
+  if not isPrinting then
+    writeData_inUserMode (!0x30)
+  end
+}
+
+//------------------------------------------------*
