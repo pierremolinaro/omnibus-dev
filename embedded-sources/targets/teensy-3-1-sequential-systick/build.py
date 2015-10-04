@@ -96,6 +96,16 @@ def linker ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   Linker libraries                                                                                                   *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def linkerLibraries ():
+  result = ["libgcc-armv7e-m.a"]
+  return result
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   objcopy invocation                                                                                                 *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -149,7 +159,7 @@ currentFile = os.path.abspath (sys.argv [0])
 plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
                  LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
-                 linker (), \
+                 linker (), linkerLibraries (), \
                  objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \
                  currentFile)
 

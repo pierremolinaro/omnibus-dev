@@ -6725,7 +6725,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
   "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
-  "                 productDir, linker, objcopy, \\\n"
+  "                 productDir, linker, linkerLibraries, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
   "                 currentFile) :\n"
   "  #--- Get max parallel jobs as first argument\n"
@@ -6790,7 +6790,8 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += objectList\n"
-  "#  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
+  "  for library in linkerLibraries:\n"
+  "    rule.mCommand += [toolDirectory + \"/lib/\" + library]\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -6843,7 +6844,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  8916, // Text length
+  8970, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -10569,6 +10570,16 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Linker libraries                                                                                                   *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerLibraries ():\n"
+  "  result = [\"libgcc-armv7e-m.a\"]\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   objcopy invocation                                                                                                 *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10622,7 +10633,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
   "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
-  "                 linker (), \\\n"
+  "                 linker (), linkerLibraries (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
   "                 currentFile)\n"
   "\n"
@@ -10632,7 +10643,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  10878, // Text length
+  11578, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -13100,7 +13111,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
   "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
-  "                 productDir, linker, objcopy, \\\n"
+  "                 productDir, linker, linkerLibraries, objcopy, \\\n"
   "                 dumpObjectCode, displayObjectSize, runExecutableOnTarget, \\\n"
   "                 currentFile) :\n"
   "  #--- Get max parallel jobs as first argument\n"
@@ -13165,7 +13176,8 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  rule.mDependences += objectList\n"
   "  rule.mCommand += linker\n"
   "  rule.mCommand += objectList\n"
-  "#  rule.mCommand += [toolDirectory + \"/lib/libgcc.a\"]\n"
+  "  for library in linkerLibraries:\n"
+  "    rule.mCommand += [toolDirectory + \"/lib/\" + library]\n"
   "  rule.mCommand += [\"-o\", productELF]\n"
   "  rule.mCommand += [\"-Tsources/linker.ld\"]\n"
   "  rule.mCommand += [\"-Map=\" + productELF + \".map\"]\n"
@@ -13218,7 +13230,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  8916, // Text length
+  8970, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -16944,6 +16956,16 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Linker libraries                                                                                                   *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def linkerLibraries ():\n"
+  "  result = [\"libgcc-armv7e-m.a\"]\n"
+  "  return result\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   objcopy invocation                                                                                                 *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -16997,7 +17019,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
   "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
-  "                 linker (), \\\n"
+  "                 linker (), linkerLibraries (), \\\n"
   "                 objcopy (), dumpObjectCode (), displayObjectSize (), runExecutableOnTarget (), \\\n"
   "                 currentFile)\n"
   "\n"
@@ -17007,7 +17029,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  10878, // Text length
+  11578, // Text length
   gWrapperFileContent_9_embeddedTargets
 ) ;
 
