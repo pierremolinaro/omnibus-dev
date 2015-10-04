@@ -152,7 +152,7 @@ override method @integerDeclaration semanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 #  INFIX OPERATION BETWEEN INTEGERS                                                                                    *
 #----------------------------------------------------------------------------------------------------------------------*
-#! literal object <-> literal object
+#! object <-> object
 #----------------------------------------------------------------------------------------------------------------------*
 
 private proc enter_integer_integer_operators
@@ -322,7 +322,7 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
 #----------------------------------------------------------------------------------------------------------------------*
 #  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
-#! literal object <-> literal integer
+#! object <-> literal integer
 #----------------------------------------------------------------------------------------------------------------------*
 
 private proc enter_integer_literal_operators
@@ -416,7 +416,7 @@ private proc enter_integer_literal_operators
   [!?ioContext.mDivOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivOVF else .udivOVF end}
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
   ]
   [!?ioContext.mDivNoOvfOperatorMap insertKey
     !intLiteralOp
@@ -426,7 +426,7 @@ private proc enter_integer_literal_operators
   [!?ioContext.mModOperatorMap insertKey
     !intLiteralOp
     !selfTypeProxy
-    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremOVF else .uremOVF end}
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
   ]
   [!?ioContext.mModNoOvfOperatorMap insertKey
     !intLiteralOp
@@ -463,7 +463,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@operandIR outResult
 {
-#--- Check right literal integer can be extented to left integer type
+#--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand.mValue literalInteger ?value:let @bigint literalValue]
   [[inLeftOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
@@ -484,9 +484,48 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+
+class @integerObject_literal_divisionOperator : @infixOperatorDescription {
+  @llvmBinaryOperation mOperator
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @integerObject_literal_divisionOperator generateInfixOperatorCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @operandIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @operandIR inRightOperand
+  ?let @unifiedTypeMap-proxy inResultType
+  !@operandIR outResult
+{
+#--- Check right literal integer can be extented to left integer type
+  [inRightOperand.mValue literalInteger ?value:let @bigint literalValue]
+  [[inLeftOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  if literalValue < min then
+    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
+  elsif literalValue > max then
+    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
+  elsif literalValue == 0G then
+    error inOperatorLocation : "division by zero" : outResult
+  else
+    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult.mValue
+      !inLeftOperand.mType
+      !inOperatorLocation
+      !inLeftOperand.mValue
+      !mOperator
+      !inRightOperand.mValue
+    ]
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                            *
 #----------------------------------------------------------------------------------------------------------------------*
-#! literal integer <-> literal object
+#! literal integer <-> object
 #----------------------------------------------------------------------------------------------------------------------*
 
 private proc enter_literal_integer_operators

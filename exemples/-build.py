@@ -102,5 +102,6 @@ compileSource ("03-blinkled-systick-enum.plm")
 compileSource ("04-blinkled-systick-struct.plm")
 compileSource ("05-blinkled-systick-string.plm")
 compileSource ("06-blinkled-lcd.plm")
+compileSource ("07-blinkled-urem-test.plm")
 
 #----------------------------------------------------------------------------------------------------------------------*
