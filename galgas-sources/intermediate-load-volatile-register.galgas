@@ -18,12 +18,12 @@ class @loadRegisterIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @loadRegisterIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
-  ioCode += "  " + mTargetValue.mValue + " = load volatile " + llvmType + ", " + llvmType
+  ioLLVMcode += "  " + mTargetValue.mValue + " = load volatile " + llvmType + ", " + llvmType
          + "* inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }
 

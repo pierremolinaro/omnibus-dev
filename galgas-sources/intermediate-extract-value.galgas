@@ -18,12 +18,12 @@ class @extractValueIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @extractValueIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mSource.mType llvmTypeName]
-  ioCode += "  " + mTarget.mValue + " = extractvalue " + llvmType + " " + mSource.mValue + ", " + mIndex + "\n"
+  ioLLVMcode += "  " + mTarget.mValue + " = extractvalue " + llvmType + " " + mSource.mValue + ", " + mIndex + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

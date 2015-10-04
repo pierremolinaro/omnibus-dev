@@ -84,7 +84,7 @@ def downloadArchive (archiveURL, archivePath):
     
 #----------------------------------------------------------------------------------------------------------------------*
 
-def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
+def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \
                  objectDir, LLCcompiler, llvmOptimizerCompiler, \
                  asAssembler, \
                  productDir, linker, linkerLibraries, objcopy, \
@@ -117,7 +117,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   #print "Product directory: " + scriptDir
   #--- Build python makefile
   make = makefile.Make (goal)
-  #--- Add C files compile rule
+  #---------------------------------------------- Add LLVM files compile rule
   objectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
@@ -146,7 +146,17 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
     rule.mCommand += ["-o", asObject]
     make.addRule (rule)
     objectList.append (asObject)
-  #--- Add linker rule
+  #---------------------------------------------- Add assembler files compile rule
+  for source in assemblerSourceList:
+    object = objectDir + "/" + source + ".o"
+    rule = makefile.Rule ([object], "Assembling " + source)
+    rule.mDependences.append ("sources/" + source)
+    rule.mCommand += asAssembler
+    rule.mCommand += ["sources/" + source]
+    rule.mCommand += ["-o", object]
+    make.addRule (rule)
+    objectList.append (object)
+  #---------------------------------------------- Add linker rule
   productELF = productDir + "/product.elf"
   rule = makefile.Rule ([productELF], "Linking " + productELF)
   rule.mDependences += objectList
@@ -179,12 +189,12 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \
   make.printErrorCountAndExitOnError ()
   #--- Run or all ? Display size
   if (goal == "run") or (goal == "all") :
-    s = runProcessAndGetOutput (displayObjectSize + objectList)
+    s = runProcessAndGetOutput (displayObjectSize + [productELF])
     secondLine = s.split('\n')[1]
     numbers = [int(s) for s in secondLine.split() if s.isdigit()]
-    print "Code:   " + str (numbers [0]) + " bytes"
-    print "Data:   " + str (numbers [1]) + " bytes"
-    print "Global: " + str (numbers [2]) + " bytes"
+    print "Code:        " + str (numbers [0]) + " bytes"
+    print "ROM data:    " + str (numbers [1]) + " bytes"
+    print "RAM + STACK: " + str (numbers [2]) + " bytes"
   #--- Run ?
   if goal == "run":
     print makefile.BOLD_BLUE () + "Loading Teensy..." + makefile.ENDC ()

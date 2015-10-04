@@ -45,7 +45,7 @@ abstract class @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 abstract method @abstractInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
@@ -72,6 +72,21 @@ func llvmTitleComment ?@string inTitle -> @string outTitle {
   outTitle  = llvmSeparatorLine ()
   outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
   outTitle += llvmSeparatorLine () + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func %once asSeparatorLine -> @string outResult {
+  outResult  = "@-------------------------------------------------------------------------"
+  outResult += "---------------------------------------------*\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func asTitleComment ?@string inTitle -> @string outTitle {
+  outTitle  = asSeparatorLine ()
+  outTitle += "@    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += asSeparatorLine () + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -134,117 +149,127 @@ proc generateLLVMfile
     ![inExceptionLineType llvmTypeName]
   }
   let sourceDirectory = inProductDirectory + "/sources"
-  var code = ""
-#----------------------------------------- Include target specific file
-  code += llvmTitleComment (!"Target specific code")
-  let targetSpecificFileContents = getTargetTextFile (
+  var llvmCode = ""
+  var asCode = ""
+#----------------------------------------- Include assembler specific file
+  asCode += asTitleComment (!"Target specific code")
+  asCode += getTargetTextFile (
+     !currentDir:inCurrentDirectory
+     !from:inTargetName.string + "/target.s"
+  )
+  asCode += "\n"
+#----------------------------------------- Include LLVM specific file
+  llvmCode += llvmTitleComment (!"Target specific code")
+  llvmCode += getTargetTextFile (
      !currentDir:inCurrentDirectory
      !from:inTargetName.string + "/target.ll"
   )
-  code += targetSpecificFileContents
-  code += "\n"
+  llvmCode += "\n"
 #----------------------------------------- Structure types
-  code += llvmTitleComment (!"Structure types")
-  declareLLVMstructures (!inTypeMap !?code)
-  code += "\n"
+  llvmCode += llvmTitleComment (!"Structure types")
+  declareLLVMstructures (!inTypeMap !?llvmCode)
+  llvmCode += "\n"
 #----------------------------------------- Global constants
   for globalConstant in inIntermediateCodeStruct.mGlobalConstantMap
-    before code += llvmTitleComment (!"Global constants")
-    do [globalConstant generateLLVM !?code]
-    after code += "\n"
+    before llvmCode += llvmTitleComment (!"Global constants")
+    do [globalConstant generateLLVM !?llvmCode]
+    after llvmCode += "\n"
   end
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
-    before code += llvmTitleComment (!"Global variables")
-    do [globalVariable generateLLVM !?code]
-    after code += "\n"
+    before llvmCode += llvmTitleComment (!"Global variables")
+    do [globalVariable generateLLVM !?llvmCode]
+    after llvmCode += "\n"
   end
 #----------------------------------------- Boot
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
-  code += llvmTitleComment (!"Boot")
-  code += "define internal void @boot () nounwind {\n"
+  llvmCode += llvmTitleComment (!"Boot")
+  llvmCode += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR instructionListLLVMCode !?code !generationContext !?generationAdds]
+    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
   end
-  code += ";---\n"
-  code += "  ret void\n"
-  code += "}\n\n"
+  llvmCode += ";---\n"
+  llvmCode += "  ret void\n"
+  llvmCode += "}\n\n"
 #----------------------------------------- Init
-  code += llvmTitleComment (!"Init")
-  code += "define internal void @init () nounwind {\n"
+  llvmCode += llvmTitleComment (!"Init")
+  llvmCode += "define internal void @init () nounwind {\n"
   for init in inIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR instructionListLLVMCode !?code !generationContext !?generationAdds]
+    [init.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
   end
-  code += ";---\n"
-  code += "  ret void\n"
-  code += "}\n\n"
+  llvmCode += ";---\n"
+  llvmCode += "  ret void\n"
+  llvmCode += "}\n\n"
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    [procedure llvmCodeGeneration !?code !generationContext !?generationAdds]
+    [procedure llvmCodeGeneration !?llvmCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do
-    [function implementationCodeGeneration !?code !generationContext !?generationAdds]
+    [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Exception
   if not [option plm_options.noExceptionGeneration value] then
-    code += getTargetTextFile (
+    llvmCode += getTargetTextFile (
        !currentDir:inCurrentDirectory
        !from:inTargetName.string + "/target-exception.ll"
     )
-    code += llvmTitleComment (!"Raise Exception internal")
-    code += "define internal void @raise_exception_internal ("
-    code += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
-    code += "i8* %in.FILE, "
-    code += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
-    code += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    llvmCode += llvmTitleComment (!"Raise Exception internal")
+    llvmCode += "define internal void @raise_exception_internal ("
+    llvmCode += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    llvmCode += "i8* %in.FILE, "
+    llvmCode += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
+    llvmCode += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
          + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
-    code += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
-    code += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
+    llvmCode += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
          + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
-      !?code
+      !?llvmCode
       !generationContext
       !?generationAdds
     ]
-    code += "  br label %exception.loop\n\n"
-    code += "exception.loop:\n"
+    llvmCode += "  br label %exception.loop\n\n"
+    llvmCode += "exception.loop:\n"
     [inIntermediateCodeStruct.mExceptionLoopInstructionListIR instructionListLLVMCode
-      !?code
+      !?llvmCode
       !generationContext
       !?generationAdds
     ]
-    code += "  br label %exception.loop\n"
-    code += "}\n\n"
+    llvmCode += "  br label %exception.loop\n"
+    llvmCode += "}\n\n"
   end
 #----------------------------------------- Intrinsics
   if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then
-    code += llvmTitleComment (!"LLVM intrinsics")
+    llvmCode += llvmTitleComment (!"LLVM intrinsics")
     for (s) in generationAdds.mIntrinsicsDeclarationSet do
-      code += s + "\n"
+      llvmCode += s + "\n"
     end
-    code += "\n"
+    llvmCode += "\n"
   end
 #----------------------------------------- Static Strings
   if [generationAdds.mStaticStringMap count] > 0 then
-    code += llvmTitleComment (!"Static strings")
+    llvmCode += llvmTitleComment (!"Static strings")
     for () in generationAdds.mStaticStringMap do
       let lgStr = [[lkey.string length] + 1 string]
-      code += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
-      code += lgStr + " x i8] c\""
-      code += [lkey.string utf8RepresentationWithoutDelimiters]
-      code += "\\00\", align 1\n"
-      code += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
-      code += lgStr + " x i8], [" + lgStr + " x i8]* "
-      code += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
+      llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
+      llvmCode += lgStr + " x i8] c\""
+      llvmCode += [lkey.string utf8RepresentationWithoutDelimiters]
+      llvmCode += "\\00\", align 1\n"
+      llvmCode += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
+      llvmCode += lgStr + " x i8], [" + lgStr + " x i8]* "
+      llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
     end
   end
 #----------------------------------------- Write LLVM file
-  code += llvmSeparatorLine ()
-  [code writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.ll" ?*]
-#----------------------------------------- Perform LLVM compilation
+  llvmCode += llvmSeparatorLine ()
+  [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.ll" ?*]
+#----------------------------------------- Write assembler file
+  asCode += asSeparatorLine ()
+  [asCode writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.s" ?*]
+#----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end
     let fullScript = "python " + inProductDirectory + "/" + script + ".py"

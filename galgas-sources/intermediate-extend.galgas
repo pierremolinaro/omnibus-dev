@@ -16,14 +16,14 @@ class @extendIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @extendIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioCode += "  " + mResult.mValue + " = "
+  ioLLVMcode += "  " + mResult.mValue + " = "
   [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
-  ioCode += if sourceIsUnsigned then "zext" else "sext" end
-  ioCode += " " + [mSource.mType  llvmTypeName] + " " + mSource.mValue + " to " + [mResult.mType llvmTypeName] + "\n"
+  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
+  ioLLVMcode += " " + [mSource.mType  llvmTypeName] + " " + mSource.mValue + " to " + [mResult.mType llvmTypeName] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

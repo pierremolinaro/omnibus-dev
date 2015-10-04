@@ -92,7 +92,7 @@ class @throwInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @throwInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
@@ -101,11 +101,11 @@ override method @throwInstructionIR llvmInstructionCode
     ?let staticStringIndex
   ]
   let lbl = [mThrowLocation locationIndex]
-  ioCode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioCode += "  call void @raise_exception ("
-  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ", "
-  ioCode += "i8* %str." + lbl + ", "
-  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ")\n"
+  ioLLVMcode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ", "
+  ioLLVMcode += "i8* %str." + lbl + ", "
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ")\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -188,25 +188,25 @@ class @ifInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @ifInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioCode += ";--- if (" + mTestVariable.mValue + ") {\n"
+  ioLLVMcode += ";--- if (" + mTestVariable.mValue + ") {\n"
   let labelTrue = "if." + [mLocation locationIndex] + ".true"
   let labelFalse = "if." + [mLocation locationIndex] + ".false"
   let labelEnd = "if." + [mLocation locationIndex] + ".end"
-  ioCode += "  br i1 " + mTestVariable.mValue + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+  ioLLVMcode += "  br i1 " + mTestVariable.mValue + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
-  ioCode += labelTrue + ":\n"
-  [mThenInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br label %" + labelEnd + "\n\n"
+  ioLLVMcode += labelTrue + ":\n"
+  [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 #--- false branch
-  ioCode += labelFalse + ":\n"
-  [mElseInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br label %" + labelEnd + "\n\n"
+  ioLLVMcode += labelFalse + ":\n"
+  [mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 #--- end
-  ioCode += labelEnd + ":\n"
+  ioLLVMcode += labelEnd + ":\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

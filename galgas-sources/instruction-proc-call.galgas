@@ -251,25 +251,25 @@ class @procCallInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @procCallInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioCode += ";--- call " + mangledNameForProcedure (!mProcName) + " ()\n"
-  ioCode += "  call void @" + mangledNameForProcedure (!mProcName) + " ("
+  ioLLVMcode += ";--- call " + mangledNameForProcedure (!mProcName) + " ()\n"
+  ioLLVMcode += "  call void @" + mangledNameForProcedure (!mProcName) + " ("
   for () in mParameters do
     switch mEffectiveParameterPassingMode
     case input:
-      ioCode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
     case output:
-      ioCode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue string]
     case outputInput:
-      ioCode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
+      ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue string]
     end
   between
-    ioCode += ", "
+    ioLLVMcode += ", "
   end
-  ioCode += ")\n"
+  ioLLVMcode += ")\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

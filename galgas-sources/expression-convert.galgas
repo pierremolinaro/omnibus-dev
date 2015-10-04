@@ -131,7 +131,7 @@ override method @convertInstructionIR enterAccessibleEntities ?!@accessibleEntit
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @convertInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
@@ -146,25 +146,25 @@ override method @convertInstructionIR llvmInstructionCode
   [[mOperand.mType kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?bitCount:*]
   let operandType = [mOperand.mType llvmTypeName]
   if minTarget != minSource then
-    ioCode += "  %" + compareMinVar + " = icmp "
-    ioCode += if operandIsUnsigned then "uge" else "sge" end
-    ioCode += " " + operandType + " " + mOperand.mValue + ", " + minTarget + "\n"
-    ioCode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
-    ioCode += convertMinOkLabel + ":\n"
+    ioLLVMcode += "  %" + compareMinVar + " = icmp "
+    ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
+    ioLLVMcode += " " + operandType + " " + mOperand.mValue + ", " + minTarget + "\n"
+    ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
+    ioLLVMcode += convertMinOkLabel + ":\n"
   end
-  ioCode += "  %" + compareMaxVar + " = icmp "
-  ioCode += if operandIsUnsigned then "ule" else "sle" end
-  ioCode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
-  ioCode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
-  ioCode += convertFailLabel + ":\n"
-  ioCode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioCode += "  call void @raise_exception ("
-  ioCode += inGenerationContext.mExceptionCodeLLVMType + " 5, "
-  ioCode += "i8* %str." + lbl + ", "
-  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
-  ioCode += "  unreachable\n\n"
-  ioCode += convertMaxOkLabel + ":\n"
-  ioCode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
+  ioLLVMcode += "  %" + compareMaxVar + " = icmp "
+  ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
+  ioLLVMcode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
+  ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
+  ioLLVMcode += convertFailLabel + ":\n"
+  ioLLVMcode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " 5, "
+  ioLLVMcode += "i8* %str." + lbl + ", "
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += convertMaxOkLabel + ":\n"
+  ioLLVMcode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

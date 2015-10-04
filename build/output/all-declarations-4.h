@@ -2687,7 +2687,7 @@ void enterCategoryMethod_llvmInstructionCode (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructionIR * inObject,
-                                             GALGAS_string & io_ioCode,
+                                             GALGAS_string & io_ioLLVMcode,
                                              const GALGAS_generationContext constin_inGenerationContext,
                                              GALGAS_generationAdds & io_ioGenerationAdds,
                                              C_Compiler * inCompiler

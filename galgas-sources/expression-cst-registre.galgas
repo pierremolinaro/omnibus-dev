@@ -203,24 +203,24 @@ class @registerIntegerConstantInExpressionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @registerIntegerConstantInExpressionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   if mNoCheck then
-    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
             + " = ((" + mangledNameForType (!name:[mResult.mType key]) + " *) "
             + mExpressionValue.mValue + ") << " + mBitShift + "\n" 
   elsif [option plm_options.noExceptionGeneration value] then
-    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
             + " = (" + mExpressionValue.mValue + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else
-    ioCode += "if (" + mExpressionValue.mValue + " > " + mMaxBound + ") {\n"
-    ioCode += "  raise_exception (4, "
+    ioLLVMcode += "if (" + mExpressionValue.mValue + " > " + mMaxBound + ") {\n"
+    ioLLVMcode += "  raise_exception (4, "
        + [[[mInstructionLocation file] lastPathComponent] utf8Representation]
        + ", " + [mInstructionLocation line] + ") ;\n"
-    ioCode += "}\n" 
-    ioCode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
+    ioLLVMcode += "}\n" 
+    ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
                + " = " + mExpressionValue.mValue + " << " + mBitShift + "\n" 
   end
 }

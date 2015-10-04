@@ -509,44 +509,44 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 method @procedureMapIR-element llvmCodeGeneration 
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   let procName = mangledNameForProcedure (!lkey.string)
-  ioCode += llvmTitleComment (!"proc " + procName)
-  ioCode += "define internal void @" + procName + " ("
+  ioLLVMcode += llvmTitleComment (!"proc " + procName)
+  ioLLVMcode += "define internal void @" + procName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
-      ioCode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioCode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
    case inputOutput :
-      ioCode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
     end
   between
-    ioCode += ", "
+    ioLLVMcode += ", "
   end
-  ioCode += ") nounwind {\n"
+  ioLLVMcode += ") nounwind {\n"
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
-      ioCode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
-      ioCode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
+      ioLLVMcode += "  %" + mFormalArgumentName + " = alloca " + [mFormalArgumentType llvmTypeName] + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + "* %" + mFormalArgumentName + "\n"
     case output, inputOutput :
     end
   end
  
 #--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Epilog
-  ioCode += ";--- return\n"
-  ioCode += "  ret void\n"
-  ioCode += "}\n\n"
+  ioLLVMcode += ";--- return\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

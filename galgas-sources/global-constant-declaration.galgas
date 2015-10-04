@@ -151,9 +151,9 @@ override method @globalConstantDeclaration semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @globalConstantMapIR-element generateLLVM ?!@string ioCode {
-  ioCode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal constant "
-  ioCode += [mType llvmTypeName] + " " +  mSourceExpression + "\n"
+method @globalConstantMapIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal constant "
+  ioLLVMcode += [mType llvmTypeName] + " " +  mSourceExpression + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

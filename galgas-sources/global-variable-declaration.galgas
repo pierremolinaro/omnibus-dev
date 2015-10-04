@@ -252,16 +252,16 @@ method @globalVarDeclarationList-element semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-method @globalVariableMapIR-element generateLLVM ?!@string ioCode {
-  ioCode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal global "
-  ioCode += [mType llvmTypeName] + " "
+method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += "@" + mangledNameForGlobalVariable (!lkey.string) + " = internal global "
+  ioLLVMcode += [mType llvmTypeName] + " "
   let initialString = [mInitialValue string]
   if initialString == "" then
-    ioCode += "zeroinitializer"
+    ioLLVMcode += "zeroinitializer"
   else
-    ioCode += initialString
+    ioLLVMcode += initialString
   end
-  ioCode += "\n"
+  ioLLVMcode += "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
