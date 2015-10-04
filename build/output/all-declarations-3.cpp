@@ -2500,29 +2500,29 @@ void routine_enterEnumerationOperators (GALGAS_lstring inArgument_inEnumerationT
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_declareLLVMstructures (const GALGAS_unifiedTypeMap constinArgument_inTypeMap,
-                                    GALGAS_string & ioArgument_ioCode,
+                                    GALGAS_string & ioArgument_ioLLVMcode,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_unifiedTypeMap enumerator_9974 (constinArgument_inTypeMap, kEnumeration_up) ;
-  while (enumerator_9974.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = enumerator_9974.current_kind (HERE).reader_isStructure (SOURCE_FILE ("structure-declaration.galgas", 257)).boolEnum () ;
+  cEnumerator_unifiedTypeMap enumerator_9978 (constinArgument_inTypeMap, kEnumeration_up) ;
+  while (enumerator_9978.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = enumerator_9978.current_kind (HERE).reader_isStructure (SOURCE_FILE ("structure-declaration.galgas", 257)).boolEnum () ;
     if (kBoolTrue == test_0) {
       GALGAS_string var_name ;
       GALGAS_propertyList var_propertyList ;
-      GALGAS_propertyMap joker_10059 ; // Joker input parameter
-      enumerator_9974.current_kind (HERE).method_structure (var_name, joker_10059, var_propertyList, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 258)) ;
-      ioArgument_ioCode.dotAssign_operation (GALGAS_string ("%").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 259)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 259))  COMMA_SOURCE_FILE ("structure-declaration.galgas", 259)) ;
-      cEnumerator_propertyList enumerator_10162 (var_propertyList, kEnumeration_up) ;
-      while (enumerator_10162.hasCurrentObject ()) {
-        ioArgument_ioCode.dotAssign_operation (categoryReader_llvmTypeName (enumerator_10162.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 261))  COMMA_SOURCE_FILE ("structure-declaration.galgas", 261)) ;
-        if (enumerator_10162.hasNextObject ()) {
-          ioArgument_ioCode.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("structure-declaration.galgas", 262)) ;
+      GALGAS_propertyMap joker_10063 ; // Joker input parameter
+      enumerator_9978.current_kind (HERE).method_structure (var_name, joker_10063, var_propertyList, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 258)) ;
+      ioArgument_ioLLVMcode.dotAssign_operation (GALGAS_string ("%").add_operation (var_name, inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 259)).add_operation (GALGAS_string (" = type {"), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 259))  COMMA_SOURCE_FILE ("structure-declaration.galgas", 259)) ;
+      cEnumerator_propertyList enumerator_10170 (var_propertyList, kEnumeration_up) ;
+      while (enumerator_10170.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.dotAssign_operation (categoryReader_llvmTypeName (enumerator_10170.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("structure-declaration.galgas", 261))  COMMA_SOURCE_FILE ("structure-declaration.galgas", 261)) ;
+        if (enumerator_10170.hasNextObject ()) {
+          ioArgument_ioLLVMcode.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("structure-declaration.galgas", 262)) ;
         }
-        enumerator_10162.gotoNextObject () ;
+        enumerator_10170.gotoNextObject () ;
       }
-      ioArgument_ioCode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("structure-declaration.galgas", 264)) ;
+      ioArgument_ioLLVMcode.dotAssign_operation (GALGAS_string ("}\n")  COMMA_SOURCE_FILE ("structure-declaration.galgas", 264)) ;
     }
-    enumerator_9974.gotoNextObject () ;
+    enumerator_9978.gotoNextObject () ;
   }
 }
 
@@ -5665,6 +5665,126 @@ C_galgas_function_descriptor functionDescriptor_llvmTitleComment ("llvmTitleComm
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Once function 'asSeparatorLine'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_asSeparatorLine (C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("@-------------------------------------------------------------------------") ;
+  result_outResult.dotAssign_operation (GALGAS_string ("---------------------------------------------*\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 81)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_asSeparatorLine = false ;
+static GALGAS_string gOnceFunctionResult_asSeparatorLine ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_asSeparatorLine (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_asSeparatorLine) {
+    gOnceFunctionResult_asSeparatorLine = onceFunction_asSeparatorLine (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_asSeparatorLine = true ;
+  }
+  return gOnceFunctionResult_asSeparatorLine ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_asSeparatorLine (void) {
+  gOnceFunctionResult_asSeparatorLine.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (NULL,
+                                                             releaseOnceFunctionResult_asSeparatorLine) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_asSeparatorLine [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_asSeparatorLine (C_Compiler * inCompiler,
+                                                                const cObjectArray & /* inEffectiveParameterArray */,
+                                                                const GALGAS_location & /* inErrorLocation */
+                                                                COMMA_LOCATION_ARGS) {
+  return function_asSeparatorLine (inCompiler COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_asSeparatorLine ("asSeparatorLine",
+                                                                 functionWithGenericHeader_asSeparatorLine,
+                                                                 & kTypeDescriptor_GALGAS_string,
+                                                                 0,
+                                                                 functionArgs_asSeparatorLine) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'asTitleComment'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_asTitleComment (GALGAS_string inArgument_inTitle,
+                                       C_Compiler * inCompiler
+                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outTitle ; // Returned variable
+  result_outTitle = function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 87)) ;
+  result_outTitle.dotAssign_operation (GALGAS_string ("@    ").add_operation (inArgument_inTitle.reader_stringByRightPadding (GALGAS_uint ((uint32_t) 114U), GALGAS_char (TO_UNICODE (32)) COMMA_SOURCE_FILE ("code-generation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 88)).add_operation (GALGAS_string ("*\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 88))  COMMA_SOURCE_FILE ("code-generation.galgas", 88)) ;
+  result_outTitle.dotAssign_operation (function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 89)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 89))  COMMA_SOURCE_FILE ("code-generation.galgas", 89)) ;
+//---
+  return result_outTitle ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_asTitleComment [2] = {
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_asTitleComment (C_Compiler * inCompiler,
+                                                               const cObjectArray & inEffectiveParameterArray,
+                                                               const GALGAS_location & /* §§ inErrorLocation */
+                                                               COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_asTitleComment (operand0,
+                                  inCompiler
+                                  COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_asTitleComment ("asTitleComment",
+                                                                functionWithGenericHeader_asTitleComment,
+                                                                & kTypeDescriptor_GALGAS_string,
+                                                                1,
+                                                                functionArgs_asTitleComment) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              Routine 'codeGeneration'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5679,15 +5799,15 @@ void routine_codeGeneration (const GALGAS_string constinArgument_inCurrentDirect
                              const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inExceptionLineType,
                              C_Compiler * inCompiler
                              COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_homeDir = GALGAS_string::constructor_homeDirectory (SOURCE_FILE ("code-generation.galgas", 89)).add_operation (GALGAS_string ("/plm-products/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 89)) ;
-  GALGAS_string var_productDirectory = var_homeDir.add_operation (constinArgument_inSourceFileName.reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 91)).reader_stringByReplacingStringByString (GALGAS_string ("/"), GALGAS_string ("+"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 91)) ;
-  GALGAS_string var_sourceDirectory = var_productDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 92)) ;
-  var_sourceDirectory.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 93)) ;
+  GALGAS_string var_homeDir = GALGAS_string::constructor_homeDirectory (SOURCE_FILE ("code-generation.galgas", 104)).add_operation (GALGAS_string ("/plm-products/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 104)) ;
+  GALGAS_string var_productDirectory = var_homeDir.add_operation (constinArgument_inSourceFileName.reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 106)).reader_stringByReplacingStringByString (GALGAS_string ("/"), GALGAS_string ("+"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 106)) ;
+  GALGAS_string var_sourceDirectory = var_productDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 107)) ;
+  var_sourceDirectory.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 108)) ;
   {
-  routine_generateTarget (constinArgument_inCurrentDirectory, var_productDirectory, constinArgument_inTargetName, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 95)) ;
+  routine_generateTarget (constinArgument_inCurrentDirectory, var_productDirectory, constinArgument_inTargetName, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 110)) ;
   }
   {
-  routine_generateLLVMfile (constinArgument_inCurrentDirectory, var_productDirectory, constinArgument_inEndOfSourceFileLocation, constinArgument_inIntermediateCodeStruct, constinArgument_inTypeMap, constinArgument_inTargetName, constinArgument_inExceptionCodeType, constinArgument_inExceptionLineType, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 101)) ;
+  routine_generateLLVMfile (constinArgument_inCurrentDirectory, var_productDirectory, constinArgument_inEndOfSourceFileLocation, constinArgument_inIntermediateCodeStruct, constinArgument_inTypeMap, constinArgument_inTargetName, constinArgument_inExceptionCodeType, constinArgument_inExceptionLineType, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 116)) ;
   }
 }
 
@@ -5708,126 +5828,132 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
                                const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inExceptionLineType,
                                C_Compiler * inCompiler
                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_generationContext var_generationContext = GALGAS_generationContext::constructor_new (categoryReader_llvmTypeName (constinArgument_inExceptionCodeType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 133)), categoryReader_llvmTypeName (constinArgument_inExceptionLineType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 134))  COMMA_SOURCE_FILE ("code-generation.galgas", 132)) ;
-  GALGAS_string var_sourceDirectory = constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 136)) ;
-  GALGAS_string var_code = GALGAS_string::makeEmptyString () ;
-  var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Target specific code"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 139))  COMMA_SOURCE_FILE ("code-generation.galgas", 139)) ;
-  GALGAS_string var_targetSpecificFileContents = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 140)) ;
-  var_code.dotAssign_operation (var_targetSpecificFileContents  COMMA_SOURCE_FILE ("code-generation.galgas", 144)) ;
-  var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 145)) ;
-  var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Structure types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 147))  COMMA_SOURCE_FILE ("code-generation.galgas", 147)) ;
+  GALGAS_generationContext var_generationContext = GALGAS_generationContext::constructor_new (categoryReader_llvmTypeName (constinArgument_inExceptionCodeType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 148)), categoryReader_llvmTypeName (constinArgument_inExceptionLineType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 149))  COMMA_SOURCE_FILE ("code-generation.galgas", 147)) ;
+  GALGAS_string var_sourceDirectory = constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 151)) ;
+  GALGAS_string var_llvmCode = GALGAS_string::makeEmptyString () ;
+  GALGAS_string var_asCode = GALGAS_string::makeEmptyString () ;
+  var_asCode.dotAssign_operation (function_asTitleComment (GALGAS_string ("Target specific code"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 155))  COMMA_SOURCE_FILE ("code-generation.galgas", 155)) ;
+  var_asCode.dotAssign_operation (function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 158)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 156))  COMMA_SOURCE_FILE ("code-generation.galgas", 156)) ;
+  var_asCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 160)) ;
+  var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Target specific code"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 162))  COMMA_SOURCE_FILE ("code-generation.galgas", 162)) ;
+  var_llvmCode.dotAssign_operation (function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 163))  COMMA_SOURCE_FILE ("code-generation.galgas", 163)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 167)) ;
+  var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Structure types"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 169))  COMMA_SOURCE_FILE ("code-generation.galgas", 169)) ;
   {
-  routine_declareLLVMstructures (constinArgument_inTypeMap, var_code, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 148)) ;
+  routine_declareLLVMstructures (constinArgument_inTypeMap, var_llvmCode, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 170)) ;
   }
-  var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 149)) ;
-  cEnumerator_globalConstantMapIR enumerator_6536 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 171)) ;
+  cEnumerator_globalConstantMapIR enumerator_7446 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
   const bool bool_0 = true ;
-  if (enumerator_6536.hasCurrentObject () && bool_0) {
-    var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Global constants"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 152))  COMMA_SOURCE_FILE ("code-generation.galgas", 152)) ;
-    while (enumerator_6536.hasCurrentObject () && bool_0) {
-      categoryMethod_generateLLVM (enumerator_6536.current (HERE), var_code, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 153)) ;
-      enumerator_6536.gotoNextObject () ;
+  if (enumerator_7446.hasCurrentObject () && bool_0) {
+    var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Global constants"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 174))  COMMA_SOURCE_FILE ("code-generation.galgas", 174)) ;
+    while (enumerator_7446.hasCurrentObject () && bool_0) {
+      categoryMethod_generateLLVM (enumerator_7446.current (HERE), var_llvmCode, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 175)) ;
+      enumerator_7446.gotoNextObject () ;
     }
-    var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 154)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 176)) ;
   }
-  cEnumerator_globalVariableMapIR enumerator_6795 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
+  cEnumerator_globalVariableMapIR enumerator_7717 (constinArgument_inIntermediateCodeStruct.mAttribute_mGlobalVariableMap, kEnumeration_up) ;
   const bool bool_1 = true ;
-  if (enumerator_6795.hasCurrentObject () && bool_1) {
-    var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Global variables"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 158))  COMMA_SOURCE_FILE ("code-generation.galgas", 158)) ;
-    while (enumerator_6795.hasCurrentObject () && bool_1) {
-      categoryMethod_generateLLVM (enumerator_6795.current (HERE), var_code, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 159)) ;
-      enumerator_6795.gotoNextObject () ;
+  if (enumerator_7717.hasCurrentObject () && bool_1) {
+    var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Global variables"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 180))  COMMA_SOURCE_FILE ("code-generation.galgas", 180)) ;
+    while (enumerator_7717.hasCurrentObject () && bool_1) {
+      categoryMethod_generateLLVM (enumerator_7717.current (HERE), var_llvmCode, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 181)) ;
+      enumerator_7717.gotoNextObject () ;
     }
-    var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 160)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 182)) ;
   }
-  GALGAS_generationAdds var_generationAdds = GALGAS_generationAdds::constructor_default (SOURCE_FILE ("code-generation.galgas", 163)) ;
+  GALGAS_generationAdds var_generationAdds = GALGAS_generationAdds::constructor_default (SOURCE_FILE ("code-generation.galgas", 185)) ;
   var_generationAdds.mAttribute_mStaticStringMap = constinArgument_inIntermediateCodeStruct.mAttribute_mStaticStringMap ;
-  var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 165))  COMMA_SOURCE_FILE ("code-generation.galgas", 165)) ;
-  var_code.dotAssign_operation (GALGAS_string ("define internal void @boot () nounwind {\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 166)) ;
-  cEnumerator_bootListIR enumerator_7237 (constinArgument_inIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
-  while (enumerator_7237.hasCurrentObject ()) {
-    categoryMethod_instructionListLLVMCode (enumerator_7237.current (HERE).mAttribute_mInstructionListIR, var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 168)) ;
-    enumerator_7237.gotoNextObject () ;
+  var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Boot"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 187))  COMMA_SOURCE_FILE ("code-generation.galgas", 187)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("define internal void @boot () nounwind {\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 188)) ;
+  cEnumerator_bootListIR enumerator_8179 (constinArgument_inIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
+  while (enumerator_8179.hasCurrentObject ()) {
+    categoryMethod_instructionListLLVMCode (enumerator_8179.current (HERE).mAttribute_mInstructionListIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 190)) ;
+    enumerator_8179.gotoNextObject () ;
   }
-  var_code.dotAssign_operation (GALGAS_string (";---\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 170)) ;
-  var_code.dotAssign_operation (GALGAS_string ("  ret void\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 171)) ;
-  var_code.dotAssign_operation (GALGAS_string ("}\n"
-    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 172)) ;
-  var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Init"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 174))  COMMA_SOURCE_FILE ("code-generation.galgas", 174)) ;
-  var_code.dotAssign_operation (GALGAS_string ("define internal void @init () nounwind {\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 175)) ;
-  cEnumerator_initListIR enumerator_7594 (constinArgument_inIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_7594.hasCurrentObject ()) {
-    categoryMethod_instructionListLLVMCode (enumerator_7594.current (HERE).mAttribute_mInstructionListIR, var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 177)) ;
-    enumerator_7594.gotoNextObject () ;
+  var_llvmCode.dotAssign_operation (GALGAS_string (";---\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 192)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("  ret void\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 193)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
+    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 194)) ;
+  var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Init"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 196))  COMMA_SOURCE_FILE ("code-generation.galgas", 196)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("define internal void @init () nounwind {\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 197)) ;
+  cEnumerator_initListIR enumerator_8560 (constinArgument_inIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_8560.hasCurrentObject ()) {
+    categoryMethod_instructionListLLVMCode (enumerator_8560.current (HERE).mAttribute_mInstructionListIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 199)) ;
+    enumerator_8560.gotoNextObject () ;
   }
-  var_code.dotAssign_operation (GALGAS_string (";---\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 179)) ;
-  var_code.dotAssign_operation (GALGAS_string ("  ret void\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 180)) ;
-  var_code.dotAssign_operation (GALGAS_string ("}\n"
-    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 181)) ;
-  cEnumerator_procedureMapIR enumerator_7876 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
-  while (enumerator_7876.hasCurrentObject ()) {
-    categoryMethod_llvmCodeGeneration (enumerator_7876.current (HERE), var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 184)) ;
-    enumerator_7876.gotoNextObject () ;
+  var_llvmCode.dotAssign_operation (GALGAS_string (";---\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 201)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("  ret void\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 202)) ;
+  var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
+    "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 203)) ;
+  cEnumerator_procedureMapIR enumerator_8858 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
+  while (enumerator_8858.hasCurrentObject ()) {
+    categoryMethod_llvmCodeGeneration (enumerator_8858.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 206)) ;
+    enumerator_8858.gotoNextObject () ;
   }
-  cEnumerator_functionMapIR enumerator_8074 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-  while (enumerator_8074.hasCurrentObject ()) {
-    categoryMethod_implementationCodeGeneration (enumerator_8074.current (HERE), var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 188)) ;
-    enumerator_8074.gotoNextObject () ;
+  cEnumerator_functionMapIR enumerator_9060 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+  while (enumerator_9060.hasCurrentObject ()) {
+    categoryMethod_implementationCodeGeneration (enumerator_9060.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 210)) ;
+    enumerator_9060.gotoNextObject () ;
   }
-  const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 191)).boolEnum () ;
+  const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 213)).boolEnum () ;
   if (kBoolTrue == test_2) {
-    var_code.dotAssign_operation (function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target-exception.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 194)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 192))  COMMA_SOURCE_FILE ("code-generation.galgas", 192)) ;
-    var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Raise Exception internal"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 196))  COMMA_SOURCE_FILE ("code-generation.galgas", 196)) ;
-    var_code.dotAssign_operation (GALGAS_string ("define internal void @raise_exception_internal (")  COMMA_SOURCE_FILE ("code-generation.galgas", 197)) ;
-    var_code.dotAssign_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType.add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 198))  COMMA_SOURCE_FILE ("code-generation.galgas", 198)) ;
-    var_code.dotAssign_operation (GALGAS_string ("i8* %in.FILE, ")  COMMA_SOURCE_FILE ("code-generation.galgas", 199)) ;
-    var_code.dotAssign_operation (var_generationContext.mAttribute_mExceptionLineLLVMType.add_operation (GALGAS_string (" %in.LINE) nounwind noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 200))  COMMA_SOURCE_FILE ("code-generation.galgas", 200)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  %").add_operation (function_mangledNameForLocalVariable (GALGAS_string ("CODE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 201)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 201)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 201)).add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 201)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 201))  COMMA_SOURCE_FILE ("code-generation.galgas", 201)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  store ").add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 202)).add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 202)).add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 202)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 203)).add_operation (function_mangledNameForLocalVariable (GALGAS_string ("CODE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 203)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 203)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 203))  COMMA_SOURCE_FILE ("code-generation.galgas", 202)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  %").add_operation (function_mangledNameForLocalVariable (GALGAS_string ("LINE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 204)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 204)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 204)).add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 204)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 204))  COMMA_SOURCE_FILE ("code-generation.galgas", 204)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  store ").add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 205)).add_operation (GALGAS_string (" %in.LINE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 205)).add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 205)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 206)).add_operation (function_mangledNameForLocalVariable (GALGAS_string ("LINE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 206)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 206))  COMMA_SOURCE_FILE ("code-generation.galgas", 205)) ;
-    categoryMethod_instructionListLLVMCode (constinArgument_inIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 207)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  br label %exception.loop\n"
-      "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 212)) ;
-    var_code.dotAssign_operation (GALGAS_string ("exception.loop:\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 213)) ;
-    categoryMethod_instructionListLLVMCode (constinArgument_inIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, var_code, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 214)) ;
-    var_code.dotAssign_operation (GALGAS_string ("  br label %exception.loop\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 219)) ;
-    var_code.dotAssign_operation (GALGAS_string ("}\n"
-      "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 220)) ;
+    var_llvmCode.dotAssign_operation (function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.mAttribute_string.add_operation (GALGAS_string ("/target-exception.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 214))  COMMA_SOURCE_FILE ("code-generation.galgas", 214)) ;
+    var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Raise Exception internal"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 218))  COMMA_SOURCE_FILE ("code-generation.galgas", 218)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("define internal void @raise_exception_internal (")  COMMA_SOURCE_FILE ("code-generation.galgas", 219)) ;
+    var_llvmCode.dotAssign_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType.add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 220))  COMMA_SOURCE_FILE ("code-generation.galgas", 220)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("i8* %in.FILE, ")  COMMA_SOURCE_FILE ("code-generation.galgas", 221)) ;
+    var_llvmCode.dotAssign_operation (var_generationContext.mAttribute_mExceptionLineLLVMType.add_operation (GALGAS_string (" %in.LINE) nounwind noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 222))  COMMA_SOURCE_FILE ("code-generation.galgas", 222)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  %").add_operation (function_mangledNameForLocalVariable (GALGAS_string ("CODE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 223)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 223)).add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 223)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 223))  COMMA_SOURCE_FILE ("code-generation.galgas", 223)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  store ").add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 224)).add_operation (GALGAS_string (" %in.CODE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 224)).add_operation (var_generationContext.mAttribute_mExceptionCodeLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 224)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 225)).add_operation (function_mangledNameForLocalVariable (GALGAS_string ("CODE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 225)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 225))  COMMA_SOURCE_FILE ("code-generation.galgas", 224)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  %").add_operation (function_mangledNameForLocalVariable (GALGAS_string ("LINE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226)).add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226))  COMMA_SOURCE_FILE ("code-generation.galgas", 226)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  store ").add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 227)).add_operation (GALGAS_string (" %in.LINE, "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 227)).add_operation (var_generationContext.mAttribute_mExceptionLineLLVMType, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 227)).add_operation (GALGAS_string ("* %"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 228)).add_operation (function_mangledNameForLocalVariable (GALGAS_string ("LINE"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 228)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 228)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 228))  COMMA_SOURCE_FILE ("code-generation.galgas", 227)) ;
+    categoryMethod_instructionListLLVMCode (constinArgument_inIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 229)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  br label %exception.loop\n"
+      "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 234)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("exception.loop:\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 235)) ;
+    categoryMethod_instructionListLLVMCode (constinArgument_inIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 236)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("  br label %exception.loop\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 241)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
+      "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 242)) ;
   }
-  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.reader_count (SOURCE_FILE ("code-generation.galgas", 223)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.reader_count (SOURCE_FILE ("code-generation.galgas", 245)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("LLVM intrinsics"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 224))  COMMA_SOURCE_FILE ("code-generation.galgas", 224)) ;
-    cEnumerator_stringset enumerator_10030 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
-    while (enumerator_10030.hasCurrentObject ()) {
-      var_code.dotAssign_operation (enumerator_10030.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 226))  COMMA_SOURCE_FILE ("code-generation.galgas", 226)) ;
-      enumerator_10030.gotoNextObject () ;
+    var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("LLVM intrinsics"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 246))  COMMA_SOURCE_FILE ("code-generation.galgas", 246)) ;
+    cEnumerator_stringset enumerator_11088 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
+    while (enumerator_11088.hasCurrentObject ()) {
+      var_llvmCode.dotAssign_operation (enumerator_11088.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 248))  COMMA_SOURCE_FILE ("code-generation.galgas", 248)) ;
+      enumerator_11088.gotoNextObject () ;
     }
-    var_code.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 228)) ;
+    var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 250)) ;
   }
-  const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.reader_count (SOURCE_FILE ("code-generation.galgas", 231)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.reader_count (SOURCE_FILE ("code-generation.galgas", 253)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    var_code.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 232))  COMMA_SOURCE_FILE ("code-generation.galgas", 232)) ;
-    cEnumerator_staticStringMap enumerator_10294 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
-    while (enumerator_10294.hasCurrentObject ()) {
-      GALGAS_string var_lgStr = enumerator_10294.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 234)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 234)).reader_string (SOURCE_FILE ("code-generation.galgas", 234)) ;
-      var_code.dotAssign_operation (function_literalCharacterArrayName (enumerator_10294.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 235)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 235))  COMMA_SOURCE_FILE ("code-generation.galgas", 235)) ;
-      var_code.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 236))  COMMA_SOURCE_FILE ("code-generation.galgas", 236)) ;
-      var_code.dotAssign_operation (enumerator_10294.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 237))  COMMA_SOURCE_FILE ("code-generation.galgas", 237)) ;
-      var_code.dotAssign_operation (GALGAS_string ("\\00\", align 1\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 238)) ;
-      var_code.dotAssign_operation (function_literalStringName (enumerator_10294.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 239)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 239))  COMMA_SOURCE_FILE ("code-generation.galgas", 239)) ;
-      var_code.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 240)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 240)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 240))  COMMA_SOURCE_FILE ("code-generation.galgas", 240)) ;
-      var_code.dotAssign_operation (function_literalCharacterArrayName (enumerator_10294.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 241)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
-        "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 241))  COMMA_SOURCE_FILE ("code-generation.galgas", 241)) ;
-      enumerator_10294.gotoNextObject () ;
+    var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 254))  COMMA_SOURCE_FILE ("code-generation.galgas", 254)) ;
+    cEnumerator_staticStringMap enumerator_11364 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
+    while (enumerator_11364.hasCurrentObject ()) {
+      GALGAS_string var_lgStr = enumerator_11364.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 256)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 256)).reader_string (SOURCE_FILE ("code-generation.galgas", 256)) ;
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_11364.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 257)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 257))  COMMA_SOURCE_FILE ("code-generation.galgas", 257)) ;
+      var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 258))  COMMA_SOURCE_FILE ("code-generation.galgas", 258)) ;
+      var_llvmCode.dotAssign_operation (enumerator_11364.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 259))  COMMA_SOURCE_FILE ("code-generation.galgas", 259)) ;
+      var_llvmCode.dotAssign_operation (GALGAS_string ("\\00\", align 1\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 260)) ;
+      var_llvmCode.dotAssign_operation (function_literalStringName (enumerator_11364.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 261)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 261))  COMMA_SOURCE_FILE ("code-generation.galgas", 261)) ;
+      var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262))  COMMA_SOURCE_FILE ("code-generation.galgas", 262)) ;
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_11364.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 263)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
+        "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 263))  COMMA_SOURCE_FILE ("code-generation.galgas", 263)) ;
+      enumerator_11364.gotoNextObject () ;
     }
   }
-  var_code.dotAssign_operation (function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 245))  COMMA_SOURCE_FILE ("code-generation.galgas", 245)) ;
-  GALGAS_bool joker_10988 ; // Joker input parameter
-  var_code.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 246)), joker_10988, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 246)) ;
-  GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 248)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  var_llvmCode.dotAssign_operation (function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 267))  COMMA_SOURCE_FILE ("code-generation.galgas", 267)) ;
+  GALGAS_bool joker_12094 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 268)), joker_12094, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 268)) ;
+  var_asCode.dotAssign_operation (function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 270))  COMMA_SOURCE_FILE ("code-generation.galgas", 270)) ;
+  GALGAS_bool joker_12272 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 271)), joker_12272, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 271)) ;
+  GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 273)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
-    test_5 = GALGAS_bool (gOption_plm_5F_options_compileOnly.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 248)) ;
+    test_5 = GALGAS_bool (gOption_plm_5F_options_compileOnly.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 273)) ;
   }
   const enumGalgasBool test_6 = test_5.boolEnum () ;
   if (kBoolTrue == test_6) {
@@ -5839,11 +5965,11 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
       temp_7 = GALGAS_string ("build") ;
     }
     GALGAS_string var_script = temp_7 ;
-    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 250)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 250)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 250)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 250)) ;
-    GALGAS_sint var_result = var_fullScript.reader_system (SOURCE_FILE ("code-generation.galgas", 251)) ;
+    GALGAS_string var_fullScript = GALGAS_string ("python ").add_operation (constinArgument_inProductDirectory, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 275)).add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 275)).add_operation (var_script, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 275)).add_operation (GALGAS_string (".py"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 275)) ;
+    GALGAS_sint var_result = var_fullScript.reader_system (SOURCE_FILE ("code-generation.galgas", 276)) ;
     const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, var_result.objectCompare (GALGAS_sint ((int32_t) 0L))).boolEnum () ;
     if (kBoolTrue == test_9) {
-      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 253)) ;
+      inCompiler->emitSemanticError (constinArgument_inEndOfSourceFileLocation, GALGAS_string ("error during LLVM compilation or flashing")  COMMA_SOURCE_FILE ("code-generation.galgas", 278)) ;
     }
   }
 }
@@ -6722,7 +6848,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    \n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
+  "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \\\n"
   "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerLibraries, objcopy, \\\n"
@@ -6755,7 +6881,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  #print \"Product directory: \" + scriptDir\n"
   "  #--- Build python makefile\n"
   "  make = makefile.Make (goal)\n"
-  "  #--- Add C files compile rule\n"
+  "  #---------------------------------------------- Add LLVM files compile rule\n"
   "  objectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
@@ -6784,7 +6910,17 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
   "    make.addRule (rule)\n"
   "    objectList.append (asObject)\n"
-  "  #--- Add linker rule\n"
+  "  #---------------------------------------------- Add assembler files compile rule\n"
+  "  for source in assemblerSourceList:\n"
+  "    object = objectDir + \"/\" + source + \".o\"\n"
+  "    rule = makefile.Rule ([object], \"Assembling \" + source)\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mCommand += asAssembler\n"
+  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", object]\n"
+  "    make.addRule (rule)\n"
+  "    objectList.append (object)\n"
+  "  #---------------------------------------------- Add linker rule\n"
   "  productELF = productDir + \"/product.elf\"\n"
   "  rule = makefile.Rule ([productELF], \"Linking \" + productELF)\n"
   "  rule.mDependences += objectList\n"
@@ -6817,12 +6953,12 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  make.printErrorCountAndExitOnError ()\n"
   "  #--- Run or all \? Display size\n"
   "  if (goal == \"run\") or (goal == \"all\") :\n"
-  "    s = runProcessAndGetOutput (displayObjectSize + objectList)\n"
+  "    s = runProcessAndGetOutput (displayObjectSize + [productELF])\n"
   "    secondLine = s.split('\\n')[1]\n"
   "    numbers = [int(s) for s in secondLine.split() if s.isdigit()]\n"
-  "    print \"Code:   \" + str (numbers [0]) + \" bytes\"\n"
-  "    print \"Data:   \" + str (numbers [1]) + \" bytes\"\n"
-  "    print \"Global: \" + str (numbers [2]) + \" bytes\"\n"
+  "    print \"Code:        \" + str (numbers [0]) + \" bytes\"\n"
+  "    print \"ROM data:    \" + str (numbers [1]) + \" bytes\"\n"
+  "    print \"RAM + STACK: \" + str (numbers [2]) + \" bytes\"\n"
   "  #--- Run \?\n"
   "  if goal == \"run\":\n"
   "    print makefile.BOLD_BLUE () + \"Loading Teensy...\" + makefile.ENDC ()\n"
@@ -6844,7 +6980,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  8970, // Text length
+  9540, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -10512,7 +10648,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "  return [toolDir () + \"/bin/opt\", \"-Oz\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10521,7 +10657,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-O2\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10598,6 +10734,15 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Assembler Source files                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def assemblerSourceList ():\n"
+  "  return [\"source-plm.s\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   Product directory                                                                                                  *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10630,7 +10775,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "currentFile = os.path.abspath (sys.argv [0])\n"
-  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
+  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \\\n"
   "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerLibraries (), \\\n"
@@ -10643,7 +10788,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  11578, // Text length
+  12213, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -11291,9 +11436,38 @@ const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   gWrapperFileContent_16_targetTemplates
 ) ;
 
+//--- File 'teensy-3-1-sequential-systick/target.s'
+
+const char * gWrapperFileContent_17_targetTemplates = "\t.text\n"
+  "\t.syntax unified\n"
+  "\t.eabi_attribute\t67, \"2.09\"\t@ Tag_conformance\n"
+  "\t.eabi_attribute\t6, 13\t@ Tag_CPU_arch\n"
+  "\t.eabi_attribute\t7, 77\t@ Tag_CPU_arch_profile\n"
+  "\t.eabi_attribute\t8, 0\t@ Tag_ARM_ISA_use\n"
+  "\t.eabi_attribute\t9, 2\t@ Tag_THUMB_ISA_use\n"
+  "\t.eabi_attribute\t17, 1\t@ Tag_ABI_PCS_GOT_use\n"
+  "\t.eabi_attribute\t20, 1\t@ Tag_ABI_FP_denormal\n"
+  "\t.eabi_attribute\t21, 1\t@ Tag_ABI_FP_exceptions\n"
+  "\t.eabi_attribute\t23, 3\t@ Tag_ABI_FP_number_model\n"
+  "\t.eabi_attribute\t34, 0\t@ Tag_CPU_unaligned_access\n"
+  "\t.eabi_attribute\t24, 1\t@ Tag_ABI_align_needed\n"
+  "\t.eabi_attribute\t25, 1\t@ Tag_ABI_align_preserved\n"
+  "\t.eabi_attribute\t38, 1\t@ Tag_ABI_FP_16bit_format\n"
+  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
+  "target.s",
+  "s",
+  true, // Text file
+  782, // Text length
+  gWrapperFileContent_17_targetTemplates
+) ;
+
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [10] = {
+static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [11] = {
   & gWrapperFile_8_targetTemplates,
   & gWrapperFile_9_targetTemplates,
   & gWrapperFile_10_targetTemplates,
@@ -11303,6 +11477,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [10] = {
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_15_targetTemplates,
   & gWrapperFile_16_targetTemplates,
+  & gWrapperFile_17_targetTemplates,
   NULL
 } ;
 
@@ -11316,7 +11491,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
   "teensy-3-1-sequential-systick",
-  9,
+  10,
   gWrapperAllFiles_targetTemplates_2,
   0,
   gWrapperAllDirectories_targetTemplates_2
@@ -13108,7 +13283,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    \n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, \\\n"
+  "def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \\\n"
   "                 objectDir, LLCcompiler, llvmOptimizerCompiler, \\\n"
   "                 asAssembler, \\\n"
   "                 productDir, linker, linkerLibraries, objcopy, \\\n"
@@ -13141,7 +13316,7 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  #print \"Product directory: \" + scriptDir\n"
   "  #--- Build python makefile\n"
   "  make = makefile.Make (goal)\n"
-  "  #--- Add C files compile rule\n"
+  "  #---------------------------------------------- Add LLVM files compile rule\n"
   "  objectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
@@ -13170,7 +13345,17 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "    rule.mCommand += [\"-o\", asObject]\n"
   "    make.addRule (rule)\n"
   "    objectList.append (asObject)\n"
-  "  #--- Add linker rule\n"
+  "  #---------------------------------------------- Add assembler files compile rule\n"
+  "  for source in assemblerSourceList:\n"
+  "    object = objectDir + \"/\" + source + \".o\"\n"
+  "    rule = makefile.Rule ([object], \"Assembling \" + source)\n"
+  "    rule.mDependences.append (\"sources/\" + source)\n"
+  "    rule.mCommand += asAssembler\n"
+  "    rule.mCommand += [\"sources/\" + source]\n"
+  "    rule.mCommand += [\"-o\", object]\n"
+  "    make.addRule (rule)\n"
+  "    objectList.append (object)\n"
+  "  #---------------------------------------------- Add linker rule\n"
   "  productELF = productDir + \"/product.elf\"\n"
   "  rule = makefile.Rule ([productELF], \"Linking \" + productELF)\n"
   "  rule.mDependences += objectList\n"
@@ -13203,12 +13388,12 @@ const char * gWrapperFileContent_1_embeddedTargets = "#! /usr/bin/env python\n"
   "  make.printErrorCountAndExitOnError ()\n"
   "  #--- Run or all \? Display size\n"
   "  if (goal == \"run\") or (goal == \"all\") :\n"
-  "    s = runProcessAndGetOutput (displayObjectSize + objectList)\n"
+  "    s = runProcessAndGetOutput (displayObjectSize + [productELF])\n"
   "    secondLine = s.split('\\n')[1]\n"
   "    numbers = [int(s) for s in secondLine.split() if s.isdigit()]\n"
-  "    print \"Code:   \" + str (numbers [0]) + \" bytes\"\n"
-  "    print \"Data:   \" + str (numbers [1]) + \" bytes\"\n"
-  "    print \"Global: \" + str (numbers [2]) + \" bytes\"\n"
+  "    print \"Code:        \" + str (numbers [0]) + \" bytes\"\n"
+  "    print \"ROM data:    \" + str (numbers [1]) + \" bytes\"\n"
+  "    print \"RAM + STACK: \" + str (numbers [2]) + \" bytes\"\n"
   "  #--- Run \?\n"
   "  if goal == \"run\":\n"
   "    print makefile.BOLD_BLUE () + \"Loading Teensy...\" + makefile.ENDC ()\n"
@@ -13230,7 +13415,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedTargets (
   "plm.py",
   "py",
   true, // Text file
-  8970, // Text length
+  9540, // Text length
   gWrapperFileContent_1_embeddedTargets
 ) ;
 
@@ -16898,7 +17083,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "  return [toolDir () + \"/bin/opt\", \"-Oz\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -16907,7 +17092,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-O2\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -16984,6 +17169,15 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
+  "#   Assembler Source files                                                                                             *\n"
+  "#                                                                                                                      *\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "def assemblerSourceList ():\n"
+  "  return [\"source-plm.s\"]\n"
+  "\n"
+  "#----------------------------------------------------------------------------------------------------------------------*\n"
+  "#                                                                                                                      *\n"
   "#   Product directory                                                                                                  *\n"
   "#                                                                                                                      *\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
@@ -17016,7 +17210,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "currentFile = os.path.abspath (sys.argv [0])\n"
-  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \\\n"
+  "plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \\\n"
   "                 LLCcompiler (), llvmOptimizerCompiler (), \\\n"
   "                 asAssembler (), productDir (), \\\n"
   "                 linker (), linkerLibraries (), \\\n"
@@ -17029,7 +17223,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  11578, // Text length
+  12213, // Text length
   gWrapperFileContent_9_embeddedTargets
 ) ;
 
@@ -17383,9 +17577,38 @@ const cRegularFileWrapper gWrapperFile_14_embeddedTargets (
   gWrapperFileContent_14_embeddedTargets
 ) ;
 
+//--- File 'teensy-3-1-sequential-systick/target.s'
+
+const char * gWrapperFileContent_15_embeddedTargets = "\t.text\n"
+  "\t.syntax unified\n"
+  "\t.eabi_attribute\t67, \"2.09\"\t@ Tag_conformance\n"
+  "\t.eabi_attribute\t6, 13\t@ Tag_CPU_arch\n"
+  "\t.eabi_attribute\t7, 77\t@ Tag_CPU_arch_profile\n"
+  "\t.eabi_attribute\t8, 0\t@ Tag_ARM_ISA_use\n"
+  "\t.eabi_attribute\t9, 2\t@ Tag_THUMB_ISA_use\n"
+  "\t.eabi_attribute\t17, 1\t@ Tag_ABI_PCS_GOT_use\n"
+  "\t.eabi_attribute\t20, 1\t@ Tag_ABI_FP_denormal\n"
+  "\t.eabi_attribute\t21, 1\t@ Tag_ABI_FP_exceptions\n"
+  "\t.eabi_attribute\t23, 3\t@ Tag_ABI_FP_number_model\n"
+  "\t.eabi_attribute\t34, 0\t@ Tag_CPU_unaligned_access\n"
+  "\t.eabi_attribute\t24, 1\t@ Tag_ABI_align_needed\n"
+  "\t.eabi_attribute\t25, 1\t@ Tag_ABI_align_preserved\n"
+  "\t.eabi_attribute\t38, 1\t@ Tag_ABI_FP_16bit_format\n"
+  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
+  "target.s",
+  "s",
+  true, // Text file
+  782, // Text length
+  gWrapperFileContent_15_embeddedTargets
+) ;
+
 //--- All files of 'teensy-3-1-sequential-systick' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [8] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [9] = {
   & gWrapperFile_8_embeddedTargets,
   & gWrapperFile_9_embeddedTargets,
   & gWrapperFile_10_embeddedTargets,
@@ -17393,6 +17616,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedTargets_2 [8] = {
   & gWrapperFile_12_embeddedTargets,
   & gWrapperFile_13_embeddedTargets,
   & gWrapperFile_14_embeddedTargets,
+  & gWrapperFile_15_embeddedTargets,
   NULL
 } ;
 
@@ -17406,7 +17630,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedTargets_2 [1] = 
 
 const cDirectoryWrapper gWrapperDirectory_2_embeddedTargets (
   "teensy-3-1-sequential-systick",
-  7,
+  8,
   gWrapperAllFiles_embeddedTargets_2,
   0,
   gWrapperAllDirectories_embeddedTargets_2

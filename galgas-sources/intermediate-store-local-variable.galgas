@@ -18,13 +18,13 @@ class @storeLocalVariableIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @storeLocalVariableIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioCode += "  store "
-  ioCode += llvmType + " " + mSourceValue.mValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
+  ioLLVMcode += "  store "
+  ioLLVMcode += llvmType + " " + mSourceValue.mValue + ", " + llvmType + "* %" + mangledNameForLocalVariable (!mLocalVarName) + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

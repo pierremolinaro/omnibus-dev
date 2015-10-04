@@ -252,16 +252,16 @@ override method @structureDeclaration semanticAnalysis
 #  CODE GENERATION                                                                                                     *
 #----------------------------------------------------------------------------------------------------------------------*
 
-proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioCode {
+proc declareLLVMstructures ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     if [kind isStructure] then
       [kind structure ?name:let name ?propertyMap:* ?propertyList:let propertyList]
-      ioCode += "%" + name + " = type {"
+      ioLLVMcode += "%" + name + " = type {"
       for () in propertyList
-        do ioCode += [mType llvmTypeName]
-        between ioCode += ", "
+        do ioLLVMcode += [mType llvmTypeName]
+        between ioLLVMcode += ", "
       end
-      ioCode += "}\n"
+      ioLLVMcode += "}\n"
     end
   end
 }

@@ -39,23 +39,23 @@ override method @shortCircuitAndOperationIR enterAccessibleEntities ?!@accessibl
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @shortCircuitAndOperationIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   let startLabel  = "and." + [mLocation locationIndex] + ".start"
   let trueLabel  = "and." + [mLocation locationIndex] + ".true"
   let falseLabel = "and." + [mLocation locationIndex] + ".false"
-  ioCode += "  br label %" + startLabel + "\n\n"
-  ioCode += ";--- left operand of short circuit and\n"
-  ioCode += startLabel + ":\n"
-  [mLeftInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
-  ioCode += trueLabel + ":\n"
-  [mRightInstructionList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br label %" + falseLabel + "\n\n"
-  ioCode += falseLabel + ":\n"
-  ioCode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioLLVMcode += "  br label %" + startLabel + "\n\n"
+  ioLLVMcode += ";--- left operand of short circuit and\n"
+  ioLLVMcode += startLabel + ":\n"
+  [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + mLeftOperand.mValue + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioLLVMcode += trueLabel + ":\n"
+  [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + falseLabel + "\n\n"
+  ioLLVMcode += falseLabel + ":\n"
+  ioLLVMcode += "  " + mTargetOperand.mValue + " = phi i1 [" + mRightOperand.mValue + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

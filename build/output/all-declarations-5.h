@@ -156,7 +156,7 @@ void enterCategoryMethod_enterCodeForOverflowOperation (const int32_t inClassInd
 void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOperationIR * inObject,
                                                        const GALGAS_string constin_inOperation,
                                                        const GALGAS_uint constin_inCode,
-                                                       GALGAS_string & io_ioCode,
+                                                       GALGAS_string & io_ioLLVMcode,
                                                        const GALGAS_generationContext constin_inGenerationContext,
                                                        GALGAS_generationAdds & io_ioGenerationAdds,
                                                        C_Compiler * inCompiler
@@ -187,7 +187,7 @@ void enterCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const int
 void callCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const class cPtr_binaryOperationIR * inObject,
                                                                       const GALGAS_string constin_inOperation,
                                                                       const GALGAS_uint constin_inCode,
-                                                                      GALGAS_string & io_ioCode,
+                                                                      GALGAS_string & io_ioLLVMcode,
                                                                       const GALGAS_generationContext constin_inGenerationContext,
                                                                       GALGAS_generationAdds & io_ioGenerationAdds,
                                                                       C_Compiler * inCompiler

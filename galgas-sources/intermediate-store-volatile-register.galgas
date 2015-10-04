@@ -20,12 +20,12 @@ class @storeVolatileIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @storeVolatileIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
-  ioCode += "  store volatile " + llvmType + " " + mSourceValue.mValue + ", " + llvmType
+  ioLLVMcode += "  store volatile " + llvmType + " " + mSourceValue.mValue + ", " + llvmType
          + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }
 

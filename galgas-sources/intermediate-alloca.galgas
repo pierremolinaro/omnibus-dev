@@ -16,12 +16,12 @@ class @allocaConstantIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @allocaConstantIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mVariableType llvmTypeName]
-  ioCode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
+  ioLLVMcode += "  %" + mangledNameForLocalVariable (!mLocalVariableName) + " = alloca " + llvmType + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

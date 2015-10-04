@@ -247,13 +247,13 @@ private filewrapper functionGenerationTemplate in "../generation-templates" {
 #----------------------------------------------------------------------------------------------------------------------*
 
 method @functionMapIR-element implementationCodeGeneration
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   var code = ""
   [mInstructionGenerationList instructionListLLVMCode !?code !inGenerationContext !?ioGenerationAdds]
-  ioCode += [filewrapper functionGenerationTemplate.implementation
+  ioLLVMcode += [filewrapper functionGenerationTemplate.implementation
     !lkey.string # mFunctionMangledName
 #    !mangledNameForFunction (!name:lkey.string) # mFunctionMangledName
     !mFormalArgumentListForGeneration

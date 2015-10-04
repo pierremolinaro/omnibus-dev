@@ -18,13 +18,13 @@ class @getElementPtrIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @getElementPtrIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [[mSource type] llvmTypeName]
-  ioCode += "  " + [mTarget name] + " = getelementptr inbounds "
-  ioCode += llvmType + ", " + llvmType + "* " + [mSource name] + ", i32 0, i32 " + mIndex + "\n"
+  ioLLVMcode += "  " + [mTarget name] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource name] + ", i32 0, i32 " + mIndex + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

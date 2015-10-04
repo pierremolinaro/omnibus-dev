@@ -72,26 +72,26 @@ override method @binaryOperationIR enterAccessibleEntities ?!@accessibleEntities
 method @binaryOperationIR enterCodeForOverflowOperation 
   ?let @string inOperation
   ?let @uint inCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
   let llvmType = [mOperandType llvmTypeName]
-  ioCode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
-  ioCode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
-  ioCode += "  " + mTarget + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 1\n"
+  ioLLVMcode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
+  ioLLVMcode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
+  ioLLVMcode += "  " + mTarget + ".hasOvf = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 1\n"
   let labelName = [mTarget name]
-  ioCode += "  br i1 " + mTarget + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
-  ioCode += labelName + ".ovf:\n"
-  ioCode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioCode += "  call void @raise_exception ("
-  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
-  ioCode += "i8* %" + labelName + ".str, "
-  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
-  ioCode += "  unreachable\n\n"
-  ioCode += labelName + ".noovf:\n"
-  ioCode += "  " + mTarget + " = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 0\n"
+  ioLLVMcode += "  br i1 " + mTarget + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
+  ioLLVMcode += labelName + ".ovf:\n"
+  ioLLVMcode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
+  ioLLVMcode += "i8* %" + labelName + ".str, "
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += labelName + ".noovf:\n"
+  ioLLVMcode += "  " + mTarget + " = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 0\n"
   ioGenerationAdds.mIntrinsicsDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
@@ -101,54 +101,54 @@ method @binaryOperationIR enterCodeForOverflowOperation
 method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException 
   ?let @string inOperation
   ?let @uint inCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
   let llvmType = [mOperandType llvmTypeName]
-  ioCode += "  " + mRight + ".isZero = icmp eq " + llvmType + " " + mRight + ", 0\n"
+  ioLLVMcode += "  " + mRight + ".isZero = icmp eq " + llvmType + " " + mRight + ", 0\n"
   let labelName = [mTarget name]
-  ioCode += "  br i1 " + mRight + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
-  ioCode += labelName + ".divideByZero:\n"
-  ioCode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioCode += "  call void @raise_exception ("
-  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
-  ioCode += "i8* %" + labelName + ".str, "
-  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
-  ioCode += "  unreachable\n\n"
-  ioCode += labelName + ".ok:\n"
-  ioCode += "  " + mTarget + " = " + inOperation + " " + llvmType + " " + mLeft + ", " + mRight + "\n"
+  ioLLVMcode += "  br i1 " + mRight + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
+  ioLLVMcode += labelName + ".divideByZero:\n"
+  ioLLVMcode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
+  ioLLVMcode += "i8* %" + labelName + ".str, "
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += labelName + ".ok:\n"
+  ioLLVMcode += "  " + mTarget + " = " + inOperation + " " + llvmType + " " + mLeft + ", " + mRight + "\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @binaryOperationIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   let llvmType = [mOperandType llvmTypeName]
   switch mOperation
   case addNoOVF :
-    ioCode += "  " + mTarget + " = add " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = add " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case subNoOVF :
-    ioCode += "  " + mTarget + " = sub " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = sub " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case mulNoOVF :
-    ioCode += "  " + mTarget + " = mul " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = mul " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case udivNoOVF :
-    ioCode += "  " + mTarget + " = udiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = udiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case sdivNoOVF :
-    ioCode += "  " + mTarget + " = sdiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = sdiv " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case uremNoOVF :
-    ioCode += "  " + mTarget + " = urem " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = urem " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case sremNoOVF :
-    ioCode += "  " + mTarget + " = srem " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = srem " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case uaddOVF :
     [self enterCodeForOverflowOperation
       !"uadd"
       !10
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -156,7 +156,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForOverflowOperation
       !"sadd"
       !10
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -164,7 +164,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForOverflowOperation
       !"usub"
       !11
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -172,7 +172,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForOverflowOperation
       !"ssub"
       !11
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -180,7 +180,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForOverflowOperation
       !"umul"
       !12
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -188,7 +188,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForOverflowOperation
       !"smul"
       !12
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -196,7 +196,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForDivisionWithZeroDivisorException
       !"udiv"
       !13
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -204,7 +204,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForDivisionWithZeroDivisorException
       !"sdiv"
       !13
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -212,7 +212,7 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForDivisionWithZeroDivisorException
       !"urem"
       !14
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
@@ -220,42 +220,42 @@ override method @binaryOperationIR llvmInstructionCode
     [self enterCodeForDivisionWithZeroDivisorException
       !"srem"
       !14
-      !?ioCode
+      !?ioLLVMcode
       !inGenerationContext
       !?ioGenerationAdds
     ]
   case and :
-    ioCode += "  " + mTarget + " = and " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = and " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case ior :
-    ioCode += "  " + mTarget + " = or " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = or " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case xor :
-    ioCode += "  " + mTarget + " = xor " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = xor " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case shl :
-    ioCode += "  " + mTarget + " = shl " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = shl " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case ashr :
-    ioCode += "  " + mTarget + " = ashr " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = ashr " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case lshr :
-    ioCode += "  " + mTarget + " = lshr " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = lshr " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_eq :
-    ioCode += "  " + mTarget + " = icmp eq " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp eq " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ne :
-    ioCode += "  " + mTarget + " = icmp ne " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp ne " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ult :
-    ioCode += "  " + mTarget + " = icmp ult " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp ult " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ule :
-    ioCode += "  " + mTarget + " = icmp ule " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp ule " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_ugt :
-    ioCode += "  " + mTarget + " = icmp ugt " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp ugt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_uge :
-    ioCode += "  " + mTarget + " = icmp uge " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp uge " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_slt :
-    ioCode += "  " + mTarget + " = icmp slt " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp slt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sle :
-    ioCode += "  " + mTarget + " = icmp sle " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp sle " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sgt :
-    ioCode += "  " + mTarget + " = icmp sgt " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp sgt " + llvmType + " " + mLeft + ", " + mRight + "\n"
   case icmp_sge :
-    ioCode += "  " + mTarget + " = icmp sge " + llvmType + " " + mLeft + ", " + mRight + "\n"
+    ioLLVMcode += "  " + mTarget + " = icmp sge " + llvmType + " " + mLeft + ", " + mRight + "\n"
   end
 }
 

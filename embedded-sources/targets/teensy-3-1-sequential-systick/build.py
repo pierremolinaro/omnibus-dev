@@ -38,7 +38,7 @@ def toolDir ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def llvmOptimizerCompiler ():
-  return [toolDir () + "/bin/opt", "-<<OPT_OPTIMIZATION_OPTION>>", "-disable-simplify-libcalls", "-S"]
+  return [toolDir () + "/bin/opt", "-Oz", "-disable-simplify-libcalls", "-S"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -47,7 +47,7 @@ def llvmOptimizerCompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def LLCcompiler ():
-  return [toolDir () + "/bin/llc", "-<<LLC_OPTIMIZATION_OPTION>>"]
+  return [toolDir () + "/bin/llc", "-O2"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -124,6 +124,15 @@ def LLVMsourceList ():
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
+#   Assembler Source files                                                                                             *
+#                                                                                                                      *
+#----------------------------------------------------------------------------------------------------------------------*
+
+def assemblerSourceList ():
+  return ["source-plm.s"]
+
+#----------------------------------------------------------------------------------------------------------------------*
+#                                                                                                                      *
 #   Product directory                                                                                                  *
 #                                                                                                                      *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -156,7 +165,7 @@ def runExecutableOnTarget ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 currentFile = os.path.abspath (sys.argv [0])
-plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), objectDir (), \
+plm.runMakefile (toolDir (), archiveBaseURL (), LLVMsourceList (), assemblerSourceList (), objectDir (), \
                  LLCcompiler (), llvmOptimizerCompiler (), \
                  asAssembler (), productDir (), \
                  linker (), linkerLibraries (), \

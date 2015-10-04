@@ -148,15 +148,15 @@ class @functionCallIR : @abstractInstructionIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-override method @functionCallIR llvmInstructionCode ?!@string ioCode {
-  ioCode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
-  ioCode += [mTempConstantTarget mangledName] + " = "
-  ioCode += mangledNameForFunction (!name:mFunctionName) + " ("
+override method @functionCallIR llvmInstructionCode ?!@string ioLLVMcode {
+  ioLLVMcode += "const " + mangledNameForType (!name:[mTargetType key]) + " "
+  ioLLVMcode += [mTempConstantTarget mangledName] + " = "
+  ioLLVMcode += mangledNameForFunction (!name:mFunctionName) + " ("
   for (variable) in mVariableList
-  do ioCode += [variable mangledName]
-  between ioCode += ", "
+  do ioLLVMcode += [variable mangledName]
+  between ioLLVMcode += ", "
   end
-  ioCode += ") ;\n"
+  ioLLVMcode += ") ;\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

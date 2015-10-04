@@ -2124,6 +2124,25 @@ class GALGAS_string function_llvmTitleComment (class GALGAS_string inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Function 'asSeparatorLine'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_asSeparatorLine (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'asTitleComment'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_asTitleComment (class GALGAS_string inArgument0,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              Routine 'codeGeneration'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2186,7 +2205,7 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMapIR_2D_element inObject,
-                                                  class GALGAS_string & io_ioCode,
+                                                  class GALGAS_string & io_ioLLVMcode,
                                                   const class GALGAS_generationContext constin_inGenerationContext,
                                                   class GALGAS_generationAdds & io_ioGenerationAdds,
                                                   class C_Compiler * inCompiler
@@ -2199,7 +2218,7 @@ void categoryMethod_implementationCodeGeneration (const class GALGAS_functionMap
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_generateLLVM (const class GALGAS_globalConstantMapIR_2D_element inObject,
-                                  class GALGAS_string & io_ioCode,
+                                  class GALGAS_string & io_ioLLVMcode,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
@@ -2210,7 +2229,7 @@ void categoryMethod_generateLLVM (const class GALGAS_globalConstantMapIR_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_element inObject,
-                                  class GALGAS_string & io_ioCode,
+                                  class GALGAS_string & io_ioLLVMcode,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
@@ -2221,7 +2240,7 @@ void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
-                                             class GALGAS_string & io_ioCode,
+                                             class GALGAS_string & io_ioLLVMcode,
                                              const class GALGAS_generationContext constin_inGenerationContext,
                                              class GALGAS_generationAdds & io_ioGenerationAdds,
                                              class C_Compiler * inCompiler
@@ -2234,7 +2253,7 @@ void categoryMethod_instructionListLLVMCode (const class GALGAS_instructionListI
 //---------------------------------------------------------------------------------------------------------------------*
 
 void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_element inObject,
-                                        class GALGAS_string & io_ioCode,
+                                        class GALGAS_string & io_ioLLVMcode,
                                         const class GALGAS_generationContext constin_inGenerationContext,
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
@@ -2405,6 +2424,7 @@ extern const char * gWrapperFileContent_13_targetTemplates ;
 extern const char * gWrapperFileContent_14_targetTemplates ;
 extern const char * gWrapperFileContent_15_targetTemplates ;
 extern const char * gWrapperFileContent_16_targetTemplates ;
+extern const char * gWrapperFileContent_17_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2428,6 +2448,7 @@ extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2857,6 +2878,7 @@ extern const char * gWrapperFileContent_11_embeddedTargets ;
 extern const char * gWrapperFileContent_12_embeddedTargets ;
 extern const char * gWrapperFileContent_13_embeddedTargets ;
 extern const char * gWrapperFileContent_14_embeddedTargets ;
+extern const char * gWrapperFileContent_15_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -2878,6 +2900,7 @@ extern const cRegularFileWrapper gWrapperFile_11_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_12_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_13_embeddedTargets ;
 extern const cRegularFileWrapper gWrapperFile_14_embeddedTargets ;
+extern const cRegularFileWrapper gWrapperFile_15_embeddedTargets ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

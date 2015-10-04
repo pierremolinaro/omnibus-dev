@@ -130,22 +130,22 @@ class @whileInstructionIR : @abstractInstructionIR {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @whileInstructionIR llvmInstructionCode
-  ?!@string ioCode
+  ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioCode += ";--- while (" + mTestExpression.mValue + ") {\n"
+  ioLLVMcode += ";--- while (" + mTestExpression.mValue + ") {\n"
   let labelTest = "while." + mLabelIndex + ".test"
   let labelLoop = "while." + mLabelIndex + ".loop"
   let labelEnd  = "while." + mLabelIndex + ".end"
-  ioCode += "  br label %" + labelTest + "\n\n"
-  ioCode += labelTest + ":\n"
-  [mTestInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br i1 " + mTestExpression.mValue + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
-  ioCode += labelLoop + ":\n"
-  [mInstructionGenerationList instructionListLLVMCode !?ioCode !inGenerationContext !?ioGenerationAdds]
-  ioCode += "  br label %" + labelTest + "\n\n"
-  ioCode += labelEnd + ":\n"
+  ioLLVMcode += "  br label %" + labelTest + "\n\n"
+  ioLLVMcode += labelTest + ":\n"
+  [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + mTestExpression.mValue + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioLLVMcode += labelLoop + ":\n"
+  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + labelTest + "\n\n"
+  ioLLVMcode += labelEnd + ":\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
