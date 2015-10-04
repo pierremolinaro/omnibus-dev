@@ -98,6 +98,31 @@ method @binaryOperationIR enterCodeForOverflowOperation
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException 
+  ?let @string inOperation
+  ?let @uint inCode
+  ?!@string ioCode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
+  let llvmType = [mOperandType llvmTypeName]
+  ioCode += "  " + mRight + ".isZero = icmp eq " + llvmType + " " + mRight + ", 0\n"
+  let labelName = [mTarget name]
+  ioCode += "  br i1 " + mRight + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
+  ioCode += labelName + ".divideByZero:\n"
+  ioCode += "  %" + labelName + ".str = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
+  ioCode += "  call void @raise_exception ("
+  ioCode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
+  ioCode += "i8* %" + labelName + ".str, "
+  ioCode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioCode += "  unreachable\n\n"
+  ioCode += labelName + ".ok:\n"
+  ioCode += "  " + mTarget + " = " + inOperation + " " + llvmType + " " + mLeft + ", " + mRight + "\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioCode
   ?let @generationContext inGenerationContext
@@ -168,7 +193,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case udivOVF :
-    [self enterCodeForOverflowOperation
+    [self enterCodeForDivisionWithZeroDivisorException
       !"udiv"
       !13
       !?ioCode
@@ -176,7 +201,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case sdivOVF :
-    [self enterCodeForOverflowOperation
+    [self enterCodeForDivisionWithZeroDivisorException
       !"sdiv"
       !13
       !?ioCode
@@ -184,7 +209,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case uremOVF :
-    [self enterCodeForOverflowOperation
+    [self enterCodeForDivisionWithZeroDivisorException
       !"urem"
       !14
       !?ioCode
@@ -192,7 +217,7 @@ override method @binaryOperationIR llvmInstructionCode
       !?ioGenerationAdds
     ]
   case sremOVF :
-    [self enterCodeForOverflowOperation
+    [self enterCodeForDivisionWithZeroDivisorException
       !"srem"
       !14
       !?ioCode

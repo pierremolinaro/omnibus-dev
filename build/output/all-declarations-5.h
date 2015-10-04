@@ -11,6 +11,29 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                      Abstract category method '@abstractInstructionIR enterAccessibleEntities'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities) (const class cPtr_abstractInstructionIR * inObject,
+                                                                                       class GALGAS_accessibleEntities & ioArgument0,
+                                                                                       class C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterAccessibleEntities (const int32_t inClassIndex,
+                                                  categoryMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterAccessibleEntities (const class cPtr_abstractInstructionIR * inObject,
+                                                 GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                   Category Getter '@functionDeclarationListAST-element mangledName' (as function)                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -138,6 +161,37 @@ void callCategoryMethod_enterCodeForOverflowOperation (const class cPtr_binaryOp
                                                        GALGAS_generationAdds & io_ioGenerationAdds,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Category method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorException'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorException) (const class cPtr_binaryOperationIR * inObject,
+                                                                                                        const class GALGAS_string constinArgument0,
+                                                                                                        const class GALGAS_uint constinArgument1,
+                                                                                                        class GALGAS_string & ioArgument2,
+                                                                                                        const class GALGAS_generationContext constinArgument3,
+                                                                                                        class GALGAS_generationAdds & ioArgument4,
+                                                                                                        class C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const int32_t inClassIndex,
+                                                                       categoryMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorException inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callCategoryMethod_enterCodeForDivisionWithZeroDivisorException (const class cPtr_binaryOperationIR * inObject,
+                                                                      const GALGAS_string constin_inOperation,
+                                                                      const GALGAS_uint constin_inCode,
+                                                                      GALGAS_string & io_ioCode,
+                                                                      const GALGAS_generationContext constin_inGenerationContext,
+                                                                      GALGAS_generationAdds & io_ioGenerationAdds,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
