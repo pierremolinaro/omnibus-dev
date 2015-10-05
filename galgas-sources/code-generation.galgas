@@ -226,6 +226,8 @@ proc generateLLVMfile
     llvmCode += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
     llvmCode += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
          + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += "  %" + mangledNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+    llvmCode += "  store i8* %in.FILE, i8** %" + mangledNameForLocalVariable (!"FILE") + "\n"
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
       !?llvmCode
       !generationContext

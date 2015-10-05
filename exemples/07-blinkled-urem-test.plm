@@ -3,11 +3,6 @@ target "teensy-3-1-sequential-systick"
 //------------------------------------------------*
 
 proc setup `user () {
-  goto (!line:0 !column:0)
-  let str = "azertyuiop"
-  for c in str do
-    writeData_inUserMode (!c)
-  end
 }
 
 //------------------------------------------------*

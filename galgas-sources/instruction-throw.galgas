@@ -97,7 +97,7 @@ override method @throwInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-    ![[mThrowLocation file] lastPathComponent]
+    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
   let lbl = [mThrowLocation locationIndex]
