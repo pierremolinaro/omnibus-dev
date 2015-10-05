@@ -190,6 +190,7 @@ override method @structureDeclaration enterInContext
     !copiable:copiable
     !equatable:false
     !comparable:false
+    !enumerationType:.null # Not enumerable
   ]
 }
 

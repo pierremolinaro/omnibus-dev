@@ -103,7 +103,7 @@ project (1:0:0) -> "plm" {
 ##  "galgas-sources/instruction-mutating-method-call-self.galgas"
   "galgas-sources/instruction-proc-call.galgas"
   "galgas-sources/instruction-while.galgas"
-#  "galgas-sources/instruction-forever.galgas"
+  "galgas-sources/instruction-for-in-do.galgas"
 
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"

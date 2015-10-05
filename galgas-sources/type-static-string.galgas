@@ -20,6 +20,7 @@ override method @literalStringDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !mLiteralStringTypeName !self]
+  [!?ioGraph addEdge !mLiteralStringTypeName !["uint8" nowhere]]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -37,6 +38,7 @@ override method @literalStringDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["uint8" nowhere] ?let uint8Type]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertKey
     !lkey:mLiteralStringTypeName
@@ -46,6 +48,7 @@ override method @literalStringDeclaration enterInContext
     !copiable:true
     !equatable:true
     !comparable:true
+    !enumerationType:uint8Type
   ]
 #--- Enter operators
   enterStaticStringOperators (

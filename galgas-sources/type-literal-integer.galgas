@@ -48,6 +48,7 @@ override method @literalIntegerDeclaration enterInContext
     !copiable:true
     !equatable:true
     !comparable:true
+    !enumerationType:.null # Not enumerable
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (
