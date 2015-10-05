@@ -731,6 +731,111 @@ class cPtr_extractValueIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                               @forInstructionIR class                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_forInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_forInstructionIR (void) ;
+
+//---
+  public : inline const class cPtr_forInstructionIR * ptr (void) const { return (const cPtr_forInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_forInstructionIR (const cPtr_forInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_forInstructionIR extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_forInstructionIR constructor_new (const class GALGAS_string & inOperand0,
+                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                           const class GALGAS_location & inOperand2,
+                                                           const class GALGAS_operandIR & inOperand3,
+                                                           const class GALGAS_instructionListIR & inOperand4
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_forInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy reader_mElementType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR reader_mExpressionResult (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mInstructionList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string reader_mVarName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_forInstructionIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Pointer class for @forInstructionIR class                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_forInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_string mAttribute_mVarName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mElementType ;
+  public : GALGAS_location mAttribute_mLocation ;
+  public : GALGAS_operandIR mAttribute_mExpressionResult ;
+  public : GALGAS_instructionListIR mAttribute_mInstructionList ;
+
+//--- Constructor
+  public : cPtr_forInstructionIR (const GALGAS_string & in_mVarName,
+                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mElementType,
+                                  const GALGAS_location & in_mLocation,
+                                  const GALGAS_operandIR & in_mExpressionResult,
+                                  const GALGAS_instructionListIR & in_mInstructionList
+                                  COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_string reader_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy reader_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location reader_mLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR reader_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR reader_mInstructionList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                               @getElementPtrIR class                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2704,189 +2809,5 @@ void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioOb
                                              class GALGAS_uint & out_outIndex,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Category setter '@instructionListIR appendComment'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendComment (class GALGAS_instructionListIR & ioObject,
-                                     const class GALGAS_string constin_inComment,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category setter '@instructionListIR appendAlloca'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_string constin_inLocalVariableName,
-                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Category setter '@instructionListIR appendExtractValue'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtractValue (class GALGAS_instructionListIR & ioObject,
-                                          const class GALGAS_operandIR constin_inTarget,
-                                          const class GALGAS_operandIR constin_inSource,
-                                          const class GALGAS_uint constin_inIndex,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category setter '@instructionListIR appendExtend'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_operandIR constin_inResult,
-                                    const class GALGAS_operandIR constin_inSource,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category setter '@instructionListIR appendBinaryOperation'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
-                                             const class GALGAS_valueIR constin_inTarget,
-                                             const class GALGAS_unifiedTypeMap_2D_proxy constin_inOperandType,
-                                             const class GALGAS_location constin_inLocation,
-                                             const class GALGAS_valueIR constin_inLeft,
-                                             const class GALGAS_llvmBinaryOperation constin_inOperation,
-                                             const class GALGAS_valueIR constin_inRight,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Category setter '@instructionListIR appendShortCircuitAndOperation'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
-                                                      const class GALGAS_operandIR constin_inTargetOperand,
-                                                      const class GALGAS_operandIR constin_inLeftOperand,
-                                                      const class GALGAS_instructionListIR constin_inLeftInstructionList,
-                                                      const class GALGAS_operandIR constin_inRightOperand,
-                                                      const class GALGAS_instructionListIR constin_inRightInstructionList,
-                                                      const class GALGAS_location constin_inLocation,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Category setter '@instructionListIR appendLoadVolatileRegister'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendLoadVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_operandIR constin_inTargetValue,
-                                                  const class GALGAS_string constin_inRegisterName,
-                                                  const class GALGAS_bigint constin_inAddress,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category setter '@instructionListIR appendLoadGlobalVariable'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendLoadGlobalVariable (class GALGAS_instructionListIR & ioObject,
-                                                const class GALGAS_operandIR constin_inTargetValue,
-                                                const class GALGAS_string constin_inRegisterName,
-                                                class GALGAS_bool in_inIsVolatile,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category setter '@instructionListIR appendLoadLocalVariable'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendLoadLocalVariable (class GALGAS_instructionListIR & ioObject,
-                                               const class GALGAS_operandIR constin_inTargetValue,
-                                               const class GALGAS_string constin_inVariableName,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category setter '@instructionListIR appendStoreVolatileRegister'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendStoreVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                   const class GALGAS_string constin_inRegisterName,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                   const class GALGAS_bigint constin_inAddress,
-                                                   const class GALGAS_operandIR constin_inSourceValue,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Category setter '@instructionListIR appendStoreGlobalVariable'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendStoreGlobalVariable (class GALGAS_instructionListIR & ioObject,
-                                                 const class GALGAS_string constin_inGlobalVarName,
-                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                 const class GALGAS_operandIR constin_inSourceValue,
-                                                 const class GALGAS_bool constin_inIsVolatile,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Category setter '@instructionListIR appendStoreLocalVariable'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendStoreLocalVariable (class GALGAS_instructionListIR & ioObject,
-                                                const class GALGAS_string constin_inLocalVarName,
-                                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                const class GALGAS_operandIR constin_inSourceValue,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Category setter '@instructionListIR appendLoadStructureConstant'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendLoadStructureConstant (class GALGAS_instructionListIR & ioObject,
-                                                   const class GALGAS_operandIR constin_inTargetValue,
-                                                   const class GALGAS_string constin_inTypeName,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category setter '@instructionListIR appendGetElementPtr'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
-                                           const class GALGAS_objectInMemoryIR constin_inTarget,
-                                           const class GALGAS_objectInMemoryIR constin_inSource,
-                                           const class GALGAS_uint constin_inIndex,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 #endif

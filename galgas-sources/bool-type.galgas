@@ -57,6 +57,7 @@ override method @booleanDeclaration enterInContext
     !copiable:copiable
     !equatable:true
     !comparable:true
+    !enumerationType:.null # Not enumerable
   ]
 #--- Enter boolean type
   if ioContext.mBooleanType != .null then

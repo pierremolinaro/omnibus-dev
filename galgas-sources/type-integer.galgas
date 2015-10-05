@@ -113,6 +113,7 @@ override method @integerDeclaration enterInContext
     !copiable:true
     !equatable:true
     !comparable:true
+    !enumerationType:.null # Not enumerable
   ]
 #--- Enter integer <-> integer infix operators
   enter_integer_integer_operators (

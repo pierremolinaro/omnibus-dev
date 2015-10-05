@@ -109,6 +109,7 @@ override method @enumerationDeclaration enterInContext
     !copiable:copiable
     !equatable:true
     !comparable:true
+    !enumerationType:.null # Not enumerable
   ]
 #--- Infix operators
   enterEnumerationOperators (

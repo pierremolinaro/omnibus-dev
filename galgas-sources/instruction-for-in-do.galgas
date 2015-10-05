@@ -1,0 +1,174 @@
+#----------------------------------------------------------------------------------------------------------------------*
+#  AST                                                                                                                 *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @forInstructionAST : @instructionAST {
+  @lstring mVarName
+  @expressionAST mIteratedExpression
+  @location mEndOf_iteratedExpression_instruction
+  @instructionListAST mDoInstructionList
+  @location mEndOf_do_instruction
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SYNTAX                                                                                                              *
+#----------------------------------------------------------------------------------------------------------------------*
+
+syntax extension common_syntax {
+
+  #--------------------------------------------------------------------------------------------------------------------*
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+    $for$
+    $identifier$ ?let varName
+    $in$
+    <expression> ?let @expressionAST expression
+    let endOf_iteratedExpression_instruction = @location.here
+    $do$
+    <instructionList> ?let instructionList !?ioLabelMap
+    let endOfInstruction = @location.here
+    $end$
+    ioInstructionList += !@forInstructionAST.new {
+      !varName
+      !expression
+      !endOf_iteratedExpression_instruction
+      !instructionList
+      !endOfInstruction
+    }
+  }
+  
+  #--------------------------------------------------------------------------------------------------------------------*
+
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  SEMANTICS                                                                                                           *
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @forInstructionAST analyze
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
+  ?optionalReceiverType:let @receiverType inReceiverType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Analyze iterated expression
+  [mIteratedExpression analyzeExpression
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !optionalReceiverType:inReceiverType
+    !optionalTargetType:.null
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@operandIR iteratedExpressionResult
+  ]
+#--- Get iterated element type
+  let @unifiedTypeMap-proxy iteratedElementType = [iteratedExpressionResult.mType enumerationType]
+  if iteratedElementType == .null then
+    error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
+  end
+#--- Analyze instruction list
+  [!?ioVariableMap openOverrideForRepeatBlock]
+  [!?ioVariableMap insertUsedLocalConstant
+    !mVarName
+    !iteratedElementType
+    !true # Read access ok
+    !.localValue {!type:iteratedElementType !name:mVarName.string}
+    !true # copiable
+    !@registerBitSliceAccessMap{}
+    !false # mCanBeUsedAsInputParameter
+    !true # mIsConstant
+  ]
+  @instructionListIR instructionGenerationList = {}
+  [mDoInstructionList analyzeBranchInstructionList
+    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+    !endOfInstructionList:mEndOf_do_instruction
+    !optionalReceiverType:inReceiverType
+    !context:inContext
+    !modes:inModeSet
+    !allowException:inAllowExceptions
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?instructionListIR:instructionGenerationList
+  ]
+  [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+#--- Code generation
+  ioInstructionGenerationList += !@forInstructionIR.new {
+    !mVarName.string
+    !iteratedElementType
+    !mEndOf_iteratedExpression_instruction
+    !iteratedExpressionResult
+    !instructionGenerationList
+  }
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+#  CODE GENERATION                                                                                                     *
+#----------------------------------------------------------------------------------------------------------------------*
+
+class @forInstructionIR : @abstractInstructionIR {
+  @string mVarName
+  @unifiedTypeMap-proxy mElementType
+  @location mLocation
+  @operandIR mExpressionResult
+  @instructionListIR mInstructionList
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @forInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let startLabel = "for." + [mLocation locationIndex] + ".start"
+  let testLabel = "for." + [mLocation locationIndex] + ".test"
+  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
+  let endLabel  = "for." + [mLocation locationIndex] + ".end"
+  let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
+  let currentVar = "for." + [mLocation locationIndex] + ".current"
+  let elementTypeName = [mElementType llvmTypeName]
+  
+#--- Start of 'for' instruction
+  ioLLVMcode += "  br label %" + startLabel + "\n\n"
+  ioLLVMcode += startLabel + ":\n"
+  ioLLVMcode += "  %" + mangledNameForLocalVariable (!mVarName) + " = alloca " + elementTypeName + "\n"
+  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+  
+#--- Test
+  ioLLVMcode += testLabel + ":\n"
+  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + mExpressionResult.mValue + ", %"
+  ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
+  ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
+  ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"
+  ioLLVMcode += "  br i1 %" + currentVar + ".nul, label %" + endLabel + ", label %" + loopLabel + "\n\n"
+
+#--- Loop  
+  ioLLVMcode += loopLabel + ":\n"
+  ioLLVMcode += "  store " + elementTypeName + " %" + currentVar + ", "
+  ioLLVMcode +=  elementTypeName + "* %" + mangledNameForLocalVariable (!mVarName) + "\n"
+  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeName + ", "
+  ioLLVMcode += elementTypeName + "* %" + ptrVar + ", i32 1\n"
+  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+
+#--- End
+  ioLLVMcode += endLabel + ":\n"
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+override method @forInstructionIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
+  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities]
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
