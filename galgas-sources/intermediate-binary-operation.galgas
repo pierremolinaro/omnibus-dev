@@ -76,7 +76,10 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
   let llvmType = [mOperandType llvmTypeName]
   ioLLVMcode += "  " + mTarget + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioLLVMcode += " (" + llvmType + " " + mLeft + ", " + llvmType + " " + mRight + ")\n"
@@ -88,7 +91,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += "  call void @raise_exception ("
   ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
   ioLLVMcode += "i8* %" + labelName + ".str, "
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".noovf:\n"
   ioLLVMcode += "  " + mTarget + " = extractvalue {" + llvmType + ", i1} " + mTarget + ".r, 0\n"
@@ -105,7 +108,10 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString ![[mLocation file] lastPathComponent] ?let staticStringIndex]
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
   let llvmType = [mOperandType llvmTypeName]
   ioLLVMcode += "  " + mRight + ".isZero = icmp eq " + llvmType + " " + mRight + ", 0\n"
   let labelName = [mTarget name]
@@ -115,7 +121,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorException
   ioLLVMcode += "  call void @raise_exception ("
   ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + inCode + ", "
   ioLLVMcode += "i8* %" + labelName + ".str, "
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation locationIndex] + ")\n"
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".ok:\n"
   ioLLVMcode += "  " + mTarget + " = " + inOperation + " " + llvmType + " " + mLeft + ", " + mRight + "\n"

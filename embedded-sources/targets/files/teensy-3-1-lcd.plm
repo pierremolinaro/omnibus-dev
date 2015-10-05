@@ -317,6 +317,14 @@ proc printSigned `user @noWarningIfUnused (?inValue $int32) {
 
 //-----------------------------------------------------------------------------*
 
+proc printString `user @noWarningIfUnused (?inString $staticString) {
+  for c in inString do
+    writeData_inUserMode (!c)
+  end
+}
+
+//-----------------------------------------------------------------------------*
+
 //void printSigned (const int32_t inValue) {
 //  if (inValue < 0) {
 //    printChar ('-') ;
@@ -482,13 +490,26 @@ proc clearScreenInExceptionMode `exception @noWarningIfUnused () {
 
 //-----------------------------------------------------------------------------*
 
+proc printStringInExceptionMode `exception @noWarningIfUnused (?inString $staticString) {
+  for c in inString do
+    writeDataInExceptionMode (!c)
+  end
+}
+
+
+//-----------------------------------------------------------------------------*
+
 exception setup 0 {
   clearScreenInExceptionMode ()
   waitMSInExceptionMode (!duration:4)
   gotoInExceptionMode (!line:0 !column:0)
-  printSignedInExceptionMode (!CODE)
+  printStringInExceptionMode (!FILE)
   gotoInExceptionMode (!line:1 !column:0)
+  printStringInExceptionMode (!"Line:")
   printUnsignedInExceptionMode (!LINE)
+  gotoInExceptionMode (!line:2 !column:0)
+  printStringInExceptionMode (!"Code:")
+  printSignedInExceptionMode (!CODE)
 }
 
 exception loop 0 {
