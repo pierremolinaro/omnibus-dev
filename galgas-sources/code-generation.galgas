@@ -100,6 +100,7 @@ proc codeGeneration
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
+  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
@@ -122,6 +123,7 @@ proc codeGeneration
     !target:inTargetName
     !exceptionCodeType:inExceptionCodeType
     !exceptionLineType:inExceptionLineType
+    !sourceFileSet:inSourceFileAbsolutePathSet
   )
 }
 
@@ -143,7 +145,10 @@ proc generateLLVMfile
   ?target:let @lstring inTargetName
   ?exceptionCodeType:let @unifiedTypeMap-proxy inExceptionCodeType
   ?exceptionLineType:let @unifiedTypeMap-proxy inExceptionLineType
+  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
+  @generationAdds generationAdds = .default
+  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
     ![inExceptionCodeType llvmTypeName]
     ![inExceptionLineType llvmTypeName]
@@ -182,8 +187,6 @@ proc generateLLVMfile
     after llvmCode += "\n"
   end
 #----------------------------------------- Boot
-  @generationAdds generationAdds = .default
-  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   llvmCode += llvmTitleComment (!"Boot")
   llvmCode += "define internal void @boot () nounwind {\n"
   for boot in inIntermediateCodeStruct.mBootList do
@@ -217,15 +220,20 @@ proc generateLLVMfile
     )
     llvmCode += llvmTitleComment (!"Raise Exception internal")
     llvmCode += "define internal void @raise_exception_internal ("
+    llvmCode += generationContext.mExceptionLineLLVMType + " %in.LINE, "
     llvmCode += generationContext.mExceptionCodeLLVMType + " %in.CODE, "
-    llvmCode += "i8* %in.FILE, "
-    llvmCode += generationContext.mExceptionLineLLVMType + " %in.LINE) nounwind noreturn {\n"
-    llvmCode += "  %" + mangledNameForLocalVariable (!"CODE") + " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
-    llvmCode += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
-         + generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
-    llvmCode += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca " + generationContext.mExceptionLineLLVMType + "\n"
+    llvmCode += "i8* %in.FILE) nounwind noreturn {\n"
+  #--- First argument: line
+    llvmCode += "  %" + mangledNameForLocalVariable (!"LINE") + " = alloca "
+    llvmCode += generationContext.mExceptionLineLLVMType + "\n"
     llvmCode += "  store " + generationContext.mExceptionLineLLVMType + " %in.LINE, "
-         + generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += generationContext.mExceptionLineLLVMType + "* %" + mangledNameForLocalVariable (!"LINE") + "\n"
+  #--- Second argument : code
+    llvmCode += "  %" + mangledNameForLocalVariable (!"CODE")
+    llvmCode += " = alloca " + generationContext.mExceptionCodeLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mExceptionCodeLLVMType + " %in.CODE, "
+    llvmCode += generationContext.mExceptionCodeLLVMType + "* %" + mangledNameForLocalVariable (!"CODE") + "\n"
+  #--- Third argument : file    
     llvmCode += "  %" + mangledNameForLocalVariable (!"FILE") + " = alloca i8*\n"
     llvmCode += "  store i8* %in.FILE, i8** %" + mangledNameForLocalVariable (!"FILE") + "\n"
     [inIntermediateCodeStruct.mExceptionSetupInstructionListIR instructionListLLVMCode
@@ -242,6 +250,20 @@ proc generateLLVMfile
     ]
     llvmCode += "  br label %exception.loop\n"
     llvmCode += "}\n\n"
+  #--- File specific routines
+    for (filePath) in inSourceFileAbsolutePathSet do
+      [!?generationAdds.mStaticStringMap findOrAddStaticString
+        ![[filePath lastPathComponent] stringByDeletingPathExtension]
+        ?let staticStringIndex
+      ]
+      let routineName = "@raise_exception." + staticStringIndex
+      llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
+      llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"
+      llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
+      llvmCode += "  call void @raise_exception (i32 322, i32 46, i8* %str.FILE)\n"
+      llvmCode += "  ret void\n"
+      llvmCode += "  }\n\n"
+    end
   end
 #----------------------------------------- Intrinsics
   if [generationAdds.mIntrinsicsDeclarationSet count] > 0 then

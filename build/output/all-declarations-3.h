@@ -2155,6 +2155,7 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_lstring constinArgument5,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                             const class GALGAS_stringset constinArgument8,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -2172,6 +2173,7 @@ void routine_generateLLVMfile (const class GALGAS_string constinArgument0,
                                const class GALGAS_lstring constinArgument5,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                                const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                               const class GALGAS_stringset constinArgument8,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -2258,6 +2260,18 @@ void categoryMethod_llvmCodeGeneration (const class GALGAS_procedureMapIR_2D_ele
                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Category setter '@staticStringMap findOrAddStaticString'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
+                                             class GALGAS_string in_inString,
+                                             class GALGAS_uint & out_outIndex,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
