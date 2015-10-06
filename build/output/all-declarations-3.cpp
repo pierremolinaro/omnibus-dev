@@ -5950,7 +5950,7 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
       var_llvmCode.dotAssign_operation (GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.reader_string (SOURCE_FILE ("code-generation.galgas", 262)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262))  COMMA_SOURCE_FILE ("code-generation.galgas", 262)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("  call void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 263)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("  unreachable\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 264)) ;
-      var_llvmCode.dotAssign_operation (GALGAS_string ("  }\n"
+      var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
         "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 265)) ;
       enumerator_11407.gotoNextObject () ;
     }
@@ -5958,36 +5958,36 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
   const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.reader_count (SOURCE_FILE ("code-generation.galgas", 269)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
     var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("LLVM intrinsics"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 270))  COMMA_SOURCE_FILE ("code-generation.galgas", 270)) ;
-    cEnumerator_stringset enumerator_12345 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
-    while (enumerator_12345.hasCurrentObject ()) {
-      var_llvmCode.dotAssign_operation (enumerator_12345.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 272))  COMMA_SOURCE_FILE ("code-generation.galgas", 272)) ;
-      enumerator_12345.gotoNextObject () ;
+    cEnumerator_stringset enumerator_12343 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
+    while (enumerator_12343.hasCurrentObject ()) {
+      var_llvmCode.dotAssign_operation (enumerator_12343.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 272))  COMMA_SOURCE_FILE ("code-generation.galgas", 272)) ;
+      enumerator_12343.gotoNextObject () ;
     }
     var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 274)) ;
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.reader_count (SOURCE_FILE ("code-generation.galgas", 277)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
     var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 278))  COMMA_SOURCE_FILE ("code-generation.galgas", 278)) ;
-    cEnumerator_staticStringMap enumerator_12621 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
-    while (enumerator_12621.hasCurrentObject ()) {
-      GALGAS_string var_lgStr = enumerator_12621.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 280)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 280)).reader_string (SOURCE_FILE ("code-generation.galgas", 280)) ;
-      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12621.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281))  COMMA_SOURCE_FILE ("code-generation.galgas", 281)) ;
+    cEnumerator_staticStringMap enumerator_12619 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
+    while (enumerator_12619.hasCurrentObject ()) {
+      GALGAS_string var_lgStr = enumerator_12619.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 280)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 280)).reader_string (SOURCE_FILE ("code-generation.galgas", 280)) ;
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281))  COMMA_SOURCE_FILE ("code-generation.galgas", 281)) ;
       var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 282))  COMMA_SOURCE_FILE ("code-generation.galgas", 282)) ;
-      var_llvmCode.dotAssign_operation (enumerator_12621.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 283))  COMMA_SOURCE_FILE ("code-generation.galgas", 283)) ;
+      var_llvmCode.dotAssign_operation (enumerator_12619.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 283))  COMMA_SOURCE_FILE ("code-generation.galgas", 283)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("\\00\", align 1\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 284)) ;
-      var_llvmCode.dotAssign_operation (function_literalStringName (enumerator_12621.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285))  COMMA_SOURCE_FILE ("code-generation.galgas", 285)) ;
+      var_llvmCode.dotAssign_operation (function_literalStringName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285))  COMMA_SOURCE_FILE ("code-generation.galgas", 285)) ;
       var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286))  COMMA_SOURCE_FILE ("code-generation.galgas", 286)) ;
-      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12621.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
         "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287))  COMMA_SOURCE_FILE ("code-generation.galgas", 287)) ;
-      enumerator_12621.gotoNextObject () ;
+      enumerator_12619.gotoNextObject () ;
     }
   }
   var_llvmCode.dotAssign_operation (function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 291))  COMMA_SOURCE_FILE ("code-generation.galgas", 291)) ;
-  GALGAS_bool joker_13351 ; // Joker input parameter
-  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)), joker_13351, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)) ;
+  GALGAS_bool joker_13349 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)), joker_13349, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)) ;
   var_asCode.dotAssign_operation (function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294))  COMMA_SOURCE_FILE ("code-generation.galgas", 294)) ;
-  GALGAS_bool joker_13529 ; // Joker input parameter
-  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)), joker_13529, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
+  GALGAS_bool joker_13527 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)), joker_13527, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
   GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 297)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
     test_5 = GALGAS_bool (gOption_plm_5F_options_compileOnly.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 297)) ;
@@ -10715,7 +10715,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\", \"-tailcallopt\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10846,7 +10846,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  12279, // Text length
+  12263, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -11204,7 +11204,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
 
 const char * gWrapperFileContent_15_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "define internal void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn {\n"
+  "define internal void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
   "  call void asm sideeffect \"msr FAULTMASK, $0\", \"r\"(i32 1) nounwind\n"
   ";--- Goto user code\n"
@@ -11217,7 +11217,7 @@ const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "target-exception.ll",
   "ll",
   true, // Text file
-  480, // Text length
+  486, // Text length
   gWrapperFileContent_15_targetTemplates
 ) ;
 
@@ -17171,7 +17171,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\", \"-tailcallopt\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -17302,7 +17302,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  12279, // Text length
+  12263, // Text length
   gWrapperFileContent_9_embeddedTargets
 ) ;
 

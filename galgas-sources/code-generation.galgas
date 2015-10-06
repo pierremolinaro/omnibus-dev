@@ -262,7 +262,7 @@ proc generateLLVMfile
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
       llvmCode += "  call void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"
-      llvmCode += "  }\n\n"
+      llvmCode += "}\n\n"
     end
   end
 #----------------------------------------- Intrinsics
