@@ -3174,6 +3174,7 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
 
   public : static void _performSourceStringParsing_ (C_Compiler * inCompiler,
                                                      GALGAS_string inSourceString,
+                                                     GALGAS_string inNameString,
                                                      GALGAS_ast & ioArgument0,
                                                      GALGAS_lstringlist & outArgument1,
                                                      GALGAS_location & outArgument2
@@ -3489,6 +3490,7 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
   public : static void _performSourceStringParsing_ (C_Compiler * inCompiler,
                                                      GALGAS_string inSourceString,
+                                                     GALGAS_string inNameString,
                                                      GALGAS_ast & ioArgument0,
                                                      GALGAS_lstringlist & outArgument1,
                                                      GALGAS_location & outArgument2

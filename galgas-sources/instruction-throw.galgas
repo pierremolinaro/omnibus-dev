@@ -100,12 +100,9 @@ override method @throwInstructionIR llvmInstructionCode
     ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  let lbl = [mThrowLocation locationIndex]
-  ioLLVMcode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ", "
-  ioLLVMcode += "i8* %str." + lbl + ")\n"
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ")\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
