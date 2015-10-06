@@ -79,13 +79,13 @@ private proc compileProject
   ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
 {
   @ast ast = inAST
-  @stringset importedFileAbsolutePathSet = inImportedFileAbsolutePathSet
+  @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #--- Add target specific files
   addTargetSpecificFiles (
     !forTarget:inTargetName
     !?toAST:ast
     !currentDirectory:inCurrentDirectory
-    !?importedFilePathSet:importedFileAbsolutePathSet
+    !?importedFilePathSet:sourceFileAbsolutePathSet
   )
 #--- Add Predefined types
   addPredefinedTypes (!?declarationList:ast.mDeclarationList)
@@ -126,6 +126,7 @@ private proc compileProject
           !target:inTargetName
           !exceptionCodeType:semanticContext.mExceptionCodeType
           !exceptionLineType:semanticContext.mExceptionLineType
+          !sourceFileSet:sourceFileAbsolutePathSet
         )
       end
     end

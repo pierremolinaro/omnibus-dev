@@ -103,9 +103,9 @@ override method @throwInstructionIR llvmInstructionCode
   let lbl = [mThrowLocation locationIndex]
   ioLLVMcode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
   ioLLVMcode += "  call void @raise_exception ("
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ", "
   ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " " + mCode + ", "
-  ioLLVMcode += "i8* %str." + lbl + ", "
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mThrowLocation line] + ")\n"
+  ioLLVMcode += "i8* %str." + lbl + ")\n"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

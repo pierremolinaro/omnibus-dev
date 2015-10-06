@@ -139,6 +139,8 @@ override method @convertInstructionIR llvmInstructionCode
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
+  log "file: " : [mLocation file]
+  log "sqqsqs: " : [[mLocation file] lastPathComponent]
   let lbl = [[mLocation locationIndex] string]
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"
@@ -160,11 +162,9 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += " " + operandType + " " + mOperand.mValue + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  %str." + lbl + " = load i8*, i8** " + literalStringName (!staticStringIndex) + "\n"
-  ioLLVMcode += "  call void @raise_exception ("
-  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " 5, "
-  ioLLVMcode += "i8* %str." + lbl + ", "
-  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ")\n"
+  ioLLVMcode += "  call void @raise_exception." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mExceptionLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mExceptionCodeLLVMType + " 5) ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
   ioLLVMcode += "  " + mTarget.mValue + " = trunc " + operandType + " " + mOperand.mValue + " to " + [mTarget.mType llvmTypeName] + "\n"

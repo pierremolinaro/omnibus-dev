@@ -2798,16 +2798,4 @@ void callCategoryMethod_llvmInstructionCode (const class cPtr_abstractInstructio
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Category setter '@staticStringMap findOrAddStaticString'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_findOrAddStaticString (class GALGAS_staticStringMap & ioObject,
-                                             class GALGAS_string in_inString,
-                                             class GALGAS_uint & out_outIndex,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
 #endif
