@@ -260,7 +260,7 @@ proc generateLLVMfile
       llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
       llvmCode += "define internal void " + routineName + " (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-      llvmCode += "  call void @raise_exception (i32 322, i32 46, i8* %str.FILE)\n"
+      llvmCode += "  call void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"
       llvmCode += "  }\n\n"
     end
