@@ -245,7 +245,7 @@ private proc recursiveImportEmbeddedTargetFiles
       if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
         ioImportedFileAbsolutePathSet += !embeddedPath
         if [path pathExtension] == "plm" then
-          grammar plm_grammar on [fw textFileContentsAtPath !path.string]
+          grammar plm_grammar on ([fw textFileContentsAtPath !path.string], path.string)
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -255,7 +255,7 @@ private proc recursiveImportEmbeddedTargetFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         elsif [path pathExtension] == "plm-target" then
-          grammar plm_target_grammar on [fw textFileContentsAtPath !path.string]
+          grammar plm_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
@@ -320,7 +320,7 @@ private proc recursiveImportFiles
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet += !embeddedPath
           if [path pathExtension] == "plm" then
-            grammar plm_grammar on [fw textFileContentsAtPath !path.string]
+            grammar plm_grammar on ([fw textFileContentsAtPath !path.string], path.string)
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
@@ -331,7 +331,7 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           elsif [path pathExtension] == "plm-target" then
-            grammar plm_target_grammar on [fw textFileContentsAtPath !path.string]
+            grammar plm_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
