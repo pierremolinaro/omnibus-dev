@@ -10706,7 +10706,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-Oz\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10715,7 +10715,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-O2\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\", \"-tailcallopt\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10846,7 +10846,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  12213, // Text length
+  12279, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 
@@ -17162,7 +17162,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def llvmOptimizerCompiler ():\n"
-  "  return [toolDir () + \"/bin/opt\", \"-Oz\", \"-disable-simplify-libcalls\", \"-S\"]\n"
+  "  return [toolDir () + \"/bin/opt\", \"-<<OPT_OPTIMIZATION_OPTION>>\", \"-disable-simplify-libcalls\", \"-S\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -17171,7 +17171,7 @@ const char * gWrapperFileContent_9_embeddedTargets = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLCcompiler ():\n"
-  "  return [toolDir () + \"/bin/llc\", \"-O2\"]\n"
+  "  return [toolDir () + \"/bin/llc\", \"-<<LLC_OPTIMIZATION_OPTION>>\", \"-tailcallopt\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -17302,7 +17302,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedTargets (
   "build.py",
   "py",
   true, // Text file
-  12213, // Text length
+  12279, // Text length
   gWrapperFileContent_9_embeddedTargets
 ) ;
 
