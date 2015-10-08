@@ -11,70 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Category setter '@instructionListIR appendComment'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendComment (class GALGAS_instructionListIR & ioObject,
-                                     const class GALGAS_string constin_inComment,
-                                     class C_Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category setter '@instructionListIR appendAlloca'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendAlloca (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_string constin_inLocalVariableName,
-                                    const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Category setter '@instructionListIR appendExtractValue'                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtractValue (class GALGAS_instructionListIR & ioObject,
-                                          const class GALGAS_operandIR constin_inTarget,
-                                          const class GALGAS_operandIR constin_inSource,
-                                          const class GALGAS_uint constin_inIndex,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                  Category setter '@instructionListIR appendExtend'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendExtend (class GALGAS_instructionListIR & ioObject,
-                                    const class GALGAS_operandIR constin_inResult,
-                                    const class GALGAS_operandIR constin_inSource,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Category setter '@instructionListIR appendBinaryOperation'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void categoryModifier_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
-                                             const class GALGAS_valueIR constin_inTarget,
-                                             const class GALGAS_unifiedTypeMap_2D_proxy constin_inOperandType,
-                                             const class GALGAS_location constin_inLocation,
-                                             const class GALGAS_valueIR constin_inLeft,
-                                             const class GALGAS_llvmBinaryOperation constin_inOperation,
-                                             const class GALGAS_valueIR constin_inRight,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Category setter '@instructionListIR appendShortCircuitAndOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -440,9 +376,9 @@ void categoryMethod_enterInPrecedenceGraph (const class GALGAS_functionDeclarati
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string categoryReader_mangledName (const class GALGAS_procedureDeclarationListAST_2D_element & inObject,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring categoryReader_mangledName (const class GALGAS_procedureDeclarationListAST_2D_element & inObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

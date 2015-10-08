@@ -196,14 +196,12 @@ proc generateLLVMfile
   llvmCode += "  ret void\n"
   llvmCode += "}\n\n"
 #----------------------------------------- Init
-  llvmCode += llvmTitleComment (!"Init")
-  llvmCode += "define internal void @init () nounwind {\n"
-  for init in inIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
-  end
-  llvmCode += ";---\n"
-  llvmCode += "  ret void\n"
-  llvmCode += "}\n\n"
+  [inIntermediateCodeStruct.mInitList generateLLVMinitCode
+    !?llvmCode
+    !inIntermediateCodeStruct.mProcedureMapIR
+    !generationContext
+    !?generationAdds
+  ]
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
     [procedure llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]

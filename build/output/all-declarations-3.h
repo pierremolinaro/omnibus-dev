@@ -1209,11 +1209,11 @@ class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_mangledName (const class GALGAS_procedureKindAST & constinArgument0,
-                                          const class GALGAS_string & constinArgument1,
-                                          class GALGAS_procFormalArgumentList inArgument2,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_mangledName (const class GALGAS_procedureKindAST & constinArgument0,
+                                           const class GALGAS_lstring & constinArgument1,
+                                           class GALGAS_procFormalArgumentList inArgument2,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2243,6 +2243,20 @@ void categoryMethod_generateLLVM (const class GALGAS_globalVariableMapIR_2D_elem
                                   class GALGAS_string & io_ioLLVMcode,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Category method '@initListIR generateLLVMinitCode'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryMethod_generateLLVMinitCode (const class GALGAS_initListIR inObject,
+                                          class GALGAS_string & io_ioLLVMcode,
+                                          const class GALGAS_procedureMapIR constin_inProcedureMapIR,
+                                          const class GALGAS_generationContext constin_inGenerationContext,
+                                          class GALGAS_generationAdds & io_ioGenerationAdds,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

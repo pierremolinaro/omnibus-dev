@@ -144,7 +144,12 @@ proc write8bitCommand `init @noWarningIfUnused (?inCommand $uint8) {
 //   LCD INIT                                                                  *
 //-----------------------------------------------------------------------------*
 
-init 10 {
+init 10 requiredBy
+writeData_inUserMode (?data $uint8),
+write8bitCommand_inUserMode (?data $uint8),
+writeDataInExceptionMode (?data $uint8),
+write8bitCommandInExceptionMode (?data $uint8)
+{
   configurePorts () ;
 //--- Étape 1 : attendre 15 ms
   busyWaitingDuringMS (!15) ;
@@ -452,7 +457,7 @@ proc printSignedInExceptionMode `exception @noWarningIfUnused (?inValue $int32) 
 
 //-----------------------------------------------------------------------------*
 
-proc write8bitCommand_inExceptionMode `exception @noWarningIfUnused (?inCommand $uint8) {
+proc write8bitCommandInExceptionMode `exception @noWarningIfUnused (?inCommand $uint8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
@@ -471,13 +476,13 @@ proc write8bitCommand_inExceptionMode `exception @noWarningIfUnused (?inCommand 
 proc gotoInExceptionMode `exception @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
   if inColumn < 20 then
     if inLine == 0 then
-      write8bitCommand_inExceptionMode (!0x80 &+ 0 &+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 &+ 0 &+ inColumn) ;
     elsif inLine == 1 then
-      write8bitCommand_inExceptionMode (!0x80 &+ 64 &+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 &+ 64 &+ inColumn) ;
     elsif inLine == 2 then
-      write8bitCommand_inExceptionMode (!0x80 &+ 20 &+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 &+ 20 &+ inColumn) ;
     elsif inLine == 3 then
-      write8bitCommand_inExceptionMode (!0x80 &+ 84 &+ inColumn) ;
+      write8bitCommandInExceptionMode (!0x80 &+ 84 &+ inColumn) ;
     end
   end
 }
@@ -485,7 +490,7 @@ proc gotoInExceptionMode `exception @noWarningIfUnused (?line:inLine $uint32 ?co
 //-----------------------------------------------------------------------------*
 
 proc clearScreenInExceptionMode `exception @noWarningIfUnused () {
-  write8bitCommand_inExceptionMode (!0x01)
+  write8bitCommandInExceptionMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*

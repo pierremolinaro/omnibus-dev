@@ -190,33 +190,34 @@ map @procedureMap {
 
 func mangledName
   ?forProcedureKind:let @procedureKindAST inProcedureKind
-  ?procedureName:let @string inProcedureName
+  ?procedureName:let @lstring inProcedureName
   ?formalArgumentList:@procFormalArgumentList inProcFormalArgumentList
-  -> @string outMangledName
+  -> @lstring outMangledName
 {
-  outMangledName = ""
+  var mangledName = ""
   switch inProcedureKind
   case standAloneProc :
   case structureProc (structureTypeName *) :
-    outMangledName += structureTypeName.string + "_"
+    mangledName += structureTypeName.string + "_"
   end
-  outMangledName += inProcedureName
+  mangledName += inProcedureName.string
   for (formalArgument selector * *) in inProcFormalArgumentList do
     switch formalArgument
-    case input : outMangledName += "?"
-    case output : outMangledName += "!"
-    case inputOutput : outMangledName += "?!"
+    case input : mangledName += "?"
+    case output : mangledName += "!"
+    case inputOutput : mangledName += "?!"
     end
-    outMangledName += selector.string + ":"
+    mangledName += selector.string + ":"
   end
+  outMangledName = .new {!mangledName !inProcedureName.location}
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @procedureDeclarationListAST-element mangledName -> @string outMangledName {
+getter @procedureDeclarationListAST-element mangledName -> @lstring outMangledName {
   outMangledName = mangledName (
     !forProcedureKind:mProcedureKind
-    !procedureName:mProcedureName.string
+    !procedureName:mProcedureName
     !formalArgumentList:mProcFormalArgumentList
   )
 }
@@ -247,17 +248,16 @@ method @procedureDeclarationListAST-element enterInContext
     end
   #--- Enter in context
     let mangledName = [self mangledName]
-    let mangledNameWithLocation = @lstring.new {!mangledName !mProcedureName.location}
-    if [ioContext.mProcedureMap hasKey !mangledName] then
-      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mangledName]
+    if [ioContext.mProcedureMap hasKey !mangledName.string] then
+      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mangledName.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
       elsif weakProcedure && weak then
         error mProcedureName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mProcedureMap removeKey !mangledNameWithLocation ?4*] # Remove weak routine
+        [!?ioContext.mProcedureMap removeKey !mangledName ?4*] # Remove weak routine
         [!?ioContext.mProcedureMap insertKey # Insert routine
-          !mangledNameWithLocation
+          !mangledName
           !false # not mutating
           !procedureModeMap
           !signature
@@ -265,7 +265,7 @@ method @procedureDeclarationListAST-element enterInContext
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mProcedureMap insertKey # Raises a redefinition error
-          !mangledNameWithLocation
+          !mangledName
           !false # not mutating
           !procedureModeMap
           !signature
@@ -274,7 +274,7 @@ method @procedureDeclarationListAST-element enterInContext
       end
     else
       [!?ioContext.mProcedureMap insertKey
-        !mangledNameWithLocation
+        !mangledName
         !false # not mutating
         !procedureModeMap
         !signature
