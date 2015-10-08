@@ -4,14 +4,18 @@
 
 sortedlist @initList {
   @location mInitLocation
+  @initRequiredByProcList mRequiredByProcList
   @instructionListAST mInstructionList
   @location mEndOfInitLocation
-  @bigint mPriority
-  @location mPriorityLocation
+  @lbigint mPriority
 }{
   mPriority <
 }
 
+list @initRequiredByProcList {
+  @lstring mProcName
+  @procFormalArgumentList mProcFormalArgumentList
+}
 #----------------------------------------------------------------------------------------------------------------------*
 #  SYNTAX                                                                                                              *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -23,6 +27,18 @@ syntax extension common_syntax {
   rule <declaration> ?!@ast ioAST {
     $init$
     $integer$ ?let @lbigint priority
+    @initRequiredByProcList requiredByProcList = {}
+    select
+    or
+      $requiredBy$
+      repeat
+        $identifier$ ?let procName
+        <procedure_formal_arguments> ?formalArguments:let procFormalArgumentList
+        requiredByProcList += !procName !procFormalArgumentList
+      while
+        $,$
+      end
+    end
     ${$
     @labelMap labelMap = {}
     <instructionList> ?let instructionList !?labelMap
@@ -30,10 +46,10 @@ syntax extension common_syntax {
     $}$
     ioAST.mInitList +=
       !priority.location
+      !requiredByProcList
       !instructionList
       !endOfInit
-      !priority.bigint
-      !priority.location
+      !priority
   }
 
   #--------------------------------------------------------------------------------------------------------------------*
@@ -54,7 +70,7 @@ map @initRoutineMap {
 method @initList-element enterInContext
   ?!context:@semanticContext ioContext
 {
-  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriorityLocation}]
+  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -75,12 +91,32 @@ method @initList-element initSemanticAnalysis
   if not [inContext.mModeMap hasKey !"init"] then
     error mInitLocation : "the $init mode should be defined in order to use init routines"
   end
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !.new{![mPriority string] !mPriority.location}]
+#--- Check "requiredBy" routines are defined
+  for (procName procFormalArgumentList) in mRequiredByProcList do
+    let procMangledName = mangledName (
+      !forProcedureKind:.standAloneProc
+      !procedureName:procName
+      !formalArgumentList:procFormalArgumentList
+    )
+    [inContext.mProcedureMap searchKey !procMangledName ?4*]
+  end
 #---
-  let routineNameForInvocationGraph = @lstring.new  {!"init " + mPriority !mPriorityLocation}
+  let routineNameForInvocationGraph = @lstring.new  {!"init " + mPriority.bigint !mPriority.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !routineNameForInvocationGraph
+      !routineNameForInvocationGraph
+    ]
+  end
+  for (procName procFormalArgumentList) in mRequiredByProcList do
+    let procMangledName = mangledName (
+      !forProcedureKind:.standAloneProc
+      !procedureName:procName
+      !formalArgumentList:procFormalArgumentList
+    )
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge
+      !.new {!"proc " + procMangledName !procMangledName.location}
       !routineNameForInvocationGraph
     ]
   end
@@ -107,6 +143,7 @@ method @initList-element initSemanticAnalysis
   [variableMap checkAutomatonStates !mEndOfInitLocation]
 #--- Code generation
   ioIntermediateCodeStruct.mInitList +=
+    !mRequiredByProcList
     !mInitLocation
     !instructionGenerationList
     !mEndOfInitLocation
@@ -117,6 +154,7 @@ method @initList-element initSemanticAnalysis
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @initListIR {
+  @initRequiredByProcList mInitRequiredByProcList
   @location mInitLocation
   @instructionListIR mInstructionListIR
   @location mEndOfInitLocation
@@ -124,3 +162,29 @@ list @initListIR {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+method @initListIR generateLLVMinitCode
+  ?!@string ioLLVMcode
+  ?let @procedureMapIR inProcedureMapIR
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  ioLLVMcode += llvmTitleComment (!"Init")
+  ioLLVMcode += "define internal void @init () nounwind {\n"
+  for init in self do
+    @bool generate 
+    if [init.mInitRequiredByProcList length] == 0 then
+      generate = true
+    else
+      generate = false
+      for (procName *) in init.mInitRequiredByProcList while not generate do
+        generate = [inProcedureMapIR hasKey !procName.string]
+      end
+    end
+    if generate then
+      [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    end
+  end
+  ioLLVMcode += ";---\n"
+  ioLLVMcode += "  ret void\n"
+  ioLLVMcode += "}\n\n"
+}

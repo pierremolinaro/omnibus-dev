@@ -41,10 +41,10 @@ proc checkRequiredProcedures
   for requiredProc in inAST.mRequiredProcList do
     let requiredProcMangledName = mangledName (
       !forProcedureKind:.standAloneProc
-      !procedureName:requiredProc.mRequiredProcedureName.string
+      !procedureName:requiredProc.mRequiredProcedureName
       !formalArgumentList:requiredProc.mProcFormalArgumentList
     )
-    if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName] then
+    if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName.string] then
       var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
       for (mode) in requiredProc.mProcedureModeList do
         s += " $" + mode
@@ -72,7 +72,7 @@ proc checkRequiredProcedures
         for (mode) in requiredProcModeSet do
           s += " $" + mode
         end
-        error [inSemanticContext.mProcedureMap locationForKey !requiredProcMangledName] : s
+        error [inSemanticContext.mProcedureMap locationForKey !requiredProcMangledName.string] : s
       end
     end
   end
