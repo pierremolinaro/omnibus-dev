@@ -160,13 +160,10 @@ Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=
 
 
 
+
 \subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
 
 L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
-
-
-
-
 
 
 
@@ -191,6 +188,30 @@ proc systickHandler `isr () {
 
 Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le même mode que la routine marquée \plm+@weak+, elle est utilisée à la place de celle-ci.
 
+
+
+
+
+
+\subsectionLabel{Attribut \texttt{@nullOnNoException}}{attributNullOnNoException}\index{"@nullOnNoException}
+
+L'attribut \plm+@nullOnNoException+ signifie que la procédure est éliminée si le projet est compilé avec les exceptions désactivées (option \OPTION{-{}-no-exception-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
+
+Cette option est à utiliser en toute connaissance de cause. Elle sert à éliminer les routines d'interruption qui ne sont pas utilisées dans un projet.
+
+Par exemple, une routine d'interruption par défaut est déclarée par la cible :
+
+\begin{PLM}
+proc svcHandler `isr @nullOnNoException @weak () {
+  throw 11
+}
+\end{PLM}
+
+Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception activées, alors l'occurrence de l'interruption déclenchera l'exception n°11.
+
+Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception désactivées, alors l'attribut \plm+@nullOnNoException+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
+
+ 
 
 
 
@@ -250,7 +271,7 @@ Le compilateur élimine les procédures qui ne sont jamais appelées, en calcula
 
 \sectionLabel{Récursivité}{routinesRecursives}\index{Routines!recursives@récursives}
 
-Par défaut, le compilateur émet un message d'erreur si une ou plusieurs routines récursives sont détectées. L'option \texttt{-{}-do-not-detect-recursive-calls} (\refSectionPage{optionCodeEngendre}) permet d'inhiber cette recherche.
+Par défaut, le compilateur émet un message d'erreur si une ou plusieurs routines récursives sont détectées. L'option \OPTION{-{}-do-not-detect-recursive-calls} (\refSectionPage{optionCodeEngendre}) permet d'inhiber cette recherche.
 
-L'option \texttt{-{}-routine-invocation-graph} permet d'obtenir un fichier contenant le graphe d'invocation, qui peut être affiché par le logiciel \texttt{graphviz}\index{graphviz}. Si le fichier source est \texttt{source.plm}, le fichier engendré s'appelle \texttt{source.subprogramInvocation.dot}.
+L'option \OPTION{-{}-routine-invocation-graph} permet d'obtenir un fichier contenant le graphe d'invocation, qui peut être affiché par le logiciel \texttt{graphviz}\index{graphviz}. Si le fichier source est \texttt{source.plm}, le fichier engendré s'appelle \texttt{source.subprogramInvocation.dot}.
 

@@ -11647,15 +11647,13 @@ const char * gWrapperFileContent_17_targetTemplates = "\t.text\n"
   "\t.eabi_attribute\t24, 1\t@ Tag_ABI_align_needed\n"
   "\t.eabi_attribute\t25, 1\t@ Tag_ABI_align_preserved\n"
   "\t.eabi_attribute\t38, 1\t@ Tag_ABI_FP_16bit_format\n"
-  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n"
-  "\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n" ;
+  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n" ;
 
 const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  782, // Text length
+  660, // Text length
   gWrapperFileContent_17_targetTemplates
 ) ;
 
@@ -17875,15 +17873,13 @@ const char * gWrapperFileContent_15_embeddedTargets = "\t.text\n"
   "\t.eabi_attribute\t24, 1\t@ Tag_ABI_align_needed\n"
   "\t.eabi_attribute\t25, 1\t@ Tag_ABI_align_preserved\n"
   "\t.eabi_attribute\t38, 1\t@ Tag_ABI_FP_16bit_format\n"
-  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n"
-  "\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n" ;
+  "\t.eabi_attribute\t14, 0\t@ Tag_ABI_PCS_R9_use\n" ;
 
 const cRegularFileWrapper gWrapperFile_15_embeddedTargets (
   "target.s",
   "s",
   true, // Text file
-  782, // Text length
+  660, // Text length
   gWrapperFileContent_15_embeddedTargets
 ) ;
 
