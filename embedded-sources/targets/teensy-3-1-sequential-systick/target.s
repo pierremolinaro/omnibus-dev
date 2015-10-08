@@ -14,5 +14,3 @@
 	.eabi_attribute	25, 1	@ Tag_ABI_align_preserved
 	.eabi_attribute	38, 1	@ Tag_ABI_FP_16bit_format
 	.eabi_attribute	14, 0	@ Tag_ABI_PCS_R9_use
-
-@----------------------------------------------------------------------------------------------------------------------*

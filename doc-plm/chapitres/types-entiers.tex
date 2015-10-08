@@ -40,17 +40,32 @@ var v $int32 = 28 // Ok
 
 
 
-\section{Conversion entre valeurs entières}
+\section{Conversion entre objets de type entier}
 
-\colorbox{red}{À compléter}
+Il y a trois types de conversion entre objets de type entier :
+\begin{itemize}
+  \item les conversions toujours possibles \plm+extend exp : $type+ (\refSubsectionPage{conversionsToujoursPossibles}) ;
+  \item les conversions pouvant échouer \plm+convert exp : $type+ (\refSubsectionPage{conversionsPouvantEchouer}) ;
+  \item les troncatures \plm+truncate exp : $type+  (\refSubsectionPage{conversionsTroncature}).
+\end{itemize}
 
-\subsection{Conversions implicites silencieuses}
-Les conversions qui sont toujours possibles sans débordement sont acceptées silencieusement. Par exemple :
+
+\subsectionLabel{Conversions toujours possibles : \texttt{extend}}{conversionsToujoursPossibles}
+
+Les conversions qui sont toujours possibles sont exprimées par le mot réservé \plm=extend=. Par exemple :
 \begin{PLM}
 let v $uint8 = ...
-let x $uint16 = v
-let y $int16 = v
+let x $uint9 = extend v to $uint9
+let y $int9 =  extend v to $int9
+let z $int10 = extend y to $int10
 \end{PLM}
+
+D'une manière générale :
+\begin{itemize}
+\item un entier non signé peut être étendu en un entier non signé de taille strictement supérieure ;
+\item un entier non signé peut être étendu en un entier signé de taille strictement supérieure ;
+\item un entier signé peut être étendu en un entier signé de taille strictement supérieure.
+\end{itemize}
 
 Par contre, une conversion pouvant provoquer un débordement est rejetée à la compilation :
 \begin{PLM}
@@ -58,39 +73,43 @@ let s $int8 = ...
 let x $uint16 = x // Erreur de compilation
 \end{PLM}
 
-\subsection{L'opérateur \texttt{\textbackslash}}
-L'opérateur \plm+\+ permet de spécifier une conversion explicite.
+
+
+
+\subsectionLabel{Conversions pouvant échouer : \texttt{convert}}{conversionsPouvantEchouer}
+
+Les conversions pouvant échouer sont exprimées par le mot réservé \plm=convert=. Par exemple :
 
 \begin{PLM}
 let s $int8 = ...
-let x $uint16 = x \ $uint16
+let x $uint16 = convert x : $uint16
 \end{PLM}
 
-L'opérateur \plm+\+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+\+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=&\=.
+L'opérateur \plm+convert+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+convert+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=truncate=.
 
-L'opérateur \plm+\+ ne peut pas apparaître dans une expression statique.
+L'opérateur \plm+convert+ ne peut pas apparaître dans une expression statique.
 
-De plus, une erreur de compilation est déclenchée si l'opérateur \plm+\+ est utilisé alors qu'une conversion implicite est possible :
+De plus, une erreur de compilation est déclenchée si l'opérateur \plm+convert+ est utilisé alors que la conversion est toujours possible :
 \begin{PLM}
 let v $uint8 = ...
-let y $int16 = v \ $int16 // Erreur, la conversion implicite est possible
+let y = convert v : $int16 // Erreur, conversion toujours possible
 \end{PLM}
 
-\subsection{L'opérateur \texttt{\&\textbackslash}}
+\subsectionLabel{Troncatures : \texttt{truncate}}{conversionsTroncature}
 
-L'opérateur \plm+&\+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{\&\textbackslash} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
+L'opérateur \plm+truncate+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{truncate} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
 
 \begin{PLM}
 let s $int8 = -10
-let x $uint16 = x &\ $uint16
+let x $uint16 = truncate x : $uint16
 \end{PLM}
 
-L'opérateur \plm+&\+ ne peut pas apparaître dans une expression statique.
+L'opérateur \plm+truncate+ ne peut pas apparaître dans une expression statique.
 
-De plus, une erreur de compilation est déclenchée si l'opérateur \plm+&\+ est utilisé alors qu'une conversion implicite est possible :
+De plus, une erreur de compilation est déclenchée si l'opérateur \plm+truncate+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
 let v $uint8 = ...
-let y $int16 = v &\ $int16 // Erreur, la conversion implicite est possible
+let y =truncate v : $int16 // Erreur, conversion toujours possible
 \end{PLM}
 
 \section{Opérateurs infix de comparaison}

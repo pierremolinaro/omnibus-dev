@@ -18,13 +18,13 @@ La déclaration d'une variable locale peut prendre plusieurs formes, suivant que
 \subsection{Déclaration d'une variable locale initialisée}
 
 \begin{PLM}
-var nom : Type = expression
+var nom $type = expression
 \end{PLM}
 
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=Type= est le nom du type de la variable globale ;
+  \item \plm=$type= est le nom du type de la variable globale ;
   \item \plm=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
 \end{itemize}
 
@@ -36,12 +36,12 @@ var nom = expression
 
 \subsection{Déclaration d'une variable locale non initialisée}
 \begin{PLM}
-var nom : Type
+var nom $yype
 \end{PLM}
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la variable locale ;
-  \item \plm=Type= est le nom du type de la variable globale.
+  \item \plm=$type= est le nom du type de la variable globale.
 \end{itemize}
 
 Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reçoive une valeur.
@@ -60,13 +60,13 @@ Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reç
 La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante :
 
 \begin{PLM}
-let nom : Type = expression
+let nom $type = expression
 \end{PLM}
 
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la constante globale ;
-  \item \plm=Type= est le nom du type de la constante globale ;
+  \item \plm=$type= est le nom du type de la constante globale ;
   \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
 \end{itemize}
 
