@@ -2216,6 +2216,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_bool & inOperand3,
                                                       const class GALGAS_bool & inOperand4,
                                                       const class GALGAS_bool & inOperand5,
+                                                      const class GALGAS_bool & inOperand6,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2226,6 +2227,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                      class GALGAS_bool constinArgument3,
                                                      class GALGAS_bool constinArgument4,
                                                      class GALGAS_bool constinArgument5,
+                                                     class GALGAS_bool constinArgument6,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2235,6 +2237,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                      class GALGAS_bool & outArgument3,
                                                      class GALGAS_bool & outArgument4,
                                                      class GALGAS_bool & outArgument5,
+                                                     class GALGAS_bool & outArgument6,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -2252,6 +2255,11 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                                 class GALGAS_string constinArgument1,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_setMNullOnNoExceptionForKey (class GALGAS_bool constinArgument0,
+                                                                       class GALGAS_string constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void modifier_setMWarnIfUnusedForKey (class GALGAS_bool constinArgument0,
                                                                   class GALGAS_string constinArgument1,
@@ -2271,6 +2279,7 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument3,
                                                    class GALGAS_bool & outArgument4,
                                                    class GALGAS_bool & outArgument5,
+                                                   class GALGAS_bool & outArgument6,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -2288,6 +2297,10 @@ class GALGAS_procedureMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsRequiredForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mNullOnNoExceptionForKey (const class GALGAS_string & constinOperand0,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWarnIfUnusedForKey (const class GALGAS_string & constinOperand0,
                                                                           C_Compiler * inCompiler
@@ -2328,6 +2341,7 @@ class cEnumerator_procedureMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mNullOnNoException (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2349,6 +2363,7 @@ class cMapElement_procedureMapIR : public cMapElement {
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
+  public : GALGAS_bool mAttribute_mNullOnNoException ;
 
 //--- Constructor
   public : cMapElement_procedureMapIR (const GALGAS_lstring & inKey,
@@ -2356,7 +2371,8 @@ class cMapElement_procedureMapIR : public cMapElement {
                                        const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                        const GALGAS_bool & in_mIsRequired,
                                        const GALGAS_bool & in_mWarnIfUnused,
-                                       const GALGAS_bool & in_mWeak
+                                       const GALGAS_bool & in_mWeak,
+                                       const GALGAS_bool & in_mNullOnNoException
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -2386,6 +2402,7 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_bool mAttribute_mIsRequired ;
   public : GALGAS_bool mAttribute_mWarnIfUnused ;
   public : GALGAS_bool mAttribute_mWeak ;
+  public : GALGAS_bool mAttribute_mNullOnNoException ;
 
 
 //--------------------------------- Accessors
@@ -2407,7 +2424,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                              const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                              const GALGAS_bool & in_mIsRequired,
                                              const GALGAS_bool & in_mWarnIfUnused,
-                                             const GALGAS_bool & in_mWeak) ;
+                                             const GALGAS_bool & in_mWeak,
+                                             const GALGAS_bool & in_mNullOnNoException) ;
 
 //-- Start of generic part --*
 
@@ -2425,7 +2443,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
                                                                     const class GALGAS_instructionListIR & inOperand2,
                                                                     const class GALGAS_bool & inOperand3,
                                                                     const class GALGAS_bool & inOperand4,
-                                                                    const class GALGAS_bool & inOperand5
+                                                                    const class GALGAS_bool & inOperand5,
+                                                                    const class GALGAS_bool & inOperand6
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -2447,6 +2466,8 @@ class GALGAS_procedureMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR reader_mInstructionGenerationList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mIsRequired (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mNullOnNoException (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_mWarnIfUnused (LOCATION_ARGS) const ;
 

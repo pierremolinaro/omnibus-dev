@@ -206,7 +206,7 @@ proc generateLLVMfile
   llvmCode += "}\n\n"
 #----------------------------------------- Procedures
   for procedure in inIntermediateCodeStruct.mProcedureMapIR do
-    [procedure llvmCodeGeneration !?llvmCode !generationContext !?generationAdds]
+    [procedure llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Functions
   for function in inIntermediateCodeStruct.mFunctionMapIR do

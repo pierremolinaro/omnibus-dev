@@ -3564,27 +3564,29 @@ cMapElement_procedureMapIR::cMapElement_procedureMapIR (const GALGAS_lstring & i
                                                         const GALGAS_instructionListIR & in_mInstructionGenerationList,
                                                         const GALGAS_bool & in_mIsRequired,
                                                         const GALGAS_bool & in_mWarnIfUnused,
-                                                        const GALGAS_bool & in_mWeak
+                                                        const GALGAS_bool & in_mWeak,
+                                                        const GALGAS_bool & in_mNullOnNoException
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
 mAttribute_mIsRequired (in_mIsRequired),
 mAttribute_mWarnIfUnused (in_mWarnIfUnused),
-mAttribute_mWeak (in_mWeak) {
+mAttribute_mWeak (in_mWeak),
+mAttribute_mNullOnNoException (in_mNullOnNoException) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_procedureMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mNullOnNoException.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_procedureMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_procedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_procedureMapIR (mAttribute_lkey, mAttribute_mFormalArgumentListForGeneration, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak, mAttribute_mNullOnNoException COMMA_HERE)) ;
   return result ;
 }
 
@@ -3611,6 +3613,10 @@ void cMapElement_procedureMapIR::description (C_String & ioString, const int32_t
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mWeak" ":" ;
   mAttribute_mWeak.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mNullOnNoException" ":" ;
+  mAttribute_mNullOnNoException.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3632,6 +3638,9 @@ typeComparisonResult cMapElement_procedureMapIR::compare (const cCollectionEleme
   }
   if (kOperandEqual == result) {
     result = mAttribute_mWeak.objectCompare (operand->mAttribute_mWeak) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mNullOnNoException.objectCompare (operand->mAttribute_mNullOnNoException) ;
   }
   return result ;
 }
@@ -3689,10 +3698,11 @@ void GALGAS_procedureMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                  const GALGAS_bool & inArgument2,
                                                  const GALGAS_bool & inArgument3,
                                                  const GALGAS_bool & inArgument4,
+                                                 const GALGAS_bool & inArgument5,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   cMapElement_procedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3709,10 +3719,11 @@ void GALGAS_procedureMapIR::modifier_insertKey (GALGAS_lstring inKey,
                                                 GALGAS_bool inArgument2,
                                                 GALGAS_bool inArgument3,
                                                 GALGAS_bool inArgument4,
+                                                GALGAS_bool inArgument5,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_procedureMapIR * p = NULL ;
-  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_procedureMapIR (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3733,6 +3744,7 @@ void GALGAS_procedureMapIR::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_bool & outArgument2,
                                               GALGAS_bool & outArgument3,
                                               GALGAS_bool & outArgument4,
+                                              GALGAS_bool & outArgument5,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) performSearch (inKey,
@@ -3745,6 +3757,7 @@ void GALGAS_procedureMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument2.drop () ;
     outArgument3.drop () ;
     outArgument4.drop () ;
+    outArgument5.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_procedureMapIR) ;
     outArgument0 = p->mAttribute_mFormalArgumentListForGeneration ;
@@ -3752,6 +3765,7 @@ void GALGAS_procedureMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mIsRequired ;
     outArgument3 = p->mAttribute_mWarnIfUnused ;
     outArgument4 = p->mAttribute_mWeak ;
+    outArgument5 = p->mAttribute_mNullOnNoException ;
   }
 }
 
@@ -3763,6 +3777,7 @@ void GALGAS_procedureMapIR::modifier_removeKey (GALGAS_lstring inKey,
                                                 GALGAS_bool & outArgument2,
                                                 GALGAS_bool & outArgument3,
                                                 GALGAS_bool & outArgument4,
+                                                GALGAS_bool & outArgument5,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   const char * kRemoveErrorMessage = "** internal error **" ;
@@ -3776,6 +3791,7 @@ void GALGAS_procedureMapIR::modifier_removeKey (GALGAS_lstring inKey,
     outArgument2 = p->mAttribute_mIsRequired ;
     outArgument3 = p->mAttribute_mWarnIfUnused ;
     outArgument4 = p->mAttribute_mWeak ;
+    outArgument5 = p->mAttribute_mNullOnNoException ;
   }
 }
 
@@ -3856,6 +3872,21 @@ GALGAS_bool GALGAS_procedureMapIR::reader_mWeakForKey (const GALGAS_string & inK
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_procedureMapIR::reader_mNullOnNoExceptionForKey (const GALGAS_string & inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+    result = p->mAttribute_mNullOnNoException ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_procedureMapIR::modifier_setMFormalArgumentListForGenerationForKey (GALGAS_procFormalArgumentListForGeneration inAttributeValue,
                                                                                 GALGAS_string inKey,
                                                                                 C_Compiler * inCompiler
@@ -3926,6 +3957,20 @@ void GALGAS_procedureMapIR::modifier_setMWeakForKey (GALGAS_bool inAttributeValu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_procedureMapIR::modifier_setMNullOnNoExceptionForKey (GALGAS_bool inAttributeValue,
+                                                                  GALGAS_string inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_procedureMapIR * p = (cMapElement_procedureMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+    p->mAttribute_mNullOnNoException = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_procedureMapIR * GALGAS_procedureMapIR::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                        const GALGAS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) {
@@ -3947,7 +3992,7 @@ cGenericAbstractEnumerator () {
 GALGAS_procedureMapIR_2D_element cEnumerator_procedureMapIR::current (LOCATION_ARGS) const {
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_procedureMapIR) ;
-  return GALGAS_procedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak) ;
+  return GALGAS_procedureMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak, p->mAttribute_mNullOnNoException) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3996,6 +4041,14 @@ GALGAS_bool cEnumerator_procedureMapIR::current_mWeak (LOCATION_ARGS) const {
   const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_procedureMapIR) ;
   return p->mAttribute_mWeak ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_procedureMapIR::current_mNullOnNoException (LOCATION_ARGS) const {
+  const cMapElement_procedureMapIR * p = (const cMapElement_procedureMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_procedureMapIR) ;
+  return p->mAttribute_mNullOnNoException ;
 }
 
 

@@ -5338,6 +5338,76 @@ C_galgas_function_descriptor functionDescriptor_weakAttribute ("weakAttribute",
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Once function 'nullOnNoExceptionAttribute'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_nullOnNoExceptionAttribute (C_Compiler * /* inCompiler */
+                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("nullOnNoException") ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_nullOnNoExceptionAttribute = false ;
+static GALGAS_string gOnceFunctionResult_nullOnNoExceptionAttribute ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_nullOnNoExceptionAttribute (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_nullOnNoExceptionAttribute) {
+    gOnceFunctionResult_nullOnNoExceptionAttribute = onceFunction_nullOnNoExceptionAttribute (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_nullOnNoExceptionAttribute = true ;
+  }
+  return gOnceFunctionResult_nullOnNoExceptionAttribute ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_nullOnNoExceptionAttribute (void) {
+  gOnceFunctionResult_nullOnNoExceptionAttribute.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_nullOnNoExceptionAttribute (NULL,
+                                                                        releaseOnceFunctionResult_nullOnNoExceptionAttribute) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_nullOnNoExceptionAttribute [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_nullOnNoExceptionAttribute (C_Compiler * inCompiler,
+                                                                           const cObjectArray & /* inEffectiveParameterArray */,
+                                                                           const GALGAS_location & /* inErrorLocation */
+                                                                           COMMA_LOCATION_ARGS) {
+  return function_nullOnNoExceptionAttribute (inCompiler COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_nullOnNoExceptionAttribute ("nullOnNoExceptionAttribute",
+                                                                            functionWithGenericHeader_nullOnNoExceptionAttribute,
+                                                                            & kTypeDescriptor_GALGAS_string,
+                                                                            0,
+                                                                            functionArgs_nullOnNoExceptionAttribute) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Routine 'codeOptimisation'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5460,85 +5530,85 @@ void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & io
     const enumGalgasBool test_0 = enumerator_6745.current (HERE).mAttribute_mIsRequired.boolEnum () ;
     if (kBoolTrue == test_0) {
       {
-      var_accessibleProcedureMap.modifier_insertKey (enumerator_6745.current (HERE).mAttribute_lkey, enumerator_6745.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6745.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6745.current (HERE).mAttribute_mIsRequired, enumerator_6745.current (HERE).mAttribute_mWarnIfUnused, enumerator_6745.current (HERE).mAttribute_mWeak, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 151)) ;
+      var_accessibleProcedureMap.modifier_insertKey (enumerator_6745.current (HERE).mAttribute_lkey, enumerator_6745.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6745.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6745.current (HERE).mAttribute_mIsRequired, enumerator_6745.current (HERE).mAttribute_mWarnIfUnused, enumerator_6745.current (HERE).mAttribute_mWeak, enumerator_6745.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 151)) ;
       }
-      categoryMethod_enterAccessibleEntities (enumerator_6745.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 159)) ;
-      outArgument_outAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (enumerator_6745.current (HERE).mAttribute_lkey.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 160)) ;
+      categoryMethod_enterAccessibleEntities (enumerator_6745.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 160)) ;
+      outArgument_outAccessibleEntities.mAttribute_mProcedureSet.addAssign_operation (enumerator_6745.current (HERE).mAttribute_lkey.mAttribute_string  COMMA_SOURCE_FILE ("code-optimisation.galgas", 161)) ;
     }else if (kBoolFalse == test_0) {
       {
-      var_nonExploredProcedureMap.modifier_insertKey (enumerator_6745.current (HERE).mAttribute_lkey, enumerator_6745.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6745.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6745.current (HERE).mAttribute_mIsRequired, enumerator_6745.current (HERE).mAttribute_mWarnIfUnused, enumerator_6745.current (HERE).mAttribute_mWeak, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 162)) ;
+      var_nonExploredProcedureMap.modifier_insertKey (enumerator_6745.current (HERE).mAttribute_lkey, enumerator_6745.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_6745.current (HERE).mAttribute_mInstructionGenerationList, enumerator_6745.current (HERE).mAttribute_mIsRequired, enumerator_6745.current (HERE).mAttribute_mWarnIfUnused, enumerator_6745.current (HERE).mAttribute_mWeak, enumerator_6745.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 163)) ;
       }
     }
     enumerator_6745.gotoNextObject () ;
   }
-  cEnumerator_bootListIR enumerator_7560 (ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
-  while (enumerator_7560.hasCurrentObject ()) {
-    categoryMethod_enterAccessibleEntities (enumerator_7560.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 174)) ;
-    enumerator_7560.gotoNextObject () ;
+  cEnumerator_bootListIR enumerator_7636 (ioArgument_ioIntermediateCodeStruct.mAttribute_mBootList, kEnumeration_up) ;
+  while (enumerator_7636.hasCurrentObject ()) {
+    categoryMethod_enterAccessibleEntities (enumerator_7636.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 176)) ;
+    enumerator_7636.gotoNextObject () ;
   }
-  cEnumerator_initListIR enumerator_7696 (ioArgument_ioIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_7696.hasCurrentObject ()) {
-    categoryMethod_enterAccessibleEntities (enumerator_7696.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 177)) ;
-    enumerator_7696.gotoNextObject () ;
+  cEnumerator_initListIR enumerator_7772 (ioArgument_ioIntermediateCodeStruct.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_7772.hasCurrentObject ()) {
+    categoryMethod_enterAccessibleEntities (enumerator_7772.current (HERE).mAttribute_mInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 179)) ;
+    enumerator_7772.gotoNextObject () ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 180)).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("code-optimisation.galgas", 182)).boolEnum () ;
   if (kBoolTrue == test_1) {
-    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 181)) ;
-    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 182)) ;
+    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionSetupInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 183)) ;
+    categoryMethod_enterAccessibleEntities (ioArgument_ioIntermediateCodeStruct.mAttribute_mExceptionLoopInstructionListIR, outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 184)) ;
   }
-  GALGAS_functionMapIR var_accessibleFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 185)) ;
+  GALGAS_functionMapIR var_accessibleFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 187)) ;
   GALGAS_functionMapIR var_nonExploredFunctionMap = ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR ;
   GALGAS_bool var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
-  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 188)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 188)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 188)).isValid ()) {
-    uint32_t variant_8344 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 188)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 188)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 188)).uintValue () ;
-    bool loop_8344 = true ;
-    while (loop_8344) {
-      loop_8344 = var_exploreProceduresAndFunctions.isValid () ;
-      if (loop_8344) {
-        loop_8344 = var_exploreProceduresAndFunctions.boolValue () ;
+  if (ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 190)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 190)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 190)).isValid ()) {
+    uint32_t variant_8420 = ioArgument_ioIntermediateCodeStruct.mAttribute_mProcedureMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 190)).add_operation (ioArgument_ioIntermediateCodeStruct.mAttribute_mFunctionMapIR.reader_count (SOURCE_FILE ("code-optimisation.galgas", 190)), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 190)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 190)).uintValue () ;
+    bool loop_8420 = true ;
+    while (loop_8420) {
+      loop_8420 = var_exploreProceduresAndFunctions.isValid () ;
+      if (loop_8420) {
+        loop_8420 = var_exploreProceduresAndFunctions.boolValue () ;
       }
-      if (loop_8344 && (0 == variant_8344)) {
-        loop_8344 = false ;
-        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 188)) ;
+      if (loop_8420 && (0 == variant_8420)) {
+        loop_8420 = false ;
+        inCompiler->loopRunTimeVariantError (SOURCE_FILE ("code-optimisation.galgas", 190)) ;
       }
-      if (loop_8344) {
-        variant_8344 -- ;
+      if (loop_8420) {
+        variant_8420 -- ;
         var_exploreProceduresAndFunctions = GALGAS_bool (false) ;
         GALGAS_procedureMapIR var_exNonExploredProcedureMap = var_nonExploredProcedureMap ;
-        var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 192)) ;
-        cEnumerator_procedureMapIR enumerator_8688 (var_exNonExploredProcedureMap, kEnumeration_up) ;
-        while (enumerator_8688.hasCurrentObject ()) {
-          const enumGalgasBool test_2 = outArgument_outAccessibleEntities.mAttribute_mProcedureSet.reader_hasKey (enumerator_8688.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 194)).boolEnum () ;
+        var_nonExploredProcedureMap = GALGAS_procedureMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 194)) ;
+        cEnumerator_procedureMapIR enumerator_8764 (var_exNonExploredProcedureMap, kEnumeration_up) ;
+        while (enumerator_8764.hasCurrentObject ()) {
+          const enumGalgasBool test_2 = outArgument_outAccessibleEntities.mAttribute_mProcedureSet.reader_hasKey (enumerator_8764.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 196)).boolEnum () ;
           if (kBoolTrue == test_2) {
             {
-            var_accessibleProcedureMap.modifier_insertKey (enumerator_8688.current (HERE).mAttribute_lkey, enumerator_8688.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8688.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8688.current (HERE).mAttribute_mIsRequired, enumerator_8688.current (HERE).mAttribute_mWarnIfUnused, enumerator_8688.current (HERE).mAttribute_mWeak, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 195)) ;
+            var_accessibleProcedureMap.modifier_insertKey (enumerator_8764.current (HERE).mAttribute_lkey, enumerator_8764.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8764.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8764.current (HERE).mAttribute_mIsRequired, enumerator_8764.current (HERE).mAttribute_mWarnIfUnused, enumerator_8764.current (HERE).mAttribute_mWeak, enumerator_8764.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 197)) ;
             }
-            categoryMethod_enterAccessibleEntities (enumerator_8688.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 203)) ;
+            categoryMethod_enterAccessibleEntities (enumerator_8764.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 206)) ;
             var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_2) {
             {
-            var_nonExploredProcedureMap.modifier_insertKey (enumerator_8688.current (HERE).mAttribute_lkey, enumerator_8688.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8688.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8688.current (HERE).mAttribute_mIsRequired, enumerator_8688.current (HERE).mAttribute_mWarnIfUnused, enumerator_8688.current (HERE).mAttribute_mWeak, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 206)) ;
+            var_nonExploredProcedureMap.modifier_insertKey (enumerator_8764.current (HERE).mAttribute_lkey, enumerator_8764.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_8764.current (HERE).mAttribute_mInstructionGenerationList, enumerator_8764.current (HERE).mAttribute_mIsRequired, enumerator_8764.current (HERE).mAttribute_mWarnIfUnused, enumerator_8764.current (HERE).mAttribute_mWeak, enumerator_8764.current (HERE).mAttribute_mNullOnNoException, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 209)) ;
             }
           }
-          enumerator_8688.gotoNextObject () ;
+          enumerator_8764.gotoNextObject () ;
         }
         GALGAS_functionMapIR var_exNonExploredFunctionMap = var_nonExploredFunctionMap ;
-        var_nonExploredFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 217)) ;
-        cEnumerator_functionMapIR enumerator_9636 (var_exNonExploredFunctionMap, kEnumeration_up) ;
-        while (enumerator_9636.hasCurrentObject ()) {
-          const enumGalgasBool test_3 = outArgument_outAccessibleEntities.mAttribute_mFunctionSet.reader_hasKey (enumerator_9636.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 219)).boolEnum () ;
+        var_nonExploredFunctionMap = GALGAS_functionMapIR::constructor_emptyMap (SOURCE_FILE ("code-optimisation.galgas", 221)) ;
+        cEnumerator_functionMapIR enumerator_9791 (var_exNonExploredFunctionMap, kEnumeration_up) ;
+        while (enumerator_9791.hasCurrentObject ()) {
+          const enumGalgasBool test_3 = outArgument_outAccessibleEntities.mAttribute_mFunctionSet.reader_hasKey (enumerator_9791.current (HERE).mAttribute_lkey.mAttribute_string COMMA_SOURCE_FILE ("code-optimisation.galgas", 223)).boolEnum () ;
           if (kBoolTrue == test_3) {
             {
-            var_accessibleFunctionMap.modifier_insertKey (enumerator_9636.current (HERE).mAttribute_lkey, enumerator_9636.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9636.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9636.current (HERE).mAttribute_mResultType, enumerator_9636.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 220)) ;
+            var_accessibleFunctionMap.modifier_insertKey (enumerator_9791.current (HERE).mAttribute_lkey, enumerator_9791.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9791.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9791.current (HERE).mAttribute_mResultType, enumerator_9791.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 224)) ;
             }
-            categoryMethod_enterAccessibleEntities (enumerator_9636.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 227)) ;
+            categoryMethod_enterAccessibleEntities (enumerator_9791.current (HERE), outArgument_outAccessibleEntities, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 231)) ;
             var_exploreProceduresAndFunctions = GALGAS_bool (true) ;
           }else if (kBoolFalse == test_3) {
             {
-            var_nonExploredFunctionMap.modifier_insertKey (enumerator_9636.current (HERE).mAttribute_lkey, enumerator_9636.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9636.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9636.current (HERE).mAttribute_mResultType, enumerator_9636.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 230)) ;
+            var_nonExploredFunctionMap.modifier_insertKey (enumerator_9791.current (HERE).mAttribute_lkey, enumerator_9791.current (HERE).mAttribute_mFormalArgumentListForGeneration, enumerator_9791.current (HERE).mAttribute_mInstructionGenerationList, enumerator_9791.current (HERE).mAttribute_mResultType, enumerator_9791.current (HERE).mAttribute_mResultVarName, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 234)) ;
             }
           }
-          enumerator_9636.gotoNextObject () ;
+          enumerator_9791.gotoNextObject () ;
         }
       }
     }
@@ -5904,13 +5974,13 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
     "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 206)) ;
   cEnumerator_procedureMapIR enumerator_9025 (constinArgument_inIntermediateCodeStruct.mAttribute_mProcedureMapIR, kEnumeration_up) ;
   while (enumerator_9025.hasCurrentObject ()) {
-    categoryMethod_llvmCodeGeneration (enumerator_9025.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)) ;
+    categoryMethod_llvmCodeGeneration (enumerator_9025.current (HERE), var_llvmCode, var_asCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 209)) ;
     enumerator_9025.gotoNextObject () ;
   }
-  cEnumerator_functionMapIR enumerator_9227 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
-  while (enumerator_9227.hasCurrentObject ()) {
-    categoryMethod_implementationCodeGeneration (enumerator_9227.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 213)) ;
-    enumerator_9227.gotoNextObject () ;
+  cEnumerator_functionMapIR enumerator_9236 (constinArgument_inIntermediateCodeStruct.mAttribute_mFunctionMapIR, kEnumeration_up) ;
+  while (enumerator_9236.hasCurrentObject ()) {
+    categoryMethod_implementationCodeGeneration (enumerator_9236.current (HERE), var_llvmCode, var_generationContext, var_generationAdds, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 213)) ;
+    enumerator_9236.gotoNextObject () ;
   }
   const enumGalgasBool test_2 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 216)).boolEnum () ;
   if (kBoolTrue == test_2) {
@@ -5938,56 +6008,56 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
     var_llvmCode.dotAssign_operation (GALGAS_string ("  br label %exception.loop\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 251)) ;
     var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
       "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 252)) ;
-    cEnumerator_stringset enumerator_11407 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
-    while (enumerator_11407.hasCurrentObject ()) {
+    cEnumerator_stringset enumerator_11416 (constinArgument_inSourceFileAbsolutePathSet, kEnumeration_up) ;
+    while (enumerator_11416.hasCurrentObject ()) {
       GALGAS_uint var_staticStringIndex ;
       {
-      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_11407.current_key (HERE).reader_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 256)).reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 256)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 255)) ;
+      categoryModifier_findOrAddStaticString (var_generationAdds.mAttribute_mStaticStringMap, enumerator_11416.current_key (HERE).reader_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 256)).reader_stringByDeletingPathExtension (SOURCE_FILE ("code-generation.galgas", 256)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 255)) ;
       }
       GALGAS_string var_routineName = GALGAS_string ("@raise_exception.").add_operation (var_staticStringIndex.reader_string (SOURCE_FILE ("code-generation.galgas", 259)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 259)) ;
-      var_llvmCode.dotAssign_operation (function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)).add_operation (enumerator_11407.current_key (HERE).reader_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260))  COMMA_SOURCE_FILE ("code-generation.galgas", 260)) ;
+      var_llvmCode.dotAssign_operation (function_llvmTitleComment (var_routineName.add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)).add_operation (enumerator_11416.current_key (HERE).reader_lastPathComponent (SOURCE_FILE ("code-generation.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 260))  COMMA_SOURCE_FILE ("code-generation.galgas", 260)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("define internal void ").add_operation (var_routineName, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 261)).add_operation (GALGAS_string (" (i32 %inSourceLine, i32 %inCode) nounwind noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 261))  COMMA_SOURCE_FILE ("code-generation.galgas", 261)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("  %str.FILE = load i8*, i8** @string.").add_operation (var_staticStringIndex.reader_string (SOURCE_FILE ("code-generation.galgas", 262)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 262))  COMMA_SOURCE_FILE ("code-generation.galgas", 262)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("  call void @raise_exception (i32 %inSourceLine, i32 %inCode, i8* %str.FILE)\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 263)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("  unreachable\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 264)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("}\n"
         "\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 265)) ;
-      enumerator_11407.gotoNextObject () ;
+      enumerator_11416.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_3 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mIntrinsicsDeclarationSet.reader_count (SOURCE_FILE ("code-generation.galgas", 269)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
     var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("LLVM intrinsics"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 270))  COMMA_SOURCE_FILE ("code-generation.galgas", 270)) ;
-    cEnumerator_stringset enumerator_12343 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
-    while (enumerator_12343.hasCurrentObject ()) {
-      var_llvmCode.dotAssign_operation (enumerator_12343.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 272))  COMMA_SOURCE_FILE ("code-generation.galgas", 272)) ;
-      enumerator_12343.gotoNextObject () ;
+    cEnumerator_stringset enumerator_12352 (var_generationAdds.mAttribute_mIntrinsicsDeclarationSet, kEnumeration_up) ;
+    while (enumerator_12352.hasCurrentObject ()) {
+      var_llvmCode.dotAssign_operation (enumerator_12352.current_key (HERE).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 272))  COMMA_SOURCE_FILE ("code-generation.galgas", 272)) ;
+      enumerator_12352.gotoNextObject () ;
     }
     var_llvmCode.dotAssign_operation (GALGAS_string ("\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 274)) ;
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsStrictSup, var_generationAdds.mAttribute_mStaticStringMap.reader_count (SOURCE_FILE ("code-generation.galgas", 277)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
     var_llvmCode.dotAssign_operation (function_llvmTitleComment (GALGAS_string ("Static strings"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 278))  COMMA_SOURCE_FILE ("code-generation.galgas", 278)) ;
-    cEnumerator_staticStringMap enumerator_12619 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
-    while (enumerator_12619.hasCurrentObject ()) {
-      GALGAS_string var_lgStr = enumerator_12619.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 280)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 280)).reader_string (SOURCE_FILE ("code-generation.galgas", 280)) ;
-      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281))  COMMA_SOURCE_FILE ("code-generation.galgas", 281)) ;
+    cEnumerator_staticStringMap enumerator_12628 (var_generationAdds.mAttribute_mStaticStringMap, kEnumeration_up) ;
+    while (enumerator_12628.hasCurrentObject ()) {
+      GALGAS_string var_lgStr = enumerator_12628.current_lkey (HERE).mAttribute_string.reader_length (SOURCE_FILE ("code-generation.galgas", 280)).add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 280)).reader_string (SOURCE_FILE ("code-generation.galgas", 280)) ;
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12628.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281)).add_operation (GALGAS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 281))  COMMA_SOURCE_FILE ("code-generation.galgas", 281)) ;
       var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8] c\""), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 282))  COMMA_SOURCE_FILE ("code-generation.galgas", 282)) ;
-      var_llvmCode.dotAssign_operation (enumerator_12619.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 283))  COMMA_SOURCE_FILE ("code-generation.galgas", 283)) ;
+      var_llvmCode.dotAssign_operation (enumerator_12628.current_lkey (HERE).mAttribute_string.reader_utf_38_RepresentationWithoutDelimiters (SOURCE_FILE ("code-generation.galgas", 283))  COMMA_SOURCE_FILE ("code-generation.galgas", 283)) ;
       var_llvmCode.dotAssign_operation (GALGAS_string ("\\00\", align 1\n")  COMMA_SOURCE_FILE ("code-generation.galgas", 284)) ;
-      var_llvmCode.dotAssign_operation (function_literalStringName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285))  COMMA_SOURCE_FILE ("code-generation.galgas", 285)) ;
+      var_llvmCode.dotAssign_operation (function_literalStringName (enumerator_12628.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285)).add_operation (GALGAS_string (" = private constant i8* getelementptr inbounds (["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 285))  COMMA_SOURCE_FILE ("code-generation.galgas", 285)) ;
       var_llvmCode.dotAssign_operation (var_lgStr.add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286)).add_operation (var_lgStr, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 286))  COMMA_SOURCE_FILE ("code-generation.galgas", 286)) ;
-      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12619.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
+      var_llvmCode.dotAssign_operation (function_literalCharacterArrayName (enumerator_12628.current_mIndex (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287)).add_operation (GALGAS_string (", i32 0, i32 0), align 4\n"
         "\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 287))  COMMA_SOURCE_FILE ("code-generation.galgas", 287)) ;
-      enumerator_12619.gotoNextObject () ;
+      enumerator_12628.gotoNextObject () ;
     }
   }
   var_llvmCode.dotAssign_operation (function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 291))  COMMA_SOURCE_FILE ("code-generation.galgas", 291)) ;
-  GALGAS_bool joker_13349 ; // Joker input parameter
-  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)), joker_13349, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)) ;
+  GALGAS_bool joker_13358 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)), joker_13358, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292)) ;
   var_asCode.dotAssign_operation (function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 294))  COMMA_SOURCE_FILE ("code-generation.galgas", 294)) ;
-  GALGAS_bool joker_13527 ; // Joker input parameter
-  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)), joker_13527, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
+  GALGAS_bool joker_13536 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)), joker_13536, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
   GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 297)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
     test_5 = GALGAS_bool (gOption_plm_5F_options_compileOnly.reader_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 297)) ;
@@ -6030,13 +6100,15 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "#        first release\n"
   "# 2.0: october 2th, 2015\n"
   "#        added several target definition for rules\n"
+  "# 2.1: october 5th, 2015\n"
+  "#        added checking routine formal argument run-time types\n"
   "#\n"
   "#----------------------------------------------------------------------------*\n"
   "\n"
   "import subprocess, sys, os, copy\n"
   "import urllib, shutil, subprocess\n"
   "import platform, json, operator\n"
-  "import threading\n"
+  "import threading, types, traceback\n"
   "\n"
   "if sys.version_info >= (2, 6) :\n"
   "  import multiprocessing\n"
@@ -6300,6 +6372,20 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def __init__ (self, targets, title = \"\"):\n"
+  "    if not isinstance (targets, types.ListType):\n"
+  "      print BOLD_RED () + \"*** Rule type instanciation: first argument 'targets' is not a list ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    else:\n"
+  "      for aTarget in targets:\n"
+  "        if not isinstance (aTarget, types.StringTypes):\n"
+  "          print BOLD_RED () + \"*** Rule type instanciation: an element of first argument 'targets' is not a string ***\" + ENDC ()\n"
+  "          traceback.print_stack ()\n"
+  "          sys.exit (1)\n"
+  "    if not isinstance (title, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Rule type instanciation: second argument 'title' is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mTargets = copy.deepcopy (targets)\n"
   "    self.mDependences = []\n"
   "    self.mCommand = []\n"
@@ -6329,6 +6415,10 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):\n"
+  "    if not isinstance (secondaryDependanceFile, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Rule.enterSecondaryDependanceFile: 'secondaryDependanceFile' argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if make.mSelectedGoal != \"clean\":\n"
   "      filePath = os.path.abspath (secondaryDependanceFile)\n"
   "      if not os.path.exists (filePath):\n"
@@ -6366,10 +6456,15 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  mSelectedGoal = \"\"\n"
   "  mLinuxTextEditor = \"\"\n"
   "  mMacTextEditor = \"\"\n"
+  "  mSimulateClean = False\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def __init__ (self, goal):\n"
+  "    if not isinstance (goal, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make instanciation: 'goal' argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mRuleList = []\n"
   "    self.mJobList = []\n"
   "    self.mErrorCount = 0\n"
@@ -6382,6 +6477,10 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def addRule (self, rule):\n"
+  "    if not isinstance (rule, Rule):\n"
+  "      print BOLD_RED () + \"*** Make.addRule: 'rule' argument is not an instance of Rule type ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mRuleList.append (copy.deepcopy (rule))\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
@@ -6698,6 +6797,24 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def addGoal (self, goal, targetList, message):\n"
+  "    if not isinstance (goal, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'goal' first argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    if not isinstance (targetList, types.ListType):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'targetList' second argument is not a list ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    else:\n"
+  "      for aTarget in targetList:\n"
+  "        if not isinstance (aTarget, types.StringTypes):\n"
+  "          print BOLD_RED () + \"*** Make.addGoal: an element of 'targetList' second argument 'targets' is not a string ***\" + ENDC ()\n"
+  "          traceback.print_stack ()\n"
+  "          sys.exit (1)\n"
+  "    if not isinstance (message, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'message' third argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if self.mGoals.has_key (goal) or (goal == \"clean\") :\n"
   "      self.enterError (\"The '\" + goal + \"' goal is already defined\")\n"
   "    else:\n"
@@ -6720,6 +6837,14 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def runGoal (self, maxConcurrentJobs, showCommand):\n"
+  "    if not isinstance (maxConcurrentJobs, types.IntType):\n"
+  "      print BOLD_RED () + \"*** Make.runGoal: 'maxConcurrentJobs' first argument is not an integer ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    if not isinstance (showCommand, types.BooleanType):\n"
+  "      print BOLD_RED () + \"*** Make.runGoal: 'showCommand' second argument is not a boolean ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if self.mGoals.has_key (self.mSelectedGoal) :\n"
   "      (targetList, message) = self.mGoals [self.mSelectedGoal]\n"
   "      for target in targetList:\n"
@@ -6746,10 +6871,16 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "              directoriesToRemoveSet.add (dirPath)\n"
   "      for dir in directoriesToRemoveSet:\n"
   "        if os.path.exists (os.path.abspath (dir)):\n"
-  "          runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
+  "          if self.mSimulateClean:\n"
+  "            print MAGENTA () + BOLD () + \"Simulated clean command: \" + ENDC () + \"rm -fr '\" + dir + \"'\"\n"
+  "          else:\n"
+  "            runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
   "      for file in filesToRemoveList:\n"
   "        if os.path.exists (os.path.abspath (file)):\n"
-  "          runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
+  "          if self.mSimulateClean:\n"
+  "            print MAGENTA () + BOLD () + \"Simulated clean command: \" + ENDC () + \"rm -f '\" + file + \"'\"\n"
+  "          else:\n"
+  "            runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
   "    else:\n"
   "      errorMessage = \"The '\" + self.mSelectedGoal + \"' goal is not defined; defined goals:\"\n"
   "      for key in self.mGoals:\n"
@@ -6757,6 +6888,11 @@ const char * gWrapperFileContent_0_targetTemplates = "#! /usr/bin/env python\n"
   "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
   "      print BOLD_RED () + errorMessage + ENDC ()\n"
   "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def simulateClean (self):\n"
+  "    self.mSimulateClean = True\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
@@ -6793,7 +6929,7 @@ const cRegularFileWrapper gWrapperFile_0_targetTemplates (
   "makefile.py",
   "py",
   true, // Text file
-  29864, // Text length
+  33121, // Text length
   gWrapperFileContent_0_targetTemplates
 ) ;
 
@@ -9292,7 +9428,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc NMIHandler `isr ()\n"
   "\n"
-  "proc NMIHandler `isr @weak () {\n"
+  "proc NMIHandler `isr @nullOnNoException @weak () {\n"
   "  throw 2\n"
   "}\n"
   "\n"
@@ -9300,7 +9436,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc HardFaultHandler `isr ()\n"
   "\n"
-  "proc HardFaultHandler `isr @weak () {\n"
+  "proc HardFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 3\n"
   "}\n"
   "\n"
@@ -9308,7 +9444,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc MemManageHandler `isr ()\n"
   "\n"
-  "proc MemManageHandler `isr @weak () {\n"
+  "proc MemManageHandler `isr @nullOnNoException @weak () {\n"
   "  throw 4\n"
   "}\n"
   "\n"
@@ -9316,7 +9452,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc BusFaultHandler `isr ()\n"
   "\n"
-  "proc BusFaultHandler `isr @weak () {\n"
+  "proc BusFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 5\n"
   "}\n"
   "\n"
@@ -9324,7 +9460,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UsageFaultHandler `isr ()\n"
   "\n"
-  "proc UsageFaultHandler `isr @weak () {\n"
+  "proc UsageFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 6\n"
   "}\n"
   "\n"
@@ -9332,7 +9468,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc svcHandler `isr ()\n"
   "\n"
-  "proc svcHandler `isr @weak () {\n"
+  "proc svcHandler `isr @nullOnNoException @weak () {\n"
   "  throw 11\n"
   "}\n"
   "\n"
@@ -9340,7 +9476,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DebugMonitorHandler `isr ()\n"
   "\n"
-  "proc DebugMonitorHandler `isr @weak () {\n"
+  "proc DebugMonitorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 12\n"
   "}\n"
   "\n"
@@ -9348,7 +9484,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PendSVHandler `isr ()\n"
   "\n"
-  "proc PendSVHandler `isr @weak () {\n"
+  "proc PendSVHandler `isr @nullOnNoException @weak () {\n"
   "  throw 14\n"
   "}\n"
   "\n"
@@ -9374,7 +9510,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc systickHandler `isr ()\n"
   "\n"
-  "proc systickHandler `isr @weak () {\n"
+  "proc systickHandler `isr () {\n"
   "  gCompteur &++\n"
   "  userSystickHandler ()\n"
   "}\n"
@@ -9392,7 +9528,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel0TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel0TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel0TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 16\n"
   "}\n"
   "\n"
@@ -9400,7 +9536,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel1TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel1TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel1TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 17\n"
   "}\n"
   "\n"
@@ -9408,7 +9544,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel2TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel2TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel2TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 18\n"
   "}\n"
   "\n"
@@ -9416,7 +9552,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel3TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel3TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel3TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 19\n"
   "}\n"
   "\n"
@@ -9424,7 +9560,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel4TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel4TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel4TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 20\n"
   "}\n"
   "\n"
@@ -9432,7 +9568,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel5TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel5TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel5TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 21\n"
   "}\n"
   "\n"
@@ -9440,7 +9576,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel6TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel6TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel6TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 22\n"
   "}\n"
   "\n"
@@ -9448,7 +9584,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel7TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel7TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel7TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 23\n"
   "}\n"
   "\n"
@@ -9456,7 +9592,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel8TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel8TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel8TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 24\n"
   "}\n"
   "\n"
@@ -9464,7 +9600,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel9TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel9TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel9TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 25\n"
   "}\n"
   "\n"
@@ -9472,7 +9608,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel10TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel10TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel10TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 26\n"
   "}\n"
   "\n"
@@ -9480,7 +9616,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel11TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel11TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel11TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 27\n"
   "}\n"
   "\n"
@@ -9488,7 +9624,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel12TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel12TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel12TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 28\n"
   "}\n"
   "\n"
@@ -9496,7 +9632,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel13TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel13TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel13TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 29\n"
   "}\n"
   "\n"
@@ -9504,7 +9640,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel14TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel14TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel14TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 30\n"
   "}\n"
   "\n"
@@ -9512,7 +9648,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel15TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel15TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel15TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 31\n"
   "}\n"
   "\n"
@@ -9520,7 +9656,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAErrorHandler `isr ()\n"
   "\n"
-  "proc DMAErrorHandler `isr @weak () {\n"
+  "proc DMAErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 32\n"
   "}\n"
   "\n"
@@ -9528,7 +9664,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc flashMemoryCommandCompleteHandler `isr ()\n"
   "\n"
-  "proc flashMemoryCommandCompleteHandler `isr @weak () {\n"
+  "proc flashMemoryCommandCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 34\n"
   "}\n"
   "\n"
@@ -9536,7 +9672,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc flashMemoryReadCollisionHandler `isr ()\n"
   "\n"
-  "proc flashMemoryReadCollisionHandler `isr @weak () {\n"
+  "proc flashMemoryReadCollisionHandler `isr @nullOnNoException @weak () {\n"
   "  throw 35\n"
   "}\n"
   "\n"
@@ -9544,7 +9680,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc modeControllerHandler `isr ()\n"
   "\n"
-  "proc modeControllerHandler `isr @weak () {\n"
+  "proc modeControllerHandler `isr @nullOnNoException @weak () {\n"
   "  throw 36\n"
   "}\n"
   "\n"
@@ -9552,7 +9688,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc LLWUHandler `isr ()\n"
   "\n"
-  "proc LLWUHandler `isr @weak () {\n"
+  "proc LLWUHandler `isr @nullOnNoException @weak () {\n"
   "  throw 37\n"
   "}\n"
   "\n"
@@ -9560,7 +9696,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc WDOGEWMHandler `isr ()\n"
   "\n"
-  "proc WDOGEWMHandler `isr @weak () {\n"
+  "proc WDOGEWMHandler `isr @nullOnNoException @weak () {\n"
   "  throw 38\n"
   "}\n"
   "\n"
@@ -9568,7 +9704,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2C0Handler `isr ()\n"
   "\n"
-  "proc I2C0Handler `isr @weak () {\n"
+  "proc I2C0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 40\n"
   "}\n"
   "\n"
@@ -9576,7 +9712,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2C1Handler `isr ()\n"
   "\n"
-  "proc I2C1Handler `isr @weak () {\n"
+  "proc I2C1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 41\n"
   "}\n"
   "\n"
@@ -9584,7 +9720,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc SPI0Handler `isr ()\n"
   "\n"
-  "proc SPI0Handler `isr @weak () {\n"
+  "proc SPI0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 42\n"
   "}\n"
   "\n"
@@ -9592,7 +9728,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc SPI1Handler `isr ()\n"
   "\n"
-  "proc SPI1Handler `isr @weak () {\n"
+  "proc SPI1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 43\n"
   "}\n"
   "\n"
@@ -9600,7 +9736,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0MessageBufferHandler `isr ()\n"
   "\n"
-  "proc CAN0MessageBufferHandler `isr @weak () {\n"
+  "proc CAN0MessageBufferHandler `isr @nullOnNoException @weak () {\n"
   "  throw 45\n"
   "}\n"
   "\n"
@@ -9608,7 +9744,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0BusOffHandler `isr ()\n"
   "\n"
-  "proc CAN0BusOffHandler `isr @weak () {\n"
+  "proc CAN0BusOffHandler `isr @nullOnNoException @weak () {\n"
   "  throw 46\n"
   "}\n"
   "\n"
@@ -9616,7 +9752,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0ErrorHandler `isr ()\n"
   "\n"
-  "proc CAN0ErrorHandler `isr @weak () {\n"
+  "proc CAN0ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 47\n"
   "}\n"
   "\n"
@@ -9624,7 +9760,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0TransmitWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0TransmitWarningHandler `isr @weak () {\n"
+  "proc CAN0TransmitWarningHandler `isr @nullOnNoException @weak () {\n"
   "  throw 48\n"
   "}\n"
   "\n"
@@ -9632,7 +9768,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0ReceiveWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0ReceiveWarningHandler `isr @weak () {\n"
+  "proc CAN0ReceiveWarningHandler `isr @nullOnNoException @weak () {\n"
   "  throw 49\n"
   "}\n"
   "\n"
@@ -9640,7 +9776,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0WakeUpHandler `isr ()\n"
   "\n"
-  "proc CAN0WakeUpHandler `isr @weak () {\n"
+  "proc CAN0WakeUpHandler `isr @nullOnNoException @weak () {\n"
   "  throw 50\n"
   "}\n"
   "\n"
@@ -9648,7 +9784,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2S0TransmitHandler `isr ()\n"
   "\n"
-  "proc I2S0TransmitHandler `isr @weak () {\n"
+  "proc I2S0TransmitHandler `isr @nullOnNoException @weak () {\n"
   "  throw 51\n"
   "}\n"
   "\n"
@@ -9656,7 +9792,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2S0ReceiveHandler `isr ()\n"
   "\n"
-  "proc I2S0ReceiveHandler `isr @weak () {\n"
+  "proc I2S0ReceiveHandler `isr @nullOnNoException @weak () {\n"
   "  throw 52\n"
   "}\n"
   "\n"
@@ -9664,7 +9800,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0LONHandler `isr ()\n"
   "\n"
-  "proc UART0LONHandler `isr @weak () {\n"
+  "proc UART0LONHandler `isr @nullOnNoException @weak () {\n"
   "  throw 60\n"
   "}\n"
   "\n"
@@ -9672,7 +9808,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0StatusHandler `isr ()\n"
   "\n"
-  "proc UART0StatusHandler `isr @weak () {\n"
+  "proc UART0StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 61\n"
   "}\n"
   "\n"
@@ -9680,7 +9816,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0ErrorHandler `isr ()\n"
   "\n"
-  "proc UART0ErrorHandler `isr @weak () {\n"
+  "proc UART0ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 62\n"
   "}\n"
   "\n"
@@ -9688,7 +9824,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART1StatusHandler `isr ()\n"
   "\n"
-  "proc UART1StatusHandler `isr @weak () {\n"
+  "proc UART1StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 63\n"
   "}\n"
   "\n"
@@ -9696,7 +9832,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART1ErrorHandler `isr ()\n"
   "\n"
-  "proc UART1ErrorHandler `isr @weak () {\n"
+  "proc UART1ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
@@ -9704,7 +9840,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART2StatusHandler `isr ()\n"
   "\n"
-  "proc UART2StatusHandler `isr @weak () {\n"
+  "proc UART2StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
@@ -9712,7 +9848,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART2ErrorHandler `isr ()\n"
   "\n"
-  "proc UART2ErrorHandler `isr @weak () {\n"
+  "proc UART2ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 65\n"
   "}\n"
   "\n"
@@ -9720,7 +9856,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc ADC0Handler `isr ()\n"
   "\n"
-  "proc ADC0Handler `isr @weak () {\n"
+  "proc ADC0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 73\n"
   "}\n"
   "\n"
@@ -9728,7 +9864,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc ADC1Handler `isr ()\n"
   "\n"
-  "proc ADC1Handler `isr @weak () {\n"
+  "proc ADC1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 74\n"
   "}\n"
   "\n"
@@ -9736,7 +9872,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP0Handler `isr ()\n"
   "\n"
-  "proc CMP0Handler `isr @weak () {\n"
+  "proc CMP0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 75\n"
   "}\n"
   "\n"
@@ -9744,7 +9880,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP1Handler `isr ()\n"
   "\n"
-  "proc CMP1Handler `isr @weak () {\n"
+  "proc CMP1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 76\n"
   "}\n"
   "\n"
@@ -9752,7 +9888,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP2Handler `isr ()\n"
   "\n"
-  "proc CMP2Handler `isr @weak () {\n"
+  "proc CMP2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 77\n"
   "}\n"
   "\n"
@@ -9760,7 +9896,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT0Handler `isr ()\n"
   "\n"
-  "proc FMT0Handler `isr @weak () {\n"
+  "proc FMT0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 78\n"
   "}\n"
   "\n"
@@ -9768,7 +9904,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT1Handler `isr ()\n"
   "\n"
-  "proc FMT1Handler `isr @weak () {\n"
+  "proc FMT1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 79\n"
   "}\n"
   "\n"
@@ -9776,7 +9912,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT2Handler `isr ()\n"
   "\n"
-  "proc FMT2Handler `isr @weak () {\n"
+  "proc FMT2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 80\n"
   "}\n"
   "\n"
@@ -9784,7 +9920,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMTHandler `isr ()\n"
   "\n"
-  "proc CMTHandler `isr @weak () {\n"
+  "proc CMTHandler `isr @nullOnNoException @weak () {\n"
   "  throw 81\n"
   "}\n"
   "\n"
@@ -9792,7 +9928,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc RTCAlarmHandler `isr ()\n"
   "\n"
-  "proc RTCAlarmHandler `isr @weak () {\n"
+  "proc RTCAlarmHandler `isr @nullOnNoException @weak () {\n"
   "  throw 82\n"
   "}\n"
   "\n"
@@ -9800,7 +9936,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc RTCSecondHandler `isr ()\n"
   "\n"
-  "proc RTCSecondHandler `isr @weak () {\n"
+  "proc RTCSecondHandler `isr @nullOnNoException @weak () {\n"
   "  throw 83\n"
   "}\n"
   "\n"
@@ -9808,7 +9944,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel0Handler `isr ()\n"
   "\n"
-  "proc PITChannel0Handler `isr @weak () {\n"
+  "proc PITChannel0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 84\n"
   "}\n"
   "\n"
@@ -9816,7 +9952,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel1Handler `isr ()\n"
   "\n"
-  "proc PITChannel1Handler `isr @weak () {\n"
+  "proc PITChannel1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 85\n"
   "}\n"
   "\n"
@@ -9824,7 +9960,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel2Handler `isr ()\n"
   "\n"
-  "proc PITChannel2Handler `isr @weak () {\n"
+  "proc PITChannel2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 86\n"
   "}\n"
   "\n"
@@ -9832,7 +9968,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel3Handler `isr ()\n"
   "\n"
-  "proc PITChannel3Handler `isr @weak () {\n"
+  "proc PITChannel3Handler `isr @nullOnNoException @weak () {\n"
   "  throw 87\n"
   "}\n"
   "\n"
@@ -9840,7 +9976,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PDBHandler `isr ()\n"
   "\n"
-  "proc PDBHandler `isr @weak () {\n"
+  "proc PDBHandler `isr @nullOnNoException @weak () {\n"
   "  throw 88\n"
   "}\n"
   "\n"
@@ -9848,7 +9984,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc USBOTGHandler `isr ()\n"
   "\n"
-  "proc USBOTGHandler `isr @weak () {\n"
+  "proc USBOTGHandler `isr @nullOnNoException @weak () {\n"
   "  throw 89\n"
   "}\n"
   "\n"
@@ -9856,7 +9992,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc USBChargerDetectHandler `isr ()\n"
   "\n"
-  "proc USBChargerDetectHandler `isr @weak () {\n"
+  "proc USBChargerDetectHandler `isr @nullOnNoException @weak () {\n"
   "  throw 90\n"
   "}\n"
   "\n"
@@ -9864,7 +10000,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DAC0Handler `isr ()\n"
   "\n"
-  "proc DAC0Handler `isr @weak () {\n"
+  "proc DAC0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 97\n"
   "}\n"
   "\n"
@@ -9872,7 +10008,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc TSIHandler `isr ()\n"
   "\n"
-  "proc TSIHandler `isr @weak () {\n"
+  "proc TSIHandler `isr @nullOnNoException @weak () {\n"
   "  throw 99\n"
   "}\n"
   "\n"
@@ -9880,7 +10016,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc MCGHandler `isr ()\n"
   "\n"
-  "proc MCGHandler `isr @weak () {\n"
+  "proc MCGHandler `isr @nullOnNoException @weak () {\n"
   "  throw 100\n"
   "}\n"
   "\n"
@@ -9888,7 +10024,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc lowPowerTimerHandler `isr ()\n"
   "\n"
-  "proc lowPowerTimerHandler `isr @weak () {\n"
+  "proc lowPowerTimerHandler `isr @nullOnNoException @weak () {\n"
   "  throw 101\n"
   "}\n"
   "\n"
@@ -9896,7 +10032,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortAHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortAHandler `isr @weak () {\n"
+  "proc pinDetectPortAHandler `isr @nullOnNoException @weak () {\n"
   "  throw 103\n"
   "}\n"
   "\n"
@@ -9904,7 +10040,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortBHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortBHandler `isr @weak () {\n"
+  "proc pinDetectPortBHandler `isr @nullOnNoException @weak () {\n"
   "  throw 104\n"
   "}\n"
   "\n"
@@ -9912,7 +10048,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortCHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortCHandler `isr @weak () {\n"
+  "proc pinDetectPortCHandler `isr @nullOnNoException @weak () {\n"
   "  throw 105\n"
   "}\n"
   "\n"
@@ -9920,7 +10056,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortDHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortDHandler `isr @weak () {\n"
+  "proc pinDetectPortDHandler `isr @nullOnNoException @weak () {\n"
   "  throw 106\n"
   "}\n"
   "\n"
@@ -9928,7 +10064,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortEHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortEHandler `isr @weak () {\n"
+  "proc pinDetectPortEHandler `isr @nullOnNoException @weak () {\n"
   "  throw 107\n"
   "}\n"
   "\n"
@@ -9936,7 +10072,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc softwareInterruptHandler `isr ()\n"
   "\n"
-  "proc softwareInterruptHandler `isr @weak () {\n"
+  "proc softwareInterruptHandler `isr @nullOnNoException @weak () {\n"
   "  throw 110\n"
   "}\n"
   "\n"
@@ -9946,7 +10082,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  15029, // Text length
+  16486, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -12486,13 +12622,15 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "#        first release\n"
   "# 2.0: october 2th, 2015\n"
   "#        added several target definition for rules\n"
+  "# 2.1: october 5th, 2015\n"
+  "#        added checking routine formal argument run-time types\n"
   "#\n"
   "#----------------------------------------------------------------------------*\n"
   "\n"
   "import subprocess, sys, os, copy\n"
   "import urllib, shutil, subprocess\n"
   "import platform, json, operator\n"
-  "import threading\n"
+  "import threading, types, traceback\n"
   "\n"
   "if sys.version_info >= (2, 6) :\n"
   "  import multiprocessing\n"
@@ -12756,6 +12894,20 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def __init__ (self, targets, title = \"\"):\n"
+  "    if not isinstance (targets, types.ListType):\n"
+  "      print BOLD_RED () + \"*** Rule type instanciation: first argument 'targets' is not a list ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    else:\n"
+  "      for aTarget in targets:\n"
+  "        if not isinstance (aTarget, types.StringTypes):\n"
+  "          print BOLD_RED () + \"*** Rule type instanciation: an element of first argument 'targets' is not a string ***\" + ENDC ()\n"
+  "          traceback.print_stack ()\n"
+  "          sys.exit (1)\n"
+  "    if not isinstance (title, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Rule type instanciation: second argument 'title' is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mTargets = copy.deepcopy (targets)\n"
   "    self.mDependences = []\n"
   "    self.mCommand = []\n"
@@ -12785,6 +12937,10 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):\n"
+  "    if not isinstance (secondaryDependanceFile, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Rule.enterSecondaryDependanceFile: 'secondaryDependanceFile' argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if make.mSelectedGoal != \"clean\":\n"
   "      filePath = os.path.abspath (secondaryDependanceFile)\n"
   "      if not os.path.exists (filePath):\n"
@@ -12822,10 +12978,15 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  mSelectedGoal = \"\"\n"
   "  mLinuxTextEditor = \"\"\n"
   "  mMacTextEditor = \"\"\n"
+  "  mSimulateClean = False\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def __init__ (self, goal):\n"
+  "    if not isinstance (goal, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make instanciation: 'goal' argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mRuleList = []\n"
   "    self.mJobList = []\n"
   "    self.mErrorCount = 0\n"
@@ -12838,6 +12999,10 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def addRule (self, rule):\n"
+  "    if not isinstance (rule, Rule):\n"
+  "      print BOLD_RED () + \"*** Make.addRule: 'rule' argument is not an instance of Rule type ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    self.mRuleList.append (copy.deepcopy (rule))\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
@@ -13154,6 +13319,24 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def addGoal (self, goal, targetList, message):\n"
+  "    if not isinstance (goal, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'goal' first argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    if not isinstance (targetList, types.ListType):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'targetList' second argument is not a list ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    else:\n"
+  "      for aTarget in targetList:\n"
+  "        if not isinstance (aTarget, types.StringTypes):\n"
+  "          print BOLD_RED () + \"*** Make.addGoal: an element of 'targetList' second argument 'targets' is not a string ***\" + ENDC ()\n"
+  "          traceback.print_stack ()\n"
+  "          sys.exit (1)\n"
+  "    if not isinstance (message, types.StringTypes):\n"
+  "      print BOLD_RED () + \"*** Make.addGoal: 'message' third argument is not a string ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if self.mGoals.has_key (goal) or (goal == \"clean\") :\n"
   "      self.enterError (\"The '\" + goal + \"' goal is already defined\")\n"
   "    else:\n"
@@ -13176,6 +13359,14 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
   "  def runGoal (self, maxConcurrentJobs, showCommand):\n"
+  "    if not isinstance (maxConcurrentJobs, types.IntType):\n"
+  "      print BOLD_RED () + \"*** Make.runGoal: 'maxConcurrentJobs' first argument is not an integer ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
+  "    if not isinstance (showCommand, types.BooleanType):\n"
+  "      print BOLD_RED () + \"*** Make.runGoal: 'showCommand' second argument is not a boolean ***\" + ENDC ()\n"
+  "      traceback.print_stack ()\n"
+  "      sys.exit (1)\n"
   "    if self.mGoals.has_key (self.mSelectedGoal) :\n"
   "      (targetList, message) = self.mGoals [self.mSelectedGoal]\n"
   "      for target in targetList:\n"
@@ -13202,10 +13393,16 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "              directoriesToRemoveSet.add (dirPath)\n"
   "      for dir in directoriesToRemoveSet:\n"
   "        if os.path.exists (os.path.abspath (dir)):\n"
-  "          runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
+  "          if self.mSimulateClean:\n"
+  "            print MAGENTA () + BOLD () + \"Simulated clean command: \" + ENDC () + \"rm -fr '\" + dir + \"'\"\n"
+  "          else:\n"
+  "            runCommand ([\"rm\", \"-fr\", dir], \"Removing \\\"\" + dir + \"\\\"\", showCommand)\n"
   "      for file in filesToRemoveList:\n"
   "        if os.path.exists (os.path.abspath (file)):\n"
-  "          runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
+  "          if self.mSimulateClean:\n"
+  "            print MAGENTA () + BOLD () + \"Simulated clean command: \" + ENDC () + \"rm -f '\" + file + \"'\"\n"
+  "          else:\n"
+  "            runCommand ([\"rm\", \"-f\", file], \"Deleting \\\"\" + file + \"\\\"\", showCommand)\n"
   "    else:\n"
   "      errorMessage = \"The '\" + self.mSelectedGoal + \"' goal is not defined; defined goals:\"\n"
   "      for key in self.mGoals:\n"
@@ -13213,6 +13410,11 @@ const char * gWrapperFileContent_0_embeddedTargets = "#! /usr/bin/env python\n"
   "        errorMessage += \"\\n  '\" + key + \"': \" + message\n"
   "      print BOLD_RED () + errorMessage + ENDC ()\n"
   "      self.mErrorCount = self.mErrorCount + 1\n"
+  "\n"
+  "  #--------------------------------------------------------------------------*\n"
+  "\n"
+  "  def simulateClean (self):\n"
+  "    self.mSimulateClean = True\n"
   "\n"
   "  #--------------------------------------------------------------------------*\n"
   "\n"
@@ -13249,7 +13451,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedTargets (
   "makefile.py",
   "py",
   true, // Text file
-  29864, // Text length
+  33121, // Text length
   gWrapperFileContent_0_embeddedTargets
 ) ;
 
@@ -15748,7 +15950,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc NMIHandler `isr ()\n"
   "\n"
-  "proc NMIHandler `isr @weak () {\n"
+  "proc NMIHandler `isr @nullOnNoException @weak () {\n"
   "  throw 2\n"
   "}\n"
   "\n"
@@ -15756,7 +15958,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc HardFaultHandler `isr ()\n"
   "\n"
-  "proc HardFaultHandler `isr @weak () {\n"
+  "proc HardFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 3\n"
   "}\n"
   "\n"
@@ -15764,7 +15966,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc MemManageHandler `isr ()\n"
   "\n"
-  "proc MemManageHandler `isr @weak () {\n"
+  "proc MemManageHandler `isr @nullOnNoException @weak () {\n"
   "  throw 4\n"
   "}\n"
   "\n"
@@ -15772,7 +15974,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc BusFaultHandler `isr ()\n"
   "\n"
-  "proc BusFaultHandler `isr @weak () {\n"
+  "proc BusFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 5\n"
   "}\n"
   "\n"
@@ -15780,7 +15982,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UsageFaultHandler `isr ()\n"
   "\n"
-  "proc UsageFaultHandler `isr @weak () {\n"
+  "proc UsageFaultHandler `isr @nullOnNoException @weak () {\n"
   "  throw 6\n"
   "}\n"
   "\n"
@@ -15788,7 +15990,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc svcHandler `isr ()\n"
   "\n"
-  "proc svcHandler `isr @weak () {\n"
+  "proc svcHandler `isr @nullOnNoException @weak () {\n"
   "  throw 11\n"
   "}\n"
   "\n"
@@ -15796,7 +15998,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DebugMonitorHandler `isr ()\n"
   "\n"
-  "proc DebugMonitorHandler `isr @weak () {\n"
+  "proc DebugMonitorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 12\n"
   "}\n"
   "\n"
@@ -15804,7 +16006,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PendSVHandler `isr ()\n"
   "\n"
-  "proc PendSVHandler `isr @weak () {\n"
+  "proc PendSVHandler `isr @nullOnNoException @weak () {\n"
   "  throw 14\n"
   "}\n"
   "\n"
@@ -15830,7 +16032,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc systickHandler `isr ()\n"
   "\n"
-  "proc systickHandler `isr @weak () {\n"
+  "proc systickHandler `isr () {\n"
   "  gCompteur &++\n"
   "  userSystickHandler ()\n"
   "}\n"
@@ -15848,7 +16050,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel0TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel0TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel0TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 16\n"
   "}\n"
   "\n"
@@ -15856,7 +16058,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel1TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel1TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel1TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 17\n"
   "}\n"
   "\n"
@@ -15864,7 +16066,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel2TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel2TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel2TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 18\n"
   "}\n"
   "\n"
@@ -15872,7 +16074,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel3TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel3TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel3TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 19\n"
   "}\n"
   "\n"
@@ -15880,7 +16082,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel4TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel4TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel4TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 20\n"
   "}\n"
   "\n"
@@ -15888,7 +16090,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel5TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel5TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel5TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 21\n"
   "}\n"
   "\n"
@@ -15896,7 +16098,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel6TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel6TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel6TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 22\n"
   "}\n"
   "\n"
@@ -15904,7 +16106,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel7TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel7TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel7TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 23\n"
   "}\n"
   "\n"
@@ -15912,7 +16114,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel8TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel8TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel8TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 24\n"
   "}\n"
   "\n"
@@ -15920,7 +16122,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel9TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel9TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel9TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 25\n"
   "}\n"
   "\n"
@@ -15928,7 +16130,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel10TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel10TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel10TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 26\n"
   "}\n"
   "\n"
@@ -15936,7 +16138,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel11TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel11TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel11TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 27\n"
   "}\n"
   "\n"
@@ -15944,7 +16146,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel12TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel12TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel12TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 28\n"
   "}\n"
   "\n"
@@ -15952,7 +16154,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel13TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel13TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel13TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 29\n"
   "}\n"
   "\n"
@@ -15960,7 +16162,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel14TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel14TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel14TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 30\n"
   "}\n"
   "\n"
@@ -15968,7 +16170,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAChannel15TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel15TranfertCompleteHandler `isr @weak () {\n"
+  "proc DMAChannel15TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 31\n"
   "}\n"
   "\n"
@@ -15976,7 +16178,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DMAErrorHandler `isr ()\n"
   "\n"
-  "proc DMAErrorHandler `isr @weak () {\n"
+  "proc DMAErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 32\n"
   "}\n"
   "\n"
@@ -15984,7 +16186,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc flashMemoryCommandCompleteHandler `isr ()\n"
   "\n"
-  "proc flashMemoryCommandCompleteHandler `isr @weak () {\n"
+  "proc flashMemoryCommandCompleteHandler `isr @nullOnNoException @weak () {\n"
   "  throw 34\n"
   "}\n"
   "\n"
@@ -15992,7 +16194,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc flashMemoryReadCollisionHandler `isr ()\n"
   "\n"
-  "proc flashMemoryReadCollisionHandler `isr @weak () {\n"
+  "proc flashMemoryReadCollisionHandler `isr @nullOnNoException @weak () {\n"
   "  throw 35\n"
   "}\n"
   "\n"
@@ -16000,7 +16202,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc modeControllerHandler `isr ()\n"
   "\n"
-  "proc modeControllerHandler `isr @weak () {\n"
+  "proc modeControllerHandler `isr @nullOnNoException @weak () {\n"
   "  throw 36\n"
   "}\n"
   "\n"
@@ -16008,7 +16210,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc LLWUHandler `isr ()\n"
   "\n"
-  "proc LLWUHandler `isr @weak () {\n"
+  "proc LLWUHandler `isr @nullOnNoException @weak () {\n"
   "  throw 37\n"
   "}\n"
   "\n"
@@ -16016,7 +16218,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc WDOGEWMHandler `isr ()\n"
   "\n"
-  "proc WDOGEWMHandler `isr @weak () {\n"
+  "proc WDOGEWMHandler `isr @nullOnNoException @weak () {\n"
   "  throw 38\n"
   "}\n"
   "\n"
@@ -16024,7 +16226,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc I2C0Handler `isr ()\n"
   "\n"
-  "proc I2C0Handler `isr @weak () {\n"
+  "proc I2C0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 40\n"
   "}\n"
   "\n"
@@ -16032,7 +16234,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc I2C1Handler `isr ()\n"
   "\n"
-  "proc I2C1Handler `isr @weak () {\n"
+  "proc I2C1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 41\n"
   "}\n"
   "\n"
@@ -16040,7 +16242,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc SPI0Handler `isr ()\n"
   "\n"
-  "proc SPI0Handler `isr @weak () {\n"
+  "proc SPI0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 42\n"
   "}\n"
   "\n"
@@ -16048,7 +16250,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc SPI1Handler `isr ()\n"
   "\n"
-  "proc SPI1Handler `isr @weak () {\n"
+  "proc SPI1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 43\n"
   "}\n"
   "\n"
@@ -16056,7 +16258,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0MessageBufferHandler `isr ()\n"
   "\n"
-  "proc CAN0MessageBufferHandler `isr @weak () {\n"
+  "proc CAN0MessageBufferHandler `isr @nullOnNoException @weak () {\n"
   "  throw 45\n"
   "}\n"
   "\n"
@@ -16064,7 +16266,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0BusOffHandler `isr ()\n"
   "\n"
-  "proc CAN0BusOffHandler `isr @weak () {\n"
+  "proc CAN0BusOffHandler `isr @nullOnNoException @weak () {\n"
   "  throw 46\n"
   "}\n"
   "\n"
@@ -16072,7 +16274,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0ErrorHandler `isr ()\n"
   "\n"
-  "proc CAN0ErrorHandler `isr @weak () {\n"
+  "proc CAN0ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 47\n"
   "}\n"
   "\n"
@@ -16080,7 +16282,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0TransmitWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0TransmitWarningHandler `isr @weak () {\n"
+  "proc CAN0TransmitWarningHandler `isr @nullOnNoException @weak () {\n"
   "  throw 48\n"
   "}\n"
   "\n"
@@ -16088,7 +16290,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0ReceiveWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0ReceiveWarningHandler `isr @weak () {\n"
+  "proc CAN0ReceiveWarningHandler `isr @nullOnNoException @weak () {\n"
   "  throw 49\n"
   "}\n"
   "\n"
@@ -16096,7 +16298,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CAN0WakeUpHandler `isr ()\n"
   "\n"
-  "proc CAN0WakeUpHandler `isr @weak () {\n"
+  "proc CAN0WakeUpHandler `isr @nullOnNoException @weak () {\n"
   "  throw 50\n"
   "}\n"
   "\n"
@@ -16104,7 +16306,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc I2S0TransmitHandler `isr ()\n"
   "\n"
-  "proc I2S0TransmitHandler `isr @weak () {\n"
+  "proc I2S0TransmitHandler `isr @nullOnNoException @weak () {\n"
   "  throw 51\n"
   "}\n"
   "\n"
@@ -16112,7 +16314,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc I2S0ReceiveHandler `isr ()\n"
   "\n"
-  "proc I2S0ReceiveHandler `isr @weak () {\n"
+  "proc I2S0ReceiveHandler `isr @nullOnNoException @weak () {\n"
   "  throw 52\n"
   "}\n"
   "\n"
@@ -16120,7 +16322,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART0LONHandler `isr ()\n"
   "\n"
-  "proc UART0LONHandler `isr @weak () {\n"
+  "proc UART0LONHandler `isr @nullOnNoException @weak () {\n"
   "  throw 60\n"
   "}\n"
   "\n"
@@ -16128,7 +16330,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART0StatusHandler `isr ()\n"
   "\n"
-  "proc UART0StatusHandler `isr @weak () {\n"
+  "proc UART0StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 61\n"
   "}\n"
   "\n"
@@ -16136,7 +16338,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART0ErrorHandler `isr ()\n"
   "\n"
-  "proc UART0ErrorHandler `isr @weak () {\n"
+  "proc UART0ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 62\n"
   "}\n"
   "\n"
@@ -16144,7 +16346,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART1StatusHandler `isr ()\n"
   "\n"
-  "proc UART1StatusHandler `isr @weak () {\n"
+  "proc UART1StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 63\n"
   "}\n"
   "\n"
@@ -16152,7 +16354,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART1ErrorHandler `isr ()\n"
   "\n"
-  "proc UART1ErrorHandler `isr @weak () {\n"
+  "proc UART1ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
@@ -16160,7 +16362,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART2StatusHandler `isr ()\n"
   "\n"
-  "proc UART2StatusHandler `isr @weak () {\n"
+  "proc UART2StatusHandler `isr @nullOnNoException @weak () {\n"
   "  throw 64\n"
   "}\n"
   "\n"
@@ -16168,7 +16370,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc UART2ErrorHandler `isr ()\n"
   "\n"
-  "proc UART2ErrorHandler `isr @weak () {\n"
+  "proc UART2ErrorHandler `isr @nullOnNoException @weak () {\n"
   "  throw 65\n"
   "}\n"
   "\n"
@@ -16176,7 +16378,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc ADC0Handler `isr ()\n"
   "\n"
-  "proc ADC0Handler `isr @weak () {\n"
+  "proc ADC0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 73\n"
   "}\n"
   "\n"
@@ -16184,7 +16386,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc ADC1Handler `isr ()\n"
   "\n"
-  "proc ADC1Handler `isr @weak () {\n"
+  "proc ADC1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 74\n"
   "}\n"
   "\n"
@@ -16192,7 +16394,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CMP0Handler `isr ()\n"
   "\n"
-  "proc CMP0Handler `isr @weak () {\n"
+  "proc CMP0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 75\n"
   "}\n"
   "\n"
@@ -16200,7 +16402,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CMP1Handler `isr ()\n"
   "\n"
-  "proc CMP1Handler `isr @weak () {\n"
+  "proc CMP1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 76\n"
   "}\n"
   "\n"
@@ -16208,7 +16410,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CMP2Handler `isr ()\n"
   "\n"
-  "proc CMP2Handler `isr @weak () {\n"
+  "proc CMP2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 77\n"
   "}\n"
   "\n"
@@ -16216,7 +16418,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc FMT0Handler `isr ()\n"
   "\n"
-  "proc FMT0Handler `isr @weak () {\n"
+  "proc FMT0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 78\n"
   "}\n"
   "\n"
@@ -16224,7 +16426,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc FMT1Handler `isr ()\n"
   "\n"
-  "proc FMT1Handler `isr @weak () {\n"
+  "proc FMT1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 79\n"
   "}\n"
   "\n"
@@ -16232,7 +16434,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc FMT2Handler `isr ()\n"
   "\n"
-  "proc FMT2Handler `isr @weak () {\n"
+  "proc FMT2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 80\n"
   "}\n"
   "\n"
@@ -16240,7 +16442,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc CMTHandler `isr ()\n"
   "\n"
-  "proc CMTHandler `isr @weak () {\n"
+  "proc CMTHandler `isr @nullOnNoException @weak () {\n"
   "  throw 81\n"
   "}\n"
   "\n"
@@ -16248,7 +16450,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc RTCAlarmHandler `isr ()\n"
   "\n"
-  "proc RTCAlarmHandler `isr @weak () {\n"
+  "proc RTCAlarmHandler `isr @nullOnNoException @weak () {\n"
   "  throw 82\n"
   "}\n"
   "\n"
@@ -16256,7 +16458,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc RTCSecondHandler `isr ()\n"
   "\n"
-  "proc RTCSecondHandler `isr @weak () {\n"
+  "proc RTCSecondHandler `isr @nullOnNoException @weak () {\n"
   "  throw 83\n"
   "}\n"
   "\n"
@@ -16264,7 +16466,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PITChannel0Handler `isr ()\n"
   "\n"
-  "proc PITChannel0Handler `isr @weak () {\n"
+  "proc PITChannel0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 84\n"
   "}\n"
   "\n"
@@ -16272,7 +16474,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PITChannel1Handler `isr ()\n"
   "\n"
-  "proc PITChannel1Handler `isr @weak () {\n"
+  "proc PITChannel1Handler `isr @nullOnNoException @weak () {\n"
   "  throw 85\n"
   "}\n"
   "\n"
@@ -16280,7 +16482,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PITChannel2Handler `isr ()\n"
   "\n"
-  "proc PITChannel2Handler `isr @weak () {\n"
+  "proc PITChannel2Handler `isr @nullOnNoException @weak () {\n"
   "  throw 86\n"
   "}\n"
   "\n"
@@ -16288,7 +16490,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PITChannel3Handler `isr ()\n"
   "\n"
-  "proc PITChannel3Handler `isr @weak () {\n"
+  "proc PITChannel3Handler `isr @nullOnNoException @weak () {\n"
   "  throw 87\n"
   "}\n"
   "\n"
@@ -16296,7 +16498,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc PDBHandler `isr ()\n"
   "\n"
-  "proc PDBHandler `isr @weak () {\n"
+  "proc PDBHandler `isr @nullOnNoException @weak () {\n"
   "  throw 88\n"
   "}\n"
   "\n"
@@ -16304,7 +16506,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc USBOTGHandler `isr ()\n"
   "\n"
-  "proc USBOTGHandler `isr @weak () {\n"
+  "proc USBOTGHandler `isr @nullOnNoException @weak () {\n"
   "  throw 89\n"
   "}\n"
   "\n"
@@ -16312,7 +16514,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc USBChargerDetectHandler `isr ()\n"
   "\n"
-  "proc USBChargerDetectHandler `isr @weak () {\n"
+  "proc USBChargerDetectHandler `isr @nullOnNoException @weak () {\n"
   "  throw 90\n"
   "}\n"
   "\n"
@@ -16320,7 +16522,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc DAC0Handler `isr ()\n"
   "\n"
-  "proc DAC0Handler `isr @weak () {\n"
+  "proc DAC0Handler `isr @nullOnNoException @weak () {\n"
   "  throw 97\n"
   "}\n"
   "\n"
@@ -16328,7 +16530,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc TSIHandler `isr ()\n"
   "\n"
-  "proc TSIHandler `isr @weak () {\n"
+  "proc TSIHandler `isr @nullOnNoException @weak () {\n"
   "  throw 99\n"
   "}\n"
   "\n"
@@ -16336,7 +16538,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc MCGHandler `isr ()\n"
   "\n"
-  "proc MCGHandler `isr @weak () {\n"
+  "proc MCGHandler `isr @nullOnNoException @weak () {\n"
   "  throw 100\n"
   "}\n"
   "\n"
@@ -16344,7 +16546,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc lowPowerTimerHandler `isr ()\n"
   "\n"
-  "proc lowPowerTimerHandler `isr @weak () {\n"
+  "proc lowPowerTimerHandler `isr @nullOnNoException @weak () {\n"
   "  throw 101\n"
   "}\n"
   "\n"
@@ -16352,7 +16554,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc pinDetectPortAHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortAHandler `isr @weak () {\n"
+  "proc pinDetectPortAHandler `isr @nullOnNoException @weak () {\n"
   "  throw 103\n"
   "}\n"
   "\n"
@@ -16360,7 +16562,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc pinDetectPortBHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortBHandler `isr @weak () {\n"
+  "proc pinDetectPortBHandler `isr @nullOnNoException @weak () {\n"
   "  throw 104\n"
   "}\n"
   "\n"
@@ -16368,7 +16570,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc pinDetectPortCHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortCHandler `isr @weak () {\n"
+  "proc pinDetectPortCHandler `isr @nullOnNoException @weak () {\n"
   "  throw 105\n"
   "}\n"
   "\n"
@@ -16376,7 +16578,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc pinDetectPortDHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortDHandler `isr @weak () {\n"
+  "proc pinDetectPortDHandler `isr @nullOnNoException @weak () {\n"
   "  throw 106\n"
   "}\n"
   "\n"
@@ -16384,7 +16586,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc pinDetectPortEHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortEHandler `isr @weak () {\n"
+  "proc pinDetectPortEHandler `isr @nullOnNoException @weak () {\n"
   "  throw 107\n"
   "}\n"
   "\n"
@@ -16392,7 +16594,7 @@ const char * gWrapperFileContent_5_embeddedTargets = "//------------------------
   "\n"
   "required proc softwareInterruptHandler `isr ()\n"
   "\n"
-  "proc softwareInterruptHandler `isr @weak () {\n"
+  "proc softwareInterruptHandler `isr @nullOnNoException @weak () {\n"
   "  throw 110\n"
   "}\n"
   "\n"
@@ -16402,7 +16604,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedTargets (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  15029, // Text length
+  16486, // Text length
   gWrapperFileContent_5_embeddedTargets
 ) ;
 
