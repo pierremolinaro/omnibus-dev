@@ -2,7 +2,7 @@
 
 required proc NMIHandler `isr ()
 
-proc NMIHandler `isr @weak () {
+proc NMIHandler `isr @nullOnNoException @weak () {
   throw 2
 }
 
@@ -10,7 +10,7 @@ proc NMIHandler `isr @weak () {
 
 required proc HardFaultHandler `isr ()
 
-proc HardFaultHandler `isr @weak () {
+proc HardFaultHandler `isr @nullOnNoException @weak () {
   throw 3
 }
 
@@ -18,7 +18,7 @@ proc HardFaultHandler `isr @weak () {
 
 required proc MemManageHandler `isr ()
 
-proc MemManageHandler `isr @weak () {
+proc MemManageHandler `isr @nullOnNoException @weak () {
   throw 4
 }
 
@@ -26,7 +26,7 @@ proc MemManageHandler `isr @weak () {
 
 required proc BusFaultHandler `isr ()
 
-proc BusFaultHandler `isr @weak () {
+proc BusFaultHandler `isr @nullOnNoException @weak () {
   throw 5
 }
 
@@ -34,7 +34,7 @@ proc BusFaultHandler `isr @weak () {
 
 required proc UsageFaultHandler `isr ()
 
-proc UsageFaultHandler `isr @weak () {
+proc UsageFaultHandler `isr @nullOnNoException @weak () {
   throw 6
 }
 
@@ -42,7 +42,7 @@ proc UsageFaultHandler `isr @weak () {
 
 required proc svcHandler `isr ()
 
-proc svcHandler `isr @weak () {
+proc svcHandler `isr @nullOnNoException @weak () {
   throw 11
 }
 
@@ -50,7 +50,7 @@ proc svcHandler `isr @weak () {
 
 required proc DebugMonitorHandler `isr ()
 
-proc DebugMonitorHandler `isr @weak () {
+proc DebugMonitorHandler `isr @nullOnNoException @weak () {
   throw 12
 }
 
@@ -58,7 +58,7 @@ proc DebugMonitorHandler `isr @weak () {
 
 required proc PendSVHandler `isr ()
 
-proc PendSVHandler `isr @weak () {
+proc PendSVHandler `isr @nullOnNoException @weak () {
   throw 14
 }
 
@@ -84,7 +84,7 @@ proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {
 
 required proc systickHandler `isr ()
 
-proc systickHandler `isr @weak () {
+proc systickHandler `isr () {
   gCompteur &++
   userSystickHandler ()
 }
@@ -102,7 +102,7 @@ proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {
 
 required proc DMAChannel0TranfertCompleteHandler `isr ()
 
-proc DMAChannel0TranfertCompleteHandler `isr @weak () {
+proc DMAChannel0TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 16
 }
 
@@ -110,7 +110,7 @@ proc DMAChannel0TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel1TranfertCompleteHandler `isr ()
 
-proc DMAChannel1TranfertCompleteHandler `isr @weak () {
+proc DMAChannel1TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 17
 }
 
@@ -118,7 +118,7 @@ proc DMAChannel1TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel2TranfertCompleteHandler `isr ()
 
-proc DMAChannel2TranfertCompleteHandler `isr @weak () {
+proc DMAChannel2TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 18
 }
 
@@ -126,7 +126,7 @@ proc DMAChannel2TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel3TranfertCompleteHandler `isr ()
 
-proc DMAChannel3TranfertCompleteHandler `isr @weak () {
+proc DMAChannel3TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 19
 }
 
@@ -134,7 +134,7 @@ proc DMAChannel3TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel4TranfertCompleteHandler `isr ()
 
-proc DMAChannel4TranfertCompleteHandler `isr @weak () {
+proc DMAChannel4TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 20
 }
 
@@ -142,7 +142,7 @@ proc DMAChannel4TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel5TranfertCompleteHandler `isr ()
 
-proc DMAChannel5TranfertCompleteHandler `isr @weak () {
+proc DMAChannel5TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 21
 }
 
@@ -150,7 +150,7 @@ proc DMAChannel5TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel6TranfertCompleteHandler `isr ()
 
-proc DMAChannel6TranfertCompleteHandler `isr @weak () {
+proc DMAChannel6TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 22
 }
 
@@ -158,7 +158,7 @@ proc DMAChannel6TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel7TranfertCompleteHandler `isr ()
 
-proc DMAChannel7TranfertCompleteHandler `isr @weak () {
+proc DMAChannel7TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 23
 }
 
@@ -166,7 +166,7 @@ proc DMAChannel7TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel8TranfertCompleteHandler `isr ()
 
-proc DMAChannel8TranfertCompleteHandler `isr @weak () {
+proc DMAChannel8TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 24
 }
 
@@ -174,7 +174,7 @@ proc DMAChannel8TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel9TranfertCompleteHandler `isr ()
 
-proc DMAChannel9TranfertCompleteHandler `isr @weak () {
+proc DMAChannel9TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 25
 }
 
@@ -182,7 +182,7 @@ proc DMAChannel9TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel10TranfertCompleteHandler `isr ()
 
-proc DMAChannel10TranfertCompleteHandler `isr @weak () {
+proc DMAChannel10TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 26
 }
 
@@ -190,7 +190,7 @@ proc DMAChannel10TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel11TranfertCompleteHandler `isr ()
 
-proc DMAChannel11TranfertCompleteHandler `isr @weak () {
+proc DMAChannel11TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 27
 }
 
@@ -198,7 +198,7 @@ proc DMAChannel11TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel12TranfertCompleteHandler `isr ()
 
-proc DMAChannel12TranfertCompleteHandler `isr @weak () {
+proc DMAChannel12TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 28
 }
 
@@ -206,7 +206,7 @@ proc DMAChannel12TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel13TranfertCompleteHandler `isr ()
 
-proc DMAChannel13TranfertCompleteHandler `isr @weak () {
+proc DMAChannel13TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 29
 }
 
@@ -214,7 +214,7 @@ proc DMAChannel13TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel14TranfertCompleteHandler `isr ()
 
-proc DMAChannel14TranfertCompleteHandler `isr @weak () {
+proc DMAChannel14TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 30
 }
 
@@ -222,7 +222,7 @@ proc DMAChannel14TranfertCompleteHandler `isr @weak () {
 
 required proc DMAChannel15TranfertCompleteHandler `isr ()
 
-proc DMAChannel15TranfertCompleteHandler `isr @weak () {
+proc DMAChannel15TranfertCompleteHandler `isr @nullOnNoException @weak () {
   throw 31
 }
 
@@ -230,7 +230,7 @@ proc DMAChannel15TranfertCompleteHandler `isr @weak () {
 
 required proc DMAErrorHandler `isr ()
 
-proc DMAErrorHandler `isr @weak () {
+proc DMAErrorHandler `isr @nullOnNoException @weak () {
   throw 32
 }
 
@@ -238,7 +238,7 @@ proc DMAErrorHandler `isr @weak () {
 
 required proc flashMemoryCommandCompleteHandler `isr ()
 
-proc flashMemoryCommandCompleteHandler `isr @weak () {
+proc flashMemoryCommandCompleteHandler `isr @nullOnNoException @weak () {
   throw 34
 }
 
@@ -246,7 +246,7 @@ proc flashMemoryCommandCompleteHandler `isr @weak () {
 
 required proc flashMemoryReadCollisionHandler `isr ()
 
-proc flashMemoryReadCollisionHandler `isr @weak () {
+proc flashMemoryReadCollisionHandler `isr @nullOnNoException @weak () {
   throw 35
 }
 
@@ -254,7 +254,7 @@ proc flashMemoryReadCollisionHandler `isr @weak () {
 
 required proc modeControllerHandler `isr ()
 
-proc modeControllerHandler `isr @weak () {
+proc modeControllerHandler `isr @nullOnNoException @weak () {
   throw 36
 }
 
@@ -262,7 +262,7 @@ proc modeControllerHandler `isr @weak () {
 
 required proc LLWUHandler `isr ()
 
-proc LLWUHandler `isr @weak () {
+proc LLWUHandler `isr @nullOnNoException @weak () {
   throw 37
 }
 
@@ -270,7 +270,7 @@ proc LLWUHandler `isr @weak () {
 
 required proc WDOGEWMHandler `isr ()
 
-proc WDOGEWMHandler `isr @weak () {
+proc WDOGEWMHandler `isr @nullOnNoException @weak () {
   throw 38
 }
 
@@ -278,7 +278,7 @@ proc WDOGEWMHandler `isr @weak () {
 
 required proc I2C0Handler `isr ()
 
-proc I2C0Handler `isr @weak () {
+proc I2C0Handler `isr @nullOnNoException @weak () {
   throw 40
 }
 
@@ -286,7 +286,7 @@ proc I2C0Handler `isr @weak () {
 
 required proc I2C1Handler `isr ()
 
-proc I2C1Handler `isr @weak () {
+proc I2C1Handler `isr @nullOnNoException @weak () {
   throw 41
 }
 
@@ -294,7 +294,7 @@ proc I2C1Handler `isr @weak () {
 
 required proc SPI0Handler `isr ()
 
-proc SPI0Handler `isr @weak () {
+proc SPI0Handler `isr @nullOnNoException @weak () {
   throw 42
 }
 
@@ -302,7 +302,7 @@ proc SPI0Handler `isr @weak () {
 
 required proc SPI1Handler `isr ()
 
-proc SPI1Handler `isr @weak () {
+proc SPI1Handler `isr @nullOnNoException @weak () {
   throw 43
 }
 
@@ -310,7 +310,7 @@ proc SPI1Handler `isr @weak () {
 
 required proc CAN0MessageBufferHandler `isr ()
 
-proc CAN0MessageBufferHandler `isr @weak () {
+proc CAN0MessageBufferHandler `isr @nullOnNoException @weak () {
   throw 45
 }
 
@@ -318,7 +318,7 @@ proc CAN0MessageBufferHandler `isr @weak () {
 
 required proc CAN0BusOffHandler `isr ()
 
-proc CAN0BusOffHandler `isr @weak () {
+proc CAN0BusOffHandler `isr @nullOnNoException @weak () {
   throw 46
 }
 
@@ -326,7 +326,7 @@ proc CAN0BusOffHandler `isr @weak () {
 
 required proc CAN0ErrorHandler `isr ()
 
-proc CAN0ErrorHandler `isr @weak () {
+proc CAN0ErrorHandler `isr @nullOnNoException @weak () {
   throw 47
 }
 
@@ -334,7 +334,7 @@ proc CAN0ErrorHandler `isr @weak () {
 
 required proc CAN0TransmitWarningHandler `isr ()
 
-proc CAN0TransmitWarningHandler `isr @weak () {
+proc CAN0TransmitWarningHandler `isr @nullOnNoException @weak () {
   throw 48
 }
 
@@ -342,7 +342,7 @@ proc CAN0TransmitWarningHandler `isr @weak () {
 
 required proc CAN0ReceiveWarningHandler `isr ()
 
-proc CAN0ReceiveWarningHandler `isr @weak () {
+proc CAN0ReceiveWarningHandler `isr @nullOnNoException @weak () {
   throw 49
 }
 
@@ -350,7 +350,7 @@ proc CAN0ReceiveWarningHandler `isr @weak () {
 
 required proc CAN0WakeUpHandler `isr ()
 
-proc CAN0WakeUpHandler `isr @weak () {
+proc CAN0WakeUpHandler `isr @nullOnNoException @weak () {
   throw 50
 }
 
@@ -358,7 +358,7 @@ proc CAN0WakeUpHandler `isr @weak () {
 
 required proc I2S0TransmitHandler `isr ()
 
-proc I2S0TransmitHandler `isr @weak () {
+proc I2S0TransmitHandler `isr @nullOnNoException @weak () {
   throw 51
 }
 
@@ -366,7 +366,7 @@ proc I2S0TransmitHandler `isr @weak () {
 
 required proc I2S0ReceiveHandler `isr ()
 
-proc I2S0ReceiveHandler `isr @weak () {
+proc I2S0ReceiveHandler `isr @nullOnNoException @weak () {
   throw 52
 }
 
@@ -374,7 +374,7 @@ proc I2S0ReceiveHandler `isr @weak () {
 
 required proc UART0LONHandler `isr ()
 
-proc UART0LONHandler `isr @weak () {
+proc UART0LONHandler `isr @nullOnNoException @weak () {
   throw 60
 }
 
@@ -382,7 +382,7 @@ proc UART0LONHandler `isr @weak () {
 
 required proc UART0StatusHandler `isr ()
 
-proc UART0StatusHandler `isr @weak () {
+proc UART0StatusHandler `isr @nullOnNoException @weak () {
   throw 61
 }
 
@@ -390,7 +390,7 @@ proc UART0StatusHandler `isr @weak () {
 
 required proc UART0ErrorHandler `isr ()
 
-proc UART0ErrorHandler `isr @weak () {
+proc UART0ErrorHandler `isr @nullOnNoException @weak () {
   throw 62
 }
 
@@ -398,7 +398,7 @@ proc UART0ErrorHandler `isr @weak () {
 
 required proc UART1StatusHandler `isr ()
 
-proc UART1StatusHandler `isr @weak () {
+proc UART1StatusHandler `isr @nullOnNoException @weak () {
   throw 63
 }
 
@@ -406,7 +406,7 @@ proc UART1StatusHandler `isr @weak () {
 
 required proc UART1ErrorHandler `isr ()
 
-proc UART1ErrorHandler `isr @weak () {
+proc UART1ErrorHandler `isr @nullOnNoException @weak () {
   throw 64
 }
 
@@ -414,7 +414,7 @@ proc UART1ErrorHandler `isr @weak () {
 
 required proc UART2StatusHandler `isr ()
 
-proc UART2StatusHandler `isr @weak () {
+proc UART2StatusHandler `isr @nullOnNoException @weak () {
   throw 64
 }
 
@@ -422,7 +422,7 @@ proc UART2StatusHandler `isr @weak () {
 
 required proc UART2ErrorHandler `isr ()
 
-proc UART2ErrorHandler `isr @weak () {
+proc UART2ErrorHandler `isr @nullOnNoException @weak () {
   throw 65
 }
 
@@ -430,7 +430,7 @@ proc UART2ErrorHandler `isr @weak () {
 
 required proc ADC0Handler `isr ()
 
-proc ADC0Handler `isr @weak () {
+proc ADC0Handler `isr @nullOnNoException @weak () {
   throw 73
 }
 
@@ -438,7 +438,7 @@ proc ADC0Handler `isr @weak () {
 
 required proc ADC1Handler `isr ()
 
-proc ADC1Handler `isr @weak () {
+proc ADC1Handler `isr @nullOnNoException @weak () {
   throw 74
 }
 
@@ -446,7 +446,7 @@ proc ADC1Handler `isr @weak () {
 
 required proc CMP0Handler `isr ()
 
-proc CMP0Handler `isr @weak () {
+proc CMP0Handler `isr @nullOnNoException @weak () {
   throw 75
 }
 
@@ -454,7 +454,7 @@ proc CMP0Handler `isr @weak () {
 
 required proc CMP1Handler `isr ()
 
-proc CMP1Handler `isr @weak () {
+proc CMP1Handler `isr @nullOnNoException @weak () {
   throw 76
 }
 
@@ -462,7 +462,7 @@ proc CMP1Handler `isr @weak () {
 
 required proc CMP2Handler `isr ()
 
-proc CMP2Handler `isr @weak () {
+proc CMP2Handler `isr @nullOnNoException @weak () {
   throw 77
 }
 
@@ -470,7 +470,7 @@ proc CMP2Handler `isr @weak () {
 
 required proc FMT0Handler `isr ()
 
-proc FMT0Handler `isr @weak () {
+proc FMT0Handler `isr @nullOnNoException @weak () {
   throw 78
 }
 
@@ -478,7 +478,7 @@ proc FMT0Handler `isr @weak () {
 
 required proc FMT1Handler `isr ()
 
-proc FMT1Handler `isr @weak () {
+proc FMT1Handler `isr @nullOnNoException @weak () {
   throw 79
 }
 
@@ -486,7 +486,7 @@ proc FMT1Handler `isr @weak () {
 
 required proc FMT2Handler `isr ()
 
-proc FMT2Handler `isr @weak () {
+proc FMT2Handler `isr @nullOnNoException @weak () {
   throw 80
 }
 
@@ -494,7 +494,7 @@ proc FMT2Handler `isr @weak () {
 
 required proc CMTHandler `isr ()
 
-proc CMTHandler `isr @weak () {
+proc CMTHandler `isr @nullOnNoException @weak () {
   throw 81
 }
 
@@ -502,7 +502,7 @@ proc CMTHandler `isr @weak () {
 
 required proc RTCAlarmHandler `isr ()
 
-proc RTCAlarmHandler `isr @weak () {
+proc RTCAlarmHandler `isr @nullOnNoException @weak () {
   throw 82
 }
 
@@ -510,7 +510,7 @@ proc RTCAlarmHandler `isr @weak () {
 
 required proc RTCSecondHandler `isr ()
 
-proc RTCSecondHandler `isr @weak () {
+proc RTCSecondHandler `isr @nullOnNoException @weak () {
   throw 83
 }
 
@@ -518,7 +518,7 @@ proc RTCSecondHandler `isr @weak () {
 
 required proc PITChannel0Handler `isr ()
 
-proc PITChannel0Handler `isr @weak () {
+proc PITChannel0Handler `isr @nullOnNoException @weak () {
   throw 84
 }
 
@@ -526,7 +526,7 @@ proc PITChannel0Handler `isr @weak () {
 
 required proc PITChannel1Handler `isr ()
 
-proc PITChannel1Handler `isr @weak () {
+proc PITChannel1Handler `isr @nullOnNoException @weak () {
   throw 85
 }
 
@@ -534,7 +534,7 @@ proc PITChannel1Handler `isr @weak () {
 
 required proc PITChannel2Handler `isr ()
 
-proc PITChannel2Handler `isr @weak () {
+proc PITChannel2Handler `isr @nullOnNoException @weak () {
   throw 86
 }
 
@@ -542,7 +542,7 @@ proc PITChannel2Handler `isr @weak () {
 
 required proc PITChannel3Handler `isr ()
 
-proc PITChannel3Handler `isr @weak () {
+proc PITChannel3Handler `isr @nullOnNoException @weak () {
   throw 87
 }
 
@@ -550,7 +550,7 @@ proc PITChannel3Handler `isr @weak () {
 
 required proc PDBHandler `isr ()
 
-proc PDBHandler `isr @weak () {
+proc PDBHandler `isr @nullOnNoException @weak () {
   throw 88
 }
 
@@ -558,7 +558,7 @@ proc PDBHandler `isr @weak () {
 
 required proc USBOTGHandler `isr ()
 
-proc USBOTGHandler `isr @weak () {
+proc USBOTGHandler `isr @nullOnNoException @weak () {
   throw 89
 }
 
@@ -566,7 +566,7 @@ proc USBOTGHandler `isr @weak () {
 
 required proc USBChargerDetectHandler `isr ()
 
-proc USBChargerDetectHandler `isr @weak () {
+proc USBChargerDetectHandler `isr @nullOnNoException @weak () {
   throw 90
 }
 
@@ -574,7 +574,7 @@ proc USBChargerDetectHandler `isr @weak () {
 
 required proc DAC0Handler `isr ()
 
-proc DAC0Handler `isr @weak () {
+proc DAC0Handler `isr @nullOnNoException @weak () {
   throw 97
 }
 
@@ -582,7 +582,7 @@ proc DAC0Handler `isr @weak () {
 
 required proc TSIHandler `isr ()
 
-proc TSIHandler `isr @weak () {
+proc TSIHandler `isr @nullOnNoException @weak () {
   throw 99
 }
 
@@ -590,7 +590,7 @@ proc TSIHandler `isr @weak () {
 
 required proc MCGHandler `isr ()
 
-proc MCGHandler `isr @weak () {
+proc MCGHandler `isr @nullOnNoException @weak () {
   throw 100
 }
 
@@ -598,7 +598,7 @@ proc MCGHandler `isr @weak () {
 
 required proc lowPowerTimerHandler `isr ()
 
-proc lowPowerTimerHandler `isr @weak () {
+proc lowPowerTimerHandler `isr @nullOnNoException @weak () {
   throw 101
 }
 
@@ -606,7 +606,7 @@ proc lowPowerTimerHandler `isr @weak () {
 
 required proc pinDetectPortAHandler `isr ()
 
-proc pinDetectPortAHandler `isr @weak () {
+proc pinDetectPortAHandler `isr @nullOnNoException @weak () {
   throw 103
 }
 
@@ -614,7 +614,7 @@ proc pinDetectPortAHandler `isr @weak () {
 
 required proc pinDetectPortBHandler `isr ()
 
-proc pinDetectPortBHandler `isr @weak () {
+proc pinDetectPortBHandler `isr @nullOnNoException @weak () {
   throw 104
 }
 
@@ -622,7 +622,7 @@ proc pinDetectPortBHandler `isr @weak () {
 
 required proc pinDetectPortCHandler `isr ()
 
-proc pinDetectPortCHandler `isr @weak () {
+proc pinDetectPortCHandler `isr @nullOnNoException @weak () {
   throw 105
 }
 
@@ -630,7 +630,7 @@ proc pinDetectPortCHandler `isr @weak () {
 
 required proc pinDetectPortDHandler `isr ()
 
-proc pinDetectPortDHandler `isr @weak () {
+proc pinDetectPortDHandler `isr @nullOnNoException @weak () {
   throw 106
 }
 
@@ -638,7 +638,7 @@ proc pinDetectPortDHandler `isr @weak () {
 
 required proc pinDetectPortEHandler `isr ()
 
-proc pinDetectPortEHandler `isr @weak () {
+proc pinDetectPortEHandler `isr @nullOnNoException @weak () {
   throw 107
 }
 
@@ -646,7 +646,7 @@ proc pinDetectPortEHandler `isr @weak () {
 
 required proc softwareInterruptHandler `isr ()
 
-proc softwareInterruptHandler `isr @weak () {
+proc softwareInterruptHandler `isr @nullOnNoException @weak () {
   throw 110
 }
 

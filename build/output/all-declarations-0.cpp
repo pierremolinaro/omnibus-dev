@@ -86,9 +86,7 @@ static const utf32 gLexicalMessage_plm_5F_lexique_attributeError [] = {
   TO_UNICODE ('t'),
   TO_UNICODE ('e'),
   TO_UNICODE ('r'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
+  TO_UNICODE (','),
   TO_UNICODE (' '),
   TO_UNICODE ('a'),
   TO_UNICODE (' '),
@@ -96,6 +94,15 @@ static const utf32 gLexicalMessage_plm_5F_lexique_attributeError [] = {
   TO_UNICODE ('i'),
   TO_UNICODE ('g'),
   TO_UNICODE ('i'),
+  TO_UNICODE ('t'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('a'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('d'),
+  TO_UNICODE ('o'),
   TO_UNICODE ('t'),
   TO_UNICODE (' '),
   TO_UNICODE ('s'),
@@ -4150,7 +4157,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
         if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           do {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-            if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+            if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('.'))) {
             }else{
               mLoop = false ;
             }

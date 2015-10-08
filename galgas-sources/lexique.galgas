@@ -79,14 +79,14 @@ style attributeStyle -> "Attributes"
 
 $attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
 
-message attributeError : "in an attribute name, a letter or a digit should follow the '@' character"
+message attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
 
 rule '@' {
   select
   case 'a'->'z' | 'A'->'Z' | '0'->'9' :
     repeat
       enterCharacterIntoString (!?tokenString !*)
-    while 'a'->'z' | 'A'->'Z'| '0'->'9' :
+    while 'a'->'z' | 'A'->'Z'| '0'->'9' | '.' :
     end
   default
     error attributeError
