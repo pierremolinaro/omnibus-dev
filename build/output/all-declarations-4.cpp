@@ -291,9 +291,6 @@ typeComparisonResult cPtr_enumerationDeclaration::dynamicObjectCompare (const ac
     result = mAttribute_mEnumerationName.objectCompare (p->mAttribute_mEnumerationName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mAttributeList.objectCompare (p->mAttribute_mAttributeList) ;
-  }
-  if (kOperandEqual == result) {
     result = mAttribute_mCaseNameList.objectCompare (p->mAttribute_mCaseNameList) ;
   }
   return result ;
@@ -328,7 +325,6 @@ GALGAS_abstractDeclaration () {
 
 GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_enumerationDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                         GALGAS_lstringlist::constructor_emptyList (HERE),
                                                          GALGAS_lstringlist::constructor_emptyList (HERE)
                                                          COMMA_THERE) ;
 }
@@ -343,12 +339,11 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mEnumerationName,
-                                                                              const GALGAS_lstringlist & inAttribute_mAttributeList,
                                                                               const GALGAS_lstringlist & inAttribute_mCaseNameList
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_enumerationDeclaration result ;
-  if (inAttribute_mEnumerationName.isValid () && inAttribute_mAttributeList.isValid () && inAttribute_mCaseNameList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_enumerationDeclaration (inAttribute_mEnumerationName, inAttribute_mAttributeList, inAttribute_mCaseNameList COMMA_THERE)) ;
+  if (inAttribute_mEnumerationName.isValid () && inAttribute_mCaseNameList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_enumerationDeclaration (inAttribute_mEnumerationName, inAttribute_mCaseNameList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -369,24 +364,6 @@ GALGAS_lstring GALGAS_enumerationDeclaration::reader_mEnumerationName (UNUSED_LO
 
 GALGAS_lstring cPtr_enumerationDeclaration::reader_mEnumerationName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEnumerationName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_enumerationDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_enumerationDeclaration) ;
-    result = p->mAttribute_mAttributeList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist cPtr_enumerationDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -412,12 +389,10 @@ GALGAS_lstringlist cPtr_enumerationDeclaration::reader_mCaseNameList (UNUSED_LOC
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_enumerationDeclaration::cPtr_enumerationDeclaration (const GALGAS_lstring & in_mEnumerationName,
-                                                          const GALGAS_lstringlist & in_mAttributeList,
                                                           const GALGAS_lstringlist & in_mCaseNameList
                                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractDeclaration (THERE),
 mAttribute_mEnumerationName (in_mEnumerationName),
-mAttribute_mAttributeList (in_mAttributeList),
 mAttribute_mCaseNameList (in_mCaseNameList) {
 }
 
@@ -432,8 +407,6 @@ void cPtr_enumerationDeclaration::description (C_String & ioString,
   ioString << "[@enumerationDeclaration:" ;
   mAttribute_mEnumerationName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mAttribute_mCaseNameList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -442,7 +415,7 @@ void cPtr_enumerationDeclaration::description (C_String & ioString,
 
 acPtr_class * cPtr_enumerationDeclaration::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_enumerationDeclaration (mAttribute_mEnumerationName, mAttribute_mAttributeList, mAttribute_mCaseNameList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_enumerationDeclaration (mAttribute_mEnumerationName, mAttribute_mCaseNameList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -15420,6 +15393,25 @@ void categoryModifier_appendBinaryOperation (GALGAS_instructionListIR & ioObject
                                              C_Compiler * /* inCompiler */
                                              COMMA_UNUSED_LOCATION_ARGS) {
   ioObject.addAssign_operation (GALGAS_binaryOperationIR::constructor_new (constinArgument_inTarget, constinArgument_inOperandType, constinArgument_inLeft, constinArgument_inOperation, constinArgument_inRight, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Category method '@instructionListIR appendShortCircuitAndOperation'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void categoryModifier_appendShortCircuitAndOperation (GALGAS_instructionListIR & ioObject,
+                                                      const GALGAS_operandIR constinArgument_inTargetOperand,
+                                                      const GALGAS_operandIR constinArgument_inLeftOperand,
+                                                      const GALGAS_instructionListIR constinArgument_inLeftInstructionList,
+                                                      const GALGAS_operandIR constinArgument_inRightOperand,
+                                                      const GALGAS_instructionListIR constinArgument_inRightInstructionList,
+                                                      const GALGAS_location constinArgument_inLocation,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_shortCircuitAndOperationIR::constructor_new (constinArgument_inTargetOperand, constinArgument_inLeftOperand, constinArgument_inLeftInstructionList, constinArgument_inRightOperand, constinArgument_inRightInstructionList, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11)) ;
 }
 
 

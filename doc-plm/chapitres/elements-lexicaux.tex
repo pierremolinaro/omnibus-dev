@@ -33,12 +33,12 @@ Les mots réservés correspondant aux éléments du langage sont listés dans le
   \centering
   \begin{tabular}{llllll}
    \plm!and! & \plm!assert! & \plm!at! & \plm!boolset! \\
-   \plm!booleanType! & \plm!boot! & \plm!case! & \plm!check! \\
+    & \plm!boot! & \plm!case! & \plm!check! \\
    \plm!do! & \plm!else! & \plm!elsif! & \plm!end! \\
-   \plm!enum! & \plm!exception! & \plm!false! & \plm!forever! \\
+   \plm!enum! & \plm!exception! & \plm!false! &  \\
    \plm!func! & \plm!if! & \plm!import! & \plm!init!  \\
-   \plm!let! & \plm!mutating! & \plm!mode! & \plm!newIntegerType! \\
-   \plm!newSignedRepresentation! & \plm!newUnsignedRepresentation! & \plm!not! & \plm!or!\\
+   \plm!let! & \plm!mutating! & \plm!mode! &  \\
+    & & \plm!not! & \plm!or!\\
    \plm!proc! & \plm!register! & \plm!required! & \plm!self! \\
    \plm!struct! & \plm!target! & \plm!then! & \plm!throw! \\
    \plm!true! & \plm!var! & \plm!while! & \plm!xor! \\
@@ -77,11 +77,7 @@ Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en 
 
 Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère \texttt{\_} peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
 
-Attention :
-\begin{itemize}
-  \item contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal ;
-  \item contrairement à l’assembleur PIC, le préfixe \texttt{0x} est indispensable pour écrire un nombre en hexadécimal.
-\end{itemize}
+Attention, contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal.
 
 \section{Délimiteurs}
 
@@ -93,7 +89,7 @@ PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
     \plm!:!  & \plm!.! & \plm!,!  & \plm+!=+ & \plm!<=! & \plm!>=! & \plm!;! & \plm!==! & \plm!<! & \plm!>! & \plm![! & \plm!]! \\
     \plm!&! & \plm!&=! & \plm!|! & \plm!|=!  & \plm!}! & \plm!}! & \plm!(!  & \plm!)!  & \plm!/!  & \plm!&/! \\
     \plm!-! & \plm!&-! & \plm!+!  & \plm!&+! & \plm!^!  & \plm!^=! & \plm!<<! & \plm!>>! & \plm!~!\\
-    \plm!%! & \plm!&%! & \plm!=! & \plm!\! & \plm!&\!\\
+    \plm!%! & \plm!&%! & \plm!=!\\
     \plm!->! & \plm!::! & \plm!++! & \plm!&++! & \plm!--! & \plm!&--! & \plm!*! & \plm!&*!
   \end{tabular}
   \caption{Délimiteurs du langage PLM}
