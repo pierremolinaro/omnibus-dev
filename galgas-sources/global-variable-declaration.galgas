@@ -26,7 +26,7 @@ list @allowedExceptionList {
 #----------------------------------------------------------------------------------------------------------------------*
 
 list @globalVarDeclarationList {
-  @generalizedTypeEnumAST mType
+  @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
   @expressionAST mSourceExpression
   @allowedProcList mAllowedProcList
@@ -87,7 +87,7 @@ syntax extension common_syntax {
     end
     $}$
     ioAST.mGlobalVarDeclarationList +=
-      !.valueType {!typeName:typeName}
+      !typeName
       !varName
       !expression
       !allowedProcList
@@ -116,110 +116,106 @@ method @globalVarDeclarationList-element enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
 #--- Get destination type
-  switch mType
-  case valueType (@lstring typeName) :
-    @unifiedTypeMap-proxy variableType
-    if typeName.string == "" then
-      variableType = .null
-    else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !typeName ?variableType]
-    end
-  #--- Analyze source expression
-    @semanticTemporariesStruct temporaries = .default
-    @instructionListIR instructionGenerationList = {}
-    @variableMap variableMap = variableMapWithConstants (!context:ioContext)
-    [mSourceExpression analyzeExpression
-       !routineNameForInvocationGraph:["compiler" nowhere]
-       !optionalReceiverType:.noReceiver
-       !optionalTargetType:variableType
-       !context:ioContext
-       !modes:{}
-       !allowException:true
-       !?temporary:temporaries
-       !?staticStringMap:ioGlobalLiteralStringMap
-       !?variableMap:variableMap
-       !?instructionListIR:instructionGenerationList
-       ?result:let @operandIR expressionResult
-    ]
-    if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
-      error mVarName : "source expression cannot be statically computed"
-    end
-  #--- Check variable type and expression type
-    if variableType == .null && [[expressionResult.mType kind] isLiteralInteger] then
-      error mVarName : "cannot infer type"
-    end
-    checkAssignmentCompatibility (
-      !source:expressionResult
-      !targetType:variableType
-      !errorLocation:mVarName.location
-    )
-    @stringset executionModes = {}
-    @allowedRoutineMap allowedProcedureMap = {}
-  #--- Check allowed init routines are defined
-    for () in mAllowedInitList do
-      [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-      [!?allowedProcedureMap insertKey
-         !.new {!"init " + [mInitPriority.bigint string] !mInitPriority.location}
-         !mHasWriteAccess
-      ]
-    end
-  #--- Check allowed exception routines are defined
-    for () in mAllowedExceptionList do
-      if mExceptionName.string == "setup" then
-        [ioContext.mExceptionSetupRoutinePriorityMap searchSetupKey
-          !.new{![mExceptionPriority.bigint string]
-          !mExceptionPriority.location}
-        ]
-      elsif mExceptionName.string == "loop" then
-        [ioContext.mExceptionLoopRoutinePriorityMap searchLoopKey
-          !.new{![mExceptionPriority.bigint string]
-          !mExceptionPriority.location}
-        ]
-      else
-        error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
-      end
-      [!?allowedProcedureMap insertKey
-        !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.bigint string] !mExceptionName.location}
-        !mHasWriteAccess
-      ]
-    end
-  #--- Check allowed procedures are defined
-    for () in mAllowedProcList do
-      var allowedProcMangledName = mProcName.string
-      for () in mProcFormalArgumentList do
-        switch mFormalArgumentPassingMode
-        case input : allowedProcMangledName += "?"
-        case output : allowedProcMangledName += "!"
-        case inputOutput : allowedProcMangledName += "?!"
-        end
-        allowedProcMangledName += mSelector.string + ":"
-      end
-      let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
-      [ioContext.mProcedureMap searchKey
-        !allowedProcMangledNameWithLocation
-        ?*
-        ?let procedureModeMap
-        ?let unused signature
-        ?*
-      ]
-      for () in procedureModeMap do
-        executionModes += !lkey.string
-      end
-      [!?allowedProcedureMap insertKey
-         !.new {!"proc " + allowedProcMangledName !mProcName.location}
-         !mHasWriteAccess
-      ]
-    end
-    [!?ioContext.mGlobalVariableMap insertKey
-      !mVarName
-      !if variableType == .null then expressionResult.mType else variableType end
-      !executionModes
-      !allowedProcedureMap
-      !expressionResult.mValue
-      !false # Is not constant
-    ]
-  case procType (* *) :
+  @unifiedTypeMap-proxy variableType
+  if mTypeName.string == "" then
+    variableType = .null
+  else
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mTypeName ?variableType]
   end
+#--- Analyze source expression
+  @semanticTemporariesStruct temporaries = .default
+  @instructionListIR instructionGenerationList = {}
+  @variableMap variableMap = variableMapWithConstants (!context:ioContext)
+  [mSourceExpression analyzeExpression
+     !routineNameForInvocationGraph:["compiler" nowhere]
+     !optionalReceiverType:.noReceiver
+     !optionalTargetType:variableType
+     !context:ioContext
+     !modes:{}
+     !allowException:true
+     !?temporary:temporaries
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:variableMap
+     !?instructionListIR:instructionGenerationList
+     ?result:let @operandIR expressionResult
+  ]
+  if ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
+    error mVarName : "source expression cannot be statically computed"
+  end
+#--- Check variable type and expression type
+  if variableType == .null && [[expressionResult.mType kind] isLiteralInteger] then
+    error mVarName : "cannot infer type"
+  end
+  checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetType:variableType
+    !errorLocation:mVarName.location
+  )
+  @stringset executionModes = {}
+  @allowedRoutineMap allowedProcedureMap = {}
+#--- Check allowed init routines are defined
+  for () in mAllowedInitList do
+    [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
+    [!?allowedProcedureMap insertKey
+       !.new {!"init " + [mInitPriority.bigint string] !mInitPriority.location}
+       !mHasWriteAccess
+    ]
+  end
+#--- Check allowed exception routines are defined
+  for () in mAllowedExceptionList do
+    if mExceptionName.string == "setup" then
+      [ioContext.mExceptionSetupRoutinePriorityMap searchSetupKey
+        !.new{![mExceptionPriority.bigint string]
+        !mExceptionPriority.location}
+      ]
+    elsif mExceptionName.string == "loop" then
+      [ioContext.mExceptionLoopRoutinePriorityMap searchLoopKey
+        !.new{![mExceptionPriority.bigint string]
+        !mExceptionPriority.location}
+      ]
+    else
+      error mExceptionName : "exception routine name should be \"setup\" or \"loop\""
+    end
+    [!?allowedProcedureMap insertKey
+      !.new {!"exception " + mExceptionName + " " + [mExceptionPriority.bigint string] !mExceptionName.location}
+      !mHasWriteAccess
+    ]
+  end
+#--- Check allowed procedures are defined
+  for () in mAllowedProcList do
+    var allowedProcMangledName = mProcName.string
+    for () in mProcFormalArgumentList do
+      switch mFormalArgumentPassingMode
+      case input : allowedProcMangledName += "?"
+      case output : allowedProcMangledName += "!"
+      case inputOutput : allowedProcMangledName += "?!"
+      end
+      allowedProcMangledName += mSelector.string + ":"
+    end
+    let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
+    [ioContext.mProcedureMap searchKey
+      !allowedProcMangledNameWithLocation
+      ?*
+      ?let procedureModeMap
+      ?let unused signature
+      ?*
+    ]
+    for () in procedureModeMap do
+      executionModes += !lkey.string
+    end
+    [!?allowedProcedureMap insertKey
+       !.new {!"proc " + allowedProcMangledName !mProcName.location}
+       !mHasWriteAccess
+    ]
+  end
+  [!?ioContext.mGlobalVariableMap insertKey
+    !mVarName
+    !if variableType == .null then expressionResult.mType else variableType end
+    !executionModes
+    !allowedProcedureMap
+    !expressionResult.mValue
+    !false # Is not constant
+  ]
 }
 
 #----------------------------------------------------------------------------------------------------------------------*

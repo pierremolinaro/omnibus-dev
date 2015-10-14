@@ -10,58 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Overriding category method '@modeDeclaration semanticAnalysis'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void categoryMethod_modeDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
-                                                             const GALGAS_semanticContext /* constinArgument_inContext */,
-                                                             GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
-                                                             C_Compiler * /* inCompiler */
-                                                             COMMA_UNUSED_LOCATION_ARGS) {
-}
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryMethod_modeDeclaration_semanticAnalysis (void) {
-  enterCategoryMethod_semanticAnalysis (kTypeDescriptor_GALGAS_modeDeclaration.mSlotID,
-                                        categoryMethod_modeDeclaration_semanticAnalysis) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_modeDeclaration_semanticAnalysis (defineCategoryMethod_modeDeclaration_semanticAnalysis, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Overriding category reader '@enumerationDeclaration location'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_location categoryReader_enumerationDeclaration_location (const cPtr_abstractDeclaration * inObject,
-                                                                       C_Compiler * /* inCompiler */
-                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_location result_outLocation ; // Returned variable
-  const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
-  result_outLocation = object->mAttribute_mEnumerationName.mAttribute_location ;
-//---
-  return result_outLocation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineCategoryReader_enumerationDeclaration_location (void) {
-  enterCategoryReader_location (kTypeDescriptor_GALGAS_enumerationDeclaration.mSlotID,
-                                categoryReader_enumerationDeclaration_location) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gReader_enumerationDeclaration_location (defineCategoryReader_enumerationDeclaration_location, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                     Overriding category method '@enumerationDeclaration enterInPrecedenceGraph'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -132,31 +80,18 @@ static void categoryMethod_enumerationDeclaration_enterInContext (const cPtr_abs
   const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
   GALGAS_bool var_copiable = GALGAS_bool (true) ;
-  cEnumerator_lstringlist enumerator_3650 (object->mAttribute_mAttributeList, kEnumeration_up) ;
-  while (enumerator_3650.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, enumerator_3650.current_mValue (HERE).mAttribute_string.objectCompare (GALGAS_string ("unique"))).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      const enumGalgasBool test_1 = var_copiable.operator_not (SOURCE_FILE ("enumeration-declaration.galgas", 91)).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        GALGAS_location location_2 (enumerator_3650.current_mValue (HERE).reader_location (HERE)) ; // Implicit use of 'location' reader
-        inCompiler->emitSemanticError (location_2, GALGAS_string ("duplicated attribute")  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 92)) ;
-      }
-      var_copiable = GALGAS_bool (false) ;
-    }
-    enumerator_3650.gotoNextObject () ;
-  }
   GALGAS_enumConstantMap var_enumConstantMap = GALGAS_enumConstantMap::constructor_emptyMap (SOURCE_FILE ("enumeration-declaration.galgas", 97)) ;
   GALGAS_typedConstantMap var_constructorMap = GALGAS_typedConstantMap::constructor_emptyMap (SOURCE_FILE ("enumeration-declaration.galgas", 98)) ;
-  cEnumerator_lstringlist enumerator_3910 (object->mAttribute_mCaseNameList, kEnumeration_up) ;
-  while (enumerator_3910.hasCurrentObject ()) {
+  cEnumerator_lstringlist enumerator_3926 (object->mAttribute_mCaseNameList, kEnumeration_up) ;
+  while (enumerator_3926.hasCurrentObject ()) {
     GALGAS_uint var_idx = var_enumConstantMap.reader_count (SOURCE_FILE ("enumeration-declaration.galgas", 100)) ;
     {
-    var_enumConstantMap.modifier_insertKey (enumerator_3910.current_mValue (HERE), var_idx, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 101)) ;
+    var_enumConstantMap.modifier_insertKey (enumerator_3926.current_mValue (HERE), var_idx, inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 101)) ;
     }
     {
-    var_constructorMap.modifier_insertKey (enumerator_3910.current_mValue (HERE), GALGAS_valueIR::constructor_literalInteger (var_idx.reader_bigint (SOURCE_FILE ("enumeration-declaration.galgas", 102))  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 102)) ;
+    var_constructorMap.modifier_insertKey (enumerator_3926.current_mValue (HERE), GALGAS_valueIR::constructor_literalInteger (var_idx.reader_bigint (SOURCE_FILE ("enumeration-declaration.galgas", 102))  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 102)) ;
     }
-    enumerator_3910.gotoNextObject () ;
+    enumerator_3926.gotoNextObject () ;
   }
   {
   ioArgument_ioContext.mAttribute_mTypeMap.modifier_insertKey (object->mAttribute_mEnumerationName, GALGAS_typeKind::constructor_enumeration (var_enumConstantMap  COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 106)), var_constructorMap, GALGAS_procedureMap::constructor_emptyMap (SOURCE_FILE ("enumeration-declaration.galgas", 108)), var_copiable, GALGAS_bool (true), GALGAS_bool (true), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("enumeration-declaration.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("enumeration-declaration.galgas", 104)) ;

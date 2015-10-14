@@ -487,7 +487,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_generalizedTypeEnumAST & in_mType,
+                                                  const class GALGAS_lstring & in_mTypeName,
                                                   const class GALGAS_lstring & in_mVarName,
                                                   const class GALGAS_expressionAST & in_mSourceExpression,
                                                   const class GALGAS_allowedProcList & in_mAllowedProcList,
@@ -508,7 +508,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
 //--------------------------------- GALGAS constructors
   public : static GALGAS_globalVarDeclarationList constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static GALGAS_globalVarDeclarationList constructor_listWithValue (const class GALGAS_generalizedTypeEnumAST & inOperand0,
+  public : static GALGAS_globalVarDeclarationList constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                              const class GALGAS_lstring & inOperand1,
                                                                              const class GALGAS_expressionAST & inOperand2,
                                                                              const class GALGAS_allowedProcList & inOperand3,
@@ -521,7 +521,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_generalizedTypeEnumAST & inOperand0,
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_expressionAST & inOperand2,
                                                       const class GALGAS_allowedProcList & inOperand3,
@@ -539,7 +539,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
 
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void modifier_insertAtIndex (class GALGAS_generalizedTypeEnumAST constinArgument0,
+  public : VIRTUAL_IN_DEBUG void modifier_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                          class GALGAS_lstring constinArgument1,
                                                          class GALGAS_expressionAST constinArgument2,
                                                          class GALGAS_allowedProcList constinArgument3,
@@ -549,7 +549,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_popFirst (class GALGAS_generalizedTypeEnumAST & outArgument0,
+  public : VIRTUAL_IN_DEBUG void modifier_popFirst (class GALGAS_lstring & outArgument0,
                                                     class GALGAS_lstring & outArgument1,
                                                     class GALGAS_expressionAST & outArgument2,
                                                     class GALGAS_allowedProcList & outArgument3,
@@ -558,7 +558,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_popLast (class GALGAS_generalizedTypeEnumAST & outArgument0,
+  public : VIRTUAL_IN_DEBUG void modifier_popLast (class GALGAS_lstring & outArgument0,
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_expressionAST & outArgument2,
                                                    class GALGAS_allowedProcList & outArgument3,
@@ -567,7 +567,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void modifier_removeAtIndex (class GALGAS_generalizedTypeEnumAST & outArgument0,
+  public : VIRTUAL_IN_DEBUG void modifier_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                          class GALGAS_lstring & outArgument1,
                                                          class GALGAS_expressionAST & outArgument2,
                                                          class GALGAS_allowedProcList & outArgument3,
@@ -579,7 +579,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_generalizedTypeEnumAST & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_lstring & outArgument1,
                                                class GALGAS_expressionAST & outArgument2,
                                                class GALGAS_allowedProcList & outArgument3,
@@ -588,7 +588,7 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_generalizedTypeEnumAST & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_lstring & outArgument1,
                                               class GALGAS_expressionAST & outArgument2,
                                               class GALGAS_allowedProcList & outArgument3,
@@ -616,9 +616,9 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_generalizedTypeEnumAST reader_mTypeAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mVarNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                          C_Compiler * inCompiler
@@ -650,7 +650,7 @@ class cEnumerator_globalVarDeclarationList : public cGenericAbstractEnumerator {
                                                  const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_generalizedTypeEnumAST current_mType (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mVarName (LOCATION_ARGS) const ;
   public : class GALGAS_expressionAST current_mSourceExpression (LOCATION_ARGS) const ;
   public : class GALGAS_allowedProcList current_mAllowedProcList (LOCATION_ARGS) const ;
@@ -731,292 +731,6 @@ class cPtr_expressionAST : public acPtr_class {
 
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
 
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @generalizedTypeEnumAST enum                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_generalizedTypeEnumAST : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_generalizedTypeEnumAST (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_valueType,
-    kEnum_procType
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_generalizedTypeEnumAST extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_generalizedTypeEnumAST constructor_procType (const class GALGAS_lstringlist & inOperand0,
-                                                                      const class GALGAS_procFormalArgumentList & inOperand1
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_generalizedTypeEnumAST constructor_valueType (const class GALGAS_lstring & inOperand0
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of reader 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_generalizedTypeEnumAST & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_procType (class GALGAS_lstringlist & outArgument0,
-                                                  class GALGAS_procFormalArgumentList & outArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_valueType (class GALGAS_lstring & outArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isProcType (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isValueType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_generalizedTypeEnumAST class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generalizedTypeEnumAST ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @procFormalArgumentList list                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_procFormalArgumentList : public AC_GALGAS_list {
-//--------------------------------- Default constructor
-  public : GALGAS_procFormalArgumentList (void) ;
-
-//--------------------------------- List constructor used by listmap
-  public : GALGAS_procFormalArgumentList (cSharedList * inSharedListPtr) ;
-
-//--------------------------------- Element constructor used by listmap
-  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                  const class GALGAS_lstring & in_mSelector,
-                                                  const class GALGAS_lstring & in_mFormalArgumentTypeName,
-                                                  const class GALGAS_lstring & in_mFormalArgumentName
-                                                  COMMA_LOCATION_ARGS) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_procFormalArgumentList extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_procFormalArgumentList constructor_emptyList (LOCATION_ARGS) ;
-
-  public : static GALGAS_procFormalArgumentList constructor_listWithValue (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                           const class GALGAS_lstring & inOperand1,
-                                                                           const class GALGAS_lstring & inOperand2,
-                                                                           const class GALGAS_lstring & inOperand3
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procFormalArgumentList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                      const class GALGAS_lstring & inOperand1,
-                                                      const class GALGAS_lstring & inOperand2,
-                                                      const class GALGAS_lstring & inOperand3
-                                                      COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList operator_concat (const GALGAS_procFormalArgumentList & inOperand
-                                                                           COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- + operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList add_operation (const GALGAS_procFormalArgumentList & inOperand,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void modifier_insertAtIndex (class GALGAS_procFormalArgumentPassingMode constinArgument0,
-                                                         class GALGAS_lstring constinArgument1,
-                                                         class GALGAS_lstring constinArgument2,
-                                                         class GALGAS_lstring constinArgument3,
-                                                         class GALGAS_uint constinArgument4,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void modifier_popFirst (class GALGAS_procFormalArgumentPassingMode & outArgument0,
-                                                    class GALGAS_lstring & outArgument1,
-                                                    class GALGAS_lstring & outArgument2,
-                                                    class GALGAS_lstring & outArgument3,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void modifier_popLast (class GALGAS_procFormalArgumentPassingMode & outArgument0,
-                                                   class GALGAS_lstring & outArgument1,
-                                                   class GALGAS_lstring & outArgument2,
-                                                   class GALGAS_lstring & outArgument3,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void modifier_removeAtIndex (class GALGAS_procFormalArgumentPassingMode & outArgument0,
-                                                         class GALGAS_lstring & outArgument1,
-                                                         class GALGAS_lstring & outArgument2,
-                                                         class GALGAS_lstring & outArgument3,
-                                                         class GALGAS_uint constinArgument4,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_procFormalArgumentPassingMode & outArgument0,
-                                               class GALGAS_lstring & outArgument1,
-                                               class GALGAS_lstring & outArgument2,
-                                               class GALGAS_lstring & outArgument3,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_procFormalArgumentPassingMode & outArgument0,
-                                              class GALGAS_lstring & outArgument1,
-                                              class GALGAS_lstring & outArgument2,
-                                              class GALGAS_lstring & outArgument3,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentPassingMode reader_mFormalArgumentPassingModeAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                                                 C_Compiler * inCompiler
-                                                                                                                 COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mSelectorAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList reader_subListFromIndex (const class GALGAS_uint & constinOperand0,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList reader_subListWithRange (const class GALGAS_range & constinOperand0,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-//--------------------------------- Friend
-
-  friend class cEnumerator_procFormalArgumentList ;
- 
-} ; // End of GALGAS_procFormalArgumentList class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_procFormalArgumentList : public cGenericAbstractEnumerator {
-  public : cEnumerator_procFormalArgumentList (const GALGAS_procFormalArgumentList & inEnumeratedObject,
-                                               const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_procFormalArgumentPassingMode current_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mFormalArgumentTypeName (LOCATION_ARGS) const ;
-  public : class GALGAS_lstring current_mFormalArgumentName (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_procFormalArgumentList_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentList ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   @generalizedTypeEnumAST enum, associated values                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_generalizedTypeEnumAST_valueType : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_generalizedTypeEnumAST_valueType (const GALGAS_lstring & inAssociatedValue0
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_generalizedTypeEnumAST_valueType (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_generalizedTypeEnumAST_procType : public cEnumAssociatedValues {
-  public : const GALGAS_lstringlist mAssociatedValue0 ;
-  public : const GALGAS_procFormalArgumentList mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_generalizedTypeEnumAST_procType (const GALGAS_lstringlist & inAssociatedValue0,
-                                                                  const GALGAS_procFormalArgumentList & inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_generalizedTypeEnumAST_procType (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1463,7 +1177,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedProcList ;
 
 class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_generalizedTypeEnumAST mAttribute_mType ;
+  public : GALGAS_lstring mAttribute_mTypeName ;
   public : GALGAS_lstring mAttribute_mVarName ;
   public : GALGAS_expressionAST mAttribute_mSourceExpression ;
   public : GALGAS_allowedProcList mAttribute_mAllowedProcList ;
@@ -1482,7 +1196,7 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_globalVarDeclarationList_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_globalVarDeclarationList_2D_element (const GALGAS_generalizedTypeEnumAST & in_mType,
+  public : GALGAS_globalVarDeclarationList_2D_element (const GALGAS_lstring & in_mTypeName,
                                                        const GALGAS_lstring & in_mVarName,
                                                        const GALGAS_expressionAST & in_mSourceExpression,
                                                        const GALGAS_allowedProcList & in_mAllowedProcList,
@@ -1500,7 +1214,7 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_globalVarDeclarationList_2D_element constructor_new (const class GALGAS_generalizedTypeEnumAST & inOperand0,
+  public : static GALGAS_globalVarDeclarationList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                               const class GALGAS_lstring & inOperand1,
                                                                               const class GALGAS_expressionAST & inOperand2,
                                                                               const class GALGAS_allowedProcList & inOperand3,
@@ -1528,7 +1242,7 @@ class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST reader_mSourceExpression (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_generalizedTypeEnumAST reader_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mVarName (LOCATION_ARGS) const ;
 
@@ -1971,6 +1685,170 @@ class cEnumerator_instructionListAST : public cGenericAbstractEnumerator {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @procFormalArgumentList list                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_procFormalArgumentList : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_procFormalArgumentList (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_procFormalArgumentList (cSharedList * inSharedListPtr) ;
+
+//--------------------------------- Element constructor used by listmap
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
+                                                  const class GALGAS_lstring & in_mSelector,
+                                                  const class GALGAS_lstring & in_mFormalArgumentTypeName,
+                                                  const class GALGAS_lstring & in_mFormalArgumentName
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_procFormalArgumentList extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_procFormalArgumentList constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static GALGAS_procFormalArgumentList constructor_listWithValue (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
+                                                                           const class GALGAS_lstring & inOperand1,
+                                                                           const class GALGAS_lstring & inOperand2,
+                                                                           const class GALGAS_lstring & inOperand3
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procFormalArgumentList inOperand
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
+                                                      const class GALGAS_lstring & inOperand1,
+                                                      const class GALGAS_lstring & inOperand2,
+                                                      const class GALGAS_lstring & inOperand3
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- . (concat) operator
+  public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList operator_concat (const GALGAS_procFormalArgumentList & inOperand
+                                                                           COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList add_operation (const GALGAS_procFormalArgumentList & inOperand,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void modifier_insertAtIndex (class GALGAS_procFormalArgumentPassingMode constinArgument0,
+                                                         class GALGAS_lstring constinArgument1,
+                                                         class GALGAS_lstring constinArgument2,
+                                                         class GALGAS_lstring constinArgument3,
+                                                         class GALGAS_uint constinArgument4,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_popFirst (class GALGAS_procFormalArgumentPassingMode & outArgument0,
+                                                    class GALGAS_lstring & outArgument1,
+                                                    class GALGAS_lstring & outArgument2,
+                                                    class GALGAS_lstring & outArgument3,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_popLast (class GALGAS_procFormalArgumentPassingMode & outArgument0,
+                                                   class GALGAS_lstring & outArgument1,
+                                                   class GALGAS_lstring & outArgument2,
+                                                   class GALGAS_lstring & outArgument3,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void modifier_removeAtIndex (class GALGAS_procFormalArgumentPassingMode & outArgument0,
+                                                         class GALGAS_lstring & outArgument1,
+                                                         class GALGAS_lstring & outArgument2,
+                                                         class GALGAS_lstring & outArgument3,
+                                                         class GALGAS_uint constinArgument4,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_procFormalArgumentPassingMode & outArgument0,
+                                               class GALGAS_lstring & outArgument1,
+                                               class GALGAS_lstring & outArgument2,
+                                               class GALGAS_lstring & outArgument3,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_procFormalArgumentPassingMode & outArgument0,
+                                              class GALGAS_lstring & outArgument1,
+                                              class GALGAS_lstring & outArgument2,
+                                              class GALGAS_lstring & outArgument3,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentPassingMode reader_mFormalArgumentPassingModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                                 C_Compiler * inCompiler
+                                                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mSelectorAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList reader_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList reader_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_procFormalArgumentList ;
+ 
+} ; // End of GALGAS_procFormalArgumentList class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_procFormalArgumentList : public cGenericAbstractEnumerator {
+  public : cEnumerator_procFormalArgumentList (const GALGAS_procFormalArgumentList & inEnumeratedObject,
+                                               const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_procFormalArgumentPassingMode current_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mFormalArgumentTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mFormalArgumentName (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_procFormalArgumentList_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4280,8 +4158,6 @@ class cParser_common_5F_syntax {
 
   protected : virtual int32_t select_common_5F_syntax_47 (C_Lexique_plm_5F_lexique *) = 0 ;
 
-  protected : virtual int32_t select_common_5F_syntax_48 (C_Lexique_plm_5F_lexique *) = 0 ;
-
 
 } ;
 
@@ -4928,8 +4804,7 @@ class GALGAS_enumerationDeclaration : public GALGAS_abstractDeclaration {
 
 //--------------------------------- GALGAS constructors
   public : static GALGAS_enumerationDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                 const class GALGAS_lstringlist & inOperand1,
-                                                                 const class GALGAS_lstringlist & inOperand2
+                                                                 const class GALGAS_lstringlist & inOperand1
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4941,8 +4816,6 @@ class GALGAS_enumerationDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mAttributeList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist reader_mCaseNameList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mEnumerationName (LOCATION_ARGS) const ;
@@ -4967,12 +4840,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumerationDeclarat
 class cPtr_enumerationDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mEnumerationName ;
-  public : GALGAS_lstringlist mAttribute_mAttributeList ;
   public : GALGAS_lstringlist mAttribute_mCaseNameList ;
 
 //--- Constructor
   public : cPtr_enumerationDeclaration (const GALGAS_lstring & in_mEnumerationName,
-                                        const GALGAS_lstringlist & in_mAttributeList,
                                         const GALGAS_lstringlist & in_mCaseNameList
                                         COMMA_LOCATION_ARGS) ;
 
@@ -4981,7 +4852,6 @@ class cPtr_enumerationDeclaration : public cPtr_abstractDeclaration {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring reader_mEnumerationName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist reader_mAttributeList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist reader_mCaseNameList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -9077,84 +8947,6 @@ class cPtr_pointerSizeDeclaration : public cPtr_abstractDeclaration {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      @procFormalArgumentList_2D_element struct                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_procFormalArgumentList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_procFormalArgumentPassingMode mAttribute_mFormalArgumentPassingMode ;
-  public : GALGAS_lstring mAttribute_mSelector ;
-  public : GALGAS_lstring mAttribute_mFormalArgumentTypeName ;
-  public : GALGAS_lstring mAttribute_mFormalArgumentName ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_procFormalArgumentList_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_procFormalArgumentList_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_procFormalArgumentList_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                     const GALGAS_lstring & in_mSelector,
-                                                     const GALGAS_lstring & in_mFormalArgumentTypeName,
-                                                     const GALGAS_lstring & in_mFormalArgumentName) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_procFormalArgumentList_2D_element extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static GALGAS_procFormalArgumentList_2D_element constructor_new (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                            const class GALGAS_lstring & inOperand1,
-                                                                            const class GALGAS_lstring & inOperand2,
-                                                                            const class GALGAS_lstring & inOperand3
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of reader 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_procFormalArgumentList_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentPassingMode reader_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mSelector (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_procFormalArgumentList_2D_element class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentList_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                                @enumConstantMap map                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10011,6 +9803,84 @@ class GALGAS_allowedProcList_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedProcList_2D_element ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @procFormalArgumentList_2D_element struct                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_procFormalArgumentList_2D_element : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_procFormalArgumentPassingMode mAttribute_mFormalArgumentPassingMode ;
+  public : GALGAS_lstring mAttribute_mSelector ;
+  public : GALGAS_lstring mAttribute_mFormalArgumentTypeName ;
+  public : GALGAS_lstring mAttribute_mFormalArgumentName ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_procFormalArgumentList_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_procFormalArgumentList_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_procFormalArgumentList_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
+                                                     const GALGAS_lstring & in_mSelector,
+                                                     const GALGAS_lstring & in_mFormalArgumentTypeName,
+                                                     const GALGAS_lstring & in_mFormalArgumentName) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_procFormalArgumentList_2D_element extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static GALGAS_procFormalArgumentList_2D_element constructor_new (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
+                                                                            const class GALGAS_lstring & inOperand1,
+                                                                            const class GALGAS_lstring & inOperand2,
+                                                                            const class GALGAS_lstring & inOperand3
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of reader 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_procFormalArgumentList_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentPassingMode reader_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mFormalArgumentTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring reader_mSelector (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_procFormalArgumentList_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentList_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

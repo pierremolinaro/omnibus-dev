@@ -369,19 +369,6 @@ extern C_StringListCommandLineOption gOption_plm_5F_options_pathList ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Routine 'enterNodeInPrecedenceGraph'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterNodeInPrecedenceGraph (class GALGAS_lstring inArgument0,
-                                         class GALGAS_abstractDeclaration inArgument1,
-                                         class GALGAS_generalizedTypeEnumAST inArgument2,
-                                         class GALGAS_semanticTypePrecedenceGraph & ioArgument3,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Routine 'enterBooleanOperators'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

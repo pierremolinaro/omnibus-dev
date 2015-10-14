@@ -16,8 +16,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/syntax-grammar.galgas"
   "galgas-sources/cocoa.galgas"
 
-  "galgas-sources/generalized-type.galgas"
-
 #--- Bool
   "galgas-sources/bool-type.galgas"
 

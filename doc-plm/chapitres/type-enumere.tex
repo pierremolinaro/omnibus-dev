@@ -66,23 +66,14 @@ Les opérateurs \plm!==!, \plm+!=+, \plm!<!, \plm!<=!, \plm!>! et \plm!>=! perme
 
 \sectionLabel{Représentation d'un type énuméré}{representation-type-enumere}
 
-Par défaut, un type énuméré est représenté dans le code engendré par un \plm!@size!. L'attribut \plm!@size! représente un entier non signé, et doit avoir été défini par le fichier de définition de la cible\footnote{Voir par exemple \refSubsectionPage{fichierTarget}.}.
-
-Il est possible de changer de représentation, en ajoutant une annotation dans la déclaration du type énuméré :
+Un type énuméré est représenté dans le code engendré par une valeur codée sur le plus petit nombre de bits nécessaire. Par exemple, le type énuméré suivant code trois valeurs.
 \begin{PLM}
-enum $feu @representation {
+enum $feu {
   case vert
   case orange
   case rouge
 }
 \end{PLM}
 
-Sont acceptables pour \plm!@representation! toutes les représentations déclarées dans la définition de la cible par \plm!newUnsignedRepresentation!. Ainsi, pour la définition de cible présentée à la \refSubsectionPage{fichierTarget}, on peut utiliser :
-\begin{itemize}
-  \item \plm!@unsigned8!, représentation sous la forme d'un octet ;
-  \item \plm!@unsigned16!, représentation sous la forme de deux octets ;
-  \item \plm!@unsigned32!, représentation sous la forme de quatre octets, identique pour cette cible à \plm!@size! ;
-  \item \plm!@unsigned64!, représentation sous la forme de huit octets.
-\end{itemize}
-
+Un objet de ce type est donc codé sur deux bits, et \plm+vert+ est représenté par $0$, \plm+orange+ par $1$ et \plm=rouge= par $2$.
 
