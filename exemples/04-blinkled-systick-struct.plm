@@ -5,11 +5,14 @@ target "teensy-3-1-sequential-systick"
 struct $point {
   var x $uint32 = 200
   var y $uint32 = 500
+
+//  mutating proc setX `user (?x:inX $uint32) { x = inX }
 }
 
 struct $point3 {
   var p $point = $point ()
   var z $int32 = 3
+  
 }
 
 //------------------------------------------------*
@@ -29,6 +32,8 @@ proc loop `user () {
   var p = $point3 ()
   waitMS (!p.p.x)
   p.p.y = 340
+  var q = $point ()
+//  [q setX !x:230]
 //  zz = zzz.p.x
 //  zzz.p.x = zz
 //  zzz = $point3 ()

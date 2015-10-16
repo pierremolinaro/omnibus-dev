@@ -96,7 +96,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-throw.galgas"
   "galgas-sources/instruction-operator-assign.galgas"
   "galgas-sources/instruction-if.galgas"
-##  "galgas-sources/instruction-method-call.galgas"
+  "galgas-sources/instruction-method-call.galgas"
 ##  "galgas-sources/instruction-mutating-method-call.galgas"
 ##  "galgas-sources/instruction-mutating-method-call-self.galgas"
   "galgas-sources/instruction-proc-call.galgas"
