@@ -374,8 +374,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !true
-          !.localAccess {
-            !access:.new {!receiverPtrName () + "->" + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
+          !.fieldAccess {
+            !objectType:type
+            !objectName:""
+            !fielfType:propertyType
+            !fieldIndex:idx
           }
           ![propertyType copiable]
           !{}
@@ -394,8 +397,11 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
           !propertyName
           !propertyType
           !true
-          !.localAccess {
-            !access:.new{!receiverName () + "." + mangledNameForProperty (!name:propertyName.string) !propertyName.location}
+          !.fieldAccess {
+            !objectType:type
+            !objectName:""
+            !fielfType:propertyType
+            !fieldIndex:idx
           }
           ![propertyType copiable]
           !{}

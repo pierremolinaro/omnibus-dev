@@ -37,8 +37,11 @@ method @objectInMemoryIR loadFromMemory
       !name
       !volatile:false
     ]
-  case localAccess (@lstring access) :
-    error access : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
+  case fieldAccess (@unifiedTypeMap-proxy unused objectType
+                    @string unused objectName
+                    @unifiedTypeMap-proxy unused fielfType
+                    @uint unused fieldIndex) :
+    error .nowhere : "@objectInMemoryIR loadFromMemory:access" : outResultingValue
   end
 }
 
@@ -57,8 +60,11 @@ method @objectInMemoryIR storeInMemory
     [!?ioInstructionGenerationList appendStoreLocalVariable !name !type !inValue]
   case globalConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
-  case localAccess (@lstring unused access) :
-     error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
+  case fieldAccess (@unifiedTypeMap-proxy unused objectType
+                    @string unused objectName
+                    @unifiedTypeMap-proxy unused fielfType
+                    @uint unused fieldIndex) :
+#     error .nowhere : "<<@objectInMemoryIR storeInMemory localAccess>>"
   end
 }
 

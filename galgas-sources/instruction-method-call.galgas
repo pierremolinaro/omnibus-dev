@@ -16,7 +16,7 @@ syntax extension common_syntax {
 
   #--------------------------------------------------------------------------------------------------------------------*
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $[$
     <expression> ?let @expressionAST expression
     $identifier$ ?let methodName
@@ -24,8 +24,8 @@ syntax extension common_syntax {
     repeat
     while
       $!$ ?let selector
-      $identifier$ ?let effectiveParameterName
-      effectiveParameterList += !.output{!name:effectiveParameterName} !selector
+      <expression> ?let @expressionAST expression
+      effectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
     while
       $!?$ ?let selector
       $identifier$ ?let effectiveParameterName
@@ -52,28 +52,29 @@ syntax extension common_syntax {
 #----------------------------------------------------------------------------------------------------------------------*
 
 override method @methodCallInstructionAST analyze
+  ?routineNameForInvocationGraph:let @lstring inRoutineNameForInvocationGraph
   ?optionalReceiverType:let @receiverType inReceiverType
   ?context:let @semanticContext inContext
-  ?mode:let @string inMode
+  ?modes:let @stringset inModeSet
+  ?allowException:let @bool inAllowExceptions
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@globalLiteralStringMap ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze receiver expression
   [mReceiverExpression analyzeExpression
-    !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
-    !optionalReceiverType:inReceiverType
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaryIndex
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?instructionListIR:ioInstructionGenerationList
-    ?expressionType:let receiverExpressionType
-    ?generatedCode:let unused receiverExpressionGeneratedCode
-    ?result:@variableKindIR receiverValueName
+     !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+     !optionalReceiverType:inReceiverType
+     !optionalTargetType:.null
+     !context:inContext
+     !modes:{}
+     !allowException:true
+     !?temporary:ioTemporaries
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:ioVariableMap
+     !?instructionListIR:ioInstructionGenerationList
+     ?result:let @operandIR receiverExpression
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
@@ -85,66 +86,78 @@ override method @methodCallInstructionAST analyze
       procMangledName += "!" ;
       [!?ioVariableMap searchForWriteAccess
         !name
-        ?let type
-        ?let acceptedModeSet
-        ?let @string valueAccess
-        ?let unused variableKind
-        ?let isCopiable
+        ?let @unifiedTypeMap-proxy type
+        ?let @bool unused readAccessAllowed
+        ?let @objectInMemoryIR unused variableKind
+        ?let @bool isCopiable
+        ?let @registerBitSliceAccessMap unused fieldMap
+        ?let @bool canBeUsedAsInputParameter
+        ?let @bool isConstant
       ]
     #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
+      if isConstant then
+        error name : "a constant cannot be modified"
+      end
+      if not canBeUsedAsInputParameter then
+        error name : "this variable cannot be used as input effective parameter"
       end
       if not isCopiable then
         error name : "the '" + name + "' variable is not copiable"
       end
-      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
-    case output (@lstring name) :
+      parameterList += !mEffectiveParameterKind !mSelector !type # !"& (" + valueAccess + ")"
+    case output (@expressionAST exp @location unused endOfExp) :
       procMangledName += "?" ;
-      [!?ioVariableMap searchForReadAccess
-        !name
-        ?let type
-        ?let acceptedModeSet
-        ?let valueAccess
-        ?let unused variableKind
-        ?*
+      [exp analyzeExpression
+         !routineNameForInvocationGraph:inRoutineNameForInvocationGraph
+         !optionalReceiverType:inReceiverType
+         !optionalTargetType:.null
+         !context:inContext
+         !modes:{}
+         !allowException:true
+         !?temporary:ioTemporaries
+         !?staticStringMap:ioGlobalLiteralStringMap
+         !?variableMap:ioVariableMap
+         !?instructionListIR:ioInstructionGenerationList
+         ?result:let @operandIR expressionResult
       ]
-    #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
-      end
-      parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
+      parameterList += !mEffectiveParameterKind !mSelector ![expressionResult mType] # !valueAccess
     case outputInput (@lstring name) :
       procMangledName += "?!" ;
       [!?ioVariableMap searchForReadWriteAccess
         !name
-        ?let type
-        ?let acceptedModeSet
-        ?let valueAccess
-        ?let unused variableKind
-        ?*
+        ?let @unifiedTypeMap-proxy type
+        ?let @bool unused readAccessAllowed
+        ?let @objectInMemoryIR unused variableKind
+        ?let @bool unused isCopiable
+        ?let @registerBitSliceAccessMap unused fieldMap
+        ?let @bool unused canBeUsedAsInputParameter
+        ?let @bool isConstant
       ]
     #--- Check mode
-      if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
+      if isConstant then
+        error name : "a constant cannot be modified"
       end
-      parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
+      parameterList += !mEffectiveParameterKind !mSelector !type # !"& (" + valueAccess + ")"
     end
     procMangledName += mSelector.string
   end
 #--- Search proc in proc map
-  let receiverTypeProcedureMap = [receiverExpressionType procedureMap]
+  let receiverTypeProcedureMap = [[receiverExpression mType] procedureMap]
   [receiverTypeProcedureMap searchKey
     !.new {!procMangledName !mMethodName.location}
     ?let calledProcIsMutating
-    ?let procedureMode
+    ?let procedureModeMap
     ?let @procedureSignature calledProcSignature
+    ?* # weak
   ]
 #--- Check mode
-  if procedureMode.string != inMode then
-    error mMethodName : "this variable cannot be used in $" + inMode + " mode"
-  end
+#  if not [inModeSet hasKey !procedureMode] then
+#    error mMethodName : "this variable cannot be used in $" + procedureMode + " mode"
+#  end
 #--- called method is not a mutating method
+#  if [[receiverExpression mType] isConstant] then
+#  
+#  end
   switch inReceiverType
   case noReceiver :
     if calledProcIsMutating then

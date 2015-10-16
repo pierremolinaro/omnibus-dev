@@ -22,7 +22,10 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
   case localValue (* @string unused name) :
   case globalConstant (* @string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
-  case localAccess (@lstring unused access) :
+  case fieldAccess (@unifiedTypeMap-proxy unused objectType
+                    @string unused objectName
+                    @unifiedTypeMap-proxy unused fielfType
+                    @uint unused fieldIndex) :
   end
 }
 

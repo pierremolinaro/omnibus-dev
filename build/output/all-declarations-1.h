@@ -6004,7 +6004,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
     kEnum_globalVariable,
     kEnum_localValue,
     kEnum_globalConstant,
-    kEnum_localAccess
+    kEnum_fieldAccess
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -6031,6 +6031,12 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static GALGAS_objectInMemoryIR constructor_fieldAccess (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                   const class GALGAS_string & inOperand1,
+                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                   const class GALGAS_uint & inOperand3
+                                                                   COMMA_LOCATION_ARGS) ;
+
   public : static GALGAS_objectInMemoryIR constructor_globalConstant (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                       const class GALGAS_string & inOperand1
                                                                       COMMA_LOCATION_ARGS) ;
@@ -6039,9 +6045,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                       const class GALGAS_string & inOperand1,
                                                                       const class GALGAS_bool & inOperand2
                                                                       COMMA_LOCATION_ARGS) ;
-
-  public : static GALGAS_objectInMemoryIR constructor_localAccess (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static GALGAS_objectInMemoryIR constructor_localValue (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                   const class GALGAS_string & inOperand1
@@ -6061,6 +6064,13 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_fieldAccess (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                     class GALGAS_string & outArgument1,
+                                                     class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
+                                                     class GALGAS_uint & outArgument3,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                         class GALGAS_string & outArgument1,
                                                         C_Compiler * inCompiler
@@ -6071,10 +6081,6 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                         class GALGAS_bool & outArgument2,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_localAccess (class GALGAS_lstring & outArgument0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_localValue (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                     class GALGAS_string & outArgument1,
@@ -6090,11 +6096,11 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isFieldAccess (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isGlobalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalAccess (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isLocalValue (LOCATION_ARGS) const ;
 

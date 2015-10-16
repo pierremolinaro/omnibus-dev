@@ -18,7 +18,7 @@ override getter @structureDeclaration location -> @location outLocation {
 
 list @structureFieldListAST {
   @lstring mFieldName
-  @lstring mOptionalFieldType
+  @lstring mFieldTypeName
   @expressionAST mInitExpression
 }
 
@@ -45,15 +45,10 @@ syntax extension common_syntax {
     while
       $var$
       $identifier$ ?let fieldName
-      @lstring optionalFieldType
-#      select
-#        optionalFieldType = .new {!"" !.here}
-#      or
-        $typeName$ ?optionalFieldType
-#      end
+      $typeName$ ?let typeName
       $=$
       <expression> ?let initExpression
-      fieldList += !fieldName !optionalFieldType !initExpression
+      fieldList += !fieldName !typeName !initExpression
     while
       <procedure>
         !procedureKind:.structureProc {!structureTypeName:structureName !mutating:false}
@@ -155,7 +150,7 @@ override method @structureDeclaration enterInContext
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   for () in mStructureFieldListAST do
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mOptionalFieldType ?let fieldTypeNameProxy]
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mFieldTypeName ?let fieldTypeNameProxy]
     propertyList += !mFieldName.string !fieldTypeNameProxy
     [!?propertyMap insertKey !mFieldName !fieldTypeNameProxy ![propertyMap count]]
   end
@@ -205,9 +200,9 @@ override method @structureDeclaration initAnalysis
   @operandIRList operandIRList = {}
   for () in mStructureFieldListAST do
   #--- Field type
-    let @unifiedTypeMap-proxy fieldType = if mOptionalFieldType.string == ""
+    let @unifiedTypeMap-proxy fieldType = if mFieldTypeName.string == ""
       then .null
-      else .searchKey {!ioContext.mTypeMap !mOptionalFieldType}
+      else .searchKey {!ioContext.mTypeMap !mFieldTypeName}
     end
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
