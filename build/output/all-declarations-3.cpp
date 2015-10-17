@@ -12872,7 +12872,7 @@ typeComparisonResult cEnumAssociatedValues_firstClassType_object::compare (const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_firstClassType_procedure::cEnumAssociatedValues_firstClassType_procedure (const GALGAS_procFormalArgumentList & inAssociatedValue0
+cEnumAssociatedValues_firstClassType_procedure::cEnumAssociatedValues_firstClassType_procedure (const GALGAS_procedureSignature & inAssociatedValue0
                                                                                                 COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -12901,41 +12901,6 @@ typeComparisonResult cEnumAssociatedValues_firstClassType_procedure::compare (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_firstClassType_function::cEnumAssociatedValues_firstClassType_function (const GALGAS_procFormalArgumentList & inAssociatedValue0,
-                                                                                              const GALGAS_firstClassType & inAssociatedValue1
-                                                                                              COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_firstClassType_function::description (C_String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_firstClassType_function::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_firstClassType_function * ptr = dynamic_cast<const cEnumAssociatedValues_firstClassType_function *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_firstClassType::GALGAS_firstClassType (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -12958,29 +12923,13 @@ GALGAS_firstClassType GALGAS_firstClassType::constructor_object (const GALGAS_un
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_firstClassType GALGAS_firstClassType::constructor_procedure (const GALGAS_procFormalArgumentList & inAssociatedValue0
+GALGAS_firstClassType GALGAS_firstClassType::constructor_procedure (const GALGAS_procedureSignature & inAssociatedValue0
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_firstClassType result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_procedure ;
     cEnumAssociatedValues * ptr = NULL ;
     macroMyNew (ptr, cEnumAssociatedValues_firstClassType_procedure (inAssociatedValue0 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_firstClassType GALGAS_firstClassType::constructor_function (const GALGAS_procFormalArgumentList & inAssociatedValue0,
-                                                                   const GALGAS_firstClassType & inAssociatedValue1
-                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_firstClassType result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
-    result.mEnum = kEnum_function ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_firstClassType_function (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -13005,7 +12954,7 @@ void GALGAS_firstClassType::method_object (GALGAS_unifiedTypeMap_2D_proxy & outA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_firstClassType::method_procedure (GALGAS_procFormalArgumentList & outAssociatedValue0,
+void GALGAS_firstClassType::method_procedure (GALGAS_procedureSignature & outAssociatedValue0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_procedure) {
@@ -13021,30 +12970,10 @@ void GALGAS_firstClassType::method_procedure (GALGAS_procFormalArgumentList & ou
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_firstClassType::method_function (GALGAS_procFormalArgumentList & outAssociatedValue0,
-                                             GALGAS_firstClassType & outAssociatedValue1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_function) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    C_String s ;
-    s << "method @firstClassType function invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_firstClassType_function * ptr = (const cEnumAssociatedValues_firstClassType_function *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_firstClassType [4] = {
+static const char * gEnumNameArrayFor_firstClassType [3] = {
   "(not built)",
   "object",
-  "procedure",
-  "function"
+  "procedure"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13057,12 +12986,6 @@ GALGAS_bool GALGAS_firstClassType::reader_isObject (UNUSED_LOCATION_ARGS) const 
 
 GALGAS_bool GALGAS_firstClassType::reader_isProcedure (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_procedure == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_firstClassType::reader_isFunction (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_function == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -15119,4 +15042,57 @@ C_galgas_function_descriptor functionDescriptor_solveInferredType ("solveInferre
                                                                    & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
                                                                    3,
                                                                    functionArgs_solveInferredType) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'combineTypeNamesForInfixOperator'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & constinArgument_inLeftTypeName,
+                                                          const GALGAS_string & constinArgument_inRightTypeName,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("{").add_operation (constinArgument_inLeftTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 337)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 337)).add_operation (constinArgument_inRightTypeName, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 337)).add_operation (GALGAS_string ("}"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 337)).reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 337)) ;
+//---
+  return result_outResult ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_combineTypeNamesForInfixOperator [3] = {
+  & kTypeDescriptor_GALGAS_string,
+  & kTypeDescriptor_GALGAS_string,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_combineTypeNamesForInfixOperator (C_Compiler * inCompiler,
+                                                                                 const cObjectArray & inEffectiveParameterArray,
+                                                                                 const GALGAS_location & /* §§ inErrorLocation */
+                                                                                 COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  const GALGAS_string operand1 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  return function_combineTypeNamesForInfixOperator (operand0,
+                                                    operand1,
+                                                    inCompiler
+                                                    COMMA_THERE).reader_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_combineTypeNamesForInfixOperator ("combineTypeNamesForInfixOperator",
+                                                                                  functionWithGenericHeader_combineTypeNamesForInfixOperator,
+                                                                                  & kTypeDescriptor_GALGAS_lstring,
+                                                                                  2,
+                                                                                  functionArgs_combineTypeNamesForInfixOperator) ;
 

@@ -25,7 +25,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/pointer-size.galgas"
 
 #--- Boolset
-#  "galgas-sources/boolset-type.galgas"
+##  "galgas-sources/boolset-type.galgas"
 
 #--- Mode
   "galgas-sources/mode-declaration.galgas"
@@ -48,8 +48,8 @@ project (1:0:0) -> "plm" {
   "galgas-sources/type-static-string.galgas"
 
 #--- New Type
-#  "galgas-sources/newtype-syntax.galgas"
-#  "galgas-sources/newtype-semantics.galgas"
+##  "galgas-sources/newtype-syntax.galgas"
+##  "galgas-sources/newtype-semantics.galgas"
 
 #--- Boot and init
   "galgas-sources/boot-declaration.galgas"
@@ -63,7 +63,6 @@ project (1:0:0) -> "plm" {
 
 #--- proc
   "galgas-sources/proc-declaration.galgas"
-  "galgas-sources/procedure-signature.galgas"
   "galgas-sources/required-proc-declaration.galgas"
 
 #--- Registers
@@ -76,7 +75,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-truncate.galgas"
   "galgas-sources/expression-constructor-call.galgas"
   "galgas-sources/expression-typed-constant.galgas"
-#  "galgas-sources/expression-instanciation.galgas"
+##  "galgas-sources/expression-instanciation.galgas"
   "galgas-sources/expression-infix-operators.galgas"
   "galgas-sources/expression-prefix-operators.galgas"
   "galgas-sources/expression-literal-integer.galgas"
@@ -84,7 +83,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-true-false.galgas"
 ##  "galgas-sources/expression-self.galgas"
   "galgas-sources/expression-var.galgas"
-#  "galgas-sources/expression-func-call.galgas"
+##  "galgas-sources/expression-func-call.galgas"
   "galgas-sources/expression-cst-registre.galgas"
 
 #--- Instructions
