@@ -646,8 +646,7 @@ class GALGAS_firstClassType : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_object,
-    kEnum_procedure,
-    kEnum_function
+    kEnum_procedure
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -674,14 +673,10 @@ class GALGAS_firstClassType : public AC_GALGAS_root {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static GALGAS_firstClassType constructor_function (const class GALGAS_procFormalArgumentList & inOperand0,
-                                                              const class GALGAS_firstClassType & inOperand1
-                                                              COMMA_LOCATION_ARGS) ;
-
   public : static GALGAS_firstClassType constructor_object (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
                                                             COMMA_LOCATION_ARGS) ;
 
-  public : static GALGAS_firstClassType constructor_procedure (const class GALGAS_procFormalArgumentList & inOperand0
+  public : static GALGAS_firstClassType constructor_procedure (const class GALGAS_procedureSignature & inOperand0
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of reader 'description'
@@ -693,24 +688,17 @@ class GALGAS_firstClassType : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_procFormalArgumentList & outArgument0,
-                                                  class GALGAS_firstClassType & outArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_object (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_procedure (class GALGAS_procFormalArgumentList & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_procedure (class GALGAS_procedureSignature & outArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isFunction (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isObject (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool reader_isProcedure (LOCATION_ARGS) const ;
@@ -749,10 +737,10 @@ class cEnumAssociatedValues_firstClassType_object : public cEnumAssociatedValues
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_firstClassType_procedure : public cEnumAssociatedValues {
-  public : const GALGAS_procFormalArgumentList mAssociatedValue0 ;
+  public : const GALGAS_procedureSignature mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_firstClassType_procedure (const GALGAS_procFormalArgumentList & inAssociatedValue0
+  public : cEnumAssociatedValues_firstClassType_procedure (const GALGAS_procedureSignature & inAssociatedValue0
                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -760,24 +748,6 @@ class cEnumAssociatedValues_firstClassType_procedure : public cEnumAssociatedVal
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_firstClassType_procedure (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_firstClassType_function : public cEnumAssociatedValues {
-  public : const GALGAS_procFormalArgumentList mAssociatedValue0 ;
-  public : const GALGAS_firstClassType mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_firstClassType_function (const GALGAS_procFormalArgumentList & inAssociatedValue0,
-                                                          const GALGAS_firstClassType & inAssociatedValue1
-                                                          COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_firstClassType_function (void) {}
 } ;
 
 

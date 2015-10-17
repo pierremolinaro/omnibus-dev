@@ -2,8 +2,16 @@
 
 enum @firstClassType {
   case object (@unifiedTypeMap-proxy type)
-  case procedure (@procFormalArgumentList formalArgumentList)
-  case function (@procFormalArgumentList formalArgumentList @firstClassType result)
+  case procedure (@procedureSignature signature)
+#  case function (@procFormalArgumentList formalArgumentList @firstClassType result)
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+list @procedureSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mType
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
