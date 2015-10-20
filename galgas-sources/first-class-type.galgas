@@ -10,7 +10,7 @@ enum @firstClassType {
 
 list @procedureSignature {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
+  @string mSelector
   @unifiedTypeMap-proxy mType
 }
 

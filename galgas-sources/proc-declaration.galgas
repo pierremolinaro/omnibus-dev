@@ -19,14 +19,14 @@ list @procFormalArgumentList {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@lstring inSelector -> @string outResult {
+getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@string inSelector -> @string outResult {
   switch self
   case input : outResult = "!"
   case output : outResult = "?"
   case inputOutput : outResult = "!?"
   end
-  if inSelector.string != "" then
-    outResult += inSelector.string + ":"
+  if inSelector != "" then
+    outResult += inSelector + ":"
   end
 }
 
@@ -234,7 +234,7 @@ method @procedureDeclarationListAST-element enterInContext
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-      signature += !formalArgumentPassingMode !selector !typeProxy
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
     end
   #--- Mode map
     @modeMap procedureModeMap = {}

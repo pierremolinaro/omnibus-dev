@@ -79,7 +79,7 @@ GALGAS_enumerationDeclaration GALGAS_enumerationDeclaration::constructor_new (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_enumerationDeclaration::reader_mEnumerationName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_enumerationDeclaration::getter_mEnumerationName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
@@ -91,13 +91,13 @@ GALGAS_lstring GALGAS_enumerationDeclaration::reader_mEnumerationName (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_enumerationDeclaration::reader_mEnumerationName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_enumerationDeclaration::getter_mEnumerationName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEnumerationName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_enumerationDeclaration::reader_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_enumerationDeclaration * p = (const cPtr_enumerationDeclaration *) mObjectPtr ;
@@ -109,7 +109,7 @@ GALGAS_lstringlist GALGAS_enumerationDeclaration::reader_mCaseNameList (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_enumerationDeclaration::reader_mCaseNameList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist cPtr_enumerationDeclaration::getter_mCaseNameList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCaseNameList ;
 }
 
@@ -259,7 +259,7 @@ GALGAS_globalConstantDeclaration GALGAS_globalConstantDeclaration::constructor_n
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_globalConstantDeclaration::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_globalConstantDeclaration::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
@@ -271,13 +271,13 @@ GALGAS_lstring GALGAS_globalConstantDeclaration::reader_mTypeName (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_globalConstantDeclaration::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_globalConstantDeclaration::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_globalConstantDeclaration::reader_mConstantName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_globalConstantDeclaration::getter_mConstantName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
@@ -289,13 +289,13 @@ GALGAS_lstring GALGAS_globalConstantDeclaration::reader_mConstantName (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_globalConstantDeclaration::reader_mConstantName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_globalConstantDeclaration::getter_mConstantName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mConstantName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_globalConstantDeclaration::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_globalConstantDeclaration::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_globalConstantDeclaration * p = (const cPtr_globalConstantDeclaration *) mObjectPtr ;
@@ -307,7 +307,7 @@ GALGAS_expressionAST GALGAS_globalConstantDeclaration::reader_mSourceExpression 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_globalConstantDeclaration::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_globalConstantDeclaration::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceExpression ;
 }
 
@@ -465,7 +465,7 @@ GALGAS_integerDeclaration GALGAS_integerDeclaration::constructor_new (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_integerDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_integerDeclaration::getter_mIsSigned (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) mObjectPtr ;
@@ -477,13 +477,13 @@ GALGAS_bool GALGAS_integerDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_integerDeclaration::reader_mIsSigned (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_integerDeclaration::getter_mIsSigned (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIsSigned ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_integerDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_integerDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_integerDeclaration * p = (const cPtr_integerDeclaration *) mObjectPtr ;
@@ -495,7 +495,7 @@ GALGAS_uint GALGAS_integerDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_integerDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_integerDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSize ;
 }
 
@@ -769,7 +769,7 @@ GALGAS_literalStringDeclaration GALGAS_literalStringDeclaration::constructor_new
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_literalStringDeclaration::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_literalStringDeclaration::getter_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalStringDeclaration * p = (const cPtr_literalStringDeclaration *) mObjectPtr ;
@@ -781,7 +781,7 @@ GALGAS_lstring GALGAS_literalStringDeclaration::reader_mLiteralStringTypeName (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_literalStringDeclaration::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_literalStringDeclaration::getter_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLiteralStringTypeName ;
 }
 
@@ -926,7 +926,7 @@ GALGAS_modeDeclaration GALGAS_modeDeclaration::constructor_new (const GALGAS_lst
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_modeDeclaration::reader_mModeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_modeDeclaration::getter_mModeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_modeDeclaration * p = (const cPtr_modeDeclaration *) mObjectPtr ;
@@ -938,7 +938,7 @@ GALGAS_lstring GALGAS_modeDeclaration::reader_mModeName (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_modeDeclaration::reader_mModeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_modeDeclaration::getter_mModeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mModeName ;
 }
 
@@ -1083,7 +1083,7 @@ GALGAS_pointerSizeDeclaration GALGAS_pointerSizeDeclaration::constructor_new (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_pointerSizeDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_pointerSizeDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
   GALGAS_lbigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_pointerSizeDeclaration * p = (const cPtr_pointerSizeDeclaration *) mObjectPtr ;
@@ -1095,7 +1095,7 @@ GALGAS_lbigint GALGAS_pointerSizeDeclaration::reader_mSize (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cPtr_pointerSizeDeclaration::reader_mSize (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint cPtr_pointerSizeDeclaration::getter_mSize (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSize ;
 }
 
@@ -1250,7 +1250,7 @@ GALGAS_registerDeclaration GALGAS_registerDeclaration::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList GALGAS_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerDeclarationList GALGAS_registerDeclaration::getter_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerDeclarationList result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
@@ -1262,13 +1262,13 @@ GALGAS_registerDeclarationList GALGAS_registerDeclaration::reader_mRegisterDecla
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerDeclarationList cPtr_registerDeclaration::reader_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerDeclarationList cPtr_registerDeclaration::getter_mRegisterDeclarationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterDeclarationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerDeclaration::getter_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
@@ -1280,13 +1280,13 @@ GALGAS_lstring GALGAS_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerDeclaration::reader_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerDeclaration::getter_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList GALGAS_registerDeclaration::reader_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerBitSliceList GALGAS_registerDeclaration::getter_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerBitSliceList result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerDeclaration * p = (const cPtr_registerDeclaration *) mObjectPtr ;
@@ -1298,7 +1298,7 @@ GALGAS_registerBitSliceList GALGAS_registerDeclaration::reader_mRegisterBitSlice
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerBitSliceList cPtr_registerDeclaration::reader_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerBitSliceList cPtr_registerDeclaration::getter_mRegisterBitSliceList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterBitSliceList ;
 }
 
@@ -1461,7 +1461,7 @@ GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_structureDeclaration::reader_mStructureName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_structureDeclaration::getter_mStructureName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
@@ -1473,13 +1473,13 @@ GALGAS_lstring GALGAS_structureDeclaration::reader_mStructureName (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_structureDeclaration::reader_mStructureName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_structureDeclaration::getter_mStructureName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStructureName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_structureDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_structureDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
@@ -1491,13 +1491,13 @@ GALGAS_lstringlist GALGAS_structureDeclaration::reader_mAttributeList (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_structureDeclaration::reader_mAttributeList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist cPtr_structureDeclaration::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureDeclaration::reader_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_structureFieldListAST GALGAS_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
   GALGAS_structureFieldListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
@@ -1509,7 +1509,7 @@ GALGAS_structureFieldListAST GALGAS_structureDeclaration::reader_mStructureField
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST cPtr_structureDeclaration::reader_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_structureFieldListAST cPtr_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStructureFieldListAST ;
 }
 
@@ -1841,7 +1841,7 @@ GALGAS_allocaConstantIR GALGAS_allocaConstantIR::constructor_new (const GALGAS_s
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_allocaConstantIR::reader_mLocalVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_allocaConstantIR::getter_mLocalVariableName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_allocaConstantIR * p = (const cPtr_allocaConstantIR *) mObjectPtr ;
@@ -1853,13 +1853,13 @@ GALGAS_string GALGAS_allocaConstantIR::reader_mLocalVariableName (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_allocaConstantIR::reader_mLocalVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_allocaConstantIR::getter_mLocalVariableName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocalVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_allocaConstantIR::reader_mVariableType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_allocaConstantIR::getter_mVariableType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_allocaConstantIR * p = (const cPtr_allocaConstantIR *) mObjectPtr ;
@@ -1871,7 +1871,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_allocaConstantIR::reader_mVariableType (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_allocaConstantIR::reader_mVariableType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_allocaConstantIR::getter_mVariableType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVariableType ;
 }
 
@@ -2021,7 +2021,7 @@ GALGAS_assertInstructionIR GALGAS_assertInstructionIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_assertInstructionIR::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_assertInstructionIR::getter_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
@@ -2033,13 +2033,13 @@ GALGAS_location GALGAS_assertInstructionIR::reader_mAssertInstructionLocation (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_assertInstructionIR::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_assertInstructionIR::getter_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mAssertInstructionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_assertInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_assertInstructionIR::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
@@ -2051,13 +2051,13 @@ GALGAS_instructionListIR GALGAS_assertInstructionIR::reader_mInstructionList (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_assertInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_assertInstructionIR::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_assertInstructionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
@@ -2069,7 +2069,7 @@ GALGAS_operandIR GALGAS_assertInstructionIR::reader_mExpressionValue (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_assertInstructionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionValue ;
 }
 
@@ -2235,7 +2235,7 @@ GALGAS_binaryOperationIR GALGAS_binaryOperationIR::constructor_new (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_binaryOperationIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2247,13 +2247,13 @@ GALGAS_valueIR GALGAS_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cPtr_binaryOperationIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::reader_mOperandType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::getter_mOperandType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2265,13 +2265,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::reader_mOperandType (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_binaryOperationIR::reader_mOperandType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_binaryOperationIR::getter_mOperandType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperandType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_binaryOperationIR::getter_mLeft (UNUSED_LOCATION_ARGS) const {
   GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2283,13 +2283,13 @@ GALGAS_valueIR GALGAS_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cPtr_binaryOperationIR::reader_mLeft (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::getter_mLeft (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeft ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::getter_mOperation (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2301,13 +2301,13 @@ GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::reader_mOperation (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cPtr_binaryOperationIR::reader_mOperation (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_binaryOperationIR::getter_mOperation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_binaryOperationIR::getter_mRight (UNUSED_LOCATION_ARGS) const {
   GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2319,13 +2319,13 @@ GALGAS_valueIR GALGAS_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cPtr_binaryOperationIR::reader_mRight (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_binaryOperationIR::getter_mRight (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRight ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_binaryOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
@@ -2337,7 +2337,7 @@ GALGAS_location GALGAS_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_binaryOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_binaryOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocation ;
 }
 
@@ -2502,7 +2502,7 @@ GALGAS_commentIR GALGAS_commentIR::constructor_new (const GALGAS_string & inAttr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_commentIR::reader_mComment (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_commentIR::getter_mComment (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_commentIR * p = (const cPtr_commentIR *) mObjectPtr ;
@@ -2514,7 +2514,7 @@ GALGAS_string GALGAS_commentIR::reader_mComment (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_commentIR::reader_mComment (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_commentIR::getter_mComment (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mComment ;
 }
 
@@ -2660,7 +2660,7 @@ GALGAS_convertInstructionIR GALGAS_convertInstructionIR::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_convertInstructionIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertInstructionIR * p = (const cPtr_convertInstructionIR *) mObjectPtr ;
@@ -2672,13 +2672,13 @@ GALGAS_operandIR GALGAS_convertInstructionIR::reader_mTarget (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_convertInstructionIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_convertInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertInstructionIR * p = (const cPtr_convertInstructionIR *) mObjectPtr ;
@@ -2690,13 +2690,13 @@ GALGAS_operandIR GALGAS_convertInstructionIR::reader_mOperand (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_convertInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_convertInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_convertInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertInstructionIR * p = (const cPtr_convertInstructionIR *) mObjectPtr ;
@@ -2708,7 +2708,7 @@ GALGAS_location GALGAS_convertInstructionIR::reader_mLocation (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_convertInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_convertInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocation ;
 }
 
@@ -2858,7 +2858,7 @@ GALGAS_extendIR GALGAS_extendIR::constructor_new (const GALGAS_operandIR & inAtt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extendIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
@@ -2870,13 +2870,13 @@ GALGAS_operandIR GALGAS_extendIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extendIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extendIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
@@ -2888,7 +2888,7 @@ GALGAS_operandIR GALGAS_extendIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extendIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -3038,7 +3038,7 @@ GALGAS_extractValueIR GALGAS_extractValueIR::constructor_new (const GALGAS_opera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extractValueIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_extractValueIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
@@ -3050,13 +3050,13 @@ GALGAS_operandIR GALGAS_extractValueIR::reader_mTarget (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extractValueIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_extractValueIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extractValueIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_extractValueIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
@@ -3068,13 +3068,13 @@ GALGAS_operandIR GALGAS_extractValueIR::reader_mSource (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extractValueIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_extractValueIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_extractValueIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_extractValueIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_extractValueIR * p = (const cPtr_extractValueIR *) mObjectPtr ;
@@ -3086,7 +3086,7 @@ GALGAS_uint GALGAS_extractValueIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_extractValueIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_extractValueIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
@@ -3248,7 +3248,7 @@ GALGAS_forInstructionIR GALGAS_forInstructionIR::constructor_new (const GALGAS_s
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_forInstructionIR::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_forInstructionIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
@@ -3260,13 +3260,13 @@ GALGAS_string GALGAS_forInstructionIR::reader_mVarName (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_forInstructionIR::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_forInstructionIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_forInstructionIR::reader_mElementType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_forInstructionIR::getter_mElementType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
@@ -3278,13 +3278,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_forInstructionIR::reader_mElementType (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_forInstructionIR::reader_mElementType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_forInstructionIR::getter_mElementType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mElementType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_forInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_forInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
@@ -3296,13 +3296,13 @@ GALGAS_location GALGAS_forInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_forInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_forInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_forInstructionIR::reader_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
@@ -3314,13 +3314,13 @@ GALGAS_operandIR GALGAS_forInstructionIR::reader_mExpressionResult (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_forInstructionIR::reader_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_forInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_forInstructionIR::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
@@ -3332,7 +3332,7 @@ GALGAS_instructionListIR GALGAS_forInstructionIR::reader_mInstructionList (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_forInstructionIR::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_forInstructionIR::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionList ;
 }
 
@@ -3494,7 +3494,7 @@ GALGAS_getElementPtrIR GALGAS_getElementPtrIR::constructor_new (const GALGAS_obj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_getElementPtrIR * p = (const cPtr_getElementPtrIR *) mObjectPtr ;
@@ -3506,13 +3506,13 @@ GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::reader_mTarget (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR cPtr_getElementPtrIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_getElementPtrIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectInMemoryIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_getElementPtrIR * p = (const cPtr_getElementPtrIR *) mObjectPtr ;
@@ -3524,13 +3524,13 @@ GALGAS_objectInMemoryIR GALGAS_getElementPtrIR::reader_mSource (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR cPtr_getElementPtrIR::reader_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cPtr_getElementPtrIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_getElementPtrIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_getElementPtrIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_getElementPtrIR * p = (const cPtr_getElementPtrIR *) mObjectPtr ;
@@ -3542,7 +3542,7 @@ GALGAS_uint GALGAS_getElementPtrIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_getElementPtrIR::reader_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_getElementPtrIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
@@ -3700,7 +3700,7 @@ GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_ope
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
@@ -3712,13 +3712,13 @@ GALGAS_operandIR GALGAS_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_ifInstructionIR::reader_mTestVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestVariable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_ifInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_ifInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
@@ -3730,13 +3730,13 @@ GALGAS_location GALGAS_ifInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_ifInstructionIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_ifInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_ifInstructionIR::getter_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
@@ -3748,13 +3748,13 @@ GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mThenInstructionGenerati
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_ifInstructionIR::reader_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_ifInstructionIR::getter_mThenInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mThenInstructionGenerationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_ifInstructionIR::getter_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
@@ -3766,7 +3766,7 @@ GALGAS_instructionListIR GALGAS_ifInstructionIR::reader_mElseInstructionGenerati
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_ifInstructionIR::reader_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_ifInstructionIR::getter_mElseInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mElseInstructionGenerationList ;
 }
 
@@ -3924,7 +3924,7 @@ GALGAS_loadGlobalVariableIR GALGAS_loadGlobalVariableIR::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadGlobalVariableIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
@@ -3936,13 +3936,13 @@ GALGAS_operandIR GALGAS_loadGlobalVariableIR::reader_mTargetValue (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadGlobalVariableIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_loadGlobalVariableIR::reader_mVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_loadGlobalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
@@ -3954,13 +3954,13 @@ GALGAS_string GALGAS_loadGlobalVariableIR::reader_mVariableName (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_loadGlobalVariableIR::reader_mVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_loadGlobalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_loadGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
@@ -3972,7 +3972,7 @@ GALGAS_bool GALGAS_loadGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_loadGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIsVolatile ;
 }
 
@@ -4122,7 +4122,7 @@ GALGAS_loadLocalVariableIR GALGAS_loadLocalVariableIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadLocalVariableIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
@@ -4134,13 +4134,13 @@ GALGAS_operandIR GALGAS_loadLocalVariableIR::reader_mTargetValue (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadLocalVariableIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_loadLocalVariableIR::reader_mVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
@@ -4152,7 +4152,7 @@ GALGAS_string GALGAS_loadLocalVariableIR::reader_mVariableName (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_loadLocalVariableIR::reader_mVariableName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVariableName ;
 }
 
@@ -4302,7 +4302,7 @@ GALGAS_loadRegisterIR GALGAS_loadRegisterIR::constructor_new (const GALGAS_opera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadRegisterIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
@@ -4314,13 +4314,13 @@ GALGAS_operandIR GALGAS_loadRegisterIR::reader_mTargetValue (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadRegisterIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_loadRegisterIR::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_loadRegisterIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
@@ -4332,13 +4332,13 @@ GALGAS_string GALGAS_loadRegisterIR::reader_mRegisterName (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_loadRegisterIR::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_loadRegisterIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_loadRegisterIR::reader_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
@@ -4350,7 +4350,7 @@ GALGAS_bigint GALGAS_loadRegisterIR::reader_mRegisterAddress (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_loadRegisterIR::reader_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterAddress ;
 }
 
@@ -4500,7 +4500,7 @@ GALGAS_loadStructureConstantIR GALGAS_loadStructureConstantIR::constructor_new (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadStructureConstantIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadStructureConstantIR * p = (const cPtr_loadStructureConstantIR *) mObjectPtr ;
@@ -4512,13 +4512,13 @@ GALGAS_operandIR GALGAS_loadStructureConstantIR::reader_mTargetValue (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadStructureConstantIR::reader_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_loadStructureConstantIR::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_loadStructureConstantIR::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadStructureConstantIR * p = (const cPtr_loadStructureConstantIR *) mObjectPtr ;
@@ -4530,7 +4530,7 @@ GALGAS_string GALGAS_loadStructureConstantIR::reader_mTypeName (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_loadStructureConstantIR::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_loadStructureConstantIR::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
@@ -4688,7 +4688,7 @@ GALGAS_prefixOperatorExpressionIR GALGAS_prefixOperatorExpressionIR::constructor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorExpressionIR::getter_mTargetType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
@@ -4700,13 +4700,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_prefixOperatorExpressionIR::reader_mTarget
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_prefixOperatorExpressionIR::reader_mTargetType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_prefixOperatorExpressionIR::getter_mTargetType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
@@ -4718,13 +4718,13 @@ GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::reader_mResult (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cPtr_prefixOperatorExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_prefixOperatorExpressionIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
@@ -4736,13 +4736,13 @@ GALGAS_valueIR GALGAS_prefixOperatorExpressionIR::reader_mOperand (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valueIR cPtr_prefixOperatorExpressionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_prefixOperatorExpressionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperatorIR GALGAS_prefixOperatorExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_prefixOperatorIR GALGAS_prefixOperatorExpressionIR::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_prefixOperatorIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
@@ -4754,13 +4754,13 @@ GALGAS_prefixOperatorIR GALGAS_prefixOperatorExpressionIR::reader_mOperator (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperatorIR cPtr_prefixOperatorExpressionIR::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_prefixOperatorIR cPtr_prefixOperatorExpressionIR::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_prefixOperatorExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_prefixOperatorExpressionIR::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionIR * p = (const cPtr_prefixOperatorExpressionIR *) mObjectPtr ;
@@ -4772,7 +4772,7 @@ GALGAS_location GALGAS_prefixOperatorExpressionIR::reader_mOperatorLocation (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_prefixOperatorExpressionIR::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_prefixOperatorExpressionIR::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperatorLocation ;
 }
 
@@ -4938,7 +4938,7 @@ GALGAS_procCallInstructionIR GALGAS_procCallInstructionIR::constructor_new (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_procCallInstructionIR::reader_mProcName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
@@ -4950,13 +4950,13 @@ GALGAS_string GALGAS_procCallInstructionIR::reader_mProcName (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_procCallInstructionIR::reader_mProcName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_procCallInstructionIR::getter_mProcName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mProcName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procCallEffectiveParameterListIR GALGAS_procCallInstructionIR::reader_mParameters (UNUSED_LOCATION_ARGS) const {
+GALGAS_procCallEffectiveParameterListIR GALGAS_procCallInstructionIR::getter_mParameters (UNUSED_LOCATION_ARGS) const {
   GALGAS_procCallEffectiveParameterListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionIR * p = (const cPtr_procCallInstructionIR *) mObjectPtr ;
@@ -4968,7 +4968,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallInstructionIR::reader_mPa
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::reader_mParameters (UNUSED_LOCATION_ARGS) const {
+GALGAS_procCallEffectiveParameterListIR cPtr_procCallInstructionIR::getter_mParameters (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mParameters ;
 }
 
@@ -5130,7 +5130,7 @@ GALGAS_registerIntegerConstantInExpressionIR GALGAS_registerIntegerConstantInExp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_registerIntegerConstantInExpressionIR::reader_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_registerIntegerConstantInExpressionIR::getter_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5142,13 +5142,13 @@ GALGAS_location GALGAS_registerIntegerConstantInExpressionIR::reader_mInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_registerIntegerConstantInExpressionIR::reader_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_registerIntegerConstantInExpressionIR::getter_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5160,13 +5160,13 @@ GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::reader_mExpressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_registerIntegerConstantInExpressionIR::reader_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_registerIntegerConstantInExpressionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ GALGAS_registerIntegerConstantInExpressionIR::reader_mMaxBound (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint_36__34_ GALGAS_registerIntegerConstantInExpressionIR::getter_mMaxBound (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint_36__34_ result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5178,13 +5178,13 @@ GALGAS_uint_36__34_ GALGAS_registerIntegerConstantInExpressionIR::reader_mMaxBou
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint_36__34_ cPtr_registerIntegerConstantInExpressionIR::reader_mMaxBound (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint_36__34_ cPtr_registerIntegerConstantInExpressionIR::getter_mMaxBound (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMaxBound ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_registerIntegerConstantInExpressionIR::reader_mBitShift (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_registerIntegerConstantInExpressionIR::getter_mBitShift (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5196,13 +5196,13 @@ GALGAS_uint GALGAS_registerIntegerConstantInExpressionIR::reader_mBitShift (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_registerIntegerConstantInExpressionIR::reader_mBitShift (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_registerIntegerConstantInExpressionIR::getter_mBitShift (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mBitShift ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5214,13 +5214,13 @@ GALGAS_operandIR GALGAS_registerIntegerConstantInExpressionIR::reader_mResult (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_registerIntegerConstantInExpressionIR::reader_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_registerIntegerConstantInExpressionIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_registerIntegerConstantInExpressionIR::reader_mNoCheck (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_registerIntegerConstantInExpressionIR::getter_mNoCheck (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerConstantInExpressionIR * p = (const cPtr_registerIntegerConstantInExpressionIR *) mObjectPtr ;
@@ -5232,7 +5232,7 @@ GALGAS_bool GALGAS_registerIntegerConstantInExpressionIR::reader_mNoCheck (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_registerIntegerConstantInExpressionIR::reader_mNoCheck (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_registerIntegerConstantInExpressionIR::getter_mNoCheck (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mNoCheck ;
 }
 
@@ -5410,7 +5410,7 @@ GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::constructor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mTargetOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5422,13 +5422,13 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mTargetOperand (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::reader_mTargetOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mLeftOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5440,13 +5440,13 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mLeftOperand (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::reader_mLeftOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeftOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::reader_mLeftInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mLeftInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5458,13 +5458,13 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::reader_mLeftInstruct
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::reader_mLeftInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::getter_mLeftInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeftInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mRightOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5476,13 +5476,13 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::reader_mRightOperand (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::reader_mRightOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRightOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::reader_mRightInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mRightInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5494,13 +5494,13 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::reader_mRightInstruc
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::reader_mRightInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::getter_mRightInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRightInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_shortCircuitAndOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
@@ -5512,7 +5512,7 @@ GALGAS_location GALGAS_shortCircuitAndOperationIR::reader_mLocation (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_shortCircuitAndOperationIR::reader_mLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocation ;
 }
 
@@ -5682,7 +5682,7 @@ GALGAS_storeGlobalVariableIR GALGAS_storeGlobalVariableIR::constructor_new (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_storeGlobalVariableIR::reader_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_storeGlobalVariableIR::getter_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
@@ -5694,13 +5694,13 @@ GALGAS_string GALGAS_storeGlobalVariableIR::reader_mGlobalVarName (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_storeGlobalVariableIR::reader_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_storeGlobalVariableIR::getter_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mGlobalVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeGlobalVariableIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeGlobalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
@@ -5712,13 +5712,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeGlobalVariableIR::reader_mTargetVarTy
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_storeGlobalVariableIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_storeGlobalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeGlobalVariableIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
@@ -5730,13 +5730,13 @@ GALGAS_operandIR GALGAS_storeGlobalVariableIR::reader_mSourceValue (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeGlobalVariableIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_storeGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
@@ -5748,7 +5748,7 @@ GALGAS_bool GALGAS_storeGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_storeGlobalVariableIR::reader_mIsVolatile (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIsVolatile ;
 }
 
@@ -5906,7 +5906,7 @@ GALGAS_storeLocalVariableIR GALGAS_storeLocalVariableIR::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_storeLocalVariableIR::reader_mLocalVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_storeLocalVariableIR::getter_mLocalVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
@@ -5918,13 +5918,13 @@ GALGAS_string GALGAS_storeLocalVariableIR::reader_mLocalVarName (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_storeLocalVariableIR::reader_mLocalVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_storeLocalVariableIR::getter_mLocalVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLocalVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeLocalVariableIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeLocalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
@@ -5936,13 +5936,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeLocalVariableIR::reader_mTargetVarTyp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_storeLocalVariableIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_storeLocalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeLocalVariableIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
@@ -5954,7 +5954,7 @@ GALGAS_operandIR GALGAS_storeLocalVariableIR::reader_mSourceValue (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeLocalVariableIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -6112,7 +6112,7 @@ GALGAS_storeVolatileIR GALGAS_storeVolatileIR::constructor_new (const GALGAS_str
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_storeVolatileIR::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_storeVolatileIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
@@ -6124,13 +6124,13 @@ GALGAS_string GALGAS_storeVolatileIR::reader_mRegisterName (UNUSED_LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_storeVolatileIR::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_storeVolatileIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
@@ -6142,13 +6142,13 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIR::reader_mTargetVarType (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_storeVolatileIR::reader_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cPtr_storeVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_storeVolatileIR::reader_mAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
@@ -6160,13 +6160,13 @@ GALGAS_bigint GALGAS_storeVolatileIR::reader_mAddress (UNUSED_LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_storeVolatileIR::reader_mAddress (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeVolatileIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
@@ -6178,7 +6178,7 @@ GALGAS_operandIR GALGAS_storeVolatileIR::reader_mSourceValue (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeVolatileIR::reader_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -6340,7 +6340,7 @@ GALGAS_throwInstructionIR GALGAS_throwInstructionIR::constructor_new (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_throwInstructionIR::reader_mThrowLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_throwInstructionIR::getter_mThrowLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_throwInstructionIR * p = (const cPtr_throwInstructionIR *) mObjectPtr ;
@@ -6352,13 +6352,13 @@ GALGAS_location GALGAS_throwInstructionIR::reader_mThrowLocation (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_throwInstructionIR::reader_mThrowLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_throwInstructionIR::getter_mThrowLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mThrowLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_throwInstructionIR::reader_mCode (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_throwInstructionIR::getter_mCode (UNUSED_LOCATION_ARGS) const {
   GALGAS_bigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_throwInstructionIR * p = (const cPtr_throwInstructionIR *) mObjectPtr ;
@@ -6370,7 +6370,7 @@ GALGAS_bigint GALGAS_throwInstructionIR::reader_mCode (UNUSED_LOCATION_ARGS) con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cPtr_throwInstructionIR::reader_mCode (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint cPtr_throwInstructionIR::getter_mCode (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCode ;
 }
 
@@ -6516,7 +6516,7 @@ GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::constructor_new (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncateInstructionIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateInstructionIR * p = (const cPtr_truncateInstructionIR *) mObjectPtr ;
@@ -6528,13 +6528,13 @@ GALGAS_operandIR GALGAS_truncateInstructionIR::reader_mTarget (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncateInstructionIR::reader_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncateInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateInstructionIR * p = (const cPtr_truncateInstructionIR *) mObjectPtr ;
@@ -6546,7 +6546,7 @@ GALGAS_operandIR GALGAS_truncateInstructionIR::reader_mOperand (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncateInstructionIR::reader_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
@@ -6700,7 +6700,7 @@ GALGAS_whileInstructionIR GALGAS_whileInstructionIR::constructor_new (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_whileInstructionIR::reader_mLabelIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_whileInstructionIR::getter_mLabelIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_uint result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
@@ -6712,13 +6712,13 @@ GALGAS_uint GALGAS_whileInstructionIR::reader_mLabelIndex (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cPtr_whileInstructionIR::reader_mLabelIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint cPtr_whileInstructionIR::getter_mLabelIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLabelIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_whileInstructionIR::reader_mTestInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_whileInstructionIR::getter_mTestInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
@@ -6730,13 +6730,13 @@ GALGAS_instructionListIR GALGAS_whileInstructionIR::reader_mTestInstructionGener
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_whileInstructionIR::reader_mTestInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mTestInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestInstructionGenerationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_whileInstructionIR::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR GALGAS_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_operandIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
@@ -6748,13 +6748,13 @@ GALGAS_operandIR GALGAS_whileInstructionIR::reader_mTestExpression (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_whileInstructionIR::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_operandIR cPtr_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR GALGAS_whileInstructionIR::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR GALGAS_whileInstructionIR::getter_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
@@ -6766,7 +6766,7 @@ GALGAS_instructionListIR GALGAS_whileInstructionIR::reader_mInstructionGeneratio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListIR cPtr_whileInstructionIR::reader_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionGenerationList ;
 }
 
@@ -7010,7 +7010,7 @@ GALGAS_literalStringTypeIR GALGAS_literalStringTypeIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string GALGAS_literalStringTypeIR::getter_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_string result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalStringTypeIR * p = (const cPtr_literalStringTypeIR *) mObjectPtr ;
@@ -7022,7 +7022,7 @@ GALGAS_string GALGAS_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_literalStringTypeIR::reader_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_string cPtr_literalStringTypeIR::getter_mLiteralStringTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLiteralStringTypeName ;
 }
 
@@ -7255,7 +7255,7 @@ GALGAS_booleanShortCircuitAndOperatorExpressionAST GALGAS_booleanShortCircuitAnd
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_mLeftExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::getter_mLeftExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_booleanShortCircuitAndOperatorExpressionAST * p = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) mObjectPtr ;
@@ -7267,13 +7267,13 @@ GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_booleanShortCircuitAndOperatorExpressionAST::reader_mLeftExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_booleanShortCircuitAndOperatorExpressionAST::getter_mLeftExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeftExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_booleanShortCircuitAndOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_booleanShortCircuitAndOperatorExpressionAST * p = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) mObjectPtr ;
@@ -7285,13 +7285,13 @@ GALGAS_location GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_mOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_booleanShortCircuitAndOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_booleanShortCircuitAndOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperatorLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_mRightExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::getter_mRightExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_booleanShortCircuitAndOperatorExpressionAST * p = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) mObjectPtr ;
@@ -7303,7 +7303,7 @@ GALGAS_expressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::reader_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_booleanShortCircuitAndOperatorExpressionAST::reader_mRightExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_booleanShortCircuitAndOperatorExpressionAST::getter_mRightExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRightExpression ;
 }
 
@@ -7461,7 +7461,7 @@ GALGAS_constructorCall GALGAS_constructorCall::constructor_new (const GALGAS_lst
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_constructorCall::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_constructorCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_constructorCall * p = (const cPtr_constructorCall *) mObjectPtr ;
@@ -7473,13 +7473,13 @@ GALGAS_lstring GALGAS_constructorCall::reader_mOptionalTypeName (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_constructorCall::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_constructorCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOptionalTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_constructorCall::reader_mErrorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_constructorCall::getter_mErrorLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_constructorCall * p = (const cPtr_constructorCall *) mObjectPtr ;
@@ -7491,7 +7491,7 @@ GALGAS_location GALGAS_constructorCall::reader_mErrorLocation (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_constructorCall::reader_mErrorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_constructorCall::getter_mErrorLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mErrorLocation ;
 }
 
@@ -7641,7 +7641,7 @@ GALGAS_convertExpressionAST GALGAS_convertExpressionAST::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_convertExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
@@ -7653,13 +7653,13 @@ GALGAS_expressionAST GALGAS_convertExpressionAST::reader_mExpression (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_convertExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_convertExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_convertExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
@@ -7671,13 +7671,13 @@ GALGAS_lstring GALGAS_convertExpressionAST::reader_mTypeName (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_convertExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_convertExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_convertExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertExpressionAST * p = (const cPtr_convertExpressionAST *) mObjectPtr ;
@@ -7689,7 +7689,7 @@ GALGAS_location GALGAS_convertExpressionAST::reader_mEndOfExpression (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_convertExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_convertExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfExpression ;
 }
 
@@ -7843,7 +7843,7 @@ GALGAS_extendExpressionAST GALGAS_extendExpressionAST::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_extendExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_extendExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendExpressionAST * p = (const cPtr_extendExpressionAST *) mObjectPtr ;
@@ -7855,13 +7855,13 @@ GALGAS_expressionAST GALGAS_extendExpressionAST::reader_mExpression (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_extendExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_extendExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_extendExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_extendExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendExpressionAST * p = (const cPtr_extendExpressionAST *) mObjectPtr ;
@@ -7873,13 +7873,13 @@ GALGAS_lstring GALGAS_extendExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_extendExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_extendExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_extendExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_extendExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendExpressionAST * p = (const cPtr_extendExpressionAST *) mObjectPtr ;
@@ -7891,7 +7891,7 @@ GALGAS_location GALGAS_extendExpressionAST::reader_mEndOfExpression (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_extendExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_extendExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfExpression ;
 }
 
@@ -8049,7 +8049,7 @@ GALGAS_infixOperatorExpressionAST GALGAS_infixOperatorExpressionAST::constructor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::reader_mLeftExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::getter_mLeftExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_infixOperatorExpressionAST * p = (const cPtr_infixOperatorExpressionAST *) mObjectPtr ;
@@ -8061,13 +8061,13 @@ GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::reader_mLeftExpression (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_infixOperatorExpressionAST::reader_mLeftExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_infixOperatorExpressionAST::getter_mLeftExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeftExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_infixOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_infixOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_infixOperatorExpressionAST * p = (const cPtr_infixOperatorExpressionAST *) mObjectPtr ;
@@ -8079,13 +8079,13 @@ GALGAS_location GALGAS_infixOperatorExpressionAST::reader_mOperatorLocation (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_infixOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_infixOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperatorLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperator GALGAS_infixOperatorExpressionAST::reader_mOp (UNUSED_LOCATION_ARGS) const {
+GALGAS_infixOperator GALGAS_infixOperatorExpressionAST::getter_mOp (UNUSED_LOCATION_ARGS) const {
   GALGAS_infixOperator result ;
   if (NULL != mObjectPtr) {
     const cPtr_infixOperatorExpressionAST * p = (const cPtr_infixOperatorExpressionAST *) mObjectPtr ;
@@ -8097,13 +8097,13 @@ GALGAS_infixOperator GALGAS_infixOperatorExpressionAST::reader_mOp (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_infixOperator cPtr_infixOperatorExpressionAST::reader_mOp (UNUSED_LOCATION_ARGS) const {
+GALGAS_infixOperator cPtr_infixOperatorExpressionAST::getter_mOp (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOp ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::reader_mRightExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::getter_mRightExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_infixOperatorExpressionAST * p = (const cPtr_infixOperatorExpressionAST *) mObjectPtr ;
@@ -8115,7 +8115,7 @@ GALGAS_expressionAST GALGAS_infixOperatorExpressionAST::reader_mRightExpression 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_infixOperatorExpressionAST::reader_mRightExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_infixOperatorExpressionAST::getter_mRightExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRightExpression ;
 }
 
@@ -8272,7 +8272,7 @@ GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_literalBooleanInExpressionAST::getter_mValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_bool result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalBooleanInExpressionAST * p = (const cPtr_literalBooleanInExpressionAST *) mObjectPtr ;
@@ -8284,7 +8284,7 @@ GALGAS_bool GALGAS_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cPtr_literalBooleanInExpressionAST::reader_mValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool cPtr_literalBooleanInExpressionAST::getter_mValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mValue ;
 }
 
@@ -8429,7 +8429,7 @@ GALGAS_literalIntegerInExpressionAST GALGAS_literalIntegerInExpressionAST::const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint GALGAS_literalIntegerInExpressionAST::getter_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
   GALGAS_lbigint result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalIntegerInExpressionAST * p = (const cPtr_literalIntegerInExpressionAST *) mObjectPtr ;
@@ -8441,7 +8441,7 @@ GALGAS_lbigint GALGAS_literalIntegerInExpressionAST::reader_mLiteralInteger (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cPtr_literalIntegerInExpressionAST::reader_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
+GALGAS_lbigint cPtr_literalIntegerInExpressionAST::getter_mLiteralInteger (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLiteralInteger ;
 }
 
@@ -8586,7 +8586,7 @@ GALGAS_literalStringInExpressionAST GALGAS_literalStringInExpressionAST::constru
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_literalStringInExpressionAST::reader_mLiteralString (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_literalStringInExpressionAST::getter_mLiteralString (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_literalStringInExpressionAST * p = (const cPtr_literalStringInExpressionAST *) mObjectPtr ;
@@ -8598,7 +8598,7 @@ GALGAS_lstring GALGAS_literalStringInExpressionAST::reader_mLiteralString (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_literalStringInExpressionAST::reader_mLiteralString (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_literalStringInExpressionAST::getter_mLiteralString (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLiteralString ;
 }
 
@@ -8744,7 +8744,7 @@ GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST::construct
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_prefixOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_prefixOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionAST * p = (const cPtr_prefixOperatorExpressionAST *) mObjectPtr ;
@@ -8756,13 +8756,13 @@ GALGAS_location GALGAS_prefixOperatorExpressionAST::reader_mOperatorLocation (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_prefixOperatorExpressionAST::reader_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_prefixOperatorExpressionAST::getter_mOperatorLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperatorLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperator GALGAS_prefixOperatorExpressionAST::reader_mOp (UNUSED_LOCATION_ARGS) const {
+GALGAS_prefixOperator GALGAS_prefixOperatorExpressionAST::getter_mOp (UNUSED_LOCATION_ARGS) const {
   GALGAS_prefixOperator result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionAST * p = (const cPtr_prefixOperatorExpressionAST *) mObjectPtr ;
@@ -8774,13 +8774,13 @@ GALGAS_prefixOperator GALGAS_prefixOperatorExpressionAST::reader_mOp (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_prefixOperator cPtr_prefixOperatorExpressionAST::reader_mOp (UNUSED_LOCATION_ARGS) const {
+GALGAS_prefixOperator cPtr_prefixOperatorExpressionAST::getter_mOp (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOp ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_prefixOperatorExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_prefixOperatorExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_prefixOperatorExpressionAST * p = (const cPtr_prefixOperatorExpressionAST *) mObjectPtr ;
@@ -8792,7 +8792,7 @@ GALGAS_expressionAST GALGAS_prefixOperatorExpressionAST::reader_mExpression (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_prefixOperatorExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_prefixOperatorExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
@@ -8950,7 +8950,7 @@ GALGAS_registerConstantInExpressionAST GALGAS_registerConstantInExpressionAST::c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerConstantInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerConstantInExpressionAST * p = (const cPtr_registerConstantInExpressionAST *) mObjectPtr ;
@@ -8962,13 +8962,13 @@ GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mRegisterName (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerConstantInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerConstantInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerConstantInExpressionAST::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerConstantInExpressionAST * p = (const cPtr_registerConstantInExpressionAST *) mObjectPtr ;
@@ -8980,7 +8980,7 @@ GALGAS_lstring GALGAS_registerConstantInExpressionAST::reader_mFieldName (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerConstantInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerConstantInExpressionAST::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldName ;
 }
 
@@ -9134,7 +9134,7 @@ GALGAS_registerIntegerExpInExpressionAST GALGAS_registerIntegerExpInExpressionAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
@@ -9146,13 +9146,13 @@ GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mRegisterName (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::reader_mRegisterName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
@@ -9164,13 +9164,13 @@ GALGAS_lstring GALGAS_registerIntegerExpInExpressionAST::reader_mFieldName (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::reader_mFieldName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_registerIntegerExpInExpressionAST::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_registerIntegerExpInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_registerIntegerExpInExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
@@ -9182,13 +9182,13 @@ GALGAS_expressionAST GALGAS_registerIntegerExpInExpressionAST::reader_mExpressio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_registerIntegerExpInExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_registerIntegerExpInExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_registerIntegerExpInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_registerIntegerExpInExpressionAST::getter_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerIntegerExpInExpressionAST * p = (const cPtr_registerIntegerExpInExpressionAST *) mObjectPtr ;
@@ -9200,7 +9200,7 @@ GALGAS_location GALGAS_registerIntegerExpInExpressionAST::reader_mExpressionLoca
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_registerIntegerExpInExpressionAST::reader_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_registerIntegerExpInExpressionAST::getter_mExpressionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionLocation ;
 }
 
@@ -9358,7 +9358,7 @@ GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::constructor_new (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_truncateExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_truncateExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
@@ -9370,13 +9370,13 @@ GALGAS_expressionAST GALGAS_truncateExpressionAST::reader_mExpression (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_truncateExpressionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_truncateExpressionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_truncateExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_truncateExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
@@ -9388,13 +9388,13 @@ GALGAS_lstring GALGAS_truncateExpressionAST::reader_mTypeName (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_truncateExpressionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_truncateExpressionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_truncateExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_truncateExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateExpressionAST * p = (const cPtr_truncateExpressionAST *) mObjectPtr ;
@@ -9406,7 +9406,7 @@ GALGAS_location GALGAS_truncateExpressionAST::reader_mEndOfExpression (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_truncateExpressionAST::reader_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_truncateExpressionAST::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfExpression ;
 }
 
@@ -9564,7 +9564,7 @@ GALGAS_typedConstantCall GALGAS_typedConstantCall::constructor_new (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_typedConstantCall::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_typedConstantCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_typedConstantCall * p = (const cPtr_typedConstantCall *) mObjectPtr ;
@@ -9576,13 +9576,13 @@ GALGAS_lstring GALGAS_typedConstantCall::reader_mOptionalTypeName (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_typedConstantCall::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_typedConstantCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOptionalTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_typedConstantCall::reader_mConstructorName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_typedConstantCall::getter_mConstructorName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_typedConstantCall * p = (const cPtr_typedConstantCall *) mObjectPtr ;
@@ -9594,7 +9594,7 @@ GALGAS_lstring GALGAS_typedConstantCall::reader_mConstructorName (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_typedConstantCall::reader_mConstructorName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_typedConstantCall::getter_mConstructorName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mConstructorName ;
 }
 
@@ -9748,7 +9748,7 @@ GALGAS_varInExpressionAST GALGAS_varInExpressionAST::constructor_new (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_varInExpressionAST::reader_mSourceVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_varInExpressionAST::getter_mSourceVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInExpressionAST * p = (const cPtr_varInExpressionAST *) mObjectPtr ;
@@ -9760,13 +9760,13 @@ GALGAS_lstring GALGAS_varInExpressionAST::reader_mSourceVarName (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_varInExpressionAST::reader_mSourceVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_varInExpressionAST::getter_mSourceVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_varInExpressionAST::reader_mFieldNameList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_varInExpressionAST::getter_mFieldNameList (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInExpressionAST * p = (const cPtr_varInExpressionAST *) mObjectPtr ;
@@ -9778,7 +9778,7 @@ GALGAS_lstringlist GALGAS_varInExpressionAST::reader_mFieldNameList (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_varInExpressionAST::reader_mFieldNameList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist cPtr_varInExpressionAST::getter_mFieldNameList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldNameList ;
 }
 
@@ -10007,7 +10007,7 @@ GALGAS_infixObjectObjectOperatorDescription GALGAS_infixObjectObjectOperatorDesc
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_infixObjectObjectOperatorDescription::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_infixObjectObjectOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_infixObjectObjectOperatorDescription * p = (const cPtr_infixObjectObjectOperatorDescription *) mObjectPtr ;
@@ -10019,7 +10019,7 @@ GALGAS_llvmBinaryOperation GALGAS_infixObjectObjectOperatorDescription::reader_m
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cPtr_infixObjectObjectOperatorDescription::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_infixObjectObjectOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -10157,7 +10157,7 @@ GALGAS_integerObject_5F_literal_5F_divisionOperator GALGAS_integerObject_5F_lite
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_divisionOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_divisionOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_integerObject_5F_literal_5F_divisionOperator * p = (const cPtr_integerObject_5F_literal_5F_divisionOperator *) mObjectPtr ;
@@ -10169,7 +10169,7 @@ GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_divisionOperator::
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cPtr_integerObject_5F_literal_5F_divisionOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_integerObject_5F_literal_5F_divisionOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -10307,7 +10307,7 @@ GALGAS_integerObject_5F_literal_5F_infixOperator GALGAS_integerObject_5F_literal
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_infixOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_integerObject_5F_literal_5F_infixOperator * p = (const cPtr_integerObject_5F_literal_5F_infixOperator *) mObjectPtr ;
@@ -10319,7 +10319,7 @@ GALGAS_llvmBinaryOperation GALGAS_integerObject_5F_literal_5F_infixOperator::rea
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cPtr_integerObject_5F_literal_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_integerObject_5F_literal_5F_infixOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -10457,7 +10457,7 @@ GALGAS_literal_5F_integerObject_5F_infixOperator GALGAS_literal_5F_integerObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_literal_5F_integerObject_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_literal_5F_integerObject_5F_infixOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_llvmBinaryOperation result ;
   if (NULL != mObjectPtr) {
     const cPtr_literal_5F_integerObject_5F_infixOperator * p = (const cPtr_literal_5F_integerObject_5F_infixOperator *) mObjectPtr ;
@@ -10469,7 +10469,7 @@ GALGAS_llvmBinaryOperation GALGAS_literal_5F_integerObject_5F_infixOperator::rea
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cPtr_literal_5F_integerObject_5F_infixOperator::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation cPtr_literal_5F_integerObject_5F_infixOperator::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -10607,7 +10607,7 @@ GALGAS_literal_5F_literal_5F_integerInfixOperation GALGAS_literal_5F_literal_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalIntegerInfixOperator GALGAS_literal_5F_literal_5F_integerInfixOperation::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_literalIntegerInfixOperator GALGAS_literal_5F_literal_5F_integerInfixOperation::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_literalIntegerInfixOperator result ;
   if (NULL != mObjectPtr) {
     const cPtr_literal_5F_literal_5F_integerInfixOperation * p = (const cPtr_literal_5F_literal_5F_integerInfixOperation *) mObjectPtr ;
@@ -10619,7 +10619,7 @@ GALGAS_literalIntegerInfixOperator GALGAS_literal_5F_literal_5F_integerInfixOper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_literalIntegerInfixOperator cPtr_literal_5F_literal_5F_integerInfixOperation::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_literalIntegerInfixOperator cPtr_literal_5F_literal_5F_integerInfixOperation::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -10848,7 +10848,7 @@ GALGAS_assertInstructionAST GALGAS_assertInstructionAST::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_assertInstructionAST::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_assertInstructionAST::getter_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionAST * p = (const cPtr_assertInstructionAST *) mObjectPtr ;
@@ -10860,13 +10860,13 @@ GALGAS_location GALGAS_assertInstructionAST::reader_mAssertInstructionLocation (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_assertInstructionAST::reader_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_assertInstructionAST::getter_mAssertInstructionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mAssertInstructionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_assertInstructionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_assertInstructionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionAST * p = (const cPtr_assertInstructionAST *) mObjectPtr ;
@@ -10878,7 +10878,7 @@ GALGAS_expressionAST GALGAS_assertInstructionAST::reader_mExpression (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_assertInstructionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_assertInstructionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
@@ -11028,7 +11028,7 @@ GALGAS_assignmentInstructionAST GALGAS_assignmentInstructionAST::constructor_new
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_assignmentInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_assignmentInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_assignmentInstructionAST * p = (const cPtr_assignmentInstructionAST *) mObjectPtr ;
@@ -11040,13 +11040,13 @@ GALGAS_lstring GALGAS_assignmentInstructionAST::reader_mTargetVarName (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_assignmentInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_assignmentInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_assignmentInstructionAST::reader_mFieldList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_assignmentInstructionAST::getter_mFieldList (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_assignmentInstructionAST * p = (const cPtr_assignmentInstructionAST *) mObjectPtr ;
@@ -11058,13 +11058,13 @@ GALGAS_lstringlist GALGAS_assignmentInstructionAST::reader_mFieldList (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_assignmentInstructionAST::reader_mFieldList (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist cPtr_assignmentInstructionAST::getter_mFieldList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFieldList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_assignmentInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_assignmentInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_assignmentInstructionAST * p = (const cPtr_assignmentInstructionAST *) mObjectPtr ;
@@ -11076,7 +11076,7 @@ GALGAS_expressionAST GALGAS_assignmentInstructionAST::reader_mSourceExpression (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_assignmentInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_assignmentInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceExpression ;
 }
 
@@ -11226,7 +11226,7 @@ GALGAS_checkInstructionAST GALGAS_checkInstructionAST::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_checkInstructionAST::reader_mCheckInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_checkInstructionAST::getter_mCheckInstructionLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_checkInstructionAST * p = (const cPtr_checkInstructionAST *) mObjectPtr ;
@@ -11238,13 +11238,13 @@ GALGAS_location GALGAS_checkInstructionAST::reader_mCheckInstructionLocation (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_checkInstructionAST::reader_mCheckInstructionLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_checkInstructionAST::getter_mCheckInstructionLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCheckInstructionLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_checkInstructionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_checkInstructionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_checkInstructionAST * p = (const cPtr_checkInstructionAST *) mObjectPtr ;
@@ -11256,7 +11256,7 @@ GALGAS_expressionAST GALGAS_checkInstructionAST::reader_mExpression (UNUSED_LOCA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_checkInstructionAST::reader_mExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_checkInstructionAST::getter_mExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpression ;
 }
 
@@ -11414,7 +11414,7 @@ GALGAS_forInstructionAST GALGAS_forInstructionAST::constructor_new (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_forInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_forInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
@@ -11426,13 +11426,13 @@ GALGAS_lstring GALGAS_forInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_forInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_forInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_forInstructionAST::reader_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_forInstructionAST::getter_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
@@ -11444,13 +11444,13 @@ GALGAS_expressionAST GALGAS_forInstructionAST::reader_mIteratedExpression (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_forInstructionAST::reader_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_forInstructionAST::getter_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIteratedExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_forInstructionAST::reader_mEndOf_5F_iteratedExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_forInstructionAST::getter_mEndOf_5F_iteratedExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
@@ -11462,13 +11462,13 @@ GALGAS_location GALGAS_forInstructionAST::reader_mEndOf_5F_iteratedExpression_5F
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_forInstructionAST::reader_mEndOf_5F_iteratedExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_forInstructionAST::getter_mEndOf_5F_iteratedExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOf_5F_iteratedExpression_5F_instruction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_forInstructionAST::reader_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_forInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
@@ -11480,13 +11480,13 @@ GALGAS_instructionListAST GALGAS_forInstructionAST::reader_mDoInstructionList (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST cPtr_forInstructionAST::reader_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST cPtr_forInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mDoInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_forInstructionAST::reader_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_forInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
@@ -11498,7 +11498,7 @@ GALGAS_location GALGAS_forInstructionAST::reader_mEndOf_5F_do_5F_instruction (UN
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_forInstructionAST::reader_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_forInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOf_5F_do_5F_instruction ;
 }
 
@@ -11676,7 +11676,7 @@ GALGAS_ifInstructionAST GALGAS_ifInstructionAST::constructor_new (const GALGAS_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_ifInstructionAST::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_ifInstructionAST::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11688,13 +11688,13 @@ GALGAS_expressionAST GALGAS_ifInstructionAST::reader_mTestExpression (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_ifInstructionAST::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_ifInstructionAST::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_ifInstructionAST::reader_mTestExpressionEndLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_ifInstructionAST::getter_mTestExpressionEndLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11706,13 +11706,13 @@ GALGAS_location GALGAS_ifInstructionAST::reader_mTestExpressionEndLocation (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_ifInstructionAST::reader_mTestExpressionEndLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_ifInstructionAST::getter_mTestExpressionEndLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestExpressionEndLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_ifInstructionAST::reader_mThenInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_ifInstructionAST::getter_mThenInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11724,13 +11724,13 @@ GALGAS_instructionListAST GALGAS_ifInstructionAST::reader_mThenInstructionList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST cPtr_ifInstructionAST::reader_mThenInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST cPtr_ifInstructionAST::getter_mThenInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mThenInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_ifInstructionAST::reader_mEndOfThenInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_ifInstructionAST::getter_mEndOfThenInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11742,13 +11742,13 @@ GALGAS_location GALGAS_ifInstructionAST::reader_mEndOfThenInstructionList (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_ifInstructionAST::reader_mEndOfThenInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_ifInstructionAST::getter_mEndOfThenInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfThenInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_ifInstructionAST::reader_mElseInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_ifInstructionAST::getter_mElseInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11760,13 +11760,13 @@ GALGAS_instructionListAST GALGAS_ifInstructionAST::reader_mElseInstructionList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST cPtr_ifInstructionAST::reader_mElseInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST cPtr_ifInstructionAST::getter_mElseInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mElseInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_ifInstructionAST::reader_mEndOfElseInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_ifInstructionAST::getter_mEndOfElseInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11778,13 +11778,13 @@ GALGAS_location GALGAS_ifInstructionAST::reader_mEndOfElseInstructionList (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_ifInstructionAST::reader_mEndOfElseInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_ifInstructionAST::getter_mEndOfElseInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfElseInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_ifInstructionAST::reader_mEndOf_5F_if_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_ifInstructionAST::getter_mEndOf_5F_if_5F_instruction (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionAST * p = (const cPtr_ifInstructionAST *) mObjectPtr ;
@@ -11796,7 +11796,7 @@ GALGAS_location GALGAS_ifInstructionAST::reader_mEndOf_5F_if_5F_instruction (UNU
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_ifInstructionAST::reader_mEndOf_5F_if_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_ifInstructionAST::getter_mEndOf_5F_if_5F_instruction (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOf_5F_if_5F_instruction ;
 }
 
@@ -11962,7 +11962,7 @@ GALGAS_incDecInstructionAST GALGAS_incDecInstructionAST::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecKind GALGAS_incDecInstructionAST::reader_mKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_incDecKind GALGAS_incDecInstructionAST::getter_mKind (UNUSED_LOCATION_ARGS) const {
   GALGAS_incDecKind result ;
   if (NULL != mObjectPtr) {
     const cPtr_incDecInstructionAST * p = (const cPtr_incDecInstructionAST *) mObjectPtr ;
@@ -11974,13 +11974,13 @@ GALGAS_incDecKind GALGAS_incDecInstructionAST::reader_mKind (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_incDecKind cPtr_incDecInstructionAST::reader_mKind (UNUSED_LOCATION_ARGS) const {
+GALGAS_incDecKind cPtr_incDecInstructionAST::getter_mKind (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_incDecInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_incDecInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_incDecInstructionAST * p = (const cPtr_incDecInstructionAST *) mObjectPtr ;
@@ -11992,7 +11992,7 @@ GALGAS_lstring GALGAS_incDecInstructionAST::reader_mVarName (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_incDecInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_incDecInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
@@ -12142,7 +12142,7 @@ GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST::c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
@@ -12154,13 +12154,13 @@ GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_letInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
@@ -12172,13 +12172,13 @@ GALGAS_lstring GALGAS_letInstructionWithAssignmentAST::reader_mOptionalTypeName 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_letInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_letInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOptionalTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_letInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_letInstructionWithAssignmentAST * p = (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
@@ -12190,7 +12190,7 @@ GALGAS_expressionAST GALGAS_letInstructionWithAssignmentAST::reader_mSourceExpre
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_letInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_letInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceExpression ;
 }
 
@@ -12344,7 +12344,7 @@ GALGAS_methodCallInstructionAST GALGAS_methodCallInstructionAST::constructor_new
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_methodCallInstructionAST::reader_mReceiverExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_methodCallInstructionAST::getter_mReceiverExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_methodCallInstructionAST * p = (const cPtr_methodCallInstructionAST *) mObjectPtr ;
@@ -12356,13 +12356,13 @@ GALGAS_expressionAST GALGAS_methodCallInstructionAST::reader_mReceiverExpression
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_methodCallInstructionAST::reader_mReceiverExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_methodCallInstructionAST::getter_mReceiverExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mReceiverExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_methodCallInstructionAST::reader_mMethodName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_methodCallInstructionAST::getter_mMethodName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_methodCallInstructionAST * p = (const cPtr_methodCallInstructionAST *) mObjectPtr ;
@@ -12374,13 +12374,13 @@ GALGAS_lstring GALGAS_methodCallInstructionAST::reader_mMethodName (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_methodCallInstructionAST::reader_mMethodName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_methodCallInstructionAST::getter_mMethodName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mMethodName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST GALGAS_methodCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+GALGAS_procEffectiveParameterListAST GALGAS_methodCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
   GALGAS_procEffectiveParameterListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_methodCallInstructionAST * p = (const cPtr_methodCallInstructionAST *) mObjectPtr ;
@@ -12392,7 +12392,7 @@ GALGAS_procEffectiveParameterListAST GALGAS_methodCallInstructionAST::reader_mEf
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST cPtr_methodCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+GALGAS_procEffectiveParameterListAST cPtr_methodCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEffectiveParameterList ;
 }
 
@@ -12546,7 +12546,7 @@ GALGAS_operatorAssignInstructionAST GALGAS_operatorAssignInstructionAST::constru
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_operatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
@@ -12558,13 +12558,13 @@ GALGAS_lstring GALGAS_operatorAssignInstructionAST::reader_mTargetVarName (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_operatorAssignInstructionAST::reader_mTargetVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_operatorAssignInstructionAST::getter_mTargetVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_operatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
@@ -12576,13 +12576,13 @@ GALGAS_expressionAST GALGAS_operatorAssignInstructionAST::reader_mSourceExpressi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_operatorAssignInstructionAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_operatorAssignInstructionAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionAST::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_operatorAssignKind result ;
   if (NULL != mObjectPtr) {
     const cPtr_operatorAssignInstructionAST * p = (const cPtr_operatorAssignInstructionAST *) mObjectPtr ;
@@ -12594,7 +12594,7 @@ GALGAS_operatorAssignKind GALGAS_operatorAssignInstructionAST::reader_mOperator 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operatorAssignKind cPtr_operatorAssignInstructionAST::reader_mOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_operatorAssignKind cPtr_operatorAssignInstructionAST::getter_mOperator (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperator ;
 }
 
@@ -12752,7 +12752,7 @@ GALGAS_procCallInstructionAST GALGAS_procCallInstructionAST::constructor_new (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_procCallInstructionAST::reader_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_procCallInstructionAST::getter_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
@@ -12764,13 +12764,13 @@ GALGAS_lstring GALGAS_procCallInstructionAST::reader_mProcRoutineName (UNUSED_LO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_procCallInstructionAST::reader_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_procCallInstructionAST::getter_mProcRoutineName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mProcRoutineName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST GALGAS_procCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+GALGAS_procEffectiveParameterListAST GALGAS_procCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
   GALGAS_procEffectiveParameterListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_procCallInstructionAST * p = (const cPtr_procCallInstructionAST *) mObjectPtr ;
@@ -12782,7 +12782,7 @@ GALGAS_procEffectiveParameterListAST GALGAS_procCallInstructionAST::reader_mEffe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procEffectiveParameterListAST cPtr_procCallInstructionAST::reader_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
+GALGAS_procEffectiveParameterListAST cPtr_procCallInstructionAST::getter_mEffectiveParameterList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEffectiveParameterList ;
 }
 
@@ -12928,7 +12928,7 @@ GALGAS_throwInstructionAST GALGAS_throwInstructionAST::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_throwInstructionAST::reader_mThrowLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_throwInstructionAST::getter_mThrowLocation (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_throwInstructionAST * p = (const cPtr_throwInstructionAST *) mObjectPtr ;
@@ -12940,13 +12940,13 @@ GALGAS_location GALGAS_throwInstructionAST::reader_mThrowLocation (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_throwInstructionAST::reader_mThrowLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_throwInstructionAST::getter_mThrowLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mThrowLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_throwInstructionAST::reader_mCodeExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_throwInstructionAST::getter_mCodeExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_throwInstructionAST * p = (const cPtr_throwInstructionAST *) mObjectPtr ;
@@ -12958,7 +12958,7 @@ GALGAS_expressionAST GALGAS_throwInstructionAST::reader_mCodeExpression (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_throwInstructionAST::reader_mCodeExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_throwInstructionAST::getter_mCodeExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mCodeExpression ;
 }
 
@@ -13112,7 +13112,7 @@ GALGAS_varInstructionAST GALGAS_varInstructionAST::constructor_new (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_varInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_varInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInstructionAST * p = (const cPtr_varInstructionAST *) mObjectPtr ;
@@ -13124,13 +13124,13 @@ GALGAS_lstring GALGAS_varInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_varInstructionAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_varInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_varInstructionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_varInstructionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInstructionAST * p = (const cPtr_varInstructionAST *) mObjectPtr ;
@@ -13142,7 +13142,7 @@ GALGAS_lstring GALGAS_varInstructionAST::reader_mTypeName (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_varInstructionAST::reader_mTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_varInstructionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTypeName ;
 }
 
@@ -13292,7 +13292,7 @@ GALGAS_varInstructionWithAssignmentAST GALGAS_varInstructionWithAssignmentAST::c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
@@ -13304,13 +13304,13 @@ GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::reader_mVarName (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_varInstructionWithAssignmentAST::reader_mVarName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_varInstructionWithAssignmentAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
@@ -13322,13 +13322,13 @@ GALGAS_lstring GALGAS_varInstructionWithAssignmentAST::reader_mOptionalTypeName 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cPtr_varInstructionWithAssignmentAST::reader_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_varInstructionWithAssignmentAST::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOptionalTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_varInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_varInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_varInstructionWithAssignmentAST * p = (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ;
@@ -13340,7 +13340,7 @@ GALGAS_expressionAST GALGAS_varInstructionWithAssignmentAST::reader_mSourceExpre
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_varInstructionWithAssignmentAST::reader_mSourceExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_varInstructionWithAssignmentAST::getter_mSourceExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceExpression ;
 }
 
@@ -13498,7 +13498,7 @@ GALGAS_whileInstructionAST GALGAS_whileInstructionAST::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_whileInstructionAST::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_whileInstructionAST::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   GALGAS_expressionAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionAST * p = (const cPtr_whileInstructionAST *) mObjectPtr ;
@@ -13510,13 +13510,13 @@ GALGAS_expressionAST GALGAS_whileInstructionAST::reader_mTestExpression (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_whileInstructionAST::reader_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_expressionAST cPtr_whileInstructionAST::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_whileInstructionAST::reader_mEndOf_5F_test_5F_expression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_whileInstructionAST::getter_mEndOf_5F_test_5F_expression (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionAST * p = (const cPtr_whileInstructionAST *) mObjectPtr ;
@@ -13528,13 +13528,13 @@ GALGAS_location GALGAS_whileInstructionAST::reader_mEndOf_5F_test_5F_expression 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_whileInstructionAST::reader_mEndOf_5F_test_5F_expression (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_whileInstructionAST::getter_mEndOf_5F_test_5F_expression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOf_5F_test_5F_expression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_whileInstructionAST::reader_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_whileInstructionAST::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionAST * p = (const cPtr_whileInstructionAST *) mObjectPtr ;
@@ -13546,13 +13546,13 @@ GALGAS_instructionListAST GALGAS_whileInstructionAST::reader_mWhileInstructionLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST cPtr_whileInstructionAST::reader_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST cPtr_whileInstructionAST::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mWhileInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_whileInstructionAST::reader_mEndOf_5F_while_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_whileInstructionAST::getter_mEndOf_5F_while_5F_instruction (UNUSED_LOCATION_ARGS) const {
   GALGAS_location result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionAST * p = (const cPtr_whileInstructionAST *) mObjectPtr ;
@@ -13564,7 +13564,7 @@ GALGAS_location GALGAS_whileInstructionAST::reader_mEndOf_5F_while_5F_instructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location cPtr_whileInstructionAST::reader_mEndOf_5F_while_5F_instruction (UNUSED_LOCATION_ARGS) const {
+GALGAS_location cPtr_whileInstructionAST::getter_mEndOf_5F_while_5F_instruction (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOf_5F_while_5F_instruction ;
 }
 
@@ -13705,57 +13705,57 @@ static void routine_before (C_Compiler * inCompiler
                             COMMA_UNUSED_LOCATION_ARGS) {
   {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_embeddedSampleCode) ;
-    const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedSampleFiles.reader_value ()).boolEnum () ;
+    const enumGalgasBool test_0 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedSampleFiles.getter_value ()).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_stringlist var_files = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-sample-code.galgas", 16)) ;
+      GALGAS_stringlist var_files = var_fw.getter_allTextFilePathes (SOURCE_FILE ("embedded-sample-code.galgas", 16)) ;
       inCompiler->printMessage (GALGAS_string ("Embedded sample code:\n")  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 17)) ;
       cEnumerator_stringlist enumerator_796 (var_files, kEnumeration_up) ;
       while (enumerator_796.hasCurrentObject ()) {
-        inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_796.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_796.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
         enumerator_796.gotoNextObject () ;
       }
     }
-    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedSampleFile.reader_value ()) ;
+    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedSampleFile.getter_value ()) ;
     const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_1) {
-      const enumGalgasBool test_2 = var_fw.reader_fileExistsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 24)).boolEnum () ;
+      const enumGalgasBool test_2 = var_fw.getter_fileExistsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 24)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 25)) ;
-        GALGAS_string var_sourceName = var_path.reader_lastPathComponent (SOURCE_FILE ("embedded-sample-code.galgas", 26)) ;
+        GALGAS_string var_text = var_fw.getter_textFileContentsAtPath (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 25)) ;
+        GALGAS_string var_sourceName = var_path.getter_lastPathComponent (SOURCE_FILE ("embedded-sample-code.galgas", 26)) ;
         GALGAS_bool joker_1128 ; // Joker input parameter
         var_text.method_writeToFileWhenDifferentContents (var_sourceName, joker_1128, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 27)) ;
       }else if (kBoolFalse == test_2) {
-        GALGAS_location location_3 (GALGAS_string::makeEmptyString ().reader_nowhere (SOURCE_FILE ("embedded-sample-code.galgas", 29)).reader_location (HERE)) ; // Implicit use of 'location' reader
+        GALGAS_location location_3 (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("embedded-sample-code.galgas", 29)).getter_location (HERE)) ; // Implicit use of 'location' getter
         inCompiler->emitSemanticError (location_3, GALGAS_string ("there is no '").add_operation (var_path, inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)).add_operation (GALGAS_string ("' embedded file"), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29))  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 29)) ;
       }
     }
   }
   {
     GALGAS_filewrapper var_fw = GALGAS_filewrapper (gWrapperDirectory_0_embeddedTargets) ;
-    const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedTargets.reader_value ()).boolEnum () ;
+    const enumGalgasBool test_4 = GALGAS_bool (gOption_plm_5F_options_listEmbeddedTargets.getter_value ()).boolEnum () ;
     if (kBoolTrue == test_4) {
-      GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 16)) ;
+      GALGAS_stringlist var_embeddedFiles = var_fw.getter_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 16)) ;
       inCompiler->printMessage (GALGAS_string ("Embedded targets:\n")  COMMA_SOURCE_FILE ("embedded-targets.galgas", 17)) ;
       cEnumerator_stringlist enumerator_830 (var_embeddedFiles, kEnumeration_up) ;
       while (enumerator_830.hasCurrentObject ()) {
-        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_830.current_mValue (HERE).reader_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
+        const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, enumerator_830.current_mValue (HERE).getter_pathExtension (SOURCE_FILE ("embedded-targets.galgas", 19)).objectCompare (GALGAS_string ("plm-target"))).boolEnum () ;
         if (kBoolTrue == test_5) {
-          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_830.current_mValue (HERE).reader_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)).reader_stringByDeletingPathExtension (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
+          inCompiler->printMessage (GALGAS_string ("  ").add_operation (enumerator_830.current_mValue (HERE).getter_lastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 20)).getter_stringByDeletingPathExtension (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-targets.galgas", 20)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 20))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 20)) ;
         }
         enumerator_830.gotoNextObject () ;
       }
     }
-    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedTargets.reader_value ()) ;
+    GALGAS_string var_path = GALGAS_string (gOption_plm_5F_options_extractEmbeddedTargets.getter_value ()) ;
     const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_path.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_6) {
-      GALGAS_stringlist var_embeddedFiles = var_fw.reader_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 26)) ;
+      GALGAS_stringlist var_embeddedFiles = var_fw.getter_allTextFilePathes (SOURCE_FILE ("embedded-targets.galgas", 26)) ;
       cEnumerator_stringlist enumerator_1149 (var_embeddedFiles, kEnumeration_up) ;
       while (enumerator_1149.hasCurrentObject ()) {
         GALGAS_string var_filePath = var_path.add_operation (enumerator_1149.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 28)) ;
-        inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)).add_operation (GALGAS_char (TO_UNICODE (10)).reader_string (SOURCE_FILE ("embedded-targets.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)) ;
-        GALGAS_string var_dir = var_filePath.reader_stringByDeletingLastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 30)) ;
+        inCompiler->printMessage (GALGAS_string ("  ").add_operation (var_filePath, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)).add_operation (GALGAS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-targets.galgas", 29)), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 29))  COMMA_SOURCE_FILE ("embedded-targets.galgas", 29)) ;
+        GALGAS_string var_dir = var_filePath.getter_stringByDeletingLastPathComponent (SOURCE_FILE ("embedded-targets.galgas", 30)) ;
         var_dir.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 31)) ;
-        GALGAS_string var_text = var_fw.reader_textFileContentsAtPath (enumerator_1149.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
+        GALGAS_string var_text = var_fw.getter_textFileContentsAtPath (enumerator_1149.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 32)) ;
         GALGAS_bool joker_1421 ; // Joker input parameter
         var_text.method_writeToFileWhenDifferentContents (var_filePath, joker_1421, inCompiler COMMA_SOURCE_FILE ("embedded-targets.galgas", 33)) ;
         enumerator_1149.gotoNextObject () ;
@@ -13797,7 +13797,7 @@ static void routine_programRule_5F__30_ (const GALGAS_lstring /* constinArgument
 static void routine_programRule_5F__31_ (const GALGAS_lstring constinArgument_inSourceFile,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_galgas_5F_builtin_5F_options_mode.reader_value ()).objectCompare (GALGAS_string::makeEmptyString ())).operator_and (GALGAS_bool (gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree.reader_value ()).operator_not (SOURCE_FILE ("program.galgas", 16)) COMMA_SOURCE_FILE ("program.galgas", 16)).boolEnum () ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, GALGAS_string (gOption_galgas_5F_builtin_5F_options_mode.getter_value ()).objectCompare (GALGAS_string::makeEmptyString ())).operator_and (GALGAS_bool (gOption_galgas_5F_builtin_5F_options_outputConcreteSyntaxTree.getter_value ()).operator_not (SOURCE_FILE ("program.galgas", 16)) COMMA_SOURCE_FILE ("program.galgas", 16)).boolEnum () ;
   if (kBoolTrue == test_0) {
     {
     routine_importFilesAndCompile (constinArgument_inSourceFile, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 17)) ;
@@ -13939,33 +13939,33 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Abstract category reader '@abstractDeclaration location'                               *
+//                              Abstract category getter '@abstractDeclaration location'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_location> gCategoryReaderTable_abstractDeclaration_location ;
+static TC_UniqueArray <categoryGetterSignature_abstractDeclaration_location> gCategoryGetterTable_abstractDeclaration_location ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryReader_location (const int32_t inClassIndex,
-                                   categoryReaderSignature_abstractDeclaration_location inReader) {
-  gCategoryReaderTable_abstractDeclaration_location.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+void enterCategoryGetter_location (const int32_t inClassIndex,
+                                   categoryGetterSignature_abstractDeclaration_location inGetter) {
+  gCategoryGetterTable_abstractDeclaration_location.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void freeCategoryReader_abstractDeclaration_location (void) {
-  gCategoryReaderTable_abstractDeclaration_location.free () ;
+static void freeCategoryGetter_abstractDeclaration_location (void) {
+  gCategoryGetterTable_abstractDeclaration_location.free () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gReader_abstractDeclaration_location (NULL,
-                                                         freeCategoryReader_abstractDeclaration_location) ;
+C_PrologueEpilogue gGetter_abstractDeclaration_location (NULL,
+                                                         freeCategoryGetter_abstractDeclaration_location) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location callCategoryReader_location (const cPtr_abstractDeclaration * inObject,
+GALGAS_location callCategoryGetter_location (const cPtr_abstractDeclaration * inObject,
                                              C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
   GALGAS_location result ;
@@ -13974,19 +13974,19 @@ GALGAS_location callCategoryReader_location (const cPtr_abstractDeclaration * in
     macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractDeclaration_location f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractDeclaration_location.count ()) {
-      f = gCategoryReaderTable_abstractDeclaration_location (classIndex COMMA_HERE) ;
+    categoryGetterSignature_abstractDeclaration_location f = NULL ;
+    if (classIndex < gCategoryGetterTable_abstractDeclaration_location.count ()) {
+      f = gCategoryGetterTable_abstractDeclaration_location (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
        const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
        while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_location.count ()) {
-           f = gCategoryReaderTable_abstractDeclaration_location (p->mSlotID COMMA_HERE) ;
+         if (p->mSlotID < gCategoryGetterTable_abstractDeclaration_location.count ()) {
+           f = gCategoryGetterTable_abstractDeclaration_location (p->mSlotID COMMA_HERE) ;
          }
          p = p->mSuperclassDescriptor ;
        }
-       gCategoryReaderTable_abstractDeclaration_location.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       gCategoryGetterTable_abstractDeclaration_location.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
@@ -14060,22 +14060,22 @@ void callCategoryMethod_addDependenceEdgeForStaticExpression (const cPtr_express
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                   Category reader '@integerDeclaration typeName'                                    *
+//                                   Category getter '@integerDeclaration typeName'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TC_UniqueArray <categoryReaderSignature_integerDeclaration_typeName> gCategoryReaderTable_integerDeclaration_typeName ;
+static TC_UniqueArray <categoryGetterSignature_integerDeclaration_typeName> gCategoryGetterTable_integerDeclaration_typeName ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryReader_typeName (const int32_t inClassIndex,
-                                   categoryReaderSignature_integerDeclaration_typeName inReader) {
-  gCategoryReaderTable_integerDeclaration_typeName.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+void enterCategoryGetter_typeName (const int32_t inClassIndex,
+                                   categoryGetterSignature_integerDeclaration_typeName inGetter) {
+  gCategoryGetterTable_integerDeclaration_typeName.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string callCategoryReader_typeName (const cPtr_integerDeclaration * inObject,
+GALGAS_string callCategoryGetter_typeName (const cPtr_integerDeclaration * inObject,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
   GALGAS_string result ;
@@ -14084,19 +14084,19 @@ GALGAS_string callCategoryReader_typeName (const cPtr_integerDeclaration * inObj
     macroValidSharedObject (inObject, cPtr_integerDeclaration) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_integerDeclaration_typeName f = NULL ;
-    if (classIndex < gCategoryReaderTable_integerDeclaration_typeName.count ()) {
-      f = gCategoryReaderTable_integerDeclaration_typeName (classIndex COMMA_HERE) ;
+    categoryGetterSignature_integerDeclaration_typeName f = NULL ;
+    if (classIndex < gCategoryGetterTable_integerDeclaration_typeName.count ()) {
+      f = gCategoryGetterTable_integerDeclaration_typeName (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
        const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
        while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_integerDeclaration_typeName.count ()) {
-           f = gCategoryReaderTable_integerDeclaration_typeName (p->mSlotID COMMA_HERE) ;
+         if (p->mSlotID < gCategoryGetterTable_integerDeclaration_typeName.count ()) {
+           f = gCategoryGetterTable_integerDeclaration_typeName (p->mSlotID COMMA_HERE) ;
          }
          p = p->mSuperclassDescriptor ;
        }
-       gCategoryReaderTable_integerDeclaration_typeName.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       gCategoryGetterTable_integerDeclaration_typeName.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
@@ -14109,9 +14109,9 @@ GALGAS_string callCategoryReader_typeName (const cPtr_integerDeclaration * inObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string categoryReader_integerDeclaration_typeName (const cPtr_integerDeclaration * inObject,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_string extensionGetter_integerDeclaration_typeName (const cPtr_integerDeclaration * inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
   const cPtr_integerDeclaration * object = inObject ;
   macroValidSharedObject (object, cPtr_integerDeclaration) ;
@@ -14122,7 +14122,7 @@ static GALGAS_string categoryReader_integerDeclaration_typeName (const cPtr_inte
   }else if (kBoolFalse == test_1) {
     temp_0 = GALGAS_string ("uint") ;
   }
-  result_outName = temp_0.add_operation (object->mAttribute_mSize.reader_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
+  result_outName = temp_0.add_operation (object->mAttribute_mSize.getter_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
 //---
   return result_outName ;
 }
@@ -14130,21 +14130,21 @@ static GALGAS_string categoryReader_integerDeclaration_typeName (const cPtr_inte
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void defineCategoryReader_integerDeclaration_typeName (void) {
-  enterCategoryReader_typeName (kTypeDescriptor_GALGAS_integerDeclaration.mSlotID,
-                                categoryReader_integerDeclaration_typeName) ;
+static void defineCategoryGetter_integerDeclaration_typeName (void) {
+  enterCategoryGetter_typeName (kTypeDescriptor_GALGAS_integerDeclaration.mSlotID,
+                                extensionGetter_integerDeclaration_typeName) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void freeCategoryReader_integerDeclaration_typeName (void) {
-  gCategoryReaderTable_integerDeclaration_typeName.free () ;
+static void freeCategoryGetter_integerDeclaration_typeName (void) {
+  gCategoryGetterTable_integerDeclaration_typeName.free () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gReader_integerDeclaration_typeName (defineCategoryReader_integerDeclaration_typeName,
-                                                        freeCategoryReader_integerDeclaration_typeName) ;
+C_PrologueEpilogue gGetter_integerDeclaration_typeName (defineCategoryGetter_integerDeclaration_typeName,
+                                                        freeCategoryGetter_integerDeclaration_typeName) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -14261,31 +14261,31 @@ void GALGAS_bootList_2D_element::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_bootList_2D_element::reader_mBootLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_bootList_2D_element::getter_mBootLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mBootLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_bootList_2D_element::reader_mInstructionList (UNUSED_LOCATION_ARGS) const {
+GALGAS_instructionListAST GALGAS_bootList_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_bootList_2D_element::reader_mEndOfBootLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_bootList_2D_element::getter_mEndOfBootLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mEndOfBootLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_bootList_2D_element::reader_mPriority (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_bootList_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_bootList_2D_element::reader_mPriorityLocation (UNUSED_LOCATION_ARGS) const {
+GALGAS_location GALGAS_bootList_2D_element::getter_mPriorityLocation (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriorityLocation ;
 }
 
@@ -14353,7 +14353,7 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
   cEnumerator_initListIR enumerator_6859 (temp_0, kEnumeration_up) ;
   while (enumerator_6859.hasCurrentObject ()) {
     GALGAS_bool var_generate ;
-    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_6859.current (HERE).mAttribute_mInitRequiredByProcList.reader_length (SOURCE_FILE ("init-declaration.galgas", 175)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, enumerator_6859.current (HERE).mAttribute_mInitRequiredByProcList.getter_length (SOURCE_FILE ("init-declaration.galgas", 175)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_1) {
       var_generate = GALGAS_bool (true) ;
     }else if (kBoolFalse == test_1) {
@@ -14362,7 +14362,7 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
       bool bool_2 = var_generate.operator_not (SOURCE_FILE ("init-declaration.galgas", 179)).isValidAndTrue () ;
       if (enumerator_7046.hasCurrentObject () && bool_2) {
         while (enumerator_7046.hasCurrentObject () && bool_2) {
-          var_generate = constinArgument_inProcedureMapIR.reader_hasKey (enumerator_7046.current_mProcName (HERE).mAttribute_string COMMA_SOURCE_FILE ("init-declaration.galgas", 180)) ;
+          var_generate = constinArgument_inProcedureMapIR.getter_hasKey (enumerator_7046.current_mProcName (HERE).mAttribute_string COMMA_SOURCE_FILE ("init-declaration.galgas", 180)) ;
           enumerator_7046.gotoNextObject () ;
           if (enumerator_7046.hasCurrentObject ()) {
             bool_2 = var_generate.operator_not (SOURCE_FILE ("init-declaration.galgas", 179)).isValidAndTrue () ;
@@ -14385,14 +14385,14 @@ void categoryMethod_generateLLVMinitCode (const GALGAS_initListIR inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                Category Reader '@procFormalArgumentPassingMode requiredActualPassingModeForSelector'                *
+//                Category Getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string categoryReader_requiredActualPassingModeForSelector (const GALGAS_procFormalArgumentPassingMode & inObject,
-                                                                   GALGAS_lstring inArgument_inSelector,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const GALGAS_procFormalArgumentPassingMode & inObject,
+                                                                    GALGAS_string inArgument_inSelector,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
   const GALGAS_procFormalArgumentPassingMode temp_0 = inObject ;
   switch (temp_0.enumValue ()) {
@@ -14414,9 +14414,9 @@ GALGAS_string categoryReader_requiredActualPassingModeForSelector (const GALGAS_
     }
     break ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, inArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, inArgument_inSelector.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    result_outResult.dotAssign_operation (inArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 29))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 29)) ;
+    result_outResult.dotAssign_operation (inArgument_inSelector.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 29))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 29)) ;
   }
 //---
   return result_outResult ;
@@ -14775,33 +14775,33 @@ void callCategoryMethod_enterInPrecedenceGraph (const cPtr_abstractDeclaration *
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Abstract category reader '@abstractDeclaration keyRepresentation'                          *
+//                          Abstract category getter '@abstractDeclaration keyRepresentation'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static TC_UniqueArray <categoryReaderSignature_abstractDeclaration_keyRepresentation> gCategoryReaderTable_abstractDeclaration_keyRepresentation ;
+static TC_UniqueArray <categoryGetterSignature_abstractDeclaration_keyRepresentation> gCategoryGetterTable_abstractDeclaration_keyRepresentation ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void enterCategoryReader_keyRepresentation (const int32_t inClassIndex,
-                                            categoryReaderSignature_abstractDeclaration_keyRepresentation inReader) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inReader, NULL COMMA_HERE) ;
+void enterCategoryGetter_keyRepresentation (const int32_t inClassIndex,
+                                            categoryGetterSignature_abstractDeclaration_keyRepresentation inGetter) {
+  gCategoryGetterTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void freeCategoryReader_abstractDeclaration_keyRepresentation (void) {
-  gCategoryReaderTable_abstractDeclaration_keyRepresentation.free () ;
+static void freeCategoryGetter_abstractDeclaration_keyRepresentation (void) {
+  gCategoryGetterTable_abstractDeclaration_keyRepresentation.free () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gReader_abstractDeclaration_keyRepresentation (NULL,
-                                                                  freeCategoryReader_abstractDeclaration_keyRepresentation) ;
+C_PrologueEpilogue gGetter_abstractDeclaration_keyRepresentation (NULL,
+                                                                  freeCategoryGetter_abstractDeclaration_keyRepresentation) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclaration * inObject,
+GALGAS_string callCategoryGetter_keyRepresentation (const cPtr_abstractDeclaration * inObject,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   GALGAS_string result ;
@@ -14810,19 +14810,19 @@ GALGAS_string callCategoryReader_keyRepresentation (const cPtr_abstractDeclarati
     macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
     const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
     const int32_t classIndex = info->mSlotID ;
-    categoryReaderSignature_abstractDeclaration_keyRepresentation f = NULL ;
-    if (classIndex < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-      f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
+    categoryGetterSignature_abstractDeclaration_keyRepresentation f = NULL ;
+    if (classIndex < gCategoryGetterTable_abstractDeclaration_keyRepresentation.count ()) {
+      f = gCategoryGetterTable_abstractDeclaration_keyRepresentation (classIndex COMMA_HERE) ;
     }
     if (NULL == f) {
        const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
        while ((NULL == f) && (NULL != p)) {
-         if (p->mSlotID < gCategoryReaderTable_abstractDeclaration_keyRepresentation.count ()) {
-           f = gCategoryReaderTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
+         if (p->mSlotID < gCategoryGetterTable_abstractDeclaration_keyRepresentation.count ()) {
+           f = gCategoryGetterTable_abstractDeclaration_keyRepresentation (p->mSlotID COMMA_HERE) ;
          }
          p = p->mSuperclassDescriptor ;
        }
-       gCategoryReaderTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+       gCategoryGetterTable_abstractDeclaration_keyRepresentation.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
     }
     if (NULL == f) {
       fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
@@ -14846,15 +14846,15 @@ void categoryModifier_findOrAddStaticString (GALGAS_staticStringMap & ioObject,
                                              COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIndex.drop () ; // Release 'out' argument
   const GALGAS_staticStringMap temp_0 = ioObject ;
-  const enumGalgasBool test_1 = temp_0.reader_hasKey (inArgument_inString COMMA_SOURCE_FILE ("semantic-context.galgas", 56)).boolEnum () ;
+  const enumGalgasBool test_1 = temp_0.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("semantic-context.galgas", 56)).boolEnum () ;
   if (kBoolTrue == test_1) {
     const GALGAS_staticStringMap temp_2 = ioObject ;
-    temp_2.method_searchKey (inArgument_inString.reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 57)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 57)) ;
+    temp_2.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 57)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 57)) ;
   }else if (kBoolFalse == test_1) {
     const GALGAS_staticStringMap temp_3 = ioObject ;
-    outArgument_outIndex = temp_3.reader_count (SOURCE_FILE ("semantic-context.galgas", 59)) ;
+    outArgument_outIndex = temp_3.getter_count (SOURCE_FILE ("semantic-context.galgas", 59)) ;
     {
-    ioObject.modifier_insertKey (inArgument_inString.reader_nowhere (SOURCE_FILE ("semantic-context.galgas", 60)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 60)) ;
+    ioObject.modifier_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 60)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 60)) ;
     }
   }
 }
@@ -15169,37 +15169,37 @@ void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_semanticTemporariesStruct::reader_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_semanticTemporariesStruct::getter_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTemporaryIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mExceptionSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExceptionSetupRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+GALGAS_exceptionRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mExceptionLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExceptionLoopRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mInitRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::reader_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
+GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mBootRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::reader_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
+GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::getter_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSubprogramInvocationGraph ;
 }
 

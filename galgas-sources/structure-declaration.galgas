@@ -164,7 +164,7 @@ override method @structureDeclaration enterInContext
         @procedureSignature signature = {}
         for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mProcFormalArgumentList do
           [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-          signature += !formalArgumentPassingMode !selector !typeProxy
+          signature += !formalArgumentPassingMode !selector.string !typeProxy
         end
         [!?procedureMap insertKey
           !.new {![procedure getMangledName] !procedure.mProcedureName.location}
