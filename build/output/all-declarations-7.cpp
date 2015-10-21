@@ -4197,43 +4197,43 @@ static void categoryMethod_throwInstructionAST_analyze (const cPtr_instructionAS
                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_throwInstructionAST * object = (const cPtr_throwInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_throwInstructionAST) ;
-  const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 45)) COMMA_SOURCE_FILE ("instruction-throw.galgas", 45)).boolEnum () ;
+  const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 45)) COMMA_SOURCE_FILE ("instruction-panic.galgas", 45)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 46)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 46))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 46)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 46)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 46))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 46)) ;
   }
-  GALGAS_instructionListIR var_unusedInstructionListIR = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-throw.galgas", 49)) ;
+  GALGAS_instructionListIR var_unusedInstructionListIR = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("instruction-panic.galgas", 49)) ;
   GALGAS_operandIR var_result ;
-  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mCodeExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext.mAttribute_mExceptionCodeType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_unusedInstructionListIR, var_result, inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 50)) ;
-  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_unusedInstructionListIR.getter_length (SOURCE_FILE ("instruction-throw.galgas", 65)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  callCategoryMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mCodeExpression.ptr (), constinArgument_inRoutineNameForInvocationGraph, constinArgument_inReceiverType, constinArgument_inContext.mAttribute_mExceptionCodeType, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowExceptions, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, var_unusedInstructionListIR, var_result, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 50)) ;
+  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_unusedInstructionListIR.getter_length (SOURCE_FILE ("instruction-panic.galgas", 65)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
-    test_1 = var_result.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("instruction-throw.galgas", 66)).operator_not (SOURCE_FILE ("instruction-throw.galgas", 66)) ;
+    test_1 = var_result.mAttribute_mValue.getter_isLiteralInteger (SOURCE_FILE ("instruction-panic.galgas", 66)).operator_not (SOURCE_FILE ("instruction-panic.galgas", 66)) ;
   }
   GALGAS_bool test_2 = test_1 ;
   if (kBoolTrue != test_2.boolEnum ()) {
-    test_2 = GALGAS_bool (kIsNotEqual, var_result.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 67)).objectCompare (function_literalIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 67)))) ;
+    test_2 = GALGAS_bool (kIsNotEqual, var_result.mAttribute_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 67)).objectCompare (function_literalIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 67)))) ;
   }
   const enumGalgasBool test_3 = test_2.boolEnum () ;
   if (kBoolTrue == test_3) {
-    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("throw expression should be a literal integer")  COMMA_SOURCE_FILE ("instruction-throw.galgas", 68)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("throw expression should be a literal integer")  COMMA_SOURCE_FILE ("instruction-panic.galgas", 68)) ;
   }else if (kBoolFalse == test_3) {
     GALGAS_bigint var_min ;
     GALGAS_bigint var_max ;
     GALGAS_bool joker_3403 ; // Joker input parameter
     GALGAS_uint joker_3415 ; // Joker input parameter
-    constinArgument_inContext.mAttribute_mExceptionCodeType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 70)).method_integer (var_min, var_max, joker_3403, joker_3415, inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 70)) ;
+    constinArgument_inContext.mAttribute_mExceptionCodeType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 70)).method_integer (var_min, var_max, joker_3403, joker_3415, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 70)) ;
     GALGAS_bigint var_throwValue ;
-    var_result.mAttribute_mValue.method_literalInteger (var_throwValue, inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 71)) ;
+    var_result.mAttribute_mValue.method_literalInteger (var_throwValue, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 71)) ;
     GALGAS_bool test_4 = GALGAS_bool (kIsStrictInf, var_throwValue.objectCompare (var_min)) ;
     if (kBoolTrue != test_4.boolEnum ()) {
       test_4 = GALGAS_bool (kIsStrictSup, var_throwValue.objectCompare (var_max)) ;
     }
     const enumGalgasBool test_5 = test_4.boolEnum () ;
     if (kBoolTrue == test_5) {
-      inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("throw expression cannot be represented by an $").add_operation (constinArgument_inContext.mAttribute_mExceptionCodeType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 73)), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 73))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 73)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mThrowLocation, GALGAS_string ("throw expression cannot be represented by an $").add_operation (constinArgument_inContext.mAttribute_mExceptionCodeType.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 73)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 73))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 73)) ;
     }else if (kBoolFalse == test_5) {
-      const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).operator_not (SOURCE_FILE ("instruction-throw.galgas", 74)).boolEnum () ;
+      const enumGalgasBool test_6 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).operator_not (SOURCE_FILE ("instruction-panic.galgas", 74)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_throwInstructionIR::constructor_new (object->mAttribute_mThrowLocation, var_throwValue  COMMA_SOURCE_FILE ("instruction-throw.galgas", 75))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 75)) ;
+        ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_throwInstructionIR::constructor_new (object->mAttribute_mThrowLocation, var_throwValue  COMMA_SOURCE_FILE ("instruction-panic.galgas", 75))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 75)) ;
       }
     }
   }
@@ -4265,11 +4265,11 @@ static void categoryMethod_throwInstructionIR_llvmInstructionCode (const cPtr_ab
   macroValidSharedObject (object, cPtr_throwInstructionIR) ;
   GALGAS_uint var_staticStringIndex ;
   {
-  categoryModifier_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mThrowLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 100)).getter_lastPathComponent (SOURCE_FILE ("instruction-throw.galgas", 100)).getter_stringByDeletingPathExtension (SOURCE_FILE ("instruction-throw.galgas", 100)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 99)) ;
+  categoryModifier_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mThrowLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 100)).getter_lastPathComponent (SOURCE_FILE ("instruction-panic.galgas", 100)).getter_stringByDeletingPathExtension (SOURCE_FILE ("instruction-panic.galgas", 100)), var_staticStringIndex, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 99)) ;
   }
-  ioArgument_ioLLVMcode.dotAssign_operation (GALGAS_string ("  call void @raise_exception.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("instruction-throw.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 103)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 103))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 103)) ;
-  ioArgument_ioLLVMcode.dotAssign_operation (constinArgument_inGenerationContext.mAttribute_mExceptionLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 104)).add_operation (object->mAttribute_mThrowLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 104)).getter_string (SOURCE_FILE ("instruction-throw.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 104)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 104))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 104)) ;
-  ioArgument_ioLLVMcode.dotAssign_operation (constinArgument_inGenerationContext.mAttribute_mExceptionCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 105)).add_operation (object->mAttribute_mCode.getter_string (SOURCE_FILE ("instruction-throw.galgas", 105)), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 105)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("instruction-throw.galgas", 105))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 105)) ;
+  ioArgument_ioLLVMcode.dotAssign_operation (GALGAS_string ("  call void @raise_exception.").add_operation (var_staticStringIndex.getter_string (SOURCE_FILE ("instruction-panic.galgas", 103)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 103)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 103))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 103)) ;
+  ioArgument_ioLLVMcode.dotAssign_operation (constinArgument_inGenerationContext.mAttribute_mExceptionLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 104)).add_operation (object->mAttribute_mThrowLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 104)).getter_string (SOURCE_FILE ("instruction-panic.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 104)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 104))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 104)) ;
+  ioArgument_ioLLVMcode.dotAssign_operation (constinArgument_inGenerationContext.mAttribute_mExceptionCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 105)).add_operation (object->mAttribute_mCode.getter_string (SOURCE_FILE ("instruction-panic.galgas", 105)), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 105)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 105))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 105)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 

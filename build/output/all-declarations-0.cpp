@@ -1266,6 +1266,30 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_or [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Syntax error message for terminal '$panic$' :
+static const utf32 gSyntaxErrorMessage_plm_5F_lexique_panic [] = {
+  TO_UNICODE ('t'),
+  TO_UNICODE ('h'),
+  TO_UNICODE ('e'),
+  TO_UNICODE (' '),
+  TO_UNICODE ('\''),
+  TO_UNICODE ('p'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('c'),
+  TO_UNICODE ('\''),
+  TO_UNICODE (' '),
+  TO_UNICODE ('k'),
+  TO_UNICODE ('e'),
+  TO_UNICODE ('y'),
+  TO_UNICODE ('w'),
+  TO_UNICODE ('o'),
+  TO_UNICODE ('r'),
+  TO_UNICODE ('d'),
+  TO_UNICODE (0)
+} ;
+
 //--- Syntax error message for terminal '$pointerSize$' :
 static const utf32 gSyntaxErrorMessage_plm_5F_lexique_pointerSize [] = {
   TO_UNICODE ('t'),
@@ -1522,30 +1546,6 @@ static const utf32 gSyntaxErrorMessage_plm_5F_lexique_then [] = {
   TO_UNICODE ('h'),
   TO_UNICODE ('e'),
   TO_UNICODE ('n'),
-  TO_UNICODE ('\''),
-  TO_UNICODE (' '),
-  TO_UNICODE ('k'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
-  TO_UNICODE (0)
-} ;
-
-//--- Syntax error message for terminal '$throw$' :
-static const utf32 gSyntaxErrorMessage_plm_5F_lexique_throw [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE (' '),
-  TO_UNICODE ('\''),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('w'),
   TO_UNICODE ('\''),
   TO_UNICODE (' '),
   TO_UNICODE ('k'),
@@ -2704,6 +2704,7 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_mode,
     gSyntaxErrorMessage_plm_5F_lexique_not,
     gSyntaxErrorMessage_plm_5F_lexique_or,
+    gSyntaxErrorMessage_plm_5F_lexique_panic,
     gSyntaxErrorMessage_plm_5F_lexique_pointerSize,
     gSyntaxErrorMessage_plm_5F_lexique_proc,
     gSyntaxErrorMessage_plm_5F_lexique_register,
@@ -2714,7 +2715,6 @@ C_String C_Lexique_plm_5F_lexique::getMessageForTerminal (const int16_t inTermin
     gSyntaxErrorMessage_plm_5F_lexique_struct,
     gSyntaxErrorMessage_plm_5F_lexique_target,
     gSyntaxErrorMessage_plm_5F_lexique_then,
-    gSyntaxErrorMessage_plm_5F_lexique_throw,
     gSyntaxErrorMessage_plm_5F_lexique_true,
     gSyntaxErrorMessage_plm_5F_lexique_truncate,
     gSyntaxErrorMessage_plm_5F_lexique_unsignedIntegerType,
@@ -3279,6 +3279,16 @@ static const utf32 kUnicodeString_plm_5F_lexique_or [] = {
   TO_UNICODE (0)
 } ;
 
+//--- Unicode string for '$panic$'
+static const utf32 kUnicodeString_plm_5F_lexique_panic [] = {
+  TO_UNICODE ('p'),
+  TO_UNICODE ('a'),
+  TO_UNICODE ('n'),
+  TO_UNICODE ('i'),
+  TO_UNICODE ('c'),
+  TO_UNICODE (0)
+} ;
+
 //--- Unicode string for '$pointerSize$'
 static const utf32 kUnicodeString_plm_5F_lexique_pointerSize [] = {
   TO_UNICODE ('p'),
@@ -3404,16 +3414,6 @@ static const utf32 kUnicodeString_plm_5F_lexique_then [] = {
   TO_UNICODE ('h'),
   TO_UNICODE ('e'),
   TO_UNICODE ('n'),
-  TO_UNICODE (0)
-} ;
-
-//--- Unicode string for '$throw$'
-static const utf32 kUnicodeString_plm_5F_lexique_throw [] = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('w'),
   TO_UNICODE (0)
 } ;
 
@@ -3608,7 +3608,7 @@ static const C_unicode_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_check, 5, C_Lexique_plm_5F_lexique::kToken_check),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_elsif, 5, C_Lexique_plm_5F_lexique::kToken_elsif),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_false, 5, C_Lexique_plm_5F_lexique::kToken_false),
-  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_throw, 5, C_Lexique_plm_5F_lexique::kToken_throw),
+  C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_panic, 5, C_Lexique_plm_5F_lexique::kToken_panic),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_while, 5, C_Lexique_plm_5F_lexique::kToken_while),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_assert, 6, C_Lexique_plm_5F_lexique::kToken_assert),
   C_unicode_lexique_table_entry (kUnicodeString_plm_5F_lexique_extend, 6, C_Lexique_plm_5F_lexique::kToken_extend),
@@ -3857,6 +3857,11 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("or") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
+    case kToken_panic:
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendCString ("panic") ;
+      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      break ;
     case kToken_pointerSize:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("pointerSize") ;
@@ -3905,11 +3910,6 @@ C_String C_Lexique_plm_5F_lexique::getCurrentTokenString (const cToken * inToken
     case kToken_then:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendCString ("then") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      break ;
-    case kToken_throw:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("throw") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_true:
@@ -4660,6 +4660,7 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("mode") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("not") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("or") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("panic") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("pointerSize") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("proc") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("register") COMMA_THERE) ;
@@ -4670,7 +4671,6 @@ GALGAS_stringlist C_Lexique_plm_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("struct") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("target") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("then") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("throw") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("true") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("truncate") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("unsignedIntegerType") COMMA_THERE) ;
@@ -4766,6 +4766,7 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_mode */,
     1 /* plm_lexique_1_not */,
     1 /* plm_lexique_1_or */,
+    1 /* plm_lexique_1_panic */,
     1 /* plm_lexique_1_pointerSize */,
     1 /* plm_lexique_1_proc */,
     1 /* plm_lexique_1_register */,
@@ -4776,7 +4777,6 @@ uint32_t C_Lexique_plm_5F_lexique::styleIndexForTerminal (const int32_t inTermin
     1 /* plm_lexique_1_struct */,
     1 /* plm_lexique_1_target */,
     1 /* plm_lexique_1_then */,
-    1 /* plm_lexique_1_throw */,
     1 /* plm_lexique_1_true */,
     1 /* plm_lexique_1_truncate */,
     1 /* plm_lexique_1_unsignedIntegerType */,
@@ -11612,17 +11612,17 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i55_parse (C_Le
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i56_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                        GALGAS_labelMap & /* ioArgument_ioLabelMap */,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_throw) COMMA_SOURCE_FILE ("instruction-throw.galgas", 19)) ;
-  GALGAS_location var_loc = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-throw.galgas", 20)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("instruction-panic.galgas", 19)) ;
+  GALGAS_location var_loc = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-panic.galgas", 20)) ;
   GALGAS_expressionAST var_codeExpression ;
   nt_expression_ (var_codeExpression, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_throwInstructionAST::constructor_new (var_loc, var_codeExpression  COMMA_SOURCE_FILE ("instruction-throw.galgas", 22))  COMMA_SOURCE_FILE ("instruction-throw.galgas", 22)) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_throwInstructionAST::constructor_new (var_loc, var_codeExpression  COMMA_SOURCE_FILE ("instruction-panic.galgas", 22))  COMMA_SOURCE_FILE ("instruction-panic.galgas", 22)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i56_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_throw) COMMA_SOURCE_FILE ("instruction-throw.galgas", 19)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_panic) COMMA_SOURCE_FILE ("instruction-panic.galgas", 19)) ;
   nt_expression_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }
