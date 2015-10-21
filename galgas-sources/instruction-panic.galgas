@@ -16,7 +16,7 @@ syntax extension common_syntax {
   #--------------------------------------------------------------------------------------------------------------------*
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    $throw$
+    $panic$
     let loc = @location.here
     <expression> ?let @expressionAST codeExpression
     ioInstructionList += !@throwInstructionAST.new {!loc !codeExpression}
