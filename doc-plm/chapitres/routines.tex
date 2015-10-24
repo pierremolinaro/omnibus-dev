@@ -203,7 +203,7 @@ Par exemple, une routine d'interruption par défaut est déclarée par la cible 
 
 \begin{PLM}
 proc svcHandler `isr @nullOnNoException @weak () {
-  throw 11
+  panic 11
 }
 \end{PLM}
 

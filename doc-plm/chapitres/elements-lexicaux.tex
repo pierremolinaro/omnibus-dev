@@ -38,12 +38,12 @@ Les mots réservés correspondant aux éléments du langage sont listés dans le
    \plm!enum! & \plm!exception! & \plm!false! &  \\
    \plm!func! & \plm!if! & \plm!import! & \plm!init!  \\
    \plm!let! & \plm!mutating! & \plm!mode! &  \\
-    & & \plm!not! & \plm!or!\\
+    & \plm!not! & \plm!or! & \plm!panic!\\
    \plm!proc! & \plm!register! & \plm!required! & \plm!self! \\
-   \plm!struct! & \plm!target! & \plm!then! & \plm!throw! \\
+   \plm!struct! & \plm!target! & \plm!then! & \\
    \plm!true! & \plm!var! & \plm!while! & \plm!xor! \\
   \end{tabular}
-  \caption{Mots réservés correspondant aux éléments du langage PLM}
+  \caption{Mots réservés correspondant du langage PLM}
   \labelTableau{motReservesLangage}
   \ligne
 \end{table}
@@ -69,11 +69,11 @@ Les mots réservés correspondant aux éléments du langage sont listés dans le
 
 Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. 
 
-\textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères \texttt{\_}.
+\textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères « \texttt{\_} ».
 
-\textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre \texttt{a} et \texttt{f}, écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence \texttt{0x} », et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères \texttt{\_}.
+\textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre \texttt{a} et \texttt{f}, écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence \texttt{0x} », et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères « \texttt{\_} ».
 
-\textbf{Binaire.} Une constante entière binaire commence par la séquence \texttt{0b} suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou le caractère \texttt{\_}.
+\textbf{Binaire.} Une constante entière binaire commence par la séquence \texttt{0b} suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou le caractère « \texttt{\_} ».
 
 Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère \texttt{\_} peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
 

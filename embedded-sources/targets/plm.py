@@ -116,7 +116,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   os.chdir (scriptDir)
   #print "Product directory: " + scriptDir
   #--- Build python makefile
-  make = makefile.Make (goal)
+  make = makefile.Make (goal, maxParallelJobs == 1) # Display command utility tool if sequential build
   #---------------------------------------------- Add LLVM files compile rule
   objectList = []
   for source in LLVMsourceList:
