@@ -1531,13 +1531,13 @@
     settings = {ATTRIBUTES = (); };
   };
 
-  5F8DC89BF3D0365288219936 /* plm_icns.icns */ = {
+  5F8DC89BF3D0365288219936 /* plm-target_icns.icns */ = {
     isa = PBXBuildFile;
     fileRef = 2A252123C40D2ADBA6A11D84 ;
     settings = {ATTRIBUTES = (); };
   };
 
-  AD0305D1A6308D2A0CF1C39C /* plms_icns.icns */ = {
+  AD0305D1A6308D2A0CF1C39C /* plm_icns.icns */ = {
     isa = PBXBuildFile;
     fileRef = 8A330607D76796B35C64C600 ;
     settings = {ATTRIBUTES = (); };
@@ -5217,16 +5217,16 @@
   2A252123C40D2ADBA6A11D84 = {
     isa = PBXFileReference;
     lastKnownFileType = image.icns;
-    name = "plm_icns.icns";
-    path = "plm_icns.icns";
+    name = "plm-target_icns.icns";
+    path = "plm-target_icns.icns";
     sourceTree = "<group>";
   };
 
   8A330607D76796B35C64C600 = {
     isa = PBXFileReference;
     lastKnownFileType = image.icns;
-    name = "plms_icns.icns";
-    path = "plms_icns.icns";
+    name = "plm_icns.icns";
+    path = "plm_icns.icns";
     sourceTree = "<group>";
   };
 

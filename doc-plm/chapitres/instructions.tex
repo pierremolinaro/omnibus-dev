@@ -176,16 +176,16 @@ assert true // Erreur, l'expression est calculable statiquement
 
 
 
-\section{L'instruction \texttt{throw}}\index{throw@\plm=throw=}
+\section{L'instruction \texttt{panic}}\index{panic@\plm=panic=}
 
-L'instruction \plm=throw= a la syntaxe suivante :
+L'instruction \plm=panic= a la syntaxe suivante :
 \begin{PLM}
-throw expression
+panic expression
 \end{PLM}
 
 L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typeLiesException}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
 
-Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=throw= lève une exception dont le code est la valeur de l'\plm=expression=.
+Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=panic= lève une exception dont le code est la valeur de l'\plm=expression=.
 
 Si le programme est compilé avec l'option \texttt{-{}-no-exception-generation}, alors aucun code n'est engendré.
 
