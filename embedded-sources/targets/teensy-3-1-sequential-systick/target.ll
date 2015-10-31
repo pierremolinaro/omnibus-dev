@@ -254,6 +254,11 @@ define internal void @ResetISR () nounwind noreturn naked {
   call void @clearBSS ()
   call void @copyData ()
   call void @init ()
+;--- set unprivileged user mode
+;  mov r0, #1
+;  msr control, r0
+  call void asm sideeffect "msr CONTROL, $0", "r"(i32 1) nounwind
+;---
   call void @proc_setup ()
   br label %loop
 loop:

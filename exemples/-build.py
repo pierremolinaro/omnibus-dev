@@ -104,5 +104,6 @@ compileSource ("05-blinkled-systick-string.plm")
 compileSource ("06-blinkled-lcd.plm")
 compileSource ("07-blinkled-urem-test.plm")
 compileSource ("08-blinkled-exception.plm")
+compileSource ("09-pit-unprivileged-mode.plm")
 
 #----------------------------------------------------------------------------------------------------------------------*

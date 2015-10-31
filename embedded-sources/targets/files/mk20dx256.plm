@@ -1,31 +1,3 @@
-// Teensyduino Core Library
-// http://www.pjrc.com/teensy/
-// Copyright (c) 2013 PJRC.COM, LLC.
-//
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// 1. The above copyright notice and this permission notice shall be 
-// included in all copies or substantial portions of the Software.
-//
-// 2. If the Software is incorporated into a build system thallows 
-// selection among a list of target devices, then similar target
-// devices manufactured by PJRC.COM must be included in the list of
-// target devices and selectable in the same manner.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
 
 let f_cpu $uint32 = 96_000_000
 
@@ -1315,23 +1287,23 @@ register VREF_SC   at 0x40074001 $uint8 // VREF Status and Control Register
 //register FTM2_PWMLOAD   0x400B8098 // FTM PWM Load
 //
 //// Chapter 36: Periodic Interrupt Timer (PIT)
-//register PIT_MCR    0x40037000 // PIT Module Control Register
-//register PIT_LDVAL0   0x40037100 // Timer Load Value Register
-//register PIT_CVAL0   0x40037104 // Current Timer Value Register
-//register PIT_TCTRL0   0x40037108 // Timer Control Register
-//register PIT_TFLG0   0x4003710C // Timer Flag Register
-//register PIT_LDVAL1   0x40037110 // Timer Load Value Register
-//register PIT_CVAL1   0x40037114 // Current Timer Value Register
-//register PIT_TCTRL1   0x40037118 // Timer Control Register
-//register PIT_TFLG1   0x4003711C // Timer Flag Register
-//register PIT_LDVAL2   0x40037120 // Timer Load Value Register
-//register PIT_CVAL2   0x40037124 // Current Timer Value Register
-//register PIT_TCTRL2   0x40037128 // Timer Control Register
-//register PIT_TFLG2   0x4003712C // Timer Flag Register
-//register PIT_LDVAL3   0x40037130 // Timer Load Value Register
-//register PIT_CVAL3   0x40037134 // Current Timer Value Register
-//register PIT_TCTRL3   0x40037138 // Timer Control Register
-//register PIT_TFLG3   0x4003713C // Timer Flag Register
+register PIT_MCR    at 0x40037000 $uint32 // PIT Module Control Register
+register PIT_LDVAL0 at 0x40037100 $uint32 // Timer Load Value Register
+register PIT_CVAL0  at 0x40037104 $uint32 // Current Timer Value Register
+register PIT_TCTRL0 at 0x40037108 $uint32 // Timer Control Register
+register PIT_TFLG0  at 0x4003710C $uint32 // Timer Flag Register
+register PIT_LDVAL1 at 0x40037110 $uint32 // Timer Load Value Register
+register PIT_CVAL1  at 0x40037114 $uint32 // Current Timer Value Register
+register PIT_TCTRL1 at 0x40037118 $uint32 // Timer Control Register
+register PIT_TFLG1  at 0x4003711C $uint32 // Timer Flag Register
+register PIT_LDVAL2 at 0x40037120 $uint32 // Timer Load Value Register
+register PIT_CVAL2  at 0x40037124 $uint32 // Current Timer Value Register
+register PIT_TCTRL2 at 0x40037128 $uint32 // Timer Control Register
+register PIT_TFLG2  at 0x4003712C $uint32 // Timer Flag Register
+register PIT_LDVAL3 at 0x40037130 $uint32 // Timer Load Value Register
+register PIT_CVAL3  at 0x40037134 $uint32 // Current Timer Value Register
+register PIT_TCTRL3 at 0x40037138 $uint32 // Timer Control Register
+register PIT_TFLG3  at 0x4003713C $uint32 // Timer Flag Register
 //
 //// Chapter 37: Low-Power Timer (LPTMR)
 //register LPTMR0_CSR   0x40040000 // Low Power Timer Control Status Register
@@ -2123,6 +2095,7 @@ register AIRCR at 0xE000ED0C $uint32 { // Application Interrupt and Reset Contro
 //register SCB_DFSR   0xE000ED30 // Debug Fault Status
 //register SCB_MMFAR   0xE000ED34 // MemManage Fault Address
 
+//--- SYSTICK
 register SYST_CSR at 0xE000_E010 $uint32 { // SysTick Control and Status
   15, 
   COUNTFLAG,
@@ -2138,6 +2111,7 @@ register SYST_CVR   at 0xE000_E018 $uint32 // SysTick Current Value Register
 
 register SYST_CALIB  @ro at 0xE000_E01C $uint32 // SysTick Calibration Value
 
+register AICS0_PARCG at 0x_4000_0048 $uint32
 
 //register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control
 //register ARM_DEMCR_TRCENA  (1 << 24)  // Enable debugging & monitoring blocks
