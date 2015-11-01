@@ -1285,6 +1285,7 @@ extern const char * gWrapperFileContent_5_embeddedSampleCode ;
 extern const char * gWrapperFileContent_6_embeddedSampleCode ;
 extern const char * gWrapperFileContent_7_embeddedSampleCode ;
 extern const char * gWrapperFileContent_8_embeddedSampleCode ;
+extern const char * gWrapperFileContent_9_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1300,6 +1301,7 @@ extern const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

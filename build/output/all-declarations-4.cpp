@@ -4984,6 +4984,10 @@ const char * gWrapperFileContent_3_targetTemplates = "\n"
   "//\n"
   "//// Nested Vectored Interrupt Controller, Table 3-4 & ARMv7 ref, appendix B3.4 (page 750)\n"
   "//register NVIC_ENABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E100 + (n >> 5)) = (1 << (n & 31)))\n"
+  "register NVIC_ISER0  at 0xE000_E100 $uint32\n"
+  "register NVIC_ISER1  at 0xE000_E104 $uint32\n"
+  "register NVIC_ISER2  at 0xE000_E108 $uint32\n"
+  "register NVIC_ISER3  at 0xE000_E10C $uint32\n"
   "//register NVIC_DISABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_SET_PENDING(n) (*((volatile $uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_CLEAR_PENDING(n) (*((volatile $uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
@@ -5125,7 +5129,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  134312, // Text length
+  134488, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
@@ -8489,8 +8493,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "proc setup `user () {\n"
-  "  let PIT_MCR_MDIS $uint32 = 2 \n"
-  "  PIT_MCR &= ~PIT_MCR_MDIS\n"
+  "  PIT_MCR = 0\n"
   "  PIT_LDVAL0 = 200000\n"
   "  PIT_TCTRL0 = 1\n"
   "}\n"
@@ -8514,13 +8517,72 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "09-pit-unprivileged-mode.plm",
   "plm",
   true, // Text file
-  665, // Text length
+  620, // Text length
   gWrapperFileContent_8_embeddedSampleCode
+) ;
+
+//--- File 'teensy-3-1-it/10-pit-unprivileged-mode-it.plm'
+
+const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-it\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "init 100_000 {\n"
+  "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
+  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
+  "  AICS0_PARCG = 0\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc setup `user () {\n"
+  "  PIT_MCR = 0\n"
+  "  PIT_LDVAL0 = 200000\n"
+  "  PIT_TCTRL0 = 3 // Interrupt, enabled\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "var gPITValue $uint32 = 0 {\n"
+  "  proc loop ()\n"
+  "  @rw proc PITChannel0Handler ()\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc PITChannel0Handler `isr () {\n"
+  "//--- Acquitter l'interruption\n"
+  "  PIT_TFLG0 = 1\n"
+  "//--- Incr\xC3""\xA9""menter le compteur\n"
+  "  gPITValue ++\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "proc loop `user () {\n"
+  "  waitMS (!250)\n"
+  "  ledOn (!LED_TEENSY) // Allumer la led\n"
+  "  waitMS (!250)\n"
+  "  ledOff (!LED_TEENSY)  // \xC3""\x89""teindre la led\n"
+  "  goto (!line:1 !column:0)\n"
+  "  printSpaces (!10)\n"
+  "  goto (!line:1 !column:0)\n"
+  "  printUnsigned (!gPITValue)\n"
+  "}\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
+  "10-pit-unprivileged-mode-it.plm",
+  "plm",
+  true, // Text file
+  993, // Text length
+  gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
 //--- All files of 'teensy-3-1-it' directory
 
-static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [10] = {
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [11] = {
   & gWrapperFile_0_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
   & gWrapperFile_2_embeddedSampleCode,
@@ -8530,6 +8592,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [10] = 
   & gWrapperFile_6_embeddedSampleCode,
   & gWrapperFile_7_embeddedSampleCode,
   & gWrapperFile_8_embeddedSampleCode,
+  & gWrapperFile_9_embeddedSampleCode,
   NULL
 } ;
 
@@ -8543,7 +8606,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1]
 
 const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   "teensy-3-1-it",
-  9,
+  10,
   gWrapperAllFiles_embeddedSampleCode_1,
   0,
   gWrapperAllDirectories_embeddedSampleCode_1

@@ -95,15 +95,12 @@ os.chdir (scriptDir)
 #--- Compile PLM
 print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
 runCommand (["python", "../../../makefile-macosx/build+release.py"])
-#--- Compile PLM
-compileSource ("01-blinkled.plm")
-compileSource ("02-blinkled-systick.plm")
-compileSource ("03-blinkled-systick-enum.plm")
-compileSource ("04-blinkled-systick-struct.plm")
-compileSource ("05-blinkled-systick-string.plm")
-compileSource ("06-blinkled-lcd.plm")
-compileSource ("07-blinkled-urem-test.plm")
-compileSource ("08-blinkled-panic.plm")
-compileSource ("09-pit-unprivileged-mode.plm")
+#--- Compile PLM sources
+for dirname, dirnames, filenames in os.walk (scriptDir):
+  for file in filenames :
+    extension = os.path.splitext (file)[1]
+    if extension == ".plm" :
+      #print "  Dependence file : '" + file + "'"
+      compileSource (file)
 
 #----------------------------------------------------------------------------------------------------------------------*
