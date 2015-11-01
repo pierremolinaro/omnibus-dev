@@ -1,18 +1,19 @@
-target "teensy-3-1-sequential-systick"
+target "teensy-3-1-it"
+
+//------------------------------------------------*
+
+init 100_000 {
+  SIM_SCGC6 |= SIM_SCGC6_PIT
+  AICS0_PARCG = 0
+}
 
 //------------------------------------------------*
 
 proc setup `user () {
-}
-
-//------------------------------------------------*
-
-var toggle = true {
-  @rw proc loop ()
-}
-
-var gCount $uint3 = 0 {
-  @rw proc loop ()
+  let PIT_MCR_MDIS $uint32 = 2 
+  PIT_MCR &= ~PIT_MCR_MDIS
+  PIT_LDVAL0 = 200000
+  PIT_TCTRL0 = 1
 }
 
 //------------------------------------------------*
@@ -22,12 +23,10 @@ proc loop `user () {
   ledOn (!LED_TEENSY) // Allumer la led
   waitMS (!250)
   ledOff (!LED_TEENSY)  // Éteindre la led
-  toggle = not toggle
-  if toggle then
-    gCount ++ // EXCEPTION AFTER 7s
-    goto (!line:1 !column:0)
-    printUnsigned (!extend gCount : $uint32)
-  end
+  goto (!line:1 !column:0)
+  printSpaces (!10)
+  goto (!line:1 !column:0)
+  printUnsigned (!PIT_CVAL0)
 }
 
 //------------------------------------------------*

@@ -81,7 +81,7 @@ def runCommand (command) :
 
 def compileSource (source) :
   print MAGENTA() + BOLD () + "********** Compile " + source + ENDC ()
-  command = ["../makefile-macosx/plm", "-v", "--Oz", source]
+  command = ["../../../makefile-macosx/plm", "-v", "--Oz", source]
   childProcess = subprocess.Popen (command)
   childProcess.wait ()
   if childProcess.returncode != 0 :
@@ -94,7 +94,7 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile PLM
 print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
-runCommand (["python", "../makefile-macosx/build+release.py"])
+runCommand (["python", "../../../makefile-macosx/build+release.py"])
 #--- Compile PLM
 compileSource ("01-blinkled.plm")
 compileSource ("02-blinkled-systick.plm")
@@ -103,7 +103,7 @@ compileSource ("04-blinkled-systick-struct.plm")
 compileSource ("05-blinkled-systick-string.plm")
 compileSource ("06-blinkled-lcd.plm")
 compileSource ("07-blinkled-urem-test.plm")
-compileSource ("08-blinkled-exception.plm")
+compileSource ("08-blinkled-panic.plm")
 compileSource ("09-pit-unprivileged-mode.plm")
 
 #----------------------------------------------------------------------------------------------------------------------*

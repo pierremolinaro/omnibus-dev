@@ -89,7 +89,7 @@ proc systickHandler `isr () {
   userSystickHandler ()
 }
 
-proc userSystickHandler `isr @weak @noWarningIfUnused () {
+proc userSystickHandler `isr @weak () {
 }
 
 proc waitMS `user `init @noWarningIfUnused (?inDuration $uint32) {

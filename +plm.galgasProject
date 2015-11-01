@@ -138,6 +138,5 @@ project (1:0:0) -> "plm" {
 #--- Program
   "galgas-sources/program.galgas"
   "galgas-sources/embedded-sample-code.galgas"
-  "galgas-sources/embedded-targets.galgas"
 }
 

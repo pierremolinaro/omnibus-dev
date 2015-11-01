@@ -29,11 +29,11 @@ Pour afficher la liste des fichiers d'exemple, entrez :
 \begin{SHELL}
 {\bfseries plm -l}\\
 Embedded sample code:\\ 
-\hspace*{1.2em}/teensy-3-1-sequential-systick/01-blinkled.plm\\
+\hspace*{1.2em}/teensy-3-1-it/01-blinkled.plm\\
 \hspace*{1.2em}...
 \end{SHELL}
 
-Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-sequential-systick}, et le fichier d'exemple \texttt{01-blinkled.plm}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers PLM comme vous le voulez.
+Les exemples sont triés par cible, ainsi, pour la première ligne, la cible est \texttt{teensy-3-1-it}, et le fichier d'exemple \texttt{01-blinkled.plm}. Les noms des fichiers d'exemple commencent par des chiffres, simplement pour qu'ils apparaissent dans l'ordre souhaité. Vous pouvez nommer vos fichiers PLM comme vous le voulez.
 
 Comme son nom le suggère, l'exemple \texttt{01-blinkled.plm} fait clignoter une led, celle embarquée sur la carte \emph{Teensy 3.1}.
 
@@ -42,7 +42,7 @@ Comme son nom le suggère, l'exemple \texttt{01-blinkled.plm} fait clignoter une
 Pour extraire le fichier d'exemple \texttt{01-blinkled.plm}, exécuter :
 
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-sequential-systick/01-blinkled.plm
+\bfseries plm -x=/teensy-3-1-it/01-blinkled.plm
 \end{SHELL}
 
 
@@ -83,7 +83,7 @@ Le programme d'exemple a été flashé (« \emph{Programming} »), puis le micro
 Maintenant, nous allons examiner le code source PLM du fichier \texttt{01-blinkled.plm} :
 
 \begin{PLM}[1]
-target "teensy-3-1-sequential-systick"
+target "teensy-3-1-it"
 
 proc setup `user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
@@ -105,7 +105,7 @@ proc loop `user () {
 }
 \end{PLM}
 
-La première ligne \plm+target "teensy-3-1-sequential-systick"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
+La première ligne \plm+target "teensy-3-1-it"+ nomme la cible, en référençant un fichier embarqué dans le compilateur. Un fichier de définition de cible définit types, routines, registres de contrôle, … Un fichier de définition de cible ne peut être compilé séparement, il doit être cité dans un programme utilisateur (ici \texttt{01-blinkled.plm}). Un fichier de définition de cible peut exiger que le programme utilisateur définisse certains routines : ici, les deux routines \plm+setup+ et \plm+loop+ doivent être définies ; essayez de les commenter\footnote{Un commentaire commence par « \texttt{//} » et s'étend jusqu'à la fin de la ligne courante.}, vous obtiendrez des messages d'erreur.
 
 Comme pour l'Arduino, la routine \plm+setup+ est exécutée une seule fois, puis la routine \plm+setup+ est exécutée de manière répétitive. En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}. Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\`} » : ici, \plm+`user+. Un \emph{mode d'exécution} permet au compilateur de vérifier la cohérence de l'appel d'une routine, par exemple qu'une routine d'interruption n'est pas appelée directement\footnote{Les \emph{modes d'exécution} font l'objet du \refChapterPage{chapitreModesExecution}.}. Ici, dans le cadre d'un exemple très simple, l'annotation de mode peut sembler superflue, car la sûreté qu'elle apporte n'est pas exploitée. 
 
@@ -159,13 +159,13 @@ Son écriture est simple : la variable globale \plm+gDelai+ est incrémentée à
 
 \sectionLabel{Deuxième exemple : clignotement avec routine d'interruption}{deuxiemeExemple}
 
-La cible \texttt{teensy-3-1-sequential-systick} programme le décompteur \texttt{SysTick} de façon que l'interruption correspondante se déclenche toutes les millisecondes, et appelle une routine d'interruption. Par défaut, cette routine ne comporte aucune instruction et n'a donc aucun effet. 
+La cible \texttt{teensy-3-1-it} programme le décompteur \texttt{SysTick} de façon que l'interruption correspondante se déclenche toutes les millisecondes, et appelle une routine d'interruption. Par défaut, cette routine ne comporte aucune instruction et n'a donc aucun effet. 
 
 Le programme d'exemple \texttt{02-blinkled-systick.plm} redéfinit cette routine d'interruption et l'utilise pour compter le temps.
 
 Pour extraire le programme d'exemple :
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-sequential-systick/02-blinkled-systick.plm
+\bfseries plm -x=/teensy-3-1-it/02-blinkled-systick.plm
 \end{SHELL}
 
 Ensuite, vous pouvez le compiler et effectuer son flashage sur la carte \emph{Teensy 3.1} :
@@ -178,7 +178,7 @@ La led sur la carte \emph{Teensy 3.1} clignote à la fréquence de `1`~Hz.
 Voyons maintenant le contenu du fichier d'exemple \texttt{02-blinkled-systick.plm} :
 
 \begin{PLM}[1]
-target "teensy-3-1-sequential-systick"
+target "teensy-3-1-it"
 
 proc setup `user () {
   PORTC_PCR5 = PORTC_PCR5::mux (1)
@@ -208,7 +208,7 @@ proc loop `user () {
 }
 \end{PLM}
 
-La référence à la cible \plm+target "teensy-3-1-sequential-systick"+ et la définition de la routine \plm+setup+ sont identiques à celles écrites dans le premier exemple.
+La référence à la cible \plm+target "teensy-3-1-it"+ et la définition de la routine \plm+setup+ sont identiques à celles écrites dans le premier exemple.
 
 La définition de la variable globale \plm+gUpTimeMS+ :
 

@@ -17,6 +17,35 @@ syntax extension plm_specific_syntax {
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
+#    TARGET LIST OPTION                                                                                                *
+#----------------------------------------------------------------------------------------------------------------------*
+
+before {
+  let @filewrapper fw = [filewrapper targetTemplates]
+  if [option plm_options.listEmbeddedTargets value] then
+    let embeddedFiles = [fw allTextFilePathes]
+    message "Embedded targets:\n"
+    for (f) in embeddedFiles do
+      if [f pathExtension] == "plm-target" then
+        message "  " + [[f lastPathComponent] stringByDeletingPathExtension] + '\n'
+      end
+    end
+  end
+  let path = [option plm_options.extractEmbeddedTargets value]
+  if path != "" then
+    let embeddedFiles = [fw allTextFilePathes]
+    for (f) in embeddedFiles do
+      let filePath = path + f
+        message "  " + filePath + '\n'
+        let dir = [filePath stringByDeletingLastPathComponent]
+        [dir makeDirectory]
+        let text = [fw textFileContentsAtPath !f]
+        [text writeToFileWhenDifferentContents !filePath ?*]
+    end
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
 #    TARGET GENERATION                                                                                                 *
 #----------------------------------------------------------------------------------------------------------------------*
 
