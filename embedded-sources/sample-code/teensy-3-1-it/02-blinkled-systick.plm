@@ -1,4 +1,4 @@
-target "teensy-3-1-sequential-systick"
+target "teensy-3-1-it"
 
 //------------------------------------------------*
 

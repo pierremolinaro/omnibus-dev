@@ -1,0 +1,261 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapterLabel{Cibles}{chapitreCiblesDefinies}
+
+Dans l'état actuel de PLM, une seule cible est définie : \texttt{teensy-3-1-it}. L'objet de ce chapitre est de décrire son utilisation.
+
+Il est possible de définir sa propre cible (\refChapterPage{chapitreConfCible}).
+
+\section{Cible \texttt{teensy-3-1-it}}\index{Cible!\texttt{teensy-3-1-it}}
+
+Cette cible est une carte \emph{Teensy 3.1}. Elle permet une programmation séquentielle avec interruptions activées. L'interruption \texttt{systick} est programmée pour se déclencher chaque milliseconde. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Organigramme d'exécution}
+
+La \refFigure{}{sequenceDemarrageTeensySequentialSystick} définit l'organigramme d'exécution d'un programme.
+
+Le micro-contrôleur démarre sur une horloge interne, la mémoire vive n'étant pas initialisée. Il est dans le mode \emph{thread, priviliged access}, avec une seule pile. La configuration conservera cette pile unique, qui servira donc pour les routines de fond et les routines d'interruption.
+
+La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot=. À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
+
+La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
+
+La troisième étape est l'exécution des routines \plm=init=. À partir de cette étape et pour les suivantes, les variables globales sont initialisées, et donc leur emploi est autorisé. Le rôle des routines \plm=init= est de configurer les entrées/sorties du micro-contrôleur. En particulier, la routine \plm=init 0= de cette cible configure le \emph{SysTick Timer} pour qu'il engendre une interruption toutes les millisecondes (\refSubsectionPage{fichierTarget}).
+
+Ensuite, le micro-contrôleur est passé en mode \emph{thread, unpriviliged access}, ce qui correspond au mode \plm+`user+ de PLM pour cette cible.
+
+La routine \plm+setup+ est exécutée une fois, puis \plm+loop+ est exécutée indéfiniment.
+
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Démarrage}} ;
+    \node [block] (confDepart) [below=of start] {Mode \emph{thread}, accès priviliégié, une seule pile} ;
+    \node [block] (boot) [below=of confDepart] {Routines \bf\texttt{boot}} ;
+    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
+    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
+    \node [block] (user) [below=of init] {Passage en mode \emph{thread}, accès non priviliégié} ;
+    \node [block] (setup) [below=of user] {Procédure \texttt{setup}} ;
+    \node [block] (loop) [below=of setup] {Procédure \texttt{loop}} ;
+
+    \draw [-stealth, thick] (start) -- (confDepart) ;
+    \draw [-stealth, thick] (confDepart) -- (boot) ;
+    \draw [-stealth, thick] (boot) -- (raz) ;
+    \draw [-stealth, thick] (raz) -- (init) ;
+    \draw [-stealth, thick] (init) -- (user) ;
+    \draw [-stealth, thick] (user) -- (setup) ;
+    \draw [-stealth, thick] (setup) -- (loop) ;
+    \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(1.7, -.25) -- +(1.7, 0.85)-- +(0, 0.85) ;
+  \end{tikzpicture}
+  \caption{Organigramme d'exécution de la cible \texttt{teensy-3-1-it}}
+  \labelFigure{sequenceDemarrageTeensySequentialSystick}
+  \ligne
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\subsection{Les routines d'interruption}
+
+Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, à l'exception de l'interruption n°1 (remise à zéro), et de la n°15 (\texttt{SysTick}), qui est prise en charge de façon particulière (voir §§).
+
+\begin{table}[!t]
+  \centering
+  \begin{tabular}{llllll}
+    \textbf{Numéro}& \textbf{Nom routine \texttt{@weak}} \\
+    1  & --\\
+    2  & \texttt{NMIHandler}\\
+    3  & \texttt{HardFaultHandler}\\
+    4  & \texttt{MemManageHandler}\\
+    5  & \texttt{BusFaultHandler}\\
+    6  & \texttt{UsageFaultHandler}\\
+    11 & \texttt{svcHandler}\\
+    12 & \texttt{DebugMonitorHandler}\\
+    14 & \texttt{PendSVHandler}\\
+    15 & \texttt{userSystickHandler}, voir texte \\
+  \end{tabular}
+  \caption{Table des interruptions 1 à 15 de la cible \texttt{teensy-3-1-it}}
+  \labelTableau{tableItTeensySequentialSystick1}
+  \ligne
+\end{table}
+
+\begin{table}[!t]
+  \centering
+  \begin{tabular}{llllll}
+    \textbf{Numéro} & \textbf{Nom routine} \\
+    16  & \texttt{DMAChannel0TranfertCompleteHandler}\\
+    17  & \texttt{DMAChannel1TranfertCompleteHandler}\\
+    18  & \texttt{DMAChannel2TranfertCompleteHandler}\\
+    19  & \texttt{DMAChannel3TranfertCompleteHandler}\\
+    20  & \texttt{DMAChannel4TranfertCompleteHandler}\\
+    21  & \texttt{DMAChannel5TranfertCompleteHandler}\\
+    22  & \texttt{DMAChannel6TranfertCompleteHandler}\\
+    23  & \texttt{DMAChannel7TranfertCompleteHandler}\\
+    24  & \texttt{DMAChannel8TranfertCompleteHandler}\\
+    25  & \texttt{DMAChannel9TranfertCompleteHandler}\\
+    26  & \texttt{DMAChannel10TranfertCompleteHandler}\\
+    27  & \texttt{DMAChannel11TranfertCompleteHandler}\\
+    28  & \texttt{DMAChannel12TranfertCompleteHandler}\\
+    29  & \texttt{DMAChannel13TranfertCompleteHandler}\\
+    30  & \texttt{DMAChannel14TranfertCompleteHandler}\\
+    31  & \texttt{DMAChannel15TranfertCompleteHandler}\\
+    32  & \texttt{DMAErrorHandler}\\
+    34  & \texttt{flashMemoryCommandCompleteHandler}\\
+    35  & \texttt{flashMemoryReadCollisionHandler}\\
+    36  & \texttt{modeControllerHandler}\\
+    37  & \texttt{LLWUHandler}\\
+    38  & \texttt{WDOGEWMHandler}\\
+    40  & \texttt{I2C0Handler}\\
+    41  & \texttt{I2C1Handler}\\
+    42  & \texttt{SPI0Handler}\\
+    43  & \texttt{SPI1Handler}\\
+    45  & \texttt{CAN0MessageBufferHandler}\\
+    46  & \texttt{CAN0BusOffHandler}\\
+    47  & \texttt{CAN0ErrorHandler}\\
+    48  & \texttt{CAN0TransmitWarningHandler}\\
+    49  & \texttt{CAN0ReceiveWarningHandler}\\
+    50  & \texttt{CAN0WakeUpHandler}\\
+    51  & \texttt{I2S0TransmitHandler}\\
+    52  & \texttt{I2S0ReceiveHandler}\\
+  \end{tabular}
+  \caption{Table des interruptions 16 à 52 de la cible \texttt{teensy-3-1-it}}
+  \labelTableau{tableItTeensySequentialSystick2}
+  \ligne
+\end{table}
+
+\begin{table}[!t]
+  \centering
+  \begin{tabular}{llllll}
+    \textbf{Numéro}& \textbf{Nom routine \texttt{@weak}} \\
+    60  & \texttt{UART0LONHandler}\\
+    61  & \texttt{UART0StatusHandler}\\
+    62  & \texttt{UART0ErrorHandler}\\
+    63  & \texttt{UART1StatusHandler}\\
+    64  & \texttt{UART1ErrorHandler}\\
+    65  & \texttt{UART2StatusHandler}\\
+    66  & \texttt{UART2ErrorHandler}\\
+    73  & \texttt{ADC0Handler}\\
+    74  & \texttt{ADC1Handler}\\
+    75  & \texttt{CMP0Handler}\\
+    76  & \texttt{CMP1Handler}\\
+    77  & \texttt{CMP2Handler}\\
+    78  & \texttt{FMT0Handler}\\
+    79  & \texttt{FMT1Handler}\\
+    80  & \texttt{FMT2Handler}\\
+    81  & \texttt{CMTHandler}\\
+    82  & \texttt{RTCAlarmHandler}\\
+    83  & \texttt{RTCSecondHandler}\\
+    84  & \texttt{PITChannel0Handler}\\
+    85  & \texttt{PITChannel1Handler}\\
+    86  & \texttt{PITChannel2Handler}\\
+    87  & \texttt{PITChannel3Handler}\\
+    88  & \texttt{PDBHandler}\\
+    89  & \texttt{USBOTGHandler}\\
+    90  & \texttt{USBChargerDetectHandler}\\
+    97  & \texttt{DAC0Handler}\\
+    99  & \texttt{TSIHandler}\\
+    100  & \texttt{MCGHandler}\\
+    101  & \texttt{lowPowerTimerHandler}\\
+    103  & \texttt{pinDetectPortAHandler}\\
+    104  & \texttt{pinDetectPortBHandler}\\
+    105  & \texttt{pinDetectPortCHandler}\\
+    106  & \texttt{pinDetectPortDHandler}\\
+    107  & \texttt{pinDetectPortEHandler}\\
+    110  & \texttt{softwareInterruptHandler}
+  \end{tabular}
+  \caption{Table des interruptions 60 à 110 de la cible \texttt{teensy-3-1-it}}
+  \labelTableau{tableItTeensySequentialSystick3}
+  \ligne
+\end{table}
+
+
+\subsubsection{Routines d'interruption par défaut, exceptions activées}
+
+Quand les exceptions sont activées, une routine par défaut est prédéfinie pour chaque interruption (sauf la n°1 et la n°15). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption n°2 (\texttt{NMI}), la routine prédéfinie est :
+\begin{PLM}[1]
+proc NMIHandler `isr @nullOnNoException @weak () {
+  panic 2
+}
+\end{PLM}
+
+
+\subsubsection{Routines d'interruption par défaut, exceptions inactivées}
+
+Quand les exceptions sont inactivées, l'attribut \plm+@nullOnNoException+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
+
+
+
+\subsubsection{Routines d'interruption définies par l'utilisateur}
+
+L'attribut \plm+@weak+ associé à chaque routine d'interruption permet sa redéfinition par l'utilisateur. La routine par défaut est alors ignorée, que les exceptions soient activées ou non.
+
+Par exemple, l'utilisateur peut définir la routine associée à \texttt{NMI} par :
+\begin{PLM}[1]
+proc NMIHandler `isr {
+  ...
+}
+\end{PLM}
+
+Il est important de conserver le nom. Si celui-ci est mal orthographié et ne correspond à aucune interruption :
+\begin{itemize}
+  \item la routine d'interruption par défaut est conservée (execeptions activées) ou supprimée (exception inactivées) ;
+  \item un \emph{warning} est déclenché, signalant que la routine utilisateur est inutilisée.
+\end{itemize}
+
+
+
+\subsubsection{Routine associée à l'interruption \texttt{SysTick}}
+
+L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur :
+\begin{itemize}
+  \item incrémente une variable globale de comptage du temps ;
+  \item appelle la routine \plm+userSystickHandler+.
+\end{itemize}
+
+La routine \plm+userSystickHandler+ est définie par :
+\begin{PLM}[1]
+proc userSystickHandler `isr @weak () {
+}
+\end{PLM}
+
+L'attribut \plm+@weak+ permet sa redéfinition par l'utilisateur.
+
+
+

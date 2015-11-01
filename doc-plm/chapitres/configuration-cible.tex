@@ -7,7 +7,7 @@
 
 \chapterLabel{Définition d'une cible}{chapitreConfCible}
 
-Dans ce chapitre, nous allons voir comment est définie une cible, en prenant pour exemple la cible \texttt{teensy-3-1-sequential-systick}. 
+Dans ce chapitre, nous allons voir comment est définie une cible, en prenant pour exemple la cible \texttt{teensy-3-1-it}. 
 
 Si vous voulez définir votre propre cible, la lecture de ce chapitre est indispensable. 
 
@@ -30,8 +30,7 @@ Une cible est définie par une arborescence de fichiers, soit embarquée dans le
 \begin{SHELL}
 {\bfseries plm -L}\\
 Embedded targets:\\ 
-\hspace*{1.2em}teensy-3-1-interrupt\\
-\hspace*{1.2em}teensy-3-1-sequential-systick\\
+\hspace*{1.2em}teensy-3-1-it\\
 \hspace*{1.2em}...
 \end{SHELL}
 
@@ -40,16 +39,15 @@ L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur to
 \begin{SHELL}
 {\bfseries plm -X=cibles}\\
 \hspace*{1.2em}cibles/makef{}ile.py\\
-\hspace*{1.2em}cibles/teensy-3-1-interrupt.plm-target\\
-\hspace*{1.2em}cibles/teensy-3-1-sequential-systick.plm-target\\
-\hspace*{1.2em}cibles/files/boot-teensy-3-1.plm\\
+\hspace*{1.2em}cibles/teensy-3-1-it.plm-target\\
+\hspace*{1.2em}cibles/files/boot-teensy-3-1-it.plm\\
 \hspace*{1.2em}...
 \end{SHELL}
 
 \subsection{Extraction d'un fichier d'exemple}
-On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-sequential-systick} :
+On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-it} :
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-sequential-systick/01-blinkled.plm
+\bfseries plm -x=/teensy-3-1-it/01-blinkled.plm
 \end{SHELL}
 
 \subsection{Compilation du fichier exemple}
@@ -69,10 +67,10 @@ Pour se convaincre que la cible nommée dans le fichier est bien celle située d
 
 Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est :
 \begin{PLM}[1]
-target "teensy-3-1-sequential-systick"
+target "teensy-3-1-it"
 \end{PLM}
 
-Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-sequential-systick}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc :
+Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-it}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc :
 
 \begin{PLM}[1]
 target "myTeensy"
@@ -84,15 +82,15 @@ Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une er
 f{}iles/\\
 makef{}ile.py\\
 ...\\
-teensy-3-1-sequential-systick/\\
-teensy-3-1-sequential-systick.plm-target\\
+teensy-3-1-it/\\
+teensy-3-1-it.plm-target\\
 ...
 \end{SHELL}
 
 Le répertoire \texttt{f{}iles} et le fichier \texttt{makef{}ile.py} seront présentés plus loin. Chaque cible est définie par un répertoire et un fichier, dont l'extension est \texttt{plm-target}. Nous allons donc effectuer les renommages suivants :
 \begin{itemize}
-  \item le répertoire \texttt{teensy-3-1-sequential-systick} est renommé en \texttt{myTeensy} ;
-  \item le fichier \texttt{teensy-3-1-sequential-systick.plm-target} en \texttt{myTeensy.plm-target}.
+  \item le répertoire \texttt{teensy-3-1-it} est renommé en \texttt{myTeensy} ;
+  \item le fichier \texttt{teensy-3-1-it.plm-target} en \texttt{myTeensy.plm-target}.
 \end{itemize}
 
 À présent, la compilation s'effectue avec succès :
@@ -124,44 +122,6 @@ Pour la cible \texttt{myTeensy} :
 
 On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le répertoire \texttt{myTeensy}.
 
-\subsection{Organigramme d'exécution}
-
-La \refFigure{}{sequenceDemarrage} définit l'organigramme d'exécution d'un programme dont la cible est \texttt{teensy-3-1-sequential-systick}, ou \texttt{myTeensy} dont il est la copie.
-
-Le micro-contrôleur démarre sur une horloge interne, la mémoire vive n'étant pas initialisée. La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot=. À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
-
-La deuxième étape est d'initialiser la mémoire vive, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
-
-La troisième étape est l'exécution des routines \plm=init=. À partir de cette étape et pour les suivantes, les variables globales sont initialisées, et donc leur emploi est autorisé. Le rôle des routines \plm=init= est de configurer les entrées/sorties du micro-contrôleur. En particulier, la routine \plm=init 0= de cette cible configure le \emph{SysTick Timer} pour qu'il engendre une interruption toutes les millisecondes (\refSubsectionPage{fichierTarget}).
-
-
-\begin{figure}[t]
-  \centering
-  \small
-  \begin{tikzpicture}[
-      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
-      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
-      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
-      node distance=5mm
-    ]
-    \node [cloud] (start) {\textsc{Démarrage}} ;
-    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}} ;
-    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
-    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
-    \node [block] (setup) [below=of init] {Procédure \texttt{setup}} ;
-    \node [block] (loop) [below=of setup] {Procédure \texttt{loop}} ;
-
-    \draw [-stealth, thick] (start) -- (boot) ;
-    \draw [-stealth, thick] (boot) -- (raz) ;
-    \draw [-stealth, thick] (raz) -- (init) ;
-    \draw [-stealth, thick] (init) -- (setup) ;
-    \draw [-stealth, thick] (setup) -- (loop) ;
-    \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(1.7, -.25) -- +(1.7, 0.8)-- +(0, 0.8) ;
-  \end{tikzpicture}
-  \caption{Organigramme d'exécution défini par la cible \texttt{teensy-3-1-sequential-systick}}
-  \labelFigure{sequenceDemarrage}
-  \ligne
-\end{figure}
 
 
 
@@ -187,7 +147,7 @@ mode `isr
 mode `user
 
 import "files/mk20dx256.plm"
-import "files/boot-teensy-3-1.plm"
+import "files/boot-teensy-3-1-it.plm"
 
 required proc systickHandler `isr ()
 required proc setup `user ()
@@ -218,7 +178,7 @@ init 0 { // Configure Systick interrupt every ms
 {\bf Lignes 8 et 9.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
 
 
-{\bf Lignes 11 et 12.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
+{\bf Lignes 11 et 12.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1-it.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
 
 
 
