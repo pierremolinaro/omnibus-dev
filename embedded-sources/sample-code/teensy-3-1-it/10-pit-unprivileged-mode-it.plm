@@ -4,6 +4,7 @@ target "teensy-3-1-it"
 
 init 100_000 {
   SIM_SCGC6 |= SIM_SCGC6_PIT
+  NVIC_ISER2 = 1 << ((84 - 16) & 31)
   AICS0_PARCG = 0
 }
 
@@ -12,7 +13,23 @@ init 100_000 {
 proc setup `user () {
   PIT_MCR = 0
   PIT_LDVAL0 = 200000
-  PIT_TCTRL0 = 1
+  PIT_TCTRL0 = 3 // Interrupt, enabled
+}
+
+//------------------------------------------------*
+
+var gPITValue $uint32 = 0 {
+  proc loop ()
+  @rw proc PITChannel0Handler ()
+}
+
+//------------------------------------------------*
+
+proc PITChannel0Handler `isr () {
+//--- Acquitter l'interruption
+  PIT_TFLG0 = 1
+//--- Incrémenter le compteur
+  gPITValue ++
 }
 
 //------------------------------------------------*
@@ -25,7 +42,7 @@ proc loop `user () {
   goto (!line:1 !column:0)
   printSpaces (!10)
   goto (!line:1 !column:0)
-  printUnsigned (!PIT_CVAL0)
+  printUnsigned (!gPITValue)
 }
 
 //------------------------------------------------*
