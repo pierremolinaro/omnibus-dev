@@ -98,8 +98,8 @@ func %once weakAttribute -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once nullOnNoExceptionAttribute -> @string outResult {
-  outResult = "nullOnNoException"
+func %once nullWhenPanicDisabledAttribute -> @string outResult {
+  outResult = "nullWhenPanicDisabled"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
