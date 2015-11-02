@@ -108,15 +108,42 @@ Vous pouvez ajouter vos propres routines \plm+init+. À chaque routine \plm+init
 
 
 
+
+
+
+
+
+
+
 \section{API}
 
+L'API de la cible \texttt{teensy-3-1-it} partagent les routines en trois groupes :
+\begin{itemize}
+  \item les routines appelables dans tous les modes ;
+  \item les routines appelables uniquement dans le mode \plm+`user+ (\refSubsectionPage{RoutinesTousModeTeensy31}) ;
+  \item les routines appelables uniquement dans le mode \plm+`exception+ ;
+\end{itemize}
+
+\subsectionLabel{Routines appelables dans tous les modes}{RoutinesTousModeTeensy31}
+
+Ces routines sont appelables dans les modes \plm+`user+, \plm+`isr+ et \plm+`exception+ :
+\begin{itemize}
+\item \texttt{ledOff} : \refSubsubsectionTitlePage{routineLedOffTeensy31it} ;
+\item \texttt{ledOn} : \refSubsubsectionTitlePage{routineLedOnTeensy31it}.
+\end{itemize}
 
 
+\subsubsectionLabel{Routine \texttt{ledOff}}{routineLedOffTeensy31it}
 
+\begin{PLM}
+proc ledOff `user `exception `isr (?inLeds $uint32)
+\end{PLM}
 
+\subsubsectionLabel{Routine \texttt{ledOn}}{routineLedOnTeensy31it}
 
-
-
+\begin{PLM}
+proc ledOn `user `exception `isr (?inLeds $uint32)
+\end{PLM}
 
 
 \section{Les routines d'interruption}
@@ -253,7 +280,7 @@ Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySeque
 
 Quand les exceptions sont activées, une routine par défaut est prédéfinie pour chaque interruption (sauf la n°1 et la n°15). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption n°2 (\texttt{NMI}), la routine prédéfinie est :
 \begin{PLM}[1]
-proc NMIHandler `isr @nullOnNoException @weak () {
+proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
   panic 2
 }
 \end{PLM}
@@ -261,7 +288,7 @@ proc NMIHandler `isr @nullOnNoException @weak () {
 
 \subsectionLabel{Routines d'interruption par défaut, exceptions inactivées}{itsTeensy31SansExceptions}
 
-Quand les exceptions sont inactivées, l'attribut \plm+@nullOnNoException+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
+Quand les exceptions sont inactivées, l'attribut \plm+@nullWhenPanicDisabled+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
 
 
 

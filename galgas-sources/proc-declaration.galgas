@@ -329,9 +329,9 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
         error attribute : "duplicate @" + weakAttribute () + " attribute"
       end
       weakProcedure = true    
-    elsif attribute.string == nullOnNoExceptionAttribute () then
+    elsif attribute.string == nullWhenPanicDisabledAttribute () then
       if nullOnNoException then
-        error attribute : "duplicate @" + nullOnNoExceptionAttribute () + " attribute"
+        error attribute : "duplicate @" + nullWhenPanicDisabledAttribute () + " attribute"
       end
       nullOnNoException = true    
     else

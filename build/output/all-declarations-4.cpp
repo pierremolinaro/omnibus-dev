@@ -1077,14 +1077,14 @@ C_galgas_function_descriptor functionDescriptor_weakAttribute ("weakAttribute",
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Once function 'nullOnNoExceptionAttribute'                                      *
+//                                   Once function 'nullWhenPanicDisabledAttribute'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_nullOnNoExceptionAttribute (C_Compiler * /* inCompiler */
-                                                              COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_string onceFunction_nullWhenPanicDisabledAttribute (C_Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("nullOnNoException") ;
+  result_outResult = GALGAS_string ("nullWhenPanicDisabled") ;
 //---
   return result_outResult ;
 }
@@ -1095,55 +1095,55 @@ static GALGAS_string onceFunction_nullOnNoExceptionAttribute (C_Compiler * /* in
 //  Function implementation                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static bool gOnceFunctionResultAvailable_nullOnNoExceptionAttribute = false ;
-static GALGAS_string gOnceFunctionResult_nullOnNoExceptionAttribute ;
+static bool gOnceFunctionResultAvailable_nullWhenPanicDisabledAttribute = false ;
+static GALGAS_string gOnceFunctionResult_nullWhenPanicDisabledAttribute ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string function_nullOnNoExceptionAttribute (class C_Compiler * inCompiler
+GALGAS_string function_nullWhenPanicDisabledAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_nullOnNoExceptionAttribute) {
-    gOnceFunctionResult_nullOnNoExceptionAttribute = onceFunction_nullOnNoExceptionAttribute (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_nullOnNoExceptionAttribute = true ;
+  if (! gOnceFunctionResultAvailable_nullWhenPanicDisabledAttribute) {
+    gOnceFunctionResult_nullWhenPanicDisabledAttribute = onceFunction_nullWhenPanicDisabledAttribute (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_nullWhenPanicDisabledAttribute = true ;
   }
-  return gOnceFunctionResult_nullOnNoExceptionAttribute ;
+  return gOnceFunctionResult_nullWhenPanicDisabledAttribute ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void releaseOnceFunctionResult_nullOnNoExceptionAttribute (void) {
-  gOnceFunctionResult_nullOnNoExceptionAttribute.drop () ;
+static void releaseOnceFunctionResult_nullWhenPanicDisabledAttribute (void) {
+  gOnceFunctionResult_nullWhenPanicDisabledAttribute.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gEpilogueForOnceFunction_nullOnNoExceptionAttribute (NULL,
-                                                                        releaseOnceFunctionResult_nullOnNoExceptionAttribute) ;
+C_PrologueEpilogue gEpilogueForOnceFunction_nullWhenPanicDisabledAttribute (NULL,
+                                                                            releaseOnceFunctionResult_nullWhenPanicDisabledAttribute) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_nullOnNoExceptionAttribute [1] = {
+static const C_galgas_type_descriptor * functionArgs_nullWhenPanicDisabledAttribute [1] = {
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_nullOnNoExceptionAttribute (C_Compiler * inCompiler,
-                                                                           const cObjectArray & /* inEffectiveParameterArray */,
-                                                                           const GALGAS_location & /* inErrorLocation */
-                                                                           COMMA_LOCATION_ARGS) {
-  return function_nullOnNoExceptionAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_nullWhenPanicDisabledAttribute (C_Compiler * inCompiler,
+                                                                               const cObjectArray & /* inEffectiveParameterArray */,
+                                                                               const GALGAS_location & /* inErrorLocation */
+                                                                               COMMA_LOCATION_ARGS) {
+  return function_nullWhenPanicDisabledAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_nullOnNoExceptionAttribute ("nullOnNoExceptionAttribute",
-                                                                            functionWithGenericHeader_nullOnNoExceptionAttribute,
-                                                                            & kTypeDescriptor_GALGAS_string,
-                                                                            0,
-                                                                            functionArgs_nullOnNoExceptionAttribute) ;
+C_galgas_function_descriptor functionDescriptor_nullWhenPanicDisabledAttribute ("nullWhenPanicDisabledAttribute",
+                                                                                functionWithGenericHeader_nullWhenPanicDisabledAttribute,
+                                                                                & kTypeDescriptor_GALGAS_string,
+                                                                                0,
+                                                                                functionArgs_nullWhenPanicDisabledAttribute) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -5215,7 +5215,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc NMIHandler `isr ()\n"
   "\n"
-  "proc NMIHandler `isr @nullOnNoException @weak () {\n"
+  "proc NMIHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 2\n"
   "}\n"
   "\n"
@@ -5223,7 +5223,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc HardFaultHandler `isr ()\n"
   "\n"
-  "proc HardFaultHandler `isr @nullOnNoException @weak () {\n"
+  "proc HardFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 3\n"
   "}\n"
   "\n"
@@ -5231,7 +5231,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc MemManageHandler `isr ()\n"
   "\n"
-  "proc MemManageHandler `isr @nullOnNoException @weak () {\n"
+  "proc MemManageHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 4\n"
   "}\n"
   "\n"
@@ -5239,7 +5239,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc BusFaultHandler `isr ()\n"
   "\n"
-  "proc BusFaultHandler `isr @nullOnNoException @weak () {\n"
+  "proc BusFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 5\n"
   "}\n"
   "\n"
@@ -5247,7 +5247,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UsageFaultHandler `isr ()\n"
   "\n"
-  "proc UsageFaultHandler `isr @nullOnNoException @weak () {\n"
+  "proc UsageFaultHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 6\n"
   "}\n"
   "\n"
@@ -5255,7 +5255,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc svcHandler `isr ()\n"
   "\n"
-  "proc svcHandler `isr @nullOnNoException @weak () {\n"
+  "proc svcHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 11\n"
   "}\n"
   "\n"
@@ -5263,7 +5263,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DebugMonitorHandler `isr ()\n"
   "\n"
-  "proc DebugMonitorHandler `isr @nullOnNoException @weak () {\n"
+  "proc DebugMonitorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 12\n"
   "}\n"
   "\n"
@@ -5271,7 +5271,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PendSVHandler `isr ()\n"
   "\n"
-  "proc PendSVHandler `isr @nullOnNoException @weak () {\n"
+  "proc PendSVHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 14\n"
   "}\n"
   "\n"
@@ -5315,7 +5315,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel0TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel0TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel0TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 16\n"
   "}\n"
   "\n"
@@ -5323,7 +5323,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel1TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel1TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel1TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 17\n"
   "}\n"
   "\n"
@@ -5331,7 +5331,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel2TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel2TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel2TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 18\n"
   "}\n"
   "\n"
@@ -5339,7 +5339,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel3TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel3TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel3TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 19\n"
   "}\n"
   "\n"
@@ -5347,7 +5347,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel4TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel4TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel4TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 20\n"
   "}\n"
   "\n"
@@ -5355,7 +5355,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel5TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel5TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel5TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 21\n"
   "}\n"
   "\n"
@@ -5363,7 +5363,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel6TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel6TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel6TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 22\n"
   "}\n"
   "\n"
@@ -5371,7 +5371,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel7TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel7TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel7TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 23\n"
   "}\n"
   "\n"
@@ -5379,7 +5379,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel8TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel8TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel8TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 24\n"
   "}\n"
   "\n"
@@ -5387,7 +5387,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel9TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel9TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel9TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 25\n"
   "}\n"
   "\n"
@@ -5395,7 +5395,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel10TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel10TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel10TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 26\n"
   "}\n"
   "\n"
@@ -5403,7 +5403,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel11TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel11TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel11TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 27\n"
   "}\n"
   "\n"
@@ -5411,7 +5411,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel12TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel12TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel12TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 28\n"
   "}\n"
   "\n"
@@ -5419,7 +5419,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel13TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel13TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel13TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 29\n"
   "}\n"
   "\n"
@@ -5427,7 +5427,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel14TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel14TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel14TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 30\n"
   "}\n"
   "\n"
@@ -5435,7 +5435,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAChannel15TranfertCompleteHandler `isr ()\n"
   "\n"
-  "proc DMAChannel15TranfertCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAChannel15TranfertCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 31\n"
   "}\n"
   "\n"
@@ -5443,7 +5443,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DMAErrorHandler `isr ()\n"
   "\n"
-  "proc DMAErrorHandler `isr @nullOnNoException @weak () {\n"
+  "proc DMAErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 32\n"
   "}\n"
   "\n"
@@ -5451,7 +5451,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc flashMemoryCommandCompleteHandler `isr ()\n"
   "\n"
-  "proc flashMemoryCommandCompleteHandler `isr @nullOnNoException @weak () {\n"
+  "proc flashMemoryCommandCompleteHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 34\n"
   "}\n"
   "\n"
@@ -5459,7 +5459,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc flashMemoryReadCollisionHandler `isr ()\n"
   "\n"
-  "proc flashMemoryReadCollisionHandler `isr @nullOnNoException @weak () {\n"
+  "proc flashMemoryReadCollisionHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 35\n"
   "}\n"
   "\n"
@@ -5467,7 +5467,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc modeControllerHandler `isr ()\n"
   "\n"
-  "proc modeControllerHandler `isr @nullOnNoException @weak () {\n"
+  "proc modeControllerHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 36\n"
   "}\n"
   "\n"
@@ -5475,7 +5475,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc LLWUHandler `isr ()\n"
   "\n"
-  "proc LLWUHandler `isr @nullOnNoException @weak () {\n"
+  "proc LLWUHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 37\n"
   "}\n"
   "\n"
@@ -5483,7 +5483,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc WDOGEWMHandler `isr ()\n"
   "\n"
-  "proc WDOGEWMHandler `isr @nullOnNoException @weak () {\n"
+  "proc WDOGEWMHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 38\n"
   "}\n"
   "\n"
@@ -5491,7 +5491,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2C0Handler `isr ()\n"
   "\n"
-  "proc I2C0Handler `isr @nullOnNoException @weak () {\n"
+  "proc I2C0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 40\n"
   "}\n"
   "\n"
@@ -5499,7 +5499,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2C1Handler `isr ()\n"
   "\n"
-  "proc I2C1Handler `isr @nullOnNoException @weak () {\n"
+  "proc I2C1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 41\n"
   "}\n"
   "\n"
@@ -5507,7 +5507,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc SPI0Handler `isr ()\n"
   "\n"
-  "proc SPI0Handler `isr @nullOnNoException @weak () {\n"
+  "proc SPI0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 42\n"
   "}\n"
   "\n"
@@ -5515,7 +5515,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc SPI1Handler `isr ()\n"
   "\n"
-  "proc SPI1Handler `isr @nullOnNoException @weak () {\n"
+  "proc SPI1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 43\n"
   "}\n"
   "\n"
@@ -5523,7 +5523,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0MessageBufferHandler `isr ()\n"
   "\n"
-  "proc CAN0MessageBufferHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0MessageBufferHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 45\n"
   "}\n"
   "\n"
@@ -5531,7 +5531,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0BusOffHandler `isr ()\n"
   "\n"
-  "proc CAN0BusOffHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0BusOffHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 46\n"
   "}\n"
   "\n"
@@ -5539,7 +5539,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0ErrorHandler `isr ()\n"
   "\n"
-  "proc CAN0ErrorHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 47\n"
   "}\n"
   "\n"
@@ -5547,7 +5547,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0TransmitWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0TransmitWarningHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0TransmitWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 48\n"
   "}\n"
   "\n"
@@ -5555,7 +5555,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0ReceiveWarningHandler `isr ()\n"
   "\n"
-  "proc CAN0ReceiveWarningHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0ReceiveWarningHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 49\n"
   "}\n"
   "\n"
@@ -5563,7 +5563,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CAN0WakeUpHandler `isr ()\n"
   "\n"
-  "proc CAN0WakeUpHandler `isr @nullOnNoException @weak () {\n"
+  "proc CAN0WakeUpHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 50\n"
   "}\n"
   "\n"
@@ -5571,7 +5571,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2S0TransmitHandler `isr ()\n"
   "\n"
-  "proc I2S0TransmitHandler `isr @nullOnNoException @weak () {\n"
+  "proc I2S0TransmitHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 51\n"
   "}\n"
   "\n"
@@ -5579,7 +5579,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc I2S0ReceiveHandler `isr ()\n"
   "\n"
-  "proc I2S0ReceiveHandler `isr @nullOnNoException @weak () {\n"
+  "proc I2S0ReceiveHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 52\n"
   "}\n"
   "\n"
@@ -5587,7 +5587,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0LONHandler `isr ()\n"
   "\n"
-  "proc UART0LONHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART0LONHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 60\n"
   "}\n"
   "\n"
@@ -5595,7 +5595,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0StatusHandler `isr ()\n"
   "\n"
-  "proc UART0StatusHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART0StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 61\n"
   "}\n"
   "\n"
@@ -5603,7 +5603,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART0ErrorHandler `isr ()\n"
   "\n"
-  "proc UART0ErrorHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART0ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 62\n"
   "}\n"
   "\n"
@@ -5611,7 +5611,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART1StatusHandler `isr ()\n"
   "\n"
-  "proc UART1StatusHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART1StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 63\n"
   "}\n"
   "\n"
@@ -5619,7 +5619,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART1ErrorHandler `isr ()\n"
   "\n"
-  "proc UART1ErrorHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART1ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 64\n"
   "}\n"
   "\n"
@@ -5627,7 +5627,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART2StatusHandler `isr ()\n"
   "\n"
-  "proc UART2StatusHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART2StatusHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 64\n"
   "}\n"
   "\n"
@@ -5635,7 +5635,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc UART2ErrorHandler `isr ()\n"
   "\n"
-  "proc UART2ErrorHandler `isr @nullOnNoException @weak () {\n"
+  "proc UART2ErrorHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 65\n"
   "}\n"
   "\n"
@@ -5643,7 +5643,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc ADC0Handler `isr ()\n"
   "\n"
-  "proc ADC0Handler `isr @nullOnNoException @weak () {\n"
+  "proc ADC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 73\n"
   "}\n"
   "\n"
@@ -5651,7 +5651,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc ADC1Handler `isr ()\n"
   "\n"
-  "proc ADC1Handler `isr @nullOnNoException @weak () {\n"
+  "proc ADC1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 74\n"
   "}\n"
   "\n"
@@ -5659,7 +5659,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP0Handler `isr ()\n"
   "\n"
-  "proc CMP0Handler `isr @nullOnNoException @weak () {\n"
+  "proc CMP0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 75\n"
   "}\n"
   "\n"
@@ -5667,7 +5667,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP1Handler `isr ()\n"
   "\n"
-  "proc CMP1Handler `isr @nullOnNoException @weak () {\n"
+  "proc CMP1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 76\n"
   "}\n"
   "\n"
@@ -5675,7 +5675,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMP2Handler `isr ()\n"
   "\n"
-  "proc CMP2Handler `isr @nullOnNoException @weak () {\n"
+  "proc CMP2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 77\n"
   "}\n"
   "\n"
@@ -5683,7 +5683,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT0Handler `isr ()\n"
   "\n"
-  "proc FMT0Handler `isr @nullOnNoException @weak () {\n"
+  "proc FMT0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 78\n"
   "}\n"
   "\n"
@@ -5691,7 +5691,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT1Handler `isr ()\n"
   "\n"
-  "proc FMT1Handler `isr @nullOnNoException @weak () {\n"
+  "proc FMT1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 79\n"
   "}\n"
   "\n"
@@ -5699,7 +5699,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc FMT2Handler `isr ()\n"
   "\n"
-  "proc FMT2Handler `isr @nullOnNoException @weak () {\n"
+  "proc FMT2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 80\n"
   "}\n"
   "\n"
@@ -5707,7 +5707,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc CMTHandler `isr ()\n"
   "\n"
-  "proc CMTHandler `isr @nullOnNoException @weak () {\n"
+  "proc CMTHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 81\n"
   "}\n"
   "\n"
@@ -5715,7 +5715,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc RTCAlarmHandler `isr ()\n"
   "\n"
-  "proc RTCAlarmHandler `isr @nullOnNoException @weak () {\n"
+  "proc RTCAlarmHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 82\n"
   "}\n"
   "\n"
@@ -5723,7 +5723,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc RTCSecondHandler `isr ()\n"
   "\n"
-  "proc RTCSecondHandler `isr @nullOnNoException @weak () {\n"
+  "proc RTCSecondHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 83\n"
   "}\n"
   "\n"
@@ -5731,7 +5731,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel0Handler `isr ()\n"
   "\n"
-  "proc PITChannel0Handler `isr @nullOnNoException @weak () {\n"
+  "proc PITChannel0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 84\n"
   "}\n"
   "\n"
@@ -5739,7 +5739,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel1Handler `isr ()\n"
   "\n"
-  "proc PITChannel1Handler `isr @nullOnNoException @weak () {\n"
+  "proc PITChannel1Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 85\n"
   "}\n"
   "\n"
@@ -5747,7 +5747,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel2Handler `isr ()\n"
   "\n"
-  "proc PITChannel2Handler `isr @nullOnNoException @weak () {\n"
+  "proc PITChannel2Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 86\n"
   "}\n"
   "\n"
@@ -5755,7 +5755,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PITChannel3Handler `isr ()\n"
   "\n"
-  "proc PITChannel3Handler `isr @nullOnNoException @weak () {\n"
+  "proc PITChannel3Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 87\n"
   "}\n"
   "\n"
@@ -5763,7 +5763,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc PDBHandler `isr ()\n"
   "\n"
-  "proc PDBHandler `isr @nullOnNoException @weak () {\n"
+  "proc PDBHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 88\n"
   "}\n"
   "\n"
@@ -5771,7 +5771,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc USBOTGHandler `isr ()\n"
   "\n"
-  "proc USBOTGHandler `isr @nullOnNoException @weak () {\n"
+  "proc USBOTGHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 89\n"
   "}\n"
   "\n"
@@ -5779,7 +5779,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc USBChargerDetectHandler `isr ()\n"
   "\n"
-  "proc USBChargerDetectHandler `isr @nullOnNoException @weak () {\n"
+  "proc USBChargerDetectHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 90\n"
   "}\n"
   "\n"
@@ -5787,7 +5787,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc DAC0Handler `isr ()\n"
   "\n"
-  "proc DAC0Handler `isr @nullOnNoException @weak () {\n"
+  "proc DAC0Handler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 97\n"
   "}\n"
   "\n"
@@ -5795,7 +5795,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc TSIHandler `isr ()\n"
   "\n"
-  "proc TSIHandler `isr @nullOnNoException @weak () {\n"
+  "proc TSIHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 99\n"
   "}\n"
   "\n"
@@ -5803,7 +5803,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc MCGHandler `isr ()\n"
   "\n"
-  "proc MCGHandler `isr @nullOnNoException @weak () {\n"
+  "proc MCGHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 100\n"
   "}\n"
   "\n"
@@ -5811,7 +5811,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc lowPowerTimerHandler `isr ()\n"
   "\n"
-  "proc lowPowerTimerHandler `isr @nullOnNoException @weak () {\n"
+  "proc lowPowerTimerHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 101\n"
   "}\n"
   "\n"
@@ -5819,7 +5819,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortAHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortAHandler `isr @nullOnNoException @weak () {\n"
+  "proc pinDetectPortAHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 103\n"
   "}\n"
   "\n"
@@ -5827,7 +5827,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortBHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortBHandler `isr @nullOnNoException @weak () {\n"
+  "proc pinDetectPortBHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 104\n"
   "}\n"
   "\n"
@@ -5835,7 +5835,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortCHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortCHandler `isr @nullOnNoException @weak () {\n"
+  "proc pinDetectPortCHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 105\n"
   "}\n"
   "\n"
@@ -5843,7 +5843,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortDHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortDHandler `isr @nullOnNoException @weak () {\n"
+  "proc pinDetectPortDHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 106\n"
   "}\n"
   "\n"
@@ -5851,7 +5851,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc pinDetectPortEHandler `isr ()\n"
   "\n"
-  "proc pinDetectPortEHandler `isr @nullOnNoException @weak () {\n"
+  "proc pinDetectPortEHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 107\n"
   "}\n"
   "\n"
@@ -5859,7 +5859,7 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "\n"
   "required proc softwareInterruptHandler `isr ()\n"
   "\n"
-  "proc softwareInterruptHandler `isr @nullOnNoException @weak () {\n"
+  "proc softwareInterruptHandler `isr @nullWhenPanicDisabled @weak () {\n"
   "  panic 110\n"
   "}\n"
   "\n"
@@ -5869,7 +5869,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  16467, // Text length
+  16775, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 
@@ -8530,7 +8530,8 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-it\
   "\n"
   "init 100_000 {\n"
   "  SIM_SCGC6 |= SIM_SCGC6_PIT\n"
-  "  NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
+  " // NVIC_ISER2 = 1 << ((84 - 16) & 31)\n"
+  "  NVIC_ISER = 1 << (84 - 16)\n"
   "  AICS0_PARCG = 0\n"
   "}\n"
   "\n"
@@ -8577,7 +8578,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "10-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  993, // Text length
+  1024, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

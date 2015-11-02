@@ -193,23 +193,23 @@ Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le 
 
 
 
-\subsectionLabel{Attribut \texttt{@nullOnNoException}}{attributNullOnNoException}\index{"@nullOnNoException}
+\subsectionLabel{Attribut \texttt{@nullWhenPanicDisabled}}{attributNullOnNoException}\index{"@nullWhenPanicDisabled}
 
-L'attribut \plm+@nullOnNoException+ signifie que la procédure est éliminée si le projet est compilé avec les exceptions désactivées (option \OPTION{-{}-no-exception-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
+L'attribut \plm+@nullWhenPanicDisabled+ signifie que la procédure est éliminée si le projet est compilé avec les exceptions désactivées (option \OPTION{-{}-no-exception-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
 
 Cette option est à utiliser en toute connaissance de cause. Elle sert à éliminer les routines d'interruption qui ne sont pas utilisées dans un projet.
 
 Par exemple, une routine d'interruption par défaut est déclarée par la cible :
 
 \begin{PLM}
-proc svcHandler `isr @nullOnNoException @weak () {
+proc svcHandler `isr @nullWhenPanicDisabled @weak () {
   panic 11
 }
 \end{PLM}
 
 Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception activées, alors l'occurrence de l'interruption déclenchera l'exception n°11.
 
-Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception désactivées, alors l'attribut \plm+@nullOnNoException+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
+Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception désactivées, alors l'attribut \plm+@nullWhenPanicDisabled+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
 
  
 

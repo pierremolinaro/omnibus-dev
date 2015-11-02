@@ -370,12 +370,12 @@ class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'nullOnNoExceptionAttribute'                                        *
+//                                      Function 'nullWhenPanicDisabledAttribute'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_nullOnNoExceptionAttribute (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_nullWhenPanicDisabledAttribute (class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
