@@ -162,10 +162,18 @@
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
+%   N A M E R E F                                                                                                     *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+%  http://tex.stackexchange.com/questions/6238/get-the-title-instead-of-the-number-of-a-referenced-chapter-section
+
+\usepackage{nameref}% Only if hyperref isn't loaded
+
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
 %   H Y P E R R E F                                                                                                     *
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
-
 
 %--- Pour les hyperliens, et le contrôle de la génération PDF 
 \usepackage[pagebackref]{hyperref}
@@ -220,7 +228,7 @@
 % C'est à dire les numéros qui sont affichées pour \section, \subsection, ...
 % Par défaut, l'affichage se fait jusqu'au niveau 2 (\subsection)
 % Avec cette commande, on va jusqu'au niveau \subsubsection.
-%\setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{3}
 
 %---------------------------------------------------- Définition de subsubsubsection
 % http://forum.mathematex.net/latex-f6/definir-un-subsubsubsection-t4031.html
@@ -277,15 +285,6 @@
 % \refFigurePageSansPrefixe{z}{nom-de-la-figure}  ---> "x.y.z page n" où x.y est le n° de la figure
 \newcommand\refFigurePageSansPrefixe[2]{\hyperref[fig:#2]{\ref*{fig:#2}{\ifthenelse{\equal{#1}{}}{}{.#1}} page \pageref{fig:#2}}}
 
-%------------------------------------------------------------------------------------------ RÉFÉRENCES À UN EXERCICE
-% Les exercices sont toujours définis au niveau des sous-sections.
-% Au lieu d'écrire \subsection{titre-exercice}, on écrit \subsectionExercice{titre-exercice}{label-exercice}
-% De cette façon, un label est défini pour chaque exercice.
-\newcommand\subsectionExercice[2]{\subsection{#1}\label{exo:#2}}
-
-% \refExercicePage{label-exercice} ---> "exercice x.y page n" où x.y est le n° de l'exercice
-\newcommand\refExercicePage[1]{\hyperref[exo:#1]{exercice \ref*{exo:#1} page \pageref{exo:#1}}}
-
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UN CHAPITRE
 % Au lieu d'écrire \chapter{titre-chapitre}, on écrit \chapterLabel{titre-chapitre}{label-chapitre}
 \newcommand \chapterLabel[2]{\chapter{#1}\label{chapter:#2}}
@@ -295,6 +294,8 @@
 \newcommand \refChapter[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1}}}
 
 \newcommand \refChapterPage[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1} page \pageref{chapter:#1}}}
+\newcommand\refChapterTitlePage[1]{\hyperref[chapter:#1]{chapitre « \emph{\nameref*{chapter:#1}} » page \pageref{chapter:#1}}}
+\newcommand\refChapterTitle[1]{\nameref{chapter:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SECTION
 % Au lieu d'écrire \section{titre-section}, on écrit \sectionLabel{titre-section}{label-section}
@@ -303,6 +304,8 @@
 
 % \refSectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la section
 \newcommand\refSectionPage[1]{\hyperref[sec:#1]{section \ref*{sec:#1} page \pageref{sec:#1}}}
+\newcommand\refSectionTitlePage[1]{\hyperref[sec:#1]{section « \emph{\nameref*{sec:#1}} » page \pageref{sec:#1}}}
+\newcommand\refSectionTitle[1]{\nameref{sec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SECTION
 % Au lieu d'écrire \subsection{titre-section}, on écrit \subsectionLabel{titre-section}{label-section}
@@ -311,6 +314,8 @@
 
 % \refSubsectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la sub-section
 \newcommand\refSubsectionPage[1]{\hyperref[subsec:#1]{section \ref*{subsec:#1} page \pageref{subsec:#1}}}
+\newcommand\refSubsectionTitlePage[1]{\hyperref[subsec:#1]{section « \emph{\nameref*{subsec:#1}} » page \pageref{subsec:#1}}}
+\newcommand\refSubsectionTitle[1]{\nameref{subsec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SECTION
 % Au lieu d'écrire \subsubsection{titre-section}, on écrit \subsubsectionLabel{titre-section}{label-section}
@@ -319,14 +324,16 @@
 
 % \refSubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
 \newcommand\refSubsubsectionPage[1]{\hyperref[subsubsec:#1]{section \ref*{subsubsec:#1} page \pageref{subsubsec:#1}}}
+\newcommand\refSubsubsectionTitlePage[1]{\hyperref[subsubsec:#1]{section « \emph{\nameref*{subsubsec:#1}} » page \pageref{subsubsec:#1}}}
+\newcommand\refSubsubsectionTitle[1]{\nameref{subsubsec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SUB-SECTION
 % Au lieu d'écrire \subsubsubsection{titre-section}, on écrit \subsubsubsectionLabel{titre-section}{label-section}
-\newcommand \subsubsubsectionLabel[2]{\subsubsubsection{#1}\label{subsubsubsec:#2}}
+%\newcommand \subsubsubsectionLabel[2]{\subsubsubsection{#1}\label{subsubsubsec:#2}}
 
 
 % \refSubsubsubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
-\newcommand\refSubsubsubsectionPage[1]{\hyperref[subsubsubsec:#1]{page \pageref{subsubsubsec:#1}}}
+%\newcommand\refSubsubsubsectionPage[1]{\hyperref[subsubsubsec:#1]{page \pageref{subsubsubsec:#1}}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE ÉQUATION
 % Pour une équation, au lieu d'écrire \label{label-equation}, on écrit \labelEquation{label-equation}
@@ -435,7 +442,7 @@
 
 % Grâce à ce paquetage, il est possible de placer plusieurs figures, tables, côte à côte.
 % Voir http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-\usepackage{subfig}
+%\usepackage{subfig}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -443,8 +450,8 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\usepackage{multicol}
-\setlength{\columnsep}{30pt}
+%\usepackage{multicol}
+%\setlength{\columnsep}{30pt}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -654,10 +661,10 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-%    Pour faire figurer la liste des tableaux (et la table des matières)
-%    dans la table des matières
+%    Pour faire figurer la liste des tableaux (et la table des matières) dans la table des matières
 \usepackage{tocbibind}
-\setcounter{tocdepth}{2}
+%--- Profondeur de la table des matières
+\setcounter{tocdepth}{3} % Faire apparaître jusqu'aux subsubsections
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -765,7 +772,7 @@
 
 
 \input{chapitres/tutorial.tex}
-\input{chapitres/cibles-disponibles.tex}
+\input{chapitres/cible-teensy-3-1-its.tex}
 \input{chapitres/option-ligne-commandes.tex}
 \input{chapitres/elements-lexicaux.tex}
 \input{chapitres/type-booleen.tex}
