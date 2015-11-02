@@ -4987,7 +4987,8 @@ const char * gWrapperFileContent_3_targetTemplates = "\n"
   "register NVIC_ISER0  at 0xE000_E100 $uint32\n"
   "register NVIC_ISER1  at 0xE000_E104 $uint32\n"
   "register NVIC_ISER2  at 0xE000_E108 $uint32\n"
-  "register NVIC_ISER3  at 0xE000_E10C $uint32\n"
+  "\n"
+  "register NVIC_ISER at 0xE000_E100 $uint96\n"
   "//register NVIC_DISABLE_IRQ(n) (*((volatile $uint32_t *)0xE000E180 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_SET_PENDING(n) (*((volatile $uint32_t *)0xE000E200 + (n >> 5)) = (1 << (n & 31)))\n"
   "//register NVIC_CLEAR_PENDING(n) (*((volatile $uint32_t *)0xE000E280 + (n >> 5)) = (1 << (n & 31)))\n"
@@ -5129,7 +5130,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "mk20dx256.plm",
   "plm",
   true, // Text file
-  134488, // Text length
+  134487, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
