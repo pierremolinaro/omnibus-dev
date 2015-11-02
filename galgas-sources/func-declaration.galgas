@@ -211,7 +211,7 @@ method @functionDeclarationListAST-element functionSemanticAnalysis
     !optionalReceiverType:.noReceiver
     !context:inContext
     !modes:functionModeSet
-    !allowException:not [functionModeSet hasKey !exceptionModeName ()]
+    !allowException:not [functionModeSet hasKey !panicModeName ()]
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

@@ -42,8 +42,8 @@ override method @throwInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Exception allowed ?
-  if [inModeSet hasKey !exceptionModeName ()] then
-    error mThrowLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+  if [inModeSet hasKey !panicModeName ()] then
+    error mThrowLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}
@@ -70,8 +70,8 @@ override method @throwInstructionAST analyze
     [[inContext.mExceptionCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]
     [result.mValue literalInteger ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error mThrowLocation : "throw expression cannot be represented by an $" +[inContext.mExceptionCodeType key]
-    elsif not [option plm_options.noExceptionGeneration value] then
+      error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mExceptionCodeType key]
+    elsif not [option plm_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@throwInstructionIR.new {
         !mThrowLocation
         !throwValue

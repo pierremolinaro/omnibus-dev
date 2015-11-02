@@ -469,7 +469,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     !optionalReceiverType:receiverType
     !context:inContext
     !modes:procedureModeSet
-    !allowException:not [procedureModeSet hasKey !exceptionModeName ()]
+    !allowException:not [procedureModeSet hasKey !panicModeName ()]
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
@@ -530,7 +530,7 @@ method @procedureMapIR-element llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   let procName = mangledNameForProcedure (!lkey.string)
-  if [option plm_options.noExceptionGeneration value] && mNullOnNoException then
+  if [option plm_options.noPanicGeneration value] && mNullOnNoException then
   #--- Generate in assembly code routine pointer as NULL value
     ioAssemblerCode += asSeparatorLine ()
     ioAssemblerCode += "  .global " + procName + "\n"

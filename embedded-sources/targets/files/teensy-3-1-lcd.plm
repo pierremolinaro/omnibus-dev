@@ -37,34 +37,34 @@ proc configurePorts `init () {
 
 //-----------------------------------------------------------------------------*
 
-proc driveHighE `init `exception `user @noWarningIfUnused () {
+proc driveHighE `init `panic `user @noWarningIfUnused () {
   GPIOB_PSOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc driveLowE `init `exception `user @noWarningIfUnused () {
+proc driveLowE `init `panic `user @noWarningIfUnused () {
   GPIOB_PCOR = 1 << 1 ; // E is PTB1
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc driveHighRS `init `exception `user @noWarningIfUnused () {
+proc driveHighRS `init `panic `user @noWarningIfUnused () {
   GPIOB_PSOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
 
-proc driveLowRS `init `exception `user @noWarningIfUnused () {
+proc driveLowRS `init `panic `user @noWarningIfUnused () {
   GPIOB_PCOR = 1 << 3 ; // RS is PTB3
 }
 
 //-----------------------------------------------------------------------------*
 
-proc setD4 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTB0
+proc setD4 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB0
   if inValue then
     GPIOB_PSOR = 1 << 0 ;
   else
@@ -74,7 +74,7 @@ proc setD4 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTB0
 
 //-----------------------------------------------------------------------------*
 
-proc setD5 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTC0
+proc setD5 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTC0
   if inValue then
     GPIOC_PSOR = 1 << 0 ;
   else
@@ -84,7 +84,7 @@ proc setD5 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTC0
 
 //-----------------------------------------------------------------------------*
 
-proc setD6 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTD1
+proc setD6 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTD1
   if inValue then
     GPIOD_PSOR = 1 << 1 ;
   else
@@ -94,7 +94,7 @@ proc setD6 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTD1
 
 //-----------------------------------------------------------------------------*
 
-proc setD7 `init `exception `user @noWarningIfUnused (?inValue $bool) { // PTB2
+proc setD7 `init `panic `user @noWarningIfUnused (?inValue $bool) { // PTB2
   if inValue then
     GPIOB_PSOR = 1 << 2 ;
   else
@@ -383,7 +383,7 @@ proc printString `user @noWarningIfUnused (?inString $staticString) {
 //   EXCEPTION                                                                 *
 //-----------------------------------------------------------------------------*
 
-proc programLcd4BitDataBusOutput_inExceptionMode `exception @noWarningIfUnused (?inValue $uint8) {
+proc programLcd4BitDataBusOutput_inExceptionMode `panic @noWarningIfUnused (?inValue $uint8) {
   setD4 (!(inValue & 0x01) != 0)
   setD5 (!(inValue & 0x02) != 0)
   setD6 (!(inValue & 0x04) != 0)
@@ -392,14 +392,14 @@ proc programLcd4BitDataBusOutput_inExceptionMode `exception @noWarningIfUnused (
 
 //-----------------------------------------------------------------------------*
 
-proc waitOneMillisecondInExceptionMode `exception @noWarningIfUnused () {
+proc waitOneMillisecondInExceptionMode `panic @noWarningIfUnused () {
   while not SYST_CSR.COUNTFLAG.bool do
   end
 }
 
 //-----------------------------------------------------------------------------*
 
-proc waitMSInExceptionMode `exception @noWarningIfUnused (?duration: inDuration $uint32) {
+proc waitMSInExceptionMode `panic @noWarningIfUnused (?duration: inDuration $uint32) {
   var duration = inDuration
   while duration > 0 do
     waitOneMillisecondInExceptionMode ()
@@ -409,7 +409,7 @@ proc waitMSInExceptionMode `exception @noWarningIfUnused (?duration: inDuration 
 
 //-----------------------------------------------------------------------------*
 
-proc writeDataInExceptionMode `exception @noWarningIfUnused (?inData $uint8) {
+proc writeDataInExceptionMode `panic @noWarningIfUnused (?inData $uint8) {
   waitOneMillisecondInExceptionMode () ;
   driveHighRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inData >> 4) ;
@@ -425,7 +425,7 @@ proc writeDataInExceptionMode `exception @noWarningIfUnused (?inData $uint8) {
 
 //-----------------------------------------------------------------------------*
 
-proc printUnsignedInExceptionMode `exception @noWarningIfUnused (?inValue $uint32) {
+proc printUnsignedInExceptionMode `panic @noWarningIfUnused (?inValue $uint32) {
   var divisor $uint32 = 1_000_000_000
   var value = inValue
   var isPrinting = false
@@ -446,7 +446,7 @@ proc printUnsignedInExceptionMode `exception @noWarningIfUnused (?inValue $uint3
 
 //-----------------------------------------------------------------------------*
 
-proc printSignedInExceptionMode `exception @noWarningIfUnused (?inValue $int32) {
+proc printSignedInExceptionMode `panic @noWarningIfUnused (?inValue $int32) {
   if inValue >= 0 then
     printUnsignedInExceptionMode (!truncate inValue : $uint32)
   else
@@ -457,7 +457,7 @@ proc printSignedInExceptionMode `exception @noWarningIfUnused (?inValue $int32) 
 
 //-----------------------------------------------------------------------------*
 
-proc write8bitCommandInExceptionMode `exception @noWarningIfUnused (?inCommand $uint8) {
+proc write8bitCommandInExceptionMode `panic @noWarningIfUnused (?inCommand $uint8) {
   waitOneMillisecondInExceptionMode () ;
   driveLowRS () ;
   programLcd4BitDataBusOutput_inExceptionMode (!inCommand >> 4) ;
@@ -473,7 +473,7 @@ proc write8bitCommandInExceptionMode `exception @noWarningIfUnused (?inCommand $
 
 //-----------------------------------------------------------------------------*
 
-proc gotoInExceptionMode `exception @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
+proc gotoInExceptionMode `panic @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
   if inColumn < 20 then
     if inLine == 0 then
       write8bitCommandInExceptionMode (!0x80 &+ 0 &+ inColumn) ;
@@ -489,13 +489,13 @@ proc gotoInExceptionMode `exception @noWarningIfUnused (?line:inLine $uint32 ?co
 
 //-----------------------------------------------------------------------------*
 
-proc clearScreenInExceptionMode `exception @noWarningIfUnused () {
+proc clearScreenInExceptionMode `panic @noWarningIfUnused () {
   write8bitCommandInExceptionMode (!0x01)
 }
 
 //-----------------------------------------------------------------------------*
 
-proc printStringInExceptionMode `exception @noWarningIfUnused (?inString $staticString) {
+proc printStringInExceptionMode `panic @noWarningIfUnused (?inString $staticString) {
   for c in inString do
     writeDataInExceptionMode (!c)
   end

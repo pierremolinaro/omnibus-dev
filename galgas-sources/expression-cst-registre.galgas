@@ -170,9 +170,9 @@ override method @registerIntegerExpInExpressionAST analyzeExpression
       error mExpressionLocation: "an unsigned integer expression is required here" : outResult
     else
       let assertGenerated = expressionBitCount > fieldBitCount
-      if assertGenerated && [inModeSet hasKey !exceptionModeName ()] then
+      if assertGenerated && [inModeSet hasKey !panicModeName ()] then
         error mExpressionLocation
-          : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+          : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
       end
       getNewTempVariable (!type !?ioTemporaries ?outResult)
       ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
@@ -211,7 +211,7 @@ override method @registerIntegerConstantInExpressionIR llvmInstructionCode
     ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
             + " = ((" + mangledNameForType (!name:[mResult.mType key]) + " *) "
             + mExpressionValue.mValue + ") << " + mBitShift + "\n" 
-  elsif [option plm_options.noExceptionGeneration value] then
+  elsif [option plm_options.noPanicGeneration value] then
     ioLLVMcode += "const " + mangledNameForType (!name:[mResult.mType key]) + " " + mResult.mValue
             + " = (" + mExpressionValue.mValue + " & " + mMaxBound + ") << " + mBitShift + "\n" 
   else

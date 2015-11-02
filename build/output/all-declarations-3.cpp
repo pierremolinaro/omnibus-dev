@@ -13086,11 +13086,11 @@ C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ("plm_options
                                          "list-embedded-targets",
                                          "List embedded targets") ;
 
-C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ("plm_options",
-                                         "noExceptionGeneration",
+C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ("plm_options",
+                                         "noPanicGeneration",
                                          0,
-                                         "no-exception-generation",
-                                         "Do not generate exception code") ;
+                                         "no-panic-generation",
+                                         "Do not generate panic code") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ("plm_options",
                                          "optimization1",
@@ -14027,14 +14027,14 @@ void routine_enterStaticStringOperators (GALGAS_lstring inArgument_inBooleanType
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Once function 'exceptionModeName'                                          *
+//                                            Once function 'panicModeName'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_string onceFunction_exceptionModeName (C_Compiler * /* inCompiler */
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
+static GALGAS_string onceFunction_panicModeName (C_Compiler * /* inCompiler */
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("exception") ;
+  result_outResult = GALGAS_string ("panic") ;
 //---
   return result_outResult ;
 }
@@ -14045,55 +14045,55 @@ static GALGAS_string onceFunction_exceptionModeName (C_Compiler * /* inCompiler 
 //  Function implementation                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static bool gOnceFunctionResultAvailable_exceptionModeName = false ;
-static GALGAS_string gOnceFunctionResult_exceptionModeName ;
+static bool gOnceFunctionResultAvailable_panicModeName = false ;
+static GALGAS_string gOnceFunctionResult_panicModeName ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string function_exceptionModeName (class C_Compiler * inCompiler
+GALGAS_string function_panicModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_exceptionModeName) {
-    gOnceFunctionResult_exceptionModeName = onceFunction_exceptionModeName (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_exceptionModeName = true ;
+  if (! gOnceFunctionResultAvailable_panicModeName) {
+    gOnceFunctionResult_panicModeName = onceFunction_panicModeName (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicModeName = true ;
   }
-  return gOnceFunctionResult_exceptionModeName ;
+  return gOnceFunctionResult_panicModeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void releaseOnceFunctionResult_exceptionModeName (void) {
-  gOnceFunctionResult_exceptionModeName.drop () ;
+static void releaseOnceFunctionResult_panicModeName (void) {
+  gOnceFunctionResult_panicModeName.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gEpilogueForOnceFunction_exceptionModeName (NULL,
-                                                               releaseOnceFunctionResult_exceptionModeName) ;
+C_PrologueEpilogue gEpilogueForOnceFunction_panicModeName (NULL,
+                                                           releaseOnceFunctionResult_panicModeName) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_exceptionModeName [1] = {
+static const C_galgas_type_descriptor * functionArgs_panicModeName [1] = {
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_exceptionModeName (C_Compiler * inCompiler,
-                                                                  const cObjectArray & /* inEffectiveParameterArray */,
-                                                                  const GALGAS_location & /* inErrorLocation */
-                                                                  COMMA_LOCATION_ARGS) {
-  return function_exceptionModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
+static GALGAS_object functionWithGenericHeader_panicModeName (C_Compiler * inCompiler,
+                                                              const cObjectArray & /* inEffectiveParameterArray */,
+                                                              const GALGAS_location & /* inErrorLocation */
+                                                              COMMA_LOCATION_ARGS) {
+  return function_panicModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_exceptionModeName ("exceptionModeName",
-                                                                   functionWithGenericHeader_exceptionModeName,
-                                                                   & kTypeDescriptor_GALGAS_string,
-                                                                   0,
-                                                                   functionArgs_exceptionModeName) ;
+C_galgas_function_descriptor functionDescriptor_panicModeName ("panicModeName",
+                                                               functionWithGenericHeader_panicModeName,
+                                                               & kTypeDescriptor_GALGAS_string,
+                                                               0,
+                                                               functionArgs_panicModeName) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -14305,7 +14305,7 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
       GALGAS_string var_s = GALGAS_string ("the '").add_operation (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 48)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 48)).add_operation (GALGAS_string ("' should be defined as: proc"), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 48)) ;
       cEnumerator_lstringlist enumerator_2301 (enumerator_1850.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
       while (enumerator_2301.hasCurrentObject ()) {
-        var_s.dotAssign_operation (GALGAS_string (" $").add_operation (enumerator_2301.current_mValue (HERE).getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50)) ;
+        var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_2301.current_mValue (HERE).getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50)) ;
         enumerator_2301.gotoNextObject () ;
       }
       var_s.dotAssign_operation (GALGAS_string (" ").add_operation (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 52))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 52)) ;
@@ -14352,7 +14352,7 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
         GALGAS_string var_s = GALGAS_string ("required modes:") ;
         cEnumerator_stringset enumerator_3203 (var_requiredProcModeSet, kEnumeration_up) ;
         while (enumerator_3203.hasCurrentObject ()) {
-          var_s.dotAssign_operation (GALGAS_string (" $").add_operation (enumerator_3203.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73)) ;
+          var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_3203.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73)) ;
           enumerator_3203.gotoNextObject () ;
         }
         inCompiler->emitSemanticError (constinArgument_inSemanticContext.mAttribute_mProcedureMap.getter_locationForKey (var_requiredProcMangledName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)), var_s  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)) ;
@@ -14431,11 +14431,11 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_addOp:
     {
-      const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 187)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 187)).boolEnum () ;
+      const enumGalgasBool test_0 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 187)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 187)).boolEnum () ;
       if (kBoolTrue == test_0) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 188)) ;
       }
-      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).boolEnum () ;
+      const enumGalgasBool test_1 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_1) {
         result_outOperatorMap = constinArgument_inContext.mAttribute_mAddNoOvfOperatorMap ;
       }else if (kBoolFalse == test_1) {
@@ -14450,11 +14450,11 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_subOp:
     {
-      const enumGalgasBool test_2 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 198)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 198)).boolEnum () ;
+      const enumGalgasBool test_2 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 198)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 198)).boolEnum () ;
       if (kBoolTrue == test_2) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 199)) ;
       }
-      const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).boolEnum () ;
+      const enumGalgasBool test_3 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_3) {
         result_outOperatorMap = constinArgument_inContext.mAttribute_mSubNoOvfOperatorMap ;
       }else if (kBoolFalse == test_3) {
@@ -14469,11 +14469,11 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_mulOp:
     {
-      const enumGalgasBool test_4 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 209)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 209)).boolEnum () ;
+      const enumGalgasBool test_4 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 209)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 209)).boolEnum () ;
       if (kBoolTrue == test_4) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 210)) ;
       }
-      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).boolEnum () ;
+      const enumGalgasBool test_5 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_5) {
         result_outOperatorMap = constinArgument_inContext.mAttribute_mMulNoOvfOperatorMap ;
       }else if (kBoolFalse == test_5) {
@@ -14488,11 +14488,11 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_divOp:
     {
-      const enumGalgasBool test_6 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 220)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 220)).boolEnum () ;
+      const enumGalgasBool test_6 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 220)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 220)).boolEnum () ;
       if (kBoolTrue == test_6) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 221)) ;
       }
-      const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).boolEnum () ;
+      const enumGalgasBool test_7 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_7) {
         result_outOperatorMap = constinArgument_inContext.mAttribute_mDivNoOvfOperatorMap ;
       }else if (kBoolFalse == test_7) {
@@ -14507,11 +14507,11 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
     break ;
   case GALGAS_infixOperator::kEnum_modOp:
     {
-      const enumGalgasBool test_8 = constinArgument_inModeSet.getter_hasKey (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)).boolEnum () ;
+      const enumGalgasBool test_8 = constinArgument_inModeSet.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)) COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 231)).boolEnum () ;
       if (kBoolTrue == test_8) {
-        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in $").add_operation (function_exceptionModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
+        inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("operations that can generate exceptions are not allowed in `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232))  COMMA_SOURCE_FILE ("expression-infix-operators.galgas", 232)) ;
       }
-      const enumGalgasBool test_9 = GALGAS_bool (gOption_plm_5F_options_noExceptionGeneration.getter_value ()).boolEnum () ;
+      const enumGalgasBool test_9 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).boolEnum () ;
       if (kBoolTrue == test_9) {
         result_outOperatorMap = constinArgument_inContext.mAttribute_mModNoOvfOperatorMap ;
       }else if (kBoolFalse == test_9) {
@@ -14866,7 +14866,7 @@ void routine_checkMode (const GALGAS_stringset constinArgument_inRequiredModes,
     var_s.dotAssign_operation (GALGAS_string (": ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 103)) ;
     cEnumerator_stringset enumerator_4305 (var_missingModes, kEnumeration_up) ;
     while (enumerator_4305.hasCurrentObject ()) {
-      var_s.dotAssign_operation (GALGAS_string ("$").add_operation (enumerator_4305.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 105))  COMMA_SOURCE_FILE ("semantic-context.galgas", 105)) ;
+      var_s.dotAssign_operation (GALGAS_string ("`").add_operation (enumerator_4305.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 105))  COMMA_SOURCE_FILE ("semantic-context.galgas", 105)) ;
       if (enumerator_4305.hasNextObject ()) {
         var_s.dotAssign_operation (GALGAS_string (", ")  COMMA_SOURCE_FILE ("semantic-context.galgas", 106)) ;
       }
@@ -14898,32 +14898,32 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
   outArgument_outSemanticContext.mAttribute_mModeMap.modifier_insertKey (GALGAS_string ("init").getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 240)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 240)) ;
   }
   {
-  outArgument_outSemanticContext.mAttribute_mModeMap.modifier_insertKey (GALGAS_string ("exception").getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 241)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 241)) ;
+  outArgument_outSemanticContext.mAttribute_mModeMap.modifier_insertKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 241)).getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 241)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 241)) ;
   }
-  cEnumerator_initList enumerator_9979 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
-  while (enumerator_9979.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_9979.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 244)) ;
-    enumerator_9979.gotoNextObject () ;
+  cEnumerator_initList enumerator_9984 (constinArgument_inAST.mAttribute_mInitList, kEnumeration_up) ;
+  while (enumerator_9984.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_9984.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 244)) ;
+    enumerator_9984.gotoNextObject () ;
   }
-  cEnumerator_exceptionClauseListAST enumerator_10141 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
-  while (enumerator_10141.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_10141.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 250)) ;
-    enumerator_10141.gotoNextObject () ;
+  cEnumerator_exceptionClauseListAST enumerator_10146 (constinArgument_inAST.mAttribute_mExceptionClauses, kEnumeration_up) ;
+  while (enumerator_10146.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_10146.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 250)) ;
+    enumerator_10146.gotoNextObject () ;
   }
-  cEnumerator_declarationListAST enumerator_10277 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
-  while (enumerator_10277.hasCurrentObject ()) {
-    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_10277.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 256)) ;
-    enumerator_10277.gotoNextObject () ;
+  cEnumerator_declarationListAST enumerator_10282 (constinArgument_inDeclarationListAST, kEnumeration_up) ;
+  while (enumerator_10282.hasCurrentObject ()) {
+    callCategoryMethod_enterInContext ((const cPtr_abstractDeclaration *) enumerator_10282.current_mDeclaration (HERE).ptr (), constinArgument_inAST.mAttribute_mProcedureListAST, outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 256)) ;
+    enumerator_10282.gotoNextObject () ;
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inAST.mAttribute_mExceptionTypes.getter_length (SOURCE_FILE ("semantic-context.galgas", 263)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     GALGAS_location location_1 (GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("semantic-context.galgas", 264)).getter_location (HERE)) ; // Implicit use of 'location' getter
     inCompiler->emitSemanticError (location_1, GALGAS_string ("exactly one exception type declaration should be provided (found:").add_operation (constinArgument_inAST.mAttribute_mExceptionTypes.getter_length (SOURCE_FILE ("semantic-context.galgas", 265)).getter_string (SOURCE_FILE ("semantic-context.galgas", 265)), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 265)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 265))  COMMA_SOURCE_FILE ("semantic-context.galgas", 264)) ;
-    cEnumerator_exceptionTypesAST enumerator_10709 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
-    while (enumerator_10709.hasCurrentObject ()) {
-      GALGAS_location location_2 (enumerator_10709.current_mExceptionCodeTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
+    cEnumerator_exceptionTypesAST enumerator_10714 (constinArgument_inAST.mAttribute_mExceptionTypes, kEnumeration_up) ;
+    while (enumerator_10714.hasCurrentObject ()) {
+      GALGAS_location location_2 (enumerator_10714.current_mExceptionCodeTypeName (HERE).getter_location (HERE)) ; // Implicit use of 'location' getter
       inCompiler->emitSemanticError (location_2, GALGAS_string ("exception type declaration is here")  COMMA_SOURCE_FILE ("semantic-context.galgas", 267)) ;
-      enumerator_10709.gotoNextObject () ;
+      enumerator_10714.gotoNextObject () ;
     }
   }else if (kBoolFalse == test_0) {
     GALGAS_lstring var_exceptionCodeTypeName ;
@@ -14932,42 +14932,42 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
     outArgument_outSemanticContext.mAttribute_mExceptionCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 271)) ;
     outArgument_outSemanticContext.mAttribute_mExceptionLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (outArgument_outSemanticContext.mAttribute_mTypeMap, var_exceptionLineTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-context.galgas", 275)) ;
   }
-  cEnumerator_procedureDeclarationListAST enumerator_11255 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
-  while (enumerator_11255.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_11255.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 282)) ;
-    enumerator_11255.gotoNextObject () ;
+  cEnumerator_procedureDeclarationListAST enumerator_11260 (constinArgument_inAST.mAttribute_mProcedureListAST, kEnumeration_up) ;
+  while (enumerator_11260.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_11260.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 282)) ;
+    enumerator_11260.gotoNextObject () ;
   }
-  cEnumerator_functionDeclarationListAST enumerator_11371 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
-  while (enumerator_11371.hasCurrentObject ()) {
-    categoryMethod_enterInContext (enumerator_11371.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 286)) ;
-    enumerator_11371.gotoNextObject () ;
+  cEnumerator_functionDeclarationListAST enumerator_11376 (constinArgument_inAST.mAttribute_mFunctionListAST, kEnumeration_up) ;
+  while (enumerator_11376.hasCurrentObject ()) {
+    categoryMethod_enterInContext (enumerator_11376.current (HERE), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 286)) ;
+    enumerator_11376.gotoNextObject () ;
   }
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 289)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    cEnumerator_requiredProcedureDeclarationListAST enumerator_11551 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
-    while (enumerator_11551.hasCurrentObject ()) {
-      cEnumerator_lstringlist enumerator_11606 (enumerator_11551.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_11606.hasCurrentObject ()) {
-        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_11606.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 292)) ;
-        enumerator_11606.gotoNextObject () ;
+    cEnumerator_requiredProcedureDeclarationListAST enumerator_11556 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
+    while (enumerator_11556.hasCurrentObject ()) {
+      cEnumerator_lstringlist enumerator_11611 (enumerator_11556.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_11611.hasCurrentObject ()) {
+        outArgument_outSemanticContext.mAttribute_mModeMap.method_searchKey (enumerator_11611.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 292)) ;
+        enumerator_11611.gotoNextObject () ;
       }
-      enumerator_11551.gotoNextObject () ;
+      enumerator_11556.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 297)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_4) {
-    cEnumerator_declarationListAST enumerator_11796 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
-    while (enumerator_11796.hasCurrentObject ()) {
-      callCategoryMethod_initAnalysis ((const cPtr_abstractDeclaration *) enumerator_11796.current_mDeclaration (HERE).ptr (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 299)) ;
-      enumerator_11796.gotoNextObject () ;
+    cEnumerator_declarationListAST enumerator_11801 (constinArgument_inAST.mAttribute_mDeclarationList, kEnumeration_up) ;
+    while (enumerator_11801.hasCurrentObject ()) {
+      callCategoryMethod_initAnalysis ((const cPtr_abstractDeclaration *) enumerator_11801.current_mDeclaration (HERE).ptr (), outArgument_outSemanticContext, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 299)) ;
+      enumerator_11801.gotoNextObject () ;
     }
   }
   const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("semantic-context.galgas", 305)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_5) {
-    cEnumerator_globalVarDeclarationList enumerator_12010 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
-    while (enumerator_12010.hasCurrentObject ()) {
-      categoryMethod_enterInContext (enumerator_12010.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 307)) ;
-      enumerator_12010.gotoNextObject () ;
+    cEnumerator_globalVarDeclarationList enumerator_12015 (constinArgument_inAST.mAttribute_mGlobalVarDeclarationList, kEnumeration_up) ;
+    while (enumerator_12015.hasCurrentObject ()) {
+      categoryMethod_enterInContext (enumerator_12015.current (HERE), outArgument_outSemanticContext, ioArgument_ioGlobalLiteralStringMap, inCompiler COMMA_SOURCE_FILE ("semantic-context.galgas", 307)) ;
+      enumerator_12015.gotoNextObject () ;
     }
   }
 }

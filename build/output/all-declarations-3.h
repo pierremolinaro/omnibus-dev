@@ -765,7 +765,7 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_noExceptionGeneration ;
+extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_optimization_31_ ;
 
@@ -1566,12 +1566,12 @@ void routine_enterStaticStringOperators (class GALGAS_lstring inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'exceptionModeName'                                             *
+//                                              Function 'panicModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_exceptionModeName (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

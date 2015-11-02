@@ -44,8 +44,8 @@ override method @assertInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  if [inModeSet hasKey !exceptionModeName ()] then
-    error mAssertInstructionLocation : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+  if [inModeSet hasKey !panicModeName ()] then
+    error mAssertInstructionLocation : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
@@ -71,7 +71,7 @@ override method @assertInstructionAST analyze
     error mAssertInstructionLocation : "expression is static: use check directive"
   end
 #--- Code generation
-  if not [option plm_options.noExceptionGeneration value] then
+  if not [option plm_options.noPanicGeneration value] then
     ioInstructionGenerationList += !@assertInstructionIR.new {
       !mAssertInstructionLocation
       !instructionGenerationList

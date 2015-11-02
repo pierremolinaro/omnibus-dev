@@ -182,7 +182,7 @@ private proc suppressInaccessibleSubprograms
     [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end
 #--- Exception clause (if exception code is generated)
-  if not [option plm_options.noExceptionGeneration value] then
+  if not [option plm_options.noPanicGeneration value] then
     [ioIntermediateCodeStruct.mExceptionSetupInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
     [ioIntermediateCodeStruct.mExceptionLoopInstructionListIR enterAccessibleEntities !?outAccessibleEntities]
   end

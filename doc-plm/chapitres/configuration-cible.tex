@@ -175,7 +175,7 @@ init 0 { // Configure Systick interrupt every ms
 
 {\bf Ligne 6.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+$int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
 
-{\bf Lignes 8 et 9.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`exception= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
+{\bf Lignes 8 et 9.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`panic= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
 
 
 {\bf Lignes 11 et 12.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1-it.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.

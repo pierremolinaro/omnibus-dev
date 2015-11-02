@@ -11,7 +11,7 @@ Un \emph{mode d'exécution} est une annotation qui permet au compilateur de vér
 
 En PLM, à toute routine est associé un ou plusieurs modes \emph{modes d'exécution}\index{Mode@Mode d'exécution}.
 
-Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\`} » : par exemple, \plm+`boot+. Trois modes d'exécution sont prédéfinis \plm+`boot+, \plm+`init+ et \plm+`exception+ (voir \refSectionPage{modesPredefinis}). Souvent, une cible définit d'autres modes, tels que par exemple \plm+`isr+ pour les routines d'interruption, et \plm+`user+ pour des routines s'exécutant en mode utilisateur.
+Syntaxiquement, un mode d'exécution est un nom précédé du caractère « \texttt{\`} » : par exemple, \plm+`boot+. Trois modes d'exécution sont prédéfinis \plm+`boot+, \plm+`init+ et \plm+`panic+ (voir \refSectionPage{modesPredefinis}). Souvent, une cible définit d'autres modes, tels que par exemple \plm+`isr+ pour les routines d'interruption, et \plm+`user+ pour des routines s'exécutant en mode utilisateur.
 
 Les annotations de mode d'une routine sont inscrites dans l'en-tête de la routine, après son nom (voir la déclaration d'une procédure, \refSubsectionPage{declarationProcedure}). Par exemple :
 
@@ -75,7 +75,7 @@ Le compilateur prédéfinit trois modes d'exécution (\refTableauPage{ModeExecut
   \textbf{Mode} & \textbf{Commentaire} & \textbf{Lien} \\
   \plm=`boot= & Routines exécutées au démarrage & \refSectionPage{bootRoutine} \\
   \plm=`init= & Routines d'initialisation & \refSectionPage{initRoutine} \\
-  \plm=`exception= & Routines d'exception & \refSectionPage{routineException} \\
+  \plm=`panic= & Routines d'exception & \refSectionPage{routineException} \\
 \end{tabular}
 \caption{Modes d'exécution prédéfinis}
 \labelTableau{ModeExecutionPredefinis}
