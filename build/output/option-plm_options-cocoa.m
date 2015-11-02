@@ -52,10 +52,10 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"noExceptionGeneration"
+    identifier:@"noPanicGeneration"
     commandChar:0
-    commandString:@"no-exception-generation"
-    comment:@"Do not generate exception code"
+    commandString:@"no-panic-generation"
+    comment:@"Do not generate panic code"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

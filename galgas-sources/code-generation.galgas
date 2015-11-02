@@ -214,7 +214,7 @@ proc generateLLVMfile
     [function implementationCodeGeneration !?llvmCode !generationContext !?generationAdds]
   end
 #----------------------------------------- Exception
-  if not [option plm_options.noExceptionGeneration value] then
+  if not [option plm_options.noPanicGeneration value] then
     llvmCode += getTargetTextFile (
        !currentDir:inCurrentDirectory
        !from:inTargetName.string + "/target-exception.ll"

@@ -115,7 +115,7 @@ override method @incDecInstructionAST analyze
     comment += "++"
     if [inContext.mIncOperatorMap hasKey ![type key]] then
       [inContext.mIncOperatorMap searchKey ![[type key] nowhere] ?let ovfOp ?let noOvfOp]
-      if [option plm_options.noExceptionGeneration value] then
+      if [option plm_options.noPanicGeneration value] then
         llvmOperator = noOvfOp
       else
         llvmOperator = ovfOp
@@ -123,8 +123,8 @@ override method @incDecInstructionAST analyze
     else
       error mVarName: "type $" + [type key] + " does not support the ++ operator" : llvmOperator
     end
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    if [inModeSet hasKey !panicModeName ()] then
+      error mVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
     end
   case  decNoOverflowCheck :
     comment += "&--"
@@ -137,7 +137,7 @@ override method @incDecInstructionAST analyze
     comment += "--"
     if [inContext.mDecOperatorMap hasKey ![type key]] then
       [inContext.mDecOperatorMap searchKey ![[type key] nowhere] ?let ovfOp ?let noOvfOp]
-      if [option plm_options.noExceptionGeneration value] then
+      if [option plm_options.noPanicGeneration value] then
         llvmOperator = noOvfOp
       else
         llvmOperator = ovfOp
@@ -145,8 +145,8 @@ override method @incDecInstructionAST analyze
     else
       error mVarName: "type $" + [type key] + " does not support the -- operator" : llvmOperator
     end
-    if [inModeSet hasKey !exceptionModeName ()] then
-      error mVarName : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+    if [inModeSet hasKey !panicModeName ()] then
+      error mVarName : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
     end
   end
 #--- Generate comment

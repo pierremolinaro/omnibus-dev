@@ -121,12 +121,12 @@ L'API de la cible \texttt{teensy-3-1-it} partagent les routines en trois groupes
 \begin{itemize}
   \item les routines appelables dans tous les modes ;
   \item les routines appelables uniquement dans le mode \plm+`user+ (\refSubsectionPage{RoutinesTousModeTeensy31}) ;
-  \item les routines appelables uniquement dans le mode \plm+`exception+ ;
+  \item les routines appelables uniquement dans le mode \plm+`panic+ ;
 \end{itemize}
 
 \subsectionLabel{Routines appelables dans tous les modes}{RoutinesTousModeTeensy31}
 
-Ces routines sont appelables dans les modes \plm+`user+, \plm+`isr+ et \plm+`exception+ :
+Ces routines sont appelables dans les modes \plm+`user+, \plm+`isr+ et \plm+`panic+ :
 \begin{itemize}
 \item \texttt{ledOff} : \refSubsubsectionTitlePage{routineLedOffTeensy31it} ;
 \item \texttt{ledOn} : \refSubsubsectionTitlePage{routineLedOnTeensy31it}.
@@ -136,13 +136,13 @@ Ces routines sont appelables dans les modes \plm+`user+, \plm+`isr+ et \plm+`exc
 \subsubsectionLabel{Routine \texttt{ledOff}}{routineLedOffTeensy31it}
 
 \begin{PLM}
-proc ledOff `user `exception `isr (?inLeds $uint32)
+proc ledOff `user `panic `isr (?inLeds $uint32)
 \end{PLM}
 
 \subsubsectionLabel{Routine \texttt{ledOn}}{routineLedOnTeensy31it}
 
 \begin{PLM}
-proc ledOn `user `exception `isr (?inLeds $uint32)
+proc ledOn `user `panic `isr (?inLeds $uint32)
 \end{PLM}
 
 

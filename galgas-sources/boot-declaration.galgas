@@ -56,7 +56,7 @@ method @bootList-element bootSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   if not [inContext.mModeMap hasKey !bootModeName ()] then
-    error mBootLocation : "the $" + bootModeName () + " mode should be defined in order to use boot routines"
+    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
   end
   [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
 #---

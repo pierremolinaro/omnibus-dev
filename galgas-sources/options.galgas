@@ -1,6 +1,6 @@
 option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
-  @bool noExceptionGeneration: '\0', "no-exception-generation" -> "Do not generate exception code"
+  @bool noPanicGeneration: '\0', "no-panic-generation" -> "Do not generate panic code"
   @bool compileOnly: 'c', "no-c-compilation" -> "Do not compile generated LLVM code"
   @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 

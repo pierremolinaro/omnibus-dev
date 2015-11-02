@@ -78,8 +78,8 @@ method @exceptionClauseListAST-element enterInContext
 #  SEMANTIC ANALYSIS                                                                                                   *
 #----------------------------------------------------------------------------------------------------------------------*
 
-func %once exceptionModeName -> @string outResult {
-  outResult = "exception"
+func %once panicModeName -> @string outResult {
+  outResult = "panic"
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -98,8 +98,8 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !exceptionModeName ()] then
-    error mExceptionClauseName : "the $" + exceptionModeName () + " mode should be defined in order to use an exception clause"
+  if not [inContext.mModeMap hasKey !panicModeName ()] then
+    error mExceptionClauseName : "the `" + panicModeName () + " mode should be defined in order to use an exception clause"
   end
   let routineNameForInvocationGraph = @lstring.new  {
     !"exception " + mExceptionClauseName + " " + mPriority
@@ -159,7 +159,7 @@ method @exceptionClauseListAST-element exceptionSemanticAnalysis
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !optionalReceiverType:.noReceiver
     !context:inContext
-    !modes:{!exceptionModeName ()}
+    !modes:{!panicModeName ()}
     !allowException:false
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap

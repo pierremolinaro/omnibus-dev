@@ -93,7 +93,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in `" + inMode + " mode"
       end
       if not isCopiable then
         error name : "the '" + name + "' variable is not copiable"
@@ -111,7 +111,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in " + inMode + " mode"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type !valueAccess
     case outputInput (@lstring name) :
@@ -126,7 +126,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
       ]
     #--- Check mode
       if not [acceptedModeSet hasKey !inMode] then
-        error name : "this variable cannot be used in $" + inMode + " mode"
+        error name : "this variable cannot be used in `" + inMode + " mode"
       end
       parameterList += !mEffectiveParameterKind !mSelector !type !"& (" + valueAccess + ")"
     end
@@ -142,7 +142,7 @@ override method @selfMutatingMethodCallInstructionAST analyze
   ]
 #--- Check mode
   if procedureMode.string != inMode then
-    error mMethodName : "this variable cannot be used in $" + inMode + " mode"
+    error mMethodName : "this variable cannot be used in `" + inMode + " mode"
   end
 #--- called method is not a mutating method
   switch inReceiverType

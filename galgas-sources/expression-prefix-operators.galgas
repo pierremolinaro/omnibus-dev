@@ -108,11 +108,11 @@ override method @prefixOperatorExpressionAST analyzeExpression
     leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
   case minus :
     operatorMap = inContext.mUnaryMinusOperatorMap
-    if [inModeSet hasKey !exceptionModeName ()] then
+    if [inModeSet hasKey !panicModeName ()] then
       error mOperatorLocation
-        : "operations that can generate exceptions are not allowed in $" + exceptionModeName () + " mode"
+        : "operations that can generate exceptions are not allowed in `" + panicModeName () + " mode"
     end
-    if [option plm_options.noExceptionGeneration value] then
+    if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
       leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
       commentOperator = "-"
