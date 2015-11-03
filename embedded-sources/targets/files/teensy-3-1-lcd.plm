@@ -504,7 +504,7 @@ proc printStringInExceptionMode `panic @noWarningIfUnused (?inString $staticStri
 
 //-----------------------------------------------------------------------------*
 
-exception setup 0 {
+panic proc setup 0 {
   clearScreenInExceptionMode ()
   waitMSInExceptionMode (!duration:4)
   gotoInExceptionMode (!line:0 !column:0)
@@ -517,7 +517,7 @@ exception setup 0 {
   printSignedInExceptionMode (!CODE)
 }
 
-exception loop 0 {
+panic proc loop 0 {
   waitMSInExceptionMode (!duration:50)
   ledOn (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4 | LED_TEENSY)
   waitMSInExceptionMode (!duration:50)

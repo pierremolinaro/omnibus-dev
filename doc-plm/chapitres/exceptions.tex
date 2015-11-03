@@ -5,7 +5,7 @@
 
 
 
-\chapter{Exceptions}
+\chapter{Panique organisée}
 
 
 \begin{table}[ht]
@@ -13,7 +13,7 @@
 %\small
 \begin{tabular}{lp{7cm}l}
   \textbf{Numéros} & \textbf{Signification} & \textbf{Lien} \\
-   < 0 & Exceptions liées aux vecteurs d'interruption & \\
+   < 0 & Panique liées aux vecteurs d'interruption & \\
    1 & Dépassement de capacité de l'incrémentation (\plm-++-) & \refSectionPage{instructionIncDec} \\
    2 & Dépassement de capacité de l'incrémentation (\plm+--+) & \refSectionPage{instructionIncDec} \\
    3 & Dépassement de capacité de la négation (\plm+-+) & \refSubsectionPage{negationOvf} \\
@@ -26,8 +26,8 @@
    14 & Modulo par zéro (\plm+%+) & \refSectionPage{operateursInfixArithmétiques} \\
    20 & Échec de l'instruction \plm+assert+ & \refSectionPage{instructionAssert} \\
 \end{tabular}
-\caption{Code des exceptions}\index{Exception!Code}
-\labelTableau{tableauCodeExceptions}
+\caption{Code des paniques}\index{Panique!Code}
+\labelTableau{tableauCodePanique}
 \end{table}
 
 
@@ -35,29 +35,29 @@
 
 
 
-\sectionLabel{Définition des types liés aux exceptions}{typeLiesException}\index{exception:@\plm=exception:=}
+\sectionLabel{Définition des types liés à la panique}{typePanique}\index{panique:@\plm=panique:=}
 
-Une exception est caractérisée par trois informations :
+Une panique est caractérisée par trois informations :
 \begin{itemize}
-  \item son code (\refTableauPage{tableauCodeExceptions}) ;
-  \item le nom du fichier source de l'instruction qui a levé l'exception ;
-  \item le numéro de ligne du fichier source de l'instruction qui a levé l'exception.
+  \item son code (\refTableauPage{tableauCodePanique}) ;
+  \item le nom du fichier source de l'instruction qui a levé la panique ;
+  \item le numéro de ligne du fichier source de l'instruction qui a levé la panique.
 \end{itemize}
 
 Le type du code et du numéro de ligne ne sont pas prédéfinis par le langage. La construction suivante définit ces types :
 \begin{PLM}
-exception : nomDuTypeDuCode nomDuTypeDuNumeroDeLigne
+panique : nomDuTypeDuCode nomDuTypeDuNumeroDeLigne
 \end{PLM}
 
 Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits :
 \begin{PLM}
-exception : $int32 $uint32
+panique : $int32 $uint32
 \end{PLM}
 
 Cette construction doit apparaître exactement une fois. Normalement, c'est le fichier de définition de la cible qui la contient.
 
 
-\sectionLabel{Routines exécutées lors de l'occurrence d'une exception}{routineException}
+\sectionLabel{Routines exécutées lors de l'occurrence d'une panique}{routinePanique}
 
 \begin{figure}[t]
   \centering
@@ -68,64 +68,64 @@ Cette construction doit apparaître exactement une fois. Normalement, c'est le f
       decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
       node distance=5mm
     ]
-    \node [cloud] (start) {\textsc{Occurrence d'une exception}} ;
+    \node [cloud] (start) {\textsc{Occurrence d'une panique}} ;
     \node [block] (raz) [below=of start] {Masquage des interruptions} ;
-    \node [block] (setup) [below=of raz] {Routines \texttt{\bf exception} \texttt{setup}} ;
-    \node [block] (loop) [below=of setup] {Routines \texttt{\bf exception} \texttt{loop}} ;
+    \node [block] (setup) [below=of raz] {Routines \texttt{\bf proc panic} \texttt{setup}} ;
+    \node [block] (loop) [below=of setup] {Routines \texttt{\bf proc panic} \texttt{loop}} ;
 
     \draw [-stealth, thick] (start) -- (raz) ;
     \draw [-stealth, thick] (raz) -- (setup) ;
     \draw [-stealth, thick] (setup) -- (loop) ;
     \draw [-stealth, thick] (loop.south) -- +(0, -.25) -- +(2.75, -.25) -- +(2.75, 0.75)-- +(0, 0.75) ;
   \end{tikzpicture}
-  \caption{Organigramme de la réponse à une exception}
-  \labelFigure{sequenceException}
+  \caption{Organigramme de la réponse à une panique}
+  \labelFigure{sequencePanique}
   \ligne
 \end{figure}
 
-Lors de l'occurrence d'une exception, l'exécution séquentielle des instructions est abandonnée, et :
+Lors de l'occurrence d'une panique, l'exécution séquentielle des instructions est abandonnée, et :
 \begin{itemize}
   \item les interruptions sont masquées, si elles ne le sont pas déjà ;
-  \item les routines d'exception \texttt{setup} sont exécutées une fois ;
-  \item les routines d'exception \texttt{loop} sont exécutées indéfiniment.
+  \item les routines de panique \texttt{setup} sont exécutées une fois ;
+  \item les routines de panique \texttt{loop} sont exécutées indéfiniment.
 \end{itemize}
-Ce fonctionnement est illustré à \refFigure{}{sequenceException}.
+Ce fonctionnement est illustré à \refFigure{}{sequencePanique}.
 
-Si plusieurs routines d'exception \texttt{setup} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines d'exception \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de l'exception.
+Si plusieurs routines de panique \texttt{setup} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines de panique \texttt{setup} offrent l'opportunité d'agir sur les sorties du micro-contrôleur, et d'afficher les caractéristiques de la panique.
 
-Si plusieurs routines d'exception \texttt{loop} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines d'exception \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une exception.
+Si plusieurs routines de panique \texttt{loop} sont définies, celles-ci sont exécutées dans l'ordre de leurs priorités relatives. Les routines de panique \texttt{loop} permettent de signaler d'une manière répétitive l'occurrence d'une panique.
 
-\subsectionLabel{Routines d'exception \texttt{setup} et \texttt{loop}}{routinesException}
-\index{exception loop@\plm=exception loop=}
-\index{exception setup@\plm=exception setup=}
-\index{Routine!exception@\plm=exception=}
+\subsectionLabel{Routines de panique \texttt{setup} et \texttt{loop}}{routinesPanique}
+\index{panic loop@\plm=panic loop=}
+\index{panic setup@\plm=panic setup=}
+\index{Routine!panic\plm=panic=}
 
 Leur syntaxe est la suivante :
 \begin{PLM}
-exception nom priorite {
+proc panic nom priorite {
   liste_instructions
 }
 \end{PLM}
 
-\plm=nom= est soit \texttt{setup}, soit \texttt{loop}. \plm=priorite= est une constante entière, comprise entre $0$ et $2^{64}-1$. Si il y a plusieurs routines d'exception de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines d'exception de même nom n'ont pas la même priorité.
+\plm=nom= est soit \texttt{setup}, soit \texttt{loop}. \plm=priorite= est une constante entière, comprise entre $0$ et $2^{64}-1$. Si il y a plusieurs routines de panique de même nom, elles sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines de panique de même nom n'ont pas la même priorité.
 
-\plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer d'exception. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
+\plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer de panique. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
 
 Trois constantes sont prédéfinies :
 \begin{itemize}
-  \item \plm=CODE=, qui contient le code de l'exception, et dont le type est défini par la construction \plm=exception:= (\refSectionPage{typeLiesException}) ;
-  \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a levé l'exception, et dont le type est \plm=StaticString= ;
-  \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a levé l'exception, et dont le type est défini par la construction \plm=exception:= (\refSectionPage{typeLiesException}).
+  \item \plm=CODE=, qui contient le code de panique, et dont le type est défini par la construction \plm=panic:= (\refSectionPage{typePanique}) ;
+  \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \plm=StaticString= ;
+  \item \plm=LINE=, qui contient le numéro de ligne du fichier source de l'instruction qui a déclenché la panique, et dont le type est défini par la construction \plm=panique:= (\refSectionPage{typePanique}).
 \end{itemize}
 
-Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler les caractéristiques de l'exception.
+Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler les caractéristiques de la panique.
 
 
 \section{Exemples}
 
-Pour redémarrer un processeur ARMv7 lors d'une exception, on peut écrire la routine d'exception \texttt{setup} suivante :
+Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine de panique \texttt{setup} suivante :
 \begin{PLM}
-exception setup 255 {
+panic proc setup 255 {
   AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
 }
 \end{PLM}

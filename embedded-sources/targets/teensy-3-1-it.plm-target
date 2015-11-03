@@ -4,7 +4,7 @@ unsignedIntegerType 1 -> 128
 
 pointerSize 32
 
-exception : $int32 $uint32
+panic proc : $int32 $uint32
 
 mode `isr
 mode `user

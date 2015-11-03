@@ -165,7 +165,7 @@ Le champ \texttt{VECTPENDING} est un champ de 9 bits, il peut donc accepter une 
 \item si \plm+x+ est une expression non calculable statiquement :
   \begin{itemize}
   \item si \plm+x+ est du type \plm+$uint8+, alors toute valeur de \plm+x+ est acceptable : le code engendré se borne à faire le décalage à gauche de la valeur de \plm+x+ ;
-  \item sinon, une assertion (code : voir \refTableauPage{tableauCodeExceptions}) est engendrée ; la valeur de \plm+x+ est ensuite masquée pour pallier un éventuel débordement, puis décalée. 
+  \item sinon, une assertion (code : voir \refTableauPage{tableauCodePanique}) est engendrée ; la valeur de \plm+x+ est ensuite masquée pour pallier un éventuel débordement, puis décalée. 
   \end{itemize}
 \end{itemize}
 

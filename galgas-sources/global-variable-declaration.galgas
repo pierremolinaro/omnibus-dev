@@ -78,7 +78,8 @@ syntax extension common_syntax {
         $integer$ ?let @lbigint priority
         allowedInitList += !hasWriteAccess !priority
       or
-        $exception$
+        $panic$
+        $proc$
         $identifier$ ?let exceptionName
         $integer$ ?let @lbigint priority
         allowedExceptionList += !hasWriteAccess !exceptionName !priority
