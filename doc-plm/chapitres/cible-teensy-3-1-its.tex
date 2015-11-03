@@ -148,7 +148,7 @@ proc ledOn `user `panic `isr (?inLeds $uint32)
 
 \section{Les routines d'interruption}
 
-Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, à l'exception de l'interruption n°1 (remise à zéro), et de la n°15 (\texttt{SysTick}), qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
+Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
 \begin{itemize}
   \item \refSubsectionTitlePage{itsTeensy31AvecExceptions} ;
   \item \refSubsectionTitlePage{itsTeensy31SansExceptions} ;
@@ -276,9 +276,9 @@ Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySeque
 \end{table}
 
 
-\subsectionLabel{Routines d'interruption par défaut, exceptions activées}{itsTeensy31AvecExceptions}
+\subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}
 
-Quand les exceptions sont activées, une routine par défaut est prédéfinie pour chaque interruption (sauf la n°1 et la n°15). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption n°2 (\texttt{NMI}), la routine prédéfinie est :
+Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf la n°1 et la n°15). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est le numéro de l'interruption. Par exemple, pour l'interruption n°2 (\texttt{NMI}), la routine prédéfinie est :
 \begin{PLM}[1]
 proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
   panic 2
@@ -286,15 +286,15 @@ proc NMIHandler `isr @nullWhenPanicDisabled @weak () {
 \end{PLM}
 
 
-\subsectionLabel{Routines d'interruption par défaut, exceptions inactivées}{itsTeensy31SansExceptions}
+\subsectionLabel{Routines d'interruption par défaut, panique inactivée}{itsTeensy31SansExceptions}
 
-Quand les exceptions sont inactivées, l'attribut \plm+@nullWhenPanicDisabled+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
+Quand la panique est inactivée, l'attribut \plm+@nullWhenPanicDisabled+ associé à chaque routine d'interruption provoque la suppression de cette routine d'interruption, et son remplacement de son adresse dans la table des vecteurs d'interruption par la valeur $0$.
 
 
 
 \subsectionLabel{Routines d'interruption définies par l'utilisateur}{itsTeensyRoutinesUtilisateur}
 
-L'attribut \plm+@weak+ associé à chaque routine d'interruption permet sa redéfinition par l'utilisateur. La routine par défaut est alors ignorée, que les exceptions soient activées ou non.
+L'attribut \plm+@weak+ associé à chaque routine d'interruption permet sa redéfinition par l'utilisateur. La routine par défaut est alors ignorée, que la panique soit activée ou non.
 
 Par exemple, l'utilisateur peut définir la routine associée à \texttt{NMI} par :
 \begin{PLM}[1]
@@ -305,7 +305,7 @@ proc NMIHandler `isr {
 
 Il est important de conserver le nom. Si celui-ci est mal orthographié et ne correspond à aucune interruption :
 \begin{itemize}
-  \item la routine d'interruption par défaut est conservée (execeptions activées) ou supprimée (exception inactivées) ;
+  \item la routine d'interruption par défaut est conservée (panique activée) ou supprimée (panique inactivée) ;
   \item un \emph{warning} est déclenché, signalant que la routine utilisateur est inutilisée.
 \end{itemize}
 

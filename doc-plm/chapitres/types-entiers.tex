@@ -85,7 +85,7 @@ let s $int8 = ...
 let x $uint16 = convert x : $uint16
 \end{PLM}
 
-L'opérateur \plm+convert+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, une exception dont le code est donné dans le \refTableauPage{tableauCodeExceptions} est levée. L'opérateur \plm+convert+ est donc interdit dans les constructions où les exceptions sont interdites : il faut alors utiliser l'opérateur \plm=truncate=.
+L'opérateur \plm+convert+ engendre un code qui vérifie à l'exécution que l'expression source (ici \plm+x+) peut être convertie dans le type cible (ici \plm+$uint16+) sans débordement. En cas de débordement détecté à l'exécution, la panique dont le code est donné dans le \refTableauPage{tableauCodePanique} est déclenchée. L'opérateur \plm+convert+ est donc interdit dans les constructions où la panique ne peut être déclenchée : il faut alors utiliser l'opérateur \plm=truncate=.
 
 L'opérateur \plm+convert+ ne peut pas apparaître dans une expression statique.
 
@@ -97,7 +97,7 @@ let y = convert v : $int16 // Erreur, conversion toujours possible
 
 \subsectionLabel{Troncatures : \texttt{truncate}}{conversionsTroncature}
 
-L'opérateur \plm+truncate+ permet de spécifier une conversion explicite silencieuse, qui ne lève aucune exception. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{truncate} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
+L'opérateur \plm+truncate+ permet de spécifier une conversion explicite silencieuse, qui ne déclenche aucune panique. La valeur de l'expression source est tronquée en cas de débordement\footnote{L'opérateur \texttt{truncate} est équivalent au \emph{type cast} entre entiers du langage C.}. Par exemple :
 
 \begin{PLM}
 let s $int8 = -10
@@ -159,12 +159,12 @@ Les opérateurs infixes arithmétiques sont listés dans le \refTableau{operateu
 
 \subsectionLabel{Opérateur \texttt{-}}{negationOvf}
 
-L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) entraîne un débordement arithmétique qui déclenche une exception dont le code est donné dans le \refTableau{tableauCodeExceptions}.
+L'opérateur préfixé \plm=-= est la négation arithmétique avec détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) entraîne un débordement arithmétique qui déclenche une panique dont le code est donné dans le \refTableau{tableauCodePanique}.
 
 
 \subsectionLabel{Opérateur \texttt{\&-}}{negationNoOvf}
 
-L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) retourne cette même valeur. Cet opérateur n'engendre jamais d'exception.
+L'opérateur préfixé \plm=&-= est la négation arithmétique sans détection de débordement. Il n'est accepté que sur les types signés. La négation de la borne inférieure d'un type signé (\plm+-128+ pour \plm+$int8+, \plm+-32768+ pour \plm+$int16+, ...) retourne cette même valeur. Cet opérateur ne déclenche jamais de panique.
 
 
 
@@ -227,10 +227,10 @@ Les opérateurs postfixés \plm=++= et \plm=--= réalisent respectivement l'incr
 variable ++
 \end{PLM}
 
-\plm=++= et \plm=--= déclenchent une exception (dont le code est donné par le \refTableauPage{tableauCodeExceptions}) en cas de débordement de capacité :
+\plm=++= et \plm=--= déclenchent une panique (dont le code est donné par le \refTableauPage{tableauCodePanique}) en cas de débordement de capacité :
 \begin{PLM}
 var variable $uint8 = 255
-variable ++ // Déclenchement d'une exception
+variable ++ // Déclenchement d'une panique
 \end{PLM}
 
 Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité (et fonctionnent donc comme les opérateurs d'incrémentation et de décrémentation du C) :

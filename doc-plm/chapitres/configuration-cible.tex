@@ -141,7 +141,7 @@ unsignedIntegerType 1 -> 128
 
 pointerSize 32
 
-exception : $int32 $uint32
+panic : $int32 $uint32
 
 mode `isr
 mode `user
@@ -173,7 +173,7 @@ init 0 { // Configure Systick interrupt every ms
 {\bf Ligne 4.} Définition de la taille d'un pointeur, en nombre de bits.
 
 
-{\bf Ligne 6.} Déclaration des types entier relatifs aux exceptions (\refSectionPage{typeLiesException}). Le premier type définit le type du code de l'exception (\plm+$int32+, dont un code d'exception peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
+{\bf Ligne 6.} Déclaration des types entier relatifs à la panique (\refSectionPage{typePanique}). Le premier type définit le type du code de la panique (\plm+$int32+, dont un code peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
 
 {\bf Lignes 8 et 9.} Déclaration des modes complémentaires, propres à la cible. Trois modes sont prédéfinis : \plm+`boot+, \plm+`init+ et \plm=`panic= (\refSectionPage{modesPredefinis}). Ces déclarations sont optionnelles, en leur absence seuls les trois modes prédéféfinis existent.
 

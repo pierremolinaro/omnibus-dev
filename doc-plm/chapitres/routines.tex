@@ -13,7 +13,7 @@ Le langage définit plusieurs natures de sous-programmes :
   \item les \emph{fonctions}, dont l'appel apparaît dans une expression ;
   \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales ;
   \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales ;
-  \item les \emph{routines d'exception}, exécutées lors d'une exception (\refSectionPage{routineException}).
+  \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique}).
 \end{itemize}
 
 Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des \emph{fonctions} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement.
@@ -193,9 +193,9 @@ Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le 
 
 
 
-\subsectionLabel{Attribut \texttt{@nullWhenPanicDisabled}}{attributNullOnNoException}\index{"@nullWhenPanicDisabled}
+\subsectionLabel{Attribut \texttt{@nullWhenPanicDisabled}}{nullWhenPanicDisabled}\index{"@nullWhenPanicDisabled}
 
-L'attribut \plm+@nullWhenPanicDisabled+ signifie que la procédure est éliminée si le projet est compilé avec les exceptions désactivées (option \OPTION{-{}-no-panic-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
+L'attribut \plm+@nullWhenPanicDisabled+ signifie que la procédure est éliminée si le projet est compilé avec la panique désactivée (option \OPTION{-{}-no-panic-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
 
 Cette option est à utiliser en toute connaissance de cause. Elle sert à éliminer les routines d'interruption qui ne sont pas utilisées dans un projet.
 
@@ -207,9 +207,9 @@ proc svcHandler `isr @nullWhenPanicDisabled @weak () {
 }
 \end{PLM}
 
-Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception activées, alors l'occurrence de l'interruption déclenchera l'exception n°11.
+Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec la panique activée, alors l'occurrence de l'interruption déclenchera l'exception n°11.
 
-Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec les exception désactivées, alors l'attribut \plm+@nullWhenPanicDisabled+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
+Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec la panique désactivée, alors l'attribut \plm+@nullWhenPanicDisabled+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
 
  
 
@@ -257,7 +257,7 @@ Ceci impose au programme utilisateur de définir ces deux procédures.
 
 \section{Routines utiles}
 
-Le compilateur élimine les procédures qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=exception=. Les procédures et fonctions inatteignables sont éliminées, avec ou sans message d'alerte (\refSubsectionPage{attributNoWarningIfUnused}).
+Le compilateur élimine les procédures qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, avec ou sans message d'alerte (\refSubsectionPage{attributNoWarningIfUnused}).
 
 
 

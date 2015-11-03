@@ -110,7 +110,7 @@ Les opérateurs postfixés \plm=++= et \plm=--= réalisent respectivement l'incr
 variable ++
 \end{PLM}
 
-\plm=++= et \plm=--= engendrent une exception sur dépassement de capacité.
+\plm=++= et \plm=--= déclenchent la panique sur dépassement de capacité.
 
 Les opérateurs \plm=&++= et \plm=&--= ignorent le dépassement de capacité.
 
@@ -146,7 +146,7 @@ L'\plm=expression= est une expression booléenne calculée statiquement.
 
 Contrairement à l'instruction \plm=assert= (\refSectionPage{instructionAssert}) qui évalue l'expression booléenne à l'exécution, la directive \plm=check= est toujours évaluée à la compilation. Elle permet d'exprimer des assertions qui sont évaluées lors de la compilation.
 
-Aucun code n'est engendré. La directive \plm=check= peut donc apparaître dans des listes d'instructions où les exceptions sont interdites.
+Aucun code n'est engendré. La directive \plm=check= peut donc apparaître dans des listes d'instructions où la panique est interdite.
 
 Exemples :
 \begin{PLM}
@@ -165,7 +165,7 @@ assert expression
 
 L'\plm=expression= est une expression booléenne non calculable statiquement.
 
-Si le programme est compilé avec les exceptions activées, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une exception (dont le code est donné par le \refTableau{tableauCodeExceptions}) est levée.
+Si le programme est compilé avec la panique activée, alors le compilateur engendre le code de calcul de l'expression booléenne. Celle-ci sera calculée à l'exécution. Si le résultat est faux, une panique (dont le code est donné par le \refTableau{tableauCodePanique}) est déclenchée.
 
 Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré.
 
@@ -183,9 +183,9 @@ L'instruction \plm=panic= a la syntaxe suivante :
 panic expression
 \end{PLM}
 
-L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typeLiesException}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
+L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typePanique}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
 
-Si le programme est compilé avec les exceptions activées, alors l'exécution de l'instruction \plm=panic= lève une exception dont le code est la valeur de l'\plm=expression=.
+Si le programme est compilé avec la panique activée, alors l'exécution de l'instruction \plm=panic= déclenche la panique avec le code est la valeur de l'\plm=expression=.
 
 Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré.
 
