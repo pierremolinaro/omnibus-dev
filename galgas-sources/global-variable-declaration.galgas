@@ -5,7 +5,6 @@
 list @allowedProcList {
   @bool mHasWriteAccess
   @lstring mProcName
-  @procFormalArgumentList mProcFormalArgumentList
 }
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -71,8 +70,7 @@ syntax extension common_syntax {
       select
         $proc$
         $identifier$ ?let procName
-        <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList procFormalArgumentList
-        allowedProcList += !hasWriteAccess !procName !procFormalArgumentList
+        allowedProcList += !hasWriteAccess !procName
       or
         $init$
         $integer$ ?let @lbigint priority
@@ -184,18 +182,18 @@ method @globalVarDeclarationList-element enterInContext
   end
 #--- Check allowed procedures are defined
   for () in mAllowedProcList do
-    var allowedProcMangledName = mProcName.string
-    for () in mProcFormalArgumentList do
-      switch mFormalArgumentPassingMode
-      case input : allowedProcMangledName += "?"
-      case output : allowedProcMangledName += "!"
-      case inputOutput : allowedProcMangledName += "?!"
-      end
-      allowedProcMangledName += mSelector.string + ":"
-    end
-    let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
+#    var allowedProcMangledName = mProcName.string
+#    for () in mProcFormalArgumentList do
+#      switch mFormalArgumentPassingMode
+#      case input : allowedProcMangledName += "?"
+#      case output : allowedProcMangledName += "!"
+#      case inputOutput : allowedProcMangledName += "?!"
+#      end
+#      allowedProcMangledName += mSelector.string + ":"
+#    end
+#    let allowedProcMangledNameWithLocation = @lstring.new {!allowedProcMangledName !mProcName.location}
     [ioContext.mProcedureMap searchKey
-      !allowedProcMangledNameWithLocation
+      !mProcName
       ?*
       ?let procedureModeMap
       ?let unused signature
@@ -205,7 +203,7 @@ method @globalVarDeclarationList-element enterInContext
       executionModes += !lkey.string
     end
     [!?allowedProcedureMap insertKey
-       !.new {!"proc " + allowedProcMangledName !mProcName.location}
+       !.new {!"proc " + mProcName.string !mProcName.location}
        !mHasWriteAccess
     ]
   end

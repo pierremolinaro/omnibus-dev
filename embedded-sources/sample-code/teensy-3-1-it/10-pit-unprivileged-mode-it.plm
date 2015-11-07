@@ -20,8 +20,8 @@ proc setup `user () {
 //------------------------------------------------*
 
 var gPITValue $uint32 = 0 {
-  proc loop ()
-  @rw proc PITChannel0Handler ()
+  proc loop
+  @rw proc PITChannel0Handler
 }
 
 //------------------------------------------------*

@@ -39,12 +39,12 @@ proc checkRequiredProcedures
   ?endOfSourceFile:let @location inEndOfSourceFile
 {
   for requiredProc in inAST.mRequiredProcList do
-    let requiredProcMangledName = mangledName (
-      !forProcedureKind:.standAloneProc
-      !procedureName:requiredProc.mRequiredProcedureName
-      !formalArgumentList:requiredProc.mProcFormalArgumentList
-    )
-    if not [inSemanticContext.mProcedureMap hasKey !requiredProcMangledName.string] then
+#    let requiredProcMangledName = mangledName (
+#      !forProcedureKind:.standAloneProc
+#      !procedureName:requiredProc.mRequiredProcedureName
+#      !formalArgumentList:requiredProc.mProcFormalArgumentList
+#    )
+    if not [inSemanticContext.mProcedureMap hasKey !requiredProc.mRequiredProcedureName.string] then
       var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
       for (mode) in requiredProc.mProcedureModeList do
         s += " `" + mode
@@ -64,7 +64,7 @@ proc checkRequiredProcedures
       end
       error inEndOfSourceFile : s
     else
-      [inSemanticContext.mProcedureMap searchKey ![requiredProcMangledName nowhere] ?* ?let procModes ?2*]
+      [inSemanticContext.mProcedureMap searchKey ![requiredProc.mRequiredProcedureName nowhere] ?* ?let procModes ?2*]
       let actualProcModeSet = [procModes keySet]
       let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
       if actualProcModeSet != requiredProcModeSet then
@@ -72,7 +72,7 @@ proc checkRequiredProcedures
         for (mode) in requiredProcModeSet do
           s += " `" + mode
         end
-        error [inSemanticContext.mProcedureMap locationForKey !requiredProcMangledName.string] : s
+        error [inSemanticContext.mProcedureMap locationForKey !requiredProc.mRequiredProcedureName.string] : s
       end
     end
   end

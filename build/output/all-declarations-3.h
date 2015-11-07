@@ -1316,18 +1316,6 @@ class GALGAS_string function_mangledNameForType (class GALGAS_string inArgument0
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               Function 'mangledName'                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_mangledName (const class GALGAS_procedureKindAST & constinArgument0,
-                                           const class GALGAS_lstring & constinArgument1,
-                                           class GALGAS_procFormalArgumentList inArgument2,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

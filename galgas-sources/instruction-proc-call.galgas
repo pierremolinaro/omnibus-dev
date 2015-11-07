@@ -91,22 +91,9 @@ override method @procCallInstructionAST analyze
   ?!variableMap:@variableMap ioVariableMap
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Build proc mangled name
-  @string procMangledName = mProcRoutineName.string
-  for () in mEffectiveParameterList do
-    switch mEffectiveParameterKind 
-    case input (*) :
-      procMangledName += "!" ;
-    case output (* *) :
-      procMangledName += "?" ;
-    case outputInput (*) :
-      procMangledName += "?!" ;
-    end
-    procMangledName += mSelector.string + ":"
-  end
 #--- Search proc in proc map
   [inContext.mProcedureMap searchKey
-    !.new {!procMangledName !mProcRoutineName.location}
+    !mProcRoutineName
     ?*
     ?let procedureModeMap
     ?let @procedureSignature procSignature
@@ -115,7 +102,7 @@ override method @procCallInstructionAST analyze
 #--- Enter in invocation graph
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge
     !inRoutineNameForInvocationGraph
-    !.new {!"proc " + procMangledName !mProcRoutineName.location}
+    !.new {!"proc " + mProcRoutineName !mProcRoutineName.location}
   ]
 #--- Check parameters
   @procEffectiveParameterList parameterList = {}
