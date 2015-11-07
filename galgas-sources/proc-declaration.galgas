@@ -188,42 +188,6 @@ map @procedureMap {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func mangledName
-  ?forProcedureKind:let @procedureKindAST inProcedureKind
-  ?procedureName:let @lstring inProcedureName
-  ?formalArgumentList:@procFormalArgumentList inProcFormalArgumentList
-  -> @lstring outMangledName
-{
-  var mangledName = ""
-  switch inProcedureKind
-  case standAloneProc :
-  case structureProc (structureTypeName *) :
-    mangledName += structureTypeName.string + "_"
-  end
-  mangledName += inProcedureName.string
-  for (formalArgument selector * *) in inProcFormalArgumentList do
-    switch formalArgument
-    case input : mangledName += "?"
-    case output : mangledName += "!"
-    case inputOutput : mangledName += "?!"
-    end
-    mangledName += selector.string + ":"
-  end
-  outMangledName = .new {!mangledName !inProcedureName.location}
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
-getter @procedureDeclarationListAST-element mangledName -> @lstring outMangledName {
-  outMangledName = mangledName (
-    !forProcedureKind:mProcedureKind
-    !procedureName:mProcedureName
-    !formalArgumentList:mProcFormalArgumentList
-  )
-}
-
-#----------------------------------------------------------------------------------------------------------------------*
-
 method @procedureDeclarationListAST-element enterInContext
   ?!context:@semanticContext ioContext
 {
@@ -247,17 +211,17 @@ method @procedureDeclarationListAST-element enterInContext
       weakProcedure = attribute.string == weakAttribute ()
     end
   #--- Enter in context
-    let mangledName = [self mangledName]
-    if [ioContext.mProcedureMap hasKey !mangledName.string] then
-      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mangledName.string]
+#    let mangledName = [self mangledName]
+    if [ioContext.mProcedureMap hasKey !mProcedureName.string] then
+      let weak = [ioContext.mProcedureMap mWeakProcedureForKey !mProcedureName.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
       elsif weakProcedure && weak then
         error mProcedureName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mProcedureMap removeKey !mangledName ?4*] # Remove weak routine
+        [!?ioContext.mProcedureMap removeKey !mProcedureName ?4*] # Remove weak routine
         [!?ioContext.mProcedureMap insertKey # Insert routine
-          !mangledName
+          !mProcedureName
           !false # not mutating
           !procedureModeMap
           !signature
@@ -265,7 +229,7 @@ method @procedureDeclarationListAST-element enterInContext
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mProcedureMap insertKey # Raises a redefinition error
-          !mangledName
+          !mProcedureName
           !false # not mutating
           !procedureModeMap
           !signature
@@ -274,7 +238,7 @@ method @procedureDeclarationListAST-element enterInContext
       end
     else
       [!?ioContext.mProcedureMap insertKey
-        !mangledName
+        !mProcedureName
         !false # not mutating
         !procedureModeMap
         !signature
@@ -342,7 +306,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineMangledName:"proc " + [self mangledName]
+    !routineMangledName:"proc " + mProcedureName
     !context:inContext
     !globalsAreConstant:false
   )
@@ -455,7 +419,7 @@ method @procedureDeclarationListAST-element procedureSemanticAnalysis
     end
   end
 #--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = @lstring.new {!"proc " + [self mangledName] !mProcedureName.location}
+  let procNameForInvocationGraph = @lstring.new {!"proc " + mProcedureName !mProcedureName.location}
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !procNameForInvocationGraph

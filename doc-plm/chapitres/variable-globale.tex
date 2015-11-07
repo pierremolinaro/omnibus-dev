@@ -43,8 +43,8 @@ Par exemple, voici comment on peut implémenter une variable globale \texttt{gCo
 
 \begin{PLM}
 var gCompteur $uint32 = 0 {
-  @rw proc timerHandler ()
-  proc waitMS (?inDuration $uint32)
+  @rw proc timerHandler // Ne pas faire figurer
+  proc waitMS           // la liste des arguments
 }
 
 proc timerHandler `isr () {
@@ -58,7 +58,7 @@ proc wait `user (?inDuration $uint32) {
 }
 \end{PLM}
 
-Note : si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code C engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=`isr= et \plm=`user=.
+Note : si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=`isr= et \plm=`user=.
 
 
 Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=init=!Routine} et les routines de panique (\refSubsectionPage{routinesPanique})\index{Routine!panique \plm=panic=}
@@ -96,7 +96,7 @@ proc uneProcedure `user (!outValue $uint32) {
 }
 
 var gGlobale $uint32 {
-  @rw proc autreProcedure ()
+  @rw proc autreProcedure
 }
 \end{PLM}
 
@@ -111,8 +111,8 @@ proc autreProcedure `user () {
 Par contre, l'écriture suivante est rejetée par le compilateur (passage d'une variable globale comme paramètre effectif en entrée) :
 \begin{PLM}
 proc autreProcedure `user () {
-  uneProcedure (?gGlobale) // Erreur, variable globale comme paramètre
-                           // effectif en entrée
+  uneProcedure (?gGlobale) // Erreur, variable globale comme
+                           // paramètre effectif en entrée
 }
 \end{PLM}
 

@@ -71,9 +71,9 @@ init 0 { // Configure Systick interrupt every ms
 }
 
 var gCompteur $uint32 = 0 {
-  @rw proc systickHandler ()
-  proc waitMS (?inDuration $uint32)
-  proc busyWaitingDuringMS (?inDuration $uint32)
+  @rw proc systickHandler
+  proc waitMS
+  proc busyWaitingDuringMS
 }
 
 proc busyWaitingDuringMS `init @noWarningIfUnused (?inDuration $uint32) {

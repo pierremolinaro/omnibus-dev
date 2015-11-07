@@ -3338,106 +3338,6 @@ GALGAS_string filewrapperTemplate_functionGenerationTemplate_implementation (C_C
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               Function 'mangledName'                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring function_mangledName (const GALGAS_procedureKindAST & constinArgument_inProcedureKind,
-                                     const GALGAS_lstring & constinArgument_inProcedureName,
-                                     GALGAS_procFormalArgumentList inArgument_inProcFormalArgumentList,
-                                     C_Compiler * inCompiler
-                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring result_outMangledName ; // Returned variable
-  GALGAS_string var_mangledName = GALGAS_string::makeEmptyString () ;
-  switch (constinArgument_inProcedureKind.enumValue ()) {
-  case GALGAS_procedureKindAST::kNotBuilt:
-    break ;
-  case GALGAS_procedureKindAST::kEnum_standAloneProc:
-    {
-    }
-    break ;
-  case GALGAS_procedureKindAST::kEnum_structureProc:
-    {
-      const cEnumAssociatedValues_procedureKindAST_structureProc * extractPtr_7047 = (const cEnumAssociatedValues_procedureKindAST_structureProc *) (constinArgument_inProcedureKind.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_structureTypeName = extractPtr_7047->mAssociatedValue0 ;
-      var_mangledName.dotAssign_operation (extractedValue_structureTypeName.mAttribute_string.add_operation (GALGAS_string ("_"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 201))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 201)) ;
-    }
-    break ;
-  }
-  var_mangledName.dotAssign_operation (constinArgument_inProcedureName.mAttribute_string  COMMA_SOURCE_FILE ("proc-declaration.galgas", 203)) ;
-  cEnumerator_procFormalArgumentList enumerator_7157 (inArgument_inProcFormalArgumentList, kEnumeration_up) ;
-  while (enumerator_7157.hasCurrentObject ()) {
-    switch (enumerator_7157.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
-    case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_input:
-      {
-        var_mangledName.dotAssign_operation (GALGAS_string ("\?")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 206)) ;
-      }
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_output:
-      {
-        var_mangledName.dotAssign_operation (GALGAS_string ("!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 207)) ;
-      }
-      break ;
-    case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
-      {
-        var_mangledName.dotAssign_operation (GALGAS_string ("\?!")  COMMA_SOURCE_FILE ("proc-declaration.galgas", 208)) ;
-      }
-      break ;
-    }
-    var_mangledName.dotAssign_operation (enumerator_7157.current_mSelector (HERE).mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("proc-declaration.galgas", 210))  COMMA_SOURCE_FILE ("proc-declaration.galgas", 210)) ;
-    enumerator_7157.gotoNextObject () ;
-  }
-  result_outMangledName = GALGAS_lstring::constructor_new (var_mangledName, constinArgument_inProcedureName.mAttribute_location  COMMA_SOURCE_FILE ("proc-declaration.galgas", 212)) ;
-//---
-  return result_outMangledName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_mangledName [4] = {
-  & kTypeDescriptor_GALGAS_procedureKindAST,
-  & kTypeDescriptor_GALGAS_lstring,
-  & kTypeDescriptor_GALGAS_procFormalArgumentList,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_mangledName (C_Compiler * inCompiler,
-                                                            const cObjectArray & inEffectiveParameterArray,
-                                                            const GALGAS_location & /* §§ inErrorLocation */
-                                                            COMMA_LOCATION_ARGS) {
-  const GALGAS_procedureKindAST operand0 = GALGAS_procedureKindAST::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                                                   inCompiler
-                                                                                   COMMA_THERE) ;
-  const GALGAS_lstring operand1 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
-                                                                 inCompiler
-                                                                 COMMA_THERE) ;
-  const GALGAS_procFormalArgumentList operand2 = GALGAS_procFormalArgumentList::extractObject (inEffectiveParameterArray.objectAtIndex (2 COMMA_HERE),
-                                                                                               inCompiler
-                                                                                               COMMA_THERE) ;
-  return function_mangledName (operand0,
-                               operand1,
-                               operand2,
-                               inCompiler
-                               COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_mangledName ("mangledName",
-                                                             functionWithGenericHeader_mangledName,
-                                                             & kTypeDescriptor_GALGAS_lstring,
-                                                             3,
-                                                             functionArgs_mangledName) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3449,20 +3349,19 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
                                       COMMA_UNUSED_LOCATION_ARGS) {
   cEnumerator_requiredProcedureDeclarationListAST enumerator_1850 (constinArgument_inAST.mAttribute_mRequiredProcList, kEnumeration_up) ;
   while (enumerator_1850.hasCurrentObject ()) {
-    GALGAS_lstring var_requiredProcMangledName = function_mangledName (GALGAS_procedureKindAST::constructor_standAloneProc (SOURCE_FILE ("required-proc-declaration.galgas", 43)), enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName, enumerator_1850.current (HERE).mAttribute_mProcFormalArgumentList, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 42)) ;
-    const enumGalgasBool test_0 = constinArgument_inSemanticContext.mAttribute_mProcedureMap.getter_hasKey (var_requiredProcMangledName.mAttribute_string COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 47)).operator_not (SOURCE_FILE ("required-proc-declaration.galgas", 47)).boolEnum () ;
+    const enumGalgasBool test_0 = constinArgument_inSemanticContext.mAttribute_mProcedureMap.getter_hasKey (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.mAttribute_string COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 47)).operator_not (SOURCE_FILE ("required-proc-declaration.galgas", 47)).boolEnum () ;
     if (kBoolTrue == test_0) {
       GALGAS_string var_s = GALGAS_string ("the '").add_operation (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 48)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 48)).add_operation (GALGAS_string ("' should be defined as: proc"), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 48)) ;
-      cEnumerator_lstringlist enumerator_2301 (enumerator_1850.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
-      while (enumerator_2301.hasCurrentObject ()) {
-        var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_2301.current_mValue (HERE).getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50)) ;
-        enumerator_2301.gotoNextObject () ;
+      cEnumerator_lstringlist enumerator_2318 (enumerator_1850.current (HERE).mAttribute_mProcedureModeList, kEnumeration_up) ;
+      while (enumerator_2318.hasCurrentObject ()) {
+        var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_2318.current_mValue (HERE).getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 50)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 50)) ;
+        enumerator_2318.gotoNextObject () ;
       }
       var_s.dotAssign_operation (GALGAS_string (" ").add_operation (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.getter_string (SOURCE_FILE ("required-proc-declaration.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 52))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 52)) ;
-      cEnumerator_procFormalArgumentList enumerator_2446 (enumerator_1850.current (HERE).mAttribute_mProcFormalArgumentList, kEnumeration_up) ;
-      while (enumerator_2446.hasCurrentObject ()) {
+      cEnumerator_procFormalArgumentList enumerator_2463 (enumerator_1850.current (HERE).mAttribute_mProcFormalArgumentList, kEnumeration_up) ;
+      while (enumerator_2463.hasCurrentObject ()) {
         var_s.dotAssign_operation (GALGAS_string (" ")  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 54)) ;
-        switch (enumerator_2446.current (HERE).mAttribute_mFormalArgumentPassingMode.enumValue ()) {
+        switch (enumerator_2463.current (HERE).mAttribute_mFormalArgumentPassingMode.enumValue ()) {
         case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
           break ;
         case GALGAS_procFormalArgumentPassingMode::kEnum_input:
@@ -3481,31 +3380,31 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
           }
           break ;
         }
-        const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_2446.current (HERE).mAttribute_mSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+        const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, enumerator_2463.current (HERE).mAttribute_mSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
         if (kBoolTrue == test_1) {
-          var_s.dotAssign_operation (enumerator_2446.current (HERE).mAttribute_mSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 61))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 61)) ;
+          var_s.dotAssign_operation (enumerator_2463.current (HERE).mAttribute_mSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 61))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 61)) ;
         }
-        var_s.dotAssign_operation (enumerator_2446.current (HERE).mAttribute_mFormalArgumentTypeName.mAttribute_string  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 63)) ;
-        enumerator_2446.gotoNextObject () ;
+        var_s.dotAssign_operation (enumerator_2463.current (HERE).mAttribute_mFormalArgumentTypeName.mAttribute_string  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 63)) ;
+        enumerator_2463.gotoNextObject () ;
       }
       inCompiler->emitSemanticError (constinArgument_inEndOfSourceFile, var_s  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 65)) ;
     }else if (kBoolFalse == test_0) {
       GALGAS_modeMap var_procModes ;
-      GALGAS_bool joker_2906 ; // Joker input parameter
-      GALGAS_procedureSignature joker_2924_2 ; // Joker input parameter
-      GALGAS_bool joker_2924_1 ; // Joker input parameter
-      constinArgument_inSemanticContext.mAttribute_mProcedureMap.method_searchKey (var_requiredProcMangledName.mAttribute_string.getter_nowhere (SOURCE_FILE ("required-proc-declaration.galgas", 67)), joker_2906, var_procModes, joker_2924_2, joker_2924_1, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 67)) ;
+      GALGAS_bool joker_2935 ; // Joker input parameter
+      GALGAS_procedureSignature joker_2953_2 ; // Joker input parameter
+      GALGAS_bool joker_2953_1 ; // Joker input parameter
+      constinArgument_inSemanticContext.mAttribute_mProcedureMap.method_searchKey (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.mAttribute_string.getter_nowhere (SOURCE_FILE ("required-proc-declaration.galgas", 67)), joker_2935, var_procModes, joker_2953_2, joker_2953_1, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 67)) ;
       GALGAS_stringset var_actualProcModeSet = var_procModes.getter_keySet (SOURCE_FILE ("required-proc-declaration.galgas", 68)) ;
       GALGAS_stringset var_requiredProcModeSet = GALGAS_stringset::constructor_setWithLStringList (enumerator_1850.current (HERE).mAttribute_mProcedureModeList  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 69)) ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_actualProcModeSet.objectCompare (var_requiredProcModeSet)).boolEnum () ;
       if (kBoolTrue == test_2) {
         GALGAS_string var_s = GALGAS_string ("required modes:") ;
-        cEnumerator_stringset enumerator_3203 (var_requiredProcModeSet, kEnumeration_up) ;
-        while (enumerator_3203.hasCurrentObject ()) {
-          var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_3203.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73)) ;
-          enumerator_3203.gotoNextObject () ;
+        cEnumerator_stringset enumerator_3232 (var_requiredProcModeSet, kEnumeration_up) ;
+        while (enumerator_3232.hasCurrentObject ()) {
+          var_s.dotAssign_operation (GALGAS_string (" `").add_operation (enumerator_3232.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73))  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 73)) ;
+          enumerator_3232.gotoNextObject () ;
         }
-        inCompiler->emitSemanticError (constinArgument_inSemanticContext.mAttribute_mProcedureMap.getter_locationForKey (var_requiredProcMangledName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)), var_s  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)) ;
+        inCompiler->emitSemanticError (constinArgument_inSemanticContext.mAttribute_mProcedureMap.getter_locationForKey (enumerator_1850.current (HERE).mAttribute_mRequiredProcedureName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)), var_s  COMMA_SOURCE_FILE ("required-proc-declaration.galgas", 75)) ;
       }
     }
     enumerator_1850.gotoNextObject () ;
@@ -9522,9 +9421,9 @@ const char * gWrapperFileContent_5_targetTemplates = "//------------------------
   "}\n"
   "\n"
   "var gCompteur $uint32 = 0 {\n"
-  "  @rw proc systickHandler ()\n"
-  "  proc waitMS (\?inDuration $uint32)\n"
-  "  proc busyWaitingDuringMS (\?inDuration $uint32)\n"
+  "  @rw proc systickHandler\n"
+  "  proc waitMS\n"
+  "  proc busyWaitingDuringMS\n"
   "}\n"
   "\n"
   "proc busyWaitingDuringMS `init @noWarningIfUnused (\?inDuration $uint32) {\n"
@@ -10107,7 +10006,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "teensy-3-1-default-isr.plm",
   "plm",
   true, // Text file
-  16852, // Text length
+  16805, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 

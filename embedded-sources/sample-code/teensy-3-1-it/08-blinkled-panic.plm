@@ -8,11 +8,11 @@ proc setup `user () {
 //------------------------------------------------*
 
 var toggle = true {
-  @rw proc loop ()
+  @rw proc loop
 }
 
 var gCount $uint3 = 0 {
-  @rw proc loop ()
+  @rw proc loop
 }
 
 //------------------------------------------------*

@@ -620,7 +620,7 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var gDelai $uint32 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -641,7 +641,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkled.plm",
   "plm",
   true, // Text file
-  575, // Text length
+  572, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 

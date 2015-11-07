@@ -649,14 +649,4 @@ void categoryMethod_enterInPrecedenceGraph (const class GALGAS_functionDeclarati
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Category getter '@procedureDeclarationListAST-element mangledName' (as function)                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_procedureDeclarationListAST_2D_element & inObject,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
 #endif
