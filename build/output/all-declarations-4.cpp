@@ -692,7 +692,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var led = $ledState.on {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -714,7 +714,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "03-blinkled-systick-enum.plm",
   "plm",
   true, // Text file
-  592, // Text length
+  589, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -740,7 +740,7 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var zz $int32 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -770,7 +770,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "04-blinkled-systick-struct.plm",
   "plm",
   true, // Text file
-  819, // Text length
+  816, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -783,7 +783,7 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var zz $int32 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -817,7 +817,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "05-blinkled-systick-string.plm",
   "plm",
   true, // Text file
-  700, // Text length
+  697, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -833,11 +833,11 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var toggle = true {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "var gCount $uint32 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -861,7 +861,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "06-blinkled-lcd.plm",
   "plm",
   true, // Text file
-  604, // Text length
+  598, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -877,11 +877,11 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var toggle = true {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "var gCount $uint32 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -926,7 +926,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "07-blinkled-urem-test.plm",
   "plm",
   true, // Text file
-  1200, // Text length
+  1194, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -942,11 +942,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var toggle = true {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "var gCount $uint3 = 0 {\n"
-  "  @rw proc loop ()\n"
+  "  @rw proc loop\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -970,7 +970,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "08-blinkled-panic.plm",
   "plm",
   true, // Text file
-  642, // Text length
+  636, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1040,8 +1040,8 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-it\
   "//------------------------------------------------*\n"
   "\n"
   "var gPITValue $uint32 = 0 {\n"
-  "  proc loop ()\n"
-  "  @rw proc PITChannel0Handler ()\n"
+  "  proc loop\n"
+  "  @rw proc PITChannel0Handler\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1072,7 +1072,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "10-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1024, // Text length
+  1018, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -15084,11 +15084,9 @@ static const char * kSourceFileHelpMessages [] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  static const char * kVersionString = "version " PROJECT_VERSION_STRING " [debug]" ;
-#else
-  static const char * kVersionString = "version " PROJECT_VERSION_STRING ;
-#endif
+const char * projectVersionString (void) {
+  return "1.0.0" ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -15211,7 +15209,6 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
 //--- Analyze Command Line Options
   TC_UniqueArray <C_String> sourceFilesArray ;
   F_Analyze_CLI_Options (inArgc, inArgv,
-                         kVersionString,
                          sourceFilesArray,
                          kSourceFileExtensions,
                          kSourceFileHelpMessages,
