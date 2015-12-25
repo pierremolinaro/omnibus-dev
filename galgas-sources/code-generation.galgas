@@ -290,10 +290,10 @@ proc generateLLVMfile
   end
 #----------------------------------------- Write LLVM file
   llvmCode += llvmSeparatorLine ()
-  [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.ll" ?*]
+  [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/src.ll" ?*]
 #----------------------------------------- Write assembler file
   asCode += asSeparatorLine ()
-  [asCode writeToFileWhenDifferentContents !sourceDirectory + "/source-plm.s" ?*]
+  [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
 #----------------------------------------- Perform compilation
   if (@uint.errorCount == 0) && not [option plm_options.compileOnly value] then
     let script = if [option plm_options.performFlashing value] then "run" else "build" end

@@ -266,7 +266,8 @@ Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un ar
 
 \begin{figure}[ht]
   \centering
-  \footnotesize
+  \scriptsize
+%  \tiny
   \begin{tikzpicture}[
       block/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.4cm},
       block2/.style ={rectangle, draw=black, thick, fill=white, align=center, minimum height=0.5cm, minimum width=1.6cm},
@@ -274,15 +275,17 @@ Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un ar
     ]
     \node [block] (plm) at (0, 0) {\tt f{}ichier.plm} ;
     \node (ws) [right=of plm, minimum height=0.6cm, minimum width=1.4cm] {} ;
-    \node [block] (plmc) [right=of ws] {\tt plm.c} ;
-    \node [block] (plms) [below=of plmc] {\tt plm.s} ;
-    \node [block] (plmco) [right=of plmc] {\tt plm.c.o} ;
-    \node [block] (plmso) [right=of plms] {\tt plm.s.o} ;
+    \node [block] (plmc) [right=of ws] {\tt src.ll} ;
+    \node [block] (make) [below=of plmc] {\tt make.py};
+    \node [block] (makeplm) [below=of make] {\tt plm.py};
+    \node [block] (plms) [below=of makeplm] {\tt src.s} ;
+    \node [block] (plmco) [right=of plmc] {\tt opt.src.ll} ;
+    \node [block] (plmcos) [below=of plmco] {\tt opt.src.ll.s} ;
+    \node [block] (plmco2) [below=of plmcos] {\tt opt.src.ll.s.o} ;
+    \node [block] (plmso) [right=of plms] {\tt src.s.o} ;
     \node [block] (link) [below=of plms] {\tt link.ld} ;
     \node [block] (elf) [right=of plmso] {\tt plm.elf} ;
     \node (elf2) [above=of elf, minimum height=0.6cm] {};
-    \node [block] (make) [below=of link] {\tt make.py};
-    \node [block] (makeplm) [below=of make] {\tt plm.py};
     \begin{scope}[node distance=0.1cm and 1.6cm]
       \node [block2] (build) at (3, -0.5) {\tt build.py};
       \node [block2] (clean) [below=of build] {\tt clean.py};
@@ -305,18 +308,19 @@ Intéressons-nous à l'appel de la routine \plm+wait+ ; celle-ci présente un ar
     \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (buildverbose.west) ;
     \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (objsize.west) ;
     \draw [-stealth, thick] (plm.east) -- +(0.3, 0) |- (objdump.west) ;
-    \draw [-stealth, thick] (plms) to node[above] {\tt gcc} (plmso) ;
-    \draw [-stealth, thick] (plmso) to node[above right] {\tt gcc} (elf) ;
-    \draw [-stealth, thick] (plmc) to node[above] {\tt gcc} (plmco) ;
-    \draw [thick] (plmco.east) -- +(0.7, 0) |- (elf.west) ;
-    \draw [thick] (elf.west) -- +(-0.7, 0) |- (plmco.east) ;
+    \draw [-stealth, thick] (plms) to node[above] {\tt as} (plmso) ;
+    \draw [-stealth, thick] (plmso) to node[above right] {\tt ld} (elf) ;
+    \draw [-stealth, thick] (plmc) to node[above] {\tt opt} (plmco) ;
+    \draw [thick] (elf.west) -- +(-0.7, 0) |- (plmco2.east) ;
     \draw [thick] (elf.west) -- +(-0.7, 0) |- (link.east) ;
+    \draw [-stealth, thick] (plmco) to node[right] {\tt llc} (plmcos) ;
+    \draw [-stealth, thick] (plmcos) to node[right] {\tt as} (plmco2) ;
     
     \begin{scope}[node distance=5mm]
     \node (repws) [above=of ws] {\tt ws/} ;
     \node (source) [above=of plmc] {\tt ws/sources/} ;
     \node (objects) [above=of plmco] {\tt ws/objects/} ;
-    \node (product) [above=of elf2] {\tt ws/product/} ;
+    \node (product) [right=of objects] {\tt ws/product/} ;
     \node (titre) [above=of plm] {Répertoires :} ;
     \end{scope}
   \end{tikzpicture}
@@ -356,8 +360,8 @@ Les fichiers produits par la compilation sont regroupés dans un répertoire not
 \centering
 \begin{tabular}{p{2cm}p{11cm}}
   \textbf{Nom} & \textbf{Commentaire} \\
-  \texttt{plm.c} & Contient tout le code C de l'application. \\
-  \texttt{plm.s} & Contient tout le code assembleur de l'application. En fonction de la cible, ce fichier peut être vide.\\
+  \texttt{src.ll} & Contient tout le code LLVM produit par la compilation du fichier source {\tt f{}ichier.plm}. \\
+  \texttt{src.s} & Contient tout le code assembleur produit par la compilation du fichier source {\tt f{}ichier.plm}. En fonction de la cible, ce fichier peut être vide.\\
   \texttt{make.py} & Makefile générique écrit en Python.\\
   \texttt{plm.py} & Configuration du makefile générique pour la compilation PLM.\\
   \texttt{link.ld} & Script de l'édition de liens.\\

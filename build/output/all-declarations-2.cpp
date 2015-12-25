@@ -2750,7 +2750,7 @@ class cCollectionElement_typeList : public cCollectionElement {
   public : virtual cCollectionElement * copy (void) ;
 
 //--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3126,7 +3126,7 @@ class cCollectionElement_operandIRList : public cCollectionElement {
   public : virtual cCollectionElement * copy (void) ;
 
 //--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

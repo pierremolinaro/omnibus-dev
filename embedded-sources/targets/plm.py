@@ -121,7 +121,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   objectList = []
   for source in LLVMsourceList:
   #--- Optimize LLVM source
-    optimizedSource = objectDir + "/" + source + "-opt.ll"
+    optimizedSource = objectDir + "/opt." + source
     rule = makefile.Rule ([optimizedSource], "Optimizing " + source)
     rule.mDependences.append ("sources/" + source)
     rule.mDependences.append (currentFile)
@@ -129,8 +129,8 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += ["sources/" + source]
     rule.mCommand += ["-o", optimizedSource]
     make.addRule (rule)
-  #--- Compile LLVM source
-    asSource = objectDir + "/" + source + ".s"
+  #--- Compile optimized LLVM source
+    asSource = objectDir + "/opt." + source + ".s"
     rule = makefile.Rule ([asSource], "Compiling " + optimizedSource)
     rule.mDependences.append (optimizedSource)
     rule.mCommand += LLCcompiler
@@ -138,7 +138,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += ["-o", asSource]
     make.addRule (rule)
   #--- Assembling
-    asObject = objectDir + "/" + source + ".s.o"
+    asObject = objectDir + "/opt." + source + ".s.o"
     rule = makefile.Rule ([asObject], "Assembling " + asSource)
     rule.mDependences.append (asSource)
     rule.mCommand += asAssembler
