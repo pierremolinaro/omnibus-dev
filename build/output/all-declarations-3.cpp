@@ -5919,11 +5919,11 @@ void routine_generateLLVMfile (const GALGAS_string constinArgument_inCurrentDire
     }
   }
   var_llvmCode.dotAssign_operation (function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 292))  COMMA_SOURCE_FILE ("code-generation.galgas", 292)) ;
-  GALGAS_bool joker_13396 ; // Joker input parameter
-  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 293)), joker_13396, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 293)) ;
+  GALGAS_bool joker_13389 ; // Joker input parameter
+  var_llvmCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.ll"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 293)), joker_13389, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 293)) ;
   var_asCode.dotAssign_operation (function_asSeparatorLine (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 295))  COMMA_SOURCE_FILE ("code-generation.galgas", 295)) ;
-  GALGAS_bool joker_13574 ; // Joker input parameter
-  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/source-plm.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)), joker_13574, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)) ;
+  GALGAS_bool joker_13560 ; // Joker input parameter
+  var_asCode.method_writeToFileWhenDifferentContents (var_sourceDirectory.add_operation (GALGAS_string ("/src.s"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)), joker_13560, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 296)) ;
   GALGAS_bool test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 298)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
     test_5 = GALGAS_bool (gOption_plm_5F_options_compileOnly.getter_value ()).operator_not (SOURCE_FILE ("code-generation.galgas", 298)) ;
@@ -7003,7 +7003,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "  objectList = []\n"
   "  for source in LLVMsourceList:\n"
   "  #--- Optimize LLVM source\n"
-  "    optimizedSource = objectDir + \"/\" + source + \"-opt.ll\"\n"
+  "    optimizedSource = objectDir + \"/opt.\" + source\n"
   "    rule = makefile.Rule ([optimizedSource], \"Optimizing \" + source)\n"
   "    rule.mDependences.append (\"sources/\" + source)\n"
   "    rule.mDependences.append (currentFile)\n"
@@ -7011,8 +7011,8 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [\"sources/\" + source]\n"
   "    rule.mCommand += [\"-o\", optimizedSource]\n"
   "    make.addRule (rule)\n"
-  "  #--- Compile LLVM source\n"
-  "    asSource = objectDir + \"/\" + source + \".s\"\n"
+  "  #--- Compile optimized LLVM source\n"
+  "    asSource = objectDir + \"/opt.\" + source + \".s\"\n"
   "    rule = makefile.Rule ([asSource], \"Compiling \" + optimizedSource)\n"
   "    rule.mDependences.append (optimizedSource)\n"
   "    rule.mCommand += LLCcompiler\n"
@@ -7020,7 +7020,7 @@ const char * gWrapperFileContent_1_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [\"-o\", asSource]\n"
   "    make.addRule (rule)\n"
   "  #--- Assembling\n"
-  "    asObject = objectDir + \"/\" + source + \".s.o\"\n"
+  "    asObject = objectDir + \"/opt.\" + source + \".s.o\"\n"
   "    rule = makefile.Rule ([asObject], \"Assembling \" + asSource)\n"
   "    rule.mDependences.append (asSource)\n"
   "    rule.mCommand += asAssembler\n"
@@ -7098,7 +7098,7 @@ const cRegularFileWrapper gWrapperFile_1_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  9613, // Text length
+  9623, // Text length
   gWrapperFileContent_1_targetTemplates
 ) ;
 
@@ -10853,7 +10853,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def LLVMsourceList ():\n"
-  "  return [\"source-plm.ll\"]\n"
+  "  return [\"src.ll\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10862,7 +10862,7 @@ const char * gWrapperFileContent_9_targetTemplates = "#! /usr/bin/env python\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "def assemblerSourceList ():\n"
-  "  return [\"source-plm.s\"]\n"
+  "  return [\"src.s\"]\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n"
   "#                                                                                                                      *\n"
@@ -10911,7 +10911,7 @@ const cRegularFileWrapper gWrapperFile_9_targetTemplates (
   "build.py",
   "py",
   true, // Text file
-  12263, // Text length
+  12249, // Text length
   gWrapperFileContent_9_targetTemplates
 ) ;
 

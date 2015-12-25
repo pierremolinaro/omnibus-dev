@@ -1108,6 +1108,63 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   gWrapperAllDirectories_embeddedSampleCode_1
 ) ;
 
+//--- File 'teensy-3-1-xtr/01-blinkled.plm'
+
+const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-xtr\"\n"
+  "\n"
+  "//------------------------------------------------*\n"
+  "\n"
+  "task BlinkLed {\n"
+  "  init {\n"
+  "    PORTC_PCR5 = PORTC_PCR5::mux (1)\n"
+  "    GPIOC_PDDR |= (1 << 5)\n"
+  "  }\n"
+  "\n"
+  "  var state : $bool = true\n"
+  "  \n"
+  "  every (!ms:500) {\n"
+  "    if state then\n"
+  "      GPIOC_PSOR = 1 << 5 // Allumer la led\n"
+  "      state = false\n"
+  "    else\n"
+  "      GPIOC_PCOR = 1 << 5 // \xC3""\x89""teindre la led\n"
+  "      static = true\n"
+  "    end  \n"
+  "  }\n"
+  "\n"
+  "//------------------------------------------------*\n" ;
+
+const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
+  "01-blinkled.plm",
+  "plm",
+  true, // Text file
+  445, // Text length
+  gWrapperFileContent_10_embeddedSampleCode
+) ;
+
+//--- All files of 'teensy-3-1-xtr' directory
+
+static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [2] = {
+  & gWrapperFile_10_embeddedSampleCode,
+  NULL
+} ;
+
+//--- All sub-directories of 'teensy-3-1-xtr' directory
+
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1] = {
+  NULL
+} ;
+
+//--- Directory 'teensy-3-1-xtr'
+
+const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
+  "teensy-3-1-xtr",
+  1,
+  gWrapperAllFiles_embeddedSampleCode_2,
+  0,
+  gWrapperAllDirectories_embeddedSampleCode_2
+) ;
+
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
@@ -1116,8 +1173,9 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
 
 //--- All sub-directories of '' directory
 
-static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [2] = {
+static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [3] = {
   & gWrapperDirectory_1_embeddedSampleCode,
+  & gWrapperDirectory_2_embeddedSampleCode,
   NULL
 } ;
 
@@ -1127,7 +1185,7 @@ const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
   "",
   0,
   gWrapperAllFiles_embeddedSampleCode_0,
-  1,
+  2,
   gWrapperAllDirectories_embeddedSampleCode_0
 ) ;
 
