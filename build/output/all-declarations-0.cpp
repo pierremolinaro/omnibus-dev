@@ -5032,18 +5032,6 @@ void GALGAS_declarationListAST::method_last (GALGAS_abstractDeclaration & outOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_declarationListAST GALGAS_declarationListAST::operator_concat (const GALGAS_declarationListAST & inOperand
-                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_declarationListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_declarationListAST GALGAS_declarationListAST::add_operation (const GALGAS_declarationListAST & inOperand,
                                                                     C_Compiler * /* inCompiler */
                                                                     COMMA_UNUSED_LOCATION_ARGS) const {
@@ -5087,8 +5075,9 @@ GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListToIndex (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_declarationListAST::dotAssign_operation (const GALGAS_declarationListAST inOperand
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_declarationListAST::plusAssign_operation (const GALGAS_declarationListAST inOperand,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -5538,18 +5527,6 @@ void GALGAS_globalVarDeclarationList::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_globalVarDeclarationList GALGAS_globalVarDeclarationList::operator_concat (const GALGAS_globalVarDeclarationList & inOperand
-                                                                                  COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_globalVarDeclarationList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_globalVarDeclarationList GALGAS_globalVarDeclarationList::add_operation (const GALGAS_globalVarDeclarationList & inOperand,
                                                                                 C_Compiler * /* inCompiler */
                                                                                 COMMA_UNUSED_LOCATION_ARGS) const {
@@ -5593,8 +5570,9 @@ GALGAS_globalVarDeclarationList GALGAS_globalVarDeclarationList::getter_subListT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalVarDeclarationList::dotAssign_operation (const GALGAS_globalVarDeclarationList inOperand
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_globalVarDeclarationList::plusAssign_operation (const GALGAS_globalVarDeclarationList inOperand,
+                                                            C_Compiler * /* inCompiler */
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -6185,18 +6163,6 @@ void GALGAS_procedureDeclarationListAST::method_last (GALGAS_procedureKindAST & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procedureDeclarationListAST GALGAS_procedureDeclarationListAST::operator_concat (const GALGAS_procedureDeclarationListAST & inOperand
-                                                                                        COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_procedureDeclarationListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_procedureDeclarationListAST GALGAS_procedureDeclarationListAST::add_operation (const GALGAS_procedureDeclarationListAST & inOperand,
                                                                                       C_Compiler * /* inCompiler */
                                                                                       COMMA_UNUSED_LOCATION_ARGS) const {
@@ -6240,8 +6206,9 @@ GALGAS_procedureDeclarationListAST GALGAS_procedureDeclarationListAST::getter_su
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureDeclarationListAST::dotAssign_operation (const GALGAS_procedureDeclarationListAST inOperand
-                                                              COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_procedureDeclarationListAST::plusAssign_operation (const GALGAS_procedureDeclarationListAST inOperand,
+                                                               C_Compiler * /* inCompiler */
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -6777,18 +6744,6 @@ void GALGAS_requiredProcedureDeclarationListAST::method_last (GALGAS_lstring & o
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationListAST::operator_concat (const GALGAS_requiredProcedureDeclarationListAST & inOperand
-                                                                                                        COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_requiredProcedureDeclarationListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationListAST::add_operation (const GALGAS_requiredProcedureDeclarationListAST & inOperand,
                                                                                                       C_Compiler * /* inCompiler */
                                                                                                       COMMA_UNUSED_LOCATION_ARGS) const {
@@ -6832,8 +6787,9 @@ GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_requiredProcedureDeclarationListAST::dotAssign_operation (const GALGAS_requiredProcedureDeclarationListAST inOperand
-                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_requiredProcedureDeclarationListAST::plusAssign_operation (const GALGAS_requiredProcedureDeclarationListAST inOperand,
+                                                                       C_Compiler * /* inCompiler */
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -7378,18 +7334,6 @@ void GALGAS_functionDeclarationListAST::method_last (GALGAS_lstring & outOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionDeclarationListAST GALGAS_functionDeclarationListAST::operator_concat (const GALGAS_functionDeclarationListAST & inOperand
-                                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_functionDeclarationListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_functionDeclarationListAST GALGAS_functionDeclarationListAST::add_operation (const GALGAS_functionDeclarationListAST & inOperand,
                                                                                     C_Compiler * /* inCompiler */
                                                                                     COMMA_UNUSED_LOCATION_ARGS) const {
@@ -7433,8 +7377,9 @@ GALGAS_functionDeclarationListAST GALGAS_functionDeclarationListAST::getter_subL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_functionDeclarationListAST::dotAssign_operation (const GALGAS_functionDeclarationListAST inOperand
-                                                             COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_functionDeclarationListAST::plusAssign_operation (const GALGAS_functionDeclarationListAST inOperand,
+                                                              C_Compiler * /* inCompiler */
+                                                              COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -7820,24 +7765,12 @@ void GALGAS_bootList::addAssign_operation (const GALGAS_location & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_bootList::dotAssign_operation (const GALGAS_bootList inOperand
-                                           COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_bootList::plusAssign_operation (const GALGAS_bootList inOperand,
+                                            C_Compiler * /* inCompiler */
+                                            COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid ()) {
     appendSortedList (inOperand) ;
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootList GALGAS_bootList::operator_concat (const GALGAS_bootList & inOperand
-                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_bootList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = constructor_emptySortedList (THERE) ;
-    result = *this ;
-    result.appendSortedList (inOperand) ;
-  }
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8209,24 +8142,12 @@ void GALGAS_initList::addAssign_operation (const GALGAS_location & inOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_initList::dotAssign_operation (const GALGAS_initList inOperand
-                                           COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_initList::plusAssign_operation (const GALGAS_initList inOperand,
+                                            C_Compiler * /* inCompiler */
+                                            COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid ()) {
     appendSortedList (inOperand) ;
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_initList GALGAS_initList::operator_concat (const GALGAS_initList & inOperand
-                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_initList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = constructor_emptySortedList (THERE) ;
-    result = *this ;
-    result.appendSortedList (inOperand) ;
-  }
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8598,24 +8519,12 @@ void GALGAS_exceptionClauseListAST::addAssign_operation (const GALGAS_lstring & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionClauseListAST::dotAssign_operation (const GALGAS_exceptionClauseListAST inOperand
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_exceptionClauseListAST::plusAssign_operation (const GALGAS_exceptionClauseListAST inOperand,
+                                                          C_Compiler * /* inCompiler */
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid ()) {
     appendSortedList (inOperand) ;
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_exceptionClauseListAST GALGAS_exceptionClauseListAST::operator_concat (const GALGAS_exceptionClauseListAST & inOperand
-                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_exceptionClauseListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = constructor_emptySortedList (THERE) ;
-    result = *this ;
-    result.appendSortedList (inOperand) ;
-  }
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9085,18 +8994,6 @@ void GALGAS_exceptionTypesAST::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::operator_concat (const GALGAS_exceptionTypesAST & inOperand
-                                                                    COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_exceptionTypesAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::add_operation (const GALGAS_exceptionTypesAST & inOperand,
                                                                   C_Compiler * /* inCompiler */
                                                                   COMMA_UNUSED_LOCATION_ARGS) const {
@@ -9140,8 +9037,9 @@ GALGAS_exceptionTypesAST GALGAS_exceptionTypesAST::getter_subListToIndex (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_exceptionTypesAST::dotAssign_operation (const GALGAS_exceptionTypesAST inOperand
-                                                    COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_exceptionTypesAST::plusAssign_operation (const GALGAS_exceptionTypesAST inOperand,
+                                                     C_Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -12573,18 +12471,6 @@ void GALGAS_procedureSignature::method_last (GALGAS_procFormalArgumentPassingMod
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procedureSignature GALGAS_procedureSignature::operator_concat (const GALGAS_procedureSignature & inOperand
-                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_procedureSignature result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_procedureSignature GALGAS_procedureSignature::add_operation (const GALGAS_procedureSignature & inOperand,
                                                                     C_Compiler * /* inCompiler */
                                                                     COMMA_UNUSED_LOCATION_ARGS) const {
@@ -12628,8 +12514,9 @@ GALGAS_procedureSignature GALGAS_procedureSignature::getter_subListToIndex (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_procedureSignature::dotAssign_operation (const GALGAS_procedureSignature inOperand
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_procedureSignature::plusAssign_operation (const GALGAS_procedureSignature inOperand,
+                                                      C_Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -13429,18 +13316,6 @@ void GALGAS_structureFieldListAST::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::operator_concat (const GALGAS_structureFieldListAST & inOperand
-                                                                            COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::add_operation (const GALGAS_structureFieldListAST & inOperand,
                                                                           C_Compiler * /* inCompiler */
                                                                           COMMA_UNUSED_LOCATION_ARGS) const {
@@ -13484,8 +13359,9 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListToIndex
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::dotAssign_operation (const GALGAS_structureFieldListAST inOperand
-                                                        COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_structureFieldListAST::plusAssign_operation (const GALGAS_structureFieldListAST inOperand,
+                                                         C_Compiler * /* inCompiler */
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -13877,18 +13753,6 @@ void GALGAS_propertyList::method_last (GALGAS_string & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_propertyList GALGAS_propertyList::operator_concat (const GALGAS_propertyList & inOperand
-                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_propertyList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_propertyList GALGAS_propertyList::add_operation (const GALGAS_propertyList & inOperand,
                                                         C_Compiler * /* inCompiler */
                                                         COMMA_UNUSED_LOCATION_ARGS) const {
@@ -13932,8 +13796,9 @@ GALGAS_propertyList GALGAS_propertyList::getter_subListToIndex (const GALGAS_uin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyList::dotAssign_operation (const GALGAS_propertyList inOperand
-                                               COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_propertyList::plusAssign_operation (const GALGAS_propertyList inOperand,
+                                                C_Compiler * /* inCompiler */
+                                                COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -14611,18 +14476,6 @@ void GALGAS_allowedProcList::method_last (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedProcList GALGAS_allowedProcList::operator_concat (const GALGAS_allowedProcList & inOperand
-                                                                COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_allowedProcList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_allowedProcList GALGAS_allowedProcList::add_operation (const GALGAS_allowedProcList & inOperand,
                                                               C_Compiler * /* inCompiler */
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
@@ -14666,8 +14519,9 @@ GALGAS_allowedProcList GALGAS_allowedProcList::getter_subListToIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedProcList::dotAssign_operation (const GALGAS_allowedProcList inOperand
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_allowedProcList::plusAssign_operation (const GALGAS_allowedProcList inOperand,
+                                                   C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -15036,18 +14890,6 @@ void GALGAS_allowedInitList::method_last (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedInitList GALGAS_allowedInitList::operator_concat (const GALGAS_allowedInitList & inOperand
-                                                                COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_allowedInitList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_allowedInitList GALGAS_allowedInitList::add_operation (const GALGAS_allowedInitList & inOperand,
                                                               C_Compiler * /* inCompiler */
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
@@ -15091,8 +14933,9 @@ GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListToIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedInitList::dotAssign_operation (const GALGAS_allowedInitList inOperand
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_allowedInitList::plusAssign_operation (const GALGAS_allowedInitList inOperand,
+                                                   C_Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -15487,18 +15330,6 @@ void GALGAS_allowedExceptionList::method_last (GALGAS_bool & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_allowedExceptionList GALGAS_allowedExceptionList::operator_concat (const GALGAS_allowedExceptionList & inOperand
-                                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_allowedExceptionList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_allowedExceptionList GALGAS_allowedExceptionList::add_operation (const GALGAS_allowedExceptionList & inOperand,
                                                                         C_Compiler * /* inCompiler */
                                                                         COMMA_UNUSED_LOCATION_ARGS) const {
@@ -15542,8 +15373,9 @@ GALGAS_allowedExceptionList GALGAS_allowedExceptionList::getter_subListToIndex (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_allowedExceptionList::dotAssign_operation (const GALGAS_allowedExceptionList inOperand
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_allowedExceptionList::plusAssign_operation (const GALGAS_allowedExceptionList inOperand,
+                                                        C_Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 

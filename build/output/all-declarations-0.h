@@ -252,16 +252,13 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_declarationListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_declarationListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_abstractDeclaration & inOperand0
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_declarationListAST operator_concat (const GALGAS_declarationListAST & inOperand
-                                                                       COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_declarationListAST add_operation (const GALGAS_declarationListAST & inOperand,
                                                                      C_Compiler * inCompiler
@@ -520,8 +517,9 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_globalVarDeclarationList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_globalVarDeclarationList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -531,10 +529,6 @@ class GALGAS_globalVarDeclarationList : public AC_GALGAS_list {
                                                       const class GALGAS_allowedInitList & inOperand4,
                                                       const class GALGAS_allowedExceptionList & inOperand5
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_globalVarDeclarationList operator_concat (const GALGAS_globalVarDeclarationList & inOperand
-                                                                             COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_globalVarDeclarationList add_operation (const GALGAS_globalVarDeclarationList & inOperand,
                                                                            C_Compiler * inCompiler
@@ -779,18 +773,15 @@ class GALGAS_allowedExceptionList : public AC_GALGAS_list {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_allowedExceptionList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_allowedExceptionList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bool & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_lbigint & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_allowedExceptionList operator_concat (const GALGAS_allowedExceptionList & inOperand
-                                                                         COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_allowedExceptionList add_operation (const GALGAS_allowedExceptionList & inOperand,
                                                                        C_Compiler * inCompiler
@@ -931,17 +922,14 @@ class GALGAS_allowedInitList : public AC_GALGAS_list {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_allowedInitList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_allowedInitList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bool & inOperand0,
                                                       const class GALGAS_lbigint & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_allowedInitList operator_concat (const GALGAS_allowedInitList & inOperand
-                                                                    COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_allowedInitList add_operation (const GALGAS_allowedInitList & inOperand,
                                                                   C_Compiler * inCompiler
@@ -1071,17 +1059,14 @@ class GALGAS_allowedProcList : public AC_GALGAS_list {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_allowedProcList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_allowedProcList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_bool & inOperand0,
                                                       const class GALGAS_lstring & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_allowedProcList operator_concat (const GALGAS_allowedProcList & inOperand
-                                                                    COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_allowedProcList add_operation (const GALGAS_allowedProcList & inOperand,
                                                                   C_Compiler * inCompiler
@@ -1309,8 +1294,9 @@ class GALGAS_procedureDeclarationListAST : public AC_GALGAS_list {
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procedureDeclarationListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_procedureDeclarationListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procedureKindAST & inOperand0,
@@ -1321,10 +1307,6 @@ class GALGAS_procedureDeclarationListAST : public AC_GALGAS_list {
                                                       const class GALGAS_instructionListAST & inOperand5,
                                                       const class GALGAS_location & inOperand6
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procedureDeclarationListAST operator_concat (const GALGAS_procedureDeclarationListAST & inOperand
-                                                                                COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procedureDeclarationListAST add_operation (const GALGAS_procedureDeclarationListAST & inOperand,
                                                                               C_Compiler * inCompiler
@@ -1608,16 +1590,13 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_instructionListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_instructionListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_instructionAST & inOperand0
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST operator_concat (const GALGAS_instructionListAST & inOperand
-                                                                       COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST add_operation (const GALGAS_instructionListAST & inOperand,
                                                                      C_Compiler * inCompiler
@@ -1740,8 +1719,9 @@ class GALGAS_procFormalArgumentList : public AC_GALGAS_list {
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procFormalArgumentList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_procFormalArgumentList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
@@ -1749,10 +1729,6 @@ class GALGAS_procFormalArgumentList : public AC_GALGAS_list {
                                                       const class GALGAS_lstring & inOperand2,
                                                       const class GALGAS_lstring & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList operator_concat (const GALGAS_procFormalArgumentList & inOperand
-                                                                           COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procFormalArgumentList add_operation (const GALGAS_procFormalArgumentList & inOperand,
                                                                          C_Compiler * inCompiler
@@ -2001,8 +1977,9 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_requiredProcedureDeclarationListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_requiredProcedureDeclarationListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -2010,10 +1987,6 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                       const class GALGAS_procFormalArgumentList & inOperand2,
                                                       const class GALGAS_location & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_requiredProcedureDeclarationListAST operator_concat (const GALGAS_requiredProcedureDeclarationListAST & inOperand
-                                                                                        COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_requiredProcedureDeclarationListAST add_operation (const GALGAS_requiredProcedureDeclarationListAST & inOperand,
                                                                                       C_Compiler * inCompiler
@@ -2256,8 +2229,9 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_functionDeclarationListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_functionDeclarationListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -2268,10 +2242,6 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                       const class GALGAS_instructionListAST & inOperand5,
                                                       const class GALGAS_location & inOperand6
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST operator_concat (const GALGAS_functionDeclarationListAST & inOperand
-                                                                               COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_functionDeclarationListAST add_operation (const GALGAS_functionDeclarationListAST & inOperand,
                                                                              C_Compiler * inCompiler
@@ -2458,18 +2428,15 @@ class GALGAS_funcFormalArgumentList : public AC_GALGAS_list {
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_funcFormalArgumentList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_funcFormalArgumentList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_lstring & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_funcFormalArgumentList operator_concat (const GALGAS_funcFormalArgumentList & inOperand
-                                                                           COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_funcFormalArgumentList add_operation (const GALGAS_funcFormalArgumentList & inOperand,
                                                                          C_Compiler * inCompiler
@@ -2700,8 +2667,9 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_bootList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_bootList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_location & inOperand0,
@@ -2710,10 +2678,6 @@ class GALGAS_bootList : public AC_GALGAS_sortedlist {
                                                       const class GALGAS_bigint & inOperand3,
                                                       const class GALGAS_location & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_bootList operator_concat (const GALGAS_bootList & inOperand
-                                                             COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_popGreatest (class GALGAS_location & outArgument0,
@@ -2901,8 +2865,9 @@ class GALGAS_initList : public AC_GALGAS_sortedlist {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_initList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_initList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_location & inOperand0,
@@ -2911,10 +2876,6 @@ class GALGAS_initList : public AC_GALGAS_sortedlist {
                                                       const class GALGAS_location & inOperand3,
                                                       const class GALGAS_lbigint & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_initList operator_concat (const GALGAS_initList & inOperand
-                                                             COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_popGreatest (class GALGAS_location & outArgument0,
@@ -3022,17 +2983,14 @@ class GALGAS_initRequiredByProcList : public AC_GALGAS_list {
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_initRequiredByProcList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_initRequiredByProcList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_procFormalArgumentList & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_initRequiredByProcList operator_concat (const GALGAS_initRequiredByProcList & inOperand
-                                                                           COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_initRequiredByProcList add_operation (const GALGAS_initRequiredByProcList & inOperand,
                                                                          C_Compiler * inCompiler
@@ -3242,8 +3200,9 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_exceptionClauseListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_exceptionClauseListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
@@ -3252,10 +3211,6 @@ class GALGAS_exceptionClauseListAST : public AC_GALGAS_sortedlist {
                                                       const class GALGAS_bigint & inOperand3,
                                                       const class GALGAS_location & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_exceptionClauseListAST operator_concat (const GALGAS_exceptionClauseListAST & inOperand
-                                                                           COMMA_LOCATION_ARGS) const ;
-
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void modifier_popGreatest (class GALGAS_lstring & outArgument0,
@@ -3449,17 +3404,14 @@ class GALGAS_exceptionTypesAST : public AC_GALGAS_list {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_exceptionTypesAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_exceptionTypesAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_exceptionTypesAST operator_concat (const GALGAS_exceptionTypesAST & inOperand
-                                                                      COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_exceptionTypesAST add_operation (const GALGAS_exceptionTypesAST & inOperand,
                                                                     C_Compiler * inCompiler
@@ -6186,17 +6138,14 @@ class GALGAS_procEffectiveParameterListAST : public AC_GALGAS_list {
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procEffectiveParameterListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_procEffectiveParameterListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procEffectiveParameterPassingModeAST & inOperand0,
                                                       const class GALGAS_lstring & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procEffectiveParameterListAST operator_concat (const GALGAS_procEffectiveParameterListAST & inOperand
-                                                                                  COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procEffectiveParameterListAST add_operation (const GALGAS_procEffectiveParameterListAST & inOperand,
                                                                                 C_Compiler * inCompiler
@@ -6935,16 +6884,13 @@ class GALGAS_registerBitSliceList : public AC_GALGAS_list {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_registerBitSliceList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_registerBitSliceList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_registerBitSlice & inOperand0
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_registerBitSliceList operator_concat (const GALGAS_registerBitSliceList & inOperand
-                                                                         COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_registerBitSliceList add_operation (const GALGAS_registerBitSliceList & inOperand,
                                                                        C_Compiler * inCompiler
@@ -7065,18 +7011,15 @@ class GALGAS_registerDeclarationList : public AC_GALGAS_list {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_registerDeclarationList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_registerDeclarationList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstringlist & inOperand1,
                                                       const class GALGAS_lbigint & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_registerDeclarationList operator_concat (const GALGAS_registerDeclarationList & inOperand
-                                                                            COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_registerDeclarationList add_operation (const GALGAS_registerDeclarationList & inOperand,
                                                                           C_Compiler * inCompiler
@@ -7414,18 +7357,15 @@ class GALGAS_structureFieldListAST : public AC_GALGAS_list {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_structureFieldListAST inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_structureFieldListAST inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_expressionAST & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_structureFieldListAST operator_concat (const GALGAS_structureFieldListAST & inOperand
-                                                                          COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_structureFieldListAST add_operation (const GALGAS_structureFieldListAST & inOperand,
                                                                         C_Compiler * inCompiler
@@ -9138,18 +9078,15 @@ class GALGAS_procedureSignature : public AC_GALGAS_list {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_procedureSignature inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_procedureSignature inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                       const class GALGAS_string & inOperand1,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_procedureSignature operator_concat (const GALGAS_procedureSignature & inOperand
-                                                                       COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procedureSignature add_operation (const GALGAS_procedureSignature & inOperand,
                                                                      C_Compiler * inCompiler
@@ -9716,17 +9653,14 @@ class GALGAS_propertyList : public AC_GALGAS_list {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
-  public : VIRTUAL_IN_DEBUG void dotAssign_operation (const GALGAS_propertyList inOperand
-                                                      COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_propertyList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
-//--------------------------------- . (concat) operator
-  public : VIRTUAL_IN_DEBUG GALGAS_propertyList operator_concat (const GALGAS_propertyList & inOperand
-                                                                 COMMA_LOCATION_ARGS) const ;
-
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_propertyList add_operation (const GALGAS_propertyList & inOperand,
                                                                C_Compiler * inCompiler

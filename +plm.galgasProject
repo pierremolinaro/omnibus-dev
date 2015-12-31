@@ -9,6 +9,8 @@ project (1:0:0) -> "plm" {
   %ElCapitanYosemite
   %applicationBundleBase : "fr.irccyn.ec-nantes"
 
+  %quietOutputByDefault
+
 #--- Source files
   "galgas-sources/lexique.galgas"
   "galgas-sources/options.galgas"

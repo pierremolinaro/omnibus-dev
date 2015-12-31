@@ -396,10 +396,10 @@ void routine_addTargetSpecificFiles (const GALGAS_lstring constinArgument_inTarg
   ioArgument_ioAST.mAttribute_mProcedureListAST = var_ast.mAttribute_mProcedureListAST.add_operation (ioArgument_ioAST.mAttribute_mProcedureListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 179)) ;
   ioArgument_ioAST.mAttribute_mRequiredProcList = var_ast.mAttribute_mRequiredProcList.add_operation (ioArgument_ioAST.mAttribute_mRequiredProcList, inCompiler COMMA_SOURCE_FILE ("program.galgas", 180)) ;
   ioArgument_ioAST.mAttribute_mFunctionListAST = var_ast.mAttribute_mFunctionListAST.add_operation (ioArgument_ioAST.mAttribute_mFunctionListAST, inCompiler COMMA_SOURCE_FILE ("program.galgas", 181)) ;
-  ioArgument_ioAST.mAttribute_mTargetList.dotAssign_operation (var_ast.mAttribute_mTargetList  COMMA_SOURCE_FILE ("program.galgas", 182)) ;
-  ioArgument_ioAST.mAttribute_mInitList.dotAssign_operation (var_ast.mAttribute_mInitList  COMMA_SOURCE_FILE ("program.galgas", 183)) ;
-  ioArgument_ioAST.mAttribute_mBootList.dotAssign_operation (var_ast.mAttribute_mBootList  COMMA_SOURCE_FILE ("program.galgas", 184)) ;
-  ioArgument_ioAST.mAttribute_mExceptionClauses.dotAssign_operation (var_ast.mAttribute_mExceptionClauses  COMMA_SOURCE_FILE ("program.galgas", 185)) ;
+  ioArgument_ioAST.mAttribute_mTargetList.plusAssign_operation(var_ast.mAttribute_mTargetList, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 182)) ;
+  ioArgument_ioAST.mAttribute_mInitList.plusAssign_operation(var_ast.mAttribute_mInitList, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 183)) ;
+  ioArgument_ioAST.mAttribute_mBootList.plusAssign_operation(var_ast.mAttribute_mBootList, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 184)) ;
+  ioArgument_ioAST.mAttribute_mExceptionClauses.plusAssign_operation(var_ast.mAttribute_mExceptionClauses, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 185)) ;
   ioArgument_ioAST.mAttribute_mExceptionTypes = var_ast.mAttribute_mExceptionTypes.add_operation (ioArgument_ioAST.mAttribute_mExceptionTypes, inCompiler COMMA_SOURCE_FILE ("program.galgas", 186)) ;
 }
 
@@ -15113,6 +15113,7 @@ GALGAS_whileInstructionAST GALGAS_whileInstructionAST::extractObject (const GALG
 #include "command_line_interface/F_Analyze_CLI_Options.h"
 #include "utilities/F_DisplayException.h"
 #include "galgas2/C_galgas_CLI_Options.h"
+#include "galgas2/F_verbose_output.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -15272,8 +15273,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
                          kSourceFileHelpMessages,
                          print_tool_help_message) ;
 //---
-  bool verboseOptionOn = true ;
-  int16_t returnCode = 0 ; // No error
+  int returnCode = 0 ; // No error
 //--- Set Execution mode
   C_String executionModeOptionErrorMessage ;
   setExecutionMode (executionModeOptionErrorMessage) ;
@@ -15286,7 +15286,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     macroMyNew (commonLexique, C_Compiler (NULL, "", "" COMMA_HERE)) ;
     try{
       routine_before (commonLexique COMMA_HERE) ;
-      verboseOptionOn = gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue ;
+      const bool verboseOptionOn = verboseOutput () ;
       for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
         if (gOption_galgas_5F_builtin_5F_options_trace.mValue) {
           enableTraceWithPath (sourceFilesArray (i COMMA_HERE)) ;
@@ -15295,7 +15295,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
         const GALGAS_string sfp = GALGAS_string (sourceFilesArray (i COMMA_HERE)) ;
         const GALGAS_location location = commonLexique->here () ;
         const GALGAS_lstring sourceFilePath (sfp, location) ;
-        int16_t r = 0 ;
+        int r = 0 ;
         if (fileExtension == "plm-target") {
           switch (executionMode ()) {
           case kExecutionModeNormal :
@@ -15355,7 +15355,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     //--- Epilogue
       routine_after (commonLexique COMMA_HERE) ;
     //--- Display error and warnings count
-      if (gOption_galgas_5F_builtin_5F_options_verbose_5F_output.mValue || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
+      if (verboseOptionOn || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
         C_String message ;
         if (totalWarningCount () == 0) {
           message << "No warning" ;
